@@ -18,16 +18,33 @@
           target="_blank"
           class="button--grey">GitHub</a>
       </div>
+      <h2>Users</h2>
+      <ul class="users">
+        <li 
+          v-for="user in users" 
+          :key="user.id">
+          <nuxt-link :to="'/product/'+user.id">
+            {{ user.name }}
+          </nuxt-link>
+        </li>
+      </ul>
     </div>
   </section>
 </template>
 
 <script>
 import Logo from '~/components/Logo.vue'
+import axios from 'axios'
 
 export default {
   components: {
     Logo
+  },
+  async asyncData() {
+    const { data } = await axios.get(
+      'https://jsonplaceholder.typicode.com/users'
+    )
+    return { users: data }
   }
 }
 </script>

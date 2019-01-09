@@ -8,6 +8,8 @@
       <h2 class="subtitle">
         My primo Nuxt.js project
       </h2>
+      <div>您的IP是：{{ ip }}</div>
+      <a href="/?startp=北京&startc=">查看北京的数据</a>
       <div class="links">
         <a
           href="https://nuxtjs.org/"
@@ -40,9 +42,15 @@ export default {
   data() {
     return {
       title: '专线列表页面',
-      lists: []
+      lists: [],
+      ip: ''
     }
   },
+  //如果校验方法返回的值不为 true， Nuxt 将自动加载显示 404 错误页面
+  /* validate ({ params }) {
+    // Must be a number
+    return /^\d+$/.test(params.id)
+  }, */
   asyncData({ params, req, res, query }) {
     let vo = {
       startProvince: query.startp || '广东省'
@@ -53,21 +61,27 @@ export default {
       vo.startCity = query.startc || '广州市'
     }
     return axios
-      .post(
-        'http://192.168.1.157:89/api/aflc-portal/portalt/aflcLogisticsCompany/v1/listCompanys',
-        {
-          currentPage: 1,
-          pageSize: 20,
-          vo: vo
-        }
+      .all([
+        axios.post(
+          'http://192.168.1.157:89/api/aflc-portal/portalt/aflcLogisticsCompany/v1/listCompanys',
+          {
+            currentPage: 1,
+            pageSize: 20,
+            vo: vo
+          }
+        ),
+        axios.get('http://icanhazip.com')
+      ])
+      .then(
+        axios.spread((res, ip2) => {
+          // console.log('res.data.data:', res.data.data, ip2)
+          return {
+            title: '专线列表页面2',
+            lists: res.data.data.list,
+            ip: ip2.data
+          }
+        })
       )
-      .then(res => {
-        // console.log('res.data.data:', res.data.data)
-        return {
-          title: '专线列表页面2',
-          lists: res.data.data.list
-        }
-      })
   },
   head() {
     return {

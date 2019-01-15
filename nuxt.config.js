@@ -30,14 +30,9 @@ module.exports = {
   // loading: '~components/loading.vue',
 
   /*
-  ** Global CSS
+  ** 公共 css
   */
-  css: [
-    /*     {
-      src: '~assets/scss/*.scss',
-      lang: 'scss'
-    } */
-  ],
+  css: ['~/css/index.css'],
 
   /*
   ** Plugins to load before mounting the App

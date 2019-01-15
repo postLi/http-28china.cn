@@ -11,9 +11,16 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'renderer', content: 'webkit' },
+      { name: 'X-UA-Compatible', content: 'IE=Edge,chrome=1' },
+      { name: 'force-rendering', content: 'webkit' },
       { hid: 'description', name: 'description', content: pkg.description }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    htmlAttrs: {
+      lang: 'zh-CN'
+    },
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [{ src: '/vendor/jquery-1.12.4.min.js' }]
   },
 
   /*
@@ -25,7 +32,12 @@ module.exports = {
   /*
   ** Global CSS
   */
-  css: [],
+  css: [
+    /*     {
+      src: '~assets/scss/*.scss',
+      lang: 'scss'
+    } */
+  ],
 
   /*
   ** Plugins to load before mounting the App
@@ -66,6 +78,8 @@ module.exports = {
     }
   },
 
+  vendor: ['axios'],
+
   /*
   ** Build configuration
   */
@@ -90,12 +104,13 @@ module.exports = {
   cache: {
     max: 1000,
     maxAge: 5 * 60 * 1000 // 毫秒单位
-  },
-  render: {
+  }
+  // https://ssr.vuejs.org/zh/api/#clientmanifest
+  /* render: {
     bundleRenderer: {
       shouldPreload: (file, type) => {
         return ['script', 'style', 'font'].includes(type)
       }
     }
-  }
+  } */
 }

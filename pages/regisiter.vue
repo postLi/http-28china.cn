@@ -1,7 +1,7 @@
 <template>
   <div class="content">
     <div class="regisiter_wrap">
-      <div class="step_info step_info_ul_1">
+      <!-- <div class="step_info step_info_ul_1">
         <ul class="clfix">
           <li class="step1 current">
             <i>1</i>
@@ -13,6 +13,19 @@
           </li>
           <li class="step3">
             <i>3</i>
+            完成注册
+          </li>  
+        </ul>
+      </div> -->
+      <div class="step_info step_info_ul_1">
+        <ul class="clfix">
+          <li class="step1 current">
+            选择会员类型
+          </li>
+          <li class="step2">
+            填写基本信息
+          </li>
+          <li class="step3">
             完成注册
           </li>
         </ul>
@@ -155,11 +168,12 @@
         </div>
         <div class="step-next3">
           <a 
-            href="http://192.168.1.157:9526/baseInfo/authentication" 
-            class="last-btn">进入会员中心</a>
-          <a 
             href="/" 
             class="normal-btn">返回网站首页</a>
+          <a 
+            href="http://192.168.1.157:9526/baseInfo/authentication" 
+            class="last-btn">进入会员中心</a>
+          
         </div>
       
       </div>

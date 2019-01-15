@@ -23,7 +23,7 @@
           <div class="login-box-tab clearfix">
             <span 
               data-type="password" 
-              class="active">账户密码登录</span><span data-type="smscode">短信验证码登录</span>
+              class="active">密码登录</span><span data-type="smscode">短信登录</span>
           </div>
           <div class="inputbox userTypeinput"><span data-type="aflc-1">车主</span><span data-type="aflc-2">货主</span><span data-type="aflc-5">物流公司</span>
           </div>
@@ -66,17 +66,19 @@
               placeholder="请输入短信验证码">
             <span class="getsmscode">获取验证码</span>
           </div>
+          
+          <div class="login-btn">登录</div>
           <div class="other-btn">
             <a 
-              href="../member/index_do.php?fmdo=user&dopost=regnew" 
-              target="_blank">免费注册</a>
+              href="regisiter?fmdo=user&dopost=regnew" 
+              target="_blank">免费注册<i/></a>
             <a 
-              href="/member/resetpassword.php" 
-              target="_blank">忘记密码</a>
+              href="resetpassword?" 
+              target="_blank">忘记密码?</a>
           </div>
-          <div class="login-btn">登录</div>
+          <div class="login-other">其他方式登入</div>
           <div class="login-other-platform">
-            <span class="login-weixin">微信登录</span>
+            <span class="login-weixin"/>
           </div>
         </form>
       </div>

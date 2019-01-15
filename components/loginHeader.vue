@@ -20,7 +20,8 @@
         </div>
         <div class="header_link">
           <p v-if="$store.state.login.isReg">如注册遇到问题，请拨打客服热线：400-9992828</p>
-          <a href="/">返回首页</a><a 
+          <a href="/">返回首页<i class="borderright"/></a>
+          <a 
             href="/plus/list.php?tid=88" 
             target="_blank" 
             class="help_link">使用帮助</a>

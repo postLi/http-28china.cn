@@ -1,0 +1,1137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>28快运网-物流配送-物流货运-物流公司-一站式物流服务平台</title>
+<meta name="description" content="{dede:global.cfg_description/}">
+<meta name="keywords" content="{dede:global.cfg_keywords/}">
+<link href="{dede:global.cfg_templets_skin/}/style/index.css" rel="stylesheet" media="screen" type="text/css">
+<link href="{dede:global.cfg_templets_skin/}/style/WTMap.css" rel="stylesheet" media="screen" type="text/css">
+<link href="{dede:global.cfg_templets_skin/}/style/echarts.css" rel="stylesheet" media="screen" type="text/css">
+<meta http-equiv="mobile-agent" content="format=xhtml;url={dede:global.cfg_mobileurl/}/index.php">
+<!--<script type="text/javascript">if(window.location.toString().indexOf('pref=padindex') != -1){}else{if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){if(window.location.href.indexOf("?mobile")<0){try{if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){window.location.href="/m/index.php";}else if(/iPad/i.test(navigator.userAgent)){}else{}}catch(e){}}}}</script>-->
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_cmsurl/}/include/dedeajax2.js"></script>
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/jquery-1.8.3.min.js"></script>
+<!--<script language="javascript" type="text/javascript" src="{dede:global.cfg_cmspath/}/images/js/j.js" ></script>-->
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/pic_scroll.js"></script>
+
+
+
+
+<script language="javascript" type="text/javascript">
+
+	$(function(){
+		$("a[_for]").mouseover(function(){
+			$(this).parents().children("a[_for]").removeClass("thisclass").parents().children("dd").hide();
+			$(this).addClass("thisclass").blur();
+			$("#"+$(this).attr("_for")).show();
+		});
+		$("a[_for=uc_member]").mouseover();
+		$("a[_for=flink_1]").mouseover();
+	});
+	function CheckLogin1(){
+	  var taget_obj = document.getElementById('_userlogin1');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/member/ajax_loginsta.php");
+	  DedeXHTTP = null;
+	}
+	function CheckLogin2(){
+	  var taget_obj = document.getElementById('_userlogin2');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/member/ajax_loginsta2.php");
+	  DedeXHTTP = null;
+	}
+
+           
+            
+
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?0106f0e6d494154961dd6a9061cf0b1c";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+</head>
+<body>
+
+
+{dede:include filename="head2.htm"/}
+
+<!-- /header -->
+<div class="w1400 center clear">
+
+<div class="main1">
+<div class="main1_1">
+	<div class="main1_1_l">
+		<div class="m1_01 m1_01_01  m1_on_01" id="m1_01_1">发物流 </div>
+		<div class="m1_01 m1_01_02" id="m1_01_2">找大货车</div>
+		<div class="m1_01 m1_01_03" id="m1_01_3">找小货车</div>
+
+
+  </div>
+  <div class="title">
+      <img src="{dede:global.cfg_templets_skin/}/images/index/10tb.png" class="imgtj"/>
+    <p id="desc_01">推荐物流承运商，提供免费上门接货和送货到家服务，发货省心又省钱</p>
+    <p id="desc_02">整车运输，车辆不放空，门到门、代签回单、无挤压、无破损、速度快</p>
+    <p id="desc_03">同城货运价格低，上门快，更安全</p>
+  </div>
+	<div class="main1_1_m" id="main1_1_m1">
+		<div class="m1_02_fh center"><span>发货地</span><input wtmap="detail" id="zhidaFrom" type="text" placeholder="您的货物在哪里？" readonly=""></div>
+		<div class="m1_02_sh center"><span>收货地</span><input wtmap="detail" id="zhidaTo" type="text" placeholder="把货运到哪里？" readonly=""></div>
+		<div class="m1_02_search center">
+			<input id="order_01" type="button" value="快速下单" onclick="javascript:void(0)">
+			<input id="order_02" type="button" value="快速下单" onclick="javascript:void(0)">
+			<input id="order_03" type="button" value="快速下单" onclick="javascript:void(0)">
+		</div>
+	</div>
+	<div class="main1_1_m" id="main1_1_m2">
+		<div class="m1_02_fh center"><span>发货地</span><input wtmap="detail" id="peisongFrom" type="text" placeholder="您的货物在哪里？" readonly=""></div>
+		<div class="m1_02_sh center"><span>收货地</span><input wtmap="detail" id="peisongTo" type="text" placeholder="把货运到哪里？" readonly=""></div>
+		<div class="m1_02_search center">
+			<input type="button" value="快速下单2" onclick="window.location.href=&#39;/plus/list.php?tid=4&#39;">
+		</div>
+	</div>
+	<div class="main1_1_m" id="main1_1_m3">
+		<div class="m1_02_fh center"><span>发货地</span><input wtmap="detail" id="zhengcheFrom" type="text" placeholder="您的货物在哪里？" readonly=""></div>
+		<div class="m1_02_sh center"><span>收货地</span><input wtmap="detail" id="zhengcheTo" type="text" placeholder="把货运到哪里？" readonly=""></div>
+		<div class="m1_02_search center">
+			<input type="button" value="快速下单3" onclick="window.location.href=&#39;/plus/list.php?tid=4&#39;">
+		</div>
+	</div>
+	<div class="main1_1_m" id="main1_1_m4">
+		<div class="m1_02_fh center"><span>发货地</span><input wtmap="detail" id="baocheFrom" type="text" placeholder="您的货物在哪里？" readonly=""></div>
+		<div class="m1_02_sh center"><span>收货地</span><input wtmap="detail" id="baocheTo" type="text" placeholder="把货运到哪里？" readonly=""></div>
+		<div class="m1_02_search center">
+			<input type="button" value="快速下单4" onclick="window.location.href=&#39;/plus/list.php?tid=4&#39;">
+		</div>
+	</div>
+	<div class="main1_1_xx"></div>
+	
+	
+	
+</div>
+<div class="main1_2">
+	<ul class="yd_box">
+		<li class="yd_1">
+			<img src="{dede:global.cfg_templets_skin/}/images/index/12kd.png"/>
+		</li>
+		<li class="yd_2"><input id="yd_nr" rows="3" cols="20" placeholder="请输入运单号，例如：" />
+		<input id="yd_cx" type="button" />
+		<div class="ydh">
+			<span>1809260061</span>
+		</div>
+		</li>
+		<li class="yd_4">
+			<ul >
+				<li class="yd_item">
+					<img src="{dede:global.cfg_templets_skin/}/images/yd_huo.png"/><span>当前货物</span>
+					<i id="data001"></i>
+				</li>
+					<li class="yd_item">
+					<img src="{dede:global.cfg_templets_skin/}/images/yd_zx.png"/><span>物流专线</span>
+					<i id="data002"></i>
+				</li>
+					<li class="yd_item">
+					<img src="{dede:global.cfg_templets_skin/}/images/yd_che.png"/><span>车源信息</span>
+					<i id="data003"></i>
+				</li>
+			</ul>
+			
+		</li>
+		<li class="yd_5"><img src="{dede:global.cfg_templets_skin/}/images/yd_jt.png"/>
+		<span>今日新增:</span><span>货源</span><i id="data004"></i><span>专线</span><i id="data005"></i><span>车源</span><i id="data006"></i>
+		</li>
+		
+	</ul>
+
+</div>
+<div class="main1_3">
+<div class="main1_3_1">
+	<div class="order_list" onclick="window.open('/plus/list.php?tid=85')">发布专线</div>
+	<div class="order_list" onclick="window.open('/plus/list.php?tid=83')">发布货源</div>
+	<div class="order_list" onclick="window.open('/plus/list.php?tid=84')">发布车源</div>
+</div>
+<div class="main1_3_2">
+	<div id="_userlogin2" class="userLogin" style="display:block;">
+                    <div class="yhimg"><img src="/templets/default/images/index/19stx.png"/></div>
+                    <div class="userHeader">
+                        <div class="img_"></div>
+                        <span id="ts">您好，欢迎来到28快运！</span>
+                    </div>
+                    <div class="operation">
+                    	<div class="loginBtn"><a href="/member/login.php">登录</a></div>
+                        <div class="regBtn"><a href="/member/index_do.php?fmdo=user&amp;dopost=regnew">注册</a></div>
+                    </div>
+                </div>
+                 <div id="_userlogin2_2" class="userLogin" style="display:none;">
+                    <div class="userHeader">
+                    	<div class="yhimg"><img src="/templets/default/images/index/19stx.png"/></div>
+                        <span>您好，<span id="login_name2" ></span>&nbsp;</span>
+                        <span  style="cursor: pointer"> <a class="exit_anfa" href="/member/index_do.php?fmdo=login&dopost=exit">【安全退出】</a> </span>
+                    </div>
+                    <div class="operation">
+					<div  class="loginBtn"><a target="_blank" href="/member/content_list.php?channelid=1"  target="_blank" >会员中心</a></div>
+                    <div  class="regBtn"> <a id="my_website" target="_blank" href="" target="_blank" >我的网站</a></div>
+                    </div>
+ </div>
+               
+                <div class="main1_c">
+                  <ul>
+                    <li class="kefu_index" >
+                      <a href="/plus/list.php?tid=12" onmouseout="kefu_none();">咨讯</a>
+                      <a href="/plus/list.php?tid=88" onmouseout="kefu_none();">帮助</a>
+                      <a onmouseover="kefu_block();"    >客服</a>
+
+                      <a target="_blank" href="/plus/list.php?tid=69" onmouseout="kefu_none();">建议</a>
+                    </li>
+                    {dede:arclist  row='3' typeid='52,53,54' titlelen='60' }  
+                    <li><a target='_blank'  href='[field:arcurl/]'>[field:title/]</a></li>
+                    {/dede:arclist}
+                  </ul>
+                </div> 
+                <div class="kefu_box"  onmouseover="kefu_block();" onmouseout="kefu_none();" >
+                	<div class="kefu_box_1"><IMG src='{dede:global.cfg_templets_skin/}/images/kefu_weixin.png' > </div>
+                	<div class="kefu_box_2"></div>
+                	<div class="kefu_box_3">
+                	<ul style="cursor: pointer;" onclick="window.open('http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes')"><li><IMG src='{dede:global.cfg_templets_skin/}/images/kefu_qq.png' ></li><li class="kefu_box_3_1">QQ交谈</li></ul>
+                	<ul><li><IMG class="kefu_box_3_phone" src='{dede:global.cfg_templets_skin/}/images/kefu_phone.png' ></li><li  class="kefu_box_3_2">客服电话：<br>400-9992828</li></ul>
+                	</div>
+                </div>
+</div>
+   <!-- 客服点击弹出效果-->
+    <script type="text/javascript">
+ function kefu_block() {
+ //alert("1");
+  $('.kefu_box').css("display","block");
+
+}
+  function kefu_none() {
+ //alert("1");
+  $('.kefu_box').css("display","none");
+
+}
+    </script>
+ 
+</div>
+</div>
+<div class="banner h62" >
+<div class="echart_scroll">
+	<div class="fl echart_scroll_sm">全国专线价</div>
+	<div class="fl echart_scroll_nr">
+		<div class="fl echart_scroll_nr800">
+		<ul class="echart_scroll_nr1">
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发武汉</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发合肥</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+		    <li><a href="javascript:void(0)" target="_blank"><span>广州发南昌</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发郑州</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+		</ul>
+		<ul class="echart_scroll_nr2"></ul>
+		</div>
+	</div>
+</div>
+</div>
+
+<!--找物流专线 S-->
+<div class="main3 center " id="rf01">
+<div class="main3_12">
+
+
+ <div class="hy main3_99 clear">
+    <div class="main3_1_1">
+    	 <div class="xt_bottom"></div>
+        <div class="floatl">
+        <b>找物流专线</b>
+        
+      <div class="index_search floatl">
+<div class="fl index_search_input" style="position:relative;" id="wlLineFrom" >
+         <input style="height: 100%;" data-toggle="city-picker" data-level="district"   type="text" name=""  class=""  placeholder=" 请选择出发地" readonly="">
+</div>
+                                    <em>&rarr;</em>
+<div class="fl index_search_input" style="position:relative;" id="wlLineTo" >            
+         <input style="height: 100%;" data-toggle="city-picker" data-level="district" type="text"  name="" class="" placeholder=" 请选择到达地" readonly="">
+</div>                               
+                       
+     	 </div>               
+        <input id="search_wlLine" type="button" class="search_hy"  value=""></div>                        
+                                 
+                                 
+                                 
+        <div class="more floatr">{dede:type typeid='4'}<a href="[field:typeurl/]" target="_blank">更多></a>{/dede:type}</div>		 
+         </div>
+  <dl class="hy_d" >
+                        <dd class="d001">出发地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;</dd>
+                        <dd class="d002">到达地</dd>
+                        <dd class="d003">重货价格</dd>
+                        <dd class="d004">轻货价格</dd>
+                        <dd class="d005">时效</dd>
+						<dd class="d006">物流公司</dd>
+						<dd class="d007">操作</dd>
+                    </dl>
+                  <div class="none_zx"><span>暂无专线信息</span>
+                   </div>          
+                    
+                    <div class="clear scroll_nr2 ">
+
+                        	
+
+                        	 
+                        	 <ul class="hy_nr " id="js001" style="margin-top: 0px;">
+                        	 	
+                                <li style="display: none;"  >
+                                <a target="_blank" id="nr_a01"><span class="t001" id="nr001"></span></a>
+                                <a target="_blank" id="nr_a01"><span class="t002" id="nr001_2"></span></a>
+                                <a target="_blank" id="nr_a02" href=""><span class="t003"   ><font id="nr002" style="color:#f00"></font>元/公斤</span></a>
+                                <a target="_blank" id="nr_a03"><span class="t004"   ><font id="nr003" style="color:#f00"></font>元/方</span> </a>
+								<a target="_blank" id="nr_a04"><span class="t005" id="nr004"></span></a>
+                                <a target="_blank" id="nr005" href="#"><span id="nr006" class="t006" ></span></a>
+                                <a target="_blank" id="nr_a05"><span class="t007" id="t006">详情</span></a>         
+                                </li>
+                                    </ul>
+                          
+
+                                  
+			 </div>
+ 
+ </div>
+
+</div>
+<div class="right_box">
+	<div class="right_price_bt1">
+	   <div class="xt_bottom w102"></div>
+	   <div class="floatl">
+        <b>价格指数</b>
+       </div>
+		
+	</div>
+<!--echart图表 S-->
+  <div class="linelist">
+    <div class="line-list-ul">
+      <ul>
+        <li>
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">武汉</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span><span ><em class="lineqing-percent">&darr;6%</em></span></p>
+        </li>
+        <li>
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">重庆</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span><span ><em class="lineqing-percent">&darr;6%</em></span></p>
+        </li>
+        <li>
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">南昌</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span><span ><em class="lineqing-percent">&darr;6%</em></span></p>
+        </li>
+        <li>
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">长沙</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span><span ><em class="lineqing-percent">&darr;6%</em></span></p>
+        </li>
+        <li>
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">郑州</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span><span ><em class="lineqing-percent">&darr;6%</em></span></p>
+        </li>
+        <li>
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">合肥</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span><span ><em class="lineqing-percent">&darr;6%</em></span></p>
+        </li>
+
+      </ul>
+    </div>
+    <div class="line-list-echart">
+      <div class="echartbox"></div>
+      <div class="line-list-links">
+        <a target="_blank" href="#" id="echart_order">闪电下单</a>
+        <a href="#" id="echart_price">即刻比价</a>
+        <a target="_blank" href="/plus/list.php?tid=76">一键查单</a>
+        <a href="#" id="echart_sx">时效查询</a>
+      </div>
+    </div>
+  </div>
+	
+	
+<!--echart图表 E-->
+</div>
+
+</div>
+
+</div>
+<!--找物流专线/图表 E-->
+
+<div class="banner"><img src="{dede:global.cfg_templets_skin/}/images/index/23banner.png"></div>
+
+
+<!--找车源 S-->
+<div class="main3 main_cy_hy center " id="rf01">
+<div class="main3_12">
+
+
+
+<div class="main3_11" id="rf02">
+    <div class="main3_1_1">
+    <div class="xt_bottom"></div>
+    <div class="floatl">
+    <b>找车源信息</b>
+      <div class="index_search floatl">
+<div class="fl index_search_input" style="position:relative;" id="carLineFrom" >
+         <input style="height: 100%;" data-toggle="city-picker" data-level="district"   type="text" name=""  class=""  placeholder=" 请选择出发地" readonly="">
+</div>
+                                    <em>&rarr;</em>
+<div class="fl index_search_input" style="position:relative;" id="carLineTo" >            
+         <input style="height: 100%;" data-toggle="city-picker" data-level="district" type="text"  name="" class="" placeholder=" 请选择到达地" readonly="">
+</div>                               
+                       
+     	 </div>  
+<input id="search_cheyuan" type="button" class="search_hy" value=""></div>
+    <div class="more floatr">{dede:type typeid='3'}<a href="[field:typeurl/]" target="_blank">更多></a>{/dede:type}</div>		 
+     </div>
+    
+     <div class="hy clear">
+      <dl class="hy_d">
+                <dd class="d1">出发地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;</dd>
+                <dd class="d2">到达地</dd>
+                <dd class="d3">车牌号</dd>
+                <dd class="d4">车型</dd>
+                <dd class="d5">车长</dd>
+                <dd class="d6">载重</dd>
+                <dd class="d7">运输价格</dd>
+                <dd class="d8">操作</dd>
+                        </dl>
+                  <div class="none_cy"><span>暂无车源信息</span>
+                   </div>            
+                        
+                        <div class="clear scroll_nr3">
+                        	{dede:arclist typeid='3'   addfields='czd,cph,cxlx,cxcd,zz,syr'  channelid='18' titlelen='60' row='1' }                      
+
+                            <ul class="hy_nr" style="margin-top: 0px;" id="js003">
+                 <li style="display: none;">
+                 	<a id="nr_a11"><span id="nr021" class="t1"></span></a>
+                 	<a id="nr_a11"><span id="nr021_2" class="t2"></span></a>
+                                    <a target="_blank" id="nr_a12"><span id="nr022" class="t3"></span></a>
+                                    <a target="_blank" id="nr_a13"><span id="nr023" class="t4"></span></a>
+                                    <a target="_blank" id="nr_a14"><span  class="t5"><font id="nr024" style="color: #f00;"></font>米</span></a>
+                                    <a target="_blank" id="nr_a15"><span  class="t6"><font id="nr025" style="color: #f00;"></font>吨</span></a>
+                                    <a target="_blank" id="nr_a16"><span  class="t7"><font id="nr026" style="color: #f00;"></font></span></a>
+                                    <a target="_blank" id="nr_a17"><span id="t7" class="t8">查看</span></a>
+                 </li>
+
+                            
+                            </ul>
+                            {/dede:arclist}
+
+           </div>
+     
+     </div>
+
+</div>
+<div class="h30 w970 bg_f7"></div>
+<div class="main3_1" id="rf03">
+    <div class="main3_1_1">
+    <div class="xt_bottom"></div>
+    <div class="floatl">
+    <b>找货源信息</b>
+    <div class="index_search floatl">
+  <div class="fl index_search_input" style="position:relative;" id="HuoyuanFrom" >
+         <input style="height: 100%;" data-toggle="city-picker" data-level="district"   type="text" name=""  class=""  placeholder=" 请选择出发地" readonly="">
+</div>
+                                    <em>&rarr;</em>
+<div class="fl index_search_input" style="position:relative;" id="HuoyuanTo" >            
+         <input style="height: 100%;" data-toggle="city-picker" data-level="district" type="text"  name="" class="" placeholder=" 请选择到达地" readonly="">
+</div>  
+                         </div>   
+<input id="search_huoyuan" type="button" class="search_hy"  value=""></div>
+    <div class="more floatr">{dede:type typeid='2'}<a href="[field:typeurl /]" target="_blank">更多></a>{/dede:type}</div>		 
+     </div>
+    
+     <div class="hy clear">
+      <dl class="hy_d">
+                            <dd class="d1">出发地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&rarr;</dd>
+                            <dd class="d2">到达地</dd>
+                            <dd class="d3">货物名称</dd>
+                            <dd class="d4">重量</dd>
+                            <dd class="d5">体积</dd>
+                            <dd class="d6">运输类型</dd>
+                            <dd class="d7">发布时间</dd>
+                            <dd class="d8">操作</dd>
+                        </dl>
+                   <div class="none_hy"><span>暂无货源信息</span>
+                   </div>
+                        
+                        
+                        <div class="clear scroll_nr1">
+ 
+                        	
+                        	
+                        	    {dede:arclist typeid='2'   addfields='cfd,ddd,hwlx,zl,tj,yslx,yf,fbsj'  channelid='17' titlelen='60' row='1' } 
+                            <ul class="hy_nr " style="margin-top: 0px;" id="js004">
+
+                 <li style="display: none;">                                      
+                                   <a id="nr_a31"><span class="t1" id="nr031"></span></a>
+                                   <a id="nr_a31"><span class="t2" id="nr031_2"></span></a>
+                                   <a id="nr_a33"><span class="t3" id="nr033"></span></a>
+                                   <a id="nr_a34"><span class="t4" ><font id="nr034" style="color: #f00;"></font></span></a>
+                                   <a id="nr_a35"><span class="t5" ><font id="nr035" style="color: #f00;"></font></span></a>
+                                   <a id="nr_a36"><span class="t6" id="nr036"></span></a>
+                                   <a id="nr_a37"><span class="t7" id="nr037"></span></a>
+                                   <a target="_blank" id="nr_a38"><span id="t8" class="t8">查看</span></a>
+                                </li>
+                            
+                            </ul>
+                            {/dede:arclist}
+           </div>
+     
+     </div>
+
+</div>
+
+</div>
+<div class="right_box">
+<!--echart图表 S-->
+	<div class="right_price_bt1">
+	   <div class="xt_bottom w102"></div>
+	   <div class="floatl">
+        <b>价格指数</b>
+       </div>
+		
+	</div>
+
+  <div class="linelist linelist2">
+      <div class="line-list-ul2">
+        <ul>
+          <li class="current">
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">武汉</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span>,<span ><em class="lineqing-percent">&darr;6%</em></span></p>
+          </li>
+          <li class="">
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">南昌</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span>,<span ><em class="lineqing-percent">&darr;6%</em></span></p>
+          </li>
+                    <li class="">
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">重庆</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span>,<span ><em class="lineqing-percent">&darr;6%</em></span></p>
+          </li>
+                    <li class="">
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">长沙</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span>,<span ><em class="lineqing-percent">&darr;6%</em></span></p>
+          </li>
+                    <li class="">
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">郑州</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span>,<span ><em class="lineqing-percent">&darr;6%</em></span></p>
+          </li>
+                    <li class="">
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">合肥</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span>,<span ><em class="lineqing-percent">&darr;6%</em></span></p>
+          </li>
+                    <li class="">
+          <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">贵阳</span></p>
+          <p class="line_bt2">重货：<span ><i class="linezhong">0.45</i>元/公斤</span><span ><i class="linezhong-percent">&uarr;5%</i></span> 轻货：<i class="lineqing">160</i>元/方</span>,<span ><em class="lineqing-percent">&darr;6%</em></span></p>
+          </li>
+
+    
+
+        </ul>
+        <div class="echartbox2">
+          <strong>本周价格：</strong>
+          <div class="zhong-info"><span class="zhong-info-price">重货 ：<i>0.45</i>元/公斤</span><i class="zhong-info-tong">&uarr;5%</i>，环比<em class="zhong-info-huan">-6%</em></div>
+          <div class="qing-info">  <span class="qing-info-price">轻货：  <i>200</i>元/方</span><i class="qing-info-tong">&uarr;5%</i>，环比<em class="qing-info-huan">-6%</em></div>
+          <div class="echartwrapper">
+            
+          </div>
+        </div>
+      </div>
+      
+       		<div class="hq-news-from">
+ 			<form style="position: relative;">
+ 				<div class="fl from-input noieclear" style="position:relative;" id="cx_start" >
+ 				<input style="height: 100%;" data-toggle="city-picker" data-level="district" type="text"  autocomplete="off" placeholder="出发地">
+ 				</div>
+ 				
+ 				<img   class="fl"  src="http://192.168.1.170/templets/default/index_files/search_jiantou.png" />
+ 				<div class="fl from-input noieclear" style="position:relative;" id="cx_end" >
+ 				<input style="height: 100%;" data-toggle="city-picker" data-level="district" type="text"  autocomplete="off" placeholder="目的地">
+ 				</div>
+ 				<a href="javascript:void(0)" onclick="line_cx()" class="hq-a-text" id="hqzx_btn1">查询其他专线</a>
+ 			</form>
+ 		</div>
+ 		
+ 		
+    </div>	
+	
+<!--echart图表 E-->
+</div>
+
+</div>
+
+<!--找货源 E-->
+
+<!--物流园区 S-->
+
+
+
+<div class="banner">
+    <img src="{dede:global.cfg_templets_skin/}/images/index/24banners2.png">
+    </div>
+    
+    <!--物流公司/物流园区 S-->
+    <div class="main4 center " id="rf04">
+    <div class="main4_1">
+    <div class="main4_1_1">
+    <div class="xt_bottom"></div>
+    <div class="floatl">
+    <b>找物流公司</b>
+    </div>
+    <div class="more2 floatr"><a href="/plus/list.php?tid=80" target="_blank">更多></a></div>		 
+     </div>
+      <div class="hy clear">
+
+    
+     
+      <dl class="wlyq_d">
+                            <dd class="d0001">公司名称</dd>
+                            <dd class="d0002">公司所在地</dd>
+                <dd class="d0003">经营范围</dd>
+                            <dd  class="d0004">操作</dd>
+                
+                        </dl>
+                  <div class="none_wlgs"><span>暂无物流公司信息</span>
+                   </div>          
+                        <div class="clear scroll_nr4">
+                            <ul class="wlyq_nr" id="js_wlgs">
+                                
+    
+    <li style="display: none;">
+                                    <a id="wlgs_a1" href="#" target="_blank" style="color: #fff;"  ><span class="t0001" id="wlgs_name"></span></a>
+                                    <a id="wlgs_a2" href="#" target="_blank" style="color: #fff;"  ><span class="t0002" id="wlgs_postion"></span></a>
+                                    <a id="wlgs_a3" href="#" target="_blank" style="color: #fff;"  ><span class="t0003" id="wlgs_jyfw"></span></a>
+                                    <span id="t77" class="t0004"><a id="wlgs_a"  href="#" target="_blank"   >查看</a></span>
+                                </li>
+
+       
+                                
+                                
+                 </ul>
+           </div>
+     
+     </div>
+    </div>
+    <div class="main4_2">
+    <div class="main4_2_1">
+    	   <div class="xt_bottom"></div>
+    <div class="floatl">
+    <b>找物流园区</b>
+    </div>
+    <div class="more2 floatr">{dede:type typeid='1'}<a href="[field:typeurl/]" target="_blank"><span>更多></span></a>{/dede:type}</div>		 
+    </div>
+     <div class="h10"></div>
+      <div class="hy clear">
+      <dl class="wlyq_d">
+                            <dd class="d01">物流园名称</dd>
+                            <dd class="d02">所在地</dd>
+                <dd class="d03">专线数量</dd>
+                            <dd  class="d04">操作</dd>
+                
+                        </dl>
+                        <div class="clear ">
+                            <ul class="wlyq_nr" id="js_wlyq">
+                                
+    
+    <li style="display: none;">
+                                    <a id="wlyq_a1" href="#" target="_blank" style="color: #fff;"  ><span class="t01" id="wlyq_name"></span></a>
+                                    <a id="wlyq_a2" href="#" target="_blank" style="color: #fff;"  ><span class="t02" id="wlyq_postion"></span></a>
+                                    <a id="wlyq_a3" href="#" target="_blank" style="color: #fff;"  ><span class="t03" id="wlyq_num"></span></a>
+                                    <span id="t77" class="t04"><a id="wlyq_a4"  href="#" target="_blank"   >查看</a></span>
+                                </li>
+
+       
+                                
+                                
+                 </ul>
+           </div>
+           </div>
+    
+    
+    </div>
+    </div>
+    <!--物流公司/物流园区 E-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--找货源 E-->
+
+
+<!--商务信息 S-->
+<div class="main3 center " id="rf06">
+
+<div class="tyxbox"><div class="tyxboxWrap">
+    <div class="tyxleft tyxleft1">
+    <div class="sHeadern">
+    <div class="xt_bottom"></div>	
+    	<b>物流商务信息</b> 
+    	<!--
+    	<em>	<a href="#" title="合作信息">合作</a><a href="#" title="求购信息">求购</a> <a href="#" title="供应信息">供应</a><a href="#" title="招商信息">招商</a> <a href="#" title="代理信息">代理</a> 
+    	</em> 
+    	-->
+    	<span>{dede:type typeid='68'}<a href="[field:typeurl/]" title="更多物流商务信息">更多></a>{/dede:type}</span></div>
+    <ul class="swlist fls">
+    	{dede:arclist typeid='68' channelid='44' addfields='xxlx,xxfl'   titlelen='48' row='20'}
+    <li class="nods"><a href="[field:arcurl/]" class="cur">[field:xxlx/]</a><a href="[field:arcurl/]" class="tag">[field:xxfl/]</a><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span><a href="[field:arcurl/]" class="cur">详情</a></span></li>
+         {/dede:arclist}
+    </ul>
+    <script type="text/javascript">
+    	$('.nods:nth-child(even)').addClass("extra");
+    </script>
+
+    </div>
+    <div class="tyxright tyxright1">
+
+    <div class="sHeadern ">
+    	 <div class="xt_bottom"></div>	
+    	<b>物流公司推荐</b>
+    </div>
+    <ul id="wlgs_tj"> 
+    	<div id="wlgs_tj1">
+    <li class="arank" style="display: none;">
+      <div class="avatar"><a id="tj_01" href="" target="_blank" title=""><span id="tj_02"></span></a></div> 
+      <div class="info">
+      <div class="wlgs_pic"><img id="tj_03" class="scrollLoading" src="templets/default/images/index/wlgs_tj_01.png"  alt=""></div>
+      <div class="company"><a id="tj_04" href="#" target="_blank" class="yh" title="#"></a></div>
+      </div>
+    </li>
+   
+    </div>
+    
+
+  <div id="wlgs_tj2">
+    <li class="arank arank2" style="display: none;">
+    	   <div class="avatar avatar2"><a id="tj_05"  href="" target="_blank" title=""><span id="tj_06"></span></a></div> 
+     <div class="company"><a id="tj_07" href="" target="_blank" class="yh" title=""></a> </div>
+     </li>
+  </div>
+     
+    </ul>
+
+    </div>
+    </div>         
+    </div>
+
+
+
+<!--仓库出租/物流设备采购 E-->
+<div class="banner">
+    <img src="{dede:global.cfg_templets_skin/}/images/index/26banners3.png">
+    </div>
+
+<!--物流资讯/物流前沿/网点加盟招商 S-->
+<div class="main5 center" id="rf07">
+<div class="main5_1">
+<div id="main5_1_1">
+	   <div class="xt_bottom_w92"></div>
+<div id="bt1_5_1"><a class="zx_a1" onclick="document.getElementById(&#39;main5_1_nr1&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;main5_1_nr2&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;more1_5_1&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;more2_5_1&#39;).style.display=&#39;none&#39;;">物流资讯</a></div>
+<div id="bt2_5_1"><a class="zx_a1" onclick="document.getElementById(&#39;main5_1_nr1&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;main5_1_nr2&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;more1_5_1&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;more2_5_1&#39;).style.display=&#39;block&#39;;">政策法令</a></div>
+<div id="more1_5_1">{dede:type typeid='52'}<a href="[field:typeurl /]" target="_blank">更多></a>{/dede:type}</div>
+<div id="more2_5_1">{dede:type typeid='14'}<a href="[field:typeurl /]" target="_blank">更多></a>{/dede:type}</div>
+</div>
+<div class="clear"></div>
+<div id="main5_1_nr1">
+	 {dede:arclist typeid='52' flag='h'   titlelen='60' row='1'   } 
+
+<a href="[field:arcurl/]"><img src="[field:picname/]" alt="[field:title/]"></a>
+ <a href="[field:arcurl/]"><span>[field:title/]</span></a>
+   {/dede:arclist}   
+                         <br>
+                         <div class="h18"></div>
+                          {dede:arclist typeid='16' noflag='h'   titlelen='60' row='3'   } 	
+ <a href="[field:arcurl /]">[field:title/]</a>	<br />	
+                         {/dede:arclist} 
+</div>
+
+<div id="main5_1_nr2">
+	 {dede:arclist typeid='14' flag='h'   titlelen='60' row='1'   } 
+
+<a href="[field:arcurl/]"><img src="[field:picname/]" alt="[field:title/]"></a>
+ <a href="[field:arcurl/]"><span>[field:title/]</span></a>
+    {/dede:arclist} 
+                         <br>
+                          <div class="h18"></div>
+                           {dede:arclist typeid='14' noflag='h'   titlelen='60' row='3'   } 				
+<a href="[field:arcurl /]">[field:title/]</a>	<br />	
+                         {/dede:arclist}  
+  
+</div>
+</div>
+<div class="main5_2">
+	<div id="main5_2_1">
+		 <div class="xt_bottom_w92"></div>
+<div id="bt1_5_2"><a class="zx_a2" onclick="document.getElementById(&#39;main5_2_nr1&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;main5_2_nr2&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;more1_5_2&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;more2_5_2&#39;).style.display=&#39;none&#39;;">物流前沿</a></div>
+<div id="bt2_5_2"><a class="zx_a2" onclick="document.getElementById(&#39;main5_2_nr1&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;main5_2_nr2&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;more1_5_2&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;more2_5_2&#39;).style.display=&#39;block&#39;;">专家观点</a></div>
+<div id="more1_5_2">{dede:type typeid='15'}<a href="[field:typeurl /]" target="_blank">更多></a>{/dede:type}</div>
+<div id="more2_5_2">{dede:type typeid='16'}<a href="[field:typeurl /]" target="_blank">更多></a>{/dede:type}</div>
+</div>
+<div class="clear"></div>
+<div id="main5_2_nr1">
+
+ {dede:arclist typeid='15' flag='h'   titlelen='60' row='1'   } 
+						
+<a href="[field:arcurl/]"><img src="[field:picname/]" alt="[field:title/]"></a>
+ <a href="[field:arcurl/]"><span>[field:title/]</span></a>	
+	
+					
+                         {/dede:arclist}   
+                         <br />
+                          <div class="h18"></div>
+                          {dede:arclist typeid='15' noflag='h'   titlelen='60' row='3'   } 				
+<a href="[field:arcurl /]">[field:title/]</a>	<br />	
+                         {/dede:arclist} 
+  
+</div>
+
+<div id="main5_2_nr2">
+	 {dede:arclist typeid='16' flag='h'   titlelen='60' row='1'   } 
+<a href="[field:arcurl/]"><img src="[field:picname/]" alt="[field:title/]"></a>
+ <a href="[field:arcurl/]"><span>[field:title/]</span></a>
+     {/dede:arclist}
+                         <br>
+                          <div class="h18"></div>
+                          
+                          {dede:arclist typeid='16' noflag='h'   titlelen='60' row='3'   } 				
+<a href="[field:arcurl /]">[field:title/]</a>	<br />	
+                         {/dede:arclist}  
+  
+                        </div>
+</div>
+
+
+<div class="main5_3">
+	<div id="main5_3_1">
+		 <div class="xt_bottom_w92"></div>
+<div id="bt1_5_2"><a class="zx_a3" onclick="document.getElementById(&#39;main5_3_nr1&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;main5_3_nr2&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;more1_5_2&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;more2_5_2&#39;).style.display=&#39;none&#39;">采购资讯</a></div>
+<div id="bt2_5_2"><a class="zx_a3" onclick="document.getElementById(&#39;main5_3_nr1&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;main5_3_nr2&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;more1_5_2&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;more2_5_2&#39;).style.display=&#39;block&#39;">仓储与配送</a></div>
+<div id="more1_5_2"><a href="/plus/list.php?tid=58" target="_blank">更多></a></div>
+<div id="more2_5_2"><a href="/plus/list.php?tid=59" target="_blank">更多></a></div>
+</div>
+<div class="clear"></div>
+<div id="main5_3_nr1">
+
+ {dede:arclist typeid='58' flag='h'   titlelen='60' row='1'   } 
+						
+<a href="[field:arcurl/]"><img src="[field:picname/]" alt="[field:title/]"></a>
+ <a href="[field:arcurl/]"><span>[field:title/]</span></a>	
+	
+					
+                         {/dede:arclist}   
+                         <br />
+                          <div class="h18"></div>
+                          {dede:arclist typeid='58' noflag='h'   titlelen='60' row='3'   } 				
+<a href="[field:arcurl /]">[field:title/]</a>	<br />	
+                         {/dede:arclist} 
+  
+</div>
+
+<div id="main5_3_nr2">
+	 {dede:arclist typeid='59' flag='h'   titlelen='60' row='1'   } 
+<a href="[field:arcurl/]"><img src="[field:picname/]" alt="[field:title/]"></a>
+ <a href="[field:arcurl/]"><span>[field:title/]</span></a>
+     {/dede:arclist}
+                         <br>
+                          <div class="h18"></div>
+                          
+                          {dede:arclist typeid='59' noflag='h'   titlelen='60' row='3'   } 				
+<a href="[field:arcurl /]">[field:title/]</a>	<br />	
+                         {/dede:arclist}  
+  
+                        </div>
+</div>
+
+
+
+</div>
+
+<!--物流资讯/物流前沿/网点加盟招商 E-->
+
+<!--会员量/客户案例/常用实用工具 S-->
+<div class="main5 center">
+<div class="main5_1">
+<div id="main6_1_1">
+	 <div class="xt_bottom_w92"></div>
+<div id="bt1_5_1"><a >会员量</a></div>
+</div>
+<div class="clear"></div>
+<div id="main6_1_hy">
+		{dede:arclist typeid='20'   addfields='hymc,sysl,lxtb'  channelid='23' titlelen='60' row='8' } 
+	<!--会员量 S-->
+ <div class="hyl">
+ <img src="[field:lxtb/]" width="60px" height="60px">
+ 	<span>[field:hymc/]</span>
+ 		<i>[field:sysl/]</i>
+ </div>
+<!--会员量 E-->
+{/dede:arclist}
+
+
+
+</div>
+</div>
+<div class="main5_2">
+  <div id="main5_2_1">
+  	<div class="xt_bottom_w92"></div>
+<div id="bt1_5_2">
+	<a onclick="document.getElementById(&#39;main5_2_nr1&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;main5_2_nr2&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;more1_5_2&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;more2_5_2&#39;).style.display=&#39;none&#39;;">客户案例</a></div>
+<div id="more1_5_2">{dede:type typeid='21'}<a href="[field:typeurl/]" target="_blank">更多></a>{/dede:type}</div>
+</div>
+<div class="clear"></div>
+<div id="main6_2_nr1">
+	{dede:arclist typeid='21'    titlelen='38' infolen='82' row='3'   } 
+ <div class="anli">
+ 	<div class="floatl"><a href="[field:arcurl/]"><img src="[field:picname/]"alt="[field:title/]" width="90px" height="68px" ></a>	</div>
+	<div class="anlixq">
+		<span>[field:title/]</span><br />
+		<a href="[field:arcurl /]">[field:info /]...</a>
+		<br />
+		
+		
+	</div>			
+			 
+					</div>
+                         {/dede:arclist}   
+
+   
+                        
+                          			                 
+</div>
+
+
+</div>
+<div class="main5_3">
+		<div id="main6_3_1">
+			<div class="xt_bottom_w92"></div>
+<div id="bt1_6_3">
+	<a>常用工具</a></div>
+</div>
+<div class="clear"></div>
+<div id="tools">
+<div class="t"><a target="_blank" href="http://www.chajiaotong.com/jiashizheng/#guangdong"><em>&bull;</em>驾驶证查询</a></div>
+<div class="t bold"><a target="_blank" href="http://www.chajiaotong.com/jiashizheng/#guangdong"><em>&bull;</em>行驶证查询</a></div>
+<div class="t bold"><a target="_blank" href="https://www.kuaidi100.com/"><em>&bull;</em>快递查询</a></div>
+<div class="t"><a target="_blank" href="http://www.weizhang8.cn/"><em>&bull;</em>交通违章查询</a></div>
+<div class="t"><a target="_blank" href="http://tianqi.2345.com/"><em>&bull;</em>天气预报</a></div>
+<div class="t"><a target="_blank" href="https://shenfenzheng.51240.com/"><em>&bull;</em>身份证查询</a></div>
+<div class="t"><a target="_blank" href="https://shouji.51240.com/"><em>&bull;</em>手机号码归属地</a></div>
+<div class="t bold"><a target="_blank" href="https://wannianrili.51240.com/"><em>&bull;</em>万年历</a></div>
+<div class="t"><a target="_blank" href="http://www.chinacar.com.cn/vin_index.html"><em>&bull;</em>车辆代码查询</a></div>
+<div class="t"><a target="_blank" href="https://youbian.51240.com/"><em>&bull;</em>邮政编号查询</a></div>
+<div class="t bold"><a target="_blank" href="http://map.baidu.com/fwmap/zt/traffic/"><em>&bull;</em>全国路况信息查询</a></div>
+<div class="t bold"><a target="_blank" href="https://www.icauto.com.cn/gonglu/"><em>&bull;</em>全国高速公路查询</a></div>
+<div class="t"><a target="_blank" href="http://www.zou114.com/highwaycode/"><em>&bull;</em>国家干线公路查询</a></div>
+<div class="t"><a target="_blank" href="http://cal.apple886.com/"><em>&bull;</em>在线计算器</a></div>
+
+</div>
+
+
+</div>
+</div>
+<!--会员量/客户案例/常用实用工具  E-->
+<!--合作伙伴 S-->
+<div class="partner center w1400">
+	<!--
+	<img src="{dede:global.cfg_templets_skin/}/index_files/btn.png" style="width:100%;height: 100%">
+		-->
+		<div class="bt"><span>28快运可以为您提供什么服务保障？</span></div>
+		<div class="bt2"><span>集结众多货运能力，提供真实可靠的物流服务</span></div>
+		<div style="width:1400px;height:322px;">
+			<div class="partner_item">
+				<p><img src="{dede:global.cfg_templets_skin/}/images/index/partner_1.png" ></p>
+				<p class="item_txt1">海量运力</p>
+				<p class="item_txt2">链接上千家快运物流公司，产品囊括小票、大票零担，网络线路覆盖千万级，实现一点发全国。</p>	
+			</div>
+			<div class="partner_item">
+				<p><img src="{dede:global.cfg_templets_skin/}/images/index/partner_2.png" ></p>
+				<p class="item_txt1">独享低价</p>
+				<p class="item_txt2">大量批发货主合伙人，独享物流费用议价能力，实现全网线上比价，在线下单可统一管理物流订单。</p>	
+			</div>
+			<div class="partner_item">
+				<p><img src="{dede:global.cfg_templets_skin/}/images/index/partner_3.png" ></p>
+				<p class="item_txt1">物流跟踪</p>
+				<p class="item_txt2">物流节点及时更新，货物物流跟踪全程可视，让发货方和收货方的交易因物流而变得更信任。</p>	
+			</div>
+			<div class="partner_item">
+				<p><img src="{dede:global.cfg_templets_skin/}/images/index/partner_4.png" ></p>
+				<p class="item_txt1">发货保障</p>
+				<p class="item_txt2">28快运在线发货，服务有保障，若有异议可在线投诉，客服及时介入处理，让您发货无忧。</p>	
+			</div>
+			
+			
+		</div>
+	</div>
+
+	
+</div>
+<!--合作伙伴 E-->
+
+
+
+</div>
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/index.js"></script>
+{dede:include filename="footer.htm"/}
+<!-- /footer -->
+
+ <!--右侧悬浮 S-->
+    <div class="floatNavBar">
+
+        <div class="nav-bd">
+            <div class="rightKfCon"><a class="rightKf"></a></div>
+            <div class="rightBarHidden">
+                <div class="item">
+                    <i class="kfImg"></i>
+                    <div class="kfTop">
+                        <h3>在线客服</h3>
+                        <p>周一至周五 9:00-18:00</p>
+                    </div>
+                    <div class="kfCenter">
+                        <a class="keFu1" onclick="javascript:window.open('tencent://message/?uin=596803544&Site=&menu=yes');">
+                            <img src="{dede:global.cfg_templets_skin/}/images/kefu1.png"></a>
+                        <a onclick="javascript:window.open('tencent://message/?uin=596803544&Site=&menu=yes');">
+                            <img src="{dede:global.cfg_templets_skin/}/images/kefu2.png"></a>
+                    </div>
+                    <div class="kfRight">
+                        <span>客服电话</span><br>
+                        <span class="phone">400-9992828</span>
+                    </div>
+                </div>
+            </div>
+
+            <ul class="nav-flo">
+                <li class=""><a href="#rf01" title="找专线">找专线</a></li>
+                <li class=""><a href="#rf02" title="找车源">找车源</a></li>
+                <li class=""><a href="#rf03" title="找货源">找货源</a></li>
+                <li class=""><a href="#rf04" title="找园区">找园区</a></li>
+                <li>
+                    <a href="#rf00"  
+                    title="回顶部" class="last">回顶部<br />
+                        <i class="whiteArw"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!--右侧悬浮 E-->
+<script type="text/javascript">
+	
+    	/*滚动效果*/
+    	
+                var $this1 = $(".scroll_nr1");
+                var scrollTimer1;
+                //alert(1);
+                $this1.hover(function () {
+                    clearInterval(scrollTimer1);
+                }, function () {
+                    scrollTimer1 = setInterval(function () {
+                        scrollNews($this1);
+                    }, 10000);
+                }).trigger("mouseout");
+                
+                  
+                 var $this2 = $(".scroll_nr2");
+                var scrollTimer2;
+                //alert(1);
+                $this2.hover(function () {
+                    clearInterval(scrollTimer2);
+                }, function () {
+                    scrollTimer2 = setInterval(function () {
+                        scrollNews($this2);
+                    }, 10000);
+                }).trigger("mouseout");
+              
+                var $this3 = $(".scroll_nr3");
+                var scrollTimer3;
+                //alert(1);
+                $this3.hover(function () {
+                    clearInterval(scrollTimer3);
+                }, function () {
+                    scrollTimer3 = setInterval(function () {
+                        scrollNews($this3);
+                    }, 10000);
+                }).trigger("mouseout");
+ 	            
+              
+                     var $this4 = $(".scroll_nr4");
+                var scrollTimer4;
+                //alert(1);
+                $this4.hover(function () {
+                    clearInterval(scrollTimer4);
+                }, function () {
+                    scrollTimer4 = setInterval(function () {
+                        scrollNews4($this4);
+                    }, 10000);
+                }).trigger("mouseout");
+
+
+
+            
+            
+            
+        function scrollNews(obj) {
+            	//alert(1);
+                var $self = obj.find("ul:first");
+                var lineHeight = $self.find("li:first").height();
+                $self.animate({ "margin-top": -8*lineHeight + "px" }, 2000, function () {
+                    $self.css({ "margin-top": "0px" });
+                    obj.find("ul:first li").slice(0,8).appendTo($self);
+                })
+            }
+        function scrollNews4(obj) {
+            	//alert(1);
+                var $self = obj.find("ul:first");
+                var lineHeight = $self.find("li:first").height();
+                $self.animate({ "margin-top": -9*lineHeight + "px" }, 2000, function () {
+                    $self.css({ "margin-top": "0px" });
+                    obj.find("ul:first li").slice(0,9).appendTo($self);
+                })
+            }
+           
+      
+    </script>
+
+<script>
+//echart滚动脚本
+var speed=30; //数字越大速度越慢
+var tab=$(".echart_scroll_nr");
+var tab1=$(".echart_scroll_nr1");
+var tab2=$(".echart_scroll_nr2");
+tab2.html(tab1.html());
+console.log('tab2:'+tab2.html())
+function Marquee(){
+if(tab2[0].offsetWidth-tab[0].scrollLeft<=0)
+{
+tab[0].scrollLeft-=tab1[0].offsetWidth
+//console.log('tab1[0].offsetWidth:'+tab1[0].offsetWidth)
+}
+else{
+tab[0].scrollLeft++;
+//console.log('tab[0].scrollLeft:'+tab1[0].scrollLeft)
+}
+}
+var MyMar=setInterval(Marquee,speed);
+tab.mouseover(function() {clearInterval(MyMar);})
+tab.mouseout(function() {MyMar=setInterval(Marquee,speed)})
+</script>
+    <script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/floatBar.min.js"></script>
+
+       
+
+	   <script src="{dede:global.cfg_templets_skin/}/js/map/echarts.min.js" type="text/javascript" charset="utf-8"></script>
+	   <script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/echart/index.js"></script>
+
+</body></html>

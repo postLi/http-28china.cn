@@ -1,0 +1,3130 @@
+[
+  {
+    "code": "110000",
+    "parent_code": null,
+    "name": "北京市",
+    "alias": "北京",
+    "pinyin": "BeiJing",
+    "level": 1
+  },
+  {
+    "code": "110100",
+    "parent_code": "110000",
+    "name": "北京城区",
+    "alias": "北京城区",
+    "pinyin": "BeiJingChengQu",
+    "level": 2
+  },
+  {
+    "code": "120000",
+    "parent_code": null,
+    "name": "天津市",
+    "alias": "天津",
+    "pinyin": "TianJin",
+    "level": 1
+  },
+  {
+    "code": "120100",
+    "parent_code": "120000",
+    "name": "天津城区",
+    "alias": "天津城区",
+    "pinyin": "TianJinChengQu",
+    "level": 2
+  },
+  {
+    "code": "130000",
+    "parent_code": null,
+    "name": "河北省",
+    "alias": "河北",
+    "pinyin": "HeBei",
+    "level": 1
+  },
+  {
+    "code": "130100",
+    "parent_code": "130000",
+    "name": "石家庄市",
+    "alias": "石家庄",
+    "pinyin": "ShiJiaZhuang",
+    "level": 2
+  },
+  {
+    "code": "130200",
+    "parent_code": "130000",
+    "name": "唐山市",
+    "alias": "唐山",
+    "pinyin": "TangShan",
+    "level": 2
+  },
+  {
+    "code": "130300",
+    "parent_code": "130000",
+    "name": "秦皇岛市",
+    "alias": "秦皇岛",
+    "pinyin": "QinHuangDao",
+    "level": 2
+  },
+  {
+    "code": "130400",
+    "parent_code": "130000",
+    "name": "邯郸市",
+    "alias": "邯郸",
+    "pinyin": "HanDan",
+    "level": 2
+  },
+  {
+    "code": "130500",
+    "parent_code": "130000",
+    "name": "邢台市",
+    "alias": "邢台",
+    "pinyin": "XingTai",
+    "level": 2
+  },
+  {
+    "code": "130600",
+    "parent_code": "130000",
+    "name": "保定市",
+    "alias": "保定",
+    "pinyin": "BaoDing",
+    "level": 2
+  },
+  {
+    "code": "130700",
+    "parent_code": "130000",
+    "name": "张家口市",
+    "alias": "张家口",
+    "pinyin": "ZhangJiaKou",
+    "level": 2
+  },
+  {
+    "code": "130800",
+    "parent_code": "130000",
+    "name": "承德市",
+    "alias": "承德",
+    "pinyin": "ChengDe",
+    "level": 2
+  },
+  {
+    "code": "130900",
+    "parent_code": "130000",
+    "name": "沧州市",
+    "alias": "沧州",
+    "pinyin": "CangZhou",
+    "level": 2
+  },
+  {
+    "code": "131000",
+    "parent_code": "130000",
+    "name": "廊坊市",
+    "alias": "廊坊",
+    "pinyin": "LangFang",
+    "level": 2
+  },
+  {
+    "code": "131100",
+    "parent_code": "130000",
+    "name": "衡水市",
+    "alias": "衡水",
+    "pinyin": "HengShui",
+    "level": 2
+  },
+  {
+    "code": "140000",
+    "parent_code": null,
+    "name": "山西省",
+    "alias": "山西",
+    "pinyin": "ShanXi",
+    "level": 1
+  },
+  {
+    "code": "140100",
+    "parent_code": "140000",
+    "name": "太原市",
+    "alias": "太原",
+    "pinyin": "TaiYuan",
+    "level": 2
+  },
+  {
+    "code": "140200",
+    "parent_code": "140000",
+    "name": "大同市",
+    "alias": "大同",
+    "pinyin": "DaTong",
+    "level": 2
+  },
+  {
+    "code": "140300",
+    "parent_code": "140000",
+    "name": "阳泉市",
+    "alias": "阳泉",
+    "pinyin": "YangQuan",
+    "level": 2
+  },
+  {
+    "code": "140400",
+    "parent_code": "140000",
+    "name": "长治市",
+    "alias": "长治",
+    "pinyin": "ZhangZhi",
+    "level": 2
+  },
+  {
+    "code": "140500",
+    "parent_code": "140000",
+    "name": "晋城市",
+    "alias": "晋城",
+    "pinyin": "JinCheng",
+    "level": 2
+  },
+  {
+    "code": "140600",
+    "parent_code": "140000",
+    "name": "朔州市",
+    "alias": "朔州",
+    "pinyin": "ShuoZhou",
+    "level": 2
+  },
+  {
+    "code": "140700",
+    "parent_code": "140000",
+    "name": "晋中市",
+    "alias": "晋中",
+    "pinyin": "JinZhong",
+    "level": 2
+  },
+  {
+    "code": "140800",
+    "parent_code": "140000",
+    "name": "运城市",
+    "alias": "运城",
+    "pinyin": "YunCheng",
+    "level": 2
+  },
+  {
+    "code": "140900",
+    "parent_code": "140000",
+    "name": "忻州市",
+    "alias": "忻州",
+    "pinyin": "XinZhou",
+    "level": 2
+  },
+  {
+    "code": "141000",
+    "parent_code": "140000",
+    "name": "临汾市",
+    "alias": "临汾",
+    "pinyin": "LinFen",
+    "level": 2
+  },
+  {
+    "code": "141100",
+    "parent_code": "140000",
+    "name": "吕梁市",
+    "alias": "吕梁",
+    "pinyin": "LvLiang",
+    "level": 2
+  },
+  {
+    "code": "150000",
+    "parent_code": null,
+    "name": "内蒙古自治区",
+    "alias": "内蒙古",
+    "pinyin": "NeiMengGu",
+    "level": 1
+  },
+  {
+    "code": "150100",
+    "parent_code": "150000",
+    "name": "呼和浩特市",
+    "alias": "呼和浩特",
+    "pinyin": "HuHeHaoTe",
+    "level": 2
+  },
+  {
+    "code": "150200",
+    "parent_code": "150000",
+    "name": "包头市",
+    "alias": "包头",
+    "pinyin": "BaoTou",
+    "level": 2
+  },
+  {
+    "code": "150300",
+    "parent_code": "150000",
+    "name": "乌海市",
+    "alias": "乌海",
+    "pinyin": "WuHai",
+    "level": 2
+  },
+  {
+    "code": "150400",
+    "parent_code": "150000",
+    "name": "赤峰市",
+    "alias": "赤峰",
+    "pinyin": "ChiFeng",
+    "level": 2
+  },
+  {
+    "code": "150500",
+    "parent_code": "150000",
+    "name": "通辽市",
+    "alias": "通辽",
+    "pinyin": "TongLiao",
+    "level": 2
+  },
+  {
+    "code": "150600",
+    "parent_code": "150000",
+    "name": "鄂尔多斯市",
+    "alias": "鄂尔多斯",
+    "pinyin": "EErDuoSi",
+    "level": 2
+  },
+  {
+    "code": "150700",
+    "parent_code": "150000",
+    "name": "呼伦贝尔市",
+    "alias": "呼伦贝尔",
+    "pinyin": "HuLunBeiEr",
+    "level": 2
+  },
+  {
+    "code": "150800",
+    "parent_code": "150000",
+    "name": "巴彦淖尔市",
+    "alias": "巴彦淖尔",
+    "pinyin": "BaYanNaoEr",
+    "level": 2
+  },
+  {
+    "code": "150900",
+    "parent_code": "150000",
+    "name": "乌兰察布市",
+    "alias": "乌兰察布",
+    "pinyin": "WuLanChaBu",
+    "level": 2
+  },
+  {
+    "code": "152200",
+    "parent_code": "150000",
+    "name": "兴安盟",
+    "alias": "兴安盟",
+    "pinyin": "XingAnMeng",
+    "level": 2
+  },
+  {
+    "code": "152500",
+    "parent_code": "150000",
+    "name": "锡林郭勒盟",
+    "alias": "锡林郭勒盟",
+    "pinyin": "XiLinGuoLeiMeng",
+    "level": 2
+  },
+  {
+    "code": "152900",
+    "parent_code": "150000",
+    "name": "阿拉善盟",
+    "alias": "阿拉善盟",
+    "pinyin": "ALaShanMeng",
+    "level": 2
+  },
+  {
+    "code": "210000",
+    "parent_code": null,
+    "name": "辽宁省",
+    "alias": "辽宁",
+    "pinyin": "LiaoNing",
+    "level": 1
+  },
+  {
+    "code": "210100",
+    "parent_code": "210000",
+    "name": "沈阳市",
+    "alias": "沈阳",
+    "pinyin": "ChenYang",
+    "level": 2
+  },
+  {
+    "code": "210200",
+    "parent_code": "210000",
+    "name": "大连市",
+    "alias": "大连",
+    "pinyin": "DaLian",
+    "level": 2
+  },
+  {
+    "code": "210300",
+    "parent_code": "210000",
+    "name": "鞍山市",
+    "alias": "鞍山",
+    "pinyin": "AnShan",
+    "level": 2
+  },
+  {
+    "code": "210400",
+    "parent_code": "210000",
+    "name": "抚顺市",
+    "alias": "抚顺",
+    "pinyin": "FuShun",
+    "level": 2
+  },
+  {
+    "code": "210500",
+    "parent_code": "210000",
+    "name": "本溪市",
+    "alias": "本溪",
+    "pinyin": "BenXi",
+    "level": 2
+  },
+  {
+    "code": "210600",
+    "parent_code": "210000",
+    "name": "丹东市",
+    "alias": "丹东",
+    "pinyin": "DanDong",
+    "level": 2
+  },
+  {
+    "code": "210700",
+    "parent_code": "210000",
+    "name": "锦州市",
+    "alias": "锦州",
+    "pinyin": "JinZhou",
+    "level": 2
+  },
+  {
+    "code": "210800",
+    "parent_code": "210000",
+    "name": "营口市",
+    "alias": "营口",
+    "pinyin": "YingKou",
+    "level": 2
+  },
+  {
+    "code": "210900",
+    "parent_code": "210000",
+    "name": "阜新市",
+    "alias": "阜新",
+    "pinyin": "FuXin",
+    "level": 2
+  },
+  {
+    "code": "211000",
+    "parent_code": "210000",
+    "name": "辽阳市",
+    "alias": "辽阳",
+    "pinyin": "LiaoYang",
+    "level": 2
+  },
+  {
+    "code": "211100",
+    "parent_code": "210000",
+    "name": "盘锦市",
+    "alias": "盘锦",
+    "pinyin": "PanJin",
+    "level": 2
+  },
+  {
+    "code": "211200",
+    "parent_code": "210000",
+    "name": "铁岭市",
+    "alias": "铁岭",
+    "pinyin": "TieLing",
+    "level": 2
+  },
+  {
+    "code": "211300",
+    "parent_code": "210000",
+    "name": "朝阳市",
+    "alias": "朝阳",
+    "pinyin": "ChaoYang",
+    "level": 2
+  },
+  {
+    "code": "211400",
+    "parent_code": "210000",
+    "name": "葫芦岛市",
+    "alias": "葫芦岛",
+    "pinyin": "HuLuDao",
+    "level": 2
+  },
+  {
+    "code": "220000",
+    "parent_code": null,
+    "name": "吉林省",
+    "alias": "吉林",
+    "pinyin": "JiLin",
+    "level": 1
+  },
+  {
+    "code": "220100",
+    "parent_code": "220000",
+    "name": "长春市",
+    "alias": "长春",
+    "pinyin": "ZhangChun",
+    "level": 2
+  },
+  {
+    "code": "220200",
+    "parent_code": "220000",
+    "name": "吉林市",
+    "alias": "吉林",
+    "pinyin": "JiLin",
+    "level": 2
+  },
+  {
+    "code": "220300",
+    "parent_code": "220000",
+    "name": "四平市",
+    "alias": "四平",
+    "pinyin": "SiPing",
+    "level": 2
+  },
+  {
+    "code": "220400",
+    "parent_code": "220000",
+    "name": "辽源市",
+    "alias": "辽源",
+    "pinyin": "LiaoYuan",
+    "level": 2
+  },
+  {
+    "code": "220500",
+    "parent_code": "220000",
+    "name": "通化市",
+    "alias": "通化",
+    "pinyin": "TongHua",
+    "level": 2
+  },
+  {
+    "code": "220600",
+    "parent_code": "220000",
+    "name": "白山市",
+    "alias": "白山",
+    "pinyin": "BaiShan",
+    "level": 2
+  },
+  {
+    "code": "220700",
+    "parent_code": "220000",
+    "name": "松原市",
+    "alias": "松原",
+    "pinyin": "SongYuan",
+    "level": 2
+  },
+  {
+    "code": "220800",
+    "parent_code": "220000",
+    "name": "白城市",
+    "alias": "白城",
+    "pinyin": "BaiCheng",
+    "level": 2
+  },
+  {
+    "code": "222400",
+    "parent_code": "220000",
+    "name": "延边朝鲜族自治州",
+    "alias": "延边朝鲜族",
+    "pinyin": "YanBianChaoXianZu",
+    "level": 2
+  },
+  {
+    "code": "230000",
+    "parent_code": null,
+    "name": "黑龙江省",
+    "alias": "黑龙江",
+    "pinyin": "HeiLongJiang",
+    "level": 1
+  },
+  {
+    "code": "230100",
+    "parent_code": "230000",
+    "name": "哈尔滨市",
+    "alias": "哈尔滨",
+    "pinyin": "HaErBin",
+    "level": 2
+  },
+  {
+    "code": "230200",
+    "parent_code": "230000",
+    "name": "齐齐哈尔市",
+    "alias": "齐齐哈尔",
+    "pinyin": "QiQiHaEr",
+    "level": 2
+  },
+  {
+    "code": "230300",
+    "parent_code": "230000",
+    "name": "鸡西市",
+    "alias": "鸡西",
+    "pinyin": "JiXi",
+    "level": 2
+  },
+  {
+    "code": "230400",
+    "parent_code": "230000",
+    "name": "鹤岗市",
+    "alias": "鹤岗",
+    "pinyin": "HeGang",
+    "level": 2
+  },
+  {
+    "code": "230500",
+    "parent_code": "230000",
+    "name": "双鸭山市",
+    "alias": "双鸭山",
+    "pinyin": "ShuangYaShan",
+    "level": 2
+  },
+  {
+    "code": "230600",
+    "parent_code": "230000",
+    "name": "大庆市",
+    "alias": "大庆",
+    "pinyin": "DaQing",
+    "level": 2
+  },
+  {
+    "code": "230700",
+    "parent_code": "230000",
+    "name": "伊春市",
+    "alias": "伊春",
+    "pinyin": "YiChun",
+    "level": 2
+  },
+  {
+    "code": "230800",
+    "parent_code": "230000",
+    "name": "佳木斯市",
+    "alias": "佳木斯",
+    "pinyin": "JiaMuSi",
+    "level": 2
+  },
+  {
+    "code": "230900",
+    "parent_code": "230000",
+    "name": "七台河市",
+    "alias": "七台河",
+    "pinyin": "QiTaiHe",
+    "level": 2
+  },
+  {
+    "code": "231081",
+    "parent_code": "230000",
+    "name": "绥芬河市",
+    "alias": "绥芬河",
+    "pinyin": "SuiFenHe",
+    "level": 2
+  },
+  {
+    "code": "231100",
+    "parent_code": "230000",
+    "name": "黑河市",
+    "alias": "黑河",
+    "pinyin": "HeiHe",
+    "level": 2
+  },
+  {
+    "code": "231200",
+    "parent_code": "230000",
+    "name": "绥化市",
+    "alias": "绥化",
+    "pinyin": "SuiHua",
+    "level": 2
+  },
+  {
+    "code": "232700",
+    "parent_code": "230000",
+    "name": "大兴安岭地区",
+    "alias": "大兴安岭",
+    "pinyin": "DaXingAnLingDeQu",
+    "level": 2
+  },
+  {
+    "code": "310000",
+    "parent_code": null,
+    "name": "上海市",
+    "alias": "上海",
+    "pinyin": "ShangHai",
+    "level": 1
+  },
+  {
+    "code": "310100",
+    "parent_code": "310000",
+    "name": "上海城区",
+    "alias": "上海城区",
+    "pinyin": "ShangHaiChengQu",
+    "level": 2
+  },
+  {
+    "code": "320000",
+    "parent_code": null,
+    "name": "江苏省",
+    "alias": "江苏",
+    "pinyin": "JiangSu",
+    "level": 1
+  },
+  {
+    "code": "320100",
+    "parent_code": "320000",
+    "name": "南京市",
+    "alias": "南京",
+    "pinyin": "NanJing",
+    "level": 2
+  },
+  {
+    "code": "320200",
+    "parent_code": "320000",
+    "name": "无锡市",
+    "alias": "无锡",
+    "pinyin": "WuXi",
+    "level": 2
+  },
+  {
+    "code": "320300",
+    "parent_code": "320000",
+    "name": "徐州市",
+    "alias": "徐州",
+    "pinyin": "XuZhou",
+    "level": 2
+  },
+  {
+    "code": "320400",
+    "parent_code": "320000",
+    "name": "常州市",
+    "alias": "常州",
+    "pinyin": "ChangZhou",
+    "level": 2
+  },
+  {
+    "code": "320500",
+    "parent_code": "320000",
+    "name": "苏州市",
+    "alias": "苏州",
+    "pinyin": "SuZhou",
+    "level": 2
+  },
+  {
+    "code": "320600",
+    "parent_code": "320000",
+    "name": "南通市",
+    "alias": "南通",
+    "pinyin": "NanTong",
+    "level": 2
+  },
+  {
+    "code": "320700",
+    "parent_code": "320000",
+    "name": "连云港市",
+    "alias": "连云港",
+    "pinyin": "LianYunGang",
+    "level": 2
+  },
+  {
+    "code": "320800",
+    "parent_code": "320000",
+    "name": "淮安市",
+    "alias": "淮安",
+    "pinyin": "HuaiAn",
+    "level": 2
+  },
+  {
+    "code": "320900",
+    "parent_code": "320000",
+    "name": "盐城市",
+    "alias": "盐城",
+    "pinyin": "YanCheng",
+    "level": 2
+  },
+  {
+    "code": "321000",
+    "parent_code": "320000",
+    "name": "扬州市",
+    "alias": "扬州",
+    "pinyin": "YangZhou",
+    "level": 2
+  },
+  {
+    "code": "321100",
+    "parent_code": "320000",
+    "name": "镇江市",
+    "alias": "镇江",
+    "pinyin": "ZhenJiang",
+    "level": 2
+  },
+  {
+    "code": "321300",
+    "parent_code": "320000",
+    "name": "宿迁市",
+    "alias": "宿迁",
+    "pinyin": "SuQian",
+    "level": 2
+  },
+  {
+    "code": "330000",
+    "parent_code": null,
+    "name": "浙江省",
+    "alias": "浙江",
+    "pinyin": "ZheJiang",
+    "level": 1
+  },
+  {
+    "code": "330100",
+    "parent_code": "330000",
+    "name": "杭州市",
+    "alias": "杭州",
+    "pinyin": "HangZhou",
+    "level": 2
+  },
+  {
+    "code": "330200",
+    "parent_code": "330000",
+    "name": "宁波市",
+    "alias": "宁波",
+    "pinyin": "NingBo",
+    "level": 2
+  },
+  {
+    "code": "330300",
+    "parent_code": "330000",
+    "name": "温州市",
+    "alias": "温州",
+    "pinyin": "WenZhou",
+    "level": 2
+  },
+  {
+    "code": "330400",
+    "parent_code": "330000",
+    "name": "嘉兴市",
+    "alias": "嘉兴",
+    "pinyin": "JiaXing",
+    "level": 2
+  },
+  {
+    "code": "330500",
+    "parent_code": "330000",
+    "name": "湖州市",
+    "alias": "湖州",
+    "pinyin": "HuZhou",
+    "level": 2
+  },
+  {
+    "code": "330600",
+    "parent_code": "330000",
+    "name": "绍兴市",
+    "alias": "绍兴",
+    "pinyin": "ShaoXing",
+    "level": 2
+  },
+  {
+    "code": "330700",
+    "parent_code": "330000",
+    "name": "金华市",
+    "alias": "金华",
+    "pinyin": "JinHua",
+    "level": 2
+  },
+  {
+    "code": "330800",
+    "parent_code": "330000",
+    "name": "衢州市",
+    "alias": "衢州",
+    "pinyin": "QuZhou",
+    "level": 2
+  },
+  {
+    "code": "330900",
+    "parent_code": "330000",
+    "name": "舟山市",
+    "alias": "舟山",
+    "pinyin": "ZhouShan",
+    "level": 2
+  },
+  {
+    "code": "331000",
+    "parent_code": "330000",
+    "name": "台州市",
+    "alias": "台州",
+    "pinyin": "TaiZhou",
+    "level": 2
+  },
+  {
+    "code": "331100",
+    "parent_code": "330000",
+    "name": "丽水市",
+    "alias": "丽水",
+    "pinyin": "LiShui",
+    "level": 2
+  },
+  {
+    "code": "340000",
+    "parent_code": null,
+    "name": "安徽省",
+    "alias": "安徽",
+    "pinyin": "AnHui",
+    "level": 1
+  },
+  {
+    "code": "340100",
+    "parent_code": "340000",
+    "name": "合肥市",
+    "alias": "合肥",
+    "pinyin": "HeFei",
+    "level": 2
+  },
+  {
+    "code": "340200",
+    "parent_code": "340000",
+    "name": "芜湖市",
+    "alias": "芜湖",
+    "pinyin": "WuHu",
+    "level": 2
+  },
+  {
+    "code": "340300",
+    "parent_code": "340000",
+    "name": "蚌埠市",
+    "alias": "蚌埠",
+    "pinyin": "BangBu",
+    "level": 2
+  },
+  {
+    "code": "340400",
+    "parent_code": "340000",
+    "name": "淮南市",
+    "alias": "淮南",
+    "pinyin": "HuaiNan",
+    "level": 2
+  },
+  {
+    "code": "340500",
+    "parent_code": "340000",
+    "name": "马鞍山市",
+    "alias": "马鞍山",
+    "pinyin": "MaAnShan",
+    "level": 2
+  },
+  {
+    "code": "340600",
+    "parent_code": "340000",
+    "name": "淮北市",
+    "alias": "淮北",
+    "pinyin": "HuaiBei",
+    "level": 2
+  },
+  {
+    "code": "340700",
+    "parent_code": "340000",
+    "name": "铜陵市",
+    "alias": "铜陵",
+    "pinyin": "TongLing",
+    "level": 2
+  },
+  {
+    "code": "340800",
+    "parent_code": "340000",
+    "name": "安庆市",
+    "alias": "安庆",
+    "pinyin": "AnQing",
+    "level": 2
+  },
+  {
+    "code": "341000",
+    "parent_code": "340000",
+    "name": "黄山市",
+    "alias": "黄山",
+    "pinyin": "HuangShan",
+    "level": 2
+  },
+  {
+    "code": "341100",
+    "parent_code": "340000",
+    "name": "滁州市",
+    "alias": "滁州",
+    "pinyin": "ChuZhou",
+    "level": 2
+  },
+  {
+    "code": "341200",
+    "parent_code": "340000",
+    "name": "阜阳市",
+    "alias": "阜阳",
+    "pinyin": "FuYang",
+    "level": 2
+  },
+  {
+    "code": "341500",
+    "parent_code": "340000",
+    "name": "六安市",
+    "alias": "六安",
+    "pinyin": "LiuAn",
+    "level": 2
+  },
+  {
+    "code": "341600",
+    "parent_code": "340000",
+    "name": "亳州市",
+    "alias": "亳州",
+    "pinyin": "BoZhou",
+    "level": 2
+  },
+  {
+    "code": "341700",
+    "parent_code": "340000",
+    "name": "池州市",
+    "alias": "池州",
+    "pinyin": "ChiZhou",
+    "level": 2
+  },
+  {
+    "code": "341800",
+    "parent_code": "340000",
+    "name": "宣城市",
+    "alias": "宣城",
+    "pinyin": "XuanCheng",
+    "level": 2
+  },
+  {
+    "code": "350000",
+    "parent_code": null,
+    "name": "福建省",
+    "alias": "福建",
+    "pinyin": "FuJian",
+    "level": 1
+  },
+  {
+    "code": "350100",
+    "parent_code": "350000",
+    "name": "福州市",
+    "alias": "福州",
+    "pinyin": "FuZhou",
+    "level": 2
+  },
+  {
+    "code": "350200",
+    "parent_code": "350000",
+    "name": "厦门市",
+    "alias": "厦门",
+    "pinyin": "ShaMen",
+    "level": 2
+  },
+  {
+    "code": "350300",
+    "parent_code": "350000",
+    "name": "莆田市",
+    "alias": "莆田",
+    "pinyin": "PuTian",
+    "level": 2
+  },
+  {
+    "code": "350400",
+    "parent_code": "350000",
+    "name": "三明市",
+    "alias": "三明",
+    "pinyin": "SanMing",
+    "level": 2
+  },
+  {
+    "code": "350500",
+    "parent_code": "350000",
+    "name": "泉州市",
+    "alias": "泉州",
+    "pinyin": "QuanZhou",
+    "level": 2
+  },
+  {
+    "code": "350600",
+    "parent_code": "350000",
+    "name": "漳州市",
+    "alias": "漳州",
+    "pinyin": "ZhangZhou",
+    "level": 2
+  },
+  {
+    "code": "350700",
+    "parent_code": "350000",
+    "name": "南平市",
+    "alias": "南平",
+    "pinyin": "NanPing",
+    "level": 2
+  },
+  {
+    "code": "350800",
+    "parent_code": "350000",
+    "name": "龙岩市",
+    "alias": "龙岩",
+    "pinyin": "LongYan",
+    "level": 2
+  },
+  {
+    "code": "350900",
+    "parent_code": "350000",
+    "name": "宁德市",
+    "alias": "宁德",
+    "pinyin": "NingDe",
+    "level": 2
+  },
+  {
+    "code": "360000",
+    "parent_code": null,
+    "name": "江西省",
+    "alias": "江西",
+    "pinyin": "JiangXi",
+    "level": 1
+  },
+  {
+    "code": "360100",
+    "parent_code": "360000",
+    "name": "南昌市",
+    "alias": "南昌",
+    "pinyin": "NanChang",
+    "level": 2
+  },
+  {
+    "code": "360200",
+    "parent_code": "360000",
+    "name": "景德镇市",
+    "alias": "景德镇",
+    "pinyin": "JingDeZhen",
+    "level": 2
+  },
+  {
+    "code": "360300",
+    "parent_code": "360000",
+    "name": "萍乡市",
+    "alias": "萍乡",
+    "pinyin": "PingXiang",
+    "level": 2
+  },
+  {
+    "code": "360400",
+    "parent_code": "360000",
+    "name": "九江市",
+    "alias": "九江",
+    "pinyin": "JiuJiang",
+    "level": 2
+  },
+  {
+    "code": "360500",
+    "parent_code": "360000",
+    "name": "新余市",
+    "alias": "新余",
+    "pinyin": "XinYu",
+    "level": 2
+  },
+  {
+    "code": "360700",
+    "parent_code": "360000",
+    "name": "赣州市",
+    "alias": "赣州",
+    "pinyin": "GanZhou",
+    "level": 2
+  },
+  {
+    "code": "360800",
+    "parent_code": "360000",
+    "name": "吉安市",
+    "alias": "吉安",
+    "pinyin": "JiAn",
+    "level": 2
+  },
+  {
+    "code": "360900",
+    "parent_code": "360000",
+    "name": "宜春市",
+    "alias": "宜春",
+    "pinyin": "YiChun",
+    "level": 2
+  },
+  {
+    "code": "361000",
+    "parent_code": "360000",
+    "name": "抚州市",
+    "alias": "抚州",
+    "pinyin": "FuZhou",
+    "level": 2
+  },
+  {
+    "code": "361100",
+    "parent_code": "360000",
+    "name": "上饶市",
+    "alias": "上饶",
+    "pinyin": "ShangRao",
+    "level": 2
+  },
+  {
+    "code": "370000",
+    "parent_code": null,
+    "name": "山东省",
+    "alias": "山东",
+    "pinyin": "ShanDong",
+    "level": 1
+  },
+  {
+    "code": "370100",
+    "parent_code": "370000",
+    "name": "济南市",
+    "alias": "济南",
+    "pinyin": "JiNan",
+    "level": 2
+  },
+  {
+    "code": "370200",
+    "parent_code": "370000",
+    "name": "青岛市",
+    "alias": "青岛",
+    "pinyin": "QingDao",
+    "level": 2
+  },
+  {
+    "code": "370300",
+    "parent_code": "370000",
+    "name": "淄博市",
+    "alias": "淄博",
+    "pinyin": "ZiBo",
+    "level": 2
+  },
+  {
+    "code": "370400",
+    "parent_code": "370000",
+    "name": "枣庄市",
+    "alias": "枣庄",
+    "pinyin": "ZaoZhuang",
+    "level": 2
+  },
+  {
+    "code": "370500",
+    "parent_code": "370000",
+    "name": "东营市",
+    "alias": "东营",
+    "pinyin": "DongYing",
+    "level": 2
+  },
+  {
+    "code": "370600",
+    "parent_code": "370000",
+    "name": "烟台市",
+    "alias": "烟台",
+    "pinyin": "YanTai",
+    "level": 2
+  },
+  {
+    "code": "370700",
+    "parent_code": "370000",
+    "name": "潍坊市",
+    "alias": "潍坊",
+    "pinyin": "WeiFang",
+    "level": 2
+  },
+  {
+    "code": "370800",
+    "parent_code": "370000",
+    "name": "济宁市",
+    "alias": "济宁",
+    "pinyin": "JiNing",
+    "level": 2
+  },
+  {
+    "code": "370900",
+    "parent_code": "370000",
+    "name": "泰安市",
+    "alias": "泰安",
+    "pinyin": "TaiAn",
+    "level": 2
+  },
+  {
+    "code": "371000",
+    "parent_code": "370000",
+    "name": "威海市",
+    "alias": "威海",
+    "pinyin": "WeiHai",
+    "level": 2
+  },
+  {
+    "code": "371100",
+    "parent_code": "370000",
+    "name": "日照市",
+    "alias": "日照",
+    "pinyin": "RiZhao",
+    "level": 2
+  },
+  {
+    "code": "371200",
+    "parent_code": "370000",
+    "name": "莱芜市",
+    "alias": "莱芜",
+    "pinyin": "LaiWu",
+    "level": 2
+  },
+  {
+    "code": "371300",
+    "parent_code": "370000",
+    "name": "临沂市",
+    "alias": "临沂",
+    "pinyin": "LinYi",
+    "level": 2
+  },
+  {
+    "code": "371400",
+    "parent_code": "370000",
+    "name": "德州市",
+    "alias": "德州",
+    "pinyin": "DeZhou",
+    "level": 2
+  },
+  {
+    "code": "371500",
+    "parent_code": "370000",
+    "name": "聊城市",
+    "alias": "聊城",
+    "pinyin": "LiaoCheng",
+    "level": 2
+  },
+  {
+    "code": "371600",
+    "parent_code": "370000",
+    "name": "滨州市",
+    "alias": "滨州",
+    "pinyin": "BinZhou",
+    "level": 2
+  },
+  {
+    "code": "371700",
+    "parent_code": "370000",
+    "name": "菏泽市",
+    "alias": "菏泽",
+    "pinyin": "HeZe",
+    "level": 2
+  },
+  {
+    "code": "410000",
+    "parent_code": null,
+    "name": "河南省",
+    "alias": "河南",
+    "pinyin": "HeNan",
+    "level": 1
+  },
+  {
+    "code": "410100",
+    "parent_code": "410000",
+    "name": "郑州市",
+    "alias": "郑州",
+    "pinyin": "ZhengZhou",
+    "level": 2
+  },
+  {
+    "code": "410200",
+    "parent_code": "410000",
+    "name": "开封市",
+    "alias": "开封",
+    "pinyin": "KaiFeng",
+    "level": 2
+  },
+  {
+    "code": "410300",
+    "parent_code": "410000",
+    "name": "洛阳市",
+    "alias": "洛阳",
+    "pinyin": "LuoYang",
+    "level": 2
+  },
+  {
+    "code": "410400",
+    "parent_code": "410000",
+    "name": "平顶山市",
+    "alias": "平顶山",
+    "pinyin": "PingDingShan",
+    "level": 2
+  },
+  {
+    "code": "410500",
+    "parent_code": "410000",
+    "name": "安阳市",
+    "alias": "安阳",
+    "pinyin": "AnYang",
+    "level": 2
+  },
+  {
+    "code": "410600",
+    "parent_code": "410000",
+    "name": "鹤壁市",
+    "alias": "鹤壁",
+    "pinyin": "HeBi",
+    "level": 2
+  },
+  {
+    "code": "410700",
+    "parent_code": "410000",
+    "name": "新乡市",
+    "alias": "新乡",
+    "pinyin": "XinXiang",
+    "level": 2
+  },
+  {
+    "code": "410800",
+    "parent_code": "410000",
+    "name": "焦作市",
+    "alias": "焦作",
+    "pinyin": "JiaoZuo",
+    "level": 2
+  },
+  {
+    "code": "410900",
+    "parent_code": "410000",
+    "name": "濮阳市",
+    "alias": "濮阳",
+    "pinyin": "PuYang",
+    "level": 2
+  },
+  {
+    "code": "411000",
+    "parent_code": "410000",
+    "name": "许昌市",
+    "alias": "许昌",
+    "pinyin": "XuChang",
+    "level": 2
+  },
+  {
+    "code": "411200",
+    "parent_code": "410000",
+    "name": "三门峡市",
+    "alias": "三门峡",
+    "pinyin": "SanMenXia",
+    "level": 2
+  },
+  {
+    "code": "411300",
+    "parent_code": "410000",
+    "name": "南阳市",
+    "alias": "南阳",
+    "pinyin": "NanYang",
+    "level": 2
+  },
+  {
+    "code": "411400",
+    "parent_code": "410000",
+    "name": "商丘市",
+    "alias": "商丘",
+    "pinyin": "ShangQiu",
+    "level": 2
+  },
+  {
+    "code": "411500",
+    "parent_code": "410000",
+    "name": "信阳市",
+    "alias": "信阳",
+    "pinyin": "XinYang",
+    "level": 2
+  },
+  {
+    "code": "411600",
+    "parent_code": "410000",
+    "name": "周口市",
+    "alias": "周口",
+    "pinyin": "ZhouKou",
+    "level": 2
+  },
+  {
+    "code": "411700",
+    "parent_code": "410000",
+    "name": "驻马店市",
+    "alias": "驻马店",
+    "pinyin": "ZhuMaDian",
+    "level": 2
+  },
+  {
+    "code": "419001",
+    "parent_code": "410000",
+    "name": "济源市",
+    "alias": "济源",
+    "pinyin": "JiYuan",
+    "level": 2
+  },
+  {
+    "code": "420000",
+    "parent_code": null,
+    "name": "湖北省",
+    "alias": "湖北",
+    "pinyin": "HuBei",
+    "level": 1
+  },
+  {
+    "code": "420100",
+    "parent_code": "420000",
+    "name": "武汉市",
+    "alias": "武汉",
+    "pinyin": "WuHan",
+    "level": 2
+  },
+  {
+    "code": "420200",
+    "parent_code": "420000",
+    "name": "黄石市",
+    "alias": "黄石",
+    "pinyin": "HuangShi",
+    "level": 2
+  },
+  {
+    "code": "420300",
+    "parent_code": "420000",
+    "name": "十堰市",
+    "alias": "十堰",
+    "pinyin": "ShiYan",
+    "level": 2
+  },
+  {
+    "code": "420500",
+    "parent_code": "420000",
+    "name": "宜昌市",
+    "alias": "宜昌",
+    "pinyin": "YiChang",
+    "level": 2
+  },
+  {
+    "code": "420600",
+    "parent_code": "420000",
+    "name": "襄阳市",
+    "alias": "襄阳",
+    "pinyin": "XiangYang",
+    "level": 2
+  },
+  {
+    "code": "420700",
+    "parent_code": "420000",
+    "name": "鄂州市",
+    "alias": "鄂州",
+    "pinyin": "EZhou",
+    "level": 2
+  },
+  {
+    "code": "420800",
+    "parent_code": "420000",
+    "name": "荆门市",
+    "alias": "荆门",
+    "pinyin": "JingMen",
+    "level": 2
+  },
+  {
+    "code": "420900",
+    "parent_code": "420000",
+    "name": "孝感市",
+    "alias": "孝感",
+    "pinyin": "XiaoGan",
+    "level": 2
+  },
+  {
+    "code": "421000",
+    "parent_code": "420000",
+    "name": "荆州市",
+    "alias": "荆州",
+    "pinyin": "JingZhou",
+    "level": 2
+  },
+  {
+    "code": "421100",
+    "parent_code": "420000",
+    "name": "黄冈市",
+    "alias": "黄冈",
+    "pinyin": "HuangGang",
+    "level": 2
+  },
+  {
+    "code": "421200",
+    "parent_code": "420000",
+    "name": "咸宁市",
+    "alias": "咸宁",
+    "pinyin": "XianNing",
+    "level": 2
+  },
+  {
+    "code": "421300",
+    "parent_code": "420000",
+    "name": "随州市",
+    "alias": "随州",
+    "pinyin": "SuiZhou",
+    "level": 2
+  },
+  {
+    "code": "422800",
+    "parent_code": "420000",
+    "name": "恩施土家族苗族自治州",
+    "alias": "恩施",
+    "pinyin": "EnShiTuJiaZuMiaoZu",
+    "level": 2
+  },
+  {
+    "code": "429004",
+    "parent_code": "420000",
+    "name": "仙桃市",
+    "alias": "仙桃",
+    "pinyin": "XianTao",
+    "level": 2
+  },
+  {
+    "code": "429005",
+    "parent_code": "420000",
+    "name": "潜江市",
+    "alias": "潜江",
+    "pinyin": "QianJiang",
+    "level": 2
+  },
+  {
+    "code": "429006",
+    "parent_code": "420000",
+    "name": "天门市",
+    "alias": "天门",
+    "pinyin": "TianMen",
+    "level": 2
+  },
+  {
+    "code": "429021",
+    "parent_code": "420000",
+    "name": "神农架林区",
+    "alias": "神农架林区",
+    "pinyin": "ShenNongJiaLinQu",
+    "level": 2
+  },
+  {
+    "code": "430000",
+    "parent_code": null,
+    "name": "湖南省",
+    "alias": "湖南",
+    "pinyin": "HuNan",
+    "level": 1
+  },
+  {
+    "code": "430100",
+    "parent_code": "430000",
+    "name": "长沙市",
+    "alias": "长沙",
+    "pinyin": "ZhangSha",
+    "level": 2
+  },
+  {
+    "code": "430200",
+    "parent_code": "430000",
+    "name": "株洲市",
+    "alias": "株洲",
+    "pinyin": "ZhuZhou",
+    "level": 2
+  },
+  {
+    "code": "430300",
+    "parent_code": "430000",
+    "name": "湘潭市",
+    "alias": "湘潭",
+    "pinyin": "XiangTan",
+    "level": 2
+  },
+  {
+    "code": "430400",
+    "parent_code": "430000",
+    "name": "衡阳市",
+    "alias": "衡阳",
+    "pinyin": "HengYang",
+    "level": 2
+  },
+  {
+    "code": "430500",
+    "parent_code": "430000",
+    "name": "邵阳市",
+    "alias": "邵阳",
+    "pinyin": "ShaoYang",
+    "level": 2
+  },
+  {
+    "code": "430600",
+    "parent_code": "430000",
+    "name": "岳阳市",
+    "alias": "岳阳",
+    "pinyin": "YueYang",
+    "level": 2
+  },
+  {
+    "code": "430700",
+    "parent_code": "430000",
+    "name": "常德市",
+    "alias": "常德",
+    "pinyin": "ChangDe",
+    "level": 2
+  },
+  {
+    "code": "430800",
+    "parent_code": "430000",
+    "name": "张家界市",
+    "alias": "张家界",
+    "pinyin": "ZhangJiaJie",
+    "level": 2
+  },
+  {
+    "code": "430900",
+    "parent_code": "430000",
+    "name": "益阳市",
+    "alias": "益阳",
+    "pinyin": "YiYang",
+    "level": 2
+  },
+  {
+    "code": "431000",
+    "parent_code": "430000",
+    "name": "郴州市",
+    "alias": "郴州",
+    "pinyin": "ChenZhou",
+    "level": 2
+  },
+  {
+    "code": "431100",
+    "parent_code": "430000",
+    "name": "永州市",
+    "alias": "永州",
+    "pinyin": "YongZhou",
+    "level": 2
+  },
+  {
+    "code": "431200",
+    "parent_code": "430000",
+    "name": "怀化市",
+    "alias": "怀化",
+    "pinyin": "HuaiHua",
+    "level": 2
+  },
+  {
+    "code": "431300",
+    "parent_code": "430000",
+    "name": "娄底市",
+    "alias": "娄底",
+    "pinyin": "LouDi",
+    "level": 2
+  },
+  {
+    "code": "433100",
+    "parent_code": "430000",
+    "name": "湘西土家族苗族自治州",
+    "alias": "湘西",
+    "pinyin": "XiangXiTuJiaZuMiaoZu",
+    "level": 2
+  },
+  {
+    "code": "440000",
+    "parent_code": null,
+    "name": "广东省",
+    "alias": "广东",
+    "pinyin": "GuangDong",
+    "level": 1
+  },
+  {
+    "code": "440100",
+    "parent_code": "440000",
+    "name": "广州市",
+    "alias": "广州",
+    "pinyin": "GuangZhou",
+    "level": 2
+  },
+  {
+    "code": "440200",
+    "parent_code": "440000",
+    "name": "韶关市",
+    "alias": "韶关",
+    "pinyin": "ShaoGuan",
+    "level": 2
+  },
+  {
+    "code": "440300",
+    "parent_code": "440000",
+    "name": "深圳市",
+    "alias": "深圳",
+    "pinyin": "ShenZhen",
+    "level": 2
+  },
+  {
+    "code": "440400",
+    "parent_code": "440000",
+    "name": "珠海市",
+    "alias": "珠海",
+    "pinyin": "ZhuHai",
+    "level": 2
+  },
+  {
+    "code": "440500",
+    "parent_code": "440000",
+    "name": "汕头市",
+    "alias": "汕头",
+    "pinyin": "ShanTou",
+    "level": 2
+  },
+  {
+    "code": "440600",
+    "parent_code": "440000",
+    "name": "佛山市",
+    "alias": "佛山",
+    "pinyin": "FuShan",
+    "level": 2
+  },
+  {
+    "code": "440700",
+    "parent_code": "440000",
+    "name": "江门市",
+    "alias": "江门",
+    "pinyin": "JiangMen",
+    "level": 2
+  },
+  {
+    "code": "440800",
+    "parent_code": "440000",
+    "name": "湛江市",
+    "alias": "湛江",
+    "pinyin": "ZhanJiang",
+    "level": 2
+  },
+  {
+    "code": "440900",
+    "parent_code": "440000",
+    "name": "茂名市",
+    "alias": "茂名",
+    "pinyin": "MaoMing",
+    "level": 2
+  },
+  {
+    "code": "441200",
+    "parent_code": "440000",
+    "name": "肇庆市",
+    "alias": "肇庆",
+    "pinyin": "ZhaoQing",
+    "level": 2
+  },
+  {
+    "code": "441300",
+    "parent_code": "440000",
+    "name": "惠州市",
+    "alias": "惠州",
+    "pinyin": "HuiZhou",
+    "level": 2
+  },
+  {
+    "code": "441400",
+    "parent_code": "440000",
+    "name": "梅州市",
+    "alias": "梅州",
+    "pinyin": "MeiZhou",
+    "level": 2
+  },
+  {
+    "code": "441500",
+    "parent_code": "440000",
+    "name": "汕尾市",
+    "alias": "汕尾",
+    "pinyin": "ShanWei",
+    "level": 2
+  },
+  {
+    "code": "441600",
+    "parent_code": "440000",
+    "name": "河源市",
+    "alias": "河源",
+    "pinyin": "HeYuan",
+    "level": 2
+  },
+  {
+    "code": "441700",
+    "parent_code": "440000",
+    "name": "阳江市",
+    "alias": "阳江",
+    "pinyin": "YangJiang",
+    "level": 2
+  },
+  {
+    "code": "441800",
+    "parent_code": "440000",
+    "name": "清远市",
+    "alias": "清远",
+    "pinyin": "QingYuan",
+    "level": 2
+  },
+  {
+    "code": "441900",
+    "parent_code": "440000",
+    "name": "东莞市",
+    "alias": "东莞",
+    "pinyin": "DongGuan",
+    "level": 2
+  },
+  {
+    "code": "442000",
+    "parent_code": "440000",
+    "name": "中山市",
+    "alias": "中山",
+    "pinyin": "ZhongShan",
+    "level": 2
+  },
+  {
+    "code": "445100",
+    "parent_code": "440000",
+    "name": "潮州市",
+    "alias": "潮州",
+    "pinyin": "ChaoZhou",
+    "level": 2
+  },
+  {
+    "code": "445200",
+    "parent_code": "440000",
+    "name": "揭阳市",
+    "alias": "揭阳",
+    "pinyin": "JieYang",
+    "level": 2
+  },
+  {
+    "code": "445300",
+    "parent_code": "440000",
+    "name": "云浮市",
+    "alias": "云浮",
+    "pinyin": "YunFu",
+    "level": 2
+  },
+  {
+    "code": "450000",
+    "parent_code": null,
+    "name": "广西壮族自治区",
+    "alias": "广西",
+    "pinyin": "GuangXiZhuangZu",
+    "level": 1
+  },
+  {
+    "code": "450100",
+    "parent_code": "450000",
+    "name": "南宁市",
+    "alias": "南宁",
+    "pinyin": "NanNing",
+    "level": 2
+  },
+  {
+    "code": "450200",
+    "parent_code": "450000",
+    "name": "柳州市",
+    "alias": "柳州",
+    "pinyin": "LiuZhou",
+    "level": 2
+  },
+  {
+    "code": "450300",
+    "parent_code": "450000",
+    "name": "桂林市",
+    "alias": "桂林",
+    "pinyin": "GuiLin",
+    "level": 2
+  },
+  {
+    "code": "450400",
+    "parent_code": "450000",
+    "name": "梧州市",
+    "alias": "梧州",
+    "pinyin": "WuZhou",
+    "level": 2
+  },
+  {
+    "code": "450500",
+    "parent_code": "450000",
+    "name": "北海市",
+    "alias": "北海",
+    "pinyin": "BeiHai",
+    "level": 2
+  },
+  {
+    "code": "450600",
+    "parent_code": "450000",
+    "name": "防城港市",
+    "alias": "防城港",
+    "pinyin": "FangChengGang",
+    "level": 2
+  },
+  {
+    "code": "450700",
+    "parent_code": "450000",
+    "name": "钦州市",
+    "alias": "钦州",
+    "pinyin": "QinZhou",
+    "level": 2
+  },
+  {
+    "code": "450800",
+    "parent_code": "450000",
+    "name": "贵港市",
+    "alias": "贵港",
+    "pinyin": "GuiGang",
+    "level": 2
+  },
+  {
+    "code": "450900",
+    "parent_code": "450000",
+    "name": "玉林市",
+    "alias": "玉林",
+    "pinyin": "YuLin",
+    "level": 2
+  },
+  {
+    "code": "451000",
+    "parent_code": "450000",
+    "name": "百色市",
+    "alias": "百色",
+    "pinyin": "BaiSe",
+    "level": 2
+  },
+  {
+    "code": "451100",
+    "parent_code": "450000",
+    "name": "贺州市",
+    "alias": "贺州",
+    "pinyin": "HeZhou",
+    "level": 2
+  },
+  {
+    "code": "451200",
+    "parent_code": "450000",
+    "name": "河池市",
+    "alias": "河池",
+    "pinyin": "HeChi",
+    "level": 2
+  },
+  {
+    "code": "451300",
+    "parent_code": "450000",
+    "name": "来宾市",
+    "alias": "来宾",
+    "pinyin": "LaiBin",
+    "level": 2
+  },
+  {
+    "code": "451400",
+    "parent_code": "450000",
+    "name": "崇左市",
+    "alias": "崇左",
+    "pinyin": "ChongZuo",
+    "level": 2
+  },
+  {
+    "code": "460000",
+    "parent_code": null,
+    "name": "海南省",
+    "alias": "海南",
+    "pinyin": "HaiNan",
+    "level": 1
+  },
+  {
+    "code": "460100",
+    "parent_code": "460000",
+    "name": "海口市",
+    "alias": "海口",
+    "pinyin": "HaiKou",
+    "level": 2
+  },
+  {
+    "code": "460200",
+    "parent_code": "460000",
+    "name": "三亚市",
+    "alias": "三亚",
+    "pinyin": "SanYa",
+    "level": 2
+  },
+  {
+    "code": "460300",
+    "parent_code": "460000",
+    "name": "三沙市",
+    "alias": "三沙",
+    "pinyin": "SanSha",
+    "level": 2
+  },
+  {
+    "code": "469001",
+    "parent_code": "460000",
+    "name": "五指山市",
+    "alias": "五指山",
+    "pinyin": "WuZhiShan",
+    "level": 2
+  },
+  {
+    "code": "469002",
+    "parent_code": "460000",
+    "name": "琼海市",
+    "alias": "琼海",
+    "pinyin": "QiongHai",
+    "level": 2
+  },
+  {
+    "code": "469003",
+    "parent_code": "460000",
+    "name": "儋州市",
+    "alias": "儋州",
+    "pinyin": "DanZhou",
+    "level": 2
+  },
+  {
+    "code": "469005",
+    "parent_code": "460000",
+    "name": "文昌市",
+    "alias": "文昌",
+    "pinyin": "WenChang",
+    "level": 2
+  },
+  {
+    "code": "469006",
+    "parent_code": "460000",
+    "name": "万宁市",
+    "alias": "万宁",
+    "pinyin": "WanNing",
+    "level": 2
+  },
+  {
+    "code": "469007",
+    "parent_code": "460000",
+    "name": "东方市",
+    "alias": "东方",
+    "pinyin": "DongFang",
+    "level": 2
+  },
+  {
+    "code": "469021",
+    "parent_code": "460000",
+    "name": "定安县",
+    "alias": "定安",
+    "pinyin": "DingAn",
+    "level": 2
+  },
+  {
+    "code": "469022",
+    "parent_code": "460000",
+    "name": "屯昌县",
+    "alias": "屯昌",
+    "pinyin": "TunChang",
+    "level": 2
+  },
+  {
+    "code": "469023",
+    "parent_code": "460000",
+    "name": "澄迈县",
+    "alias": "澄迈",
+    "pinyin": "ChengMai",
+    "level": 2
+  },
+  {
+    "code": "469024",
+    "parent_code": "460000",
+    "name": "临高县",
+    "alias": "临高",
+    "pinyin": "LinGao",
+    "level": 2
+  },
+  {
+    "code": "469025",
+    "parent_code": "460000",
+    "name": "白沙黎族自治县",
+    "alias": "白沙黎族",
+    "pinyin": "BaiShaLiZu",
+    "level": 2
+  },
+  {
+    "code": "469026",
+    "parent_code": "460000",
+    "name": "昌江黎族自治县",
+    "alias": "昌江黎族",
+    "pinyin": "ChangJiangLiZu",
+    "level": 2
+  },
+  {
+    "code": "469027",
+    "parent_code": "460000",
+    "name": "乐东黎族自治县",
+    "alias": "乐东黎族",
+    "pinyin": "LeDongLiZu",
+    "level": 2
+  },
+  {
+    "code": "469028",
+    "parent_code": "460000",
+    "name": "陵水黎族自治县",
+    "alias": "陵水黎族",
+    "pinyin": "LingShuiLiZu",
+    "level": 2
+  },
+  {
+    "code": "469029",
+    "parent_code": "460000",
+    "name": "保亭黎族苗族自治县",
+    "alias": "保亭",
+    "pinyin": "BaoTingLiZuMiaoZu",
+    "level": 2
+  },
+  {
+    "code": "469030",
+    "parent_code": "460000",
+    "name": "琼中黎族苗族自治县",
+    "alias": "琼中",
+    "pinyin": "QiongZhongLiZuMiaoZu",
+    "level": 2
+  },
+  {
+    "code": "500000",
+    "parent_code": null,
+    "name": "重庆市",
+    "alias": "重庆",
+    "pinyin": "ZhongQing",
+    "level": 1
+  },
+  {
+    "code": "500100",
+    "parent_code": "500000",
+    "name": "重庆城区",
+    "alias": "重庆城区",
+    "pinyin": "ZhongQingChengQu",
+    "level": 2
+  },
+  {
+    "code": "500200",
+    "parent_code": "500000",
+    "name": "重庆郊县",
+    "alias": "重庆郊县",
+    "pinyin": "ZhongQingJiaoXian",
+    "level": 2
+  },
+  {
+    "code": "510000",
+    "parent_code": null,
+    "name": "四川省",
+    "alias": "四川",
+    "pinyin": "SiChuan",
+    "level": 1
+  },
+  {
+    "code": "510100",
+    "parent_code": "510000",
+    "name": "成都市",
+    "alias": "成都",
+    "pinyin": "ChengDou",
+    "level": 2
+  },
+  {
+    "code": "510300",
+    "parent_code": "510000",
+    "name": "自贡市",
+    "alias": "自贡",
+    "pinyin": "ZiGong",
+    "level": 2
+  },
+  {
+    "code": "510400",
+    "parent_code": "510000",
+    "name": "攀枝花市",
+    "alias": "攀枝花",
+    "pinyin": "PanZhiHua",
+    "level": 2
+  },
+  {
+    "code": "510500",
+    "parent_code": "510000",
+    "name": "泸州市",
+    "alias": "泸州",
+    "pinyin": "LuZhou",
+    "level": 2
+  },
+  {
+    "code": "510600",
+    "parent_code": "510000",
+    "name": "德阳市",
+    "alias": "德阳",
+    "pinyin": "DeYang",
+    "level": 2
+  },
+  {
+    "code": "510700",
+    "parent_code": "510000",
+    "name": "绵阳市",
+    "alias": "绵阳",
+    "pinyin": "MianYang",
+    "level": 2
+  },
+  {
+    "code": "510800",
+    "parent_code": "510000",
+    "name": "广元市",
+    "alias": "广元",
+    "pinyin": "GuangYuan",
+    "level": 2
+  },
+  {
+    "code": "510900",
+    "parent_code": "510000",
+    "name": "遂宁市",
+    "alias": "遂宁",
+    "pinyin": "SuiNing",
+    "level": 2
+  },
+  {
+    "code": "511000",
+    "parent_code": "510000",
+    "name": "内江市",
+    "alias": "内江",
+    "pinyin": "NeiJiang",
+    "level": 2
+  },
+  {
+    "code": "511100",
+    "parent_code": "510000",
+    "name": "乐山市",
+    "alias": "乐山",
+    "pinyin": "LeShan",
+    "level": 2
+  },
+  {
+    "code": "511300",
+    "parent_code": "510000",
+    "name": "南充市",
+    "alias": "南充",
+    "pinyin": "NanChong",
+    "level": 2
+  },
+  {
+    "code": "511400",
+    "parent_code": "510000",
+    "name": "眉山市",
+    "alias": "眉山",
+    "pinyin": "MeiShan",
+    "level": 2
+  },
+  {
+    "code": "511500",
+    "parent_code": "510000",
+    "name": "宜宾市",
+    "alias": "宜宾",
+    "pinyin": "YiBin",
+    "level": 2
+  },
+  {
+    "code": "511600",
+    "parent_code": "510000",
+    "name": "广安市",
+    "alias": "广安",
+    "pinyin": "GuangAn",
+    "level": 2
+  },
+  {
+    "code": "511700",
+    "parent_code": "510000",
+    "name": "达州市",
+    "alias": "达州",
+    "pinyin": "DaZhou",
+    "level": 2
+  },
+  {
+    "code": "511800",
+    "parent_code": "510000",
+    "name": "雅安市",
+    "alias": "雅安",
+    "pinyin": "YaAn",
+    "level": 2
+  },
+  {
+    "code": "511900",
+    "parent_code": "510000",
+    "name": "巴中市",
+    "alias": "巴中",
+    "pinyin": "BaZhong",
+    "level": 2
+  },
+  {
+    "code": "511902",
+    "parent_code": "510000",
+    "name": "巴州区",
+    "alias": "巴州区",
+    "pinyin": "BaZhouQu",
+    "level": 2
+  },
+  {
+    "code": "512000",
+    "parent_code": "510000",
+    "name": "资阳市",
+    "alias": "资阳",
+    "pinyin": "ZiYang",
+    "level": 2
+  },
+  {
+    "code": "513200",
+    "parent_code": "510000",
+    "name": "阿坝藏族羌族自治州",
+    "alias": "阿坝",
+    "pinyin": "ABaCangZuQiangZu",
+    "level": 2
+  },
+  {
+    "code": "513300",
+    "parent_code": "510000",
+    "name": "甘孜藏族自治州",
+    "alias": "甘孜藏族",
+    "pinyin": "GanZiCangZu",
+    "level": 2
+  },
+  {
+    "code": "513400",
+    "parent_code": "510000",
+    "name": "凉山彝族自治州",
+    "alias": "凉山彝族",
+    "pinyin": "LiangShanYiZu",
+    "level": 2
+  },
+  {
+    "code": "520000",
+    "parent_code": null,
+    "name": "贵州省",
+    "alias": "贵州",
+    "pinyin": "GuiZhou",
+    "level": 1
+  },
+  {
+    "code": "520100",
+    "parent_code": "520000",
+    "name": "贵阳市",
+    "alias": "贵阳",
+    "pinyin": "GuiYang",
+    "level": 2
+  },
+  {
+    "code": "520200",
+    "parent_code": "520000",
+    "name": "六盘水市",
+    "alias": "六盘水",
+    "pinyin": "LiuPanShui",
+    "level": 2
+  },
+  {
+    "code": "520300",
+    "parent_code": "520000",
+    "name": "遵义市",
+    "alias": "遵义",
+    "pinyin": "ZunYi",
+    "level": 2
+  },
+  {
+    "code": "520400",
+    "parent_code": "520000",
+    "name": "安顺市",
+    "alias": "安顺",
+    "pinyin": "AnShun",
+    "level": 2
+  },
+  {
+    "code": "520500",
+    "parent_code": "520000",
+    "name": "毕节市",
+    "alias": "毕节",
+    "pinyin": "BiJie",
+    "level": 2
+  },
+  {
+    "code": "520600",
+    "parent_code": "520000",
+    "name": "铜仁市",
+    "alias": "铜仁",
+    "pinyin": "TongRen",
+    "level": 2
+  },
+  {
+    "code": "522300",
+    "parent_code": "520000",
+    "name": "黔西南布依族苗族自治州",
+    "alias": "黔西南",
+    "pinyin": "QianXiNanBuYiZuMiaoZu",
+    "level": 2
+  },
+  {
+    "code": "522600",
+    "parent_code": "520000",
+    "name": "黔东南苗族侗族自治州",
+    "alias": "黔东南",
+    "pinyin": "QianDongNanMiaoZuDongZu",
+    "level": 2
+  },
+  {
+    "code": "522700",
+    "parent_code": "520000",
+    "name": "黔南布依族苗族自治州",
+    "alias": "黔南",
+    "pinyin": "QianNanBuYiZuMiaoZu",
+    "level": 2
+  },
+  {
+    "code": "530000",
+    "parent_code": null,
+    "name": "云南省",
+    "alias": "云南",
+    "pinyin": "YunNan",
+    "level": 1
+  },
+  {
+    "code": "530100",
+    "parent_code": "530000",
+    "name": "昆明市",
+    "alias": "昆明",
+    "pinyin": "KunMing",
+    "level": 2
+  },
+  {
+    "code": "530300",
+    "parent_code": "530000",
+    "name": "曲靖市",
+    "alias": "曲靖",
+    "pinyin": "QuJing",
+    "level": 2
+  },
+  {
+    "code": "530400",
+    "parent_code": "530000",
+    "name": "玉溪市",
+    "alias": "玉溪",
+    "pinyin": "YuXi",
+    "level": 2
+  },
+  {
+    "code": "530500",
+    "parent_code": "530000",
+    "name": "保山市",
+    "alias": "保山",
+    "pinyin": "BaoShan",
+    "level": 2
+  },
+  {
+    "code": "530600",
+    "parent_code": "530000",
+    "name": "昭通市",
+    "alias": "昭通",
+    "pinyin": "ZhaoTong",
+    "level": 2
+  },
+  {
+    "code": "530700",
+    "parent_code": "530000",
+    "name": "丽江市",
+    "alias": "丽江",
+    "pinyin": "LiJiang",
+    "level": 2
+  },
+  {
+    "code": "530800",
+    "parent_code": "530000",
+    "name": "普洱市",
+    "alias": "普洱",
+    "pinyin": "PuEr",
+    "level": 2
+  },
+  {
+    "code": "530900",
+    "parent_code": "530000",
+    "name": "临沧市",
+    "alias": "临沧",
+    "pinyin": "LinCang",
+    "level": 2
+  },
+  {
+    "code": "532300",
+    "parent_code": "530000",
+    "name": "楚雄彝族自治州",
+    "alias": "楚雄彝族",
+    "pinyin": "ChuXiongYiZu",
+    "level": 2
+  },
+  {
+    "code": "532500",
+    "parent_code": "530000",
+    "name": "红河哈尼族彝族自治州",
+    "alias": "红河",
+    "pinyin": "HongHeHaNiZuYiZu",
+    "level": 2
+  },
+  {
+    "code": "532600",
+    "parent_code": "530000",
+    "name": "文山壮族苗族自治州",
+    "alias": "文山",
+    "pinyin": "WenShanZhuangZuMiaoZu",
+    "level": 2
+  },
+  {
+    "code": "532800",
+    "parent_code": "530000",
+    "name": "西双版纳傣族自治州",
+    "alias": "西双版纳",
+    "pinyin": "XiShuangBanNaDaiZu",
+    "level": 2
+  },
+  {
+    "code": "532900",
+    "parent_code": "530000",
+    "name": "大理白族自治州",
+    "alias": "大理白族",
+    "pinyin": "DaLiBaiZu",
+    "level": 2
+  },
+  {
+    "code": "533100",
+    "parent_code": "530000",
+    "name": "德宏傣族景颇族自治州",
+    "alias": "德宏",
+    "pinyin": "DeHongDaiZuJingPoZu",
+    "level": 2
+  },
+  {
+    "code": "533300",
+    "parent_code": "530000",
+    "name": "怒江傈僳族自治州",
+    "alias": "怒江傈僳族",
+    "pinyin": "NuJiangLiSuZu",
+    "level": 2
+  },
+  {
+    "code": "533400",
+    "parent_code": "530000",
+    "name": "迪庆藏族自治州",
+    "alias": "迪庆藏族",
+    "pinyin": "DiQingCangZu",
+    "level": 2
+  },
+  {
+    "code": "540000",
+    "parent_code": null,
+    "name": "西藏自治区",
+    "alias": "西藏",
+    "pinyin": "XiCang",
+    "level": 1
+  },
+  {
+    "code": "540100",
+    "parent_code": "540000",
+    "name": "拉萨市",
+    "alias": "拉萨",
+    "pinyin": "LaSa",
+    "level": 2
+  },
+  {
+    "code": "542100",
+    "parent_code": "540000",
+    "name": "昌都地区",
+    "alias": "昌都",
+    "pinyin": "ChangDouDeQu",
+    "level": 2
+  },
+  {
+    "code": "542200",
+    "parent_code": "540000",
+    "name": "山南地区",
+    "alias": "山南",
+    "pinyin": "ShanNanDeQu",
+    "level": 2
+  },
+  {
+    "code": "542300",
+    "parent_code": "540000",
+    "name": "日喀则地区",
+    "alias": "日喀则",
+    "pinyin": "RiKaZeDeQu",
+    "level": 2
+  },
+  {
+    "code": "542400",
+    "parent_code": "540000",
+    "name": "那曲地区",
+    "alias": "那曲",
+    "pinyin": "NaQuDeQu",
+    "level": 2
+  },
+  {
+    "code": "542500",
+    "parent_code": "540000",
+    "name": "阿里地区",
+    "alias": "阿里",
+    "pinyin": "ALiDeQu",
+    "level": 2
+  },
+  {
+    "code": "542600",
+    "parent_code": "540000",
+    "name": "林芝地区",
+    "alias": "林芝",
+    "pinyin": "LinZhiDeQu",
+    "level": 2
+  },
+  {
+    "code": "610000",
+    "parent_code": null,
+    "name": "陕西省",
+    "alias": "陕西",
+    "pinyin": "ShaanXi",
+    "level": 1
+  },
+  {
+    "code": "610100",
+    "parent_code": "610000",
+    "name": "西安市",
+    "alias": "西安",
+    "pinyin": "XiAn",
+    "level": 2
+  },
+  {
+    "code": "610200",
+    "parent_code": "610000",
+    "name": "铜川市",
+    "alias": "铜川",
+    "pinyin": "TongChuan",
+    "level": 2
+  },
+  {
+    "code": "610300",
+    "parent_code": "610000",
+    "name": "宝鸡市",
+    "alias": "宝鸡",
+    "pinyin": "BaoJi",
+    "level": 2
+  },
+  {
+    "code": "610400",
+    "parent_code": "610000",
+    "name": "咸阳市",
+    "alias": "咸阳",
+    "pinyin": "XianYang",
+    "level": 2
+  },
+  {
+    "code": "610500",
+    "parent_code": "610000",
+    "name": "渭南市",
+    "alias": "渭南",
+    "pinyin": "WeiNan",
+    "level": 2
+  },
+  {
+    "code": "610600",
+    "parent_code": "610000",
+    "name": "延安市",
+    "alias": "延安",
+    "pinyin": "YanAn",
+    "level": 2
+  },
+  {
+    "code": "610700",
+    "parent_code": "610000",
+    "name": "汉中市",
+    "alias": "汉中",
+    "pinyin": "HanZhong",
+    "level": 2
+  },
+  {
+    "code": "610800",
+    "parent_code": "610000",
+    "name": "榆林市",
+    "alias": "榆林",
+    "pinyin": "YuLin",
+    "level": 2
+  },
+  {
+    "code": "610900",
+    "parent_code": "610000",
+    "name": "安康市",
+    "alias": "安康",
+    "pinyin": "AnKang",
+    "level": 2
+  },
+  {
+    "code": "611000",
+    "parent_code": "610000",
+    "name": "商洛市",
+    "alias": "商洛",
+    "pinyin": "ShangLuo",
+    "level": 2
+  },
+  {
+    "code": "620000",
+    "parent_code": null,
+    "name": "甘肃省",
+    "alias": "甘肃",
+    "pinyin": "GanSu",
+    "level": 1
+  },
+  {
+    "code": "620100",
+    "parent_code": "620000",
+    "name": "兰州市",
+    "alias": "兰州",
+    "pinyin": "LanZhou",
+    "level": 2
+  },
+  {
+    "code": "620200",
+    "parent_code": "620000",
+    "name": "嘉峪关市",
+    "alias": "嘉峪关",
+    "pinyin": "JiaYuGuan",
+    "level": 2
+  },
+  {
+    "code": "620300",
+    "parent_code": "620000",
+    "name": "金昌市",
+    "alias": "金昌",
+    "pinyin": "JinChang",
+    "level": 2
+  },
+  {
+    "code": "620400",
+    "parent_code": "620000",
+    "name": "白银市",
+    "alias": "白银",
+    "pinyin": "BaiYin",
+    "level": 2
+  },
+  {
+    "code": "620500",
+    "parent_code": "620000",
+    "name": "天水市",
+    "alias": "天水",
+    "pinyin": "TianShui",
+    "level": 2
+  },
+  {
+    "code": "620600",
+    "parent_code": "620000",
+    "name": "武威市",
+    "alias": "武威",
+    "pinyin": "WuWei",
+    "level": 2
+  },
+  {
+    "code": "620700",
+    "parent_code": "620000",
+    "name": "张掖市",
+    "alias": "张掖",
+    "pinyin": "ZhangYe",
+    "level": 2
+  },
+  {
+    "code": "620800",
+    "parent_code": "620000",
+    "name": "平凉市",
+    "alias": "平凉",
+    "pinyin": "PingLiang",
+    "level": 2
+  },
+  {
+    "code": "620900",
+    "parent_code": "620000",
+    "name": "酒泉市",
+    "alias": "酒泉",
+    "pinyin": "JiuQuan",
+    "level": 2
+  },
+  {
+    "code": "621000",
+    "parent_code": "620000",
+    "name": "庆阳市",
+    "alias": "庆阳",
+    "pinyin": "QingYang",
+    "level": 2
+  },
+  {
+    "code": "621100",
+    "parent_code": "620000",
+    "name": "定西市",
+    "alias": "定西",
+    "pinyin": "DingXi",
+    "level": 2
+  },
+  {
+    "code": "621200",
+    "parent_code": "620000",
+    "name": "陇南市",
+    "alias": "陇南",
+    "pinyin": "LongNan",
+    "level": 2
+  },
+  {
+    "code": "622900",
+    "parent_code": "620000",
+    "name": "临夏回族自治州",
+    "alias": "临夏回族",
+    "pinyin": "LinXiaHuiZu",
+    "level": 2
+  },
+  {
+    "code": "623000",
+    "parent_code": "620000",
+    "name": "甘南藏族自治州",
+    "alias": "甘南藏族",
+    "pinyin": "GanNanCangZu",
+    "level": 2
+  },
+  {
+    "code": "630000",
+    "parent_code": null,
+    "name": "青海省",
+    "alias": "青海",
+    "pinyin": "QingHai",
+    "level": 1
+  },
+  {
+    "code": "630100",
+    "parent_code": "630000",
+    "name": "西宁市",
+    "alias": "西宁",
+    "pinyin": "XiNing",
+    "level": 2
+  },
+  {
+    "code": "632200",
+    "parent_code": "630000",
+    "name": "海北藏族自治州",
+    "alias": "海北藏族",
+    "pinyin": "HaiBeiCangZu",
+    "level": 2
+  },
+  {
+    "code": "632300",
+    "parent_code": "630000",
+    "name": "黄南藏族自治州",
+    "alias": "黄南藏族",
+    "pinyin": "HuangNanCangZu",
+    "level": 2
+  },
+  {
+    "code": "632500",
+    "parent_code": "630000",
+    "name": "海南藏族自治州",
+    "alias": "海南藏族",
+    "pinyin": "HaiNanCangZu",
+    "level": 2
+  },
+  {
+    "code": "632600",
+    "parent_code": "630000",
+    "name": "果洛藏族自治州",
+    "alias": "果洛藏族",
+    "pinyin": "GuoLuoCangZu",
+    "level": 2
+  },
+  {
+    "code": "632700",
+    "parent_code": "630000",
+    "name": "玉树藏族自治州",
+    "alias": "玉树藏族",
+    "pinyin": "YuShuCangZu",
+    "level": 2
+  },
+  {
+    "code": "632800",
+    "parent_code": "630000",
+    "name": "海西蒙古族藏族自治州",
+    "alias": "海西",
+    "pinyin": "HaiXiMengGuZuCangZu",
+    "level": 2
+  },
+  {
+    "code": "640000",
+    "parent_code": null,
+    "name": "宁夏回族自治区",
+    "alias": "宁夏",
+    "pinyin": "NingXiaHuiZu",
+    "level": 1
+  },
+  {
+    "code": "640100",
+    "parent_code": "640000",
+    "name": "银川市",
+    "alias": "银川",
+    "pinyin": "YinChuan",
+    "level": 2
+  },
+  {
+    "code": "640200",
+    "parent_code": "640000",
+    "name": "石嘴山市",
+    "alias": "石嘴山",
+    "pinyin": "ShiZuiShan",
+    "level": 2
+  },
+  {
+    "code": "640300",
+    "parent_code": "640000",
+    "name": "吴忠市",
+    "alias": "吴忠",
+    "pinyin": "WuZhong",
+    "level": 2
+  },
+  {
+    "code": "640400",
+    "parent_code": "640000",
+    "name": "固原市",
+    "alias": "固原",
+    "pinyin": "GuYuan",
+    "level": 2
+  },
+  {
+    "code": "640500",
+    "parent_code": "640000",
+    "name": "中卫市",
+    "alias": "中卫",
+    "pinyin": "ZhongWei",
+    "level": 2
+  },
+  {
+    "code": "650000",
+    "parent_code": null,
+    "name": "新疆维吾尔自治区",
+    "alias": "新疆",
+    "pinyin": "XinJiangWeiWuEr",
+    "level": 1
+  },
+  {
+    "code": "650100",
+    "parent_code": "650000",
+    "name": "乌鲁木齐市",
+    "alias": "乌鲁木齐",
+    "pinyin": "WuLuMuQi",
+    "level": 2
+  },
+  {
+    "code": "650200",
+    "parent_code": "650000",
+    "name": "克拉玛依市",
+    "alias": "克拉玛依",
+    "pinyin": "KeLaMaYi",
+    "level": 2
+  },
+  {
+    "code": "652100",
+    "parent_code": "650000",
+    "name": "吐鲁番地区",
+    "alias": "吐鲁番",
+    "pinyin": "TuLuFanDeQu",
+    "level": 2
+  },
+  {
+    "code": "652200",
+    "parent_code": "650000",
+    "name": "哈密地区",
+    "alias": "哈密",
+    "pinyin": "HaMiDeQu",
+    "level": 2
+  },
+  {
+    "code": "652300",
+    "parent_code": "650000",
+    "name": "昌吉回族自治州",
+    "alias": "昌吉回族",
+    "pinyin": "ChangJiHuiZu",
+    "level": 2
+  },
+  {
+    "code": "652700",
+    "parent_code": "650000",
+    "name": "博尔塔拉蒙古自治州",
+    "alias": "博尔塔拉",
+    "pinyin": "BoErTaLaMengGu",
+    "level": 2
+  },
+  {
+    "code": "652800",
+    "parent_code": "650000",
+    "name": "巴音郭楞蒙古自治州",
+    "alias": "巴音郭楞",
+    "pinyin": "BaYinGuoLengMengGu",
+    "level": 2
+  },
+  {
+    "code": "652900",
+    "parent_code": "650000",
+    "name": "阿克苏地区",
+    "alias": "阿克苏",
+    "pinyin": "AKeSuDeQu",
+    "level": 2
+  },
+  {
+    "code": "653000",
+    "parent_code": "650000",
+    "name": "克孜勒苏柯尔克孜自治州",
+    "alias": "克孜勒苏",
+    "pinyin": "KeZiLeiSuKeErKeZi",
+    "level": 2
+  },
+  {
+    "code": "653100",
+    "parent_code": "650000",
+    "name": "喀什地区",
+    "alias": "喀什",
+    "pinyin": "KaShenDeQu",
+    "level": 2
+  },
+  {
+    "code": "653200",
+    "parent_code": "650000",
+    "name": "和田地区",
+    "alias": "和田",
+    "pinyin": "HeTianDeQu",
+    "level": 2
+  },
+  {
+    "code": "654000",
+    "parent_code": "650000",
+    "name": "伊犁哈萨克自治州",
+    "alias": "伊犁哈萨克",
+    "pinyin": "YiLiHaSaKe",
+    "level": 2
+  },
+  {
+    "code": "654200",
+    "parent_code": "650000",
+    "name": "塔城地区",
+    "alias": "塔城",
+    "pinyin": "TaChengDeQu",
+    "level": 2
+  },
+  {
+    "code": "654300",
+    "parent_code": "650000",
+    "name": "阿勒泰地区",
+    "alias": "阿勒泰",
+    "pinyin": "ALeiTaiDeQu",
+    "level": 2
+  },
+  {
+    "code": "659001",
+    "parent_code": "650000",
+    "name": "石河子市",
+    "alias": "石河子",
+    "pinyin": "ShiHeZi",
+    "level": 2
+  },
+  {
+    "code": "659002",
+    "parent_code": "650000",
+    "name": "阿拉尔市",
+    "alias": "阿拉尔",
+    "pinyin": "ALaEr",
+    "level": 2
+  },
+  {
+    "code": "659003",
+    "parent_code": "650000",
+    "name": "图木舒克市",
+    "alias": "图木舒克",
+    "pinyin": "TuMuShuKe",
+    "level": 2
+  },
+  {
+    "code": "659004",
+    "parent_code": "650000",
+    "name": "五家渠市",
+    "alias": "五家渠",
+    "pinyin": "WuJiaQu",
+    "level": 2
+  },
+  {
+    "code": "630200",
+    "parent_code": "630000",
+    "name": "海东市",
+    "alias": "海东",
+    "pinyin": "HaiDongShi",
+    "level": 2
+  }
+]

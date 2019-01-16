@@ -743,14 +743,13 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     }
   }
   .prev-btn {
-    // background: #ffffff;
+    background: #ffffff;
     // border: 1px solid #969696;
     color: #333;
     box-sizing: border-box;
-
     &:hover {
       background: #ccc;
-      // border: 1px solid #ccc;
+      border: 1px solid #ccc;
     }
   }
   .last-btn {

@@ -680,7 +680,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
       font-weight: bold;
       text-align: center;
       width: 100%;
-      // height: 143px;
+      height: 143px;
       background: url(/img/success.png) no-repeat 94px center;
     }
     .tipinfo {
@@ -743,14 +743,12 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
     }
   }
   .prev-btn {
-    // background: #ffffff;
-    // border: 1px solid #969696;
+    background: #ffffff;
+    border: 1px solid #969696;
     color: #333;
-    box-sizing: border-box;
-
     &:hover {
       background: #ccc;
-      // border: 1px solid #ccc;
+      border: 1px solid #ccc;
     }
   }
   .last-btn {
@@ -762,7 +760,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   .normal-btn {
     background: #fff;
     color: #000;
-    // border-color: #000;
+    border-color: #000;
     margin-right: 165px;
   }
   .step-next2 {
@@ -969,7 +967,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
       background: #ccc;
     }
   }
-  .last-btn{
+  .last-btn {
     background-image: -webkit-gradient(linear, left bottom, left top, from(#269fe0), to(#71c6f4));
     background-image: linear-gradient(0deg, #269fe0 0%, #71c6f4 100%);
     border: solid 1px #1d8dc9;
@@ -1176,11 +1174,11 @@ input {
   line-height: 40px;
   text-align: center;
   color: #fff;
-  // border: 1px solid #969696;
+  border: 1px solid #969696;
   border-radius: 6px;
   display: inline-block;
   font-size: 16px;
-  background-color: #2577e3;
+  // background-color: #2577e3;
 }
 .registiter-page .last-btn, .registiter-page .normal-btn:hover{
   opacity: 0.8;

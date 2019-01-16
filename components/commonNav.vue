@@ -280,10 +280,10 @@
             onclick="gotoline();"><a href="#" >物流专线</a></li>
           <li
             id="hy"
-            style="margin-left: 20px;"><nuxt-link to="/huoyuan?tid=3">货源信息</nuxt-link></li>
+            style="margin-left: 20px;"><nuxt-link to="/huoyuan">货源信息</nuxt-link></li>
           <li
             id="cy"
-            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=3">车源信息</nuxt-link></li>
+            style="margin-left: 20px;"><nuxt-link to="/cheyuan">车源信息</nuxt-link></li>
           <li
             id="gs"
             style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=80">物流公司</nuxt-link></li>
@@ -322,15 +322,11 @@ export default {
   },
   mounted() {
     this.changeNav()
-    if (process.client) {
-      // window.seajs.use(['layer'], function() {
-      //   seajs.use(['./js/city-picker.data.js'], function() {
-      //     seajs.use(['./js/city-picker.js'], function() {
-      //       seajs.use(['./js/diqu.js'])
-      //     })
-      //   })
-      // })
-    }
+    seajs.use(['./js/city-picker.data.js'], function() {
+      seajs.use(['./js/city-picker.js'], function() {
+        seajs.use(['./js/diqu.js'])
+      })
+    })
   },
   methods: {
     routeChange() {
@@ -345,6 +341,9 @@ export default {
       switch (this.$route.name) {
         case 'huoyuan':
           $('#hy').addClass('nav-active')
+          break
+        case 'cheyuan':
+          $('#cy').addClass('nav-active')
           break
       }
     }

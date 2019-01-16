@@ -23,9 +23,9 @@ module.exports = {
     script: [
       { src: '/vendor/jquery-1.12.4.min.js' },
       { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' }
-      // { src: '/js/diqu.js' },
-      // { src: '/js/jquery.pagination.min.js' }
+      { src: '/js/city-picker.js' },
+      { src: '/js/diqu.js' },
+      { src: '/js/jquery.pagination.min.js' }
     ]
   },
 

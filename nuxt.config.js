@@ -20,7 +20,13 @@ module.exports = {
       lang: 'zh-CN'
     },
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [{ src: '/vendor/jquery-1.12.4.min.js' }]
+    script: [
+      { src: '/vendor/jquery-1.12.4.min.js' },
+      { src: '/js/city-picker.data.js' },
+      { src: '/js/city-picker.js' },
+      { src: '/js/diqu.js' },
+      { src: '/js/jquery.pagination.min.js' }
+    ]
   },
 
   /*
@@ -30,14 +36,9 @@ module.exports = {
   // loading: '~components/loading.vue',
 
   /*
-  ** Global CSS
+  ** 公共 css
   */
-  css: [
-    /*     {
-      src: '~assets/scss/*.scss',
-      lang: 'scss'
-    } */
-  ],
+  css: ['~/css/index.css', '~/css/list_huo.css'],
 
   /*
   ** Plugins to load before mounting the App

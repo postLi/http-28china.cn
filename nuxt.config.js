@@ -38,7 +38,13 @@ module.exports = {
   /*
   ** 公共 css
   */
-  css: ['~/css/index.css', '~/css/list_huo.css'],
+  // css: ['~/css/index.css', '~/css/list_huo.css'],
+  css: [
+    /*     {
+      src: '~assets/scss/*.scss',
+      lang: 'scss'
+    } */
+  ],
 
   /*
   ** Plugins to load before mounting the App

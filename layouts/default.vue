@@ -13,8 +13,12 @@ export default {
   components: {
     CommonNav,
     CommonFooter
+  },
+  head: {
+    link: [
+      { rel: 'stylesheet', href: '/css/index.css' },
+      { rel: 'stylesheet', href: '/css/list_huo.css' }
+    ]
   }
 }
 </script>
-<style scoped>
-</style>

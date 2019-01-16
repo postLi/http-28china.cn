@@ -12,9 +12,12 @@ export default {
   components: {
     LoginHeader,
     LoginFooter
+  },
+  head: {
+    link: [{ rel: 'stylesheet', href: '/css/regisiter.css' }]
   }
 }
 </script>
-<style lang="scss" scoped>
-@import '~/assets/scss/regisiter.scss';
+<style lang="scss">
+// @import '~/assets/scss/regisiter.scss';
 </style>

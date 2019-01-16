@@ -408,9 +408,9 @@
       });
       // 获取微信登录信息
       window.addEventListener('message', function(e){
-        var payload = e.data
-        if(e.data.indexOf('code:')!==-1){
-          var code = e.data.split(':')[1];
+        var payload = e ? (e.data+'') : ''
+        if(payload.indexOf('code:')!==-1){
+          var code = payload.split(':')[1];
           $('body').trigger('wxLoginSuccess', code);
         }
       });

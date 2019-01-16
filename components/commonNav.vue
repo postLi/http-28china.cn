@@ -234,7 +234,7 @@
                   class=""
                   placeholder=" 请输入出发地"
                   readonly=""></div>
-                <div class="h_m_jt floatl"><img src="/templets/default/images/index/02jt.png"></div>
+                <div class="h_m_jt floatl"><img src="../static/images/index/02jt.png"></div>
                 <div class="h_m_ddd floatl"><input
                   id="phLine1To"
                   wtmap=""
@@ -260,7 +260,7 @@
             style="margin-top: 35px;">
 
             <img
-              src="/templets/default/index_files/phone.png"
+              src="../static/index_files/phone.png"
               style="width:200px;display:block">
 
           </div>
@@ -268,38 +268,35 @@
         </div>
       </div>
       <div class="header_bottom center" >
-        <ul style="width: 1400px;">
+        <ul
+          id="nav"
+          style="width: 1400px;">
           <span class="re2"/>
           <span class="xin2"/>
-          <li><a
-            href="/"
-            target="_self">首页</a></li>
-
-          <!-- <li style="margin-left: 20px;"><a href='/plus/list.php?tid=4'>物流专线</a></li> -->
+          <li><nuxt-link to="/">首页</nuxt-link></li>
           <li
             id="wlzx"
             style="margin-left: 20px;"
             onclick="gotoline();"><a href="#" >物流专线</a></li>
           <li
             id="hy"
-            style="margin-left: 20px;"><a href="/plus/list.php?tid=2">货源信息</a></li>
+            style="margin-left: 20px;"><nuxt-link to="/huoyuan?tid=3">货源信息</nuxt-link></li>
           <li
             id="cy"
-            style="margin-left: 20px;"><a href="/plus/list.php?tid=3">车源信息</a></li>
+            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=3">车源信息</nuxt-link></li>
           <li
             id="gs"
-            style="margin-left: 20px;"><a href="/plus/list.php?tid=80">物流公司</a></li>
+            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=80">物流公司</nuxt-link></li>
           <li
             id="wd"
-            style="margin-left: 20px;"><a href="/plus/list.php?tid=81">物流网点</a></li>
+            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=81">物流网点</nuxt-link></li>
           <li
             id="sx"
-            style="margin-left: 20px;"><a href="/plus/list.php?tid=82">时效查询</a></li>
+            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=82">时效查询</nuxt-link></li>
           <li
             id="wlyq"
-            style="margin-left: 20px;"><a href="/plus/list.php?tid=1">物流园区</a></li>
+            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=1">物流园区</nuxt-link></li>
 
-          <!--<li id="xypj" style="margin-left: 20px;"><a href='#'>信用评级</a></li>-->
           <li
             id="jgzs"
             style="margin-left: 20px;"><a href="#">价格指数</a></li>
@@ -320,13 +317,36 @@
 <script>
 export default {
   name: 'CommonNav',
+  watch: {
+    $route: 'routeChange'
+  },
   mounted() {
+    this.changeNav()
     if (process.client) {
-      window.seajs.use(['layer'], function() {
-        seajs.use(['./js/city-picker.data.js'])
-        seajs.use(['./js/city-picker.js'])
-        seajs.use(['./js/diqu.js'])
+      // window.seajs.use(['layer'], function() {
+      //   seajs.use(['./js/city-picker.data.js'], function() {
+      //     seajs.use(['./js/city-picker.js'], function() {
+      //       seajs.use(['./js/diqu.js'])
+      //     })
+      //   })
+      // })
+    }
+  },
+  methods: {
+    routeChange() {
+      $('#nav li').each(function() {
+        if ($(this).hasClass('nav-active')) {
+          $(this).removeClass('nav-active')
+        }
       })
+      this.changeNav()
+    },
+    changeNav() {
+      switch (this.$route.name) {
+        case 'huoyuan':
+          $('#hy').addClass('nav-active')
+          break
+      }
     }
   }
 }

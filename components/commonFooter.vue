@@ -26,7 +26,7 @@
 
 
     <div class="login_box">
-      <div class="login_close"><img src="/templets/default/images/login_close.png" ></div>
+      <div class="login_close"><img src="../static/images/login_close.png" ></div>
       <div class="login_box_bt">
         <div class="login_bt1">密码登录</div>
         <div class="login_bt2">验证码登录</div>

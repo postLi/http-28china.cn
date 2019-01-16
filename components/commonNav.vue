@@ -3,46 +3,7 @@
     <div
       id="rf00"
       class="header">
-      <div class="header_top">
-        <div
-          class="header_top_top w1200 center"
-          style="width: 1400px;" >
-          <div class="header_r">
-            <div
-              id="_userlogin1"
-              class="header_r1">您好，欢迎来到28快运!&nbsp;&nbsp; <a href="/member/login.php">登录</a> <a href="/member/index_do.php?fmdo=user&amp;dopost=regnew">注册</a></div>
-            <div
-              id="_userlogin1_1"
-              class="header_r1"
-              style="display: none;">
-              <span class="chgoEm">您好，<span id="login_name1"/>&nbsp;已登录</span>
-              <a
-                target="_blank"
-                href="/member/content_list.php?channelid=1" >会员中心</a>
-              <a
-                class="exit_anfa"
-                href="/member/index_do.php?fmdo=login&dopost=exit">退出登录</a>
-            </div>
-            <div class="header_r2">
-
-              <a href="/">首页</a>
-              <a
-                target="_blank"
-                href="http://www.anfanet.com/download.html">APP下载</a>
-              <a
-                target="_blank"
-                href="http://www.28tms.com">28TMS</a>
-              <a
-                target="_blank"
-                href="http://biz.28china.cn">企业货主登录</a>
-              <a
-                target="_blank"
-                href="/plus/list.php?tid=88">帮助中心</a>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <top/>
       <div class="header_middle clear">
         <div
           class="header_m"
@@ -292,7 +253,7 @@
             style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=81">物流网点</nuxt-link></li>
           <li
             id="sx"
-            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=82">时效查询</nuxt-link></li>
+            style="margin-left: 20px;"><nuxt-link to="/shixiao">时效查询</nuxt-link></li>
           <li
             id="wlyq"
             style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=1">物流园区</nuxt-link></li>
@@ -315,8 +276,10 @@
   </div>
 </template>
 <script>
+import Top from '../components/top'
 export default {
   name: 'CommonNav',
+  components: { Top },
   watch: {
     $route: 'routeChange'
   },
@@ -345,6 +308,9 @@ export default {
         case 'cheyuan':
           $('#cy').addClass('nav-active')
           break
+        case 'shixiao':
+          $('#sx').addClass('nav-active')
+          break
       }
     }
   }
@@ -352,49 +318,10 @@ export default {
 </script>
 <style scoped>
 .header {
-  /* background-color: #fff; */
-  /* background: red; */
-  /* float: left; */
-  /* width: 1400px; */
-  /* width: 100%; */
   background: none !important;
   margin: 0 auto;
   height: 194px;
-  /* min-width: 1400px; */
   margin-bottom: 30px;
-}
-.header_top {
-  height: 30px;
-  line-height: 30px;
-
-  background-color: #eeeeee;
-}
-.header_top_top {
-  /* width: 1400px; */
-  /* margin:0 auto; */
-}
-.header_r {
-  /* float:left; */
-}
-.header_r1 {
-  float: left;
-  margin-right: 20px;
-}
-.header_r1 a {
-  color: #fb5000;
-  padding-left: 10px;
-}
-.header_r2 {
-  float: right;
-}
-.header_r2 a {
-  color: #333333;
-  border-left: 1px solid #ccc;
-  padding: 0 10px;
-}
-.header_r2 a em {
-  font-family: normal;
-  font-weight: bold;
 }
 .header_middle {
   height: 120px;

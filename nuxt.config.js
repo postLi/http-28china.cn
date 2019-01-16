@@ -20,13 +20,7 @@ module.exports = {
       lang: 'zh-CN'
     },
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [
-      { src: '/vendor/jquery-1.12.4.min.js' },
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
-      { src: '/js/diqu.js' },
-      { src: '/js/jquery.pagination.min.js' }
-    ]
+    script: [{ src: '/vendor/jquery-1.12.4.min.js' }]
   },
 
   /*
@@ -61,9 +55,9 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios',
+    '@nuxtjs/axios'
     // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt'
+    // 'bootstrap-vue/nuxt'
   ],
   /*
   ** Axios module configuration

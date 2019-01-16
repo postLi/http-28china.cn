@@ -88,7 +88,6 @@
 <script>
 export default {
   layout: 'login',
-
   fetch({ params, store, req, res, query, route }) {
     store.commit('login/setReg', false)
     store.commit('login/setPageType', 'login')

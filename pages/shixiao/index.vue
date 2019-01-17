@@ -587,10 +587,7 @@ export default {
                   var driverStatus = datas[i].driverStatus
 
                   var arcurl =
-                    '/wlzx/2018/0509/7.html?id=' +
-                    id +
-                    '&publishId=' +
-                    companyId //下单
+                    '/shixiao/detail?id=' + id + '&publishId=' + companyId //下单
                   var orderurl =
                     '/plus/list.php?tid=77&uid=' +
                     account +

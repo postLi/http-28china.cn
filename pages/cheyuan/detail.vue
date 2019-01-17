@@ -261,14 +261,22 @@
 export default {
   name: 'Detail',
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/article_cheyuan.css' }],
-    script: [{ src: '../js/jquery.pagination.min.js' }]
+    link: [
+      { rel: 'stylesheet', href: '/css/article_cheyuan.css' },
+      { rel: 'stylesheet', href: '/css/WTMap.css' }
+    ],
+    script: [
+      { src: '../js/jquery.pagination.min.js' },
+      { src: '../js/WTMap.min.js' }
+    ]
   },
   layout: 'subLayout',
   mounted() {
     seajs.use(['../js/city.js'], function() {
       seajs.use(['../js/arc_cheyuan.js'], function() {
-        seajs.use(['../js/collection.js'], function() {})
+        seajs.use(['../js/collection.js'], function() {
+          seajs.use(['../js/gaodemap2.js'], function() {})
+        })
       })
     })
   }

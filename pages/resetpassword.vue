@@ -118,6 +118,9 @@
 <script>
 export default {
   layout: 'login',
+  head: {
+    title: '找回密码'
+  },
   fetch({ params, store, req, res, query, route }) {
     store.commit('login/setReg', false)
     store.commit('login/setPageType', 'findpassword')

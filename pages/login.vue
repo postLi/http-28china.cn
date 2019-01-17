@@ -88,6 +88,9 @@
 <script>
 export default {
   layout: 'login',
+  head: {
+    title: '登录'
+  },
   fetch({ params, store, req, res, query, route }) {
     store.commit('login/setReg', false)
     store.commit('login/setPageType', 'login')

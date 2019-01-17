@@ -15,6 +15,14 @@ export default {
     CommonFooter
   },
   head: {
+    //https://github.com/declandewet/vue-meta
+    //metaInfo
+    //  htmlAttrs
+    //  headAttrs
+    //  bodyAttrs
+    //  meta
+    //  style
+    //  script
     link: [
       { rel: 'stylesheet', href: '/css/index.css' },
       { rel: 'stylesheet', href: '/css/list_huo.css' }

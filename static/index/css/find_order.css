@@ -1,0 +1,297 @@
+.hide{
+  display: none;
+}
+.find_order{
+  padding: 10px 0 20px;
+  background: #fff;
+  font-size: 16px;
+}
+.hyq_banner{
+  margin-bottom: 30px;
+}
+.hyq_banner img{
+  width: 100%;
+  display: block;
+}
+.find_order_left{
+  float: left;
+  width: 292px;
+  margin-right: 64px;
+}
+.find_order_right{
+  float: left;
+  width: 816px;
+}
+.find_order_tab{
+  border: solid 1px #e2e2e2;
+  padding: 30px 15px;
+  margin-bottom: 12px;
+}
+.find_order_tab a{
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.find_order_tab li{
+  line-height: 30px;
+  padding: 0 15px;
+}
+.find_order_tab_title{
+  color: #333;
+  border-bottom: 1px solid #81c2f8;
+  padding-bottom: 20px;
+  padding-left: 46px;
+  background: url(../images/ydcx/01cj.png) no-repeat 0 0;
+  line-height: 1.5;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+.find_order_quesiton .find_order_tab_title{
+  background: url(../images/ydcx/02cd.png) no-repeat 0 0;
+}
+.find_order_tip .find_order_tab_title{
+  background: url(../images/ydcx/05ts.png) no-repeat 0 0;
+}
+.findo_ico_mobile{
+  padding-left: 20px;
+  background: url(../images/ydcx/03dh.png) no-repeat 0 center;
+}
+.find_ico_qq{
+  padding-left:22px;
+  background: url(../images/ydcx/04qq.gif) no-repeat 0 center;
+}
+.find_order_tab_tip li{
+  font-size: 16px;
+  white-space: nowrap;
+}
+.find_order_tousu,.find_order_xiadan{
+  float: left;
+  width: 140px;
+	height: 40px;
+  border-radius: 4px;
+  line-height: 40px;
+  text-indent: 54px;
+}
+.find_order_tousu{
+  color: #333;
+  border: solid 1px #e2e2e2;
+  background: url(../images/ydcx/06jy.png) no-repeat 15px center;
+}
+.find_order_xiadan{
+  color: #fff;
+  background: url(../images/ydcx/07xd.png) no-repeat 15px center #3f94ee;
+  margin-left: 10px;
+}
+/* 右边部分 */
+.find_order_right{
+
+}
+.find_order_title{
+  line-height: 28px;
+  height: 28px;
+  margin-bottom: 22px;
+  padding-left: 40px;
+  font-size: 20px;
+  color: #333;
+  background: url(../images/ydcx/08hw.png) no-repeat 0 -4px;
+  font-weight: normal;
+}
+.find_order_search{
+  margin-bottom: 24px;
+  position: relative;
+  height: 40px;
+  line-height: 40px;
+}
+.find_order_search input{
+ background: transparent;
+ padding-left: 10px;
+ border-radius: 4px 0px 0px 4px;
+  border: solid 1px #81c2f8;
+  height: 38px;
+  font-size: 14px;
+  position: relative;
+  z-index: 2;
+  vertical-align: middle;
+  display: inline-block;
+  line-height: 38px;
+  width: 526px;
+}
+.find_order_search_tip{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  /*background: url(../images/ydcx/09ss.png) no-repeat 4px center;*/
+  color: #999;
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+  padding-left: 16px;
+}
+.hide_search_tip .find_order_search_tip{
+  display: none;
+}
+.find_order_search_tip #ydh{color: #2577e3;cursor: pointer;
+position: absolute;
+z-index: 2;
+top:0px;
+left: 140px;
+
+   }
+.find_order_search_btn{
+  width: 136px;
+	height: 40px;
+	background-color: #3f94ee;
+  border-radius: 0px 4px 4px 0px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+  color: #fff;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.find_order_con{
+  width: 676px;
+  min-height: 600px;
+  position: relative;
+}
+.find_order_default{
+  background: url(../images/ydcx/10tu.png) no-repeat center 90px;
+}
+.find_order_default p{
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+  padding-top: 300px;
+}
+.find_order_none{
+  padding-top: 180px;
+  padding-left: 180px;
+}
+.none_tip_text{
+  color: #208CFF;
+  font-size: 28px;
+  padding-left: 48px;
+  background: url(../images/ydcx/14wjl.png) no-repeat -0  -0;
+  line-height: 36px;
+}
+.none_tip_desc{
+  font-size: 14px;
+  color: #666;
+  line-height: 30px;
+  width: 280px;
+  text-align: center;
+}
+/* 搜索列表 */
+.find_order_content{
+  width: 816px;
+  border: solid 1px #e2e2e2;
+}
+.find_order_company{
+  height: 36px;
+  background-color: #f7f7f7;
+  line-height: 36px;
+  text-indent: 24px;
+  color: #333;
+  font-size: 14px;
+}
+.find_order_list{
+  padding: 24px;
+}
+.find_order_search_list .find_order_company{
+  color: #999;
+}
+.find_order_company span{
+  color: #eb434d;
+  display: inline-block;
+  max-width: 20em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  text-indent: 0;
+}
+.find_order_company_list{
+  padding: 24px 30px;
+}
+.find_order_company_list ol{
+  margin-left: 20px;
+}
+.find_order_company_list li{
+  list-style: decimal;
+  line-height: 30px;
+}
+.find_company_order{
+  font-size: 14px;
+  color: #3864f2;
+  text-decoration: underline;
+  cursor: pointer;
+}
+/* 签收列表 */
+.return_search{
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 14px;
+  color: #00f;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.find_order_list li{
+  height: 66px;
+  position: relative;
+  
+}
+.find_order_list li{
+  padding-left: 100px;
+  padding-right: 100px;
+  clear: both;
+}
+.find_order_list li b{
+  display: block;
+}
+.find_order_sign{
+  color: #ff7801;
+}
+.find_order_date{
+  float: left;
+  width: 70px;
+  font-size: 12px;
+  margin-top: -10px;
+}
+.find_order-info{
+  margin-top: -10px;
+  float: left;
+}
+.find_order_line{
+  float: left;
+  margin-left: 20px;
+  margin-right: 15px;
+  width: 1px;
+  background: #d3d3d3;
+  text-align: center;
+  height: 100%;
+}
+.find_order_line i{
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background: url(../images/ydcx/12xs.png) no-repeat center 0;
+  margin-left: -7.5px;
+}
+.find_order_create .find_order_line i{
+  background: url(../images/ydcx/11kd.png) no-repeat center 0;
+  margin-top: 10px;
+}
+.find_order_create .find_order_line{
+  height: 20px;
+}
+
+.find_order_sign .find_order_line i{
+  background: url(../images/ydcx/13dd.png) no-repeat center 0;
+  margin-left: -10.5px;
+  width: 21px;
+  height: 21px;
+}

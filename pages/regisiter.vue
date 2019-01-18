@@ -223,6 +223,9 @@
 <script>
 export default {
   layout: 'login',
+  head: {
+    title: '注册'
+  },
   fetch({ params, store, req, res, query, route }) {
     let isReg = false
     isReg = route.path.indexOf('/regisiter') !== -1

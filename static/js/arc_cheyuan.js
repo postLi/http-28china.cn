@@ -37,10 +37,10 @@ $('.arc_input3').click(function() {
     window.open('/plus/list.php?tid=4&start=' + start + '&end=' + end)
   }
   if (search_type == 'huo') {
-    window.open('/plus/list.php?tid=2&start=' + start + '&end=' + end)
+    window.open('/huoyuan?start=' + start + '&end=' + end)
   }
   if (search_type == 'che') {
-    window.open('/cheyuan/detail?start=' + start + '&end=' + end)
+    window.open('/cheyuan?start=' + start + '&end=' + end)
   }
 })
 

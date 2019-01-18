@@ -10,6 +10,7 @@
 </template>
 <script>
 import Top from '../components/top'
+import TopNav from '../components/public/topNav.vue'
 import CommonFooter from '../components/commonFooter'
 export default {
   components: {

@@ -256,7 +256,7 @@
             style="margin-left: 20px;"><nuxt-link to="/shixiao">时效查询</nuxt-link></li>
           <li
             id="wlyq"
-            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=1">物流园区</nuxt-link></li>
+            style="margin-left: 20px;"><nuxt-link to="/wuliu">物流园区</nuxt-link></li>
 
           <li
             id="jgzs"
@@ -285,9 +285,9 @@ export default {
   },
   mounted() {
     this.changeNav()
-    seajs.use(['./js/city-picker.data.js'], function() {
-      seajs.use(['./js/city-picker.js'], function() {
-        seajs.use(['./js/diqu.js'])
+    seajs.use([location.origin + '/js/city-picker.data.js'], function() {
+      seajs.use([location.origin + '/js/city-picker.js'], function() {
+        seajs.use([location.origin + '/js/diqu.js'])
       })
     })
   },
@@ -310,6 +310,9 @@ export default {
           break
         case 'shixiao':
           $('#sx').addClass('nav-active')
+          break
+        case 'wuliu':
+          $('#wlyq').addClass('nav-active')
           break
       }
     }

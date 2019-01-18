@@ -7,14 +7,26 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: pkg.name,
+    title: '28快运网-物流配送-物流货运-物流公司-一站式物流服务平台',
+    titleTemplate: '%s | 28快运网',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'renderer', content: 'webkit' },
       { name: 'X-UA-Compatible', content: 'IE=Edge,chrome=1' },
       { name: 'force-rendering', content: 'webkit' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          '28快运是专业提供零担运输和整车运输等物流服务平台，同时提供免费发布货源、车源、专线。货主在线发货，物流跟踪查询，服务有保障，让您发货省时，省钱，更省心！'
+      },
+      {
+        hid: 'keywords',
+        name: 'keywords',
+        content:
+          '物流,物流平台,物流专线,物流公司,物流服务,在线发货,查询运价,运单查询,运单跟踪,物流帮'
+      }
     ],
     htmlAttrs: {
       lang: 'zh-CN'

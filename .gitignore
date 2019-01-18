@@ -84,3 +84,5 @@ dist
 .project
 /.history
 .cache
+/pages/gongsi/index.vue
+!/pages/gongsi/index.vue

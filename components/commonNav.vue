@@ -285,9 +285,9 @@ export default {
   },
   mounted() {
     this.changeNav()
-    seajs.use(['./js/city-picker.data.js'], function() {
-      seajs.use(['./js/city-picker.js'], function() {
-        seajs.use(['./js/diqu.js'])
+    seajs.use([location.origin + '/js/city-picker.data.js'], function() {
+      seajs.use([location.origin + '/js/city-picker.js'], function() {
+        seajs.use([location.origin + '/js/diqu.js'])
       })
     })
   },

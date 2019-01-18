@@ -1,0 +1,218 @@
+img:hover{transform: scale(1.02); transition-delay: 0.3s;}
+img{transition: 0.7s}
+.top_bg{width: 100%;height: 120px;background-color: #fff;margin-top: -30px;}
+.top{height: 120px;background-color: #fff;
+width: 1400px;
+}
+.top ul{width: 100%;height: 100%;}
+.top_1{
+	float: left;margin-top: 30px;
+}
+.top_1 img{width: 135px;height: 80px;}
+.top_2{float:left;margin-top: 55px;margin-left: 40px;}
+.top_2 span{	
+
+	font-size: 24px;
+	font-weight: bold;
+	font-style: italic;
+	letter-spacing: 1.9px;
+	color: #1ea5d5;}
+.top_3{float:right;height: 24px;width: 320px;margin-top: 55px;
+}
+.top_3 img{float: left;width: 24px;height: 24px;margin-top: 5px;}
+.top_3 span{float:left;padding-left: 7px;color: #1ea5d5;font-size: 24px;}
+.top_3 font{float:left;padding-left: 18px;color: #1ea5d5;font-size: 24px;}
+.top_4{float:right;height: 36px;width: 490px;margin-top: 50px;margin-right: 100px;}
+.r_t_bg1{background: url(/images/insurance/right_top1.png) no-repeat;}
+.r_t_bg2{background: url(/images/insurance/right_top2.png) no-repeat;}
+.top_4 i{float: left;height: 36px;line-height:36px;width: 420px;background-color: #1ea5d5;padding-left: 70px;}
+.top_4 em{font-size: 14px;color: #fff;}
+.top_4 em:first-child{padding-right: 130px;}
+.main_bg{
+/* width: 1920px; */
+height: 460px;
+background: url(/images/insurance/banner-bx.png) no-repeat;
+background-position: center center;
+/* margin: auto calc(26% - 561px); */
+}
+
+.footer_sm{height: 100px;width: 100%;background-color: #2577e3;clear: both;}
+.footer_sm .item_sm{width: 1400px;height: 100px;}
+
+.item_sm  ul{margin-left: 170px;}
+.item_sm li{float: left;height: 46px;width: 187px;margin-top: 20px;margin-right: 90px;}
+.item_sm li img{float: left;height:46px ;width: 46px;}
+.item_sm li span{float: left;height:14px ;min-width: 110px;margin-left: 18px;font-size: 14px;color: #fff;margin-bottom: 10px;}
+.item_sm li font{float: left;height:14px ;min-width: 110px;margin-left: 18px;font-size: 14px;color: #fff;}
+.item_sm li:nth-child(4){width: 240px;}
+
+.main{width: 1400px;
+min-height: 1960px;
+background-color: #fff;
+}
+.main1{
+	width: 1400px;
+	height: 349px;
+	margin-top: 123px;
+	margin-bottom: 83px;
+    /* margin-left: 188px; */
+    padding: 0 84px;
+    float: left;
+    background: url(/images/insurance/youshi.png) no-repeat top center;
+    box-sizing: border-box;
+}
+.main2{
+		width: 1023px;
+	height: 366px;
+	margin-bottom: 136px;
+    margin-left: 188px;
+    float: left;	
+}
+.main3{
+		width: 1125px;
+	height: 813px;
+	margin-bottom: 75px;
+    margin-left: 131px;
+    float: left;	
+}
+
+.main1  ul{}
+.main1 li{float: left;height: 50px;width: 280px;}
+.main1 li i{float: left;width: 36px;height: 28px;line-height:28px;background-color: #2577e3;border-radius: 1px;text-align: center;font-size: 16px;color: #fff;}
+.main1 li span{float: left;height:14px ;min-width: 110px;margin-left: 18px;font-size: 14px;color: #fff;margin-bottom: 10px;font-weight:bold;color: #333;font-size: 16px;}
+.main1 li font{float: left;height:14px ;min-width: 110px;margin-left: 18px;font-size: 14px;color: #fff;font-size: 14px;color: #333;}
+.main1 li:nth-child(1){margin-top: 32px;}
+.main1 li:nth-child(2){margin-top: 32px;float: right;width: 260px;}
+.main1 li:nth-child(3){margin-top: 140px;float: left;clear: both;}
+.main1 li:nth-child(4){margin-top: 140px;float: right;width: 260px;}
+
+.main2_1{text-align: center;}
+.main2_1 span{font-size: 30px;color: #333;}
+.main2_2 {float: left;
+margin-left: 489px;
+margin-top: 19px;
+margin-bottom: 100px;
+	width: 50px;
+	height: 4px;
+	background-color: #2577e3;}
+.main2_3 ul{clear: both;}	
+.main2_3 li{
+	float: left;
+	width: 172px;
+	height: 200px;
+	background-color: #ffffff;
+	box-shadow: 0px 2px 5.9px 0.1px 
+		rgba(83, 83, 83, 0.31);
+	border-radius: 4px;}
+.main2_3 li:hover{
+	transform: translateY(-3px);
+    transition-delay: 0.1s;
+    box-shadow: 0px 20px 20px -17px rgba(0, 0, 0, 0.40);
+    opacity: 0.8;
+    background-color: rgb(196, 231, 255);
+}
+.main2_3 img{float: left;
+width: 111px;
+height: 16px;
+margin-top: 100px;
+}
+.main2_3 li span{
+	float: left;
+	text-align: center;width: 100%;
+	height: 14px;
+	margin-top: 23px;
+	margin-bottom: 115px;
+		color: #333333;
+		font-size: 14px;
+}
+.main2_3 li font{	float: left;
+	text-align: center;width: 100%;
+	height: 16px;
+	color: #2577e3;
+	font-size: 16px;
+	}
+.main2_3 li:nth-child(1){
+	background: url(/images/insurance/step1.png) no-repeat center;
+}
+.main2_3 li:nth-child(3){
+	background: url(/images/insurance/step2.png) no-repeat center;
+}
+.main2_3 li:nth-child(5){
+	background: url(/images/insurance/step3.png) no-repeat center;
+}
+.main2_3 li:nth-child(7){
+	background: url(/images/insurance/step4.png) no-repeat center;
+}
+
+.main3_1{text-align: center;
+width: 100%;
+border: 0;
+min-height: auto;
+}
+.main3_1 span{font-size: 30px;color: #333;}
+.main3_2 {float: left;
+margin-left: 535px;
+margin-top: 19px;
+margin-bottom: 100px;
+	width: 50px;
+	height: 4px;
+	background-color: #2577e3;
+	border: 0;
+	
+	}
+.main3_3 ul{clear: both;
+margin-left: 57px;
+}	
+.main3_3 li{
+	float: left;
+	width: 236px;
+	height: 282px;
+	margin-right: 26px;
+	margin-bottom: 26px;
+	}
+.main3_3 li .item_01{width: 236px;height: 202px;}	
+.main3_3 li .item_01 img{
+width: 236px;height: 202px;
+}
+.main3_3 li .item_02{height: 16px;width: 234px;
+border-left: 1px solid #ccc;
+border-right: 1px solid #ccc;
+padding-top: 20px;}
+.main3_3 li .item_02 span{margin-left: 13px;font-size: 16px;color: #333;float: left;}
+.main3_3 li .item_02 font{float: right;font-size: 12px;color:#333;margin-right: 13px;margin-top: 3px;}
+.main3_3 li .item_02 i{float: right;color: #ff3a3a;font-size: 14px;}
+
+.main3_3 li .item_03{height: 30px;width: 234px;
+padding-top: 5px;line-height: 30px;
+border: 1px solid #ccc;
+border-top: 0;
+
+}
+.main3_3 li .item_03 span{font-size: 14px;color: #333;float: left;margin-left: 12px;}
+.main3_3 li .item_03 img{width: 84px;height: 30px;float: right;}
+
+.main3_sm {height: 50px;line-height: 50px;width: 100%;text-align: center;
+clear: both;}
+.main3_sm span{font-size: 16px;color: #000;}
+.error{border: solid 1px red !important;}
+.pointer{cursor: pointer;}
+.display_none{
+	display: none;
+}
+.input01{
+	display: inline-block;
+	width: 120px;
+	height: 40px;
+	border-radius: 4px;
+	border: solid 1px #ccc;
+	text-align: center;
+	line-height: 40px;
+	color: #333;
+	margin-right: 20px;
+	cursor: pointer;
+}
+
+.bx_checked{	border-color: #ffb65f;
+	color: #f77d07;
+	background: url(/images/insurance/checked_bg.png) no-repeat right bottom;
+}

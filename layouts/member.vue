@@ -1,5 +1,6 @@
 <template>
   <div class="member-page">
+    <Top />
     <MemberHeader />
     <MemberNav />
     <nuxt/>
@@ -10,13 +11,13 @@
 import MemberHeader from '../components/member/top'
 import MemberNav from '../components/member/nav'
 import MemberFooter from '../components/member/foot'
-import MemberBanner from '../components/member/banner'
+import Top from '../components/top'
 export default {
   components: {
     MemberHeader,
     MemberNav,
     MemberFooter,
-    MemberBanner
+    Top
   },
   head: {
     link: [

@@ -1,0 +1,63 @@
+.main{min-height: 740px;padding-top: 15px;}
+form{width: 836px;min-height: 685px;}
+table{width: 836px;height: 80px;border-collapse: collapse}
+th,td{border: solid 1px #ccc;}
+table,th,td{border-spacing: 0px;padding:0;margin: 0;text-align: center;font-size: 14px;color: #333;}
+th{	background-color: #f1fbff;font-weight: bold;}
+.main ul{width: 836px;height: 608px;}
+.main ul li{font-size: 14px;}
+.item_left{float: left;width: 93px;margin-top: 50px;}
+.item_right{float: right;width: 736px;margin-top: 50px;}
+.pay_input1{	
+	width: 85px;
+	height: 44px;
+	padding:0;
+	margin: 0;
+	border: 0;
+	padding-left: 61px;
+	background: url(../images/wechat2.png);
+	cursor: pointer;
+	}
+.pay_checked1{
+	background: url(../images/wechat1.png);
+}
+.pay_input2{	
+	width: 92px;
+	height: 44px;
+	padding:0;
+	margin: 0;
+	border: 0;
+	padding-left: 54px;
+	background: url(../images/zfb2.png);
+	margin-left: 20px;
+	cursor: pointer;
+	}
+.pay_checked2{
+	background: url(../images/zfb1.png);
+}
+.pay_way_sm{line-height: 44px;}
+.pay_money{margin-bottom: 242px;}
+.pay_money_sm{line-height: 37px;}
+.pay_money font{color: #f14747;font-size: 28px;}
+.pay_money em{color: #333;font-size: 14px;padding-left: 8px;}
+.item_fapiao{padding-right: 30px;width: 30px;padding-left: 25px;float: left;background: url(../images/fapiao2.png) no-repeat;cursor: pointer;}
+
+.fapiao_checked{background: url(../images/fapiao1.png) no-repeat;}
+.agree{height: 16px;width: 600px;clear: both;margin-left: 235px;}
+.agree_none{float:left;width: 16px;height: 16px;padding-right:11px;background: url(../images/agree_none.png) no-repeat;cursor: pointer;}
+.agree_yes{background: url(../images/agree_yes.png) no-repeat;}
+.agree font{float:left;color: #666;}
+.agree a{color: #3e8dfa;}
+.pay_tj{	
+	margin: 40px 0 0 290px;
+	text-align: center;
+	border: 0;
+	width: 260px;
+	height: 56px;
+	background-color: #fb7c00;
+	border-radius: 4px;
+	font-size: 26px;
+	color: #fff;
+	cursor: pointer;
+	}
+

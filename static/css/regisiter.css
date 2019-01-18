@@ -549,9 +549,9 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 }
 
 .login-page .login-other-platform .login-weixin {
-  background: url("/templets/default/images/weixinquan_24.png") no-repeat 0 center;
+  background: url("/img/weixinquan_24.png") no-repeat 0 center;
  
-  /* background: url("/templets/default/images/weixinquan_24.png") no-repeat; */
+  /* background: url("/img/weixinquan_24.png") no-repeat; */
 }
 
 .login-page .icon {

@@ -1,4 +1,3 @@
-
 const Koa = require('koa')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
@@ -28,6 +27,7 @@ async function start() {
       ctx.res.on('close', resolve)
       ctx.res.on('finish', resolve)
       nuxt.render(ctx.req, ctx.res, promise => {
+        
         // nuxt.render passes a rejected promise into callback on error.
         promise.then(resolve).catch(reject)
       })

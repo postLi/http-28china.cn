@@ -1,0 +1,53 @@
+.main{min-height: 753px;padding-top: 14px;}
+.success_main{margin-left: 100px;	
+    width: 1200px;
+	height: 600px;
+	background-color: #fffdeb;
+	border: solid 1px #f2cf66;
+	margin-bottom: 49px;
+	}
+.success_go{width: 1400px;text-align: center;}
+.success_go a{color: #3e8dfa;font-size: 14px;}
+.success_top{height: 73px;width: 774px;margin-left: 218px;margin-top: 134px;margin-bottom: 76px;
+background:url(../images/success.png) no-repeat;
+}
+.success_top font{
+	margin-left: 148px;
+	margin-top: 8px;margin-bottom: 13px;
+float: left;
+color: #3eb314;
+line-height: 26px;
+letter-spacing: 1px;
+font-size: 26px;
+}
+.success_top span{
+float: left;	
+clear: both;
+margin-left: 148px;
+font-size: 14px;
+letter-spacing: 0.6px;
+color: #333;
+}
+.success_detail{
+	height: 150px;
+	width: 780px;
+	margin-left: 218px;
+}
+table{width: 780px;height: 150px;border-spacing: 0;font-size: 14px;color: #333;}
+table th{font-weight: bold;
+}
+table th span{	
+	float: left;
+	margin-top: 3px;
+	width: 3px;
+	height: 14px;
+	background-color: #1ea5d5;}
+table th font{float: left;margin-left: 10px;}
+table tr td:nth-child(1){width: 90px;height: 30px;}
+table tr td:nth-child(2){width: 690px;height: 30px;}
+.success_detail02 i{color: #f14747;}
+.success_detail03{vertical-align: top;}
+.success_detail03 td:nth-child(2){
+	line-height: 26px;
+	letter-spacing: 0.6px;
+}

@@ -11,74 +11,74 @@
                        
             <li 
               id="cp01" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">整车运输</a></li>
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">整车运输</a></li>
             <li 
               id="cp02" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">零担运输</a></li>  
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">零担运输</a></li>  
             <li 
               id="cp03" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">专线运输</a></li>
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">专线运输</a></li>
             <li 
               id="cp04" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">特大货物运输</a></li>
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">特大货物运输</a></li>
             <li 
               id="cp05" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">大件运输</a></li>
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">大件运输</a></li>
             <li 
               id="cp06" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">集装箱运输</a></li>  
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">集装箱运输</a></li>  
             <li 
               id="cp07" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">冷藏运输</a></li>
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">冷藏运输</a></li>
             <li 
               id="cp08" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">危险品运输</a></li>
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">危险品运输</a></li>
             <li 
               id="cp09" 
-              class="cp"> <a :href="$store.state.member.id + '-cpfw.html'">仓储</a></li>
+              class="cp"> <a :href="$store.state.member.id + '-cpfw'">仓储</a></li>
           </ul>
           <ul>
             <h3>增值服务</h3>
             <span/>
             <li 
               id="fw01" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">送货上门</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">送货上门</a></li>
             <li 
               id="fw02" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">保价运输</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">保价运输</a></li>
             <li 
               id="fw03" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">运费到付</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">运费到付</a></li>
             <li 
               id="fw04" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">代收货款</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">代收货款</a></li>
             <li 
               id="fw05" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">开发票</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">开发票</a></li>
             <li 
               id="fw06" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">上门提货</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">上门提货</a></li>
             <li 
               id="fw07" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">签单回收</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">签单回收</a></li>
             <li 
               id="fw08" 
-              class="fw"> <a :href="$store.state.member.id + '-cpfw2.html'">时效保障</a></li>
+              class="fw"> <a :href="$store.state.member.id + '-cpfw2'">时效保障</a></li>
           </ul>
           <ul>
             <h3>客户服务</h3>
             <span/>
             <li><a href="#">查件</a></li>
             <li><a href="#">在线下单</a></li>
-            <li><a :href="$store.state.member.id + '-line.html'">物流专线</a></li>
-            <li><a :href="$store.state.member.id + '-wangdian.html'">网点分布</a></li>
+            <li><a :href="$store.state.member.id + '-line'">物流专线</a></li>
+            <li><a :href="$store.state.member.id + '-wangdian'">网点分布</a></li>
           </ul>
           <ul>
             <h3>关于我们</h3>
             <span/>
-            <li><a :href="$store.state.member.id + '-jianjie.html'" >公司简介</a></li>
-            <li><a :href="$store.state.member.id + '-webnotice.html'">公司动态</a></li>
-            <li><a :href="$store.state.member.id + '-contactus.html'">联系我们</a></li>
+            <li><a :href="$store.state.member.id + '-jianjie'" >公司简介</a></li>
+            <li><a :href="$store.state.member.id + '-webnotice'">公司动态</a></li>
+            <li><a :href="$store.state.member.id + '-contactus'">联系我们</a></li>
           </ul>
 
         </div>

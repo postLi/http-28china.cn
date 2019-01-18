@@ -4,9 +4,7 @@
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a 
           id="arc_nav_a1" 
-          href="">物流园区</a>&gt;<a
-            id="arc_nav_a2"
-            href=""/>
+          href="">物流园区</a>&gt;<a>{{ gatewayData.parkName }}</a>
       </div>
       <div class="list_left">
         <div class="left_main">
@@ -22,8 +20,9 @@
               <ul>
                 <li class="list_yq1"><img src="../../static/images/article_wlzx/peple.png"><span>{{ gatewayData.parkContact }}</span></li>
                 <li class="list_yq2"><img src="../../static/images/article_wlzx/phone-ico.png"><span>{{ gatewayData.parkMobile }}</span></li>
-                <li class="list_yq3"><span>电话：<em id="yq_04">{{ gatewayData.parkNum }}</em></span></li>
-                <li class="list_yq4"><a 
+                <li class="list_yq3"><span>电话：<em>{{ gatewayData.parkNum }}</em></span></li>
+                <li class="list_yq4"><a
+                  v-if="gatewayData.contactQq"
                   :href=" 'http://wpa.qq.com/msgrd?v=3&uin=' + gatewayData.contactQq + '&site=qq&menu=yes'"
                   target="_blank"><span>QQ：<em>{{ gatewayData.contactQq }}</em></span></a></li>
                 <li class="list_yq5"><span>区域：<em>{{ gatewayData.locationProvince }}{{ gatewayData.locationCity }}{{ gatewayData.locationArea }}</em></span></li>
@@ -78,23 +77,23 @@
                       placeholder="请输入到达地" >
                   </div>
 
-                  <input 
-                    id="wlgs_name" 
-                    name="wlgs_name" 
+                  <input
+                    v-model="searchWLGS"
                     type="text" 
-                    class="list_input" 
-                    placeholder="请输入公司名称" >
-                  <input 
-                    id="search_wlLine" 
+                    class="list_input"
+                    placeholder="请输入公司名称">
+                  <input
                     name="Submit2" 
                     value="搜索" 
                     readonly="" 
-                    class="list_button">
-                  <input 
-                    id="flush" 
+                    class="list_button"
+                    @click="searchWlLine()">
+                  <input
+                    id="flush"
                     name="Submit2" 
                     value="重置" 
-                    readonly="">
+                    readonly="" 
+                    @click="flush()">
 
                 </dd>
 
@@ -130,9 +129,10 @@
             <ul
               class="zx_nr "
               style="margin-top: 0px;">
-              <div 
-                v-if="transportRange.length === 0" 
-                class="list_none">
+              <div
+                v-if="transportRange.length === 0"
+                class="list_none"
+                style="display: block;">
                 <span>暂时没有找到您要查询的信息，可以看看其他物流园区哦</span>
                 <img src="../../static/images/none_pic.png">
               </div>
@@ -205,13 +205,11 @@
               </dl>
             </div>
           </div>
-          <div 
-            id="js002" 
-            class="w1036" >
-            <!--<div class="zx_sx"><span class="biaozhi"></span><span>物流公司列表</span></div>-->
+          <div class="w1036" >
             <div 
               v-if="logisticsCompany.length === 0" 
-              class="list_none">
+              class="list_none"
+              style="display: block;">
               <span>暂时没有找到您要查询的信息，可以看看其他物流园区哦</span>
               <img src="../../static/images/none_pic.png">
             </div>
@@ -221,7 +219,7 @@
               class="wlzx_list">
               <li class="wlzx_list_2">
                 <p class="p1">
-                  <font id="nr_wd">{{ item.pointName }}</font><a
+                  <font>{{ item.pointName }}</font><a
                     v-if="item.qq"
                     :href="'http://wpa.qq.com/msgrd?v='+ item.qq +'&uin=&site=qq&menu=yes'" 
                     target="_blank"><img src="../../static/images/article_wlzx/15qq.gif"></a>
@@ -378,7 +376,7 @@ function setCredit(item) {
 async function getLogisticsCompany(
   $axios,
   query,
-  vo = { parkId: '1', defaultSort: 1 }
+  vo = { parkId: 1, defaultSort: 1 }
 ) {
   let list,
     parm1 = {
@@ -408,7 +406,9 @@ async function getLogisticsCompany(
         }
         setCredit(item)
       })
-      list = res.data.data.list
+      if (res.data.status === 200) {
+        list = res.data.data.list
+      }
     })
   return list
 }
@@ -429,7 +429,9 @@ async function getTransportRange($axios, query, vo = {}) {
       res.data.data.list.forEach(item => {
         item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
       })
-      list = res.data.data.list
+      if (res.data.status === 200) {
+        list = res.data.data.list
+      }
     })
   return list
 }
@@ -478,6 +480,7 @@ export default {
         { name: '重货价格', vo: { weigthPrice: 1 } }
       ],
       sortName: '默认排序',
+      searchWLGS: '',
       searchWDKey: ''
     }
   },
@@ -512,222 +515,89 @@ export default {
     )
     AF025.data.data.unshift({ name: '不限', code: '' })
     return {
-      gatewayData: gatewayData.data.data,
+      gatewayData: gatewayData.data.status === 200 ? gatewayData.data.data : [],
       jwd,
-      companysList: companysList.data.data.list,
+      companysList:
+        companysList.data.status === 200 ? companysList.data.data.list : [],
       transportRange: transportRange,
       logisticsCompany: logisticsCompany,
-      AF025: AF025.data.data
+      AF025: AF025.data.status === 200 ? AF025.data.data : []
     }
   },
   mounted() {
     seajs.use(['../js/city-picker.data.js'], function() {
       seajs.use(['../js/city-picker.js'], function() {
-        $('.collapse').click(function() {
-          $('.collapse').css('display', 'none')
-          $('.expand').css('display', 'inline-block')
-          $('.select_con').css('display', 'none')
+        //切换内容 S
+        $('#checked_zx').click(function() {
+          $('.list_left_zx').css('display', 'block')
+          $('#checked_zx').addClass('active')
+          $('.list_left_wangdian').css('display', 'none')
+          $('#checked_wangdian').removeClass('active')
         })
-        $('.expand').click(function() {
-          $('.collapse').css('display', 'inline-block')
-          $('.expand').css('display', 'none')
-          $('.select_con').css('display', 'block')
+        $('#checked_wangdian').click(function() {
+          $('.list_left_zx').css('display', 'none')
+          $('#checked_zx').removeClass('active')
+          $('.list_left_wangdian').css('display', 'block')
+          $('#checked_wangdian').addClass('active')
         })
-        function GetUrlParam(name) {
-          var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-          var r = encodeURI(window.location.search)
-            .substr(1)
-            .match(reg)
-          if (r != null) return unescape(r[2])
-          return null
-        }
-        //当前url追加参数 UrlUpdateParams(window.location.href, "mid", 11111)
-        function UrlUpdateParams(url, name, value) {
-          var r = url
-          if (r != null && r != 'undefined' && r != '') {
-            value = encodeURIComponent(value)
-            var reg = new RegExp('(^|)' + name + '=([^&]*)(|$)')
-            var tmp = name + '=' + value
-            if (url.match(reg) != null) {
-              r = url.replace(eval(reg), tmp)
-            } else {
-              if (url.match('[?]')) {
-                r = url + '&' + tmp
-              } else {
-                r = url + '?' + tmp
-              }
-            }
-          }
-          return r
-        }
-        var myid = GetUrlParam('id')
-
-        var address1 = GetUrlParam('address')
-        var companyName1 = GetUrlParam('companyName')
-        var authStatus1 = GetUrlParam('authStatus')
-        var belongBrandCode1 = GetUrlParam('belongBrandCode')
-        var otherServiceCode1 = GetUrlParam('otherServiceCode')
-
-        var orderNumber = GetUrlParam('orderNumber')
-        var transportAging = GetUrlParam('transportAging')
-        var weigthPrice = GetUrlParam('weigthPrice')
-        var lightPrice = GetUrlParam('lightPrice')
-
-        var address = decodeURI(address1)
-        var companyName = decodeURI(companyName1)
-        var authStatus = decodeURI(authStatus1)
-        var belongBrandCode = decodeURI(belongBrandCode1)
-        var otherServiceCode = decodeURI(otherServiceCode1)
-
-        var orderNumber = decodeURI(orderNumber)
-        var transportAging = decodeURI(transportAging)
-        var weigthPrice = decodeURI(weigthPrice)
-        var lightPrice = decodeURI(lightPrice)
-
-        var vo = new Object()
-        vo.address = address
-        vo.companyName = companyName
-        vo.authStatus = authStatus
-        vo.belongBrandCode = belongBrandCode
-        vo.otherServiceCode = otherServiceCode
-        vo.parkId = myid
-
-        vo.orderNumber = orderNumber
-        vo.transportAging = transportAging
-        vo.weigthPrice = weigthPrice
-        vo.lightPrice = lightPrice
-        vo.defaultSort = 1
-
-        if (!address || address == 'null') {
-          address = ''
-          delete vo.address
-        }
-        if (!companyName || companyName == 'null') {
-          companyName = ''
-          delete vo.companyName
-        }
-        if (!authStatus || authStatus == 'null') {
-          authStatus = ''
-          delete vo.authStatus
-        }
-        if (!belongBrandCode || belongBrandCode == 'null') {
-          belongBrandCode = ''
-          delete vo.belongBrandCode
-        }
-        if (!otherServiceCode || otherServiceCode == 'null') {
-          otherServiceCode = ''
-          delete vo.otherServiceCode
-        }
-
-        if (!orderNumber || orderNumber == 'null') {
-          orderNumber = ''
-          delete vo.orderNumber
-        }
-        if (!transportAging || transportAging == 'null') {
-          transportAging = ''
-          delete vo.transportAging
-        }
-        if (!weigthPrice || weigthPrice == 'null') {
-          weigthPrice = ''
-          delete vo.weigthPrice
-        }
-        if (!lightPrice || lightPrice == 'null') {
-          lightPrice = ''
-          delete vo.lightPrice
-        }
-
+        //切换内容 E
         var locationProvince = $.cookie('currentProvinceFullName')
         var locationCity = $.cookie('currentAreaFullName')
         $('#arc_nav_a1').attr(
           'href',
-          '/plus/list.php?tid=1' +
+          '/wuliu?tid=1' +
             '&locationProvince=' +
             locationProvince +
             '&locationCity=' +
             locationCity
         )
         $('#arc_nav_a1').html(locationCity + '物流园区')
-        $('#address').val(address)
-        $('#companyName').val(companyName)
-        //清空条件
-        $('#flush').click(function() {
-          console.log('清空地址')
-          window.location.href = '/plus/list.php?tid=80'
-        })
-        //清空条件 S
-        //切换内容 S
-        $('#checked_zx').click(function() {
-          $('.list_left_zx').css('display', 'block')
-          $('.list_left_wangdian').css('display', 'none')
-        })
-        $('#checked_wangdian').click(function() {
-          $('.list_left_zx').css('display', 'none')
-          $('.list_left_wangdian').css('display', 'block')
-        })
-        //切换内容 E
-
-        //物流专线搜索 S
-        $('#search_wlLine').click(function() {
-          var companyName = $('#wlgs_name').val()
-          var list1 = [],
-            list2 = []
-          $('#wlLineFrom .select-item').each(function(i, e) {
-            list1.push($(this).text())
-          })
-          var startp = list1[0]
-          var startc = list1[1]
-          var starta = list1[2]
-
-          $('#wlLineTo .select-item').each(function(i, e) {
-            list2.push($(this).text())
-          })
-          var endp = list2[0]
-          var endc = list2[1]
-          var enda = list2[2]
-          if (!startp) {
-            startp = ''
-          }
-          if (!startc) {
-            startc = ''
-          }
-          if (!starta) {
-            starta = ''
-          }
-          if (!endp) {
-            endp = ''
-          }
-          if (!endc) {
-            endc = ''
-          }
-          if (!enda) {
-            enda = ''
-          }
-          if (!companyName) {
-            companyName = ''
-          }
-          //    startp=encodeURI(startp)
-          //    startc=encodeURI(startc)
-          //    starta=encodeURI(starta)
-          //    endp=encodeURI(endp)
-          //    endc=encodeURI(endc)
-          //    enda=encodeURI(enda)
-          //    companyName=encodeURI(companyName)
-          vo = new Object()
-          vo.startProvince = startp
-          vo.startCity = startc
-          vo.startArea = starta
-          vo.endProvince = endp
-          vo.endCity = endc
-          vo.endArea = enda
-          vo.companyName = companyName
-          process03(1)
-          //   window.location='/plus/list.php?tid=4&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda+'&companyName='+companyName;
-        })
-        //物流专线搜索 E
       })
     })
   },
   methods: {
+    async searchWlLine() {
+      let list1 = [],
+        list2 = []
+      $('#wlLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      let startp = list1[0]
+      let startc = list1[1]
+      let starta = list1[2]
+
+      $('#wlLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      let endp = list2[0]
+      let endc = list2[1]
+      let enda = list2[2]
+      let vo = {
+        companyName: this.searchWLGS,
+        endArea: enda,
+        endCity: endc,
+        endProvince: endp,
+        startArea: starta,
+        startCity: startc,
+        startProvince: startp
+      }
+      this.transportRange = await getTransportRange(
+        this.$axios,
+        this.$route.query,
+        vo
+      )
+    },
+    async flush() {
+      $('#wlLineFrom input').citypicker('reset')
+      $('#wlLineTo input').citypicker('reset')
+      this.AF025Name = '不限'
+      this.sortName = '默认排序'
+      this.searchWLGS = ''
+      this.transportRange = await getTransportRange(
+        this.$axios,
+        this.$route.query
+      )
+    },
     searchWD() {
       window.open('/plus/list.php?tid=80&&wangdian=' + this.searchWDKey)
     },

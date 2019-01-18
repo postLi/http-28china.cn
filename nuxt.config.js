@@ -67,9 +67,13 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
     // Doc: https://bootstrap-vue.js.org/docs/
     // 'bootstrap-vue/nuxt'
+    // Simple usage
+    'cookie-universal-nuxt',
+    // With options
+    ['cookie-universal-nuxt']
   ],
   /*
   ** Axios module configuration

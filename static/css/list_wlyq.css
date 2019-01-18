@@ -152,7 +152,7 @@ margin-left: 10px;
 #tj_price1:hover,#tj_price2:hover{color: #f00;}
             
 .wlzx_list{
-	width: 332px;
+	width: 325px;
 	height: 442px;
 	background-color: #fff;
 	overflow: hidden;
@@ -161,7 +161,6 @@ margin-left: 10px;
 	float: left;
     transition: all .4s;
 }
-.wlzx_list:nth-child(3n+5){margin-right: 0;}
 
 
 	.wlzx_list:hover{

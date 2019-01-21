@@ -20,10 +20,7 @@ export default {
     Top
   },
   head: {
-    link: [
-      { rel: 'stylesheet', href: '/member/css/index.css' },
-      { rel: 'stylesheet', href: '/member/css/list.css' }
-    ]
+    link: [{ rel: 'stylesheet', href: '/member/css/index.css' }]
   },
   fetch({ store, params }) {
     store.commit('member/setId', params.id)

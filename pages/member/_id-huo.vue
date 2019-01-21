@@ -177,6 +177,9 @@ export default {
     MemberBanner,
     MemberSidebar
   },
+  head: {
+    link: [{ rel: 'stylesheet', href: '/member/css/list.css' }]
+  },
   layout: 'member',
   mounted() {
     seajs.use(

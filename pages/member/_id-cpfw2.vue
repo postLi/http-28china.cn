@@ -87,6 +87,9 @@ export default {
     MemberBanner,
     MemberSidebar
   },
+  head: {
+    link: [{ rel: 'stylesheet', href: '/member/css/list.css' }]
+  },
   layout: 'member',
   mounted() {
     seajs.use(['/member/js/index.js', '/index/js/collection.js'])

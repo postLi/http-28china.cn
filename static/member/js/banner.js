@@ -17,9 +17,9 @@ function changeImg()
 //数量为0开始
 	if (num==0){
 		$('.banner-box').html(
-			'<a href="#" class="banner-item toZtts" style="display:none;"><img  src="space/company/images/banner_01.png"></a>'+
-			'<a href="#" class="banner-item toZtts" style="display:none;"><img  src="space/company/images/banner_02.png"></a>'+
-			'<a href="#" class="banner-item toZtts" style="display:none;"><img  src="space/company/images/banner_03.png"></a>'+
+			'<a href="#" class="banner-item toZtts" style="display:none;"><img  src="/member/images/banner_01.png"></a>'+
+			'<a href="#" class="banner-item toZtts" style="display:none;"><img  src="/member/images/banner_02.png"></a>'+
+			'<a href="#" class="banner-item toZtts" style="display:none;"><img  src="/member/images/banner_03.png"></a>'+
 			'<div class="banner-num"><span class="dot cur">1</span><span class="dot">2</span><span class="dot">3</span></div>'
 		 );	
     $('.banner-item:nth-child(1)').fadeIn();

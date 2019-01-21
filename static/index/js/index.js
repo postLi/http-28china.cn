@@ -396,7 +396,7 @@ function process_01(vo1){
 		        $("#nr002").html(heavyPrice);
 		        $("#nr003").html(lightPrice);
 				$("#nr004").html(transportAging+transportAgingUnit);
-				$("#nr005").attr("href","/member/"+account+".html");
+				$("#nr005").attr("href","/member/"+account+"");
 				$("#nr006").html(publishName);
 				 var s1='<li>';
 				 var s2=$("#js001 li").html();	
@@ -545,7 +545,7 @@ function process_03(vo3){
 				var createTime = datas[i].createTime.substring(5,10);	    
 		        var  url="/huoyuan/2018/0508/2.html?id="+id+"&shipperId="+shipperId;
                 $("#nr_a31").attr("href",url);
-                $("#nr_a32").attr("href","/member/"+account+".html");
+                $("#nr_a32").attr("href","/member/"+account+"");
                 $("#nr_a33").attr("href",url);
                 $("#nr_a34").attr("href",url);
                 $("#nr_a35").attr("href",url);
@@ -607,11 +607,11 @@ function wlgs_tj(){
 				var companyName=datas[i].companyName;
 				var account=datas[i].account;
 
-				$("#tj_01").attr("href","/member/"+account+".html");
+				$("#tj_01").attr("href","/member/"+account+"");
 				$("#tj_02").html(i+1);
-				var imgsrc="/templets/default/images/index/wlgs_tj_0"+i+".png";
+				var imgsrc="/images/index/wlgs_tj_0"+i+".png";
 				$("#tj_03").attr("src",imgsrc);
-				$("#tj_04").attr("href","/member/"+account+".html");
+				$("#tj_04").attr("href","/member/"+account+"");
 				$("#tj_04").html(companyName);
 				 var s1='<li class="arank">';
 				 var s2=$("#wlgs_tj1 li").html();	
@@ -626,10 +626,10 @@ function wlgs_tj(){
 				var companyName=datas[i].companyName;
 				var account=datas[i].account;
 
-				$("#tj_05").attr("href","/member/"+account+".html");
+				$("#tj_05").attr("href","/member/"+account+"");
 				$("#tj_06").html(i+1);
 				$("#tj_07").html(companyName);
-				$("#tj_07").attr("href","/member/"+account+".html");
+				$("#tj_07").attr("href","/member/"+account+"");
 				 var s1='<li class="arank arank2">';
 				 var s2=$("#wlgs_tj2 li").html();	
 				 var s3='</li>'
@@ -769,11 +769,11 @@ function wlgs(vo4){
 				}
 		
 				if(!datas[i].productService){var productService=""; }
-	             $('#wlgs_a').attr("href",'/member/'+account+'.html');
-                 $('#wlgs_a1').attr("href",'/member/'+account+'.html');
-                 $('#wlgs_a2').attr("href",'/member/'+account+'.html');
-                 $('#wlgs_a3').attr("href",'/member/'+account+'.html');
-                 $('#wlgs_a4').attr("href",'/member/'+account+'.html');
+	             $('#wlgs_a').attr("href",'/member/'+account+'');
+                 $('#wlgs_a1').attr("href",'/member/'+account+'');
+                 $('#wlgs_a2').attr("href",'/member/'+account+'');
+                 $('#wlgs_a3').attr("href",'/member/'+account+'');
+                 $('#wlgs_a4').attr("href",'/member/'+account+'');
                  $('#wlgs_name').html(companyName);
                  $('#wlgs_postion').html(belongCityName);
                  $('#wlgs_jyfw').html(productService);

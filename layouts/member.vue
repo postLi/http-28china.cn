@@ -11,7 +11,7 @@
 import MemberHeader from '../components/member/top'
 import MemberNav from '../components/member/nav'
 import MemberFooter from '../components/member/foot'
-import Top from '../components/top'
+import Top from '../components/member/topNav'
 export default {
   components: {
     MemberHeader,

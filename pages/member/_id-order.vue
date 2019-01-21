@@ -399,7 +399,10 @@ export default {
     MemberSidebar
   },
   head: {
-    link: [{ rel: 'stylesheet', href: '/member/css/onlineOrder.css' }]
+    link: [
+      { rel: 'stylesheet', href: '/member/css/list.css' },
+      { rel: 'stylesheet', href: '/member/css/onlineOrder.css' }
+    ]
   },
   layout: 'member',
   mounted() {

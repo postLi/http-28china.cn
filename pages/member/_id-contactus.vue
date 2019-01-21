@@ -80,7 +80,10 @@ export default {
   },
   layout: 'member',
   head: {
-    link: [{ rel: 'stylesheet', href: '/member/css/contactUs.css' }]
+    link: [
+      { rel: 'stylesheet', href: '/member/css/list.css' },
+      { rel: 'stylesheet', href: '/member/css/contactUs.css' }
+    ]
   },
   mounted() {
     seajs.use(

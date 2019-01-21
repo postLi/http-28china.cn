@@ -311,17 +311,22 @@ export default {
     //   { src: './js/city-picker.js' },
     //   { src: '../../static/gongsi/js/list_wlgs.js' }
     // ]
-  }
+  },
   // layout: 'subLayout',
-  // mounted() {
-  //   seajs.use(['../js/city.js'], function() {
-  //     seajs.use(['../gongsi/js/list_wlgs.js'], function() {
-  //       seajs.use(['../js/collection.js'], function() {
-  //         seajs.use(['../js/gaodemap2.js'], function() {})
-  //       })
-  //     })
-  //   })
-  // }
+  mounted() {
+    seajs.use(['../js/city.js'], function() {
+      seajs.use(
+        ['./js/city-picker.js', './js/jquery.pagination.min.js'],
+        function() {
+          seajs.use(['../gongsi/js/list_wlgs.js'], function() {
+            seajs.use(['../js/collection.js'], function() {
+              seajs.use(['../js/gaodemap2.js'], function() {})
+            })
+          })
+        }
+      )
+    })
+  }
 }
 </script>
 <style lang="scss">

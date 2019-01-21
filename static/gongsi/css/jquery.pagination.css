@@ -1,0 +1,44 @@
+.ui-pagination-container {
+	height: 36px;
+	line-height: 33px;
+}
+.ui-pagination-container input{
+  padding: 6px 15px;
+  width: 70px;
+  height: 30px;
+  border: 1px solid;
+  border: 1px solid #3f94ee;
+  margin: 0 8px;
+  text-align: center;
+}
+.ui-pagination-container .ui-pagination-page-item ,.ui-pagination-container .ui-pagination-page-btn{
+  border: #aaaadd 1px solid;
+  padding: 8px 15px;
+  margin: 2px;
+  color: #3f94ee;
+  text-decoration: none;
+  background: #fff;
+  /* border:1px solid #ccc; */
+}
+
+.ui-pagination-container .ui-pagination-page-btn:hover {
+	border-color: #3f94ee;
+	color: #3f94ee;
+  text-decoration: none;
+}
+.ui-pagination-container .ui-pagination-page-item:hover{
+  border-color: #3f94ee;
+	color: #3f94ee;
+  text-decoration: none;
+}
+.ui-pagination-container .ui-pagination-page-item.active {
+	background:  #3f94ee;
+	border-color:  #3f94ee;
+	color: #fff;
+  cursor: default;
+}
+.page{
+	text-align: center;
+	margin: 30px 0;
+}
+.ui-pagination-container .page_input{height:20px;width:50px;margin-top: -4px}

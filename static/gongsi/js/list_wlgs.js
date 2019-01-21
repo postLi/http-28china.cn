@@ -119,8 +119,9 @@ $('#tjcx_03 .all').attr("href",UrlUpdateParams(window.location.href, "otherServi
 //清空条件
 $("#flush").click(
     	function(){
-    		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=80';
+    		// console.log("清空地址")
+    		window.location.href='/gongsi';
+    		// window.location.href='/plus/list.php?tid=80';
     })
 //清空条件
 
@@ -372,8 +373,8 @@ var rangeIds="";
 				var isVip=datas[i].isVip;
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-                $("#tj010").attr("href","/member/"+account+".html");
-				$("#tj_05").attr("href","/member/"+account+".html");
+                $("#tj010").attr("href","/member/"+account+"");
+				$("#tj_05").attr("href","/member/"+account+"");
 				$("#tj_01").html(companyName);
 				$("#tj_02").html(contactsName);
 				$("#tj_03").html(contactsTel+" "+mobile);
@@ -534,7 +535,7 @@ var totalPage=8;
 		    var collateral=datas[i].collateral;
 				//var orderurl="/plus/list.php?tid=77&uid="+account+"&publishId="+companyId;
         // window.location='/gongsi?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
-				var orderurl="/onlineOrder/"+account+"?action=order"+"&publishId="+companyId;
+				var orderurl="/member/"+account+"-order?action=order"+"&publishId="+companyId;
 				// var orderurl="/member/"+account+".html?action=order"+"&publishId="+companyId;
 				var companyFacadeFile=datas[i].companyFacadeFile;
 				if(companyFacadeFile){
@@ -553,9 +554,9 @@ var totalPage=8;
 		          $('#nr06').html(address);
 		          $('#nr07').html(productService);
 		          $('#nr08').html(otherService);
-		          $('#nr02').attr('href','/member/'+account+'.html')
-		          $('#nr_a21').attr('href','/member/'+account+'.html')
-		        $("#wlzx_list_view").attr("onclick","window.open('/member/"+account+".html')")
+		          $('#nr02').attr('href','/member/'+account+'')
+		          $('#nr_a21').attr('href','/member/'+account+'')
+		        $("#wlzx_list_view").attr("onclick","window.open('/member/"+account+"-jianjie')")
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")
 				$("#nr11").attr("href","http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");
 				 var s1='<ul class="wlzx_list wlzx_list'+i+'">'

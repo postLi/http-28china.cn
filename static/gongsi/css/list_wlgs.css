@@ -501,7 +501,7 @@ width: 342px;
     width: 342px;
     height: 224px;
     border: 1px solid #e4e4e4;
-    background: url(../images/list_wlzx/tj_wlgs.png) no-repeat top right #fff;
+    background: url(../images/tj_wlgs.png) no-repeat top right #fff;
        transition: all .4s;
     }
 .wlzx_list_2 p{line-height: 30px;}

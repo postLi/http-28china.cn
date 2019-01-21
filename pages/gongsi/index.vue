@@ -129,49 +129,43 @@
 
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
-
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
-
-
-
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="wlgs_shiming"
-                  src="/templets/default/images/list_wlzx/wlgs_shiming.png">
+                  src="../../static/gongsi/images/wlgs_shiming.png">
                 <img
                   class="wlgs_xinyong"
-                  src="/templets/default/images/list_wlzx/wlgs_xinyong.png">
+                  src="../../static/gongsi/images/xinyong.png">
                 <img
                   class="wlgs_danbao"
-                  src="/templets/default/images/list_wlzx/wlgs_danbao.png">
-
-
+                  src="../../static/gongsi/images/wlgs_danbao.png">
 
               </P>
               <p class="p2"><i>联系人：</i><font id="nr04">张总</font><a
@@ -203,11 +197,7 @@
             </p><p class="p3"/></li>
           </ul>
 
-
-
-
         </div>
-
 
         <!--分页-->
         <div
@@ -302,6 +292,7 @@ export default {
   head: {
     link: [
       { rel: 'stylesheet', href: '/gongsi/css/list_wlgs.css' },
+      { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ]
     // script: [
@@ -320,7 +311,46 @@ export default {
         function() {
           seajs.use(['../gongsi/js/list_wlgs.js'], function() {
             seajs.use(['../js/collection.js'], function() {
-              seajs.use(['../js/gaodemap2.js'], function() {})
+              seajs.use(['../js/gaodemap2.js'], function() {
+                $('.list_tiaoj span').click(function() {
+                  //alert("1");
+                  $('.list_tiaoj span').removeClass('active')
+                  $(this).toggleClass('active')
+                })
+                function onCheckPage() {
+                  var beginPage = parseInt(
+                    document.beginPagefrm.beginPage.value
+                  )
+                  if (isNaN(beginPage)) {
+                    alert('请输入数字！')
+                    return false
+                  }
+                  if (beginPage <= 0) {
+                    beginPage = 1
+                  }
+                  if (beginPage > 100) {
+                    beginPage = 100
+                  }
+                  if (beginPage > 1) {
+                    document.beginPagefrm.action =
+                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
+                      beginPage
+                  } else {
+                    document.beginPagefrm.action =
+                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
+                  }
+                  return true
+                }
+                $('#pagination1').pagination({
+                  currentPage: 1,
+                  totalPage: process02(1),
+                  callback: function(current) {
+                    $('#current1').text(current)
+                    process02(current)
+                    window.location.href = '#top'
+                  }
+                })
+              })
             })
           })
         }

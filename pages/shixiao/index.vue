@@ -52,7 +52,9 @@
               </div>
             </div>
             <div class="order-form-item">
-              <span class="search">查询</span>
+              <span 
+                class="search" 
+                @click="search(1)">查询</span>
             </div>
           </div>
         </div>
@@ -61,86 +63,85 @@
           id="js006" 
           class="w1130">
           <div class="zx_sx"><span class="biaozhi"/><span >为您推荐</span></div>
-          <div class="list_tiaoj"><span 
-            id="seq1" 
-            class="active">综合排序</span><span id="seq2">运输排序</span></div>
+          <div class="list_tiaoj">
+            <span 
+              v-for="(item,index) in sortList" 
+              :key="index"
+              :class="[sortId === item.id ? 'active' : '']"
+              @click="selectSort(item)">{{ item.name }}</span>
+          </div>
 
-          <div class="list_none">
+          <div 
+            v-if="listRangesAging.length === 0" 
+            class="list_none" 
+            style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
             <img src="../../static/images/none_pic.png">
           </div>
           <div 
-            class="wzl_box" 
-            style="display: none">
-            <div class="wzl_log"><span id="span">TOP<i id="num">1</i></span></div>
+            v-for="(item,index) in listRangesAging" 
+            :key="index" 
+            class="wzl_box">
+            <div 
+              v-if="currentPage === 1"
+              class="wzl_log"><span :class="[index <3 ? 'bgr' : '']">TOP<i>{{ index + 1 }}</i></span></div>
             <ul class="wlzx_list" >
               <li class="cy_list_1">
                 <p class="p1"><a 
-                  id="nr_a51" 
-                  target="_blank" ><span id="startLocation"/> <span>&rarr;</span><span id="endLocation"/></a></p>
-                <p class="p2"><img src="../../static/images/wzlImg/1.png"><font
-                  id="nr055" 
-                  style="color: #2577e3;">北京华远物流有限公司</font></p>
+                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                  target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
+                <p class="p2"><img src="../../static/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
                 <p class="p3"><img 
                   src="../../static/images/wzlImg/2.png"
-                  style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font id="nr056" >专线直达，天天发车，运价低至...</font></p>
-                <p class="p4"><img src="../../static/images/wzlImg/3.png"><i>地址：</i><font id="nr058">北京大兴区魏永路博洋仓储物流园</font></p>
+                  style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
+                <p class="p4"><img src="../../static/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
               </li>
               <li class="cy_list_7">
-                <p>时效：<span id="shixiao"/></p>
+                <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
               </li>
               <li class="cy_list_2">
-                <!-- <p class="p1"><span>发布者：</span><i id="nr059">广州东山运输有限公司</i></P>
-                <p class="p2"><span id="nr0510">发布时间：2018-6-30 15：28</span></p> -->
-                <p>重货：<span id="zhPrice"/></p>
-                <p>轻货：<span id="qhPrice"/></p>
-                <p>频率：<span id="pinglv"/></p>
+                <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
+                <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
+                <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
 
               </li>
               <li class="cy_list_3">
-                <p class="p1"><img 
-                  id="list_shiming" 
+                <p class="p1"><img
+                  v-if="item.authStatus === 'AF0010403'"
                   src="../../static/images/list_wlzx/10shiming.png"></P>
-                <p class="p2"><img 
-                  id="list_xinyong" 
+                <p class="p2"><img
+                  v-if="item.isVip && item.isVip === 1"
                   src="../../static/images/list_wlzx/11xinyong.png"></P>
-                <p class="p3"><img 
-                  id="list_danbao" 
+                <p class="p3"><img
+                  v-if="item.collateral && item.collateral !== 0"
                   src="../../static/images/list_wlzx/12danbao.png"></P>
               </li>
-              <!-- <li class="cy_list_4" style="visibility:hidden">
-              <p class="p1"><a href="#"><i>浏览量：<em id="nr0521"></em></i></a></p>
-              <p class="p1"><a href="#"><i>收藏量：32</i></a></p>
-              <p><span id="orderNumber"></span>下单量</p>
-              <p><span id="assessNumber"></span>条评价</p>
-              </li> -->
+
               <li class="cy_list_4">
-                <!-- <p class="p1"><a href="#"><i>浏览量：<em id="nr0521"></em></i></a></p> -->
-                <!-- <p class="p1"><a href="#"><i>收藏量：32</i></a></p> -->
                 <p><img 
                   class="numlll" 
-                  src="../../static/images/wzlImg/lll.png">浏览量：<span id="orderNumber"/></p>
+                  src="../../static/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
                 <p><img 
                   class="numlll" 
-                  src="../../static/images/wzlImg/pj.png">评价：<span id="assessNumber"/></p>
+                  src="../../static/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
               </li>
               <li class="wlzx_list_6">
                 <p class="p2"><a 
-                  id="nr_a521" 
+                  :href="'/plus/list.php?tid=77&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
                   target="_blank" 
                   class="check_btn" 
                   style="background: #2577e3;color: #fff;">下单</a>
-                </p><p class="p2"><a 
-                  id="nr_a522" 
-                  target="_blank" 
+                </p><p class="p2"><a
+                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId"
+                  target="_blank"
                   class="check_btn">查看</a>
-                </p><p class="p3"><a 
-                  id="nr_a53" 
-                  target="_blank" 
-                  href="http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes"><input 
-                    id="qq" 
-                    readonly="readonly" 
-                    value="QQ交谈"></a>
+                </p><p 
+                  v-if="item.qq" 
+                  class="p3"><a
+                    :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
+                    target="_blank"><input
+                      readonly="readonly" 
+                      value="QQ交谈"></a>
               </p></li>
             </ul>
           </div>
@@ -149,7 +150,7 @@
 
         </div>
         <!--分页-->
-        <div 
+        <div
           class="box" 
           style="float: right;margin-right: 370px;">
           <div 
@@ -159,287 +160,89 @@
             <!-- <p>当前页数：<span id="current1">1</span></p> -->
           </div>
         </div>
-        <!--分页-->
-        <!--分页
-        <div class="list_hy_page2">
-            <div class="floatr2">
-                <form name="beginPagefrm" method=post action="" onsubmit="return onCheckPage()">
-                {dede:pagelist listitem="info,pre,next,pageno,option" listsize="3"/}
-                <span>
-
-            到第&nbsp;<input class="input_page1" name="beginPage" value="">页&nbsp;<input class="input_page2" type="submit" name="Submit" value="确定">
-
-                </span>
-
-                </form>
-            </div>
-        </div>
-        分页-->
-
       </div>
 
     </div>
-    <div class="h70"/>
+
   </div>
 </template>
 
 <script>
+async function getListRangesAging($axios, currentPage, vo = {}) {
+  let list, totalPage
+  let parm = {
+    currentPage: currentPage,
+    pageSize: 20,
+    vo
+  }
+  await $axios
+    .post('/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging', parm)
+    .then(res => {
+      if (res.data.status === 200) {
+        list = res.data.data.list
+        totalPage = res.data.data.totalPage
+      }
+    })
+  return { list, totalPage, currentPage }
+}
 export default {
   name: 'ShiXiao',
   head: {
+    title: '时效查询-28快运',
+    meta: [
+      {
+        name: 'keywords',
+        content:
+          '物流,物流平台,物流专线,物流公司,物流服务,在线发货,查询运价,运单查询,运单跟踪,物流帮'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          '28快运是专业提供零担运输和整车运输等物流服务平台，同时提供免费发布货源、车源、专线。货主在线发货，物流跟踪查询，服务有保障，让您发货省时，省钱，更省心！'
+      }
+    ],
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
   },
+  data() {
+    return {
+      listRangesAging: [],
+      totalPage: 0,
+      currentPage: 1,
+      sortList: [{ id: 1, name: '综合排序' }, { id: 2, name: '运输排序' }],
+      sortId: 1
+    }
+  },
+  async asyncData({ $axios, app, query }) {
+    let listRangesAging = await getListRangesAging($axios, 1, {
+      filterSign: 1,
+      startCity: app.$cookies.get('currentAreaFullName'),
+      startProvince: app.$cookies.get('currentProvinceFullName')
+    })
+    return {
+      listRangesAging: listRangesAging.list,
+      totalPage: listRangesAging.totalPage,
+      currentPage: listRangesAging.currentPage
+    }
+  },
   mounted() {
-    seajs.use(['./js/city-picker.data.js'], function() {
-      seajs.use(['./js/city-picker.js'], function() {
-        seajs.use(['./js/jquery.pagination.min.js'], function() {
-          $(function() {
-            $('a[_for]').mouseover(function() {
-              $(this)
-                .parents()
-                .children('a[_for]')
-                .removeClass('thisclass')
-                .parents()
-                .children('dd')
-                .hide()
-              $(this)
-                .addClass('thisclass')
-                .blur()
-              $('#' + $(this).attr('_for')).show()
-            })
-            $('a[_for=uc_member]').mouseover()
-            $('a[_for=flink_1]').mouseover()
-          })
-
-          $('.collapse').click(function() {
-            $('.collapse').css('display', 'none')
-            $('.expand').css('display', 'inline-block')
-            $('.select_con').css('display', 'none')
-          })
-          $('.expand').click(function() {
-            $('.collapse').css('display', 'inline-block')
-            $('.expand').css('display', 'none')
-            $('.select_con').css('display', 'block')
-          })
-          //点击事件
-          $('.list_tiaoj')
-            .find('span')
-            .click(function() {
-              $('.list_tiaoj')
-                .find('span')
-                .removeClass('active')
-              $(this).addClass('active')
-            })
-
-          var startCity = $.cookie('currentProvinceFullName')
-          var startArea = $.cookie('currentAreaFullName')
-          // console.log(cookie1,cookie3)
-          //排序点击 S
-          $('#seq1').click(function() {
-            console.log('clear排序')
-            vo.filterSign = 1
-            process02(1)
-          })
-          $('#seq2').click(function() {
-            console.log('clear排序')
-            vo.filterSign = 2
-            process02(1)
-          })
-          $('.search').click(function() {
-            var list1 = [],
-              list2 = []
-            $('#carLineFrom .select-item').each(function(i, e) {
-              list1.push($(this).text())
-            })
-            var startp = list1[0]
-            var startc = list1[1]
-            var starta = list1[2]
-
-            $('#carLineTo .select-item').each(function(i, e) {
-              list2.push($(this).text())
-            })
-            var endp = list2[0]
-            var endc = list2[1]
-            var enda = list2[2]
-            if (!startp) {
-              startp = ''
-            }
-            if (!startc) {
-              startc = ''
-            }
-            if (!starta) {
-              starta = ''
-            }
-            if (!endp) {
-              endp = ''
-            }
-            if (!endc) {
-              endc = ''
-            }
-            if (!enda) {
-              enda = ''
-            }
-            startp = encodeURI(startp)
-            startc = encodeURI(startc)
-            starta = encodeURI(starta)
-            endp = encodeURI(endp)
-            endc = encodeURI(endc)
-            enda = encodeURI(enda)
-
-            window.location =
-              '/shixiao?startp=' +
-              startp +
-              '&startc=' +
-              startc +
-              '&starta=' +
-              starta +
-              '&endp=' +
-              endp +
-              '&endc=' +
-              endc +
-              '&enda=' +
-              enda
-          })
-
-          //车源搜索 E
-          //获取参数的值
-          function GetQueryString(e) {
-            var t = new RegExp('(^|&)' + e + '=([^&]*)(&|$)'),
-              s = window.location.search.substr(1).match(t)
-            return null != s ? unescape(s[2]) : null
-          }
-          function GetUrlParam(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-            var r = encodeURI(window.location.search)
-              .substr(1)
-              .match(reg)
-            if (r != null) return unescape(r[2])
-            return null
-          }
-          //当前url追加参数 UrlUpdateParams(window.location.href, "mid", 11111)
-          function UrlUpdateParams(url, name, value) {
-            var r = url
-            if (r != null && r != 'undefined' && r != '') {
-              value = encodeURIComponent(value)
-              var reg = new RegExp('(^|)' + name + '=([^&]*)(|$)')
-              var tmp = name + '=' + value
-              if (url.match(reg) != null) {
-                r = url.replace(eval(reg), tmp)
-              } else {
-                if (url.match('[?]')) {
-                  r = url + '&' + tmp
-                } else {
-                  r = url + '?' + tmp
-                }
-              }
-            }
-            return r
-          }
-          function formatDate(objD) {
-            var str, colorhead, colorfoot
-            var yy = objD.getYear()
-            if (yy < 1900) yy = yy + 1900
-            var MM = objD.getMonth() + 1
-            if (MM < 10) MM = '0' + MM
-            var dd = objD.getDate()
-            if (dd < 10) dd = '0' + dd
-            var hh = objD.getHours()
-            if (hh < 10) hh = '0' + hh
-            var mm = objD.getMinutes()
-            if (mm < 10) mm = '0' + mm
-            var ss = objD.getSeconds()
-            if (ss < 10) ss = '0' + ss
-            str = yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm
-            return str
-          }
-
-          //获取url传过来的参数
-          var filterSign1 = GetUrlParam('filterSign')
-          var startp1 = GetUrlParam('startp')
-          var startc1 = GetUrlParam('startc')
-          var starta1 = GetUrlParam('starta')
-          var endp1 = GetUrlParam('endp')
-          var endc1 = GetUrlParam('endc')
-          var enda1 = GetUrlParam('enda')
-
-          //将参数转码
-          var filterSign = decodeURI(filterSign1)
-          var startp = decodeURI(startp1)
-          var startc = decodeURI(startc1)
-          var starta = decodeURI(starta1)
-          var endp = decodeURI(endp1)
-          var endc = decodeURI(endc1)
-          var enda = decodeURI(enda1)
-
+    seajs.use(['./js/city-picker.data.js'], () => {
+      seajs.use(['./js/city-picker.js'], () => {
+        seajs.use(['./js/jquery.pagination.min.js'], () => {
           var currentAreaFullName = $.cookie('currentAreaFullName')
           var currentProvinceFullName = $.cookie('currentProvinceFullName')
-          //创建一个vo对象，将需要传的参数放在vo中
-          var vo = new Object()
-          vo.filterSign = filterSign
-          vo.startProvince = startp
-          vo.startCity = startc
-          vo.startArea = starta
-          vo.endProvince = endp
-          vo.endCity = endc
-          vo.endArea = enda
-
-          if (!filterSign || filterSign == 'null') {
-            vo.filterSign = 1
-          }
-          if (startp || startc) {
-            if (!startp || startp == 'null') {
-              startp = ''
-              delete vo.startProvince
-            }
-            if (!startc || startc == 'null') {
-              startc = ''
-              delete vo.startCity
-            }
-          }
-          if ((!startp || startp == 'null') && (!startc || startc == 'null')) {
-            startc = currentAreaFullName
-            vo.startCity = startc
-            startp = currentProvinceFullName
-            vo.startProvince = startp
-          }
-
-          if (!starta || starta == 'null') {
-            starta = ''
-            delete vo.startArea
-          }
-          if (!endp || endp == 'null') {
-            endp = ''
-            delete vo.endProvince
-          }
-          if (!endc || endc == 'null') {
-            endc = ''
-            delete vo.endCity
-          }
-          if (!enda || enda == 'null') {
-            enda = ''
-            delete vo.endArea
-          }
-
-          //$("#list_nav_a").attr("href",'/plus/list.php?tid=82'+'&starp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda);
-          $('#list_nav_a').html(
-            startc + starta + ' 到 ' + endc + enda + ' 专线时效'
-          )
-          if ((!startc && !starta) || (!endc && !enda)) {
-            $('#list_nav_a').html(
-              startc + starta + '  ' + endc + enda + '专线时效'
-            )
-          }
+          $('#list_nav_a').html(currentAreaFullName + '专线时效')
           //搜索赋input框的初始值
 
           $('#carLineFrom input').citypicker({
-            province: startp,
-            city: startc,
-            district: starta
+            province: currentProvinceFullName,
+            city: currentAreaFullName,
+            district: ''
           })
           $('#carLineTo input').citypicker({
-            province: endp,
-            city: endc,
-            district: enda
+            province: '',
+            city: '',
+            district: ''
           })
 
           $('.qiehuan').click(function() {
@@ -468,180 +271,67 @@ export default {
               district: starta
             })
           })
-          //车源信息栏目列表S
-          function process02(currentPage) {
-            var totalPage = 8
-            $.ajax({
-              type: 'post',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              // url:"/api2/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging",
-              url:
-                '/api/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging',
-              dataType: 'json',
-              async: false,
-              data: JSON.stringify({
-                currentPage: currentPage,
-                pageSize: 20,
-                //vo:{	"strartAddress":start,"endAddress":end,"carType":carType,"carLengthLower":carLength1,"carLengthUpper":carLength2,"carLoadLower":carLoad1,"carLoadUpper":carLoad2}			//JSON.stringify({})
-                vo: vo
-              }),
-              //列表的显示请求接口
-              success: function(res) {
-                $('#js006 .wzl_box')
-                  .not(':eq(0)')
-                  .remove()
-                if (res.data) {
-                  totalPage = res.data.totalPage
-                  // console.log(totalPage,88888);
-                }
-                if (!res.data || !res.data.totalCount) {
-                  console.log('内容为空')
-                  $('.box').css('display', 'none')
-                  $('.list_none').css('display', 'block')
-                  return
-                }
-
-                //后台返回的参数赋值给datas
-                var datas = res.data.list
-                // console.log(res)
-                for (var i = 0; i < datas.length; i++) {
-                  // var  startLocation=datas[i].startLocation ? datas[i].startLocation : '';
-                  // var endLocation = datas[i].endLocation ? datas[i].endLocation : '';
-                  var startCity = datas[i].startCity ? datas[i].startCity : ''
-                  var startArea = datas[i].startArea ? datas[i].startArea : ''
-                  var endCity = datas[i].endCity ? datas[i].endCity : ''
-                  var endArea = datas[i].endArea ? datas[i].endArea : ''
-                  var zhPrice = datas[i].zhPrice
-                    ? datas[i].zhPrice + '元/公斤'
-                    : '0'
-                  var qhPrice = datas[i].qhPrice
-                    ? datas[i].qhPrice + '元/m³'
-                    : '0'
-                  var transportAging = datas[i].transportAging
-                    ? datas[i].transportAging
-                    : '0'
-                  var departureHzData = datas[i].departureHzData
-                    ? datas[i].departureHzData + '天'
-                    : ''
-                  var departureHzTime = datas[i].departureHzTime
-                    ? datas[i].departureHzTime + '次'
-                    : ''
-                  var browseNumber = datas[i].browseNumber
-                    ? datas[i].browseNumber
-                    : '无'
-                  var assessNumber = datas[i].assessNumber
-                    ? datas[i].assessNumber + '条'
-                    : '无'
-                  var companyName = datas[i].companyName
-                    ? datas[i].companyName
-                    : '无'
-                  var transportRemark = datas[i].transportRemark
-                    ? datas[i].transportRemark
-                    : '无'
-                  var transportAgingUnit = datas[i].transportAgingUnit
-                    ? datas[i].transportAgingUnit
-                    : ''
-                  var authStatus = datas[i].authStatus
-                  var isVip = datas[i].isVip
-                  var collateral = datas[i].collateral
-                  // if(transportRemark.length>20){
-                  //   transportRemark=transportRemark.substring(0,20)}
-                  var address = datas[i].address ? datas[i].address : '无'
-                  var companyId = datas[i].companyId
-                  var id = datas[i].id
-                  var account = datas[i].account
-                  //前三个添加颜色
-                  $('.wzl_box0 span').addClass('bgr')
-                  $('.wzl_box1 span').addClass('bgr')
-                  $('.wzl_box2 span').addClass('bgr')
-                  //给每一个添加数字12345序号
-                  var list_index =
-                    i + (res.data.currentPage - 1) * res.data.pageSize + 1
-                  // console.log(i, res.data.currentPage, list_index)
-                  if (list_index > 20) {
-                    $('.wzl_log').css('display', 'none')
-                  } else {
-                    $('.wzl_log').css('display', 'block')
-                  }
-                  $('#num').html(list_index)
-                  $('#startLocation').html(startCity + startArea)
-                  $('#endLocation').html(endCity + endArea)
-                  $('#zhPrice').html(zhPrice)
-                  $('#qhPrice').html(qhPrice)
-                  $('#shixiao').html(transportAging + transportAgingUnit)
-                  $('#pinglv').html(departureHzData + departureHzTime)
-                  $('#orderNumber').html(browseNumber)
-                  $('#assessNumber').html(assessNumber)
-                  $('#nr055').html(companyName)
-                  $('#nr056').html(transportRemark)
-                  $('#nr058').html(address)
-                  //  $('#list_shiming')
-                  // console.log($('#qinghuo'),datas[i].zhPrice)
-                  var qq = datas[i].qq
-                  if (!qq) {
-                    $('#qq').css('display', 'none')
-                  }
-                  var credit28 = datas[i].credit28
-                  var driverStatus = datas[i].driverStatus
-
-                  var arcurl =
-                    '/shixiao/detail?id=' + id + '&publishId=' + companyId //下单
-                  var orderurl =
-                    '/plus/list.php?tid=77&uid=' +
-                    account +
-                    '&id=' +
-                    id +
-                    '&publishId=' +
-                    companyId //查看详情
-                  $('#nr_a521').attr(
-                    'onclick',
-                    "window.open('" + orderurl + "')"
-                  )
-                  $('#nr_a522').attr('onclick', "window.open('" + arcurl + "')")
-                  $('#nr_a51').attr('onclick', "window.open('" + arcurl + "')")
-                  var s1 = '<div class="wzl_box wzl_box' + i + '">'
-                  var s2 = $('.wzl_box').html()
-                  var s3 = '</div>'
-                  $('#js006').append(s1 + s2 + s3)
-                  if (!collateral || collateral == 0) {
-                    //实名认证，28信用，担保交易，后台返回authStatus有值就显示，没有值就隐藏
-                    $('.wzl_box' + i + ' #list_danbao').css('display', 'none')
-                  }
-                  if (!isVip || isVip == 0) {
-                    console.log('is not Vip')
-                    // console.log('wlzx_list'+i+' .wlzx_list_4 .p2');
-                    $('.wzl_box' + i + ' #list_xinyong').css('display', 'none')
-                  }
-                  if (authStatus != 'AF0010403') {
-                    // console.log("is not shiming"+startLocation+endLocation);
-                    $('.wzl_box' + i + ' #list_shiming').css('display', 'none')
-                  }
-                }
-              },
-              error: function(err) {
-                console.log(err.responseText)
-              }
-            })
-            // console.log("最终总页数："+totalPage)
-            return totalPage
-          }
-          // process02(1);
-          //车源信息栏目列表 E
-
-          $('#pagination1').pagination({
-            currentPage: 1,
-            totalPage: process02(1),
-            callback: function(current) {
-              $('#current1').text(current)
-              process02(current)
-              window.location.href = '#top'
-            }
-          })
+          this.loadPagination()
         })
       })
     })
+  },
+  methods: {
+    selectSort(item) {
+      this.sortId = item.id
+      this.search(this.currentPage)
+    },
+    async search(int) {
+      let list1 = [],
+        list2 = []
+      $('#carLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      let startp = list1[0] ? list1[0] : ''
+      let startc = list1[1] ? list1[1] : ''
+      let starta = list1[2] ? list1[2] : ''
+      $('#carLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      let endp = list2[0] ? list2[0] : ''
+      let endc = list2[1] ? list2[1] : ''
+      let enda = list2[2] ? list2[2] : ''
+      $('#list_nav_a').html(
+        startc + starta + (endc ? '到' : '') + endc + enda + ' 专线时效'
+      )
+
+      let obj = await getListRangesAging(this.$axios, int, {
+        endArea: enda,
+        endCity: endc,
+        endProvince: endp,
+        filterSign: this.sortId,
+        startArea: starta,
+        startCity: startc,
+        startProvince: startp
+      })
+      this.listRangesAging = obj.list
+      this.currentPage = obj.currentPage
+      this.totalPage = obj.totalPage
+      this.loadPagination()
+    },
+    loadPagination() {
+      $('#pagination1').pagination({
+        currentPage: this.currentPage,
+        totalPage: this.totalPage,
+        callback: async current => {
+          $('#current1').text(current)
+          console.log(current)
+          let obj = await getListRangesAging(this.$axios, current, {
+            filterSign: this.sortId,
+            startCity: this.$cookies.get('currentAreaFullName'),
+            startProvince: this.$cookies.get('currentProvinceFullName')
+          })
+          this.listRangesAging = obj.list
+          this.currentPage = obj.currentPage
+          window.location.href = '#top'
+        }
+      })
+    }
   }
 }
 </script>
@@ -1391,7 +1081,7 @@ body {
 .boxx {
   float: left;
 }
-#nr056 {
+.nr056 {
   width: 300px;
   float: left;
   overflow: hidden;

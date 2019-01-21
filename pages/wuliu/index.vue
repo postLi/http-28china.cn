@@ -111,7 +111,7 @@
         <!--分页-->
 
         <div class="bottom_wlyq" >
-          <div class="bottom_wlyq_bt">您可能对这些感兴趣</div>
+          <div class="bottom_wlyq_bt">您可能对这些感兴趣{{ currentPage }}</div>
           <div class="bottom_wlyq_nr">
             <div
               v-for="(item,index) in getLogisticsPark"
@@ -156,20 +156,21 @@
 
 <script>
 async function gatewaylist($axios, currentPage, vo = {}) {
-  let list,
-    parm = {
-      currentPage: currentPage,
-      pageSize: 21,
-      vo
-    }
+  let list, pages
+  let parm = {
+    currentPage: currentPage,
+    pageSize: 21,
+    vo
+  }
   await $axios
     .post('/aflc-portal/portalt/aflclogisticspark/v1/Gateway/Gatewaylist', parm)
     .then(res => {
       if (res.data.status === 200) {
         list = res.data.data.list
+        pages = res.data.data.pages
       }
     })
-  return list
+  return { list, pages, currentPage }
 }
 export default {
   name: 'WuLiu',
@@ -199,7 +200,12 @@ export default {
       getGatewaylist: [],
       getLogisticsPark: [],
       recommendParklist: [],
-      searchKey: ''
+      searchKey: '',
+      pages: 0, //总页数
+      currentPage: 1, //当前页
+      locationProvince: '',
+      locationCity: '',
+      locationArea: ''
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -226,7 +232,9 @@ export default {
       locationCity: app.$cookies.get('currentAreaFullName')
     })
     return {
-      getGatewaylist: getGatewaylist,
+      getGatewaylist: getGatewaylist.list,
+      pages: getGatewaylist.pages,
+      currentPage: getGatewaylist.currentPage,
       getLogisticsPark:
         getLogisticsPark.data.status === 200
           ? getLogisticsPark.data.data.list
@@ -238,9 +246,9 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['./js/city-picker.data.js'], function() {
-      seajs.use(['./js/city-picker.js'], function() {
-        seajs.use(['./js/jquery.pagination.min.js'], function() {
+    seajs.use(['./js/city-picker.data.js'], () => {
+      seajs.use(['./js/city-picker.js'], () => {
+        seajs.use(['./js/jquery.pagination.min.js'], () => {
           function GetUrlParam(name) {
             var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
             var r = encodeURI(window.location.search)
@@ -286,7 +294,6 @@ export default {
             parkName = ''
             delete vo.parkName
           }
-
           $('#parkAddress input').citypicker({
             province: locationProvince,
             city: locationCity,
@@ -295,15 +302,7 @@ export default {
           $('#list_nav_a').html(locationCity + locationArea + '物流园区')
 
           $('#parkName').val(parkName)
-          // $('#pagination1').pagination({
-          //   currentPage: 1,
-          //   totalPage: gatewaylist(this.$axios, 1),
-          //   callback: current => {
-          //     $('#current1').text(current)
-          //     gatewaylist(this.$axios, current)
-          //     window.location.href = '#top'
-          //   }
-          // })
+          this.loadPagination()
         })
       })
     })
@@ -314,23 +313,72 @@ export default {
       $('#parkAddress .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      let locationProvince = list1[0]
-      let locationCity = list1[1]
-      let locationArea = list1[2]
+      this.locationProvince = list1[0]
+      this.locationCity = list1[1]
+      this.locationArea = list1[2]
       let vo = {
-        locationArea: locationArea,
-        locationCity: locationCity,
-        locationProvince: locationProvince,
+        locationProvince: this.locationProvince,
+        locationCity: this.locationCity,
+        locationArea: this.locationArea,
         parkName: this.searchKey
       }
-      this.getGatewaylist = await gatewaylist(this.$axios, 1, vo)
+      let obj = await gatewaylist(this.$axios, 1, vo)
+      this.getGatewaylist = obj.list
+      this.currentPage = obj.currentPage
+      if (obj.list.length === 0) {
+        this.pages = 0
+      } else {
+        this.pages = obj.pages
+      }
+      this.loadPagination()
     },
     async flush() {
       this.searchKey = ''
+      this.locationProvince = ''
+      this.locationCity = ''
+      this.locationArea = ''
+      let currentProvinceFullName = this.$cookies.get('currentProvinceFullName')
+      let currentAreaFullName = this.$cookies.get('currentAreaFullName')
+      console.log(currentAreaFullName)
+      // $('#parkAddress input').citypicker({
+      //   province: currentProvinceFullName,
+      //   city: currentAreaFullName,
+      //   district: ''
+      // })
       $('#parkAddress input').citypicker('reset')
-      this.getGatewaylist = await gatewaylist(this.$axios, 1, {
+      let obj = await gatewaylist(this.$axios, 1, {
         locationProvince: this.$cookies.get('currentProvinceFullName'),
         locationCity: this.$cookies.get('currentAreaFullName')
+      })
+      this.getGatewaylist = obj.list
+      this.currentPage = obj.currentPage
+      if (obj.list.length === 0) {
+        this.pages = 0
+      } else {
+        this.pages = obj.pages
+      }
+      this.loadPagination()
+    },
+    loadPagination() {
+      $('#pagination1').pagination({
+        currentPage: this.currentPage,
+        totalPage: this.pages,
+        callback: async current => {
+          $('#current1').text(current)
+          let obj = await gatewaylist(this.$axios, current, {
+            locationProvince: this.locationProvince
+              ? this.locationProvince
+              : this.$cookies.get('currentProvinceFullName'),
+            locationCity: this.locationCity
+              ? this.locationCity
+              : this.$cookies.get('currentAreaFullName'),
+            locationArea: this.locationArea ? this.locationArea : '',
+            parkName: this.searchKey
+          })
+          this.getGatewaylist = obj.list
+          this.currentPage = obj.currentPage
+          window.location.href = '#top'
+        }
       })
     }
   }

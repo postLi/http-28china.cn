@@ -6,9 +6,9 @@
         style="background-color: #ddd;">
         <div class="footer1  center">
 
-          <a href="/plus/list.php?tid=4">找物流专线</a>
-          <a href="/plus/list.php?tid=3">找车源</a>
-          <a href="/plus/list.php?tid=2">找货源</a>
+          <a href="/zhuanxian">找物流专线</a>
+          <a href="/cheyuan">找车源</a>
+          <a href="/huoyuan">找货源</a>
           <a href="javascript:void(0)">精选案例</a>
           <a href="/plus/list.php?tid=12">资讯动态</a>
           <a href="http://www.anfanet.com/about.html">关于我们</a>

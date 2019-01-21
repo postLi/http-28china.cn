@@ -3,7 +3,7 @@
     <div class="w1200">
       <div 
         id="_userlogin1" 
-        class="header_r1">您好，欢迎来到28快运!&nbsp;&nbsp; <a href="/member/login.php">请登录</a> <a href="/member/index_do.php?fmdo=user&amp;dopost=regnew">免费注册</a></div>
+        class="header_r1">您好，欢迎来到28快运!&nbsp;&nbsp; <a href="/login">请登录</a> <a href="/regisiter">免费注册</a></div>
       <div class="header_r2">
         <a href="/">首页</a>
         <a 

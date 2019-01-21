@@ -329,64 +329,47 @@
             </div>
           </div>
 
-
-
-
         </div>
         <div class="arc_right">
-          <p class="arc_right01"><img src="../../static/images/article_wlzx/04gongsi.png"><span id="nr1020"/></p>
-          <p class="arc_right02"><i>信誉：</i>
-            <img 
+          <p class="arc_right01"><img src="../../static/images/article_wlzx/04gongsi.png"><span>{{ oneCompany.companyName }}</span></p>
+          <p 
+            v-if="oneCompany.credit >= 0 && oneCompany.credit <= 150" 
+            class="arc_right02"><i>信誉：</i>
+            <img
+              v-for="(item1,index1) in oneCompany.starS"
+              :key="index1"
               class="xy_zuan" 
-              src="../../static/images/article_wlzx/blue.gif">
-            <img 
-              class="xy_zuan" 
-              src="../../static/images/article_wlzx/blue.gif">
-            <img 
-              class="xy_zuan" 
-              src="../../static/images/article_wlzx/blue.gif">
-            <img 
-              class="xy_zuan" 
-              src="../../static/images/article_wlzx/blue.gif">
-            <img 
-              class="xy_zuan" 
-              src="../../static/images/article_wlzx/blue.gif">
-
-            <img 
-              class="xy_guan" 
-              src="../../static/images/article_wlzx/34huanguan.gif">
-            <img 
-              class="xy_guan" 
-              src="../../static/images/article_wlzx/34huanguan.gif">
-            <img 
-              class="xy_guan" 
-              src="../../static/images/article_wlzx/34huanguan.gif">
-            <img 
-              class="xy_guan" 
-              src="../../static/images/article_wlzx/34huanguan.gif">
-            <img 
-              class="xy_guan" 
-              src="../../static/images/article_wlzx/34huanguan.gif">
+              src="../../static/images/article_wlzx/blue.gif"
+              style="display: inline">
+          </p>
+          <p
+            v-if="oneCompany.credit >= 151"
+            class="arc_right02"><i>信誉：</i>
+            <img
+              v-for="(item1,index1) in oneCompany.starB"
+              :key="index1"
+              class="xy_zuan"
+              src="../../static/images/article_wlzx/34huanguan.gif"
+              style="display: inline">
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br >
-            <font id="nr1041" /><font id="nr1042"/><font id="nr1043"/>
+            <font>{{ oneCompany.serverQualityScore }}</font><font>{{ oneCompany.transportAgingScore }}</font><font>{{ oneCompany.serverPriceScore }}</font>
           </p>
           <p class="arc_right04">
-            <span class="arc_right04_1"><i>联系人：</i><font id="nr1021"/></span>
-            <span><i>手机：</i><font id="nr1022" /></span>
-            <span><i>Q&nbsp;Q：</i><a 
-              id="nr1023" 
-              target="_blank"><input 
-                id="qq" 
+            <span class="arc_right04_1"><i>联系人：</i><font>{{ oneCompany.contactsName }}</font></span>
+            <span><i>手机：</i><font>{{ oneCompany.mobile }}</font></span>
+            <span><i>Q&nbsp;Q：</i><a
+              v-if="oneCompany.qq"
+              :href="'http://wpa.qq.com/msgrd?v=3&uin=' + oneCompany.qq + '&site=qq&menu=yes'" 
+              target="_blank"><input
                 value="QQ交谈"></a></span>
-            <span><i>地址：</i><font id="nr10232" /></span>
+            <span><i>地址：</i><font>{{ oneCompany.address }}</font></span>
           </p>
           <p class="arc_right05">
             <a 
-              id="nr1024" 
-              target="_blank"><input 
-                id="arc_right05_1" 
+              :href=" '/member/' + oneCompany.account + '.html'"
+              target="_blank"><input
                 readonly="" 
                 value="进入官网"></a>
             <a ><input 
@@ -399,14 +382,18 @@
           </p>
           <p class="arc_right07">
             <img 
-              id="right_xinyong" 
+              v-if="oneCompany.isVip && oneCompany.isVip ===1"
               src="../../static/images/list_wlzx/11xinyong.png">
-            <img 
-              id="right_shiming" 
+            <img
+              v-if="oneCompany.authStatus ==='AF0010403'"
               src="../../static/images/list_wlzx/10shiming.png">
-            <img 
-              id="right_baozhengjin" 
-              src="../../static/images/list_wlzx/danbao.png"><span id="nr1037">1000元</span>
+            <img
+              v-if="oneCompany.collateral && oneCompany.collateral !==0"
+              src="../../static/images/list_wlzx/danbao.png"><span v-if="oneCompany.collateral && oneCompany.collateral !==0">{{ oneCompany.collateral + '元' }}</span>
+            <span 
+              v-if="oneCompany.authStatus != 'AF0010403' &&
+                (!oneCompany.isVip || oneCompany.isVip == 0) &&
+            (!oneCompany.collateral || oneCompany.collateral == 0)">暂无认证信息</span>
           </p>
 
         </div>
@@ -416,37 +403,33 @@
         <div class="arc_left2">
           <div class="arc_left2_bt" >
             <span>公司网点分布</span><i><a 
-              id="wd_more" 
+              :href="'/member/' + oneCompany.account + '-wangdian.html'"
               target="_blank" >更多</a></i>
           </div>
-          <div 
-            id="js013" 
-            class="arc_left2_nr">
-            <div id="tag2b21ba3e883b13b32c3a6c318b68e863">
-              <div 
-                class="tjwd_list" 
-                style="display: none;">
-                <p class="p01"><span id="nr1011">广州网点</span></p>
-                <p class="p02"><img src="../../static/images/04gongsi.png" >&nbsp;<span><a 
-                  id="nr1012" 
-                  target="_blank" 
-                  href="#"/></span></p>
-                <p class="p03">
-                  <i>联系人：</i><span id="nr1013">李明</span> &nbsp; <i>手机号：</i><font id="nr1014">13416233760</font>
+          <div class="arc_left2_nr">
+            <div
+              v-for="(item,index) in listDetailPointNetwork" 
+              :key="index"
+              class="tjwd_list">
+              <p class="p01"><span>{{ item.pointName.substring(0, 12) + '..' }}</span></p>
+              <p class="p02"><img src="../../static/images/04gongsi.png" >&nbsp;<span><a
+                :href="'/member/' + item.creater + '.html'"
+                target="_blank">{{ item.companyName.substring(0, 16) + '..' }}</a></span></p>
+              <p class="p03">
+                <i>联系人：</i><span >{{ item.name }}</span> &nbsp; <i>手机号：</i><font>{{ item.mobile }}</font>
 
-                </p>
-                <p class="p04">
-                  <i>所在地：</i><span id="nr1015">浙江省&nbsp;杭州市&nbsp;下城区</span>
-                </p>
-                <p class="p05">
-                  <img src="../../static/images/06dingwei.png" >&nbsp;<span id="nr1016">金黄大道永福路博洋物流园10号</span>
-                </p>
-              </div>
+              </p>
+              <p class="p04">
+                <i>所在地：</i><span>{{ item.belongCityName }}</span>
+              </p>
+              <p class="p05">
+                <img src="../../static/images/06dingwei.png" >&nbsp;<span>{{ item.address.substring(0, 17) + '..' }}</span>
+              </p>
             </div>
-
-
-
-
+            <div 
+              v-if="listDetailPointNetwork.length === 0" 
+              class="tjwd_list"
+              style="text-align: center;line-height: 180px;">暂无网点内容！</div>
           </div>
         </div>
         <div class="arc_right2">
@@ -774,10 +757,56 @@
 </template>
 
 <script>
+function setCredit(item) {
+  if (item.credit >= 0 && item.credit <= 3) {
+    item.starS = new Array(1)
+  }
+  if (item.credit >= 4 && item.credit <= 10) {
+    item.starS = new Array(2)
+  }
+  if (item.credit >= 11 && item.credit <= 40) {
+    item.starS = new Array(3)
+  }
+  if (item.credit >= 41 && item.credit <= 90) {
+    item.starS = new Array(4)
+  }
+  if (item.credit >= 91 && item.credit <= 150) {
+    item.starS = new Array(5)
+  }
+  if (item.credit >= 151 && item.credit <= 250) {
+    item.starB = new Array(1)
+  }
+  if (item.credit >= 251 && item.credit <= 500) {
+    item.starB = new Array(2)
+  }
+  if (item.credit >= 501 && item.credit <= 1000) {
+    item.starB = new Array(3)
+  }
+  if (item.credit >= 1001 && item.credit <= 2000) {
+    item.starB = new Array(4)
+  }
+  if (item.credit >= 2001) {
+    item.starB = new Array(5)
+  }
+}
 export default {
   name: 'Detail',
   layout: 'subLayout',
   head: {
+    title: '28快运',
+    meta: [
+      {
+        name: 'keywords',
+        content:
+          '物流,物流平台,物流专线,物流公司,物流服务,在线发货,查询运价,运单查询,运单跟踪,物流帮'
+      },
+      {
+        hid: 'description',
+        name: 'description',
+        content:
+          '28快运是专业提供零担运输和整车运输等物流服务平台，同时提供免费发布货源、车源、专线。货主在线发货，物流跟踪查询，服务有保障，让您发货省时，省钱，更省心！'
+      }
+    ],
     link: [
       { rel: 'stylesheet', href: '/css/article_wlzx.css' },
       { rel: 'stylesheet', href: '/css/price.css' },
@@ -788,6 +817,43 @@ export default {
       { src: '../js/WTMap.min.js' }
     ]
   },
+  data() {
+    return {
+      oneCompany: {},
+      listDetailPointNetwork: []
+    }
+  },
+  async asyncData({ $axios, app, query }) {
+    const oneCompany = await $axios.get(
+      '/aflc-portal/portalt/aflcLogisticsCompany/v1/' + query.publishId
+    )
+    if (oneCompany.data.status === 200) {
+      setCredit(oneCompany.data.data)
+    }
+    let parm = {
+      currentPage: 1,
+      pageSize: 6,
+      vo: {
+        companyId: query.publishId
+      }
+    }
+    const listDetailPointNetwork = await $axios.post(
+      '/aflc-portal/portalt/aflcPointNetwork/v1/listDetailPointNetwork',
+      parm
+    )
+    listDetailPointNetwork.data.data.list.forEach(item => {
+      if (item.address.indexOf(item.belongCityName !== -1)) {
+        item.address = item.address.replace(item.belongCityName, '')
+      }
+    })
+    return {
+      oneCompany: oneCompany.data.status === 200 ? oneCompany.data.data : {},
+      listDetailPointNetwork:
+        listDetailPointNetwork.data.status === 200
+          ? listDetailPointNetwork.data.data.list
+          : []
+    }
+  },
   mounted() {
     seajs.use(['../js/city.js'], function() {
       seajs.use(['../js/arc_wlzx.js'], function() {
@@ -797,23 +863,6 @@ export default {
           })
         })
       })
-    })
-    $(function() {
-      $('a[_for]').mouseover(function() {
-        $(this)
-          .parents()
-          .children('a[_for]')
-          .removeClass('thisclass')
-          .parents()
-          .children('dd')
-          .hide()
-        $(this)
-          .addClass('thisclass')
-          .blur()
-        $('#' + $(this).attr('_for')).show()
-      })
-      $('a[_for=uc_member]').mouseover()
-      $('a[_for=flink_1]').mouseover()
     })
     $('#arc_bt1').click(function() {
       //alert("1");

@@ -379,23 +379,15 @@ export default {
     height: 28px;
     border-radius: 2px;
     color: #f9f9f9;
-    font-size: 16px;
+    font-size: 15px;
     background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png)
       10px 6px #2577e3;
     text-align: left;
     padding-left: 30px;
-    padding-right: 5px;
     margin-left: 8px;
+    padding-right: 5px;
     cursor: pointer;
   }
-  /*#search_cheyuan {*/
-  /*width: 72px;*/
-  /*height: 28px;*/
-  /*color: #f9f9f9;*/
-  /*padding-left: 20px;*/
-  /*background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png)*/
-  /*10px 6px #2577e3;*/
-  /*}*/
   /*显示隐藏S */
   .toggle-btn {
     float: right;

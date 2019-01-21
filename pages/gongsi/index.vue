@@ -295,15 +295,7 @@ export default {
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ]
-    // script: [
-    //   { src: '../js/jquery.pagination.min.js' },
-    //   { src: '../js/WTMap.min.js' },
-    //   { src: './js/city-picker.data.js' },
-    //   { src: './js/city-picker.js' },
-    //   { src: '../../static/gongsi/js/list_wlgs.js' }
-    // ]
   },
-  // layout: 'subLayout',
   mounted() {
     seajs.use(['../js/city.js'], function() {
       seajs.use(
@@ -360,4 +352,75 @@ export default {
 }
 </script>
 <style lang="scss">
+.lll-gongsi {
+  .list_button {
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    color: #f9f9f9;
+    font-size: 15px;
+    background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png)
+      10px 6px #2577e3;
+    text-align: left;
+    padding-left: 30px;
+    margin-left: 8px;
+    padding-right: 5px;
+    cursor: pointer;
+  }
+  /*显示隐藏S */
+  .toggle-btn {
+    float: right;
+    margin: 12px 15px 0 4px;
+    height: 24px;
+    line-height: 24px;
+    border: solid 1px #e8e8e8;
+    padding: 0 9px;
+    background: #fff;
+    color: #6b6b6b;
+    cursor: pointer;
+    text-decoration: none;
+    font: 12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+  }
+
+  .show-collapse .expand {
+    display: none;
+    margin-top: 2px;
+  }
+  .toggle-btn .arrow {
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .icon-btn-arrow-up-2,
+  .icon-btn-arrow-down-2 {
+  }
+
+  .icon-btn-arrow-down-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/xiajt.png);
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 7px;
+    cursor: pointer;
+  }
+  .show-collapse .collapse {
+    display: inline-block;
+    margin-top: 2px;
+  }
+  .toggle-btn .arrow {
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .icon-btn-arrow-up-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/up_jt.png);
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 7px;
+    cursor: pointer;
+  }
+  /*显示隐藏E */
+}
 </style>

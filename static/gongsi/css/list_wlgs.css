@@ -91,19 +91,7 @@ padding:0px 0 0 20px;
 	padding-left: 9px;
 }
 .list_input::-webkit-input-placeholder{color: #999;}
-.list_button {
-	width: 42px;
-	height: 28px;
-	border-radius: 2px;
-	color: #f9f9f9;
-	font-size: 15px;
-	background: no-repeat url(../images/white_search.png) 10px 6px #2577e3;
-	text-align: left;
-	padding-left: 30px;
-	margin-left: 8px;
-	padding-right: 5px;
-	cursor: pointer;
-}
+
 #flush
 {    width: 70px;
     height: 28px;
@@ -517,67 +505,6 @@ width: 342px;
 .wlzx_list_3 .p1{margin-top: 35px;}
 .wlzx_list_3 p i{color: #666;}
 .wlzx_list_6 .p1{margin-top: 20px;margin-bottom: 22px;}
-
-
-/*显示隐藏S */
-.toggle-btn {
-    float: right;
-    margin:12px 15px 0 4px;
-    height: 24px;
-    line-height: 24px;
-    border: solid 1px #e8e8e8;
-    padding: 0 9px;
-    background: #fff;
-    color: #6b6b6b;
-    cursor: pointer;
-    text-decoration: none;
-    font: 12px/1.5 tahoma,arial,'Hiragino Sans GB','\5b8b\4f53',sans-serif;
-}
-
-
-.show-collapse .expand {
-    display: none;
-    margin-top: 2px;
-}
-.toggle-btn .arrow {
-    margin-left: 8px;
-    vertical-align: middle;
-}
-.icon-btn-arrow-up-2,.icon-btn-arrow-down-2{
-
-
-}
-
-.icon-btn-arrow-down-2 {
-	margin-top: 5px;
-    display: inline-block;
-	background: url('../../../static/images/list_wlzx/xiajt.png');
-    background-repeat: no-repeat;
-    width: 12px;
-    height: 7px;
-    cursor: pointer;
-}
-.show-collapse .collapse {
-    display: inline-block;
-    margin-top: 2px;
-}
-.toggle-btn .arrow {
-    margin-left: 8px;
-    vertical-align: middle;
-}
-
-.icon-btn-arrow-up-2 {
-	margin-top: 5px;
-   display: inline-block;
-	background: url("../../../static/images/list_wlzx/up_jt.png");
-	/*background: url(../images/list_wlzx/up_jt.png);*/
-	background-repeat: no-repeat;
-    width: 12px;
-    height: 7px;
-    cursor: pointer;
-
-}
-/*显示隐藏E */
 
 .select_con dl dd {
     min-height: 28px;

@@ -67,8 +67,6 @@
               <span>第四步</span>
               <font>下载保单</font>
             </li>
-            
-            
           </ul>
         </div>
         
@@ -80,7 +78,7 @@
           <ul>
             <li>
               <a 
-                href="/Insurance/product" 
+                href="/Insurance/product?id=1" 
                 target="_blank">
                 <div class="item_01"><img src="images/insurance/big_pic.png" ></div>
                 <div class="item_02">
@@ -224,11 +222,7 @@
           <div class="main3_sm">
             <span>我们保证: 为客户提供详细全面的产品介绍，为您定制合适的保障方案，24小时客服服务，全程提供售前售后及理赔服务</span>
           </div>
-          
-          
         </div>
-        
-        
       </div>
     </div>
 
@@ -272,55 +266,56 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/insuranceIndex.css' },
       { rel: 'stylesheet', href: '/css/insuranceComon.css' }
-    ],
-    script: [{ src: '/js/insurance.js' }]
+    ]
   },
   layout: 'subLayout',
   mounted() {
-    $(function() {
-      var theRequest = getRequest()
-      if ($("input[name='a']:checked").val() === '综合险') {
-        $('#bx_lx1_label').addClass('bx_checked')
-        $('#bx_sm1').css('display', 'block')
-        $('#bx_sm2').css('display', 'none')
-      } else {
-        $('#bx_lx2_label').addClass('bx_checked')
-        $('#bx_sm1').css('display', 'none')
-        $('#bx_sm2').css('display', 'block')
-      }
-
-      function next() {
-        window.sessionStorage.setItem(
-          'step0',
-          $("input[name='a']:checked").val()
-        )
-        window.open('/Insurance/step1')
-      }
-      let url = '/aflc-portal/portalt/aflcinsurancepolicy/v1/' + theRequest.id
-      $.ajax({
-        url: '/api' + url,
-        type: 'GET',
-        dataType: 'json',
-        // 如果用jq，必须设置以下三项，避免jq 的中间处理
-        processData: false,
-        cache: false,
-        contentType: false,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        success: function(res) {
-          $('#insuranceNumber').html(res.data.insuranceNumber)
-          $('#browseNumber').html(res.data.browseNumber)
-        },
-        error: function(err) {
-          if (JSON.parse(err.responseText).error === 'invalid_token') {
-            $('body').toast({
-              content: '您还未登录，请先登录',
-              duration: 3000
-            })
-            $('.login_box').show()
-          }
+    seajs.use(['/js/insurance.js'], function() {
+      $(function() {
+        var theRequest = getRequest()
+        if ($("input[name='a']:checked").val() === '综合险') {
+          $('#bx_lx1_label').addClass('bx_checked')
+          $('#bx_sm1').css('display', 'block')
+          $('#bx_sm2').css('display', 'none')
+        } else {
+          $('#bx_lx2_label').addClass('bx_checked')
+          $('#bx_sm1').css('display', 'none')
+          $('#bx_sm2').css('display', 'block')
         }
+
+        function next() {
+          window.sessionStorage.setItem(
+            'step0',
+            $("input[name='a']:checked").val()
+          )
+          window.open('/Insurance/step1')
+        }
+        let url = '/aflc-portal/portalt/aflcinsurancepolicy/v1/' + theRequest.id
+        $.ajax({
+          url: '/api' + url,
+          type: 'GET',
+          dataType: 'json',
+          // 如果用jq，必须设置以下三项，避免jq 的中间处理
+          processData: false,
+          cache: false,
+          contentType: false,
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          success: function(res) {
+            $('#insuranceNumber').html(res.data.insuranceNumber)
+            $('#browseNumber').html(res.data.browseNumber)
+          },
+          error: function(err) {
+            if (JSON.parse(err.responseText).error === 'invalid_token') {
+              $('body').toast({
+                content: '您还未登录，请先登录',
+                duration: 3000
+              })
+              $('.login_box').show()
+            }
+          }
+        })
       })
     })
   }

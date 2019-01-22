@@ -145,72 +145,75 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/insuranceStep1.css' },
       { rel: 'stylesheet', href: '/css/insuranceComon.css' }
-    ],
-    script: [{ src: '/js/insurance.js' }]
+    ]
   },
   layout: 'subLayout',
   mounted() {
-    $(function() {
-      if (window.sessionStorage.getItem('step0')) {
-        if (window.sessionStorage.getItem('step0') === '综合险') {
-          $('#bx_lx1').attr('checked', 'checked')
-          $('#bx_lx2').removeAttr('checked')
-        } else {
-          $('#bx_lx2').attr('checked', 'checked')
-          $('#bx_lx1').removeAttr('checked')
-        }
-        window.sessionStorage.removeItem('step0')
-      }
-      var obj = {
-        insuranceType: $("input[name='a']:checked").val(), //"基本险"
-        policyHolderType: $("input[name='b']:checked").val(), //投保人类型0个人，1团险
-        policyHolderName: $('#bx_lx5').val(), //投保人姓名
-        policyHolderNum: $('#bx_lx6').val(), //投保人证件号
-        theInsuredType: $("input[name='c']:checked").val(), //被投保人类型0个人，1团险
-        theInsuredName: $('#bx_lx9').val(), //被投保人
-        theInsuredNum: $('#bx_lx10').val() //被投保人证件号
-      }
-
-      if ($("input[name='a']:checked").val() === '综合险') {
-        $('#bx_lx1_label').addClass('bx_checked')
-        $('#bx_sm1').css('display', 'block')
-        $('#bx_sm2').css('display', 'none')
-      } else {
-        $('#bx_lx2_label').addClass('bx_checked')
-        $('#bx_sm1').css('display', 'none')
-        $('#bx_sm2').css('display', 'block')
-      }
-
-      if ($("input[name='b']:checked").val() === '0') {
-        $('#bx_lx3_label').addClass('bx_checked')
-      } else {
-        $('#bx_lx4_label').addClass('bx_checked')
-      }
-
-      if ($("input[name='c']:checked").val() === '0') {
-        $('#bx_lx7_label').addClass('bx_checked')
-      } else {
-        $('#bx_lx8_label').addClass('bx_checked')
-      }
-      window.sessionStorage.setItem('step1', JSON.stringify(obj))
-
-      function next() {
-        if (insuranceValidate.check()) {
-          obj.insuranceType = $("input[name='a']:checked").val()
-          obj.policyHolderType = $("input[name='b']:checked").val()
-          obj.theInsuredType = $("input[name='c']:checked").val()
-          obj.policyHolderName = $('#bx_lx5').val()
-          obj.policyHolderNum = $('#bx_lx6').val()
-          obj.theInsuredName = $('#bx_lx9').val()
-          obj.theInsuredNum = $('#bx_lx10').val()
-          window.sessionStorage.setItem('step1', JSON.stringify(obj))
-          if (window.history.length === 1) {
-            window.location.href = '/Insurance/step2'
+    seajs.use(['/js/insurance.js'], function() {
+      $(function() {
+        if (window.sessionStorage.getItem('step0')) {
+          if (window.sessionStorage.getItem('step0') === '综合险') {
+            $('#bx_lx1').attr('checked', 'checked')
+            $('#bx_lx2').removeAttr('checked')
           } else {
-            window.history.forward()
+            $('#bx_lx2').attr('checked', 'checked')
+            $('#bx_lx1').removeAttr('checked')
+          }
+          window.sessionStorage.removeItem('step0')
+        }
+        var obj = {
+          insuranceType: $("input[name='a']:checked").val(), //"基本险"
+          policyHolderType: $("input[name='b']:checked").val(), //投保人类型0个人，1团险
+          policyHolderName: $('#bx_lx5').val(), //投保人姓名
+          policyHolderNum: $('#bx_lx6').val(), //投保人证件号
+          theInsuredType: $("input[name='c']:checked").val(), //被投保人类型0个人，1团险
+          theInsuredName: $('#bx_lx9').val(), //被投保人
+          theInsuredNum: $('#bx_lx10').val() //被投保人证件号
+        }
+
+        if ($("input[name='a']:checked").val() === '综合险') {
+          $('#bx_lx1_label').addClass('bx_checked')
+          $('#bx_sm1').css('display', 'block')
+          $('#bx_sm2').css('display', 'none')
+        } else {
+          $('#bx_lx2_label').addClass('bx_checked')
+          $('#bx_sm1').css('display', 'none')
+          $('#bx_sm2').css('display', 'block')
+        }
+
+        if ($("input[name='b']:checked").val() === '0') {
+          $('#bx_lx3_label').addClass('bx_checked')
+        } else {
+          $('#bx_lx4_label').addClass('bx_checked')
+        }
+
+        if ($("input[name='c']:checked").val() === '0') {
+          $('#bx_lx7_label').addClass('bx_checked')
+        } else {
+          $('#bx_lx8_label').addClass('bx_checked')
+        }
+        window.sessionStorage.setItem('step1', JSON.stringify(obj))
+        $('.next_button').click(function() {
+          next()
+        })
+        function next() {
+          if (insuranceValidate.check()) {
+            obj.insuranceType = $("input[name='a']:checked").val()
+            obj.policyHolderType = $("input[name='b']:checked").val()
+            obj.theInsuredType = $("input[name='c']:checked").val()
+            obj.policyHolderName = $('#bx_lx5').val()
+            obj.policyHolderNum = $('#bx_lx6').val()
+            obj.theInsuredName = $('#bx_lx9').val()
+            obj.theInsuredNum = $('#bx_lx10').val()
+            window.sessionStorage.setItem('step1', JSON.stringify(obj))
+            if (window.history.length === 1) {
+              window.location.href = '/Insurance/step2'
+            } else {
+              window.history.forward()
+            }
           }
         }
-      }
+      })
     })
   }
 }

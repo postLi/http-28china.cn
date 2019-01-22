@@ -97,9 +97,6 @@
             id="nr0610" 
             style="color: #eb434d;"/></span></div>
           <div class="arc_m3_2"><i>说明：</i><span id="nr0611"/></div>
-
-
-
         </div>
 
         <div class="arc_middle5">
@@ -192,11 +189,6 @@
               </div>
             </div>
           </div>
-
-
-
-
-
         </div>
         <!--分页-->
         <div 
@@ -247,11 +239,6 @@
             href=""><span>查看&nbsp;&gt;</span></a>
         </p>
       </div>
-
-
-
-
-
     </div>
 
   </div>

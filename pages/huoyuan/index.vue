@@ -133,7 +133,7 @@
           </div>
           <ul
             class="wlzx_list"
-            style="display: none;">
+          >
 
             <li id="wlzx_list_0">
               <a
@@ -887,7 +887,7 @@ export default {
                 if (!res.data || !res.data.totalCount) {
                   console.log('内容为空')
                   $('.box').css('display', 'none')
-                  $('.list_none').css('display', 'block')
+                  // $('.list_none').css('display', 'block')
 
                   return
                 }
@@ -1084,7 +1084,7 @@ body {
 .zx_sx span {
   float: left;
   display: block;
-  color: #2577e3;
+  color: #999999;
 }
 .zx_sx .biaozhi {
   width: 3px;
@@ -1255,7 +1255,8 @@ body {
 
 .wlzx_list {
   width: 1036px;
-  height: 180px;
+  /* height: 180px; */
+  float: left;
   border: solid 1px #dfdfdf;
   border-left: 0;
   border-right: 0;
@@ -1548,7 +1549,7 @@ body {
   line-height: 26px;
 }
 .cy_list_1 p a {
-  color: #eb434d;
+  /* color: #eb434d; */
   font-size: 16px;
 }
 .cy_list_1 p i {
@@ -1812,7 +1813,7 @@ body {
   float: left;
   /*OVERFLOW: hidden;*/
   border: 1px solid #eee;
-  border-bottom: 0;
+  /* border-bottom: 0; */
 }
 .select_con {
   width: 1036px;

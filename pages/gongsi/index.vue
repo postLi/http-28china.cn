@@ -1,3 +1,5 @@
+<script src="../../static/gongsi/js/list_wlgs.js">
+</script>
 <template>
   <div class="lll-gongsi">
     <div class="wlgs_bg center"><img src="../../static/gongsi/images/banner_wlgs.png" ></div>
@@ -105,7 +107,7 @@
 
           <div class="list_none">
             <span>暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
-            <img src="{dede:global.cfg_templets_skin/}/images/none_pic.png">
+            <img src="../../static/gongsi/images/none_pic.png">
           </div>
 
 
@@ -171,7 +173,7 @@
               <p class="p2"><i>联系人：</i><font id="nr04">张总</font><a
                 id="nr11"
                 target="_blank"
-                href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img src="{dede:global.cfg_templets_skin/}/images/article_wlzx/15qq.gif"></a></p>
+                href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img src="../../static/gongsi/images/15qq.gif"></a></p>
               <p class="p3"><i>电话：</i><font id="nr05">0731-88818882  17707316111</font></p>
               <p class="p4"><i>地址：</i><font
                 id="nr06"
@@ -233,35 +235,35 @@
 
             <img
               class="xy_zuan"
-              src="/templets/default/images/article_wlzx/blue.gif">
+              src="../../static/gongsi/images/blue.gif">
             <img
               class="xy_zuan"
-              src="/templets/default/images/article_wlzx/blue.gif">
+              src="../../static/gongsi/images/blue.gif">
             <img
               class="xy_zuan"
-              src="/templets/default/images/article_wlzx/blue.gif">
+              src="../../static/gongsi/images/blue.gif">
             <img
               class="xy_zuan"
-              src="/templets/default/images/article_wlzx/blue.gif">
+              src="../../static/gongsi/images/blue.gif">
             <img
               class="xy_zuan"
-              src="/templets/default/images/article_wlzx/blue.gif">
+              src="../../static/gongsi/images/blue.gif">
 
             <img
               class="xy_guan"
-              src="/templets/default/images/article_wlzx/34huanguan.gif">
+              src="../../static/gongsi/images/34huanguan.gif">
             <img
               class="xy_guan"
-              src="/templets/default/images/article_wlzx/34huanguan.gif">
+              src="../../static/gongsi/images/34huanguan.gif">
             <img
               class="xy_guan"
-              src="/templets/default/images/article_wlzx/34huanguan.gif">
+              src="../../static/gongsi/images/34huanguan.gif">
             <img
               class="xy_guan"
-              src="/templets/default/images/article_wlzx/34huanguan.gif">
+              src="../../static/gongsi/images/34huanguan.gif">
             <img
               class="xy_guan"
-              src="/templets/default/images/article_wlzx/34huanguan.gif">
+              src="../../static/gongsi/images/34huanguan.gif">
 
           </p>
           <p class="p3"><i>联系人：</i><font id="tj_02">张总</font></p>

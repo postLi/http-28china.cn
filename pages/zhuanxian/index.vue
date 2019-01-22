@@ -193,9 +193,9 @@
             <li class="wlzx_list_1">
               <a
                 id="nr_a21"
-                target="_blank" 
+                target="_blank"
                 class="nr_a21_img"><img
-                  class="scrollLoading "
+                  class="scrollLoading"
                   width="180"
                   height="128"
             ></a></li>
@@ -323,6 +323,11 @@
               value="查询零担运费"
               class="right-top-btn">
           </form>
+        </div>
+        <div class="list-box-r-top">
+          <img
+            src="../../static/zhuanxian/images/guangg.jpg"
+            alt="">
         </div>
         <div class="zx_sx"><span class="biaozhi"/><span>专线信息推荐</span></div>
         <div class="tj_none">

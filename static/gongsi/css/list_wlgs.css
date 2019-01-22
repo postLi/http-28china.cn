@@ -71,13 +71,13 @@ line-height: 49px;
 padding:0px 0 0 20px;
 }
 .lll-gongsi .select_con .otherdt{
-  clear: left;
-  height: 0px;
-  line-height: 0px;
+  /*clear: left;*/
+  /*height: 0px;*/
+  /*line-height: 0px;*/
 }
 .lll-gongsi .select_con .otherdd{
-  display: inline-block;
-  margin-left: -190px;
+  /*display: inline-block;*/
+  /*margin-left: -190px;*/
 }
 .select_con dd span{font-size: 14px;}
 .list_input{
@@ -516,4 +516,4 @@ width: 342px;
 	height:20px;
 	width:15.83px;
 }
-.wlgs_bg{width: 1920px;margin-top: -30px;}
+.wlgs_bg{width: 1903px;margin-top: -30px;overflow: hidden;}

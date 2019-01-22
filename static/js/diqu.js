@@ -88,7 +88,7 @@ function cx02(code) {
       datas.push(el)
     }
   })
-  console.log('datas:', code, datas)
+  // console.log('datas:', code, datas)
 
   renderDropdownList(datas)
 }
@@ -156,7 +156,7 @@ function setSelectArea(a, b, c, d) {
   }
 
   window.process_01 && process_01(vo1)
-  console.log(vo1)
+  // console.log(vo1)
   vo2 = {}
   vo2.startProvince = bfull
   vo2.startCity = afull
@@ -166,7 +166,7 @@ function setSelectArea(a, b, c, d) {
   }
 
   window.process_02 && process_02(vo2)
-  console.log(vo2)
+  // console.log(vo2)
   vo3 = {}
   vo3.startProvince = bfull
   vo3.startCity = afull
@@ -177,7 +177,7 @@ function setSelectArea(a, b, c, d) {
   }
 
   window.process_03 && process_03(vo3)
-  console.log(vo3)
+  // console.log(vo3)
   vo4 = {}
   vo4.address = bfull + afull
   if (!b || b == 'null') {
@@ -185,7 +185,7 @@ function setSelectArea(a, b, c, d) {
   }
 
   window.wlgs && wlgs(vo4)
-  console.log(vo4)
+  // console.log(vo4)
 }
 
 $('#diqu').html('')
@@ -229,7 +229,7 @@ $('.map_box').on('click', 'a', function(e) {
     }
   }
 
-  console.log('切换到省市' + a + b + c)
+  // console.log('切换到省市' + a + b + c)
 })
 
 $('#index_map').on({
@@ -310,7 +310,7 @@ function detectWhereYouFrom() {
       .done(function() {
         if (window.returnCitySN) {
           var city = returnCitySN.cname
-          console.log(city)
+          // console.log(city)
           // 先从前到后判断
           // 先找省
           // 再找市
@@ -325,7 +325,7 @@ function detectWhereYouFrom() {
               REGIONSDATA_SELECTED_DATA.provinceCode = ele.code
             }
           })
-          console.log('find1:', find1)
+          // console.log('find1:', find1)
           if (find1) {
             $.each(REGIONSDATA, function(index, ele) {
               if (city.indexOf(find1.name + ele.name) === 0) {

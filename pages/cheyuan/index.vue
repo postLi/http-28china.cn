@@ -140,7 +140,9 @@
           <div class="zx_sx"><span class="biaozhi"/><span>车源信息</span></div>
           <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
 
-          <div class="list_none">
+          <div 
+            class="list_none" 
+            style="display:none">
             <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
             <img src="../../static/images/none_pic.png">
           </div>
@@ -149,7 +151,7 @@
             style="display: none;">
             <li id="cy_list_0">
               <div class="sc_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em id="nr0520"/>收藏量</i></span></div>
-              <div class="view_num"><img src="../../static/images/list_wlzx/ll_num.png"><span><i><em id="nr0521"/>浏览量</i></span></div>
+              <div class="view_num"><img src="/_nuxt/static/images/wzlImg/lll.png"><span><i><em id="nr0521"/>浏览量</i></span></div>
             </li>
             <li class="cy_list_4">
               <a
@@ -191,13 +193,15 @@
                 target="_blank" ><input
                   readonly
                   value="查看"></a>
-              </p><p class="p3"><a
+              </p>
+              <!-- <p class="p3"><a
                 id="nr_a53"
                 target="_blank"
                 href="http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes"><input
                   id="qq"
-                  value="QQ交谈"></a>
-            </p></li>
+                  value="QQ交谈">
+              </a></p> -->
+            </li>
           </ul>
 
 
@@ -234,48 +238,64 @@
 
       <div
         id="js009"
-        class="list_right">
+        class="list_right"
+      >
 
         <div class="zx_sx"><span class="biaozhi"/><span>车源信息推荐</span></div>
 
         <div class="tj_none cy_tj_none">
           <span>没有相关车源推荐</span>
         </div>
-        <div
-          class="tj_list"
-          style="display:none"
-        >
-          <p class="p1">
-            <a
-              id="nr0500"
-              class="list-title-a"
-              target="_blank" >
-              <span class="list-icon lines-sprite-icons icon-start"/>广西省柳州市
-              <em id="nr0511"/>
-              <span class="list-icon lines-sprite-icons icon-through"/>
-              <span class="list-icon lines-sprite-icons icon-end"/>广东省广州市
-              <em id="nr0512"/>
-            </a>
+        <div class="che_box">
+          <div class="tj_list">
+            <p class="p1">
+              <a
+                id="nr0500"
+                class="list-title-a"
+                target="_blank" >
+                <span class="list-icon lines-sprite-icons icon-start"/>
+                <em id="nr0511"/>
+                <span class="list-icon lines-sprite-icons icon-through"/>
+                <span class="list-icon lines-sprite-icons icon-end"/>
+                <em id="nr0512"/>
+              </a>
 
-          </p>
-          <p class="p3"><i>车辆载重：</i>44<span id="nr0513"/><em>车长：</em>44<font id="nr0514"/></p>
-          <p class="p3">
-            <i>车源类型：</i><span id="nr0515"/><em>车型：</em><font id="nr0516"/>
-          </p>
-          <p class="p4">
-            <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span id="nr0517"/>
-          </p>
-          <p class="p4">
-            <i>发车时间：</i><span id="nr0518"/>
-          </p>
-          <p class="p5">
-            <img src="/templets/default/images/list_wlzx/10shiming.png" >
-          </p>
-          <div class="p6">
-            <div class="sc_num1"><img src="/templets/default/images/list_wlzx/sc_num.png"><span><i><em id="tj101"/>人收藏</i></span></div>
-            <div class="view_num1"><img src="/templets/default/images/list_wlzx/ll_num.png"><span><i><em id="tj102"/>浏览量</i></span></div>
+            </p>
+            <div class="che_che">
+              
+              <p class="p3"><i>车辆载重：</i><span id="nr0513"/><em>车长：</em><font id="nr0514"/></p>
+              <p class="p3">
+                <i>车源类型：</i><span id="nr0515"/><em>车辆类型：</em><font id="nr0516"/>
+              </p>
+              <p class="p4">
+                <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span id="nr0517"/>
+              </p>
+            </div>
+            
+            <!-- <p class="p4">
+              <i>发车时间：</i><span id="nr0518"/>
+            </p> -->
+            <div class="p5">
+              <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
+              <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span>
+              <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span>
+              <span id="nr0518">2/25/19 13:11:00</span>
+            </div>
+            <!-- <p class="p5">
+              <img src="member/images/list_wlzx/wlgs_xinyong.png" >
+            </p>
+            <p class="p5">
+              <img src="member/images/list_wlzx/wlgs_danbao.png" >
+            </p> -->
+            <!-- <div class="p6">
+              <div class="sc_num1"><img src="member/images/list_wlzx/sc_num.png"><span><i><em id="tj101"/>人收藏</i></span></div>
+              <div class="view_num1"><img src="member/images/list_wlzx/ll_num.png"><span><i><em id="tj102"/>浏览量</i></span></div>
+            </div> -->
           </div>
+         
         </div>
+        
+       
       </div>
     </div>
     <div class="h70"/>
@@ -285,6 +305,9 @@
 <script>
 export default {
   name: 'CheYuan',
+  head: {
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
+  },
   mounted() {
     seajs.use(['./js/city-picker.data.js'], function() {
       seajs.use(['./js/city-picker.js'], function() {
@@ -804,19 +827,31 @@ export default {
 
           //车源列表 推荐列表S
           function process01() {
+            var startProvince = $.cookie('currentProvinceFullName')
+            var startCity = $.cookie('currentAreaFullName')
             $.ajax({
-              type: 'post',
+              type: 'get',
               headers: {
                 'Content-Type': 'application/json'
               },
               url:
-                '/api/aflc-portal/portalt/aflcCarInfo/v1/getPortalRecommendlist',
+                '/api/28chinaservice/carInfo/recommendList?' +
+                'startProvince=' +
+                startProvince +
+                '&' +
+                'startCity=' +
+                startCity,
+              // '/api/aflc-portal/portalt/aflcCarInfo/v1/getPortalRecommendlist',
               dataType: 'json',
-              data: JSON.stringify({
-                currentPage: 1,
-                pageSize: 14,
-                vo: vo //JSON.stringify({})
-              }),
+              // data: JSON.stringify({
+              // currentPage: 1,
+              // pageSize: 14,
+              // vo: vo //JSON.stringify({})
+              // vo: {
+              //   startProvince: startProvince,
+              //   startCity: startCity
+              // }
+              // }),
               success: function(res) {
                 $('#js009 .tj_list')
                   .not(':eq(0)')
@@ -845,8 +880,8 @@ export default {
                   if (!datas[i].usualPlace) {
                     var usualPlace = ''
                   }
-                  var usualPlace = datas[i].usualPlace.substring(0, 12)
-
+                  // var usualPlace = datas[i].usualPlace.substring(0, 12)
+                  var usualPlace = datas[i].usualPlace
                   var startCity = datas[i].startCity
                   var startArea = datas[i].startArea
                   var endCity = datas[i].endCity
@@ -874,7 +909,8 @@ export default {
 
                   var startTime = datas[i].startTime
                   if (startTime) {
-                    startTime = startTime.substring(0, 10)
+                    // startTime = startTime.substring(1, 10)
+                    // startTime = datas[i].startTime.split(1, 10)
                   }
 
                   var arcurl =
@@ -892,10 +928,10 @@ export default {
                   $('#nr0500').attr('href', arcurl)
                   $('#tj101').html(collectNum)
                   $('#tj102').html(browseNumber)
-                  var s1 = '<ul class="tj_list tj_list' + i + '">'
+                  var s1 = '<div class="tj_list" data-v-fa4d12fa>'
                   var s2 = $('.tj_list').html()
                   var s3 = '</div>'
-                  $('#js009').append(s1 + s2 + s3)
+                  $('.che_box').append(s1 + s2 + s3)
                   if (driverStatus != 'AF0010403') {
                     console.log('is not shiming')
                     $('.tj_list' + i + ' .p5').css('display', 'none')
@@ -919,8 +955,7 @@ export default {
               headers: {
                 'Content-Type': 'application/json'
               },
-              url:
-                '/api/aflc-portal/portalt/aflcCarInfo/v1/getPortalCardInfolist',
+              url: '/api/28-web/carInfo/list',
               dataType: 'json',
               async: false,
               data: JSON.stringify({
@@ -937,8 +972,7 @@ export default {
                   totalPage = res.data.totalPage
                   console.log(totalPage)
                 }
-
-                if (!res.data || !res.data.totalCount) {
+                if (!res.data || !res.data.total) {
                   console.log('内容为空')
                   $('.box').css('display', 'none')
                   $('.list_none').css('display', 'block')
@@ -957,8 +991,8 @@ export default {
                   if (!createrName) {
                     createrName = ''
                   }
-                  var carNum =
-                    carNum.substring(0, 2) + '***' + carNum.substring(6, 10)
+                  // var carNum = datas[i].
+                  // carNum.substring(0, 2) + '***' + carNum.substring(6, 10)
                   var remark = datas[i].remark
                   if (remark && remark.length > 19) {
                     var remark = datas[i].remark.substring(0, 19) + '...'
@@ -974,7 +1008,8 @@ export default {
                   if (!datas[i].usualPlace) {
                     var usualPlace = ''
                   }
-                  var usualPlace = datas[i].usualPlace.substring(0, 12)
+                  var usualPlace = datas[i].usualPlace
+                  // var usualPlace = datas[i].usualPlace.substring(0, 12)
                   var title = datas[i].title
 
                   var startCity = datas[i].startCity
@@ -996,10 +1031,10 @@ export default {
                   var start = startCity + startArea
                   var end = endCity + endArea
                   if (start && start.length > 6) {
-                    start = start.substring(0, 6) + '..'
+                    // start = start.substring(0, 6) + '..'
                   }
                   if (end && end.length > 6) {
-                    end = end.substring(0, 6) + '..'
+                    // end = end.substring(0, 6) + '..'
                   }
 
                   var expectPrice = datas[i].expectPrice
@@ -1048,9 +1083,9 @@ export default {
                   var s2 = $('.wlzx_list').html()
                   var s3 = '</ul>'
                   $('#js006').append(s1 + s2 + s3)
-                  if (!qq) {
-                    $('.wlzx_list' + i + ' #qq').css('display', 'none')
-                  }
+                  // if (!qq) {
+                  //   $('.wlzx_list' + i + ' #qq').css('display', 'none')
+                  // }
                   //if(!credit28){console.log("is not Vip");
                   //$('.wlzx_list'+i+' .cy_list_3 .p2').css("display","none")}
                   if (driverStatus != 'AF0010403') {
@@ -1160,6 +1195,11 @@ body {
   width: 344px;
   padding: 0px 0px 0 20px;
   float: left;
+}
+.list_right > ul {
+  float: left;
+  width: 100%;
+  background: #ffffff;
 }
 .list_hy_page2 {
   width: 1400px;
@@ -1454,6 +1494,14 @@ body {
   transition: all 0.4s;
   float: left;
 }
+.tj_list .p6 {
+  display: flex;
+}
+.tj_list .p6 > div {
+  flex: 1;
+  margin-left: 16px;
+  margin-right: 16px;
+}
 .tj_list:hover {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   transform: translate3d(0, -2px, 0);
@@ -1510,7 +1558,7 @@ body {
 }
 .tj_list .p3 em {
   float: left;
-  width: 50px;
+  /* width: 50px; */
   height: 30px;
 }
 .tj_list .p3 span {
@@ -1527,6 +1575,30 @@ body {
   margin-top: 5px;
   margin-bottom: 10px;
   margin-right: 8px;
+}
+.tj_list .p5 {
+  float: left;
+  width: 100%;
+  padding: 0 22px;
+  box-sizing: border-box;
+  /* display: flex; */
+}
+.tj_list .p5 span {
+  float: left;
+  /* flex: 1; */
+  /* margin-left: 24px; */
+}
+.tj_list .p5 span:last-child {
+  float: right;
+  line-height: 35px;
+  font-size: 12px;
+  /* flex: 10; */
+}
+.che_che {
+  float: left;
+  margin: 12px 20px;
+  background-color: #f8f8f8;
+  box-sizing: border-box;
 }
 .tj_list img {
   transition: 0.7s;
@@ -1562,7 +1634,9 @@ body {
   width: 180px;
   margin-left: 11px;
 }
-
+.cy_list_4 > a {
+  float: left;
+}
 .cy_list_5 {
   width: 102px;
   margin-left: 60px;
@@ -1809,6 +1883,14 @@ body {
   font-size: 12px;
   line-height: 26px;
 }
+.view_num img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  float: left;
+  margin: 0px 5px;
+  vertical-align: middle;
+}
 .sc_num {
   float: right;
   height: 26px;
@@ -1820,7 +1902,7 @@ body {
   overflow: visible;
 }
 #cy_list_0 img {
-  margin-top: 30px;
+  margin-top: 32px;
   float: left;
   margin-right: 7px;
 }
@@ -1898,6 +1980,9 @@ body {
 }
 .view_num1 span,
 .sc_num1 span {
+  float: left;
+}
+.che_box {
   float: left;
 }
 </style>

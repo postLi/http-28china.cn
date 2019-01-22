@@ -2518,10 +2518,10 @@ background-image:none;
   cursor: pointer;
   cursor: hand;
 }
-.select_con { border: 1px solid #F4F4F4; border-bottom: none;width: 100%; margin: 0 auto; }
+.select_con { border: 1px solid #F4F4F4; width: 100%; margin: 0 auto; padding: 15px 0; }
 .select_con dl dt { float: left; font-size: 12px; line-height: 24px; padding: 10px 0 0 20px; }
-.select_con dl dd { padding: 10px 0 10px 120px; line-height: 24px; border-bottom: 1px solid #F4F4F4; }
-.select_con dl dd a { padding: 2px 5px; color: #444; margin-right: 0px; line-height: 15px; display: inline-block; _margin-bottom: 5px; }
+.select_con dl dd { padding: 10px 0 10px 120px; line-height: 35px;}
+.select_con dl dd a { padding: 2px 5px; color: #444; margin-right: 0px; line-height: 15px; display: inline-block; _margin-bottom: 5px; margin:0 5px;}
 .select_con dl dd a:hover, .select_con dl dd a.now { background: #FF5833; color: #fff;}
 .tselect dl dd { padding: 10px 0 10px 60px; line-height: 24px; border-bottom: 1px solid #F4F4F4; }
 .slinks{width:1190px;}

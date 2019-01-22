@@ -96,41 +96,45 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/insuranceStep2.css' },
       { rel: 'stylesheet', href: '/css/insuranceComon.css' }
-    ],
-    script: [{ src: '/js/insurance.js' }]
+    ]
   },
   layout: 'subLayout',
   mounted() {
-    $(function() {
-      var url1 = location.search.substr(1)
-      var obj = {
-        goodsType: $('#data1').val(), //货物类型
-        goodsName: $('#data2').val(), //货物名称
-        goodsPack: $('#data3').val(), //货物包装
-        goodsNumber: $('#data4').val(), //货物数量
-        goodsValue: $('#data5').val() //货物价值
-      }
-      function checkValue(v) {
-        if (v.value * 1 > 3000000) {
-          v.value = 3000000
+    seajs.use('/js/insurance.js', function() {
+      $(function() {
+        var url1 = location.search.substr(1)
+        var obj = {
+          goodsType: $('#data1').val(), //货物类型
+          goodsName: $('#data2').val(), //货物名称
+          goodsPack: $('#data3').val(), //货物包装
+          goodsNumber: $('#data4').val(), //货物数量
+          goodsValue: $('#data5').val() //货物价值
         }
-      }
-      window.sessionStorage.setItem('step2', JSON.stringify(obj))
-      function next() {
-        if (insuranceValidate.check()) {
-          obj.goodsType = $('#data1').val()
-          obj.goodsName = $('#data2').val()
-          obj.goodsPack = $('#data3').val()
-          obj.goodsNumber = $('#data4').val()
-          obj.goodsValue = $('#data5').val()
-          window.sessionStorage.setItem('step2', JSON.stringify(obj))
-          if (window.history.length === 2) {
-            window.location.href = '/Insurance/step3'
-          } else {
-            window.history.forward()
+        function checkValue(v) {
+          if (v.value * 1 > 3000000) {
+            v.value = 3000000
           }
         }
-      }
+        window.sessionStorage.setItem('step2', JSON.stringify(obj))
+        $('.next_button').click(function() {
+          next()
+        })
+        function next() {
+          if (insuranceValidate.check()) {
+            obj.goodsType = $('#data1').val()
+            obj.goodsName = $('#data2').val()
+            obj.goodsPack = $('#data3').val()
+            obj.goodsNumber = $('#data4').val()
+            obj.goodsValue = $('#data5').val()
+            window.sessionStorage.setItem('step2', JSON.stringify(obj))
+            if (window.history.length === 2) {
+              window.location.href = '/Insurance/step3'
+            } else {
+              window.history.forward()
+            }
+          }
+        }
+      })
     })
   }
 }

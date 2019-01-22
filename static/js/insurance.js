@@ -103,6 +103,7 @@ var api = {
               duration: 3000
             })
             $('.login_box').show()
+            $('.login_box_mask').show()
           }
         }
       })
@@ -128,6 +129,7 @@ var api = {
               duration: 3000
             })
             $('.login_box').show()
+            $('.login_box_mask').show()
           }
         }
       })

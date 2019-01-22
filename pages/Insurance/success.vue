@@ -29,10 +29,7 @@
             明的目的地的收货人在当地的第一个仓库或储存处所时终止。但保险货物运抵目的地后，如收货人未及时提
             货，则保险责任的终止期限最多延长至以收货人接到《到货通知单》后的十五天为限（以邮戳日期为准）。</td></tr>
           </table>
-		
         </div>
-	
-	
       </div>
       <div class="success_go"><a 
         href="http://member.28china.cn/insurance/manage" 
@@ -47,27 +44,28 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/insuranceSuccess.css' },
       { rel: 'stylesheet', href: '/css/insuranceComon.css' }
-    ],
-    script: [{ src: '/js/insurance.js' }]
+    ]
   },
   layout: 'Sublayout',
   mounted() {
-    $(function() {
-      var theRequest = getRequest()
-      var url =
-        '/aflc-uc/usercenter/aflcinsurancepolicy/v1/' +
-        theRequest.id +
-        '?access_token=' +
-        $.cookie('access_token')
-      api
-        .getInfo(url)
-        .done(function(res) {
-          if (res.status === 200 && res.data.paymentState === 1) {
-            $('#insuranceNum').html(res.data.insuranceNum)
-            $('#insuranceFee').html(res.data.insuranceFee)
-          }
-        })
-        .fail(function(err) {})
+    seajs.use(['/js/insurance.js'], function() {
+      $(function() {
+        var theRequest = getRequest()
+        var url =
+          '/aflc-uc/usercenter/aflcinsurancepolicy/v1/' +
+          theRequest.id +
+          '?access_token=' +
+          $.cookie('access_token')
+        api
+          .getInfo(url)
+          .done(function(res) {
+            if (res.status === 200 && res.data.paymentState === 1) {
+              $('#insuranceNum').html(res.data.insuranceNum)
+              $('#insuranceFee').html(res.data.insuranceFee)
+            }
+          })
+          .fail(function(err) {})
+      })
     })
   }
 }

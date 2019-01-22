@@ -6,10 +6,10 @@
           id="list_nav_a"
           href="">车源信息</a>
       </div>
-      <div class="list_left">
+      <div class="list_left" >
         <div
           class="w1036"
-          style=" background-color: #fff;">
+          style=" background-color: #fff;border:1px solid #eeeeee;">
           <div class="zx_sx"><span class="biaozhi"/><span>车源筛选</span>
             <a
               class="toggle-btn show-collapse"
@@ -243,21 +243,22 @@
         </div>
         <div
           class="tj_list"
-          style="display: none;">
+          style="display:none"
+        >
           <p class="p1">
             <a
               id="nr0500"
               class="list-title-a"
               target="_blank" >
-              <span class="list-icon lines-sprite-icons icon-start"/>
+              <span class="list-icon lines-sprite-icons icon-start"/>广西省柳州市
               <em id="nr0511"/>
               <span class="list-icon lines-sprite-icons icon-through"/>
-              <span class="list-icon lines-sprite-icons icon-end"/>
+              <span class="list-icon lines-sprite-icons icon-end"/>广东省广州市
               <em id="nr0512"/>
             </a>
 
           </p>
-          <p class="p3"><i>车辆载重：</i><span id="nr0513"/><em>车长：</em><font id="nr0514"/></p>
+          <p class="p3"><i>车辆载重：</i>44<span id="nr0513"/><em>车长：</em>44<font id="nr0514"/></p>
           <p class="p3">
             <i>车源类型：</i><span id="nr0515"/><em>车型：</em><font id="nr0516"/>
           </p>
@@ -1100,24 +1101,31 @@ body {
   font-size: 18px;
   font-weight: bold;
   background-color: #fff;
+  border-bottom: 2px solid #3f94ee;
 }
 .list_cy .zx_sx {
-  border-bottom: 2px solid #2577e3;
+  border-bottom: 2px solid #3f94ee;
   margin-bottom: 1px;
 }
 .list_right .zx_sx {
-  border-bottom: 2px solid #2577e3;
+  border-bottom: 2px solid #3f94ee;
   margin-bottom: 1px;
 }
 .zx_sx span {
   float: left;
   display: block;
-  color: #2577e3;
+  color: #3f94ee;
+}
+.expand span {
+  color: #999;
+}
+.collapse span {
+  color: #999;
 }
 .zx_sx .biaozhi {
   width: 3px;
   height: 18px;
-  background-color: #2577e3;
+  background-color: #3f94ee;
   border-radius: 1px;
   margin: 16px 12px 0px 10px;
 }
@@ -1135,7 +1143,7 @@ body {
   width: 1036px;
   float: left;
   /*OVERFLOW: hidden;*/
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
   border-bottom: 0;
 }
 .tywlist {
@@ -1189,9 +1197,9 @@ body {
   width: 72px;
   height: 28px;
   border-radius: 2px;
-  border: solid 1px #2577e3;
+  border: solid 1px #3f94ee;
   background-color: #fff;
-  color: #2577e3;
+  color: #3f94ee;
   font-size: 15px;
   text-align: left;
   margin-left: 8px;
@@ -1203,7 +1211,7 @@ body {
   color: #f9f9f9;
   padding-left: 20px;
   background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png) 10px
-    6px #2577e3;
+    6px #3f94ee;
 }
 #flush {
   width: 70px;
@@ -1284,7 +1292,9 @@ body {
 
 .wlzx_list {
   width: 1034px;
-  height: 180px;
+  float: left;
+  /* height: 180px; */
+  /* height: none !important; */
   border: solid 1px #dfdfdf;
   border-left: 0px;
   border-right: 0px;
@@ -1298,7 +1308,7 @@ body {
   transform: translate3d(0, -2px, 0);
 }
 .wlzx_list li {
-  height: 140px;
+  /* height: 140px; */
   float: left;
   overflow: hidden;
 }
@@ -1331,7 +1341,7 @@ body {
 .wlzx_list_6 {
   width: 110px;
   margin-left: 85px;
-  margin-top: 40px;
+  margin-top: 50px;
 }
 .wlzx_list_2 p {
   height: 26px;
@@ -1351,7 +1361,7 @@ body {
   padding-left: 5px;
 }
 .wlzx_list_2 .p2 font {
-  color: #2577e3;
+  color: #3f94ee;
   font-size: 14px;
   padding-left: 5px;
 }
@@ -1403,14 +1413,17 @@ body {
 
 .wlzx_list_6 p input {
   display: block;
-  width: 102px;
-  height: 26px;
+  width: 80px;
+  height: 30px;
   line-height: 26px;
   border-radius: 3px;
   text-align: center;
   font-size: 14px;
   cursor: pointer;
   border: solid 1px #dedede;
+}
+.wlzx_list_6 p input:hover {
+  opacity: 0.8;
 }
 .wlzx_list_6 .p1,
 .wlzx_list_6 .p2 {
@@ -1439,6 +1452,7 @@ body {
   width: 342px;
   font-size: 14px;
   transition: all 0.4s;
+  float: left;
 }
 .tj_list:hover {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
@@ -1457,7 +1471,7 @@ body {
 }
 .tj_list .p1 span {
   font-size: 16px;
-  color: #2577e3;
+  color: #3f94ee;
 }
 .tj_list .p1 i {
   color: #c5c5c5;
@@ -1525,7 +1539,7 @@ body {
   float: left;
 }
 .tj_list .p6 span {
-  color: #2577e3;
+  color: #3f94ee;
   font-size: 14px;
 }
 /*物流专线 E */
@@ -1557,11 +1571,11 @@ body {
   margin-bottom: 3px;
 }
 .cy_list_1 p {
-  height: 26px;
-  line-height: 26px;
+  height: 40px;
+  line-height: 40px;
 }
 .cy_list_1 p a {
-  color: #eb434d;
+  /* color: #eb434d; */
   font-size: 16px;
 }
 .cy_list_1 p i {
@@ -1614,13 +1628,14 @@ body {
 .cy_list_1 .p1 a:hover em {
   color: #fa5000;
 }
-.cy_list_1 p {
+/* .cy_list_1 p {
   height: 30px;
   line-height: 30px;
-}
+} */
 .cy_list_1 p a {
-  color: #2577e3;
+  /* color: #3f94ee; */
   font-size: 16px;
+  font-weight: bold;
 }
 .cy_list_1 p i {
   font-size: 14px;
@@ -1658,7 +1673,7 @@ body {
   line-height: 30px;
 }
 .wlzx_list_6 .p2 input {
-  background-color: #2577e3;
+  background-color: #3f94ee;
   color: #fff;
   border: 0;
 }
@@ -1805,20 +1820,21 @@ body {
   overflow: visible;
 }
 #cy_list_0 img {
-  margin-top: 15px;
+  margin-top: 30px;
   float: left;
   margin-right: 7px;
 }
 #cy_list_0 span {
   float: left;
-  margin-top: 13px;
+  margin-top: 28px;
 }
 .cy_list_4 img {
   width: 180px;
-  height: 128px;
+  height: 180px;
 }
 .list_cy {
   margin-top: 20px;
+  padding-bottom: 20px;
 }
 
 .lines-sprite-icons {

@@ -62,114 +62,115 @@ export default {
     ]
   },
   layout: 'Sublayout',
-  script: [{ src: '/js/insurance.js' }],
   mounted() {
-    $(function() {
-      var theRequest = getRequest()
-      var timer = null
-      var url =
-        '/aflc-uc/usercenter/aflcinsurancepolicy/v1/' +
-        theRequest.id +
-        '?access_token=' +
-        $.cookie('access_token')
-      api
-        .getInfo(url)
-        .done(function(res) {
-          $('#insuranceNum').html(res.data.insuranceNum)
-          $('#theInsuredName').html(res.data.theInsuredName)
-          $('#createTime').html(res.data.createTime)
-          $('#insuranceName').html(res.data.insuranceName)
-          $('#insuranceFee').html(res.data.insuranceFee + '元')
-          $('.pay_money').html(
-            '<font>' + res.data.insuranceFee + '</font><em>元</em>'
-          )
-        })
-        .fail(function(err) {})
-
-      function pay() {
-        if (!$('.agree_none').hasClass('agree_yes')) {
-          layer.alert('请接受《平安保险投保须知》和《保险条款》')
-          return
-        }
-        var payChannel, invoiceType
-        switch ($('.item_right .fapiao_checked').html()) {
-          case '不开':
-            var invoiceType = 0
-            break
-          case '开':
-            var invoiceType = 1
-            break
-        }
-
-        if ($('.item_right .pay_checked1').val() === '微信支付') {
-          payChannel = 'wx'
-        }
-        if ($('.item_right .pay_checked2').val() === '支付宝支付') {
-          payChannel = 'ali'
-        }
+    seajs.use(['/js/insurance.js'], function() {
+      $(function() {
+        var theRequest = getRequest()
+        var timer = null
         var url =
-          '/api/aflc-uc/usercenter/aflcinsurancepolicy/v1/scanPay/' +
+          '/aflc-uc/usercenter/aflcinsurancepolicy/v1/' +
           theRequest.id +
           '?access_token=' +
-          $.cookie('access_token') +
-          '&invoiceType=' +
-          invoiceType +
-          '&payChannel=' +
-          payChannel
-        layer.open({
-          type: 1,
-          offset: 'auto',
-          id: 'layerDemoAuto',
-          content:
-            '<div style="width: 340px;height: 340px;text-align: center;line-height: 340px">二维码加载中...<img id="imgcontainer" style="padding: 20px;top: 0;left: 0; position: absolute" /></div>',
-          btnAlign: 'c',
-          shade: 0,
-          end: function() {
-            clearTimeout(timer)
-          }
-        })
+          $.cookie('access_token')
+        api
+          .getInfo(url)
+          .done(function(res) {
+            $('#insuranceNum').html(res.data.insuranceNum)
+            $('#theInsuredName').html(res.data.theInsuredName)
+            $('#createTime').html(res.data.createTime)
+            $('#insuranceName').html(res.data.insuranceName)
+            $('#insuranceFee').html(res.data.insuranceFee + '元')
+            $('.pay_money').html(
+              '<font>' + res.data.insuranceFee + '</font><em>元</em>'
+            )
+          })
+          .fail(function(err) {})
 
-        var xhr = new XMLHttpRequest()
-        xhr.open('post', url, true)
-        xhr.responseType = 'blob'
-        xhr.onload = function() {
-          if (this.status === 200) {
-            var blob = this.response
-            $('#imgcontainer').attr('src', window.URL.createObjectURL(blob))
-            getPayResult(theRequest.id, payChannel)
+        function pay() {
+          if (!$('.agree_none').hasClass('agree_yes')) {
+            layer.alert('请接受《平安保险投保须知》和《保险条款》')
+            return
           }
+          var payChannel, invoiceType
+          switch ($('.item_right .fapiao_checked').html()) {
+            case '不开':
+              var invoiceType = 0
+              break
+            case '开':
+              var invoiceType = 1
+              break
+          }
+
+          if ($('.item_right .pay_checked1').val() === '微信支付') {
+            payChannel = 'wx'
+          }
+          if ($('.item_right .pay_checked2').val() === '支付宝支付') {
+            payChannel = 'ali'
+          }
+          var url =
+            '/api/aflc-uc/usercenter/aflcinsurancepolicy/v1/scanPay/' +
+            theRequest.id +
+            '?access_token=' +
+            $.cookie('access_token') +
+            '&invoiceType=' +
+            invoiceType +
+            '&payChannel=' +
+            payChannel
+          layer.open({
+            type: 1,
+            offset: 'auto',
+            id: 'layerDemoAuto',
+            content:
+              '<div style="width: 340px;height: 340px;text-align: center;line-height: 340px">二维码加载中...<img id="imgcontainer" style="padding: 20px;top: 0;left: 0; position: absolute" /></div>',
+            btnAlign: 'c',
+            shade: 0,
+            end: function() {
+              clearTimeout(timer)
+            }
+          })
+
+          var xhr = new XMLHttpRequest()
+          xhr.open('post', url, true)
+          xhr.responseType = 'blob'
+          xhr.onload = function() {
+            if (this.status === 200) {
+              var blob = this.response
+              $('#imgcontainer').attr('src', window.URL.createObjectURL(blob))
+              getPayResult(theRequest.id, payChannel)
+            }
+          }
+          xhr.send()
         }
-        xhr.send()
-      }
 
-      function getPayResult(id, payChannel) {
-        var url =
-          '/aflc-uc/usercenter/aflcinsurancepolicy/v1/result/' +
-          id +
-          '?access_token=' +
-          $.cookie('access_token') +
-          '&payChannel=' +
-          payChannel
-        clearTimeout(timer)
-        timer = setTimeout(function() {
-          api
-            .getInfo(url)
-            .done(function(res) {
-              if (res.data !== '未支付') {
-                console.log('支付成功')
-                window.location.href =
-                  '/Insurance/success.htm?id=' + theRequest.id
-              } else {
+        function getPayResult(id, payChannel) {
+          var url =
+            '/aflc-uc/usercenter/aflcinsurancepolicy/v1/result/' +
+            id +
+            '?access_token=' +
+            $.cookie('access_token') +
+            '&payChannel=' +
+            payChannel
+          clearTimeout(timer)
+          timer = setTimeout(function() {
+            api
+              .getInfo(url)
+              .done(function(res) {
+                if (res.data !== '未支付') {
+                  console.log('支付成功')
+                  window.location.href =
+                    '/Insurance/success.htm?id=' + theRequest.id
+                } else {
+                  // 支付失败
+                  getPayResult(id, payChannel)
+                }
+              })
+              .fail(function(err) {
                 // 支付失败
                 getPayResult(id, payChannel)
-              }
-            })
-            .fail(function(err) {
-              // 支付失败
-              getPayResult(id, payChannel)
-            })
-        }, 2000)
-      }
+              })
+          }, 2000)
+        }
+      })
     })
   }
 }

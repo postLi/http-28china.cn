@@ -67,9 +67,6 @@
               <em/><span style="float: left;">时效保障</span></p>
               <p class="p2">承诺在规定时间内送达的时效保障服务。</p>
             </li>
-    	
-    	
-    	
           </ul>
         </div>
 		

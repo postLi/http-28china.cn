@@ -132,7 +132,7 @@ function is_collection_zx(userType, mobile, collectId) {
       console.log(err.responseText)
     }
   })
-  console.log('collection_status=' + is_collection_zx)
+  // console.log('collection_status=' + is_collection_zx)
   return { collection_status: collection_status, collectNum: collectNum }
 }
 
@@ -162,7 +162,7 @@ function is_collection_wlgs(userType, mobile, collectId) {
       console.log(err.responseText)
     }
   })
-  console.log('collection_status=' + is_collection_zx)
+  // console.log('collection_status=' + is_collection_zx)
   return { collection_status: collection_status, collectNum: collectNum }
 }
 
@@ -195,7 +195,7 @@ function is_collection_hz(userType, mobile, collectId) {
       console.log(err.responseText)
     }
   })
-  console.log('collection_status=' + is_collection_zx)
+  // console.log('collection_status=' + is_collection_zx)
   return { collection_status: collection_status, collectNum: collectNum }
 }
 
@@ -228,7 +228,7 @@ function is_collection_cz(userType, mobile, collectId) {
       console.log(err.responseText)
     }
   })
-  console.log('collection_status=' + is_collection_zx)
+  // console.log('collection_status=' + is_collection_zx)
   return { collection_status: collection_status, collectNum: collectNum }
 }
 

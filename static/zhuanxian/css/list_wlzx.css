@@ -10,7 +10,7 @@ background-color: #fff;
 .zx_sx .biaozhi{
     width: 3px;
     height: 18px;
-    background-color: #2577e3;
+    background-color: #3f94ee;
     border-radius: 1px;
     margin: 16px 12px 0px 10px;
 
@@ -100,8 +100,8 @@ margin-left: 10px;
 }
 
 .list_img{ position: relative;top:10px;left: 5px;margin-right: 5px;}
-.select_con dl dd a{min-width: 60px;text-align: center;}
-.select_con dl dd a:hover, .select_con dl dd a.now { background:#3371ff; color: #fff;}
+.lll-zhuangXian .select_con dl dd a{min-width: 60px;text-align: center;color: #333333;font-weight: 600;}
+.select_con dl dd a:hover, .select_con dl dd a.now { background:rgba(63,151,239,1); color: #fff;}
 .ck_input{
 	width: 14px;
 	height: 14px;

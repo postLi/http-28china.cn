@@ -4,9 +4,9 @@
       <div class="collection_zx">
         <div 
           class="bt_close" 
-          onclick="$('.collection_zx').hide()" ><img src="/templets/default/images/article_wlzx/xxx.png"></div>	
+          onclick="$('.collection_zx').hide()" ><img src="/member/images/article_wlzx/xxx.png"></div>	
         <div class="collection_zx_nr">
-          <img src="/templets/default/images/article_wlzx/yes.png">
+          <img src="/member/images/article_wlzx/yes.png">
           <span>成功加入</span><a 
             id="collection_url" 
             target="_blank" 
@@ -53,21 +53,21 @@
             <div class="item_left">平台信用</div>
             <div class="item_right item02"><img 
               id="shiming" 
-              src="/templets/default/images/list_wlzx/10shiming.png" ><img 
+              src="/member/images/list_wlzx/10shiming.png" ><img 
                 id="xinyong" 
-                src="/templets/default/images/list_wlzx/11xinyong.png" ></div>
+                src="/member/images/list_wlzx/11xinyong.png" ></div>
           </li>
           <li class="box_item box_zzfw" >
             <div class="item_left">增值服务</div>
             <div class="item_right item03">
-              <span id="fw001"><img src="/templets/default/images/pic/item_zzfw1.png" >送货上门</span>
-              <span id="fw002"><img src="/templets/default/images/pic/item_zzfw2.png" >保价运输</span>
-              <span id="fw003"><img src="/templets/default/images/pic/item_zzfw3.png" >运费到付</span>
-              <span id="fw004"><img src="/templets/default/images/pic/item_zzfw4.png" >代收货款</span>
-              <span id="fw005"><img src="/templets/default/images/pic/item_zzfw5.png" >开发票</span>
-              <span id="fw006"><img src="/templets/default/images/pic/item_zzfw6.png" >上门提货</span>
-              <span id="fw007"><img src="/templets/default/images/pic/item_zzfw7.png" >签单回收</span>
-              <span id="fw008"><img src="/templets/default/images/pic/item_zzfw8.png" >时效保障</span>
+              <span id="fw001"><img src="/member/images/pic/item_zzfw1.png" >送货上门</span>
+              <span id="fw002"><img src="/member/images/pic/item_zzfw2.png" >保价运输</span>
+              <span id="fw003"><img src="/member/images/pic/item_zzfw3.png" >运费到付</span>
+              <span id="fw004"><img src="/member/images/pic/item_zzfw4.png" >代收货款</span>
+              <span id="fw005"><img src="/member/images/pic/item_zzfw5.png" >开发票</span>
+              <span id="fw006"><img src="/member/images/pic/item_zzfw6.png" >上门提货</span>
+              <span id="fw007"><img src="/member/images/pic/item_zzfw7.png" >签单回收</span>
+              <span id="fw008"><img src="/member/images/pic/item_zzfw8.png" >时效保障</span>
             </div>
           </li>
           <li class="box_item">

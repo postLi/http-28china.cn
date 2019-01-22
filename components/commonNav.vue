@@ -247,10 +247,10 @@
             style="margin-left: 20px;"><nuxt-link to="/cheyuan">车源信息</nuxt-link></li>
           <li
             id="gs"
-            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=80">物流公司</nuxt-link></li>
+            style="margin-left: 20px;"><nuxt-link to="/gongsi">物流公司</nuxt-link></li>
           <li
             id="wd"
-            style="margin-left: 20px;"><nuxt-link to="/plus/list.php?tid=81">物流网点</nuxt-link></li>
+            style="margin-left: 20px;"><nuxt-link to="/wangdian">物流网点</nuxt-link></li>
           <li
             id="sx"
             style="margin-left: 20px;"><nuxt-link to="/shixiao">时效查询</nuxt-link></li>
@@ -266,7 +266,7 @@
             href="/Insurance">保险商城</a></li>
           <li
             id="news"
-            style="margin-left: 20px;"><a href="/plus/list.php?tid=12">物流资讯</a></li>
+            style="margin-left: 20px;"><a href="/zixun">物流资讯</a></li>
         </ul>
 
 

@@ -99,13 +99,13 @@ vo.lightPrice=lightPrice;
  if (!authStatus || authStatus == "null") {authStatus="";delete vo.authStatus;}
  if (!belongBrandCode || belongBrandCode== "null") {belongBrandCode="";delete vo.belongBrandCode;}
  if (!otherServiceCode || otherServiceCode== "null") {otherServiceCode="";delete vo.otherServiceCode;}
- 
+
  if (!orderNumber || orderNumber== "null") {orderNumber="";delete vo.orderNumber;}
  if (!transportAging || transportAging== "null") {transportAging="";delete vo.transportAging;}
  if (!weigthPrice || weigthPrice== "null") {weigthPrice="";delete vo.weigthPrice;}
  if (!lightPrice || lightPrice== "null") {lightPrice="";delete vo.lightPrice;}
 //vo.rangeIds=process01();
- 
+
 $("#address input").citypicker({
   province: startp,
   city: startc,
@@ -117,80 +117,81 @@ if(authStatus){$('.shiming').addClass("now");}
 $('#tjcx_02 .all').attr("href",UrlUpdateParams(window.location.href, "belongBrandCode", ""))
 $('#tjcx_03 .all').attr("href",UrlUpdateParams(window.location.href, "otherServiceCode", ""))
 //清空条件
-$("#flush").click(	
+$("#flush").click(
     	function(){
-    		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=80';
+    		// console.log("清空地址")
+    		window.location.href='/gongsi';
+    		// window.location.href='/plus/list.php?tid=80';
     })
 //清空条件
 
 //排序点击 S
- $("#seq0").click(	
+ $("#seq0").click(
     	function(){
     		console.log("clear排序")
     delete vo.orderNumber;
     delete vo.transportAging;
     delete vo.weigthPrice;
-    delete vo.lightPrice; 
+    delete vo.lightPrice;
     process02(1);
-    
+
     })
-  $("#seq1").click(	
+  $("#seq1").click(
     	function(){
     		console.log("orderNumber排序")
     delete vo.orderNumber;
     delete vo.transportAging;
     delete vo.weigthPrice;
-    delete vo.lightPrice; 
+    delete vo.lightPrice;
     vo.orderNumber=1;
     process02(1);
     })
-    $("#seq2").click(	
+    $("#seq2").click(
     	function(){
     		console.log("transportAging排序")
     delete vo.orderNumber;
     delete vo.transportAging;
     delete vo.weigthPrice;
-    delete vo.lightPrice; 
+    delete vo.lightPrice;
     vo.transportAging=1;
     process02(1);
     })
-        $("#seq3").mouseenter(	
+        $("#seq3").mouseenter(
     	function(){
     		console.log("弹出价格排序")
  $("#tj_price").css("display","block")
     })
-                $("#seq3").mouseleave(	
+                $("#seq3").mouseleave(
     	function(){
  $("#tj_price").css("display","none")
     })
-             $("#tj_price").mouseenter(	
+             $("#tj_price").mouseenter(
     	function(){
  $("#tj_price").css("display","block")
-    })  
-                 $("#tj_price").mouseleave(	
+    })
+                 $("#tj_price").mouseleave(
     	function(){
  $("#tj_price").css("display","none")
     })
-    $("#tj_price2").click(	
+    $("#tj_price2").click(
     	function(){
     		 $("#tj_price").css("display","none")
     		console.log("weigthPrice排序")
     delete vo.orderNumber;
     delete vo.transportAging;
     delete vo.weigthPrice;
-    delete vo.lightPrice; 
+    delete vo.lightPrice;
     vo.weigthPrice=1;
     process02(1);
     })
-    $("#tj_price1").click(	
+    $("#tj_price1").click(
     	function(){
     		 $("#tj_price").css("display","none")
     		console.log("lightPrice排序")
     delete vo.orderNumber;
     delete vo.transportAging;
     delete vo.weigthPrice;
-    delete vo.lightPrice; 
+    delete vo.lightPrice;
     vo.lightPrice=1;
     process02(1);
     })
@@ -201,7 +202,7 @@ $("#flush").click(
 //物流公司搜索 S
 
     $("#search_wlgs").click(
-    	
+
     	function(){
     			var list1 = [],list2 = [];
 			$('#address .select-item').each(function (i,e) {
@@ -219,7 +220,7 @@ $("#flush").click(
       companyName=encodeURI(companyName);
      var address=startp+startc+starta;
      var companyName=$("#companyName").val();
-      window.location='/plus/list.php?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
+      window.location='/gongsi?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
     })
 
 
@@ -236,29 +237,29 @@ function tjcx02(){
 		'Content-Type': 'application/json'
 		},
 		url:"/api/aflc-common/sysDict/getSysDictByCodeGet/AF029",
-		
+
 		success:function(res){
 			var datas = res.data;
 			if(!datas){return ;}
 			for(var i=0;i<datas.length;i++){
-				
-				var name=datas[i].name;	
+
+				var name=datas[i].name;
 				var code=datas[i].code;
         var myurl=UrlUpdateParams(window.location.href, "belongBrandCode", code)
 				 var s1='<a  href='+myurl+'>';
 				 var s3=name+'</a>';
-				 $("#tjcx_02").append(s1+s3);	
-				 
-			}	
-			
-				//选中状态 S 
+				 $("#tjcx_02").append(s1+s3);
+
+			}
+
+				//选中状态 S
 	if(belongBrandCode){
-	
+
 	$("#tjcx_02 a").each(function(){
 		var aaa=$(this).attr("href");
-		
+
 		if(aaa.indexOf(belongBrandCode) !=-1){
-			
+
 			console.log(aaa);
 			$("#tjcx_02 a").removeClass("now");
 			$(this).addClass("now");}
@@ -267,7 +268,7 @@ function tjcx02(){
 	//选中状态 E
 	},error:function(err){
 			console.log(err.responseText);
-		
+
 
 		}
 		})
@@ -283,29 +284,29 @@ function tjcx03(){
 		'Content-Type': 'application/json'
 		},
 		url:"/api/aflc-common/sysDict/getSysDictByCodeGet/AF025",
-		
+
 		success:function(res){
 			var datas = res.data;
 			$('.shiming').attr("href",'/plus/list.php?tid=80&address='+address+'&companyName='+companyName+'&authStatus=AF0010403')
 		    if(!datas){return ;}
 			for(var i=0;i<datas.length;i++){
-				
-				var name=datas[i].name;	
+
+				var name=datas[i].name;
 				var code=datas[i].code;
           var myurl=UrlUpdateParams(window.location.href, "otherServiceCode", code)
 				 var s1='<a  href='+myurl+'>';
 				 var s3=name+'</a>';
-				 $("#tjcx_03").append(s1+s3);	
-				 
-			}	
-			//选中状态 S 
+				 $("#tjcx_03").append(s1+s3);
+
+			}
+			//选中状态 S
 	if(otherServiceCode){
-	
+
 	$("#tjcx_03 a").not('.shiming').each(function(){
 		var aaa=$(this).attr("href");
-		
+
 		if(aaa.indexOf(otherServiceCode) !=-1){
-			
+
 			console.log(aaa);
 			$("#tjcx_03 a").not('.shiming').removeClass("now");
 			$(this).addClass("now");}
@@ -314,7 +315,7 @@ function tjcx03(){
 	//选中状态 E
 	},error:function(err){
 			console.log(err.responseText);
-		
+
 
 		}
 		})
@@ -341,20 +342,20 @@ var rangeIds="";
 			currentPage:1,
 			pageSize:14,
 			vo:vo		//JSON.stringify({})
-		}		
-		),	
+		}
+		),
 		success:function(res){
 			 $("#js007 .tj_list").not(":eq(0)").remove();
-			  if(!res.data||!res.data.totalCount){ 
+			  if(!res.data||!res.data.totalCount){
 				console.log("推荐内容为空")
 				$(".tj_none").css("display","block")}
 			  if(!res.data){return }
-			var datas = res.data.list;	
+			var datas = res.data.list;
 			for(var i=0;i<datas.length;i++){
 
-	
 
-		
+
+
 				var id=datas[i].id;
 				var companyId=datas[i].companyId;
                 var mobile=datas[i].mobile;
@@ -372,18 +373,18 @@ var rangeIds="";
 				var isVip=datas[i].isVip;
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-                $("#tj010").attr("href","/member/"+account+".html");
-				$("#tj_05").attr("href","/member/"+account+".html");
+                $("#tj010").attr("href","/member/"+account+"");
+				$("#tj_05").attr("href","/member/"+account+"");
 				$("#tj_01").html(companyName);
 				$("#tj_02").html(contactsName);
 				$("#tj_03").html(contactsTel+" "+mobile);
 				$("#tj_04").html(address);
 
 				 var s1='<div class="tj_list tj_list'+i+'">'
-				 var s2=$(".tj_list").html();	
+				 var s2=$(".tj_list").html();
 				 var s3='</div>'
-				$("#js007").append(s1+s2+s3);	
-				
+				$("#js007").append(s1+s2+s3);
+
 				  if(credit>=0&&credit<=3){
 		   	$('.tj_list'+i+' .xy_zuan:eq(0)').css("display","inline")
 		   	}
@@ -404,10 +405,10 @@ var rangeIds="";
 		   	}
 		   if(credit>=91&&credit<=150){
 		   	$('.tj_list'+i+' .xy_zuan').css("display","inline")
-		  
+
 		   	}
-		   
-		   
+
+
 		   if(credit>=151&&credit<=250){
 		   	$('.tj_list'+i+' .xy_guan:eq(0)').css("display","inline")
 		   	}
@@ -429,8 +430,8 @@ var rangeIds="";
 		   if(credit>=2001){
 		   	$('.tj_list'+i+' .xy_guan').css("display","inline")
 		   	}
-				 
-				
+
+
 				 if(isVip!=1){console.log("is not Vip");
 		  $('.tj_list'+i+'  #tj_xinyong').css("display","none")}
 		  if(authStatus!="AF0010403"){console.log("is not shiming");
@@ -438,16 +439,16 @@ var rangeIds="";
 		  if(!collateral||collateral==0){console.log("is not danbao");
 		  $('.tj_list'+i+'  #tj_danbao').css("display","none")}
 
-			}		
+			}
 
 		},error:function(err){
 			console.log(err.responseText);
-		
+
 
 		}
 		})
 	return rangeIds;
-	
+
 	}
 process01();
 //物流公司 推荐列表 E
@@ -469,23 +470,23 @@ var totalPage=8;
 			currentPage:currentPage,
 			pageSize:20,
 			vo:vo			//JSON.stringify({})
-		}		
-		),	
+		}
+		),
 		success:function(res){
 		  $("#js002 .wlzx_list").not(":eq(0)").remove();
 		   if(res.data){
 		  totalPage=res.data.totalPage;
 		  console.log(totalPage);}
-		   if(!res.data||!res.data.totalCount){ 
+		   if(!res.data||!res.data.totalCount){
 				console.log("内容为空")
 				$(".box").css("display","none")
 				$(".list_none").css("display","block")
 				return;
 		   }
-		  
-		  
-			var datas = res.data.list;			
-			for(var i=0;i<datas.length;i++){ 
+
+
+			var datas = res.data.list;
+			for(var i=0;i<datas.length;i++){
 	    var id=datas[i].id;
 				var companyId=datas[i].companyId;
 				var account=datas[i].account;
@@ -493,7 +494,7 @@ var totalPage=8;
 				if(companyName.length>8){companyName=companyName.substring(0,8)+'..'}
 				var contactsName = datas[i].contactsName;
 				if(contactsName&&contactsName.length>3){contactsName=contactsName.substring(0,3)+".."}
-				
+
 				var contactsTel=datas[i].contactsTel;
 				if(!contactsTel){contactsTel=''}
 				if(contactsTel.length>12){contactsTel=contactsTel.substring(0,12)+'..'}
@@ -522,9 +523,9 @@ var totalPage=8;
 				}
 				if(!datas[i].otherService){var otherService=""; }
 			    var credit=datas[i].credit;
-		   
 
-		
+
+
 				var qq=datas[i].qq;
 				var address=datas[i].address;
 				if(address&&address.length>16){
@@ -533,16 +534,18 @@ var totalPage=8;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
 				//var orderurl="/plus/list.php?tid=77&uid="+account+"&publishId="+companyId;
-				var orderurl="/member/"+account+".html?action=order"+"&publishId="+companyId;
+        // window.location='/gongsi?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
+				var orderurl="/member/"+account+"-order?action=order"+"&publishId="+companyId;
+				// var orderurl="/member/"+account+".html?action=order"+"&publishId="+companyId;
 				var companyFacadeFile=datas[i].companyFacadeFile;
 				if(companyFacadeFile){
-		   var   companyFacadeFile=datas[i].companyFacadeFile.split(",")[0]; 
+		   var   companyFacadeFile=datas[i].companyFacadeFile.split(",")[0];
 		  }
 		    var  num0=Math.random();
 		    var num=Math.ceil(num0*30);
         var src1="/templets/default/images/pic/bg"+num+".png";
         if(!companyFacadeFile){ $("#nr01").attr("src",src1);}
-				if(companyFacadeFile){ 
+				if(companyFacadeFile){
         $("#nr01").attr("src",companyFacadeFile);
 		                }
                   $('#nr02').html(companyName);
@@ -551,15 +554,15 @@ var totalPage=8;
 		          $('#nr06').html(address);
 		          $('#nr07').html(productService);
 		          $('#nr08').html(otherService);
-		          $('#nr02').attr('href','/member/'+account+'.html')
-		          $('#nr_a21').attr('href','/member/'+account+'.html')
-		        $("#wlzx_list_view").attr("onclick","window.open('/member/"+account+".html')")
+		          $('#nr02').attr('href','/member/'+account+'')
+		          $('#nr_a21').attr('href','/member/'+account+'')
+		        $("#wlzx_list_view").attr("onclick","window.open('/member/"+account+"-jianjie')")
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")
 				$("#nr11").attr("href","http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");
 				 var s1='<ul class="wlzx_list wlzx_list'+i+'">'
-				 var s2=$(".wlzx_list").html();	
+				 var s2=$(".wlzx_list").html();
 				 var s3='</ul>'
-				 $("#js002").append(s1+s2+s3);	
+				 $("#js002").append(s1+s2+s3);
 
 				 		   if(credit>=0&&credit<=3){
 		   	$('.wlzx_list'+i+' .xy_zuan:eq(0)').css("display","inline")
@@ -582,8 +585,8 @@ var totalPage=8;
 		   if(credit>=91&&credit<=150){
 		   	$('.wlzx_list'+i+' .xy_zuan').css("display","inline")
 		   	}
-		   
-		   
+
+
 		   if(credit>=151&&credit<=250){
 		   	$('.wlzx_list'+i+' .xy_guan:eq(0)').css("display","inline")
 		   	}
@@ -605,9 +608,9 @@ var totalPage=8;
 		   if(credit>=2001){
 		   	$('.wlzx_list'+i+' .xy_guan').css("display","inline")
 		   	}
-				 
-				 
-				 
+
+
+
 				  if(collateral>0){
 			$('.wlzx_list'+i+' .wlgs_danbao').css("display","inline")}
 				 if(isVip==1){
@@ -618,18 +621,18 @@ var totalPage=8;
 	  	if(!qq){
 					$('.wlzx_list'+i+' .wlzx_list_2 #nr11 img').css("display","none");
 					}
-	  
-			}				
+
+			}
 		},error:function(err){
 			console.log(err.responseText);
-		
+
 
 		}
-		})	
+		})
 	console.log("最终总页数："+totalPage)
 	return totalPage;
 	}
-//process02(1);
+process02(1);
 //物流公司栏目列表 E
 
 

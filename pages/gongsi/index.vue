@@ -129,49 +129,43 @@
 
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_zuan"
-                  src="/templets/default/images/article_wlzx/blue.gif">
-
+                  src="../../static/gongsi/images/blue.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="xy_guan"
-                  src="/templets/default/images/article_wlzx/34huanguan.gif">
-
-
-
+                  src="../../static/gongsi/images/34huanguan.gif">
                 <img
                   class="wlgs_shiming"
-                  src="/templets/default/images/list_wlzx/wlgs_shiming.png">
+                  src="../../static/gongsi/images/wlgs_shiming.png">
                 <img
                   class="wlgs_xinyong"
-                  src="/templets/default/images/list_wlzx/wlgs_xinyong.png">
+                  src="../../static/gongsi/images/xinyong.png">
                 <img
                   class="wlgs_danbao"
-                  src="/templets/default/images/list_wlzx/wlgs_danbao.png">
-
-
+                  src="../../static/gongsi/images/wlgs_danbao.png">
 
               </P>
               <p class="p2"><i>联系人：</i><font id="nr04">张总</font><a
@@ -203,11 +197,7 @@
             </p><p class="p3"/></li>
           </ul>
 
-
-
-
         </div>
-
 
         <!--分页-->
         <div
@@ -302,27 +292,135 @@ export default {
   head: {
     link: [
       { rel: 'stylesheet', href: '/gongsi/css/list_wlgs.css' },
+      { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ]
-    // script: [
-    //   { src: '../js/jquery.pagination.min.js' },
-    //   { src: '../js/WTMap.min.js' },
-    //   { src: './js/city-picker.data.js' },
-    //   { src: './js/city-picker.js' },
-    //   { src: '../../static/gongsi/js/list_wlgs.js' }
-    // ]
+  },
+  mounted() {
+    seajs.use(['../js/city.js'], function() {
+      seajs.use(
+        ['./js/city-picker.js', './js/jquery.pagination.min.js'],
+        function() {
+          seajs.use(['../gongsi/js/list_wlgs.js'], function() {
+            seajs.use(['../js/collection.js'], function() {
+              seajs.use(['../js/gaodemap2.js'], function() {
+                $('.list_tiaoj span').click(function() {
+                  //alert("1");
+                  $('.list_tiaoj span').removeClass('active')
+                  $(this).toggleClass('active')
+                })
+                function onCheckPage() {
+                  var beginPage = parseInt(
+                    document.beginPagefrm.beginPage.value
+                  )
+                  if (isNaN(beginPage)) {
+                    alert('请输入数字！')
+                    return false
+                  }
+                  if (beginPage <= 0) {
+                    beginPage = 1
+                  }
+                  if (beginPage > 100) {
+                    beginPage = 100
+                  }
+                  if (beginPage > 1) {
+                    document.beginPagefrm.action =
+                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
+                      beginPage
+                  } else {
+                    document.beginPagefrm.action =
+                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
+                  }
+                  return true
+                }
+                $('#pagination1').pagination({
+                  currentPage: 1,
+                  totalPage: process02(1),
+                  callback: function(current) {
+                    $('#current1').text(current)
+                    process02(current)
+                    window.location.href = '#top'
+                  }
+                })
+              })
+            })
+          })
+        }
+      )
+    })
   }
-  // layout: 'subLayout',
-  // mounted() {
-  //   seajs.use(['../js/city.js'], function() {
-  //     seajs.use(['../gongsi/js/list_wlgs.js'], function() {
-  //       seajs.use(['../js/collection.js'], function() {
-  //         seajs.use(['../js/gaodemap2.js'], function() {})
-  //       })
-  //     })
-  //   })
-  // }
 }
 </script>
 <style lang="scss">
+.lll-gongsi {
+  .list_button {
+    width: 42px;
+    height: 28px;
+    border-radius: 2px;
+    color: #f9f9f9;
+    font-size: 15px;
+    background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png)
+      10px 6px #2577e3;
+    text-align: left;
+    padding-left: 30px;
+    margin-left: 8px;
+    padding-right: 5px;
+    cursor: pointer;
+  }
+  /*显示隐藏S */
+  .toggle-btn {
+    float: right;
+    margin: 12px 15px 0 4px;
+    height: 24px;
+    line-height: 24px;
+    border: solid 1px #e8e8e8;
+    padding: 0 9px;
+    background: #fff;
+    color: #6b6b6b;
+    cursor: pointer;
+    text-decoration: none;
+    font: 12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+  }
+
+  .show-collapse .expand {
+    display: none;
+    margin-top: 2px;
+  }
+  .toggle-btn .arrow {
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+  .icon-btn-arrow-up-2,
+  .icon-btn-arrow-down-2 {
+  }
+
+  .icon-btn-arrow-down-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/xiajt.png);
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 7px;
+    cursor: pointer;
+  }
+  .show-collapse .collapse {
+    display: inline-block;
+    margin-top: 2px;
+  }
+  .toggle-btn .arrow {
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .icon-btn-arrow-up-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/up_jt.png);
+    background-repeat: no-repeat;
+    width: 12px;
+    height: 7px;
+    cursor: pointer;
+  }
+  /*显示隐藏E */
+}
 </style>

@@ -257,15 +257,15 @@
           <div class="arc_middle2">
             <div class="arc_middle2_1">
               <p class="p1"><i>重货价：</i><span>{{ tranDetail.rangePrices1[0].startVolume }} - {{ tranDetail.rangePrices1[0].endVolume }}公斤</span>
-                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices1[0].discountPrice.toFixed(0) }}</font>
-                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice.toFixed(0) }}</span><font
+                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices1[0].discountPrice ? tranDetail.rangePrices1[0].discountPrice.toFixed(0) : '0' }}</font>
+                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice ? tranDetail.rangePrices1[0].primeryPrice.toFixed(0) : '0' }}</span><font
                   v-if="tranDetail.rangePrices1.length >=2"
                   onmouseover="$('.price_box1').css('display', 'block');"
                   onmouseout="$('.price_box1').css('display', 'none');"
                   class="font2">[阶梯价]</font></p>
               <p class="p2"><i>轻货价：</i><span>{{ tranDetail.rangePrices0[0].startVolume }} - {{ tranDetail.rangePrices0[0].endVolume }}公斤</span>
-                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices0[0].discountPrice.toFixed(0) }}</font>
-                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice.toFixed(0) }}</span><font
+                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices0[0].discountPrice ? tranDetail.rangePrices0[0].discountPrice.toFixed(0) : '0' }}</font>
+                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices0[0].primeryPrice ? tranDetail.rangePrices0[0].primeryPrice.toFixed(0) : '0' }}</span><font
                   v-if="tranDetail.rangePrices0.length >=2"
                   onmouseover="$('.price_box2').css('display', 'block');"
                   onmouseout="$('.price_box2').css('display', 'none');"
@@ -286,7 +286,7 @@
                 :key="index"
                 class="price_box_item1">
                 <span>{{ item.startVolume }} - {{ item.endVolume }}公斤</span>
-                <i>&nbsp;&nbsp;{{ item.discountPrice.toFixed(0) }}元/公斤</i>
+                <i>&nbsp;&nbsp;{{ item.discountPrice ? item.discountPrice.toFixed(0) : '0' }}元/公斤</i>
               <font>{{ item.primeryPrice.toFixed(0) }}</font><em id="nr07210">元/公斤</em></div>
             </div>
 
@@ -300,7 +300,7 @@
                 :key="index"
                 class="price_box_item2">
                 <span>{{ item.startVolume }} - {{ item.endVolume }}立方</span>
-                <i>&nbsp;&nbsp;{{ item.discountPrice.toFixed(0) }}元/立方</i>
+                <i>&nbsp;&nbsp;{{ item.discountPrice ? item.discountPrice.toFixed(0) : '0' }}元/立方</i>
               <font>{{ item.primeryPrice.toFixed(0) }}</font><em id="nr07310">元/立方</em></div>
             </div>
             <!--阶梯价格 E-->
@@ -810,6 +810,7 @@
 </template>
 
 <script>
+import { getCode, getCity } from '~/components/commonJs.js'
 async function getRangeEvaluationlist($axios, currentPage, vo = {}) {
   let parm = {
     currentPage: currentPage,
@@ -821,21 +822,6 @@ async function getRangeEvaluationlist($axios, currentPage, vo = {}) {
     parm
   )
 }
-async function getCode($axios, name) {
-  const res = await $axios.get('../js/province.json')
-  for (let i = 0; i < res.data.length; i++) {
-    let name0 = res.data[i].name
-    if (name === name0) {
-      return res.data[i].code
-    }
-  }
-}
-async function getcity_zx($axios, code, startCity) {
-  return await $axios.get(
-    '/aflc-common/common/aflcCommonPCA/v1/findAflcCommonPCAByCode?code=' + code
-  )
-}
-
 function setCredit(item) {
   if (item.credit >= 0 && item.credit <= 3) {
     item.starS = new Array(1)
@@ -872,20 +858,6 @@ export default {
   name: 'Detail',
   layout: 'subLayout',
   head: {
-    title: '28快运',
-    meta: [
-      {
-        name: 'keywords',
-        content:
-          '物流,物流平台,物流专线,物流公司,物流服务,在线发货,查询运价,运单查询,运单跟踪,物流帮'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content:
-          '28快运是专业提供零担运输和整车运输等物流服务平台，同时提供免费发布货源、车源、专线。货主在线发货，物流跟踪查询，服务有保障，让您发货省时，省钱，更省心！'
-      }
-    ],
     link: [
       { rel: 'stylesheet', href: '/css/article_wlzx.css' },
       { rel: 'stylesheet', href: '/css/price.css' },
@@ -953,7 +925,7 @@ export default {
         }
       )
       let code = await getCode($axios, tranDetail.data.data.endProvince)
-      zxList = await getcity_zx($axios, code, tranDetail.data.data.startCity)
+      zxList = await getCity($axios, code, tranDetail.data.data.startCity)
     }
     let rangeEvaluationlist = await getRangeEvaluationlist($axios, 1, {
       transportRangeId: query.id

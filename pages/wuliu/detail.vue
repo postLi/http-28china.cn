@@ -438,20 +438,6 @@ async function getTransportRange($axios, query, vo = {}) {
 export default {
   name: 'WuLiu',
   head: {
-    title: '物流园区-28快运',
-    meta: [
-      {
-        name: 'keywords',
-        content:
-          '物流,物流平台,物流专线,物流公司,物流服务,在线发货,查询运价,运单查询,运单跟踪,物流帮'
-      },
-      {
-        hid: 'description',
-        name: 'description',
-        content:
-          '28快运是专业提供零担运输和整车运输等物流服务平台，同时提供免费发布货源、车源、专线。货主在线发货，物流跟踪查询，服务有保障，让您发货省时，省钱，更省心！'
-      }
-    ],
     link: [
       { rel: 'stylesheet', href: '/css/basic.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },

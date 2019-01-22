@@ -29,7 +29,7 @@ margin-bottom: 20px; margin-top: 10px;
 .arc_top2_1 span{font-size: 16px;color: #2577e3;}
 .arc_top2_2{float: left;width: 1070px;overflow: hidden;}
 .arc_top2_2 span{font-size: 16px;color: #333;margin-right: 40px;}
-.arc_top2_3{float:right;width: 50px;display: none; }
+.arc_top2_3{float:right;width: 50px;}
 .arc_top2_3 span{font-size: 16px;color: #666;}
 .arc_main1{height: 509px; width: 100%;margin-bottom: 40px;}
 .arc_main2{height: auto;width: 100%;margin-bottom: 29px; min-height: 180px;
@@ -122,8 +122,7 @@ min-width: 90px;margin-top: -2px;}
 	height: 24px;	
 	line-height: 24px;padding-left: 7px;
 }
-.item_zzfw1,.item_zzfw2,.item_zzfw3,.item_zzfw4,.item_zzfw5,.item_zzfw6,.item_zzfw7,.item_zzfw8{display:none;margin-bottom:10px;margin-right:20px;height: 24px;width: 95px;float: left;}
-.item_fw1,.item_fw2,.item_fw3,.item_fw4,.item_fw5,.item_fw6,.item_fw7,.item_fw8{display:none;}
+.item_zzfw1,.item_zzfw2,.item_zzfw3,.item_zzfw4,.item_zzfw5,.item_zzfw6,.item_zzfw7,.item_zzfw8{margin-bottom:10px;margin-right:20px;height: 24px;width: 95px;float: left;}
 .arc_middle6 .arc_m6_1 i{color: #999;}
 .arc_right{float:left;width: 304px; height: 507px;box-shadow:0px 0px 1.7px rgba(0,0,0,0.3); font-size: 14px;}
 .arc_right p{margin: 0;padding: 0;padding-left: 24px;}

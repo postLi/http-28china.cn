@@ -12,7 +12,7 @@
       <!--</div>-->
       <div class="arc_top1">
         <div class="arc_top1_1">
-          <span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>
+          <span><i>{{ tranDetail.startLocation.substring(0, 15) }}</i>&nbsp;&rarr;&nbsp;<i>{{ tranDetail.endLocation.substring(0, 15) }}</i></span>
         </div>
         <div class="arc_top1_3"><a 
           id="search_huo" 
@@ -37,11 +37,16 @@
       </div>
       <div class="arc_top2">
         <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
+        <div class="arc_top2_2">
+          <a
+            v-for="(item,index) in zxList"
+            v-if="index < 14"
+            :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
+          </a>
+        </div>
         <div 
-          id="arc_city" 
-          class="arc_top2_2"/>
-        <div 
-          class="arc_top2_3" 
+          v-if="zxList.length >14" 
+          class="arc_top2_3"
           onmouseover="$('.city_box').css('display', 'block')" ><a href="javascript:void(0)"><span>更多+</span></a></div>
 
         <!--更多城市-->
@@ -49,16 +54,39 @@
           id="city_box" 
           class="city_box" 
           onmouseover="$('.city_box').css('display', 'block');"
-          onmouseout="$('.city_box').css('display', 'none');" />
+          onmouseout="$('.city_box').css('display', 'none');" >
+          <a
+            v-for="(item,index) in zxList"
+            v-if="index >= 14"
+            :key="index"><span>{{ item.name.substring(0, 2) }}</span>
+          </a>
+        </div>
 
       </div>
       <div class="arc_main1">
         <div class="arc_left">
-          <div class="arc_left_1"><img id="nr0714" ></div>
+          <div class="arc_left_1">
+            <img 
+              v-if="tranDetail.rangeLogo" 
+              :src="tranDetail.rangeLogo.split(',')[0]">
+            <img 
+              v-else 
+              :src="'../../images/pic/bg' + tranDetail.num + '.png'" >
+          </div>
           <div class="arc_left_2">
-            <a href="javascript:void(0)"><img id="nr0715" ></a>
-            <a href="javascript:void(0)"><img id="nr0716" ></a>
-            <a href="javascript:void(0)"><img id="nr0717" ></a>
+            <a href="javascript:void(0)"><img 
+              v-if="tranDetail.rangeLogo" 
+              :src="tranDetail.rangeLogo.split(',')[0]" >
+              <img
+                v-else
+                :src="'../../images/pic/bg' + tranDetail.num + '.png'" >
+            </a>
+            <a href="javascript:void(0)"><img 
+              v-if="tranDetail.rangeLogo.split(',')[1]" 
+              :src="tranDetail.rangeLogo.split(',')[1]" ></a>
+            <a href="javascript:void(0)"><img 
+              v-if="tranDetail.rangeLogo.split(',')[2]"
+              :src="tranDetail.rangeLogo.split(',')[2]" ></a>
           </div>
           <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/images/article_wlzx/17shoucang.png">&nbsp;<span id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
         </div>
@@ -225,73 +253,75 @@
             </div>
 
           </div>
-          <div class="arc_middle1"><span id="nr072"/></div>
+          <div class="arc_middle1"><span>{{ tranDetail.startLocation.substring(0, 15) }}&nbsp;&rarr;&nbsp;{{ tranDetail.endLocation.substring(0, 15) }}</span></div>
           <div class="arc_middle2">
             <div class="arc_middle2_1">
-              <p class="p1"><i>重货价：</i><span id="nr0741"/><font 
-                id="nr073" 
-                class="font1"/><span 
-                  id="nr074" 
-                  class="span2"/><font 
-                    id="zh_price" 
-                    onmouseover="$('.price_box1').css('display', 'block');"
-                    onmouseout="$('.price_box1').css('display', 'none');"
-                    class="font2">[阶梯价]</font></p>
-              <p class="p2"><i>轻货价：</i><span id="nr0742"/><font 
-                id="nr075" 
-                class="font1"/><span 
-                  id="nr076" 
-                  class="span2"/><font 
-                    id="qh_price" 
-                    onmouseover="$('.price_box2').css('display', 'block');"
-                    onmouseout="$('.price_box2').css('display', 'none');"
-                    class="font2">[阶梯价]</font></p>
+              <p class="p1"><i>重货价：</i><span>{{ tranDetail.rangePrices1[0].startVolume }} - {{ tranDetail.rangePrices1[0].endVolume }}公斤</span>
+                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices1[0].discountPrice.toFixed(0) }}</font>
+                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice.toFixed(0) }}</span><font
+                  v-if="tranDetail.rangePrices1.length >=2"
+                  onmouseover="$('.price_box1').css('display', 'block');"
+                  onmouseout="$('.price_box1').css('display', 'none');"
+                  class="font2">[阶梯价]</font></p>
+              <p class="p2"><i>轻货价：</i><span>{{ tranDetail.rangePrices0[0].startVolume }} - {{ tranDetail.rangePrices0[0].endVolume }}公斤</span>
+                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices0[0].discountPrice.toFixed(0) }}</font>
+                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice.toFixed(0) }}</span><font
+                  v-if="tranDetail.rangePrices0.length >=2"
+                  onmouseover="$('.price_box2').css('display', 'block');"
+                  onmouseout="$('.price_box2').css('display', 'none');"
+                  class="font2">[阶梯价]</font></p>
             </div>
             <div class="arc_middle2_2">
-              <div class="num1"><span id="nr0746"/></div><div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>
+              <div class="num1"><span>{{ tranDetail.orderNumber }}</span></div><div class="num2"><a href="javascript:void(0)"><span>{{ tranDetail.assessNumber }}</span></a></div>
               <div class="num3"><span>下单量</span></div><div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
             </div>
             <!--阶梯价格 S-->
-            <div 
-              id="js018" 
+            <div
               class="price_box1" 
               onmouseover="$('.price_box1').css('display', 'block');"
               onmouseout="$('.price_box1').css('display', 'none');">
               <div class="price_box_bt">阶梯价（重货）</div>
               <div 
-                class="price_box_item1" 
-                style="display: none;"><span id="nr0743" /><i id="nr0720"/><font id="nr0721"/><em id="nr07210">元/公斤</em></div>
+                v-for="(item,index) in tranDetail.rangePrices1" 
+                :key="index"
+                class="price_box_item1">
+                <span>{{ item.startVolume }} - {{ item.endVolume }}公斤</span>
+                <i>&nbsp;&nbsp;{{ item.discountPrice.toFixed(0) }}元/公斤</i>
+              <font>{{ item.primeryPrice.toFixed(0) }}</font><em id="nr07210">元/公斤</em></div>
             </div>
 
-            <div 
-              id="js019" 
+            <div
               class="price_box2" 
               onmouseover="$('.price_box2').css('display', 'block');"
               onmouseout="$('.price_box2').css('display', 'none')();">
               <div class="price_box_bt">阶梯价（轻货）</div>
-              <div 
-                class="price_box_item2" 
-                style="display: none;"><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em></div>
+              <div
+                v-for="(item,index) in tranDetail.rangePrices0"
+                :key="index"
+                class="price_box_item2">
+                <span>{{ item.startVolume }} - {{ item.endVolume }}立方</span>
+                <i>&nbsp;&nbsp;{{ item.discountPrice.toFixed(0) }}元/立方</i>
+              <font>{{ item.primeryPrice.toFixed(0) }}</font><em id="nr07310">元/立方</em></div>
             </div>
             <!--阶梯价格 E-->
 
 
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>运输时效：</i><span id="nr077"/></div>
-            <div class="arc_m3"><i>发货频次：</i><span id="nr078"/></div>
-            <div class="arc_m3"><i>最低一票价格：</i><span id="nr079"/></div>
+            <div class="arc_m3"><i>运输时效：</i><span>{{ tranDetail.transportAging }}{{ tranDetail.transportAgingUnit }}</span></div>
+            <div class="arc_m3"><i>发货频次：</i><span>{{ tranDetail.departureHzData }}天{{ tranDetail.departureHzTime }}次</span></div>
+            <div class="arc_m3"><i>最低一票价格：</i><span>{{ tranDetail.lowerPrice ? '&yen;&nbsp;' + tranDetail.lowerPrice + '元' : '面议' }}</span></div>
           </div>
           <div class="arc_middle4">
             <div class="arc_m4_1">
               <div ><span>出发地</span></div>
-              <div ><i>联系人：</i><span id="nr0710"/></div>
-              <div ><i>手机：</i><span id="nr0711"/></div>
+              <div ><i>联系人：</i><span>{{ tranDetail.startLocationContacts }}</span></div>
+              <div ><i>手机：</i><span>{{ tranDetail.startLocationContactsMobile }}</span></div>
             </div>
             <div class="arc_m4_2">
               <div ><span>到达地</span></div>
-              <div ><i>联系人：</i><span id="nr0712"/></div>
-              <div ><i>手机：</i><span id="nr0713"/></div>
+              <div ><i>联系人：</i><span>{{ tranDetail.endLocationContacts }}</span></div>
+              <div ><i>手机：</i><span>{{ tranDetail.endLocationContactsMobile }}</span></div>
             </div>
           </div>
           <div class="arc_middle5">
@@ -307,25 +337,35 @@
                   id="nr_order" 
                   target="_blank" 
                   href="javascript:void(0)"><span >快速下单</span></a></div>
-
-
-
             </div>
           </div>
           <div class="arc_middle6">
             <div class="arc_m6_1"><i>增值服务：</i></div>
             <div class="arc_m6_2">
-              <div class="item_zzfw1"><img src="../../static/images/pic/item_zzfw1.png"><span>送货上门</span></div>
-              <div class="item_zzfw2"><img src="../../static/images/pic/item_zzfw2.png"><span>保价运输</span></div>
-              <div class="item_zzfw3"><img src="../../static/images/pic/item_zzfw3.png"><span>运费到付</span></div>
-              <div class="item_zzfw4"><img src="../../static/images/pic/item_zzfw4.png"><span>代收货款</span></div>
-              <div class="item_zzfw5"><img src="../../static/images/pic/item_zzfw5.png"><span>上门提货</span></div>
-              <div class="item_zzfw6"><img src="../../static/images/pic/item_zzfw6.png"><span>开发票</span></div>
-              <div class="item_zzfw7"><img src="../../static/images/pic/item_zzfw7.png"><span>签单回收</span></div>
-              <div class="item_zzfw8"><img src="../../static/images/pic/item_zzfw8.png"><span>时效保障</span></div>
-
-              <!--<img src="../../static/images/article_wlzx/18zengzhifw.png"/>-->
-
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02501')"
+                class="item_zzfw1"><img src="../../static/images/pic/item_zzfw1.png"><span>送货上门</span></div>
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02502')"
+                class="item_zzfw2"><img src="../../static/images/pic/item_zzfw2.png"><span>保价运输</span></div>
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02503')"
+                class="item_zzfw3"><img src="../../static/images/pic/item_zzfw3.png"><span>运费到付</span></div>
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02504')"
+                class="item_zzfw4"><img src="../../static/images/pic/item_zzfw4.png"><span>代收货款</span></div>
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02505')"
+                class="item_zzfw5"><img src="../../static/images/pic/item_zzfw5.png"><span>上门提货</span></div>
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02506')"
+                class="item_zzfw6"><img src="../../static/images/pic/item_zzfw6.png"><span>开发票</span></div>
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02507')"
+                class="item_zzfw7"><img src="../../static/images/pic/item_zzfw7.png"><span>签单回收</span></div>
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02508')" 
+                class="item_zzfw8"><img src="../../static/images/pic/item_zzfw8.png"><span>时效保障</span></div>
             </div>
           </div>
 
@@ -435,113 +475,132 @@
         <div class="arc_right2">
           <div class="arc_right2_bt">
             <span 
-              id="arc_bt1" 
-              class="arc_span arc_active">增值服务</span>
-            <span 
-              id="arc_bt2" 
-              class="arc_span">专线介绍</span>
-            <span 
-              id="arc_bt3" 
-              class="arc_span">累计评价&nbsp;<font 
-                id="nr1048" 
-                style="color: #eb434d;"/></span>
-            <span 
-              id="arc_bt4" 
-              class="arc_span">专享服务</span>
+              v-for="(item,index) in nav4List" 
+              :key="index"
+              :class="[nav4Id === item.id ? 'arc_active' : '']"
+              class="arc_span"
+              @click="click4(item)">{{ item.name }}&nbsp;<font
+                v-if="index === 2"
+                style="color: #eb434d;">{{ rangeEvaluationCount.count }}</font></span>
           </div>
           <div 
-            id="arc_nr1" 
-            class="arc_nr ">
+            :class="[nav4Id === 0 ? '':'arc_nr_none']"
+            class="arc_nr">
             <div class="arc_nr1">
-              <div class="arc_fw item_fw1">
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02501')" 
+                class="arc_fw item_fw1">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_1.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>送货上门</span></p>
                   <p class="fw_nr2"><i>收取客户货物后，将货物送到指定收件对象的服务。</i></p>
                 </div>
               </div>
-              <div class="arc_fw item_fw2">
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02502')" 
+                class="arc_fw item_fw2">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_2.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>保价运输</span></p>
                   <p class="fw_nr2"><i>保价运输是我司与您共同确定的以托运人申明货物价值为基础的一种特殊运输方式，您向我司声明其托运货物的实际价值，按保价运输的货物，托运人除缴纳运输费用外，按照规定缴纳一定的保价费用，若货物在运输过程中出险，我司将按照托运人的声明价值赔偿一定损失。</i></p>
                 </div>
               </div>
-              <div class="arc_fw item_fw3" >
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02503')" 
+                class="arc_fw item_fw3" >
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_3.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>运费到付</span></p>
                   <p class="fw_nr2"><i>为您提供派送末端支付运费服务，当货物到达收货人时由收货人支付运费。</i></p>
                 </div>
               </div>
-              <div class="arc_fw item_fw4">
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02504')"
+                class="arc_fw item_fw4">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_4.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>代收货款</span></p>
                   <p class="fw_nr2"><i>按照寄件方（卖家）与收件方（买家）达成交易协议的要求，为寄件方提供承运、寄递物品的同时，并代寄件方向收件方收取货款，同时按照约定时间将货款返还给寄件方的服务。</i></p>
                 </div>
               </div>
-              <div class="arc_fw item_fw5">
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02505')"
+                class="arc_fw item_fw5">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_5.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>上门提货</span></p>
                   <p class="fw_nr2"><i>按照客户指令到指定地点收取货物的服务。</i></p>
                 </div>
               </div>
-              <div class="arc_fw item_fw6">
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02506')"
+                class="arc_fw item_fw6">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_6.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>开发票</span></p>
                   <p class="fw_nr2"><i>客户可向物流公司申请开具货物运输发票。</i></p>
                 </div>
               </div>
-              <div class="arc_fw item_fw7">
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02507')"
+                class="arc_fw item_fw7">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_7.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>签单回收</span></p>
                   <p class="fw_nr2"><i>在货物正常签收后，将寄件客户提供的需收件客户签名的收条或收货单等单据返还寄件客户的服务。</i></p>
                 </div>
               </div>
-              <div class="arc_fw item_fw8">
+              <div 
+                v-if="tranDetail.otherServiceCode.includes('AF02508')" 
+                class="arc_fw item_fw8">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_8.png" ></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>时效保障</span></p>
                   <p class="fw_nr2"><i>承诺在规定时间内送达的时效保障服务。</i></p>
                 </div>
               </div>
-
-
             </div>
 
           </div>
-          <div 
-            id="arc_nr2" 
-            class="arc_nr arc_nr_none">
+          <div
+            :class="[nav4Id === 1 ? '':'arc_nr_none']"
+            class="arc_nr">
             <div 
-              id="nr1035" 
-              class="arc_nr2"/>
+              v-if="tranDetail.transportRemark" 
+              class="arc_nr2">
+              {{ tranDetail.transportRemark.substring(0,500) }}
+            </div>
+            <div 
+              v-else 
+              class="arc_nr2">暂无专线说明。点击为您推荐<a
+                target="_blank" 
+                href="/plus/list.php?tid=4&amp;start=深圳市&amp;end=北京市">更多专线</a></div>
           </div>
-          <div 
-            id="arc_nr3" 
-            class="arc_nr arc_nr_none" >
+          <div
+            :class="[nav4Id === 2 ? '':'arc_nr_none']"
+            class="arc_nr" >
             <div class="arc_pjnr_bt">
               <div class="arc_pjnr_bt1">
                 <div class="arc_pjbt_item"><input 
                   type="radio" 
-                  name="radio" 
-                  value=""><span>全部</span><i id="nr1044">(439)</i></div>
+                  name="radio"
+                  value=""
+                  @click="radioClick('')"><span>全部</span><i>({{ rangeEvaluationCount.count }})</i></div>
                 <div class="arc_pjbt_item"><input 
                   type="radio" 
-                  name="radio" 
-                  value="AF0360101"><span>好评</span><i id="nr1045">(400)</i></div>
+                  name="radio"
+                  value="AF0360101"
+                  @click="radioClick('AF0360101')"><span>好评</span><i>({{ rangeEvaluationCount.good }})</i></div>
                 <div class="arc_pjbt_item"><input 
                   type="radio" 
-                  name="radio" 
-                  value="AF0360102"><span>中评</span><i id="nr1046">(30)</i></div>
+                  name="radio"
+                  value="AF0360102"
+                  @click="radioClick('AF0360102')"><span>中评</span><i>({{ rangeEvaluationCount.medium }})</i></div>
                 <div class="arc_pjbt_item"><input 
                   type="radio" 
-                  name="radio" 
-                  value="AF0360103"><span>差评</span><i id="nr1047">(9)</i></div>
+                  name="radio"
+                  value="AF0360103"
+                  @click="radioClick('AF0360103')"><span>差评</span><i>({{ rangeEvaluationCount.bad }})</i></div>
               </div>
 
               <div class="arc_pjnr_bt2">
@@ -631,24 +690,20 @@
 
             </div>
             <div 
-              id="js014" 
+              v-for="(item,index) in rangeEvaluationlist" 
+              :key="index"
               class="arc_pjnr_nr">
-              <div 
-                class="arc_pjnr_item" 
-                style="display: none;">
+              <div class="arc_pjnr_item">
                 <div class="arc_pjnr_item_left">
-                  <p class="item_p1"><font id="nr1031">134****1323</font></p>
+                  <p class="item_p1"><font>{{ item.evaluationName }}</font></p>
                   <p class="item_p2">
                   <img src="../../static/images/article_wlzx/pingfen.png"></p>
 
                 </div>
                 <div class="arc_pjnr_item_right">
-                  <p class="item_p3"><span id="nr1032">内容真实，可靠！</span></p>
-                  <p class="item_p4"><i id="nr1033">2018-08-01  10:00</i></p>
-                  <p 
-                    id="item_p5" 
-                    class="item_p5" 
-                    style="display: none"><font id="nr10340">[回复]：</font><font id="nr1034"/></p>
+                  <p class="item_p3"><span>{{ item.evaluationDes ? item.evaluationDes : '此用户没有评论' }}</span></p>
+                  <p class="item_p4"><i>{{ item.createTime }}</i></p>
+                  <p class="item_p5"><font>[回复]：</font><font>{{ item.replyDes }}</font></p>
 
                 </div>
               </div>
@@ -670,11 +725,11 @@
 
 
           </div>
-          <div 
-            id="arc_nr4" 
-            class="arc_nr arc_nr_none" >
-            <div 
-              id="block_bzj" 
+          <div
+            :class="[nav4Id === 3 ? '':'arc_nr_none']"
+            class="arc_nr" >
+            <div
+              v-if="oneCompany.collateral !== 0"
               class="arc_nr1">
               <div class="arc_fw_bt" >
                 <img src="../../static/images/pic/xiexian.png">
@@ -690,17 +745,14 @@
               </div>
 
             </div>
-            <div 
-              id="none_bzj" 
-              class="arc_nr1" 
-              style="display: none;">
+            <div
+              v-if="oneCompany.collateral === 0"
+              id="none_bzj"
+              class="arc_nr1">
               <img src="../../static/images/pic/gantanhao.png" >
               <span>暂未开通此项服务</span>
 
             </div>
-
-
-
 
           </div>
         </div>
@@ -709,7 +761,8 @@
 
     <div 
       id="js017" 
-      class="arc_bottom">
+      class="arc_bottom"
+      style="display: none">
       <div class="zx_sx"><span class="biaozhi"/><span>此路线其他专线</span><a 
         id="arc_bottom_more" 
         href="#"><span class="arc_bottom_more">更多+</span></a></div>
@@ -757,6 +810,32 @@
 </template>
 
 <script>
+async function getRangeEvaluationlist($axios, currentPage, vo = {}) {
+  let parm = {
+    currentPage: currentPage,
+    pageSize: 10,
+    vo: vo
+  }
+  return await $axios.post(
+    '/aflc-portal/portal/aflcTransportEvaluation/v1/rangeEvaluationlist',
+    parm
+  )
+}
+async function getCode($axios, name) {
+  const res = await $axios.get('../js/province.json')
+  for (let i = 0; i < res.data.length; i++) {
+    let name0 = res.data[i].name
+    if (name === name0) {
+      return res.data[i].code
+    }
+  }
+}
+async function getcity_zx($axios, code, startCity) {
+  return await $axios.get(
+    '/aflc-common/common/aflcCommonPCA/v1/findAflcCommonPCAByCode?code=' + code
+  )
+}
+
 function setCredit(item) {
   if (item.credit >= 0 && item.credit <= 3) {
     item.starS = new Array(1)
@@ -819,11 +898,23 @@ export default {
   },
   data() {
     return {
+      tranDetail: {},
       oneCompany: {},
-      listDetailPointNetwork: []
+      listDetailPointNetwork: [],
+      zxList: [],
+      nav4List: [
+        { id: 0, name: '增值服务' },
+        { id: 1, name: '专线介绍' },
+        { id: 2, name: '累计评价' },
+        { id: 3, name: '专享服务' }
+      ],
+      nav4Id: 0,
+      rangeEvaluationlist: [],
+      rangeEvaluationCount: {}
     }
   },
   async asyncData({ $axios, app, query }) {
+    let zxList
     const oneCompany = await $axios.get(
       '/aflc-portal/portalt/aflcLogisticsCompany/v1/' + query.publishId
     )
@@ -846,12 +937,47 @@ export default {
         item.address = item.address.replace(item.belongCityName, '')
       }
     })
+    const tranDetail = await $axios.get(
+      '/aflc-portal/portalt/aflcTransportRange/v1/' + query.id
+    )
+    if (tranDetail.data.status === 200) {
+      tranDetail.data.data.num = Math.ceil(Math.random() * 30)
+      tranDetail.data.data.rangePrices1 = tranDetail.data.data.rangePrices.filter(
+        item => {
+          return item.type === '1'
+        }
+      )
+      tranDetail.data.data.rangePrices0 = tranDetail.data.data.rangePrices.filter(
+        item => {
+          return item.type === '0'
+        }
+      )
+      let code = await getCode($axios, tranDetail.data.data.endProvince)
+      zxList = await getcity_zx($axios, code, tranDetail.data.data.startCity)
+    }
+    let rangeEvaluationlist = await getRangeEvaluationlist($axios, 1, {
+      transportRangeId: query.id
+    })
+    let rangeEvaluationCount = await $axios.get(
+      '/aflc-portal/portal/aflcTransportEvaluation/v1/rangeEvaluationCount/' +
+        query.id
+    )
     return {
       oneCompany: oneCompany.data.status === 200 ? oneCompany.data.data : {},
       listDetailPointNetwork:
         listDetailPointNetwork.data.status === 200
           ? listDetailPointNetwork.data.data.list
-          : []
+          : [],
+      tranDetail: tranDetail.data.status === 200 ? tranDetail.data.data : {},
+      zxList: zxList.data.status === 200 ? zxList.data.data : [],
+      rangeEvaluationlist:
+        rangeEvaluationlist.data.status === 200
+          ? rangeEvaluationlist.data.data.list
+          : [],
+      rangeEvaluationCount:
+        rangeEvaluationCount.data.status === 200
+          ? rangeEvaluationCount.data.data
+          : {}
     }
   },
   mounted() {
@@ -864,36 +990,21 @@ export default {
         })
       })
     })
-    $('#arc_bt1').click(function() {
-      //alert("1");
-      $('.arc_span').removeClass('arc_active')
-      $(this).addClass('arc_active')
-      $('.arc_nr').addClass('arc_nr_none')
-      $('#arc_nr1').removeClass('arc_nr_none')
-    })
-    $('#arc_bt2').click(function() {
-      //alert("1_2");
-      $('.arc_span').removeClass('arc_active')
-      $(this).addClass('arc_active')
-      $('.arc_nr').addClass('arc_nr_none')
-      $('#arc_nr2').removeClass('arc_nr_none')
-    })
-
-    $('#arc_bt3').click(function() {
-      //alert("2");
-      $('.arc_span').removeClass('arc_active')
-      $(this).addClass('arc_active')
-      $('.arc_nr').addClass('arc_nr_none')
-      $('#arc_nr3').removeClass('arc_nr_none')
-    })
-
-    $('#arc_bt4').click(function() {
-      //alert("3");
-      $('.arc_span').removeClass('arc_active')
-      $(this).addClass('arc_active')
-      $('.arc_nr').addClass('arc_nr_none')
-      $('#arc_nr4').removeClass('arc_nr_none')
-    })
+  },
+  methods: {
+    click4(item) {
+      this.nav4Id = item.id
+    },
+    async radioClick(data) {
+      let rangeEvaluationlist = await getRangeEvaluationlist(this.$axios, 1, {
+        transportRangeId: this.$route.query.id,
+        assessLevel: data
+      })
+      this.rangeEvaluationlist =
+        rangeEvaluationlist.data.status === 200
+          ? rangeEvaluationlist.data.data.list
+          : []
+    }
   }
 }
 </script>

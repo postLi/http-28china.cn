@@ -334,7 +334,7 @@ var rangeIds="";
 		headers:{
 		'Content-Type': 'application/json'
 		},
-		url:"/api/aflc-portal/portalt/aflcLogisticsCompany/v1/recommendCompanys",
+		url:"/api/28-web/logisticsCompany/list",
 		dataType: "json",
 		/*async:false,*/
 		data:JSON.stringify(

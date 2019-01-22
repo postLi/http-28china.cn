@@ -84,7 +84,7 @@ var belongBrandCode1 = GetUrlParam("belongBrandCode");
 var otherServiceCode1 = GetUrlParam("otherServiceCode");
 var companyName1 = GetUrlParam("companyName");
 var parkId1 = GetUrlParam("parkId");
-var parkName1 = GetUrlParam("parkName");
+var parkName = GetUrlParam("parkName");
 //var authStatus1=GetUrlParam("authStatus");
 
 var orderNumber = GetUrlParam("orderNumber");
@@ -103,7 +103,7 @@ var belongBrandCode = decodeURI(belongBrandCode1);
 var otherServiceCode = decodeURI(otherServiceCode1);
 var companyName = decodeURI(companyName1);
 var parkId = decodeURI(parkId1);
-var parkName = decodeURI(parkName1);
+// var parkName = decodeURI(parkName1);
 //var authStatus= decodeURI(authStatus1);
 
 var orderNumber = decodeURI(orderNumber);
@@ -138,15 +138,11 @@ vo.defaultSort = 1;
 
 vo1 = new Object();
 orderBy = new String;
-
-console.log(orderBy, 'orderBy1');
 if (lightPrice) {
   orderBy = lightPrice
-  // console.log(orderBy, 'orderBy2');
 }
 if (weigthPrice) {
   orderBy = weigthPrice
-  console.log(orderBy, 'orderBy3');
 }
 if (orderNumber) {
   var orderDesc = orderNumber
@@ -156,8 +152,9 @@ if (transportAging) {
   var transportAgingAsc = transportAging
   orderBy = transportAgingAsc
 }
-
-
+if (orderBy === 'null') {
+  orderBy = 'default'
+}
 if (startp || startc) {
   if (!startp || startp == "null") {
     startp = "";
@@ -168,14 +165,14 @@ if (startp || startc) {
     delete vo.startCity;
   }
 }
+var locationProvince,locationCity,locationArea;
 if ((!startp || startp == "null") && (!startc || startc == "null")) {
   startc = currentAreaFullName;
   vo.startCity = startc;
   startp = currentProvinceFullName;
   vo.startProvince = startp;
-  vo1.locationProvince = startp;
-  vo1.locationCity = startc;
-
+  locationProvince = startp;
+  locationCity = startc;
 }
 
 if (!starta || starta == "null") {
@@ -321,7 +318,7 @@ $("#seq1").click(
     delete vo.weigthPrice;
     delete vo.lightPrice;
     delete vo.defaultSort;
-    vo.orderNumber = 1;
+    orderBy = 'orderDesc'
     process02(1);
   })
 $("#seq2").click(
@@ -332,7 +329,7 @@ $("#seq2").click(
     delete vo.weigthPrice;
     delete vo.lightPrice;
     delete vo.defaultSort;
-    vo.transportAging = 1;
+    orderBy = "transportAgingAsc"
     process02(1);
   })
 $("#seq3").mouseenter(
@@ -361,7 +358,7 @@ $("#tj_price2").click(
     delete vo.weigthPrice;
     delete vo.lightPrice;
     delete vo.defaultSort;
-    vo.weigthPrice = 1;
+    orderBy = "weigthPrice"
     process02(1);
   })
 $("#tj_price1").click(
@@ -373,7 +370,7 @@ $("#tj_price1").click(
     delete vo.weigthPrice;
     delete vo.lightPrice;
     delete vo.defaultSort;
-    vo.lightPrice = 1;
+    orderBy = "lightPrice"
     process02(1);
   })
 //排序点击 E
@@ -536,29 +533,37 @@ $(".list_wlyq_cx").click(
     $('#wlyq_pos .select-item').each(function (i, e) {
       list1.push($(this).text())
     });
-    var locationProvince = list1[0];
-    var locationCity = list1[1];
-    var locationArea = list1[2];
-    vo1.locationProvince = locationProvince;
-    vo1.locationCity = locationCity;
-    vo1.locationArea = locationArea;
-    vo1.parkName = parkName;
+     locationProvince = list1[0];
+     locationCity = list1[1];
+     locationArea = list1[2];
+    // var locationProvince = list1[0];
+    // var locationCity = list1[1];
+    // var locationArea = list1[2];
+    // vo1.locationProvince = locationProvince;
+    // vo1.locationCity = locationCity;
+    // vo1.locationArea = locationArea;
+    // vo1.parkName = parkName;
     if (!locationProvince) {
       locationProvince = "";
-      delete vo1.locationProvince;
+      delete locationProvince;
+      // delete vo1.locationProvince;
     }
     if (!locationCity) {
       locationCity = "";
-      delete vo1.locationCity;
+      delete locationCity;
+      // delete vo1.locationCity;
     }
     if (!locationArea) {
       locationArea = "";
-      delete vo1.locationArea;
+      delete locationArea;
+      // delete locationArea;
     }
     if (!parkName) {
       parkName = "";
-      delete vo1.parkName;
+      delete parkName;
+      // delete vo1.parkName;
     }
+    console.log(parkName,'parkName');
     belong_wlyq(1);
   })
 
@@ -587,6 +592,7 @@ function tjcx00() {
   if (parkId) {
     $("#tjcx_00 a").each(function () {
       var aaa = $(this).attr("href");
+      console.log(aaa,'aaa');
       if (aaa.split("&parkId=")[1] == parkId) {
         $("#tjcx_00 a").removeClass("now");
         $(this).addClass("now");
@@ -606,7 +612,7 @@ function tjcx01() {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: "/api/aflc-common/sysDict/getSysDictByCodeGet/AF026",
+      url: "/api/28-web/sysDict/getSysDictByCodeGet/AF026",
 
       success: function (res) {
         var datas = res.data;
@@ -654,7 +660,7 @@ function tjcx02() {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: "/api/aflc-common/sysDict/getSysDictByCodeGet/AF029",
+      url: "/api/28-web/sysDict/getSysDictByCodeGet/AF029",
 
       success: function (res) {
         var datas = res.data;
@@ -703,7 +709,7 @@ function tjcx03() {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: "/api/aflc-common/sysDict/getSysDictByCodeGet/AF025",
+      url: "/api/28-web/sysDict/getSysDictByCodeGet/AF025",
 
       success: function (res) {
         var datas = res.data;
@@ -762,14 +768,25 @@ function process01() {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: "/api/aflc-portal/portalt/aflcRecommendTransportRange/v1/recommendRanges",
+      url: "/api/28-web/range/recommend",
+      // url: "/api/aflc-portal/portalt/aflcRecommendTransportRange/v1/recommendRanges",
       dataType: "json",
       //async:false,
       data: JSON.stringify(
         {
           currentPage: 1,
           pageSize: 14,
-          vo: vo		//JSON.stringify({})
+          startProvince: startp,
+          startCity: startc,
+          startArea: starta,
+          endProvince: endp,
+          endCity: endc,
+          endArea: enda,
+          belongBrandCode: belongBrandCode,
+          departureTimeCode: departureTimeCode,
+          otherServiceCode: otherServiceCode,
+          parkId: parkId,
+          companyName: companyName
         }
       ),
       success: function (res) {
@@ -785,9 +802,9 @@ function process01() {
           if (lightPrice) {
             lightPrice = parseFloat(lightPrice).toFixed(1);
           }
-          var heavyPrice = datas[i].heavyPrice;
-          if (heavyPrice) {
-            heavyPrice = parseFloat(heavyPrice).toFixed(1);
+          var weightPrice = datas[i].weightPrice;
+          if (weightPrice) {
+            weightPrice = parseFloat(weightPrice).toFixed(1);
           }
           var assessNumber = datas[i].assessNumber;
           var browseNumber = datas[i].browseNumber;
@@ -847,7 +864,7 @@ function process01() {
           $("#tj101").html(browseNumber);
           $("#tj011").html(start);
           $("#tj012").html(end);
-          $("#tj013").html(heavyPrice);
+          $("#tj013").html(weightPrice);
           $("#tj014").html(lightPrice);
           $("#tj015").html(transportAging + transportAgingUnit);
           if (!transportAging || !transportAgingUnit) {
@@ -894,11 +911,9 @@ process01();
 //物流专线 推荐列表 E
 
 //物流专线 栏目列表S
-console.log(belongBrandCode, 'belongBrandCode');
 
 function process02(currentPage) {
   var totalPage = 8;
-  // console.log(orderBy, 'orderByorderByorderBy');
   $.ajax(
     {
       type: "post",
@@ -924,35 +939,17 @@ function process02(currentPage) {
           parkId: parkId,
           companyName: companyName,
           orderBy: orderBy
-//         vo = new Object();
-//   vo.startProvince=startp;
-//   vo.startCity=startc;
-//   vo.startArea=starta;
-//   vo.endProvince=endp;
-//   vo.endCity=endc;
-//   vo.endArea=enda;
-//   vo.companyName=companyName;
-//   vo.parkId=parkId;
-//
-//
-//   vo.departureTimeCode=departureTimeCode;
-//   vo.belongBrandCode=belongBrandCode;
-//   vo.otherServiceCode=otherServiceCode;
-// //vo.authStatus=authStatus;
-//
-//   vo.orderNumber=orderNumber;
-//   vo.transportAging=transportAging;
-//   vo.weigthPrice=weigthPrice;
-//   vo.lightPrice=lightPrice;
         }
       ),
       success: function (res) {
+        // console.log(res, '');
         $("#js002 .wlzx_list").not(":eq(0)").remove();
         if (res.data) {
           totalPage = res.data.totalPage;
           // console.log(totalPage);
         }
-        if (!res.data || !res.data.totalCount) {
+        console.log(res.data.list,'res.data.list');
+        if (!res.data.list || !res.data.total) {
           // console.log("内容为空")
           $(".box").css("display", "none")
           $(".list_none").css("display", "block")
@@ -967,19 +964,21 @@ function process02(currentPage) {
           var primeryPrice0 = datas[i].primeryPrice0;
           var discountPrice0 = datas[i].discountPrice0;
           var primeryPrice1 = datas[i].primeryPrice1;
-          var discountPrice1 = datas[i].discountPrice1;
-          if (!discountPrice0) {
-            qhjg = primeryPrice0
-          }
-          if (discountPrice0) {
-            qhjg = discountPrice0
-          }
-          if (!discountPrice1) {
-            zhjg = primeryPrice1
-          }
-          if (discountPrice1) {
-            zhjg = discountPrice1
-          }
+          // lightPrice weightPrice
+          var zhjg = datas[i].weightPrice;
+          var qhjg = datas[i].lightPrice;
+          // if (!discountPrice0) {
+          //   qhjg = primeryPrice0
+          // }
+          // if (discountPrice0) {
+          //   qhjg = discountPrice0
+          // }
+          // if (!discountPrice1) {
+          //   zhjg = primeryPrice1
+          // }
+          // if (discountPrice1) {
+          //   zhjg = discountPrice1
+          // }
           var recommendType = datas[i].recommendType;
 
 
@@ -1066,7 +1065,7 @@ function process02(currentPage) {
             }
           }
           if (datas[i].rangeLogo.length == '') {
-            $(".nr_a21_img img").eq[i].attr("src", src1);
+            $(".nr_a21_img img").attr("src", src1);
           }
           $(".nr_a21_img img").attr("alt", companyName);
           // $("#nr01").attr("alt",companyName);
@@ -1137,14 +1136,18 @@ function belong_wlyq(currentPage) {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: "/api/aflc-uc/usercenter/aflclogisticspark/v1/search",
+      url: "/api/28-web/logisticsPark/search",
       dataType: "json",
       data: JSON.stringify(
         {
           currentPage: currentPage,
           pageSize: 20,
           //vo:vo		//JSON.stringify({})
-          vo: vo1
+          locationProvince: locationProvince,
+          locationCity: locationCity,
+          locationArea: locationArea,
+          parkName: parkName,
+          // parkId: parkId,
         }
       ),
       success: function (res) {

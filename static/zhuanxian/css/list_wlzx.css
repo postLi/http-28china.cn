@@ -145,7 +145,8 @@ margin-left: 10px;
             padding-top: 15px;
             z-index: 9;
             }
-#tj_price1,#tj_price2{color: #ff6633;width: 140px;padding-bottom: 5px;}
+             /*color: #ff6633*/
+#tj_price1,#tj_price2{color: #aaa;width: 140px;padding-bottom: 5px;}
 #tj_price1:hover,#tj_price2:hover{color: #f00;}
 
 .wlzx_list{

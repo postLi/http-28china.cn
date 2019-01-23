@@ -5,8 +5,8 @@
       class="index-banner">
       <div class="banner_text">
         <span>
-          <em id="nr_name"/>&nbsp;
-          <em id="nr_tel"/>
+          <em id="nr_name">{{ $store.state.member.company.contactsName }}</em>&nbsp;
+          <em id="nr_tel">{{ $store.state.member.company.mobile }}</em>
         </span>
       </div>
       <div class="banner-box">
@@ -75,8 +75,8 @@
           </a>
           <a
             id="btn_offerTime"
-            class="menu-item js-express-price item-3 need_companyId"
-            href="13001010101-order?uid=13001010101"
+            :href="$store.state.member.id + '-order?uid=' + $store.state.member.id + '&publishId=' + $store.state.member.id" 
+            class="menu-item js-express-price item-3 need_companyId" 
             target="_blank"
           >
             <div class="menu-icon">
@@ -86,8 +86,8 @@
           </a>
           <a
             id="qq"
+            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + $store.state.member.company.qq + '&site=qq&menu=yes'"
             class="menu-item js-express-complain item-4"
-            href="http://wpa.qq.com/msgrd?v=3&amp;uin=596803544&amp;site=qq&amp;menu=yes"
             target="_blank"
           >
             <div class="menu-icon">
@@ -107,7 +107,9 @@
             <span>产品与服务</span>
           </div>
 
-          <div class="main1_nr cp_5_8">
+          <div 
+            v-if="plen >= 5 || plen < 1" 
+            class="main1_nr cp_5_8">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/cp_01.jpg">
@@ -133,13 +135,16 @@
               <li class="item8">
                 <img src="/member/images/index/cp_08.jpg">
               </li>
-              <li class="item9">
+              <li 
+                class="item9">
                 <img src="/member/images/index/cp_09.jpg">
               </li>
             </ul>
           </div>
 
-          <div class="main1_nr cp_1">
+          <div 
+            v-if="plen === 1" 
+            class="main1_nr cp_1">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/cp_1_01.jpg">
@@ -189,7 +194,9 @@
             </ul>
           </div>
 
-          <div class="main1_nr cp_2">
+          <div 
+            v-if="plen === 2" 
+            class="main1_nr cp_2">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/cp_2_01.jpg">
@@ -230,7 +237,9 @@
             </ul>
           </div>
 
-          <div class="main1_nr cp_3">
+          <div 
+            v-if="plen === 3" 
+            class="main1_nr cp_3">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/cp_3_01.jpg">
@@ -271,7 +280,9 @@
             </ul>
           </div>
 
-          <div class="main1_nr cp_4">
+          <div 
+            v-if="plen === 4" 
+            class="main1_nr cp_4">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/cp_4_01.jpg">
@@ -309,7 +320,9 @@
             <span>增值服务</span>
           </div>
 
-          <div class="main1_nr fw_5_8">
+          <div 
+            v-if="olen >= 5 || olen < 1" 
+            class="main1_nr fw_5_8">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/fw_01.jpg">
@@ -338,7 +351,9 @@
             </ul>
           </div>
 
-          <div class="main1_nr fw_1">
+          <div 
+            v-if="olen === 1" 
+            class="main1_nr fw_1">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/fw_1_01.jpg">
@@ -383,7 +398,9 @@
             </ul>
           </div>
 
-          <div class="main1_nr fw_2">
+          <div 
+            v-if="olen === 2" 
+            class="main1_nr fw_2">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/fw_2_01.jpg">
@@ -420,7 +437,9 @@
             </ul>
           </div>
 
-          <div class="main1_nr fw_3">
+          <div 
+            v-if="olen === 3" 
+            class="main1_nr fw_3">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/fw_3_01.jpg">
@@ -457,7 +476,9 @@
             </ul>
           </div>
 
-          <div class="main1_nr fw_4">
+          <div 
+            v-if="olen === 4" 
+            class="main1_nr fw_4">
             <ul>
               <li class="item1">
                 <img src="/member/images/index/fw_4_01.jpg">
@@ -536,83 +557,87 @@
               <li class="bt_05">操作</li>
             </ul>
           </div>
-          <div 
-            class="zx_item" 
-            style="display: none;">
-            <ul>
-              <li class="zx_item01">
-                <em id="nr001"/>&nbsp;→&nbsp;
-                <em id="nr002"/>
-              </li>
-              <li class="zx_item02">
-                <p>
-                  <font>重货：
-                    <i id="nr003"/>元/公斤
-                  </font>
-                  <span>时效：
-                    <em id="nr004"/>
-                  </span>
-                </p>
-                <p>
-                  <font>轻货：
-                    <i id="nr005"/>元/立方
-                  </font>
-                  <span>最低一票：
-                    <em id="nr006"/>
-                  </span>
-                </p>
-              </li>
-              <li class="zx_item03">
-                <p class="p1">
-                  <img 
-                    id="nr007" 
-                    src="/templets/default/images/list_wlzx/10shiming.png">
-                </p>
-                <p class="p2">
-                  <img 
-                    id="nr008" 
-                    src="/templets/default/images/list_wlzx/11xinyong.png">
-                </p>
-                <p class="p3">
-                  <img 
-                    id="nr009" 
-                    src="/templets/default/images/list_wlzx/12danbao.png">
-                </p>
-              </li>
-              <li class="zx_item04">
-                <p>
-                  <a href="javacript:void(0)">
-                    <em id="nr0010">9224</em>人询价
-                  </a>
-                </p>
-                <p>
-                  <a href="javacript:void(0)">
-                    <em id="nr0011">986</em>条评价
-                  </a>
-                </p>
-              </li>
-              <li class="zx_item05">
-                <a 
-                  id="nr0007" 
-                  target="_blank" 
-                  href="13001010101-order.html">
-                  <input 
-                    class="input1" 
-                    readonly 
-                    value="下单">
-                </a>
-                <a 
-                  id="nr0012" 
-                  target="_blank">
-                  <input 
-                    class="input2" 
-                    readonly 
-                    value="查看">
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
+        <div 
+          v-for="(item, index) in $store.state.member.lineList"
+          :key="index"
+          class="zx_item" 
+        >
+          <ul>
+            <li class="zx_item01">
+              <em id="nr001">{{ item.startCity || '' }}{{ item.startArea || '' }}</em>&nbsp;→&nbsp;
+              <em id="nr002">{{ item.endCity || '' }}{{ item.endArea || '' }}</em>
+            </li>
+            <li class="zx_item02">
+              <p>
+                <font>重货：
+                  <i id="nr003">{{ findPrice(item.rangePrices, '1') }}</i>元/公斤
+                </font>
+                <span>时效：
+                  <em id="nr004">{{ item.transportAging }}{{ item.transportAgingUnit }}</em>
+                </span>
+              </p>
+              <p>
+                <font>轻货：
+                  <i id="nr005">{{ findPrice(item.rangePrices, '0') }}</i>元/立方
+                </font>
+                <span>最低一票：
+                  <em id="nr006">{{ item.lowerPrice || '面议' }}</em>
+                </span>
+              </p>
+            </li>
+            <li class="zx_item03">
+              <p class="p1">
+                <img 
+                  id="nr007" 
+                  src="/images/list_wlzx/10shiming.png">
+              </p>
+              <p class="p2">
+                <img 
+                  id="nr008" 
+                  src="/images/list_wlzx/11xinyong.png">
+              </p>
+              <p class="p3">
+                <img 
+                  id="nr009" 
+                  src="/images/list_wlzx/12danbao.png">
+              </p>
+            </li>
+            <li class="zx_item04">
+              <p>
+                <a href="javacript:void(0)">
+                  <em id="nr0010">{{ item.browseNumber }}</em>人询价
+                </a>
+              </p>
+              <p>
+                <a href="javacript:void(0)">
+                  <em id="nr0011">{{ item.assessNumber }}</em>条评价
+                </a>
+              </p>
+            </li>
+            <li class="zx_item05">
+              <a 
+                id="nr0007" 
+                :href="$store.state.member.id + '-order?id=' + item.id + '&publishId=' + item.companyId"
+                target="_blank" >
+                <input 
+                  class="input1" 
+                  readonly 
+                  value="下单">
+              </a>
+              <a 
+                id="nr0012"
+                :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                target="_blank">
+                <input 
+                  class="input2" 
+                  readonly 
+                  value="查看">
+              </a>
+            </li>
+          </ul>
+        </div>
+        
       </div>
       <!--物流专线 E-->
       <div 
@@ -648,17 +673,19 @@
           </div>
         </div>
         <div 
-          class="wd_item" 
-          style="display: none;">
-          <p id="nr011"/>
+          v-for="(item, index) in $store.state.member.pointList"
+          :key="index"
+          class="wd_item"
+        >
+          <p id="nr011">{{ item.pointName }}</p>
           <p>
             <img src="/member/images/wd_lxr.png">
-            <em id="nr012"/>
-            <em id="nr013"/>
+            <em id="nr012">{{ item.name }}</em>
+            <em id="nr013">{{ item.mobile }}</em>
           </p>
           <p>
             <img src="/member/images/wd_dw.png">
-            <em id="nr014"/>
+            <em id="nr014">{{ item.belongCityName }}</em>
           </p>
         </div>
       </div>
@@ -676,7 +703,7 @@
           </div>
           <div 
             id="nr082" 
-            class="main4_nr">暂无内容</div>
+            class="main4_nr">{{ $store.state.member.company.companyDes ? $store.state.member.company.companyDes.substring(0, 470) + '...' : '暂无内容' }}</div>
         </div>
         <div class="main4_right">
           <div 
@@ -718,16 +745,41 @@
 export default {
   components: {},
   layout: 'member',
+  computed: {
+    plen() {
+      return this.$store.state.member.company.productServiceCode.length
+    },
+    olen() {
+      return this.$store.state.member.company.otherServiceCode.length
+    }
+  },
   mounted() {
+    var _this = this
     seajs.use(
       [
         '/index/js/city-picker.data.js',
+        '/js/gaodemap2.js',
         '/index/js/city-picker.js',
         '/member/js/index.js',
         '/member/js/banner.js',
         '/index/js/collection.js'
       ],
       function() {
+        var productServiceCode =
+          _this.$store.state.member.company.productServiceCode
+        var n = productServiceCode.length
+        for (var i = 1; i < 10; i++) {
+          if (productServiceCode) {
+            if (productServiceCode.indexOf('AF0270' + i) != -1) {
+              $('.main1_left .item' + i).css('display', 'block')
+              $('#cp0' + i).css('display', 'block')
+            }
+          }
+        }
+        if (n == 9) {
+          $('.main1_left .item9').css('display', 'none')
+        }
+
         $('body').click(function(e) {
           var _con = $('.bill-search ') // 设置目标区域(排除此元素)
           if (!_con.is(e.target) && _con.has(e.target).length === 0) {
@@ -741,8 +793,42 @@ export default {
       }
     )
   },
-  fetch({ store, params }) {
+  methods: {
+    findPrice(arr, type) {
+      let find = 0
+      if (arr.length) {
+        arr.forEach(item => {
+          console.log(
+            'type:',
+            type,
+            typeof item.type,
+            item.startVolume,
+            item.discountPrice,
+            item.primeryPrice
+          )
+          if (item.type === type && item.startVolume === 0) {
+            find = item.discountPrice || item.primeryPrice
+          }
+        })
+        return find
+      } else {
+        return 0
+      }
+    }
+  },
+  async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
+    await store.dispatch('member/GETCOMPANYINFO', params.id)
+    await store.dispatch('member/GETCOMPANYPOINTINFO', {
+      companyId: store.state.member.company.id,
+      pageSize: 8,
+      currentPage: 1
+    })
+    await store.dispatch('member/GETCOMPANYLINEINFO', {
+      publishId: store.state.member.company.id,
+      pageSize: 4,
+      currentPage: 1
+    })
   }
 }
 </script>

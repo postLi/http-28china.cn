@@ -10,6 +10,7 @@
         <div class="nr">
           <ul >
             <li 
+              v-if="opdata.indexOf('AF02501') !== -1"
               id="fw01" 
               class="fw">
               <p class="p1">
@@ -18,6 +19,7 @@
             </li>
     	    
             <li 
+              v-if="opdata.indexOf('AF02502') !== -1"
               id="fw02" 
               class="fw">
               <p class="p1">
@@ -26,6 +28,7 @@
             </li>
     	    
             <li 
+              v-if="opdata.indexOf('AF02503') !== -1"
               id="fw03" 
               class="fw">
               <p class="p1">
@@ -33,6 +36,7 @@
               <p class="p2">为您提供派送末端支付运费服务，当货物到达收货人时由收货人支付运费。</p>
             </li>
             <li 
+              v-if="opdata.indexOf('AF02504') !== -1"
               id="fw04" 
               class="fw">
               <p class="p1">
@@ -40,6 +44,7 @@
               <p class="p2">按照寄件方（卖家）与收件方（买家）达成交易协议的要求，为寄件方提供承运、寄递物品的同时，并代寄件方向收件方收取货款，同时按照约定时间将货款返还给寄件方的服务。</p>
             </li>
             <li 
+              v-if="opdata.indexOf('AF02505') !== -1"
               id="fw05" 
               class="fw">
               <p class="p1">
@@ -47,6 +52,7 @@
               <p class="p2">按照客户指令到指定地点收取货物的服务。</p>
             </li>
             <li 
+              v-if="opdata.indexOf('AF02506') !== -1"
               id="fw06" 
               class="fw">
               <p class="p1">
@@ -54,6 +60,7 @@
               <p class="p2">客户可向物流公司申请开具货物运输发票。</p>
             </li>
             <li 
+              v-if="opdata.indexOf('AF02507') !== -1"
               id="fw07" 
               class="fw">
               <p class="p1">
@@ -61,6 +68,7 @@
               <p class="p2">在货物正常签收后，将寄件客户提供的需收件客户签名的收条或收货单等单据返还寄件客户的服务。</p>
             </li>
             <li 
+              v-if="opdata.indexOf('AF02508') !== -1"
               id="fw08" 
               class="fw">
               <p class="p1">
@@ -84,6 +92,14 @@ export default {
     MemberBanner,
     MemberSidebar
   },
+  computed: {
+    opdata() {
+      return this.$store.state.member.company.otherServiceCode
+    },
+    psdata() {
+      return this.$store.state.member.company.productServiceCode
+    }
+  },
   head: {
     link: [{ rel: 'stylesheet', href: '/member/css/list.css' }]
   },
@@ -91,8 +107,9 @@ export default {
   mounted() {
     seajs.use(['/member/js/index.js', '/index/js/collection.js'])
   },
-  fetch({ store, params }) {
+  async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
+    await store.dispatch('member/GETCOMPANYINFO', params.id)
   }
 }
 </script>

@@ -12,9 +12,8 @@
           <div class="header_middle1"><a
             href="/"
             target="_self"><img
-              height="80px"
               width="135px"
-              src="../static/index_files/logor.png"></a></div>
+              src="/img/logo.png"></a></div>
           <div
             id="index_map"
             class="header_middles"
@@ -253,6 +252,23 @@ export default {
         seajs.use([location.origin + '/js/diqu.js'])
       })
     })
+    if (process.client) {
+      $('.h_m_search1')
+        .find('a')
+        .on('click', function(e) {
+          e.preventDefault()
+          var inx = $(this).index()
+          $('.h_m_search1')
+            .find('a')
+            .removeClass('actvied')
+            .eq(inx)
+            .addClass('actvied')
+          $('.h_m_search2')
+            .hide()
+            .eq(inx)
+            .show()
+        })
+    }
   },
   methods: {
     click4() {
@@ -530,15 +546,19 @@ export default {
 .h_m_search1 span:hover {
   color: #eb434d;
 }
+.h_m_search1 .actvied span {
+  color: #3f94ee;
+  font-weight: bold;
+}
 .h_m_search2 {
   width: 540px;
   height: 40px;
 }
 .h_m_search33 {
-  border: solid 1px #ccc;
+  border: solid 2px #3f94ee;
   border-right: 0px;
   width: fit-content;
-  height: 40px;
+  height: 36px;
 }
 .h_m_search33 input {
   width: 180px;
@@ -654,13 +674,13 @@ export default {
   padding-right: 20px;
 }
 .header_bottom li:hover {
-  background-color: #1373bc;
+  background-color: #157ee2;
 }
 .header_bottom li:visited {
-  background-color: #1373bc;
+  background-color: #157ee2;
 }
 .header_bottom .nav-active {
-  background-color: #1373bc;
+  background-color: #157ee2;
 }
 
 .header_bottom li a {

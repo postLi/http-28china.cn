@@ -9,7 +9,7 @@
         </div>	
         <div 
           id="nr083" 
-          class="nr"/>
+          class="nr">{{ $store.state.member.company.companyDes || '' }}</div>
       </div>
     </div>
   </div>
@@ -30,8 +30,9 @@ export default {
   mounted() {
     seajs.use(['/member/js/index.js', '/index/js/collection.js'])
   },
-  fetch({ store, params }) {
+  async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
+    await store.dispatch('member/GETCOMPANYINFO', params.id)
   }
 }
 </script>

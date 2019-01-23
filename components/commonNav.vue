@@ -314,6 +314,12 @@ export default {
         case 'wuliu':
           $('#wlyq').addClass('nav-active')
           break
+        case 'gongsi':
+          $('#gs').addClass('nav-active')
+          break
+        case 'wangdian':
+          $('#wd').addClass('nav-active')
+          break
       }
     }
   }

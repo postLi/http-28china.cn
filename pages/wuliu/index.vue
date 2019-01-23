@@ -213,14 +213,14 @@ export default {
       '/aflc-portal/portalt/aflclogisticspark/v1/Gateway/RecommendParklist',
       parm1
     )
-    let getGatewaylist = await gatewaylist($axios, 1, {
+    let getGatewaylistData = await gatewaylist($axios, 1, {
       locationProvince: app.$cookies.get('currentProvinceFullName'),
       locationCity: app.$cookies.get('currentAreaFullName')
     })
     return {
-      getGatewaylist: getGatewaylist.list,
-      pages: getGatewaylist.pages,
-      currentPage: getGatewaylist.currentPage,
+      getGatewaylist: getGatewaylistData.list ? getGatewaylistData.list : [],
+      pages: getGatewaylistData.pages ? getGatewaylistData.pages : 0,
+      currentPage: getGatewaylistData.currentPage,
       getLogisticsPark:
         getLogisticsPark.data.status === 200
           ? getLogisticsPark.data.data.list

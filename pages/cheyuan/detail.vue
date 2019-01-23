@@ -41,7 +41,8 @@
       </div>
       <div
         v-if="zxList.length >14"
-        class="arc_top2_3" 
+        class="arc_top2_3"
+        style="display: block"
         onmouseover="$('.city_box').css('display', 'block')"><a href="javascript:void(0)"><span>更多+</span></a></div>
 
       <!--更多城市-->
@@ -63,26 +64,32 @@
         <div class="arc_left_1">
           <img
             v-if="cy1.carFile"
-            :src="cy1.carFile.split(',')[0]">
+            :src="cy1.carFile.split(',')[showImg]">
           <img
             v-else
             :src="'../../images/pic/bg' + cy1.num + '.png'" >
         </div>
         <div class="arc_left_2">
-          <a href="javascript:void(0)"><img
-            v-if="cy1.carFile"
-            :src="cy1.carFile.split(',')[0]" >
+          <a 
+            href="javascript:void(0)" 
+            @click="clickImg(0)"><img
+              v-if="cy1.carFile"
+              :src="cy1.carFile.split(',')[0]" >
             <img
               v-else
               :src="'../../images/pic/bg' + cy1.num + '.png'" >
           </a>
-          <a href="javascript:void(0)"><img
-            v-if="cy1.carFile.split(',')[1]"
-            :src="cy1.carFile.split(',')[1]" >
+          <a 
+            href="javascript:void(0)" 
+            @click="clickImg(1)"><img
+              v-if="cy1.carFile && cy1.carFile.split(',')[1]"
+              :src="cy1.carFile.split(',')[1]" >
           </a>
-          <a href="javascript:void(0)"><img
-            v-if="cy1.carFile.split(',')[2]"
-            :src="cy1.carFile.split(',')[2]" >
+          <a 
+            href="javascript:void(0)" 
+            @click="clickImg(2)"><img
+              v-if="cy1.carFile && cy1.carFile.split(',')[2]"
+              :src="cy1.carFile.split(',')[2]" >
           </a>
         </div>
         <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/images/article_wlzx/17shoucang.png">&nbsp;<span class="collection_cz">收藏车源</span><i>&nbsp;(&nbsp;<em class="my_cz_num"/>人气&nbsp;)</i></a></div>
@@ -105,7 +112,7 @@
           <div class="arc_middle2_1">
             <p class="p1"><i>运价：</i><font
               id="nr062"
-              class="font1"> {{ cy1.expectPrice ? '&yen;&nbsp;' + cy1.expectPrice + '元' : '面议' }}</font></p>
+              class="font1"> {{ cy1.expectPrice ? '&yen;&nbsp;' + cy1.expectPrice : '面议' }}</font></p>
             <p class="p2"><i>车源类型：</i><span>{{ cy1.carSourceTypeName }}</span></p>
           </div>
           <div class="arc_middle2_2">
@@ -125,7 +132,7 @@
           <div class="arc_m3"><i>联系人：</i><span>{{ cy1.belongDriver }}</span></div>
           <div class="arc_m3"><i>电话：</i><span><font
             style="color: #eb434d;">{{ cy1.phone }}</font></span></div>
-          <div class="arc_m3_2"><i>说明：</i><span>{{ cy1.carTagName + '|' + cy1.remark.substring(0, 30) }}</span></div>
+          <div class="arc_m3_2"><i>说明：</i><span>{{ cy1.carTagName }}</span><span v-if="cy1.remark">{{ '|'+cy1.remark.substring(0, 30) }}</span></div>
         </div>
 
         <div class="arc_middle5">
@@ -137,8 +144,8 @@
       <div class="arc_right">
         <p class="arc_right01"><img src="../../static/images/article_wlzx/04gongsi.png"><span>车辆档案</span></p>
         <p class="arc_right04">
-          <span class="arc_right04_1"><i>车牌号：</i><font>{{ cy1.carNum.substring(0, 2) + '***' + cy1.carNum.substring(6, 10) }}</font></span>
-          <span><i>常驻地：</i><font>{{ cy1.usualPlace.substring(0, 10) }}</font></span>
+          <span class="arc_right04_1"><i>车牌号：</i><font v-if="cy1.carNum">{{ cy1.carNum.substring(0, 2) + '***' + cy1.carNum.substring(6, 10) }}</font></span>
+          <span><i>常驻地：</i><font v-if="cy1.usualPlace">{{ cy1.usualPlace.substring(0, 10) }}</font></span>
           <span><i>车长：</i><font>{{ cy1.carLength }}米</font></span>
           <span><i>车辆类型：</i><font>{{ cy1.carTypeName }}</font></span>
           <span><i>车辆载重：</i><font>{{ cy1.carLoad }}吨</font></span>
@@ -302,11 +309,12 @@ export default {
       cy1: {},
       zxList: [],
       otherCarSourceList: [],
-      otherCarInfoList: []
+      otherCarInfoList: [],
+      showImg: 0
     }
   },
   async asyncData({ $axios, app, query }) {
-    let zxList
+    let zxList, otherCarSourceList
     const cy1 = await $axios.get(
       '/aflc-portal/portalt/aflcCarInfo/v1/getDetail/' + query.id
     )
@@ -318,24 +326,27 @@ export default {
       )
       let code = await getCode($axios, cy1.data.data.endProvince)
       zxList = await getCity($axios, code, cy1.data.data.startCity)
-    }
-    let parm = {
-      currentPage: 1,
-      pageSize: 7,
-      vo: {
-        noId: query.id,
-        endAddress: cy1.data.data.endCity,
-        strartAddress: cy1.data.data.startCity
+      let parm = {
+        currentPage: 1,
+        pageSize: 7,
+        vo: {
+          noId: query.id,
+          endAddress: cy1.data.data.endCity,
+          strartAddress: cy1.data.data.startCity
+        }
       }
-    }
-    const otherCarSourceList = await $axios.post(
-      '/aflc-portal/portalt/aflcCarInfo/v1/getOtherCarSourceList',
-      parm
-    )
-    if (otherCarSourceList.data.status === 200) {
-      otherCarSourceList.data.data.list.forEach(item => {
-        item.createTime1 = parseTime(item.createTime, '{y}-{m}-{d} {h}:{i}:{s}')
-      })
+      otherCarSourceList = await $axios.post(
+        '/aflc-portal/portalt/aflcCarInfo/v1/getOtherCarSourceList',
+        parm
+      )
+      if (otherCarSourceList.data.status === 200) {
+        otherCarSourceList.data.data.list.forEach(item => {
+          item.createTime1 = parseTime(
+            item.createTime,
+            '{y}-{m}-{d} {h}:{i}:{s}'
+          )
+        })
+      }
     }
     let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
       driverId: query.driverId,
@@ -343,9 +354,9 @@ export default {
     })
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
-      zxList: zxList.data.status === 200 ? zxList.data.data : [],
+      zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       otherCarSourceList:
-        otherCarSourceList.data.status === 200
+        otherCarSourceList && otherCarSourceList.data.status === 200
           ? otherCarSourceList.data.data.list
           : [],
       otherCarInfoList:
@@ -362,6 +373,11 @@ export default {
         })
       })
     })
+  },
+  methods: {
+    clickImg(int) {
+      this.showImg = int
+    }
   }
 }
 </script>

@@ -12,7 +12,7 @@
       <!--</div>-->
       <div class="arc_top1">
         <div class="arc_top1_1">
-          <span><i>{{ tranDetail.startLocation.substring(0, 15) }}</i>&nbsp;&rarr;&nbsp;<i>{{ tranDetail.endLocation.substring(0, 15) }}</i></span>
+          <span><i v-if="tranDetail.startLocation && tranDetail.endLocation">{{ tranDetail.startLocation.substring(0, 15) }}</i>&nbsp;&rarr;&nbsp;<i>{{ tranDetail.endLocation.substring(0, 15) }}</i></span>
         </div>
         <div class="arc_top1_3"><a 
           id="search_huo" 
@@ -47,6 +47,7 @@
         <div 
           v-if="zxList.length >14" 
           class="arc_top2_3"
+          style="display: block"
           onmouseover="$('.city_box').css('display', 'block')" ><a href="javascript:void(0)"><span>更多+</span></a></div>
 
         <!--更多城市-->
@@ -68,25 +69,31 @@
           <div class="arc_left_1">
             <img 
               v-if="tranDetail.rangeLogo" 
-              :src="tranDetail.rangeLogo.split(',')[0]">
+              :src="tranDetail.rangeLogo.split(',')[showImg]">
             <img 
               v-else 
               :src="'../../images/pic/bg' + tranDetail.num + '.png'" >
           </div>
           <div class="arc_left_2">
-            <a href="javascript:void(0)"><img 
-              v-if="tranDetail.rangeLogo" 
-              :src="tranDetail.rangeLogo.split(',')[0]" >
+            <a 
+              href="javascript:void(0)" 
+              @click="clickImg(0)"><img
+                v-if="tranDetail.rangeLogo" 
+                :src="tranDetail.rangeLogo.split(',')[0]" >
               <img
                 v-else
                 :src="'../../images/pic/bg' + tranDetail.num + '.png'" >
             </a>
-            <a href="javascript:void(0)"><img 
-              v-if="tranDetail.rangeLogo.split(',')[1]" 
-              :src="tranDetail.rangeLogo.split(',')[1]" ></a>
-            <a href="javascript:void(0)"><img 
-              v-if="tranDetail.rangeLogo.split(',')[2]"
-              :src="tranDetail.rangeLogo.split(',')[2]" ></a>
+            <a 
+              href="javascript:void(0)" 
+              @click="clickImg(1)"><img
+                v-if="tranDetail.rangeLogo && tranDetail.rangeLogo.split(',')[1]"
+                :src="tranDetail.rangeLogo.split(',')[1]" ></a>
+            <a 
+              href="javascript:void(0)" 
+              @click="clickImg(2)"><img
+                v-if="tranDetail.rangeLogo && tranDetail.rangeLogo.split(',')[2]"
+                :src="tranDetail.rangeLogo.split(',')[2]" ></a>
           </div>
           <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/images/article_wlzx/17shoucang.png">&nbsp;<span id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
         </div>
@@ -256,20 +263,28 @@
           <div class="arc_middle1"><span>{{ tranDetail.startLocation.substring(0, 15) }}&nbsp;&rarr;&nbsp;{{ tranDetail.endLocation.substring(0, 15) }}</span></div>
           <div class="arc_middle2">
             <div class="arc_middle2_1">
-              <p class="p1"><i>重货价：</i><span>{{ tranDetail.rangePrices1[0].startVolume }} - {{ tranDetail.rangePrices1[0].endVolume }}公斤</span>
-                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices1[0].discountPrice ? tranDetail.rangePrices1[0].discountPrice.toFixed(0) : '0' }}</font>
-                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice ? tranDetail.rangePrices1[0].primeryPrice.toFixed(0) : '0' }}</span><font
-                  v-if="tranDetail.rangePrices1.length >=2"
-                  onmouseover="$('.price_box1').css('display', 'block');"
-                  onmouseout="$('.price_box1').css('display', 'none');"
-                  class="font2">[阶梯价]</font></p>
-              <p class="p2"><i>轻货价：</i><span>{{ tranDetail.rangePrices0[0].startVolume }} - {{ tranDetail.rangePrices0[0].endVolume }}公斤</span>
-                <font class="font1">&yen;&nbsp;{{ tranDetail.rangePrices0[0].discountPrice ? tranDetail.rangePrices0[0].discountPrice.toFixed(0) : '0' }}</font>
-                <span class="span2">&yen;&nbsp;{{ tranDetail.rangePrices0[0].primeryPrice ? tranDetail.rangePrices0[0].primeryPrice.toFixed(0) : '0' }}</span><font
-                  v-if="tranDetail.rangePrices0.length >=2"
-                  onmouseover="$('.price_box2').css('display', 'block');"
-                  onmouseout="$('.price_box2').css('display', 'none');"
-                  class="font2">[阶梯价]</font></p>
+              <p class="p1"><i>重货价：</i><span v-if="tranDetail.rangePrices1[0]">{{ tranDetail.rangePrices1[0].startVolume }} - {{ tranDetail.rangePrices1[0].endVolume }}公斤</span>
+                <font 
+                  v-if="tranDetail.rangePrices1[0] && tranDetail.rangePrices1[0].discountPrice"
+                  class="font1">&yen;&nbsp;{{ tranDetail.rangePrices1[0].discountPrice.toFixed(0) }}</font>
+                <span 
+                  v-if="tranDetail.rangePrices1[0] && tranDetail.rangePrices1[0].primeryPrice"
+                  class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice.toFixed(0) }}</span><font
+                    v-if="tranDetail.rangePrices1.length >=2"
+                    onmouseover="$('.price_box1').css('display', 'block');"
+                    onmouseout="$('.price_box1').css('display', 'none');"
+                    class="font2">[阶梯价]</font></p>
+              <p class="p2"><i>轻货价：</i><span v-if="tranDetail.rangePrices0[0]">{{ tranDetail.rangePrices0[0].startVolume }} - {{ tranDetail.rangePrices0[0].endVolume }}公斤</span>
+                <font 
+                  v-if="tranDetail.rangePrices0[0] && tranDetail.rangePrices0[0].discountPrice"
+                  class="font1">&yen;&nbsp;{{ tranDetail.rangePrices0[0].discountPrice.toFixed(0) }}</font>
+                <span 
+                  v-if="tranDetail.rangePrices0[0] && tranDetail.rangePrices0[0].primeryPrice"
+                  class="span2">&yen;&nbsp;{{ tranDetail.rangePrices0[0].primeryPrice.toFixed(0) }}</span><font
+                    v-if="tranDetail.rangePrices0.length >=2"
+                    onmouseover="$('.price_box2').css('display', 'block');"
+                    onmouseout="$('.price_box2').css('display', 'none');"
+                    class="font2">[阶梯价]</font></p>
             </div>
             <div class="arc_middle2_2">
               <div class="num1"><span>{{ tranDetail.orderNumber }}</span></div><div class="num2"><a href="javascript:void(0)"><span>{{ tranDetail.assessNumber }}</span></a></div>
@@ -343,28 +358,28 @@
             <div class="arc_m6_1"><i>增值服务：</i></div>
             <div class="arc_m6_2">
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02501')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02501')"
                 class="item_zzfw1"><img src="../../static/images/pic/item_zzfw1.png"><span>送货上门</span></div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02502')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02502')"
                 class="item_zzfw2"><img src="../../static/images/pic/item_zzfw2.png"><span>保价运输</span></div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02503')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02503')"
                 class="item_zzfw3"><img src="../../static/images/pic/item_zzfw3.png"><span>运费到付</span></div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02504')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02504')"
                 class="item_zzfw4"><img src="../../static/images/pic/item_zzfw4.png"><span>代收货款</span></div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02505')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02505')"
                 class="item_zzfw5"><img src="../../static/images/pic/item_zzfw5.png"><span>上门提货</span></div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02506')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02506')"
                 class="item_zzfw6"><img src="../../static/images/pic/item_zzfw6.png"><span>开发票</span></div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02507')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02507')"
                 class="item_zzfw7"><img src="../../static/images/pic/item_zzfw7.png"><span>签单回收</span></div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02508')" 
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02508')"
                 class="item_zzfw8"><img src="../../static/images/pic/item_zzfw8.png"><span>时效保障</span></div>
             </div>
           </div>
@@ -488,7 +503,7 @@
             class="arc_nr">
             <div class="arc_nr1">
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02501')" 
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02501')"
                 class="arc_fw item_fw1">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_1.png" ></div>
                 <div class="fw_nr">
@@ -497,7 +512,7 @@
                 </div>
               </div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02502')" 
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02502')"
                 class="arc_fw item_fw2">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_2.png" ></div>
                 <div class="fw_nr">
@@ -506,7 +521,7 @@
                 </div>
               </div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02503')" 
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02503')"
                 class="arc_fw item_fw3" >
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_3.png" ></div>
                 <div class="fw_nr">
@@ -515,7 +530,7 @@
                 </div>
               </div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02504')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02504')"
                 class="arc_fw item_fw4">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_4.png" ></div>
                 <div class="fw_nr">
@@ -524,7 +539,7 @@
                 </div>
               </div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02505')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02505')"
                 class="arc_fw item_fw5">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_5.png" ></div>
                 <div class="fw_nr">
@@ -533,7 +548,7 @@
                 </div>
               </div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02506')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02506')"
                 class="arc_fw item_fw6">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_6.png" ></div>
                 <div class="fw_nr">
@@ -542,7 +557,7 @@
                 </div>
               </div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02507')"
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02507')"
                 class="arc_fw item_fw7">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_7.png" ></div>
                 <div class="fw_nr">
@@ -551,7 +566,7 @@
                 </div>
               </div>
               <div 
-                v-if="tranDetail.otherServiceCode.includes('AF02508')" 
+                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02508')"
                 class="arc_fw item_fw8">
                 <div class="fw_img"><img src="../../static/images/article_wlzx/fw_8.png" ></div>
                 <div class="fw_nr">
@@ -882,7 +897,8 @@ export default {
       ],
       nav4Id: 0,
       rangeEvaluationlist: [],
-      rangeEvaluationCount: {}
+      rangeEvaluationCount: {},
+      showImg: 0
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -904,11 +920,13 @@ export default {
       '/aflc-portal/portalt/aflcPointNetwork/v1/listDetailPointNetwork',
       parm
     )
-    listDetailPointNetwork.data.data.list.forEach(item => {
-      if (item.address.indexOf(item.belongCityName !== -1)) {
-        item.address = item.address.replace(item.belongCityName, '')
-      }
-    })
+    if (listDetailPointNetwork.data.status === 200) {
+      listDetailPointNetwork.data.data.list.forEach(item => {
+        if (item.address.indexOf(item.belongCityName !== -1)) {
+          item.address = item.address.replace(item.belongCityName, '')
+        }
+      })
+    }
     const tranDetail = await $axios.get(
       '/aflc-portal/portalt/aflcTransportRange/v1/' + query.id
     )
@@ -941,7 +959,7 @@ export default {
           ? listDetailPointNetwork.data.data.list
           : [],
       tranDetail: tranDetail.data.status === 200 ? tranDetail.data.data : {},
-      zxList: zxList.data.status === 200 ? zxList.data.data : [],
+      zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       rangeEvaluationlist:
         rangeEvaluationlist.data.status === 200
           ? rangeEvaluationlist.data.data.list
@@ -964,6 +982,9 @@ export default {
     })
   },
   methods: {
+    clickImg(int) {
+      this.showImg = int
+    },
     click4(item) {
       this.nav4Id = item.id
     },

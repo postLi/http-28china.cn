@@ -200,15 +200,17 @@ export default {
     }
   },
   async asyncData({ $axios, app, query }) {
-    let listRangesAging = await getListRangesAging($axios, 1, {
+    let listRangesAgingData = await getListRangesAging($axios, 1, {
       filterSign: 1,
       startCity: app.$cookies.get('currentAreaFullName'),
       startProvince: app.$cookies.get('currentProvinceFullName')
     })
     return {
-      listRangesAging: listRangesAging.list,
-      totalPage: listRangesAging.totalPage,
-      currentPage: listRangesAging.currentPage
+      listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
+      totalPage: listRangesAgingData.totalPage
+        ? listRangesAgingData.totalPage
+        : 0,
+      currentPage: listRangesAgingData.currentPage
     }
   },
   mounted() {

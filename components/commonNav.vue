@@ -32,31 +32,20 @@
             style="margin-left: 110px;">
             <div class="h_m_search1">
               <a
-                onclick="document.getElementById(&#39;h_m_search001&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;h_m_search002&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search003&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search004&#39;).style.display=&#39;none&#39;;
-      document.getElementById(&#39;h_m_span1&#39;).style.color=&#39;#3f94ee&#39;;document.getElementById(&#39;h_m_span2&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span3&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span4&#39;).style.color=&#39;#333&#39;;	"
-                href="#">
-                <span
-                  id="h_m_span1"
-                  style="color:#3f94ee;">找专线</span></a>
-              <a
-                onclick="document.getElementById(&#39;h_m_search002&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;h_m_search001&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search003&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search004&#39;).style.display=&#39;none&#39;;
-      document.getElementById(&#39;h_m_span2&#39;).style.color=&#39;#3f94ee&#39;;document.getElementById(&#39;h_m_span1&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span3&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span4&#39;).style.color=&#39;#333&#39;;	"
-                href="#">
-              <span id="h_m_span2">找货</span></a>
-              <a
-                onclick="document.getElementById(&#39;h_m_search003&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;h_m_search001&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search002&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search004&#39;).style.display=&#39;none&#39;;
-      document.getElementById(&#39;h_m_span3&#39;).style.color=&#39;#3f94ee&#39;;document.getElementById(&#39;h_m_span1&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span2&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span4&#39;).style.color=&#39;#333&#39;;	"
-                href="#">
-              <span id="h_m_span3">找车</span></a>
-
+                v-for="(item,index) in navList"
+                :key="index"
+                :style="{'color':$store.state.topNav3.navId === item.id ? '#3f94ee' : '#333'}"
+                href="javascript:"
+                @click="clickNav(item)">
+              <span>{{ item.name }}</span></a>
             </div>
             <div class="h3"/>
             <!--找专线 S -->
 
             <div
+              v-show="$store.state.topNav3.navId === 4"
               id="h_m_search001"
-              class="h_m_search2"
-              style="display: block;">
+              class="h_m_search2">
               <div class="h_m_search33 floatl">
                 <!--<div class="h_m_cfd floatl"><input wtmap="" type="text" id="wlLineFrom0" name="" class="" placeholder=" 请输入出发地" readonly=""></div>-->
                 <div
@@ -88,18 +77,17 @@
               </div>
 
               <div class=" floatl"><input
-                id="search_wlLine0"
                 type="button"
                 class="h_m_search"
-                onclick="window.location.href=&#39;/plus/list.php?tid=4&#39;"
-                value=""></div>
+                value=""
+                @click="click4()"></div>
             </div>
             <!-- 找专线  E -->
             <!--找货 S -->
             <div
+              v-show="$store.state.topNav3.navId === 2"
               id="h_m_search002"
-              class="h_m_search2"
-              style="display: none;">
+              class="h_m_search2">
               <div class="h_m_search33 floatl">
                 <!--<div class="h_m_cfd floatl"><input wtmap="" type="text" id="HuoyuanFrom0" name="" class="" placeholder=" 请输入出发地" readonly=""></div>-->
                 <div
@@ -131,18 +119,17 @@
               </div>
 
               <div class=" floatl"><input
-                id="search_huoyuan0"
                 type="button"
                 class="h_m_search"
-                onclick="window.location.href=&#39;/plus/list.php?tid=2&#39;"
-                value=""></div>
+                value=""
+                @click="click2()"></div>
             </div>
             <!-- 找货 E -->
             <!--找车 S -->
             <div
+              v-show="$store.state.topNav3.navId === 3"
               id="h_m_search003"
-              class="h_m_search2"
-              style="display: none;">
+              class="h_m_search2">
               <div class="h_m_search33 floatl">
                 <!--<div class="h_m_cfd floatl"><input wtmap="" type="text" id="carLineFrom0" name="" class="" placeholder=" 请输入出发地" readonly=""></div>-->
                 <div
@@ -174,46 +161,13 @@
               </div>
 
               <div class=" floatl"><input
-                id="search_cheyuan0"
                 type="button"
                 class="h_m_search"
-                onclick="window.location.href=&#39;/plus/list.php?tid=3&#39;"
-                value=""></div>
+                value=""
+                @click="click3()"></div>
             </div>
             <!-- 找车 E -->
-            <!--找园区 S -->
-            <div
-              id="h_m_search004"
-              class="h_m_search2"
-              style="display:none;">
-              <div class="h_m_search3 floatl">
-                <div class="h_m_cfd floatl"><input
-                  id="phLine1From"
-                  wtmap=""
-                  type="text"
-                  name=""
-                  class=""
-                  placeholder=" 请输入出发地"
-                  readonly=""></div>
-                <div class="h_m_jt floatl"><img src="../static/images/index/02jt.png"></div>
-                <div class="h_m_ddd floatl"><input
-                  id="phLine1To"
-                  wtmap=""
-                  type="text"
-                  name=""
-                  class=""
-                  placeholder=" 请输入到达地"
-                  readonly=""></div>
-              </div>
 
-              <div class=" floatl"><input
-                id=""
-                type="button"
-                class="h_m_search"
-                onclick="window.location.href=&#39;/plus/list.php?tid=1&#39;"
-                value=""></div>
-            </div>
-            <!-- 找园区 E -->
 
           </div>
           <div
@@ -280,6 +234,15 @@ import Top from '../components/top'
 export default {
   name: 'CommonNav',
   components: { Top },
+  data() {
+    return {
+      navList: [
+        { id: 4, name: '找专线' },
+        { id: 2, name: '找货' },
+        { id: 3, name: '找车' }
+      ]
+    }
+  },
   watch: {
     $route: 'routeChange'
   },
@@ -292,6 +255,174 @@ export default {
     })
   },
   methods: {
+    click4() {
+      var list1 = [],
+        list2 = []
+      $('#wlLineFrom0 .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      var startp = list1[0]
+      var startc = list1[1]
+      var starta = list1[2]
+
+      $('#wlLineTo0 .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      var endp = list2[0]
+      var endc = list2[1]
+      var enda = list2[2]
+
+      if (!startp) {
+        startp = ''
+      }
+      if (!startc) {
+        startc = ''
+      }
+      if (!starta) {
+        starta = ''
+      }
+      if (!endp) {
+        endp = ''
+      }
+      if (!endc) {
+        endc = ''
+      }
+      if (!enda) {
+        enda = ''
+      }
+      startp = encodeURI(startp)
+      startc = encodeURI(startc)
+      starta = encodeURI(starta)
+      endp = encodeURI(endp)
+      endc = encodeURI(endc)
+      enda = encodeURI(enda)
+      window.location =
+        '/plus/list.php?tid=4&startp=' +
+        startp +
+        '&startc=' +
+        startc +
+        '&starta=' +
+        starta +
+        '&endp=' +
+        endp +
+        '&endc=' +
+        endc +
+        '&enda=' +
+        enda
+    },
+    click2() {
+      var list1 = [],
+        list2 = []
+      $('#HuoyuanFrom0 .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      var startp = list1[0]
+      var startc = list1[1]
+      var starta = list1[2]
+
+      $('#HuoyuanTo0 .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      var endp = list2[0]
+      var endc = list2[1]
+      var enda = list2[2]
+
+      if (!startp) {
+        startp = ''
+      }
+      if (!startc) {
+        startc = ''
+      }
+      if (!starta) {
+        starta = ''
+      }
+      if (!endp) {
+        endp = ''
+      }
+      if (!endc) {
+        endc = ''
+      }
+      if (!enda) {
+        enda = ''
+      }
+      startp = encodeURI(startp)
+      startc = encodeURI(startc)
+      starta = encodeURI(starta)
+      endp = encodeURI(endp)
+      endc = encodeURI(endc)
+      enda = encodeURI(enda)
+      window.location =
+        '/plus/list.php?tid=2&startp=' +
+        startp +
+        '&startc=' +
+        startc +
+        '&starta=' +
+        starta +
+        '&endp=' +
+        endp +
+        '&endc=' +
+        endc +
+        '&enda=' +
+        enda
+    },
+    click3() {
+      var list1 = [],
+        list2 = []
+      $('#carLineFrom0 .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      var startp = list1[0]
+      var startc = list1[1]
+      var starta = list1[2]
+
+      $('#carLineTo0 .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      var endp = list2[0]
+      var endc = list2[1]
+      var enda = list2[2]
+
+      if (!startp) {
+        startp = ''
+      }
+      if (!startc) {
+        startc = ''
+      }
+      if (!starta) {
+        starta = ''
+      }
+      if (!endp) {
+        endp = ''
+      }
+      if (!endc) {
+        endc = ''
+      }
+      if (!enda) {
+        enda = ''
+      }
+      startp = encodeURI(startp)
+      startc = encodeURI(startc)
+      starta = encodeURI(starta)
+      endp = encodeURI(endp)
+      endc = encodeURI(endc)
+      enda = encodeURI(enda)
+      window.location =
+        '/plus/list.php?tid=3&startp=' +
+        startp +
+        '&startc=' +
+        startc +
+        '&starta=' +
+        starta +
+        '&endp=' +
+        endp +
+        '&endc=' +
+        endc +
+        '&enda=' +
+        enda
+    },
+    clickNav(item) {
+      this.$store.commit('topNav3/setNav', item.id)
+    },
     routeChange() {
       $('#nav li').each(function() {
         if ($(this).hasClass('nav-active')) {
@@ -393,7 +524,6 @@ export default {
 }
 
 .h_m_search1 span {
-  color: #333;
   font-size: 12px;
   padding: 0 20px;
 }
@@ -459,41 +589,6 @@ export default {
   width: 200px;
   height: 50px;
   float: right;
-}
-.tel_l {
-  float: left;
-  padding-top: 5px;
-}
-.tel_r {
-  float: left;
-}
-.tel_r1 {
-  height: 28px;
-  line-height: 28px;
-  font-size: 14px;
-  color: #666666;
-  font-weight: normal;
-}
-.tel_r2 {
-  height: 28px;
-  line-height: 28px;
-  color: #eb434d;
-  font-size: 24px;
-  font-weight: bold;
-}
-.header_middle4 {
-  float: left;
-  margin-left: 25px;
-  margin-top: 20px;
-}
-.header_middle5 {
-  float: left;
-  margin-left: 5px;
-  margin-top: 20px;
-  font-size: 14px;
-  color: #333333;
-  width: 20px;
-  line-height: 15px;
 }
 .header_bottom {
   /* width: 1200px; */

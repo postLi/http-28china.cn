@@ -110,6 +110,7 @@ height:20px;text-align: center;
 .arc_right06 span{color: #333;padding-left: 70px;}
 .arc_right .arc_right07 {height: 95px; width: 228px;}
 .arc_right07 img{margin-top: 18px;margin-right: 36px;float: left;}
+.arc_right07 span{float: left;margin-top: 19px;margin-right: 6px;color: #3f94ee;font-size: 14px;}
 .arc_left2{float:left;width: 434px;height:100%;border-right: 1px solid #e2e2e2;margin-right: -1px;padding-bottom: 20px;}
 .arc_left2 .arc_left2_bt{height: 42px;width: 434px;border-bottom: 1px solid #e2e2e2;}
 /*.arc_left2_bt font{color: #eb434d;font-size:16px;display:block;float:left;height:42px;border-right: 1px solid #e2e2e2;line-height:42px;width: 132px; text-align: center;}

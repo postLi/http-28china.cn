@@ -1,18 +1,55 @@
 <template>
   <div>
     <div class="footer clear">
-      <div 
-        class="w1200 center " 
-        style="background-color: #ddd;">
-        <div class="footer1  center">
-
-          <a href="/zhuanxian">找物流专线</a>
-          <a href="/cheyuan">找车源</a>
-          <a href="/huoyuan">找货源</a>
+      <div class="center">
+        <div class="img">
+          28
+        </div>
+        <div class="title">
+          <div class="left">
+            <div class="title1">快 好 省</div>
+            <div class="title2">国内领先的一站式综合物流快运平台，物流运输管理，网络路径优化，网络货物跟踪，供应链可视化</div>
+          </div>
+          <div class="right">
+            <div class="box divide">
+              <div class="box-in"/>
+            </div>
+            <div class="box">
+              <img 
+                src="../static/images/28fast_download.png" 
+                width="112" 
+                height="112">
+              <div>28快运 货主端</div>
+            </div>
+            <div class="box">
+              <img
+                src="../static/images/28fast_download.png"
+                width="112"
+                height="112">
+              <div>28快运 车主端</div>
+            </div>
+          </div>
+        </div>
+        <div class="footer1">
+          <a 
+            href="http://www.anfanet.com/about.html" 
+            target="_blank">关于我们</a>
+          <a href="javascript:void(0)">产品与服务</a>
+          <a href="javascript:void(0)">云TMS</a>
           <a href="javascript:void(0)">精选案例</a>
           <a href="/plus/list.php?tid=12">资讯动态</a>
-          <a href="http://www.anfanet.com/about.html">关于我们</a>
-          <a href="http://www.anfanet.com/tech-info.html">帮助中心</a>
+          <a 
+            href="http://www.anfanet.com/tech-info.html" 
+            target="_blank">帮助中心</a>
+        </div>
+        <div class="footer1-1">
+          <a href="javascript:void(0)">友情链接：</a>
+          <a 
+            href="http://www.28china.cn" 
+            target="_blank"> 28快运官网</a>
+          <a 
+            href="http://www.28tms.com" 
+            target="_blank">28云TMS</a>
         </div>
         <div class="footer2 center">
           <p>版权所有：28快运|客服免费电话：400-9992828</p>
@@ -202,25 +239,85 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .footer {
-  padding-top: 27px;
   font-family: MicrosoftYaHei;
-  height: 176px;
+  margin-top: 50px;
   font-size: 14px;
   text-align: center;
   border-top: 2px solid #ccc;
-  background-color: #ddd;
+  background-color: #2d3b55;
   /* min-width: 1400px; */
+  .center {
+    padding-top: 27px;
+    width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    .img {
+      position: absolute;
+      top: -19px;
+      left: 0;
+      width: 205px;
+      height: 140px;
+      background: url(../static/images/foot_logo_bg.png) no-repeat center;
+    }
+    .title {
+      height: 100px;
+      .left {
+        float: left;
+        margin: 0 0 0 229px;
+        .title1 {
+          text-align: left;
+          font-size: 20px;
+          font-weight: bold;
+          line-height: 28px;
+          color: #3f97ef;
+        }
+        .title2 {
+          font-size: 14px;
+          font-weight: bold;
+          line-height: 28px;
+          color: #ffffff;
+        }
+      }
+      .right {
+        float: right;
+        .box {
+          display: table-cell;
+          padding-left: 20px;
+          div {
+            font-size: 14px;
+            color: #e0e0e0;
+          }
+        }
+        .divide {
+          vertical-align: middle;
+          .box-in {
+            background: #ffffff;
+            width: 1px;
+            height: 100px;
+          }
+        }
+      }
+    }
+  }
 }
 .footer1 {
-  width: 1200px;
+  clear: both;
+  text-align: left;
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 10px;
 }
-.footer1 a {
-  color: #333;
-  padding: 0 20px;
+.footer1-1 {
+  padding-top: 10px;
+  text-align: left;
+}
+.footer1 a,
+.footer1-1 a {
+  padding-right: 20px;
   line-height: 1.2;
-  border-right: 1px solid #999999;
+  font-size: 16px;
+  color: #fefefe;
 }
 .footer1 a:last-child {
   border: none;
@@ -232,6 +329,7 @@ export default {
   line-height: 24px;
   padding-top: 10px;
   width: 1200px;
-  color: #999999;
+  font-size: 14px;
+  color: #cccccc;
 }
 </style>

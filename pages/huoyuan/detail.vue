@@ -8,7 +8,7 @@
     <!--href="">货源信息</a>-->
     <!--</div>-->
     <div class="arc_top1">
-      <div class="arc_top1_1"><span id="nr081"/></div>
+      <div class="arc_top1_1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></div>
 
       <div class="arc_top1_3"><a 
         id="search_huo" 
@@ -28,49 +28,52 @@
           placeholder="到达地">
       </div>
 
-
-
-
     </div>
     <div class="arc_top2">
-      <div class="arc_top2_1"><a href="{dede:global.cfg_cmsurl/}/"><span>首页</span></a></div>
-      <div 
-        id="arc_city" 
-        class="arc_top2_2"/>
-      <div 
-        class="arc_top2_3" 
+      <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
+      <div class="arc_top2_2">
+        <a
+          v-for="(item,index) in zxList"
+          v-if="index < 14"
+          :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
+        </a>
+      </div>
+      <div
+        v-if="zxList.length >14"
+        class="arc_top2_3"
+        style="display: block"
         onmouseover="$('.city_box').css('display','block');"><a href="javascript:void(0)"><span>更多+</span></a></div>
       <!--更多城市-->
       <div 
         id="city_box" 
         class="city_box" 
         onmouseover="$('.city_box').css('display','block');"
-        onmouseout="$('.city_box').css('display','none');" />
+        onmouseout="$('.city_box').css('display','none');">
+        <a
+          v-for="(item,index) in zxList"
+          v-if="index >= 14"
+          :key="index"><span>{{ item.name.substring(0, 2) }}</span>
+        </a>
+      </div>
 
     </div>
     <div class="arc_main1">
       <div class="arc_left">
         <div class="arc_left_1">
-          <p class="arc_p1"><span id="nr082"/></p>
-          <p class="arc_p2"><i>浏览量：<em id="nr0899"/></i><i>收藏量：<em class="my_hz_num"/></i></p>
+          <p class="arc_p1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></p>
+          <p class="arc_p2"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i><i>收藏量：<em class="my_hz_num"/></i></p>
         </div>
         <div class="arc_left_2">
           <div class="arc_left_2_1">
             <div class="arc_left_2_1_1"><span>货源信息</span></div>
             <div class="arc_left_2_1_2"><table>
-              <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font id="nr083"/></td></tr>
-              <tr><td class="arc_td1">数量：</td><td 
-                id="nr084" 
-                class="arc_td2"/></tr>
-              <tr><td class="arc_td1">重量：</td><td 
-                id="nr085" 
-                class="arc_td2"/></tr>
-              <tr><td class="arc_td1">体积：</td><td 
-                id="nr086" 
-                class="arc_td2"/></tr>
-              <tr><td class="arc_td1">有效期：</td><td 
-                id="nr087" 
-                class="arc_td2"/></tr>
+              <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsName }}</font></td></tr>
+              <tr><td class="arc_td1">数量：</td><td class="arc_td2">{{ hyDetail.goodsNum ? hyDetail.goodsNum + '件': '' }}</td></tr>
+              <tr><td class="arc_td1">重量：</td><td
+                class="arc_td2">{{ hyDetail.goodsWeight }}公斤</td></tr>
+              <tr><td class="arc_td1">体积：</td><td class="arc_td2">{{ hyDetail.goodsVolume }}立方米</td></tr>
+              <tr><td class="arc_td1">有效期：</td><td
+                class="arc_td2">{{ hyDetail.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</td></tr>
             </table>
             </div>
             <div class="arc_left_2_1_3">
@@ -92,27 +95,21 @@
             </div>
             <div class="arc_left_2_1_1"><span>线路信息</span></div>
             <div class="arc_left_2_1_2"><table>
-              <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font id="nr088"/></td></tr>
-              <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font id="nr089"/></td></tr>
-              <tr><td class="arc_td1">联系人：</td><td 
-                id="nr0810" 
-                class="arc_td2"/></tr>
-              <tr><td class="arc_td1">联系电话：</td><td 
-                id="nr0811" 
-                class="arc_td2"/></tr>
+              <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font>{{ hyDetail.startProvinceCityArea }}</font></td></tr>
+              <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
+              <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.consignor }}</td></tr>
+              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.consignorPhone }}</td></tr>
               <tr><td class="arc_td1">发布时间：</td><td 
-                id="nr0812" 
-                class="arc_td2"/></tr>
+                v-if="hyDetail.createTime"
+                class="arc_td2">{{ hyDetail.createTime.substring(0, 19) }}</td></tr>
             </table>
             </div>
             <div class="arc_left_2_1_3">
-              <img src="/templets/default/images/article_wlzx/pj_zhuyi.png" ><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
+              <img src="../../static/images/article_wlzx/pj_zhuyi.png" ><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
             </div>
 
           </div>
         </div>
-
-
 
       </div>
       <div class="arc_right">
@@ -139,15 +136,16 @@
         </p>
         <p class="arc_right03">
           <span>质量</span><span>时效</span><span>价格</span><br >
-          <font id="nr0814"/><font id="nr0815"/><font id="nr0816"/>
+          <font>4.7</font><font>4.8</font><font>4.9</font>
         </p>
         <p class="arc_right04">
-          <span class="arc_right04_1"><i>联系人：</i><font id="nr0817"/></span>
-          <span><i>手机：</i><font id="nr0818"/></span>
-          <span><i>Q&nbsp;Q：</i><a id="nr0819"><input 
-            id="qq" 
-            value="QQ交谈"></a></span>
-          <span><i>地址：</i><font id="nr0820"/></span>
+          <span class="arc_right04_1"><i>联系人：</i><font>{{ hyDetail.consignor }}</font></span>
+          <span><i>手机：</i><font>{{ hyDetail.consignorPhone }}</font></span>
+          <span><i>Q&nbsp;Q：</i><a
+            v-if="hyDetail.qq"
+            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + hyDetail.qq + '&site=qq&menu=yes'" 
+            target="_blank"><input value="QQ交谈"></a></span>
+          <span><i>地址：</i><font v-if="hyDetail.consignorAddress">{{ hyDetail.consignorAddress.substring(0, 10) }}</font></span>
         </p>
         <p class="arc_right05">
           <input 
@@ -160,13 +158,14 @@
           <span>相关认证</span>
         </p>
         <p class="arc_right07">
-          <img 
-            id="right_xinyong" 
+          <img
+            v-if="hyDetail.isVip"
             src="../../static/images/article_wlzx/11xinyong.png">
-          <img 
-            id="right_shiming" 
+          <img
+            v-if="hyDetail.authStatus === 'AF0010403'"
             src="../../static/images/article_wlzx/10shiming.png">
-            <!--<img src="../../static/images/article_wlzx/25baozhengjin.png"/>-->
+          <!--<img src="../../static/images/article_wlzx/25baozhengjin.png"/>-->
+          <span v-if="hyDetail.authStatus !== 'AF0010403' && (!hyDetail.isVip || hyDetail.isVip === 0)">暂无认证信息</span>
         </p>
 
       </div>
@@ -178,9 +177,7 @@
           <span>货主介绍</span>
         </div>
 
-        <div 
-          id="nr0821" 
-          class="arc_left2_nr"/>
+        <div class="arc_left2_nr">{{ hyDetail.shipperDesc ? hyDetail.shipperDesc.substring(0, 400) :'暂未填写简介信息！' }}</div>
       </div>
 
       <div class="arc_right2">
@@ -191,30 +188,30 @@
             class="arc_span arc_active">货主其他求车信息</span>
         </div>
 
-        <div 
-          id="arc_nr2" 
-          class="arc_nr arc_right2_nr ">
-
+        <div class="arc_nr arc_right2_nr ">
           <div 
-            class="arc_list_item" 
-            style="display: none;">
+            v-for="(item,index) in otherInfoList" 
+            :key="index" 
+            class="arc_list_item">
             <a 
-              id="nr090" 
-              target="_blank"><div 
-                id="nr091" 
-                class="arc_list_item_bt"/></a>
+              :href="'/huoyuan/2018/0508/2.html?id=' + item.id + '&shipperId=' + item.shipperId"
+              target="_blank"><div
+                v-if="item.startProvinceCityArea && item.endProvinceCityArea" 
+                class="arc_list_item_bt">{{ item.startProvinceCityArea + '	&rarr;' + item.endProvinceCityArea }}</div></a>
             <div class="arc_list_item_nr">
               <div class="arc_list_item_nr1">
-                <i>货源信息：</i><span id="nr092">电子电器  </span><em/><span ><font id="nr093">26</font>件 </span><em/><span ><font id="nr094">1.3</font>公斤  </span><em/> <span ><font id="nr095">20</font>立方米  </span>
+                <i>货源信息：</i><span>{{ item.goodsName }}  </span><em/>
+                <span ><font>{{ item.goodsNum }}</font>件 </span><em/>
+                <span ><font>{{ item.goodsWeight }}</font>公斤  </span><em/>
+                <span ><font>{{ item.goodsVolume }}</font>立方米  </span>
               </div>
               <div class="arc_list_item_nr2">
-                <i>发布时间：</i><span id="nr096">2018-07-27</span>
+                <i>发布时间：</i><span v-if="item.createTime">{{ item.createTime.substring(0, 16) }}</span>
 
               </div>
               <div class="arc_list_item_nr3">
-                <a 
-                  id="nr097" 
-                  href="javascript:void(0)"><input value="查看"></a>
+                <a
+                  :href="'/huoyuan/2018/0508/2.html?id=' + item.id + '&shipperId=' + item.shipperId"><input value="查看"></a>
               </div>
 
             </div>
@@ -241,7 +238,8 @@
 
     <div 
       id="js011" 
-      class="arc_bottom">
+      class="arc_bottom"
+      style="display: none">
       <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/plus/list.php?tid=2"><span class="arc_bottom_more">更多+</span></a></div>
 
       <div 
@@ -284,6 +282,7 @@
   </div>
 </template>
 <script>
+import { getCode, getCity } from '~/components/commonJs.js'
 function setEnable(item) {
   if (item.isEnable >= 0 && item.isEnable <= 3) {
     item.starS = new Array(1)
@@ -316,6 +315,17 @@ function setEnable(item) {
     item.starB = new Array(5)
   }
 }
+async function getOtherInfoList($axios, current, vo = {}) {
+  let parm = {
+    currentPage: current,
+    pageSize: 5,
+    vo
+  }
+  return await $axios.post(
+    '/aflc-portal/order/fclOrder/v1/getOtherInfoList',
+    parm
+  )
+}
 export default {
   name: 'Detail',
   head: {
@@ -325,24 +335,48 @@ export default {
   layout: 'subLayout',
   data() {
     return {
+      zxList: [],
+      otherInfoList: [],
       hyDetail: []
     }
   },
   async asyncData({ $axios, app, query }) {
+    let zxList
     let hyDetail = await $axios.get(
-      'http://www.28china.cn/api/aflc-portal/order/fclOrder/v1/getDetails/' +
-        query.id
+      '/aflc-portal/order/fclOrder/v1/getDetails/' + query.id
     )
     if (hyDetail.data.status === 200) {
       setEnable(hyDetail.data.data)
+      let code = await getCode($axios, hyDetail.data.data.endProvince)
+      zxList = await getCity($axios, code, hyDetail.data.data.startCity)
     }
-    return { hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {} }
+    let otherInfoList = await getOtherInfoList($axios, 1, {
+      id: query.id,
+      shipperId: query.shipperId,
+      queryType: '2'
+    })
+    return {
+      hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+      zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
+      otherInfoList:
+        otherInfoList.data.status === 200 ? otherInfoList.data.data.list : []
+    }
   },
   mounted() {
     seajs.use(['../js/city.js'], function() {
       seajs.use(['../js/arc_huoyuan.js'], function() {
         seajs.use(['../js/collection.js'], function() {
-          seajs.use(['../js/gaodemap2.js'], function() {})
+          seajs.use(['../js/gaodemap2.js'], function() {
+            $('#pagination1').pagination({
+              currentPage: 1,
+              totalPage: process02(1),
+              callback: function(current) {
+                $('#current1').text(current)
+                process02(current)
+                window.location.href = '#top'
+              }
+            })
+          })
         })
       })
     })

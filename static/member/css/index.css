@@ -1045,6 +1045,9 @@ clear: both;
     padding-top: 5px;
     list-style: none;
 }
+#about .about-main .about-font .cp{
+    display: block;
+}
 #about .about-main .about-font ul h3 {
     font-size: 14px;
     color: #fff;
@@ -1086,13 +1089,13 @@ clear: both;
 }
 #about .about-main .about-img .friendLink li .img-box {
     position: relative;
-    display: none;
     width: 211px;
     height: 248px;
     top: -292px;
     left: -86px;
     z-index: 2;
     background: url(../images/border.png);
+    pointer-events: none;
 }
 #about .about-main .about-img .friendLink li .img-box .detail-img {
     position: absolute;
@@ -1273,8 +1276,8 @@ background-color: #48abee;
 }
 .wd_item:hover{ box-shadow: 0 2px 20px rgba(0,0,0,.1);
     transform: translate3d(0,-2px,0);}
-.wd_item:nth-child(6){margin-right: 0px;}
-.wd_item:nth-child(10){margin-right: 0px;}
+.wd_item:nth-child(5){margin-right: 0px;}
+.wd_item:nth-child(9){margin-right: 0px;}
 .wd_item p{padding-left: 30px;color: #333;font-size: 14px;padding-top: 15px;}
 .wd_item img{width: 20px; height: 20px;padding-right: 12px;}
 
@@ -1327,7 +1330,7 @@ background-color: #48abee;
 
 /*弹框 S*/
 .company_box {
-	z-index: 9;
+	z-index: 99;
 	position:fixed;
 	left: 31%;
 	top:14%;
@@ -1362,8 +1365,8 @@ background-color: #48abee;
 	padding-left: 14px;
 	float: left;
 	}
-.company_box .box_item .item01 img{margin-right: 5px; margin-top: 8px;float: left;display: none;}
-.company_box .box_item .item02 img{margin-right: 30px;display: none;float: left;margin-top: 8px;}
+.company_box .box_item .item01 img{margin-right: 5px; margin-top: 8px;float: left;}
+.company_box .box_item .item02 img{margin-right: 30px;float: left;margin-top: 8px;}
 .company_box .box_item .item03 img{margin-right: 4px;margin-top: -4px;}
 .company_box .box_item .item03 span{margin-right: 4px;font-size: 13px;color: #666;display: none;float: left;}
 .company_box .box_item .item04{font-size: 13px;color: #666;}
@@ -1838,7 +1841,7 @@ width:300px;
 height:138px;
 }
 
-.main1_nr{display: none;}
+.main1_nr{}
 .main1_nr ul li{display: none;}
 .cp{display: none;}
 .fw{display: none;}

@@ -31,7 +31,7 @@
           :class="tpath.indexOf('huo') !== -1 ? 'nav-current' : ''">货源信息</a></li>
         <li ><a 
           id="menu_online_order" 
-          :href="$store.state.member.id + '-order?uid=' + $store.state.member.id" 
+          :href="$store.state.member.id + '-order?uid=' + $store.state.member.id + '&publishId=' + $store.state.member.id" 
           :class="tpath.indexOf('order') !== -1 ? 'nav-current' : ''" 
           target="_blank"
           class="need_companyId">在线下单</a></li>

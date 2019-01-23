@@ -11,18 +11,18 @@
           <li class="contact1">
             <p 
               id="nr091" 
-              class="p1"/>
-            <p>联系人：<em id="nr092"/></p>
-            <p>联系电话：<em id="nr093"/></p>
-            <p>QQ：<em id="nr094"/></p>
-            <p>公司地址：<em id="nr095"/></p>
+              class="p1">{{ $store.state.member.company.companyName }}</p>
+            <p>联系人：<em id="nr092">{{ $store.state.member.company.contactsName }}</em></p>
+            <p>联系电话：<em id="nr093">{{ $store.state.member.company.mobile }}</em></p>
+            <p>QQ：<em id="nr094">{{ $store.state.member.company.qq }}</em></p>
+            <p>公司地址：<em id="nr095">{{ $store.state.member.company.address }}</em></p>
     		
           </li>
           <li class="contact2">
             <p class="p1">企业信息</p>
-            <p>公司名称：<em id="nr096"/></p>
+            <p>公司名称：<em id="nr096">{{ $store.state.member.company.companyName }}</em></p>
             <p>营业执照：<em id="nr097"/></p>
-            <p>法人/负责人：<em id="nr098"/></p>
+            <p>法人/负责人：<em id="nr098">{{ $store.state.member.company.corporation }}</em></p>
             <p>公司成立时间：<em id="nr099"/></p>
             <p>代收货款：<em id="nr0910"/></p>
     		
@@ -38,28 +38,28 @@
                   <div class="bg-img first"/>
                   <p>地址</p>
                 </dt>
-                <dd id="nr0911"/>
+                <dd id="nr0911">{{ $store.state.member.company.address }}</dd>
               </dl>
               <dl>
                 <dt class="postal-code">
                   <div class="bg-img"/>
                   <p>法人代表</p>
                 </dt>
-                <dd id="nr0912"/>
+                <dd id="nr0912">{{ $store.state.member.company.corporation }}</dd>
               </dl>
               <dl class="server-phone">
                 <dt>
                   <div class="bg-img"/>
                   <p>全国统一客服热线</p>
                 </dt>
-                <dd id="nr0913"/>
+                <dd id="nr0913">{{ $store.state.member.company.mobile }}</dd>
               </dl>
               <dl class="website">
                 <dt>
                   <div class="bg-img"/>
                   <p>公司名称</p>
                 </dt>
-                <dd id="nr0914"/>
+                <dd id="nr0914">{{ $store.state.member.company.companyName }}</dd>
               </dl>
             </div>
           </div>
@@ -118,8 +118,9 @@ export default {
       }
     )
   },
-  fetch({ store, params }) {
+  async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
+    await store.dispatch('member/GETCOMPANYINFO', params.id)
   }
 }
 </script>

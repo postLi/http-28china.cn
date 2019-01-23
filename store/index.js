@@ -1,6 +1,7 @@
 export const state = () => ({
   counter: 0,
-  pageClass: ''
+  pageClass: '',
+  baseUrl: 'http://192.168.1.188:825'
 })
 
 export const mutations = {

@@ -6,7 +6,7 @@
       <div class="header_r">
         <div
           id="_userlogin1"
-          class="header_r1">您好，欢迎来到28快运!&nbsp;&nbsp; <a href="/member/login.php">登录</a> <a href="/member/index_do.php?fmdo=user&amp;dopost=regnew">注册</a></div>
+          class="header_r1">您好，欢迎来到28快运!&nbsp;&nbsp; <a href="/login">登录</a> <a href="/regisiter">注册</a></div>
         <div
           id="_userlogin1_1"
           class="header_r1"

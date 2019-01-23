@@ -12,9 +12,8 @@
           <div class="header_middle1"><a
             href="/"
             target="_self"><img
-              height="80px"
               width="135px"
-              src="../static/index_files/logor.png"></a></div>
+              src="/img/logo.png"></a></div>
           <div
             id="index_map"
             class="header_middles"
@@ -32,20 +31,17 @@
             style="margin-left: 110px;">
             <div class="h_m_search1">
               <a
-                onclick="document.getElementById(&#39;h_m_search001&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;h_m_search002&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search003&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search004&#39;).style.display=&#39;none&#39;;
-      document.getElementById(&#39;h_m_span1&#39;).style.color=&#39;#3f94ee&#39;;document.getElementById(&#39;h_m_span2&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span3&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span4&#39;).style.color=&#39;#333&#39;;	"
+                class="actvied"
                 href="#">
                 <span
                   id="h_m_span1"
-                  style="color:#3f94ee;">找专线</span></a>
+              >找专线</span></a>
               <a
-                onclick="document.getElementById(&#39;h_m_search002&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;h_m_search001&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search003&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search004&#39;).style.display=&#39;none&#39;;
-      document.getElementById(&#39;h_m_span2&#39;).style.color=&#39;#3f94ee&#39;;document.getElementById(&#39;h_m_span1&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span3&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span4&#39;).style.color=&#39;#333&#39;;	"
+                
                 href="#">
               <span id="h_m_span2">找货</span></a>
               <a
-                onclick="document.getElementById(&#39;h_m_search003&#39;).style.display=&#39;block&#39;;document.getElementById(&#39;h_m_search001&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search002&#39;).style.display=&#39;none&#39;;document.getElementById(&#39;h_m_search004&#39;).style.display=&#39;none&#39;;
-      document.getElementById(&#39;h_m_span3&#39;).style.color=&#39;#3f94ee&#39;;document.getElementById(&#39;h_m_span1&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span2&#39;).style.color=&#39;#333&#39;;document.getElementById(&#39;h_m_span4&#39;).style.color=&#39;#333&#39;;	"
+                
                 href="#">
               <span id="h_m_span3">找车</span></a>
 
@@ -290,6 +286,23 @@ export default {
         seajs.use([location.origin + '/js/diqu.js'])
       })
     })
+    if (process.client) {
+      $('.h_m_search1')
+        .find('a')
+        .on('click', function(e) {
+          e.preventDefault()
+          var inx = $(this).index()
+          $('.h_m_search1')
+            .find('a')
+            .removeClass('actvied')
+            .eq(inx)
+            .addClass('actvied')
+          $('.h_m_search2')
+            .hide()
+            .eq(inx)
+            .show()
+        })
+    }
   },
   methods: {
     routeChange() {
@@ -400,15 +413,19 @@ export default {
 .h_m_search1 span:hover {
   color: #eb434d;
 }
+.h_m_search1 .actvied span {
+  color: #3f94ee;
+  font-weight: bold;
+}
 .h_m_search2 {
   width: 540px;
   height: 40px;
 }
 .h_m_search33 {
-  border: solid 1px #ccc;
+  border: solid 2px #3f94ee;
   border-right: 0px;
   width: fit-content;
-  height: 40px;
+  height: 36px;
 }
 .h_m_search33 input {
   width: 180px;
@@ -559,13 +576,13 @@ export default {
   padding-right: 20px;
 }
 .header_bottom li:hover {
-  background-color: #1373bc;
+  background-color: #157ee2;
 }
 .header_bottom li:visited {
-  background-color: #1373bc;
+  background-color: #157ee2;
 }
 .header_bottom .nav-active {
-  background-color: #1373bc;
+  background-color: #157ee2;
 }
 
 .header_bottom li a {

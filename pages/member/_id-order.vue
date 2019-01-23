@@ -417,8 +417,9 @@ export default {
       function() {}
     )
   },
-  fetch({ store, params }) {
+  async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
+    await store.dispatch('member/GETCOMPANYINFO', params.id)
   }
 }
 </script>

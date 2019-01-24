@@ -471,9 +471,7 @@ export default {
     }
   },
   async asyncData({ $axios, query }) {
-    let gatewayData = await $axios.get(
-      '/aflc-portal/portalt/aflclogisticspark/v1/Gateway/' + query.id
-    )
+    let gatewayData = await $axios.get('/28-web/logisticsPark/' + query.id)
     let jwd
     const longitude = gatewayData.data.data.longitude
     const latitude = gatewayData.data.data.latitude

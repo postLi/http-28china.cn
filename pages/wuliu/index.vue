@@ -36,7 +36,7 @@
                   class="fl list_input"
                   style="position:relative;" >
                   <input
-                    style="height: 100%;"
+                    style="height: 100%;border: none;outline: none;"
                     data-toggle="city-picker"
                     data-level="district"
                     type="text"
@@ -111,7 +111,7 @@
         <!--分页-->
 
         <div class="bottom_wlyq" >
-          <div class="bottom_wlyq_bt">您可能对这些感兴趣{{ currentPage }}</div>
+          <div class="bottom_wlyq_bt">您可能对这些感兴趣</div>
           <div class="bottom_wlyq_nr">
             <div
               v-for="(item,index) in getLogisticsPark"
@@ -139,7 +139,7 @@
             <div class="p p1"><span>{{ item.parkName }}</span></div>
             <div class="p p3">
               <ul>
-                <li class="tj_left tj_left1"><font >{{ item.transportNumber }}<em>条</em></font></li>
+                <li class="tj_left tj_left1"><font >{{ item.transportNumber }}条</font></li>
                 <li class="tj_right"><span >优质专线</span></li>
                 <li class="tj_left tj_left2"><font>{{ item.netWorkNumber }}<em>家</em></font></li>
                 <li class="tj_right"><span >优质物流公司</span></li>
@@ -162,14 +162,12 @@ async function gatewaylist($axios, currentPage, vo = {}) {
     pageSize: 21,
     vo
   }
-  await $axios
-    .post('/aflc-portal/portalt/aflclogisticspark/v1/Gateway/Gatewaylist', parm)
-    .then(res => {
-      if (res.data.status === 200) {
-        list = res.data.data.list
-        pages = res.data.data.pages
-      }
-    })
+  await $axios.post('/28-web/logisticsPark/list', parm).then(res => {
+    if (res.data.status === 200) {
+      list = res.data.data.list
+      pages = res.data.data.pages
+    }
+  })
   return { list, pages, currentPage }
 }
 export default {
@@ -179,6 +177,11 @@ export default {
       { rel: 'stylesheet', href: '/css/basic.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/list_wlyq.css' }
+    ],
+    script: [
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' }
     ]
   },
   data() {
@@ -201,7 +204,7 @@ export default {
       vo: {}
     }
     let getLogisticsPark = await $axios.post(
-      '/aflc-portal/portalt/aflclogisticspark/v1/Gateway/getLogisticsPark',
+      '/28-web/logisticsPark/interestedList',
       parm
     )
     let parm1 = {
@@ -210,7 +213,7 @@ export default {
       vo: {}
     }
     let recommendParklist = await $axios.post(
-      '/aflc-portal/portalt/aflclogisticspark/v1/Gateway/RecommendParklist',
+      '/28-web/logisticsPark/recommendList',
       parm1
     )
     let getGatewaylistData = await gatewaylist($axios, 1, {
@@ -232,66 +235,60 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['./js/city-picker.data.js'], () => {
-      seajs.use(['./js/city-picker.js'], () => {
-        seajs.use(['./js/jquery.pagination.min.js'], () => {
-          function GetUrlParam(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-            var r = encodeURI(window.location.search)
-              .substr(1)
-              .match(reg)
-            if (r != null) return unescape(r[2])
-            return null
-          }
+    function GetUrlParam(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+      var r = encodeURI(window.location.search)
+        .substr(1)
+        .match(reg)
+      if (r != null) return unescape(r[2])
+      return null
+    }
 
-          var locationProvince1 = GetUrlParam('locationProvince')
-          var locationCity1 = GetUrlParam('locationCity')
-          var locationArea1 = GetUrlParam('locationArea')
-          var parkName1 = GetUrlParam('parkName')
+    var locationProvince1 = GetUrlParam('locationProvince')
+    var locationCity1 = GetUrlParam('locationCity')
+    var locationArea1 = GetUrlParam('locationArea')
+    var parkName1 = GetUrlParam('parkName')
 
-          var locationProvince = decodeURI(locationProvince1)
-          var locationCity = decodeURI(locationCity1)
-          var locationArea = decodeURI(locationArea1)
-          var parkName = decodeURI(parkName1)
+    var locationProvince = decodeURI(locationProvince1)
+    var locationCity = decodeURI(locationCity1)
+    var locationArea = decodeURI(locationArea1)
+    var parkName = decodeURI(parkName1)
 
-          var currentProvinceFullName = $.cookie('currentProvinceFullName')
-          var currentAreaFullName = $.cookie('currentAreaFullName')
+    var currentProvinceFullName = $.cookie('currentProvinceFullName')
+    var currentAreaFullName = $.cookie('currentAreaFullName')
 
-          var vo = new Object()
+    var vo = new Object()
 
-          vo.locationProvince = locationProvince
-          vo.locationCity = locationCity
-          vo.locationArea = locationArea
-          vo.parkName = parkName
+    vo.locationProvince = locationProvince
+    vo.locationCity = locationCity
+    vo.locationArea = locationArea
+    vo.parkName = parkName
 
-          if (!locationProvince || locationProvince == 'null') {
-            locationProvince = currentProvinceFullName
-            vo.locationProvince = locationProvince
-          }
-          if (!locationCity || locationCity == 'null') {
-            locationCity = currentAreaFullName
-            vo.locationCity = locationCity
-          }
-          if (!locationArea || locationArea == 'null') {
-            locationArea = ''
-            delete vo.locationArea
-          }
-          if (!parkName || parkName == 'null') {
-            parkName = ''
-            delete vo.parkName
-          }
-          $('#parkAddress input').citypicker({
-            province: locationProvince,
-            city: locationCity,
-            district: locationArea
-          })
-          $('#list_nav_a').html(locationCity + locationArea + '物流园区')
-
-          $('#parkName').val(parkName)
-          this.loadPagination()
-        })
-      })
+    if (!locationProvince || locationProvince == 'null') {
+      locationProvince = currentProvinceFullName
+      vo.locationProvince = locationProvince
+    }
+    if (!locationCity || locationCity == 'null') {
+      locationCity = currentAreaFullName
+      vo.locationCity = locationCity
+    }
+    if (!locationArea || locationArea == 'null') {
+      locationArea = ''
+      delete vo.locationArea
+    }
+    if (!parkName || parkName == 'null') {
+      parkName = ''
+      delete vo.parkName
+    }
+    $('#parkAddress input').citypicker({
+      province: locationProvince,
+      city: locationCity,
+      district: locationArea
     })
+    $('#list_nav_a').html(locationCity + locationArea + '物流园区')
+
+    $('#parkName').val(parkName)
+    this.loadPagination()
   },
   methods: {
     async search() {

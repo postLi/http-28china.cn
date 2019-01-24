@@ -84,7 +84,9 @@ var belongBrandCode1 = GetUrlParam("belongBrandCode");
 var otherServiceCode1 = GetUrlParam("otherServiceCode");
 var companyName1 = GetUrlParam("companyName");
 var parkId1 = GetUrlParam("parkId");
-var parkName = GetUrlParam("parkName");
+var parkName =decodeURI(decodeURI(GetUrlParam("parkName")));
+// var parkName = GetUrlParam("parkName");
+// console.log(parkName1,'parkName1');
 //var authStatus1=GetUrlParam("authStatus");
 
 var orderNumber = GetUrlParam("orderNumber");
@@ -173,6 +175,7 @@ if ((!startp || startp == "null") && (!startc || startc == "null")) {
   vo.startProvince = startp;
   locationProvince = startp;
   locationCity = startc;
+  console.log(locationProvince,locationCity);
 }
 
 if (!starta || starta == "null") {
@@ -245,22 +248,26 @@ $("#list_nav_a3").html(startc + starta + " 到 " + endc + enda + " 零担物流�
 if ((!startc && !starta) || (!endc && !enda)) {
   $("#list_nav_a3").html(startc + starta + "  " + endc + enda + " 零担物流专线")
 }
+$(function () {
+  $("#wlLineFrom input").citypicker({
+    province: startp,
+    city: startc,
+    district: starta
+  });
+  $("#wlLineTo input").citypicker({
+    province: endp,
+    city: endc,
+    district: enda
+  });
+})
 
-$("#wlLineFrom input").citypicker({
-  province: startp,
-  city: startc,
-  district: starta
-});
-$("#wlLineTo input").citypicker({
-  province: endp,
-  city: endc,
-  district: enda
-});
 
 
 $('#wlgs_name').val(companyName);
 $('#select_wlyq').val(parkName);
+// console.log(parkName,'parkName');
 $('#select_wlyq').attr("name", parkId);
+// console.log(parkId,'name');
 $('#tjcx_00 .all').attr("href", UrlUpdateParams(window.location.href, "parkId", ""))
 $('#tjcx_01 .all').attr("href", UrlUpdateParams(window.location.href, "departureTimeCode", ""))
 $('#tjcx_02 .all').attr("href", UrlUpdateParams(window.location.href, "belongBrandCode", ""))
@@ -307,6 +314,7 @@ $("#seq0").click(
     delete vo.weigthPrice;
     delete vo.lightPrice;
     vo.defaultSort = 1;
+    orderBy = 'default'
     process02(1);
 
   })
@@ -458,6 +466,7 @@ $("#check-fee").click(
 //零担下单 E
 
 
+
 //专线搜索 S
 
 $("#search_wlLine").click(
@@ -474,7 +483,6 @@ $("#search_wlLine").click(
     var startp = list1[0];
     var startc = list1[1];
     var starta = list1[2];
-
     $('#wlLineTo .select-item').each(function (i, e) {
       list2.push($(this).text())
     });
@@ -518,6 +526,12 @@ $("#search_wlLine").click(
     parkId = encodeURI(parkId)
     parkName = encodeURI(parkName)
     window.location = '/zhuanxian?tid=4&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda + '&companyName=' + companyName + '&parkId=' + parkId + '&parkName=' + parkName;
+    if(startp || startc || starta){
+      // $(this).attr('placeholder','请输入企业名')
+      // $('.city-picker-input').attr('placeholder',startp + startc + starta)
+
+    }
+
   })
 
 
@@ -563,7 +577,7 @@ $(".list_wlyq_cx").click(
       delete parkName;
       // delete vo1.parkName;
     }
-    console.log(parkName,'parkName');
+    // console.log(parkName,'parkName');
     belong_wlyq(1);
   })
 
@@ -769,13 +783,12 @@ function process01() {
         'Content-Type': 'application/json'
       },
       url: "/api/28-web/range/recommend",
-      // url: "/api/aflc-portal/portalt/aflcRecommendTransportRange/v1/recommendRanges",
       dataType: "json",
       //async:false,
       data: JSON.stringify(
         {
           currentPage: 1,
-          pageSize: 14,
+          pageSize: 5,
           startProvince: startp,
           startCity: startc,
           startArea: starta,
@@ -791,7 +804,7 @@ function process01() {
       ),
       success: function (res) {
         $("#js007 .tj_list").not(":eq(0)").remove();
-        if (!res.data) {
+        if (!res.data.length) {
           console.log("推荐内容为空")
           $(".tj_none").css("display", "block")
           return;
@@ -926,7 +939,7 @@ function process02(currentPage) {
       data: JSON.stringify(
         {
           currentPage: currentPage,
-          pageSize: 20,
+          pageSize: 9,
           startProvince: startp,
           startCity: startc,
           startArea: starta,
@@ -948,7 +961,7 @@ function process02(currentPage) {
           totalPage = res.data.totalPage;
           // console.log(totalPage);
         }
-        console.log(res.data.list,'res.data.list');
+        // console.log(res.data.list,'res.data.list');
         if (!res.data.list || !res.data.total) {
           // console.log("内容为空")
           $(".box").css("display", "none")
@@ -1064,8 +1077,8 @@ function process02(currentPage) {
               // $(".nr_a21_img img").attr("src",src1);
             }
           }
-          if (datas[i].rangeLogo.length == '') {
-            $(".nr_a21_img img").attr("src", src1);
+          if (datas[i].rangeLogo ==null ) {
+            $(".scrollLoading").attr("src", src1);
           }
           $(".nr_a21_img img").attr("alt", companyName);
           // $("#nr01").attr("alt",companyName);

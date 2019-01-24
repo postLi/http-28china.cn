@@ -277,7 +277,7 @@ function tjcx02(){
 		headers:{
 		'Content-Type': 'application/json'
 		},
-		url:"/api/aflc-common/sysDict/getSysDictByCodeGet/AF029",
+		url:"/api/28-web/sysDict/getSysDictByCodeGet/AF029",
 
 		success:function(res){
 			var datas = res.data;
@@ -372,7 +372,7 @@ var rangeIds="";
 		headers:{
 		'Content-Type': 'application/json'
 		},
-		url:"/api/aflc-portal/portalt/aflcLogisticsCompany/v1/recommendCompanys",
+		url:"/api/28-web/logisticsCompany/recommend",
 		dataType: "json",
 		async:false,
 		data:JSON.stringify(
@@ -384,7 +384,7 @@ var rangeIds="";
 		),
 		success:function(res){
 			 $("#js007 .tj_list").not(":eq(0)").remove();
-			  if(!res.data||!res.data.totalCount){
+			  if(!res.data||!res.data.total){
 				console.log("推荐内容为空")
 				$(".tj_none").css("display","block")
 				return ;
@@ -497,7 +497,7 @@ var totalPage=8;
 		headers:{
 		'Content-Type': 'application/json'
 		},
-		url:"/api/aflc-portal/portalt/aflcPointNetwork/v1/listNetworks",
+		url:"/api/28-web/pointNetwork/list",
 		dataType: "json",
 		async:false,
 		data:JSON.stringify(
@@ -514,14 +514,15 @@ var totalPage=8;
 			 if(res.data){
 			 totalPage=res.data.totalPage;
 		   console.log(totalPage);}
-			 if(!res.data||!res.data.totalCount){
+			 if(!res.data||!res.data.total){
 				console.log("内容为空")
 				$(".box").css("display","none")
 				$(".list_none").css("display","block")
 				return ;
 			 }
 			var datas = res.data.list;
-			for(var i=0;i<datas.length;i++){
+      console.log(datas,'datasdatasdatas');
+      for(var i=0;i<datas.length;i++){
 				var id=datas[i].id;
 				var companyId=datas[i].companyId;
 				var account=datas[i].account;
@@ -597,7 +598,7 @@ function belong_wlyq(currentPage){
 		headers:{
 		'Content-Type': 'application/json'
 		},
-		url:"/api/aflc-uc/usercenter/aflclogisticspark/v1/search",
+		url:"/api/28-web/logisticsPark/search",
 		dataType: "json",
 		data:JSON.stringify(
 			{

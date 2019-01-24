@@ -52,7 +52,6 @@
                   <input
                     name="cfd"
                     style="height: 100%;"
-                    data-toggle="city-picker"
                     data-level="district"
                     type="text"
                     placeholder="请输入出发地" >
@@ -67,7 +66,6 @@
                   <input
                     name="ddd"
                     style="height: 100%;"
-                    data-toggle="city-picker"
                     data-level="district"
                     type="text"
                     placeholder="请输入到达地" >
@@ -132,8 +130,12 @@
                     <div
                       class="wlzx_yq_item"
                       style="display: none;">
-                      <font id="wlzx_yq_01"/>
-                      <span id="wlzx_yq_02"/>
+                      <font
+                        id="wlzx_yq_01"
+                      />
+                      <span
+                        id="wlzx_yq_02"
+                      />
                     </div>
                   </div>
                 </div>
@@ -387,6 +389,24 @@
         </div>
 
       </div>
+      <div class="list-box-r-hot">
+
+        <div class="zx_sx"><span class="biaozhi" />企业月人气榜</div>
+        <div class="tj_none">
+          <span>没有相关企业月人气榜</span>
+        </div>
+        <ul>
+          <li><span>1</span><img
+            src=""
+            alt="">
+          <p>新光速惠快运有限公司</p><span>人气值:<i>159</i></span></li>
+          <li/>
+        </ul>
+        <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
+        <!--<div class="tj_none">-->
+        <!--<span>没有相关线路推荐23</span>-->
+        <!--</div>-->
+      </div>
 
     </div>
 
@@ -408,7 +428,7 @@ export default {
   mounted() {
     seajs.use(['../js/city.js'], function() {
       seajs.use(
-        ['./js/city-picker.js', './js/jquery.pagination.min.js'],
+        ['../js/city-picker.js', '../js/jquery.pagination.min.js'],
         function() {
           seajs.use(['../zhuanxian/js/list_wlzx.js'], function() {
             seajs.use(['../js/collection.js'], function() {
@@ -476,6 +496,23 @@ export default {
     margin-left: 8px;
     padding-right: 5px;
     cursor: pointer;
+  }
+  .list-box-r-hot {
+    min-height: 246px;
+    height: auto !important;
+    width: 344px;
+    margin: 0px 0px 0 16px;
+    float: left;
+    .zx_sx {
+      border-bottom: 2px solid #2577e3;
+      margin-bottom: 1px;
+      color: #2577e3;
+    }
+    ul {
+      li {
+        display: flex;
+      }
+    }
   }
   /*显示隐藏S */
   .toggle-btn {

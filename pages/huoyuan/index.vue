@@ -301,23 +301,6 @@ export default {
     // console.log(query)
   },
   mounted() {
-    $(function() {
-      $('a[_for]').mouseover(function() {
-        $(this)
-          .parents()
-          .children('a[_for]')
-          .removeClass('thisclass')
-          .parents()
-          .children('dd')
-          .hide()
-        $(this)
-          .addClass('thisclass')
-          .blur()
-        $('#' + $(this).attr('_for')).show()
-      })
-      $('a[_for=uc_member]').mouseover()
-      $('a[_for=flink_1]').mouseover()
-    })
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')

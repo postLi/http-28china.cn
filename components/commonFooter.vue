@@ -9,17 +9,17 @@
             <div class="title2">国内领先的一站式综合物流快运平台，物流运输管理，网络路径优化，网络货物跟踪，供应链可视化</div>
           </div>
           <div class="right">
-            <div class="box divide">
+            <div class="box-qr divide">
               <div class="box-in"/>
             </div>
-            <div class="box">
+            <div class="box-qr">
               <img 
                 src="../static/images/28fast_download.png" 
                 width="112" 
                 height="112">
               <div>28快运 货主端</div>
             </div>
-            <div class="box">
+            <div class="box-qr">
               <img
                 src="../static/images/28fast_download.png"
                 width="112"
@@ -280,7 +280,7 @@ export default {
       }
       .right {
         float: right;
-        .box {
+        .box-qr {
           display: table-cell;
           padding-left: 20px;
           div {

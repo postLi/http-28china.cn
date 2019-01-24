@@ -194,13 +194,13 @@
                   readonly
                   value="查看"></a>
               </p>
-              <!-- <p class="p3"><a
+              <p class="p3"><a
                 id="nr_a53"
                 target="_blank"
                 href="http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes"><input
                   id="qq"
                   value="QQ交谈">
-              </a></p> -->
+              </a></p>
             </li>
           </ul>
 
@@ -247,7 +247,10 @@
           <span>没有相关车源推荐</span>
         </div>
         <div class="che_box">
-          <div class="tj_list">
+          <div 
+            class="tj_list"
+            style="display:none"
+          >
             <p class="p1">
               <a
                 id="nr0500"
@@ -277,8 +280,8 @@
             </p> -->
             <div class="p5">
               <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
-              <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span>
-              <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span>
+              <!-- <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span> -->
+              <!-- <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span> -->
               <span id="nr0518">2/25/19 13:11:00</span>
             </div>
             <!-- <p class="p5">
@@ -620,7 +623,7 @@ export default {
               headers: {
                 'Content-Type': 'application/json'
               },
-              url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF018',
+              url: '/api/28chinaservice/sysDict/getSysDictByCodeGet/AF018',
 
               success: function(res) {
                 var datas = res.data
@@ -856,12 +859,13 @@ export default {
                 $('#js009 .tj_list')
                   .not(':eq(0)')
                   .remove()
-                if (!res.data || res.data == '') {
+                if (!res.data || res.data == []) {
                   console.log('推荐内容为空')
                   $('.tj_none').css('display', 'block')
                 }
                 var datas = res.data
                 for (var i = 0; i < datas.length; i++) {
+                  console.log(99999999)
                   var id = datas[i].id
                   var driverId = datas[i].driverId
                   var carLoad = datas[i].carLoad
@@ -933,7 +937,7 @@ export default {
                   var s3 = '</div>'
                   $('.che_box').append(s1 + s2 + s3)
                   if (driverStatus != 'AF0010403') {
-                    console.log('is not shiming')
+                    // console.log('is not shiming')
                     $('.tj_list' + i + ' .p5').css('display', 'none')
                   }
                 }
@@ -960,7 +964,7 @@ export default {
               async: false,
               data: JSON.stringify({
                 currentPage: currentPage,
-                pageSize: 20,
+                pageSize: 10,
                 //vo:{	"strartAddress":start,"endAddress":end,"carType":carType,"carLengthLower":carLength1,"carLengthUpper":carLength2,"carLoadLower":carLoad1,"carLoadUpper":carLoad2}			//JSON.stringify({})
                 vo: vo
               }),
@@ -969,8 +973,8 @@ export default {
                   .not(':eq(0)')
                   .remove()
                 if (res.data) {
-                  totalPage = res.data.totalPage
-                  console.log(totalPage)
+                  // totalPage = res.data.totalPage;
+                  totalPage = res.data.pages
                 }
                 if (!res.data || !res.data.total) {
                   console.log('内容为空')
@@ -1083,9 +1087,9 @@ export default {
                   var s2 = $('.wlzx_list').html()
                   var s3 = '</ul>'
                   $('#js006').append(s1 + s2 + s3)
-                  // if (!qq) {
-                  //   $('.wlzx_list' + i + ' #qq').css('display', 'none')
-                  // }
+                  if (!qq) {
+                    $('.wlzx_list' + i + ' #qq').css('display', 'none')
+                  }
                   //if(!credit28){console.log("is not Vip");
                   //$('.wlzx_list'+i+' .cy_list_3 .p2').css("display","none")}
                   if (driverStatus != 'AF0010403') {
@@ -1193,8 +1197,11 @@ body {
   min-height: 200px;
   height: auto !important;
   width: 344px;
-  padding: 0px 0px 0 20px;
+  /* padding: 0px 0px 0 20px; */
   float: left;
+  /* border: 1px solid #ddd; */
+  box-sizing: border-box;
+  margin-left: 20px;
 }
 .list_right > ul {
   float: left;
@@ -1453,14 +1460,14 @@ body {
 
 .wlzx_list_6 p input {
   display: block;
-  width: 80px;
-  height: 30px;
+  width: 102px;
+  height: 26px;
   line-height: 26px;
   border-radius: 3px;
   text-align: center;
-  font-size: 14px;
+  font-size: 13px;
   cursor: pointer;
-  border: solid 1px #dedede;
+  border: solid 1px #dddddd;
 }
 .wlzx_list_6 p input:hover {
   opacity: 0.8;
@@ -1487,8 +1494,8 @@ body {
 }
 .tj_list {
   background-color: #fff;
-  margin-top: -1px;
-  border: 1px solid #dedede;
+  /* margin-top: -1px; */
+  border-bottom: 1px solid #dedede;
   width: 342px;
   font-size: 14px;
   transition: all 0.4s;
@@ -1496,6 +1503,9 @@ body {
 }
 .tj_list .p6 {
   display: flex;
+}
+.tj_list:last-child {
+  border-bottom: none;
 }
 .tj_list .p6 > div {
   flex: 1;

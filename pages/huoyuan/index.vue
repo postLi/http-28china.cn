@@ -133,6 +133,7 @@
           </div>
           <ul
             class="wlzx_list"
+            style="display: none;"
           >
 
             <li id="wlzx_list_0">
@@ -159,7 +160,7 @@
             <li class="wlzx_list_1">
               <p class="p1"/>
               <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font id="nr041">电子电器 </font></p>
-              <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i><span id="nr042"/><font id="nr0420" >件</font>&nbsp;&nbsp;<span id="nr043"/><font >公斤</font>&nbsp;&nbsp;<span id="nr044">20</span><font >立方米</font></p>
+              <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i><span id="nr042"/><font id="nr0420" >件</font>&nbsp;|&nbsp;<span id="nr043"/><font >公斤</font>&nbsp;|&nbsp;<span id="nr044">20</span><font >立方米</font></p>
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
@@ -186,13 +187,16 @@
                 target="_blank"><input
                   readonly
                   value="查看"></a>
-              </p><p class="p2"><a
+              </p>
+              <p class="p2"><a
                 id="nr048"
                 target="_blank"
-                href="http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes"><input
+                href="http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes">
+                <input
                   id="qq"
                   value="QQ交谈"></a>
-            </p></li>
+              </p>
+            </li>
           </ul>
 
 
@@ -237,48 +241,52 @@
         <div class="tj_none hy_tj_none">
           <span>没有相关货源推荐</span>
         </div>
-        <div
-          class="tj_list"
-          style="display: none;">
-          <div class="p p1"><img src="../../static/images/04gongsi.png" ><span><a
-            id="nr0412"
-            target="_blank" >广州明科物流有限公司</a></span>
-            <img
-              id="tj_shiming"
-              src="../../static/images/list_wlzx/shiming.png" >
-            <img
-              id="tj_xinyong"
-              src="../../static/images/list_wlzx/xinyong.png" >
+        <div class="che_box">
+          <div
+            class="tj_list"
+            style="display:none"
+          >
+            <div class="p p1"><img src="../../static/images/04gongsi.png" ><span><a
+              id="nr0412"
+              target="_blank" >广州明科物流有限公司</a></span>
+              <img
+                id="tj_shiming"
+                src="../../static/images/list_wlzx/shiming.png" >
+              <img
+                id="tj_xinyong"
+                src="../../static/images/list_wlzx/xinyong.png" >
 
-          </div>
-          <div class="p p2">
-            <a
-              id="tj010"
-              class="list-title-a"
-              target="_blank" >
-              <span class="list-icon lines-sprite-icons icon-start"/>
-              <em id="nr0410"/>
-              <span class="list-icon lines-sprite-icons icon-through"/>
-              <span class="list-icon lines-sprite-icons icon-end"/>
-              <em id="nr0411"/>
-            </a>
-          </div>
+            </div>
+            <div class="p p2">
+              <a
+                id="tj010"
+                class="list-title-a"
+                target="_blank" >
+                <span class="list-icon lines-sprite-icons icon-start"/>
+                <em id="nr0410"/>
+                <span class="list-icon lines-sprite-icons icon-through"/>
+                <span class="list-icon lines-sprite-icons icon-end"/>
+                <em id="nr0411"/>
+              </a>
+            </div>
 
-          <div class="p p3">
-            <ul>
-              <li class="tj_left"><i>货物：</i><span id="nr0413"/></li>
-              <li class="tj_right"><i>数量：</i><span id="nr0416"/></li>
-              <li class="tj_left"><i >重量：</i><font id="nr0414" /><em>公斤</em></li>
-              <li class="tj_right"><i >体积：</i><font id="nr0415" /><em>立方米</em></li>
-            </ul>
+            <div class="p p3">
+              <ul>
+                <li class="tj_left"><i>货物：</i><span id="nr0413"/></li>
+                <li class="tj_right"><i>数量：</i><span id="nr0416"/></li>
+                <li class="tj_left"><i >重量：</i><font id="nr0414" /><em>公斤</em></li>
+                <li class="tj_right"><i >体积：</i><font id="nr0415" /><em>立方米</em></li>
+              </ul>
 
-          </div>
+            </div>
 
-          <div class="p p6">
-            <div class="sc_num1"><img src="../../static/images/list_wlzx/ll_num.png"><span><i><em id="tj101"/></i>浏览</span></div>
-            <div class="view_num1"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em id="tj102"/>人收藏</i></span></div>
+            <div class="p p6">
+              <div class="sc_num1"><img src="../../static/images/list_wlzx/ll_num.png"><span><i><em id="tj101"/></i>浏览</span></div>
+              <div class="view_num1"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em id="tj102"/>人收藏</i></span></div>
+            </div>
           </div>
         </div>
+       
 
 
       </div>
@@ -289,9 +297,12 @@
 <script>
 export default {
   name: 'HuoYuan',
-  asyncData({ query }) {
-    // console.log(query)
+  head: {
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
   },
+  // asyncData({ query }) {
+  // console.log(query)
+  // },
   mounted() {
     seajs.use(['./js/city-picker.data.js'], function() {
       seajs.use(['./js/city-picker.js'], function() {
@@ -585,7 +596,8 @@ export default {
               headers: {
                 'Content-Type': 'application/json'
               },
-              url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF03801',
+
+              url: '/api/28chinaservice/sysDict/getSysDictByCodeGet/AF03801',
 
               success: function(res) {
                 var datas = res.data
@@ -649,7 +661,7 @@ export default {
               headers: {
                 'Content-Type': 'application/json'
               },
-              url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF03802',
+              url: '/api/28chinaservice/sysDict/getSysDictByCodeGet/AF03802',
 
               success: function(res) {
                 var datas = res.data
@@ -730,27 +742,38 @@ export default {
 
           //货源列表推荐列表S
           function process01() {
+            var startProvince = $.cookie('currentProvinceFullName')
+            var startCity = $.cookie('currentAreaFullName')
             $.ajax({
               type: 'post',
               headers: {
                 'Content-Type': 'application/json'
               },
-              url: '/api/aflc-portal/order/fclOrder/v1/getPortalRecommendList',
+              url: '/api/28-web/lclOrder/recommendList',
               dataType: 'json',
               data: JSON.stringify({
                 currentPage: 1,
-                pageSize: 14,
-                vo: vo //JSON.stringify({})
+                pageSize: 5,
+                // vo: vo //JSON.stringify({})
+                vo: {
+                  startProvince,
+                  startCity
+                }
               }),
               success: function(res) {
+                $('#js009 .tj_list')
+                  .not(':eq(0)')
+                  .remove()
                 if (!res.data || res.data == '') {
                   console.log('推荐内容为空')
                   $('.tj_none').css('display', 'block')
                 }
-                var datas = res.data
-                if (!datas) {
-                  return
+                console.log(res)
+                if (!res.data || res.data == []) {
+                  console.log('推荐内容为空')
+                  $('.tj_none').css('display', 'block')
                 }
+                var datas = res.data.list
                 for (var i = 0; i < datas.length; i++) {
                   var id = datas[i].id
                   var shipperId = datas[i].shipperId
@@ -834,11 +857,15 @@ export default {
                   $('#tj010').attr('href', url)
                   $('#nr_a41').attr('href', url)
                   $('#tj017').attr('href', url)
-                  var s1 = '<div class="tj_list tj_list' + i + '">'
+                  var s1 =
+                    '<div style="float:left;width:100%;background:#fff;border-bottom:1px solid #ddd" class="tj_list" data-v-fa4d12fa>'
                   var s2 = $('.tj_list').html()
                   var s3 = '</div>'
-                  $('#js010').append(s1 + s2 + s3)
-
+                  $('.che_box').append(s1 + s2 + s3)
+                  // var s1 = '<div class="tj_list tj_list' + i + '">'
+                  // var s2 = $('.tj_list').html()
+                  // var s3 = '</div>'
+                  // $('.che_box').append(s1 + s2 + s3)
                   if (!isVip || isVip == 0) {
                     console.log('is not Vip')
                     $('.tj_list' + i + '  #tj_xinyong').css('display', 'none')
@@ -865,12 +892,12 @@ export default {
               headers: {
                 'Content-Type': 'application/json'
               },
-              url: '/api/aflc-portal/order/fclOrder/v1/getPortalOrderList',
+              url: '/api/28chinaservice/lclOrder/list',
               dataType: 'json',
               async: false,
               data: JSON.stringify({
                 currentPage: currentPage,
-                pageSize: 20,
+                pageSize: 10,
                 //vo:{"queryType":"2","startAddress":start,"endAddress":end,"goodsWeightLower":goodsWeight1,"goodsWeightUpper":goodsWeight2,"goodsVolumeLower":goodsVolume1,"goodsVolumeUpper":goodsVolume2}			//JSON.stringify({})
                 vo: vo //JSON.stringify({})
               }),
@@ -878,16 +905,16 @@ export default {
                 $('#js005 .wlzx_list')
                   .not(':eq(0)')
                   .remove()
-
+                console.log(res)
                 if (res.data) {
-                  totalPage = res.data.totalPage
+                  totalPage = res.data.pages
                   console.log(totalPage)
                 }
 
-                if (!res.data || !res.data.totalCount) {
+                if (!res.data || !res.data.total) {
                   console.log('内容为空')
                   $('.box').css('display', 'none')
-                  // $('.list_none').css('display', 'block')
+                  $('.list_none').css('display', 'block')
 
                   return
                 }
@@ -1027,12 +1054,12 @@ export default {
                       'none'
                     )
                   }
-                  if (!qq) {
-                    $('.wlzx_list' + i + ' .wlzx_list_6 #qq').css(
-                      'display',
-                      'none'
-                    )
-                  }
+                  // if (!qq) {
+                  //   $('.wlzx_list' + i + ' .wlzx_list_6 #qq').css(
+                  //     'display',
+                  //     'none'
+                  //   )
+                  // }
                 }
               },
               error: function(err) {
@@ -1074,11 +1101,11 @@ body {
   background-color: #fff;
 }
 .list_hy .zx_sx {
-  border-bottom: 2px solid #2577e3;
+  border-bottom: 2px solid #3f94ee;
   margin-bottom: 1px;
 }
 .list_right .zx_sx {
-  border-bottom: 2px solid #2577e3;
+  border-bottom: 2px solid #3f94ee;
   margin-bottom: 1px;
 }
 .zx_sx span {
@@ -1089,7 +1116,7 @@ body {
 .zx_sx .biaozhi {
   width: 3px;
   height: 18px;
-  background-color: #2577e3;
+  background-color: #3f94ee;
   border-radius: 1px;
   margin: 16px 12px 0px 10px;
 }
@@ -1160,9 +1187,9 @@ body {
   width: 72px;
   height: 28px;
   border-radius: 2px;
-  border: solid 1px #2577e3;
+  border: solid 1px #3f94ee;
   background-color: #fff;
-  color: #2577e3;
+  color: #3f94ee;
   font-size: 15px;
   /*
       background: no-repeat url(../images/01search.png) 45px 6px;
@@ -1326,7 +1353,7 @@ body {
   font-size: 14px;
 }
 .wlzx_list_2 .p2 font {
-  color: #2577e3;
+  color: #3f94ee;
   font-size: 13px;
   padding-left: 5px;
 }
@@ -1391,7 +1418,7 @@ body {
   text-align: center;
   font-size: 13px;
   cursor: pointer;
-  border: solid 1px #8dadd8;
+  border: solid 1px #dddddd;
 }
 .wlzx_list_6 .p1 {
   margin-top: 20px;
@@ -1400,7 +1427,7 @@ body {
   margin-bottom: 14px;
 }
 .wlzx_list_6 .p1 input {
-  background-color: #2577e3;
+  background-color: #3f94ee;
   color: #fff;
   border: 0px;
   height: 28px;
@@ -1408,15 +1435,18 @@ body {
 .wlzx_list_6 .p1 input:hover {
   background-color: #2577ff;
 }
-
+img {
+  vertical-align: middle;
+  margin-top: 0 !important;
+}
 .tj_list {
   background-color: #fff;
-  margin-top: -1px;
-  border: 1px solid #dedede;
-  width: 344px;
-  height: 246px;
+  /* margin-top: -1px; */
+  border-bottom: 1px solid #dedede;
+  width: 342px;
   font-size: 14px;
   transition: all 0.4s;
+  float: left;
 }
 .tj_list:hover {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
@@ -1441,13 +1471,13 @@ body {
   padding-left: 30px;
 }
 .tj_list .p2 i {
-  color: #2577e3;
+  color: #3f94ee;
   font-size: 16px;
   padding: 0 5px 0 5px;
 }
 .tj_list .p2 span {
   font-size: 16px;
-  color: #2577e3;
+  color: #3f94ee;
 }
 .tj_list .p3 {
   margin-top: 20px;
@@ -1674,7 +1704,7 @@ body {
   border: solid 1px #8dadd8;
   font-size: 13px;
   background-color: #fff;
-  color: #2577e3;
+  color: #3f94ee;
 }
 /*货源信息 E */
 
@@ -1801,7 +1831,7 @@ body {
   color: #f9f9f9;
   font-size: 13px;
   background: no-repeat url(../../static/images/white_search.png) 10px 6px
-    #2577e3;
+    #3f94ee;
   text-align: left;
   padding-left: 30px;
   padding-right: 5px;
@@ -1831,6 +1861,7 @@ body {
   width: 120px;
   font-size: 12px;
   line-height: 26px;
+  margin-top: 13px;
 }
 .sc_num {
   float: right;
@@ -1838,16 +1869,23 @@ body {
   width: 120px;
   font-size: 12px;
   line-height: 26px;
+  margin-top: 13px;
 }
 #wlzx_list_0 img {
   margin-top: 15px;
   float: left;
   margin-right: 7px;
 }
+#nr_a41_1 {
+  font-weight: bold;
+}
+#nr_a41_2 {
+  font-weight: bold;
+}
 .view_num span,
 .sc_num span {
   float: left;
-  margin-top: 13px;
+  /* margin-top: 13px; */
 }
 .wlzx_list_2 .p5 {
   height: auto;
@@ -1983,5 +2021,9 @@ body {
 .wlzx_list_2 img,
 .wlzx_list_4 img {
   padding-right: 5px;
+}
+.che_box {
+  float: left;
+  width: 100%;
 }
 </style>

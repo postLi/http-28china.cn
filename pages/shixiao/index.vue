@@ -16,7 +16,7 @@
                 id="carLineFrom" 
                 class="order-form-input shixiao-input">
                 <input 
-                  style="height: 100%;" 
+                  style="height: 100%;border: none;outline: none;"
                   data-toggle="city-picker" 
                   data-level="district" 
                   maxlength="40" 
@@ -39,7 +39,7 @@
                 id="carLineTo" 
                 class="order-form-input shixiao-input">
                 <input 
-                  style="height: 100%;" 
+                  style="height: 100%;border: none;outline: none;"
                   data-toggle="city-picker" 
                   data-level="district" 
                   placeholder="请选择到达地" 
@@ -188,7 +188,12 @@ async function getListRangesAging($axios, currentPage, vo = {}) {
 export default {
   name: 'ShiXiao',
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
+    script: [
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' }
+    ]
   },
   data() {
     return {
@@ -214,55 +219,49 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['./js/city-picker.data.js'], () => {
-      seajs.use(['./js/city-picker.js'], () => {
-        seajs.use(['./js/jquery.pagination.min.js'], () => {
-          var currentAreaFullName = $.cookie('currentAreaFullName')
-          var currentProvinceFullName = $.cookie('currentProvinceFullName')
-          $('#list_nav_a').html(currentAreaFullName + '专线时效')
-          //搜索赋input框的初始值
+    var currentAreaFullName = $.cookie('currentAreaFullName')
+    var currentProvinceFullName = $.cookie('currentProvinceFullName')
+    $('#list_nav_a').html(currentAreaFullName + '专线时效')
+    //搜索赋input框的初始值
 
-          $('#carLineFrom input').citypicker({
-            province: currentProvinceFullName,
-            city: currentAreaFullName,
-            district: ''
-          })
-          $('#carLineTo input').citypicker({
-            province: '',
-            city: '',
-            district: ''
-          })
+    $('#carLineFrom input').citypicker({
+      province: currentProvinceFullName,
+      city: currentAreaFullName,
+      district: ''
+    })
+    $('#carLineTo input').citypicker({
+      province: '',
+      city: '',
+      district: ''
+    })
 
-          $('.qiehuan').click(function() {
-            var list1 = [],
-              list2 = []
-            $('#carLineFrom .select-item').each(function(i, e) {
-              list1.push($(this).text())
-            })
-            var startp = list1[0]
-            var startc = list1[1]
-            var starta = list1[2]
-            $('#carLineTo .select-item').each(function(i, e) {
-              list2.push($(this).text())
-            })
-            var endp = list2[0]
-            var endc = list2[1]
-            var enda = list2[2]
-            $('#carLineFrom input').citypicker({
-              province: endp,
-              city: endc,
-              district: enda
-            })
-            $('#carLineTo input').citypicker({
-              province: startp,
-              city: startc,
-              district: starta
-            })
-          })
-          this.loadPagination()
-        })
+    $('.qiehuan').click(function() {
+      var list1 = [],
+        list2 = []
+      $('#carLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      var startp = list1[0]
+      var startc = list1[1]
+      var starta = list1[2]
+      $('#carLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      var endp = list2[0]
+      var endc = list2[1]
+      var enda = list2[2]
+      $('#carLineFrom input').citypicker({
+        province: endp,
+        city: endc,
+        district: enda
+      })
+      $('#carLineTo input').citypicker({
+        province: startp,
+        city: startc,
+        district: starta
       })
     })
+    this.loadPagination()
   },
   methods: {
     selectSort(item) {

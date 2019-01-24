@@ -2,9 +2,7 @@
   <div>
     <div class="footer clear">
       <div class="center">
-        <div class="img">
-          28
-        </div>
+        <div class="img"/>
         <div class="title">
           <div class="left">
             <div class="title1">快 好 省</div>

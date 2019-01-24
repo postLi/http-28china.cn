@@ -704,16 +704,27 @@ display: none;
 	font-size: 14px;text-align: center;cursor: pointer;}
 .wlzx_yq_item{	width: 488px;
 	height: 64px;cursor: pointer;float: left;}
-.wlzx_yq_item:hover{background-color: #6cb3ff;}
+.wlzx_yq_item:hover{background-color: #6cb3ff;color: #fff;}
 .wlzx_yq_item:hover font{color: #fff;}
 .wlzx_yq_item:hover span{color: #fff;}
 .wlzx_yq_item font{
 float: left;
 width: 474px;
-margin: 13px 0 6px 14px;
+margin: 0px 0 0px 14px;
+/*margin: 13px 0 6px 14px;*/
 	letter-spacing: 1.1px;
 	font-size: 14px;
 	color: #333;font-weight: bold;}
+/*.lll-zhuangXian .city-picker-input {*/
+  /*opacity: 1 !important;*/
+  /*top: 0px;*/
+  /*left: 0px;*/
+  /*position: absolute;*/
+  /*border: 0 !important;*/
+/*}*/
+/*.lll-zhuangXian .city-picker-span{*/
+  /*display: none;*/
+/*}*/
 .wlzx_yq_item span{
 float: left;
 width: 474px;

@@ -188,7 +188,12 @@ async function getListRangesAging($axios, currentPage, vo = {}) {
 export default {
   name: 'ShiXiao',
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
+    script: [
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' }
+    ]
   },
   data() {
     return {

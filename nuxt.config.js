@@ -32,12 +32,7 @@ module.exports = {
       lang: 'zh-CN'
     },
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [
-      { src: '/vendor/jquery-1.12.4.min.js' },
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
-      { src: '/js/jquery.pagination.min.js' }
-    ]
+    script: [{ src: '/vendor/jquery-1.12.4.min.js' }]
   },
 
   /*

@@ -519,17 +519,21 @@
             </div>
             <div class="main2_bt1_2">
               <div class="search_input">
-                <input 
-                  id="wlLineFrom" 
-                  wtmap 
-                  class="search_input1" 
-                  placeholder="出发地">
-                <span>→</span>
-                <input 
-                  id="wlLineTo" 
-                  wtmap 
-                  class="search_input2" 
-                  placeholder="到达地">
+                <div class="input_div">
+                  <input 
+                    id="wlLineFrom" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    class="search_input1" 
+                    placeholder="出发地">
+                </div><span>→</span><div class="input_div">
+                  <input 
+                    id="wlLineTo" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    class="search_input2" 
+                    placeholder="到达地">
+                </div>
               </div>
               <div 
                 id="search_wlLine" 
@@ -652,9 +656,10 @@
             <div class="search_input">
               <input 
                 id="wangdian" 
-                wtmap="city" 
+                data-toggle="city-picker" 
+                data-level="district" 
                 class="search_input3" 
-                placeholder="请选择&nbsp;省-市">
+                placeholder="请选择省-市">
             </div>
             <div class="search_button">
               <input 
@@ -768,6 +773,7 @@ export default {
         var productServiceCode =
           _this.$store.state.member.company.productServiceCode
         var n = productServiceCode.length
+        var uid = _this.$store.state.member.id
         for (var i = 1; i < 10; i++) {
           if (productServiceCode) {
             if (productServiceCode.indexOf('AF0270' + i) != -1) {
@@ -789,6 +795,107 @@ export default {
 
         $('#txtbill').mousedown(function() {
           $('.bill-search').addClass('show')
+        })
+
+        $('#btn_onlineTracking').click(function() {
+          console.log("$('#txtbill').val()", $('#txtbill').val())
+          var num = $('#txtbill').val()
+          if (num) {
+            //window.open('/plus/list.php?tid=76&num='+num+'&uid='+uid)
+            location.href = uid + '-chajian?num=' + num
+          }
+          if (!num) {
+            alert('请先输入运单号查询！')
+          }
+        })
+
+        if ($('.news_item').length <= 2) {
+          $('.news_item0').css('display', 'block')
+        }
+
+        //专线搜索 S
+        $('#search_wlLine').click(function() {
+          var list1 = [],
+            list2 = []
+          $('#wlLineFrom')
+            .parent('div')
+            .find('.select-item')
+            .each(function(i, e) {
+              list1.push($(this).text())
+            })
+          var startp = list1[0]
+          var startc = list1[1]
+          var starta = list1[2]
+
+          $('#wlLineTo')
+            .parent('div')
+            .find('.select-item')
+            .each(function(i, e) {
+              list2.push($(this).text())
+            })
+          var endp = list2[0]
+          var endc = list2[1]
+          var enda = list2[2]
+          if (!startp) {
+            startp = ''
+          }
+          if (!startc) {
+            startc = ''
+          }
+          if (!starta) {
+            starta = ''
+          }
+          if (!endp) {
+            endp = ''
+          }
+          if (!endc) {
+            endc = ''
+          }
+          if (!enda) {
+            enda = ''
+          }
+          startp = encodeURI(startp)
+          startc = encodeURI(startc)
+          starta = encodeURI(starta)
+          endp = encodeURI(endp)
+          endc = encodeURI(endc)
+          enda = encodeURI(enda)
+          location.href =
+            uid +
+            '-line?startp=' +
+            startp +
+            '&startc=' +
+            startc +
+            '&starta=' +
+            starta +
+            '&endp=' +
+            endp +
+            '&endc=' +
+            endc +
+            '&enda=' +
+            enda
+        })
+
+        //网点搜索 S
+        $('#search_wangdian').click(function() {
+          var list1 = []
+          $('#wangdian')
+            .parent('div')
+            .find('.select-item')
+            .each(function(i, e) {
+              list1.push($(this).text())
+            })
+          var startp = encodeURI(list1[0] || '')
+          var startc = encodeURI(list1[1] || '')
+          var starta = encodeURI(list1[2] || '')
+          location.href =
+            uid +
+            '-wangdian?startp=' +
+            startp +
+            '&startc=' +
+            startc +
+            '&starta=' +
+            starta
         })
       }
     )

@@ -183,23 +183,26 @@ export default {
   layout: 'member',
   mounted() {
     seajs.use(
-      [
-        '/index/js/city-picker.data.js',
-        '/index/js/city-picker.js',
-        '/member/js/index.js',
-        '/index/js/collection.js',
-        '/member/js/jquery.pagination.min.js',
-        '/member/js/huo.js'
-      ],
+      ['/member/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
       function() {
-        $('#pagination1').pagination({
-          currentPage: 1,
-          totalPage: get_huo(1).totalPage,
-          callback: function(current) {
-            $('#current1').text(current)
-            get_huo(current)
+        seajs.use(
+          [
+            '/index/js/city-picker.js',
+            '/member/js/index.js',
+            '/index/js/collection.js',
+            '/member/js/huo.js'
+          ],
+          function() {
+            $('#pagination1').pagination({
+              currentPage: 1,
+              totalPage: get_huo(1).totalPage,
+              callback: function(current) {
+                $('#current1').text(current)
+                get_huo(current)
+              }
+            })
           }
-        })
+        )
       }
     )
   },

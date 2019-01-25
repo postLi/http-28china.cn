@@ -236,6 +236,9 @@ export default {
     })
 
     $('.qiehuan').click(function() {
+      $(this)
+        .css('transition', '0.3s')
+        .css('transform', 'rotate(180deg)')
       var list1 = [],
         list2 = []
       $('#carLineFrom .select-item').each(function(i, e) {
@@ -250,17 +253,28 @@ export default {
       var endp = list2[0]
       var endc = list2[1]
       var enda = list2[2]
-      $('#carLineFrom input').citypicker({
+      $('#carLineFrom input').pickerReload({
         province: endp,
         city: endc,
         district: enda
       })
-      $('#carLineTo input').citypicker({
+      $('#carLineTo input').pickerReload({
         province: startp,
         city: startc,
         district: starta
       })
     })
+    let qiehuan = document.querySelector('.qiehuan')
+    qiehuan.addEventListener(
+      'transitionend',
+      () => {
+        console.log(1)
+        $('.qiehuan')
+          .css('transition', '')
+          .css('transform', '')
+      },
+      false
+    )
     this.loadPagination()
   },
   methods: {
@@ -1140,16 +1154,6 @@ body {
 }
 .qiehuan {
   cursor: pointer;
-}
-.qiehuan:active {
-  cursor: pointer;
-  /* transform: scale(2); */
-  transition-duration: 0.8s;
-  transform: rotate(180deg);
-  -ms-transform: rotate(180deg); /* IE 9 */
-  -webkit-transform: rotate(180deg); /* Safari and Chrome */
-  -o-transform: rotate(180deg); /* Opera */
-  -moz-transform: rotate(180deg); /* Firefox */
 }
 .rotate {
   cursor: pointer;

@@ -12,8 +12,8 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_cookieuniversalnuxt_ae33af8c from 'nuxt_plugin_cookieuniversalnuxt_ae33af8c' // Source: ./cookie-universal-nuxt.js
-import nuxt_plugin_axios_7f3826dc from 'nuxt_plugin_axios_7f3826dc' // Source: ./axios.js
+import nuxt_plugin_cookieuniversalnuxt_045b8140 from 'nuxt_plugin_cookieuniversalnuxt_045b8140' // Source: ./cookie-universal-nuxt.js
+import nuxt_plugin_axios_0e81e090 from 'nuxt_plugin_axios_0e81e090' // Source: ./axios.js
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (ssr: false)
 
 // Component: <no-ssr>
@@ -153,8 +153,8 @@ async function createApp(ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_cookieuniversalnuxt_ae33af8c === 'function') await nuxt_plugin_cookieuniversalnuxt_ae33af8c(app.context, inject)
-  if (typeof nuxt_plugin_axios_7f3826dc === 'function') await nuxt_plugin_axios_7f3826dc(app.context, inject)
+  if (typeof nuxt_plugin_cookieuniversalnuxt_045b8140 === 'function') await nuxt_plugin_cookieuniversalnuxt_045b8140(app.context, inject)
+  if (typeof nuxt_plugin_axios_0e81e090 === 'function') await nuxt_plugin_axios_0e81e090(app.context, inject)
 
   if (process.client) {
     if (typeof nuxt_plugin_axios_3566aa80 === 'function') await nuxt_plugin_axios_3566aa80(app.context, inject)

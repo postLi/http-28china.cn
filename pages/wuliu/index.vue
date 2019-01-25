@@ -322,13 +322,11 @@ export default {
       this.locationArea = ''
       let currentProvinceFullName = this.$cookies.get('currentProvinceFullName')
       let currentAreaFullName = this.$cookies.get('currentAreaFullName')
-      console.log(currentAreaFullName)
-      // $('#parkAddress input').citypicker({
-      //   province: currentProvinceFullName,
-      //   city: currentAreaFullName,
-      //   district: ''
-      // })
-      $('#parkAddress input').citypicker('reset')
+      $('#parkAddress input').pickerReload({
+        province: currentProvinceFullName,
+        city: currentAreaFullName,
+        district: ''
+      })
       let obj = await gatewaylist(this.$axios, 1, {
         locationProvince: this.$cookies.get('currentProvinceFullName'),
         locationCity: this.$cookies.get('currentAreaFullName')

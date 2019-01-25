@@ -34,37 +34,10 @@ var myurl = window.location.href
 var uid = myurl.split(/member\/|-|.html/)[1]
 console.log('uid=' + uid)
 
-$('#btn_onlineTracking').click(function() {
-  console.log($('#txtbill').val())
-  var num = $('#txtbill').val()
-  if (num) {
-    //window.open('/plus/list.php?tid=76&num='+num+'&uid='+uid)
-    window.open(uid + '-chajian.html?num=' + num)
-  }
-  if (!num) {
-    alert('请先输入运单号查询！')
-  }
-})
-console.log('新闻长度' + $('.news_item').length)
-if ($('.news_item').length <= 2) {
-  $('.news_item0').css('display', 'block')
-}
+// console.log('新闻长度' + $('.news_item').length)
 
-//专线搜索 S
-$('#search_wlLine').click(function() {
-  var start = $('#wlLineFrom').val()
-  var end = $('#wlLineTo').val()
-
-  window.location = uid + '-line.html?start=' + start + '&end=' + end
-})
 //专线搜索 E
 
-//网点搜索 S
-$('#search_wangdian').click(function() {
-  var wangdian = $('#wangdian').val()
-
-  window.location = uid + '-wangdian.html?wangdian=' + wangdian
-})
 //网点搜索 E
 
 //通过账号获取专线公司id S

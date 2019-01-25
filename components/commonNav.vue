@@ -187,29 +187,29 @@
           style="width: 1400px;">
           <span class="re2"/>
           <span class="xin2"/>
-          <li><nuxt-link to="/">首页</nuxt-link></li>
+          <li><a href="/">首页</a></li>
           <li
             id="wlzx"
             style="margin-left: 20px;"
             onclick="gotoline();"><a href="#" >物流专线</a></li>
           <li
             id="hy"
-            style="margin-left: 20px;"><nuxt-link to="/huoyuan">货源信息</nuxt-link></li>
+            style="margin-left: 20px;"><a href="/huoyuan">货源信息</a></li>
           <li
             id="cy"
-            style="margin-left: 20px;"><nuxt-link to="/cheyuan">车源信息</nuxt-link></li>
+            style="margin-left: 20px;"><a href="/cheyuan">车源信息</a></li>
           <li
             id="gs"
-            style="margin-left: 20px;"><nuxt-link to="/gongsi">物流公司</nuxt-link></li>
+            style="margin-left: 20px;"><a href="/gongsi">物流公司</a></li>
           <li
             id="wd"
-            style="margin-left: 20px;"><nuxt-link to="/wangdian">物流网点</nuxt-link></li>
+            style="margin-left: 20px;"><a href="/wangdian">物流网点</a></li>
           <li
             id="sx"
-            style="margin-left: 20px;"><nuxt-link to="/shixiao">时效查询</nuxt-link></li>
+            style="margin-left: 20px;"><a href="/shixiao">时效查询</a></li>
           <li
             id="wlyq"
-            style="margin-left: 20px;"><nuxt-link to="/wuliu">物流园区</nuxt-link></li>
+            style="margin-left: 20px;"><a href="/wuliu">物流园区</a></li>
 
           <li
             id="jgzs"

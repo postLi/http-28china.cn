@@ -704,6 +704,13 @@
   // Save the other citypicker
   CityPicker.other = $.fn.citypicker
 
+  //重置功能 2019.01.25
+  $.fn.pickerReload = function(option) {
+    var $this = $(this)
+    $this.citypicker('reset')
+    $this.next().remove()
+    $this.data(NAMESPACE, new CityPicker(this, option))
+  }
   // Register as jQuery plugin
   $.fn.citypicker = function(option) {
     var args = [].slice.call(arguments, 1)

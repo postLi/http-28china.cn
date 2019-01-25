@@ -84,19 +84,28 @@ export const state = () => ({
   },
   id: '',
   pointList: [],
+  pointTotal: 0,
   lineList: [],
+  lineTotal: 0,
   pageType: '' // findpassword login
 })
+
+let aurl = ''
+if (process.server) {
+  aurl = 'http://localhost:3000'
+}
 
 export const mutations = {
   setCompany(state, param) {
     state.company = param
   },
   setPointList(state, param) {
-    state.pointList = param
+    state.pointList = param.list || []
+    state.pointTotal = param.pages || 0
   },
   setLineList(state, param) {
-    state.lineList = param
+    state.lineList = param.list || []
+    state.lineTotal = param.pages || 0
   },
   setId(state, param) {
     state.id = param
@@ -113,15 +122,12 @@ export const actions = {
       resolve()
     })
   },
+  // 获取公司信息
   GETCOMPANYINFO({ commit }, payload) {
     return new Promise(resolve => {
       console.log('payload', payload)
       axios
-        .get(
-          'http://localhost:3000' +
-            '/api/28-web/logisticsCompany/info/' +
-            payload
-        )
+        .get(aurl + '/api/28-web/logisticsCompany/info/' + payload)
         .then(res => {
           let data = res.data
           if (data.status === 200) {
@@ -138,18 +144,17 @@ export const actions = {
         })
     })
   },
+  // 获取公司网点信息
   GETCOMPANYPOINTINFO({ commit }, payload) {
     return new Promise((resolve, reject) => {
       console.log('payload', payload)
       axios
-        .post(
-          'http://localhost:3000' + '/api/28-web/pointNetwork/findCompanyNet',
-          payload
-        )
+        .post(aurl + '/api/28-web/pointNetwork/findCompanyNet', payload)
         .then(res => {
           let data = res.data
+
           if (data.status === 200) {
-            commit('setPointList', data.data.list)
+            commit('setPointList', data.data)
 
             resolve()
           } else {
@@ -162,19 +167,17 @@ export const actions = {
         })
     })
   },
+  // 获取公司专线信息
   GETCOMPANYLINEINFO({ commit }, payload) {
     console.log('payload3', payload)
     return new Promise((resolve, reject) => {
       axios
-        .post(
-          'http://localhost:3000' + '/api/28-web/range/company/list',
-          payload
-        )
+        .post(aurl + '/api/28-web/range/company/list', payload)
         .then(res => {
           let data = res.data
-          // console.log('payload4', payload, data.data.list)
+          console.log('payload4', payload, data.data)
           if (data.status === 200) {
-            commit('setLineList', data.data.list)
+            commit('setLineList', data.data)
 
             resolve()
           } else {

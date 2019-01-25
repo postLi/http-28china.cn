@@ -1045,7 +1045,7 @@ clear: both;
     padding-top: 5px;
     list-style: none;
 }
-#about .about-main .about-font .cp{
+#about .about-main .about-font .cp,#about .about-main .about-font .fw{
     display: block;
 }
 #about .about-main .about-font ul h3 {
@@ -1188,7 +1188,15 @@ clear: both;
     border-right: 0px;
     position: relative;
 }
-.search_input span{color: #999;}
+.search_input .input_div{
+    display: inline-block;
+    width: 170px;
+    position: relative;
+    font-size: 12px;
+    line-height: 38px;
+    
+}
+.search_input span{color: #999;vertical-align: middle;line-height: 38px;display: inline-block;}
 .search_input .search_input1, .search_input .search_input2 {
     border: 0px;
     width: 170px;
@@ -1375,7 +1383,7 @@ background-color: #48abee;
 .company_box .box_item5 .item_right{height: 60px;}
 .company_box .box_item .item04 .item04_1{float: left;width: 260px;min-height: 30px;line-height: 30px;}
 .company_box .box_item .item04 .item04_2{float: right;width: 90px;height: 30px;line-height: 30px;margin-right: 15px;font-size: 14px;color: #333;}
-.company_box .box_item .item04 .item04_3{float: left;width: 350px;min-height: 30px;line-height: 30px;}
+.company_box .box_item .item04 .item04_3{float: left;width: 350px;min-height: 30px;line-height: 30px;white-space: nowrap;overflow: hidden;text-overflow: ellipsis;}
 .company_box .box_item .item04  i{font-size: 13px;color: #666;}
 .company_box .box_item .item04  span{font-size: 13px;color: #333;padding-right: 20px;}
 .company_box .box_item .item04  font{font-size: 13px;color: #f82c2c;}

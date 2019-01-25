@@ -7,7 +7,7 @@
         id="js003" 
         class="right">
         <div class="right_bt1">
-          <div class="right_bt1_1"><img src="space/company/images/line.png"><span>物流专线</span></div>
+          <div class="right_bt1_1"><img src="/member/images/line.png"><span>物流专线</span></div>
           <div class="huo_tj line_tj">
     			
             <div class="select_con">
@@ -44,7 +44,7 @@
 
                   <img 
                     class="fl list_img" 
-                    src="/templets/default/images/02jiantou.png">
+                    src="/images/02jiantou.png">
                   <div 
                     id="wlLineTo" 
                     class="fl list_input" 
@@ -111,41 +111,51 @@
 
           </ul>
         </div>
-        <div class="line_none"><span>暂无物流专线信息</span></div>
         <div 
+          v-show="$store.state.member.lineList.length === 0" 
+          class="line_none"><span>暂无物流专线信息</span></div>
+        <div 
+          v-for="(item, index) in $store.state.member.lineList"
+          :key="index"
           class="line_item" 
-          style="display: none;">
+        >
           <ul>
             <li class="line_item01"><a 
               id="nr021" 
-              target="_blank" 
-              href="#"><span><em id="nr022"/>&nbsp;→&nbsp;<em id="nr023"/></span></a></li>
+              :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
+              target="_blank"><span><em id="nr022">{{ item.startCity || '' }}{{ item.startArea || '' }}</em>&nbsp;→&nbsp;<em id="nr023">{{ item.endCity || '' }}{{ item.endArea || '' }}</em></span></a></li>
             <li class="line_item02">
-              <span>重货:<i id="nr024"/><em>元/公斤</em></span><font>时效:<i id="nr025"/></font>
-              <span>轻货:<i id="nr026"/><em>元/立方</em></span><font>最低一票:<i id="nr027"/></font>
+              <span>重货:<i id="nr024">{{ findPrice(item.rangePrices, '1') }}</i><em>元/公斤</em></span><font>时效:<i id="nr025">{{ item.transportAging }}{{ item.transportAgingUnit }}</i></font>
+              <span>轻货:<i id="nr026">{{ findPrice(item.rangePrices, '0') }}</i><em>元/立方</em></span><font>最低一票:<i id="nr027">{{ item.lowerPrice || '面议' }}</i></font>
             </li>
             <li class="line_item03">
               <p class="p1"><img 
                 id="list_shiming" 
-                src="/templets/default/images/10shiming.png"></p>
+                src="/images/list_wlzx/10shiming.png"></p>
               <p class="p2"><img 
                 id="list_xinyong" 
-                src="/templets/default/images/11xinyong.png"></p>
+                src="/images/list_wlzx/11xinyong.png"></p>
               <p class="p3"><img 
                 id="list_danbao" 
-                src="/templets/default/images/12danbao.png"></p>
+                src="/images/list_wlzx/12danbao.png"></p>
             </li>
             <li class="line_item04">
-              <p class="p1"><span><em id="nr028">9224</em>浏览量</span></p>
-              <p class="p2"><span><em id="nr029">986</em>收藏量</span></p>
+              <p class="p1"><span><em id="nr028">{{ item.browseNumber }}</em>浏览量</span></p>
+              <p class="p2"><span><em id="nr029">{{ item.assessNumber }}</em>收藏量</span></p>
             </li>
             <li class="line_item05">
               <a 
-                id="nr_order" 
+                id="nr_order"
+                :href="$store.state.member.id + '-order?id=' + item.id + '&publishId=' + item.companyId" 
                 target="_blank"><input 
-                  id="fahuo" 
+                  id="fahuo"
+                  readonly 
                   value="下单"></a>
-              <a id="nr0210"><input value="查看"></a>
+              <a 
+                id="nr0210" 
+                :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"><input 
+                  readonly 
+                  value="查看"></a>
             </li>
           </ul>    		
         </div>
@@ -175,39 +185,198 @@ export default {
     MemberSidebar
   },
   head: {
-    link: [{ rel: 'stylesheet', href: '/member/css/list.css' }]
+    link: [
+      { rel: 'stylesheet', href: '/member/css/list.css' },
+      { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
+    ]
   },
   layout: 'member',
   mounted() {
+    let _this = this
+    let uid = this.$store.state.member.id
     seajs.use(
-      [
-        '/index/js/city-picker.data.js',
-        '/index/js/city-picker.js',
-        '/member/js/index.js',
-        '/index/js/collection.js',
-        '/member/js/jquery.pagination.min.js',
-        '/member/js/line.js'
-      ],
+      ['/member/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
       function() {
-        $('.list_tiaoj span').click(function() {
-          //alert("1");
-          $('.list_tiaoj span').removeClass('active')
-          $(this).toggleClass('active')
-        })
-        $('#pagination1').pagination({
-          currentPage: 1,
-          totalPage: lineId(1).totalPage,
-          callback: function(current) {
-            $('#current1').text(current)
-            lineId(current)
+        seajs.use(
+          [
+            '/index/js/city-picker.js',
+            // '/index/js/collection.js',
+
+            '/member/js/line.js'
+          ],
+          function() {
+            $('.list_tiaoj span').click(function() {
+              //alert("1");
+              $('.list_tiaoj span').removeClass('active')
+              $(this).toggleClass('active')
+            })
+            _this.setPagination()
+
+            //专线搜索 S
+            $('#search_wlLine1').click(function() {
+              var list1 = [],
+                list2 = []
+              $('#wlLineFrom .select-item').each(function(i, e) {
+                list1.push($(this).text())
+              })
+              var startp = list1[0]
+              var startc = list1[1]
+              var starta = list1[2]
+
+              $('#wlLineTo .select-item').each(function(i, e) {
+                list2.push($(this).text())
+              })
+              var endp = list2[0]
+              var endc = list2[1]
+              var enda = list2[2]
+              if (!startp) {
+                startp = ''
+              }
+              if (!startc) {
+                startc = ''
+              }
+              if (!starta) {
+                starta = ''
+              }
+              if (!endp) {
+                endp = ''
+              }
+              if (!endc) {
+                endc = ''
+              }
+              if (!enda) {
+                enda = ''
+              }
+              startp = encodeURI(startp)
+              startc = encodeURI(startc)
+              starta = encodeURI(starta)
+              endp = encodeURI(endp)
+              endc = encodeURI(endc)
+              enda = encodeURI(enda)
+              window.location =
+                uid +
+                '-line?startp=' +
+                startp +
+                '&startc=' +
+                startc +
+                '&starta=' +
+                starta +
+                '&endp=' +
+                endp +
+                '&endc=' +
+                endc +
+                '&enda=' +
+                enda
+            })
+
+            // 搜索全站
+            $('#search_wlLine2').click(function() {
+              var list1 = [],
+                list2 = []
+              $('#wlLineFrom .select-item').each(function(i, e) {
+                list1.push($(this).text())
+              })
+              var startp = list1[0]
+              var startc = list1[1]
+              var starta = list1[2]
+
+              $('#wlLineTo .select-item').each(function(i, e) {
+                list2.push($(this).text())
+              })
+              var endp = list2[0]
+              var endc = list2[1]
+              var enda = list2[2]
+              if (!startp) {
+                startp = ''
+              }
+              if (!startc) {
+                startc = ''
+              }
+              if (!starta) {
+                starta = ''
+              }
+              if (!endp) {
+                endp = ''
+              }
+              if (!endc) {
+                endc = ''
+              }
+              if (!enda) {
+                enda = ''
+              }
+              startp = encodeURI(startp)
+              startc = encodeURI(startc)
+              starta = encodeURI(starta)
+              endp = encodeURI(endp)
+              endc = encodeURI(endc)
+              enda = encodeURI(enda)
+              var url =
+                '/zhuanxian/list?&startp=' +
+                startp +
+                '&startc=' +
+                startc +
+                '&starta=' +
+                starta +
+                '&endp=' +
+                endp +
+                '&endc=' +
+                endc +
+                '&enda=' +
+                enda
+              window.open(url)
+            })
           }
-        })
+        )
       }
     )
   },
-  async fetch({ store, params, $axios, error }) {
+  async fetch({ store, params, $axios, error, querys }) {
     store.commit('member/setId', params.id)
     await store.dispatch('member/GETCOMPANYINFO', params.id)
+    await store.dispatch('member/GETCOMPANYLINEINFO', {
+      publishId: store.state.member.company.id,
+      pageSize: 10,
+      currentPage: 1
+    })
+  },
+  methods: {
+    setPagination() {
+      $('#pagination1').pagination({
+        currentPage: 1,
+        count: 10,
+        totalPage: this.$store.state.member.lineTotal,
+        callback: function(current) {
+          $('#current1').text(current)
+          this.$store.dispatch('member/GETCOMPANYLINEINFO', {
+            publishId: this.$store.state.member.company.id,
+            pageSize: 10,
+            currentPage: current
+          })
+        }
+      })
+    },
+
+    findPrice(arr, type) {
+      let find = 0
+      if (arr.length) {
+        arr.forEach(item => {
+          console.log(
+            'type:',
+            type,
+            typeof item.type,
+            item.startVolume,
+            item.discountPrice,
+            item.primeryPrice
+          )
+          if (item.type === type && item.startVolume === 0) {
+            find = item.discountPrice || item.primeryPrice
+          }
+        })
+        return find
+      } else {
+        return 0
+      }
+    }
   }
 }
 </script>

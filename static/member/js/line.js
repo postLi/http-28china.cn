@@ -5,6 +5,7 @@ function GetQueryString(e) {
   return null != s ? unescape(s[2]) : null
 }
 //var uid=GetQueryString("uid");
+var myurl = window.location.href
 var uid = myurl.split(/member\/|-|.html/)[1]
 
 //获取参数的值
@@ -71,7 +72,7 @@ vo.endCity = endc
 vo.endArea = enda
 
 var obj2 = new Object()
-obj2 = lineId(1)
+//obj2 = lineId(1)
 vo.companyId = obj2.companyId
 
 if (!startp || startp == 'null') {
@@ -192,119 +193,6 @@ $('#tj_price1').click(function() {
   line(1)
 })
 //排序点击 E
-
-//专线搜索 S
-$('#search_wlLine1').click(function() {
-  var list1 = [],
-    list2 = []
-  $('#wlLineFrom .select-item').each(function(i, e) {
-    list1.push($(this).text())
-  })
-  var startp = list1[0]
-  var startc = list1[1]
-  var starta = list1[2]
-
-  $('#wlLineTo .select-item').each(function(i, e) {
-    list2.push($(this).text())
-  })
-  var endp = list2[0]
-  var endc = list2[1]
-  var enda = list2[2]
-  if (!startp) {
-    startp = ''
-  }
-  if (!startc) {
-    startc = ''
-  }
-  if (!starta) {
-    starta = ''
-  }
-  if (!endp) {
-    endp = ''
-  }
-  if (!endc) {
-    endc = ''
-  }
-  if (!enda) {
-    enda = ''
-  }
-  startp = encodeURI(startp)
-  startc = encodeURI(startc)
-  starta = encodeURI(starta)
-  endp = encodeURI(endp)
-  endc = encodeURI(endc)
-  enda = encodeURI(enda)
-  window.location =
-    uid +
-    '-line.html?startp=' +
-    startp +
-    '&startc=' +
-    startc +
-    '&starta=' +
-    starta +
-    '&endp=' +
-    endp +
-    '&endc=' +
-    endc +
-    '&enda=' +
-    enda
-})
-
-$('#search_wlLine2').click(function() {
-  var list1 = [],
-    list2 = []
-  $('#wlLineFrom .select-item').each(function(i, e) {
-    list1.push($(this).text())
-  })
-  var startp = list1[0]
-  var startc = list1[1]
-  var starta = list1[2]
-
-  $('#wlLineTo .select-item').each(function(i, e) {
-    list2.push($(this).text())
-  })
-  var endp = list2[0]
-  var endc = list2[1]
-  var enda = list2[2]
-  if (!startp) {
-    startp = ''
-  }
-  if (!startc) {
-    startc = ''
-  }
-  if (!starta) {
-    starta = ''
-  }
-  if (!endp) {
-    endp = ''
-  }
-  if (!endc) {
-    endc = ''
-  }
-  if (!enda) {
-    enda = ''
-  }
-  startp = encodeURI(startp)
-  startc = encodeURI(startc)
-  starta = encodeURI(starta)
-  endp = encodeURI(endp)
-  endc = encodeURI(endc)
-  enda = encodeURI(enda)
-  window.open(
-    '/plus/list.php?tid=4&startp=' +
-      startp +
-      '&startc=' +
-      startc +
-      '&starta=' +
-      starta +
-      '&endp=' +
-      endp +
-      '&endc=' +
-      endc +
-      '&enda=' +
-      enda
-  )
-})
 
 //专线搜索 E
 

@@ -343,19 +343,19 @@
               id="tj_a011"
               target="_blank"
               href="#">广州明科物流有限公司</a></span>
-            <img
-              id="tj_shiming"
-              src="../../static/zhuanxian/images/shiming.png" >
-            <img
-              id="tj_xinyong"
-              src="../../static/zhuanxian/images/xinyong.png" >
-            <img
-              id="tj_danbao"
-              src="../../static/zhuanxian/images/danbao.png" >
+              <!--<img-->
+              <!--id="tj_shiming"-->
+              <!--src="../../static/zhuanxian/images/shiming.png" >-->
+              <!--<img-->
+              <!--id="tj_xinyong"-->
+              <!--src="../../static/zhuanxian/images/xinyong.png" >-->
+              <!--<img-->
+              <!--id="tj_danbao"-->
+              <!--src="../../static/zhuanxian/images/danbao.png" >-->
 
-            <img
-              id="tj_icon_2"
-              src="../../static/zhuanxian/images/wtjzx.gif">
+              <!--<img-->
+              <!--id="tj_icon_2"-->
+              <!--src="../../static/zhuanxian/images/wtjzx.gif">-->
           </div>
           <div class="p p2">
 

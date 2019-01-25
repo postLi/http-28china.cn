@@ -6,7 +6,7 @@ OVERFLOW: hidden; LINE-HEIGHT: 50px;HEIGHT: 50px;  color:#585858; font-size:18px
 background-color: #fff;
 }
 .list_right .zx_sx{border-bottom: 2px solid #2577e3;margin-bottom: 1px;}
-.zx_sx span{ float: left;display: block;color: #2577e3;}
+.zx_sx span{ float: left;display: block;color:#3f94ee;}
 .zx_sx .biaozhi{
     width: 3px;
     height: 18px;
@@ -299,7 +299,8 @@ color: #2577e3;
 .tj_list ul{padding-top: 10px;}
 .tj_list .p3 li{float:left;width: 130px;height: 35px;}
 
-.tj_list .p3  .tj_left{text-align: left;width: 140px;}
+.tj_list .p3  .tj_left{text-align: left;width: 105px;
+  padding-left: 10px;}
 .tj_list .p3  .tj_right{text-align: right;padding-right: 10px;width: 110px;}
 .tj_list .p3 i,.tj_list .p3 em,.tj_list .p4 i{
 	font-size: 13px;

@@ -821,6 +821,7 @@ function process01() {
           }
           var assessNumber = datas[i].assessNumber;
           var browseNumber = datas[i].browseNumber;
+          var companyName1 = datas[i].companyName;
           if (!assessNumber) {
             assessNumber = 0
           }
@@ -864,7 +865,7 @@ function process01() {
           if (end && end.length > 6) {
             end = end.substring(0, 6) + ".."
           }
-          var publishName = datas[i].publishName;
+          var companyName = datas[i].companyName;
           var transportAging = datas[i].transportAging;
           var transportAgingUnit = datas[i].transportAgingUnit.replace("多", "");
           var isVip = datas[i].isVip;
@@ -872,7 +873,7 @@ function process01() {
           var collateral = datas[i].collateral;
           var arcurl = "/wlzx/2018/0509/7?id=" + rangeId + "&publishId=" + publishId;
           $("#tj_a011").attr("href", "/member/" + account + ".html");
-          $("#tj_a011").html(publishName);
+          $("#tj_a011").html(companyName);
           $("#tj102").html(assessNumber);
           $("#tj101").html(browseNumber);
           $("#tj011").html(start);

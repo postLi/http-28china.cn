@@ -218,57 +218,44 @@
           </div>
         </div>
         <!--分页-->
-        <!--分页
-        <div class="list_hy_page2">
-            <div class="floatr2">
-                <form name="beginPagefrm" method=post action="" onsubmit="return onCheckPage()">
-                {dede:pagelist listitem="info,pre,next,pageno,option" listsize="3"/}
-                <span>
-
-            到第&nbsp;<input class="input_page1" name="beginPage" value="">页&nbsp;<input class="input_page2" type="submit" name="Submit" value="确定">
-
-                </span>
-
-                </form>
-            </div>
-        </div>
-        分页-->
 
       </div>
 
-      <div
-        id="js009"
-        class="list_right"
-      >
+      <div class="list_right">
 
         <div class="zx_sx"><span class="biaozhi"/><span>车源信息推荐</span></div>
 
-        <div class="tj_none cy_tj_none">
+        <div 
+          v-if="recommendList.length === 0" 
+          class="tj_none cy_tj_none" 
+          style="display: block">
           <span>没有相关车源推荐</span>
         </div>
         <div class="che_box">
-          <div class="tj_list">
+          <div 
+            v-for="(item,index) in recommendList" 
+            :key="index" 
+            class="tj_list">
             <p class="p1">
               <a
-                id="nr0500"
+                :href=" '/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
                 class="list-title-a"
                 target="_blank" >
                 <span class="list-icon lines-sprite-icons icon-start"/>
-                <em id="nr0511"/>
+                <em>{{ (item.startCity + item.startArea).length > 6 ? (item.startCity + item.startArea).substring(0, 6) + '..' : item.startCity + item.startArea }}</em>
                 <span class="list-icon lines-sprite-icons icon-through"/>
                 <span class="list-icon lines-sprite-icons icon-end"/>
-                <em id="nr0512"/>
+                <em>{{ (item.endCity + item.endArea).length > 6 ? (item.endCity + item.endArea).substring(0, 6) + '..' : item.endCity + item.endArea }}</em>
               </a>
 
             </p>
             <div class="che_che">
-              
-              <p class="p3"><i>车辆载重：</i><span id="nr0513"/><em>车长：</em><font id="nr0514"/></p>
+              <p class="p3"><i>车辆载重：</i><span><b>{{ item.carLoad }}吨</b></span><em>车长：</em><font><b>{{ item.carLength }}米</b></font></p>
               <p class="p3">
-                <i>车源类型：</i><span id="nr0515"/><em>车辆类型：</em><font id="nr0516"/>
+                <i>车源类型：</i><span>{{ item.carSourceTypeName }}</span><em>车辆类型：</em><font>{{ item.carTypeName }}</font>
               </p>
               <p class="p4">
-                <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span id="nr0517"/>
+                <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span>{{ item.usualPlace }}</span>
               </p>
             </div>
             
@@ -276,10 +263,12 @@
               <i>发车时间：</i><span id="nr0518"/>
             </p> -->
             <div class="p5">
-              <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
-              <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span>
-              <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span>
-              <span id="nr0518">2/25/19 13:11:00</span>
+              <span v-if="item.driverStatus === 'AF0010403'">
+                <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
+                <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span>
+                <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span>
+              </span>
+              <span>{{ item.startTime }}</span>
             </div>
             <!-- <p class="p5">
               <img src="member/images/list_wlzx/wlgs_xinyong.png" >
@@ -313,25 +302,30 @@ export default {
       { src: './js/jquery.pagination.min.js' }
     ]
   },
+  data() {
+    return {
+      recommendList: []
+    }
+  },
+  async asyncData({ $axios, app, query }) {
+    const currentProvinceFullName = encodeURIComponent(
+      app.$cookies.get('currentProvinceFullName')
+    )
+    const currentAreaFullName = encodeURIComponent(
+      app.$cookies.get('currentAreaFullName')
+    )
+    let getRecommendList = await $axios.get(
+      '/28chinaservice/carInfo/recommendList?startProvince=' +
+        currentProvinceFullName +
+        '&startCity=' +
+        currentAreaFullName
+    )
+    return {
+      recommendList:
+        getRecommendList.data.status === 200 ? getRecommendList.data.data : []
+    }
+  },
   mounted() {
-    $(function() {
-      $('a[_for]').mouseover(function() {
-        $(this)
-          .parents()
-          .children('a[_for]')
-          .removeClass('thisclass')
-          .parents()
-          .children('dd')
-          .hide()
-        $(this)
-          .addClass('thisclass')
-          .blur()
-        $('#' + $(this).attr('_for')).show()
-      })
-      $('a[_for=uc_member]').mouseover()
-      $('a[_for=flink_1]').mouseover()
-    })
-
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
@@ -818,128 +812,6 @@ export default {
     }
     tjcx05()
     //车源数据字典 E
-
-    //车源列表 推荐列表S
-    function process01() {
-      var startProvince = $.cookie('currentProvinceFullName')
-      var startCity = $.cookie('currentAreaFullName')
-      $.ajax({
-        type: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url:
-          '/api/28chinaservice/carInfo/recommendList?' +
-          'startProvince=' +
-          startProvince +
-          '&' +
-          'startCity=' +
-          startCity,
-        // '/api/aflc-portal/portalt/aflcCarInfo/v1/getPortalRecommendlist',
-        dataType: 'json',
-        // data: JSON.stringify({
-        // currentPage: 1,
-        // pageSize: 14,
-        // vo: vo //JSON.stringify({})
-        // vo: {
-        //   startProvince: startProvince,
-        //   startCity: startCity
-        // }
-        // }),
-        success: function(res) {
-          console.log(res)
-          $('#js009 .tj_list')
-            .not(':eq(0)')
-            .remove()
-          if (!res.data || res.data == '') {
-            console.log('推荐内容为空')
-            $('.tj_none').css('display', 'block')
-          }
-          var datas = res.data
-          for (var i = 0; i < datas.length; i++) {
-            var id = datas[i].id
-            var driverId = datas[i].driverId
-            var carLoad = datas[i].carLoad
-            var carLength = datas[i].carLength
-            var carSourceTypeName = datas[i].carSourceTypeName
-            var carTypeName = datas[i].carTypeName
-            var driverStatus = datas[i].driverStatus
-            var browseNumber = datas[i].browseNumber
-            var collectNum = datas[i].collectNum
-            if (!browseNumber) {
-              browseNumber = 0
-            }
-            if (!collectNum) {
-              collectNum = 0
-            }
-            if (!datas[i].usualPlace) {
-              var usualPlace = ''
-            }
-            // var usualPlace = datas[i].usualPlace.substring(0, 12)
-            var usualPlace = datas[i].usualPlace
-            var startCity = datas[i].startCity
-            var startArea = datas[i].startArea
-            var endCity = datas[i].endCity
-            var endArea = datas[i].endArea
-            if (!startCity) {
-              startCity = ''
-            }
-            if (!endCity) {
-              endCity = ''
-            }
-            if (!startArea) {
-              startArea = ''
-            }
-            if (!endArea) {
-              endArea = ''
-            }
-            var start = startCity + startArea
-            var end = endCity + endArea
-            if (start && start.length > 6) {
-              start = start.substring(0, 6) + '..'
-            }
-            if (end && end.length > 6) {
-              end = end.substring(0, 6) + '..'
-            }
-
-            var startTime = datas[i].startTime
-            if (startTime) {
-              // startTime = startTime.substring(1, 10)
-              // startTime = datas[i].startTime.split(1, 10)
-            }
-
-            var arcurl =
-              '/cyxx/2018/0508/5.html?id=' + id + '&driverId=' + driverId
-
-            $('#nr0511').html(start)
-            $('#nr0512').html(end)
-            $('#nr0513').html('<b>' + carLoad + '</b>吨')
-            $('#nr0514').html('<b>' + carLength + '</b>米')
-            $('#nr0515').html(carSourceTypeName)
-            $('#nr0516').html(carTypeName)
-            $('#nr0517').html(usualPlace)
-            $('#nr0518').html(startTime)
-            $('#nr0519').attr('href', arcurl)
-            $('#nr0500').attr('href', arcurl)
-            $('#tj101').html(collectNum)
-            $('#tj102').html(browseNumber)
-            var s1 = '<div class="tj_list" data-v-fa4d12fa>'
-            var s2 = $('.tj_list').html()
-            var s3 = '</div>'
-            $('.che_box').append(s1 + s2 + s3)
-            if (driverStatus != 'AF0010403') {
-              console.log('is not shiming')
-              $('.tj_list' + i + ' .p5').css('display', 'none')
-            }
-          }
-        },
-        error: function(err) {
-          console.log(err.responseText)
-        }
-      })
-    }
-    process01()
-    //车源列表 推荐列表 E
 
     //车源信息栏目列表S
     function process02(currentPage) {

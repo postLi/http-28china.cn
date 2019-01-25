@@ -177,11 +177,6 @@ export default {
       { rel: 'stylesheet', href: '/css/basic.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/list_wlyq.css' }
-    ],
-    script: [
-      { src: './js/city-picker.data.js' },
-      { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' }
     ]
   },
   data() {

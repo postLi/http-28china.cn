@@ -86,3 +86,4 @@ dist
 .cache
 /pages/gongsi/index.vue
 !/pages/gongsi/index.vue
+!/pages/zhuanxian/index.vue

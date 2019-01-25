@@ -859,11 +859,11 @@ function process01() {
           }
           var start = startCity + startArea;
           var end = endCity + endArea;
-          if (start && start.length > 6) {
-            start = start.substring(0, 6) + ".."
+          if (start && start.length > 7) {
+            start = start.substring(0, 7) + ".."
           }
-          if (end && end.length > 6) {
-            end = end.substring(0, 6) + ".."
+          if (end && end.length > 7) {
+            end = end.substring(0, 7) + ".."
           }
           var companyName = datas[i].companyName;
           var transportAging = datas[i].transportAging;
@@ -940,7 +940,7 @@ function process02(currentPage) {
       data: JSON.stringify(
         {
           currentPage: currentPage,
-          pageSize: 9,
+          pageSize: 6,
           startProvince: startp,
           startCity: startc,
           startArea: starta,
@@ -1031,11 +1031,11 @@ function process02(currentPage) {
           }
           var start = startCity + startArea;
           var end = endCity + endArea;
-          if (start && start.length > 6) {
-            start = start.substring(0, 6) + ".."
+          if (start && start.length > 7) {
+            start = start.substring(0, 7) + ".."
           }
-          if (end && end.length > 6) {
-            end = end.substring(0, 6) + ".."
+          if (end && end.length > 7) {
+            end = end.substring(0, 7) + ".."
           }
 
           var publishName = datas[i].publishName;

@@ -218,60 +218,65 @@
           </div>
         </div>
         <!--分页-->
-        <!--分页
-        <div class="list_hy_page2">
-            <div class="floatr2">
-                <form name="beginPagefrm" method=post action="" onsubmit="return onCheckPage()">
-                {dede:pagelist listitem="info,pre,next,pageno,option" listsize="3"/}
-                <span>
-
-            到第&nbsp;<input class="input_page1" name="beginPage" value="">页&nbsp;<input class="input_page2" type="submit" name="Submit" value="确定">
-
-                </span>
-
-                </form>
-            </div>
-        </div>
-        分页-->
 
       </div>
 
-      <div
-        id="js009"
-        class="list_right"
-      >
+
+      <!-- 最新车源start -->
+      <!-- <div class="list_new">
+        <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
+        <ul class="list_new_ul">
+          <li>
+            <div class="li_one">
+              <a>广东省广州市->北京市</a>
+              <span>2019-02-24 12:11:00</span>
+            </div>
+            <div class="li_two">
+              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
+              <span><a class="li_check">查看详情</a></span>
+            </div>
+          </li>
+        </ul>
+      </div> -->
+     
+      <!-- 最新车源end -->
+
+      <div class="list_right">
 
         <div class="zx_sx"><span class="biaozhi"/><span>车源信息推荐</span></div>
 
-        <div class="tj_none cy_tj_none">
+        <div 
+          v-if="recommendList.length === 0" 
+          class="tj_none cy_tj_none" 
+          style="display: block">
           <span>没有相关车源推荐</span>
         </div>
+
         <div class="che_box">
           <div 
-            class="tj_list"
-            style="display:none"
-          >
+            v-for="(item,index) in recommendList" 
+            :key="index" 
+            class="tj_list">
             <p class="p1">
               <a
-                id="nr0500"
+                :href=" '/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
                 class="list-title-a"
                 target="_blank" >
                 <span class="list-icon lines-sprite-icons icon-start"/>
-                <em id="nr0511"/>
+                <em>{{ (item.startCity + item.startArea).length > 6 ? (item.startCity + item.startArea).substring(0, 6) + '..' : item.startCity + item.startArea }}</em>
                 <span class="list-icon lines-sprite-icons icon-through"/>
                 <span class="list-icon lines-sprite-icons icon-end"/>
-                <em id="nr0512"/>
+                <em>{{ (item.endCity + item.endArea).length > 6 ? (item.endCity + item.endArea).substring(0, 6) + '..' : item.endCity + item.endArea }}</em>
               </a>
 
             </p>
             <div class="che_che">
-              
-              <p class="p3"><i>车辆载重：</i><span id="nr0513"/><em>车长：</em><font id="nr0514"/></p>
+              <p class="p3"><i>车辆载重：</i><span><b>{{ item.carLoad }}吨</b></span><em>车长：</em><font><b>{{ item.carLength }}米</b></font></p>
               <p class="p3">
-                <i>车源类型：</i><span id="nr0515"/><em>车辆类型：</em><font id="nr0516"/>
+                <i>车源类型：</i><span>{{ item.carSourceTypeName }}</span><em>车辆类型：</em><font>{{ item.carTypeName }}</font>
               </p>
               <p class="p4">
-                <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span id="nr0517"/>
+                <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span>{{ item.usualPlace }}</span>
               </p>
             </div>
             
@@ -279,10 +284,12 @@
               <i>发车时间：</i><span id="nr0518"/>
             </p> -->
             <div class="p5">
-              <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
-              <!-- <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span> -->
-              <!-- <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span> -->
-              <span id="nr0518">2/25/19 13:11:00</span>
+              <span v-if="item.driverStatus === 'AF0010403'">
+                <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
+                <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span>
+                <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span>
+              </span>
+              <span>{{ item.startTime }}</span>
             </div>
             <!-- <p class="p5">
               <img src="member/images/list_wlzx/wlgs_xinyong.png" >
@@ -298,831 +305,764 @@
          
         </div>
         
-       
       </div>
+
+      <!-- 帮我找优质运动start -->
+      <!-- <div class="list_help">
+        <div class="list-box-r-top">
+          <form action="">
+            <h2>帮我找优质运力</h2>
+            <div class="ltl-input">
+              <input 
+                id="right-bar-form" 
+                autocomplete="off" 
+                wtmap="" 
+                type="text" 
+                class="ltl-location" 
+                placeholder="请选择出发地">
+              <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+            </div>
+            <div class="ltl-input">
+              <input 
+                id="right-bar-to" 
+                autocomplete="off" 
+                wtmap="" 
+                type="text" 
+                class="ltl-location" 
+                placeholder="请选择目到达地">
+              <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+            </div>
+            <div class="ltl-input">
+              <input 
+                id="right-bar-to" 
+                autocomplete="off" 
+                wtmap="" 
+                type="text" 
+                class="ltl-location" 
+                placeholder="请选择">
+              <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+            </div>
+            <div class="ltl-input">
+              <input 
+                id="right-bar-phone" 
+                autocomplete="off" 
+                wtmap="" 
+                type="text" 
+                class="ltl-location" 
+                placeholder="请选择">
+              <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+            </div>
+            <input 
+              id="check-fee" 
+              type="button" 
+              value="查询零担运费" 
+              class="right-top-btn">
+          </form>
+
+        </div>
+      </div> -->
+      
+      <!-- 帮我找优质运动end -->
     </div>
     <div class="h70"/>
   </div>
 </template>
 
 <script>
+import { test } from './index.js'
 export default {
   name: 'CheYuan',
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
+    script: [
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' }
+    ]
+  },
+  data() {
+    return {
+      recommendList: [],
+      dataset: []
+    }
+  },
+  async asyncData({ $axios, app, query }) {
+    // const currentProvinceFullName = encodeURIComponent(
+    //   app.$cookies.get('currentProvinceFullName')
+    // )
+    // const currentAreaFullName = encodeURIComponent(
+    //   app.$cookies.get('currentAreaFullName')
+    // )
+    // let getRecommendList = await $axios.get(
+    //   '/28chinaservice/carInfo/recommendList?startProvince=' +
+    //     currentProvinceFullName +
+    //     '&startCity=' +
+    //     currentAreaFullName
+    // )
+    let getRecommendList = await test($axios, app)
+    console.log(getRecommendList)
+    return {
+      recommendList:
+        getRecommendList.data.status === 200 ? getRecommendList.data.data : []
+    }
   },
   mounted() {
-    seajs.use(['./js/city-picker.data.js'], function() {
-      seajs.use(['./js/city-picker.js'], function() {
-        seajs.use(['./js/jquery.pagination.min.js'], function() {
-          $(function() {
-            $('a[_for]').mouseover(function() {
-              $(this)
-                .parents()
-                .children('a[_for]')
-                .removeClass('thisclass')
-                .parents()
-                .children('dd')
-                .hide()
-              $(this)
-                .addClass('thisclass')
-                .blur()
-              $('#' + $(this).attr('_for')).show()
-            })
-            $('a[_for=uc_member]').mouseover()
-            $('a[_for=flink_1]').mouseover()
-          })
-
-          $('.collapse').click(function() {
-            $('.collapse').css('display', 'none')
-            $('.expand').css('display', 'inline-block')
-            $('.select_con').css('display', 'none')
-          })
-          $('.expand').click(function() {
-            $('.collapse').css('display', 'inline-block')
-            $('.expand').css('display', 'none')
-            $('.select_con').css('display', 'block')
-          })
-
-          //获取参数的值
-          function GetQueryString(e) {
-            var t = new RegExp('(^|&)' + e + '=([^&]*)(&|$)'),
-              s = window.location.search.substr(1).match(t)
-            return null != s ? unescape(s[2]) : null
-          }
-          function GetUrlParam(name) {
-            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-            var r = encodeURI(window.location.search)
-              .substr(1)
-              .match(reg)
-            if (r != null) return unescape(r[2])
-            return null
-          }
-          //当前url追加参数 UrlUpdateParams(window.location.href, "mid", 11111)
-          function UrlUpdateParams(url, name, value) {
-            var r = url
-            if (r != null && r != 'undefined' && r != '') {
-              value = encodeURIComponent(value)
-              var reg = new RegExp('(^|)' + name + '=([^&]*)(|$)')
-              var tmp = name + '=' + value
-              if (url.match(reg) != null) {
-                r = url.replace(eval(reg), tmp)
-              } else {
-                if (url.match('[?]')) {
-                  r = url + '&' + tmp
-                } else {
-                  r = url + '?' + tmp
-                }
-              }
-            }
-            return r
-          }
-          function formatDate(objD) {
-            var str, colorhead, colorfoot
-            var yy = objD.getYear()
-            if (yy < 1900) yy = yy + 1900
-            var MM = objD.getMonth() + 1
-            if (MM < 10) MM = '0' + MM
-            var dd = objD.getDate()
-            if (dd < 10) dd = '0' + dd
-            var hh = objD.getHours()
-            if (hh < 10) hh = '0' + hh
-            var mm = objD.getMinutes()
-            if (mm < 10) mm = '0' + mm
-            var ss = objD.getSeconds()
-            if (ss < 10) ss = '0' + ss
-            str = yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm
-            return str
-          }
-
-          var startp1 = GetUrlParam('startp')
-          var endp1 = GetUrlParam('endp')
-          var startc1 = GetUrlParam('startc')
-          var endc1 = GetUrlParam('endc')
-          var starta1 = GetUrlParam('starta')
-          var enda1 = GetUrlParam('enda')
-          var carType1 = GetUrlParam('carType')
-          var carSourceType1 = GetUrlParam('carSourceType')
-          var carLength1 = GetUrlParam('carLength1')
-          var carLength2 = GetUrlParam('carLength2')
-          var carLoad1 = GetUrlParam('carLoad1')
-          var carLoad2 = GetUrlParam('carLoad2')
-          var isLongCar1 = GetUrlParam('isLongCar')
-
-          var startp = decodeURI(startp1)
-          var endp = decodeURI(endp1)
-          var startc = decodeURI(startc1)
-          var endc = decodeURI(endc1)
-          var starta = decodeURI(starta1)
-          var enda = decodeURI(enda1)
-          var carType = decodeURI(carType1)
-          var carSourceType = decodeURI(carSourceType1)
-          var carLength1 = decodeURI(carLength1)
-          var carLength2 = decodeURI(carLength2)
-          var carLoad1 = decodeURI(carLoad1)
-          var carLoad2 = decodeURI(carLoad2)
-          var isLongCar = decodeURI(isLongCar1)
-
-          var currentAreaFullName = $.cookie('currentAreaFullName')
-          var currentProvinceFullName = $.cookie('currentProvinceFullName')
-
-          var vo = new Object()
-          vo.startProvince = startp
-          vo.startCity = startc
-          vo.startArea = starta
-          vo.endProvince = endp
-          vo.endCity = endc
-          vo.endArea = enda
-          vo.carType = carType
-          vo.carSourceType = carSourceType
-          vo.carLengthLower = carLength1
-          vo.carLengthUpper = carLength2
-          vo.carLoadLower = carLoad1
-          vo.carLoadUpper = carLoad2
-          vo.isLongCar = isLongCar
-
-          if (startp || startc) {
-            if (!startp || startp == 'null') {
-              startp = ''
-              delete vo.startProvince
-            }
-            if (!startc || startc == 'null') {
-              startc = ''
-              delete vo.startCity
-            }
-          }
-          if ((!startp || startp == 'null') && (!startc || startc == 'null')) {
-            startc = currentAreaFullName
-            vo.startCity = startc
-            startp = currentProvinceFullName
-            vo.startProvince = startp
-          }
-
-          if (!starta || starta == 'null') {
-            starta = ''
-            delete vo.startArea
-          }
-          if (!endp || endp == 'null') {
-            endp = ''
-            delete vo.endProvince
-          }
-          if (!endc || endc == 'null') {
-            endc = ''
-            delete vo.endCity
-          }
-          if (!enda || enda == 'null') {
-            enda = ''
-            delete vo.endArea
-          }
-          if (!carType || carType == 'null') {
-            carType = ''
-            delete vo.carType
-          }
-          if (!carSourceType || carSourceType == 'null') {
-            carSourceType = ''
-            delete vo.carSourceType
-          }
-          if (!carLength1 || carLength1 == 'null') {
-            carLength1 = ''
-            delete vo.carLengthLower
-          }
-          if (!carLength2 || carLength2 == 'null') {
-            carLength2 = ''
-            delete vo.carLengthUpper
-          }
-          if (!carLoad1 || carLoad1 == 'null') {
-            carLoad1 = ''
-            delete vo.carLoadLower
-          }
-          if (!carLoad2 || carLoad2 == 'null') {
-            carLoad2 = ''
-            delete vo.carLoadUpper
-          }
-          if (!isLongCar || isLongCar == 'null') {
-            isLongCar = ''
-            delete vo.isLongCar
-          }
-
-          $('#list_nav_a').html(
-            startc + starta + ' 到 ' + endc + enda + ' 车源信息'
-          )
-          if ((!startc && !starta) || (!endc && !enda)) {
-            $('#list_nav_a').html(
-              startc + starta + '  ' + endc + enda + '车源信息'
-            )
-          }
-
-          $('#carLineFrom input').citypicker({
-            province: startp,
-            city: startc,
-            district: starta
-          })
-          $('#carLineTo input').citypicker({
-            province: endp,
-            city: endc,
-            district: enda
-          })
-          $('#tjcx_01 .all').attr(
-            'href',
-            UrlUpdateParams(window.location.href, 'carType', '')
-          )
-          $('#tjcx_02 .all').attr(
-            'href',
-            UrlUpdateParams(window.location.href, 'carSourceType', '')
-          )
-          $('#tjcx_03 .all').attr(
-            'href',
-            UrlUpdateParams(window.location.href, 'isLongCar', '')
-          )
-          $('#tjcx_04 .all').attr(
-            'href',
-            UrlUpdateParams(
-              UrlUpdateParams(window.location.href, 'carLength1', ''),
-              'carLength2',
-              ''
-            )
-          )
-          $('#tjcx_05 .all').attr(
-            'href',
-            UrlUpdateParams(
-              UrlUpdateParams(window.location.href, 'carLoad1', ''),
-              'carLoad2',
-              ''
-            )
-          )
-          //清空条件
-          $('#flush').click(function() {
-            console.log('清空地址')
-            window.location.href = '/cheyuan'
-          })
-          //清空条件
-          //车源搜索 S
-
-          $('#search_cheyuan').click(function() {
-            var list1 = [],
-              list2 = []
-            $('#carLineFrom .select-item').each(function(i, e) {
-              list1.push($(this).text())
-            })
-            var startp = list1[0]
-            var startc = list1[1]
-            var starta = list1[2]
-
-            $('#carLineTo .select-item').each(function(i, e) {
-              list2.push($(this).text())
-            })
-            var endp = list2[0]
-            var endc = list2[1]
-            var enda = list2[2]
-            if (!startp) {
-              startp = ''
-            }
-            if (!startc) {
-              startc = ''
-            }
-            if (!starta) {
-              starta = ''
-            }
-            if (!endp) {
-              endp = ''
-            }
-            if (!endc) {
-              endc = ''
-            }
-            if (!enda) {
-              enda = ''
-            }
-            startp = encodeURI(startp)
-            startc = encodeURI(startc)
-            starta = encodeURI(starta)
-            endp = encodeURI(endp)
-            endc = encodeURI(endc)
-            enda = encodeURI(enda)
-
-            window.location =
-              '/cheyuan?startp=' +
-              startp +
-              '&startc=' +
-              startc +
-              '&starta=' +
-              starta +
-              '&endp=' +
-              endp +
-              '&endc=' +
-              endc +
-              '&enda=' +
-              enda
-          })
-
-          //车源搜索 E
-
-          //车源数据字典 S
-          function tjcx01() {
-            $.ajax({
-              type: 'get',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              url: '/api/28chinaservice/sysDict/getSysDictByCodeGet/AF018',
-
-              success: function(res) {
-                var datas = res.data
-                for (var i = 0; i < datas.length; i++) {
-                  var name = datas[i].name
-                  var code = datas[i].code
-                  var myurl = UrlUpdateParams(
-                    window.location.href,
-                    'carType',
-                    code
-                  )
-                  //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
-                  //				 var s2='&carType='+code+'>';
-                  //				 var s3=name+'</a>';
-                  var s1 = '<a href=' + myurl + '>'
-                  var s3 = name + '</a>'
-                  $('#tjcx_01').append(s1 + s3)
-                }
-                //选中状态 S
-                if (carType) {
-                  $('#tjcx_01 a').each(function() {
-                    var aaa = $(this).attr('href')
-
-                    if (aaa.indexOf(carType) != -1) {
-                      console.log(aaa)
-                      $('#tjcx_01 a').removeClass('now')
-                      $(this).addClass('now')
-                    }
-                  })
-                }
-                //选中状态 E
-              },
-              error: function(err) {
-                console.log(err.responseText)
-              }
-            })
-          }
-          tjcx01()
-          function tjcx02() {
-            var myurl1 = UrlUpdateParams(
-              window.location.href,
-              'carSourceType',
-              'AF01802'
-            )
-            var myurl2 = UrlUpdateParams(
-              window.location.href,
-              'carSourceType',
-              'AF01801'
-            )
-            $('#tjcx_02 a:eq(1)').attr('href', myurl1)
-            $('#tjcx_02 a:eq(2)').attr('href', myurl2)
-            $('#tjcx_02 a').each(function() {
-              var aaa = window.location.href
-
-              if (aaa.indexOf('carSourceType=AF01802') != -1) {
-                $('#tjcx_02 a').removeClass('now')
-                $('#tjcx_02 a:eq(1)').addClass('now')
-              }
-              if (aaa.indexOf('carSourceType=AF01801') != -1) {
-                $('#tjcx_02 a').removeClass('now')
-                $('#tjcx_02 a:eq(2)').addClass('now')
-              }
-            })
-          }
-          tjcx02()
-          function tjcx03() {
-            var myurl1 = UrlUpdateParams(window.location.href, 'isLongCar', '1')
-            var myurl2 = UrlUpdateParams(window.location.href, 'isLongCar', '0')
-            $('#tjcx_03 a:eq(1)').attr('href', myurl1)
-            $('#tjcx_03 a:eq(2)').attr('href', myurl2)
-            $('#tjcx_03 a').each(function() {
-              var aaa = window.location.href
-
-              if (aaa.indexOf('isLongCar=1') != -1) {
-                $('#tjcx_03 a').removeClass('now')
-                $('#tjcx_03 a:eq(1)').addClass('now')
-              }
-              if (aaa.indexOf('isLongCar=0') != -1) {
-                $('#tjcx_03 a').removeClass('now')
-                $('#tjcx_03 a:eq(2)').addClass('now')
-              }
-            })
-          }
-          tjcx03()
-          function tjcx04() {
-            $.ajax({
-              type: 'get',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF031',
-
-              success: function(res) {
-                var datas = res.data
-                for (var i = 0; i < datas.length; i++) {
-                  var name = datas[i].name
-                  if (name.indexOf('<') != -1) {
-                    var name1 = 0
-                    var name2 = name.substring(1, 20)
-                  } else if (name.indexOf('>') != -1) {
-                    var name1 = name.substring(1, 20)
-                    var name2 = 99999
-                  } else {
-                    var name1 = name.split('-', 2)[0]
-                    var name2 = name.split('-', 2)[1]
-                  }
-
-                  var code = datas[i].code
-                  var myurl = UrlUpdateParams(
-                    UrlUpdateParams(window.location.href, 'carLength1', name1),
-                    'carLength2',
-                    name2
-                  )
-                  //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
-                  //				 var s2='&carLength1='+name1+'&carLength2='+name2+'>';
-                  //				 var s3=name+'米</a>';
-                  var s1 = '<a href=' + myurl + '>'
-                  var s3 = name + '米</a>'
-                  $('#tjcx_04').append(s1 + s3)
-                }
-                //选中状态 S
-                if (carLength1 && carLength2) {
-                  $('#tjcx_04 a').each(function() {
-                    var aaa = $(this).attr('href')
-
-                    if (
-                      aaa.indexOf('carLength1=' + carLength1) != -1 &&
-                      aaa.indexOf('carLength2=' + carLength2) != -1
-                    ) {
-                      //console.log(aaa+":"+goodsWeight1+":"+goodsWeight2);
-                      $('#tjcx_04 a').removeClass('now')
-                      $(this).addClass('now')
-                    }
-                  })
-                }
-                //选中状态 E
-              },
-              error: function(err) {
-                console.log(err.responseText)
-              }
-            })
-          }
-          tjcx04()
-          function tjcx05() {
-            $.ajax({
-              type: 'get',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF032',
-
-              success: function(res) {
-                var datas = res.data
-                for (var i = 0; i < datas.length; i++) {
-                  var name = datas[i].name
-                  if (name.indexOf('<') != -1) {
-                    var name1 = 0
-                    var name2 = name.substring(1, 20)
-                  } else if (name.indexOf('>') != -1) {
-                    var name1 = name.substring(1, 20)
-                    var name2 = 9999
-                  } else {
-                    var name1 = name.split('-', 2)[0]
-                    var name2 = name.split('-', 2)[1]
-                  }
-
-                  var code = datas[i].code
-                  var myurl = UrlUpdateParams(
-                    UrlUpdateParams(window.location.href, 'carLoad1', name1),
-                    'carLoad2',
-                    name2
-                  )
-                  //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
-                  //				 var s2='&carLoad1='+name1+'&carLoad2='+name2+'>';
-                  //				 var s3=name+'吨</a>';
-                  var s1 = '<a href=' + myurl + '>'
-                  var s3 = name + '吨</a>'
-                  $('#tjcx_05').append(s1 + s3)
-                }
-                //选中状态 S
-                if (carLoad1 && carLoad2) {
-                  $('#tjcx_05 a').each(function() {
-                    var aaa = $(this).attr('href')
-
-                    if (
-                      aaa.indexOf('carLoad1=' + carLoad1) != -1 &&
-                      aaa.indexOf('carLoad2=' + carLoad2) != -1
-                    ) {
-                      //console.log(aaa+":"+goodsWeight1+":"+goodsWeight2);
-                      $('#tjcx_05 a').removeClass('now')
-                      $(this).addClass('now')
-                    }
-                  })
-                }
-                //选中状态 E
-              },
-              error: function(err) {
-                console.log(err.responseText)
-              }
-            })
-          }
-          tjcx05()
-          //车源数据字典 E
-
-          //车源列表 推荐列表S
-          function process01() {
-            var startProvince = $.cookie('currentProvinceFullName')
-            var startCity = $.cookie('currentAreaFullName')
-            $.ajax({
-              type: 'get',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              url:
-                '/api/28chinaservice/carInfo/recommendList?' +
-                'startProvince=' +
-                startProvince +
-                '&' +
-                'startCity=' +
-                startCity,
-              // '/api/aflc-portal/portalt/aflcCarInfo/v1/getPortalRecommendlist',
-              dataType: 'json',
-              // data: JSON.stringify({
-              // currentPage: 1,
-              // pageSize: 14,
-              // vo: vo //JSON.stringify({})
-              // vo: {
-              //   startProvince: startProvince,
-              //   startCity: startCity
-              // }
-              // }),
-              success: function(res) {
-                $('#js009 .tj_list')
-                  .not(':eq(0)')
-                  .remove()
-                if (!res.data || res.data == []) {
-                  console.log('推荐内容为空')
-                  $('.tj_none').css('display', 'block')
-                }
-                var datas = res.data
-                for (var i = 0; i < datas.length; i++) {
-                  console.log(99999999)
-                  var id = datas[i].id
-                  var driverId = datas[i].driverId
-                  var carLoad = datas[i].carLoad
-                  var carLength = datas[i].carLength
-                  var carSourceTypeName = datas[i].carSourceTypeName
-                  var carTypeName = datas[i].carTypeName
-                  var driverStatus = datas[i].driverStatus
-                  var browseNumber = datas[i].browseNumber
-                  var collectNum = datas[i].collectNum
-                  if (!browseNumber) {
-                    browseNumber = 0
-                  }
-                  if (!collectNum) {
-                    collectNum = 0
-                  }
-                  if (!datas[i].usualPlace) {
-                    var usualPlace = ''
-                  }
-                  // var usualPlace = datas[i].usualPlace.substring(0, 12)
-                  var usualPlace = datas[i].usualPlace
-                  var startCity = datas[i].startCity
-                  var startArea = datas[i].startArea
-                  var endCity = datas[i].endCity
-                  var endArea = datas[i].endArea
-                  if (!startCity) {
-                    startCity = ''
-                  }
-                  if (!endCity) {
-                    endCity = ''
-                  }
-                  if (!startArea) {
-                    startArea = ''
-                  }
-                  if (!endArea) {
-                    endArea = ''
-                  }
-                  var start = startCity + startArea
-                  var end = endCity + endArea
-                  if (start && start.length > 6) {
-                    start = start.substring(0, 6) + '..'
-                  }
-                  if (end && end.length > 6) {
-                    end = end.substring(0, 6) + '..'
-                  }
-
-                  var startTime = datas[i].startTime
-                  if (startTime) {
-                    // startTime = startTime.substring(1, 10)
-                    // startTime = datas[i].startTime.split(1, 10)
-                  }
-
-                  var arcurl =
-                    '/cyxx/2018/0508/5.html?id=' + id + '&driverId=' + driverId
-
-                  $('#nr0511').html(start)
-                  $('#nr0512').html(end)
-                  $('#nr0513').html('<b>' + carLoad + '</b>吨')
-                  $('#nr0514').html('<b>' + carLength + '</b>米')
-                  $('#nr0515').html(carSourceTypeName)
-                  $('#nr0516').html(carTypeName)
-                  $('#nr0517').html(usualPlace)
-                  $('#nr0518').html(startTime)
-                  $('#nr0519').attr('href', arcurl)
-                  $('#nr0500').attr('href', arcurl)
-                  $('#tj101').html(collectNum)
-                  $('#tj102').html(browseNumber)
-                  var s1 = '<div class="tj_list" data-v-fa4d12fa>'
-                  var s2 = $('.tj_list').html()
-                  var s3 = '</div>'
-                  $('.che_box').append(s1 + s2 + s3)
-                  if (driverStatus != 'AF0010403') {
-                    // console.log('is not shiming')
-                    $('.tj_list' + i + ' .p5').css('display', 'none')
-                  }
-                }
-              },
-              error: function(err) {
-                console.log(err.responseText)
-              }
-            })
-          }
-          process01()
-          //车源列表 推荐列表 E
-
-          //车源信息栏目列表S
-          function process02(currentPage) {
-            var totalPage = 8
-
-            $.ajax({
-              type: 'post',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              url: '/api/28-web/carInfo/list',
-              dataType: 'json',
-              async: false,
-              data: JSON.stringify({
-                currentPage: currentPage,
-                pageSize: 10,
-                //vo:{	"strartAddress":start,"endAddress":end,"carType":carType,"carLengthLower":carLength1,"carLengthUpper":carLength2,"carLoadLower":carLoad1,"carLoadUpper":carLoad2}			//JSON.stringify({})
-                vo: vo
-              }),
-              success: function(res) {
-                $('#js006 .wlzx_list')
-                  .not(':eq(0)')
-                  .remove()
-                if (res.data) {
-                  // totalPage = res.data.totalPage;
-                  totalPage = res.data.pages
-                }
-                if (!res.data || !res.data.total) {
-                  console.log('内容为空')
-                  $('.box').css('display', 'none')
-                  $('.list_none').css('display', 'block')
-                }
-                var datas = res.data.list
-                for (var i = 0; i < datas.length; i++) {
-                  var id = datas[i].id
-                  var collectNum = datas[i].collectNum
-                  if (!collectNum) {
-                    collectNum = 0
-                  }
-                  var driverId = datas[i].driverId
-                  var carLoad = datas[i].carLoad
-                  var carNum = datas[i].carNum
-                  var createrName = datas[i].createrName
-                  if (!createrName) {
-                    createrName = ''
-                  }
-                  // var carNum = datas[i].
-                  // carNum.substring(0, 2) + '***' + carNum.substring(6, 10)
-                  var remark = datas[i].remark
-                  if (remark && remark.length > 19) {
-                    var remark = datas[i].remark.substring(0, 19) + '...'
-                  }
-                  var carLength = datas[i].carLength
-                  var carSourceTypeName = datas[i].carSourceTypeName
-                  var browseNumber = datas[i].browseNumber
-                  if (!browseNumber) {
-                    browseNumber = 0
-                  }
-
-                  var carTypeName = datas[i].carTypeName
-                  if (!datas[i].usualPlace) {
-                    var usualPlace = ''
-                  }
-                  var usualPlace = datas[i].usualPlace
-                  // var usualPlace = datas[i].usualPlace.substring(0, 12)
-                  var title = datas[i].title
-
-                  var startCity = datas[i].startCity
-                  var startArea = datas[i].startArea
-                  var endCity = datas[i].endCity
-                  var endArea = datas[i].endArea
-                  if (!startCity) {
-                    startCity = ''
-                  }
-                  if (!endCity) {
-                    endCity = ''
-                  }
-                  if (!startArea) {
-                    startArea = ''
-                  }
-                  if (!endArea) {
-                    endArea = ''
-                  }
-                  var start = startCity + startArea
-                  var end = endCity + endArea
-                  if (start && start.length > 6) {
-                    // start = start.substring(0, 6) + '..'
-                  }
-                  if (end && end.length > 6) {
-                    // end = end.substring(0, 6) + '..'
-                  }
-
-                  var expectPrice = datas[i].expectPrice
-                  var qq = datas[i].qq
-
-                  var credit28 = datas[i].credit28
-                  var driverStatus = datas[i].driverStatus
-
-                  var createTime1 = datas[i].createTime
-                  var createTime = formatDate(new Date(createTime1))
-                  if (!datas[i].carFile) {
-                    var carFile1 = ''
-                  }
-                  if (datas[i].carFile) {
-                    var carFile1 = datas[i].carFile.split(',')[0]
-                  }
-                  $('#car_pic').attr('src', carFile1)
-
-                  var arcurl =
-                    '/cheyuan/detail?id=' + id + '&driverId=' + driverId
-                  $('#nr_a51').attr('href', arcurl)
-                  $('#nr_a54').attr('href', arcurl)
-                  $('#nr_a51_1').html(start)
-                  $('#nr_a51_2').html(end)
-                  $('#nr_a52').attr('href', arcurl)
-                  $('#nr051').html(carNum)
-                  $('#nr052').html(carTypeName)
-                  $('#nr053').html('长' + '<b>' + carLength + '</b>米')
-                  $('#nr054').html('载重' + '<b>' + carLoad + '</b>吨')
-                  $('#nr055').html(carSourceTypeName)
-                  $('#nr056').html(usualPlace)
-                  $('#nr057').html(expectPrice + '元')
-                  if (!expectPrice) {
-                    $('#nr057').html('面议')
-                  }
-                  $('#nr058').html(remark)
-                  $('#nr059').html(createrName)
-                  $('#nr0510').html('发布时间：' + createTime)
-                  $('#nr0520').html(collectNum)
-                  $('#nr0521').html(browseNumber)
-                  $('#nr_a53').attr(
-                    'href',
-                    'tencent://message/?uin=' + qq + '&Site=&menu=yes'
-                  )
-                  var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
-                  var s2 = $('.wlzx_list').html()
-                  var s3 = '</ul>'
-                  $('#js006').append(s1 + s2 + s3)
-                  if (!qq) {
-                    $('.wlzx_list' + i + ' #qq').css('display', 'none')
-                  }
-                  //if(!credit28){console.log("is not Vip");
-                  //$('.wlzx_list'+i+' .cy_list_3 .p2').css("display","none")}
-                  if (driverStatus != 'AF0010403') {
-                    console.log('is not shiming')
-                    $('.wlzx_list' + i + ' .cy_list_3 .p1').css(
-                      'display',
-                      'none'
-                    )
-                  }
-                }
-              },
-              error: function(err) {
-                console.log(err.responseText)
-              }
-            })
-            console.log('最终总页数：' + totalPage)
-            return totalPage
-          }
-          //process02(1);
-          //车源信息栏目列表 E
-
-          $('#pagination1').pagination({
-            currentPage: 1,
-            totalPage: process02(1),
-            callback: function(current) {
-              $('#current1').text(current)
-              process02(current)
-              window.location.href = '#top'
-            }
-          })
-        })
-      })
+    $('.collapse').click(function() {
+      $('.collapse').css('display', 'none')
+      $('.expand').css('display', 'inline-block')
+      $('.select_con').css('display', 'none')
     })
+    $('.expand').click(function() {
+      $('.collapse').css('display', 'inline-block')
+      $('.expand').css('display', 'none')
+      $('.select_con').css('display', 'block')
+    })
+
+    //获取参数的值
+    function GetQueryString(e) {
+      var t = new RegExp('(^|&)' + e + '=([^&]*)(&|$)'),
+        s = window.location.search.substr(1).match(t)
+      return null != s ? unescape(s[2]) : null
+    }
+    function GetUrlParam(name) {
+      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+      var r = encodeURI(window.location.search)
+        .substr(1)
+        .match(reg)
+      if (r != null) return unescape(r[2])
+      return null
+    }
+    //当前url追加参数 UrlUpdateParams(window.location.href, "mid", 11111)
+    function UrlUpdateParams(url, name, value) {
+      var r = url
+      if (r != null && r != 'undefined' && r != '') {
+        value = encodeURIComponent(value)
+        var reg = new RegExp('(^|)' + name + '=([^&]*)(|$)')
+        var tmp = name + '=' + value
+        if (url.match(reg) != null) {
+          r = url.replace(eval(reg), tmp)
+        } else {
+          if (url.match('[?]')) {
+            r = url + '&' + tmp
+          } else {
+            r = url + '?' + tmp
+          }
+        }
+      }
+      return r
+    }
+    function formatDate(objD) {
+      var str, colorhead, colorfoot
+      var yy = objD.getYear()
+      if (yy < 1900) yy = yy + 1900
+      var MM = objD.getMonth() + 1
+      if (MM < 10) MM = '0' + MM
+      var dd = objD.getDate()
+      if (dd < 10) dd = '0' + dd
+      var hh = objD.getHours()
+      if (hh < 10) hh = '0' + hh
+      var mm = objD.getMinutes()
+      if (mm < 10) mm = '0' + mm
+      var ss = objD.getSeconds()
+      if (ss < 10) ss = '0' + ss
+      str = yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm
+      return str
+    }
+
+    var startp1 = GetUrlParam('startp')
+    var endp1 = GetUrlParam('endp')
+    var startc1 = GetUrlParam('startc')
+    var endc1 = GetUrlParam('endc')
+    var starta1 = GetUrlParam('starta')
+    var enda1 = GetUrlParam('enda')
+    var carType1 = GetUrlParam('carType')
+    var carSourceType1 = GetUrlParam('carSourceType')
+    var carLength1 = GetUrlParam('carLength1')
+    var carLength2 = GetUrlParam('carLength2')
+    var carLoad1 = GetUrlParam('carLoad1')
+    var carLoad2 = GetUrlParam('carLoad2')
+    var isLongCar1 = GetUrlParam('isLongCar')
+
+    var startp = decodeURI(startp1)
+    var endp = decodeURI(endp1)
+    var startc = decodeURI(startc1)
+    var endc = decodeURI(endc1)
+    var starta = decodeURI(starta1)
+    var enda = decodeURI(enda1)
+    var carType = decodeURI(carType1)
+    var carSourceType = decodeURI(carSourceType1)
+    var carLength1 = decodeURI(carLength1)
+    var carLength2 = decodeURI(carLength2)
+    var carLoad1 = decodeURI(carLoad1)
+    var carLoad2 = decodeURI(carLoad2)
+    var isLongCar = decodeURI(isLongCar1)
+
+    var currentAreaFullName = $.cookie('currentAreaFullName')
+    var currentProvinceFullName = $.cookie('currentProvinceFullName')
+
+    var vo = new Object()
+    vo.startProvince = startp
+    vo.startCity = startc
+    vo.startArea = starta
+    vo.endProvince = endp
+    vo.endCity = endc
+    vo.endArea = enda
+    vo.carType = carType
+    vo.carSourceType = carSourceType
+    vo.carLengthLower = carLength1
+    vo.carLengthUpper = carLength2
+    vo.carLoadLower = carLoad1
+    vo.carLoadUpper = carLoad2
+    vo.isLongCar = isLongCar
+
+    if (startp || startc) {
+      if (!startp || startp == 'null') {
+        startp = ''
+        delete vo.startProvince
+      }
+      if (!startc || startc == 'null') {
+        startc = ''
+        delete vo.startCity
+      }
+    }
+    if ((!startp || startp == 'null') && (!startc || startc == 'null')) {
+      startc = currentAreaFullName
+      vo.startCity = startc
+      startp = currentProvinceFullName
+      vo.startProvince = startp
+    }
+
+    if (!starta || starta == 'null') {
+      starta = ''
+      delete vo.startArea
+    }
+    if (!endp || endp == 'null') {
+      endp = ''
+      delete vo.endProvince
+    }
+    if (!endc || endc == 'null') {
+      endc = ''
+      delete vo.endCity
+    }
+    if (!enda || enda == 'null') {
+      enda = ''
+      delete vo.endArea
+    }
+    if (!carType || carType == 'null') {
+      carType = ''
+      delete vo.carType
+    }
+    if (!carSourceType || carSourceType == 'null') {
+      carSourceType = ''
+      delete vo.carSourceType
+    }
+    if (!carLength1 || carLength1 == 'null') {
+      carLength1 = ''
+      delete vo.carLengthLower
+    }
+    if (!carLength2 || carLength2 == 'null') {
+      carLength2 = ''
+      delete vo.carLengthUpper
+    }
+    if (!carLoad1 || carLoad1 == 'null') {
+      carLoad1 = ''
+      delete vo.carLoadLower
+    }
+    if (!carLoad2 || carLoad2 == 'null') {
+      carLoad2 = ''
+      delete vo.carLoadUpper
+    }
+    if (!isLongCar || isLongCar == 'null') {
+      isLongCar = ''
+      delete vo.isLongCar
+    }
+
+    $('#list_nav_a').html(startc + starta + ' 到 ' + endc + enda + ' 车源信息')
+    if ((!startc && !starta) || (!endc && !enda)) {
+      $('#list_nav_a').html(startc + starta + '  ' + endc + enda + '车源信息')
+    }
+
+    $('#carLineFrom input').citypicker({
+      province: startp,
+      city: startc,
+      district: starta
+    })
+    $('#carLineTo input').citypicker({
+      province: endp,
+      city: endc,
+      district: enda
+    })
+    $('#tjcx_01 .all').attr(
+      'href',
+      UrlUpdateParams(window.location.href, 'carType', '')
+    )
+    $('#tjcx_02 .all').attr(
+      'href',
+      UrlUpdateParams(window.location.href, 'carSourceType', '')
+    )
+    $('#tjcx_03 .all').attr(
+      'href',
+      UrlUpdateParams(window.location.href, 'isLongCar', '')
+    )
+    $('#tjcx_04 .all').attr(
+      'href',
+      UrlUpdateParams(
+        UrlUpdateParams(window.location.href, 'carLength1', ''),
+        'carLength2',
+        ''
+      )
+    )
+    $('#tjcx_05 .all').attr(
+      'href',
+      UrlUpdateParams(
+        UrlUpdateParams(window.location.href, 'carLoad1', ''),
+        'carLoad2',
+        ''
+      )
+    )
+    //清空条件
+    $('#flush').click(function() {
+      console.log('清空地址')
+      window.location.href = '/cheyuan'
+    })
+    //清空条件
+    //车源搜索 S
+
+    $('#search_cheyuan').click(function() {
+      var list1 = [],
+        list2 = []
+      $('#carLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      var startp = list1[0]
+      var startc = list1[1]
+      var starta = list1[2]
+
+      $('#carLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      var endp = list2[0]
+      var endc = list2[1]
+      var enda = list2[2]
+      if (!startp) {
+        startp = ''
+      }
+      if (!startc) {
+        startc = ''
+      }
+      if (!starta) {
+        starta = ''
+      }
+      if (!endp) {
+        endp = ''
+      }
+      if (!endc) {
+        endc = ''
+      }
+      if (!enda) {
+        enda = ''
+      }
+      startp = encodeURI(startp)
+      startc = encodeURI(startc)
+      starta = encodeURI(starta)
+      endp = encodeURI(endp)
+      endc = encodeURI(endc)
+      enda = encodeURI(enda)
+
+      window.location =
+        '/cheyuan?startp=' +
+        startp +
+        '&startc=' +
+        startc +
+        '&starta=' +
+        starta +
+        '&endp=' +
+        endp +
+        '&endc=' +
+        endc +
+        '&enda=' +
+        enda
+    })
+
+    //车源搜索 E
+
+    //车源数据字典 S
+    function tjcx01() {
+      $.ajax({
+        type: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF018',
+
+        success: function(res) {
+          var datas = res.data
+          for (var i = 0; i < datas.length; i++) {
+            var name = datas[i].name
+            var code = datas[i].code
+            var myurl = UrlUpdateParams(window.location.href, 'carType', code)
+            //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
+            //				 var s2='&carType='+code+'>';
+            //				 var s3=name+'</a>';
+            var s1 = '<a href=' + myurl + '>'
+            var s3 = name + '</a>'
+            $('#tjcx_01').append(s1 + s3)
+          }
+          //选中状态 S
+          if (carType) {
+            $('#tjcx_01 a').each(function() {
+              var aaa = $(this).attr('href')
+
+              if (aaa.indexOf(carType) != -1) {
+                console.log(aaa)
+                $('#tjcx_01 a').removeClass('now')
+                $(this).addClass('now')
+              }
+            })
+          }
+          //选中状态 E
+        },
+        error: function(err) {
+          console.log(err.responseText)
+        }
+      })
+    }
+    tjcx01()
+    function tjcx02() {
+      var myurl1 = UrlUpdateParams(
+        window.location.href,
+        'carSourceType',
+        'AF01802'
+      )
+      var myurl2 = UrlUpdateParams(
+        window.location.href,
+        'carSourceType',
+        'AF01801'
+      )
+      $('#tjcx_02 a:eq(1)').attr('href', myurl1)
+      $('#tjcx_02 a:eq(2)').attr('href', myurl2)
+      $('#tjcx_02 a').each(function() {
+        var aaa = window.location.href
+
+        if (aaa.indexOf('carSourceType=AF01802') != -1) {
+          $('#tjcx_02 a').removeClass('now')
+          $('#tjcx_02 a:eq(1)').addClass('now')
+        }
+        if (aaa.indexOf('carSourceType=AF01801') != -1) {
+          $('#tjcx_02 a').removeClass('now')
+          $('#tjcx_02 a:eq(2)').addClass('now')
+        }
+      })
+    }
+    tjcx02()
+    function tjcx03() {
+      var myurl1 = UrlUpdateParams(window.location.href, 'isLongCar', '1')
+      var myurl2 = UrlUpdateParams(window.location.href, 'isLongCar', '0')
+      $('#tjcx_03 a:eq(1)').attr('href', myurl1)
+      $('#tjcx_03 a:eq(2)').attr('href', myurl2)
+      $('#tjcx_03 a').each(function() {
+        var aaa = window.location.href
+
+        if (aaa.indexOf('isLongCar=1') != -1) {
+          $('#tjcx_03 a').removeClass('now')
+          $('#tjcx_03 a:eq(1)').addClass('now')
+        }
+        if (aaa.indexOf('isLongCar=0') != -1) {
+          $('#tjcx_03 a').removeClass('now')
+          $('#tjcx_03 a:eq(2)').addClass('now')
+        }
+      })
+    }
+    tjcx03()
+    function tjcx04() {
+      $.ajax({
+        type: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF031',
+
+        success: function(res) {
+          var datas = res.data
+          for (var i = 0; i < datas.length; i++) {
+            var name = datas[i].name
+            if (name.indexOf('<') != -1) {
+              var name1 = 0
+              var name2 = name.substring(1, 20)
+            } else if (name.indexOf('>') != -1) {
+              var name1 = name.substring(1, 20)
+              var name2 = 99999
+            } else {
+              var name1 = name.split('-', 2)[0]
+              var name2 = name.split('-', 2)[1]
+            }
+
+            var code = datas[i].code
+            var myurl = UrlUpdateParams(
+              UrlUpdateParams(window.location.href, 'carLength1', name1),
+              'carLength2',
+              name2
+            )
+            //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
+            //				 var s2='&carLength1='+name1+'&carLength2='+name2+'>';
+            //				 var s3=name+'米</a>';
+            var s1 = '<a href=' + myurl + '>'
+            var s3 = name + '米</a>'
+            $('#tjcx_04').append(s1 + s3)
+          }
+          //选中状态 S
+          if (carLength1 && carLength2) {
+            $('#tjcx_04 a').each(function() {
+              var aaa = $(this).attr('href')
+
+              if (
+                aaa.indexOf('carLength1=' + carLength1) != -1 &&
+                aaa.indexOf('carLength2=' + carLength2) != -1
+              ) {
+                //console.log(aaa+":"+goodsWeight1+":"+goodsWeight2);
+                $('#tjcx_04 a').removeClass('now')
+                $(this).addClass('now')
+              }
+            })
+          }
+          //选中状态 E
+        },
+        error: function(err) {
+          console.log(err.responseText)
+        }
+      })
+    }
+    tjcx04()
+    function tjcx05() {
+      $.ajax({
+        type: 'get',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF032',
+
+        success: function(res) {
+          var datas = res.data
+          for (var i = 0; i < datas.length; i++) {
+            var name = datas[i].name
+            if (name.indexOf('<') != -1) {
+              var name1 = 0
+              var name2 = name.substring(1, 20)
+            } else if (name.indexOf('>') != -1) {
+              var name1 = name.substring(1, 20)
+              var name2 = 9999
+            } else {
+              var name1 = name.split('-', 2)[0]
+              var name2 = name.split('-', 2)[1]
+            }
+
+            var code = datas[i].code
+            var myurl = UrlUpdateParams(
+              UrlUpdateParams(window.location.href, 'carLoad1', name1),
+              'carLoad2',
+              name2
+            )
+            //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
+            //				 var s2='&carLoad1='+name1+'&carLoad2='+name2+'>';
+            //				 var s3=name+'吨</a>';
+            var s1 = '<a href=' + myurl + '>'
+            var s3 = name + '吨</a>'
+            $('#tjcx_05').append(s1 + s3)
+          }
+          //选中状态 S
+          if (carLoad1 && carLoad2) {
+            $('#tjcx_05 a').each(function() {
+              var aaa = $(this).attr('href')
+
+              if (
+                aaa.indexOf('carLoad1=' + carLoad1) != -1 &&
+                aaa.indexOf('carLoad2=' + carLoad2) != -1
+              ) {
+                //console.log(aaa+":"+goodsWeight1+":"+goodsWeight2);
+                $('#tjcx_05 a').removeClass('now')
+                $(this).addClass('now')
+              }
+            })
+          }
+          //选中状态 E
+        },
+        error: function(err) {
+          console.log(err.responseText)
+        }
+      })
+    }
+    tjcx05()
+    //车源数据字典 E
+
+    //车源信息栏目列表S
+    function process02(currentPage) {
+      var totalPage = 8
+
+      $.ajax({
+        type: 'post',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        url: '/api/28-web/carInfo/list',
+        dataType: 'json',
+        async: false,
+        data: JSON.stringify({
+          currentPage: currentPage,
+          pageSize: 10,
+          //vo:{	"strartAddress":start,"endAddress":end,"carType":carType,"carLengthLower":carLength1,"carLengthUpper":carLength2,"carLoadLower":carLoad1,"carLoadUpper":carLoad2}			//JSON.stringify({})
+          vo: vo
+        }),
+        success: function(res) {
+          $('#js006 .wlzx_list')
+            .not(':eq(0)')
+            .remove()
+          if (res.data) {
+            totalPage = res.data.pages
+            console.log(totalPage)
+          }
+          if (!res.data || !res.data.total) {
+            console.log('内容为空')
+            $('.box').css('display', 'none')
+            $('.list_none').css('display', 'block')
+          }
+          var datas = res.data.list
+          for (var i = 0; i < datas.length; i++) {
+            var id = datas[i].id
+            var collectNum = datas[i].collectNum
+            if (!collectNum) {
+              collectNum = 0
+            }
+            var driverId = datas[i].driverId
+            var carLoad = datas[i].carLoad
+            var carNum = datas[i].carNum
+            var createrName = datas[i].createrName
+            if (!createrName) {
+              createrName = ''
+            }
+            // var carNum = datas[i].
+            // carNum.substring(0, 2) + '***' + carNum.substring(6, 10)
+            var remark = datas[i].remark
+            if (remark && remark.length > 19) {
+              var remark = datas[i].remark.substring(0, 19) + '...'
+            }
+            var carLength = datas[i].carLength
+            var carSourceTypeName = datas[i].carSourceTypeName
+            var browseNumber = datas[i].browseNumber
+            if (!browseNumber) {
+              browseNumber = 0
+            }
+
+            var carTypeName = datas[i].carTypeName
+            if (!datas[i].usualPlace) {
+              var usualPlace = ''
+            }
+            var usualPlace = datas[i].usualPlace
+            // var usualPlace = datas[i].usualPlace.substring(0, 12)
+            var title = datas[i].title
+
+            var startCity = datas[i].startCity
+            var startArea = datas[i].startArea
+            var endCity = datas[i].endCity
+            var endArea = datas[i].endArea
+            if (!startCity) {
+              startCity = ''
+            }
+            if (!endCity) {
+              endCity = ''
+            }
+            if (!startArea) {
+              startArea = ''
+            }
+            if (!endArea) {
+              endArea = ''
+            }
+            var start = startCity + startArea
+            var end = endCity + endArea
+            if (start && start.length > 6) {
+              // start = start.substring(0, 6) + '..'
+            }
+            if (end && end.length > 6) {
+              // end = end.substring(0, 6) + '..'
+            }
+
+            var expectPrice = datas[i].expectPrice
+            var qq = datas[i].qq
+
+            var credit28 = datas[i].credit28
+            var driverStatus = datas[i].driverStatus
+
+            var createTime1 = datas[i].createTime
+            var createTime = formatDate(new Date(createTime1))
+            if (!datas[i].carFile) {
+              var carFile1 = ''
+            }
+            if (datas[i].carFile) {
+              var carFile1 = datas[i].carFile.split(',')[0]
+            }
+            $('#car_pic').attr('src', carFile1)
+
+            var arcurl = '/cheyuan/detail?id=' + id + '&driverId=' + driverId
+            $('#nr_a51').attr('href', arcurl)
+            $('#nr_a54').attr('href', arcurl)
+            $('#nr_a51_1').html(start)
+            $('#nr_a51_2').html(end)
+            $('#nr_a52').attr('href', arcurl)
+            $('#nr051').html(carNum)
+            $('#nr052').html(carTypeName)
+            $('#nr053').html('长' + '<b>' + carLength + '</b>米')
+            $('#nr054').html('载重' + '<b>' + carLoad + '</b>吨')
+            $('#nr055').html(carSourceTypeName)
+            $('#nr056').html(usualPlace)
+            $('#nr057').html(expectPrice + '元')
+            if (!expectPrice) {
+              $('#nr057').html('面议')
+            }
+            $('#nr058').html(remark)
+            $('#nr059').html(createrName)
+            $('#nr0510').html('发布时间：' + createTime)
+            $('#nr0520').html(collectNum)
+            $('#nr0521').html(browseNumber)
+            $('#nr_a53').attr(
+              'href',
+              'tencent://message/?uin=' + qq + '&Site=&menu=yes'
+            )
+            var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
+            var s2 = $('.wlzx_list').html()
+            var s3 = '</ul>'
+            $('#js006').append(s1 + s2 + s3)
+            // if (!qq) {
+            //   $('.wlzx_list' + i + ' #qq').css('display', 'none')
+            // }
+            //if(!credit28){console.log("is not Vip");
+            //$('.wlzx_list'+i+' .cy_list_3 .p2').css("display","none")}
+            if (driverStatus != 'AF0010403') {
+              console.log('is not shiming')
+              $('.wlzx_list' + i + ' .cy_list_3 .p1').css('display', 'none')
+            }
+          }
+        },
+        error: function(err) {
+          console.log(err.responseText)
+        }
+      })
+      console.log('最终总页数：' + totalPage)
+      return totalPage
+    }
+    //process02(1);
+    //车源信息栏目列表 E
+
+    $('#pagination1').pagination({
+      currentPage: 1,
+      totalPage: process02(1),
+      callback: function(current) {
+        $('#current1').text(current)
+        process02(current)
+        window.location.href = '#top'
+      }
+    })
+  },
+  methods: {
+    //
   }
 }
 </script>
@@ -1388,7 +1328,7 @@ body {
 .wlzx_list_6 {
   width: 110px;
   margin-left: 85px;
-  margin-top: 50px;
+  margin-top: 63px;
 }
 .wlzx_list_2 p {
   height: 26px;
@@ -1994,5 +1934,174 @@ body {
 }
 .che_box {
   float: left;
+}
+
+.list_new {
+  float: left;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+.list_new .list_new_ul {
+  width: 342px;
+  background: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+}
+.list_new .list_new_ul li {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.li_one {
+  display: flex;
+  font-size: 14px;
+  flex: 1;
+  height: 30px;
+  line-height: 30px;
+}
+.li_two {
+  display: flex;
+  font-size: 14px;
+  flex: 1;
+  height: 30px;
+  line-height: 30px;
+}
+.li_one a {
+  flex: 1;
+  cursor: pointer;
+  color: #333333;
+}
+.li_one span {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  color: #999999;
+  font-size: 12px;
+}
+.li_two a {
+  flex: 1;
+  cursor: pointer;
+  color: #333333;
+}
+.li_two span {
+  color: #999999;
+}
+.li_two .li_check {
+  border-bottom: 1px solid #3f94ee;
+  color: #3f94ee;
+}
+
+.list_help {
+  width: 342px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  float: left;
+  margin-top: 20px;
+}
+.list-box-r-top {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 20px 20px;
+  /* border: 1px solid #ececec; */
+  margin-bottom: 10px;
+}
+.ltl-input {
+  position: relative;
+  margin: 7px 0 10px 0;
+}
+.right-top-btn {
+  display: block;
+  height: 40px;
+  width: 300px;
+  background: #3f94ee;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  margin-top: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+.ltl-ico-start {
+  background-position: -10px -6px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 5px;
+  top: 8px;
+}
+.ss56-common-sprite1 {
+  background-image: url(/templets/default/images/wzlImg/qd.png);
+  background-repeat: no-repeat;
+}
+.ltl-ico-end {
+  background-position: -15px -5px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 5px;
+  top: 8px;
+}
+.ss56-common-sprite2 {
+  background-image: url(/templets/default/images/wzlImg/zd.png);
+  background-repeat: no-repeat;
+}
+
+.ltl-location {
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 40px;
+  line-height: 40px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  border-radius: 4px;
+  padding-right: 50px;
+  outline: 0;
+}
+
+.lines-sprite-icons {
+  background: url(/templets/default/images/list_wlzx/ss56-lines-sprite.png)
+    no-repeat;
+}
+.list-title-a {
+  color: #333;
+  font-size: 16px;
+}
+.list-title {
+  font-weight: 300;
+  font-size: 18px;
+  color: #333;
+}
+.icon-through {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-position: -6px -62px;
+  position: relative;
+  top: 3px;
+  margin: 0 10px;
+}
+.icon-end {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -6px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
+.icon-start {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -34px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
 }
 </style>

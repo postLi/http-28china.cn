@@ -319,7 +319,7 @@ export default {
   mounted() {
     seajs.use(['../js/city.js'], function() {
       seajs.use(
-        ['./js/city-picker.js', './js/jquery.pagination.min.js'],
+        ['../js/city-picker.js', '../js/jquery.pagination.min.js'],
         function() {
           seajs.use(['../wangdian/js/list_wangdian.js'], function() {
             seajs.use(['../js/collection.js'], function() {

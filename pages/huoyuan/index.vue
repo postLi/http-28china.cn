@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="list_box">
+      
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a 
           id="list_nav_a" 
@@ -90,7 +91,6 @@
                   href="/huoyuan"
                   style="    float: left;
     margin-bottom: 10px;">不限</a>
-
               </dd>
               <dt>体积区间&nbsp;:</dt>
               <dd id="tjcx_02">
@@ -114,10 +114,6 @@
                   id="seq2"
                   href="#" >长期稳定货源</a>
               </dd>
-
-
-
-
             </dl>
           </div>
         </div>
@@ -201,7 +197,6 @@
 
 
         </div>
-
         <!--分页-->
         <div
           class="box"
@@ -249,12 +244,15 @@
             <div class="p p1"><img src="../../static/images/04gongsi.png" ><span><a
               id="nr0412"
               target="_blank" >广州明科物流有限公司</a></span>
-              <img
-                id="tj_shiming"
-                src="../../static/images/list_wlzx/shiming.png" >
-              <img
-                id="tj_xinyong"
-                src="../../static/images/list_wlzx/xinyong.png" >
+              <span class="img_icon">
+                <img
+                  id="tj_shiming"
+                  src="../../static/images/list_wlzx/shiming.png" >
+                <img
+                  id="tj_xinyong"
+                  src="../../static/images/list_wlzx/xinyong.png" >
+              </span>
+              
 
             </div>
             <div class="p p2">
@@ -298,11 +296,13 @@
 export default {
   name: 'HuoYuan',
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
+    script: [
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' }
+    ]
   },
-  // asyncData({ query }) {
-  // console.log(query)
-  // },
   mounted() {
     seajs.use(['./js/city-picker.data.js'], function() {
       seajs.use(['./js/city-picker.js'], function() {
@@ -753,7 +753,7 @@ export default {
               dataType: 'json',
               data: JSON.stringify({
                 currentPage: 1,
-                pageSize: 5,
+                pageSize: 10,
                 // vo: vo //JSON.stringify({})
                 vo: {
                   startProvince,
@@ -897,7 +897,7 @@ export default {
               async: false,
               data: JSON.stringify({
                 currentPage: currentPage,
-                pageSize: 10,
+                pageSize: 20,
                 //vo:{"queryType":"2","startAddress":start,"endAddress":end,"goodsWeightLower":goodsWeight1,"goodsWeightUpper":goodsWeight2,"goodsVolumeLower":goodsVolume1,"goodsVolumeUpper":goodsVolume2}			//JSON.stringify({})
                 vo: vo //JSON.stringify({})
               }),
@@ -908,7 +908,8 @@ export default {
                 console.log(res)
                 if (res.data) {
                   totalPage = res.data.pages
-                  console.log(totalPage)
+                  // console.log(totalPage)
+                  // debugger
                 }
 
                 if (!res.data || !res.data.total) {
@@ -1091,6 +1092,12 @@ export default {
 body {
   background-color: #f9f9f9;
 }
+.list_box {
+  width: 1400px;
+  height: auto !important;
+  margin: 0 auto;
+  overflow: hidden;
+}
 .zx_sx {
   overflow: hidden;
   line-height: 50px;
@@ -1120,12 +1127,7 @@ body {
   border-radius: 1px;
   margin: 16px 12px 0px 10px;
 }
-.list_box {
-  width: 1400px;
-  height: auto !important;
-  margin: 0 auto;
-  overflow: hidden;
-}
+
 .list_left {
   width: 1036px;
   float: left;
@@ -1279,8 +1281,13 @@ body {
 #tj_price2:hover {
   color: #f00;
 }
-
-.wlzx_list {
+.img_icon {
+  float: right;
+  height: 33px;
+  line-height: 33px;
+  width: 76px;
+}
+.list_box .wlzx_list {
   width: 1036px;
   /* height: 180px; */
   float: left;
@@ -1302,6 +1309,7 @@ body {
 }
 .wlzx_list img {
   transition: 0.7s;
+  vertical-align: middle;
 }
 .wlzx_list img:hover {
   transform: scale(1.05);
@@ -1435,10 +1443,10 @@ body {
 .wlzx_list_6 .p1 input:hover {
   background-color: #2577ff;
 }
-img {
+/* img {
   vertical-align: middle;
   margin-top: 0 !important;
-}
+} */
 .tj_list {
   background-color: #fff;
   /* margin-top: -1px; */
@@ -1453,16 +1461,15 @@ img {
   transform: translate3d(0, -2px, 0);
 }
 .tj_list .p {
-  height: 28px;
   line-height: 28px;
-  padding-left: 10px;
+  padding-left: 27px;
   padding-right: 0px;
 }
 
 .tj_list .p1 {
   height: 50px;
   line-height: 50px;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 .tj_list .p1 span {
   padding: 0 0 0 5px;
@@ -1481,10 +1488,10 @@ img {
 }
 .tj_list .p3 {
   margin-top: 20px;
-  margin-left: 32px;
-  width: 260px;
+  margin-left: 21px;
+  width: 272px;
   height: 80px;
-  background-color: #f2f2f2;
+  background-color: #f8f8f8;
 }
 .tj_list ul {
   padding-top: 10px;
@@ -1539,13 +1546,21 @@ img {
 }
 .tj_list .p6 {
   float: left;
-  margin-top: 24px;
+  margin: 24px 0px;
   margin-right: 15px;
   text-align: center;
 }
 .tj_list .p6 span {
   color: #333;
   font-size: 13px;
+}
+#nr0412 {
+  font-size: 14px;
+  color: #3f94ee;
+  font-family: MicrosoftYaHei;
+  font-weight: normal;
+  font-stretch: normal;
+  font-weight: bold;
 }
 /*物流专线 E */
 
@@ -1861,7 +1876,7 @@ img {
   width: 120px;
   font-size: 12px;
   line-height: 26px;
-  margin-top: 13px;
+  margin-top: 16px;
 }
 .sc_num {
   float: right;
@@ -1869,10 +1884,10 @@ img {
   width: 120px;
   font-size: 12px;
   line-height: 26px;
-  margin-top: 13px;
+  margin-top: 16px;
 }
 #wlzx_list_0 img {
-  margin-top: 15px;
+  margin-top: 3px;
   float: left;
   margin-right: 7px;
 }
@@ -1902,7 +1917,7 @@ img {
 #tj_danbao {
   position: relative;
   left: 5px;
-  top: 5px;
+  top: 10px;
 }
 .list_hy {
   margin-top: 20px;
@@ -1940,8 +1955,12 @@ img {
   background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
-  color: #333;
+  font-family: MicrosoftYaHei;
   font-size: 16px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #333333;
 }
 .list-title {
   font-weight: 300;

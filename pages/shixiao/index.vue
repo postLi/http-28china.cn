@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="list_box">
+    <div class="shixiao_box">
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a 
           id="list_nav_a" 
@@ -16,7 +16,7 @@
                 id="carLineFrom" 
                 class="order-form-input shixiao-input">
                 <input 
-                  style="height: 100%;" 
+                  style="height: 100%;border: none;outline: none;"
                   data-toggle="city-picker" 
                   data-level="district" 
                   maxlength="40" 
@@ -39,7 +39,7 @@
                 id="carLineTo" 
                 class="order-form-input shixiao-input">
                 <input 
-                  style="height: 100%;" 
+                  style="height: 100%;border: none;outline: none;"
                   data-toggle="city-picker" 
                   data-level="district" 
                   placeholder="请选择到达地" 
@@ -85,7 +85,9 @@
             <div 
               v-if="currentPage === 1"
               class="wzl_log"><span :class="[index <3 ? 'bgr' : '']">TOP<i>{{ index + 1 }}</i></span></div>
-            <ul class="wlzx_list" >
+            <ul 
+              class="wlzx_list" 
+              style="border:none" >
               <li class="cy_list_1">
                 <p class="p1"><a 
                   :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
@@ -188,7 +190,12 @@ async function getListRangesAging($axios, currentPage, vo = {}) {
 export default {
   name: 'ShiXiao',
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }]
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
+    script: [
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' }
+    ]
   },
   data() {
     return {
@@ -214,55 +221,49 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['./js/city-picker.data.js'], () => {
-      seajs.use(['./js/city-picker.js'], () => {
-        seajs.use(['./js/jquery.pagination.min.js'], () => {
-          var currentAreaFullName = $.cookie('currentAreaFullName')
-          var currentProvinceFullName = $.cookie('currentProvinceFullName')
-          $('#list_nav_a').html(currentAreaFullName + '专线时效')
-          //搜索赋input框的初始值
+    var currentAreaFullName = $.cookie('currentAreaFullName')
+    var currentProvinceFullName = $.cookie('currentProvinceFullName')
+    $('#list_nav_a').html(currentAreaFullName + '专线时效')
+    //搜索赋input框的初始值
 
-          $('#carLineFrom input').citypicker({
-            province: currentProvinceFullName,
-            city: currentAreaFullName,
-            district: ''
-          })
-          $('#carLineTo input').citypicker({
-            province: '',
-            city: '',
-            district: ''
-          })
+    $('#carLineFrom input').citypicker({
+      province: currentProvinceFullName,
+      city: currentAreaFullName,
+      district: ''
+    })
+    $('#carLineTo input').citypicker({
+      province: '',
+      city: '',
+      district: ''
+    })
 
-          $('.qiehuan').click(function() {
-            var list1 = [],
-              list2 = []
-            $('#carLineFrom .select-item').each(function(i, e) {
-              list1.push($(this).text())
-            })
-            var startp = list1[0]
-            var startc = list1[1]
-            var starta = list1[2]
-            $('#carLineTo .select-item').each(function(i, e) {
-              list2.push($(this).text())
-            })
-            var endp = list2[0]
-            var endc = list2[1]
-            var enda = list2[2]
-            $('#carLineFrom input').citypicker({
-              province: endp,
-              city: endc,
-              district: enda
-            })
-            $('#carLineTo input').citypicker({
-              province: startp,
-              city: startc,
-              district: starta
-            })
-          })
-          this.loadPagination()
-        })
+    $('.qiehuan').click(function() {
+      var list1 = [],
+        list2 = []
+      $('#carLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      var startp = list1[0]
+      var startc = list1[1]
+      var starta = list1[2]
+      $('#carLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      var endp = list2[0]
+      var endc = list2[1]
+      var enda = list2[2]
+      $('#carLineFrom input').citypicker({
+        province: endp,
+        city: endc,
+        district: enda
+      })
+      $('#carLineTo input').citypicker({
+        province: startp,
+        city: startc,
+        district: starta
       })
     })
+    this.loadPagination()
   },
   methods: {
     selectSort(item) {
@@ -329,6 +330,12 @@ export default {
 body {
   background-color: #f9f9f9;
 }
+.shixiao_box {
+  width: 1400px;
+  height: auto !important;
+  margin: 0 auto;
+  overflow: hidden;
+}
 .zx_sx {
   /* PADDING-top: 6px;  */
   overflow: hidden;
@@ -353,12 +360,7 @@ body {
   border-radius: 1px;
   margin: 16px 12px 0 10px;
 }
-.list_box {
-  width: 1400px;
-  height: auto !important;
-  margin: 0 auto;
-  overflow: hidden;
-}
+
 .list_left {
   width: 100%;
   float: left;

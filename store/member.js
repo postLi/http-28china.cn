@@ -147,7 +147,6 @@ export const actions = {
   // 获取公司网点信息
   GETCOMPANYPOINTINFO({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      console.log('payload', payload)
       axios
         .post(aurl + '/api/28-web/pointNetwork/findCompanyNet', payload)
         .then(res => {
@@ -175,7 +174,6 @@ export const actions = {
         .post(aurl + '/api/28-web/range/company/list', payload)
         .then(res => {
           let data = res.data
-          console.log('payload4', payload, data.data)
           if (data.status === 200) {
             commit('setLineList', data.data)
 

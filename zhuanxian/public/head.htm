@@ -1,0 +1,55 @@
+<!doctype html>
+<html data-n-head-ssr lang="zh-CN" data-n-head="lang">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta data-n-head="true" name="renderer" content="webkit"/><meta data-n-head="true" name="X-UA-Compatible" content="IE=Edge,chrome=1"/><meta data-n-head="true" name="force-rendering" content="webkit"/>
+
+<link href="/index/css/anfa.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="/index/css/index.css" rel="stylesheet" media="screen" type="text/css" />
+
+
+<link type="text/css" rel="stylesheet" href="/index_files/basic.css">
+<link type="text/css" rel="stylesheet" href="/index_files/mains.css">
+<link type="text/css" rel="stylesheet" href="/index/css/list_line.css">
+<link type="text/css" rel="stylesheet" href="/index/css/list_line_more.css">
+<link type="text/css" rel="stylesheet" href="/index/css/jquery.pagination.css">
+
+<script type="text/javascript" src="/vendor/jquery-1.12.4.min.js"></script>
+<script language="javascript" type="text/javascript" src="/index/js/pic_scroll.js"></script>
+
+
+<script language="javascript" type="text/javascript">
+
+	$(function(){
+		$("a[_for]").mouseover(function(){
+			$(this).parents().children("a[_for]").removeClass("thisclass").parents().children("dd").hide();
+			$(this).addClass("thisclass").blur();
+			$("#"+$(this).attr("_for")).show();
+		});
+		$("a[_for=uc_member]").mouseover();
+		$("a[_for=flink_1]").mouseover();
+	});
+	function CheckLogin1(){
+	  var taget_obj = document.getElementById('_userlogin1');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/member/ajax_loginsta.php");
+	  DedeXHTTP = null;
+	}
+	function CheckLogin2(){
+	  var taget_obj = document.getElementById('_userlogin2');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("/member/ajax_loginsta2.php");
+	  DedeXHTTP = null;
+	}
+	starta = ''
+	endc = ''
+	enda = ''
+</script>
+<script type="text/javascript" src="/index/js/list_line.js"></script>
+<script type="text/javascript" src="/index/js/jquery.pagination.min.js"></script>
+<script type="text/javascript" src="/index/js/list_line_more.js"></script>
+<script type="text/javascript" src="/index/js/head2.js"></script>
+
+<!--#set var="webtitle" value="28快运平台"-->
+<!--#set var="webkeywork" value="28快运平台"-->
+<!--#set var="webdescription" value="28快运平台"-->

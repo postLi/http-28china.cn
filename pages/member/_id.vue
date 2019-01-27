@@ -905,14 +905,6 @@ export default {
       let find = 0
       if (arr.length) {
         arr.forEach(item => {
-          console.log(
-            'type:',
-            type,
-            typeof item.type,
-            item.startVolume,
-            item.discountPrice,
-            item.primeryPrice
-          )
           if (item.type === type && item.startVolume === 0) {
             find = item.discountPrice || item.primeryPrice
           }

@@ -18,7 +18,7 @@
 
                 <!-- <span class="mock-input-ico lines-sprite-icons mock-input-start"></span> -->
             </div>
-            <span class="ss56-list-right-ico"><img src="../../static/zhuanxian/images/02jiantou.png"></span>
+            <span class="ss56-list-right-ico"><img src="/line/images/02jiantou.png"></span>
             <div class="mock-input">
               <input
                 id="carLineTo"
@@ -3231,7 +3231,7 @@
                     <!-- <a href="#" class="advice-list-unit"> -->
                     <div class="list-title advice-list-title">
                       <!-- <span class="list-icon lines-sprite-icons icon-start"></span> -->
-                      <span id="tj01">广东-东莞</span><img src="../../static/zhuanxian/images/sjt.png"><span id="tj02">河北-石家庄</span>
+                      <span id="tj01">广东-东莞</span><img src="/line/images/sjt.png"><span id="tj02">河北-石家庄</span>
                     </div>
                     <div class="list-title advice-list-title" >
                       <span class="list-icon lines-sprite-icons icon-end"/>
@@ -3258,17 +3258,17 @@
                     <div class="advice-unit-details">
                       <span class="number_linst"><img
                         id="tj_shiming"
-                        src="../../static/zhuanxian/images/10shiming.png"
+                        src="/line/images/10shiming.png"
                         class="img"></span>
                       <span class="number_linst"><img
                         id="tj_xinyong"
-                        src="../../static/zhuanxian/images/11xinyong.png"
+                        src="/line/images/11xinyong.png"
                         class="img"></span>
                       <span
                         class="number_linst"
                         style="clear: left"><img
                           id="tj_danbao"
-                          src="../../static/zhuanxian/images/12danbao.png"
+                          src="/line/images/12danbao.png"
                           class="img"></span>
                     </div>
                     <div class="advice-unit-details">
@@ -3276,7 +3276,7 @@
                         id="tj09"
                         href=""
                         target="_blank"><span class="number_look" >查看详情<img
-                          src="../../static/zhuanxian/images/qjt.png"
+                          src="/line/images/qjt.png"
                           class="img"></span></a>
                     </div>
                     <!-- </a> -->
@@ -3333,7 +3333,7 @@ export default {
   name: 'Index',
   head: {
     link: [
-      { rel: 'stylesheet', href: '/zhuanxian/css/list_line.css' },
+      { rel: 'stylesheet', href: '/line/css/list_line.css' },
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ]
@@ -3343,7 +3343,7 @@ export default {
       seajs.use(
         ['./js/city-picker.js', './js/jquery.pagination.min.js'],
         function() {
-          seajs.use(['../zhuanxian/js/list_line.js'], function() {
+          seajs.use(['/line/js/list_line.js'], function() {
             seajs.use(['../js/collection.js'], function() {
               seajs.use(['../js/gaodemap2.js'], function() {
                 $('.list_tiaoj span').click(function() {
@@ -3399,13 +3399,13 @@ export default {
 <style lang="scss">
 .lll-zhuanxian {
   #carLineFrom {
-    background: url('../../static/zhuanxian/images/qd.png') no-repeat;
+    background: url('/line/images/qd.png') no-repeat;
   }
   #carLineTo {
-    background: url(../../static/zhuanxian/images/zd.png) no-repeat;
+    background: url(/line/images/zd.png) no-repeat;
   }
   .lines-sprite-icons {
-    background: url(../../static/zhuanxian/images/fz.png) no-repeat;
+    background: url(/line/images/fz.png) no-repeat;
   }
   .xiao-line-title {
     width: 18%;
@@ -3415,14 +3415,14 @@ export default {
     font-size: 30px;
     font-weight: bold;
     float: left;
-    background: url(../../static/zhuanxian/images/dz.png) 16px 6px no-repeat;
+    background: url(/line/images/dz.png) 16px 6px no-repeat;
   }
   .ss56-common-sprite1 {
-    background-image: url(../../static/zhuanxian/images/qd.png);
+    background-image: url(/line/images/qd.png);
     background-repeat: no-repeat;
   }
   .ss56-common-sprite2 {
-    background-image: url(../../static/zhuanxian/images/zd.png);
+    background-image: url(/line/images/zd.png);
     background-repeat: no-repeat;
   }
 
@@ -3437,7 +3437,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background: url(../../static/zhuanxian/images/jt.png) -3px no-repeat;
+    background: url(/line/images/jt.png) -3px no-repeat;
     vertical-align: middle;
     padding-left: 15px;
     padding-right: 20px;
@@ -3454,7 +3454,7 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background: url(../../static/zhuanxian/images/jt.png) -3px no-repeat;
+    background: url(/line/images/jt.png) -3px no-repeat;
     vertical-align: middle;
     padding-left: 15px;
     padding-right: 20px;

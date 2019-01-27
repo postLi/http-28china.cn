@@ -1,4 +1,4 @@
-export function test($axios, app) {
+export function getRecommendList($axios, app) {
   const currentProvinceFullName = encodeURIComponent(
     app.$cookies.get('currentProvinceFullName')
   )
@@ -6,7 +6,7 @@ export function test($axios, app) {
     app.$cookies.get('currentAreaFullName')
   )
   return $axios.get(
-    '/28chinaservice/carInfo/recommendList?startProvince=' +
+    '/28-web/carInfo/recommendList?startProvince=' +
       currentProvinceFullName +
       '&startCity=' +
       currentAreaFullName

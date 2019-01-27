@@ -210,28 +210,11 @@
         </div>
         <!--分页-->
 
-        <!--分页
-        <div class="list_hy_page2">
-            <div class="floatr2">
-                <form name="beginPagefrm" method=post action="" onsubmit="return onCheckPage()">
-                {dede:pagelist listitem="info,pre,next,pageno,option" listsize="3"/}
-                <span>
-
-            到第&nbsp;<input class="input_page1" name="beginPage" value="">页&nbsp;<input class="input_page2" type="submit" name="Submit" value="确定">
-
-                </span>
-
-                </form>
-            </div>
-        </div>
-        分页-->
-
       </div>
 
-      <div
-        id="js010"
+      <div 
+        id="js010" 
         class="list_right">
-
         <div class="zx_sx"><span class="biaozhi"/><span>货源推荐</span></div>
         <div class="tj_none hy_tj_none">
           <span>没有相关货源推荐</span>
@@ -288,8 +271,46 @@
 
 
       </div>
+
+      <!-- 订阅优质货源start -->
+      <!-- <div class="list_help">
+        <div class="list-box-r-top">
+          <form action="">
+            <h2 class="list_help_title">订阅优质货源</h2>
+            <div class="ltl-input">
+              <input 
+                id="right-bar-form" 
+                autocomplete="off" 
+                wtmap="" 
+                type="text" 
+                class="ltl-location" 
+                placeholder="请选择出发地">
+              <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+            </div>
+            <div class="ltl-input">
+              <input 
+                id="right-bar-to" 
+                autocomplete="off" 
+                wtmap="" 
+                type="text" 
+                class="ltl-location" 
+                placeholder="请选择目到达地">
+              <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+            </div>
+            <div class="ltl-input">
+              <h4 class="ltl-text">订阅货源，第一时间获得系统消息通知</h4>
+              <h4 class="ltl-text">已有18965人订阅后达成交易</h4>
+            </div>
+            <input 
+              id="check-fee" 
+              type="button" 
+              value="上新提醒我" 
+              class="right-top-btn">
+          </form>
+        </div>
+      </div> -->
+      <!-- 订阅优质货源end -->
     </div>
-    <div class="h70"/>
   </div>
 </template>
 <script>
@@ -2044,5 +2065,129 @@ body {
 .che_box {
   float: left;
   width: 100%;
+}
+
+.list_help {
+  width: 342px;
+  margin-left: 20px;
+  box-sizing: border-box;
+  float: left;
+  margin-top: 20px;
+}
+.list-box-r-top {
+  width: 100%;
+  box-sizing: border-box;
+  background: url(../../static/images/list_wlzx/che_background.png) no-repeat;
+  /* background: #fff; */
+  padding: 20px 20px;
+  /* border: 1px solid #ececec; */
+  margin-bottom: 10px;
+}
+.ltl-input {
+  position: relative;
+  margin: 7px 0 10px 0;
+}
+.right-top-btn {
+  display: block;
+  height: 40px;
+  width: 300px;
+  background: #3f94ee;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  /* margin-top: 20px; */
+  color: #fff;
+  cursor: pointer;
+}
+.ltl-ico-start {
+  background-position: 0px 8px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 5px;
+  top: 8px;
+}
+.ss56-common-sprite1 {
+  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-repeat: no-repeat;
+}
+.ltl-ico-end {
+  background-position: 0px 8px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 5px;
+  top: 8px;
+}
+.ss56-common-sprite2 {
+  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-repeat: no-repeat;
+}
+.list_help_title {
+  color: #3f94ee;
+}
+.ltl-location {
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 35px;
+  line-height: 35px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  /* border-radius: 4px; */
+  padding-right: 50px;
+  outline: 0;
+}
+.ltl-text {
+  width: 100%;
+  display: block;
+  font-family: MicrosoftYaHei;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  letter-spacing: 0px;
+  color: #999999;
+}
+.lines-sprite-icons {
+  background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+}
+.list-title-a {
+  color: #333;
+  font-size: 16px;
+}
+.list-title {
+  font-weight: 300;
+  font-size: 18px;
+  color: #333;
+}
+.icon-through {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-position: -6px -62px;
+  position: relative;
+  top: 3px;
+  margin: 0 10px;
+}
+.icon-end {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -6px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
+.icon-start {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -34px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
 }
 </style>

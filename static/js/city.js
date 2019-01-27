@@ -31,7 +31,7 @@ function getcode(name) {
       console.log(err.responseText)
     }
   })
-  console.log(code)
+  // console.log(code)
   return code
 }
 //getcode("湖北省");
@@ -48,7 +48,7 @@ function getcity_zx(code, startCity) {
 
     success: function(res) {
       var datas = res.data
-      console.log('城市数量' + datas.length)
+      // console.log('城市数量' + datas.length)
       $('#arc_city').html('')
       //更多城市 S
       if (datas.length > 14) {
@@ -63,11 +63,11 @@ function getcity_zx(code, startCity) {
         }
         $('#city_box a').each(function() {
           $(this).click(function() {
-            console.log('切换到目的地城市')
+            // console.log('切换到目的地城市')
             //var a = $(this).html();
             var end = $(this).attr('name')
             //console.log(a);
-            console.log(end)
+            // console.log(end)
             window.open('/cheyuan?startc=' + startCity + '&endc=' + end)
           })
         })
@@ -223,11 +223,11 @@ function getcity_che(code, startCity) {
 
       $('#arc_city a').each(function() {
         $(this).click(function() {
-          console.log('切换到目的地城市')
+          // console.log('切换到目的地城市')
           //var a = $(this).html();
           var end = $(this).attr('name')
           //console.log(a);
-          console.log(end)
+          // console.log(end)
           window.open('/cheyuan?start=' + startCity + '&end=' + end)
         })
       })

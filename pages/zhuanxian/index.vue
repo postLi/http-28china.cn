@@ -382,176 +382,187 @@
         <div class="tj_none">
           <span>没有相关线路推荐</span>
         </div>
-        <div
-          class="tj_list"
-          style="display: none;">
-          <div class="p p1">
-            <img src="../../static/zhuanxian/images/04gongsi.png" ><span><a
-              id="tj_a011"
-              target="_blank"
-              href="#">广州明科物流有限公司</a></span>
-            <img
-              id="tj_shiming"
-              src="../../static/zhuanxian/images/shiming.png" >
-              <!--<img-->
-              <!--id="tj_xinyong"-->
-              <!--src="../../static/zhuanxian/images/xinyong.png" >-->
+        <div class="tj_box">
+          <div
+            class="tj_list"
+            style="display: none;">
+            <div class="p p1">
+              <img src="../../static/zhuanxian/images/04gongsi.png" ><span><a
+                id="tj_a011"
+                target="_blank"
+                href="#">广州明科物流有限公司</a></span>
+              <img
+                id="tj_shiming"
+                src="../../static/zhuanxian/images/shiming.png" >
+                <!--<img-->
+                <!--id="tj_xinyong"-->
+                <!--src="../../static/zhuanxian/images/xinyong.png" >-->
 
 
-              <!--<img-->
-              <!--id="tj_icon_2"-->
-              <!--src="../../static/zhuanxian/images/wtjzx.gif">-->
+                <!--<img-->
+                <!--id="tj_icon_2"-->
+                <!--src="../../static/zhuanxian/images/wtjzx.gif">-->
+            </div>
+            <div class="p p2">
+
+              <a
+                id="tj010"
+                class="list-title-a"
+                target="_blank" >
+                <span class="list-icon lines-sprite-icons icon-start"/>
+                <em id="tj011"/>
+                <span class="list-icon lines-sprite-icons icon-through"/>
+                <span class="list-icon lines-sprite-icons icon-end"/>
+                <em id="tj012"/>
+              </a>
+            </div>
+
+            <div class="p p3">
+              <ul>
+                <li class="tj_left"><i>时效：</i><span id="tj015"/></li>
+                <li class="tj_right"><i>最低一票：</i><span id="tj016"/></li>
+                <li class="tj_left"><i >重货：</i><font id="tj013" /><span >元/公斤</span></li>
+                <li class="tj_right"><i >轻货：</i><font id="tj014" /><span >元/m³</span></li>
+              </ul>
+
+            </div>
+
+            <div class="p p6">
+              <div class="sc_num1"><img src="../../static/zhuanxian/images/ll_num.png"><span><i><em id="tj101"/>人浏览</i></span></div>
+              <div class="view_num1"><img src="../../static/zhuanxian/images/pj_num.png"><span><i><em id="tj102"/>条评论</i></span></div>
+
+            </div>
           </div>
-          <div class="p p2">
+        </div>
+        <div>
+          <div class="list-box-r-hot">
 
-            <a
-              id="tj010"
-              class="list-title-a"
-              target="_blank" >
-              <span class="list-icon lines-sprite-icons icon-start"/>
-              <em id="tj011"/>
-              <span class="list-icon lines-sprite-icons icon-through"/>
-              <span class="list-icon lines-sprite-icons icon-end"/>
-              <em id="tj012"/>
-            </a>
-          </div>
-
-          <div class="p p3">
+            <div class="zx_sx"><span class="biaozhi" />企业月人气榜</div>
+            <div class="tj_none">
+              <span>没有相关企业月人气榜</span>
+            </div>
             <ul>
-              <li class="tj_left"><i>时效：</i><span id="tj015"/></li>
-              <li class="tj_right"><i>最低一票：</i><span id="tj016"/></li>
-              <li class="tj_left"><i >重货：</i><font id="tj013" /><span >元/公斤</span></li>
-              <li class="tj_right"><i >轻货：</i><font id="tj014" /><span >元/m³</span></li>
+              <li><span class="hot-num">1</span><img
+                src="../../static/zhuanxian/images/touxiang1.png"
+                alt=""
+                width="50"
+                height="50">
+              <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+              <li><span class="hot-num">2</span><img
+                src="../../static/zhuanxian/images/touxiang2.png"
+                alt=""
+                width="50"
+                height="50">
+              <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+              <li><span class="hot-num">3</span><img
+                src="../../static/zhuanxian/images/touxiang3.png"
+                alt=""
+                width="50"
+                height="50">
+              <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
             </ul>
-
-          </div>
-
-          <div class="p p6">
-            <div class="sc_num1"><img src="../../static/zhuanxian/images/ll_num.png"><span><i><em id="tj101"/>人浏览</i></span></div>
-            <div class="view_num1"><img src="../../static/zhuanxian/images/pj_num.png"><span><i><em id="tj102"/>条评论</i></span></div>
-
+            <ul class="lastul">
+              <li><span class="hot-num">4</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+              <li><span class="hot-num">5</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+            </ul>
+            <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
+            <!--<div class="tj_none">-->
+            <!--<span>没有相关线路推荐23</span>-->
+            <!--</div>-->
           </div>
         </div>
-
-      </div>
-      <div class="list-box-r-hot">
-
-        <div class="zx_sx"><span class="biaozhi" />企业月人气榜</div>
-        <div class="tj_none">
-          <span>没有相关企业月人气榜</span>
-        </div>
-        <ul>
-          <li><span class="hot-num">1</span><img
-            src="../../static/zhuanxian/images/touxiang1.png"
-            alt=""
-            width="50"
-            height="50">
-          <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          <li><span class="hot-num">2</span><img
-            src="../../static/zhuanxian/images/touxiang2.png"
-            alt=""
-            width="50"
-            height="50">
-          <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          <li><span class="hot-num">3</span><img
-            src="../../static/zhuanxian/images/touxiang3.png"
-            alt=""
-            width="50"
-            height="50">
-          <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-        </ul>
-        <ul class="lastul">
-          <li><span class="hot-num">4</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          <li><span class="hot-num">5</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-        </ul>
-        <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
-        <!--<div class="tj_none">-->
-        <!--<span>没有相关线路推荐23</span>-->
-        <!--</div>-->
-      </div>
-      <div class="list-box-r-phone">
-        <div class="zx_p_tit">帮我找优质承运商</div>
-        <div class="list-box-r-top">
-          <form action="">
-            <!--<span>出发地</span>-->
-            <div class="ltl-input">
-              <input
-                id="right-bar-form"
-                autocomplete="off"
-                wtmap=""
-                type="text"
-                class="ltl-location"
-                placeholder="请选择出发地">
-              <i class="ltl-icons ss56-common-sprite-icon ltl-ico-start"/>
-            </div>
-            <!--<span>目的地</span>-->
-            <div class="ltl-input">
-              <input
-                id="right-bar-to"
-                autocomplete="off"
-                wtmap=""
-                type="text"
-                class="ltl-location"
-                placeholder="请选择目的地">
-              <i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>
-            </div>
-            <div class="ltl-input">
-              <input
-                type="text"
-                class="ltl-location"
-                placeholder="备注信息，如：期望发货时间、货物体积重量
+        <div>
+          <div class="list-box-r-phone">
+            <div class="zx_p_tit">帮我找优质承运商</div>
+            <div class="list-box-r-top">
+              <form action="">
+                <!--<span>出发地</span>-->
+                <div class="ltl-input">
+                  <input
+                    id="right-bar-form"
+                    autocomplete="off"
+                    wtmap=""
+                    type="text"
+                    class="ltl-location"
+                    placeholder="请选择出发地">
+                  <i class="ltl-icons ss56-common-sprite-icon ltl-ico-start"/>
+                </div>
+                <!--<span>目的地</span>-->
+                <div class="ltl-input">
+                  <input
+                    id="right-bar-to"
+                    autocomplete="off"
+                    wtmap=""
+                    type="text"
+                    class="ltl-location"
+                    placeholder="请选择目的地">
+                  <i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>
+                </div>
+                <div class="ltl-input">
+                  <input
+                    type="text"
+                    class="ltl-location"
+                    placeholder="备注信息，如：期望发货时间、货物体积重量
 等信息...">
+                </div>
+                <div class="ltl-input">
+                  <input
+                    type="text"
+                    class="ltl-location phone-val"
+                    placeholder="11位手机号"
+                    style="width: 60%"
+                    maxlength="11">
+                  <input
+                    class="btn-phone"
+                    type="button"
+                    value="找到通知我">
+                </div>
+                <!--<input-->
+                <!--id="check-fee"-->
+                <!--type="button"-->
+                <!--value="查询零担运费"-->
+                <!--class="right-top-btn">-->
+              </form>
             </div>
-            <div class="ltl-input">
-              <input
-                type="text"
-                class="ltl-location"
-                placeholder="11位手机号"
-                style="width: 60%" 
-                maxlength="11">
-              <button>找到通知我</button>
-            </div>
-            <!--<input-->
-            <!--id="check-fee"-->
-            <!--type="button"-->
-            <!--value="查询零担运费"-->
-            <!--class="right-top-btn">-->
-          </form>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="lll-line-bot">
+        <div
+          class="lll-recommend">
+          <div
+            class="zx_sx"
+          ><span class="biaozhi"/><span>全国热门物流货运专线</span></div>
+          <ul style="border-bottom: 2px dotted #e7e7e7">
+            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+          </ul>
+        </div>
+        <div
+          class="lll-recommend">
+          <div
+            class="zx_sx"
+          ><span class="biaozhi"/><span>北京出发物流专线</span></div>
+          <ul style="border-bottom: 2px dotted #e7e7e7">
+            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+          </ul>
+        </div>
+        <div
+          class="lll-recommend">
+          <div
+            class="zx_sx"
+          ><span class="biaozhi"/><span>广州到北京物流专线相关信息</span></div>
+          <ul style="border-bottom: 2px dotted #e7e7e7">
+            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+          </ul>
         </div>
       </div>
     </div>
-    <div class="lll-line-bot">
-      <div
-        class="lll-recommend">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>全国热门物流货运专线</span></div>
-        <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-        </ul>
-      </div>
-      <div
-        class="lll-recommend">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>北京出发物流专线</span></div>
-        <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-        </ul>
-      </div>
-      <div
-        class="lll-recommend">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>广州到北京物流专线相关信息</span></div>
-        <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-        </ul>
-      </div>
-    </div>
+
 
     <div class="h70"/>
   </div>
@@ -613,6 +624,20 @@ export default {
                     window.location.href = '#top'
                   }
                 })
+                $('.btn-phone').click(function() {
+                  var validReg = window.AFLC_VALID
+                  var phoneVal = $('.phone-val').val()
+                  var phoneReg = /^[1][3-8]\d{9}$/
+                  console.log(phoneReg)
+                  if (phoneReg.test(phoneVal)) {
+                    alert('0eri')
+                    layer.alert('请求出错了，请尝试刷新页面')
+                  } else {
+                    alert('请输入正确的手机号码')
+                    layer.alert('请输入正确的手机号码')
+                  }
+                  console.log($('.phone-val').val(), 'll')
+                })
               })
             })
           })
@@ -636,13 +661,119 @@ export default {
   .clearfix:after {
     clear: both;
   }
+  .list_right {
+    margin-bottom: 20px;
+    .tj_list.tj_list4 {
+      border-bottom: none;
+    }
+    .list-box-r-phone {
+      margin-top: 20px;
+      background: url('../../static/zhuanxian/images/helpbg.png');
+      .zx_p_tit {
+        overflow: hidden;
+        line-height: 50px;
+        height: 50px;
+        color: #3f94ee;
+        font-size: 18px;
+        font-weight: bold;
+        padding-left: 20px;
+      }
+      .list-box-r-top {
+        background: rgba(255, 255, 255, 0.1);
+        padding-top: 0 !important;
+        margin-bottom: 0px !important;
+      }
+
+      .btn-phone {
+        font-size: 14px;
+        padding: 7px 18px;
+        margin-left: 10px;
+        background-color: #589def;
+        color: #ffffff;
+        border-style: none;
+      }
+      .btn-phone:hover {
+        background-color: #2577ff;
+      }
+    }
+    .list-box-r-hot {
+      margin-top: 20px;
+      padding-bottom: 20px;
+      background: #fff;
+      .zx_sx {
+        border-bottom: 2px solid #2577e3;
+        margin-bottom: 1px;
+        color: #2577e3;
+      }
+      ul:first-of-type,
+      ul:last-of-type {
+        li {
+          display: flex;
+          padding: 20px 14px 0px 16px;
+          font-size: 14px;
+          .hot-num {
+            width: 20px;
+            height: 20px;
+            background: #f65050;
+            text-align: center;
+            line-height: 20px;
+            color: #fff;
+            margin-top: 20px;
+          }
+          img {
+            margin: 0 8px 0 15px;
+          }
+          p {
+            margin-top: 20px;
+            color: #333;
+            /*padding-right: 10px;*/
+            width: 138px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          span.hot-peonum {
+            margin-top: 20px;
+            font-size: 12px;
+            padding-left: 10px;
+            color: #666;
+            i {
+              color: #f14747;
+              padding-left: 5px;
+            }
+          }
+        }
+        li:nth-child(2) {
+          .hot-num {
+            background: #ff8547;
+          }
+        }
+        li:nth-child(3) {
+          .hot-num {
+            background: #ffac38;
+          }
+        }
+      }
+      ul.lastul {
+        li {
+          padding: 0px 14px 0px 16px;
+          span.hot-num {
+            background: #8eb9f5 !important;
+          }
+          p {
+            width: 62%;
+            padding-left: 16px;
+          }
+        }
+      }
+    }
+  }
   .lll-line-bot {
     width: 1400px;
     height: auto !important;
     margin: 0 auto;
     overflow: hidden;
     background: #fff;
-    margin-top: 20px;
   }
   #search_wlLine {
     width: 42px;
@@ -658,115 +789,7 @@ export default {
     padding-right: 5px;
     cursor: pointer;
   }
-  .list-box-r-hot {
-    min-height: 246px;
-    height: auto !important;
-    width: 344px;
-    margin: 0px 0px 0 16px;
-    float: left;
-    background: #fff;
-    .zx_sx {
-      border-bottom: 2px solid #2577e3;
-      margin-bottom: 1px;
-      color: #2577e3;
-    }
-    ul:first-of-type,
-    ul:last-of-type {
-      li {
-        display: flex;
-        padding: 20px 14px 0px 16px;
-        font-size: 14px;
-        .hot-num {
-          width: 20px;
-          height: 20px;
-          background: #f65050;
-          text-align: center;
-          line-height: 20px;
-          color: #fff;
-          margin-top: 20px;
-        }
-        img {
-          margin: 0 8px 0 15px;
-        }
-        p {
-          margin-top: 20px;
-          color: #333;
-          /*padding-right: 10px;*/
-          width: 138px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        span.hot-peonum {
-          margin-top: 20px;
-          font-size: 12px;
-          padding-left: 10px;
-          color: #666;
-          i {
-            color: #f14747;
-            padding-left: 5px;
-          }
-        }
-      }
-      li:nth-child(2) {
-        .hot-num {
-          background: #ff8547;
-        }
-      }
-      li:nth-child(3) {
-        .hot-num {
-          background: #ffac38;
-        }
-      }
-    }
-    ul.lastul {
-      li {
-        padding: 0px 14px 0px 16px;
-        span.hot-num {
-          background: #8eb9f5 !important;
-        }
-        p {
-          width: 62%;
-          padding-left: 16px;
-        }
-      }
-    }
-  }
-  .list-box-r-phone {
-    min-height: 246px;
-    height: auto !important;
-    width: 344px;
-    margin: 20px 0px 0 16px;
-    float: left;
-    background: url('../../static/zhuanxian/images/helpbg.png');
 
-    .zx_p_tit {
-      overflow: hidden;
-      line-height: 50px;
-      height: 50px;
-      color: #3f94ee;
-      font-size: 18px;
-      font-weight: bold;
-      padding-left: 20px;
-    }
-    .list-box-r-top {
-      background: rgba(255, 255, 255, 0.1);
-      padding-top: 0 !important;
-      margin-bottom: 0px !important;
-    }
-
-    button {
-      font-size: 14px;
-      padding: 7px 18px;
-      margin-left: 10px;
-      background-color: #589def;
-      color: #ffffff;
-      border-style: none;
-    }
-    button:hover {
-      background-color: #2577ff;
-    }
-  }
   .lll-recommend {
     transition: all 0.4s;
     background: #fff;

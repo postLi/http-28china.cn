@@ -402,8 +402,8 @@ $("#check-fee").click(
     var endp = $("#right-bar-to").attr('theprovince')
     var endc = $("#right-bar-to").attr('thecity')
     var enda = $("#right-bar-to").attr('thearea')
-
-
+    var endjw = $("#right-bar-to").attr("thepos");
+    var startj,startw, endj,endw;
     if (startjw) {
       var startj = startjw.split(",", 2)[0];
       var startw = startjw.split(",", 2)[1];
@@ -465,7 +465,58 @@ $("#check-fee").click(
   })
 //零担下单 E
 
+function comMap() {
 
+  if (startjw) {
+    var startj = startjw.split(",", 2)[0];
+    var startw = startjw.split(",", 2)[1];
+  }
+  if (!startjw) {
+    var startj = "";
+    var startw = "";
+  }
+
+
+  var endjw = $("#right-bar-to").attr("thepos");
+  if (endjw) {
+    var endj = endjw.split(",", 2)[0];
+    var endw = endjw.split(",", 2)[1];
+  }
+  if (!endjw) {
+    var endj = "";
+    var endw = "";
+  }
+  if (!startpcd) {
+    startpcd = ""
+  }
+  if (!endpcd) {
+    endpcd = ""
+  }
+  if (!startstreet) {
+    startstreet = ""
+  }
+  if (!endstreet) {
+    endstreet = ""
+  }
+  if (!startp) {
+    startp = ""
+  }
+  if (!startc) {
+    startc = ""
+  }
+  if (!starta) {
+    starta = ""
+  }
+  if (!endp) {
+    endp = ""
+  }
+  if (!endc) {
+    endc = ""
+  }
+  if (!enda) {
+    enda = ""
+  }
+}
 
 //专线搜索 S
 
@@ -890,7 +941,7 @@ function process01() {
           var s1 = '<div class="tj_list tj_list' + i + '">'
           var s2 = $(".tj_list").html();
           var s3 = '</div>'
-          $("#js007").append(s1 + s2 + s3);
+          $(".tj_box").append(s1 + s2 + s3);
           if (isVip != 1) {
             // console.log("is not Vip");
             $('.tj_list' + i + '  #tj_xinyong').css("display", "none")
@@ -1208,4 +1259,22 @@ function belong_wlyq(currentPage) {
 
 belong_wlyq(1);
 //所属物流园区 E
+
+//找到通知我
+function call_me() {
+  $('.btn-phone').click(function () {
+    var validReg = window.AFLC_VALID;
+    var phoneVal = $('.phone-val').val();
+    var phoneReg = /^[1][3-8]\d{9}$/;
+    console.log(phoneReg);
+    if(phoneReg.test(phoneVal)){
+      layer.alert('请求出错了，请尝试刷新页面')
+    }else{
+      layer.alert('请输入正确的手机号码')
+    }
+    console.log($('.phone-val').val(),'ll');
+  })
+}
+// call_me()
+//找到通知我
 

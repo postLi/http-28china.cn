@@ -37,8 +37,13 @@
 	color: #fff;
   cursor: default;
 }
+.box{
+  margin-right:0 !important;
+  float: none !important;
+}
 .page{
 	text-align: center;
-	margin: 30px 0;
+  margin: 30px 0;
+  width:100%;
 }
 .ui-pagination-container .page_input{height:20px;width:50px;margin-top: -4px}

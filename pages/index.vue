@@ -174,13 +174,13 @@
           <div class="main1_3_1">
             <div 
               class="order_list" 
-              onclick="window.open('/plus/list.php?tid=85')">发布专线</div>
+              onclick="window.open('/create/line')">发布专线</div>
             <div 
               class="order_list" 
-              onclick="window.open('/plus/list.php?tid=83')">发布货源</div>
+              onclick="window.open('/create/huoyuan')">发布货源</div>
             <div 
               class="order_list" 
-              onclick="window.open('/plus/list.php?tid=84')">发布车源</div>
+              onclick="window.open('create/cheyuan')">发布车源</div>
           </div>
           <div class="main1_3_2">
             <div 

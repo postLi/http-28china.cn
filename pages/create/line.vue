@@ -340,7 +340,7 @@
 </template>
 <script>
 export default {
-  name: 'LineOrder',
+  name: 'Linerder',
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/line_order.css' },
@@ -734,11 +734,11 @@ export default {
 
                     //重置
                     $('#reset').click(function() {
-                      _this.resetForm()
+                      resetForm()
                     })
                     //发布
                     $('#next').click(function() {
-                      _this.next()
+                      next()
                     })
                   }
 

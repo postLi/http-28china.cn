@@ -152,7 +152,6 @@ export default {
           seajs.use(['/layer/layer.js'], function() {
             $(function() {
               var theRequest = getRequest()
-
               var obj = {
                 strartAddressCoordinate: '',
                 endAddressCoordinate: '',
@@ -204,11 +203,11 @@ export default {
                 })
                 //重置
                 $('#reset').click(function() {
-                  _this.resetForm()
+                  resetForm()
                 })
                 //发布
                 $('#next').click(function() {
-                  _this.next()
+                  next()
                 })
                 //点击选择remark
                 $(document).on('click', '.remark span', function(event) {

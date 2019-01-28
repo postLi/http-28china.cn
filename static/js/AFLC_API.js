@@ -15,7 +15,7 @@ jQuery.getParams = function(_keystr,url) {
 //设置统一token
 $(document).ajaxSend(function(event, jqXHR, ajaxOptions) {
   var access_token = $.cookie('access_token');
-  console.log('ajaxOptions:',ajaxOptions)
+  // console.log('ajaxOptions:',ajaxOptions)
   if(access_token && ajaxOptions.url.indexOf('access_token=')===-1){
     // ajaxOptions.
     ajaxOptions.url = ajaxOptions.url + (ajaxOptions.url.indexOf('?')!==-1 ? '&' : '?') + 'access_token=' + access_token
@@ -135,7 +135,7 @@ var AFWL_API = {
       } else {
         defer.reject(res);
       }
-      
+
     }).fail(function(err){
       defer.reject(err);
     });
@@ -191,7 +191,7 @@ var AFWL_API = {
       } else {
         defer.reject(res);
       }
-      
+
     }).fail(function(err){
       defer.reject(err);
     });
@@ -213,7 +213,7 @@ var AFWL_API = {
         data.login_type = 'aflc-5'
         _this.setCookieData(data)
       }
-      
+
       return res
     })
   },
@@ -330,7 +330,7 @@ var AFWL_API = {
     form.append('code', code)
     form.append('origin', origin || 'AF0030105')
     form.append('grant_type', grant_type)
- 
+
     return $.ajax({
       url: this.url + '/api-uaa/qrwechat/token',
       type: 'POST',

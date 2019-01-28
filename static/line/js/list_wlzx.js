@@ -52,7 +52,7 @@ function myCode(myname) {
       headers: {
         'Content-Type': 'application/json'
       },
-      url: "/templets/default/js/regions.json",
+      url: "../../js/regions.json",
       async: false,
       success: function (res) {
         for (var i = 0; i < res.length; i++) {
@@ -922,7 +922,7 @@ function process01() {
           var isVip = datas[i].isVip;
           var authStatus = datas[i].authStatus;
           var collateral = datas[i].collateral;
-          var arcurl = "/wlzx/2018/0509/7?id=" + rangeId + "&publishId=" + publishId;
+          var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
           $("#tj_a011").attr("href", "/member/" + account + ".html");
           $("#tj_a011").html(companyName);
           $("#tj102").html(assessNumber);
@@ -941,7 +941,7 @@ function process01() {
           var s1 = '<div class="tj_list tj_list' + i + '">'
           var s2 = $(".tj_list").html();
           var s3 = '</div>'
-          $(".tj_box").append(s1 + s2 + s3);
+          $(".tj_list_box").append(s1 + s2 + s3);
           if (isVip != 1) {
             // console.log("is not Vip");
             $('.tj_list' + i + '  #tj_xinyong').css("display", "none")
@@ -1060,8 +1060,8 @@ function process02(currentPage) {
           if (!assessNumber) {
             assessNumber = 0
           }
-          var rangeId = datas[i].rangeId;
-          var companyId = datas[i].companyId;
+          var rangeId = datas[i].id;
+          var publishId = datas[i].publishId;
           var account = datas[i].account;
           var companyName = datas[i].companyName;
           var startCity = datas[i].startCity;
@@ -1109,8 +1109,8 @@ function process02(currentPage) {
           var authStatus = datas[i].authStatus;
           var collateral = datas[i].collateral;
           var rangeLogo1 = "";
-          var arcurl = "/wlzx/2018/0509/7?id=" + rangeId + "&publishId=" + companyId;
-          var orderurl = "/plus/list.php?tid=77&uid=" + account + "&id=" + rangeId + "&publishId=" + companyId;
+          var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
+          var orderurl = "/plus/list.php?tid=77&uid=" + account + "&id=" + rangeId + "&publishId=" + publishId;
           $("#nr_a21").attr("href", arcurl);
           $("#wlzx_list_view").attr("onclick", "window.open('" + arcurl + "')")
           $("#fahuo").attr("onclick", "window.open('" + orderurl + "')")

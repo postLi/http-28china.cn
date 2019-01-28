@@ -351,7 +351,7 @@
                 autocomplete="off"
                 wtmap=""
                 type="text"
-                class="ltl-location"
+                class="ltl-location "
                 placeholder="请选择出发地">
               <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
             </div>
@@ -382,54 +382,56 @@
         <div class="tj_none">
           <span>没有相关线路推荐</span>
         </div>
-        <div
-          class="tj_list"
-          style="display: none;">
-          <div class="p p1">
-            <img src="/line/images/04gongsi.png" ><span><a
-              id="tj_a011"
-              target="_blank"
-              href="#">广州明科物流有限公司</a></span>
-            <img
-              id="tj_shiming"
-              src="/line/images/shiming.png" >
-              <!--<img-->
-              <!--id="tj_xinyong"-->
-              <!--src="/line/images/xinyong.png" >-->
+        <div class="tj_list_box">
+          <div
+            class="tj_list"
+            style="display: none;">
+            <div class="p p1">
+              <img src="/line/images/04gongsi.png" ><span><a
+                id="tj_a011"
+                target="_blank"
+                href="#">广州明科物流有限公司</a></span>
+              <img
+                id="tj_shiming"
+                src="/line/images/shiming.png" >
+                <!--<img-->
+                <!--id="tj_xinyong"-->
+                <!--src="/line/images/xinyong.png" >-->
 
 
-              <!--<img-->
-              <!--id="tj_icon_2"-->
-              <!--src="/line/images/wtjzx.gif">-->
-          </div>
-          <div class="p p2">
+                <!--<img-->
+                <!--id="tj_icon_2"-->
+                <!--src="/line/images/wtjzx.gif">-->
+            </div>
+            <div class="p p2">
 
-            <a
-              id="tj010"
-              class="list-title-a"
-              target="_blank" >
-              <span class="list-icon lines-sprite-icons icon-start"/>
-              <em id="tj011"/>
-              <span class="list-icon lines-sprite-icons icon-through"/>
-              <span class="list-icon lines-sprite-icons icon-end"/>
-              <em id="tj012"/>
-            </a>
-          </div>
+              <a
+                id="tj010"
+                class="list-title-a"
+                target="_blank" >
+                <span class="list-icon lines-sprite-icons icon-start"/>
+                <em id="tj011"/>
+                <span class="list-icon lines-sprite-icons icon-through"/>
+                <span class="list-icon lines-sprite-icons icon-end"/>
+                <em id="tj012"/>
+              </a>
+            </div>
 
-          <div class="p p3">
-            <ul>
-              <li class="tj_left"><i>时效：</i><span id="tj015"/></li>
-              <li class="tj_right"><i>最低一票：</i><span id="tj016"/></li>
-              <li class="tj_left"><i >重货：</i><font id="tj013" /><span >元/公斤</span></li>
-              <li class="tj_right"><i >轻货：</i><font id="tj014" /><span >元/m³</span></li>
-            </ul>
+            <div class="p p3">
+              <ul>
+                <li class="tj_left"><i>时效：</i><span id="tj015"/></li>
+                <li class="tj_right"><i>最低一票：</i><span id="tj016"/></li>
+                <li class="tj_left"><i >重货：</i><font id="tj013" /><span >元/公斤</span></li>
+                <li class="tj_right"><i >轻货：</i><font id="tj014" /><span >元/m³</span></li>
+              </ul>
 
-          </div>
+            </div>
 
-          <div class="p p6">
-            <div class="sc_num1"><img src="/line/images/ll_num.png"><span><i><em id="tj101"/>人浏览</i></span></div>
-            <div class="view_num1"><img src="/line/images/pj_num.png"><span><i><em id="tj102"/>条评论</i></span></div>
+            <div class="p p6">
+              <div class="sc_num1"><img src="/line/images/ll_num.png"><span><i><em id="tj101"/>人浏览</i></span></div>
+              <div class="view_num1"><img src="/line/images/pj_num.png"><span><i><em id="tj102"/>条评论</i></span></div>
 
+            </div>
           </div>
         </div>
 
@@ -505,11 +507,14 @@
             <div class="ltl-input">
               <input
                 type="text"
-                class="ltl-location"
+                class="ltl-location phone-num"
                 placeholder="11位手机号"
-                style="width: 60%" 
+                style="width: 60%"
                 maxlength="11">
-              <button>找到通知我</button>
+              <input
+                class="phone-btn"
+                type="button"
+                value="找到通知我">
             </div>
             <!--<input-->
             <!--id="check-fee"-->
@@ -568,13 +573,17 @@ export default {
     ]
   },
   mounted() {
-    seajs.use(['../js/city.js'], function() {
+    seajs.use(['../../js/city.js', 'layer'], function() {
       seajs.use(
-        ['../js/city-picker.js', '../js/jquery.pagination.min.js'],
+        [
+          '../../js/city-picker.js',
+          '../../js/jquery.pagination.min.js',
+          '../../js/AFLC_API.js'
+        ],
         function() {
           seajs.use(['/line/js/list_wlzx.js'], function() {
-            seajs.use(['../js/collection.js'], function() {
-              seajs.use(['../js/gaodemap2.js'], function() {
+            seajs.use(['../../js/collection.js'], function() {
+              seajs.use(['../../js/gaodemap2.js'], function() {
                 $('.list_tiaoj span').click(function() {
                   //alert("1");
                   $('.list_tiaoj span').removeClass('active')
@@ -611,6 +620,21 @@ export default {
                     $('#current1').text(current)
                     process02(current)
                     window.location.href = '#top'
+                  }
+                })
+                $('.phone-btn').click(function() {
+                  var validReg = window.AFLC_VALID
+                  var phoneNum = $('.phone-num').val()
+                  if (validReg.MOBILE.test(phoneNum)) {
+                    layer.alert('请求出错了，请尝试刷新页面')
+                  } else {
+                    layer.alert('请求出错了，请尝试刷新页面11')
+                    // $('.phone-num').val().length = 0
+                    console.log(
+                      $('.phone-num').val(),
+                      $('.phone-num').val().length,
+                      'phoneNum.length'
+                    )
                   }
                 })
               })
@@ -755,7 +779,7 @@ export default {
       margin-bottom: 0px !important;
     }
 
-    button {
+    .phone-btn {
       font-size: 14px;
       padding: 7px 18px;
       margin-left: 10px;
@@ -763,7 +787,7 @@ export default {
       color: #ffffff;
       border-style: none;
     }
-    button:hover {
+    .phone-btn:hover {
       background-color: #2577ff;
     }
   }

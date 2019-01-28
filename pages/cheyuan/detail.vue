@@ -213,9 +213,9 @@
               target="_blank">{{ item.strartAddress + '&nbsp;&rarr;&nbsp;' + item.endAddress }}</a> </div>
             <div class="arc_list_item_nr">
               <div class="arc_list_item_nr1">
-                <i>车辆：</i><span> {{ item.carNum.substring(0, 2) + '***' + item.carNum.substring(6, 10) }} </span>
-                <em/><span>{{ item.carTypeName }} </span><em/><span>长{{ item.carLength }}米   </span>
-              <em/><span> <span>载重{{ item.carLoad }}吨  </span><em/><span> {{ item.carSourceTypeName }}</span></span></div>
+                <i>车辆：</i><span v-if="item.carNum"> {{ item.carNum.substring(0, 2) + '***' + item.carNum.substring(6, 10) }} <em/></span>
+                <span v-if="item.carTypeName">{{ item.carTypeName }} <em/></span><span>长{{ item.carLength }}米   <em/></span>
+              <span> <span>载重{{ item.carLoad }}吨  <em/></span><span> {{ item.carSourceTypeName }}</span></span></div>
               <div class="arc_list_item_nr2">
                 <i>发车时间：</i><span>{{ item.startTime }}</span>
               </div>
@@ -245,7 +245,9 @@
 
     <div class="arc_bottom">
       <div class="zx_sx"><span class="biaozhi"/><span>此路线其他车源</span><a href="/plus/list.php?tid=3"><span class="arc_bottom_more">更多+</span></a></div>
-
+      <div v-if="otherCarSourceList.length === 0">
+        暂没有其它车源
+      </div>
       <div
         v-for="(item,index) in otherCarSourceList" 
         :key="index"
@@ -280,21 +282,27 @@
 
 <script>
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
-async function getOtherCarInfoList($axios, currentPage, vo = {}) {
-  let parm = {
-    currentPage: currentPage,
-    pageSize: 5,
-    vo: vo
-  }
-  return await $axios.post(
-    '/aflc-portal/portalt/aflcCarInfo/v1/getOtherCarInfoList',
-    parm
+async function getOtherCarInfoList($axios, currentPage, vo) {
+  let res = await $axios.get(
+    `/28-web/carInfo/findOtherCarInfoList/${
+      vo.id
+    }?pageNum=${currentPage}&pageSize=5&driverId=${vo.driverId}`
   )
+  if (res.data.status === 200) {
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
+    }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
+  }
 }
 export default {
   name: 'Detail',
   head: {
     link: [
+      { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/article_cheyuan.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
@@ -310,14 +318,14 @@ export default {
       zxList: [],
       otherCarSourceList: [],
       otherCarInfoList: [],
-      showImg: 0
+      showImg: 0,
+      pages: 0,
+      currentPage: 1
     }
   },
   async asyncData({ $axios, app, query }) {
     let zxList, otherCarSourceList
-    const cy1 = await $axios.get(
-      '/aflc-portal/portalt/aflcCarInfo/v1/getDetail/' + query.id
-    )
+    const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     if (cy1.data.status === 200) {
       cy1.data.data.num = Math.ceil(Math.random() * 30)
       cy1.data.data.startTime1 = parseTime(
@@ -326,21 +334,11 @@ export default {
       )
       let code = await getCode($axios, cy1.data.data.endProvince)
       zxList = await getCity($axios, code, cy1.data.data.startCity)
-      let parm = {
-        currentPage: 1,
-        pageSize: 7,
-        vo: {
-          noId: query.id,
-          endAddress: cy1.data.data.endCity,
-          strartAddress: cy1.data.data.startCity
-        }
-      }
-      otherCarSourceList = await $axios.post(
-        '/aflc-portal/portalt/aflcCarInfo/v1/getOtherCarSourceList',
-        parm
+      otherCarSourceList = await $axios.get(
+        '/28-web/carInfo/getOtherCarSourceList/' + query.id
       )
       if (otherCarSourceList.data.status === 200) {
-        otherCarSourceList.data.data.list.forEach(item => {
+        otherCarSourceList.data.data.forEach(item => {
           item.createTime1 = parseTime(
             item.createTime,
             '{y}-{m}-{d} {h}:{i}:{s}'
@@ -357,12 +355,10 @@ export default {
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       otherCarSourceList:
         otherCarSourceList && otherCarSourceList.data.status === 200
-          ? otherCarSourceList.data.data.list
+          ? otherCarSourceList.data.data
           : [],
-      otherCarInfoList:
-        otherCarInfoList.data.status === 200
-          ? otherCarInfoList.data.data.list
-          : []
+      otherCarInfoList: otherCarInfoList.list,
+      pages: otherCarInfoList.pages
     }
   },
   mounted() {
@@ -372,6 +368,22 @@ export default {
           seajs.use(['../js/gaodemap2.js'], function() {})
         })
       })
+    })
+    $('#pagination1').pagination({
+      currentPage: this.currentPage,
+      totalPage: this.pages,
+      callback: async current => {
+        $('#current1').text(current)
+        console.log(current)
+        let obj = await getOtherCarInfoList(this.$axios, current, {
+          driverId: this.$route.query.driverId,
+          id: this.$route.query.id
+        })
+        this.otherCarInfoList = obj.list
+        this.currentPage = obj.currentPage
+        this.pages = obj.pages
+        window.location.href = '#top'
+      }
     })
   },
   methods: {

@@ -84,52 +84,54 @@
               </dd>
 
               <dt>车辆类型&nbsp;:</dt>
-              <dd id="tjcx_01">
+              <dd>
                 <a
-                  class="now all"
-                  href="/cheyuan" >不限</a>
+                  v-for="(item,index) in AF018"
+                  :class="[item.code === carType ? 'now':'']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF018Click(item)">{{ item.name }}</a>
               </dd>
 
               <dt >车源类型&nbsp;:</dt>
-              <dd id="tjcx_02">
+              <dd>
                 <a
-                  class="now all"
-                  href="/cheyuan" >不限</a>
-                <a
-                  class=""
-                  href="/cheyuan" >本地车</a>
-                <a
-                  class=""
-                  href="/cheyuan" >回程车</a>
+                  v-for="(item,index) in carSourceList"
+                  :class="[item.value === carSourceType ? 'now':'']"
+                  :key="index"
+                  href="javascript:"
+                  @click="carSourceTypeClick(item)">{{ item.name }}</a>
               </dd>
 
               <dt >即时/长期&nbsp;:</dt>
-              <dd id="tjcx_03">
+              <dd>
                 <a
-                  class="now all"
-                  href="/cheyuan">不限</a>
-                <a
-                  class=""
-                  href="/cheyuan" >即时车源</a>
-                <a
-                  class=""
-                  href="/cheyuan">长期车源</a>
+                  v-for="(item,index) in longCarList"
+                  :class="[item.value === isLongCar ? 'now':'']"
+                  :key="index"
+                  href="javascript:"
+                  @click="longCarClick(item)">{{ item.name }}</a>
+
               </dd>
 
               <dt >车厢长度&nbsp;:</dt>
-              <dd id="tjcx_04">
+              <dd>
                 <a
-                  class="now all"
-                  href="/cheyuan" >不限</a>
-
+                  v-for="(item,index) in AF031"
+                  :class="[item.name === AF031Name ? 'now':'']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF031Click(item)">{{ index===0? item.name : item.name + '米' }}</a>
               </dd>
 
               <dt>载重（吨）&nbsp;:</dt>
-              <dd id="tjcx_05">
+              <dd>
                 <a
-                  class="now all"
-                  href="/cheyuan" >不限</a>
-
+                  v-for="(item,index) in AF032"
+                  :class="[item.name === AF032Name ? 'now':'']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF032Click(item)">{{ index===0? item.name : item.name + '吨' }}</a>
               </dd>
             </dl>
           </div>
@@ -141,61 +143,66 @@
           <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
 
           <div 
-            class="list_none" 
-            style="display:none">
+            v-if="carInfoList.length === 0"
+            class="list_none">
             <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
             <img src="../../static/images/none_pic.png">
           </div>
-          <ul
-            class="wlzx_list"
-            style="display: none;">
+          <ul 
+            v-for="(item,index) in carInfoList" 
+            :key="index" 
+            class="wlzx_list">
             <li id="cy_list_0">
-              <div class="sc_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em id="nr0520"/>收藏量</i></span></div>
-              <div class="view_num"><img src="/_nuxt/static/images/wzlImg/lll.png"><span><i><em id="nr0521"/>浏览量</i></span></div>
+              <div class="sc_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+              <div class="view_num"><img src="/_nuxt/static/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
             </li>
             <li class="cy_list_4">
               <a
-                id="nr_a54"
-                href="#"
-                target="_blank"><img id="car_pic" ></a>
+                :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
+                target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
 
             </li>
             <li class="cy_list_1">
               <p class="p1">
                 <a
-                  id="nr_a51"
+                  :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
                   class="list-title-a"
                   target="_blank" >
                   <span class="list-icon lines-sprite-icons icon-start"/>
-                  <em id="nr_a51_1"/>
+                  <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
-                  <em id="nr_a51_2"/>
+                  <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
                 </a>
 
               </P>
-              <p class="p2"><i>车辆：</i><font id="nr051"/><span style="color: #dcdcdc;">|</span><font id="nr052"/><span style="color: #dcdcdc;">|</span><font id="nr053"/><span style="color: #dcdcdc;">|</span><font id="nr054"/><span style="color: #dcdcdc;">|</span><font id="nr055"/></p>
-              <p class="p3"><i>常驻地：</i><font id="nr056" />&nbsp;&nbsp;<i>运价：</i><font id="nr057"/>&nbsp;&nbsp;<i>发布者：</i><font id="nr059"/></p>
-              <p class="p4"><i>说明：</i><font id="nr058"/></p>
+              <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font><span style="color: #dcdcdc;">|</span>
+                <font>{{ item.carTypeName }}</font><span style="color: #dcdcdc;">|</span>
+                <font>长<b>{{ item.carLength }}</b>米</font><span style="color: #dcdcdc;">|</span>
+                <font>载重<b>{{ item.carLoad }}</b>吨</font><span style="color: #dcdcdc;">|</span>
+              <font id="nr055"/></p>
+              <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
+                <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
+              <font>{{ item.createrName?item.createrName:'' }}</font></p>
+              <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
             </li>
             <li class="cy_list_3">
               <p class="p1"><img
-                id="list_shiming"
+                v-if="item.driverStatus === 'AF0010403'"
                 src="../../static/images/list_wlzx/10shiming.png"></P>
                 <!--<p class="p2"><img id="list_xinyong" src="../../static/images/list_wlzx/11xinyong.png"/></P>-->
             </li>
             <li class="wlzx_list_6">
               <p class="p2"><a
-                id="nr_a52"
+                :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
                 target="_blank" ><input
                   readonly
                   value="查看"></a>
               </p>
               <p class="p3"><a
-                id="nr_a53"
-                target="_blank"
-                href="http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes"><input
-                  id="qq"
+                v-if="item.qq"
+                :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
+                target="_blank"><input
                   value="QQ交谈">
               </a></p>
             </li>
@@ -433,7 +440,24 @@
 </template>
 
 <script>
-import { test } from './index.js'
+import { getRecommendList } from './index.js'
+async function getCarInfoList($axios, currentPage, vo = {}) {
+  let parm = {
+    currentPage: currentPage,
+    pageSize: 10,
+    vo: vo
+  }
+  let res = await $axios.post('/28-web/carInfo/list', parm)
+  if (res.data.status === 200) {
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
+    }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
+  }
+}
 export default {
   name: 'CheYuan',
   head: {
@@ -447,27 +471,66 @@ export default {
   data() {
     return {
       recommendList: [],
-      dataset: []
+      dataset: [],
+      carInfoList: [],
+      pages: 0,
+      currentPage: 1,
+      AF032: [],
+      AF032Name: '不限',
+      carLoadLower: '',
+      carLoadUpper: '',
+      AF031: [],
+      AF031Name: '不限',
+      carLengthLower: '',
+      carLengthUpper: '',
+      longCarList: [
+        { name: '不限', value: '' },
+        { name: '即时车源', value: '1' },
+        { name: '长期车源', value: '0' }
+      ],
+      isLongCar: '',
+      carSourceList: [
+        { name: '不限', value: '' },
+        { name: '本地车', value: 'AF01802' },
+        { name: '回程车', value: 'AF01801' }
+      ],
+      carSourceType: '',
+      AF018: [],
+      carType: ''
     }
   },
   async asyncData({ $axios, app, query }) {
-    // const currentProvinceFullName = encodeURIComponent(
-    //   app.$cookies.get('currentProvinceFullName')
-    // )
-    // const currentAreaFullName = encodeURIComponent(
-    //   app.$cookies.get('currentAreaFullName')
-    // )
-    // let getRecommendList = await $axios.get(
-    //   '/28chinaservice/carInfo/recommendList?startProvince=' +
-    //     currentProvinceFullName +
-    //     '&startCity=' +
-    //     currentAreaFullName
-    // )
-    let getRecommendList = await test($axios, app)
-    console.log(getRecommendList)
+    let AF018 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF018'
+    )
+    if (AF018.data.status === 200) {
+      AF018.data.data.unshift({ code: '', name: '不限' })
+    }
+    let AF031 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF031'
+    )
+    if (AF031.data.status === 200) {
+      AF031.data.data.unshift({ id: '', name: '不限' })
+    }
+    let AF032 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF032'
+    )
+    if (AF032.data.status === 200) {
+      AF032.data.data.unshift({ id: '', name: '不限' })
+    }
+    let carInfoList = await getCarInfoList($axios, 1, {
+      startCity: app.$cookies.get('currentAreaFullName'),
+      startProvince: app.$cookies.get('currentProvinceFullName')
+    })
+    let recommendList = await getRecommendList($axios, app)
     return {
+      AF018: AF018.data.status === 200 ? AF018.data.data : [],
+      AF031: AF031.data.status === 200 ? AF031.data.data : [],
+      AF032: AF032.data.status === 200 ? AF032.data.data : [],
       recommendList:
-        getRecommendList.data.status === 200 ? getRecommendList.data.data : []
+        recommendList.data.status === 200 ? recommendList.data.data : [],
+      carInfoList: carInfoList.list,
+      pages: carInfoList.pages
     }
   },
   mounted() {
@@ -656,34 +719,7 @@ export default {
       city: endc,
       district: enda
     })
-    $('#tjcx_01 .all').attr(
-      'href',
-      UrlUpdateParams(window.location.href, 'carType', '')
-    )
-    $('#tjcx_02 .all').attr(
-      'href',
-      UrlUpdateParams(window.location.href, 'carSourceType', '')
-    )
-    $('#tjcx_03 .all').attr(
-      'href',
-      UrlUpdateParams(window.location.href, 'isLongCar', '')
-    )
-    $('#tjcx_04 .all').attr(
-      'href',
-      UrlUpdateParams(
-        UrlUpdateParams(window.location.href, 'carLength1', ''),
-        'carLength2',
-        ''
-      )
-    )
-    $('#tjcx_05 .all').attr(
-      'href',
-      UrlUpdateParams(
-        UrlUpdateParams(window.location.href, 'carLoad1', ''),
-        'carLoad2',
-        ''
-      )
-    )
+
     //清空条件
     $('#flush').click(function() {
       console.log('清空地址')
@@ -750,383 +786,71 @@ export default {
 
     //车源搜索 E
 
-    //车源数据字典 S
-    function tjcx01() {
-      $.ajax({
-        type: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF018',
-
-        success: function(res) {
-          var datas = res.data
-          for (var i = 0; i < datas.length; i++) {
-            var name = datas[i].name
-            var code = datas[i].code
-            var myurl = UrlUpdateParams(window.location.href, 'carType', code)
-            //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
-            //				 var s2='&carType='+code+'>';
-            //				 var s3=name+'</a>';
-            var s1 = '<a href=' + myurl + '>'
-            var s3 = name + '</a>'
-            $('#tjcx_01').append(s1 + s3)
-          }
-          //选中状态 S
-          if (carType) {
-            $('#tjcx_01 a').each(function() {
-              var aaa = $(this).attr('href')
-
-              if (aaa.indexOf(carType) != -1) {
-                console.log(aaa)
-                $('#tjcx_01 a').removeClass('now')
-                $(this).addClass('now')
-              }
-            })
-          }
-          //选中状态 E
-        },
-        error: function(err) {
-          console.log(err.responseText)
-        }
-      })
-    }
-    tjcx01()
-    function tjcx02() {
-      var myurl1 = UrlUpdateParams(
-        window.location.href,
-        'carSourceType',
-        'AF01802'
-      )
-      var myurl2 = UrlUpdateParams(
-        window.location.href,
-        'carSourceType',
-        'AF01801'
-      )
-      $('#tjcx_02 a:eq(1)').attr('href', myurl1)
-      $('#tjcx_02 a:eq(2)').attr('href', myurl2)
-      $('#tjcx_02 a').each(function() {
-        var aaa = window.location.href
-
-        if (aaa.indexOf('carSourceType=AF01802') != -1) {
-          $('#tjcx_02 a').removeClass('now')
-          $('#tjcx_02 a:eq(1)').addClass('now')
-        }
-        if (aaa.indexOf('carSourceType=AF01801') != -1) {
-          $('#tjcx_02 a').removeClass('now')
-          $('#tjcx_02 a:eq(2)').addClass('now')
-        }
-      })
-    }
-    tjcx02()
-    function tjcx03() {
-      var myurl1 = UrlUpdateParams(window.location.href, 'isLongCar', '1')
-      var myurl2 = UrlUpdateParams(window.location.href, 'isLongCar', '0')
-      $('#tjcx_03 a:eq(1)').attr('href', myurl1)
-      $('#tjcx_03 a:eq(2)').attr('href', myurl2)
-      $('#tjcx_03 a').each(function() {
-        var aaa = window.location.href
-
-        if (aaa.indexOf('isLongCar=1') != -1) {
-          $('#tjcx_03 a').removeClass('now')
-          $('#tjcx_03 a:eq(1)').addClass('now')
-        }
-        if (aaa.indexOf('isLongCar=0') != -1) {
-          $('#tjcx_03 a').removeClass('now')
-          $('#tjcx_03 a:eq(2)').addClass('now')
-        }
-      })
-    }
-    tjcx03()
-    function tjcx04() {
-      $.ajax({
-        type: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF031',
-
-        success: function(res) {
-          var datas = res.data
-          for (var i = 0; i < datas.length; i++) {
-            var name = datas[i].name
-            if (name.indexOf('<') != -1) {
-              var name1 = 0
-              var name2 = name.substring(1, 20)
-            } else if (name.indexOf('>') != -1) {
-              var name1 = name.substring(1, 20)
-              var name2 = 99999
-            } else {
-              var name1 = name.split('-', 2)[0]
-              var name2 = name.split('-', 2)[1]
-            }
-
-            var code = datas[i].code
-            var myurl = UrlUpdateParams(
-              UrlUpdateParams(window.location.href, 'carLength1', name1),
-              'carLength2',
-              name2
-            )
-            //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
-            //				 var s2='&carLength1='+name1+'&carLength2='+name2+'>';
-            //				 var s3=name+'米</a>';
-            var s1 = '<a href=' + myurl + '>'
-            var s3 = name + '米</a>'
-            $('#tjcx_04').append(s1 + s3)
-          }
-          //选中状态 S
-          if (carLength1 && carLength2) {
-            $('#tjcx_04 a').each(function() {
-              var aaa = $(this).attr('href')
-
-              if (
-                aaa.indexOf('carLength1=' + carLength1) != -1 &&
-                aaa.indexOf('carLength2=' + carLength2) != -1
-              ) {
-                //console.log(aaa+":"+goodsWeight1+":"+goodsWeight2);
-                $('#tjcx_04 a').removeClass('now')
-                $(this).addClass('now')
-              }
-            })
-          }
-          //选中状态 E
-        },
-        error: function(err) {
-          console.log(err.responseText)
-        }
-      })
-    }
-    tjcx04()
-    function tjcx05() {
-      $.ajax({
-        type: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF032',
-
-        success: function(res) {
-          var datas = res.data
-          for (var i = 0; i < datas.length; i++) {
-            var name = datas[i].name
-            if (name.indexOf('<') != -1) {
-              var name1 = 0
-              var name2 = name.substring(1, 20)
-            } else if (name.indexOf('>') != -1) {
-              var name1 = name.substring(1, 20)
-              var name2 = 9999
-            } else {
-              var name1 = name.split('-', 2)[0]
-              var name2 = name.split('-', 2)[1]
-            }
-
-            var code = datas[i].code
-            var myurl = UrlUpdateParams(
-              UrlUpdateParams(window.location.href, 'carLoad1', name1),
-              'carLoad2',
-              name2
-            )
-            //       var s1='<a  href=/cheyuan&start='+start+'&end='+end;
-            //				 var s2='&carLoad1='+name1+'&carLoad2='+name2+'>';
-            //				 var s3=name+'吨</a>';
-            var s1 = '<a href=' + myurl + '>'
-            var s3 = name + '吨</a>'
-            $('#tjcx_05').append(s1 + s3)
-          }
-          //选中状态 S
-          if (carLoad1 && carLoad2) {
-            $('#tjcx_05 a').each(function() {
-              var aaa = $(this).attr('href')
-
-              if (
-                aaa.indexOf('carLoad1=' + carLoad1) != -1 &&
-                aaa.indexOf('carLoad2=' + carLoad2) != -1
-              ) {
-                //console.log(aaa+":"+goodsWeight1+":"+goodsWeight2);
-                $('#tjcx_05 a').removeClass('now')
-                $(this).addClass('now')
-              }
-            })
-          }
-          //选中状态 E
-        },
-        error: function(err) {
-          console.log(err.responseText)
-        }
-      })
-    }
-    tjcx05()
-    //车源数据字典 E
-
-    //车源信息栏目列表S
-    function process02(currentPage) {
-      var totalPage = 8
-
-      $.ajax({
-        type: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url: '/api/28-web/carInfo/list',
-        dataType: 'json',
-        async: false,
-        data: JSON.stringify({
-          currentPage: currentPage,
-          pageSize: 10,
-          //vo:{	"strartAddress":start,"endAddress":end,"carType":carType,"carLengthLower":carLength1,"carLengthUpper":carLength2,"carLoadLower":carLoad1,"carLoadUpper":carLoad2}			//JSON.stringify({})
-          vo: vo
-        }),
-        success: function(res) {
-          $('#js006 .wlzx_list')
-            .not(':eq(0)')
-            .remove()
-          if (res.data) {
-            totalPage = res.data.pages
-            console.log(totalPage)
-          }
-          if (!res.data || !res.data.total) {
-            console.log('内容为空')
-            $('.box').css('display', 'none')
-            $('.list_none').css('display', 'block')
-          }
-          var datas = res.data.list
-          for (var i = 0; i < datas.length; i++) {
-            var id = datas[i].id
-            var collectNum = datas[i].collectNum
-            if (!collectNum) {
-              collectNum = 0
-            }
-            var driverId = datas[i].driverId
-            var carLoad = datas[i].carLoad
-            var carNum = datas[i].carNum
-            var createrName = datas[i].createrName
-            if (!createrName) {
-              createrName = ''
-            }
-            // var carNum = datas[i].
-            // carNum.substring(0, 2) + '***' + carNum.substring(6, 10)
-            var remark = datas[i].remark
-            if (remark && remark.length > 19) {
-              var remark = datas[i].remark.substring(0, 19) + '...'
-            }
-            var carLength = datas[i].carLength
-            var carSourceTypeName = datas[i].carSourceTypeName
-            var browseNumber = datas[i].browseNumber
-            if (!browseNumber) {
-              browseNumber = 0
-            }
-
-            var carTypeName = datas[i].carTypeName
-            if (!datas[i].usualPlace) {
-              var usualPlace = ''
-            }
-            var usualPlace = datas[i].usualPlace
-            // var usualPlace = datas[i].usualPlace.substring(0, 12)
-            var title = datas[i].title
-
-            var startCity = datas[i].startCity
-            var startArea = datas[i].startArea
-            var endCity = datas[i].endCity
-            var endArea = datas[i].endArea
-            if (!startCity) {
-              startCity = ''
-            }
-            if (!endCity) {
-              endCity = ''
-            }
-            if (!startArea) {
-              startArea = ''
-            }
-            if (!endArea) {
-              endArea = ''
-            }
-            var start = startCity + startArea
-            var end = endCity + endArea
-            if (start && start.length > 6) {
-              // start = start.substring(0, 6) + '..'
-            }
-            if (end && end.length > 6) {
-              // end = end.substring(0, 6) + '..'
-            }
-
-            var expectPrice = datas[i].expectPrice
-            var qq = datas[i].qq
-
-            var credit28 = datas[i].credit28
-            var driverStatus = datas[i].driverStatus
-
-            var createTime1 = datas[i].createTime
-            var createTime = formatDate(new Date(createTime1))
-            if (!datas[i].carFile) {
-              var carFile1 = ''
-            }
-            if (datas[i].carFile) {
-              var carFile1 = datas[i].carFile.split(',')[0]
-            }
-            $('#car_pic').attr('src', carFile1)
-
-            var arcurl = '/cheyuan/detail?id=' + id + '&driverId=' + driverId
-            $('#nr_a51').attr('href', arcurl)
-            $('#nr_a54').attr('href', arcurl)
-            $('#nr_a51_1').html(start)
-            $('#nr_a51_2').html(end)
-            $('#nr_a52').attr('href', arcurl)
-            $('#nr051').html(carNum)
-            $('#nr052').html(carTypeName)
-            $('#nr053').html('长' + '<b>' + carLength + '</b>米')
-            $('#nr054').html('载重' + '<b>' + carLoad + '</b>吨')
-            $('#nr055').html(carSourceTypeName)
-            $('#nr056').html(usualPlace)
-            $('#nr057').html(expectPrice + '元')
-            if (!expectPrice) {
-              $('#nr057').html('面议')
-            }
-            $('#nr058').html(remark)
-            $('#nr059').html(createrName)
-            $('#nr0510').html('发布时间：' + createTime)
-            $('#nr0520').html(collectNum)
-            $('#nr0521').html(browseNumber)
-            $('#nr_a53').attr(
-              'href',
-              'tencent://message/?uin=' + qq + '&Site=&menu=yes'
-            )
-            var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
-            var s2 = $('.wlzx_list').html()
-            var s3 = '</ul>'
-            $('#js006').append(s1 + s2 + s3)
-            // if (!qq) {
-            //   $('.wlzx_list' + i + ' #qq').css('display', 'none')
-            // }
-            //if(!credit28){console.log("is not Vip");
-            //$('.wlzx_list'+i+' .cy_list_3 .p2').css("display","none")}
-            if (driverStatus != 'AF0010403') {
-              console.log('is not shiming')
-              $('.wlzx_list' + i + ' .cy_list_3 .p1').css('display', 'none')
-            }
-          }
-        },
-        error: function(err) {
-          console.log(err.responseText)
-        }
-      })
-      console.log('最终总页数：' + totalPage)
-      return totalPage
-    }
-    //process02(1);
-    //车源信息栏目列表 E
-
     $('#pagination1').pagination({
-      currentPage: 1,
-      totalPage: process02(1),
-      callback: function(current) {
+      currentPage: this.currentPage,
+      totalPage: this.pages,
+      callback: async current => {
         $('#current1').text(current)
-        process02(current)
+        let carInfoList = await getCarInfoList(this.$axios, current, {
+          startCity: this.$cookies.get('currentAreaFullName'),
+          startProvince: this.$cookies.get('currentProvinceFullName')
+        })
+        this.carInfoList = carInfoList.list
+        this.pages = carInfoList.pages
+        this.current = carInfoList.current
         window.location.href = '#top'
       }
     })
   },
   methods: {
-    //
+    AF032Click(item) {
+      this.AF032Name = item.name
+      if (item.name.indexOf('<') !== -1) {
+        this.carLoadLower = 0
+        this.carLoadUpper = item.name.substring(1, 20)
+      } else if (item.name.indexOf('>') != -1) {
+        this.carLoadLower = item.name.substring(1, 20)
+        this.carLoadUpper = 9999
+      } else if (item.name === '不限') {
+        this.carLoadLower = ''
+        this.carLoadUpper = ''
+      } else {
+        this.carLoadLower = item.name.split('-', 2)[0]
+        this.carLoadUpper = item.name.split('-', 2)[1]
+      }
+      console.log(this.carLoadLower)
+      console.log(this.carLoadUpper)
+    },
+    AF031Click(item) {
+      this.AF031Name = item.name
+      if (item.name.indexOf('<') !== -1) {
+        this.carLengthLower = 0
+        this.carLengthUpper = item.name.substring(1, 20)
+      } else if (item.name.indexOf('>') != -1) {
+        this.carLengthLower = item.name.substring(1, 20)
+        this.carLengthUpper = 9999
+      } else if (item.name === '不限') {
+        this.carLengthLower = ''
+        this.carLengthUpper = ''
+      } else {
+        this.carLengthLower = item.name.split('-', 2)[0]
+        this.carLengthUpper = item.name.split('-', 2)[1]
+      }
+      console.log(this.carLengthLower)
+      console.log(this.carLengthUpper)
+    },
+    longCarClick(item) {
+      this.isLongCar = item.value
+      console.log(this.isLongCar)
+    },
+    carSourceTypeClick(item) {
+      this.carSourceType = item.value
+      console.log(this.carSourceType)
+    },
+    AF018Click(item) {
+      this.carType = item.code
+      console.log(this.carType)
+    }
   }
 }
 </script>

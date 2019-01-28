@@ -1,14 +1,21 @@
-export function getRecommendList($axios, app) {
-  const currentProvinceFullName = encodeURIComponent(
-    app.$cookies.get('currentProvinceFullName')
-  )
-  const currentAreaFullName = encodeURIComponent(
-    app.$cookies.get('currentAreaFullName')
-  )
+export function getRecommendList($axios, app, vo) {
   return $axios.get(
-    '/28-web/carInfo/recommendList?startProvince=' +
-      currentProvinceFullName +
-      '&startCity=' +
-      currentAreaFullName
+    `/28-web/carInfo/recommendList?carLengthLower=${
+      vo.carLengthLower
+    }&AF031Id=${vo.AF031Id}&carLengthUpper=${vo.carLengthUpper}&AF032Id=${
+      vo.AF032Id
+    }&carLoadLower=${vo.carLoadLower}&carLoadUpper=${
+      vo.carLoadUpper
+    }&carSourceType=${vo.carSourceType}&carType=${
+      vo.carType
+    }&endArea=${encodeURIComponent(vo.endArea)}&endCity=${encodeURIComponent(
+      vo.endCity
+    )}&endProvince=${encodeURIComponent(vo.endProvince)}&isLongCar=${
+      vo.isLongCar
+    }&startArea=${encodeURIComponent(
+      vo.startArea
+    )}&startCity=${encodeURIComponent(
+      vo.startCity
+    )}&startProvince=${encodeURIComponent(vo.startProvince)}`
   )
 }

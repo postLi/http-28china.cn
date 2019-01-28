@@ -1,3 +1,4 @@
+
 <template>
   <div class="lll-zhuangXian-detail">
     <div class="arc_main">
@@ -14,7 +15,11 @@
             class="arc_input3"
             value="搜全网"> </a></div>
         <div class="arc_top1_2">
-          <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
+          <select id="search_type">
+            <option name="zx">找专线</option>
+            <option name="che">找车源</option>
+            <option name="huo">找货源</option>
+          </select>
           <input
             class="arc_input1"
             wtmap=""
@@ -27,40 +32,39 @@
         </div>
 
 
-
       </div>
       <div class="arc_top2">
-        <div class="arc_top2_1"><a href="{dede:global.cfg_cmsurl/}/"><span>首页</span></a></div>
+        <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
         <div
           id="arc_city"
           class="arc_top2_2"/>
         <div
           class="arc_top2_3"
-          onmouseover="city_block();" ><a href="javascript:void(0)"><span>更多+</span></a></div>
+        ><a href="javascript:void(0)"><span>更多+</span></a></div>
 
         <!--更多城市-->
         <div
           id="city_box"
-          class="city_box"
-          onmouseover="city_block();"
-          onmouseout="city_none();" />
+          class="city_box"/>
+          <!-- 点击弹出效果-->
 
       </div>
       <div class="arc_main1">
         <div class="arc_left">
-          <div class="arc_left_1"><img id="nr0714" ></div>
+          <div class="arc_left_1"><img id="nr0714"></div>
           <div class="arc_left_2">
-            <a href="javascript:void(0)"><img id="nr0715" ></a>
-            <a href="javascript:void(0)"><img id="nr0716" ></a>
-            <a href="javascript:void(0)"><img id="nr0717" ></a>
+            <a href="javascript:void(0)"><img id="nr0715"></a>
+            <a href="javascript:void(0)"><img id="nr0716"></a>
+            <a href="javascript:void(0)"><img id="nr0717"></a>
           </div>
-          <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
+          <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span
+            id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
         </div>
         <div class="arc_middle">
           <div class="collection_zx">
             <div
               class="bt_close"
-              onclick="$('.collection_zx').hide()" ><img src="../../static/line/images/xxx.png"></div>
+              onclick="$('.collection_zx').hide()"><img src="../../static/line/images/xxx.png"></div>
             <div class="collection_zx_nr">
               <img src="../../static/line/images/yes.png">
               <span>成功加入</span><a
@@ -70,9 +74,11 @@
             </div>
           </div>
           <div class="pj_price_box">
-            <div class="pj_price_box1"><div
-              class="bt_close"
-              onclick="$('.pj_price_box').hide()" ><img src="../../static/line/images/xxx.png"></div></div>
+            <div class="pj_price_box1">
+              <div
+                class="bt_close"
+                onclick="$('.pj_price_box').hide()"><img src="../../static/line/images/xxx.png"></div>
+            </div>
             <div class="pj_price_box2">试算价格</div>
             <div class="item-form plr20">
               <h2 class="form-tit">货物重量/体积计算</h2>
@@ -228,8 +234,6 @@
                   id="nr074"
                   class="span2"/><font
                     id="zh_price"
-                    onmouseover="price_block1();"
-                    onmouseout="price_none1();"
                     class="font2">[阶梯价]</font></p>
               <p class="p2"><i>轻货价：</i><span id="nr0742"/><font
                 id="nr075"
@@ -237,13 +241,13 @@
                   id="nr076"
                   class="span2"/><font
                     id="qh_price"
-                    onmouseover="price_block2();"
-                    onmouseout="price_none2();"
                     class="font2">[阶梯价]</font></p>
             </div>
             <div class="arc_middle2_2">
-              <div class="num1"><span id="nr0746"/></div><div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>
-              <div class="num3"><span>下单量</span></div><div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
+              <div class="num1"><span id="nr0746"/></div>
+              <div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>
+              <div class="num3"><span>下单量</span></div>
+              <div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
             </div>
             <!--阶梯价格 S-->
             <div
@@ -254,7 +258,8 @@
               <div class="price_box_bt">阶梯价（重货）</div>
               <div
                 class="price_box_item1"
-                style="display: none;"><span id="nr0743" /><i id="nr0720"/><font id="nr0721"/><em id="nr07210">元/吨</em></div>
+                style="display: none;"><span id="nr0743"/><i id="nr0720"/><font id="nr0721"/><em id="nr07210">元/吨</em>
+              </div>
             </div>
 
             <div
@@ -265,10 +270,9 @@
               <div class="price_box_bt">阶梯价（轻货）</div>
               <div
                 class="price_box_item2"
-                style="display: none;"><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em></div>
+                style="display: none;"><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>
+              </div>
             </div>
-            <!--阶梯价格 E-->
-
           </div>
           <div class="arc_middle3">
             <div class="arc_m3"><i>运输时效：</i><span id="nr077"/></div>
@@ -277,19 +281,19 @@
           </div>
           <div class="arc_middle4">
             <div class="arc_m4_1">
-              <div ><span>出发地</span></div>
-              <div ><i>联系人：</i><span id="nr0710"/></div>
-              <div ><i>手机：</i><span id="nr0711"/></div>
+              <div><span>出发地</span></div>
+              <div><i>联系人：</i><span id="nr0710"/></div>
+              <div><i>手机：</i><span id="nr0711"/></div>
             </div>
             <div class="arc_m4_2">
-              <div ><span>到达地</span></div>
-              <div ><i>联系人：</i><span id="nr0712"/></div>
-              <div ><i>手机：</i><span id="nr0713"/></div>
+              <div><span>到达地</span></div>
+              <div><i>联系人：</i><span id="nr0712"/></div>
+              <div><i>手机：</i><span id="nr0713"/></div>
             </div>
           </div>
           <div class="arc_middle5">
             <div class="arc_m5_1"><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span></div>
-            <div class="arc_m5_2" >
+            <div class="arc_m5_2">
               <div
                 id="order_price"
                 class="arc_m5_2_1"
@@ -299,10 +303,7 @@
                 class="arc_m5_2_2"><a
                   id="nr_order"
                   target="_blank"
-                  href="javascript:void(0)"><span >快速下单</span></a></div>
-
-
-
+                  href="javascript:void(0)"><span>快速下单</span></a></div>
             </div>
           </div>
           <div class="arc_middle6">
@@ -317,14 +318,10 @@
               <div class="item_zzfw7"><img src="../../static/line/images/item_zzfw7.png"><span>签单回收</span></div>
               <div class="item_zzfw8"><img src="../../static/line/images/item_zzfw8.png"><span>时效保障</span></div>
 
-              <!--<img src="{dede:global.cfg_templets_skin/}/images/article_wlzx/18zengzhifw.png"/>-->
+              <!--<img src="/templets/default/images/article_wlzx/18zengzhifw.png"/>-->
 
             </div>
           </div>
-
-
-
-
         </div>
         <div class="arc_right">
           <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020"/></p>
@@ -362,18 +359,18 @@
               src="../../static/gongsi/images/34huanguan.gif">
           </p>
           <p class="arc_right03">
-            <span>质量</span><span>时效</span><span>价格</span><br >
-            <font id="nr1041" /><font id="nr1042"/><font id="nr1043"/>
+            <span>质量</span><span>时效</span><span>价格</span><br>
+            <font id="nr1041"/><font id="nr1042"/><font id="nr1043"/>
           </p>
           <p class="arc_right04">
             <span class="arc_right04_1"><i>联系人：</i><font id="nr1021"/></span>
-            <span><i>手机：</i><font id="nr1022" /></span>
+            <span><i>手机：</i><font id="nr1022"/></span>
             <span><i>Q&nbsp;Q：</i><a
               id="nr1023"
               target="_blank"><input
                 id="qq"
                 value="QQ交谈"></a></span>
-            <span><i>地址：</i><font id="nr10232" /></span>
+            <span><i>地址：</i><font id="nr10232"/></span>
           </p>
           <p class="arc_right05">
             <a
@@ -382,7 +379,7 @@
                 id="arc_right05_1"
                 readonly=""
                 value="进入官网"></a>
-            <a ><input
+            <a><input
               id="collection_wlgs"
               readonly=""
               value="收藏"></a>
@@ -396,7 +393,7 @@
               src="../../static/line/images/11xinyong.png">
             <img
               id="right_shiming"
-              src="../../static/wangdian/images/10shiming.png">
+              src="../../static/line/images/10shiming.png">
             <img
               id="right_baozhengjin"
               src="../../static/line/images/danbao.png"><span id="nr1037">1000元</span>
@@ -407,37 +404,38 @@
       </div>
       <div class="arc_main2">
         <div class="arc_left2">
-          <div class="arc_left2_bt" >
+          <div class="arc_left2_bt">
             <span>公司网点分布</span><i><a
               id="wd_more"
-              target="_blank" >更多</a></i>
+              target="_blank">更多</a></i>
           </div>
           <div
             id="js013"
             class="arc_left2_nr">
-            <!--{dede:arclist  typeid='2' pagesize='1' }-->
-            <div
-              class="tjwd_list"
-              style="display: none;">
-              <p class="p01"><span id="nr1011">广州网点</span></p>
-              <p class="p02"><img src="../../static/line/images/04gongsi.png" >&nbsp;
-                <span><a
-                  id="nr1012"
-                  target="_blank"
-                  href="#"/></span></p>
-              <p class="p03">
-                <i>联系人：</i><span id="nr1013">李明</span> &nbsp; <i>手机号：</i><font id="nr1014">13416233760</font>
-
-              </p>
-              <p class="p04">
-                <i>所在地：</i><span id="nr1015">浙江省&nbsp;杭州市&nbsp;下城区</span>
-              </p>
-              <p class="p05">
-                <img src="../../static/line/images/06dingwei.png" >&nbsp;<span id="nr1016">金黄大道永福路博洋物流园10号</span>
-              </p>
+            <div id="tag07eb8b4d92e4d69bb7b5d30cf3bb012e">
+              <div
+                class="tjwd_list"
+                style="display: none;">
+                <p class="p01"><span id="nr1011">广州网点</span></p>
+                <p class="p02">
+                  <img src="../../static/line/images/04gongsi.png">&nbsp;
+                  <span>
+                    <a
+                      id="nr1012"
+                      target="_blank"
+                      href="#"/></span>
+                </p>
+                <p class="p03">
+                  <i>联系人：</i><span id="nr1013">李明</span> &nbsp; <i>手机号：</i><font id="nr1014">13416233760</font>
+                </p>
+                <p class="p04">
+                  <i>所在地：</i><span id="nr1015">浙江省&nbsp;杭州市&nbsp;下城区</span>
+                </p>
+                <p class="p05">
+                  <img src="../../static/line/images/06dingwei.png">&nbsp;<span id="nr1016">金黄大道永福路博洋物流园10号</span>
+                </p>
+              </div>
             </div>
-            <!--{/dede:arclist}-->
-
 
           </div>
         </div>
@@ -463,65 +461,64 @@
             class="arc_nr ">
             <div class="arc_nr1">
               <div class="arc_fw item_fw1">
-                <div class="fw_img"><img src="../../static/line/images/fw_1.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/fw_1.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>送货上门</span></p>
                   <p class="fw_nr2"><i>收取客户货物后，将货物送到指定收件对象的服务。</i></p>
                 </div>
               </div>
               <div class="arc_fw item_fw2">
-                <div class="fw_img"><img src="../../static/line/images/fw_2.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/fw_2.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>保价运输</span></p>
-                  <p class="fw_nr2"><i>保价运输是我司与您共同确定的以托运人申明货物价值为基础的一种特殊运输方式，您向我司声明其托运货物的实际价值，按保价运输的货物，托运人除缴纳运输费用外，按照规定缴纳一定的保价费用，若货物在运输过程中出险，我司将按照托运人的声明价值赔偿一定损失。</i></p>
+                  <p class="fw_nr2"><i>保价运输是我司与您共同确定的以托运人申明货物价值为基础的一种特殊运输方式，您向我司声明其托运货物的实际价值，按保价运输的货物，托运人除缴纳运输费用外，按照规定缴纳一定的保价费用，若货物在运输过程中出险，我司将按照托运人的声明价值赔偿一定损失。</i>
+                  </p>
                 </div>
               </div>
-              <div class="arc_fw item_fw3" >
-                <div class="fw_img"><img src="../../static/line/images/fw_3.png" ></div>
+              <div class="arc_fw item_fw3">
+                <div class="fw_img"><img src="../../static/line/images/fw_3.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>运费到付</span></p>
                   <p class="fw_nr2"><i>为您提供派送末端支付运费服务，当货物到达收货人时由收货人支付运费。</i></p>
                 </div>
               </div>
               <div class="arc_fw item_fw4">
-                <div class="fw_img"><img src="../../static/line/images/fw_4.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/fw_4.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>代收货款</span></p>
-                  <p class="fw_nr2"><i>按照寄件方（卖家）与收件方（买家）达成交易协议的要求，为寄件方提供承运、寄递物品的同时，并代寄件方向收件方收取货款，同时按照约定时间将货款返还给寄件方的服务。</i></p>
+                  <p class="fw_nr2">
+                  <i>按照寄件方（卖家）与收件方（买家）达成交易协议的要求，为寄件方提供承运、寄递物品的同时，并代寄件方向收件方收取货款，同时按照约定时间将货款返还给寄件方的服务。</i></p>
                 </div>
               </div>
               <div class="arc_fw item_fw5">
-                <div class="fw_img"><img src="../../static/line/images/fw_5.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/fw_5.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>上门提货</span></p>
                   <p class="fw_nr2"><i>按照客户指令到指定地点收取货物的服务。</i></p>
                 </div>
               </div>
               <div class="arc_fw item_fw6">
-                <div class="fw_img"><img src="../../static/line/images/fw_6.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/fw_6.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>开发票</span></p>
                   <p class="fw_nr2"><i>客户可向物流公司申请开具货物运输发票。</i></p>
                 </div>
               </div>
               <div class="arc_fw item_fw7">
-                <div class="fw_img"><img src="../../static/line/images/fw_7.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/fw_7.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>签单回收</span></p>
                   <p class="fw_nr2"><i>在货物正常签收后，将寄件客户提供的需收件客户签名的收条或收货单等单据返还寄件客户的服务。</i></p>
                 </div>
               </div>
               <div class="arc_fw item_fw8">
-                <div class="fw_img"><img src="../../static/line/images/fw_8.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/fw_8.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>时效保障</span></p>
                   <p class="fw_nr2"><i>承诺在规定时间内送达的时效保障服务。</i></p>
                 </div>
               </div>
-
-
             </div>
-
           </div>
           <div
             id="arc_nr2"
@@ -532,7 +529,7 @@
           </div>
           <div
             id="arc_nr3"
-            class="arc_nr arc_nr_none" >
+            class="arc_nr arc_nr_none">
             <div class="arc_pjnr_bt">
               <div class="arc_pjnr_bt1">
                 <div class="arc_pjbt_item"><input
@@ -557,10 +554,12 @@
                 <input
                   value="我要评价"
                   onclick="$('.pj_box').show()">
-                <div class="pj_box" >
-                  <div class="pj_box1"><div
-                    class="bt_close"
-                    onclick="$('.pj_box').hide()" ><img src="../../static/line/images/xxx.png"></div></div>
+                <div class="pj_box">
+                  <div class="pj_box1">
+                    <div
+                      class="bt_close"
+                      onclick="$('.pj_box').hide()"><img src="../../static/line/images/xxx.png"></div>
+                  </div>
                   <div class="pj_box2">
                     <div class="pj_box2_1"><img src="../../static/line/images/pj.png"></div>
                     <div class="pj_box2_2">
@@ -569,7 +568,8 @@
                     </div>
                   </div>
                   <div class="pj_box3">
-                    <div class="pj_box3_left">服务价格：</div><div
+                    <div class="pj_box3_left">服务价格：</div>
+                    <div
                       id="pj_box_item1"
                       class="pj_box3_right"><img
                         id="pjxx1_1"
@@ -584,7 +584,8 @@
                                 src="../../static/line/images/stars01.png"><span id="pj_f1"/></div>
                   </div>
                   <div class="pj_box3">
-                    <div class="pj_box3_left">服务质量：</div><div
+                    <div class="pj_box3_left">服务质量：</div>
+                    <div
                       id="pj_box_item2"
                       class="pj_box3_right"><img
                         id="pjxx2_1"
@@ -599,7 +600,8 @@
                                 src="../../static/line/images/stars01.png"><span id="pj_f2"/></div>
                   </div>
                   <div class="pj_box3">
-                    <div class="pj_box3_left">运输时效：</div><div
+                    <div class="pj_box3_left">运输时效：</div>
+                    <div
                       id="pj_box_item3"
                       class="pj_box3_right"><img
                         id="pjxx3_1"
@@ -613,14 +615,18 @@
                                 id="pjxx3_5"
                                 src="../../static/line/images/stars01.png"><span id="pj_f3"/></div>
                   </div>
-                  <div class="pj_box3 " >
-                    <div class="pj_box3_left"><font>综合评价</font>：</div><div class="pj_box3_right" ><i id="pj_box_zh"/></div>
+                  <div class="pj_box3 ">
+                    <div class="pj_box3_left"><font>综合评价</font>：</div>
+                    <div class="pj_box3_right"><i id="pj_box_zh"/></div>
                   </div>
-                  <div class="pj_box4"> <div class="pj_box4_left">评价说明：</div><div class="pj_box4_right"><textarea
-                    id="pj_nr"
-                    maxlength="400"
-                    rows="3"
-                    cols="30" /></div></div>
+                  <div class="pj_box4">
+                    <div class="pj_box4_left">评价说明：</div>
+                    <div class="pj_box4_right"><textarea
+                      id="pj_nr"
+                      maxlength="400"
+                      rows="3"
+                      cols="30"/></div>
+                  </div>
                   <div class="pj_box5"><span>还可输入<i id="pj_limit">400</i>字</span></div>
                   <div class="pj_box6"><input
                     id="pj_submit"
@@ -628,16 +634,12 @@
                     value="提交评价"><input
                       class="pj_input1"
                       onclick="$('.pj_box').hide()"
-                      value="取消" ></div>
+                      value="取消"></div>
                   <div class="pj_box7">打分和评价都将是其他用户的参考依据，并影响该承运商信誉值。
                   请发布真实、客观的本人消费体验评价。如您受到威逼、利诱如优惠等干扰而发布的评价或并非本人体验的虚假/恶意评价，则点评视为违规，同时影响您的信誉度。更多请见 <span>这里的说明</span>。
                   </div>
                 </div>
-
-
-
               </div>
-
             </div>
             <div
               id="js014"
@@ -653,7 +655,7 @@
                 </div>
                 <div class="arc_pjnr_item_right">
                   <p class="item_p3"><span id="nr1032">内容真实，可靠！</span></p>
-                  <p class="item_p4"><i id="nr1033">2018-08-01  10:00</i></p>
+                  <p class="item_p4"><i id="nr1033">2018-08-01 10:00</i></p>
                   <p
                     id="item_p5"
                     class="item_p5"
@@ -677,23 +679,23 @@
             </div>
             <!--分页-->
 
-
           </div>
           <div
             id="arc_nr4"
-            class="arc_nr arc_nr_none" >
+            class="arc_nr arc_nr_none">
             <div
               id="block_bzj"
               class="arc_nr1">
-              <div class="arc_fw_bt" >
+              <div class="arc_fw_bt">
                 <img src="../../static/line/images/xiexian.png">
               </div>
               <div class="arc_fw arc_fw2">
-                <div class="fw_img"><img src="../../static/line/images/baozhengjin.png" ></div>
+                <div class="fw_img"><img src="../../static/line/images/baozhengjin.png"></div>
                 <div class="fw_nr">
                   <p class="fw_nr1"><span>物流运输保障服务</span></p>
                   <p class="fw_nr2"><i>此承运商已交</i><i id="nr1036"/><i>元诚信保证金</i></p>
-                  <p class="fw_nr3"><span>如果您采用平台的担保交易，您与承运商洽谈好价格后，要平台上生成标准托运单，并把运费托管在平台上，如果承运商未能良好履约，您有权要求退回所有的运费。并根据托运单规定的规则条款，您有权对承运商要求相应的补偿。</span></p>
+                  <p class="fw_nr3"><span>如果您采用平台的担保交易，您与承运商洽谈好价格后，要平台上生成标准托运单，并把运费托管在平台上，如果承运商未能良好履约，您有权要求退回所有的运费。并根据托运单规定的规则条款，您有权对承运商要求相应的补偿。</span>
+                  </p>
                   <p class="fw_nr4"><span>如果您线下私自与承运商进行交易，平台不承担任何协助您向承运商要求兑现承诺的义务。</span></p>
                 </div>
               </div>
@@ -703,14 +705,9 @@
               id="none_bzj"
               class="arc_nr1"
               style="display: none;">
-              <img src="../../static/line/images/gantanhao.png" >
+              <img src="../../static/line/images/gantanhao.png">
               <span>暂未开通此项服务</span>
-
             </div>
-
-
-
-
           </div>
         </div>
       </div>
@@ -725,16 +722,16 @@
       <div
         class="tj_list"
         style="display: none;">
-        <div class="p p02"><img src="../../static/images/04gongsi.png" ><span><a id="tj023" /></span>
+        <div class="p p02"><img src="../../static/line/images/04gongsi.png"><span><a id="tj023"/></span>
           <img
             id="tj_shiming"
-            src="../../static/line/images/shiming.png" >
+            src="../../static/line/images/shiming.png">
           <img
             id="tj_xinyong"
-            src="../../static/line/images/xinyong.png" >
+            src="../../static/line/images/xinyong.png">
           <img
             id="tj_danbao"
-            src="../../static/line/images/danbao.png" >
+            src="../../static/line/images/danbao.png">
 
         </div>
         <div class="p p01"><a
@@ -746,11 +743,8 @@
             <li class="tj_right"><i>最低一票：</i><span id="tj027"/></li>
             <li class="tj_left"><i>重货：</i><font id="tj024"/><span>元/吨</span></li>
             <li class="tj_right"><i>轻货：</i><font id="tj025"/><span>元/方</span></li>
-
-
           </ul>
         </div>
-
         <div class="p p05"/>
         <div class="p p06">
           <a
@@ -758,11 +752,10 @@
             target="_blank"><span>查看&gt;</span></a>
         </div>
       </div>
-
-
-
     </div>
+
   </div>
+
 </template>
 
 <script>
@@ -776,66 +769,76 @@ export default {
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ]
   },
-  layout: 'detail',
+  layout: 'subLayout',
   mounted() {
-    seajs.use(['../js/city.js'], function() {
+    seajs.use(['../js/city.js', '../js/calculator.js'], function() {
       seajs.use(['../js/city-picker.js'], function() {
         seajs.use(['/line/js/arc_wlzx.js'], function() {
           seajs.use(['../js/collection.js'], function() {
             seajs.use(['../js/gaodemap2.js'], function() {
-              function city_block() {
-                //alert("1");
-                $('.city_box').css('display', 'block')
-              }
-              function city_none() {
-                //alert("1");
-                $('.city_box').css('display', 'none')
-              }
+              //  <!-- 阶梯价格浮层弹出效果 E-
 
-              // onmouseover="price_block1();"
-              // onmouseout="price_none1();"
-              // $('.price_box1').onmouseover(function() {
-              //   $('.price_box1').css('display', 'block')
-              // })
-              function price_block1() {
-                //alert("1");
-                $('.price_box1').css('display', 'block')
-              }
-              function price_none1() {
-                alert('1')
-                $('.price_box1').css('display', 'none')
-              }
-              function price_block2() {
-                //alert("1");
-                $('.price_box2').css('display', 'block')
-              }
-              function price_none2() {
-                //alert("1");
-                $('.price_box2').css('display', 'none')
-              }
-              $('#arc_bt1').click(function() {
-                //alert("1");
-                $('.arc_span').removeClass('arc_active')
-                $(this).addClass('arc_active')
-                $('.arc_nr').addClass('arc_nr_none')
-                $('#arc_nr1').removeClass('arc_nr_none')
-              })
+              function mousePrice() {
+                // 更多城市
+                $('.arc_top2_3').mouseover(function() {
+                  $('.city_box').css('display', 'block')
+                })
+                $('.city_box').mouseover(function() {
+                  $('.city_box').css('display', 'block')
+                })
+                $('.city_box').mouseover(function() {
+                  $('.city_box').css('display', 'none')
+                })
+                // 更多城市
 
-              $('#arc_bt2').click(function() {
-                //alert("2");
-                $('.arc_span').removeClass('arc_active')
-                $(this).addClass('arc_active')
-                $('.arc_nr').addClass('arc_nr_none')
-                $('#arc_nr2').removeClass('arc_nr_none')
-              })
+                $('#zh_price').mouseover(function() {
+                  $('.price_box1').css('display', 'block')
+                })
+                $('#zh_price').mouseout(function() {
+                  $('.price_box1').css('display', 'none')
+                })
+                $('#qh_price').mouseover(function() {
+                  $('.price_box2').css('display', 'block')
+                })
+                $('#qh_price').mouseout(function() {
+                  $('.price_box2').css('display', 'none')
+                })
 
-              $('#arc_bt3').click(function() {
-                //alert("3");
-                $('.arc_span').removeClass('arc_active')
-                $(this).addClass('arc_active')
-                $('.arc_nr').addClass('arc_nr_none')
-                $('#arc_nr3').removeClass('arc_nr_none')
-              })
+                //  增值服务切换
+                $('#arc_bt1').click(function() {
+                  //alert("1");
+                  $('.arc_span').removeClass('arc_active')
+                  $(this).addClass('arc_active')
+                  $('.arc_nr').addClass('arc_nr_none')
+                  $('#arc_nr1').removeClass('arc_nr_none')
+                })
+                $('#arc_bt2').click(function() {
+                  //alert("1_2");
+                  $('.arc_span').removeClass('arc_active')
+                  $(this).addClass('arc_active')
+                  $('.arc_nr').addClass('arc_nr_none')
+                  $('#arc_nr2').removeClass('arc_nr_none')
+                })
+
+                $('#arc_bt3').click(function() {
+                  //alert("2");
+                  $('.arc_span').removeClass('arc_active')
+                  $(this).addClass('arc_active')
+                  $('.arc_nr').addClass('arc_nr_none')
+                  $('#arc_nr3').removeClass('arc_nr_none')
+                })
+
+                $('#arc_bt4').click(function() {
+                  //alert("3");
+                  $('.arc_span').removeClass('arc_active')
+                  $(this).addClass('arc_active')
+                  $('.arc_nr').addClass('arc_nr_none')
+                  $('#arc_nr4').removeClass('arc_nr_none')
+                })
+                //  增值服务切换
+              }
+              mousePrice()
+              //  <!-- 阶梯价格浮层弹出效果 E-
             })
           })
         })

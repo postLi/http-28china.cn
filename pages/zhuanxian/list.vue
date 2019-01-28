@@ -1,3 +1,5 @@
+<script src="../../static/line/js/arc_wlzx.js">
+</script>
 <template>
   <div class="lll-zhuangXian">
     <div class="list_box" >

@@ -1,0 +1,442 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{dede:field name='typename'/}-{dede:global.cfg_webname/}</title>
+<meta name="description" content="{dede:global.cfg_description/}" />
+<meta name="keywords" content="{dede:global.cfg_keywords/}" />
+<meta http-equiv="mobile-agent" content="format=xhtml;url={dede:global.cfg_mobileurl/}/index.php">
+<link href="{dede:global.cfg_templets_skin/}/style/anfa.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/index.css" rel="stylesheet" media="screen" type="text/css" />
+<link href="{dede:global.cfg_templets_skin/}/style/WTMap.css" rel="stylesheet" media="screen" type="text/css" />
+<link type="text/css" rel="stylesheet" href="{dede:global.cfg_templets_skin/}/zxnews_files/basic.css">
+<link type="text/css" rel="stylesheet" href="{dede:global.cfg_templets_skin/}/zxnews_files/mains.css">
+<script src="{dede:global.cfg_templets_skin/}/zxnews_files/hm.js"></script>
+<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/zxnews_files/ty_window.js"></script>
+<script type="text/javascript" src="{dede:global.cfg_templets_skin/}/zxnews_files/jquery.SuperSlide.2.1.1.js"></script>
+<script type="text/javascript">if(window.location.toString().indexOf('pref=padindex') != -1){}else{if(/AppleWebKit.*Mobile/i.test(navigator.userAgent) || (/MIDP|SymbianOS|NOKIA|SAMSUNG|LG|NEC|TCL|Alcatel|BIRD|DBTEL|Dopod|PHILIPS|HAIER|LENOVO|MOT-|Nokia|SonyEricsson|SIE-|Amoi|ZTE/.test(navigator.userAgent))){if(window.location.href.indexOf("?mobile")<0){try{if(/Android|Windows Phone|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent)){window.location.href="{dede:global.cfg_mobileurl/}/index.php";}else if(/iPad/i.test(navigator.userAgent)){}else{}}catch(e){}}}}</script>
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_cmsurl/}/include/dedeajax2.js"></script>
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_templets_skin/}/js/pic_scroll.js"></script>
+<!--
+<script language="javascript" type="text/javascript" src="{dede:global.cfg_cmspath/}/images/js/j.js" ></script>
+-->
+<script language="javascript" type="text/javascript">
+
+	$(function(){
+		$("a[_for]").mouseover(function(){
+			$(this).parents().children("a[_for]").removeClass("thisclass").parents().children("dd").hide();
+			$(this).addClass("thisclass").blur();
+			$("#"+$(this).attr("_for")).show();
+		});
+		$("a[_for=uc_member]").mouseover();
+		$("a[_for=flink_1]").mouseover();
+	});
+	function CheckLogin1(){
+	  var taget_obj = document.getElementById('_userlogin1');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("{dede:global.cfg_cmspath/}/member/ajax_loginsta.php");
+	  DedeXHTTP = null;
+	}
+	function CheckLogin2(){
+	  var taget_obj = document.getElementById('_userlogin2');
+	  myajax = new DedeAjax(taget_obj,false,false,'','','');
+	  myajax.SendGet2("{dede:global.cfg_cmspath/}/member/ajax_loginsta2.php");
+	  DedeXHTTP = null;
+	}
+	/*滚动效果*/
+ $(function () {
+                var $this = $(".scroll_nr1");
+                var scrollTimer;
+                $this.hover(function () {
+                    clearInterval(scrollTimer);
+                }, function () {
+                    scrollTimer = setInterval(function () {
+                        scrollNews($this);
+                    }, 3000);
+                }).trigger("mouseout");
+            });
+ $(function () {
+                var $this = $(".scroll_nr2");
+                var scrollTimer;
+                $this.hover(function () {
+                    clearInterval(scrollTimer);
+                }, function () {
+                    scrollTimer = setInterval(function () {
+                        scrollNews($this);
+                    }, 3000);
+                }).trigger("mouseout");
+            });
+  $(function () {
+                var $this = $(".scroll_nr3");
+                var scrollTimer;
+                $this.hover(function () {
+                    clearInterval(scrollTimer);
+                }, function () {
+                    scrollTimer = setInterval(function () {
+                        scrollNews($this);
+                    }, 3000);
+                }).trigger("mouseout");
+            });
+  $(function () {
+                var $this = $(".scroll_nr4");
+                var scrollTimer;
+                $this.hover(function () {
+                    clearInterval(scrollTimer);
+                }, function () {
+                    scrollTimer = setInterval(function () {
+                        scrollNews($this);
+                    }, 3000);
+                }).trigger("mouseout");
+            });
+   $(function () {
+                var $this = $(".scroll_nr5");
+                var scrollTimer;
+                $this.hover(function () {
+                    clearInterval(scrollTimer);
+                }, function () {
+                    scrollTimer = setInterval(function () {
+                        scrollNews($this);
+                    }, 3000);
+                }).trigger("mouseout");
+            });
+            
+            
+            
+            function scrollNews(obj) {
+                var $self = obj.find("ul:first");
+                var lineHeight = $self.find("li:first").height();
+                $self.animate({ "margin-top": -lineHeight + "px" }, 600, function () {
+                    $self.css({ "margin-top": "0px" }).find("li:first").appendTo($self);
+                })
+            }
+
+</script>
+</head>
+<body  >
+{dede:include filename="head2.htm"/}
+<!-- /header -->
+<div class="m1400 center clear">
+
+<div id="daohang">
+<a href="{dede:global.cfg_cmsurl/}/">物流首页</a> &gt;&gt; 物流资讯
+</div>
+<div class="tyxbox"><div class="tyxboxWrap">
+<div class="tyxleft">
+<div class="w427 mr20  ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>物流资讯</b><span></span></div>
+<div id="slideBox1" class="slideBox1"> <div class="hd">
+      <ul><li class=""></li><li class="on"></li><li class=""></li></ul>
+    </div>
+    <div class="bd">
+     <ul> 
+{dede:arclist flag='f,p'  row='3' typeid='52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67' titlelen='80' orderby='pubdate' }
+<li style="display: list-item;"><a href="[field:arcurl/]" target="_blank"><img class="scrollLoading" src="[field:litpic/]"  alt="[field:title/]"></a>
+<p class="con">[field:title/]</p>
+</li>
+{/dede:arclist}
+
+</ul>
+</div>
+</div>
+<div class="w427s mr20 mt20 ">
+<ul class="alist">
+{dede:arclist  row='6' typeid='52,53,54' titlelen='80' }
+<li><a href="[field:arcurl/]">[field:title/]</a><span>[field:pubdate function='strftime("%m-%d",time())'/]</span></li>
+{/dede:arclist}
+
+
+</ul>
+</div>
+</div>
+
+<div class="w506 ">
+		{dede:arclist flag='h'   row='1' typeid='52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67' titlelen='80'   orderby='pubdate'  }
+<div class="sHeadern">
+<div class="xt_bottom w102"></div><b>今日要闻：
+	<a href="[field:arcurl/]">[field:title/] </a></b>
+	
+</div>
+	<div class="wztwzy">
+	<a href="[field:arcurl/]">[field:info function='cn_substr(@me,180)' /]…</a>
+	
+	<div class="wztwgw"><a href="[field:arcurl/]" class="orange"> + 浏览详情</a></div>
+	
+	</div>
+	{/dede:arclist}
+<ul class="alist">
+{dede:arclist   row='13' typeid='52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67' titlelen='80'  orderby='rand'  }
+<li><a href="javascript:void(0);" class="cur">物流资讯</a><a href="list.php?tid=[field:typeid/]" class="tag">[field:typename/]</a><a href="[field:arcurl/]">[field:title/]</a><span>[field:pubdate function='strftime("%m-%d",time())'/]</span></li>
+{/dede:arclist}
+
+
+</ul>
+</div>
+</div>
+<div class="tyxright">
+<div class="w427 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>关注排行</b><span></span></div>
+<ul class="alist">
+{dede:arclist   row='5'  typeid='52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67' titlelen='80'  orderby='click'  }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]</span></li>
+{/dede:arclist}
+
+</ul>
+</div>
+<div class="w427 mt20 tac">
+<div id="slideBox3" class="ads320 wad300 wad405"> 
+<div class="hd"> <ul><li class=""></li><li class=""></li><li class="on"></li></ul></div>
+    <div class="bd">
+     <ul> 
+     	{dede:arclist flag='s,p'   row='3'  typeid='52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67' titlelen='80'  orderby='pubdate'  }
+
+	 <li style="display: list-item;"><a href="[field:arcurl/]"><img class="scrollLoading" src="[field:litpic/]"  width="320" height="93" alt="[field:title/]"></a></li>
+	 {/dede:arclist}
+     </ul>
+     </div>
+
+ </div>
+ </div> 
+</div>
+</div>
+</div>
+
+<div class="ad1190 ad1400">
+<div class="echart_scroll" >
+	<div class="fl echart_scroll_sm">全国专线价:</div>
+	<div class="fl echart_scroll_nr" style="width: 1200px;">
+		<div class="fl echart_scroll_nr800">
+		<ul class="echart_scroll_nr1">
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发武汉</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发合肥</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+		    <li><a href="javascript:void(0)" target="_blank"><span>广州发南昌</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+			<li><a href="javascript:void(0)" target="_blank"><span>广州发郑州</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+		</ul>
+		<ul class="echart_scroll_nr2"></ul>
+		</div>
+	</div>
+</div>
+</div>
+
+
+
+<div class="w1190 w1400">
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div>
+<b>行业资讯</b>
+<span><a href="list.php?tid=52">+更多行业资讯</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='52' titlelen='80' orderby="pubdate" }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>国内物流新闻</b><span><a href="list.php?tid=53">+更多国内物流新闻</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='53' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>国际物流新闻</b><span><a href="list.php?tid=54">+更多国际物流新闻</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='54' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>理政资讯</b><span><a href="list.php?tid=55">+更多理政资讯</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='55' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>交通资讯</b><span><a href="list.php?tid=56">+更多交通资讯</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='56' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>信息化资讯</b><span><a href="list.php?tid=57">+更多信息化资讯</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='57' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+<div class="h10"></div>
+<div class="ad1190 ad1400 mt20"><a href="javascript:void(0)" target="_blank"><img alt="欢迎点击" src="/templets/default/images/index/24banners2.png" border="0" style="height:90px;width:1400px;"></a> 
+</div>
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>采购资讯</b><span><a href="list.php?tid=58">+更多采购资讯</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='58' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>仓储与配送</b><span><a href="list.php?tid=59">+更多仓储与配送</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='59' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>经贸资讯</b><span><a href="list.php?tid=60">+更多经贸资讯</a></span></div>
+<ul class="tylist">
+
+{dede:arclist   row='8' typeid='60' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>流通资讯</b><span><a href="list.php?tid=61">+更多流通资讯</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='61' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>铁路资讯</b><span><a href="list.php?tid=62">+更多铁路资讯</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='62' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+
+</ul>
+</div>
+
+<div class="w453 mt20 fl  ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>物流前沿</b><span><a href="list.php?tid=15">+更多物流前沿</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='15' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+<div class="h10"></div>
+<div class="ad1190 ad1400 mt20"><a href="javascript:void(0)" target="_blank"><img alt="欢迎点击" src="/templets/default/images/index/26banners3.png" border="0" style="height:90px;width:1400px;"></a> 
+</div>
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>供应链管理</b><span><a href="list.php?tid=63">+更多供应链管理</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='63' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>物流行业分析</b><span><a href="list.php?tid=64">+更多物流行业分析</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='64' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>经济数据公布</b><span><a href="list.php?tid=65">+更多经济数据公布</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='65' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>经济形势分析</b><span><a href="list.php?tid=66">+更多经济形势分析</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='66' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+
+<div class="w453 mt20 fl  mr16 ">
+<div class="sHeadern">
+<div class="xt_bottom"></div><b>路况信息</b><span><a href="list.php?tid=67">+更多路况信息</a></span></div>
+<ul class="tylist">
+{dede:arclist   row='8' typeid='67' titlelen='80' }
+<li><a href="[field:arcurl/]" title="[field:title/]">[field:title/]</a><span>[field:click/]次浏览</span></li>
+{/dede:arclist}
+</ul>
+</div>
+	
+</div>
+<script>
+//echart滚动脚本
+var speed=30; //数字越大速度越慢
+var tab=$(".echart_scroll_nr");
+var tab1=$(".echart_scroll_nr1");
+var tab2=$(".echart_scroll_nr2");
+tab2.html(tab1.html());
+console.log('tab2:'+tab2.html())
+function Marquee(){
+if(tab2[0].offsetWidth-tab[0].scrollLeft<=0)
+{
+tab[0].scrollLeft-=tab1[0].offsetWidth
+//console.log('tab1[0].offsetWidth:'+tab1[0].offsetWidth)
+}
+else{
+tab[0].scrollLeft++;
+//console.log('tab[0].scrollLeft:'+tab1[0].scrollLeft)
+}
+}
+var MyMar=setInterval(Marquee,speed);
+tab.mouseover(function() {clearInterval(MyMar);})
+tab.mouseout(function() {MyMar=setInterval(Marquee,speed)})
+</script>
+<script type="text/javascript">
+
+$("#slideBox1").slide({mainCell:".bd ul",autoPlay:true, delayTime:0, trigger:"click"});
+$("#slideBox2").slide({mainCell:".bd ul",autoPlay:true});
+$("#slideBox3").slide({mainCell:".bd ul",autoPlay:true});
+$(".scrollLoading").scrollLoading();
+</script>
+<div class="h50"></div>
+{dede:include filename="footer.htm"/}
+<!-- /footer -->
+<div id="popupMask"></div><div id="popupContainer"><div id="popupInner"><div id="popupTitleBar"><div id="popupTitle"></div><div id="popupControls"><img src="./zxnews_files/close.gif" height="20" width="20" onclick="hidePopWin(false);" id="popCloseBox"></div></div><iframe src="./zxnews_files/loading.html" style="width:100%;height:100%;background-color:transparent;" scrolling="no" frameborder="0" allowtransparency="true" id="popupFrame" name="popupFrame" width="100%" height="100%"></iframe></div></div></body></html>
+</body>
+</html>

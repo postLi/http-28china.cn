@@ -1,7 +1,7 @@
 export default function(app) {
   let axios = app.$axios
   // 基本配置
-  axios.defaults.timeout = 10000
+  axios.defaults.timeout = 30000
   axios.defaults.baseUrl = ''
   axios.defaults.headers.post['Content-Type'] =
     'application/x-www-form-urlencoded'

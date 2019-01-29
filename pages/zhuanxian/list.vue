@@ -676,8 +676,8 @@ export default {
     border-radius: 2px;
     color: #f9f9f9;
     font-size: 16px;
-    background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png)
-      10px 6px #3f94ee;
+    background: no-repeat url(../../static/line/images/wlgs_search.png) 10px 6px
+      #3f94ee;
     text-align: left;
     padding-left: 30px;
     margin-left: 20px;
@@ -856,7 +856,7 @@ export default {
   .icon-btn-arrow-down-2 {
     margin-top: 5px;
     display: inline-block;
-    background: url(../../static/images/list_wlzx/xiajt.png);
+    background: url(../../static/line/images//xiajt.png);
     background-repeat: no-repeat;
     width: 12px;
     height: 7px;
@@ -874,7 +874,7 @@ export default {
   .icon-btn-arrow-up-2 {
     margin-top: 5px;
     display: inline-block;
-    background: url(../../static/images/list_wlzx/up_jt.png);
+    background: url(../../static/line/images/up_jt.png);
     background-repeat: no-repeat;
     width: 12px;
     height: 7px;
@@ -883,7 +883,8 @@ export default {
   /**/
   #wlLineFrom {
     width: 190px;
-    background: url(/line/images/start_addr.png) no-repeat 200px 8px #fff;
+    background: url(../../static/line/images/start_addr.png) no-repeat 200px 8px
+      #fff;
     background-size: 16px 17px;
     padding-right: 20px;
   }

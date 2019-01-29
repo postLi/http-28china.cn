@@ -700,7 +700,7 @@ function tjcx01() {
 
             if (aaa.indexOf(departureTimeCode) != -1) {
 
-              console.log(aaa);
+              // console.log(aaa);
               $("#tjcx_01 a").removeClass("now");
               $(this).addClass("now");
             }
@@ -1117,7 +1117,7 @@ function process02(currentPage) {
           var num0 = Math.random();
           var num = Math.ceil(num0 * 30);
           // console.log(num,'num');
-          var src1 = "/zhuanxian/images/bg" + num + ".png";
+          var src1 = "/line/images/bg" + num + ".png";
 
           if (datas[i].rangeLogo) {
             if (datas[i].rangeLogo.indexOf(',')) {
@@ -1129,7 +1129,7 @@ function process02(currentPage) {
               // $(".nr_a21_img img").attr("src",src1);
             }
           }
-          if (datas[i].rangeLogo ==null ) {
+          if (datas[i].rangeLogo =='' ) {
             $(".scrollLoading").attr("src", src1);
           }
           $(".nr_a21_img img").attr("alt", companyName);

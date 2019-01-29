@@ -35,7 +35,7 @@ function myCode(myname) {
     },
     url: '../../js/regions.json',
     async: false,
-    success: function(res) {
+    success: function (res) {
       for (var i = 0; i < res.length; i++) {
         var code = res[i].code
         var name = res[i].name
@@ -44,7 +44,7 @@ function myCode(myname) {
         }
       }
     },
-    error: function(err) {
+    error: function (err) {
       console.log(err.responseText)
     }
   })
@@ -53,7 +53,7 @@ function myCode(myname) {
 }
 
 //找专线/货源/车源 S
-$('.arc_input3').click(function() {
+$('.arc_input3').click(function () {
   var search_type = $('#search_type option:selected').attr('name')
   var start = $('.arc_input1').val()
   var end = $('.arc_input2').val()
@@ -87,7 +87,7 @@ var defen2 = '中评'
 var defen3 = '好评'
 
 //第一行
-$('#pjxx1_1').click(function() {
+$('#pjxx1_1').click(function () {
   $('#pj_f1').html(fen1)
   $('#pj_f1').css('display', 'block')
   $('#pjxx1_1').attr('src', src2)
@@ -96,7 +96,7 @@ $('#pjxx1_1').click(function() {
   $('#pjxx1_4').attr('src', src1)
   $('#pjxx1_5').attr('src', src1)
 })
-$('#pjxx1_2').click(function() {
+$('#pjxx1_2').click(function () {
   $('#pj_f1').html(fen2)
   $('#pj_f1').css('display', 'block')
   $('#pjxx1_1').attr('src', src2)
@@ -105,7 +105,7 @@ $('#pjxx1_2').click(function() {
   $('#pjxx1_4').attr('src', src1)
   $('#pjxx1_5').attr('src', src1)
 })
-$('#pjxx1_3').click(function() {
+$('#pjxx1_3').click(function () {
   $('#pj_f1').html(fen3)
   $('#pj_f1').css('display', 'block')
   $('#pjxx1_1').attr('src', src2)
@@ -114,7 +114,7 @@ $('#pjxx1_3').click(function() {
   $('#pjxx1_4').attr('src', src1)
   $('#pjxx1_5').attr('src', src1)
 })
-$('#pjxx1_4').click(function() {
+$('#pjxx1_4').click(function () {
   $('#pj_f1').html(fen4)
   $('#pj_f1').css('display', 'block')
   $('#pjxx1_1').attr('src', src2)
@@ -123,7 +123,7 @@ $('#pjxx1_4').click(function() {
   $('#pjxx1_4').attr('src', src2)
   $('#pjxx1_5').attr('src', src1)
 })
-$('#pjxx1_5').click(function() {
+$('#pjxx1_5').click(function () {
   $('#pj_f1').html(fen5)
   $('#pj_f1').css('display', 'block')
   $('#pjxx1_1').attr('src', src2)
@@ -133,7 +133,7 @@ $('#pjxx1_5').click(function() {
   $('#pjxx1_5').attr('src', src2)
 })
 //第二行
-$('#pjxx2_1').click(function() {
+$('#pjxx2_1').click(function () {
   $('#pj_f2').html(fen1)
   $('#pj_f2').css('display', 'block')
   $('#pjxx2_1').attr('src', src2)
@@ -142,7 +142,7 @@ $('#pjxx2_1').click(function() {
   $('#pjxx2_4').attr('src', src1)
   $('#pjxx2_5').attr('src', src1)
 })
-$('#pjxx2_2').click(function() {
+$('#pjxx2_2').click(function () {
   $('#pj_f2').html(fen2)
   $('#pj_f2').css('display', 'block')
   $('#pjxx2_1').attr('src', src2)
@@ -151,7 +151,7 @@ $('#pjxx2_2').click(function() {
   $('#pjxx2_4').attr('src', src1)
   $('#pjxx2_5').attr('src', src1)
 })
-$('#pjxx2_3').click(function() {
+$('#pjxx2_3').click(function () {
   $('#pj_f2').html(fen3)
   $('#pj_f2').css('display', 'block')
   $('#pjxx2_1').attr('src', src2)
@@ -160,7 +160,7 @@ $('#pjxx2_3').click(function() {
   $('#pjxx2_4').attr('src', src1)
   $('#pjxx2_5').attr('src', src1)
 })
-$('#pjxx2_4').click(function() {
+$('#pjxx2_4').click(function () {
   $('#pj_f2').html(fen4)
   $('#pj_f2').css('display', 'block')
   $('#pjxx2_1').attr('src', src2)
@@ -169,7 +169,7 @@ $('#pjxx2_4').click(function() {
   $('#pjxx2_4').attr('src', src2)
   $('#pjxx2_5').attr('src', src1)
 })
-$('#pjxx2_5').click(function() {
+$('#pjxx2_5').click(function () {
   $('#pj_f2').html(fen5)
   $('#pj_f2').css('display', 'block')
   $('#pjxx2_1').attr('src', src2)
@@ -179,7 +179,7 @@ $('#pjxx2_5').click(function() {
   $('#pjxx2_5').attr('src', src2)
 })
 //第三行
-$('#pjxx3_1').click(function() {
+$('#pjxx3_1').click(function () {
   $('#pj_f3').html(fen1)
   $('#pj_f3').css('display', 'block')
   $('#pjxx3_1').attr('src', src2)
@@ -188,7 +188,7 @@ $('#pjxx3_1').click(function() {
   $('#pjxx3_4').attr('src', src1)
   $('#pjxx3_5').attr('src', src1)
 })
-$('#pjxx3_2').click(function() {
+$('#pjxx3_2').click(function () {
   $('#pj_f3').html(fen2)
   $('#pj_f3').css('display', 'block')
   $('#pjxx3_1').attr('src', src2)
@@ -197,7 +197,7 @@ $('#pjxx3_2').click(function() {
   $('#pjxx3_4').attr('src', src1)
   $('#pjxx3_5').attr('src', src1)
 })
-$('#pjxx3_3').click(function() {
+$('#pjxx3_3').click(function () {
   $('#pj_f3').html(fen3)
   $('#pj_f3').css('display', 'block')
   $('#pjxx3_1').attr('src', src2)
@@ -206,7 +206,7 @@ $('#pjxx3_3').click(function() {
   $('#pjxx3_4').attr('src', src1)
   $('#pjxx3_5').attr('src', src1)
 })
-$('#pjxx3_4').click(function() {
+$('#pjxx3_4').click(function () {
   $('#pj_f3').html(fen4)
   $('#pj_f3').css('display', 'block')
   $('#pjxx3_1').attr('src', src2)
@@ -215,7 +215,7 @@ $('#pjxx3_4').click(function() {
   $('#pjxx3_4').attr('src', src2)
   $('#pjxx3_5').attr('src', src1)
 })
-$('#pjxx3_5').click(function() {
+$('#pjxx3_5').click(function () {
   $('#pj_f3').html(fen5)
   $('#pj_f3').css('display', 'block')
   $('#pjxx3_1').attr('src', src2)
@@ -225,7 +225,7 @@ $('#pjxx3_5').click(function() {
   $('#pjxx3_5').attr('src', src2)
 })
 //评价积分处理
-$('.pj_box3 img').click(function() {
+$('.pj_box3 img').click(function () {
   if (
     $('#pj_f1').html() != '' &&
     $('#pj_f2').html() != '' &&
@@ -262,7 +262,7 @@ $('.pj_box3 img').click(function() {
   }
 })
 
-$('#pj_nr').keyup(function() {
+$('#pj_nr').keyup(function () {
   var len = this.value.length
 
   var limit = 400 - len
@@ -281,17 +281,30 @@ function GetQueryString(e) {
 var aid = GetQueryString('id')
 var publishId = GetQueryString('publishId')
 
-vo = new Object()
-var assessLevel = ''
-vo.assessLevel = assessLevel
-vo.transportRangeId = aid
+// vo = new Object()
+// var assessLevel ,assessLevel,transportRangeId;
+// vo.assessLevel = assessLevel
+// vo.transportRangeId = aid
+// if (!assessLevel || assessLevel == 'null') {
+//   delete vo.assessLevel
+// }
+// $('.arc_pjbt_item input').click(function() {
+//   var val = $('[name=radio]:checked').attr('value')
+//   // console.log(val);
+//   vo.assessLevel = val
+//   process04()
+// })
+// vo = new Object()
+var assessLevel, assessLevel, transportRangeId;
+assessLevel = assessLevel
+transportRangeId = aid
 if (!assessLevel || assessLevel == 'null') {
-  delete vo.assessLevel
+  delete assessLevel
 }
-$('.arc_pjbt_item input').click(function() {
+$('.arc_pjbt_item input').click(function () {
   var val = $('[name=radio]:checked').attr('value')
   // console.log(val);
-  vo.assessLevel = val
+  assessLevel = val
   process04()
 })
 
@@ -304,7 +317,7 @@ function process1() {
     },
     url: '/api/28-web/range/' + aid,
 
-    success: function(res) {
+    success: function (res) {
       $('#js019 .price_box_item2')
         .not(':eq(0)')
         .remove()
@@ -334,7 +347,7 @@ function process1() {
       }
       if (!transportRemark) {
         transportRemark =
-          '暂无专线说明。点击为您推荐<a target="_blank" href="/zhuanxian/list/&start=' +
+          '暂无专线说明。点击为您推荐<a target="_blank" href="/zhuanxian/list/?start=' +
           startCity +
           '&end=' +
           endCity +
@@ -371,7 +384,7 @@ function process1() {
       var num0 = Math.random()
       var num = Math.ceil(num0 * 30)
       // console.log(num);
-      var src1 = '/templets/default/images/pic/bg' + num + '.png'
+      var src1 = '/line/images/bg' + num + '.png'
       if (!rangeLogo1) {
         //$("#nr0714").css("display","none");
         //$("#nr0715").css("display","none");
@@ -615,33 +628,33 @@ function process1() {
       $('#arc_nav_a2').attr(
         'href',
         '/plus/list.php?tid=4' +
-          '&startp=' +
-          startProvince +
-          '&startc=' +
-          startCity +
-          '&endp=' +
-          endProvince +
-          '&endc=' +
-          endCity
+        '&startp=' +
+        startProvince +
+        '&startc=' +
+        startCity +
+        '&endp=' +
+        endProvince +
+        '&endc=' +
+        endCity
       )
       $('#arc_nav_a3').attr(
         'href',
         '/plus/list.php?tid=4' +
-          '&startp=' +
-          startProvince +
-          '&startc=' +
-          startCity +
-          '&starta=' +
-          startArea +
-          '&endp=' +
-          endProvince +
-          '&endc=' +
-          endCity +
-          '&enda=' +
-          endArea
+        '&startp=' +
+        startProvince +
+        '&startc=' +
+        startCity +
+        '&starta=' +
+        startArea +
+        '&endp=' +
+        endProvince +
+        '&endc=' +
+        endCity +
+        '&enda=' +
+        endArea
       )
     },
-    error: function(err) {
+    error: function (err) {
       console.log(err, 'errr')
     }
   })
@@ -657,16 +670,14 @@ function process02() {
     headers: {
       'Content-Type': 'application/json'
     },
-    url: '/api/aflc-portal/portalt/aflcPointNetwork/v1/listDetailPointNetwork',
+    url: '/api/28-web//pointNetwork/findCompanyNet',
     dataType: 'json',
     data: JSON.stringify({
       currentPage: 1,
       pageSize: 6,
-      vo: {
-        companyId: publishId
-      } //JSON.stringify({})
+      companyId: publishId
     }),
-    success: function(res) {
+    success: function (res) {
       var datas = res.data.list
       if (datas == '') {
         $('.tjwd_list').css('display', 'block')
@@ -678,6 +689,7 @@ function process02() {
           pointName = pointName.substring(0, 12) + '..'
         }
         var companyName = datas[i].companyName
+        // console.log(companyName,'companyName');
         if (companyName && companyName.length > 16) {
           companyName = companyName.substring(0, 16) + '..'
         }
@@ -707,7 +719,7 @@ function process02() {
         $('#js013').append(s1 + s2 + s3)
       }
     },
-    error: function(err) {
+    error: function (err) {
       console.log(err.responseText)
     }
   })
@@ -725,8 +737,8 @@ function process3(startCity, endCity) {
     },
     url: '/api/28-web/logisticsCompany/' + publishId,
 
-    success: function(res) {
-      console.log(res, 'resssss')
+    success: function (res) {
+      // console.log(res, 'resssss')
       var datas = res.data
 
       var account = datas.account
@@ -843,13 +855,13 @@ function process3(startCity, endCity) {
         }
       }
       var orderurl =
-        '/plus/list.php?tid=77&uid=' +
+        '/create/line?uid=' +
         account +
         '&id=' +
         aid +
         '&publishId=' +
         publishId
-      $('#order_arc').click(function() {
+      $('#order_arc').click(function () {
         window.open(orderurl)
       })
       $('#nr1020').html(companyName)
@@ -865,7 +877,7 @@ function process3(startCity, endCity) {
       $('#nr1036').html(collateral)
       $('#nr10232').html(address)
     },
-    error: function(err) {
+    error: function (err) {
       console.log(err.responseText)
     }
   })
@@ -889,50 +901,57 @@ function process04(currentPage) {
     data: JSON.stringify({
       currentPage: currentPage,
       pageSize: 10,
-      vo: vo //JSON.stringify({})
+      transportRangeId: transportRangeId,
+      assessLevel: assessLevel,
     }),
-    success: function(res) {
+    success: function (res) {
+
       $('#js014 .arc_pjnr_item')
         .not(':eq(0)')
         .remove()
       if (res.data) {
         totalPage = res.data.totalPage
-        // console.log(totalPage);
       }
-      var datas = res.data.list
-      for (var i = 0; i < datas.length; i++) {
-        var evaluationName = datas[i].evaluationName
-        var evaluationDes = datas[i].evaluationDes
-        var replyDes = datas[i].replyDes
+      var datas = res.data.list, evaluationDes;
+      // console.log(res.data.list,'res.data.list');
+      if (!datas.length || datas === []) {
+        $('.arc_prinr_p').show()
+        $('.arc_pjnr_item').hide()
+        evaluationDes = '此用户没有评论'
+        $('.arc_prinr_p').html(evaluationDes)
+      }
+      else {
+        $('.arc_prinr_p').hide()
+        for (var i = 0; i < datas.length; i++) {
+          var evaluationName = datas[i].evaluationName
+          evaluationDes = datas[i].evaluationDes
+          var replyDes = datas[i].replyDes
+          var createTime = datas[i].createTime
+          $('#nr1031').html(evaluationName)
+          $('#nr1032').html(evaluationDes)
+          $('#nr1033').html(createTime)
+          $('#nr1034').html(replyDes)
+          var s1 = '<div class="arc_pjnr_item' + ' pj_item' + i + '">'
+          var s2 = $('.arc_pjnr_item').html()
+          var s3 = '</div>'
+          $('#js014').append(s1 + s2 + s3)
 
-        var createTime = datas[i].createTime
-        if (!evaluationDes || evaluationDes == '\n') {
-          // console.log("暂无评价内容")
-          evaluationDes = '此用户没有评论'
-        }
-
-        $('#nr1031').html(evaluationName)
-        $('#nr1032').html(evaluationDes)
-
-        $('#nr1033').html(createTime)
-        $('#nr1034').html(replyDes)
-        var s1 = '<div class="arc_pjnr_item' + ' pj_item' + i + '">'
-        var s2 = $('.arc_pjnr_item').html()
-        var s3 = '</div>'
-        $('#js014').append(s1 + s2 + s3)
-
-        if (replyDes) {
-          $('.pj_item' + i + ' #item_p5').css('display', 'block')
+          if (replyDes) {
+            $('.pj_item' + i + ' #item_p5').css('display', 'block')
+          }
         }
       }
+
+
     },
-    error: function(err) {
+    error: function (err) {
       console.log(err.responseText)
     }
   })
   return totalPage
 }
 
+process04(1)
 //专线评价列表 E
 
 //专线评价数量  S
@@ -944,7 +963,7 @@ function process5() {
     },
     url: '/api/28-web/rangeEva/range/assessLevel/count/?rangeId=' + aid,
 
-    success: function(res) {
+    success: function (res) {
       var datas = res.data
       var count = datas.all
       var good = datas.good
@@ -958,8 +977,8 @@ function process5() {
       $('#nr1048').html(count)
       $('#nr0745').html(count)
     },
-    error: function(err) {
-      // console.log(err.responseText);
+    error: function (err) {
+      console.log(err);
     }
   })
 }
@@ -987,7 +1006,7 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         rangeIds: rangeIds
       } //JSON.stringify({})
     }),
-    success: function(res) {
+    success: function (res) {
       $('#js017 .tj_list')
         .not(':eq(0)')
         .remove()
@@ -1083,7 +1102,7 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         $('.arc_bottom').css('display', 'none')
       }
     },
-    error: function(err) {
+    error: function (err) {
       // console.log(err.responseText);
     }
   })
@@ -1101,14 +1120,14 @@ function tjcx01() {
     },
     url: '/api/aflc-common/sysDict/getSysDictByCodeGet/AF0360301',
 
-    success: function(res) {
+    success: function (res) {
       var datas = res.data
       for (var i = 0; i < datas.length; i++) {
         var value = datas[i].value
         var code = datas[i].code
       }
     },
-    error: function(err) {
+    error: function (err) {
       console.log(err.responseText)
     }
   })
@@ -1117,16 +1136,14 @@ function tjcx01() {
 //专线数据字典 E
 
 //专线详情评价S
-function process06(
-  evaluationDes,
-  evaluationId,
-  evaluationName,
-  serverPriceStarLevel,
-  serverQualityStarLevel,
-  transportAgingStarLevel,
-  transportRangeId,
-  assessLevel
-) {
+function process06(evaluationDes,
+                   evaluationId,
+                   evaluationName,
+                   serverPriceStarLevel,
+                   serverQualityStarLevel,
+                   transportAgingStarLevel,
+                   transportRangeId,
+                   assessLevel) {
   $.ajax({
     type: 'post',
     headers: {
@@ -1144,12 +1161,12 @@ function process06(
       transportRangeId: transportRangeId,
       assessLevel: assessLevel
     }),
-    success: function(res) {
+    success: function (res) {
       var datas = res.data.list
       process04(1)
       process5()
     },
-    error: function(err) {
+    error: function (err) {
       console.log(err.responseText)
     }
   })
@@ -1159,7 +1176,7 @@ function process06(
 //专线详情评价 E
 
 //提交评价 S
-$('#pj_submit').click(function() {
+$('#pj_submit').click(function () {
   var login_mobile = getCookie('login_mobile')
   var login_type = getCookie('login_type')
   var access_token = getCookie('access_token')
@@ -1229,17 +1246,17 @@ $('#pj_submit').click(function() {
 
   console.log(
     serverPriceStarLevel +
-      ':' +
-      serverQualityStarLevel +
-      ':' +
-      transportAgingStarLevel +
-      ':' +
-      assessLevel +
-      ':' +
-      evaluationDes +
-      transportRangeId +
-      evaluationName +
-      evaluationId
+    ':' +
+    serverQualityStarLevel +
+    ':' +
+    transportAgingStarLevel +
+    ':' +
+    assessLevel +
+    ':' +
+    evaluationDes +
+    transportRangeId +
+    evaluationName +
+    evaluationId
   )
   if (!pj_zh) {
     alert('请完善评价信息！')

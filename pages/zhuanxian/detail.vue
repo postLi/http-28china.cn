@@ -1,4 +1,3 @@
-
 <template>
   <div class="lll-zhuangXian-detail">
     <div class="arc_main">
@@ -644,9 +643,13 @@
             <div
               id="js014"
               class="arc_pjnr_nr">
+              <p
+                style="display: none"
+                class="arc_prinr_p">dfdfdfsdfdfdf</p>
               <div
                 class="arc_pjnr_item"
                 style="display: none;">
+
                 <div class="arc_pjnr_item_left">
                   <p class="item_p1"><font id="nr1031">134****1323</font></p>
                   <p class="item_p2">
@@ -660,7 +663,6 @@
                     id="item_p5"
                     class="item_p5"
                     style="display: none"><font id="nr10340">[回复]：</font><font id="nr1034"/></p>
-
                 </div>
               </div>
 
@@ -837,6 +839,7 @@ export default {
                 })
                 //  增值服务切换
               }
+
               mousePrice()
               //  <!-- 阶梯价格浮层弹出效果 E-
             })
@@ -860,6 +863,10 @@ export default {
   }
   .clearfix:after {
     clear: both;
+  }
+  .arc_prinr_p {
+    padding: 20px 0 0 15px;
+    font-size: 14px;
   }
 }
 </style>

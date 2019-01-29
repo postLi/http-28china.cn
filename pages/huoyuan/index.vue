@@ -74,23 +74,26 @@
                   readonly 
                   name="Submit2" 
                   value=" 搜索 " 
-                  class="list_button">
+                  class="list_button"
+                  @click="search()">
                 <input 
                   id="flush" 
                   name="Submit2" 
                   readonly 
                   value="重置 " 
-                  class="list_button">
+                  class="list_button"
+                  @click="reload()">
               </form>
               </dd>
 
               <dt>重量区间&nbsp;:</dt>
               <dd id="tjcx_01">
-                <a 
-                  class="now all" 
-                  href="/huoyuan"
-                  style="    float: left;
-    margin-bottom: 10px;">不限</a>
+                <a
+                  v-for="(item,index) in AF03801"
+                  :class="[item.id === AF03801Id ? 'now':'']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF03801Click(item)">{{ index===0? item.name : item.name + '公斤' }}</a>
               </dd>
               <dt>体积区间&nbsp;:</dt>
               <dd>
@@ -116,80 +119,82 @@
             </dl>
           </div>
         </div>
-        <div
-          id="js005"
-          class="w1036 list_hy">
-
+        <div class="w1036 list_hy">
           <div class="zx_sx"><span class="biaozhi"/><span>货源信息</span></div>
           <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
-          <div class="list_none">
+          <div 
+            v-if="hyList.length === 0" 
+            class="list_none" 
+            style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他货源哦</span>
             <img src="../../static/images/none_pic.png">
           </div>
-          <ul
-            class="wlzx_list"
-            style="display: none;"
-          >
+          <ul 
+            v-for="(item,index) in hyList" 
+            :key="index" 
+            class="wlzx_list">
 
             <li id="wlzx_list_0">
               <a
-                id="nr_a41"
+                :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
                 class="list-title-a"
                 target="_blank" >
                 <div class="position">
 
                   <span class="list-icon lines-sprite-icons icon-start"/>
-                  <em id="nr_a41_1"/>
+                  <em>{{ item.start }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
-                  <em id="nr_a41_2"/>
+                  <em>{{ item.end }}</em>
 
                 </div>
               </a>
-              <div class="distance_total">[全程<em id="nr_distance"/>公里]</div>
-              <div class="sc_num"><img src="../../static/images/list_wlzx/ll_num.png"><span><i>浏览量:<em id="nr0499"/></i></span></div>
-              <div class="view_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i>收藏量:<em id="nr0500"/></i></span></div>
+              <div class="distance_total">[全程<em>{{ item.distance }}</em>公里]</div>
+              <div class="sc_num"><img src="../../static/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
+              <div class="view_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
             </li>
 
 
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font id="nr041">电子电器 </font></p>
-              <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i><span id="nr042"/><font id="nr0420" >件</font>&nbsp;|&nbsp;<span id="nr043"/><font >公斤</font>&nbsp;|&nbsp;<span id="nr044">20</span><font >立方米</font></p>
+              <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
+              <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i>
+                <span>{{ item.goodsNum }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
+                <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
+                <span>{{ item.goodsVolume }}<font >立方米</font></span>
+              </p>
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i id="nr045"/></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item4.png"><span>联系人：</span><i id="nr046">张三</i></P>
+              <p class="p1"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+              <p class="p2"><img src="../../static/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i id="nr051"/></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i id="nr052"/></P>
+              <p class="p1"><img src="../../static/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
+              <p class="p2"><img src="../../static/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><img
-                id="list_shiming"
+                v-if="item.authStatus === 'AF0010403'"
                 src="../../static/images/list_wlzx/10shiming.png"></P>
               <p class="p2"><img
-                id="list_xinyong"
+                v-if="item.isVip && item.isVip === '1'"
                 src="../../static/images/list_wlzx/11xinyong.png"></P>
             </li>
 
             <li class="wlzx_list_6">
               <p class="p1"><a
-                id="nr_a42"
+                :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
                 target="_blank"><input
                   readonly
                   value="查看"></a>
               </p>
               <p class="p2"><a
-                id="nr048"
-                target="_blank"
-                href="http://wpa.qq.com/msgrd?v=3&uin=596803544&site=qq&menu=yes">
-                <input
-                  id="qq"
-                  value="QQ交谈"></a>
+                v-if="item.qq"
+                :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
+                target="_blank">
+              <input value="QQ交谈"></a>
               </p>
             </li>
           </ul>
@@ -309,15 +314,44 @@
   </div>
 </template>
 <script>
-async function getRecommendList($axios, app) {
-  let parm = {
-    currentPage: 1,
-    pageSize: 10,
-    vo: {
-      startProvince: app.$cookies.get('currentProvinceFullName'),
-      startCity: app.$cookies.get('currentAreaFullName')
+async function getHyList($axios, currentPage, vo = {}) {
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 20
+  let res = await $axios.post('/28-web/lclOrder/list', parm)
+  if (res.data.status === 200) {
+    res.data.data.list.forEach(item => {
+      if (item.companyName && item.companyName > 8) {
+        item.companyName = item.companyName.substring(0, 8) + '..'
+      }
+      if (!item.companyName) {
+        item.companyName = '普通货主'
+      }
+      item.start = item.startCity + item.startArea
+      item.end = item.endCity + item.endArea
+      if (item.start && item.start.length > 6) {
+        item.start = item.start.substring(0, 6) + '..'
+      }
+      if (item.end && item.end.length > 6) {
+        item.end = item.end.substring(0, 6) + '..'
+      }
+      if (item.goodsName.length > 14) {
+        item.goodsName = item.goodsName.substring(0, 14) + '..'
+      }
+    })
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
     }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
   }
+}
+async function getRecommendList($axios, vo) {
+  let parm = vo
+  parm.currentPage = 1
+  parm.pageSize = 10
   let res = await $axios.post('/28-web/lclOrder/recommendList', parm)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
@@ -363,13 +397,16 @@ export default {
   },
   data() {
     return {
+      hyList: [],
+      pages: 0,
+      currentPage: 1,
       recommendList: [],
       orderClassList: [
         { id: '', name: '不限' },
-        { id: 0, name: '单次急发货源' },
-        { id: 1, name: '长期稳定货源' }
+        { id: 'AF0490701', name: '单次急发货源' },
+        { id: 'AF0490702', name: '长期稳定货源' }
       ],
-      orderClass: '',
+      orderClass: '', //货源类型
       AF03802: [],
       AF03802Id: '',
       goodsVolumeLower: '', //体积区间
@@ -377,20 +414,121 @@ export default {
       AF03801: [],
       AF03801Id: '',
       goodsWeightLower: '', //重量区间
-      goodsWeightUpper: '' //重量区间
+      goodsWeightUpper: '', //重量区间
+      startProvince: '',
+      startCity: '',
+      startArea: '',
+      endProvince: '',
+      endCity: '',
+      endArea: ''
     }
   },
   async asyncData({ $axios, app, query }) {
+    let goodsVolumeLower = '',
+      goodsVolumeUpper = '',
+      goodsWeightLower = '',
+      goodsWeightUpper = '',
+      orderClass = '',
+      AF03801Id = '',
+      AF03802Id = '',
+      endArea = '',
+      endCity = '',
+      endProvince = '',
+      startArea = '',
+      startCity = '',
+      startProvince = ''
+    if (query.goodsVolumeLower) {
+      goodsVolumeLower = query.goodsVolumeLower
+    }
+    if (query.goodsVolumeUpper) {
+      goodsVolumeUpper = query.goodsVolumeUpper
+    }
+    if (query.goodsWeightLower) {
+      goodsWeightLower = query.goodsWeightLower
+    }
+    if (query.goodsWeightUpper) {
+      goodsWeightUpper = query.goodsWeightUpper
+    }
+    if (query.orderClass) {
+      orderClass = query.orderClass
+    }
+    if (query.AF03801Id) {
+      AF03801Id = query.AF03801Id
+    }
+    if (query.AF03802Id) {
+      AF03802Id = query.AF03802Id
+    }
+    if (query.endArea) {
+      endArea = query.endArea
+    }
+    if (query.endCity) {
+      endCity = query.endCity
+    }
+    if (query.endProvince) {
+      endProvince = query.endProvince
+    }
+    if (query.startArea) {
+      startArea = query.startArea
+    }
+    if (query.startCity) {
+      startCity = query.startCity
+    } else {
+      startCity = app.$cookies.get('currentAreaFullName')
+    }
+    if (query.startProvince) {
+      startProvince = query.startProvince
+    } else {
+      startProvince = app.$cookies.get('currentProvinceFullName')
+    }
+    let AF03801 = await $axios.get(
+      '/28chinaservice/sysDict/getSysDictByCodeGet/AF03801'
+    )
+    if (AF03801.data.status === 200) {
+      AF03801.data.data.unshift({ id: '', name: '不限' })
+    }
     let AF03802 = await $axios.get(
       '/28chinaservice/sysDict/getSysDictByCodeGet/AF03802'
     )
     if (AF03802.data.status === 200) {
       AF03802.data.data.unshift({ id: '', name: '不限' })
     }
-    let recommendList = await getRecommendList($axios, app)
+    let vo = {
+      startProvince: startProvince,
+      startCity: startCity,
+      startArea: startArea,
+      endProvince: endProvince,
+      endCity: endCity,
+      endArea: endArea,
+      queryType: 2,
+      orderClass: orderClass,
+      AF03801Id: AF03801Id,
+      AF03802Id: AF03802Id,
+      goodsVolumeLower: goodsVolumeLower,
+      goodsVolumeUpper: goodsVolumeUpper,
+      goodsWeightLower: goodsWeightLower,
+      goodsWeightUpper: goodsWeightUpper
+    }
+    let hyList = await getHyList($axios, 1, vo)
+    let recommendList = await getRecommendList($axios, vo)
     return {
+      AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],
-      recommendList: recommendList
+      recommendList: recommendList,
+      hyList: hyList.list,
+      pages: hyList.pages,
+      goodsVolumeLower: goodsVolumeLower,
+      goodsVolumeUpper: goodsVolumeUpper,
+      goodsWeightLower: goodsWeightLower,
+      goodsWeightUpper: goodsWeightUpper,
+      orderClass: orderClass,
+      AF03801Id: AF03801Id,
+      AF03802Id: AF03802Id,
+      endArea: endArea,
+      endCity: endCity,
+      endProvince: endProvince,
+      startArea: startArea,
+      startCity: startCity,
+      startProvince: startProvince
     }
   },
   mounted() {
@@ -404,491 +542,102 @@ export default {
       $('.expand').css('display', 'none')
       $('.select_con').css('display', 'block')
     })
-    function GetUrlParam(name) {
-      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-      var r = encodeURI(window.location.search)
-        .substr(1)
-        .match(reg)
-      if (r != null) return unescape(r[2])
-      return null
-    }
-    //当前url追加参数 UrlUpdateParams(window.location.href, "mid", 11111)
-    function UrlUpdateParams(url, name, value) {
-      var r = url
-      if (r != null && r != 'undefined' && r != '') {
-        value = encodeURIComponent(value)
-        var reg = new RegExp('(^|)' + name + '=([^&]*)(|$)')
-        var tmp = name + '=' + value
-        if (url.match(reg) != null) {
-          r = url.replace(eval(reg), tmp)
-        } else {
-          if (url.match('[?]')) {
-            r = url + '&' + tmp
-          } else {
-            r = url + '?' + tmp
-          }
-        }
-      }
-      return r
-    }
 
-    var startp1 = GetUrlParam('startp')
-    var endp1 = GetUrlParam('endp')
-    var startc1 = GetUrlParam('startc')
-    var endc1 = GetUrlParam('endc')
-    var starta1 = GetUrlParam('starta')
-    var enda1 = GetUrlParam('enda')
-    var goodsWeight1 = GetUrlParam('goodsWeight1')
-    var goodsWeight2 = GetUrlParam('goodsWeight2')
-    var goodsVolume1 = GetUrlParam('goodsVolume1')
-    var goodsVolume2 = GetUrlParam('goodsVolume2')
-    var orderClass1 = GetUrlParam('orderClass')
-
-    var startp = decodeURI(startp1)
-    var endp = decodeURI(endp1)
-    var startc = decodeURI(startc1)
-    var endc = decodeURI(endc1)
-    var starta = decodeURI(starta1)
-    var enda = decodeURI(enda1)
-    var goodsWeight1 = decodeURI(goodsWeight1)
-    var goodsWeight2 = decodeURI(goodsWeight2)
-    var goodsVolume1 = decodeURI(goodsVolume1)
-    var goodsVolume2 = decodeURI(goodsVolume2)
-    var orderClass = decodeURI(orderClass1)
-
-    var currentAreaFullName = $.cookie('currentAreaFullName')
-    var currentProvinceFullName = $.cookie('currentProvinceFullName')
-
-    var vo = new Object()
-    vo.queryType = '2'
-    vo.startProvince = startp
-    vo.startCity = startc
-    vo.startArea = starta
-    vo.endProvince = endp
-    vo.endCity = endc
-    vo.endArea = enda
-    vo.goodsWeightLower = parseFloat(goodsWeight1).toFixed(0)
-    vo.goodsWeightUpper = parseFloat(goodsWeight2).toFixed(0)
-    vo.goodsVolumeLower = parseFloat(goodsVolume1).toFixed(1)
-    vo.goodsVolumeUpper = parseFloat(goodsVolume2).toFixed(1)
-    vo.orderClass = orderClass
-
-    if (startp || startc) {
-      if (!startp || startp == 'null') {
-        startp = ''
-        delete vo.startProvince
-      }
-      if (!startc || startc == 'null') {
-        startc = ''
-        delete vo.startCity
-      }
-    }
-    if ((!startp || startp == 'null') && (!startc || startc == 'null')) {
-      startc = currentAreaFullName
-      vo.startCity = startc
-      startp = currentProvinceFullName
-      vo.startProvince = startp
-    }
-
-    if (!starta || starta == 'null') {
-      starta = ''
-      delete vo.startArea
-    }
-    if (!endp || endp == 'null') {
-      endp = ''
-      delete vo.endProvince
-    }
-    if (!endc || endc == 'null') {
-      endc = ''
-      delete vo.endCity
-    }
-    if (!enda || enda == 'null') {
-      enda = ''
-      delete vo.endArea
-    }
-
-    if (!goodsWeight1 || goodsWeight1 == 'null') {
-      goodsWeight1 = ''
-      delete vo.goodsWeightLower
-    }
-    if (!goodsWeight2 || goodsWeight2 == 'null') {
-      goodsWeight2 = ''
-      delete vo.goodsWeightUpper
-    }
-    if (!goodsVolume1 || goodsVolume1 == 'null') {
-      goodsVolume1 = ''
-      delete vo.goodsVolumeLower
-    }
-    if (!goodsVolume2 || goodsVolume2 == 'null') {
-      goodsVolume2 = ''
-      delete vo.goodsVolumeUpper
-    }
-    if (!orderClass || orderClass == 'null') {
-      orderClass = ''
-      delete vo.orderClass
-    }
-
-    $('#list_nav_a').html(startc + starta + ' 到 ' + endc + enda + ' 货源信息')
-    if ((!startc && !starta) || (!endc && !enda)) {
-      $('#list_nav_a').html(startc + starta + '  ' + endc + enda + '货源信息')
+    $('#list_nav_a').html(
+      this.startCity +
+        this.startArea +
+        ' 到 ' +
+        this.endCity +
+        this.endArea +
+        ' 货源信息'
+    )
+    if (
+      (!this.startCity && !this.startArea) ||
+      (!this.endCity && !this.endArea)
+    ) {
+      $('#list_nav_a').html(
+        this.startCity +
+          this.startArea +
+          '  ' +
+          this.endCity +
+          this.endArea +
+          '货源信息'
+      )
     }
     $('#HuoyuanFrom input').citypicker({
-      province: startp,
-      city: startc,
-      district: starta
+      province: this.startProvince,
+      city: this.startCity,
+      district: this.startArea
     })
     $('#HuoyuanTo input').citypicker({
-      province: endp,
-      city: endc,
-      district: enda
+      province: this.endProvince,
+      city: this.endCity,
+      district: this.endArea
     })
-    $('#tjcx_01 .all').attr(
-      'href',
-      UrlUpdateParams(
-        UrlUpdateParams(window.location.href, 'goodsWeight1', ''),
-        'goodsWeight2',
-        ''
-      )
-    )
-    $('#tjcx_02 .all').attr(
-      'href',
-      UrlUpdateParams(
-        UrlUpdateParams(window.location.href, 'goodsVolume1', ''),
-        'goodsVolume2',
-        ''
-      )
-    )
-    $('#tjcx_03 .all').attr(
-      'href',
-      UrlUpdateParams(window.location.href, 'orderClass', '')
-    )
-    //清空条件
-    $('#flush').click(function() {
-      console.log('清空地址')
-      window.location.href = '/huoyuan'
-    })
-    //清空条件
-    //货源搜索 S
-
-    $('#search_huoyuan').click(function() {
-      var list1 = [],
+    this.pagination()
+  },
+  methods: {
+    searchDo() {
+      let list1 = [],
         list2 = []
       $('#HuoyuanFrom .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      var startp = list1[0]
-      var startc = list1[1]
-      var starta = list1[2]
+      this.startProvince = list1[0] ? list1[0] : ''
+      this.startCity = list1[1] ? list1[1] : ''
+      this.startArea = list1[2] ? list1[2] : ''
 
       $('#HuoyuanTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
-      var endp = list2[0]
-      var endc = list2[1]
-      var enda = list2[2]
-      if (!startp) {
-        startp = ''
-      }
-      if (!startc) {
-        startc = ''
-      }
-      if (!starta) {
-        starta = ''
-      }
-      if (!endp) {
-        endp = ''
-      }
-      if (!endc) {
-        endc = ''
-      }
-      if (!enda) {
-        enda = ''
-      }
-      startp = encodeURI(startp)
-      startc = encodeURI(startc)
-      starta = encodeURI(starta)
-      endp = encodeURI(endp)
-      endc = encodeURI(endc)
-      enda = encodeURI(enda)
-
-      window.location =
-        '/huoyuan?startp=' +
-        startp +
-        '&startc=' +
-        startc +
-        '&starta=' +
-        starta +
-        '&endp=' +
-        endp +
-        '&endc=' +
-        endc +
-        '&enda=' +
-        enda
-    })
-    //货源搜索 E
-
-    //货源数据字典 S
-
-    function tjcx01() {
-      $.ajax({
-        type: 'get',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
-        url: '/api/28chinaservice/sysDict/getSysDictByCodeGet/AF03801',
-
-        success: function(res) {
-          var datas = res.data
-          for (var i = 0; i < datas.length; i++) {
-            var name = datas[i].name
-            if (name.indexOf('<') != -1) {
-              var name1 = 0
-              var name2 = name.substring(1, 20)
-            } else if (name.indexOf('>') != -1) {
-              var name1 = name.substring(1, 20)
-              var name2 = 100000
-            } else {
-              var name1 = name.split('-', 2)[0]
-              var name2 = name.split('-', 2)[1]
-            }
-
-            var code = datas[i].code
-            var myurl = UrlUpdateParams(
-              UrlUpdateParams(window.location.href, 'goodsWeight1', name1),
-              'goodsWeight2',
-              name2
-            )
-            //       var s1='<a  href=/plus/list.php?tid=2'+sstart+send;
-            //				 var s2='&goodsWeight1='+name1+'&goodsWeight2='+name2+'>';
-            //				 var s3=name+'公斤</a>';
-            var s1 = '<a  href=' + myurl + '>'
-            var s3 = name + '公斤</a>'
-            $('#tjcx_01').append(s1 + s3)
-          }
-          //选中状态 S
-          if (goodsWeight1 && goodsWeight2) {
-            $('#tjcx_01 a').each(function() {
-              var aaa = $(this).attr('href')
-
-              if (
-                aaa.indexOf('goodsWeight1=' + goodsWeight1) != -1 &&
-                aaa.indexOf('goodsWeight2=' + goodsWeight2) != -1
-              ) {
-                //console.log(aaa+":"+goodsWeight1+":"+goodsWeight2);
-                $('#tjcx_01 a').removeClass('now')
-                $(this).addClass('now')
-              }
-            })
-          }
-          //选中状态 E
-        },
-        error: function(err) {
-          console.log(err.responseText)
-        }
-      })
-    }
-    tjcx01()
-
-    //货源信息栏目列表S
-    function process02(currentPage) {
-      var totalPage = 8
-      $.ajax({
-        type: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url: '/api/28chinaservice/lclOrder/list',
-        dataType: 'json',
-        async: false,
-        data: JSON.stringify({
-          currentPage: currentPage,
-          pageSize: 20,
-          //vo:{"queryType":"2","startAddress":start,"endAddress":end,"goodsWeightLower":goodsWeight1,"goodsWeightUpper":goodsWeight2,"goodsVolumeLower":goodsVolume1,"goodsVolumeUpper":goodsVolume2}			//JSON.stringify({})
-          vo: vo //JSON.stringify({})
-        }),
-        success: function(res) {
-          $('#js005 .wlzx_list')
-            .not(':eq(0)')
-            .remove()
-          console.log(res)
-          if (res.data) {
-            totalPage = res.data.pages
-            // console.log(totalPage)
-            // debugger
-          }
-
-          if (!res.data || !res.data.total) {
-            console.log('内容为空')
-            $('.box').css('display', 'none')
-            $('.list_none').css('display', 'block')
-
-            return
-          }
-
-          var datas = res.data.list
-          for (var i = 0; i < datas.length; i++) {
-            var id = datas[i].id
-
-            var shipperId = datas[i].shipperId
-            var account = datas[i].account
-            var qq = datas[i].qq
-            var distance = datas[i].distance
-
-            distance = parseFloat(distance / 1000).toFixed(1)
-            var startCoordinate = datas[i].startCoordinate
-            var endCoordinate = datas[i].endCoordinate
-            var createTime = datas[i].createTime
-
-            if (createTime) {
-              createTime = createTime.substring(0, 19)
-            }
-            var orderClass = datas[i].orderClass
-            if (orderClass == 0) {
-              orderClass = '单次急发货源'
-            }
-            if (orderClass == 1) {
-              orderClass = '长期稳定货源'
-            }
-            var goodsNum = datas[i].goodsNum
-
-            console.log('goodsNum0:' + goodsNum)
-            if (goodsNum <= 0) {
-              console.log('goodsNum1:' + goodsNum)
-              $('#nr042').html('')
-              $('#nr0420').html('')
-            }
-            var startCity = datas[i].startCity
-            var startArea = datas[i].startArea
-            var endCity = datas[i].endCity
-            var endArea = datas[i].endArea
-            if (!startCity) {
-              startCity = ''
-            }
-            if (!endCity) {
-              endCity = ''
-            }
-            if (!startArea) {
-              startArea = ''
-            }
-            if (!endArea) {
-              endArea = ''
-            }
-            var start = startCity + startArea
-            var end = endCity + endArea
-            if (start && start.length > 6) {
-              start = start.substring(0, 6) + '..'
-            }
-            if (end && end.length > 6) {
-              end = end.substring(0, 6) + '..'
-            }
-
-            var goodsName = datas[i].goodsName.replace(/\,/g, ' ')
-            if (goodsName.length > 14) {
-              var goodsName = goodsName.substring(0, 14) + '..'
-            }
-            var goodsWeight = datas[i].goodsWeight
-            var goodsVolume = datas[i].goodsVolume
-            var companyName = datas[i].companyName
-            if (companyName && companyName.length > 8) {
-              companyName = companyName.substring(0, 8) + '..'
-            }
-            var wlName = datas[i].wlName
-            if (!companyName) {
-              companyName = '普通货主'
-            }
-            var shipperName = datas[i].shipperName
-            var createTime = datas[i].createTime.substring(0, 16)
-            var isVip = datas[i].isVip
-            var authStatus = datas[i].authStatus
-            var browseNumber = datas[i].browseNumber
-            var collectNum = datas[i].collectNum
-            if (!browseNumber) {
-              browseNumber = 0
-            }
-            if (!collectNum) {
-              collectNum = 0
-            }
-
-            var url =
-              '/huoyuan/2018/0508/2.html?id=' + id + '&shipperId=' + shipperId
-            $('#nr_a41').attr('href', url)
-            $('#nr_a41_1').html(start)
-            $('#nr_a41_2').html(end)
-            $('#nr_a42').attr('href', url)
-            $('#nr_a43').attr('href', '/member/index.php?uid=' + account)
-            $('#nr041').html(goodsName)
-            if (goodsNum > 0) {
-              $('#nr042').html(goodsNum)
-              $('#nr0420').html('件')
-            }
-
-            $('#nr043').html(goodsWeight)
-            $('#nr044').html(goodsVolume)
-            $('#nr045').html(companyName)
-            $('#nr046').html(shipperName)
-
-            $('#nr051').html(orderClass)
-            $('#nr052').html(createTime)
-            $('#nr048').attr(
-              'href',
-              'tencent://message/?uin=' + qq + '&Site=&menu=yes'
-            )
-            $('#nr049').attr('href', url)
-            $('#nr0499').html(browseNumber)
-            $('#nr0500').html(collectNum)
-            $('#nr_distance').html(distance)
-            var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
-            var s2 = $('.wlzx_list').html()
-            var s3 = '</ul>'
-
-            $('#js005').append(s1 + s2 + s3)
-
-            if (!isVip || isVip == 0) {
-              console.log('is not Vip')
-              $('.wlzx_list' + i + ' #list_xinyong').css('display', 'none')
-            }
-            if (authStatus != 'AF0010403') {
-              console.log('is not shiming')
-              $('.wlzx_list' + i + ' #list_shiming').css('display', 'none')
-            }
-            // if (!qq) {
-            //   $('.wlzx_list' + i + ' .wlzx_list_6 #qq').css(
-            //     'display',
-            //     'none'
-            //   )
-            // }
-          }
-        },
-        error: function(err) {
-          console.log(err.responseText)
-        }
-      })
-      console.log('最终货源总页数：' + totalPage)
-      return totalPage
-    }
-    //process02(1);
-    //货源信息栏目列表 E
-    $('#pagination1').pagination({
-      currentPage: 1,
-      totalPage: process02(1),
-      callback: function(current) {
-        $('#current1').text(current)
-        process02(current)
-        window.location.href = '#top'
-      }
-    })
-  },
-  methods: {
+      this.endProvince = list2[0] ? list2[0] : ''
+      this.endCity = list2[1] ? list2[1] : ''
+      this.endArea = list2[2] ? list2[2] : ''
+    },
+    search() {
+      this.searchDo()
+      //
+      window.location.href = `/huoyuan?goodsVolumeLower=${
+        this.goodsVolumeLower
+      }&AF03801Id=${this.AF03801Id}&goodsVolumeUpper=${
+        this.goodsVolumeUpper
+      }&AF03802Id=${this.AF03802Id}&goodsWeightLower=${
+        this.goodsWeightLower
+      }&goodsWeightUpper=${this.goodsWeightUpper}&orderClass=${
+        this.orderClass
+      }&endArea=${this.endArea}&endCity=${this.endCity}&endProvince=${
+        this.endProvince
+      }&startArea=${this.startArea}&startCity=${this.startCity}&startProvince=${
+        this.startProvince
+      }`
+    },
     orderClassClick(item) {
       this.orderClass = item.id
+      this.search()
+    },
+    AF03801Click(item) {
+      this.AF03801Id = item.id
+      if (item.name.indexOf('<') !== -1) {
+        this.goodsWeightLower = 0
+        this.goodsWeightUpper = item.name.substring(1, 20)
+      } else if (item.name.indexOf('>') !== -1) {
+        this.goodsWeightLower = item.name.substring(1, 20)
+        this.goodsWeightUpper = 100000
+      } else if (item.name === '不限') {
+        this.goodsWeightLower = ''
+        this.goodsWeightUpper = ''
+      } else {
+        this.goodsWeightLower = item.name.split('-', 2)[0]
+        this.goodsWeightUpper = item.name.split('-', 2)[1]
+      }
+      this.search()
     },
     AF03802Click(item) {
       this.AF03802Id = item.id
-      if (item.name.indexOf('<') != -1) {
+      if (item.name.indexOf('<') !== -1) {
         this.goodsVolumeLower = 0
         this.goodsVolumeUpper = item.name.substring(1, 20)
-      } else if (item.name.indexOf('>') != -1) {
+      } else if (item.name.indexOf('>') !== -1) {
         this.goodsVolumeLower = item.name.substring(1, 20)
         this.goodsVolumeUpper = 100000
       } else if (item.name === '不限') {
@@ -898,8 +647,39 @@ export default {
         this.goodsVolumeLower = item.name.split('-', 2)[0]
         this.goodsVolumeUpper = item.name.split('-', 2)[1]
       }
-      console.log(this.goodsVolumeLower)
-      console.log(this.goodsVolumeUpper)
+      this.search()
+    },
+    pagination() {
+      $('#pagination1').pagination({
+        currentPage: this.currentPage,
+        totalPage: this.pages,
+        callback: async current => {
+          $('#current1').text(current)
+          let hyList = await getHyList(this.$axios, current, {
+            startProvince: this.startProvince,
+            startCity: this.startCity,
+            startArea: this.startArea,
+            endProvince: this.endProvince,
+            endCity: this.endCity,
+            endArea: this.endArea,
+            queryType: 2,
+            orderClass: this.orderClass,
+            AF03801Id: this.AF03801Id,
+            AF03802Id: this.AF03802Id,
+            goodsVolumeLower: this.goodsVolumeLower,
+            goodsVolumeUpper: this.goodsVolumeUpper,
+            goodsWeightLower: this.goodsWeightLower,
+            goodsWeightUpper: this.goodsWeightUpper
+          })
+          this.carInfoList = hyList.list
+          this.pages = hyList.pages
+          this.current = hyList.current
+          window.location.href = '#top'
+        }
+      })
+    },
+    reload() {
+      window.location.href = '/huoyuan'
     }
   }
 }

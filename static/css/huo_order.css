@@ -24,8 +24,6 @@
 .required{
   color: #ef0000;
 }
-
-
 .main_nr{
   position: relative;
 }
@@ -125,7 +123,6 @@
 }
 .order-form-item:first-child .order-form-label{
   padding-left: 10px;
-  
 }
 .order-form-label,.order-form-input{
   float: left;

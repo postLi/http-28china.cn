@@ -32,6 +32,7 @@
 .main_nr .nr_bt1 span{
   border-bottom: none;
   padding-left: 36px;
+  /* background: url(../images/order/order-title.png) no-repeat 0 center; */
   background: url(../images/order/order-title.png) no-repeat 0 center;
 }
 .order-step{
@@ -76,7 +77,8 @@
   border:1px solid #009ee9ed;
   position: relative;
   color:#009ee9ed;
-  background: url(/templets/default/images/wzlImg/gou.png) no-repeat;
+  /* background: url(/templets/default/images/wzlImg/gou.png) no-repeat; */
+  background: url(../../static/images/wzlImg/gou.png) no-repeat;
   background-position: right bottom;
 }
 .order-submit-btn:active{

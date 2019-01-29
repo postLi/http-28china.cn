@@ -203,58 +203,119 @@ export default {
       totalPage: 0,
       currentPage: 1,
       sortList: [{ id: 1, name: '综合排序' }, { id: 2, name: '运输排序' }],
-      sortId: 1
+      sortId: 1,
+      startProvince: '',
+      startCity: '',
+      startArea: '',
+      endProvince: '',
+      endCity: '',
+      endArea: ''
     }
   },
   async asyncData({ $axios, app, query }) {
+    let endArea = '',
+      endCity = '',
+      endProvince = '',
+      startArea = '',
+      startCity = '',
+      startProvince = ''
+    if (query.endArea) {
+      endArea = query.endArea
+    }
+    if (query.endCity) {
+      endCity = query.endCity
+    }
+    if (query.endProvince) {
+      endProvince = query.endProvince
+    }
+    if (query.startArea) {
+      startArea = query.startArea
+    }
+    if (query.startCity) {
+      startCity = query.startCity
+    } else {
+      startCity = app.$cookies.get('currentAreaFullName')
+    }
+    if (query.startProvince) {
+      startProvince = query.startProvince
+    } else {
+      startProvince = app.$cookies.get('currentProvinceFullName')
+    }
     let listRangesAgingData = await getListRangesAging($axios, 1, {
       filterSign: 1,
-      startCity: app.$cookies.get('currentAreaFullName'),
-      startProvince: app.$cookies.get('currentProvinceFullName')
+      endArea: endArea,
+      endCity: endCity,
+      endProvince: endProvince,
+      startArea: startArea,
+      startCity: startCity,
+      startProvince: startProvince
     })
     return {
       listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
       totalPage: listRangesAgingData.totalPage
         ? listRangesAgingData.totalPage
         : 0,
-      currentPage: listRangesAgingData.currentPage
+      currentPage: listRangesAgingData.currentPage,
+      endArea: endArea,
+      endCity: endCity,
+      endProvince: endProvince,
+      startArea: startArea,
+      startCity: startCity,
+      startProvince: startProvince
     }
   },
   mounted() {
-    var currentAreaFullName = $.cookie('currentAreaFullName')
-    var currentProvinceFullName = $.cookie('currentProvinceFullName')
-    $('#list_nav_a').html(currentAreaFullName + '专线时效')
-    //搜索赋input框的初始值
+    $('#list_nav_a').html(
+      this.startCity +
+        this.startArea +
+        ' 到 ' +
+        this.endCity +
+        this.endArea +
+        ' 专线时效'
+    )
+    if (
+      (!this.startCity && !this.startArea) ||
+      (!this.endCity && !this.endArea)
+    ) {
+      $('#list_nav_a').html(
+        this.startCity +
+          this.startArea +
+          '  ' +
+          this.endCity +
+          this.endArea +
+          '专线时效'
+      )
+    }
 
     $('#carLineFrom input').citypicker({
-      province: currentProvinceFullName,
-      city: currentAreaFullName,
-      district: ''
+      province: this.startProvince,
+      city: this.startCity,
+      district: this.startArea
     })
     $('#carLineTo input').citypicker({
-      province: '',
-      city: '',
-      district: ''
+      province: this.endProvince,
+      city: this.endCity,
+      district: this.endArea
     })
 
     $('.qiehuan').click(function() {
       $(this)
         .css('transition', '0.3s')
         .css('transform', 'rotate(180deg)')
-      var list1 = [],
+      let list1 = [],
         list2 = []
       $('#carLineFrom .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      var startp = list1[0]
-      var startc = list1[1]
-      var starta = list1[2]
+      let startp = list1[0]
+      let startc = list1[1]
+      let starta = list1[2]
       $('#carLineTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
-      var endp = list2[0]
-      var endc = list2[1]
-      var enda = list2[2]
+      let endp = list2[0]
+      let endc = list2[1]
+      let enda = list2[2]
       $('#carLineFrom input').pickerReload({
         province: endp,
         city: endc,
@@ -280,42 +341,39 @@ export default {
     this.loadPagination()
   },
   methods: {
-    selectSort(item) {
+    async selectSort(item) {
       this.sortId = item.id
-      this.search(this.currentPage)
+      let obj = await getListRangesAging(this.$axios, this.currentPage, {
+        filterSign: this.sortId,
+        startProvince: this.startProvince,
+        startCity: this.startCity,
+        startArea: this.startArea,
+        endProvince: this.endProvince,
+        endCity: this.endCity,
+        endArea: this.endArea
+      })
+      this.listRangesAging = obj.list
     },
-    async search(int) {
+    async search() {
       let list1 = [],
         list2 = []
       $('#carLineFrom .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      let startp = list1[0] ? list1[0] : ''
-      let startc = list1[1] ? list1[1] : ''
-      let starta = list1[2] ? list1[2] : ''
+      this.startProvince = list1[0] ? list1[0] : ''
+      this.startCity = list1[1] ? list1[1] : ''
+      this.startArea = list1[2] ? list1[2] : ''
       $('#carLineTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
-      let endp = list2[0] ? list2[0] : ''
-      let endc = list2[1] ? list2[1] : ''
-      let enda = list2[2] ? list2[2] : ''
-      $('#list_nav_a').html(
-        startc + starta + (endc ? '到' : '') + endc + enda + ' 专线时效'
-      )
-
-      let obj = await getListRangesAging(this.$axios, int, {
-        endArea: enda,
-        endCity: endc,
-        endProvince: endp,
-        filterSign: this.sortId,
-        startArea: starta,
-        startCity: startc,
-        startProvince: startp
-      })
-      this.listRangesAging = obj.list
-      this.currentPage = obj.currentPage
-      this.totalPage = obj.totalPage
-      this.loadPagination()
+      this.endProvince = list2[0] ? list2[0] : ''
+      this.endCity = list2[1] ? list2[1] : ''
+      this.endArea = list2[2] ? list2[2] : ''
+      window.location.href = `/shixiao?endArea=${this.endArea}&endCity=${
+        this.endCity
+      }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
+        this.startCity
+      }&startProvince=${this.startProvince}`
     },
     loadPagination() {
       $('#pagination1').pagination({
@@ -326,8 +384,12 @@ export default {
           console.log(current)
           let obj = await getListRangesAging(this.$axios, current, {
             filterSign: this.sortId,
-            startCity: this.$cookies.get('currentAreaFullName'),
-            startProvince: this.$cookies.get('currentProvinceFullName')
+            startProvince: this.startProvince,
+            startCity: this.startCity,
+            startArea: this.startArea,
+            endProvince: this.endProvince,
+            endCity: this.endCity,
+            endArea: this.endArea
           })
           this.listRangesAging = obj.list
           this.currentPage = obj.currentPage

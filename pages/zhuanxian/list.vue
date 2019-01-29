@@ -2,7 +2,7 @@
 </script>
 <template>
   <div class="lll-zhuangXian">
-    <div class="list_box" >
+    <div class="list_box">
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a
           id="list_nav_a1"
@@ -31,67 +31,68 @@
           <div class="select_con">
             <dl>
               <dt>专线线路&nbsp;：</dt>
-              <dd><form
-                name="zxaddform"
-                method="post"
-                action="" >
-                <input
-                  name="a7"
-                  type="hidden"
-                  value="0">
-                <input
-                  type="hidden"
-                  name="mid"
-                  value="19" >
-                <input
-                  type="hidden"
-                  name="dopost"
-                  value="search" >
-                <div
-                  id="wlLineFrom"
-                  class="fl list_input"
-                  style="position:relative;" >
+              <dd>
+                <form
+                  name="zxaddform"
+                  method="post"
+                  action="">
                   <input
-                    name="cfd"
-                    style="height: 100%;"
-                    data-level="district"
-                    type="text"
-                    placeholder="请输入出发地" >
-                </div>
-                <img
-                  class="fl list_img"
-                  src="/line/images/02jiantou.png">
-                <div
-                  id="wlLineTo"
-                  class="fl list_input"
-                  style="position:relative;" >
+                    name="a7"
+                    type="hidden"
+                    value="0">
                   <input
-                    name="ddd"
-                    style="height: 100%;"
-                    data-level="district"
+                    type="hidden"
+                    name="mid"
+                    value="19">
+                  <input
+                    type="hidden"
+                    name="dopost"
+                    value="search">
+                  <div
+                    id="wlLineFrom"
+                    class="fl list_input"
+                    style="position:relative;">
+                    <input
+                      name="cfd"
+                      style="height: 100%;"
+                      data-level="district"
+                      type="text"
+                      placeholder="请输入出发地">
+                  </div>
+                  <img
+                    class="fl list_img"
+                    src="/line/images/02jiantou.png">
+                  <div
+                    id="wlLineTo"
+                    class="fl list_input"
+                    style="position:relative;">
+                    <input
+                      name="ddd"
+                      style="height: 100%;"
+                      data-level="district"
+                      type="text"
+                      placeholder="请输入到达地">
+                  </div>
+                  <input
+                    id="wlgs_name"
+                    name="wlgs"
                     type="text"
-                    placeholder="请输入到达地" >
-                </div>
-                <input
-                  id="wlgs_name"
-                  name="wlgs"
-                  type="text"
-                  class="list_input"
-                  style="margin-left: 16px;"
-                  placeholder="请输入公司名称" >
-                <input
-                  id="search_wlLine"
-                  readonly=""
-                  name="Submit2"
-                  value=" 搜索 "
-                  class="list_button">
-                <input
-                  id="flush"
-                  readonly=""
-                  name="Submit2"
-                  value="重置 "
-                  class="list_button">
-              </form>
+                    class="list_input"
+                    style="margin-left: 16px;"
+                    placeholder="请输入公司名称">
+                  <input
+                    id="search_wlLine"
+                    readonly=""
+                    name="Submit2"
+                    value=" 搜索 "
+                    class="list_button">
+                  <input
+                    id="flush"
+                    readonly=""
+                    name="Submit2"
+                    value="重置 "
+                    class="list_button">
+                </form>
               </dd>
               <div style="display: none">
                 <dt>所属园区&nbsp;：</dt>
@@ -107,19 +108,19 @@
                       <div
                         id="wlyq_pos"
                         class="fl list_wlyq_input"
-                        style="position:relative;" >
+                        style="position:relative;">
                         <input
                           style="height: 100%;"
                           data-toggle="city-picker"
                           data-level="district"
                           type="text"
                           name=""
-                          placeholder="请选择园区所在地" >
+                          placeholder="请选择园区所在地">
                       </div>
                       <input
                         id="wlyq_name"
                         class="list_wlyq_input"
-                        placeholder="请输入园区名称" >
+                        placeholder="请输入园区名称">
                       <input
                         class="list_wlyq_cx"
                         readonly=""
@@ -149,28 +150,28 @@
               <dd id="tjcx_01">
                 <a
                   class="now all"
-                  href="/plus/list.php?tid=4" >不限</a>
+                  href="/plus/list.php?tid=4">不限</a>
               </dd>
               <dt>选择品牌&nbsp;:</dt>
-              <dd id="tjcx_02" >
+              <dd id="tjcx_02">
                 <a
                   class="now all"
                   href="/plus/list.php?tid=4"
                 >不限</a>
               </dd>
-              <dt >其他&nbsp;:</dt>
+              <dt>其他&nbsp;:</dt>
               <dd id="tjcx_03">
                 <a
                   class="now all"
-                  href="/plus/list.php?tid=4" >不限</a>
-                <a class="shiming" >实名认证</a>
+                  href="/plus/list.php?tid=4">不限</a>
+                <a class="shiming">实名认证</a>
               </dd>
             </dl>
           </div>
         </div>
         <div
           id="js002"
-          class="w1036 list_wlzx" >
+          class="w1036 list_wlzx">
 
           <div class="zx_sx"><span class="biaozhi"/><span>专线信息</span></div>
           <div class="list_tiaoj"><span
@@ -180,7 +181,7 @@
               title="交易量从高到低">交易量</span><span
                 id="seq2"
                 title="运输时效从低到高">运输时效</span><span
-                  id="seq3" >重货价格</span>
+                  id="seq3">重货价格</span>
             <div
               id="tj_price">
               <span id="tj_price1">轻货价格从低到高</span>
@@ -213,7 +214,7 @@
                 <a
                   id="nr02"
                   class="list-title-a"
-                  target="_blank" >
+                  target="_blank">
                   <span class="list-icon lines-sprite-icons icon-start"/>
                   <em id="nr02_1"/>
                   <span class="list-icon lines-sprite-icons icon-through"/>
@@ -253,16 +254,16 @@
               <p class="p21">
                 <img
                   id="tj_shiming"
-                  src="/line/images/shiming.png" >
+                  src="/line/images/shiming.png">
                 <img
                   id="tj_xinyong"
-                  src="/line/images/xinyong.png" >
+                  src="/line/images/xinyong.png">
                 <img
                   id="tj_danbao"
-                  src="/line/images/danbao.png" >
+                  src="/line/images/danbao.png">
               </p>
               <p class="p3">
-                <i >说明：</i><font
+                <i>说明：</i><font
                   id="nr05"
                   class=""/></p>
               <p class="p4"><i>地址：</i><font
@@ -290,13 +291,15 @@
                   id="fahuo"
                   readonly=""
                   value="下单"></a>
-              </p><p class="p2"><a
+              </p>
+              <p class="p2"><a
                 id="nr_a22"
                 target="_blank"><input
                   id="wlzx_list_view"
                   readonly=""
                   value="查看"></a>
-            </p><p class="p3"/></li>
+              </p>
+            <p class="p3"/></li>
           </ul>
         </div>
 
@@ -316,13 +319,17 @@
         <!--分页-->
 
 
-        <div class="lll-recommend" >
+        <div class="lll-recommend">
           <div
             class="zx_sx"
           ><span class="biaozhi"/><span>28快运为您推荐</span></div>
           <ul>
-            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span></li>
-            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span></li>
+            <li>
+              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
+            </li>
+            <li>
+              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
+            </li>
           </ul>
         </div>
         <div
@@ -332,9 +339,15 @@
             class="zx_sx"
           ><span class="biaozhi"/><span>其他相关推荐</span></div>
           <ul>
-            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span></li>
-            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span></li>
-            <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span></li>
+            <li>
+              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
+            </li>
+            <li>
+              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
+            </li>
+            <li>
+              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
+            </li>
           </ul>
         </div>
 
@@ -389,13 +402,13 @@
             class="tj_list"
             style="display: none;">
             <div class="p p1">
-              <img src="/line/images/04gongsi.png" ><span><a
+              <img src="/line/images/04gongsi.png"><span><a
                 id="tj_a011"
                 target="_blank"
                 href="#">广州明科物流有限公司</a></span>
               <img
                 id="tj_shiming"
-                src="/line/images/shiming.png" >
+                src="/line/images/shiming.png">
                 <!--<img-->
                 <!--id="tj_xinyong"-->
                 <!--src="/line/images/xinyong.png" >-->
@@ -410,7 +423,7 @@
               <a
                 id="tj010"
                 class="list-title-a"
-                target="_blank" >
+                target="_blank">
                 <span class="list-icon lines-sprite-icons icon-start"/>
                 <em id="tj011"/>
                 <span class="list-icon lines-sprite-icons icon-through"/>
@@ -423,8 +436,8 @@
               <ul>
                 <li class="tj_left"><i>时效：</i><span id="tj015"/></li>
                 <li class="tj_right"><i>最低一票：</i><span id="tj016"/></li>
-                <li class="tj_left"><i >重货：</i><font id="tj013" /><span >元/公斤</span></li>
-                <li class="tj_right"><i >轻货：</i><font id="tj014" /><span >元/m³</span></li>
+                <li class="tj_left"><i>重货：</i><font id="tj013"/><span>元/公斤</span></li>
+                <li class="tj_right"><i>轻货：</i><font id="tj014"/><span>元/m³</span></li>
               </ul>
 
             </div>
@@ -438,7 +451,7 @@
         </div>
         <div class="list-box-r-hot">
 
-          <div class="zx_sx"><span class="biaozhi" />企业月人气榜</div>
+          <div class="zx_sx"><span class="biaozhi"/>企业月人气榜</div>
           <div class="tj_none">
             <span>没有相关企业月人气榜</span>
           </div>
@@ -463,8 +476,10 @@
             <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
           </ul>
           <ul class="lastul">
-            <li><span class="hot-num">4</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-            <li><span class="hot-num">5</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+            <li><span class="hot-num">4</span>
+            <p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+            <li><span class="hot-num">5</span>
+            <p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
           </ul>
           <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
           <!--<div class="tj_none">-->
@@ -498,11 +513,10 @@
                 <i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>
               </div>
               <div class="ltl-input">
-                <input
-                  type="text"
-                  class="ltl-location"
+                <textarea 
+                  class="textareaDiv"
                   placeholder="备注信息，如：期望发货时间、货物体积重量
-等信息...">
+等信息..."/>
               </div>
               <div class="ltl-input">
                 <input
@@ -534,8 +548,12 @@
           class="zx_sx"
         ><span class="biaozhi"/><span>全国热门物流货运专线</span></div>
         <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+          <li>
+            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
+          </li>
+          <li>
+            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
+          </li>
         </ul>
       </div>
       <div
@@ -544,8 +562,12 @@
           class="zx_sx"
         ><span class="biaozhi"/><span>北京出发物流专线</span></div>
         <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+          <li>
+            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
+          </li>
+          <li>
+            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
+          </li>
         </ul>
       </div>
       <div
@@ -554,8 +576,12 @@
           class="zx_sx"
         ><span class="biaozhi"/><span>广州到北京物流专线相关信息</span></div>
         <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
-          <li><span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span></li>
+          <li>
+            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
+          </li>
+          <li>
+            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
+          </li>
         </ul>
       </div>
     </div>
@@ -591,6 +617,7 @@ export default {
                   $('.list_tiaoj span').removeClass('active')
                   $(this).toggleClass('active')
                 })
+
                 function onCheckPage() {
                   var beginPage = parseInt(
                     document.beginPagefrm.beginPage.value
@@ -615,6 +642,7 @@ export default {
                   }
                   return true
                 }
+
                 $('#pagination1').pagination({
                   currentPage: 1,
                   totalPage: process02(1),
@@ -651,6 +679,12 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian {
+  .textareaDiv {
+    height: 64px;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+  }
   .clearfix:after {
     content: ' ';
     display: table;
@@ -676,8 +710,8 @@ export default {
     border-radius: 2px;
     color: #f9f9f9;
     font-size: 16px;
-    background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png)
-      10px 6px #3f94ee;
+    background: no-repeat url(../../static/line/images/wlgs_search.png) 10px 6px
+      #3f94ee;
     text-align: left;
     padding-left: 30px;
     margin-left: 20px;
@@ -856,7 +890,7 @@ export default {
   .icon-btn-arrow-down-2 {
     margin-top: 5px;
     display: inline-block;
-    background: url(../../static/images/list_wlzx/xiajt.png);
+    background: url(../../static/line/images//xiajt.png);
     background-repeat: no-repeat;
     width: 12px;
     height: 7px;
@@ -874,7 +908,7 @@ export default {
   .icon-btn-arrow-up-2 {
     margin-top: 5px;
     display: inline-block;
-    background: url(../../static/images/list_wlzx/up_jt.png);
+    background: url(../../static/line/images/up_jt.png);
     background-repeat: no-repeat;
     width: 12px;
     height: 7px;
@@ -883,7 +917,8 @@ export default {
   /**/
   #wlLineFrom {
     width: 190px;
-    background: url(/line/images/start_addr.png) no-repeat 200px 8px #fff;
+    background: url(../../static/line/images/start_addr.png) no-repeat 200px 8px
+      #fff;
     background-size: 16px 17px;
     padding-right: 20px;
   }
@@ -904,10 +939,11 @@ export default {
   .lines-sprite-icons {
     background: url(/line/images/ss56-lines-sprite.png) no-repeat;
   }
+  .ss56-common-sprite11 {
+    background: url('../../static/line/images/downicon.png') no-repeat 0 11px;
+  }
   .ss56-common-sprite-icon {
-    background-image: url(/line/images/downicon.png);
-    /*background-image: url(/line/images/downicon.png);*/
-    background-repeat: no-repeat;
+    background: url('../../static/line/images/downicon.png') no-repeat 0 11px;
   }
 
   .icon-through {

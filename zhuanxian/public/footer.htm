@@ -21,16 +21,16 @@
 	//退出清理cookie S
 function getCookie(cookieName){
 	    var cookieValue="";
-		if (document.cookie && document.cookie != '') { 
+		if (document.cookie && document.cookie != '') {
 			var cookies = document.cookie.split(';');
-			for (var i = 0; i < cookies.length; i++) { 
+			for (var i = 0; i < cookies.length; i++) {
 				 var cookie = cookies[i];
 				 if (cookie.substring(0, cookieName.length + 2).trim() == cookieName.trim() + "=") {
-					   cookieValue = cookie.substring(cookieName.length + 2, cookie.length); 
+					   cookieValue = cookie.substring(cookieName.length + 2, cookie.length);
 					   break;
 				 }
 			 }
-		} 
+		}
 		return cookieValue;
 	}
 function delCookie(name)
@@ -59,8 +59,8 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 //  delCookie("access_token");
 //  delCookie("login_userId");
 //  delCookie("login_userToken");
-    
-         
+
+
 
     })
 //退出清理cookie E
@@ -72,7 +72,7 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
       <div class="login_box_bt">
         <div class="login_bt1">密码登录</div>
         <div class="login_bt2">验证码登录</div>
-        
+
       </div>
       <div class="pwd_login">
         <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
@@ -82,7 +82,7 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
                   <input type="hidden" name="userType" id="userType" />
                   <input type="hidden" name="gourl" value="" />
       <ul>
-        
+
         <li class="userType"  ><input type="button" name="aflc-5"  value="物流公司"/><input type="button" name="aflc-2" value="货主"/><input type="button" name="aflc-1" value="车主"/></li>
         <div class="inputbox">
           <span class="icon icon-mobile"></span>
@@ -100,11 +100,11 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
             </div>
             <li class="submit"> <input  class="login-btn" readonly="" value="登录" ></li>
           <li class="userreg"><a href="/member/index_do.php?fmdo=user&dopost=regnew" target="_blank"><span>免费注册</span></a><i></i><a href="/member/resetpassword.php" target="_blank"><span>忘记密码?</span></a></li>
-          
+
       </ul>
       </form>
-      </div>	
-        
+      </div>
+
       <div class="yzm_login">
         <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
         <form name="form2" id="form2" >
@@ -113,7 +113,7 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
                   <input type="hidden" name="userType2" id="userType2" />
                   <input type="hidden" name="gourl" value="" />
       <ul>
-        
+
         <li class="userType2"  ><input type="button" name="aflc-5"  value="物流公司"/><input type="button" name="aflc-2" value="货主"/><input type="button" name="aflc-1" value="车主"/></li>
         <div class="inputbox">
           <span class="icon icon-mobile"></span>
@@ -132,7 +132,7 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
         <!-- <li class="useryzm"> <input type="text" value="" name="pwd" id="useryzm" placeholder="请输入短信验证码">
         <input type="button" value="获取短信验证码" name="pwd" id="getyzm" >
         </li> -->
-        
+
         <!--
           <li class="yzm_sm">
             <span id="yzm_sm" >验证码已发出，请注意查收短信您可以在<i id="yzm_time">60</i>秒后点击重新获取验证码</span>
@@ -223,7 +223,7 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
       endc=encodeURI(endc)
       enda=encodeURI(enda)
      window.location='/plus/list.php?tid=2&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda;
-            
+
 
     })
 //header货源搜索 E
@@ -259,9 +259,9 @@ document.cookie= name + "="+cval+";expires="+exp.toGMTString();
       endc=encodeURI(endc)
       enda=encodeURI(enda)
      window.location='/plus/list.php?tid=4&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda;
-         
 
-         
+
+
 
     })
 //header专线搜索 E

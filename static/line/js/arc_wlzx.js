@@ -942,13 +942,13 @@ function process5() {
     headers: {
       'Content-Type': 'application/json'
     },
-    url: '/api/28-web/rangeEva/range/assessLevel/count/' + aid,
+    url: '/api/28-web/rangeEva/range/assessLevel/count/?rangeId=' + aid,
 
     success: function(res) {
       var datas = res.data
-      var count = datas.count
+      var count = datas.all
       var good = datas.good
-      var medium = datas.medium
+      var medium = datas.middle
       var bad = datas.bad
 
       $('#nr1044').html('(' + count + ')')

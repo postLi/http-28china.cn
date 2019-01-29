@@ -436,96 +436,96 @@
             </div>
           </div>
         </div>
+        <div class="list-box-r-hot">
 
-      </div>
-      <div class="list-box-r-hot">
-
-        <div class="zx_sx"><span class="biaozhi" />企业月人气榜</div>
-        <div class="tj_none">
-          <span>没有相关企业月人气榜</span>
+          <div class="zx_sx"><span class="biaozhi" />企业月人气榜</div>
+          <div class="tj_none">
+            <span>没有相关企业月人气榜</span>
+          </div>
+          <ul>
+            <li><span class="hot-num">1</span><img
+              src="/line/images/touxiang1.png"
+              alt=""
+              width="50"
+              height="50">
+            <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+            <li><span class="hot-num">2</span><img
+              src="/line/images/touxiang2.png"
+              alt=""
+              width="50"
+              height="50">
+            <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+            <li><span class="hot-num">3</span><img
+              src="/line/images/touxiang3.png"
+              alt=""
+              width="50"
+              height="50">
+            <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+          </ul>
+          <ul class="lastul">
+            <li><span class="hot-num">4</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+            <li><span class="hot-num">5</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+          </ul>
+          <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
+          <!--<div class="tj_none">-->
+          <!--<span>没有相关线路推荐23</span>-->
+          <!--</div>-->
         </div>
-        <ul>
-          <li><span class="hot-num">1</span><img
-            src="/line/images/touxiang1.png"
-            alt=""
-            width="50"
-            height="50">
-          <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          <li><span class="hot-num">2</span><img
-            src="/line/images/touxiang2.png"
-            alt=""
-            width="50"
-            height="50">
-          <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          <li><span class="hot-num">3</span><img
-            src="/line/images/touxiang3.png"
-            alt=""
-            width="50"
-            height="50">
-          <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-        </ul>
-        <ul class="lastul">
-          <li><span class="hot-num">4</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          <li><span class="hot-num">5</span><p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-        </ul>
-        <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
-        <!--<div class="tj_none">-->
-        <!--<span>没有相关线路推荐23</span>-->
-        <!--</div>-->
-      </div>
-      <div class="list-box-r-phone">
-        <div class="zx_p_tit">帮我找优质承运商</div>
-        <div class="list-box-r-top">
-          <form action="">
-            <!--<span>出发地</span>-->
-            <div class="ltl-input">
-              <input
-                id="right-bar-form"
-                autocomplete="off"
-                wtmap=""
-                type="text"
-                class="ltl-location"
-                placeholder="请选择出发地">
-              <i class="ltl-icons ss56-common-sprite-icon ltl-ico-start"/>
-            </div>
-            <!--<span>目的地</span>-->
-            <div class="ltl-input">
-              <input
-                id="right-bar-to"
-                autocomplete="off"
-                wtmap=""
-                type="text"
-                class="ltl-location"
-                placeholder="请选择目的地">
-              <i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>
-            </div>
-            <div class="ltl-input">
-              <input
-                type="text"
-                class="ltl-location"
-                placeholder="备注信息，如：期望发货时间、货物体积重量
+        <div class="list-box-r-phone">
+          <div class="zx_p_tit">帮我找优质承运商</div>
+          <div class="list-box-r-top">
+            <form action="">
+              <!--<span>出发地</span>-->
+              <div class="ltl-input">
+                <input
+                  id="right-bar-form"
+                  autocomplete="off"
+                  wtmap=""
+                  type="text"
+                  class="ltl-location"
+                  placeholder="请选择出发地">
+                <i class="ltl-icons ss56-common-sprite-icon ltl-ico-start"/>
+              </div>
+              <!--<span>目的地</span>-->
+              <div class="ltl-input">
+                <input
+                  id="right-bar-to"
+                  autocomplete="off"
+                  wtmap=""
+                  type="text"
+                  class="ltl-location"
+                  placeholder="请选择目的地">
+                <i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>
+              </div>
+              <div class="ltl-input">
+                <input
+                  type="text"
+                  class="ltl-location"
+                  placeholder="备注信息，如：期望发货时间、货物体积重量
 等信息...">
-            </div>
-            <div class="ltl-input">
-              <input
-                type="text"
-                class="ltl-location phone-num"
-                placeholder="11位手机号"
-                style="width: 60%"
-                maxlength="11">
-              <input
-                class="phone-btn"
-                type="button"
-                value="找到通知我">
-            </div>
-            <!--<input-->
-            <!--id="check-fee"-->
-            <!--type="button"-->
-            <!--value="查询零担运费"-->
-            <!--class="right-top-btn">-->
-          </form>
+              </div>
+              <div class="ltl-input">
+                <input
+                  type="text"
+                  class="ltl-location phone-num"
+                  placeholder="11位手机号"
+                  style="width: 60%"
+                  maxlength="11">
+                <input
+                  class="phone-btn"
+                  type="button"
+                  value="找到通知我">
+              </div>
+              <!--<input-->
+              <!--id="check-fee"-->
+              <!--type="button"-->
+              <!--value="查询零担运费"-->
+              <!--class="right-top-btn">-->
+            </form>
+          </div>
         </div>
       </div>
+
     </div>
     <div class="lll-line-bot">
       <div
@@ -684,115 +684,125 @@ export default {
     padding-right: 5px;
     cursor: pointer;
   }
-  .list-box-r-hot {
-    min-height: 246px;
-    height: auto !important;
-    width: 344px;
-    margin: 0px 0px 0 16px;
-    float: left;
-    background: #fff;
-    .zx_sx {
-      border-bottom: 2px solid #2577e3;
-      margin-bottom: 1px;
-      color: #2577e3;
+  .list_right {
+    .tj_list_box {
+      .tj_list4 {
+        border-bottom: none;
+      }
     }
-    ul:first-of-type,
-    ul:last-of-type {
-      li {
-        display: flex;
-        padding: 20px 14px 0px 16px;
-        font-size: 14px;
-        .hot-num {
-          width: 20px;
-          height: 20px;
-          background: #f65050;
-          text-align: center;
-          line-height: 20px;
-          color: #fff;
-          margin-top: 20px;
+    .list-box-r-hot {
+      /*min-height: 246px;*/
+      /*height: auto !important;*/
+      /*width: 344px;*/
+      /*margin: 0px 0px 0 16px;*/
+      /*float: left;*/
+      margin-top: 20px;
+      background: #fff;
+      .zx_sx {
+        border-bottom: 2px solid #2577e3;
+        margin-bottom: 1px;
+        color: #2577e3;
+      }
+      ul:first-of-type,
+      ul:last-of-type {
+        li {
+          display: flex;
+          padding: 20px 14px 0px 16px;
+          font-size: 14px;
+          .hot-num {
+            width: 20px;
+            height: 20px;
+            background: #f65050;
+            text-align: center;
+            line-height: 20px;
+            color: #fff;
+            margin-top: 20px;
+          }
+          img {
+            margin: 0 8px 0 15px;
+          }
+          p {
+            margin-top: 20px;
+            color: #333;
+            /*padding-right: 10px;*/
+            width: 138px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          span.hot-peonum {
+            margin-top: 20px;
+            font-size: 12px;
+            padding-left: 10px;
+            color: #666;
+            i {
+              color: #f14747;
+              padding-left: 5px;
+            }
+          }
         }
-        img {
-          margin: 0 8px 0 15px;
+        li:nth-child(2) {
+          .hot-num {
+            background: #ff8547;
+          }
         }
-        p {
-          margin-top: 20px;
-          color: #333;
-          /*padding-right: 10px;*/
-          width: 138px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-        span.hot-peonum {
-          margin-top: 20px;
-          font-size: 12px;
-          padding-left: 10px;
-          color: #666;
-          i {
-            color: #f14747;
-            padding-left: 5px;
+        li:nth-child(3) {
+          .hot-num {
+            background: #ffac38;
           }
         }
       }
-      li:nth-child(2) {
-        .hot-num {
-          background: #ff8547;
-        }
-      }
-      li:nth-child(3) {
-        .hot-num {
-          background: #ffac38;
+      ul.lastul {
+        li {
+          padding: 0px 14px 0px 16px;
+          span.hot-num {
+            background: #8eb9f5 !important;
+          }
+          p {
+            width: 62%;
+            padding-left: 16px;
+          }
         }
       }
     }
-    ul.lastul {
-      li {
-        padding: 0px 14px 0px 16px;
-        span.hot-num {
-          background: #8eb9f5 !important;
-        }
-        p {
-          width: 62%;
-          padding-left: 16px;
-        }
+    .list-box-r-phone {
+      /*min-height: 246px;*/
+      /*height: auto !important;*/
+      /*width: 344px;*/
+      /*margin: 20px 0px 0 16px;*/
+      /*float: left;*/
+      margin-top: 20px;
+      background: url('/line/images/helpbg.png');
+
+      .zx_p_tit {
+        overflow: hidden;
+        line-height: 50px;
+        height: 50px;
+        color: #3f94ee;
+        font-size: 18px;
+        font-weight: bold;
+        padding-left: 20px;
+      }
+      .list-box-r-top {
+        background: rgba(255, 255, 255, 0.1);
+        padding-top: 0 !important;
+        margin-bottom: 0px !important;
+      }
+
+      .phone-btn {
+        font-size: 14px;
+        padding: 7px 18px;
+        margin-left: 10px;
+        background-color: #589def;
+        color: #ffffff;
+        border-style: none;
+      }
+      .phone-btn:hover {
+        background-color: #2577ff;
       }
     }
   }
-  .list-box-r-phone {
-    min-height: 246px;
-    height: auto !important;
-    width: 344px;
-    margin: 20px 0px 0 16px;
-    float: left;
-    background: url('/line/images/helpbg.png');
 
-    .zx_p_tit {
-      overflow: hidden;
-      line-height: 50px;
-      height: 50px;
-      color: #3f94ee;
-      font-size: 18px;
-      font-weight: bold;
-      padding-left: 20px;
-    }
-    .list-box-r-top {
-      background: rgba(255, 255, 255, 0.1);
-      padding-top: 0 !important;
-      margin-bottom: 0px !important;
-    }
-
-    .phone-btn {
-      font-size: 14px;
-      padding: 7px 18px;
-      margin-left: 10px;
-      background-color: #589def;
-      color: #ffffff;
-      border-style: none;
-    }
-    .phone-btn:hover {
-      background-color: #2577ff;
-    }
-  }
   .lll-recommend {
     transition: all 0.4s;
     background: #fff;

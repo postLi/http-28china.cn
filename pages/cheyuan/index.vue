@@ -73,13 +73,15 @@
                   readonly
                   name="Submit2"
                   value=" 搜索 "
-                  class="list_button">
+                  class="list_button"
+                  @click="search()">
                 <input
                   id="flush"
                   name="Submit2"
                   readonly
                   value="重置 "
-                  class="list_button">
+                  class="list_button"
+                  @click="reload()">
               </form>
               </dd>
 
@@ -118,7 +120,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF031"
-                  :class="[item.name === AF031Name ? 'now':'']"
+                  :class="[item.id === AF031Id ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF031Click(item)">{{ index===0? item.name : item.name + '米' }}</a>
@@ -128,7 +130,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF032"
-                  :class="[item.name === AF032Name ? 'now':'']"
+                  :class="[item.id === AF032Id ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF032Click(item)">{{ index===0? item.name : item.name + '吨' }}</a>
@@ -476,30 +478,100 @@ export default {
       pages: 0,
       currentPage: 1,
       AF032: [],
-      AF032Name: '不限',
-      carLoadLower: '',
-      carLoadUpper: '',
+      AF032Id: '',
+      carLoadLower: '', //载重
+      carLoadUpper: '', //载重
       AF031: [],
-      AF031Name: '不限',
-      carLengthLower: '',
-      carLengthUpper: '',
+      AF031Id: '',
+      carLengthLower: '', //车厢长度
+      carLengthUpper: '', //车厢长度
       longCarList: [
         { name: '不限', value: '' },
         { name: '即时车源', value: '1' },
         { name: '长期车源', value: '0' }
       ],
-      isLongCar: '',
+      isLongCar: '', //即时/长期
       carSourceList: [
         { name: '不限', value: '' },
         { name: '本地车', value: 'AF01802' },
         { name: '回程车', value: 'AF01801' }
       ],
-      carSourceType: '',
+      carSourceType: '', //车源类型
       AF018: [],
-      carType: ''
+      carType: '', //车辆类型
+      startProvince: '',
+      startCity: '',
+      startArea: '',
+      endProvince: '',
+      endCity: '',
+      endArea: ''
     }
   },
   async asyncData({ $axios, app, query }) {
+    let carType = '',
+      carSourceType = '',
+      isLongCar = '',
+      AF032Id = '',
+      AF031Id = '',
+      carLengthLower = '',
+      carLengthUpper = '',
+      carLoadLower = '',
+      carLoadUpper = '',
+      endArea = '',
+      endCity = '',
+      endProvince = '',
+      startArea = '',
+      startCity = '',
+      startProvince = ''
+    if (query.carType) {
+      carType = query.carType
+    }
+    if (query.carSourceType) {
+      carSourceType = query.carSourceType
+    }
+    if (query.isLongCar) {
+      isLongCar = query.isLongCar
+    }
+    if (query.AF032Id) {
+      AF032Id = query.AF032Id
+    }
+    if (query.AF031Id) {
+      AF031Id = query.AF031Id
+    }
+    if (query.carLengthLower) {
+      carLengthLower = query.carLengthLower
+    }
+    if (query.carLengthUpper) {
+      carLengthUpper = query.carLengthUpper
+    }
+    if (query.carLoadLower) {
+      carLoadLower = query.carLoadLower
+    }
+    if (query.carLoadUpper) {
+      carLoadUpper = query.carLoadUpper
+    }
+    if (query.endArea) {
+      endArea = query.endArea
+    }
+    if (query.endCity) {
+      endCity = query.endCity
+    }
+    if (query.endProvince) {
+      endProvince = query.endProvince
+    }
+    if (query.startArea) {
+      startArea = query.startArea
+    }
+    if (query.startCity) {
+      startCity = query.startCity
+    } else {
+      startCity = app.$cookies.get('currentAreaFullName')
+    }
+    if (query.startProvince) {
+      startProvince = query.startProvince
+    } else {
+      startProvince = app.$cookies.get('currentProvinceFullName')
+    }
     let AF018 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF018'
     )
@@ -518,11 +590,25 @@ export default {
     if (AF032.data.status === 200) {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
-    let carInfoList = await getCarInfoList($axios, 1, {
-      startCity: app.$cookies.get('currentAreaFullName'),
-      startProvince: app.$cookies.get('currentProvinceFullName')
-    })
-    let recommendList = await getRecommendList($axios, app)
+    let vo = {
+      startProvince: startProvince,
+      startCity: startCity,
+      startArea: startArea,
+      endProvince: endProvince,
+      endCity: endCity,
+      endArea: endArea,
+      carType: carType,
+      isLongCar: isLongCar,
+      carSourceType: carSourceType,
+      AF031Id: AF031Id,
+      AF032Id: AF032Id,
+      carLengthLower: carLengthLower,
+      carLengthUpper: carLengthUpper,
+      carLoadLower: carLoadLower,
+      carLoadUpper: carLoadUpper
+    }
+    let carInfoList = await getCarInfoList($axios, 1, vo)
+    let recommendList = await getRecommendList($axios, app, vo)
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [],
       AF031: AF031.data.status === 200 ? AF031.data.data : [],
@@ -530,7 +616,22 @@ export default {
       recommendList:
         recommendList.data.status === 200 ? recommendList.data.data : [],
       carInfoList: carInfoList.list,
-      pages: carInfoList.pages
+      pages: carInfoList.pages,
+      carType: carType,
+      carSourceType: carSourceType,
+      isLongCar: isLongCar,
+      AF032Id: AF032Id,
+      AF031Id: AF031Id,
+      carLengthLower: carLengthLower,
+      carLengthUpper: carLengthUpper,
+      carLoadLower: carLoadLower,
+      carLoadUpper: carLoadUpper,
+      endArea: endArea,
+      endCity: endCity,
+      endProvince: endProvince,
+      startArea: startArea,
+      startCity: startCity,
+      startProvince: startProvince
     }
   },
   mounted() {
@@ -544,267 +645,80 @@ export default {
       $('.expand').css('display', 'none')
       $('.select_con').css('display', 'block')
     })
-
-    //获取参数的值
-    function GetQueryString(e) {
-      var t = new RegExp('(^|&)' + e + '=([^&]*)(&|$)'),
-        s = window.location.search.substr(1).match(t)
-      return null != s ? unescape(s[2]) : null
+    $('#list_nav_a').html(
+      this.startCity +
+        this.startArea +
+        ' 到 ' +
+        this.endCity +
+        this.endArea +
+        ' 车源信息'
+    )
+    if (
+      (!this.startCity && !this.startArea) ||
+      (!this.endCity && !this.endArea)
+    ) {
+      $('#list_nav_a').html(
+        this.startCity +
+          this.startArea +
+          '  ' +
+          this.endCity +
+          this.endArea +
+          '车源信息'
+      )
     }
-    function GetUrlParam(name) {
-      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-      var r = encodeURI(window.location.search)
-        .substr(1)
-        .match(reg)
-      if (r != null) return unescape(r[2])
-      return null
-    }
-    //当前url追加参数 UrlUpdateParams(window.location.href, "mid", 11111)
-    function UrlUpdateParams(url, name, value) {
-      var r = url
-      if (r != null && r != 'undefined' && r != '') {
-        value = encodeURIComponent(value)
-        var reg = new RegExp('(^|)' + name + '=([^&]*)(|$)')
-        var tmp = name + '=' + value
-        if (url.match(reg) != null) {
-          r = url.replace(eval(reg), tmp)
-        } else {
-          if (url.match('[?]')) {
-            r = url + '&' + tmp
-          } else {
-            r = url + '?' + tmp
-          }
-        }
-      }
-      return r
-    }
-    function formatDate(objD) {
-      var str, colorhead, colorfoot
-      var yy = objD.getYear()
-      if (yy < 1900) yy = yy + 1900
-      var MM = objD.getMonth() + 1
-      if (MM < 10) MM = '0' + MM
-      var dd = objD.getDate()
-      if (dd < 10) dd = '0' + dd
-      var hh = objD.getHours()
-      if (hh < 10) hh = '0' + hh
-      var mm = objD.getMinutes()
-      if (mm < 10) mm = '0' + mm
-      var ss = objD.getSeconds()
-      if (ss < 10) ss = '0' + ss
-      str = yy + '-' + MM + '-' + dd + ' ' + hh + ':' + mm
-      return str
-    }
-
-    var startp1 = GetUrlParam('startp')
-    var endp1 = GetUrlParam('endp')
-    var startc1 = GetUrlParam('startc')
-    var endc1 = GetUrlParam('endc')
-    var starta1 = GetUrlParam('starta')
-    var enda1 = GetUrlParam('enda')
-    var carType1 = GetUrlParam('carType')
-    var carSourceType1 = GetUrlParam('carSourceType')
-    var carLength1 = GetUrlParam('carLength1')
-    var carLength2 = GetUrlParam('carLength2')
-    var carLoad1 = GetUrlParam('carLoad1')
-    var carLoad2 = GetUrlParam('carLoad2')
-    var isLongCar1 = GetUrlParam('isLongCar')
-
-    var startp = decodeURI(startp1)
-    var endp = decodeURI(endp1)
-    var startc = decodeURI(startc1)
-    var endc = decodeURI(endc1)
-    var starta = decodeURI(starta1)
-    var enda = decodeURI(enda1)
-    var carType = decodeURI(carType1)
-    var carSourceType = decodeURI(carSourceType1)
-    var carLength1 = decodeURI(carLength1)
-    var carLength2 = decodeURI(carLength2)
-    var carLoad1 = decodeURI(carLoad1)
-    var carLoad2 = decodeURI(carLoad2)
-    var isLongCar = decodeURI(isLongCar1)
-
-    var currentAreaFullName = $.cookie('currentAreaFullName')
-    var currentProvinceFullName = $.cookie('currentProvinceFullName')
-
-    var vo = new Object()
-    vo.startProvince = startp
-    vo.startCity = startc
-    vo.startArea = starta
-    vo.endProvince = endp
-    vo.endCity = endc
-    vo.endArea = enda
-    vo.carType = carType
-    vo.carSourceType = carSourceType
-    vo.carLengthLower = carLength1
-    vo.carLengthUpper = carLength2
-    vo.carLoadLower = carLoad1
-    vo.carLoadUpper = carLoad2
-    vo.isLongCar = isLongCar
-
-    if (startp || startc) {
-      if (!startp || startp == 'null') {
-        startp = ''
-        delete vo.startProvince
-      }
-      if (!startc || startc == 'null') {
-        startc = ''
-        delete vo.startCity
-      }
-    }
-    if ((!startp || startp == 'null') && (!startc || startc == 'null')) {
-      startc = currentAreaFullName
-      vo.startCity = startc
-      startp = currentProvinceFullName
-      vo.startProvince = startp
-    }
-
-    if (!starta || starta == 'null') {
-      starta = ''
-      delete vo.startArea
-    }
-    if (!endp || endp == 'null') {
-      endp = ''
-      delete vo.endProvince
-    }
-    if (!endc || endc == 'null') {
-      endc = ''
-      delete vo.endCity
-    }
-    if (!enda || enda == 'null') {
-      enda = ''
-      delete vo.endArea
-    }
-    if (!carType || carType == 'null') {
-      carType = ''
-      delete vo.carType
-    }
-    if (!carSourceType || carSourceType == 'null') {
-      carSourceType = ''
-      delete vo.carSourceType
-    }
-    if (!carLength1 || carLength1 == 'null') {
-      carLength1 = ''
-      delete vo.carLengthLower
-    }
-    if (!carLength2 || carLength2 == 'null') {
-      carLength2 = ''
-      delete vo.carLengthUpper
-    }
-    if (!carLoad1 || carLoad1 == 'null') {
-      carLoad1 = ''
-      delete vo.carLoadLower
-    }
-    if (!carLoad2 || carLoad2 == 'null') {
-      carLoad2 = ''
-      delete vo.carLoadUpper
-    }
-    if (!isLongCar || isLongCar == 'null') {
-      isLongCar = ''
-      delete vo.isLongCar
-    }
-
-    $('#list_nav_a').html(startc + starta + ' 到 ' + endc + enda + ' 车源信息')
-    if ((!startc && !starta) || (!endc && !enda)) {
-      $('#list_nav_a').html(startc + starta + '  ' + endc + enda + '车源信息')
-    }
-
     $('#carLineFrom input').citypicker({
-      province: startp,
-      city: startc,
-      district: starta
+      province: this.startProvince,
+      city: this.startCity,
+      district: this.startArea
     })
     $('#carLineTo input').citypicker({
-      province: endp,
-      city: endc,
-      district: enda
+      province: this.endProvince,
+      city: this.endCity,
+      district: this.endArea
     })
-
-    //清空条件
-    $('#flush').click(function() {
-      console.log('清空地址')
-      window.location.href = '/cheyuan'
-    })
-    //清空条件
-    //车源搜索 S
-
-    $('#search_cheyuan').click(function() {
-      var list1 = [],
+    this.pagination()
+  },
+  methods: {
+    searchDo() {
+      let list1 = [],
         list2 = []
       $('#carLineFrom .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      var startp = list1[0]
-      var startc = list1[1]
-      var starta = list1[2]
+      this.startProvince = list1[0] ? list1[0] : ''
+      this.startCity = list1[1] ? list1[1] : ''
+      this.startArea = list1[2] ? list1[2] : ''
 
       $('#carLineTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
-      var endp = list2[0]
-      var endc = list2[1]
-      var enda = list2[2]
-      if (!startp) {
-        startp = ''
-      }
-      if (!startc) {
-        startc = ''
-      }
-      if (!starta) {
-        starta = ''
-      }
-      if (!endp) {
-        endp = ''
-      }
-      if (!endc) {
-        endc = ''
-      }
-      if (!enda) {
-        enda = ''
-      }
-      startp = encodeURI(startp)
-      startc = encodeURI(startc)
-      starta = encodeURI(starta)
-      endp = encodeURI(endp)
-      endc = encodeURI(endc)
-      enda = encodeURI(enda)
-
-      window.location =
-        '/cheyuan?startp=' +
-        startp +
-        '&startc=' +
-        startc +
-        '&starta=' +
-        starta +
-        '&endp=' +
-        endp +
-        '&endc=' +
-        endc +
-        '&enda=' +
-        enda
-    })
-
-    //车源搜索 E
-
-    $('#pagination1').pagination({
-      currentPage: this.currentPage,
-      totalPage: this.pages,
-      callback: async current => {
-        $('#current1').text(current)
-        let carInfoList = await getCarInfoList(this.$axios, current, {
-          startCity: this.$cookies.get('currentAreaFullName'),
-          startProvince: this.$cookies.get('currentProvinceFullName')
-        })
-        this.carInfoList = carInfoList.list
-        this.pages = carInfoList.pages
-        this.current = carInfoList.current
-        window.location.href = '#top'
-      }
-    })
-  },
-  methods: {
+      this.endProvince = list2[0] ? list2[0] : ''
+      this.endCity = list2[1] ? list2[1] : ''
+      this.endArea = list2[2] ? list2[2] : ''
+    },
+    async search() {
+      this.searchDo()
+      // let carInfoList = await getCarInfoList(this.$axios, 1, this.vo)
+      // this.carInfoList = carInfoList.list
+      // this.pages = carInfoList.pages
+      // this.currentPage = carInfoList.currentPage
+      // this.pagination()
+      window.location.href = `/cheyuan?carLengthLower=${
+        this.carLengthLower
+      }&AF031Id=${this.AF031Id}&carLengthUpper=${this.carLengthUpper}&AF032Id=${
+        this.AF032Id
+      }&carLoadLower=${this.carLoadLower}&carLoadUpper=${
+        this.carLoadUpper
+      }&carSourceType=${this.carSourceType}&carType=${this.carType}&endArea=${
+        this.endArea
+      }&endCity=${this.endCity}&endProvince=${this.endProvince}&isLongCar=${
+        this.isLongCar
+      }&startArea=${this.startArea}&startCity=${this.startCity}&startProvince=${
+        this.startProvince
+      }`
+    },
     AF032Click(item) {
-      this.AF032Name = item.name
+      this.AF032Id = item.id
       if (item.name.indexOf('<') !== -1) {
         this.carLoadLower = 0
         this.carLoadUpper = item.name.substring(1, 20)
@@ -818,11 +732,10 @@ export default {
         this.carLoadLower = item.name.split('-', 2)[0]
         this.carLoadUpper = item.name.split('-', 2)[1]
       }
-      console.log(this.carLoadLower)
-      console.log(this.carLoadUpper)
+      this.search()
     },
     AF031Click(item) {
-      this.AF031Name = item.name
+      this.AF031Id = item.id
       if (item.name.indexOf('<') !== -1) {
         this.carLengthLower = 0
         this.carLengthUpper = item.name.substring(1, 20)
@@ -836,20 +749,51 @@ export default {
         this.carLengthLower = item.name.split('-', 2)[0]
         this.carLengthUpper = item.name.split('-', 2)[1]
       }
-      console.log(this.carLengthLower)
-      console.log(this.carLengthUpper)
+      this.search()
     },
     longCarClick(item) {
       this.isLongCar = item.value
-      console.log(this.isLongCar)
+      this.search()
     },
     carSourceTypeClick(item) {
       this.carSourceType = item.value
-      console.log(this.carSourceType)
+      this.search()
     },
     AF018Click(item) {
       this.carType = item.code
-      console.log(this.carType)
+      this.search()
+    },
+    pagination() {
+      $('#pagination1').pagination({
+        currentPage: this.currentPage,
+        totalPage: this.pages,
+        callback: async current => {
+          $('#current1').text(current)
+          this.searchDo()
+          let carInfoList = await getCarInfoList(this.$axios, current, {
+            startProvince: this.startProvince,
+            startCity: this.startCity,
+            startArea: this.startArea,
+            endProvince: this.endProvince,
+            endCity: this.endCity,
+            endArea: this.endArea,
+            carType: this.carType,
+            isLongCar: this.isLongCar,
+            carSourceType: this.carSourceType,
+            carLengthLower: this.carLengthLower,
+            carLengthUpper: this.carLengthUpper,
+            carLoadLower: this.carLoadLower,
+            carLoadUpper: this.carLoadUpper
+          })
+          this.carInfoList = carInfoList.list
+          this.pages = carInfoList.pages
+          this.current = carInfoList.current
+          window.location.href = '#top'
+        }
+      })
+    },
+    reload() {
+      window.location.href = '/cheyuan'
     }
   }
 }

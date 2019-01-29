@@ -1,4 +1,4 @@
-export function getRecommendList($axios, app, vo) {
+export function getRecommendList($axios, vo) {
   return $axios.get(
     `/28-web/carInfo/recommendList?carLengthLower=${
       vo.carLengthLower

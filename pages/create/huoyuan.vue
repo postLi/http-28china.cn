@@ -6,9 +6,10 @@
           <div class="nr_bt1"><span>在线下单</span></div>
         </div>	 -->
         <!-- 下单部分 -->
+        <!-- <img src="../../static/images/wzlImg/wz.png"> -->
         <div class="nr order-create-main">
           <div class="order-step"><img 
-            src="/templets/default/images/wzlImg/dp.png" 
+            src="../../static/images/wzlImg/dp.png" 
             class="dp">发布货源信息，让物流企业和运输车辆主动联系您，价比三家，省时省力</div>
           <div class="order-line-info order-input-tab">
             <div class="order-title">线路信息 <span>（提示：待*为必填）</span></div>
@@ -21,7 +22,7 @@
                     wtmap="" 
                     maxlength="40" 
                     type="text"><img 
-                      src="/templets/default/images/wzlImg/qd.png" 
+                      src="../../static/images/wzlImg/qd.png" 
                       class="qd">
                 </div>
               </div>
@@ -33,7 +34,7 @@
                     wtmap="{township}{street}{building}" 
                     maxlength="40" 
                     type="text"><img 
-                      src="/templets/default/images/wzlImg/wz.png" 
+                      src="../../static/images/wzlImg/wz.png" 
                       class="wz1">
                 </div>
               </div>
@@ -47,7 +48,7 @@
                     wtmap="" 
                     maxlength="40" 
                     type="text" ><img 
-                      src="/templets/default/images/wzlImg/zd.png" 
+                      src="../../static/images/wzlImg/zd.png" 
                       class="zd">
                 </div>
               </div>
@@ -59,7 +60,7 @@
                     wtmap="{township}{street}{building}" 
                     maxlength="40" 
                     type="text"><img 
-                      src="/templets/default/images/wzlImg/wz.png" 
+                      src="../../static/images/wzlImg/wz.png" 
                       class="wz2">
                 </div>
               </div>

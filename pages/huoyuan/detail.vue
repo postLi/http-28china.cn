@@ -194,7 +194,7 @@
             :key="index" 
             class="arc_list_item">
             <a 
-              :href="'/huoyuan/2018/0508/2.html?id=' + item.id + '&shipperId=' + item.shipperId"
+              :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
               target="_blank"><div
                 v-if="item.startProvinceCityArea && item.endProvinceCityArea" 
                 class="arc_list_item_bt">{{ item.startProvinceCityArea + '	&rarr;' + item.endProvinceCityArea }}</div></a>
@@ -211,7 +211,7 @@
               </div>
               <div class="arc_list_item_nr3">
                 <a
-                  :href="'/huoyuan/2018/0508/2.html?id=' + item.id + '&shipperId=' + item.shipperId"><input value="查看"></a>
+                  :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><input value="查看"></a>
               </div>
 
             </div>
@@ -316,20 +316,27 @@ function setEnable(item) {
   }
 }
 async function getOtherInfoList($axios, current, vo = {}) {
-  let parm = {
-    currentPage: current,
-    pageSize: 5,
-    vo
+  let parm = vo
+  parm.currentPage = current
+  parm.pageSize = 5
+  let res = await $axios.post('/28-web/lclOrder/findOtherInfoList', parm)
+  if (res.data.status === 200) {
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
+    }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
   }
-  return await $axios.post(
-    '/aflc-portal/order/fclOrder/v1/getOtherInfoList',
-    parm
-  )
 }
 export default {
   name: 'Detail',
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/article_huoyuan.css' }],
+    link: [
+      { rel: 'stylesheet', href: '/css/article_huoyuan.css' },
+      { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
+    ],
     script: [{ src: '../js/jquery.pagination.min.js' }]
   },
   layout: 'subLayout',
@@ -337,14 +344,14 @@ export default {
     return {
       zxList: [],
       otherInfoList: [],
-      hyDetail: []
+      hyDetail: [],
+      pages: 0,
+      currentPage: 1
     }
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    let hyDetail = await $axios.get(
-      '/aflc-portal/order/fclOrder/v1/getDetails/' + query.id
-    )
+    let hyDetail = await $axios.get('/28-web/lclOrder/detail/' + query.id)
     if (hyDetail.data.status === 200) {
       setEnable(hyDetail.data.data)
       let code = await getCode($axios, hyDetail.data.data.endProvince)
@@ -352,31 +359,36 @@ export default {
     }
     let otherInfoList = await getOtherInfoList($axios, 1, {
       id: query.id,
-      shipperId: query.shipperId,
-      queryType: '2'
+      shipperId: query.shipperId
     })
     return {
       hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
-      otherInfoList:
-        otherInfoList.data.status === 200 ? otherInfoList.data.data.list : []
+      otherInfoList: otherInfoList.list,
+      currentPage: otherInfoList.currentPage,
+      pages: otherInfoList.pages
     }
   },
   mounted() {
+    $('#pagination1').pagination({
+      currentPage: this.currentPage,
+      totalPage: this.pages,
+      callback: async current => {
+        $('#current1').text(current)
+        let otherInfoList = await getOtherInfoList(this.$axios, current, {
+          id: this.$route.query.id,
+          shipperId: this.$route.shipperId
+        })
+        this.otherInfoList = otherInfoList.list
+        this.currentPage = otherInfoList.currentPage
+        this.pages = otherInfoList.pages
+        window.location.href = '#top'
+      }
+    })
     seajs.use(['../js/city.js'], function() {
       seajs.use(['../js/arc_huoyuan.js'], function() {
         seajs.use(['../js/collection.js'], function() {
-          seajs.use(['../js/gaodemap2.js'], function() {
-            $('#pagination1').pagination({
-              currentPage: 1,
-              totalPage: process02(1),
-              callback: function(current) {
-                $('#current1').text(current)
-                process02(current)
-                window.location.href = '#top'
-              }
-            })
-          })
+          seajs.use(['../js/gaodemap2.js'], function() {})
         })
       })
     })

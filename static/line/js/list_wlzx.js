@@ -576,7 +576,7 @@ $("#search_wlLine").click(
     companyName = encodeURI(companyName)
     parkId = encodeURI(parkId)
     parkName = encodeURI(parkName)
-    window.location = '/zhuanxian?tid=4&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda + '&companyName=' + companyName + '&parkId=' + parkId + '&parkName=' + parkName;
+    window.location = '/zhuanxian/list?startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda + '&companyName=' + companyName + '&parkId=' + parkId + '&parkName=' + parkName;
     if(startp || startc || starta){
       // $(this).attr('placeholder','请输入企业名')
       // $('.city-picker-input').attr('placeholder',startp + startc + starta)

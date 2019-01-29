@@ -1194,12 +1194,12 @@ margin-left: 30px;
   padding: 6px 6px !important;
 }
 
-.ui-pagination-container .ui-pagination-page-btn {
-  width: 30px !important;
-  height: 10px !important;
-  line-height: 10px;
-  padding: 6px 0px !important;
-}
+/*.ui-pagination-container .ui-pagination-page-btn {*/
+  /*width: 30px !important;*/
+  /*height: 10px !important;*/
+  /*line-height: 10px;*/
+  /*padding: 6px 0px !important;*/
+/*}*/
 
 .wlzx_yq_none {
   width: 488px;

@@ -513,7 +513,7 @@
                 <i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>
               </div>
               <div class="ltl-input">
-                <textarea 
+                <textarea
                   class="textareaDiv"
                   placeholder="备注信息，如：期望发货时间、货物体积重量
 等信息..."/>
@@ -684,6 +684,8 @@ export default {
     width: 100%;
     padding: 10px;
     box-sizing: border-box;
+    border-radius: 4px;
+    border-color: #ccc;
   }
   .clearfix:after {
     content: ' ';
@@ -939,9 +941,8 @@ export default {
   .lines-sprite-icons {
     background: url(/line/images/ss56-lines-sprite.png) no-repeat;
   }
-  .ss56-common-sprite11 {
-    background: url('../../static/line/images/downicon.png') no-repeat 0 11px;
-  }
+  /**/
+  .ss56-common-sprite11,
   .ss56-common-sprite-icon {
     background: url('../../static/line/images/downicon.png') no-repeat 0 11px;
   }

@@ -25,8 +25,12 @@ export default {
     }
   },
   async asyncData({ $axios, app, query, params, route }) {
-    console.log('route.path:', route.path)
-    let con = await $axios.get(makeAnfaTmsUrl(route.path))
+    console.log('route.path2:', route.path)
+    let path = route.path
+    if (path.indexOf('.jhtml') === -1) {
+      path = path.replace(/\/?$/, '/index.jhtml')
+    }
+    let con = await $axios.get(makeAnfaTmsUrl(path))
     // 替换链接跟静态资源路径
     return {
       content: formatAnfaTms(con.data)

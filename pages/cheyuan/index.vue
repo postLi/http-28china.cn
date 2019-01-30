@@ -281,6 +281,26 @@
               <span><a class="li_check">查看详情</a></span>
             </div>
           </li>
+          <li>
+            <div class="li_one">
+              <a>广东省广州市->北京市</a>
+              <span>2019-02-24 12:11:00</span>
+            </div>
+            <div class="li_two">
+              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
+              <span><a class="li_check">查看详情</a></span>
+            </div>
+          </li>
+          <li>
+            <div class="li_one">
+              <a>广东省广州市->北京市</a>
+              <span>2019-02-24 12:11:00</span>
+            </div>
+            <div class="li_two">
+              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
+              <span><a class="li_check">查看详情</a></span>
+            </div>
+          </li>
         </ul>
       </div>
       <!-- 最新车源end -->
@@ -398,7 +418,6 @@
       </div>
       <!-- 帮我找优质运动end -->
 
-
       <!-- 全国热门物流专线start -->
       <div class="hot-city-layer main-width">
         <div class="hot-city-unit">
@@ -466,7 +485,8 @@ export default {
     script: [
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' }
+      { src: './js/jquery.pagination.min.js' },
+      { src: '/js/gaodemap2.js' }
     ]
   },
   data() {
@@ -1679,6 +1699,7 @@ body {
   padding: 20px;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
 }
 .list_new .list_new_ul li {
   flex: 1;

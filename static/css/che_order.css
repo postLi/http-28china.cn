@@ -25,17 +25,16 @@
   color: #ef0000;
 }
 
-
 .main_nr{
   position: relative;
 }
 .main_nr .nr_bt1 span{
   border-bottom: none;
   padding-left: 36px;
-  background: url(../images/order/order-title.png) no-repeat 0 center;
+  background: url(/images/order/order-title.png) no-repeat 0 center;
 }
 .order-step{
-  /* background: url(../images/order/step.png) no-repeat center center; */
+  background: url(/images/order/step.png) no-repeat center center;
   height: 45px;
   line-height: 45px;
   /* background: navajowhite; */
@@ -114,7 +113,6 @@
 }
 .order-form-item:first-child .order-form-label{
   padding-left: 10px;
-  
 }
 .order-form-label,.order-form-input{
   float: left;

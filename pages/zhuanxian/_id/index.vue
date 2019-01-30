@@ -3,9 +3,8 @@
 </template>
 
 <script>
-import { formatAnfaTms, makeAnfaTmsUrl } from '../utils.js'
 export default {
-  name: 'CheYuan',
+  name: 'Zhuanxian1',
   head: {
     link: [
       { rel: 'stylesheet', href: '/zxnews_files/n/basic.css' },
@@ -25,15 +24,15 @@ export default {
     }
   },
   async asyncData({ $axios, app, query, params, route }) {
-    console.log('route.path2:', route.path)
     let path = route.path
-    if (path.indexOf('.jhtml') === -1) {
-      path = path.replace(/\/?$/, '/index.jhtml')
-    }
-    let con = await $axios.get(makeAnfaTmsUrl(path))
+
+    path = 'http://192.168.1.188:825/lines' + path.replace(/^\/zhuanxian/, '')
+    console.log('route.path4:', route.path, path)
+
+    let con = await $axios.get(path)
     // 替换链接跟静态资源路径
     return {
-      content: formatAnfaTms(con.data)
+      content: con.data
     }
   },
   mounted() {},

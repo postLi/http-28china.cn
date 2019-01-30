@@ -3400,6 +3400,7 @@ input:-webkit-autofill {
 }
 .pwd_login .vcodeinput .vcode span {
 cursor: pointer;
+font-size: 12px;
 }
 .pwd_login .vcodeinput .vcode .changeVcode {
     cursor: pointer;
@@ -3494,6 +3495,7 @@ cursor: pointer;
 }
 #changeVcode2{
   color: #2577e3;
+  /* font-size: 12px !important; */
 }
 .yzm_login .vcodeinput .vcode {
     float: left;

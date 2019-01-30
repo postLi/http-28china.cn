@@ -44,7 +44,7 @@
                 </div>
                 <span>&nbsp;园区名称&nbsp;：</span>
                 <input
-                  v-model="searchKey"
+                  v-model="parkName"
                   type="text"
                   class="list_input"
                   placeholder="请输入园区名称" >
@@ -60,7 +60,7 @@
                   value="重置 "
                   readonly=""
                   class="list_button"
-                  @click="flush()">
+                  @click="reload()">
               </form>
               </dd>
 
@@ -69,7 +69,7 @@
         </div>
         <div class="w1036 list_wlyq">
           <div
-            v-if="getGatewaylist.length === 0"
+            v-if="getGateWayList.length === 0"
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
@@ -77,7 +77,7 @@
           </div>
 
           <ul
-            v-for="(item,index) in getGatewaylist"
+            v-for="(item,index) in getGateWayList"
             :key="index"
             class="wlzx_list">
             <a
@@ -130,7 +130,7 @@
           <span>暂无相关园区推荐</span>
         </div>
         <div
-          v-for="(item,index) in recommendParklist"
+          v-for="(item,index) in recommendParkList"
           :key="index"
           class="tj_list">
           <a
@@ -155,20 +155,20 @@
 </template>
 
 <script>
-async function gatewaylist($axios, currentPage, vo = {}) {
-  let list, pages
-  let parm = {
-    currentPage: currentPage,
-    pageSize: 21,
-    vo
-  }
-  await $axios.post('/28-web/logisticsPark/list', parm).then(res => {
-    if (res.data.status === 200) {
-      list = res.data.data.list
-      pages = res.data.data.pages
+async function gateWayList($axios, currentPage, vo = {}) {
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 21
+  let res = await $axios.post('/28-web/logisticsPark/list', parm)
+  if (res.data.status === 200) {
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
     }
-  })
-  return { list, pages, currentPage }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
+  }
 }
 export default {
   name: 'WuLiu',
@@ -186,108 +186,84 @@ export default {
   },
   data() {
     return {
-      getGatewaylist: [],
+      getGateWayList: [],
       getLogisticsPark: [],
-      recommendParklist: [],
-      searchKey: '',
+      recommendParkList: [],
       pages: 0, //总页数
       currentPage: 1, //当前页
+      parkName: '', //搜索园区名称
       locationProvince: '',
       locationCity: '',
       locationArea: ''
     }
   },
   async asyncData({ $axios, app, query }) {
-    let parm = {
-      currentPage: 1,
-      pageSize: 16,
-      vo: {}
+    let parkName = '',
+      locationProvince = '',
+      locationCity = '',
+      locationArea = ''
+    if (query.parkName) {
+      parkName = query.parkName
     }
+    if (query.locationArea) {
+      locationArea = query.locationArea
+    }
+    if (query.locationCity) {
+      locationCity = query.locationCity
+    } else {
+      locationCity = app.$cookies.get('currentAreaFullName')
+    }
+    if (query.locationProvince) {
+      locationProvince = query.locationProvince
+    } else {
+      locationProvince = app.$cookies.get('currentProvinceFullName')
+    }
+    let vo = {
+      locationProvince: locationProvince,
+      locationCity: locationCity,
+      locationArea: locationArea,
+      parkName: parkName
+    }
+    let parm = vo
+    parm.currentPage = 1
+    parm.pageSize = 16
     let getLogisticsPark = await $axios.post(
       '/28-web/logisticsPark/interestedList',
       parm
     )
-    let parm1 = {
-      currentPage: 1,
-      pageSize: 14,
-      vo: {}
-    }
-    let recommendParklist = await $axios.post(
+    let parm1 = vo
+    parm1.currentPage = 1
+    parm1.pageSize = 14
+    let recommendParkList = await $axios.post(
       '/28-web/logisticsPark/recommendList',
       parm1
     )
-    let getGatewaylistData = await gatewaylist($axios, 1, {
-      locationProvince: app.$cookies.get('currentProvinceFullName'),
-      locationCity: app.$cookies.get('currentAreaFullName')
-    })
+    let getGateWayListData = await gateWayList($axios, 1, vo)
     return {
-      getGatewaylist: getGatewaylistData.list ? getGatewaylistData.list : [],
-      pages: getGatewaylistData.pages ? getGatewaylistData.pages : 0,
-      currentPage: getGatewaylistData.currentPage,
+      getGateWayList: getGateWayListData.list,
+      pages: getGateWayListData.pages,
+      currentPage: getGateWayListData.currentPage,
       getLogisticsPark:
         getLogisticsPark.data.status === 200
           ? getLogisticsPark.data.data.list
           : [],
-      recommendParklist:
-        recommendParklist.data.status === 200
-          ? recommendParklist.data.data.list
-          : []
+      recommendParkList:
+        recommendParkList.data.status === 200
+          ? recommendParkList.data.data.list
+          : [],
+      parkName: parkName,
+      locationProvince: locationProvince,
+      locationCity: locationCity,
+      locationArea: locationArea
     }
   },
   mounted() {
-    function GetUrlParam(name) {
-      var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
-      var r = encodeURI(window.location.search)
-        .substr(1)
-        .match(reg)
-      if (r != null) return unescape(r[2])
-      return null
-    }
-
-    var locationProvince1 = GetUrlParam('locationProvince')
-    var locationCity1 = GetUrlParam('locationCity')
-    var locationArea1 = GetUrlParam('locationArea')
-    var parkName1 = GetUrlParam('parkName')
-
-    var locationProvince = decodeURI(locationProvince1)
-    var locationCity = decodeURI(locationCity1)
-    var locationArea = decodeURI(locationArea1)
-    var parkName = decodeURI(parkName1)
-
-    var currentProvinceFullName = $.cookie('currentProvinceFullName')
-    var currentAreaFullName = $.cookie('currentAreaFullName')
-
-    var vo = new Object()
-
-    vo.locationProvince = locationProvince
-    vo.locationCity = locationCity
-    vo.locationArea = locationArea
-    vo.parkName = parkName
-
-    if (!locationProvince || locationProvince == 'null') {
-      locationProvince = currentProvinceFullName
-      vo.locationProvince = locationProvince
-    }
-    if (!locationCity || locationCity == 'null') {
-      locationCity = currentAreaFullName
-      vo.locationCity = locationCity
-    }
-    if (!locationArea || locationArea == 'null') {
-      locationArea = ''
-      delete vo.locationArea
-    }
-    if (!parkName || parkName == 'null') {
-      parkName = ''
-      delete vo.parkName
-    }
     $('#parkAddress input').citypicker({
-      province: locationProvince,
-      city: locationCity,
-      district: locationArea
+      province: this.locationProvince,
+      city: this.locationCity,
+      district: this.locationArea
     })
-    $('#list_nav_a').html(locationCity + locationArea + '物流园区')
-
-    $('#parkName').val(parkName)
+    $('#list_nav_a').html(this.locationCity + this.locationArea + '物流园区')
     this.loadPagination()
   },
   methods: {
@@ -296,49 +272,17 @@ export default {
       $('#parkAddress .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      this.locationProvince = list1[0]
-      this.locationCity = list1[1]
-      this.locationArea = list1[2]
-      let vo = {
-        locationProvince: this.locationProvince,
-        locationCity: this.locationCity,
-        locationArea: this.locationArea,
-        parkName: this.searchKey
-      }
-      let obj = await gatewaylist(this.$axios, 1, vo)
-      this.getGatewaylist = obj.list
-      this.currentPage = obj.currentPage
-      if (obj.list.length === 0) {
-        this.pages = 0
-      } else {
-        this.pages = obj.pages
-      }
-      this.loadPagination()
+      this.locationProvince = list1[0] ? list1[0] : ''
+      this.locationCity = list1[1] ? list1[1] : ''
+      this.locationArea = list1[2] ? list1[2] : ''
+      window.location.href = `/wuliu?locationProvince=${
+        this.locationProvince
+      }&locationCity=${this.locationCity}&locationArea=${
+        this.locationArea
+      }&parkName=${this.parkName}`
     },
-    async flush() {
-      this.searchKey = ''
-      this.locationProvince = ''
-      this.locationCity = ''
-      this.locationArea = ''
-      let currentProvinceFullName = this.$cookies.get('currentProvinceFullName')
-      let currentAreaFullName = this.$cookies.get('currentAreaFullName')
-      $('#parkAddress input').pickerReload({
-        province: currentProvinceFullName,
-        city: currentAreaFullName,
-        district: ''
-      })
-      let obj = await gatewaylist(this.$axios, 1, {
-        locationProvince: this.$cookies.get('currentProvinceFullName'),
-        locationCity: this.$cookies.get('currentAreaFullName')
-      })
-      this.getGatewaylist = obj.list
-      this.currentPage = obj.currentPage
-      if (obj.list.length === 0) {
-        this.pages = 0
-      } else {
-        this.pages = obj.pages
-      }
-      this.loadPagination()
+    reload() {
+      window.location.href = '/wuliu'
     },
     loadPagination() {
       $('#pagination1').pagination({
@@ -346,17 +290,13 @@ export default {
         totalPage: this.pages,
         callback: async current => {
           $('#current1').text(current)
-          let obj = await gatewaylist(this.$axios, current, {
-            locationProvince: this.locationProvince
-              ? this.locationProvince
-              : this.$cookies.get('currentProvinceFullName'),
-            locationCity: this.locationCity
-              ? this.locationCity
-              : this.$cookies.get('currentAreaFullName'),
-            locationArea: this.locationArea ? this.locationArea : '',
-            parkName: this.searchKey
+          let obj = await gateWayList(this.$axios, current, {
+            locationProvince: this.locationProvince,
+            locationCity: this.locationCity,
+            locationArea: this.locationArea,
+            parkName: this.parkName
           })
-          this.getGatewaylist = obj.list
+          this.getGateWayList = obj.list
           this.currentPage = obj.currentPage
           window.location.href = '#top'
         }

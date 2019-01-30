@@ -146,7 +146,8 @@
 
           <div 
             v-if="carInfoList.length === 0"
-            class="list_none">
+            class="list_none"
+            style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
             <img src="../../static/images/none_pic.png">
           </div>
@@ -155,8 +156,8 @@
             :key="index" 
             class="wlzx_list">
             <li id="cy_list_0">
-              <div class="sc_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
-              <div class="view_num"><img src="/_nuxt/static/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
+              <div class="sc_num"><img src="_nuxt/static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+              <div class="view_num"><img src="_nuxt/static/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
             </li>
             <li class="cy_list_4">
               <a
@@ -224,7 +225,7 @@
         <!--分页-->
 
         <!-- 28为您推荐start -->
-        <!-- <div
+        <div
           class="hot-city-layer" 
           style="min-width:1036px;float:left">
           <div class="hot-city-unit">
@@ -262,12 +263,12 @@
                 href="/goods/f441200.html">肇庆找车拉货</a></li>
             </ul>
           </div>
-        </div> -->
+        </div>
         <!-- 28为您推荐end -->
          
       </div>
       <!-- 最新车源start -->
-      <!-- <div class="list_new">
+      <div class="list_new">
         <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
         <ul class="list_new_ul">
           <li>
@@ -281,7 +282,7 @@
             </div>
           </li>
         </ul>
-      </div> -->
+      </div>
       <!-- 最新车源end -->
 
       <div class="list_right">
@@ -351,7 +352,7 @@
       </div>
 
       <!-- 帮我找优质运动start -->
-      <!-- <div class="list_help">
+      <div class="list_help">
         <div class="list-box-r-top">
           <form action="">
             <h2 class="list_help_title">帮我找优质运力</h2>
@@ -394,12 +395,12 @@
             </div>
           </form>
         </div>
-      </div> -->
+      </div>
       <!-- 帮我找优质运动end -->
 
 
       <!-- 全国热门物流专线start -->
-      <!-- <div class="hot-city-layer main-width">
+      <div class="hot-city-layer main-width">
         <div class="hot-city-unit">
           <h3 class="news-unit-title">热门货源</h3>
           <ul class="hot-cities">
@@ -435,7 +436,7 @@
               href="/goods/f441200.html">肇庆找车拉货</a></li>
           </ul>
         </div>
-      </div> -->
+      </div>
       <!-- 全国热门物流专线end -->
     </div>
   </div>
@@ -444,11 +445,9 @@
 <script>
 import { getRecommendList } from './index.js'
 async function getCarInfoList($axios, currentPage, vo = {}) {
-  let parm = {
-    currentPage: currentPage,
-    pageSize: 10,
-    vo: vo
-  }
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 10
   let res = await $axios.post('/28-web/carInfo/list', parm)
   if (res.data.status === 200) {
     return {
@@ -608,7 +607,7 @@ export default {
       carLoadUpper: carLoadUpper
     }
     let carInfoList = await getCarInfoList($axios, 1, vo)
-    let recommendList = await getRecommendList($axios, app, vo)
+    let recommendList = await getRecommendList($axios, vo)
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [],
       AF031: AF031.data.status === 200 ? AF031.data.data : [],

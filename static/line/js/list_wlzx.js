@@ -576,7 +576,7 @@ $("#search_wlLine").click(
     companyName = encodeURI(companyName)
     parkId = encodeURI(parkId)
     parkName = encodeURI(parkName)
-    window.location = '/zhuanxian?tid=4&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda + '&companyName=' + companyName + '&parkId=' + parkId + '&parkName=' + parkName;
+    window.location = '/zhuanxian/list?startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda + '&companyName=' + companyName + '&parkId=' + parkId + '&parkName=' + parkName;
     if(startp || startc || starta){
       // $(this).attr('placeholder','请输入企业名')
       // $('.city-picker-input').attr('placeholder',startp + startc + starta)
@@ -700,7 +700,7 @@ function tjcx01() {
 
             if (aaa.indexOf(departureTimeCode) != -1) {
 
-              console.log(aaa);
+              // console.log(aaa);
               $("#tjcx_01 a").removeClass("now");
               $(this).addClass("now");
             }
@@ -923,7 +923,7 @@ function process01() {
           var authStatus = datas[i].authStatus;
           var collateral = datas[i].collateral;
           var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
-          $("#tj_a011").attr("href", "/member/" + account + ".html");
+          $("#tj_a011").attr("href", "/member/" + account + "");
           $("#tj_a011").html(companyName);
           $("#tj102").html(assessNumber);
           $("#tj101").html(browseNumber);
@@ -1117,7 +1117,7 @@ function process02(currentPage) {
           var num0 = Math.random();
           var num = Math.ceil(num0 * 30);
           // console.log(num,'num');
-          var src1 = "/zhuanxian/images/bg" + num + ".png";
+          var src1 = "/line/images/bg" + num + ".png";
 
           if (datas[i].rangeLogo) {
             if (datas[i].rangeLogo.indexOf(',')) {
@@ -1129,7 +1129,7 @@ function process02(currentPage) {
               // $(".nr_a21_img img").attr("src",src1);
             }
           }
-          if (datas[i].rangeLogo ==null ) {
+          if (datas[i].rangeLogo =='' ) {
             $(".scrollLoading").attr("src", src1);
           }
           $(".nr_a21_img img").attr("alt", companyName);

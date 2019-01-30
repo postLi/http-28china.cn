@@ -58,14 +58,11 @@
         </div>
       </div>
     </div>
-
-
     <div class="login_box">
       <div class="login_close"><img src="../static/images/login_close.png" ></div>
       <div class="login_box_bt">
         <div class="login_bt1">密码登录</div>
         <div class="login_bt2">验证码登录</div>
-
       </div>
       <div class="pwd_login">
         <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
@@ -132,13 +129,13 @@
             <li class="submit"> <input 
               class="login-btn" 
               readonly="" 
-              value="登录" ></li>
+              value="登录"></li>
           </ul>
         </form>
       </div>
 
       <div class="yzm_login">
-        <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
+        <!-- <form name="form1" id="form1" method="POST" action="/member/index_do.php"> -->
         <form 
           id="form2" 
           name="form2" >
@@ -159,7 +156,6 @@
             name="gourl" 
             value="" >
           <ul>
-
             <li class="userType2" ><input 
               type="button" 
               name="aflc-5" 
@@ -219,7 +215,7 @@
             <li class="submit"> <input 
               class="login-yzm" 
               readonly="" 
-              value="登录" ></li>
+              value="登录"></li>
           </ul>
         </form>
       </div>

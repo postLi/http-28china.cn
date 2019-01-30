@@ -6,7 +6,8 @@
       </div>-->
       <div class="arc_top1">
         <div class="arc_top1_1">
-          <span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>
+          <span>{{ linedata.startLocation+ '&nbsp;&rarr;&nbsp;' +linedata.endLocation }}</span>
+          <!--<span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>-->
         </div>
         <div class="arc_top1_3"><a
           id="search_huo"
@@ -36,10 +37,17 @@
         <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
         <div
           id="arc_city"
-          class="arc_top2_2"/>
+          class="arc_top2_2">
+          <a
+            v-for="(item,index) in lineCitys"
+            v-if="index<14"
+            :key="index"
+            href=""><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
+        </div>
         <div
+          v-if="lineCitys.length>14"
           class="arc_top2_3"
-        ><a href="javascript:void(0)"><span>更多+</span></a></div>
+        ><a href="javascript:void(0)" ><span>更多+</span></a></div>
 
         <!--更多城市-->
         <div
@@ -50,7 +58,15 @@
       </div>
       <div class="arc_main1">
         <div class="arc_left">
-          <div class="arc_left_1"><img id="nr0714"></div>
+          <div class="arc_left_1">
+            <img
+              v-if="linedata.rangeLogo==''"
+              :src="linedata.rangeLogo.split(',')[showImg]">
+            <img
+              v-else
+              :src="'../../static/line/images/bg' + linedata.num + '.png'"
+              alt="">
+          </div>
           <div class="arc_left_2">
             <a href="javascript:void(0)"><img id="nr0715"></a>
             <a href="javascript:void(0)"><img id="nr0716"></a>
@@ -323,7 +339,7 @@
           </div>
         </div>
         <div class="arc_right">
-          <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020"/></p>
+          <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020" >{{ linedata.publishName }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
             <img
               class="xy_zuan"
@@ -761,6 +777,20 @@
 </template>
 
 <script>
+import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+async function getOtherCarInfoList($axios, id) {
+  let res = await $axios.get(`/api/28-web/range/${id}`)
+  if (res.data.status === 200) {
+    console.log(res, 'res')
+    // return {
+    //   list: res.data.data.list,
+    //   pages: res.data.data.pages,
+    //   currentPage: res.data.data.pageNum
+    // }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
+  }
+}
 export default {
   name: 'Index',
   head: {
@@ -772,6 +802,45 @@ export default {
     ]
   },
   layout: 'subLayout',
+  data() {
+    return {
+      cy1: {},
+      zxList: [],
+      otherCarSourceList: [],
+      otherCarInfoList: [],
+      showImg: 0,
+      pages: 0,
+      currentPage: 1,
+      linedata: {},
+      lineCitys: []
+    }
+  },
+  async asyncData({ $axios, app, query }) {
+    let aurl = '',
+      lineCode,
+      lineCity
+    if (process.server) {
+      aurl = 'http://localhost:3000'
+    }
+
+    let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
+    console.log(
+      `/api/28-web/range/${query.id}`,
+      'res',
+      res.data,
+      res.data.data.endLocation
+    )
+    if (res.data.status === 200) {
+      // this.linedata = res.data.data
+      lineCode = await getCode($axios, res.data.data.endProvince)
+      lineCity = await getCity($axios, lineCode, res.data.data.startCity)
+      res.data.data.num = Math.ceil(Math.random() * 30)
+      return {
+        linedata: res.data.data,
+        lineCitys: lineCity.data.data
+      }
+    }
+  },
   mounted() {
     seajs.use(['../js/city.js', '../js/calculator.js'], function() {
       seajs.use(['../js/city-picker.js'], function() {
@@ -847,6 +916,11 @@ export default {
         })
       })
     })
+  },
+  methods: {
+    clickImg(int) {
+      this.showImg = int
+    }
   }
 }
 </script>

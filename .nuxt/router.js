@@ -34,23 +34,6 @@ const _afdc8b7a = () => interopDefault(import('..\\pages\\zhuanxian\\detail.vue'
 const _35bd9290 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
 const _77c9e1a0 = () => interopDefault(import('..\\pages\\zixun\\utils.js' /* webpackChunkName: "pages_zixun_utils" */))
 const _ed3add8a = () => interopDefault(import('..\\pages\\act\\2019\\springDay\\index.vue' /* webpackChunkName: "pages_act_2019_springDay_index" */))
-const _0fa40780 = () => interopDefault(import('..\\pages\\zixun\\ccyps\\_id.vue' /* webpackChunkName: "pages_zixun_ccyps__id" */))
-const _989193b4 = () => interopDefault(import('..\\pages\\zixun\\cgzx\\_id.vue' /* webpackChunkName: "pages_zixun_cgzx__id" */))
-const _26f8fa1e = () => interopDefault(import('..\\pages\\zixun\\gjwlxw\\_id.vue' /* webpackChunkName: "pages_zixun_gjwlxw__id" */))
-const _73faa96d = () => interopDefault(import('..\\pages\\zixun\\gnwlxw\\_id.vue' /* webpackChunkName: "pages_zixun_gnwlxw__id" */))
-const _6f6812c6 = () => interopDefault(import('..\\pages\\zixun\\gylgl\\_id.vue' /* webpackChunkName: "pages_zixun_gylgl__id" */))
-const _43703696 = () => interopDefault(import('..\\pages\\zixun\\jjsjgb\\_id.vue' /* webpackChunkName: "pages_zixun_jjsjgb__id" */))
-const _caada54a = () => interopDefault(import('..\\pages\\zixun\\jjxsfx\\_id.vue' /* webpackChunkName: "pages_zixun_jjxsfx__id" */))
-const _677643e7 = () => interopDefault(import('..\\pages\\zixun\\jmzx\\_id.vue' /* webpackChunkName: "pages_zixun_jmzx__id" */))
-const _c55c6d00 = () => interopDefault(import('..\\pages\\zixun\\jtzx\\_id.vue' /* webpackChunkName: "pages_zixun_jtzx__id" */))
-const _0b4fa0a9 = () => interopDefault(import('..\\pages\\zixun\\lkxx\\_id.vue' /* webpackChunkName: "pages_zixun_lkxx__id" */))
-const _7a57d682 = () => interopDefault(import('..\\pages\\zixun\\ltzx\\_id.vue' /* webpackChunkName: "pages_zixun_ltzx__id" */))
-const _aefc9288 = () => interopDefault(import('..\\pages\\zixun\\lzzx\\_id.vue' /* webpackChunkName: "pages_zixun_lzzx__id" */))
-const _9e3a40dc = () => interopDefault(import('..\\pages\\zixun\\tlzx\\_id.vue' /* webpackChunkName: "pages_zixun_tlzx__id" */))
-const _34ab1b6b = () => interopDefault(import('..\\pages\\zixun\\wlqy\\_id.vue' /* webpackChunkName: "pages_zixun_wlqy__id" */))
-const _1cb30620 = () => interopDefault(import('..\\pages\\zixun\\wlxyfx\\_id.vue' /* webpackChunkName: "pages_zixun_wlxyfx__id" */))
-const _3b274ff6 = () => interopDefault(import('..\\pages\\zixun\\xxhzx\\_id.vue' /* webpackChunkName: "pages_zixun_xxhzx__id" */))
-const _6217412e = () => interopDefault(import('..\\pages\\zixun\\xyzx\\_id.vue' /* webpackChunkName: "pages_zixun_xyzx__id" */))
 const _422dfb7b = () => interopDefault(import('..\\pages\\member\\_id-chajian.vue' /* webpackChunkName: "pages_member__id-chajian" */))
 const _ba53af9e = () => interopDefault(import('..\\pages\\member\\_id-contactus.vue' /* webpackChunkName: "pages_member__id-contactus" */))
 const _776fdedb = () => interopDefault(import('..\\pages\\member\\_id-cpfw.vue' /* webpackChunkName: "pages_member__id-cpfw" */))
@@ -63,6 +46,9 @@ const _79bdda5c = () => interopDefault(import('..\\pages\\member\\_id-wangdian.v
 const _3ffbacc2 = () => interopDefault(import('..\\pages\\member\\_id-webnotice.vue' /* webpackChunkName: "pages_member__id-webnotice" */))
 const _20851d80 = () => interopDefault(import('..\\pages\\member\\_id.vue' /* webpackChunkName: "pages_member__id" */))
 const _310f4dbb = () => interopDefault(import('..\\pages\\product\\_id.vue' /* webpackChunkName: "pages_product__id" */))
+const _66e21fca = () => interopDefault(import('..\\pages\\zhuanxian\\_id\\index.vue' /* webpackChunkName: "pages_zhuanxian__id_index" */))
+const _3919a364 = () => interopDefault(import('..\\pages\\zhuanxian\\_id\\_area.vue' /* webpackChunkName: "pages_zhuanxian__id__area" */))
+const _03989944 = () => interopDefault(import('..\\pages\\zixun\\_menu\\_id.vue' /* webpackChunkName: "pages_zixun__menu__id" */))
 const _698eb11c = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages_index" */))
 
 Vue.use(Router)
@@ -251,74 +237,6 @@ export function createRouter() {
       component: _ed3add8a,
       name: "act-2019-springDay"
     }, {
-      path: "/zixun/ccyps/:id?",
-      component: _0fa40780,
-      name: "zixun-ccyps-id"
-    }, {
-      path: "/zixun/cgzx/:id?",
-      component: _989193b4,
-      name: "zixun-cgzx-id"
-    }, {
-      path: "/zixun/gjwlxw/:id?",
-      component: _26f8fa1e,
-      name: "zixun-gjwlxw-id"
-    }, {
-      path: "/zixun/gnwlxw/:id?",
-      component: _73faa96d,
-      name: "zixun-gnwlxw-id"
-    }, {
-      path: "/zixun/gylgl/:id?",
-      component: _6f6812c6,
-      name: "zixun-gylgl-id"
-    }, {
-      path: "/zixun/jjsjgb/:id?",
-      component: _43703696,
-      name: "zixun-jjsjgb-id"
-    }, {
-      path: "/zixun/jjxsfx/:id?",
-      component: _caada54a,
-      name: "zixun-jjxsfx-id"
-    }, {
-      path: "/zixun/jmzx/:id?",
-      component: _677643e7,
-      name: "zixun-jmzx-id"
-    }, {
-      path: "/zixun/jtzx/:id?",
-      component: _c55c6d00,
-      name: "zixun-jtzx-id"
-    }, {
-      path: "/zixun/lkxx/:id?",
-      component: _0b4fa0a9,
-      name: "zixun-lkxx-id"
-    }, {
-      path: "/zixun/ltzx/:id?",
-      component: _7a57d682,
-      name: "zixun-ltzx-id"
-    }, {
-      path: "/zixun/lzzx/:id?",
-      component: _aefc9288,
-      name: "zixun-lzzx-id"
-    }, {
-      path: "/zixun/tlzx/:id?",
-      component: _9e3a40dc,
-      name: "zixun-tlzx-id"
-    }, {
-      path: "/zixun/wlqy/:id?",
-      component: _34ab1b6b,
-      name: "zixun-wlqy-id"
-    }, {
-      path: "/zixun/wlxyfx/:id?",
-      component: _1cb30620,
-      name: "zixun-wlxyfx-id"
-    }, {
-      path: "/zixun/xxhzx/:id?",
-      component: _3b274ff6,
-      name: "zixun-xxhzx-id"
-    }, {
-      path: "/zixun/xyzx/:id?",
-      component: _6217412e,
-      name: "zixun-xyzx-id"
-    }, {
       path: "/member/:id-chajian",
       component: _422dfb7b,
       name: "member-id-chajian"
@@ -366,6 +284,18 @@ export function createRouter() {
       path: "/product/:id?",
       component: _310f4dbb,
       name: "product-id"
+    }, {
+      path: "/zhuanxian/:id?",
+      component: _66e21fca,
+      name: "zhuanxian-id"
+    }, {
+      path: "/zhuanxian/:id?/:area",
+      component: _3919a364,
+      name: "zhuanxian-id-area"
+    }, {
+      path: "/zixun/:menu/:id?",
+      component: _03989944,
+      name: "zixun-menu-id"
     }, {
       path: "/",
       component: _698eb11c,

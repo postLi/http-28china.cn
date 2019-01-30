@@ -923,7 +923,7 @@ function process01() {
           var authStatus = datas[i].authStatus;
           var collateral = datas[i].collateral;
           var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
-          $("#tj_a011").attr("href", "/member/" + account + ".html");
+          $("#tj_a011").attr("href", "/member/" + account + "");
           $("#tj_a011").html(companyName);
           $("#tj102").html(assessNumber);
           $("#tj101").html(browseNumber);

@@ -734,6 +734,7 @@ export default {
       /*float: left;*/
       margin-top: 20px;
       background: #fff;
+      padding-bottom: 10px;
       .zx_sx {
         border-bottom: 2px solid #2577e3;
         margin-bottom: 1px;

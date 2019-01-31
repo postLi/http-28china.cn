@@ -923,7 +923,7 @@ function process01() {
           var authStatus = datas[i].authStatus;
           var collateral = datas[i].collateral;
           var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
-          $("#tj_a011").attr("href", "/member/" + account + "");
+          $("#tj_a011").attr("href", "/member/" + publishId + "");
           $("#tj_a011").html(companyName);
           $("#tj102").html(assessNumber);
           $("#tj101").html(browseNumber);
@@ -1137,7 +1137,7 @@ function process02(currentPage) {
           $("#nr02_1").html(start);
           $("#nr02_2").html(end);
           $("#nr02").attr("href", arcurl);
-          $("#nr03").attr("href", "/member/" + account + "");
+          $("#nr03").attr("href", "/member/" + publishId + "");
           $("#nr04").html(companyName);
           $("#nr05").html(transportRemark);
           $("#nr06").html(address);

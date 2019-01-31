@@ -670,7 +670,7 @@ function process02() {
     headers: {
       'Content-Type': 'application/json'
     },
-    url: '/api/28-web//pointNetwork/findCompanyNet',
+    url: '/api/28-web/pointNetwork/findCompanyNet',
     dataType: 'json',
     data: JSON.stringify({
       currentPage: 1,

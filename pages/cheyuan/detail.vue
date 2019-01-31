@@ -209,7 +209,7 @@
             :key="index"
             class="arc_list_item">
             <div class="arc_list_item_bt" ><a
-              :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
+              :href="'/cheyuan/detail?id=' + item.id"
               target="_blank">{{ item.strartAddress + '&nbsp;&rarr;&nbsp;' + item.endAddress }}</a> </div>
             <div class="arc_list_item_nr">
               <div class="arc_list_item_nr1">
@@ -220,7 +220,7 @@
                 <i>发车时间：</i><span>{{ item.startTime }}</span>
               </div>
               <div class="arc_list_item_nr3">
-                <a :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"><input value="查看"></a>
+                <a :href="'/cheyuan/detail?id=' + item.id"><input value="查看"></a>
               </div>
 
             </div>
@@ -272,7 +272,7 @@
             src="../../static/images/list_wlzx/10shiming.png" >
         </p>
         <p class="p06">
-          <a :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"><span>查看&nbsp;&gt;</span></a>
+          <a :href="'/cheyuan/detail?id=' + item.id"><span>查看&nbsp;&gt;</span></a>
         </p>
       </div>
     </div>
@@ -286,7 +286,7 @@ async function getOtherCarInfoList($axios, currentPage, vo) {
   let res = await $axios.get(
     `/28-web/carInfo/findOtherCarInfoList/${
       vo.id
-    }?pageNum=${currentPage}&pageSize=5&driverId=${vo.driverId}`
+    }?pageNum=${currentPage}&pageSize=5`
   )
   if (res.data.status === 200) {
     return {
@@ -348,7 +348,6 @@ export default {
       }
     }
     let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
-      driverId: query.driverId,
       id: query.id
     })
     return {
@@ -377,7 +376,6 @@ export default {
         $('#current1').text(current)
         console.log(current)
         let obj = await getOtherCarInfoList(this.$axios, current, {
-          driverId: this.$route.query.driverId,
           id: this.$route.query.id
         })
         this.otherCarInfoList = obj.list

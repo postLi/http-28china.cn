@@ -60,17 +60,33 @@
         <div class="arc_left">
           <div class="arc_left_1">
             <img
-              v-if="linedata.rangeLogo==''"
+              v-if="linedata.rangeLogo"
               :src="linedata.rangeLogo.split(',')[showImg]">
             <img
               v-else
-              :src="'../../static/line/images/bg' + linedata.num + '.png'"
+              :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
               alt="">
           </div>
           <div class="arc_left_2">
-            <a href="javascript:void(0)"><img id="nr0715"></a>
-            <a href="javascript:void(0)"><img id="nr0716"></a>
-            <a href="javascript:void(0)"><img id="nr0717"></a>
+            <a href="javascript:void(0)"><img
+              v-if="linedata.rangeLogo"
+              :src="linedata.rangeLogo.split(',')[0]"
+              @click="clickImg(0)"><img
+                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
+                @click="clickImg(0)"></a>
+            <a href="javascript:void(0)"><img
+              v-if="linedata.rangeLogo"
+              :src="linedata.rangeLogo.split(',')[1]"
+              @click="clickImg(1)"><img
+                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
+                @click="clickImg(1)"></a>
+            <a href="javascript:void(0)"><img
+              v-if="linedata.rangeLogo"
+              :src="linedata.rangeLogo.split(',')[2]"
+              @click="clickImg(2)"><img
+                v-else
+                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
+                @click="clickImg(2)"></a>
           </div>
           <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span
             id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
@@ -778,19 +794,7 @@
 
 <script>
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
-async function getOtherCarInfoList($axios, id) {
-  let res = await $axios.get(`/api/28-web/range/${id}`)
-  if (res.data.status === 200) {
-    console.log(res, 'res')
-    // return {
-    //   list: res.data.data.list,
-    //   pages: res.data.data.pages,
-    //   currentPage: res.data.data.pageNum
-    // }
-  } else {
-    return { list: [], pages: 0, currentPage: 1 }
-  }
-}
+
 export default {
   name: 'Index',
   head: {
@@ -804,10 +808,6 @@ export default {
   layout: 'subLayout',
   data() {
     return {
-      cy1: {},
-      zxList: [],
-      otherCarSourceList: [],
-      otherCarInfoList: [],
       showImg: 0,
       pages: 0,
       currentPage: 1,
@@ -835,6 +835,7 @@ export default {
       lineCode = await getCode($axios, res.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, res.data.data.startCity)
       res.data.data.num = Math.ceil(Math.random() * 30)
+      // console.log(res.data.data.num, 'res.data.data.num')
       return {
         linedata: res.data.data,
         lineCitys: lineCity.data.data

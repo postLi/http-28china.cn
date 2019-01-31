@@ -420,8 +420,43 @@
 
       <!-- 全国热门物流专线start -->
       <div class="hot-city-layer main-width">
-        <div class="hot-city-unit">
-          <h3 class="news-unit-title">热门货源</h3>
+        <div class="hot-city-unit hot_box">
+          <h3 class="news-unit-title">全国热门物流货运专线</h3>
+          <ul class="hot-cities">
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440300.html">深圳找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440100.html">广州找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f441900.html">东莞找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f140400.html">长治找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440500.html">汕头找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440600.html">佛山找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440700.html">江门找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440800.html">湛江找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440900.html">茂名找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f441200.html">肇庆找车拉货</a></li>
+          </ul>
+        </div>
+        <div class="hot-city-unit hot_box">
+          <h3 class="news-unit-title">北京出发物流专线</h3>
           <ul class="hot-cities">
             <li class="hot-cities-li"><a 
               class="hot-cities-a" 
@@ -1890,9 +1925,12 @@ body {
   margin: 0 auto;
   overflow: hidden;
 }
+.hot_box {
+  border-bottom: 1px dashed #dfdfdf;
+}
 .hot-city-unit {
   box-sizing: border-box;
-  border: 1px solid #ececec;
+  /* border: 1px solid #ececec; */
   background: #fff;
   padding: 10px;
 }
@@ -1910,7 +1948,7 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  border-bottom: 1px solid #ededed;
+  /* border-bottom: 1px solid #ededed; */
   margin-bottom: 10px;
   font-weight: 400;
   font-size: 16px;

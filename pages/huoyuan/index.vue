@@ -216,10 +216,10 @@
 
         <!-- 28为您推荐start -->
         <div
-          class="hot-city-layer" 
-          style="min-width:1036px;float:left">
+          class="hot-city-layer line-city-box">
           <div class="hot-city-unit">
-            <h3 class="news-unit-title">热门货源</h3>
+            <h3 
+              class="news-unit-title line-title">28快运为您推荐</h3>
             <ul class="hot-cities">
               <li class="hot-cities-li"><a 
                 class="hot-cities-a" 
@@ -354,8 +354,8 @@
 
       <!-- 全国热门物流专线start -->
       <div class="hot-city-layer main-width">
-        <div class="hot-city-unit">
-          <h3 class="news-unit-title">热门货源</h3>
+        <div class="hot-city-unit hot_box ">
+          <h3 class="news-unit-title">全国热门物流货运专线</h3>
           <ul class="hot-cities">
             <li class="hot-cities-li"><a 
               class="hot-cities-a" 
@@ -1858,9 +1858,12 @@ body {
   margin: 0 auto;
   overflow: hidden;
 }
+.hot_box {
+  border-bottom: 1px dashed #dfdfdf;
+}
 .hot-city-unit {
   box-sizing: border-box;
-  border: 1px solid #ececec;
+  /* border: 1px solid #ececec; */
   background: #fff;
   padding: 10px;
 }
@@ -1878,10 +1881,19 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  border-bottom: 1px solid #ededed;
+  /* border-bottom: 1px solid #ededed; */
   margin-bottom: 10px;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333333;
+}
+.line-city-box {
+  max-width: 1036px;
+  float: left;
+}
+.line-title {
+  color: #3f94ee;
+  border-bottom: 2px solid #3f94ee;
 }
 .hot-cities-li {
   display: inline-block;

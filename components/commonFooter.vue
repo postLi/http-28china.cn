@@ -71,7 +71,6 @@
       <div class="pwd_login">
         <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
         <form 
-          id="form1" 
           name="form1" >
           <input 
             type="hidden" 

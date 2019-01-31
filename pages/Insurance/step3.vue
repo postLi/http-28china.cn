@@ -48,7 +48,6 @@
               <img 
                 id="add1"
                 src="images/add.png"></td></tr>
-
             <tr><td><i/></td><td>
               <span>若前往目的地途中需要绕路进行中转，请务必填写中转地，否则绕路途中导致的事故损失将不予赔付</span>
             </td></tr>
@@ -101,7 +100,7 @@
                 <input 
                   class="next_button" 
                   readonly="" 
-                  value="下一步" >
+                  value="下一步">
             </td></tr>
           </table>
 		
@@ -302,6 +301,7 @@ export default {
                         .fail(function(err) {})
                     } else {
                       $('.login_box').show()
+                      $('.login_box_mask').show()
                     }
                   }
                 }

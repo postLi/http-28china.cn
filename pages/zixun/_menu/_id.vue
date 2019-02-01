@@ -6,26 +6,32 @@
 import { formatAnfaTms, makeAnfaTmsUrl } from '../utils.js'
 export default {
   name: 'CheYuan',
-  head: {
-    link: [
-      { rel: 'stylesheet', href: '/zxnews_files/n/basic.css' },
-      { rel: 'stylesheet', href: '/zxnews_files/n/mains.css' }
-    ],
-    script: [
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
-      { src: '/js/jquery.pagination.min.js' }
-    ]
+  head() {
+    return {
+      title: this.metatitle,
+      meta: [{ hid: 'description', name: 'description', content: this.desc }],
+      link: [
+        { rel: 'stylesheet', href: '/zxnews_files/n/basic.css' },
+        { rel: 'stylesheet', href: '/zxnews_files/n/mains.css' }
+      ],
+      script: [
+        { src: '/js/city-picker.data.js' },
+        { src: '/js/city-picker.js' },
+        { src: '/js/jquery.pagination.min.js' }
+      ]
+    }
   },
   data() {
     return {
       recommendList: [],
       dataset: [],
-      content: ''
+      content: '',
+      metatitle: '',
+      desc: '',
+      keyw: ''
     }
   },
   async asyncData({ $axios, app, query, params, route }) {
-    console.log('route.path2:', route.path)
     let path = route.path
     if (path.indexOf('.jhtml') === -1) {
       path = path.replace(/\/?$/, '/index.jhtml')

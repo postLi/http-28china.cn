@@ -113,7 +113,6 @@
                   :key="index"
                   href="javascript:"
                   @click="longCarClick(item)">{{ item.name }}</a>
-
               </dd>
 
               <dt >车厢长度&nbsp;:</dt>

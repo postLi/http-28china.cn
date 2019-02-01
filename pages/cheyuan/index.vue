@@ -507,13 +507,28 @@ export default {
       startFromRecommend: [], //广州市出发的车源
       startFromRecommendLabel: '',
       hotRecommend: [], //全国热门车源信息
-      hotRecommendLabel: ''
+      hotRecommendLabel: '',
+      vo: {
+        startProvince: this.startProvince,
+        startCity: this.startCity,
+        startArea: this.startArea,
+        endProvince: this.endProvince,
+        endCity: this.endCity,
+        endArea: this.endArea,
+        carType: this.carType,
+        isLongCar: this.isLongCar,
+        carSourceType: this.carSourceType,
+        carLengthLower: this.carLengthLower,
+        carLengthUpper: this.carLengthUpper,
+        carLoadLower: this.carLoadLower,
+        carLoadUpper: this.carLoadUpper
+      }
     }
   },
   async asyncData({ $axios, app, query }) {
     let carType = '',
       carSourceType = '',
-      isLongCar = '',
+      isLongCar = query.isLongCar ? query.isLongCar : '',
       AF032Id = '',
       AF031Id = '',
       carLengthLower = '',

@@ -123,12 +123,15 @@
                     </div>
                     <input
                       id="wlyq_name"
+                      v-model="searchtest"
                       class="list_wlyq_input"
                       placeholder="请输入园区名称" >
                     <input
                       class="list_wlyq_cx"
                       readonly=""
-                      value="查询">
+                      value="查询"
+                      @click="seachlist"
+                    >
                   </div>
                   <div
                     id="js010"
@@ -137,11 +140,12 @@
                       <font>暂无园区信息</font>
                     </div>
 
-                    <div
-                      class="wlzx_yq_item"
-                      style="display: none;">
-                      <font id="wlzx_yq_01"/>
-                      <span id="wlzx_yq_02"/>
+                    <div 
+                      v-for="(item,index) in logisticsPark" 
+                      :key="index" 
+                      class="wlzx_yq_item">
+                      <font id="wlzx_yq_01">{{ item.parkName }}</font>
+                      <span id="wlzx_yq_02">{{ item.parkAddress }}</span>
                     </div>
                   </div>
                 </div>
@@ -150,16 +154,20 @@
 
               <dd id="tjcx_02" >
                 <a
-                  class="now all"
-                  href="/plus/list.php?tid=81"
-                >不限</a>
+                  v-for="(item,index) in AF029"
+                  :class="[item.code === belongBrandCode ? 'now':'all']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF029Click(item)">{{ item.name }}</a>
               </dd>
               <dt >其他&nbsp;:</dt>
               <dd id="tjcx_03">
                 <a
-                  class="now all"
-                  href="/plus/list.php?tid=81" >不限</a>
-                <a class="shiming" >实名认证</a>
+                  v-for="(item,index) in AF025"
+                  :class="[item.code === otherServiceCode ? 'now':'all']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF025Click(item)">{{ item.name }}</a>
               </dd>
             </dl>
           </div>
@@ -311,11 +319,18 @@
 </template>
 
 <script>
+async function getWdiangInfoList($axios, vo) {
+  let res = await $axios.post('/28-web/logisticsPark/search', vo)
+  if (res.data.status === 200) {
+    return res.data.data.list
+  }
+}
+
 export default {
   name: 'Index',
   head: {
     link: [
-      { rel: 'stylesheet', href: '/wangdian/css/list_wangdian.css' },
+      { rel: 'stylesheet', href: '/css/wangdian.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
@@ -333,59 +348,205 @@ export default {
       { src: '/js/gaodemap2.js' }
     ]
   },
-  // layout: 'subLayout',
+  data() {
+    return {
+      searchtest: '',
+      vo: {}
+    }
+  },
+  async asyncData({ $axios, app, query }) {
+    let vo = {
+      startProvince: query.startProvince ? query.startProvince : '',
+      startCity: query.startCity ? query.startCity : ''
+      // startArea: startArea,
+      // endProvince: endProvince,
+      // endCity: endCity,
+      // endArea: endArea,
+      // currentPage: currentPage,
+      // pageSize: pageSize,
+      // parkName: parkName
+    }
+    // belongBrandCode: query.belongBrandCode ? query.belongBrandCode : ''
+    let belongBrandCode = ''
+    let otherServiceCode = '',
+      endArea = '',
+      endCity = '',
+      endProvince = '',
+      startArea = '',
+      startCity = '',
+      startProvince = '',
+      currentPage = 1,
+      pageSize = 10,
+      parkName = ''
+    // let vo = {
+    //   // currentPage: currentPage,
+    //   // pageSize: 10
+    //   startProvince: startProvince,
+    //   startCity: startCity,
+    //   startArea: startArea,
+    //   endProvince: endProvince,
+    //   endCity: endCity,
+    //   endArea: endArea,
+    //   parkName: parkName
+    // }
+    // if (query.belongBrandCode) {
+    //   belongBrandCode = query.belongBrandCode
+    // }
+    if (query.otherServiceCode) {
+      otherServiceCode = query.otherServiceCode
+    }
+    if (query.currentPage) {
+      currentPage = query.currentPage
+    }
+    if (query.pageSize) {
+      pageSize = query.pageSize
+    }
+    if (query.parkName) {
+      parkName = query.parkName
+    }
+    if (query.endArea) {
+      endArea = query.endArea
+    }
+    if (query.endCity) {
+      endCity = query.endCity
+    }
+    if (query.endProvince) {
+      endProvince = query.endProvince
+    }
+    if (query.startArea) {
+      startArea = query.startArea
+    }
+    if (query.startCity) {
+      startCity = query.startCity
+    } else {
+      startCity = app.$cookies.get('currentAreaFullName')
+    }
+    if (query.startProvince) {
+      startProvince = query.startProvince
+    } else {
+      startProvince = app.$cookies.get('currentProvinceFullName')
+    }
+    let AF029 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF029' //品牌
+    )
+    let AF025 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
+    )
+    // let logisticsPark = await $axios.post('/28-web/logisticsPark/search', {
+    //   startProvince: startProvince,
+    //   startCity: startCity,
+    //   startArea: startArea,
+    //   endProvince: endProvince,
+    //   endCity: endCity,
+    //   endArea: endArea,
+    //   currentPage: currentPage,
+    //   pageSize: pageSize,
+    //   parkName: parkName
+    // })
+    let logisticsPark = await getWdiangInfoList($axios, vo)
+    console.log(logisticsPark)
+    //网点信息列表
+    // let res = await $axios.post('/28-web/carInfo/list', vo)
+    if (AF029.data.status === 200) {
+      AF029.data.data.unshift({ code: '', name: '不限' })
+    }
+    if (AF025.data.status === 200) {
+      AF025.data.data.unshift({ code: '', name: '不限' })
+    }
+    return {
+      AF029: AF029.data.status === 200 ? AF029.data.data : [],
+      AF025: AF025.data.status === 200 ? AF025.data.data : [],
+      logisticsPark: logisticsPark,
+      // logisticsPark.data.status === 200 ? logisticsPark.data.data.list : [],
+      belongBrandCode: belongBrandCode,
+      otherServiceCode: otherServiceCode
+    }
+  },
   mounted() {
-    seajs.use(['../js/city.js'], function() {
-      seajs.use(
-        ['../js/city-picker.js', '../js/jquery.pagination.min.js'],
-        function() {
-          seajs.use(['../wangdian/js/list_wangdian.js'], function() {
-            seajs.use(['../js/collection.js'], function() {
-              seajs.use(['../js/gaodemap2.js'], function() {
-                $('.list_tiaoj span').click(function() {
-                  // alert('1')
-                  $('.list_tiaoj span').removeClass('active')
-                  $(this).toggleClass('active')
-                })
-                function onCheckPage() {
-                  var beginPage = parseInt(
-                    document.beginPagefrm.beginPage.value
-                  )
-                  if (isNaN(beginPage)) {
-                    alert('请输入数字！')
-                    return false
-                  }
-                  if (beginPage <= 0) {
-                    beginPage = 1
-                  }
-                  if (beginPage > 100) {
-                    beginPage = 100
-                  }
-                  if (beginPage > 1) {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-                      beginPage
-                  } else {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-                  }
-                  return true
-                }
-                $('#pagination1').pagination({
-                  currentPage: 1,
-                  totalPage: process02(1),
-                  callback: function(current) {
-                    $('#current1').text(current)
-                    process02(current)
-                    window.location.href = '#top'
-                  }
-                })
-              })
-            })
-          })
-        }
-      )
+    $('#select_wlyq').mousedown(function() {
+      $('#list_wlzx_yq').css('display', 'block')
     })
+    $('body').click(function(e) {
+      var _con = $('.js_yq') // 设置目标区域(排除此元素)
+      if (!_con.is(e.target) && _con.has(e.target).length === 0) {
+        $('#list_wlzx_yq').css('display', 'none')
+      }
+    })
+    // seajs.use(['../js/city.js'], function() {
+    //   seajs.use(
+    //     ['../js/city-picker.js', '../js/jquery.pagination.min.js'],
+    //     function() {
+    //       seajs.use(['../wangdian/js/list_wangdian.js'], function() {
+    //         seajs.use(['../js/collection.js'], function() {
+    //           seajs.use(['../js/gaodemap2.js'], function() {
+    //             $('.list_tiaoj span').click(function() {
+    //               // alert('1')
+    //               $('.list_tiaoj span').removeClass('active')
+    //               $(this).toggleClass('active')
+    //             })
+    //             function onCheckPage() {
+    //               var beginPage = parseInt(
+    //                 document.beginPagefrm.beginPage.value
+    //               )
+    //               if (isNaN(beginPage)) {
+    //                 alert('请输入数字！')
+    //                 return false
+    //               }
+    //               if (beginPage <= 0) {
+    //                 beginPage = 1
+    //               }
+    //               if (beginPage > 100) {
+    //                 beginPage = 100
+    //               }
+    //               if (beginPage > 1) {
+    //                 document.beginPagefrm.action =
+    //                   '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
+    //                   beginPage
+    //               } else {
+    //                 document.beginPagefrm.action =
+    //                   '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
+    //               }
+    //               return true
+    //             }
+    //             $('#pagination1').pagination({
+    //               currentPage: 1,
+    //               totalPage: process02(1),
+    //               callback: function(current) {
+    //                 $('#current1').text(current)
+    //                 process02(current)
+    //                 window.location.href = '#top'
+    //               }
+    //             })
+    //           })
+    //         })
+    //       })
+    //     }
+    //   )
+    // })
+  },
+  methods: {
+    async search() {
+      window.location.href = `/wangdian/?&belongBrandCode=${
+        this.belongBrandCode
+      }&otherServiceCode=${this.otherServiceCode}`
+    },
+    //品牌
+    AF029Click(item) {
+      this.belongBrandCode = item.code
+      this.search()
+    },
+    //其他
+    AF025Click(item) {
+      this.otherServiceCode = item.code
+      this.search()
+    },
+    //园区
+    seachlist() {
+      let vo
+      // this.searchtest
+      // console.log(this.searchtest)
+      // getWdiangInfoList(this.$axios, vo)
+    }
   }
 }
 </script>
@@ -460,6 +621,10 @@ export default {
     width: 12px;
     height: 7px;
     cursor: pointer;
+  }
+  .select_con dl dd a.now {
+    background: #3371ff;
+    color: #fff;
   }
   /*显示隐藏E */
 }

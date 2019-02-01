@@ -893,7 +893,9 @@ body {
   padding: 10px 0 10px 120px;
   line-height: 30px;
 }
-
+#tjcx_03 >a {
+  margin-right: 10px;
+}
 .list_input2 {
   margin-left: 18px;
 }
@@ -901,7 +903,7 @@ body {
 /*所属园区 S*/
 .list_wlzx_yq {
   height: 35px;
-  width: 212px;
+  width: 221px;
   border: solid 1px #e5e5e5;
   border-radius: 2px;
   padding-left: 9px;

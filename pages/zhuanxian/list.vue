@@ -591,6 +591,7 @@
 </template>
 
 <script>
+import $axios from 'axios'
 export default {
   name: 'Index',
   head: {
@@ -599,6 +600,56 @@ export default {
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ]
+  },
+  data() {
+    return {
+      showImg: 0,
+      pages: 0,
+      currentPage: 1,
+      lineList: []
+    }
+  },
+  async asyncData({ $axios, query }) {
+    let aurl = ''
+    let orderBy = 'default'
+    let startp = query.startp
+    let startc = query.startc
+    let starta = query.starta
+    let endp = query.endp
+    // let starta = query.starta
+    let enda = query.enda
+    let endc = query.endc
+
+    if (!startp || startp == 'null') {
+      startp = ''
+    }
+    if (!startc || startc == 'null') {
+      startc = ''
+    }
+    if (!starta || starta == 'null') {
+      starta = ''
+    }
+    if (!endp || endp == 'null') {
+      endp = ''
+    }
+    if (!enda || enda == 'null') {
+      endp = ''
+    }
+    if (!endc || endc == 'null') {
+      endc = ''
+    }
+    if (process.server) {
+      aurl = 'http://localhost:3000'
+    }
+    let res = await $axios.post(
+      aurl +
+        `/api/28-web/range/list?currentPage=1&pageSize=6&startProvince=${
+          query.startp
+        }`
+    )
+    // startp=广东省&startc=广州市&starta=&endp=湖南省&endc=长沙市&enda=&companyName=&parkId=&parkName=
+    console.log(res, 'ressssfdfdd')
+    // let res = await $axios.post(aurl+`/api/28-web/range/list?currentPage=1&pageSize=6&startProvince=${query.startp}&startCity=${query.startc}&startArea=${query.starta}&endProvince=${query.endp}&endCity=${query.endc}&endArea=${query.enda}&belongBrandCode=${query.belongBrandCode}&departureTimeCode=${query.departureTimeCode}&otherServiceCode=${query.otherServiceCode}&parkId=${query.parkId}&orderBy=${orderBy})`
   },
   mounted() {
     seajs.use(['../../js/city.js', 'layer'], function() {
@@ -617,7 +668,10 @@ export default {
                   $('.list_tiaoj span').removeClass('active')
                   $(this).toggleClass('active')
                 })
-
+                $('#seq0').click(function() {
+                  console.log('clear排序')
+                  fetchLineList()
+                })
                 function onCheckPage() {
                   var beginPage = parseInt(
                     document.beginPagefrm.beginPage.value
@@ -673,6 +727,25 @@ export default {
         }
       )
     })
+  },
+  methods: {
+    fetchLineList() {
+      let aurl = ''
+      let orderBy = 'default'
+      // if(query.)
+      if (process.server) {
+        aurl = 'http://localhost:3000'
+      }
+      $axios
+        .post(aurl + `/api/28-web/range/list`, {
+          currentPage: 1,
+          pageSize: 6,
+          orderBy: orderBy
+        })
+        .then(res => {
+          console.log(res)
+        })
+    }
   }
 }
 </script>

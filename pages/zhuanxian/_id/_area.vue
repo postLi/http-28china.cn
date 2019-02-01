@@ -5,37 +5,64 @@
 <script>
 export default {
   name: 'Zhuanxian1',
-  head: {
-    link: [
-      { rel: 'stylesheet', href: '/zxnews_files/n/basic.css' },
-      { rel: 'stylesheet', href: '/zxnews_files/n/mains.css' }
-    ],
-    script: [
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
-      { src: '/js/jquery.pagination.min.js' }
-    ]
-  },
   data() {
     return {
       recommendList: [],
       dataset: [],
-      content: ''
+      content: '',
+      metatitle: '',
+      desc: '',
+      keyw: ''
+    }
+  },
+  head() {
+    return {
+      title: this.metatitle,
+      meta: [
+        { hid: 'description', name: 'description', content: this.desc },
+        { hid: 'keywords', name: 'keywords', content: this.keyw }
+      ],
+      link: [
+        { rel: 'stylesheet', href: '/index/css/list_line.css' },
+        { rel: 'stylesheet', href: '/index/css/jquery.pagination.css' },
+        { rel: 'stylesheet', href: '/index/css/list_line_more.css' }
+      ],
+      script: [
+        { src: '/js/city-picker.data.js' },
+        { src: '/js/city-picker.js' },
+        { src: '/js/jquery.pagination.min.js' }
+      ]
     }
   },
   async asyncData({ $axios, app, query, params, route }) {
-    console.log('route.path4:', route.path)
     let path = route.path
 
-    let con = await $axios.get(
-      'http://location:825/lines' + path.replace(/^\/zhuanxian/, '')
-    )
+    path = 'http://127.0.0.1:825/lines' + path.replace(/^\/zhuanxian/, '')
+    // console.log('route.path4:', route.path, path)
+
+    let con = await $axios.get(path)
     // 替换链接跟静态资源路径
+
+    // 找到tdk信息回填到页面上
+    // 过滤其它无关的信息
+    let body = con.data.match(/<body>((\s|\S)*)<\/body>/gim)
+    let head = con.data.match(/<title>(.*)<\/title>/i)
+    let desc = con.data.match(/meta\s+name="description"\s+content="([^"]*)"/)
+    let keyw = con.data.match(/meta\s+name="keywords"\s+content="([^"]*)"/)
+    head = head ? head[1] : '28快运网'
+    desc = desc ? desc[1] : '28快运网'
+    keyw = keyw ? keyw[1] : '28快运网'
+
     return {
-      content: con.data
+      content: body ? body[0] : con.data,
+      metatitle: head,
+      desc: desc,
+      keyw: keyw
     }
   },
-  mounted() {},
+  mounted() {
+    seajs.use(['/line/js/list_line.js', '/line/js/list_line_more.js'])
+  },
   methods: {
     //
   }

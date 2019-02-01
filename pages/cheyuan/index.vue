@@ -424,11 +424,7 @@
           </ul>
         </div>
         <div class="hot-city-unit hot_box">
-<<<<<<< HEAD
-          <h3 class="news-unit-title">全国热门物流货运专线</h3>
-=======
           <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
->>>>>>> 846f77b8535310508e300240f1fe7decf92d1230
           <ul class="hot-cities">
             <li 
               v-for="(item,index) in hotRecommend" 

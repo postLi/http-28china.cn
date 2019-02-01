@@ -188,119 +188,139 @@
               <span id="tj_price2">重货价格从低到高</span>
             </div>
           </div>
-          <div class="list_none">
+          <div
+            v-if="lineLists==[]"
+            class="list_none">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/line/images/none_pic.png">
           </div>
-          <ul
-            class="wlzx_list"
-            style="display: none;">
-            <li id="wlzx_list_0">
-              <div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>人浏览</i></span></div>
+          <!--lineList-->
+          <!--<span>{{lineLists.length}}</span>-->
+          <div
+            v-else >
+            <ul
+              v-for="(item , index) in lineLists"
+              :key="index"
+              class="wlzx_list">
+              <li id="wlzx_list_0">
+                <div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>
 
-              <div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>条评论</i></span></div>
-            </li>
-            <li class="wlzx_list_1">
-              <a
-                id="nr_a21"
-                target="_blank"
-                class="nr_a21_img"><img
-                  class="scrollLoading"
-                  width="180"
-                  height="180"
-            ></a></li>
-            <li class="wlzx_list_2">
-              <p class="p1">
+                <div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>
+              </li>
+              <li class="wlzx_list_1">
                 <a
-                  id="nr02"
-                  class="list-title-a"
-                  target="_blank">
-                  <span class="list-icon lines-sprite-icons icon-start"/>
-                  <em id="nr02_1"/>
-                  <span class="list-icon lines-sprite-icons icon-through"/>
-                  <span class="list-icon lines-sprite-icons icon-end"/>
-                  <em id="nr02_2"/>
-                </a>
-              </P>
-              <p class="p2">
-                <!--<img src="/line/images/04gongsi.png">-->
-                <a
-                  id="nr03"
-                  href="#"
-                  target="_blank"><font
-                    id="nr04"
-                    class=""/></a>
-                <a
-                  id="nr11"
+                  id="nr_a21"
+                  :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
                   target="_blank"
-                  href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img
-                    id="qq"
-                    src="../../static/gongsi/images/15qq.gif"></a>
-                <img
-                  id="tj_icon_1"
-                  src="/line/images/wtjzx.gif">
-              </p>
-              <p class="p5">
-                <img
-                  id="list_shiming"
-                  src="/line/images/10shiming.png">
-                <img
-                  id="list_xinyong"
-                  src="/line/images/11xinyong.png">
-                <img
-                  id="list_danbao"
-                  src="/line/images/12danbao.png">
-              </p>
-              <p class="p21">
-                <img
-                  id="tj_shiming"
-                  src="/line/images/shiming.png">
-                <img
-                  id="tj_xinyong"
-                  src="/line/images/xinyong.png">
-                <img
-                  id="tj_danbao"
-                  src="/line/images/danbao.png">
-              </p>
-              <p class="p3">
-                <i>说明：</i><font
-                  id="nr05"
-                  class=""/></p>
-              <p class="p4"><i>地址：</i><font
-                id="nr06"
-                class=""/></p>
-            </li>
-            <li class="wlzx_list_3">
-              <p class="p1"><i
-                class="zhuo"
-                style="color: #666">重货：</i><font
-                  id="nr07"
-                  class=""/><span style="color: #333">元/公斤</span></P>
-              <p class="p2"><i
-                class="zhuo"
-                style="color: #666">轻货：</i><font
-                  id="nr08"
-                  class=""/><span style="color: #333">元/m³</span></p>
-              <p class="p3"><i>时效：</i><span id="nr09"/></p>
-              <p class="p4"><i>频率：</i><span id="nr10"/></p>
-            </li>
-            <li class="wlzx_list_6">
-              <p class="p1"><a
-                id="nr_order"
-                target="_blank"><input
-                  id="fahuo"
-                  readonly=""
-                  value="下单"></a>
-              </p>
-              <p class="p2"><a
-                id="nr_a22"
-                target="_blank"><input
-                  id="wlzx_list_view"
-                  readonly=""
-                  value="查看"></a>
-              </p>
-            <p class="p3"/></li>
-          </ul>
+                  class="nr_a21_img">
+                  <img
+                    v-if="item.rangeLogo==''"
+                    :src="require('../../static/images/pic/bg' + item.num + '.png')"
+                    width="180"
+                    height="180">
+                  <img
+                    v-else
+                    :src="item.rangeLogo"
+                    class="scrollLoading"
+                    width="180"
+                    height="180">
+              </a></li>
+              <li class="wlzx_list_2">
+                <p class="p1">
+                  <a
+                    id="nr02"
+                    :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
+                    class="list-title-a"
+                    target="_blank">
+                    <span class="list-icon lines-sprite-icons icon-start"/>
+                    <em >{{ item.startCity }}</em><em>{{ item.startArea }}</em>
+                    <span class="list-icon lines-sprite-icons icon-through"/>
+                    <span class="list-icon lines-sprite-icons icon-end"/>
+                    <em>{{ item.endCity.length>7?item.endCity.substring(0,7)+'..': item.endCity }}</em><em >{{ item.endArea.length>7?item.endArea.substring(0,7)+'..': item.endArea }}</em>
+                  </a>
+                </P>
+                <p class="p2">
+                  <img src="/line/images/04gongsi.png">
+                  <a
+                    id="nr03"
+                    :href="'/member/'+item.publishId"
+                    target="_blank"><font
+                      class="">{{ item.companyName }}</font></a>
+                  <a
+                    id="nr11"
+                    target="_blank"
+                    href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img
+                      id="qq"
+                      src="../../static/gongsi/images/15qq.gif"></a>
+                  <img
+                    id="tj_icon_1"
+                    src="/line/images/wtjzx.gif">
+                </p>
+                <!--<p class="p5">-->
+                <!--<img-->
+                <!--id="list_shiming"-->
+                <!--src="/line/images/10shiming.png">-->
+                <!--<img-->
+                <!--id="list_xinyong"-->
+                <!--src="/line/images/11xinyong.png">-->
+                <!--<img-->
+                <!--id="list_danbao"-->
+                <!--src="/line/images/12danbao.png">-->
+                <!--</p>-->
+                <p
+                  class="p21"
+                  style="padding-top: 15px;">
+                  <img
+                    id="tj_shiming"
+                    src="/line/images/shiming.png">
+                  <img
+                    id="tj_xinyong"
+                    src="/line/images/xinyong.png">
+                  <img
+                    id="tj_danbao"
+                    src="/line/images/danbao.png">
+                </p>
+                <p class="p3">
+                <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,10):'暂无' }}</font></p>
+                <p class="p4"><i>地址：</i><font
+                  id="nr06"
+                  class="">{{ item.address.length>24?item.address.substring(0,24)+'..':item.address }}</font></p>
+              </li>
+              <li class="wlzx_list_3">
+                <p class="p1"><i
+                  class="zhuo"
+                  style="color: #666">重货：{{ item.weightPrice }}</i><span style="color: #333">元/公斤</span></P>
+                <p class="p2"><i
+                  class="zhuo"
+                  style="color: #666">轻货：</i>{{ item.lightPrice }}<span style="color: #333">元/m³</span></p>
+                <p class="p3"><i>时效：</i><span>{{ item.transportAging?item.transportAging:'' }}{{ item.transportAging?item.transportAgingUnit:'暂无' }}</span></p>
+                <!--<p class="p3"><i>时效：</i><span id="nr09"/></p>-->
+                <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
+                <!--<p class="p4"><i>频率：</i><span id="nr10"/></p>-->
+              </li>
+              <li class="wlzx_list_6">
+                <p class="p1"><a
+                  id="nr_order"
+                  :href="'/create/line?id='+ item.id+'&publishId='+ item.publishId+'&uid='+ item.account"
+                  target="_blank"><input
+                    readonly=""
+                    value="下单"
+
+                ></a>
+                </p>
+                <!--/:href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"-->
+                <!--onclick="'/create/line?id='+ item.id+'?uid='+ item.account+'&publishId='+item.publishId'"-->
+                <p class="p2"><a
+                  id="nr_a22"
+                  :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
+                  target="_blank"><input
+                    readonly=""
+                    value="查看"></a>
+                </p>
+              <p class="p3"/></li>
+            </ul>
+          </div>
+
         </div>
 
         <!--分页-->
@@ -606,7 +626,8 @@ export default {
       showImg: 0,
       pages: 0,
       currentPage: 1,
-      lineList: []
+      lineList: [],
+      lineLists: []
     }
   },
   async asyncData({ $axios, query }) {
@@ -641,21 +662,38 @@ export default {
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
-    let res = await $axios.post(
-      aurl +
-        `/api/28-web/range/list?currentPage=1&pageSize=6&startProvince=${
-          query.startp
-        }`
-    )
-    // startp=广东省&startc=广州市&starta=&endp=湖南省&endc=长沙市&enda=&companyName=&parkId=&parkName=
-    console.log(res, 'ressssfdfdd')
-    // let res = await $axios.post(aurl+`/api/28-web/range/list?currentPage=1&pageSize=6&startProvince=${query.startp}&startCity=${query.startc}&startArea=${query.starta}&endProvince=${query.endp}&endCity=${query.endc}&endArea=${query.enda}&belongBrandCode=${query.belongBrandCode}&departureTimeCode=${query.departureTimeCode}&otherServiceCode=${query.otherServiceCode}&parkId=${query.parkId}&orderBy=${orderBy})`
+    let [listA, codeA] = await Promise.all([
+      $axios.post(aurl + `/api/28-web/range/list`, {
+        currentPage: 1,
+        pageSize: 6,
+        startProvince: startp,
+        startCity: startc,
+        startArea: starta,
+        endProvince: endp,
+        endCity: endc,
+        endArea: enda,
+        belongBrandCode: query.belongBrandCode,
+        departureTimeCode: query.departureTimeCode,
+        otherServiceCode: query.otherServiceCode,
+        otherServiceCode: query.otherServiceCode,
+        parkId: query.parkId
+      }),
+      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF026')
+    ])
+    //codeA过节后继续
+    console.log(codeA, 'codeA')
+    if (listA.data.status == 200 || codeA.data.status == 200) {
+      listA.data.data.list.forEach(item => {
+        item.num = Math.ceil(Math.random() * 30)
+      })
+
+      return {
+        lineLists: listA.data.data.list
+      }
+    }
   },
   mounted() {
-    // $('#seq0').click(function() {
-    //   console.log('clear排序')
-    //   this.fetchLineList()
-    // })
+    let _this = this
     seajs.use(['../../js/city.js', 'layer'], function() {
       seajs.use(
         [
@@ -766,7 +804,17 @@ export default {
                       orderBy: orderBy
                     })
                     .then(res => {
-                      console.log(res)
+                      // res.data.data.num = Math.ceil(Math.random() * 30)
+                      // console.log('this.lineList12:', res.data.data)
+                      res.data.data.list.forEach(item => {
+                        item.num = Math.ceil(Math.random() * 30)
+                        // console.log('this.lineList:', item.num)
+                      })
+                      _this.lineLists = res.data.data.list
+
+                      // return {
+                      //   lineList: res.data.data.list
+                      // }
                     })
                 }
                 clickPrice()

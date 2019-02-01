@@ -1008,7 +1008,7 @@ function process02(currentPage) {
       ),
       success: function (res) {
         // console.log(res, '');
-        $("#js002 .wlzx_list").not(":eq(0)").remove();
+        // $("#js002 .wlzx_list").not(":eq(0)").remove();
         if (res.data) {
           totalPage = res.data.totalPage;
           // console.log(totalPage);
@@ -1157,7 +1157,7 @@ function process02(currentPage) {
           var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
           var s2 = $(".wlzx_list").html();
           var s3 = '</ul>'
-          $("#js002").append(s1 + s2 + s3);
+          // $("#js002").append(s1 + s2 + s3);
           if (!collateral || collateral == 0) {
 
             $('.wlzx_list' + i + ' #list_danbao').css("display", "none")

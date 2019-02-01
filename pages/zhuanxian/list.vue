@@ -1,5 +1,4 @@
-<script src="../../static/line/js/arc_wlzx.js">
-</script>
+
 <template>
   <div class="lll-zhuangXian">
     <div class="list_box">
@@ -176,12 +175,13 @@
           <div class="zx_sx"><span class="biaozhi"/><span>专线信息</span></div>
           <div class="list_tiaoj"><span
             id="seq0"
-            class="active">默认排序</span><span
-              id="seq1"
-              title="交易量从高到低">交易量</span><span
-                id="seq2"
-                title="运输时效从低到高">运输时效</span><span
-                  id="seq3">重货价格</span>
+            class="active"
+          >默认排序</span><span
+            id="seq1"
+            title="交易量从高到低">交易量</span><span
+              id="seq2"
+              title="运输时效从低到高">运输时效</span><span
+                id="seq3">重货价格</span>
             <div
               id="tj_price">
               <span id="tj_price1">轻货价格从低到高</span>
@@ -652,6 +652,10 @@ export default {
     // let res = await $axios.post(aurl+`/api/28-web/range/list?currentPage=1&pageSize=6&startProvince=${query.startp}&startCity=${query.startc}&startArea=${query.starta}&endProvince=${query.endp}&endCity=${query.endc}&endArea=${query.enda}&belongBrandCode=${query.belongBrandCode}&departureTimeCode=${query.departureTimeCode}&otherServiceCode=${query.otherServiceCode}&parkId=${query.parkId}&orderBy=${orderBy})`
   },
   mounted() {
+    // $('#seq0').click(function() {
+    //   console.log('clear排序')
+    //   this.fetchLineList()
+    // })
     seajs.use(['../../js/city.js', 'layer'], function() {
       seajs.use(
         [
@@ -663,15 +667,13 @@ export default {
           seajs.use(['/line/js/list_wlzx.js'], function() {
             seajs.use(['../../js/collection.js'], function() {
               seajs.use(['../../js/gaodemap2.js'], function() {
+                let orderBy = 'default'
                 $('.list_tiaoj span').click(function() {
                   //alert("1");
                   $('.list_tiaoj span').removeClass('active')
                   $(this).toggleClass('active')
                 })
-                $('#seq0').click(function() {
-                  console.log('clear排序')
-                  fetchLineList()
-                })
+
                 function onCheckPage() {
                   var beginPage = parseInt(
                     document.beginPagefrm.beginPage.value
@@ -721,6 +723,53 @@ export default {
                     )
                   }
                 })
+                //切换专线信息
+                function clickPrice() {
+                  $('#seq0').click(function() {
+                    console.log('clear排序')
+                    orderBy = 'default'
+                    fetchLineList(orderBy)
+                  })
+                  $('#seq1').click(function() {
+                    console.log('orderNumber排序')
+                    orderBy = 'orderDesc'
+                    fetchLineList(orderBy)
+                  })
+                  $('#seq2').click(function() {
+                    console.log('transportAging排序')
+                    orderBy = 'transportAgingAsc'
+                    fetchLineList(orderBy)
+                  })
+                  $('#tj_price2').click(function() {
+                    $('#tj_price').css('display', 'none')
+                    console.log('weigthPrice排序')
+                    orderBy = 'weigthPrice'
+                    process02(1)
+                  })
+                  $('#tj_price1').click(function() {
+                    $('#tj_price').css('display', 'none')
+                    console.log('lightPrice排序')
+                    orderBy = 'lightPrice'
+                    fetchLineList(orderBy)
+                  })
+                }
+                function fetchLineList(orderBy) {
+                  let aurl = ''
+                  // if(query.)
+                  if (process.server) {
+                    aurl = 'http://localhost:3000'
+                  }
+                  $axios
+                    .post(aurl + `/api/28-web/range/list`, {
+                      currentPage: 1,
+                      pageSize: 6,
+                      orderBy: orderBy
+                    })
+                    .then(res => {
+                      console.log(res)
+                    })
+                }
+                clickPrice()
               })
             })
           })
@@ -728,25 +777,7 @@ export default {
       )
     })
   },
-  methods: {
-    fetchLineList() {
-      let aurl = ''
-      let orderBy = 'default'
-      // if(query.)
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
-      $axios
-        .post(aurl + `/api/28-web/range/list`, {
-          currentPage: 1,
-          pageSize: 6,
-          orderBy: orderBy
-        })
-        .then(res => {
-          console.log(res)
-        })
-    }
-  }
+  methods: {}
 }
 </script>
 

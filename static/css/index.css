@@ -2521,8 +2521,9 @@ background-image:none;
 .select_con { border: 1px solid #F4F4F4; width: 100%; margin: 0 auto; padding: 15px 0; }
 .select_con dl dt { float: left; font-size: 12px; line-height: 24px; padding: 10px 0 0 20px; }
 .select_con dl dd { padding: 10px 0 10px 120px; line-height: 35px;}
-.select_con dl dd a { padding: 2px 5px; color: #444; margin-right: 0px; line-height: 15px; display: inline-block; _margin-bottom: 5px; margin:0 5px;}
-.select_con dl dd a:hover, .select_con dl dd a.now { background: #FF5833; color: #fff;}
+.select_con dl dd a { padding: 2px 5px; color: #444; margin-right: 0px; line-height: 15px; display: inline-block; _margin-bottom: 5px;}
+.select_con dl dd a:hover{ background: #FF5833; color: #fff;}
+ .select_con dl dd a.now { background: #FF5833; color: #fff;}
 .tselect dl dd { padding: 10px 0 10px 60px; line-height: 24px; border-bottom: 1px solid #F4F4F4; }
 .slinks{width:1190px;}
 .slinks dl dd { padding: 10px 0 10px 120px; line-height: 24px; border-bottom: 1px solid #F4F4F4; }
@@ -3589,13 +3590,13 @@ font-size: 14px;
   padding-left: 10px;
   min-width: 190px ;
   width: auto !important;
-  height: 38px;
-  line-height: 38px;
+  /* height: 38px; */
+  /* line-height: 38px; */
   overflow: hidden;
 }
 .hq-news-from .city-picker-span{min-width: 90px ;}
 .index_search .city-picker-span{line-height: 32px;padding-left: 0px;}
-.select_con .city-picker-span{line-height: 34px;padding-left: 0px;}
+.select_con .city-picker-span{padding-left: 0px;}
 .order-form-input .city-picker-span{line-height: 45px;padding-left: 0px;}
 #list_wlzx_yq .city-picker-span{line-height: 28px;min-width: 159px;}
 .list_left_zx .city-picker-span{padding-right: 20px;width: 170px !important;min-width: 170px !important;}
@@ -3672,13 +3673,17 @@ font-size: 14px;
   margin-right: 0px !important;
   line-height:normal !important;
 }
-
+.city-select-tab > a:hover{
+  background: #00a0e9 !important;
+}
 .city-select-tab > a.active {
   background: #fff;
   border-bottom: 1px solid #fff;
   color: #46A4FF;
 }
-
+#tjcx_02 >a{
+  margin-right: 10px;
+}
 .city-select-tab > a:first-child {
   border-left: none;
 }

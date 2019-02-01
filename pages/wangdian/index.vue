@@ -30,7 +30,9 @@
               <dd><form
                 name="zxaddform"
                 method="post"
-                action="" >
+                action="" 
+                style="float:left;"
+              >
                 <input
                   name="a7"
                   type="hidden"
@@ -43,22 +45,32 @@
                   type="hidden"
                   name="dopost"
                   value="search" >
-
-                <input
-                  id="address"
-                  name="cfd"
-                  wtmap=""
-                  type="text"
-                  class="list_input"
-                  placeholder="请选择省-市-区" >
-
-                <input
-                  id="jwd"
-                  name="ddd"
-                  wtmap="detail"
-                  type="text"
-                  class="list_input list_input2"
-                  placeholder="请输入详细地址查附近网点" >
+                <div
+                  id="carLineFrom"
+                  class="fl list_input"
+                  style="position:relative;" >
+                  <input
+                    id="address"
+                    name="cfd"
+                    style="height: 80%;border: none;outline: none;"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text"
+                    placeholder="请输入出发地" >
+                </div>
+                <div
+                  id="carLineTo"
+                  class="fl list_input"
+                  style="position:relative" >
+                  <input
+                    id="jwd"
+                    name="ddd"
+                    style="height: 80%;border: none;outline: none;"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text"
+                    placeholder="请输入详细地址查附近网点" >
+                </div>
                 <input
                   id="search_wangdian"
                   name="Submit2"
@@ -140,7 +152,7 @@
                 <a
                   class="now all"
                   href="/plus/list.php?tid=81"
-                  style="float: left;margin-bottom: 40px; ">不限</a>
+                >不限</a>
               </dd>
               <dt >其他&nbsp;:</dt>
               <dd id="tjcx_03">
@@ -306,7 +318,7 @@ export default {
       { rel: 'stylesheet', href: '/wangdian/css/list_wangdian.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
-    ]
+    ],
     // script: [
     //   { src: '../js/jquery.pagination.min.js' },
     //   { src: '../js/WTMap.min.js' },
@@ -314,6 +326,12 @@ export default {
     //   { src: './js/city-picker.js' },
     //   { src: '../../static/gongsi/js/list_wlgs.js' }
     // ]
+    script: [
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' },
+      { src: '/js/gaodemap2.js' }
+    ]
   },
   // layout: 'subLayout',
   mounted() {
@@ -387,6 +405,7 @@ export default {
     margin-left: 8px;
     padding-right: 5px;
     cursor: pointer;
+    border: none;
   }
   /*显示隐藏S */
   .toggle-btn {

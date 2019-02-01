@@ -58,16 +58,19 @@
         </div>
       </div>
     </div>
+    <!-- <div class="login_box_mask" id="login_box_mask"> -->
     <div class="login_box">
-      <div class="login_close"><img src="../static/images/login_close.png" ></div>
+      <div class="login_close"><img 
+        id="close_btn" 
+        src="/images/login_close.png"></div>
       <div class="login_box_bt">
         <div class="login_bt1">密码登录</div>
         <div class="login_bt2">验证码登录</div>
+        
       </div>
       <div class="pwd_login">
         <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
         <form 
-          id="form1" 
           name="form1" >
           <input 
             type="hidden" 
@@ -86,7 +89,7 @@
             name="gourl" 
             value="" >
           <ul>
-
+        
             <li class="userType" ><input 
               type="button" 
               name="aflc-5" 
@@ -97,19 +100,28 @@
                   type="button" 
                   name="aflc-1" 
                   value="车主"></li>
-            <li class="usermobile" > <input 
-              id="usermobile" 
-              type="text" 
-              value="" 
-              name="userid" 
-              placeholder="请输入您的手机号"></li>
-            <li class="userpwd"> <input 
-              id="userpwd" 
-              type="password" 
-              value="" 
-              name="pwd" 
-              autocomplete="off" 
-              placeholder="请输入您的密码"></li>
+            <div class="inputbox">
+              <span class="icon icon-mobile"/>
+              <input 
+                id="usermobile" 
+                type="text" 
+                maxlength="11" 
+                name="userid" 
+                placeholder="请输入您的手机号">
+            </div>
+            <div 
+              class="inputbox passinput" 
+              style="display: block;">
+              <span class="icon icon-password"/>
+              <input 
+                id="userpwd" 
+                type="password" 
+                maxlength="20" 
+                name="pwd" 
+                placeholder="请输入您的密码">
+            </div>
+            <!-- <li class="usermobile" > <input type="text" value="" name="userid" id="usermobile" placeholder="请输入您的手机号"></li> -->
+            <!-- <li class="userpwd"> <input type="password" value="" name="pwd" autocomplete="off" id="userpwd" placeholder="请输入您的密码"></li> -->
             <div class="inputbox vcodeinput">
               <input 
                 id="uservcode" 
@@ -121,21 +133,22 @@
                 id="Vcode" 
                 alt=""><span id="changeVcode">点击更换</span></div>
             </div>
-            <li class="userreg"><a 
-              href="/member/index_do.php?fmdo=user&dopost=regnew" 
-              target="_blank"><span>免费注册</span></a><i/><a 
-                href="/member/resetpassword.php" 
-                target="_blank"><span>忘记密码?</span></a></li>
             <li class="submit"> <input 
               class="login-btn" 
               readonly="" 
-              value="登录"></li>
+              value="登录" ></li>
+            <li class="userreg"><a 
+              href="/regisiter?fmdo=user&dopost=regnew" 
+              target="_blank"><span>免费注册</span></a><i/><a 
+                href="/resetpassword?" 
+                target="_blank"><span>忘记密码?</span></a></li>
+          
           </ul>
         </form>
-      </div>
-
+      </div>	
+        
       <div class="yzm_login">
-        <!-- <form name="form1" id="form1" method="POST" action="/member/index_do.php"> -->
+        <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
         <form 
           id="form2" 
           name="form2" >
@@ -156,6 +169,7 @@
             name="gourl" 
             value="" >
           <ul>
+        
             <li class="userType2" ><input 
               type="button" 
               name="aflc-5" 
@@ -166,12 +180,31 @@
                   type="button" 
                   name="aflc-1" 
                   value="车主"></li>
-            <li class="usermobile" > <input 
-              id="usermobile2" 
-              type="text" 
-              value="" 
-              name="userid" 
-              placeholder="请输入您的手机号"></li>
+            <div class="inputbox">
+              <span class="icon icon-mobile"/>
+              <input 
+                id="usermobile2" 
+                type="text" 
+                maxlength="11" 
+                name="userid" 
+                placeholder="请输入您的手机号">
+            </div>
+            <!-- <li class="usermobile" > <input type="text" value="" name="userid" id="usermobile2" placeholder="请输入您的手机号"></li> -->
+            <div 
+              class="inputbox smscodeinput" 
+              style="display: block;">
+              <span class="icon icon-password"/>
+              <input 
+                id="usersmscode" 
+          
+                type="text" 
+                maxlength="10" 
+                name="smscode" 
+                placeholder="请输入短信验证码">
+              <span 
+                id="getyzm" 
+                class="getsmscode">获取验证码</span>
+            </div>
             <div class="inputbox vcodeinput">
               <input 
                 id="uservcode2" 
@@ -183,53 +216,47 @@
                 id="Vcode2" 
                 alt=""><span id="changeVcode2">点击更换</span></div>
             </div>
-            <li class="useryzm"> <input 
-              id="useryzm" 
-              type="text" 
-              value="" 
-              name="pwd" 
-              placeholder="请输入短信验证码">
-              <input 
-                id="getyzm" 
-                type="button" 
-                value="获取短信验证码" 
-                name="pwd" >
-            </li>
+            <!-- <li class="useryzm"> <input type="text" value="" name="pwd" id="useryzm" placeholder="请输入短信验证码">
+        <input type="button" value="获取短信验证码" name="pwd" id="getyzm" >
+        </li> -->
+        
             <!--
-              <li class="yzm_sm">
-                  <span id="yzm_sm" >验证码已发出，请注意查收短信您可以在<i id="yzm_time">60</i>秒后点击重新获取验证码</span>
-              </li>
-             -->
-            <li class="useragree"><input 
-              id="useragree" 
-              type="checkbox" 
-              name="agree" 
-              value="checkbox" >
-              <label for="useragree"/>
-              我已阅读并接受<a 
-                target="_blank" 
-                href="/h5/EnterpriseAgreement.html"><i>《安发网络服务条款》</i></a><a 
-                  target="_blank" 
-                  href="/h5/SecrecyAgreement.html"><i>《网络用户信息保密协议》</i></a>
-            </li>
+          <li class="yzm_sm">
+            <span id="yzm_sm" >验证码已发出，请注意查收短信您可以在<i id="yzm_time">60</i>秒后点击重新获取验证码</span>
+          </li>
+          -->
+            <!-- <li class="useragree"><input id="useragree"  type="checkbox" name="agree" value="checkbox" /> -->
+            <!-- <label for="useragree"></label>
+                我已阅读并接受<a target="_blank" href="/h5/EnterpriseAgreement.html"><i>《安发网络服务条款》</i></a><a target="_blank" href="/h5/SecrecyAgreement.html"><i>《网络用户信息保密协议》</i></a>
+          </li> -->
             <li class="submit"> <input 
               class="login-yzm" 
               readonly="" 
-              value="登录"></li>
+              value="登录" ></li>
+            <li class="userreg"><a 
+              href="/member/index_do.php?fmdo=user&dopost=regnew" 
+              target="_blank"><span>免费注册</span></a><i/><a 
+                href="/member/resetpassword.php" 
+                target="_blank"><span>忘记密码?</span></a></li>
           </ul>
         </form>
       </div>
+      <div class="login-other">其他方式登入</div>
       <div class="login-other-platform">
-        <span class="login-weixin">微信登录</span>
+        <span class="login-weixin"/>
       </div>
     </div>
-
+    <!-- </div> -->
+    <div class="login_box_mask" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CommonFooter'
+  name: 'CommonFooter',
+  mounted() {
+    seajs.use(['/js/login.js'], function() {})
+  }
 }
 </script>
 

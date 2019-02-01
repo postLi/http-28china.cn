@@ -85,7 +85,6 @@ export default {
             )
           })
           .fail(function(err) {})
-
         function pay() {
           if (!$('.agree_none').hasClass('agree_yes')) {
             layer.alert('请接受《平安保险投保须知》和《保险条款》')

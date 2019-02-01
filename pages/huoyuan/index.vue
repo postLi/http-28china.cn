@@ -214,6 +214,47 @@
         </div>
         <!--分页-->
 
+        <!-- 28为您推荐start -->
+        <div
+          class="hot-city-layer line-city-box">
+          <div class="hot-city-unit">
+            <h3 
+              class="news-unit-title line-title">28快运为您推荐</h3>
+            <ul class="hot-cities">
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f440300.html">深圳找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f440100.html">广州找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f441900.html">东莞找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f140400.html">长治找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f440500.html">汕头找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f440600.html">佛山找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f440700.html">江门找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f440800.html">湛江找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f440900.html">茂名找车拉货</a></li>
+              <li class="hot-cities-li"><a 
+                class="hot-cities-a" 
+                href="/goods/f441200.html">肇庆找车拉货</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- 28为您推荐end -->
       </div>
 
       <div class="list_right">
@@ -273,7 +314,7 @@
       </div>
 
       <!-- 订阅优质货源start -->
-      <!-- <div class="list_help">
+      <div class="list_help">
         <div class="list-box-r-top">
           <form action="">
             <h2 class="list_help_title">订阅优质货源</h2>
@@ -308,8 +349,48 @@
               class="right-top-btn">
           </form>
         </div>
-      </div> -->
+      </div>
       <!-- 订阅优质货源end -->
+
+      <!-- 全国热门物流专线start -->
+      <div class="hot-city-layer main-width">
+        <div class="hot-city-unit hot_box ">
+          <h3 class="news-unit-title">全国热门物流货运专线</h3>
+          <ul class="hot-cities">
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440300.html">深圳找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440100.html">广州找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f441900.html">东莞找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f140400.html">长治找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440500.html">汕头找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440600.html">佛山找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440700.html">江门找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440800.html">湛江找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f440900.html">茂名找车拉货</a></li>
+            <li class="hot-cities-li"><a 
+              class="hot-cities-a" 
+              href="/goods/f441200.html">肇庆找车拉货</a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 全国热门物流专线end -->
     </div>
   </div>
 </template>
@@ -728,6 +809,7 @@ body {
 .list_left {
   width: 1036px;
   float: left;
+  margin-bottom: 40px;
 }
 .w1130 {
   width: 1130px;
@@ -884,6 +966,9 @@ body {
   line-height: 33px;
   width: 76px;
 }
+.img_icon img {
+  margin-top: 10px;
+}
 .list_box .wlzx_list {
   width: 1036px;
   /* height: 180px; */
@@ -1000,7 +1085,7 @@ body {
   height: 20px;
 }
 .wlzx_list_4 img {
-  margin-top: 5px;
+  /* margin-top: 5px; */
 }
 .wlzx_list_5 p {
   height: 30px;
@@ -1765,5 +1850,57 @@ body {
   position: relative;
   top: 2px;
   margin-right: 3px;
+}
+
+.main-width {
+  width: 1400px;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.hot_box {
+  border-bottom: 1px dashed #dfdfdf;
+}
+.hot-city-unit {
+  box-sizing: border-box;
+  /* border: 1px solid #ececec; */
+  background: #fff;
+  padding: 10px;
+}
+.news-unit-title:after {
+  position: absolute;
+  content: '';
+  height: 15px;
+  width: 3px;
+  left: 0;
+  top: 8px;
+  background: #589def;
+}
+.news-unit-title {
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 15px;
+  /* border-bottom: 1px solid #ededed; */
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333333;
+}
+.line-city-box {
+  max-width: 1036px;
+  float: left;
+}
+.line-title {
+  color: #3f94ee;
+  border-bottom: 2px solid #3f94ee;
+}
+.hot-cities-li {
+  display: inline-block;
+  padding: 10px;
+}
+.hot-cities-a {
+  font-size: 14px;
+  /* color: #333; */
 }
 </style>

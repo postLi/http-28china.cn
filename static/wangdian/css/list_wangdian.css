@@ -103,13 +103,15 @@ body {
 
 .list_input {
   width: 210px;
-  height: 32px;
+  height: 35px;
+  line-height: 35px;
   border-radius: 2px;
   border: solid 1px #e5e5e5;
   background: none;
   color: #999;
   font-size: 14px;
   padding-left: 9px;
+  margin-right: 15px;
 }
 
 #flush {
@@ -898,12 +900,13 @@ body {
 
 /*所属园区 S*/
 .list_wlzx_yq {
-  height: 38px;
+  height: 35px;
   width: 212px;
   border: solid 1px #e5e5e5;
   border-radius: 2px;
   padding-left: 9px;
   cursor: pointer;
+  box-sizing: border-box;
 }
 
 #list_wlzx_yq {
@@ -947,13 +950,14 @@ body {
 
 .list_wlyq_cx {
   width: 64px;
-  height: 28px;
+  height: 30px;
   background-color: #79b3ff;
   border-radius: 3px;
   color: #fff;
   font-size: 14px;
   text-align: center;
   cursor: pointer;
+  border:none;
 }
 
 .wlzx_yq_item {

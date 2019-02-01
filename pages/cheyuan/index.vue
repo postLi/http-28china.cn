@@ -47,7 +47,7 @@
                   style="position:relative;" >
                   <input
                     name="cfd"
-                    style="height: 100%;"
+                    style="height: 80%;border: none;outline: none;"
                     data-toggle="city-picker"
                     data-level="district"
                     type="text"
@@ -62,7 +62,7 @@
                   style="position:relative" >
                   <input
                     name="ddd"
-                    style="height: 100%;"
+                    style="height: 80%;border: none;outline: none;"
                     data-toggle="city-picker"
                     data-level="district"
                     type="text"
@@ -113,7 +113,6 @@
                   :key="index"
                   href="javascript:"
                   @click="longCarClick(item)">{{ item.name }}</a>
-
               </dd>
 
               <dt >车厢长度&nbsp;:</dt>
@@ -161,14 +160,14 @@
             </li>
             <li class="cy_list_4">
               <a
-                :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
+                :href="'/cheyuan/detail?id=' + item.id"
                 target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
 
             </li>
             <li class="cy_list_1">
               <p class="p1">
                 <a
-                  :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
+                  :href="'/cheyuan/detail?id=' + item.id"
                   class="list-title-a"
                   target="_blank" >
                   <span class="list-icon lines-sprite-icons icon-start"/>
@@ -179,10 +178,10 @@
                 </a>
 
               </P>
-              <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font><span style="color: #dcdcdc;">|</span>
-                <font>{{ item.carTypeName }}</font><span style="color: #dcdcdc;">|</span>
-                <font>长<b>{{ item.carLength }}</b>米</font><span style="color: #dcdcdc;">|</span>
-                <font>载重<b>{{ item.carLoad }}</b>吨</font><span style="color: #dcdcdc;">|</span>
+              <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font>
+                <font>{{ item.carTypeName }}</font>
+                <font>长<b>{{ item.carLength }}</b>米</font>
+                <font>载重<b>{{ item.carLoad }}</b>吨</font>
               <font id="nr055"/></p>
               <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                 <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
@@ -197,7 +196,7 @@
             </li>
             <li class="wlzx_list_6">
               <p class="p2"><a
-                :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
+                :href="'/cheyuan/detail?id=' + item.id"
                 target="_blank" ><input
                   readonly
                   value="查看"></a>
@@ -229,38 +228,14 @@
           class="hot-city-layer" 
           style="min-width:1036px;float:left">
           <div class="hot-city-unit">
-            <h3 class="news-unit-title">热门货源</h3>
+            <h3 class="news-unit-title">{{ recommendBy28Label }}</h3>
             <ul class="hot-cities">
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f440300.html">深圳找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f440100.html">广州找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f441900.html">东莞找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f140400.html">长治找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f440500.html">汕头找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f440600.html">佛山找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f440700.html">江门找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f440800.html">湛江找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f440900.html">茂名找车拉货</a></li>
-              <li class="hot-cities-li"><a 
-                class="hot-cities-a" 
-                href="/goods/f441200.html">肇庆找车拉货</a></li>
+              <li 
+                v-for="(item,index) in recommendBy28"
+                :key="index" 
+                class="hot-cities-li"><a
+                  :href="'/cheyuan/detail?id='+ item.companyId" 
+                  class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
         </div>
@@ -271,6 +246,26 @@
       <div class="list_new">
         <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
         <ul class="list_new_ul">
+          <li>
+            <div class="li_one">
+              <a>广东省广州市->北京市</a>
+              <span>2019-02-24 12:11:00</span>
+            </div>
+            <div class="li_two">
+              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
+              <span><a class="li_check">查看详情</a></span>
+            </div>
+          </li>
+          <li>
+            <div class="li_one">
+              <a>广东省广州市->北京市</a>
+              <span>2019-02-24 12:11:00</span>
+            </div>
+            <div class="li_two">
+              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
+              <span><a class="li_check">查看详情</a></span>
+            </div>
+          </li>
           <li>
             <div class="li_one">
               <a>广东省广州市->北京市</a>
@@ -303,7 +298,7 @@
             class="tj_list">
             <p class="p1">
               <a
-                :href=" '/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
+                :href=" '/cheyuan/detail?id=' + item.id"
                 class="list-title-a"
                 target="_blank" >
                 <span class="list-icon lines-sprite-icons icon-start"/>
@@ -349,6 +344,22 @@
          
         </div>
         
+      </div>
+
+      <!--企业月人气榜start-->
+      <div 
+        class="list_right"
+        style="margin-top: 20px">
+        <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
+        <div class="rc_list">
+          <div class="left"><p>1</p></div>
+          <div class="img"><img src="../../static/images/index/wlgs_tj_00.png" ></div>
+          <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
+        </div>
+        <div class="rc_list">
+          <div class="left"><p>2</p></div>
+          <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
+        </div>
       </div>
 
       <!-- 帮我找优质运动start -->
@@ -398,42 +409,28 @@
       </div>
       <!-- 帮我找优质运动end -->
 
-
       <!-- 全国热门物流专线start -->
       <div class="hot-city-layer main-width">
-        <div class="hot-city-unit">
-          <h3 class="news-unit-title">热门货源</h3>
+        <div class="hot-city-unit hot_box">
+          <h3 class="news-unit-title">{{ hotRecommendLabel }}</h3>
           <ul class="hot-cities">
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f440300.html">深圳找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f440100.html">广州找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f441900.html">东莞找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f140400.html">长治找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f440500.html">汕头找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f440600.html">佛山找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f440700.html">江门找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f440800.html">湛江找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f440900.html">茂名找车拉货</a></li>
-            <li class="hot-cities-li"><a 
-              class="hot-cities-a" 
-              href="/goods/f441200.html">肇庆找车拉货</a></li>
+            <li 
+              v-for="(item,index) in hotRecommend" 
+              :key="index" 
+              class="hot-cities-li"><a
+                :href="'/cheyuan/detail?id='+ item.companyId"
+                class="hot-cities-a">{{ item.title }}</a></li>
+          </ul>
+        </div>
+        <div class="hot-city-unit hot_box">
+          <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in hotRecommend" 
+              :key="index"
+              class="hot-cities-li" ><a
+                :href="'/cheyuan/detail?id='+ item.companyId"
+                class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
         </div>
       </div>
@@ -443,12 +440,12 @@
 </template>
 
 <script>
-import { getRecommendList } from './index.js'
+import { getRecommendList } from './index.js' //车源信息推荐列表
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
   parm.pageSize = 10
-  let res = await $axios.post('/28-web/carInfo/list', parm)
+  let res = await $axios.post('/28-web/carInfo/list', parm) //车源信息列表
   if (res.data.status === 200) {
     return {
       list: res.data.data.list,
@@ -466,21 +463,22 @@ export default {
     script: [
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' }
+      { src: './js/jquery.pagination.min.js' },
+      { src: '/js/gaodemap2.js' }
     ]
   },
   data() {
     return {
-      recommendList: [],
+      recommendList: [], //车源信息推荐列表
       dataset: [],
-      carInfoList: [],
+      carInfoList: [], //车源信息列表
       pages: 0,
       currentPage: 1,
-      AF032: [],
+      AF032: [], //载重列表
       AF032Id: '',
       carLoadLower: '', //载重
       carLoadUpper: '', //载重
-      AF031: [],
+      AF031: [], //车厢长度列表
       AF031Id: '',
       carLengthLower: '', //车厢长度
       carLengthUpper: '', //车厢长度
@@ -496,14 +494,20 @@ export default {
         { name: '回程车', value: 'AF01801' }
       ],
       carSourceType: '', //车源类型
-      AF018: [],
+      AF018: [], //车辆类型列表
       carType: '', //车辆类型
       startProvince: '',
       startCity: '',
       startArea: '',
       endProvince: '',
       endCity: '',
-      endArea: ''
+      endArea: '',
+      recommendBy28: {}, //28快运为您推荐
+      recommendBy28Label: '',
+      startFromRecommend: [], //广州市出发的车源
+      startFromRecommendLabel: '',
+      hotRecommend: [], //全国热门车源信息
+      hotRecommendLabel: ''
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -572,19 +576,19 @@ export default {
       startProvince = app.$cookies.get('currentProvinceFullName')
     }
     let AF018 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF018'
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
     )
     if (AF018.data.status === 200) {
       AF018.data.data.unshift({ code: '', name: '不限' })
     }
     let AF031 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF031'
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF031' //车厢长度列表
     )
     if (AF031.data.status === 200) {
       AF031.data.data.unshift({ id: '', name: '不限' })
     }
     let AF032 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF032'
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF032' //载重列表
     )
     if (AF032.data.status === 200) {
       AF032.data.data.unshift({ id: '', name: '不限' })
@@ -608,12 +612,45 @@ export default {
     }
     let carInfoList = await getCarInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
+    //车源底部推荐
+    let recommend = await $axios.post('/28-web/carInfo/related/links', {
+      endArea: endArea,
+      endCity: endCity,
+      endProvince: endProvince,
+      startArea: startArea,
+      startCity: startCity,
+      startProvince: startProvince
+    })
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [],
       AF031: AF031.data.status === 200 ? AF031.data.data : [],
       AF032: AF032.data.status === 200 ? AF032.data.data : [],
       recommendList:
         recommendList.data.status === 200 ? recommendList.data.data : [],
+      recommendBy28:
+        recommend.data.status === 200
+          ? recommend.data.data.recommendBy28.links
+          : {},
+      recommendBy28Label:
+        recommend.data.status === 200
+          ? recommend.data.data.recommendBy28.label
+          : {},
+      startFromRecommend:
+        recommend.data.status === 200
+          ? recommend.data.data.startFromRecommend.links
+          : {},
+      startFromRecommendLabel:
+        recommend.data.status === 200
+          ? recommend.data.data.startFromRecommend.label
+          : {},
+      hotRecommend:
+        recommend.data.status === 200
+          ? recommend.data.data.hotRecommend.links
+          : {},
+      hotRecommendLabel:
+        recommend.data.status === 200
+          ? recommend.data.data.hotRecommend.label
+          : {},
       carInfoList: carInfoList.list,
       pages: carInfoList.pages,
       carType: carType,
@@ -1346,6 +1383,7 @@ body {
 .cy_list_1 p font {
   font-size: 14px;
   color: #333;
+  padding-right: 25px;
 }
 
 .cy_list_2 p {
@@ -1679,6 +1717,7 @@ body {
   padding: 20px;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
 }
 .list_new .list_new_ul li {
   flex: 1;
@@ -1869,9 +1908,12 @@ body {
   margin: 0 auto;
   overflow: hidden;
 }
+.hot_box {
+  border-bottom: 1px dashed #dfdfdf;
+}
 .hot-city-unit {
   box-sizing: border-box;
-  border: 1px solid #ececec;
+  /* border: 1px solid #ececec; */
   background: #fff;
   padding: 10px;
 }
@@ -1889,7 +1931,7 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  border-bottom: 1px solid #ededed;
+  /* border-bottom: 1px solid #ededed; */
   margin-bottom: 10px;
   font-weight: 400;
   font-size: 16px;
@@ -1901,5 +1943,32 @@ body {
 .hot-cities-a {
   font-size: 14px;
   /* color: #333; */
+}
+.rc_list {
+  margin: 10px 0;
+}
+.rc_list div {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 14px;
+}
+.rc_list .left p {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+  background-color: red;
+  text-align: center;
+  color: #ffffff;
+  margin: 0 17px;
+}
+.rc_list .img {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  padding-right: 9px;
+}
+.rc_list .right {
+  color: #333333;
+  width: 100%;
 }
 </style>

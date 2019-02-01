@@ -10,19 +10,19 @@
     <div class="arc_top1">
       <div class="arc_top1_1"><span>{{ cy1.startCity + cy1.startArea + '&nbsp;&rarr;&nbsp;' + cy1.endCity + cy1.endArea }}</span></div>
 
-      <div class="arc_top1_3"><input 
-        class="arc_input3" 
+      <div class="arc_top1_3"><input
+        class="arc_input3"
         value="搜全网"> </div>
       <div class="arc_top1_2">
         <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
-        <input 
-          class="arc_input1" 
-          wtmap="" 
+        <input
+          class="arc_input1"
+          wtmap=""
           placeholder="出发地">
         <span>&rarr;</span>
-        <input 
-          class="arc_input2" 
-          wtmap="" 
+        <input
+          class="arc_input2"
+          wtmap=""
           placeholder="到达地">
 
       </div>
@@ -46,9 +46,9 @@
         onmouseover="$('.city_box').css('display', 'block')"><a href="javascript:void(0)"><span>更多+</span></a></div>
 
       <!--更多城市-->
-      <div 
-        id="city_box" 
-        class="city_box" 
+      <div
+        id="city_box"
+        class="city_box"
         onmouseover="$('.city_box').css('display', 'block');"
         onmouseout="$('.city_box').css('display', 'none');">
         <a
@@ -70,8 +70,8 @@
             :src="'../../images/pic/bg' + cy1.num + '.png'" >
         </div>
         <div class="arc_left_2">
-          <a 
-            href="javascript:void(0)" 
+          <a
+            href="javascript:void(0)"
             @click="clickImg(0)"><img
               v-if="cy1.carFile"
               :src="cy1.carFile.split(',')[0]" >
@@ -79,14 +79,14 @@
               v-else
               :src="'../../images/pic/bg' + cy1.num + '.png'" >
           </a>
-          <a 
-            href="javascript:void(0)" 
+          <a
+            href="javascript:void(0)"
             @click="clickImg(1)"><img
               v-if="cy1.carFile && cy1.carFile.split(',')[1]"
               :src="cy1.carFile.split(',')[1]" >
           </a>
-          <a 
-            href="javascript:void(0)" 
+          <a
+            href="javascript:void(0)"
             @click="clickImg(2)"><img
               v-if="cy1.carFile && cy1.carFile.split(',')[2]"
               :src="cy1.carFile.split(',')[2]" >
@@ -96,14 +96,14 @@
       </div>
       <div class="arc_middle">
         <div class="collection_zx">
-          <div 
-            class="bt_close" 
+          <div
+            class="bt_close"
             onclick="$('.collection_zx').hide()" ><img src="../../static/images/article_wlzx/xxx.png"></div>
           <div class="collection_zx_nr">
             <img src="../../static/images/article_wlzx/yes.png">
-            <span>成功加入</span><a 
-              id="collection_url" 
-              target="_blank" 
+            <span>成功加入</span><a
+              id="collection_url"
+              target="_blank"
               href="#">收藏夹</a>
           </div>
         </div>
@@ -160,10 +160,10 @@
         <p style="clear: both;"/>
         <p class="arc_right05" >
 
-          <input 
-            class="collection_cz" 
-            style="cursor: pointer;" 
-            readonly 
+          <input
+            class="collection_cz"
+            style="cursor: pointer;"
+            readonly
             value="收藏">
         </p>
         <p class="arc_right06" >
@@ -198,18 +198,18 @@
           <div class="arc_bt2"><i><a href="javascript:void(0)"><em style="font-size: 14px;color: #ccc;">&lt;&nbsp;</em></a><em style="color: #eb434d;">1</em>/100<a href="javascript:void(0)"><em style="font-size: 16px;color: #999;">&nbsp;&gt;</em></a></i></div>
 
         </div>
-        <div 
-          id="js012" 
+        <div
+          id="js012"
           class="arc_right2_nr ">
-          <div 
-            v-if="otherCarInfoList.length === 0" 
+          <div
+            v-if="otherCarInfoList.length === 0"
             class="arc_none">暂无其他求货信息</div>
-          <div 
-            v-for="(item,index) in otherCarInfoList" 
-            :key="index" 
+          <div
+            v-for="(item,index) in otherCarInfoList"
+            :key="index"
             class="arc_list_item">
             <div class="arc_list_item_bt" ><a
-              :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"
+              :href="'/cheyuan/detail?id=' + item.id"
               target="_blank">{{ item.strartAddress + '&nbsp;&rarr;&nbsp;' + item.endAddress }}</a> </div>
             <div class="arc_list_item_nr">
               <div class="arc_list_item_nr1">
@@ -220,7 +220,7 @@
                 <i>发车时间：</i><span>{{ item.startTime }}</span>
               </div>
               <div class="arc_list_item_nr3">
-                <a :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"><input value="查看"></a>
+                <a :href="'/cheyuan/detail?id=' + item.id"><input value="查看"></a>
               </div>
 
             </div>
@@ -228,11 +228,11 @@
 
         </div>
         <!--分页-->
-        <div 
-          class="box" 
+        <div
+          class="box"
           style="float: right;margin-right: 200px;">
-          <div 
-            id="pagination1" 
+          <div
+            id="pagination1"
             class="page fl"/>
           <div class="info fl">
             <!--<p>当前页数：<span id="current1">1</span></p>-->
@@ -249,7 +249,7 @@
         暂没有其它车源
       </div>
       <div
-        v-for="(item,index) in otherCarSourceList" 
+        v-for="(item,index) in otherCarSourceList"
         :key="index"
         class="tj_list">
         <p class="p01"><span>{{ item.startCity }}</span><i>&rarr;</i><span>{{ item.endCity }}</span></p>
@@ -267,12 +267,12 @@
           <i>发车时间：</i><span>{{ item.createTime1 }}</span>
         </p>
         <p class="p05">
-          <img 
+          <img
             v-if="item.driverStatus === 'AF0010403'"
             src="../../static/images/list_wlzx/10shiming.png" >
         </p>
         <p class="p06">
-          <a :href="'/cheyuan/detail?id=' + item.id + '&driverId=' + item.driverId"><span>查看&nbsp;&gt;</span></a>
+          <a :href="'/cheyuan/detail?id=' + item.id"><span>查看&nbsp;&gt;</span></a>
         </p>
       </div>
     </div>
@@ -286,7 +286,7 @@ async function getOtherCarInfoList($axios, currentPage, vo) {
   let res = await $axios.get(
     `/28-web/carInfo/findOtherCarInfoList/${
       vo.id
-    }?pageNum=${currentPage}&pageSize=5&driverId=${vo.driverId}`
+    }?pageNum=${currentPage}&pageSize=5`
   )
   if (res.data.status === 200) {
     return {
@@ -298,6 +298,7 @@ async function getOtherCarInfoList($axios, currentPage, vo) {
     return { list: [], pages: 0, currentPage: 1 }
   }
 }
+//
 export default {
   name: 'Detail',
   head: {
@@ -347,7 +348,6 @@ export default {
       }
     }
     let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
-      driverId: query.driverId,
       id: query.id
     })
     return {
@@ -376,7 +376,6 @@ export default {
         $('#current1').text(current)
         console.log(current)
         let obj = await getOtherCarInfoList(this.$axios, current, {
-          driverId: this.$route.query.driverId,
           id: this.$route.query.id
         })
         this.otherCarInfoList = obj.list

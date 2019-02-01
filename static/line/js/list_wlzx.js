@@ -306,40 +306,40 @@ $("#flush").click(
 //清空条件
 
 //排序点击 S
-$("#seq0").click(
-  function () {
-    console.log("clear排序")
-    delete vo.orderNumber;
-    delete vo.transportAging;
-    delete vo.weigthPrice;
-    delete vo.lightPrice;
-    vo.defaultSort = 1;
-    orderBy = 'default'
-    process02(1);
-
-  })
-$("#seq1").click(
-  function () {
-    console.log("orderNumber排序")
-    delete vo.orderNumber;
-    delete vo.transportAging;
-    delete vo.weigthPrice;
-    delete vo.lightPrice;
-    delete vo.defaultSort;
-    orderBy = 'orderDesc'
-    process02(1);
-  })
-$("#seq2").click(
-  function () {
-    console.log("transportAging排序")
-    delete vo.orderNumber;
-    delete vo.transportAging;
-    delete vo.weigthPrice;
-    delete vo.lightPrice;
-    delete vo.defaultSort;
-    orderBy = "transportAgingAsc"
-    process02(1);
-  })
+// $("#seq0").click(
+//   function () {
+//     console.log("clear排序")
+//     delete vo.orderNumber;
+//     delete vo.transportAging;
+//     delete vo.weigthPrice;
+//     delete vo.lightPrice;
+//     vo.defaultSort = 1;
+//     orderBy = 'default'
+//     process02(1);
+//
+//   })
+// $("#seq1").click(
+//   function () {
+//     console.log("orderNumber排序")
+//     delete vo.orderNumber;
+//     delete vo.transportAging;
+//     delete vo.weigthPrice;
+//     delete vo.lightPrice;
+//     delete vo.defaultSort;
+//     orderBy = 'orderDesc'
+//     process02(1);
+//   })
+// $("#seq2").click(
+//   function () {
+//     console.log("transportAging排序")
+//     delete vo.orderNumber;
+//     delete vo.transportAging;
+//     delete vo.weigthPrice;
+//     delete vo.lightPrice;
+//     delete vo.defaultSort;
+//     orderBy = "transportAgingAsc"
+//     process02(1);
+//   })
 $("#seq3").mouseenter(
   function () {
     console.log("弹出价格排序")
@@ -357,30 +357,30 @@ $("#tj_price").mouseleave(
   function () {
     $("#tj_price").css("display", "none")
   })
-$("#tj_price2").click(
-  function () {
-    $("#tj_price").css("display", "none")
-    console.log("weigthPrice排序")
-    delete vo.orderNumber;
-    delete vo.transportAging;
-    delete vo.weigthPrice;
-    delete vo.lightPrice;
-    delete vo.defaultSort;
-    orderBy = "weigthPrice"
-    process02(1);
-  })
-$("#tj_price1").click(
-  function () {
-    $("#tj_price").css("display", "none")
-    console.log("lightPrice排序")
-    delete vo.orderNumber;
-    delete vo.transportAging;
-    delete vo.weigthPrice;
-    delete vo.lightPrice;
-    delete vo.defaultSort;
-    orderBy = "lightPrice"
-    process02(1);
-  })
+// $("#tj_price2").click(
+//   function () {
+//     $("#tj_price").css("display", "none")
+//     console.log("weigthPrice排序")
+//     delete vo.orderNumber;
+//     delete vo.transportAging;
+//     delete vo.weigthPrice;
+//     delete vo.lightPrice;
+//     delete vo.defaultSort;
+//     orderBy = "weigthPrice"
+//     process02(1);
+//   })
+// $("#tj_price1").click(
+//   function () {
+//     $("#tj_price").css("display", "none")
+//     console.log("lightPrice排序")
+//     delete vo.orderNumber;
+//     delete vo.transportAging;
+//     delete vo.weigthPrice;
+//     delete vo.lightPrice;
+//     delete vo.defaultSort;
+//     orderBy = "lightPrice"
+//     process02(1);
+//   })
 //排序点击 E
 
 //零担下单 S
@@ -923,7 +923,7 @@ function process01() {
           var authStatus = datas[i].authStatus;
           var collateral = datas[i].collateral;
           var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
-          $("#tj_a011").attr("href", "/member/" + account + "");
+          $("#tj_a011").attr("href", "/member/" + publishId + "");
           $("#tj_a011").html(companyName);
           $("#tj102").html(assessNumber);
           $("#tj101").html(browseNumber);
@@ -1137,7 +1137,7 @@ function process02(currentPage) {
           $("#nr02_1").html(start);
           $("#nr02_2").html(end);
           $("#nr02").attr("href", arcurl);
-          $("#nr03").attr("href", "/member/" + account + "");
+          $("#nr03").attr("href", "/member/" + publishId + "");
           $("#nr04").html(companyName);
           $("#nr05").html(transportRemark);
           $("#nr06").html(address);

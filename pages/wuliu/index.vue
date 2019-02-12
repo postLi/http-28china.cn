@@ -44,7 +44,7 @@
                 </div>
                 <span>&nbsp;园区名称&nbsp;：</span>
                 <input
-                  v-model="parkName"
+                  v-model="vo.parkName"
                   type="text"
                   class="list_input"
                   placeholder="请输入园区名称" >
@@ -186,43 +186,20 @@ export default {
   },
   data() {
     return {
-      getGateWayList: [],
-      getLogisticsPark: [],
-      recommendParkList: [],
       pages: 0, //总页数
-      currentPage: 1, //当前页
-      parkName: '', //搜索园区名称
-      locationProvince: '',
-      locationCity: '',
-      locationArea: ''
+      currentPage: 1 //当前页
     }
   },
   async asyncData({ $axios, app, query }) {
-    let parkName = '',
-      locationProvince = '',
-      locationCity = '',
-      locationArea = ''
-    if (query.parkName) {
-      parkName = query.parkName
-    }
-    if (query.locationArea) {
-      locationArea = query.locationArea
-    }
-    if (query.locationCity) {
-      locationCity = query.locationCity
-    } else {
-      locationCity = app.$cookies.get('currentAreaFullName')
-    }
-    if (query.locationProvince) {
-      locationProvince = query.locationProvince
-    } else {
-      locationProvince = app.$cookies.get('currentProvinceFullName')
-    }
     let vo = {
-      locationProvince: locationProvince,
-      locationCity: locationCity,
-      locationArea: locationArea,
-      parkName: parkName
+      parkName: query.parkName ? query.parkName : '',
+      locationProvince: query.locationProvince
+        ? query.locationProvince
+        : app.$cookies.get('currentProvinceFullName'),
+      locationCity: query.locationCity
+        ? query.locationCity
+        : app.$cookies.get('currentAreaFullName'),
+      locationArea: query.locationArea ? query.locationArea : ''
     }
     let parm = vo
     parm.currentPage = 1
@@ -251,19 +228,18 @@ export default {
         recommendParkList.data.status === 200
           ? recommendParkList.data.data.list
           : [],
-      parkName: parkName,
-      locationProvince: locationProvince,
-      locationCity: locationCity,
-      locationArea: locationArea
+      vo: vo
     }
   },
   mounted() {
     $('#parkAddress input').citypicker({
-      province: this.locationProvince,
-      city: this.locationCity,
-      district: this.locationArea
+      province: this.vo.locationProvince,
+      city: this.vo.locationCity,
+      district: this.vo.locationArea
     })
-    $('#list_nav_a').html(this.locationCity + this.locationArea + '物流园区')
+    $('#list_nav_a').html(
+      this.vo.locationCity + this.vo.locationArea + '物流园区'
+    )
     this.loadPagination()
   },
   methods: {
@@ -272,14 +248,14 @@ export default {
       $('#parkAddress .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      this.locationProvince = list1[0] ? list1[0] : ''
-      this.locationCity = list1[1] ? list1[1] : ''
-      this.locationArea = list1[2] ? list1[2] : ''
+      this.vo.locationProvince = list1[0] ? list1[0] : ''
+      this.vo.locationCity = list1[1] ? list1[1] : ''
+      this.vo.locationArea = list1[2] ? list1[2] : ''
       window.location.href = `/wuliu?locationProvince=${
-        this.locationProvince
-      }&locationCity=${this.locationCity}&locationArea=${
-        this.locationArea
-      }&parkName=${this.parkName}`
+        this.vo.locationProvince
+      }&locationCity=${this.vo.locationCity}&locationArea=${
+        this.vo.locationArea
+      }&parkName=${this.vo.parkName}`
     },
     reload() {
       window.location.href = '/wuliu'
@@ -290,12 +266,7 @@ export default {
         totalPage: this.pages,
         callback: async current => {
           $('#current1').text(current)
-          let obj = await gateWayList(this.$axios, current, {
-            locationProvince: this.locationProvince,
-            locationCity: this.locationCity,
-            locationArea: this.locationArea,
-            parkName: this.parkName
-          })
+          let obj = await gateWayList(this.$axios, current, this.vo)
           this.getGateWayList = obj.list
           this.currentPage = obj.currentPage
           window.location.href = '#top'

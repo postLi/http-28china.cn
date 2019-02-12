@@ -203,99 +203,65 @@ export default {
       totalPage: 0,
       currentPage: 1,
       sortList: [{ id: 1, name: '综合排序' }, { id: 2, name: '运输排序' }],
-      sortId: 1,
-      startProvince: '',
-      startCity: '',
-      startArea: '',
-      endProvince: '',
-      endCity: '',
-      endArea: ''
+      sortId: 1
     }
   },
   async asyncData({ $axios, app, query }) {
-    let endArea = '',
-      endCity = '',
-      endProvince = '',
-      startArea = '',
-      startCity = '',
-      startProvince = ''
-    if (query.endArea) {
-      endArea = query.endArea
-    }
-    if (query.endCity) {
-      endCity = query.endCity
-    }
-    if (query.endProvince) {
-      endProvince = query.endProvince
-    }
-    if (query.startArea) {
-      startArea = query.startArea
-    }
-    if (query.startCity) {
-      startCity = query.startCity
-    } else {
-      startCity = app.$cookies.get('currentAreaFullName')
-    }
-    if (query.startProvince) {
-      startProvince = query.startProvince
-    } else {
-      startProvince = app.$cookies.get('currentProvinceFullName')
-    }
-    let listRangesAgingData = await getListRangesAging($axios, 1, {
+    let vo = {
       filterSign: 1,
-      endArea: endArea,
-      endCity: endCity,
-      endProvince: endProvince,
-      startArea: startArea,
-      startCity: startCity,
-      startProvince: startProvince
-    })
+      endArea: query.endArea ? query.endArea : '',
+      endCity: query.endCity ? query.endCity : '',
+      endProvince: query.endProvince ? query.endProvince : '',
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
+    }
+    let listRangesAgingData = await getListRangesAging($axios, 1, vo)
     return {
       listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
       totalPage: listRangesAgingData.totalPage
         ? listRangesAgingData.totalPage
         : 0,
       currentPage: listRangesAgingData.currentPage,
-      endArea: endArea,
-      endCity: endCity,
-      endProvince: endProvince,
-      startArea: startArea,
-      startCity: startCity,
-      startProvince: startProvince
+      vo: vo
     }
   },
   mounted() {
     $('#list_nav_a').html(
-      this.startCity +
-        this.startArea +
+      this.vo.startCity +
+        this.vo.startArea +
         ' 到 ' +
-        this.endCity +
-        this.endArea +
+        this.vo.endCity +
+        this.vo.endArea +
         ' 专线时效'
     )
     if (
-      (!this.startCity && !this.startArea) ||
-      (!this.endCity && !this.endArea)
+      (!this.vo.startCity && !this.vo.startArea) ||
+      (!this.vo.endCity && !this.vo.endArea)
     ) {
       $('#list_nav_a').html(
-        this.startCity +
-          this.startArea +
+        this.vo.startCity +
+          this.vo.startArea +
           '  ' +
-          this.endCity +
-          this.endArea +
+          this.vo.endCity +
+          this.vo.endArea +
           '专线时效'
       )
     }
 
     $('#carLineFrom input').citypicker({
-      province: this.startProvince,
-      city: this.startCity,
-      district: this.startArea
+      province: this.vo.startProvince,
+      city: this.vo.startCity,
+      district: this.vo.startArea
     })
     $('#carLineTo input').citypicker({
-      province: this.endProvince,
-      city: this.endCity,
-      district: this.endArea
+      province: this.vo.endProvince,
+      city: this.vo.endCity,
+      district: this.vo.endArea
     })
 
     $('.qiehuan').click(function() {
@@ -343,15 +309,9 @@ export default {
   methods: {
     async selectSort(item) {
       this.sortId = item.id
-      let obj = await getListRangesAging(this.$axios, this.currentPage, {
-        filterSign: this.sortId,
-        startProvince: this.startProvince,
-        startCity: this.startCity,
-        startArea: this.startArea,
-        endProvince: this.endProvince,
-        endCity: this.endCity,
-        endArea: this.endArea
-      })
+      let vo = this.vo
+      vo.filterSign = this.sortId
+      let obj = await getListRangesAging(this.$axios, this.currentPage, vo)
       this.listRangesAging = obj.list
     },
     async search() {
@@ -360,20 +320,20 @@ export default {
       $('#carLineFrom .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      this.startProvince = list1[0] ? list1[0] : ''
-      this.startCity = list1[1] ? list1[1] : ''
-      this.startArea = list1[2] ? list1[2] : ''
+      this.vo.startProvince = list1[0] ? list1[0] : ''
+      this.vo.startCity = list1[1] ? list1[1] : ''
+      this.vo.startArea = list1[2] ? list1[2] : ''
       $('#carLineTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
-      this.endProvince = list2[0] ? list2[0] : ''
-      this.endCity = list2[1] ? list2[1] : ''
-      this.endArea = list2[2] ? list2[2] : ''
-      window.location.href = `/shixiao?endArea=${this.endArea}&endCity=${
-        this.endCity
-      }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
-        this.startCity
-      }&startProvince=${this.startProvince}`
+      this.vo.endProvince = list2[0] ? list2[0] : ''
+      this.vo.endCity = list2[1] ? list2[1] : ''
+      this.vo.endArea = list2[2] ? list2[2] : ''
+      window.location.href = `/shixiao?endArea=${this.vo.endArea}&endCity=${
+        this.vo.endCity
+      }&endProvince=${this.vo.endProvince}&startArea=${
+        this.vo.startArea
+      }&startCity=${this.vo.startCity}&startProvince=${this.vo.startProvince}`
     },
     loadPagination() {
       $('#pagination1').pagination({
@@ -381,16 +341,9 @@ export default {
         totalPage: this.totalPage,
         callback: async current => {
           $('#current1').text(current)
-          console.log(current)
-          let obj = await getListRangesAging(this.$axios, current, {
-            filterSign: this.sortId,
-            startProvince: this.startProvince,
-            startCity: this.startCity,
-            startArea: this.startArea,
-            endProvince: this.endProvince,
-            endCity: this.endCity,
-            endArea: this.endArea
-          })
+          let vo = this.vo
+          vo.filterSign = this.sortId
+          let obj = await getListRangesAging(this.$axios, current, vo)
           this.listRangesAging = obj.list
           this.currentPage = obj.currentPage
           window.location.href = '#top'

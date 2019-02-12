@@ -269,10 +269,10 @@ $('#select_wlyq').val(parkName);
 $('#select_wlyq').attr("name", parkId);
 // console.log(parkId,'name');
 $('#tjcx_00 .all').attr("href", UrlUpdateParams(window.location.href, "parkId", ""))
-$('#tjcx_01 .all').attr("href", UrlUpdateParams(window.location.href, "departureTimeCode", ""))
-$('#tjcx_02 .all').attr("href", UrlUpdateParams(window.location.href, "belongBrandCode", ""))
-$('#tjcx_03 .all').attr("href", UrlUpdateParams(window.location.href, "otherServiceCode", ""))
-
+// $('#tjcx_01 .all').attr("href", UrlUpdateParams(window.location.href, "departureTimeCode", ""))
+// $('#tjcx_02 .all').attr("href", UrlUpdateParams(window.location.href, "belongBrandCode", ""))
+// $('#tjcx_03 .all').attr("href", UrlUpdateParams(window.location.href, "otherServiceCode", ""))
+//
 
 $('body').click(function (e) {
   var _con = $('.js_yq'); // 设置目标区域(排除此元素)
@@ -671,152 +671,95 @@ tjcx00();
 
 function tjcx01() {
 
-  $.ajax(
-    {
-      type: "get",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url: "/api/28-web/sysDict/getSysDictByCodeGet/AF026",
+  if (departureTimeCode) {
 
-      success: function (res) {
-        var datas = res.data;
-        for (var i = 0; i < datas.length; i++) {
+    $("#tjcx_01 a").each(function () {
+      var aaa = $(this).attr("href");
+      console.log(aaa,'erwrerw');
+      if (aaa.indexOf(departureTimeCode) != -1) {
 
-          var name = datas[i].name;
-          var code = datas[i].code;
-          var myurl = UrlUpdateParams(window.location.href, "departureTimeCode", code)
-          var s1 = '<a  href=' + myurl + '>';
-          var s3 = name + '</a>';
-          $("#tjcx_01").append(s1 + s3);
-
-
-        }
-        //选中状态 S
-        if (departureTimeCode) {
-
-          $("#tjcx_01 a").each(function () {
-            var aaa = $(this).attr("href");
-
-            if (aaa.indexOf(departureTimeCode) != -1) {
-
-              // console.log(aaa);
-              $("#tjcx_01 a").removeClass("now");
-              $(this).addClass("now");
-            }
-          })
-        }
-        //选中状态 E
-      }, error: function (err) {
-        // console.log(err.responseText);
-
-
+        // console.log(aaa);
+        $("#tjcx_01 a").removeClass("now");
+        $(this).addClass("now");
       }
     })
+  }
 }
 
 tjcx01();
 
 function tjcx02() {
 
-  $.ajax(
-    {
-      type: "get",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url: "/api/28-web/sysDict/getSysDictByCodeGet/AF029",
+  //选中状态 S
+  if (belongBrandCode) {
 
-      success: function (res) {
-        var datas = res.data;
-        for (var i = 0; i < datas.length; i++) {
+    $("#tjcx_02 a").each(function () {
+      var aaa = $(this).attr("href");
 
-          var name = datas[i].name;
-          var code = datas[i].code;
-          var myurl = UrlUpdateParams(window.location.href, "belongBrandCode", code)
+      if (aaa.indexOf(belongBrandCode) != -1) {
 
-          var s1 = '<a  href=' + myurl + '>';
-          var s3 = name + '</a>';
-          $("#tjcx_02").append(s1 + s3);
-
-        }
-
-        //选中状态 S
-        if (belongBrandCode) {
-
-          $("#tjcx_02 a").each(function () {
-            var aaa = $(this).attr("href");
-
-            if (aaa.indexOf(belongBrandCode) != -1) {
-
-              console.log(aaa);
-              $("#tjcx_02 a").removeClass("now");
-              $(this).addClass("now");
-            }
-          })
-        }
-        //选中状态 E
-      }, error: function (err) {
-        // console.log(err.responseText);
-
-
+        console.log(aaa);
+        $("#tjcx_02 a").removeClass("now");
+        $(this).addClass("now");
       }
     })
+  }
 }
 
 tjcx02();
 
 function tjcx03() {
+  if (otherServiceCode) {
+    $("#tjcx_03 a").each(function () {
+      var aaa = $(this).attr("href");
 
-  $.ajax(
-    {
-      type: "get",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url: "/api/28-web/sysDict/getSysDictByCodeGet/AF025",
+      if (aaa.indexOf(otherServiceCode) != -1) {
 
-      success: function (res) {
-        var datas = res.data;
-        var myurl0 = UrlUpdateParams(window.location.href, "otherServiceCode", "AF0010403")
-        $('.shiming').attr("href", myurl0)
-        for (var i = 0; i < datas.length; i++) {
-
-          var name = datas[i].name;
-          var code = datas[i].code;
-          var myurl = UrlUpdateParams(window.location.href, "otherServiceCode", code)
-//       var s1='<a  href=/plus/list.php?tid=4&start='+start+'&end='+end;
-//				 var s2='&otherServiceCode='+code+'>';
-//				 var s3=name+'</a>';
-          var s1 = '<a  href=' + myurl + '>';
-          var s3 = name + '</a>';
-          $("#tjcx_03").append(s1 + s3);
-
-        }
-        //选中状态 S
-
-
-        if (otherServiceCode) {
-          $("#tjcx_03 a").each(function () {
-            var aaa = $(this).attr("href");
-
-            if (aaa.indexOf(otherServiceCode) != -1) {
-
-              $("#tjcx_03 a").removeClass("now");
-              $(this).addClass("now");
-            }
-            if (aaa.indexOf('AF0010403') != -1) {
-              $('.shiming').addClass("now");
-            }
-          })
-        }
-
-
-        //选中状态 E
-      }, error: function (err) {
-        // console.log(err.responseText);
+        $("#tjcx_03 a").removeClass("now");
+        $(this).addClass("now");
+      }
+      if (aaa.indexOf('AF0010403') != -1) {
+        $('.shiming').addClass("now");
       }
     })
+  }
+
+//   $.ajax(
+//     {
+//       type: "get",
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       url: "/api/28-web/sysDict/getSysDictByCodeGet/AF025",
+//
+//       success: function (res) {
+//         var datas = res.data;
+//         var myurl0 = UrlUpdateParams(window.location.href, "otherServiceCode", "AF0010403")
+//         $('.shiming').attr("href", myurl0)
+//         for (var i = 0; i < datas.length; i++) {
+//
+//           var name = datas[i].name;
+//           var code = datas[i].code;
+//           var myurl = UrlUpdateParams(window.location.href, "otherServiceCode", code)
+// //       var s1='<a  href=/plus/list.php?tid=4&start='+start+'&end='+end;
+// //				 var s2='&otherServiceCode='+code+'>';
+// //				 var s3=name+'</a>';
+//           var s1 = '<a  href=' + myurl + '>';
+//           var s3 = name + '</a>';
+//           $("#tjcx_03").append(s1 + s3);
+//
+//         }
+//         //选中状态 S
+//
+//
+//
+//
+//
+//         //选中状态 E
+//       }, error: function (err) {
+//         // console.log(err.responseText);
+//       }
+//     })
 }
 
 tjcx03();
@@ -854,12 +797,12 @@ function process01() {
         }
       ),
       success: function (res) {
-        $("#js007 .tj_list").not(":eq(0)").remove();
-        if (!res.data.length) {
-          console.log("推荐内容为空")
-          $(".tj_none").css("display", "block")
-          return;
-        }
+        // $("#js007 .tj_list").not(":eq(0)").remove();
+        // if (!res.data.length) {
+        //   console.log("推荐内容为空")
+        //   $(".tj_none").css("display", "block")
+        //   return;
+        // }
         var datas = res.data;
         for (var i = 0; i < datas.length; i++) {
           var lightPrice = datas[i].lightPrice;
@@ -925,12 +868,12 @@ function process01() {
           var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
           $("#tj_a011").attr("href", "/member/" + publishId + "");
           $("#tj_a011").html(companyName);
-          $("#tj102").html(assessNumber);
-          $("#tj101").html(browseNumber);
+          // $("#tj102").html(assessNumber);
+          // $("#tj101").html(browseNumber);
           $("#tj011").html(start);
           $("#tj012").html(end);
-          $("#tj013").html(weightPrice);
-          $("#tj014").html(lightPrice);
+          // $("#tj013").html(weightPrice);
+          // $("#tj014").html(lightPrice);
           $("#tj015").html(transportAging + transportAgingUnit);
           if (!transportAging || !transportAgingUnit) {
             $("#tj015").html("")
@@ -972,7 +915,7 @@ function process01() {
 
 }
 
-process01();
+// process01();
 //物流专线 推荐列表 E
 
 //物流专线 栏目列表S

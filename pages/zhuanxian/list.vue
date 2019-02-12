@@ -147,23 +147,54 @@
               </div>
               <dt>发车时间&nbsp;:</dt>
               <dd id="tjcx_01">
-                <a
-                  class="now all"
-                  href="/plus/list.php?tid=4">不限</a>
+                <!--lineCodeA-->
+                <span
+                  v-for="(item,index) in lineCodeA"
+                  :key="index"
+                  style="margin-right: 10px;">
+                  <a
+                    :href="'/zhuanxian/list?departureTimeCode='+ item.code"
+                    :data-code="item.code"
+                    :class=" item.name=='不限'? 'now':''"
+                    class="all">{{ item.name }}</a>
+                </span>
+                <!--<a-->
+                <!--class="now all"-->
+                <!--href="/plus/list.php?tid=4">不限</a>-->
               </dd>
               <dt>选择品牌&nbsp;:</dt>
               <dd id="tjcx_02">
-                <a
-                  class="now all"
-                  href="/plus/list.php?tid=4"
-                >不限</a>
+                <span
+                  v-for="(item,index) in lineCodeB"
+                  :key="index"
+                  style="margin-right: 10px;">
+                  <a
+                    :href="'/zhuanxian/list?belongBrandCode='+ item.code"
+                    :data-code="item.code"
+                    :class=" item.name=='不限'? 'now':''"
+                    class="all">{{ item.name }}</a>
+                </span>
+                <!--<a-->
+                <!--class="now all"-->
+                <!--href="/plus/list.php?tid=4"-->
+                <!--&gt;不限</a>-->
               </dd>
               <dt>其他&nbsp;:</dt>
               <dd id="tjcx_03">
-                <a
-                  class="now all"
-                  href="/plus/list.php?tid=4">不限</a>
-                <a class="shiming">实名认证</a>
+                <span
+                  v-for="(item,index) in lineCodeC"
+                  :key="index"
+                  style="margin-right: 10px;">
+                  <a
+                    :href="'/zhuanxian/list?otherServiceCode='+ item.code"
+                    :data-code="item.code"
+                    :class=" item.name=='不限'? 'now':''"
+                    class="all">{{ item.name }}</a>
+                </span>
+                <!--<a-->
+                <!--class="now all"-->
+                <!--href="/plus/list.php?tid=4">不限</a>-->
+                <!--<a class="shiming">实名认证</a>-->
               </dd>
             </dl>
           </div>
@@ -233,10 +264,12 @@
                     class="list-title-a"
                     target="_blank">
                     <span class="list-icon lines-sprite-icons icon-start"/>
-                    <em >{{ item.startCity }}</em><em>{{ item.startArea }}</em>
+                    <em>{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
+                    <!--<em >{{ item.startCity }}</em><em>{{ item.startArea }}</em>-->
                     <span class="list-icon lines-sprite-icons icon-through"/>
                     <span class="list-icon lines-sprite-icons icon-end"/>
-                    <em>{{ item.endCity.length>7?item.endCity.substring(0,7)+'..': item.endCity }}</em><em >{{ item.endArea.length>7?item.endArea.substring(0,7)+'..': item.endArea }}</em>
+                    <em>{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
+                    <!--<em>{{ item.endCity.length>7?item.endCity.substring(0,7)+'..': item.endCity }}</em><em >{{ item.endArea.length>7?item.endArea.substring(0,7)+'..': item.endArea }}</em>-->
                   </a>
                 </P>
                 <p class="p2">
@@ -414,18 +447,24 @@
             alt="">
         </div>
         <div class="zx_sx"><span class="biaozhi"/><span>专线信息推荐</span></div>
-        <div class="tj_none">
+        <div
+          v-if="!lineCodeC.length"
+          class="tj_none">
           <span>没有相关线路推荐</span>
         </div>
-        <div class="tj_list_box">
+        <div
+          v-for="(item,index) in lineRecoms"
+          v-else
+          :key="index"
+          class="tj_list_box">
           <div
             class="tj_list"
-            style="display: none;">
+          >
             <div class="p p1">
               <img src="/line/images/04gongsi.png"><span><a
                 id="tj_a011"
-                target="_blank"
-                href="#">广州明科物流有限公司</a></span>
+                :href="'/member/'+ item.publishId"
+                target="_blank">{{ item.companyName }}</a></span>
               <img
                 id="tj_shiming"
                 src="/line/images/shiming.png">
@@ -442,29 +481,31 @@
 
               <a
                 id="tj010"
+                :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
                 class="list-title-a"
                 target="_blank">
                 <span class="list-icon lines-sprite-icons icon-start"/>
-                <em id="tj011"/>
+                <!--<em id="tj011"></em>-->
+                <em id="tj011">{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
                 <span class="list-icon lines-sprite-icons icon-through"/>
                 <span class="list-icon lines-sprite-icons icon-end"/>
-                <em id="tj012"/>
+                <em id="tj012">{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
               </a>
             </div>
 
             <div class="p p3">
               <ul>
-                <li class="tj_left"><i>时效：</i><span id="tj015"/></li>
-                <li class="tj_right"><i>最低一票：</i><span id="tj016"/></li>
-                <li class="tj_left"><i>重货：</i><font id="tj013"/><span>元/公斤</span></li>
-                <li class="tj_right"><i>轻货：</i><font id="tj014"/><span>元/m³</span></li>
+                <li class="tj_left"><i>时效：</i><span>{{ item.transportAging + item.transportAgingUnit.replace("多", "") }}</span></li>
+                <li class="tj_right"><i>最低一票：</i><span id="tj016">{{ item.lowerPrice?item.lowerPrice+'元':'面议' }}</span></li>
+                <li class="tj_left"><i>重货：</i><font id="tj013">{{ parseFloat(item.weightPrice).toFixed(1) }}</font><span>元/公斤</span></li>
+                <li class="tj_right"><i>轻货：</i><font id="tj014">{{ parseFloat(item.lightPrice).toFixed(1) }}</font><span>元/m³</span></li>
               </ul>
 
             </div>
 
             <div class="p p6">
-              <div class="sc_num1"><img src="/line/images/ll_num.png"><span><i><em id="tj101"/>人浏览</i></span></div>
-              <div class="view_num1"><img src="/line/images/pj_num.png"><span><i><em id="tj102"/>条评论</i></span></div>
+              <div class="sc_num1"><img src="/line/images/ll_num.png"><span><i><em id="tj101">{{ item.browseNumber?item.browseNumber:'0' }}</em>人浏览</i></span></div>
+              <div class="view_num1"><img src="/line/images/pj_num.png"><span><i><em id="tj102">{{ item.assessNumber?item.assessNumber:'0' }}</em>条评论</i></span></div>
 
             </div>
           </div>
@@ -472,7 +513,7 @@
         <div class="list-box-r-hot">
 
           <div class="zx_sx"><span class="biaozhi"/>企业月人气榜</div>
-          <div class="tj_none">
+          <div class="hot_none">
             <span>没有相关企业月人气榜</span>
           </div>
           <ul>
@@ -654,7 +695,7 @@ export default {
       endp = ''
     }
     if (!enda || enda == 'null') {
-      endp = ''
+      enda = ''
     }
     if (!endc || endc == 'null') {
       endc = ''
@@ -662,7 +703,7 @@ export default {
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
-    let [listA, codeA] = await Promise.all([
+    let [listA, listB, codeA, codeB, codeC] = await Promise.all([
       $axios.post(aurl + `/api/28-web/range/list`, {
         currentPage: 1,
         pageSize: 6,
@@ -675,37 +716,80 @@ export default {
         belongBrandCode: query.belongBrandCode,
         departureTimeCode: query.departureTimeCode,
         otherServiceCode: query.otherServiceCode,
-        otherServiceCode: query.otherServiceCode,
         parkId: query.parkId
       }),
-      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF026')
+      $axios.post(aurl + `/api/28-web/range/recommend`, {
+        currentPage: 1,
+        pageSize: 5,
+        startProvince: startp,
+        startCity: startc,
+        startArea: starta,
+        endProvince: endp,
+        endCity: endc,
+        endArea: enda,
+        belongBrandCode: query.belongBrandCode,
+        departureTimeCode: query.departureTimeCode,
+        otherServiceCode: query.otherServiceCode,
+        parkId: query.parkId,
+        companyName: query.companyName
+      }),
+      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF026'),
+      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF029'),
+      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
     //codeA过节后继续
-    console.log(codeA, 'codeA')
-    if (listA.data.status == 200 || codeA.data.status == 200) {
+    // console.log(codeB, 'codeA')
+    if (
+      listA.data.status == 200 ||
+      listB.data.status == 200 ||
+      codeA.data.status == 200 ||
+      codeB.data.status == 200 ||
+      codeC.data.status == 200
+    ) {
       listA.data.data.list.forEach(item => {
         item.num = Math.ceil(Math.random() * 30)
       })
+      let codeObj = {
+        name: '不限',
+        code: ''
+      }
+      // let codeNmae = {
+      //   name: '实名认证',
+      //   code: ''
+      // }
+      codeA.data.data.unshift(codeObj)
+      codeB.data.data.unshift(codeObj)
+      codeC.data.data.unshift(codeObj)
+      // codeB.data.data.unshift(codeNmae)
+      console.log(listB.data.data, 'listBlistB')
+      //tjcx_01
 
       return {
-        lineLists: listA.data.data.list
+        lineLists: listA.data.data.list,
+        lineRecoms: listB.data.data,
+        lineCodeA: codeA.data.data,
+        lineCodeB: codeB.data.data,
+        lineCodeC: codeC.data.data
       }
     }
   },
   mounted() {
     let _this = this
-    seajs.use(['../../js/city.js', 'layer'], function() {
+    // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
+    console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
+    seajs.use(['/js/city.js', 'layer'], function() {
       seajs.use(
         [
-          '../../js/city-picker.js',
-          '../../js/jquery.pagination.min.js',
-          '../../js/AFLC_API.js'
+          '/js/city-picker.js',
+          '/js/jquery.pagination.min.js',
+          '/js/AFLC_API.js'
         ],
         function() {
           seajs.use(['/line/js/list_wlzx.js'], function() {
-            seajs.use(['../../js/collection.js'], function() {
-              seajs.use(['../../js/gaodemap2.js'], function() {
+            seajs.use(['/js/collection.js'], function() {
+              seajs.use(['/js/gaodemap2.js'], function() {
                 let orderBy = 'default'
+                let currentPage = 1
                 $('.list_tiaoj span').click(function() {
                   //alert("1");
                   $('.list_tiaoj span').removeClass('active')
@@ -737,12 +821,25 @@ export default {
                   return true
                 }
 
+                // $('#pagination1').pagination({
+                //   currentPage: 1,
+                //   totalPage: process02(1),
+                //   callback: function(current) {
+                //     console.log(current, 'current')
+                //     $('#current1').text(current)
+                //     process02(current)
+                //     window.location.href = '#top'
+                //   }
+                // })
+                // onCheckPage()
                 $('#pagination1').pagination({
                   currentPage: 1,
-                  totalPage: process02(1),
+                  totalPage: 6,
                   callback: function(current) {
                     $('#current1').text(current)
-                    process02(current)
+                    // orderBy = ''
+                    currentPage = current
+                    fetchLineList(currentPage, orderBy)
                     window.location.href = '#top'
                   }
                 })
@@ -766,42 +863,95 @@ export default {
                   $('#seq0').click(function() {
                     console.log('clear排序')
                     orderBy = 'default'
-                    fetchLineList(orderBy)
+                    fetchLineList(currentPage, orderBy)
                   })
                   $('#seq1').click(function() {
                     console.log('orderNumber排序')
                     orderBy = 'orderDesc'
-                    fetchLineList(orderBy)
+                    fetchLineList(currentPage, orderBy)
                   })
                   $('#seq2').click(function() {
                     console.log('transportAging排序')
                     orderBy = 'transportAgingAsc'
-                    fetchLineList(orderBy)
+                    fetchLineList(currentPage, orderBy)
                   })
                   $('#tj_price2').click(function() {
                     $('#tj_price').css('display', 'none')
-                    console.log('weigthPrice排序')
+                    // console.log('weigthPrice排序')
                     orderBy = 'weigthPrice'
-                    process02(1)
+                    fetchLineList(currentPage, orderBy)
                   })
                   $('#tj_price1').click(function() {
                     $('#tj_price').css('display', 'none')
-                    console.log('lightPrice排序')
+                    // console.log('lightPrice排序')
                     orderBy = 'lightPrice'
-                    fetchLineList(orderBy)
+                    fetchLineList(currentPage, orderBy)
                   })
                 }
-                function fetchLineList(orderBy) {
+                function fetchLineList(currentPage, orderBy) {
                   let aurl = ''
-                  // if(query.)
+                  let startp = _this.$route.query.startp
+                  let startc = _this.$route.query.startc
+                  let starta = _this.$route.query.starta
+                  let endp = _this.$route.query.endp
+                  let enda = _this.$route.query.enda
+                  let endc = _this.$route.query.endc
+                  let belongBrandCode = _this.$route.query.belongBrandCode
+                  let departureTimeCode = _this.$route.query.departureTimeCode
+                  let otherServiceCode = _this.$route.query.otherServiceCode
+                  let parkId = _this.$route.query.parkId
+
+                  if (
+                    !startp ||
+                    startp == 'null' ||
+                    !startc ||
+                    startc == 'null' ||
+                    !starta ||
+                    starta == 'null' ||
+                    !endp ||
+                    endp == 'null' ||
+                    !enda ||
+                    enda == 'null' ||
+                    !endc ||
+                    endc == 'null' ||
+                    !belongBrandCode ||
+                    belongBrandCode == 'null' ||
+                    !departureTimeCode ||
+                    departureTimeCode == 'null' ||
+                    !otherServiceCode ||
+                    otherServiceCode == 'null' ||
+                    !parkId ||
+                    parkId == 'null'
+                  ) {
+                    startp = ''
+                    startc = ''
+                    starta = ''
+                    endp = ''
+                    enda = ''
+                    endc = ''
+                    belongBrandCode = ''
+                    departureTimeCode = ''
+                    otherServiceCode = ''
+                    parkId = ''
+                  }
                   if (process.server) {
                     aurl = 'http://localhost:3000'
                   }
                   $axios
                     .post(aurl + `/api/28-web/range/list`, {
-                      currentPage: 1,
+                      currentPage: currentPage,
                       pageSize: 6,
-                      orderBy: orderBy
+                      orderBy: orderBy,
+                      startProvince: startp,
+                      startCity: startc,
+                      startArea: starta,
+                      endProvince: endp,
+                      endCity: endc,
+                      endArea: enda,
+                      belongBrandCode: belongBrandCode,
+                      departureTimeCode: departureTimeCode,
+                      otherServiceCode: otherServiceCode,
+                      parkId: parkId
                     })
                     .then(res => {
                       // res.data.data.num = Math.ceil(Math.random() * 30)
@@ -831,6 +981,16 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian {
+  #tjcx_01,
+  #tjcx_02,
+  #tjcx_03 {
+    span:first-of-type {
+      a {
+        /*background: rgba(63, 151, 239, 1);*/
+        /*color: #fff;*/
+      }
+    }
+  }
   .textareaDiv {
     height: 64px;
     width: 100%;
@@ -1045,7 +1205,7 @@ export default {
   .icon-btn-arrow-down-2 {
     margin-top: 5px;
     display: inline-block;
-    background: url(../../static/line/images//xiajt.png);
+    background-image: url('../../static/line/images/xiajt.png');
     background-repeat: no-repeat;
     width: 12px;
     height: 7px;

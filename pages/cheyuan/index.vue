@@ -89,7 +89,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF018"
-                  :class="[item.code === carType ? 'now':'']"
+                  :class="[item.code === vo.carType ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF018Click(item)">{{ item.name }}</a>
@@ -99,7 +99,7 @@
               <dd>
                 <a
                   v-for="(item,index) in carSourceList"
-                  :class="[item.value === carSourceType ? 'now':'']"
+                  :class="[item.value === vo.carSourceType ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="carSourceTypeClick(item)">{{ item.name }}</a>
@@ -109,7 +109,7 @@
               <dd>
                 <a
                   v-for="(item,index) in longCarList"
-                  :class="[item.value === isLongCar ? 'now':'']"
+                  :class="[item.value === vo.isLongCar ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="longCarClick(item)">{{ item.name }}</a>
@@ -119,7 +119,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF031"
-                  :class="[item.id === AF031Id ? 'now':'']"
+                  :class="[item.id === vo.AF031Id ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF031Click(item)">{{ index===0? item.name : item.name + '米' }}</a>
@@ -129,7 +129,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF032"
-                  :class="[item.id === AF032Id ? 'now':'']"
+                  :class="[item.id === vo.AF032Id ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF032Click(item)">{{ index===0? item.name : item.name + '吨' }}</a>
@@ -378,8 +378,7 @@
               <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
             </div>
             <div class="ltl-input">
-              <input 
-                id="right-bar-to" 
+              <input
                 autocomplete="off" 
                 wtmap="" 
                 type="text" 
@@ -388,8 +387,7 @@
               <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
             </div>
             <div class="ltl-input">
-              <input 
-                id="right-bar-to" 
+              <input
                 autocomplete="off" 
                 wtmap="" 
                 type="text" 
@@ -475,120 +473,47 @@ export default {
       pages: 0,
       currentPage: 1,
       AF032: [], //载重列表
-      AF032Id: '',
-      carLoadLower: '', //载重
-      carLoadUpper: '', //载重
       AF031: [], //车厢长度列表
-      AF031Id: '',
-      carLengthLower: '', //车厢长度
-      carLengthUpper: '', //车厢长度
       longCarList: [
         { name: '不限', value: '' },
         { name: '即时车源', value: '1' },
         { name: '长期车源', value: '0' }
       ],
-      isLongCar: '', //即时/长期
       carSourceList: [
         { name: '不限', value: '' },
         { name: '本地车', value: 'AF01802' },
         { name: '回程车', value: 'AF01801' }
       ],
-      carSourceType: '', //车源类型
       AF018: [], //车辆类型列表
-      carType: '', //车辆类型
-      startProvince: '',
-      startCity: '',
-      startArea: '',
-      endProvince: '',
-      endCity: '',
-      endArea: '',
       recommendBy28: {}, //28快运为您推荐
       recommendBy28Label: '',
       startFromRecommend: [], //广州市出发的车源
       startFromRecommendLabel: '',
       hotRecommend: [], //全国热门车源信息
-      hotRecommendLabel: '',
-      vo: {
-        startProvince: this.startProvince,
-        startCity: this.startCity,
-        startArea: this.startArea,
-        endProvince: this.endProvince,
-        endCity: this.endCity,
-        endArea: this.endArea,
-        carType: this.carType,
-        isLongCar: this.isLongCar,
-        carSourceType: this.carSourceType,
-        carLengthLower: this.carLengthLower,
-        carLengthUpper: this.carLengthUpper,
-        carLoadLower: this.carLoadLower,
-        carLoadUpper: this.carLoadUpper
-      }
+      hotRecommendLabel: ''
     }
   },
   async asyncData({ $axios, app, query }) {
-    let carType = '',
-      carSourceType = '',
-      isLongCar = query.isLongCar ? query.isLongCar : '',
-      AF032Id = '',
-      AF031Id = '',
-      carLengthLower = '',
-      carLengthUpper = '',
-      carLoadLower = '',
-      carLoadUpper = '',
-      endArea = '',
-      endCity = '',
-      endProvince = '',
-      startArea = '',
-      startCity = '',
-      startProvince = ''
-    if (query.carType) {
-      carType = query.carType
-    }
-    if (query.carSourceType) {
-      carSourceType = query.carSourceType
-    }
-    if (query.isLongCar) {
-      isLongCar = query.isLongCar
-    }
-    if (query.AF032Id) {
-      AF032Id = query.AF032Id
-    }
-    if (query.AF031Id) {
-      AF031Id = query.AF031Id
-    }
-    if (query.carLengthLower) {
-      carLengthLower = query.carLengthLower
-    }
-    if (query.carLengthUpper) {
-      carLengthUpper = query.carLengthUpper
-    }
-    if (query.carLoadLower) {
-      carLoadLower = query.carLoadLower
-    }
-    if (query.carLoadUpper) {
-      carLoadUpper = query.carLoadUpper
-    }
-    if (query.endArea) {
-      endArea = query.endArea
-    }
-    if (query.endCity) {
-      endCity = query.endCity
-    }
-    if (query.endProvince) {
-      endProvince = query.endProvince
-    }
-    if (query.startArea) {
-      startArea = query.startArea
-    }
-    if (query.startCity) {
-      startCity = query.startCity
-    } else {
-      startCity = app.$cookies.get('currentAreaFullName')
-    }
-    if (query.startProvince) {
-      startProvince = query.startProvince
-    } else {
-      startProvince = app.$cookies.get('currentProvinceFullName')
+    let vo = {
+      carType: query.carType ? query.carType : '', //车辆类型
+      carSourceType: query.carSourceType ? query.carSourceType : '', //车源类型
+      isLongCar: query.isLongCar ? query.isLongCar : '', //即时/长期
+      AF032Id: query.AF032Id ? query.AF032Id : '',
+      AF031Id: query.AF031Id ? query.AF031Id : '',
+      carLengthLower: query.carLengthLower ? query.carLengthLower : '', //车厢长度
+      carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
+      carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
+      carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
+      endArea: query.endArea ? query.endArea : '',
+      endCity: query.endCity ? query.endCity : '',
+      endProvince: query.endProvince ? query.endProvince : '',
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
     }
     let AF018 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
@@ -608,34 +533,10 @@ export default {
     if (AF032.data.status === 200) {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
-    let vo = {
-      startProvince: startProvince,
-      startCity: startCity,
-      startArea: startArea,
-      endProvince: endProvince,
-      endCity: endCity,
-      endArea: endArea,
-      carType: carType,
-      isLongCar: isLongCar,
-      carSourceType: carSourceType,
-      AF031Id: AF031Id,
-      AF032Id: AF032Id,
-      carLengthLower: carLengthLower,
-      carLengthUpper: carLengthUpper,
-      carLoadLower: carLoadLower,
-      carLoadUpper: carLoadUpper
-    }
     let carInfoList = await getCarInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
     //车源底部推荐
-    let recommend = await $axios.post('/28-web/carInfo/related/links', {
-      endArea: endArea,
-      endCity: endCity,
-      endProvince: endProvince,
-      startArea: startArea,
-      startCity: startCity,
-      startProvince: startProvince
-    })
+    let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [],
       AF031: AF031.data.status === 200 ? AF031.data.data : [],
@@ -668,21 +569,7 @@ export default {
           : {},
       carInfoList: carInfoList.list,
       pages: carInfoList.pages,
-      carType: carType,
-      carSourceType: carSourceType,
-      isLongCar: isLongCar,
-      AF032Id: AF032Id,
-      AF031Id: AF031Id,
-      carLengthLower: carLengthLower,
-      carLengthUpper: carLengthUpper,
-      carLoadLower: carLoadLower,
-      carLoadUpper: carLoadUpper,
-      endArea: endArea,
-      endCity: endCity,
-      endProvince: endProvince,
-      startArea: startArea,
-      startCity: startCity,
-      startProvince: startProvince
+      vo: vo
     }
   },
   mounted() {
@@ -697,35 +584,35 @@ export default {
       $('.select_con').css('display', 'block')
     })
     $('#list_nav_a').html(
-      this.startCity +
-        this.startArea +
+      this.vo.startCity +
+        this.vo.startArea +
         ' 到 ' +
-        this.endCity +
-        this.endArea +
+        this.vo.endCity +
+        this.vo.endArea +
         ' 车源信息'
     )
     if (
-      (!this.startCity && !this.startArea) ||
-      (!this.endCity && !this.endArea)
+      (!this.vo.startCity && !this.vo.startArea) ||
+      (!this.vo.endCity && !this.vo.endArea)
     ) {
       $('#list_nav_a').html(
-        this.startCity +
-          this.startArea +
+        this.vo.startCity +
+          this.vo.startArea +
           '  ' +
-          this.endCity +
-          this.endArea +
+          this.vo.endCity +
+          this.vo.endArea +
           '车源信息'
       )
     }
     $('#carLineFrom input').citypicker({
-      province: this.startProvince,
-      city: this.startCity,
-      district: this.startArea
+      province: this.vo.startProvince,
+      city: this.vo.startCity,
+      district: this.vo.startArea
     })
     $('#carLineTo input').citypicker({
-      province: this.endProvince,
-      city: this.endCity,
-      district: this.endArea
+      province: this.vo.endProvince,
+      city: this.vo.endCity,
+      district: this.vo.endArea
     })
     this.pagination()
   },
@@ -736,16 +623,16 @@ export default {
       $('#carLineFrom .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      this.startProvince = list1[0] ? list1[0] : ''
-      this.startCity = list1[1] ? list1[1] : ''
-      this.startArea = list1[2] ? list1[2] : ''
+      this.vo.startProvince = list1[0] ? list1[0] : ''
+      this.vo.startCity = list1[1] ? list1[1] : ''
+      this.vo.startArea = list1[2] ? list1[2] : ''
 
       $('#carLineTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
-      this.endProvince = list2[0] ? list2[0] : ''
-      this.endCity = list2[1] ? list2[1] : ''
-      this.endArea = list2[2] ? list2[2] : ''
+      this.vo.endProvince = list2[0] ? list2[0] : ''
+      this.vo.endCity = list2[1] ? list2[1] : ''
+      this.vo.endArea = list2[2] ? list2[2] : ''
     },
     async search() {
       this.searchDo()
@@ -755,63 +642,65 @@ export default {
       // this.currentPage = carInfoList.currentPage
       // this.pagination()
       window.location.href = `/cheyuan?carLengthLower=${
-        this.carLengthLower
-      }&AF031Id=${this.AF031Id}&carLengthUpper=${this.carLengthUpper}&AF032Id=${
-        this.AF032Id
-      }&carLoadLower=${this.carLoadLower}&carLoadUpper=${
-        this.carLoadUpper
-      }&carSourceType=${this.carSourceType}&carType=${this.carType}&endArea=${
-        this.endArea
-      }&endCity=${this.endCity}&endProvince=${this.endProvince}&isLongCar=${
-        this.isLongCar
-      }&startArea=${this.startArea}&startCity=${this.startCity}&startProvince=${
-        this.startProvince
-      }`
+        this.vo.carLengthLower
+      }&AF031Id=${this.vo.AF031Id}&carLengthUpper=${
+        this.vo.carLengthUpper
+      }&AF032Id=${this.vo.AF032Id}&carLoadLower=${
+        this.vo.carLoadLower
+      }&carLoadUpper=${this.vo.carLoadUpper}&carSourceType=${
+        this.vo.carSourceType
+      }&carType=${this.vo.carType}&endArea=${this.vo.endArea}&endCity=${
+        this.vo.endCity
+      }&endProvince=${this.vo.endProvince}&isLongCar=${
+        this.vo.isLongCar
+      }&startArea=${this.vo.startArea}&startCity=${
+        this.vo.startCity
+      }&startProvince=${this.vo.startProvince}`
     },
     AF032Click(item) {
-      this.AF032Id = item.id
+      this.vo.AF032Id = item.id
       if (item.name.indexOf('<') !== -1) {
-        this.carLoadLower = 0
-        this.carLoadUpper = item.name.substring(1, 20)
-      } else if (item.name.indexOf('>') != -1) {
-        this.carLoadLower = item.name.substring(1, 20)
-        this.carLoadUpper = 9999
+        this.vo.carLoadLower = 0
+        this.vo.carLoadUpper = item.name.substring(1, 20)
+      } else if (item.name.indexOf('>') !== -1) {
+        this.vo.carLoadLower = item.name.substring(1, 20)
+        this.vo.carLoadUpper = 9999
       } else if (item.name === '不限') {
-        this.carLoadLower = ''
-        this.carLoadUpper = ''
+        this.vo.carLoadLower = ''
+        this.vo.carLoadUpper = ''
       } else {
-        this.carLoadLower = item.name.split('-', 2)[0]
-        this.carLoadUpper = item.name.split('-', 2)[1]
+        this.vo.carLoadLower = item.name.split('-', 2)[0]
+        this.vo.carLoadUpper = item.name.split('-', 2)[1]
       }
       this.search()
     },
     AF031Click(item) {
-      this.AF031Id = item.id
+      this.vo.AF031Id = item.id
       if (item.name.indexOf('<') !== -1) {
-        this.carLengthLower = 0
-        this.carLengthUpper = item.name.substring(1, 20)
-      } else if (item.name.indexOf('>') != -1) {
-        this.carLengthLower = item.name.substring(1, 20)
-        this.carLengthUpper = 9999
+        this.vo.carLengthLower = 0
+        this.vo.carLengthUpper = item.name.substring(1, 20)
+      } else if (item.name.indexOf('>') !== -1) {
+        this.vo.carLengthLower = item.name.substring(1, 20)
+        this.vo.carLengthUpper = 9999
       } else if (item.name === '不限') {
-        this.carLengthLower = ''
-        this.carLengthUpper = ''
+        this.vo.carLengthLower = ''
+        this.vo.carLengthUpper = ''
       } else {
-        this.carLengthLower = item.name.split('-', 2)[0]
-        this.carLengthUpper = item.name.split('-', 2)[1]
+        this.vo.carLengthLower = item.name.split('-', 2)[0]
+        this.vo.carLengthUpper = item.name.split('-', 2)[1]
       }
       this.search()
     },
     longCarClick(item) {
-      this.isLongCar = item.value
+      this.vo.isLongCar = item.value
       this.search()
     },
     carSourceTypeClick(item) {
-      this.carSourceType = item.value
+      this.vo.carSourceType = item.value
       this.search()
     },
     AF018Click(item) {
-      this.carType = item.code
+      this.vo.carType = item.code
       this.search()
     },
     pagination() {
@@ -821,21 +710,7 @@ export default {
         callback: async current => {
           $('#current1').text(current)
           this.searchDo()
-          let carInfoList = await getCarInfoList(this.$axios, current, {
-            startProvince: this.startProvince,
-            startCity: this.startCity,
-            startArea: this.startArea,
-            endProvince: this.endProvince,
-            endCity: this.endCity,
-            endArea: this.endArea,
-            carType: this.carType,
-            isLongCar: this.isLongCar,
-            carSourceType: this.carSourceType,
-            carLengthLower: this.carLengthLower,
-            carLengthUpper: this.carLengthUpper,
-            carLoadLower: this.carLoadLower,
-            carLoadUpper: this.carLoadUpper
-          })
+          let carInfoList = await getCarInfoList(this.$axios, current, this.vo)
           this.carInfoList = carInfoList.list
           this.pages = carInfoList.pages
           this.current = carInfoList.current

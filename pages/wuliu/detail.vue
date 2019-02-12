@@ -452,12 +452,6 @@ export default {
   },
   data() {
     return {
-      gatewayData: {},
-      jwd: '',
-      companysList: [],
-      transportRange: [],
-      logisticsCompany: [],
-      AF025: [],
       AF025Name: '不限',
       sortList: [
         { name: '默认排序', vo: { defaultSort: 1 } },
@@ -472,7 +466,7 @@ export default {
   },
   async asyncData({ $axios, query }) {
     let gatewayData = await $axios.get('/28-web/logisticsPark/' + query.id)
-    let jwd
+    let jwd = ''
     const longitude = gatewayData.data.data.longitude
     const latitude = gatewayData.data.data.latitude
     if (longitude && latitude) {
@@ -499,7 +493,7 @@ export default {
     )
     AF025.data.data.unshift({ name: '不限', code: '' })
     return {
-      gatewayData: gatewayData.data.status === 200 ? gatewayData.data.data : [],
+      gatewayData: gatewayData.data.status === 200 ? gatewayData.data.data : {},
       jwd,
       companysList:
         companysList.data.status === 200 ? companysList.data.data.list : [],

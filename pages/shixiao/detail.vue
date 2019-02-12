@@ -885,10 +885,6 @@ export default {
   },
   data() {
     return {
-      tranDetail: {},
-      oneCompany: {},
-      listDetailPointNetwork: [],
-      zxList: [],
       nav4List: [
         { id: 0, name: '增值服务' },
         { id: 1, name: '专线介绍' },
@@ -896,18 +892,16 @@ export default {
         { id: 3, name: '专享服务' }
       ],
       nav4Id: 0,
-      rangeEvaluationlist: [],
-      rangeEvaluationCount: {},
       showImg: 0
     }
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    const oneCompany = await $axios.get(
+    const oneCompanyRes = await $axios.get(
       '/aflc-portal/portalt/aflcLogisticsCompany/v1/' + query.publishId
     )
-    if (oneCompany.data.status === 200) {
-      setCredit(oneCompany.data.data)
+    if (oneCompanyRes.data.status === 200) {
+      setCredit(oneCompanyRes.data.data)
     }
     let parm = {
       currentPage: 1,
@@ -916,57 +910,59 @@ export default {
         companyId: query.publishId
       }
     }
-    const listDetailPointNetwork = await $axios.post(
+    const listDetailPointNetworkRes = await $axios.post(
       '/aflc-portal/portalt/aflcPointNetwork/v1/listDetailPointNetwork',
       parm
     )
-    if (listDetailPointNetwork.data.status === 200) {
-      listDetailPointNetwork.data.data.list.forEach(item => {
+    if (listDetailPointNetworkRes.data.status === 200) {
+      listDetailPointNetworkRes.data.data.list.forEach(item => {
         if (item.address.indexOf(item.belongCityName !== -1)) {
           item.address = item.address.replace(item.belongCityName, '')
         }
       })
     }
-    const tranDetail = await $axios.get(
+    const tranDetailRes = await $axios.get(
       '/aflc-portal/portalt/aflcTransportRange/v1/' + query.id
     )
-    if (tranDetail.data.status === 200) {
-      tranDetail.data.data.num = Math.ceil(Math.random() * 30)
-      tranDetail.data.data.rangePrices1 = tranDetail.data.data.rangePrices.filter(
+    if (tranDetailRes.data.status === 200) {
+      tranDetailRes.data.data.num = Math.ceil(Math.random() * 30)
+      tranDetailRes.data.data.rangePrices1 = tranDetailRes.data.data.rangePrices.filter(
         item => {
           return item.type === '1'
         }
       )
-      tranDetail.data.data.rangePrices0 = tranDetail.data.data.rangePrices.filter(
+      tranDetailRes.data.data.rangePrices0 = tranDetailRes.data.data.rangePrices.filter(
         item => {
           return item.type === '0'
         }
       )
-      let code = await getCode($axios, tranDetail.data.data.endProvince)
-      zxList = await getCity($axios, code, tranDetail.data.data.startCity)
+      let code = await getCode($axios, tranDetailRes.data.data.endProvince)
+      zxList = await getCity($axios, code, tranDetailRes.data.data.startCity)
     }
-    let rangeEvaluationlist = await getRangeEvaluationlist($axios, 1, {
+    let rangeEvaluationlistRes = await getRangeEvaluationlist($axios, 1, {
       transportRangeId: query.id
     })
-    let rangeEvaluationCount = await $axios.get(
+    let rangeEvaluationCountRes = await $axios.get(
       '/aflc-portal/portal/aflcTransportEvaluation/v1/rangeEvaluationCount/' +
         query.id
     )
     return {
-      oneCompany: oneCompany.data.status === 200 ? oneCompany.data.data : {},
+      oneCompany:
+        oneCompanyRes.data.status === 200 ? oneCompanyRes.data.data : {},
       listDetailPointNetwork:
-        listDetailPointNetwork.data.status === 200
-          ? listDetailPointNetwork.data.data.list
+        listDetailPointNetworkRes.data.status === 200
+          ? listDetailPointNetworkRes.data.data.list
           : [],
-      tranDetail: tranDetail.data.status === 200 ? tranDetail.data.data : {},
+      tranDetail:
+        tranDetailRes.data.status === 200 ? tranDetailRes.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       rangeEvaluationlist:
-        rangeEvaluationlist.data.status === 200
-          ? rangeEvaluationlist.data.data.list
+        rangeEvaluationlistRes.data.status === 200
+          ? rangeEvaluationlistRes.data.data.list
           : [],
       rangeEvaluationCount:
-        rangeEvaluationCount.data.status === 200
-          ? rangeEvaluationCount.data.data
+        rangeEvaluationCountRes.data.status === 200
+          ? rangeEvaluationCountRes.data.data
           : {}
     }
   },
@@ -989,13 +985,17 @@ export default {
       this.nav4Id = item.id
     },
     async radioClick(data) {
-      let rangeEvaluationlist = await getRangeEvaluationlist(this.$axios, 1, {
-        transportRangeId: this.$route.query.id,
-        assessLevel: data
-      })
+      let rangeEvaluationlistRes = await getRangeEvaluationlist(
+        this.$axios,
+        1,
+        {
+          transportRangeId: this.$route.query.id,
+          assessLevel: data
+        }
+      )
       this.rangeEvaluationlist =
-        rangeEvaluationlist.data.status === 200
-          ? rangeEvaluationlist.data.data.list
+        rangeEvaluationlistRes.data.status === 200
+          ? rangeEvaluationlistRes.data.data.list
           : []
     }
   }

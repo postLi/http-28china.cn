@@ -6,7 +6,7 @@
       </div>-->
       <div class="arc_top1">
         <div class="arc_top1_1">
-          <span>{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>
+          <span>{{ linedata.startLocation+ '&nbsp;&rarr;&nbsp;' +linedata.endLocation }}</span>
           <!--<span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>-->
         </div>
         <div class="arc_top1_3"><a
@@ -60,32 +60,32 @@
         <div class="arc_left">
           <div class="arc_left_1">
             <img
-              v-if="linedataA.rangeLogo"
-              :src="linedataA.rangeLogo.split(',')[showImg]">
+              v-if="linedata.rangeLogo"
+              :src="linedata.rangeLogo.split(',')[showImg]">
             <img
               v-else
-              :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
+              :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
               alt="">
           </div>
           <div class="arc_left_2">
             <a href="javascript:void(0)"><img
-              v-if="linedataA.rangeLogo"
-              :src="linedataA.rangeLogo.split(',')[0]"
+              v-if="linedata.rangeLogo"
+              :src="linedata.rangeLogo.split(',')[0]"
               @click="clickImg(0)"><img
-                :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
+                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
                 @click="clickImg(0)"></a>
             <a href="javascript:void(0)"><img
-              v-if="linedataA.rangeLogo"
-              :src="linedataA.rangeLogo.split(',')[1]"
+              v-if="linedata.rangeLogo"
+              :src="linedata.rangeLogo.split(',')[1]"
               @click="clickImg(1)"><img
-                :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
+                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
                 @click="clickImg(1)"></a>
             <a href="javascript:void(0)"><img
-              v-if="linedataA.rangeLogo"
-              :src="linedataA.rangeLogo.split(',')[2]"
+              v-if="linedata.rangeLogo"
+              :src="linedata.rangeLogo.split(',')[2]"
               @click="clickImg(2)"><img
                 v-else
-                :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
+                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
                 @click="clickImg(2)"></a>
           </div>
           <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span
@@ -256,7 +256,7 @@
             </div>
 
           </div>
-          <div class="arc_middle1"><span id="nr072"/><span style="float: right;"> 用户159***5898发布广州到长沙货源  3分钟前</span></div>
+          <div class="arc_middle1"><span id="nr072"/></div>
           <div class="arc_middle2">
             <div class="arc_middle2_1">
               <p class="p1"><i>重货价：</i><span id="nr0741"/><font
@@ -355,7 +355,7 @@
           </div>
         </div>
         <div class="arc_right">
-          <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
+          <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020" >{{ linedata.publishName }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
             <img
               class="xy_zuan"
@@ -391,36 +391,21 @@
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br>
-            <font id="nr1041">{{ linedataB.serverQualityScore ? linedataB.serverQualityScore:'5' }}</font><font id="nr1042">{{ linedataB.transportAgingScore ? linedataB.transportAgingScore:'5' }}</font><font id="nr1043">{{ linedataB.serverPriceScore ? linedataB.serverPriceScore:'5' }}</font>
+            <font id="nr1041"/><font id="nr1042"/><font id="nr1043"/>
           </p>
           <p class="arc_right04">
-            <span class="arc_right04_1"><i>联系人：</i><font
-              id="nr1021"
-              style="color: #333">{{ linedataB.contactsName }}</font></span>
-            <span><i>手机：</i>
-              <font
-                v-show="checkMoblie"
-                style="color: #3f94ee;border-bottom: 1px solid #3f94ee"
-                @click="showMoblieFn(showMoblie)">查看电话</font>
-              <font
-                v-show="showMoblie"
-                id="nr1022"
-                style="color: #333"
-                @click="showMoblieFn(showMoblie)">{{ linedataB.mobile }}</font>
-            </span>
+            <span class="arc_right04_1"><i>联系人：</i><font id="nr1021"/></span>
+            <span><i>手机：</i><font id="nr1022"/></span>
             <span><i>Q&nbsp;Q：</i><a
               id="nr1023"
-              :href="'http://wpa.qq.com/msgrd?v=3&uin='+ linedataB.qq+'&site=qq&menu=yes'"
-              &site="qq&menu=yes&quot;"
               target="_blank"><input
                 id="qq"
                 value="QQ交谈"></a></span>
-                <!--<span><i>地址：</i><font id="nr10232"/></span>-->
+            <span><i>地址：</i><font id="nr10232"/></span>
           </p>
           <p class="arc_right05">
             <a
               id="nr1024"
-              :href="'/member/'+ linedataB.account"
               target="_blank"><input
                 id="arc_right05_1"
                 readonly=""
@@ -447,75 +432,6 @@
 
         </div>
 
-      </div>
-      <div class="arc_main1-1">
-        想要更多<span>广州</span>到<span>深圳</span>的车源信息，您可以<i>发布货源</i>，让车主主动来联系您，达成交易
-      </div>
-
-      <div class="arc_main3">
-        <div class="left">
-          <div class="zx_sx">
-            <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
-          </div>
-          <div id="echart"/>
-        </div>
-        <div class="right">
-          <div class="zx_sx">
-            <span class="biaozhi"/><span>车主综合力评估</span>
-          </div>
-          <div class="content">
-            <div class="content-left">
-              <div class="img">
-                <img
-                  src="../../static/images/28fast_download.png"
-                  width="82"
-                  height="82">
-              </div>
-              <div class="name">企业货主名</div>
-              <div class="name">
-                <img src="../../static/images/article_wlzx/10shiming.png">
-              </div>
-            </div>
-            <div class="content-right">
-              <div class="content-right-row"><img
-                class="img"
-                src="../../static/images/list_wlzx/sc_num.png">活跃度：<i>30</i></div>
-              <div class="content-right-row">最近三个月发布货源 <i>15</i> 次</div>
-              <div class="content-right-row">共成交 <i>146</i> 笔订单，收到好评 <i>28</i> 次</div>
-              <div class="content-right-row">大家对他的印象:</div>
-              <div class="content-right-row">
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>最想合作的伙伴（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-              </div>
-              <div
-                class="content-right-row"
-                style="clear: both"
-              >大家对他的印象:</div>
-              <div class="content-right-row">
-                <em>广州<img src="../../static/images/yd_zx.png">武汉</em>
-                <em>广州<img src="../../static/images/yd_zx.png">武汉</em>
-                <em>广州<img src="../../static/images/yd_zx.png">武汉</em>
-              </div>
-              <div
-                class="content-right-row"
-                style="clear: both">
-                <a
-                  href="javascript:;"
-                  class="button1">标准价</a>
-                <a
-                  href="javascript:;"
-                  class="button2"><img src="../../static/images/yd_zx.png">帮我选择优质车源</a>
-              </div>
-            </div>
-          </div>
-
-        </div>
       </div>
       <div class="arc_main2">
         <div class="arc_left2">
@@ -829,7 +745,6 @@
           </div>
         </div>
       </div>
-
     </div>
 
     <div
@@ -888,18 +803,11 @@ export default {
       { rel: 'stylesheet', href: '/line/css/price.css' },
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
-    ],
-    script: [
-      { src: '../js/jquery.pagination.min.js' },
-      // { src: '../js/WTMap.min.js' },
-      { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
   layout: 'subLayout',
   data() {
     return {
-      showMoblie: false,
-      checkMoblie: true,
       showImg: 0,
       pages: 0,
       currentPage: 1,
@@ -914,168 +822,27 @@ export default {
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
-    let [linedataA, linedataB] = await Promise.all([
-      $axios.get(aurl + `/api/28-web/range/${query.id}`),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/${query.publishId}`)
-    ])
-    console.log(linedataA, 'res.data.data.linedataB', linedataB)
-    if (linedataA.data.status === 200) {
-      lineCode = await getCode($axios, linedataA.data.data.endProvince)
-      lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
-      linedataA.data.data.num = Math.ceil(Math.random() * 30)
-      // console.log(linedataA.data.data, 'res.data.data.linedataB', linedataB)
+
+    let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
+    console.log(
+      `/api/28-web/range/${query.id}`,
+      'res',
+      res.data,
+      res.data.data.endLocation
+    )
+    if (res.data.status === 200) {
+      // this.linedata = res.data.data
+      lineCode = await getCode($axios, res.data.data.endProvince)
+      lineCity = await getCity($axios, lineCode, res.data.data.startCity)
+      res.data.data.num = Math.ceil(Math.random() * 30)
+      console.log(res.data.data, 'res.data.data.num')
       return {
-        linedataA: linedataA.data.data,
-        linedataB: linedataB.data.data,
+        linedata: res.data.data,
         lineCitys: lineCity.data.data
       }
     }
-    // let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
-    // // console.log(
-    // //   `/api/28-web/range/${query.id}`,
-    // //   'res',
-    // //   res.data,
-    // //   res.data.data.endLocation
-    // // )
-    // if (res.data.status === 200) {
-    //   // this.linedata = res.data.data
-    //   lineCode = await getCode($axios, res.data.data.endProvince)
-    //   lineCity = await getCity($axios, lineCode, res.data.data.startCity)
-    //   res.data.data.num = Math.ceil(Math.random() * 30)
-    //   console.log(
-    //     res.data.data,
-    //     'res.data.data.serverQualityScore',
-    //     lineCity.data.data
-    //   )
-    //   return {
-    //     linedata: res.data.data,
-    //     lineCitys: lineCity.data.data
-    //   }
-    // }
   },
   mounted() {
-    let myChart = echarts.init(document.getElementById('echart'))
-    console.log(myChart, 'myChart')
-    let option = {
-      title: { text: '', subtext: '' },
-      tooltip: { trigger: 'axis' },
-      xAxis: {
-        show: false,
-        type: 'category',
-        boundaryGap: false,
-        data: [
-          '大品牌报价',
-          '优质专线报价',
-          '行业均价（高点）',
-          '行业均价（低点）',
-          '本供应商价'
-        ]
-      },
-      yAxis: {
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: { show: false },
-        type: 'value',
-        max: 15
-      },
-      series: [
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 0.5)' }
-          },
-          data: [11, 10, 8, 6, 5],
-          label: {
-            show: true,
-            position: 'bottom',
-            textStyle: { color: '#6F6F6F' },
-            formatter: function(params) {
-              let c0
-              if (params.dataIndex <= 1) {
-                c0 = 'color1'
-              } else {
-                c0 = 'color0'
-              }
-              return `{${c0}|${params.value}万}\n{color2|${params.name}}`
-            },
-            rich: {
-              color0: {
-                fontSize: 18,
-                align: 'center',
-                color: '#FF7836'
-              },
-              color1: {
-                fontSize: 18,
-                align: 'center',
-                color: '#6F6F6F'
-              },
-              color2: {
-                color: '#413A43',
-                align: 'center',
-                fontSize: 14,
-                padding: [5, 5, 5, 5]
-              }
-            }
-          },
-          tooltip: { show: false }
-        },
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 1)' }
-          },
-          areaStyle: {
-            normal: {
-              origin: 'end',
-              color: 'rgba(255,161,77, 0.5)'
-            }
-          },
-          data: [null, null, 8, 6],
-          tooltip: { show: false }
-        },
-        {
-          name: '平行于y轴的趋势线',
-          type: 'line',
-          markLine: {
-            name: 'xfdsvffds',
-            symbol: 'none',
-            lineStyle: {
-              normal: { color: 'rgba(255,173,101, 1)' }
-            },
-            label: {
-              show: true,
-              position: 'end',
-              formatter: function(params) {
-                console.log(params)
-                if (params.dataIndex === 1) {
-                  return `{style|建议价格区间}`
-                }
-              },
-              rich: {
-                style: {
-                  fontSize: 15,
-                  padding: [0, 110, 0, 0],
-                  color: '#FF7836'
-                }
-              }
-            },
-            data: [
-              [
-                { coord: ['行业均价（高点）', 8] },
-                { coord: ['行业均价（高点）', 15] }
-              ],
-              [
-                { coord: ['行业均价（低点）', 6] },
-                { coord: ['行业均价（低点）', 15] }
-              ]
-            ]
-          }
-        }
-      ]
-    }
-    myChart.setOption(option)
     seajs.use(['../js/city.js', '../js/calculator.js'], function() {
       seajs.use(['../js/city-picker.js'], function() {
         seajs.use(['/line/js/arc_wlzx.js'], function() {
@@ -1152,19 +919,6 @@ export default {
     })
   },
   methods: {
-    showMoblieFn(showMoblieFn) {
-      if (showMoblieFn == false) {
-        this.showMoblie = true
-        this.checkMoblie = false
-      } else {
-        this.checkMoblie = true
-        this.showMoblie = false
-      }
-      // this.showMoblie = !showMoblieFn
-
-      console.log(showMoblieFn, 'showMoblieFn')
-      // this.showMoblie = false
-    },
     clickImg(int) {
       this.showImg = int
     }
@@ -1188,9 +942,6 @@ export default {
   .arc_prinr_p {
     padding: 20px 0 0 15px;
     font-size: 14px;
-  }
-  #echart {
-    height: 340px;
   }
 }
 </style>

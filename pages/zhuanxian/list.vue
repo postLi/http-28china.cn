@@ -220,7 +220,7 @@
             </div>
           </div>
           <div
-            v-if="lineLists==[]"
+            v-if="!lineLists.length"
             class="list_none">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/line/images/none_pic.png">
@@ -357,7 +357,9 @@
         </div>
 
         <!--分页-->
-        <div class="clearfix">
+        <div
+          v-if="lineLists.length"
+          class="clearfix">
           <div
             class="box"
             style="float: right;margin-right: 150px;">
@@ -372,10 +374,10 @@
         <!--分页-->
 
 
-        <div class="lll-recommend">
+        <div class="lll-recommend clearfix">
           <div
-            class="zx_sx"
-          ><span class="biaozhi"/><span>28快运为您推荐</span></div>
+            class="zx_sx1"
+          ><span class="biaozhi"/><span class="zx_sxl_tit">28快运为您推荐</span></div>
           <ul>
             <li>
               <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
@@ -448,7 +450,7 @@
         </div>
         <div class="zx_sx"><span class="biaozhi"/><span>专线信息推荐</span></div>
         <div
-          v-if="!lineCodeC.length"
+          v-if="!lineRecoms.length"
           class="tj_none">
           <span>没有相关线路推荐</span>
         </div>
@@ -761,7 +763,7 @@ export default {
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
       // codeB.data.data.unshift(codeNmae)
-      console.log(listB.data.data, 'listBlistB')
+      // console.log(listB.data.data, 'listBlistB')
       //tjcx_01
 
       return {
@@ -776,7 +778,7 @@ export default {
   mounted() {
     let _this = this
     // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
-    console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
+    // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
     seajs.use(['/js/city.js', 'layer'], function() {
       seajs.use(
         [
@@ -900,40 +902,43 @@ export default {
                   let departureTimeCode = _this.$route.query.departureTimeCode
                   let otherServiceCode = _this.$route.query.otherServiceCode
                   let parkId = _this.$route.query.parkId
+                  let companyName = _this.$route.query.companyName
+                  //
+                  // if (
+                  //   !startp ||
+                  //   startp == 'null' ||
+                  //   !startc ||
+                  //   startc == 'null' ||
+                  //   !starta ||
+                  //   starta == 'null' ||
+                  //   !endp ||
+                  //   endp == 'null' ||
+                  //   !enda ||
+                  //   enda == 'null' ||
+                  //   !endc ||
+                  //   endc == 'null' ||
+                  //   !departureTimeCode ||
+                  //   departureTimeCode == 'null' ||
+                  //   !otherServiceCode ||
+                  //   otherServiceCode == 'null' ||
+                  //   !parkId ||
+                  //   parkId == 'null' ||
+                  //   !companyName ||
+                  //   companyName == 'null'
+                  // ) {
+                  //   startp = ''
+                  //   startc = ''
+                  //   starta = ''
+                  //   endp = ''
+                  //   enda = ''
+                  //   endc = ''
+                  //   // belongBrandCode = ''
+                  //   departureTimeCode = ''
+                  //   otherServiceCode = ''
+                  //   parkId = ''
+                  //   companyName = ''
+                  // }
 
-                  if (
-                    !startp ||
-                    startp == 'null' ||
-                    !startc ||
-                    startc == 'null' ||
-                    !starta ||
-                    starta == 'null' ||
-                    !endp ||
-                    endp == 'null' ||
-                    !enda ||
-                    enda == 'null' ||
-                    !endc ||
-                    endc == 'null' ||
-                    !belongBrandCode ||
-                    belongBrandCode == 'null' ||
-                    !departureTimeCode ||
-                    departureTimeCode == 'null' ||
-                    !otherServiceCode ||
-                    otherServiceCode == 'null' ||
-                    !parkId ||
-                    parkId == 'null'
-                  ) {
-                    startp = ''
-                    startc = ''
-                    starta = ''
-                    endp = ''
-                    enda = ''
-                    endc = ''
-                    belongBrandCode = ''
-                    departureTimeCode = ''
-                    otherServiceCode = ''
-                    parkId = ''
-                  }
                   if (process.server) {
                     aurl = 'http://localhost:3000'
                   }
@@ -981,16 +986,26 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian {
-  #tjcx_01,
-  #tjcx_02,
-  #tjcx_03 {
-    span:first-of-type {
-      a {
-        /*background: rgba(63, 151, 239, 1);*/
-        /*color: #fff;*/
+  .list_left {
+    .zx_sx1 {
+      border-bottom: 1px solid #e7e7e7;
+      line-height: 50px;
+      font-size: 18px;
+      font-weight: bold;
+      .biaozhi {
+        width: 3px;
+        height: 18px;
+        background-color: #3f94ee;
+        border-radius: 1px;
+        margin: 16px 12px 0px 10px;
+        float: left;
+      }
+      .zx_sxl_tit {
+        color: #3f94ee;
       }
     }
   }
+
   .textareaDiv {
     height: 64px;
     width: 100%;
@@ -1047,6 +1062,7 @@ export default {
       margin-top: 20px;
       background: #fff;
       padding-bottom: 10px;
+
       .zx_sx {
         border-bottom: 2px solid #2577e3;
         margin-bottom: 1px;

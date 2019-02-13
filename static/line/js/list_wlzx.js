@@ -698,7 +698,7 @@ function tjcx02() {
 
       if (aaa.indexOf(belongBrandCode) != -1) {
 
-        console.log(aaa);
+        // console.log(aaa);
         $("#tjcx_02 a").removeClass("now");
         $(this).addClass("now");
       }

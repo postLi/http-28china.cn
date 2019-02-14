@@ -67,29 +67,42 @@
               :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
               alt="">
           </div>
-          <div class="arc_left_2">
-            <a href="javascript:void(0)"><img
-              v-if="linedataA.rangeLogo"
-              :src="linedataA.rangeLogo.split(',')[0]"
-              @click="clickImg(0)"><img
-                :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
-                @click="clickImg(0)"></a>
-            <a href="javascript:void(0)"><img
-              v-if="linedataA.rangeLogo"
-              :src="linedataA.rangeLogo.split(',')[1]"
-              @click="clickImg(1)"><img
-                :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
-                @click="clickImg(1)"></a>
-            <a href="javascript:void(0)"><img
-              v-if="linedataA.rangeLogo"
-              :src="linedataA.rangeLogo.split(',')[2]"
-              @click="clickImg(2)"><img
-                v-else
-                :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
-                @click="clickImg(2)"></a>
+          <div class="arc_left_down">
+            <ul>
+              <li><img
+                src="../../static/line/images/04ewm.png"
+                alt=""></li>
+              <li>
+                <p>下载<span>【28快运APP】</span>，您可查看更</p>
+                <p>多<span>广州</span>到<span>东莞</span>的货源，并可实时接</p>
+                <p>收28快运为您推荐的精品货源提醒!</p>
+              </li>
+            </ul>
           </div>
-          <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span
-            id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
+
+          <!--<div class="arc_left_2">-->
+          <!--<a href="javascript:void(0)"><img-->
+          <!--v-if="linedataA.rangeLogo"-->
+          <!--:src="linedataA.rangeLogo.split(',')[0]"-->
+          <!--@click="clickImg(0)"><img-->
+          <!--:src="require('../../static/images/pic/bg' + linedataA.num + '.png')"-->
+          <!--@click="clickImg(0)"></a>-->
+          <!--<a href="javascript:void(0)"><img-->
+          <!--v-if="linedataA.rangeLogo"-->
+          <!--:src="linedataA.rangeLogo.split(',')[1]"-->
+          <!--@click="clickImg(1)"><img-->
+          <!--:src="require('../../static/images/pic/bg' + linedataA.num + '.png')"-->
+          <!--@click="clickImg(1)"></a>-->
+          <!--<a href="javascript:void(0)"><img-->
+          <!--v-if="linedataA.rangeLogo"-->
+          <!--:src="linedataA.rangeLogo.split(',')[2]"-->
+          <!--@click="clickImg(2)"><img-->
+          <!--v-else-->
+          <!--:src="require('../../static/images/pic/bg' + linedataA.num + '.png')"-->
+          <!--@click="clickImg(2)"></a>-->
+          <!--</div>-->
+          <!--<div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span-->
+          <!--id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>-->
         </div>
         <div class="arc_middle">
           <div class="collection_zx">
@@ -256,7 +269,32 @@
             </div>
 
           </div>
-          <div class="arc_middle1"><span id="nr072"/><span style="float: right;"> 用户159***5898发布广州到长沙货源  3分钟前</span></div>
+          <div
+            class="arc_middle1"
+            style="padding-left: 20px"><span id="nr072"/><span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>
+            <ul>
+              <li><img
+                src="../../static/line/images/02sj.png"
+                alt=""><span>发布日期：2019-01-18 13:25:20 </span></li>
+              <li style="padding-left: 26px"><img
+                src="../../static/line/images/03sc.png"
+                alt=""><span>收藏量:5566</span></li>
+            </ul>
+          </div>
+          <!--<div class="arc_data">-->
+          <!--<ul>-->
+          <!--<li><img -->
+          <!--src="../../static/images/list_wlzx/hy_item6.png" -->
+          <!--alt=""><span>发布日期：2019-01-18 13:25:20 </span></li>-->
+          <!--</ul>-->
+          <!--</div>-->
+          <!--<div-->
+          <!--class="arc_middle1-21"-->
+          <!--style="padding-left: 20px"><span><img-->
+          <!--class="img1"-->
+          <!--src="../../static/images/list_wlzx/hy_item6.png"></span><span>发布日期：2019-01-18 13:25:20 </span><span><img-->
+          <!--class="img2"-->
+          <!--src="../../static/images/list_wlzx/sc_num.png"></span><span>收藏量：<i class="my_cz_num"/></span></div>-->
           <div class="arc_middle2">
             <div class="arc_middle2_1">
               <p class="p1"><i>重货价：</i><span id="nr0741"/><font
@@ -284,8 +322,9 @@
             <div
               id="js018"
               class="price_box1"
-              onmouseover="price_block1();"
-              onmouseout="price_none1();">
+            >
+              <!--onmouseover="price_block1();"-->
+              <!--onmouseout="price_none1();"-->
               <div class="price_box_bt">阶梯价（重货）</div>
               <div
                 class="price_box_item1"
@@ -296,8 +335,9 @@
             <div
               id="js019"
               class="price_box2"
-              onmouseover="price_block2();"
-              onmouseout="price_none2();">
+            >
+              <!--onmouseover="price_block2();"-->
+              <!--onmouseout="price_none2();"-->
               <div class="price_box_bt">阶梯价（轻货）</div>
               <div
                 class="price_box_item2"
@@ -918,7 +958,7 @@ export default {
       $axios.get(aurl + `/api/28-web/range/${query.id}`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/${query.publishId}`)
     ])
-    console.log(linedataA, 'res.data.data.linedataB', linedataB)
+    console.log(linedataA, 'res.data.data.linedataA')
     if (linedataA.data.status === 200) {
       lineCode = await getCode($axios, linedataA.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
@@ -1096,18 +1136,18 @@ export default {
                 })
                 // 更多城市
 
-                $('#zh_price').mouseover(function() {
-                  $('.price_box1').css('display', 'block')
-                })
-                $('#zh_price').mouseout(function() {
-                  $('.price_box1').css('display', 'none')
-                })
-                $('#qh_price').mouseover(function() {
-                  $('.price_box2').css('display', 'block')
-                })
-                $('#qh_price').mouseout(function() {
-                  $('.price_box2').css('display', 'none')
-                })
+                // $('#zh_price').mouseover(function() {
+                //   $('.price_box1').css('display', 'block')
+                // })
+                // $('#zh_price').mouseout(function() {
+                //   $('.price_box1').css('display', 'none')
+                // })
+                // $('#qh_price').mouseover(function() {
+                //   $('.price_box2').css('display', 'block')
+                // })
+                // $('#qh_price').mouseout(function() {
+                //   $('.price_box2').css('display', 'none')
+                // })
 
                 //  增值服务切换
                 $('#arc_bt1').click(function() {

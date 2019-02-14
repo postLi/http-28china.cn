@@ -739,6 +739,7 @@ export default {
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
+    console.log(listB, 'listA')
     //codeA过节后继续
     // console.log(codeB, 'codeA')
     if (

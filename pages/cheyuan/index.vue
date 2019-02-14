@@ -182,7 +182,8 @@
                 <font>{{ item.carTypeName }}</font>
                 <font>长<b>{{ item.carLength }}</b>米</font>
                 <font>载重<b>{{ item.carLoad }}</b>吨</font>
-              <font id="nr055"/></p>
+                <font>{{ item.carSourceTypeName }}</font>
+              </p>
               <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                 <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
               <font>{{ item.createrName?item.createrName:'' }}</font></p>
@@ -234,7 +235,7 @@
                 v-for="(item,index) in recommendBy28"
                 :key="index" 
                 class="hot-cities-li"><a
-                  :href="'/cheyuan/detail?id='+ item.companyId" 
+                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
@@ -245,38 +246,28 @@
       <!-- 最新车源start -->
       <div class="list_new">
         <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
-        <ul class="list_new_ul">
-          <li>
-            <div class="li_one">
-              <a>广东省广州市->北京市</a>
-              <span>2019-02-24 12:11:00</span>
-            </div>
-            <div class="li_two">
-              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
-              <span><a class="li_check">查看详情</a></span>
-            </div>
-          </li>
-          <li>
-            <div class="li_one">
-              <a>广东省广州市->北京市</a>
-              <span>2019-02-24 12:11:00</span>
-            </div>
-            <div class="li_two">
-              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
-              <span><a class="li_check">查看详情</a></span>
-            </div>
-          </li>
-          <li>
-            <div class="li_one">
-              <a>广东省广州市->北京市</a>
-              <span>2019-02-24 12:11:00</span>
-            </div>
-            <div class="li_two">
-              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
-              <span><a class="li_check">查看详情</a></span>
-            </div>
-          </li>
-        </ul>
+        <div class="list_new_box">
+          <ul 
+            class="list_new_ul">
+            <li
+              v-for="(item,index) in newestCar"
+              :key="index"
+              class="manage_box"
+            >
+              <div class="li_one">
+                <a :title="item.startProvince+item.startCity+'->'+item.endProvince+item.endCity">{{ item.startProvince }}{{ item.startCity }}->{{ item.endProvince }}{{ item.endCity }}</a>
+                <span>{{ item.createTime }}</span>
+              </div>
+              <div class="li_two">
+                <a><span>长{{ item.carLength }}米</span>|<span>载重{{ item.carLoad }}吨</span>|<span>{{ item.carSourceTypeName }}</span></a>
+                <span><a
+                  :href="'/cheyuan/detail?id=' + item.id"
+                  class="li_check">查看详情</a></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
       </div>
       <!-- 最新车源end -->
 
@@ -416,7 +407,7 @@
               v-for="(item,index) in hotRecommend" 
               :key="index" 
               class="hot-cities-li"><a
-                :href="'/cheyuan/detail?id='+ item.companyId"
+                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
         </div>
@@ -424,10 +415,10 @@
           <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
           <ul class="hot-cities">
             <li 
-              v-for="(item,index) in hotRecommend" 
+              v-for="(item,index) in startFromRecommend"
               :key="index"
               class="hot-cities-li" ><a
-                :href="'/cheyuan/detail?id='+ item.companyId"
+                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
         </div>
@@ -467,13 +458,8 @@ export default {
   },
   data() {
     return {
-      recommendList: [], //车源信息推荐列表
-      dataset: [],
-      carInfoList: [], //车源信息列表
       pages: 0,
       currentPage: 1,
-      AF032: [], //载重列表
-      AF031: [], //车厢长度列表
       longCarList: [
         { name: '不限', value: '' },
         { name: '即时车源', value: '1' },
@@ -484,13 +470,7 @@ export default {
         { name: '本地车', value: 'AF01802' },
         { name: '回程车', value: 'AF01801' }
       ],
-      AF018: [], //车辆类型列表
-      recommendBy28: {}, //28快运为您推荐
-      recommendBy28Label: '',
-      startFromRecommend: [], //广州市出发的车源
-      startFromRecommendLabel: '',
-      hotRecommend: [], //全国热门车源信息
-      hotRecommendLabel: ''
+      inTerVar: null
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -537,42 +517,76 @@ export default {
     let recommendList = await getRecommendList($axios, vo)
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
+    let newestCarRes = await $axios.get('/28-web/carInfo/newestCar') //最新车源推荐列表
     return {
-      AF018: AF018.data.status === 200 ? AF018.data.data : [],
-      AF031: AF031.data.status === 200 ? AF031.data.data : [],
-      AF032: AF032.data.status === 200 ? AF032.data.data : [],
+      AF018: AF018.data.status === 200 ? AF018.data.data : [], //车辆类型列表
+      AF031: AF031.data.status === 200 ? AF031.data.data : [], //车厢长度列表
+      AF032: AF032.data.status === 200 ? AF032.data.data : [], //载重列表
       recommendList:
-        recommendList.data.status === 200 ? recommendList.data.data : [],
+        recommendList.data.status === 200 ? recommendList.data.data : [], //车源信息推荐列表
       recommendBy28:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.links
-          : {},
+          : [], //28快运为您推荐
       recommendBy28Label:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.label
-          : {},
+          : '',
       startFromRecommend:
         recommend.data.status === 200
           ? recommend.data.data.startFromRecommend.links
-          : {},
+          : [], //广州市出发的车源
       startFromRecommendLabel:
         recommend.data.status === 200
           ? recommend.data.data.startFromRecommend.label
-          : {},
+          : '',
       hotRecommend:
         recommend.data.status === 200
           ? recommend.data.data.hotRecommend.links
-          : {},
+          : [], ////全国热门车源信息
       hotRecommendLabel:
         recommend.data.status === 200
           ? recommend.data.data.hotRecommend.label
-          : {},
+          : '',
       carInfoList: carInfoList.list,
       pages: carInfoList.pages,
-      vo: vo
+      vo: vo,
+      newestCar: newestCarRes.data.status === 200 ? newestCarRes.data.data : []
     }
   },
   mounted() {
+    let rollContainer_h = $('.list_new_box').height()
+    let roll = $('.list_new_ul')
+    roll.append(roll.html())
+    let number = 4
+    let l = this.newestCar.length
+    let manage_box_h = $('.manage_box').height()
+    let startScroll = () => {
+      this.inTerVar = setInterval(() => {
+        roll
+          .stop()
+          .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
+            if (number > l) {
+              number = 4
+              roll.css('top', '0px')
+            }
+          })
+        number = number + 4
+      }, 6000)
+    }
+    if (manage_box_h * l > rollContainer_h) {
+      startScroll()
+    }
+    $('.list_new_box').hover(
+      () => {
+        clearInterval(this.inTerVar)
+        this.inTerVar = null
+      },
+      () => {
+        startScroll()
+      }
+    )
+
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
@@ -615,6 +629,10 @@ export default {
       district: this.vo.endArea
     })
     this.pagination()
+  },
+  destroyed() {
+    clearInterval(this.inTerVar)
+    this.inTerVar = null
   },
   methods: {
     searchDo() {
@@ -1595,24 +1613,30 @@ body {
 .che_box {
   float: left;
 }
-
+.list_new_box {
+  height: 240px;
+  overflow: hidden;
+  margin-top: 20px;
+}
 .list_new {
   float: left;
   margin-left: 20px;
   margin-bottom: 20px;
+  background-color: white;
 }
 .list_new .list_new_ul {
+  position: relative;
   width: 342px;
   background: #fff;
-  padding: 20px;
+  padding: 0 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
 .list_new .list_new_ul li {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  /*flex: 1;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
 }
 .li_one {
   display: flex;
@@ -1632,6 +1656,9 @@ body {
   flex: 1;
   cursor: pointer;
   color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .li_one span {
   flex: 1;

@@ -118,7 +118,14 @@
               href="#">收藏夹</a>
           </div>
         </div>
-        <div class="arc_middle1"><span>{{ cy1.strartAddress + '&nbsp;&rarr;&nbsp;' + cy1.endAddress }}</span><span>用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</span></div>
+        <div class="arc_middle1"><span>{{ cy1.strartAddress + '&nbsp;&rarr;&nbsp;' + cy1.endAddress }}</span>
+          <div class="release_box">
+            <div>用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
+            <div>用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
+            <div>用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
+          </div>
+
+        </div>
         <div class="arc_middle1-2"><span><img 
           class="img1" 
           src="../../static/images/list_wlzx/hy_item6.png"></span><span>发布日期：2019-01-18 13:25:20 </span><span><img
@@ -158,7 +165,9 @@
               <a href="">快速下单</a>
               <span style="margin-left: 47px">
                 <img src="../../static/images/list_wlzx/hy_item6.png">
-                <span class="arc_middle5-right">换一个</span>
+                <span 
+                  class="arc_middle5-right" 
+                  @click="findAnother()">换一个</span>
               </span>
             </div>
           </div>
@@ -281,18 +290,20 @@
         <div>
           <div class="zx_sx">
             <span class="biaozhi"/><span>更多从{{ cy1.startCity }}出发的货源</span>
-            <i>更多></i>
+            <i 
+              style="cursor: pointer" 
+              @click="goToCy()">更多></i>
           </div>
           <div class="arc_main4-content">
             <div
-              v-if="carInfoList.length === 0"
+              v-if="carInfoStartList.length === 0"
               class="list_none"
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
               <img src="../../static/images/none_pic.png">
             </div>
             <ul
-              v-for="(item,index) in carInfoList"
+              v-for="(item,index) in carInfoStartList"
               :key="index"
               class="wlzx_list">
               <li id="cy_list_0">
@@ -323,7 +334,8 @@
                   <font>{{ item.carTypeName }}</font>
                   <font>长<b>{{ item.carLength }}</b>米</font>
                   <font>载重<b>{{ item.carLoad }}</b>吨</font>
-                <font id="nr055"/></p>
+                  <font>{{ item.carSourceTypeName }}</font>
+                </p>
                 <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                   <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
                 <font>{{ item.createrName?item.createrName:'' }}</font></p>
@@ -361,19 +373,21 @@
 
         <div>
           <div class="zx_sx">
-            <span class="biaozhi"/><span>更多从{{ cy1.startCity }}出发的货源</span>
-            <i>更多></i>
+            <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的货源</span>
+            <i 
+              style="cursor: pointer" 
+              @click="goToCy1()">更多></i>
           </div>
           <div class="arc_main4-content">
             <div
-              v-if="carInfoList.length === 0"
+              v-if="carInfoEndList.length === 0"
               class="list_none"
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
               <img src="../../static/images/none_pic.png">
             </div>
             <ul
-              v-for="(item,index) in carInfoList"
+              v-for="(item,index) in carInfoEndList"
               :key="index"
               class="wlzx_list">
               <li id="cy_list_0">
@@ -404,7 +418,8 @@
                   <font>{{ item.carTypeName }}</font>
                   <font>长<b>{{ item.carLength }}</b>米</font>
                   <font>载重<b>{{ item.carLoad }}</b>吨</font>
-                <font id="nr055"/></p>
+                  <font>{{ item.carSourceTypeName }}</font>
+                </p>
                 <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                   <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
                 <font>{{ item.createrName?item.createrName:'' }}</font></p>
@@ -436,7 +451,7 @@
 
         <div style="clear: both">
           <div class="zx_sx1">
-            <span class="biaozhi1"/><span>更多从{{ cy1.startCity }}出发的品牌货源</span>
+            <span class="biaozhi1"/><span>您可能对这些感兴趣</span>
           </div>
           <ul class="hot-cities">
             <li class="hot-cities-li">
@@ -464,56 +479,19 @@
           <div class="zx_sx">
             <span class="biaozhi"/><span>28快运平台功能导航源</span>
           </div>
-          <a 
-            class="gldh_list" 
-            href="#">
-            <div class="img"><img src="../../static/images/index/wlgs_tj_00.png"></div>
+          <a
+            v-for="(item,index) in gldhList"
+            :key="index"
+            :href="item.url"
+            class="gldh_list"
+            target="_blank"
+          >
+            <div class="img"><img :src="item.img"></div>
             <div>
-              <p>注册28快运会员</p>
-              <p>免费发布车源货源专线信息，轻松一键搞定</p>
+              <p>{{ item.title }}</p>
+              <p>{{ item.subTitle }}</p>
             </div>
           </a>
-
-          <a 
-            class="gldh_list" 
-            href="#">
-            <div class="img"><img src="../../static/images/index/wlgs_tj_00.png"></div>
-            <div>
-              <p>快速下单</p>
-              <p>下单立即响应，甄选优质运力，发货有保障</p>
-            </div>
-          </a>
-
-          <a 
-            class="gldh_list" 
-            href="#">
-            <div class="img"><img src="../../static/images/index/wlgs_tj_00.png"></div>
-            <div>
-              <p>发布车源</p>
-              <p>让客户主动找我，让平台为我撮合</p>
-            </div>
-          </a>
-
-          <a 
-            class="gldh_list" 
-            href="#">
-            <div class="img"><img src="../../static/images/index/wlgs_tj_00.png"></div>
-            <div>
-              <p>发布货源</p>
-              <p>精准匹配合适物流，方便快捷省钱</p>
-            </div>
-          </a>
-
-          <a 
-            class="gldh_list" 
-            href="#">
-            <div class="img"><img src="../../static/images/index/wlgs_tj_00.png"></div>
-            <div>
-              <p>发布专线</p>
-              <p>平台智能推荐货源，实施提醒撮合交易</p>
-            </div>
-          </a>
-
         </div>
 
         <div class="arc_main4-content">
@@ -529,19 +507,12 @@
           </div>
           <div style="padding: 10px">
             <a
-              class="rmsx_list"
-              href="#">
-              广州到杭州货源
-            </a>
-            <a
-              class="rmsx_list"
-              href="#">
-              广东广州到山西太原的货源
-            </a>
-            <a
-              class="rmsx_list"
-              href="#">
-              找上海货源
+              v-for="(item,index) in hotSearchList" 
+              :key="index"
+              :href="item.url"
+              class="rmsx_list" 
+              target="_blank">
+              {{ item.name }}
             </a>
           </div>
         </div>
@@ -613,7 +584,7 @@
 
     <div class="arc_main4">
       <div class="zx_sx1">
-        <span class="biaozhi1"/><span>您可能对这些感兴趣</span>
+        <span class="biaozhi1"/><span>为您推荐车源</span>
       </div>
       <ul class="hot-cities">
         <li class="hot-cities-li">
@@ -679,11 +650,95 @@ export default {
       otherCarInfoList: [],
       showImg: 0,
       pages: 0,
-      currentPage: 1
+      currentPage: 1,
+      gldhList: [
+        {
+          title: '注册28快运会员',
+          subTitle: '免费发布车源货源专线信息，轻松一键搞定',
+          url: '/regisiter',
+          img: '/_nuxt/static/images/index/wlgs_tj_00.png'
+        },
+        {
+          title: '快速下单',
+          subTitle: '下单立即响应，甄选优质运力，发货有保障',
+          url: '/',
+          img: '/_nuxt/static/images/index/wlgs_tj_00.png'
+        },
+        {
+          title: '发布车源',
+          subTitle: '让客户主动找我，让平台为我撮合',
+          url: '/create/cheyuan',
+          img: '/_nuxt/static/images/index/wlgs_tj_00.png'
+        },
+        {
+          title: '发布货源',
+          subTitle: '精准匹配合适物流，方便快捷省钱',
+          url: '/create/huoyuan',
+          img: '/_nuxt/static/images/index/wlgs_tj_00.png'
+        },
+        {
+          title: '发布专线',
+          subTitle: '平台智能推荐货源，实施提醒撮合交易',
+          url: '/create/line',
+          img: '/_nuxt/static/images/index/wlgs_tj_00.png'
+        }
+      ],
+      hotSearchList: [
+        {
+          name: '广州到杭州货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=杭州市&endProvince=浙江省&startArea=&startCity=广州市&startProvince=广东省'
+        },
+        {
+          name: '山西到甘肃的货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=甘肃省&startArea=&startCity=&startProvince=山西省'
+        },
+        {
+          name: '广东广州到山西太原的货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=太原市&endProvince=山西省&startArea=&startCity=广州市&startProvince=广东省'
+        },
+        {
+          name: '找上海货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=上海市&startProvince=上海市'
+        },
+        {
+          name: '沈阳到广州的货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=广州市&endProvince=广东省&startArea=&startCity=沈阳市&startProvince=辽宁省'
+        },
+        {
+          name: '苏州货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=苏州市&startProvince=江苏省'
+        },
+        {
+          name: '上海到江西的运力',
+          url:
+            '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=江西省&isLongCar=&startArea=&startCity=&startProvince=上海市'
+        },
+        {
+          name: '广州出发的专线',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=广州市&startProvince=广东省'
+        },
+        {
+          name: '广州物流公司',
+          url:
+            '/gongsi/?tid=80&startp=广东省&startc=广州市&starta=&address=广东省广州市&companyName='
+        },
+        {
+          name: '上海地区运力',
+          url:
+            '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=上海市&startProvince=上海市'
+        }
+      ]
     }
   },
   async asyncData({ $axios, app, query }) {
-    let zxList, otherCarSourceList
+    let zxList, otherCarSourceList, carInfoRes, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     if (cy1.data.status === 200) {
       cy1.data.data.num = Math.ceil(Math.random() * 30)
@@ -693,6 +748,20 @@ export default {
       )
       let code = await getCode($axios, cy1.data.data.endProvince)
       zxList = await getCity($axios, code, cy1.data.data.startCity)
+      let parm = {
+        currentPage: 1,
+        pageSize: 10,
+        startProvince: cy1.data.data.startProvince,
+        startCity: cy1.data.data.startCity
+      }
+      carInfoRes = await $axios.post('/28-web/carInfo/list', parm)
+      let parm1 = {
+        currentPage: 1,
+        pageSize: 10,
+        startProvince: cy1.data.data.endProvince,
+        startCity: cy1.data.data.endCity
+      }
+      carInfoRes1 = await $axios.post('/28-web/carInfo/list', parm1)
       //此路线其他车源
       // otherCarSourceList = await $axios.get(
       //   '/28-web/carInfo/getOtherCarSourceList/' + query.id
@@ -710,6 +779,10 @@ export default {
     // let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
     //   id: query.id
     // })
+    //车主月人气榜列表
+    let carPopularityRes = await $axios.get('/28-web/carInfo/carPopularityList')
+    console.log(carPopularityRes.data)
+
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
@@ -717,7 +790,12 @@ export default {
         otherCarSourceList && otherCarSourceList.data.status === 200
           ? otherCarSourceList.data.data
           : [],
-      carInfoList: []
+      carInfoStartList:
+        carInfoRes.data.status === 200 ? carInfoRes.data.data.list : [],
+      carInfoEndList:
+        carInfoRes1.data.status === 200 ? carInfoRes1.data.data.list : [],
+      carPopularityList:
+        carPopularityRes.data.status === 200 ? carPopularityRes.data.data : []
       // otherCarInfoList: otherCarInfoList.list,
       // pages: otherCarInfoList.pages
     }
@@ -731,19 +809,6 @@ export default {
       })
     })
     let myChart = echarts.init(document.getElementById('echart'))
-    // let _zr = myChart.getZr()
-    // _zr.add(
-    //   new echarts.graphic.Text({
-    //     style: {
-    //       x: _zr.getWidth() / 2,
-    //       // y: _zr.getHeight() / 2,
-    //       color: '#666',
-    //       text: '集团重大风险',
-    //       textAlign: 'center',
-    //       textFont: '16px verdana'
-    //     }
-    //   })
-    // )
     let option = {
       title: { text: '', subtext: '' },
       tooltip: { trigger: 'axis' },
@@ -825,7 +890,6 @@ export default {
               show: true,
               position: 'end',
               formatter: function(params) {
-                console.log(params)
                 if (params.dataIndex === 1) {
                   return `{style|建议价格区间}`
                 }
@@ -870,6 +934,27 @@ export default {
     })
   },
   methods: {
+    findAnother() {
+      let parm = {
+        strartAddress: this.cy1.strartAddress,
+        endAddress: this.cy1.endAddress
+      }
+      this.$axios.post('/28-web/carInfo/findAnother', parm).then(res => {
+        if (res.data.status === 200) {
+          window.location.href = `/cheyuan/detail?id=${res.data.data.id}`
+        }
+      })
+    },
+    goToCy() {
+      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
+        this.cy1.startCity
+      }&startProvince=${this.cy1.startProvince}`
+    },
+    goToCy1() {
+      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
+        this.cy1.endCity
+      }&startProvince=${this.cy1.endProvince}`
+    },
     clickImg(int) {
       this.showImg = int
     }

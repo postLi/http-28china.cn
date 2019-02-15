@@ -160,7 +160,7 @@
               <div style="margin-top: 15px">
                 <a href="">快速下单</a>
                 <span style="margin-left: 47px">
-                  <img src="/images/list_wlzx/hy_item6.png">
+                  <img src="/images/cy/14fresh.png">
                   <span
                     class="arc_middle5-right"
                     @click="findAnother()">换一个</span>
@@ -243,7 +243,7 @@
               <img src="/images/cy/02gold.png">
               <div class="content-right-row"><img
                 class="img"
-                src="/images/list_wlzx/sc_num.png">活跃度：<i>30</i></div>
+                src="/images/cy/13hot.png">活跃度：<i>30</i></div>
               <div class="content-right-row">最近三个月发布货源 <i>15</i> 次</div>
               <div class="content-right-row">共成交 <i>146</i> 笔订单，收到好评 <i>28</i> 次</div>
               <div class="content-right-row">大家对他的印象:</div>
@@ -270,8 +270,9 @@
                 class="content-right-row"
                 style="clear: both">
                 <a
-                  href="javascript:;"
-                  class="button1">标准价</a>
+                  href="javascript:;" 
+                  class="button1"
+                  @click="showPrice()">标准价</a>
                 <a
                   href="javascript:;"
                   class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质车源</a>
@@ -634,6 +635,7 @@ export default {
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
     script: [
+      { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
       { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
@@ -892,7 +894,7 @@ export default {
             {
               value: 5,
               symbol: 'image:///images/cy/12d.png',
-              symbolSize: 15
+              symbolSize: 20
             }
           ],
           markPoint: {
@@ -941,7 +943,8 @@ export default {
               color: '#6F6F6F'
             }
           },
-          symbolSize: 4,
+          symbolSize: 6,
+          hoverAnimation: false, //拐点不要动画
           symbol: 'circle',
           label: {
             show: true,
@@ -990,7 +993,8 @@ export default {
           type: 'line',
           markLine: {
             name: 'xfdsvffds',
-            symbol: 'none',
+            symbol: ['circle', 'none'],
+            symbolSize: 6,
             lineStyle: {
               normal: { color: 'rgba(255,173,101, 1)' }
             },
@@ -1042,6 +1046,224 @@ export default {
     })
   },
   methods: {
+    showPrice() {
+      layer.open({
+        type: 1,
+        title: ' ',
+        area: ['580px', '540px'],
+        closeBtn: 1,
+        shadeClose: true,
+        success: (layero, index) => {
+          let seconds = 5
+          let stop = setInterval(() => {
+            $('#seconds').html(seconds + 'S')
+            seconds--
+            if (seconds < 0) {
+              clearInterval(stop)
+              $('.show1').hide()
+              $('.show2').show()
+              let myChart2 = echarts.init(document.getElementById('echart2'))
+              let option2 = {
+                title: { text: '', subtext: '' },
+                tooltip: { trigger: 'axis' },
+                xAxis: {
+                  show: false,
+                  type: 'category',
+                  boundaryGap: false,
+                  data: [
+                    '大品牌报价',
+                    '优质专线报价',
+                    '行业均价（高点）',
+                    '行业均价（低点）',
+                    '本供应商价'
+                  ]
+                },
+                yAxis: {
+                  axisLine: { show: false },
+                  axisTick: { show: false },
+                  axisLabel: { show: false },
+                  type: 'value',
+                  max: 15
+                },
+                series: [
+                  {
+                    name: '',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 0.5)' }
+                    },
+                    data: [
+                      11,
+                      10,
+                      8,
+                      6,
+                      {
+                        value: 5,
+                        symbol: 'image:///images/cy/12d.png',
+                        symbolSize: 20
+                      }
+                    ],
+                    markPoint: {
+                      symbol: 'image:///images/cy/11wk.png',
+                      symbolOffset: [0, '-70%'],
+                      symbolSize: [82, 62],
+                      itemStyle: {
+                        color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+                      },
+                      label: {
+                        position: 'insideTop',
+                        formatter: function(params) {
+                          console.log(params)
+                          return `{color1|${params.name}}\n{color0|${
+                            params.value
+                          }万}`
+                        },
+                        rich: {
+                          color0: {
+                            fontSize: 14,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#FF7836',
+                            padding: [0, 0, 6, 0]
+                          },
+                          color1: {
+                            fontSize: 12,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#6F6F6F',
+                            padding: [0, 0, 6, 0]
+                          }
+                        }
+                      },
+                      data: [
+                        {
+                          name: '',
+                          type: 'min'
+                        }
+                      ]
+                    },
+                    itemStyle: {
+                      normal: {
+                        color: '#6F6F6F',
+                        opacity: 1
+                      },
+                      emphasis: {
+                        color: '#6F6F6F'
+                      }
+                    },
+                    symbolSize: 6,
+                    hoverAnimation: false,
+                    symbol: 'circle',
+                    label: {
+                      show: true,
+                      position: 'bottom',
+                      textStyle: { color: '#6F6F6F' },
+                      formatter: function(params) {
+                        let c0
+                        if (params.dataIndex <= 1) {
+                          c0 = 'color1'
+                        } else {
+                          c0 = 'color0'
+                        }
+                        if (params.dataIndex === 4) {
+                          return ``
+                        } else {
+                          return `{${c0}|${params.value}万}\n{color2|${
+                            params.name
+                          }}`
+                        }
+                      },
+                      rich: {
+                        color0: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#FF7836'
+                        },
+                        color1: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#6F6F6F'
+                        },
+                        color2: {
+                          color: '#413A43',
+                          align: 'center',
+                          fontSize: 14,
+                          padding: [5, 5, 5, 5]
+                        }
+                      }
+                    },
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 1)' }
+                    },
+                    areaStyle: {
+                      normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
+                    },
+                    data: [null, null, 8, 6],
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '平行于y轴的趋势线',
+                    type: 'line',
+                    markLine: {
+                      name: 'xfdsvffds',
+                      symbol: ['circle', 'none'],
+                      symbolSize: 6,
+                      lineStyle: {
+                        normal: { color: 'rgba(255,173,101, 1)' }
+                      },
+                      label: {
+                        show: true,
+                        position: 'end',
+                        formatter: function(params) {
+                          if (params.dataIndex === 1) {
+                            return `{style|建议价格区间}`
+                          }
+                        },
+                        rich: {
+                          style: {
+                            fontSize: 15,
+                            padding: [0, 110, 0, 0],
+                            color: '#FF7836'
+                          }
+                        }
+                      },
+                      data: [
+                        [
+                          { coord: ['行业均价（高点）', 8] },
+                          { coord: ['行业均价（高点）', 15] }
+                        ],
+                        [
+                          { coord: ['行业均价（低点）', 6] },
+                          { coord: ['行业均价（低点）', 15] }
+                        ]
+                      ]
+                    }
+                  }
+                ]
+              }
+              myChart2.setOption(option2)
+            }
+          }, 1000)
+        },
+        content:
+          '<div class="show1"><div class="myLayer_title">稍等。。。</div><div class="myLayer_content">28平台智能运输大数据中心正在为您核算从<span>' +
+          this.cy1.startCity +
+          '</span>至<span>' +
+          this.cy1.endCity +
+          '</span>全网优质车源的最新报价</div><div class="myLayer_footer"><span id="seconds">5S</span></div></div>' +
+          '<div class="show2">' +
+          '<div class="myLayer_title2"><span></span> <span>价格参考</span><span>大数据智能模型精准定价，28智能平台指导定价</span></div>' +
+          '<div class="myLayer_content2">广州→深圳17.5米整车</div>' +
+          '<div id="echart2"></div>' +
+          '<div class="myLayer_content2">车主李先平的报价<span>低于</span><i>92.6%的车主</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          '</div>'
+      })
+    },
     findAnother() {
       let parm = {
         strartAddress: this.cy1.strartAddress,

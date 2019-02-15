@@ -55,7 +55,7 @@
                 </div>
                 <img
                   class="fl list_img"
-                  src="../../static/images/02jiantou.png">
+                  src="/images/02jiantou.png">
                 <div
                   id="carLineTo"
                   class="fl list_input"
@@ -148,15 +148,15 @@
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
-            <img src="../../static/images/none_pic.png">
+            <img src="/images/none_pic.png">
           </div>
           <ul 
             v-for="(item,index) in carInfoList" 
             :key="index" 
             class="wlzx_list">
             <li id="cy_list_0">
-              <div class="sc_num"><img src="_nuxt/static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
-              <div class="view_num"><img src="_nuxt/static/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
+              <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+              <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
             </li>
             <li class="cy_list_4">
               <a
@@ -192,8 +192,8 @@
             <li class="cy_list_3">
               <p class="p1"><img
                 v-if="item.driverStatus === 'AF0010403'"
-                src="../../static/images/list_wlzx/10shiming.png"></P>
-                <!--<p class="p2"><img id="list_xinyong" src="../../static/images/list_wlzx/11xinyong.png"/></P>-->
+                src="/images/list_wlzx/10shiming.png"></P>
+                <!--<p class="p2"><img id="list_xinyong" src="/images/list_wlzx/11xinyong.png"/></P>-->
             </li>
             <li class="wlzx_list_6">
               <p class="p2"><a
@@ -344,7 +344,7 @@
         <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
         <div class="rc_list">
           <div class="left"><p>1</p></div>
-          <div class="img"><img src="../../static/images/index/wlgs_tj_00.png" ></div>
+          <div class="img"><img src="/images/index/wlgs_tj_00.png" ></div>
           <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
         </div>
         <div class="rc_list">
@@ -874,8 +874,7 @@ body {
   height: 28px;
   color: #f9f9f9;
   padding-left: 20px;
-  background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png) 10px
-    6px #3f94ee;
+  background: no-repeat url(/images/list_wlzx/wlgs_search.png) 10px 6px #3f94ee;
 }
 #flush {
   width: 70px;
@@ -912,8 +911,7 @@ body {
   background-color: #f1f1f1;
   border: solid 1px #e6e6e6;
   margin-bottom: 14px;
-  background: no-repeat url(../../static/images/list_wlzx/xiajt.png) #f1f1f1
-    363px 16px;
+  background: no-repeat url(/images/list_wlzx/xiajt.png) #f1f1f1 363px 16px;
   position: relative;
 }
 .list_tiaoj span {
@@ -1104,7 +1102,7 @@ body {
 }
 
 .wlzx_list_6 .p3 input {
-  background: no-repeat url(../../static/images/article_wlzx/15qq.gif) 12px 3px;
+  background: no-repeat url(/images/article_wlzx/15qq.gif) 12px 3px;
 
   padding-left: 15px;
   width: 87px;
@@ -1461,7 +1459,7 @@ body {
 .icon-btn-arrow-down-2 {
   margin-top: 5px;
   display: inline-block;
-  background: url(../../static/images/list_wlzx/xiajt.png);
+  background: url(/images/list_wlzx/xiajt.png);
   background-repeat: no-repeat;
   width: 12px;
   height: 7px;
@@ -1479,7 +1477,7 @@ body {
 .icon-btn-arrow-up-2 {
   margin-top: 5px;
   display: inline-block;
-  background: url(../../static/images/list_wlzx/up_jt.png);
+  background: url(/images/list_wlzx/up_jt.png);
   background-repeat: no-repeat;
   width: 12px;
   height: 7px;
@@ -1489,14 +1487,12 @@ body {
 
 #carLineFrom {
   width: 220px;
-  background: url(../../static/images/list_wlzx/start_addr.png) no-repeat 200px
-    8px #fff;
+  background: url(/images/list_wlzx/start_addr.png) no-repeat 200px 8px #fff;
   background-size: 16px 17px;
 }
 #carLineTo {
   width: 220px;
-  background: url(../../static/images/list_wlzx/end_addr.png) no-repeat 200px
-    8px #fff;
+  background: url(/images/list_wlzx/end_addr.png) no-repeat 200px 8px #fff;
   background-size: 16px 17px;
 }
 #cy_list_0 {
@@ -1548,7 +1544,7 @@ body {
 }
 
 .lines-sprite-icons {
-  background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
   color: #333;
@@ -1690,7 +1686,7 @@ body {
 .list-box-r-top {
   width: 100%;
   box-sizing: border-box;
-  background: url(../../static/images/list_wlzx/che_background.png) no-repeat;
+  background: url(/images/list_wlzx/che_background.png) no-repeat;
   /* background: #fff; */
   padding: 20px 20px;
   /* border: 1px solid #ececec; */
@@ -1723,7 +1719,7 @@ body {
   top: 8px;
 }
 .ss56-common-sprite1 {
-  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
 .ltl-ico-end {
@@ -1737,7 +1733,7 @@ body {
   top: 8px;
 }
 .ss56-common-sprite2 {
-  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
 .list_help_title {
@@ -1780,7 +1776,7 @@ body {
   float: right;
 }
 .lines-sprite-icons {
-  background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
   color: #333;

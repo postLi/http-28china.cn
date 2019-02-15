@@ -72,9 +72,9 @@
               <li><img
                 src="../../static/line/images/04ewm.png"
                 alt=""></li>
-              <li>
-                <p>下载<span>【28快运APP】</span>，您可查看更</p>
-                <p>多<span>广州</span>到<span>东莞</span>的货源，并可实时接</p>
+              <li @click="downFn">
+                <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
+                <p>多<span style="color: #2577e3">广州</span>到<span style="color: #2577e3">东莞</span>的货源，并可实时接</p>
                 <p>收28快运为您推荐的精品货源提醒!</p>
               </li>
             </ul>
@@ -275,10 +275,12 @@
             <ul>
               <li><img
                 src="../../static/line/images/02sj.png"
-                alt=""><span>发布日期：2019-01-18 13:25:20 </span></li>
+                alt=""
+                style="vertical-align: middle;"><span>发布日期：2019-01-18 13:25:20 </span></li>
               <li style="padding-left: 26px"><img
                 src="../../static/line/images/03sc.png"
-                alt=""><span>收藏量:5566</span></li>
+                alt=""
+                style="vertical-align: middle;"><span>收藏量:5566</span></li>
             </ul>
           </div>
           <!--<div class="arc_data">-->
@@ -349,6 +351,7 @@
             <div class="arc_m3"><i>运输时效：</i><span id="nr077"/></div>
             <div class="arc_m3"><i>发货频次：</i><span id="nr078"/></div>
             <div class="arc_m3"><i>最低一票价格：</i><span id="nr079"/></div>
+            <div class="arc_m31"><i style="color: #999">途径:</i> <span>广州天河，深圳罗湖</span></div>
           </div>
           <div class="arc_middle4">
             <div class="arc_m4_1">
@@ -365,34 +368,40 @@
           <div class="arc_middle5">
             <div class="arc_m5_1"><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span></div>
             <div class="arc_m5_2">
-              <div
-                id="order_price"
-                class="arc_m5_2_1"
-                onclick="$('.pj_price_box').show()"><a href="javascript:void(0)"><span>试算价格</span></a></div>
+              <!--<div-->
+              <!--id="order_price"-->
+              <!--class="arc_m5_2_1"-->
+              <!--onclick="$('.pj_price_box').show()"><a href="javascript:void(0)"><span>试算价格</span></a></div>-->
               <div
                 id="order_arc"
                 class="arc_m5_2_2"><a
                   id="nr_order"
                   target="_blank"
                   href="javascript:void(0)"><span>快速下单</span></a></div>
+              <div class="arc_m5_2_3">
+                <img
+                  src="../../static/line/images/05fresh.png"
+                  alt="">
+                <span>换一个</span>
+              </div>
             </div>
           </div>
-          <div class="arc_middle6">
-            <div class="arc_m6_1"><i>增值服务：</i></div>
-            <div class="arc_m6_2">
-              <div class="item_zzfw1"><img src="../../static/line/images/item_zzfw1.png"><span>送货上门</span></div>
-              <div class="item_zzfw2"><img src="../../static/line/images/item_zzfw2.png"><span>保价运输</span></div>
-              <div class="item_zzfw3"><img src="../../static/line/images/item_zzfw3.png"><span>运费到付</span></div>
-              <div class="item_zzfw4"><img src="../../static/line/images/item_zzfw4.png"><span>代收货款</span></div>
-              <div class="item_zzfw5"><img src="../../static/line/images/item_zzfw5.png"><span>上门提货</span></div>
-              <div class="item_zzfw6"><img src="../../static/line/images/item_zzfw6.png"><span>开发票</span></div>
-              <div class="item_zzfw7"><img src="../../static/line/images/item_zzfw7.png"><span>签单回收</span></div>
-              <div class="item_zzfw8"><img src="../../static/line/images/item_zzfw8.png"><span>时效保障</span></div>
+          <!--<div class="arc_middle6">-->
+          <!--<div class="arc_m6_1"><i>增值服务：</i></div>-->
+          <!--<div class="arc_m6_2">-->
+          <!--<div class="item_zzfw1"><img src="../../static/line/images/item_zzfw1.png"><span>送货上门</span></div>-->
+          <!--<div class="item_zzfw2"><img src="../../static/line/images/item_zzfw2.png"><span>保价运输</span></div>-->
+          <!--<div class="item_zzfw3"><img src="../../static/line/images/item_zzfw3.png"><span>运费到付</span></div>-->
+          <!--<div class="item_zzfw4"><img src="../../static/line/images/item_zzfw4.png"><span>代收货款</span></div>-->
+          <!--<div class="item_zzfw5"><img src="../../static/line/images/item_zzfw5.png"><span>上门提货</span></div>-->
+          <!--<div class="item_zzfw6"><img src="../../static/line/images/item_zzfw6.png"><span>开发票</span></div>-->
+          <!--<div class="item_zzfw7"><img src="../../static/line/images/item_zzfw7.png"><span>签单回收</span></div>-->
+          <!--<div class="item_zzfw8"><img src="../../static/line/images/item_zzfw8.png"><span>时效保障</span></div>-->
 
-              <!--<img src="/templets/default/images/article_wlzx/18zengzhifw.png"/>-->
+          <!--&lt;!&ndash;<img src="/templets/default/images/article_wlzx/18zengzhifw.png"/>&ndash;&gt;-->
 
-            </div>
-          </div>
+          <!--</div>-->
+          <!--</div>-->
         </div>
         <div class="arc_right">
           <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
@@ -455,7 +464,7 @@
               target="_blank"><input
                 id="qq"
                 value="QQ交谈"></a></span>
-                <!--<span><i>地址：</i><font id="nr10232"/></span>-->
+            <span><i>地址：</i><font id="nr10232">{{ linedataB.address.length > 20 ? linedataB.address.substring(0,20)+'..':linedataB.address }}</font></span>
           </p>
           <p class="arc_right05">
             <a
@@ -489,7 +498,7 @@
 
       </div>
       <div class="arc_main1-1">
-        想要更多<span>广州</span>到<span>深圳</span>的车源信息，您可以<i>发布货源</i>，让车主主动来联系您，达成交易
+        想要更多<span>广州</span>到<span>深圳</span>的车源信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -501,60 +510,97 @@
         </div>
         <div class="right">
           <div class="zx_sx">
-            <span class="biaozhi"/><span>车主综合力评估</span>
+            <span class="biaozhi"/><span>服务亮点</span>
           </div>
           <div class="content">
-            <div class="content-left">
-              <div class="img">
-                <img
-                  src="../../static/images/28fast_download.png"
-                  width="82"
-                  height="82">
-              </div>
-              <div class="name">企业货主名</div>
-              <div class="name">
-                <img src="../../static/images/article_wlzx/10shiming.png">
-              </div>
-            </div>
+
             <div class="content-right">
-              <div class="content-right-row"><img
-                class="img"
-                src="../../static/images/list_wlzx/sc_num.png">活跃度：<i>30</i></div>
-              <div class="content-right-row">最近三个月发布货源 <i>15</i> 次</div>
-              <div class="content-right-row">共成交 <i>146</i> 笔订单，收到好评 <i>28</i> 次</div>
-              <div class="content-right-row">大家对他的印象:</div>
-              <div class="content-right-row">
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>最想合作的伙伴（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-                <span>付款及时（15）</span>
-              </div>
-              <div
-                class="content-right-row"
-                style="clear: both"
-              >大家对他的印象:</div>
-              <div class="content-right-row">
-                <em>广州<img src="../../static/images/yd_zx.png">武汉</em>
-                <em>广州<img src="../../static/images/yd_zx.png">武汉</em>
-                <em>广州<img src="../../static/images/yd_zx.png">武汉</em>
-              </div>
               <div
                 class="content-right-row"
                 style="clear: both">
-                <a
-                  href="javascript:;"
-                  class="button1">标准价</a>
-                <a
-                  href="javascript:;"
-                  class="button2"><img src="../../static/images/yd_zx.png">帮我选择优质车源</a>
+                <ul>
+                  <li>
+                    <div class="content-right-row-left"><span>送货上门</span><span>保价运输</span><span>运费到付</span><span>运费到付</span>
+                    <span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>
+                    <div class="content-right-row-right"> <p style="padding-top: 10px">全部</p>
+                    <p>（15）</p></div>
+                  </li>
+                  <li>
+                    <p><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
+                    <p><span>证件已认证</span>承运商的运输货物安全保证金已交纳5000元！</p>
+                    <p><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
+                  </li>
+                </ul>
+
+                <div style="padding-left: 65px;display: inline-block">
+                  <a
+                    href="javascript:;"
+                    class="button1">标准价</a>
+                  <a
+                    onclick="$('.pj_price_box').show()"
+                    href="javascript:;"
+                    class="button1">精准报价</a>
+                  <a
+                    href="javascript:;"
+                    class="button2"><img
+                      src="../../static/line/images/06fm.gif"
+                      style="vertical-align: middle;padding-right: 15px">帮我选择优质专线</a>
+                </div>
               </div>
             </div>
           </div>
 
+        </div>
+      </div>
+      <div
+        class="arc_main4"
+        style="clear: both">
+        <div class="arc_main4_top">
+          <img
+            src="../../static/line/images/07hege.png"
+            alt="">
+          <ul class="top_tit">
+            <li>此专线物流公司诚信值超过<span style="color: #f88700;border-bottom: 1px solid #f88700">92.3%</span>的同行</li>
+            <li>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</li>
+          </ul>
+          <!--<div class="top_tit"><p>此专线物流公司诚信值超过<span style="color: #f88700;">92.3%</span>的同行</p>-->
+          <!--<p>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</p></div>-->
+          <img
+            src="../../static/line/images/08gold.png"
+            alt="">
+        </div>
+        <div class="arc_main4_bot">
+          <div class="bot_left">
+            <div class="bot_left_per">
+              <img
+                src="../../static/line/images/09sj.png"
+                alt="">
+              <p>江苏大本赢物流有限公司</p>
+            </div>
+            <div class="bot_left_pj">
+              <ul>
+                <li>
+                  <p>92%</p>
+                  <p><span class="unActive"/>好评</p>
+                </li>
+                <li>
+                  <p>92%</p>
+                  <p><span class="unActive active"/>好评</p>
+                </li>
+                <li>
+                  <p>92%</p>
+                  <p><span class="unActive active"/>好评</p>
+                </li>
+              </ul>
+            </div>
+            <div class="bot_left_ts">
+              <img 
+                src="../../static/line/images/12xx.png" 
+                alt="">
+              <span>公司未收到重大服务投诉</span>
+            </div>
+          </div>
+          <div class="bot_right">432</div>
         </div>
       </div>
       <div class="arc_main2">
@@ -927,7 +973,8 @@ export default {
       { rel: 'stylesheet', href: '/line/css/article_wlzx.css' },
       { rel: 'stylesheet', href: '/line/css/price.css' },
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/WTMap.css' }
+      { rel: 'stylesheet', href: '/css/WTMap.css' },
+      { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
     ],
     script: [
       { src: '../js/jquery.pagination.min.js' },
@@ -1116,75 +1163,77 @@ export default {
       ]
     }
     myChart.setOption(option)
-    seajs.use(['../js/city.js', '../js/calculator.js'], function() {
-      seajs.use(['../js/city-picker.js'], function() {
-        seajs.use(['/line/js/arc_wlzx.js'], function() {
-          seajs.use(['../js/collection.js'], function() {
-            seajs.use(['../js/gaodemap2.js'], function() {
-              //  <!-- 阶梯价格浮层弹出效果 E-
+    seajs.use(['/layer/layer.js'], function() {
+      seajs.use(['../js/city.js', '../js/calculator.js'], function() {
+        seajs.use(['../js/city-picker.js'], function() {
+          seajs.use(['/line/js/arc_wlzx.js'], function() {
+            seajs.use(['../js/collection.js'], function() {
+              seajs.use(['../js/gaodemap2.js'], function() {
+                //  <!-- 阶梯价格浮层弹出效果 E-
 
-              function mousePrice() {
-                // 更多城市
-                $('.arc_top2_3').mouseover(function() {
-                  $('.city_box').css('display', 'block')
-                })
-                $('.city_box').mouseover(function() {
-                  $('.city_box').css('display', 'block')
-                })
-                $('.city_box').mouseover(function() {
-                  $('.city_box').css('display', 'none')
-                })
-                // 更多城市
+                function mousePrice() {
+                  // 更多城市
+                  $('.arc_top2_3').mouseover(function() {
+                    $('.city_box').css('display', 'block')
+                  })
+                  $('.city_box').mouseover(function() {
+                    $('.city_box').css('display', 'block')
+                  })
+                  $('.city_box').mouseover(function() {
+                    $('.city_box').css('display', 'none')
+                  })
+                  // 更多城市
 
-                // $('#zh_price').mouseover(function() {
-                //   $('.price_box1').css('display', 'block')
-                // })
-                // $('#zh_price').mouseout(function() {
-                //   $('.price_box1').css('display', 'none')
-                // })
-                // $('#qh_price').mouseover(function() {
-                //   $('.price_box2').css('display', 'block')
-                // })
-                // $('#qh_price').mouseout(function() {
-                //   $('.price_box2').css('display', 'none')
-                // })
+                  // $('#zh_price').mouseover(function() {
+                  //   $('.price_box1').css('display', 'block')
+                  // })
+                  // $('#zh_price').mouseout(function() {
+                  //   $('.price_box1').css('display', 'none')
+                  // })
+                  // $('#qh_price').mouseover(function() {
+                  //   $('.price_box2').css('display', 'block')
+                  // })
+                  // $('#qh_price').mouseout(function() {
+                  //   $('.price_box2').css('display', 'none')
+                  // })
 
-                //  增值服务切换
-                $('#arc_bt1').click(function() {
-                  //alert("1");
-                  $('.arc_span').removeClass('arc_active')
-                  $(this).addClass('arc_active')
-                  $('.arc_nr').addClass('arc_nr_none')
-                  $('#arc_nr1').removeClass('arc_nr_none')
-                })
-                $('#arc_bt2').click(function() {
-                  //alert("1_2");
-                  $('.arc_span').removeClass('arc_active')
-                  $(this).addClass('arc_active')
-                  $('.arc_nr').addClass('arc_nr_none')
-                  $('#arc_nr2').removeClass('arc_nr_none')
-                })
+                  //  增值服务切换
+                  $('#arc_bt1').click(function() {
+                    //alert("1");
+                    $('.arc_span').removeClass('arc_active')
+                    $(this).addClass('arc_active')
+                    $('.arc_nr').addClass('arc_nr_none')
+                    $('#arc_nr1').removeClass('arc_nr_none')
+                  })
+                  $('#arc_bt2').click(function() {
+                    //alert("1_2");
+                    $('.arc_span').removeClass('arc_active')
+                    $(this).addClass('arc_active')
+                    $('.arc_nr').addClass('arc_nr_none')
+                    $('#arc_nr2').removeClass('arc_nr_none')
+                  })
 
-                $('#arc_bt3').click(function() {
-                  //alert("2");
-                  $('.arc_span').removeClass('arc_active')
-                  $(this).addClass('arc_active')
-                  $('.arc_nr').addClass('arc_nr_none')
-                  $('#arc_nr3').removeClass('arc_nr_none')
-                })
+                  $('#arc_bt3').click(function() {
+                    //alert("2");
+                    $('.arc_span').removeClass('arc_active')
+                    $(this).addClass('arc_active')
+                    $('.arc_nr').addClass('arc_nr_none')
+                    $('#arc_nr3').removeClass('arc_nr_none')
+                  })
 
-                $('#arc_bt4').click(function() {
-                  //alert("3");
-                  $('.arc_span').removeClass('arc_active')
-                  $(this).addClass('arc_active')
-                  $('.arc_nr').addClass('arc_nr_none')
-                  $('#arc_nr4').removeClass('arc_nr_none')
-                })
-                //  增值服务切换
-              }
+                  $('#arc_bt4').click(function() {
+                    //alert("3");
+                    $('.arc_span').removeClass('arc_active')
+                    $(this).addClass('arc_active')
+                    $('.arc_nr').addClass('arc_nr_none')
+                    $('#arc_nr4').removeClass('arc_nr_none')
+                  })
+                  //  增值服务切换
+                }
 
-              mousePrice()
-              //  <!-- 阶梯价格浮层弹出效果 E-
+                mousePrice()
+                //  <!-- 阶梯价格浮层弹出效果 E-
+              })
             })
           })
         })
@@ -1207,6 +1256,9 @@ export default {
     },
     clickImg(int) {
       this.showImg = int
+    },
+    downFn() {
+      window.open('http://h5.28tms.com/')
     }
   }
 }
@@ -1214,6 +1266,7 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian-detail {
+  /*background: rgb(249, 249, 249);*/
   .clearfix:after {
     content: ' ';
     display: table;

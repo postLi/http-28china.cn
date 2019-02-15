@@ -5,7 +5,9 @@ body{background-color: #F9F9F9;}
 	width: 1400px;
 	margin: 0 auto;
 }
-.arc_top1{height: 32px;width: 1400px;background-color: #fff;margin-bottom: 12px;margin-top: 10px;}
+.arc_top1{height: 32px;width: 1400px;padding-bottom: 12px;
+  padding-top: 10px;
+  margin: 0 auto;}
 /*搜索*/
 .arc_top1_1 span,.arc_top1_1 i{font-size: 24px;
 	color: #333;}
@@ -68,6 +70,12 @@ body{background-color: #F9F9F9;}
   height: inherit;
   font-size: 14px;
   padding-top: 26px;
+  position: relative;
+}
+.arc_main3 .right .content .content-right > img {
+  position: absolute;
+  right: 32px;
+  top: -1px;
 }
 .arc_main3 .right .content .content-right-row{
   margin-bottom: 5px;
@@ -136,6 +144,11 @@ body{background-color: #F9F9F9;}
   color: #ffffff;
   display: inline-block;
   text-align: center;
+}
+.button2 img {
+  position: relative;
+  top: 5px;
+  right: 5px;
 }
 .arc_bottom{height:auto;width: 100%;margin-bottom: 30px;clear: both;}
 .arc_left{float:left;width: 336px;height: 100%;margin-right: 14px;}
@@ -818,7 +831,7 @@ padding-right: 12px;
 }
 
 .wlzx_list_6 .p3 input {
-  background: no-repeat url(../../static/images/article_wlzx/15qq.gif) 12px 3px;
+  background: no-repeat url(/images/article_wlzx/15qq.gif) 12px 3px;
 
   padding-left: 15px;
   width: 87px;
@@ -861,4 +874,13 @@ padding-right: 12px;
   float: right;
   height: 16px;
   overflow: hidden;
+}
+.release_scroll{
+  position: relative;
+}
+.manage_box i{
+  color: #2577e3;
+}
+.cy_top_banner {
+  background: no-repeat center url(/images/cy/01tltle.png);height: 150px
 }

@@ -37,7 +37,12 @@ export default {
   async asyncData({ $axios, app, query, params, route }) {
     let path = route.path
 
-    path = 'http://127.0.0.1:825/lines' + path.replace(/^\/zhuanxian/, '')
+    if (process.server) {
+      path = 'http://localhost:825/lines' + path.replace(/^\/zhuanxian/, '')
+    } else {
+      path = 'http://127.0.0.1:825/lines' + path.replace(/^\/zhuanxian/, '')
+    }
+
     // console.log('route.path4:', route.path, path)
 
     let con = await $axios.get(path)

@@ -1295,3 +1295,16 @@ $('#pj_submit').click(function () {
 })
 
 //提交评价 E
+
+$(function () {
+  $("#wlLineFrom input").citypicker({
+    // province: startp,
+    // city: startc,
+    // district: starta
+  });
+  $("#wlLineTo input").citypicker({
+    // province: endp,
+    // city: endc,
+    // district: enda
+  });
+})

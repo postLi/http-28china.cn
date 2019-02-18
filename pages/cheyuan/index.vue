@@ -358,7 +358,9 @@
         <div class="list-box-r-top">
           <form action="">
             <h2 class="list_help_title">帮我找优质运力</h2>
-            <div class="ltl-input0">
+            <div 
+              id="form0" 
+              class="ltl-input0">
               <input 
                 id="right-bar-form"
                 data-toggle="city-picker"
@@ -368,7 +370,9 @@
                 placeholder="请选择出发地">
               <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
             </div>
-            <div class="ltl-input0">
+            <div 
+              id="form1" 
+              class="ltl-input0">
               <input
                 autocomplete="off"
                 data-toggle="city-picker"
@@ -378,10 +382,12 @@
                 placeholder="请选择目到达地">
               <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
             </div>
-            <div class="ltl-input0">
+            <div 
+              id="form2" 
+              class="ltl-input0">
               <select 
-                v-model="selectValue"
-                :style="{'color':selectValue === '请选择类型'?'#aaaaaa':'#333333'}"
+                v-model="checkNotice.selectValue"
+                :style="{'color':checkNotice.selectValue === '请选择类型'?'#aaaaaa':'#333333'}"
                 class="ltl-select">
                 <option>请选择类型</option>
                 <option 
@@ -394,9 +400,12 @@
 
             <div class="ltl-input">
               <input 
-                type="text" 
-                class="ltl-phone" 
-                placeholder="11位手机号">
+                v-model="checkNotice.phone" 
+                :placeholder="phoneHolder" 
+                type="text"
+                class="ltl-phone"
+                maxlength="11"
+              >
               <span 
                 class="ltl-button" 
                 @click="sendNotice()">找到通知我</span>
@@ -479,7 +488,13 @@ export default {
         { name: '回程车', value: 'AF01801' }
       ],
       inTerVar: null,
-      selectValue: '请选择类型'
+      checkNotice: {
+        start: '',
+        end: '',
+        selectValue: '请选择类型',
+        phone: ''
+      },
+      phoneHolder: '请输入正确手机号'
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -649,7 +664,34 @@ export default {
   },
   methods: {
     sendNotice() {
-      console.log(this.selectValue)
+      if (this.checkNotice.start === '') {
+        $('#form0').css('border-color', 'red')
+      } else {
+        $('#form0').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.end === '') {
+        $('#form1').css('border-color', 'red')
+      } else {
+        $('#form1').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.selectValue === '请选择类型') {
+        $('#form2').css('border-color', 'red')
+      } else {
+        $('#form2').css('border-color', '#e5e5e5')
+      }
+      let re = /^1[3|4|5|7|8|9]\d{9}$/
+      if (this.checkNotice.phone === '') {
+        $('.ltl-phone').css('border-color', 'red')
+        this.phoneHolder = '请输入正确手机号'
+      } else {
+        if (re.test(this.checkNotice.phone)) {
+          $('.ltl-phone').css('border-color', '#e5e5e5')
+        } else {
+          $('.ltl-phone').css('border-color', 'red')
+          this.checkNotice.phone = ''
+          this.phoneHolder = '请输入正确手机号'
+        }
+      }
     },
     searchDo() {
       let list1 = [],
@@ -1724,6 +1766,8 @@ body {
   width: 100%;
   height: 100%;
   padding-left: 10px;
+  border: none;
+  outline: none;
 }
 .ltl-select option {
   color: #333333;

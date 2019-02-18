@@ -358,40 +358,48 @@
         <div class="list-box-r-top">
           <form action="">
             <h2 class="list_help_title">帮我找优质运力</h2>
-            <div class="ltl-input">
+            <div class="ltl-input0">
               <input 
-                id="right-bar-form" 
-                autocomplete="off" 
-                wtmap="" 
+                id="right-bar-form"
+                data-toggle="city-picker"
+                data-level="district"
                 type="text" 
                 class="ltl-location" 
                 placeholder="请选择出发地">
               <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
             </div>
-            <div class="ltl-input">
+            <div class="ltl-input0">
               <input
-                autocomplete="off" 
-                wtmap="" 
+                autocomplete="off"
+                data-toggle="city-picker"
+                data-level="district"
                 type="text" 
                 class="ltl-location" 
                 placeholder="请选择目到达地">
               <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
             </div>
-            <div class="ltl-input">
-              <input
-                autocomplete="off" 
-                wtmap="" 
-                type="text" 
-                class="ltl-location" 
-                placeholder="请选择类型">
+            <div class="ltl-input0">
+              <select 
+                v-model="selectValue"
+                :style="{'color':selectValue === '请选择类型'?'#aaaaaa':'#333333'}"
+                class="ltl-select">
+                <option>请选择类型</option>
+                <option 
+                  v-for="(item,index) in AF018Select"
+                  :value="item.code"
+                  :key="index">{{ item.name }}</option>
+              </select>
               <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
             </div>
+
             <div class="ltl-input">
               <input 
                 type="text" 
                 class="ltl-phone" 
                 placeholder="11位手机号">
-              <span class="ltl-button">找到通知我</span>
+              <span 
+                class="ltl-button" 
+                @click="sendNotice()">找到通知我</span>
             </div>
           </form>
         </div>
@@ -470,7 +478,8 @@ export default {
         { name: '本地车', value: 'AF01802' },
         { name: '回程车', value: 'AF01801' }
       ],
-      inTerVar: null
+      inTerVar: null,
+      selectValue: '请选择类型'
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -498,6 +507,9 @@ export default {
     let AF018 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
     )
+    let AF018Select = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
+    )
     if (AF018.data.status === 200) {
       AF018.data.data.unshift({ code: '', name: '不限' })
     }
@@ -520,6 +532,7 @@ export default {
     let newestCarRes = await $axios.get('/28-web/carInfo/newestCar') //最新车源推荐列表
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [], //车辆类型列表
+      AF018Select: AF018Select.data.status === 200 ? AF018Select.data.data : [], //优质运力 车辆类型列表
       AF031: AF031.data.status === 200 ? AF031.data.data : [], //车厢长度列表
       AF032: AF032.data.status === 200 ? AF032.data.data : [], //载重列表
       recommendList:
@@ -635,6 +648,9 @@ export default {
     this.inTerVar = null
   },
   methods: {
+    sendNotice() {
+      console.log(this.selectValue)
+    },
     searchDo() {
       let list1 = [],
         list2 = []
@@ -1691,6 +1707,26 @@ body {
   padding: 20px 20px;
   /* border: 1px solid #ececec; */
   margin-bottom: 10px;
+}
+.ltl-input0 {
+  position: relative;
+  margin: 7px 0 10px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: white;
+  font-size: 14px;
+  line-height: 32px;
+}
+.ltl-select {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+}
+.ltl-select option {
+  color: #333333;
 }
 .ltl-input {
   position: relative;

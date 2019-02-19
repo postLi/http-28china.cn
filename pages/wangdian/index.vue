@@ -213,9 +213,7 @@
               <p class="p3"><i>地址：</i><font
                 id="nr03"
                 class="">{{ item.pointAddress }}</font></p>
-              <p class="p4"><i>约</i><em
-                id="nr04"
-                class=""/><i>公里</i></p>
+              <p class="p4"><i>约</i><em id="nr04">{{ item.distance }}</em><i>公里</i></p>
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><i>联系人：</i><span id="nr05">{{ item.contactsName }}</span></P>
@@ -309,17 +307,25 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
   if (res.data.status === 200) {
     return res.data.data.list
   }
 }
+
 async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
   parm.pageSize = 10
-  let res = await $axios.post('/28-web/pointNetwork/list', parm) //车源信息列表
+  let prefix = ''
+  if (process.client) {
+    $axios = axios
+    prefix = '/api'
+  }
+  let res = await $axios.post(prefix + '/28-web/pointNetwork/list', parm) //车源信息列表
   // console.log('99999999', res.data.data.list)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
@@ -351,30 +357,8 @@ async function getRecommendList($axios, vo) {
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
       if (item.credit >= 0 && item.credit <= 3) {
-        // this.creditImg.push(1)
       }
-      console.log('credit', item.credit)
     })
-    // res.data.data.list.forEach(item => {
-    //   if (item.companyName && item.companyName > 12) {
-    //     item.companyName = item.companyName.substring(0, 12) + '..'
-    //   }
-    //   if (!item.companyName) {
-    //     item.companyName = '普通货主'
-    //   }
-    //   item.start = item.startCity + item.startArea
-    //   item.end = item.endCity + item.endArea
-    //   if (item.start && item.start.length > 6) {
-    //     item.start = item.start.substring(0, 6) + '..'
-    //   }
-    //   if (item.end && item.end.length > 6) {
-    //     item.end = item.end.substring(0, 6) + '..'
-    //   }
-    //   if (item.goodsName.length > 6) {
-    //     item.goodsName = item.goodsName.substring(0, 6) + '..'
-    //   }
-
-    // })
 
     return res.data.data.list
   } else {
@@ -398,7 +382,7 @@ export default {
   data() {
     return {
       wangdianInfoList: [], //网点信息列表
-      pages: 0,
+      totalPage: 1,
       currentPage: 1,
       parkName: '',
       startProvince: '',
@@ -409,13 +393,6 @@ export default {
       endArea: '',
       companyName: '',
       creditImg: []
-      // authStatus: '',
-      // belongBrandCode: '',
-      // otherServiceCode: '',
-      // orderNumber: '',
-      // transportAging: '',
-      // weigthPrice: '',
-      // lightPrice: ''
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -437,7 +414,7 @@ export default {
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
       companyName: query.companyName ? query.companyName : ''
     }
-    console.log(vo)
+    // console.log(vo)
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
@@ -467,24 +444,44 @@ export default {
     }
   },
   mounted() {
+    let _this = this
     $('#select_wlyq').mousedown(function() {
       $('#list_wlzx_yq').css('display', 'block')
     })
     //排序点击 S
-    $('#seq1').click(function() {
+    $('#seq1').click(async function() {
       $('#seq2').removeClass('active')
       $(this).addClass('active')
-      console.log('clear排序')
-      // vo.filterSign = 1
-      // process02(1)
+      let filterSign = 1
+      let WangdiangInfoList = await getWangdiangInfoList(
+        '',
+        1,
+        Object.assign(
+          {
+            filterSign: 1
+          },
+          _this.vo
+        )
+      )
+      _this.WangdiangInfoList = WangdiangInfoList.list
     })
 
-    $('#seq2').click(function() {
+    $('#seq2').click(async function() {
       $('#seq1').removeClass('active')
       $(this).addClass('active')
-      console.log('clear排序')
-      // vo.filterSign = 2
-      // process02(1)
+      let filterSign = 2
+      let WangdiangInfoList = await getWangdiangInfoList(
+        '',
+        1,
+        Object.assign(
+          {
+            filterSign: 2
+          },
+          _this.vo
+        )
+      )
+      console.log('WangdiangInfoList.list', WangdiangInfoList.list)
+      _this.WangdiangInfoList = WangdiangInfoList.list
     })
     //排序点击 E
     $('body').click(function(e) {
@@ -493,18 +490,17 @@ export default {
         $('#list_wlzx_yq').css('display', 'none')
       }
     })
-    console.log('000003333', this.vo.startProvince)
     $('#addressFrom input').citypicker({
       province: this.vo.startProvince,
       city: this.vo.startCity,
       district: this.vo.startArea
     })
-    // $('#addressTo input').citypicker({
-    //   province: this.endProvince,
-    //   city: this.endCity,
-    //   district: this.endArea
-    // })
-    // this.pagination()
+    $('#addressTo input').citypicker({
+      province: this.endProvince,
+      city: this.endCity,
+      district: this.endArea
+    })
+    this.pagination()
   },
   methods: {
     searchDo() {
@@ -536,10 +532,6 @@ export default {
         this.startCity
       }&startProvince=${this.startProvince}`
     },
-    // orderClassClick(item) {
-    //   this.orderClass = item.id
-    //   this.search()
-    // },
     //品牌
     AF029Click(item) {
       this.vo.belongBrandCode = item.code
@@ -570,25 +562,9 @@ export default {
         totalPage: this.pages,
         callback: async current => {
           $('#current1').text(current)
-          // this.searchDo()
-          // let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
-          let WangdiangInfoList = await getWangdiangInfoList(
-            this.$axios,
-            current,
-            {
-              startProvince: this.startProvince,
-              startCity: this.startCity,
-              startArea: this.startArea,
-              endProvince: this.endProvince,
-              endCity: this.endCity,
-              endArea: this.endArea,
-              companyName: this.companyName,
-              parkName: this.parkName
-            }
-          )
-          // this.WangdiangInfoList = WangdiangInfoList.list
-          this.pages = WangdiangInfoList.pages
-          this.current = WangdiangInfoList.current
+          let hyList = await getWangdiangInfoList(this.$axios, current, this.vo)
+          this.totalPage = hyList.pages
+          this.current = hyList.current
           window.location.href = '#top'
         }
       })

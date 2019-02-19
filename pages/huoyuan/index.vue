@@ -735,8 +735,8 @@ export default {
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
-          $('#current1').text(current)
-          let hyList = await getHyList(this.$axios, current, {
+          // $('#current1').text(current)
+          let hyList = await getHyList(this.$axios, {
             startProvince: this.startProvince,
             startCity: this.startCity,
             startArea: this.startArea,

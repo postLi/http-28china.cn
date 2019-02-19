@@ -687,9 +687,9 @@
           </div>
         </div>
       </div>
-      <div 
+      <div
 
-        style="clear: both" 
+        style="clear: both"
         class="clearfix">
         <div
           class="arc_main5">
@@ -876,10 +876,10 @@
                   </p>
                   <p class="p1"><i
                     class="zhuo"
-                    style="color: #666">重货：{{ item.weightPrice }}</i><span style="color: #333">元/公斤</span></P>
+                    style="color: #666">重货：<span style="color: #ff4747">{{ parseFloat(item.weightPrice).toFixed(1) }}</span></i><span style="color: #333">元/公斤</span></P>
                   <p class="p2"><i
                     class="zhuo"
-                    style="color: #666">轻货：</i>{{ item.lightPrice }}<span style="color: #333">元/m³</span></p>
+                    style="color: #666">轻货：</i><span style="color: #ff4747">{{ parseFloat(item.lightPrice).toFixed(1) }}</span><span style="color: #333">元/m³</span></p>
                   <p class="p3"><i>时效：</i><span>{{ item.transportAging?item.transportAging:'' }}{{ item.transportAging?item.transportAgingUnit:'暂无' }}</span></p>
                   <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
                 </li>
@@ -978,364 +978,53 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="arc_main7">
-        fggfgfgfg
-      </div>
-      <div class="arc_main2">
-        <div class="arc_left2">
-          <div class="arc_left2_bt">
-            <span>公司网点分布</span><i><a
-              id="wd_more"
-              target="_blank">更多</a></i>
-          </div>
-          <div
-            id="js013"
-            class="arc_left2_nr">
-            <div id="tag07eb8b4d92e4d69bb7b5d30cf3bb012e">
-              <div
-                class="tjwd_list"
-                style="display: none;">
-                <p class="p01"><span id="nr1011">广州网点</span></p>
-                <p class="p02">
-                  <img src="../../static/line/images/04gongsi.png">&nbsp;
-                  <span>
-                    <a
-                      id="nr1012"
-                      target="_blank"
-                      href="#"/></span>
-                </p>
-                <p class="p03">
-                  <i>联系人：</i><span id="nr1013">李明</span> &nbsp; <i>手机号：</i><font id="nr1014">13416233760</font>
-                </p>
-                <p class="p04">
-                  <i>所在地：</i><span id="nr1015">浙江省&nbsp;杭州市&nbsp;下城区</span>
-                </p>
-                <p class="p05">
-                  <img src="../../static/line/images/06dingwei.png">&nbsp;<span id="nr1016">金黄大道永福路博洋物流园10号</span>
-                </p>
-              </div>
-            </div>
-
+        <div class="arc_main7">
+          <div class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>北京出发物流专线</span></div>
+            <!--<FootList/>-->
+            <ul>
+              <li>
+                <span>广州到北京</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京</span><span>广州车源信息</span><span>北京车源信息</span>
+              </li>
+              <li>
+                <span>广州到北京物</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北</span><span>广州车源信息</span><span>北京车源信息</span>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="arc_right2">
-          <div class="arc_right2_bt">
-            <span
-              id="arc_bt1"
-              class="arc_span arc_active">增值服务</span>
-            <span
-              id="arc_bt2"
-              class="arc_span">专线介绍</span>
-            <span
-              id="arc_bt3"
-              class="arc_span">累计评价&nbsp;<font
-                id="nr1048"
-                style="color: #eb434d;"/></span>
-            <span
-              id="arc_bt4"
-              class="arc_span">专享服务</span>
+      </div>
+      <div class="arc_main8">
+        <div class="arc_main8_1">
+          <div class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+              style="border-color: #e7e7e7"
+            ><span class="biaozhi"/><span>你可能对这些感兴趣</span></div>
+            <FootList/>
           </div>
-          <div
-            id="arc_nr1"
-            class="arc_nr ">
-            <div class="arc_nr1">
-              <div class="arc_fw item_fw1">
-                <div class="fw_img"><img src="../../static/line/images/fw_1.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>送货上门</span></p>
-                  <p class="fw_nr2"><i>收取客户货物后，将货物送到指定收件对象的服务。</i></p>
-                </div>
-              </div>
-              <div class="arc_fw item_fw2">
-                <div class="fw_img"><img src="../../static/line/images/fw_2.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>保价运输</span></p>
-                  <p class="fw_nr2"><i>保价运输是我司与您共同确定的以托运人申明货物价值为基础的一种特殊运输方式，您向我司声明其托运货物的实际价值，按保价运输的货物，托运人除缴纳运输费用外，按照规定缴纳一定的保价费用，若货物在运输过程中出险，我司将按照托运人的声明价值赔偿一定损失。</i>
-                  </p>
-                </div>
-              </div>
-              <div class="arc_fw item_fw3">
-                <div class="fw_img"><img src="../../static/line/images/fw_3.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>运费到付</span></p>
-                  <p class="fw_nr2"><i>为您提供派送末端支付运费服务，当货物到达收货人时由收货人支付运费。</i></p>
-                </div>
-              </div>
-              <div class="arc_fw item_fw4">
-                <div class="fw_img"><img src="../../static/line/images/fw_4.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>代收货款</span></p>
-                  <p class="fw_nr2">
-                  <i>按照寄件方（卖家）与收件方（买家）达成交易协议的要求，为寄件方提供承运、寄递物品的同时，并代寄件方向收件方收取货款，同时按照约定时间将货款返还给寄件方的服务。</i></p>
-                </div>
-              </div>
-              <div class="arc_fw item_fw5">
-                <div class="fw_img"><img src="../../static/line/images/fw_5.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>上门提货</span></p>
-                  <p class="fw_nr2"><i>按照客户指令到指定地点收取货物的服务。</i></p>
-                </div>
-              </div>
-              <div class="arc_fw item_fw6">
-                <div class="fw_img"><img src="../../static/line/images/fw_6.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>开发票</span></p>
-                  <p class="fw_nr2"><i>客户可向物流公司申请开具货物运输发票。</i></p>
-                </div>
-              </div>
-              <div class="arc_fw item_fw7">
-                <div class="fw_img"><img src="../../static/line/images/fw_7.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>签单回收</span></p>
-                  <p class="fw_nr2"><i>在货物正常签收后，将寄件客户提供的需收件客户签名的收条或收货单等单据返还寄件客户的服务。</i></p>
-                </div>
-              </div>
-              <div class="arc_fw item_fw8">
-                <div class="fw_img"><img src="../../static/line/images/fw_8.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>时效保障</span></p>
-                  <p class="fw_nr2"><i>承诺在规定时间内送达的时效保障服务。</i></p>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="arc_main8_2">
+          <div class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+              style="border-color: #e7e7e7"
+            ><span class="biaozhi"/><span>广州出发物流专线</span></div>
+            <FootList/>
           </div>
-          <div
-            id="arc_nr2"
-            class="arc_nr arc_nr_none">
+        </div>
+        <div class="arc_main8_3">
+          <div class="lll-recommend clearfix">
             <div
-              id="nr1035"
-              class="arc_nr2"/>
-          </div>
-          <div
-            id="arc_nr3"
-            class="arc_nr arc_nr_none">
-            <div class="arc_pjnr_bt">
-              <div class="arc_pjnr_bt1">
-                <div class="arc_pjbt_item"><input
-                  type="radio"
-                  name="radio"
-                  value=""><span>全部</span><i id="nr1044">(439)</i></div>
-                <div class="arc_pjbt_item"><input
-                  type="radio"
-                  name="radio"
-                  value="AF0360101"><span>好评</span><i id="nr1045">(400)</i></div>
-                <div class="arc_pjbt_item"><input
-                  type="radio"
-                  name="radio"
-                  value="AF0360102"><span>中评</span><i id="nr1046">(30)</i></div>
-                <div class="arc_pjbt_item"><input
-                  type="radio"
-                  name="radio"
-                  value="AF0360103"><span>差评</span><i id="nr1047">(9)</i></div>
-              </div>
-
-              <div class="arc_pjnr_bt2">
-                <input
-                  value="我要评价"
-                  onclick="$('.pj_box').show()">
-                <div class="pj_box">
-                  <div class="pj_box1">
-                    <div
-                      class="bt_close"
-                      onclick="$('.pj_box').hide()"><img src="../../static/line/images/xxx.png"></div>
-                  </div>
-                  <div class="pj_box2">
-                    <div class="pj_box2_1"><img src="../../static/line/images/pj.png"></div>
-                    <div class="pj_box2_2">
-                      <p class="pj_box2_2_p1">物流公司需要您的建议哦！</p>
-                      <P class="pj_box2_2_p2">认真填写评价平台会给你推荐最优质的物流专线</P>
-                    </div>
-                  </div>
-                  <div class="pj_box3">
-                    <div class="pj_box3_left">服务价格：</div>
-                    <div
-                      id="pj_box_item1"
-                      class="pj_box3_right"><img
-                        id="pjxx1_1"
-                        src="../../static/line/images/stars01.png"><img
-                          id="pjxx1_2"
-                          src="../../static/line/images/stars01.png"><img
-                            id="pjxx1_3"
-                            src="../../static/line/images/stars01.png"><img
-                              id="pjxx1_4"
-                              src="../../static/line/images/stars01.png"><img
-                                id="pjxx1_5"
-                                src="../../static/line/images/stars01.png"><span id="pj_f1"/></div>
-                  </div>
-                  <div class="pj_box3">
-                    <div class="pj_box3_left">服务质量：</div>
-                    <div
-                      id="pj_box_item2"
-                      class="pj_box3_right"><img
-                        id="pjxx2_1"
-                        src="../../static/line/images/stars01.png"><img
-                          id="pjxx2_2"
-                          src="../../static/line/images/stars01.png"><img
-                            id="pjxx2_3"
-                            src="../../static/line/images/stars01.png"><img
-                              id="pjxx2_4"
-                              src="../../static/line/images/stars01.png"><img
-                                id="pjxx2_5"
-                                src="../../static/line/images/stars01.png"><span id="pj_f2"/></div>
-                  </div>
-                  <div class="pj_box3">
-                    <div class="pj_box3_left">运输时效：</div>
-                    <div
-                      id="pj_box_item3"
-                      class="pj_box3_right"><img
-                        id="pjxx3_1"
-                        src="../../static/line/images/stars01.png"><img
-                          id="pjxx3_2"
-                          src="../../static/line/images/stars01.png"><img
-                            id="pjxx3_3"
-                            src="../../static/line/images/stars01.png"><img
-                              id="pjxx3_4"
-                              src="../../static/line/images/stars01.png"><img
-                                id="pjxx3_5"
-                                src="../../static/line/images/stars01.png"><span id="pj_f3"/></div>
-                  </div>
-                  <div class="pj_box3 ">
-                    <div class="pj_box3_left"><font>综合评价</font>：</div>
-                    <div class="pj_box3_right"><i id="pj_box_zh"/></div>
-                  </div>
-                  <div class="pj_box4">
-                    <div class="pj_box4_left">评价说明：</div>
-                    <div class="pj_box4_right"><textarea
-                      id="pj_nr"
-                      maxlength="400"
-                      rows="3"
-                      cols="30"/></div>
-                  </div>
-                  <div class="pj_box5"><span>还可输入<i id="pj_limit">400</i>字</span></div>
-                  <div class="pj_box6"><input
-                    id="pj_submit"
-                    class="pj_input2"
-                    value="提交评价"><input
-                      class="pj_input1"
-                      onclick="$('.pj_box').hide()"
-                      value="取消"></div>
-                  <div class="pj_box7">打分和评价都将是其他用户的参考依据，并影响该承运商信誉值。
-                  请发布真实、客观的本人消费体验评价。如您受到威逼、利诱如优惠等干扰而发布的评价或并非本人体验的虚假/恶意评价，则点评视为违规，同时影响您的信誉度。更多请见 <span>这里的说明</span>。
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              id="js014"
-              class="arc_pjnr_nr">
-              <p
-                style="display: none"
-                class="arc_prinr_p">dfdfdfsdfdfdf</p>
-              <div
-                class="arc_pjnr_item"
-                style="display: none;">
-
-                <div class="arc_pjnr_item_left">
-                  <p class="item_p1"><font id="nr1031">134****1323</font></p>
-                  <p class="item_p2">
-                  <img src="../../static/line/images/pingfen.png"></p>
-
-                </div>
-                <div class="arc_pjnr_item_right">
-                  <p class="item_p3"><span id="nr1032">内容真实，可靠！</span></p>
-                  <p class="item_p4"><i id="nr1033">2018-08-01 10:00</i></p>
-                  <p
-                    id="item_p5"
-                    class="item_p5"
-                    style="display: none"><font id="nr10340">[回复]：</font><font id="nr1034"/></p>
-                </div>
-              </div>
-
-
-            </div>
-            <!--分页-->
-            <div
-              class="box"
-              style="float: right;margin-right: 70px;">
-              <div
-                id="pagination1"
-                class="page fl"/>
-              <div class="info fl">
-                <!--<p>当前页数：<span id="current1">1</span></p>-->
-              </div>
-            </div>
-            <!--分页-->
-
-          </div>
-          <div
-            id="arc_nr4"
-            class="arc_nr arc_nr_none">
-            <div
-              id="block_bzj"
-              class="arc_nr1">
-              <div class="arc_fw_bt">
-                <img src="../../static/line/images/xiexian.png">
-              </div>
-              <div class="arc_fw arc_fw2">
-                <div class="fw_img"><img src="../../static/line/images/baozhengjin.png"></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>物流运输保障服务</span></p>
-                  <p class="fw_nr2"><i>此承运商已交</i><i id="nr1036"/><i>元诚信保证金</i></p>
-                  <p class="fw_nr3"><span>如果您采用平台的担保交易，您与承运商洽谈好价格后，要平台上生成标准托运单，并把运费托管在平台上，如果承运商未能良好履约，您有权要求退回所有的运费。并根据托运单规定的规则条款，您有权对承运商要求相应的补偿。</span>
-                  </p>
-                  <p class="fw_nr4"><span>如果您线下私自与承运商进行交易，平台不承担任何协助您向承运商要求兑现承诺的义务。</span></p>
-                </div>
-              </div>
-
-            </div>
-            <div
-              id="none_bzj"
-              class="arc_nr1"
-              style="display: none;">
-              <img src="../../static/line/images/gantanhao.png">
-              <span>暂未开通此项服务</span>
-            </div>
+              class="zx_sx"
+              style="border-color: #e7e7e7"
+            ><span class="biaozhi"/><span>深圳出发物流专线</span></div>
+            <FootList/>
           </div>
         </div>
       </div>
 
-    </div>
-
-    <div
-      id="js017"
-      class="arc_bottom">
-      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他专线</span><a
-        id="arc_bottom_more"
-        href="#"><span class="arc_bottom_more">更多+</span></a></div>
-      <div
-        class="tj_list"
-        style="display: none;">
-        <div class="p p02"><img src="../../static/line/images/04gongsi.png"><span><a id="tj023"/></span>
-          <img
-            id="tj_shiming"
-            src="../../static/line/images/shiming.png">
-          <img
-            id="tj_xinyong"
-            src="../../static/line/images/xinyong.png">
-          <img
-            id="tj_danbao"
-            src="../../static/line/images/danbao.png">
-
-        </div>
-        <div class="p p01"><a
-          id="tj020"
-          target="_blank"><span id="tj021"/><i>&rarr;</i><span id="tj022"/></a></div>
-        <div class="p p03">
-          <ul>
-            <li class="tj_left"><i>时效：</i><span id="tj026"/></li>
-            <li class="tj_right"><i>最低一票：</i><span id="tj027"/></li>
-            <li class="tj_left"><i>重货：</i><font id="tj024"/><span>元/吨</span></li>
-            <li class="tj_right"><i>轻货：</i><font id="tj025"/><span>元/方</span></li>
-          </ul>
-        </div>
-        <div class="p p05"/>
-        <div class="p p06">
-          <a
-            id="tj028"
-            target="_blank"><span>查看&gt;</span></a>
-        </div>
-      </div>
     </div>
 
   </div>
@@ -1344,9 +1033,13 @@
 
 <script>
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+import FootList from '../../components/footerList'
 
 export default {
   name: 'Index',
+  components: {
+    FootList
+  },
   head: {
     link: [
       { rel: 'stylesheet', href: '/line/css/article_wlzx.css' },
@@ -1752,6 +1445,30 @@ export default {
     position: relative;
     top: 2px;
     margin-right: 3px;
+  }
+  .arc_main7 {
+    .lll-recommend {
+      transition: all 0.4s;
+      background: #fff;
+      .zx_sx {
+        border-bottom: 1px solid #e7e7e7;
+      }
+      ul {
+        padding-bottom: 10px;
+        li {
+          padding-top: 20px;
+          span {
+            width: 126px;
+            padding-right: 40px;
+            color: #333;
+            font-size: 14px;
+          }
+          span:first-of-type {
+            padding-left: 24px;
+          }
+        }
+      }
+    }
   }
 }
 </style>

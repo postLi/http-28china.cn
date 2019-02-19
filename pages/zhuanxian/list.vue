@@ -374,36 +374,21 @@
         <!--分页-->
 
 
-        <div class="lll-recommend clearfix">
+        <div class="lll-line--othet">
+          <div class="lll-recommend clearfix">
+            <div
+              class="zx_sx1"
+            ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.recommendBy28.label }}</span></div>
+            <FooterLinks :info="lineLinks.recommendBy28.links"/>
+          </div>
           <div
-            class="zx_sx1"
-          ><span class="biaozhi"/><span class="zx_sxl_tit">28快运为您推荐</span></div>
-          <ul>
-            <li>
-              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
-            </li>
-            <li>
-              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
-            </li>
-          </ul>
-        </div>
-        <div
-          class="lll-recommend"
-          style="padding-top: 40px;">
-          <div
-            class="zx_sx"
-          ><span class="biaozhi"/><span>其他相关推荐</span></div>
-          <ul>
-            <li>
-              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
-            </li>
-            <li>
-              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
-            </li>
-            <li>
-              <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span>
-            </li>
-          </ul>
+            class="lll-recommend"
+            style="padding-top: 40px;">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>{{ lineLinks.otherRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.otherRecommend.links"/>
+          </div>
         </div>
 
       </div>
@@ -606,46 +591,33 @@
     </div>
     <div class="lll-line-bot">
       <div
-        class="lll-recommend">
+        class="lll-recommend clearfix">
         <div
           class="zx_sx"
-        ><span class="biaozhi"/><span>全国热门物流货运专线</span></div>
-        <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li>
-            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
-          </li>
-          <li>
-            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
-          </li>
-        </ul>
+        ><span class="biaozhi"/><span>{{ lineLinks.hotRecommend.label }}</span></div>
+        <FooterLinks :info="lineLinks.hotRecommend.links"/>
       </div>
       <div
-        class="lll-recommend">
+        class="lll-recommend clearfix">
         <div
           class="zx_sx"
-        ><span class="biaozhi"/><span>北京出发物流专线</span></div>
-        <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li>
-            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
-          </li>
-          <li>
-            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
-          </li>
-        </ul>
+        ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
+        <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
+        <!--<ul>-->
+        <!--<li-->
+        <!--v-for="(item, index) in lineLinks.startArriveRecommend.links"-->
+        <!--:key="index"-->
+        <!--&gt;-->
+        <!--<a :href="'/zhuanxian/list?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+ item.endCity+'&enda='+item.endArea"><span>{{ item.title }}</span></a>-->
+        <!--</li>-->
+        <!--</ul>-->
       </div>
       <div
-        class="lll-recommend">
+        class="lll-recommend clearfix">
         <div
           class="zx_sx"
-        ><span class="biaozhi"/><span>广州到北京物流专线相关信息</span></div>
-        <ul style="border-bottom: 2px dotted #e7e7e7">
-          <li>
-            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
-          </li>
-          <li>
-            <span>广州到北京物流专线</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京整车运输</span><span>广州车源信息</span><span>北京车源信息</span><span>北京车源信息</span>
-          </li>
-        </ul>
+        ><span class="biaozhi"/><span>{{ lineLinks.startFromRecommend.label }}</span></div>
+        <FooterLinks :info="lineLinks.startFromRecommend.links"/>
       </div>
     </div>
 
@@ -655,8 +627,12 @@
 
 <script>
 import $axios from 'axios'
+import FooterLinks from '../../components/footerLinks'
 export default {
   name: 'Index',
+  components: {
+    FooterLinks
+  },
   head: {
     link: [
       { rel: 'stylesheet', href: '/line/css/list_wlzx.css' },
@@ -666,6 +642,7 @@ export default {
   },
   data() {
     return {
+      infoLinks: {},
       showImg: 0,
       pages: 0,
       currentPage: 1,
@@ -705,7 +682,7 @@ export default {
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
-    let [listA, listB, codeA, codeB, codeC] = await Promise.all([
+    let [listA, listB, listC, codeA, codeB, codeC] = await Promise.all([
       $axios.post(aurl + `/api/28-web/range/list`, {
         currentPage: 1,
         pageSize: 6,
@@ -735,11 +712,19 @@ export default {
         parkId: query.parkId,
         companyName: query.companyName
       }),
+      $axios.post(aurl + `/api/28-web/range/related/links`, {
+        startProvince: startp,
+        startCity: startc,
+        startArea: starta,
+        endProvince: endp,
+        endCity: endc,
+        endArea: enda
+      }),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF026'),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    console.log(listB, 'listA')
+    console.log(listC.data.data.hotRecommend.label, 'listC')
     //codeA过节后继续
     // console.log(codeB, 'codeA')
     if (
@@ -770,6 +755,7 @@ export default {
       return {
         lineLists: listA.data.data.list,
         lineRecoms: listB.data.data,
+        lineLinks: listC.data.data,
         lineCodeA: codeA.data.data,
         lineCodeB: codeB.data.data,
         lineCodeC: codeC.data.data
@@ -987,6 +973,7 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian {
+  margin-bottom: 70px;
   .list_left {
     .zx_sx1 {
       border-bottom: 1px solid #e7e7e7;
@@ -1026,6 +1013,30 @@ export default {
   .clearfix:after {
     clear: both;
   }
+  .lll-line--othet {
+    .lll-recommend:first-of-type {
+      ul.footerLinks {
+        li {
+          width: 14.26%;
+          /* text-align: center; */
+          overflow: hidden;
+          /* text-overflow: ellipsis; */
+          white-space: nowrap;
+        }
+      }
+    }
+    .lll-recommend:last-of-type {
+      ul.footerLinks {
+        li {
+          width: 14.63%;
+          /* text-align: center; */
+          overflow: hidden;
+          /*text-overflow: ellipsis;*/
+          white-space: nowrap;
+        }
+      }
+    }
+  }
   .lll-line-bot {
     width: 1400px;
     height: auto !important;
@@ -1033,6 +1044,17 @@ export default {
     overflow: hidden;
     background: #fff;
     margin-top: 20px;
+    .lll-recommend {
+      ul.footerLinks {
+        li {
+          width: 17.5%;
+          /* text-align: center; */
+          overflow: hidden;
+          /* text-overflow: ellipsis; */
+          white-space: nowrap;
+        }
+      }
+    }
   }
   #search_wlLine {
     width: 42px;
@@ -1174,21 +1196,7 @@ export default {
     background: #fff;
     .zx_sx {
       border-bottom: 1px solid #e7e7e7;
-    }
-    ul {
-      padding-bottom: 10px;
-      li {
-        padding-top: 20px;
-        span {
-          width: 126px;
-          padding-right: 40px;
-          color: #333;
-          font-size: 14px;
-        }
-        span:first-of-type {
-          padding-left: 24px;
-        }
-      }
+      padding-top: 20px;
     }
   }
 

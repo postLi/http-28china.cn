@@ -1,0 +1,137 @@
+<template>
+  
+
+
+  <div class="list-box-right list-box-right1">
+    <div class="list-box-r-top">
+      <form action="">
+        <span>出发地</span>
+        <div class="ltl-input">
+          <input 
+            id="right-bar-form" 
+            autocomplete="off" 
+            wtmap="" 
+            type="text" 
+            class="ltl-location" 
+            placeholder="请选择出发地">
+          <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+        </div>
+        <span>目的地</span>
+        <div class="ltl-input">
+          <input 
+            id="right-bar-to" 
+            autocomplete="off" 
+            wtmap="" 
+            type="text" 
+            class="ltl-location" 
+            placeholder="请选择目的地">
+          <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+        </div>
+        <input 
+          id="check-fee" 
+          type="button" 
+          value="查询零担运费" 
+          class="right-top-btn">
+      </form>
+
+    </div>
+    <!-- 热门城市 -->
+    <div class="list-right-city">
+      <h3 class="layer-title">热门城市</h3>
+      <div class="advice-list">
+        <ul>
+          <li>
+            <a href="/zhuanxian/list?startp=广东省&startc=广州市">广州市</a>
+            <a href="/zhuanxian/list?startp=北京市&startc=北京市">北京市</a>
+            <a href="/zhuanxian/list?startp=福建省&startc=福州市">福州市</a>
+            <a href="/zhuanxian/list?startp=福建省&startc=厦门市">厦门市</a>
+            <a href="/zhuanxian/list?startp=广东省&startc=深圳市">深圳市</a>
+            <a href="/zhuanxian/list?startp=广东省&startc=佛山市">佛山市</a>
+            <a href="/zhuanxian/list?startp=广东省&startc=东莞市">东莞市</a>
+            <a href="/zhuanxian/list?startp=重庆市&startc=重庆市">重庆市</a>
+            <a href="/zhuanxian/list?startp=江苏省&startc=南京市">南京市</a>
+            <a href="/zhuanxian/list?startp=江苏省&startc=苏州市">苏州市</a>
+            <a href="/zhuanxian/list?startp=河南省&startc=郑州市">郑州市</a>
+            <a href="/zhuanxian/list?startp=湖北省&startc=武汉市">武汉市</a>
+            <a href="/zhuanxian/list?startp=湖南省&startc=长沙市">长沙市</a>
+            <a href="/zhuanxian/list?startp=辽宁省&startc=沈阳市">沈阳市</a>
+            <a href="/zhuanxian/list?startp=上海市&startc=上海市">上海市</a>
+            <a href="/zhuanxian/list?startp=山东省&startc=济南市">济南市</a>
+            <a href="/zhuanxian/list?startp=四川省&startc=成都市">成都市</a>
+            <a href="/zhuanxian/list?startp=天津市&startc=天津市">天津市</a>
+            <a href="/zhuanxian/list?startp=浙江省&startc=杭州市">杭州市</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 专线推荐 -->
+    <div id="js007">
+      <h3 
+        id="h3_title" 
+        class="layer-title zx_title" 
+        style="display: none;">专线推荐</h3>
+      <div 
+        class="list-right-advice" 
+        style="display: none">
+      
+        <div class="advice-list">
+          <ul>
+            <li class="advice-list-li">
+              <div class="list-title advice-list-title">
+                <!-- <span class="list-icon lines-sprite-icons icon-start"></span> -->
+                <span id="tj01">广东-东莞</span><img 
+                  class="xiao-jian-tou" 
+                  src="/templets/default/images/wzlImg/sjt.png"><span id="tj02">河北-石家庄</span>
+              </div>
+              <div class="list-title advice-list-title" >
+                <span class="list-icon lines-sprite-icons icon-end"/>
+                <a 
+                  id="tj03" 
+                  target="_blank">澳门特别行政圣方济各堂</a>
+              </div>
+              <div class="advice-unit-details">
+                <span class="number_linst">重货：<em 
+                  id="tj04" 
+                  class="number">645</em>元/方</span>
+                <span>轻货：<em 
+                  id="tj05" 
+                  class="number">645</em>元/方</span>
+              </div>
+              <div class="advice-unit-details">
+                <span class="number_linst">时效：<em 
+                  id="tj06" 
+                  class="number">4天</em></span>
+                <span>最低一票：<em 
+                  id="tj07" 
+                  class="number">645</em></span>
+              </div>
+              <div class="advice-unit-details">
+                <span class="number_linst"><img 
+                  id="tj_shiming" 
+                  src="/templets/default/images/list_wlzx/10shiming.png" 
+                  class="img"></span>
+                <span class="number_linst"><img 
+                  id="tj_xinyong" 
+                  src="/templets/default/images/list_wlzx/11xinyong.png" 
+                  class="img"></span>
+                <span class="number_linst"><img 
+                  id="tj_danbao" 
+                  src="/templets/default/images/list_wlzx/12danbao.png" 
+                  class="img"></span>
+              </div>
+              <div class="advice-unit-details">
+                <a 
+                  id="tj09" 
+                  href="" 
+                  target="_blank"><span class="number_look" >查看详情<img 
+                    src="/templets/default/images/wzlImg/qjt.png" 
+                    class="img"></span></a>
+              </div>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

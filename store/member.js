@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { reject } from 'q'
 
 export const state = () => ({
   company: {

@@ -92,6 +92,13 @@ module.exports = {
       pathRewrite: {
         '^/api': ''
       }
+    },
+    '/anfacms/': {
+      target: 'http://192.168.1.79', // 代理地址
+      changeOrigin: true
+      /* pathRewrite: {
+        '^/api': ''
+      } */
     }
   },
 

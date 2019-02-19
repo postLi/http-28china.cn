@@ -1,10 +1,29 @@
 <template>
-  <div v-html="content" />
+  <div class="list-content main-width line-box-unit-wrapper">
+    <div class="list_nav">
+      <a href="/">物流首页</a>&gt;<a 
+        id="list_nav_a1" 
+        href="">零担物流专线</a>&gt;<a 
+          id="list_nav_a2" 
+          href="">零担物流专线</a>
+    </div>
+    <TopSearch />
+    <div class="list-box">
+      <div v-html="content" />
+      <RightSide />
+    </div>
+  </div>
 </template>
 
 <script>
+import RightSide from '@/components/lines/right1.vue'
+import TopSearch from '@/components/lines/search.vue'
 export default {
   name: 'Zhuanxian1',
+  components: {
+    RightSide,
+    TopSearch
+  },
   data() {
     return {
       recommendList: [],

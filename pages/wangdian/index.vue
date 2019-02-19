@@ -93,6 +93,7 @@
               <dd >
                 <input
                   id="companyName"
+                  v-model="companyName"
                   name="cfd"
                   type="text"
                   class="list_input"
@@ -187,12 +188,15 @@
               title="距离从近到远">距离最近</span>
           </div>
 
-          <div class="list_none">
+          <div 
+            v-if="WangdiangInfoList.length === 0" 
+            class="list_none" 
+            style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/templets/default/images/none_pic.png">
           </div>
           <ul
-            v-for="(item,index) in wangdianInfoList"
+            v-for="(item,index) in WangdiangInfoList"
             :key="index" 
             class="wlzx_list"
           >
@@ -205,7 +209,7 @@
               <p class="p2"><a
                 id="nr01_1"
                 href="#"
-                target="_blank"><font id="nr02">{{ item.companyName }}</font></a></p>
+                target="_blank"><font id="nr02">{{ item.companyName ? item.companyName : '普通货主' }}</font></a></p>
               <p class="p3"><i>地址：</i><font
                 id="nr03"
                 class="">{{ item.pointAddress }}</font></p>
@@ -214,19 +218,25 @@
                 class=""/><i>公里</i></p>
             </li>
             <li class="wlzx_list_3">
-              <p class="p1"><i>联系人：</i><span id="nr05">张总</span></P>
-              <p class="p2"><i>电话：</i><span id="nr06">0731-88818882     17707316111</span></p>
+              <p class="p1"><i>联系人：</i><span id="nr05">{{ item.contactsName }}</span></P>
+              <p class="p2"><i>电话：</i><span id="nr06">{{ item.contactsTel? item.contactsTel + '-' : '' }}{{ item.mobile }}</span></p>
             </li>
             <li class="wlzx_list_4">
-              <p class="p1"><img
-                id="list_shiming"
-                src="../../static/wangdian/images/10shiming.png"></P>
-              <p class="p2"><img
-                id="list_xinyong"
-                src="../../static/wangdian/images/11xinyong.png"></p>
-              <p class="p3"><img
-                id="list_danbao"
-                src="../../static/wangdian/images/12danbao.png"></p>
+              <p 
+                v-if="item.authStatus" 
+                class="p1"><img
+                  id="list_shiming"
+                  src="../../static/wangdian/images/10shiming.png"></P>
+              <p 
+                v-if="item.isVip" 
+                class="p2" ><img
+                  id="list_xinyong"
+                  src="../../static/wangdian/images/11xinyong.png"></p>
+              <p 
+                v-if="item.collateral" 
+                class="p3" ><img
+                  id="list_danbao"
+                  src="../../static/wangdian/images/12danbao.png"></p>
             </li>
             <li class="wlzx_list_6">
               <p class="p1"><a target="_blank"><input
@@ -256,55 +266,65 @@
         class="list_right">
 
         <div class="zx_sx"><span class="biaozhi"/><span>物流公司推荐</span></div>
-        <div class="tj_none">
+        <div 
+          v-if="recommendList.length === 0" 
+          class="tj_none" >
           <span>没有相关物流公司推荐</span>
         </div>
         <div
-          class="tj_list"
-          style="display: none;">
+          v-for="(item,index) in recommendList"
+          :key="index" 
+          class="tj_list" 
+        >
           <p class="p1"><a
             id="tj010"
-            target="_blank"><span id="tj_01">北京华远物流有限公司</span></a></p>
-          <p class="p2">
-
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-
+            target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
+          <p class="p7">
+            <!-- <img 
+              v-for="(item,index) in creditImg" 
+              :key="index" 
+              src="../../static/wangdian/images/blue.gif"> -->
+          
           </p>
-          <p class="p3"><i>联系人：</i><font id="tj_02">张总</font></p>
-          <p class="p4"><i>电话：</i><font id="tj_03">0731-88818882  17707316111</font></p>
+          <!-- <p class="p2">
+
+            <img
+              src="../../static/wangdian/images/blue.gif">
+            <img
+              class="xy_zuan"
+              src="/img/blue.gif">
+            <img
+              class="xy_zuan"
+              src="/img/blue.gif">
+            <img
+              class="xy_zuan"
+              src="/img/blue.gif">
+            <img
+              class="xy_zuan"
+              src="/img/blue.gif">
+
+            <img
+              class="xy_guan"
+              src="../../static/gongsi/images/34huanguan.gif">
+            <img
+              class="xy_guan"
+              src="../../static/gongsi/images/34huanguan.gif">
+            <img
+              class="xy_guan"
+              src="../../static/gongsi/images/34huanguan.gif">
+            <img
+              class="xy_guan"
+              src="../../static/gongsi/images/34huanguan.gif">
+            <img
+              class="xy_guan"
+              src="../../static/gongsi/images/34huanguan.gif">
+
+          </p> -->
+          <p class="p3"><i>联系人：</i><font id="tj_02">{{ item.contactsName }}</font></p>
+          <p class="p4"><i>电话：</i><font id="tj_03">{{ item.contactsTel ? item.contactsTel + '-' : '' }}{{ item.mobile }}</font></p>
           <p class="p5"><i>地址：</i><font
             id="tj_04"
-            class="">北京大兴区魏永路博洋仓储物流园</font></p>
+            class="">{{ item.address }}</font></p>
           <p class="p6">
             <a
               id="tj_05"
@@ -335,8 +355,19 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   parm.currentPage = currentPage
   parm.pageSize = 10
   let res = await $axios.post('/28-web/pointNetwork/list', parm) //车源信息列表
-  console.log(res.data.data.list)
+  // console.log('99999999', res.data.data.list)
   if (res.data.status === 200) {
+    res.data.data.list.forEach(item => {
+      if (item.pointName.length > 15) {
+        item.pointName = item.pointName.substring(0, 15) + '...'
+      }
+      if (item.companyName.length > 15) {
+        item.companyName = item.companyName.substring(0, 15) + '...'
+      }
+      if (item.pointAddress.length > 15) {
+        item.pointAddress = item.pointAddress.substring(0, 15) + '...'
+      }
+    })
     return {
       list: res.data.data.list,
       pages: res.data.data.pages,
@@ -344,6 +375,45 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
     }
   } else {
     return { list: [], pages: 0, currentPage: 1 }
+  }
+}
+async function getRecommendList($axios, vo) {
+  let parm = vo
+  parm.currentPage = 1
+  parm.pageSize = 10
+  let res = await $axios.post('/28-web/logisticsCompany/recommend', parm)
+  // console.log('4444', res.data.data.list, res.data.data.list[0].credit)
+  if (res.data.status === 200) {
+    res.data.data.list.forEach(item => {
+      if (item.credit >= 0 && item.credit <= 3) {
+        // this.creditImg.push(1)
+      }
+      console.log('credit', item.credit)
+    })
+    // res.data.data.list.forEach(item => {
+    //   if (item.companyName && item.companyName > 12) {
+    //     item.companyName = item.companyName.substring(0, 12) + '..'
+    //   }
+    //   if (!item.companyName) {
+    //     item.companyName = '普通货主'
+    //   }
+    //   item.start = item.startCity + item.startArea
+    //   item.end = item.endCity + item.endArea
+    //   if (item.start && item.start.length > 6) {
+    //     item.start = item.start.substring(0, 6) + '..'
+    //   }
+    //   if (item.end && item.end.length > 6) {
+    //     item.end = item.end.substring(0, 6) + '..'
+    //   }
+    //   if (item.goodsName.length > 6) {
+    //     item.goodsName = item.goodsName.substring(0, 6) + '..'
+    //   }
+
+    // })
+
+    return res.data.data.list
+  } else {
+    return []
   }
 }
 export default {
@@ -373,7 +443,22 @@ export default {
       wangdianInfoList: [], //网点信息列表
       pages: 0,
       currentPage: 1,
-      parkName: ''
+      parkName: '',
+      startProvince: '',
+      startCity: '',
+      startArea: '',
+      endProvince: '',
+      endCity: '',
+      endArea: '',
+      companyName: '',
+      creditImg: []
+      // authStatus: '',
+      // belongBrandCode: '',
+      // otherServiceCode: '',
+      // orderNumber: '',
+      // transportAging: '',
+      // weigthPrice: '',
+      // lightPrice: ''
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -385,11 +470,17 @@ export default {
         ? query.startCity
         : app.$cookies.get('currentAreaFullName'),
       startArea: query.startArea ? query.startArea : '',
+      authStatus: query.authStatus ? query.authStatus : '',
+
       parkName: query.parkName ? query.parkName : '',
       otherServiceCode: query.otherServiceCode ? query.otherServiceCode : '',
-      belongBrandCode: query.belongBrandCode ? query.belongBrandCode : ''
+      belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
+      companyName: query.companyName ? query.companyName : ''
     }
-
+    //网点列表
+    let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
+    let recommendList = await getRecommendList($axios, vo)
+    // console.log('0000003330', WangdiangInfoList.list)
     let AF029 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF029' //品牌
     )
@@ -398,7 +489,6 @@ export default {
     )
 
     let logisticsPark = await getWdiangSearchList($axios, vo)
-
     //网点信息列表
     if (AF029.data.status === 200) {
       AF029.data.data.unshift({ code: '', name: '不限' })
@@ -410,6 +500,8 @@ export default {
       AF029: AF029.data.status === 200 ? AF029.data.data : [],
       AF025: AF025.data.status === 200 ? AF025.data.data : [],
       logisticsPark: logisticsPark,
+      WangdiangInfoList: WangdiangInfoList.list,
+      recommendList: recommendList,
       vo: vo
     }
   },
@@ -417,6 +509,23 @@ export default {
     $('#select_wlyq').mousedown(function() {
       $('#list_wlzx_yq').css('display', 'block')
     })
+    //排序点击 S
+    $('#seq1').click(function() {
+      $('#seq2').removeClass('active')
+      $(this).addClass('active')
+      console.log('clear排序')
+      // vo.filterSign = 1
+      // process02(1)
+    })
+
+    $('#seq2').click(function() {
+      $('#seq1').removeClass('active')
+      $(this).addClass('active')
+      console.log('clear排序')
+      // vo.filterSign = 2
+      // process02(1)
+    })
+    //排序点击 E
     $('body').click(function(e) {
       var _con = $('.js_yq') // 设置目标区域(排除此元素)
       if (!_con.is(e.target) && _con.has(e.target).length === 0) {
@@ -424,57 +533,6 @@ export default {
       }
     })
     // this.pagination()
-    // seajs.use(['../js/city.js'], function() {
-    //   seajs.use(
-    //     ['../js/city-picker.js', '../js/jquery.pagination.min.js'],
-    //     function() {
-    //       seajs.use(['../wangdian/js/list_wangdian.js'], function() {
-    //         seajs.use(['../js/collection.js'], function() {
-    //           seajs.use(['../js/gaodemap2.js'], function() {
-    //             $('.list_tiaoj span').click(function() {
-    //               // alert('1')
-    //               $('.list_tiaoj span').removeClass('active')
-    //               $(this).toggleClass('active')
-    //             })
-    //             function onCheckPage() {
-    //               var beginPage = parseInt(
-    //                 document.beginPagefrm.beginPage.value
-    //               )
-    //               if (isNaN(beginPage)) {
-    //                 alert('请输入数字！')
-    //                 return false
-    //               }
-    //               if (beginPage <= 0) {
-    //                 beginPage = 1
-    //               }
-    //               if (beginPage > 100) {
-    //                 beginPage = 100
-    //               }
-    //               if (beginPage > 1) {
-    //                 document.beginPagefrm.action =
-    //                   '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-    //                   beginPage
-    //               } else {
-    //                 document.beginPagefrm.action =
-    //                   '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-    //               }
-    //               return true
-    //             }
-    //             $('#pagination1').pagination({
-    //               currentPage: 1,
-    //               totalPage: process02(1),
-    //               callback: function(current) {
-    //                 $('#current1').text(current)
-    //                 process02(current)
-    //                 window.location.href = '#top'
-    //               }
-    //             })
-    //           })
-    //         })
-    //       })
-    //     }
-    //   )
-    // })
   },
   methods: {
     search() {
@@ -497,8 +555,6 @@ export default {
     },
     //园区
     async seachlist() {
-      // let vo
-
       let list1 = []
       $('#wlyq_pos .select-item').each(function(i, e) {
         list1.push($(this).text())
@@ -506,10 +562,7 @@ export default {
       this.vo.startProvince = list1[0] ? list1[0] : ''
       this.vo.startCity = list1[1] ? list1[1] : ''
       this.vo.startArea = list1[2] ? list1[2] : ''
-      console.log(this.vo)
-
       this.logisticsPark = await getWdiangSearchList(this.$axios, this.vo)
-      // console.log(list2)
     },
     pagination() {
       $('#pagination1').pagination({
@@ -518,7 +571,8 @@ export default {
         callback: async current => {
           $('#current1').text(current)
           // this.searchDo()
-          let wangdianInfoList = await getWangdiangInfoList(
+          // let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
+          let WangdiangInfoList = await getWangdiangInfoList(
             this.$axios,
             current,
             {
@@ -528,18 +582,13 @@ export default {
               endProvince: this.endProvince,
               endCity: this.endCity,
               endArea: this.endArea,
-              carType: this.carType,
-              isLongCar: this.isLongCar,
-              carSourceType: this.carSourceType,
-              carLengthLower: this.carLengthLower,
-              carLengthUpper: this.carLengthUpper,
-              carLoadLower: this.carLoadLower,
-              carLoadUpper: this.carLoadUpper
+              companyName: this.companyName,
+              parkName: this.parkName
             }
           )
-          this.wangdianInfoList = wangdianInfoList.list
-          this.pages = wangdianInfoList.pages
-          this.current = wangdianInfoList.current
+          // this.WangdiangInfoList = WangdiangInfoList.list
+          this.pages = WangdiangInfoList.pages
+          this.current = WangdiangInfoList.current
           window.location.href = '#top'
         }
       })

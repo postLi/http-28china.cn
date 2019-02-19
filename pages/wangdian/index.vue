@@ -46,11 +46,10 @@
                   name="dopost"
                   value="search" >
                 <div
-                  id="carLineFrom"
+                  id="addressFrom"
                   class="fl list_input"
                   style="position:relative;" >
                   <input
-                    id="address"
                     name="cfd"
                     style="height: 100%;width:100%;border: none;outline: none;"
                     data-toggle="city-picker"
@@ -59,11 +58,10 @@
                     placeholder="请输入出发地" >
                 </div>
                 <div
-                  id="carLineTo"
+                  id="addressTo"
                   class="fl list_input"
                   style="position:relative" >
                   <input
-                    id="jwd"
                     name="ddd"
                     style="height: 100%;width:100%;border: none;outline: none;"
                     data-toggle="city-picker"
@@ -76,12 +74,14 @@
                   name="Submit2"
                   readonly=""
                   value=" 搜索 "
-                  class="list_button">
+                  class="list_button"
+                  @click="search()">
                 <input
                   id="flush"
                   name="Submit2"
                   readonly=""
-                  value="重置 ">
+                  value="重置 "
+                  @click="reload()">
               </form>
 
 
@@ -226,24 +226,22 @@
                 v-if="item.authStatus" 
                 class="p1"><img
                   id="list_shiming"
-                  src="../../static/wangdian/images/10shiming.png"></P>
+                  src="/wd/images/10shiming.png"></P>
               <p 
                 v-if="item.isVip" 
                 class="p2" ><img
                   id="list_xinyong"
-                  src="../../static/wangdian/images/11xinyong.png"></p>
+                  src="/wd/images/11xinyong.png"></p>
               <p 
                 v-if="item.collateral" 
                 class="p3" ><img
                   id="list_danbao"
-                  src="../../static/wangdian/images/12danbao.png"></p>
+                  src="/wd/images/12danbao.png"></p>
             </li>
             <li class="wlzx_list_6">
               <p class="p1"><a target="_blank"><input
-                id="fahuo"
                 value="下单"></a>
               </p><p class="p2"><a target="_blank"><input
-                id="nr_a01"
                 value="查看"></a>
             </p></li>
           </ul>
@@ -286,40 +284,7 @@
               src="../../static/wangdian/images/blue.gif"> -->
           
           </p>
-          <!-- <p class="p2">
 
-            <img
-              src="../../static/wangdian/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="/img/blue.gif">
-            <img
-              class="xy_zuan"
-              src="/img/blue.gif">
-            <img
-              class="xy_zuan"
-              src="/img/blue.gif">
-            <img
-              class="xy_zuan"
-              src="/img/blue.gif">
-
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-
-          </p> -->
           <p class="p3"><i>联系人：</i><font id="tj_02">{{ item.contactsName }}</font></p>
           <p class="p4"><i>电话：</i><font id="tj_03">{{ item.contactsTel ? item.contactsTel + '-' : '' }}{{ item.mobile }}</font></p>
           <p class="p5"><i>地址：</i><font
@@ -424,18 +389,10 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
-    // script: [
-    //   { src: '../js/jquery.pagination.min.js' },
-    //   { src: '../js/WTMap.min.js' },
-    //   { src: './js/city-picker.data.js' },
-    //   { src: './js/city-picker.js' },
-    //   { src: '../../static/gongsi/js/list_wlgs.js' }
-    // ]
     script: [
-      { src: './js/city-picker.data.js' },
-      { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' },
-      { src: '/js/gaodemap2.js' }
+      { src: '/js/city-picker.data.js' },
+      { src: '/js/city-picker.js' },
+      { src: '/js/jquery.pagination.min.js' }
     ]
   },
   data() {
@@ -470,6 +427,9 @@ export default {
         ? query.startCity
         : app.$cookies.get('currentAreaFullName'),
       startArea: query.startArea ? query.startArea : '',
+      endProvince: query.endProvince ? query.startProvince : '',
+      endCity: query.endCity ? query.endCity : '',
+      endArea: query.endArea ? query.endArea : '',
       authStatus: query.authStatus ? query.authStatus : '',
 
       parkName: query.parkName ? query.parkName : '',
@@ -477,6 +437,7 @@ export default {
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
       companyName: query.companyName ? query.companyName : ''
     }
+    console.log(vo)
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
@@ -532,14 +493,53 @@ export default {
         $('#list_wlzx_yq').css('display', 'none')
       }
     })
+    console.log('000003333', this.vo.startProvince)
+    $('#addressFrom input').citypicker({
+      province: this.vo.startProvince,
+      city: this.vo.startCity,
+      district: this.vo.startArea
+    })
+    // $('#addressTo input').citypicker({
+    //   province: this.endProvince,
+    //   city: this.endCity,
+    //   district: this.endArea
+    // })
     // this.pagination()
   },
   methods: {
+    searchDo() {
+      let list1 = [],
+        list2 = []
+      $('#addressFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      this.startProvince = list1[0] ? list1[0] : ''
+      this.startCity = list1[1] ? list1[1] : ''
+      this.startArea = list1[2] ? list1[2] : ''
+
+      $('#addressTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      this.endProvince = list2[0] ? list2[0] : ''
+      this.endCity = list2[1] ? list2[1] : ''
+      this.endArea = list2[2] ? list2[2] : ''
+    },
     search() {
+      this.searchDo()
       window.location.href = `/wangdian/?&belongBrandCode=${
         this.vo.belongBrandCode
-      }&otherServiceCode=${this.vo.otherServiceCode}`
+      }&otherServiceCode=${this.vo.otherServiceCode}&companyName=${
+        this.companyName
+      }&parkName=${this.parkName}&endArea=${this.endArea}&endCity=${
+        this.endCity
+      }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
+        this.startCity
+      }&startProvince=${this.startProvince}`
     },
+    // orderClassClick(item) {
+    //   this.orderClass = item.id
+    //   this.search()
+    // },
     //品牌
     AF029Click(item) {
       this.vo.belongBrandCode = item.code

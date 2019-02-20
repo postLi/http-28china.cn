@@ -31,6 +31,7 @@ const _ed20c140 = () => interopDefault(import('..\\pages\\product\\detail.vue' /
 const _5d926204 = () => interopDefault(import('..\\pages\\shixiao\\detail.vue' /* webpackChunkName: "pages_shixiao_detail" */))
 const _85120a2a = () => interopDefault(import('..\\pages\\wuliu\\detail.vue' /* webpackChunkName: "pages_wuliu_detail" */))
 const _afdc8b7a = () => interopDefault(import('..\\pages\\zhuanxian\\detail.vue' /* webpackChunkName: "pages_zhuanxian_detail" */))
+const _5a2f1ffe = () => interopDefault(import('..\\pages\\zhuanxian\\detail1.vue' /* webpackChunkName: "pages_zhuanxian_detail1" */))
 const _35bd9290 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
 const _77c9e1a0 = () => interopDefault(import('..\\pages\\zixun\\utils.js' /* webpackChunkName: "pages_zixun_utils" */))
 const _ed3add8a = () => interopDefault(import('..\\pages\\act\\2019\\springDay\\index.vue' /* webpackChunkName: "pages_act_2019_springDay_index" */))
@@ -224,6 +225,10 @@ export function createRouter() {
       path: "/zhuanxian/detail",
       component: _afdc8b7a,
       name: "zhuanxian-detail"
+    }, {
+      path: "/zhuanxian/detail1",
+      component: _5a2f1ffe,
+      name: "zhuanxian-detail1"
     }, {
       path: "/zhuanxian/list",
       component: _35bd9290,

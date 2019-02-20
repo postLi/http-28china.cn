@@ -1,4 +1,6 @@
 
+<script src="../../store/member.js">
+</script>
 <template>
   <div class="lll-zhuangXian">
     <div class="list_box">
@@ -536,37 +538,14 @@
                   height="50">
               <p>{{ lineHots[2].companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
             </ul>
-            <!--<ul>-->
-            <!--<li><span class="hot-num">1</span><img-->
-            <!--src="/line/images/touxiang1.png"-->
-            <!--alt=""-->
-            <!--width="50"-->
-            <!--height="50">-->
-            <!--<p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>-->
-            <!--<li><span class="hot-num">2</span><img-->
-            <!--src="/line/images/touxiang2.png"-->
-            <!--alt=""-->
-            <!--width="50"-->
-            <!--height="50">-->
-            <!--<p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>-->
-            <!--<li><span class="hot-num">3</span><img-->
-            <!--src="/line/images/touxiang3.png"-->
-            <!--alt=""-->
-            <!--width="50"-->
-            <!--height="50">-->
-            <!--<p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>-->
-            <!--</ul>-->
             <ul
-
               class="lastul">
-              <!--<li><a-->
-              <!--:href="'/member/'+item.id"-->
-              <!--style="display: flex;"><span class="hot-num">{{ index+4 }}</span>-->
-              <!--<p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>-->
               <li
-                v-for="(item, index) in lineHots.slice(-13)"
-                :key="index"><span class="hot-num">{{ index + 4 }}</span>
-              <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
+                v-for="(item, index) in lineHots.slice(-12)"
+                :key="index"><a
+                  :href="'/member/'+item.id"
+                  style="display: flex;"><span class="hot-num">{{ index + 4 }}</span>
+              <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
             </ul>
           </div>
           <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->

@@ -702,6 +702,7 @@ function process02() {
         }
 
         var creater = datas[i].creater
+        var companyId = datas[i].companyId
         $('#nr1011').html(pointName)
         $('#nr1012').html(companyName)
         $('#nr1013').html(name)
@@ -711,7 +712,7 @@ function process02() {
           address = address.replace(belongCityName, '')
         }
         $('#nr1016').html(address)
-        $('#nr1012').attr('href', '/member/' + creater + '')
+        $('#nr1012').attr('href', '/member/' + companyId + '')
 
         var s1 = '<div class="tjwd_list">'
         var s2 = $('.tjwd_list').html()
@@ -871,8 +872,9 @@ function process3(startCity, endCity) {
       //   'href',
       //   'http://wpa.qq.com/msgrd?v=3&uin=' + qq + '&site=qq&menu=yes'
       // )
-      $('#nr1024').attr('href', '/member/' + account + '')
-      $('#wd_more').attr('href', '/member/' + account + '-wangdian')
+      var companyId = datas.companyId
+      $('#nr1024').attr('href', '/member/' + companyId + '')
+      $('#wd_more').attr('href', '/member/' + companyId + '-wangdian')
 
       $('#nr1036').html(collateral)
       // $('#nr10232').html(address)
@@ -1058,8 +1060,9 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         var isVip = datas[i].isVip
         var authStatus = datas[i].authStatus
         var collateral = datas[i].collateral
+        var companyId = datas[i].companyId
         var arcurl = '/wlzx/2018/0509/7?id=' + id + '&publishId=' + publishId
-        $('#tj023').attr('href', '/member/' + account + '')
+        $('#tj023').attr('href', '/member/' + companyId + '')
         $('#tj023').html(publishName)
         $('#tj021').html(start)
         $('#tj022').html(end)

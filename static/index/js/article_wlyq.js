@@ -481,7 +481,8 @@ var rangeIds="";
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
 
-				$("#tj_05").attr("href","/member/"+account+".html");
+				var companyId = datas[i].companyId
+				$("#tj_05").attr("href","/member/"+companyId+"");
 				$("#tj_01").html(companyName);
 				$("#tj_02").html(contactsName);
 				$("#tj_03").html(contactsTel+" "+mobile);
@@ -644,7 +645,7 @@ var totalPage=8;
 		  }
 		    var  num0=Math.random();
 		    var num=Math.ceil(num0*30);
-        var src1="/templets/default/images/pic/bg"+num+".png";
+        var src1="/images/pic/bg"+num+".png";
         if(!companyFacadeFile){ $("#nr01").attr("src",src1);}
 				if(companyFacadeFile){ 
         $("#nr01").attr("src",companyFacadeFile);
@@ -656,8 +657,8 @@ var totalPage=8;
 		          $('#nr06').html(address);
 		          $('#nr07').html(productService);
 		          $('#nr08').html(otherService);
-		          $('#nr_a21').attr('href','/member/'+account+'.html')
-		        $("#wlzx_list_view").attr("onclick","window.open('/member/"+account+".html')")
+		          $('#nr_a21').attr('href','/member/'+companyId+'')
+		        $("#wlzx_list_view").attr("onclick","window.open('/member/"+companyId+"')")
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")
 				$("#nr11").attr("href","http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");
 				 var s1='<ul class="wlzx_list wlzx_list'+i+'">'
@@ -797,7 +798,7 @@ var totalPage=8;
 				var companyName = datas[i].companyName;
 				var transportAging = datas[i].transportAging;
 				var transportAgingUnit = datas[i].transportAgingUnit.replace("多","");
-				var url="/wlzx/2018/0509/7.html?id="+rangeId+"&publishId="+companyId;
+				var url="/zhuanxian/detail?id="+rangeId+"&publishId="+companyId;
 		        $("#nr_a01").attr("href",url);
 		        $("#nr_a02").attr("href",url);
 		        $("#nr_a03").attr("href",url);
@@ -809,7 +810,8 @@ var totalPage=8;
 		        $("#nr002").html(qhjg);
 		        $("#nr003").html(zhjg);
 				$("#nr004").html(transportAging+transportAgingUnit);
-				$("#nr005").attr("href","/member/"+account+".html");
+				var companyId = datas[i].companyId
+				$("#nr005").attr("href","/member/"+companyId+"");
 				$("#nr006").html(companyName);
 				 var s1='<li>';
 				 var s2=$("#js003 li").html();	

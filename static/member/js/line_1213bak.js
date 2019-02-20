@@ -117,7 +117,7 @@ var totalPage=10;
 				var lowerPrice=datas[i].lowerPrice;
 				var startLocationContacts=datas[i].startLocationContacts;
 				var startLocationContactsMobile=datas[i].startLocationContactsMobile;
-				var arcurl="/wlzx/2018/0509/7.html?id="+id+"&publishId="+companyId; 
+				var arcurl="/zhuanxian/detail?id="+id+"&publishId="+companyId; 
 				var orderurl="/member/index.php?uid="+uid+"&action=order"+"&id="+id+"&publishId="+companyId;
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")
 				$("#nr021").attr("href",arcurl);

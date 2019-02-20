@@ -469,7 +469,7 @@
           <p class="arc_right05">
             <a
               id="nr1024"
-              :href="'/member/'+ linedataB.account"
+              :href="'/member/'+ linedataB.companyId"
               target="_blank"><input
                 id="arc_right05_1"
                 readonly=""
@@ -1416,7 +1416,7 @@ export default {
   }
   .ss56-common-sprite11,
   .ss56-common-sprite-icon {
-    background: url('../../static/line/images/downicon.png') no-repeat 0 11px;
+    background: url('/line/images/downicon.png') no-repeat 0 11px;
   }
 
   .icon-through {

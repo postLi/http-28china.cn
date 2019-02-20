@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { reject } from 'q'
 
 export const state = () => ({
   company: {
@@ -130,16 +129,22 @@ export const actions = {
         .get(aurl + '/api/28-web/logisticsCompany/info/' + payload)
         .then(res => {
           let data = res.data
+          console.log('GETCOMPANYINFO:', data)
           if (data.status === 200) {
-            let ordata = data.data.aflcLogisticsCompany
-            ordata.assessNumber = data.data.assessNumber
+            let ordata = data.data
+            let ps = ordata.productServiceCode.replace(/(\[|\])/g, '').split(',')
+            let os = ordata.otherServiceCode.replace(/(\[|\])/g, '').split(',')
+            console.log('psss:', ps, os)
+            ordata.productServiceCode = ps
+            ordata.otherServiceCode = os
+
             commit('setCompany', ordata)
 
             resolve()
           }
         })
         .catch(err => {
-          console.log('payload2', payload, err.response)
+          console.log('payload2', payload, err)
           resolve()
         })
     })
@@ -179,7 +184,8 @@ export const actions = {
 
             resolve()
           } else {
-            reject('1111')
+            console.log('1122 error', data)
+            reject('1122')
           }
         })
         .catch(err => {

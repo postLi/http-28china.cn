@@ -287,7 +287,8 @@ var rangeIds="";
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
 
-				$("#tj_05").attr("href","/member/"+account+".html");
+				var companyId = datas[i].companyId
+				$("#tj_05").attr("href","/member/"+companyId+"");
 				$("#tj_01").html(companyName);
 				$("#tj_02").html(contactsName);
 				$("#tj_03").html(contactsTel+" "+mobile);
@@ -421,9 +422,10 @@ var totalPage=8;
 		        var authStatus=datas[i].authStatus;
 	            var collateral=datas[i].collateral;
                 var orderurl="/plus/list.php?tid=77&uid="+account+"&publishId="+companyId;
-             
-                $("#nr01").attr("href","/member/"+account+".html");
-                $("#nr01_1").attr("href","/member/"+account+".html");
+						 
+								
+                $("#nr01").attr("href","/member/"+companyId+"");
+                $("#nr01_1").attr("href","/member/"+companyId+"");
                 $("#nr01").html(pointName);
                 $("#nr02").html(companyName);
                 $("#nr03").html(address);

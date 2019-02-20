@@ -1,10 +1,29 @@
 <template>
-  <div v-html="content" />
+  <div class="list-content main-width">
+    <div class="list_nav">
+      <a href="/">物流首页</a>&gt;<a 
+        id="list_nav_a1" 
+        href="">零担物流专线</a>&gt;<a 
+          id="list_nav_a2" 
+          href="">零担物流专线</a>
+    </div>
+    <TopSearch />
+    <div class="list-box">
+      <div v-html="content" />
+      <RightSide />
+    </div>
+  </div>
 </template>
 
 <script>
+import RightSide from '@/components/lines/right.vue'
+import TopSearch from '@/components/lines/search.vue'
 export default {
   name: 'Zhuanxian2',
+  components: {
+    RightSide,
+    TopSearch
+  },
   data() {
     return {
       recommendList: [],
@@ -62,8 +81,19 @@ export default {
   mounted() {
     seajs.use(['/line/js/list_line.js', '/line/js/list_line_more.js'])
   },
-  methods: {
-    //
+  methods: {},
+  async fetch({ store, params, $axios, error }) {
+    await store.dispatch('line/GETNEWSINFO', {
+      params: {
+        channelIds: '94,95,96,97,98,99',
+        count: '10',
+        // checked: 'true',
+        // recommend: '1',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      name: 'wlzx'
+    })
   }
 }
 </script>

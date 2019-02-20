@@ -3,8 +3,7 @@ export default function(app) {
   // 基本配置
   axios.defaults.timeout = 30000
   axios.defaults.baseUrl = ''
-  axios.defaults.headers.post['Content-Type'] =
-    'application/x-www-form-urlencoded'
+  // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
   // 请求回调
   axios.onRequest(config => {})

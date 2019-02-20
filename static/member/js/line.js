@@ -309,12 +309,12 @@ function line(currentPage) {
         var lowerPrice = datas[i].lowerPrice
         var startLocationContacts = datas[i].startLocationContacts
         var startLocationContactsMobile = datas[i].startLocationContactsMobile
-        var arcurl =
-          '/wlzx/2018/0509/7.html?id=' + id + '&publishId=' + publishId
+        var companyId = datas[i].companyId
+        var arcurl = '/zhuanxian/detail?id=' + id + '&publishId=' + publishId
         var orderurl =
           '/member/' +
-          uid +
-          '.html?action=order' +
+          companyId +
+          '?action=order' +
           '&id=' +
           id +
           '&publishId=' +

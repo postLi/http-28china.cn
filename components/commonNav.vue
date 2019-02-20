@@ -191,7 +191,7 @@
           <li
             id="wlzx"
             style="margin-left: 20px;"
-            onclick="gotoline();"><a href="#" >物流专线</a></li>
+          ><a href="/zhaunxian/list" >物流专线</a></li>
           <li
             id="hy"
             style="margin-left: 20px;"><a href="/huoyuan">货源信息</a></li>
@@ -268,6 +268,10 @@ export default {
             .eq(inx)
             .show()
         })
+
+      var code = $.cookie('currentArea')
+      var url = code ? '/zhuanxian/' + code + '.htm' : '/zhuanxian/list'
+      $('#wlzx a').attr('href', url)
     }
   },
   methods: {

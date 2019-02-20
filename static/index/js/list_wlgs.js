@@ -372,8 +372,8 @@ var rangeIds="";
 				var isVip=datas[i].isVip;
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-                $("#tj010").attr("href","/member/"+account+".html");
-				$("#tj_05").attr("href","/member/"+account+".html");
+                $("#tj010").attr("href","/member/"+companyId+"");
+				$("#tj_05").attr("href","/member/"+companyId+"");
 				$("#tj_01").html(companyName);
 				$("#tj_02").html(contactsName);
 				$("#tj_03").html(contactsTel+" "+mobile);
@@ -533,7 +533,7 @@ var totalPage=8;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
 				//var orderurl="/plus/list.php?tid=77&uid="+account+"&publishId="+companyId;
-				var orderurl="/member/"+account+".html?action=order"+"&publishId="+companyId;
+				var orderurl="/member/"+companyId+"?action=order"+"&publishId="+companyId;
 				var companyFacadeFile=datas[i].companyFacadeFile;
 				if(companyFacadeFile){
 		   var   companyFacadeFile=datas[i].companyFacadeFile.split(",")[0]; 
@@ -551,8 +551,8 @@ var totalPage=8;
 		          $('#nr06').html(address);
 		          $('#nr07').html(productService);
 		          $('#nr08').html(otherService);
-		          $('#nr02').attr('href','/member/'+account+'.html')
-		          $('#nr_a21').attr('href','/member/'+account+'.html')
+		          $('#nr02').attr('href','/member/'+companyId+'')
+		          $('#nr_a21').attr('href','/member/'+companyId+'')
 		        $("#wlzx_list_view").attr("onclick","window.open('/member/"+account+".html')")
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")
 				$("#nr11").attr("href","http://wpa.qq.com/msgrd?v=3&uin="+qq+"&site=qq&menu=yes");

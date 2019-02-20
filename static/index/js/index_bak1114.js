@@ -259,7 +259,7 @@ function process1(vo1){
 				var publishName = datas[i].publishName;
 				var transportAging = datas[i].transportAging;
 				var transportAgingUnit = datas[i].transportAgingUnit.replace("多","");
-				var url="/wlzx/2018/0509/7.html?id="+id+"&publishId="+publishId;
+				var url="/zhuanxian/detail?id="+id+"&publishId="+publishId;
 		        $("#nr_a01").attr("href",url);
 		        $("#nr_a02").attr("href",url);
 		        $("#nr_a03").attr("href",url);
@@ -271,7 +271,8 @@ function process1(vo1){
 		        $("#nr002").html(zhjg);
 		        $("#nr003").html(qhjg);
 				$("#nr004").html(transportAging+transportAgingUnit);
-				$("#nr005").attr("href","/member/"+account+".html");
+				var companyId = datas[i].companyId
+				$("#nr005").attr("href","/member/"+companyId+"");
 				$("#nr006").html(publishName);
 				 var s1='<li>';
 				 var s2=$("#js001 li").html();	
@@ -401,8 +402,9 @@ function process3(vo3){
 				var account=datas[i].account;
 				var createTime = datas[i].createTime.substring(5,10);	    
 		        var  url="/huoyuan/2018/0508/2.html?id="+id+"&shipperId="+shipperId;
-                $("#nr_a31").attr("href",url);
-                $("#nr_a32").attr("href","/member/"+account+".html");
+								$("#nr_a31").attr("href",url);
+								var companyId = datas[i].companyId
+                $("#nr_a32").attr("href","/member/"+companyId+"");
                 $("#nr_a33").attr("href",url);
                 $("#nr_a34").attr("href",url);
                 $("#nr_a35").attr("href",url);

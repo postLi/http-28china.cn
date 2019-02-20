@@ -1771,7 +1771,7 @@ body {
   top: 8px;
 }
 .ss56-common-sprite1 {
-  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
 .ltl-ico-end {

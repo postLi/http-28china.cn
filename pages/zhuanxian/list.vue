@@ -1,4 +1,6 @@
 
+<script src="../../store/member.js">
+</script>
 <template>
   <div class="lll-zhuangXian">
     <div class="list_box">
@@ -276,7 +278,7 @@
                   <img src="/line/images/04gongsi.png">
                   <a
                     id="nr03"
-                    :href="'/member/'+item.publishId"
+                    :href="'/member/'+item.companyId"
                     target="_blank"><font
                       class="">{{ item.companyName }}</font></a>
                   <a
@@ -450,7 +452,7 @@
             <div class="p p1">
               <img src="/line/images/04gongsi.png"><span><a
                 id="tj_a011"
-                :href="'/member/'+ item.publishId"
+                :href="'/member/'+ item.companyId"
                 target="_blank">{{ item.companyName }}</a></span>
               <img
                 id="tj_shiming"
@@ -500,39 +502,56 @@
         <div class="list-box-r-hot">
 
           <div class="zx_sx"><span class="biaozhi"/>企业月人气榜</div>
-          <div class="hot_none">
+          <div
+            v-if="!lineHots.length"
+            class="hot_none">
             <span>没有相关企业月人气榜</span>
           </div>
-          <ul>
-            <li><span class="hot-num">1</span><img
-              src="/line/images/touxiang1.png"
-              alt=""
-              width="50"
-              height="50">
-            <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-            <li><span class="hot-num">2</span><img
-              src="/line/images/touxiang2.png"
-              alt=""
-              width="50"
-              height="50">
-            <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-            <li><span class="hot-num">3</span><img
-              src="/line/images/touxiang3.png"
-              alt=""
-              width="50"
-              height="50">
-            <p>新光速惠快运有限公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          </ul>
-          <ul class="lastul">
-            <li><span class="hot-num">4</span>
-            <p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-            <li><span class="hot-num">5</span>
-            <p>扬州物流公司</p><span class="hot-peonum">人气值:<i>1590</i></span></li>
-          </ul>
+          <div
+            v-else
+            class="hot-ul">
+            <ul
+
+            >
+              <li><a
+                :href="'/member/'+lineHots[0].id"
+                style="display: flex;"><span class="hot-num">1</span><img
+                  src="/line/images/touxiang1.png"
+                  alt=""
+                  width="50"
+                  height="50">
+              <p>{{ lineHots[0].companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+              <li><a
+                :href="'/member/'+lineHots[1].id"
+                style="display: flex;"><span class="hot-num">2</span><img
+                  src="/line/images/touxiang2.png"
+                  alt=""
+                  width="50"
+                  height="50">
+              <p>{{ lineHots[1].companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+              <li><a
+                :href="'/member/'+lineHots[2].id"
+                style="display: flex;"><span class="hot-num">3</span><img
+                  src="/line/images/touxiang3.png"
+                  alt=""
+                  width="50"
+                  height="50">
+              <p>{{ lineHots[2].companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+            </ul>
+            <ul
+              class="lastul">
+              <li
+                v-for="(item, index) in lineHots.slice(-12)"
+                :key="index"><a
+                  :href="'/member/'+item.id"
+                  style="display: flex;"><span class="hot-num">{{ index + 4 }}</span>
+              <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+            </ul>
+          </div>
           <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
           <!--<div class="tj_none">-->
           <!--<span>没有相关线路推荐23</span>-->
-          <!--</div>-->
+          <!--</div>-->`
         </div>
         <div class="list-box-r-phone">
           <div class="zx_p_tit">帮我找优质承运商</div>
@@ -603,14 +622,6 @@
           class="zx_sx"
         ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
         <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
-        <!--<ul>-->
-        <!--<li-->
-        <!--v-for="(item, index) in lineLinks.startArriveRecommend.links"-->
-        <!--:key="index"-->
-        <!--&gt;-->
-        <!--<a :href="'/zhuanxian/list?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+ item.endCity+'&enda='+item.endArea"><span>{{ item.title }}</span></a>-->
-        <!--</li>-->
-        <!--</ul>-->
       </div>
       <div
         class="lll-recommend clearfix">
@@ -682,7 +693,7 @@ export default {
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
-    let [listA, listB, listC, codeA, codeB, codeC] = await Promise.all([
+    let [listA, listB, listC, listD, codeA, codeB, codeC] = await Promise.all([
       $axios.post(aurl + `/api/28-web/range/list`, {
         currentPage: 1,
         pageSize: 6,
@@ -720,11 +731,12 @@ export default {
         endCity: endc,
         endArea: enda
       }),
+      $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF026'),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    console.log(listC.data.data.hotRecommend.label, 'listC')
+    console.log(listD.data.data.slice(-13).length, 'listD')
     //codeA过节后继续
     // console.log(codeB, 'codeA')
     if (
@@ -737,30 +749,32 @@ export default {
       listA.data.data.list.forEach(item => {
         item.num = Math.ceil(Math.random() * 30)
       })
+      // for (var i = 3; i < listD.data.data.length; i--) {
+      //   let listD1 = listD.data.data
+      //   console.log(listD1.length, 'listD1')
+      // }
       let codeObj = {
         name: '不限',
         code: ''
       }
-      // let codeNmae = {
-      //   name: '实名认证',
-      //   code: ''
-      // }
       codeA.data.data.unshift(codeObj)
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
-      // codeB.data.data.unshift(codeNmae)
-      // console.log(listB.data.data, 'listBlistB')
-      //tjcx_01
-
       return {
         lineLists: listA.data.data.list,
         lineRecoms: listB.data.data,
         lineLinks: listC.data.data,
+        lineHots: listD.data.data,
         lineCodeA: codeA.data.data,
         lineCodeB: codeB.data.data,
         lineCodeC: codeC.data.data
       }
     }
+  },
+  computed: {
+    // filteredItems() {
+    //   // return lineHots.slice(0, 3)
+    // }
   },
   mounted() {
     let _this = this
@@ -1017,10 +1031,10 @@ export default {
     .lll-recommend:first-of-type {
       ul.footerLinks {
         li {
-          width: 14.26%;
+          width: 16.67%;
           /* text-align: center; */
           overflow: hidden;
-          /* text-overflow: ellipsis; */
+          text-overflow: ellipsis;
           white-space: nowrap;
         }
       }
@@ -1031,7 +1045,7 @@ export default {
           width: 14.63%;
           /* text-align: center; */
           overflow: hidden;
-          /*text-overflow: ellipsis;*/
+          text-overflow: ellipsis;
           white-space: nowrap;
         }
       }
@@ -1045,15 +1059,20 @@ export default {
     background: #fff;
     margin-top: 20px;
     .lll-recommend {
+      padding-bottom: 20px;
+      border-bottom: dotted 1px #e7e7e7;
       ul.footerLinks {
         li {
           width: 17.5%;
           /* text-align: center; */
           overflow: hidden;
-          /* text-overflow: ellipsis; */
+          text-overflow: ellipsis;
           white-space: nowrap;
         }
       }
+    }
+    .lll-recommend:last-of-type {
+      border-bottom-color: #fff;
     }
   }
   #search_wlLine {
@@ -1091,64 +1110,66 @@ export default {
         margin-bottom: 1px;
         color: #2577e3;
       }
-      ul:first-of-type,
-      ul:last-of-type {
-        li {
-          display: flex;
-          padding: 20px 14px 0px 16px;
-          font-size: 14px;
-          .hot-num {
-            width: 20px;
-            height: 20px;
-            background: #f65050;
-            text-align: center;
-            line-height: 20px;
-            color: #fff;
-            margin-top: 20px;
+      .hot-ul {
+        ul:first-of-type,
+        ul:last-of-type {
+          li {
+            display: flex;
+            padding: 20px 14px 0px 16px;
+            font-size: 14px;
+            .hot-num {
+              width: 20px;
+              height: 20px;
+              background: #f65050;
+              text-align: center;
+              line-height: 20px;
+              color: #fff;
+              margin-top: 20px;
+            }
+            img {
+              margin: 0 8px 0 15px;
+            }
+            p {
+              margin-top: 20px;
+              color: #333;
+              /*padding-right: 10px;*/
+              width: 138px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            span.hot-peonum {
+              margin-top: 20px;
+              font-size: 12px;
+              padding-left: 10px;
+              color: #666;
+              i {
+                color: #f14747;
+                padding-left: 5px;
+              }
+            }
           }
-          img {
-            margin: 0 8px 0 15px;
+          li:nth-child(2) {
+            .hot-num {
+              background: #ff8547;
+            }
           }
-          p {
-            margin-top: 20px;
-            color: #333;
-            /*padding-right: 10px;*/
-            width: 138px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-          span.hot-peonum {
-            margin-top: 20px;
-            font-size: 12px;
-            padding-left: 10px;
-            color: #666;
-            i {
-              color: #f14747;
-              padding-left: 5px;
+          li:nth-child(3) {
+            .hot-num {
+              background: #ffac38;
             }
           }
         }
-        li:nth-child(2) {
-          .hot-num {
-            background: #ff8547;
-          }
-        }
-        li:nth-child(3) {
-          .hot-num {
-            background: #ffac38;
-          }
-        }
-      }
-      ul.lastul {
-        li {
-          padding: 0px 14px 0px 16px;
-          span.hot-num {
-            background: #8eb9f5 !important;
-          }
-          p {
-            width: 62%;
-            padding-left: 16px;
+        ul.lastul {
+          li {
+            padding: 0px 14px 0px 16px;
+            span.hot-num {
+              background: #8eb9f5 !important;
+            }
+            p {
+              width: 62%;
+              padding-left: 16px;
+            }
           }
         }
       }
@@ -1282,7 +1303,7 @@ export default {
   /**/
   .ss56-common-sprite11,
   .ss56-common-sprite-icon {
-    background: url('../../static/line/images/downicon.png') no-repeat 0 11px;
+    background: url('/line/images/downicon.png') no-repeat 0 11px;
   }
 
   .icon-through {

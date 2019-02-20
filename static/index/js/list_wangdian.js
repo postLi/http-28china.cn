@@ -409,8 +409,8 @@ var rangeIds="";
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
 
-				$("#tj_05").attr("href","/member/"+account+".html");
-				$("#tj010").attr("href","/member/"+account+".html");
+				$("#tj_05").attr("href","/member/"+companyId+"");
+				$("#tj010").attr("href","/member/"+companyId+"");
 				$("#tj_01").html(companyName);
 				$("#tj_02").html(contactsName);
 				$("#tj_03").html(contactsTel+" "+mobile);
@@ -545,10 +545,10 @@ var totalPage=8;
                 var isVip=datas[i].isVip;
 		        var authStatus=datas[i].authStatus;
 	            var collateral=datas[i].collateral;
-                var orderurl="/member/"+account+"-order.html?uid="+account+"&publishId="+companyId;
+                var orderurl="/member/"+companyId+"-order?uid="+account+"&publishId="+companyId;
              
-                $("#nr01").attr("href","/member/"+account+".html");
-                $("#nr01_1").attr("href","/member/"+account+".html");
+                $("#nr01").attr("href","/member/"+companyId+"");
+                $("#nr01_1").attr("href","/member/"+companyId+"");
                 $("#nr01").html(pointName);
                 $("#nr02").html(companyName);
                 $("#nr03").html(pointAddress);
@@ -557,7 +557,7 @@ var totalPage=8;
                 $("#nr06").html(contactsTel+"  "+mobile);
                 $("#nr07").html(pointName);
                 $("#nr08").html(companyName);
-   		        $("#nr_a01").attr("onclick","window.open('/member/"+account+".html')")
+   		        $("#nr_a01").attr("onclick","window.open('/member/"+companyId+"')")
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")
 
 				 var s1='<ul class="wlzx_list wlzx_list'+i+'">'

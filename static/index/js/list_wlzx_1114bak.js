@@ -395,7 +395,7 @@ var rangeIds="";
 				var isVip=datas[i].isVip;
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-				var arcurl="/wlzx/2018/0509/7.html?id="+rangeId+"&publishId="+companyId; 
+				var arcurl="/zhuanxian/detail?id="+rangeId+"&publishId="+companyId; 
 				$("#tj_a011").attr("href","/member/"+account+".html");
 				$("#tj_a011").html(companyName);
 				$("#tj011").html( startLocation.substring(0,6));
@@ -514,7 +514,7 @@ var totalPage=8;
 				var isVip=datas[i].isVip;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-				var arcurl="/wlzx/2018/0509/7.html?id="+rangeId+"&publishId="+companyId; 
+				var arcurl="/zhuanxian/detail?id="+rangeId+"&publishId="+companyId; 
 				var orderurl="/plus/list.php?tid=77&uid="+account+"&id="+rangeId+"&publishId="+companyId;
 				$("#nr_a21").attr("href",arcurl);
 				$("#wlzx_list_view").attr("onclick","window.open('"+arcurl+"')")

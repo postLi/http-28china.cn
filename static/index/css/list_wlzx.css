@@ -613,7 +613,7 @@ border-right: 0;
     top: 8px;
 }
 .ss56-common-sprite1 {
-    background-image: url(/templets/default/images/wzlImg/qd.png);
+    background-image: url(/images/wzlImg/qd.png);
     background-repeat: no-repeat;
 }
 .ltl-ico-end {
@@ -627,7 +627,7 @@ border-right: 0;
     top: 8px;
 }
 .ss56-common-sprite2 {
-    background-image: url(/templets/default/images/wzlImg/zd.png);
+    background-image: url(/images/wzlImg/zd.png);
     background-repeat: no-repeat;
 }
 
@@ -645,7 +645,7 @@ border-right: 0;
 
 
 .lines-sprite-icons {
-    background: url(/templets/default/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+    background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
     color: #333;

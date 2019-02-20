@@ -5,7 +5,7 @@
       :key="index"
     >
       <a
-        :href="targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea"
+        :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
         target="_blank"><span>{{ item.title }}</span></a>
         <!--<a :href="'/zhuanxian/list?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea"><span>{{ item.title }}</span></a>-->
     </li>
@@ -26,20 +26,22 @@ export default {
   },
   data() {
     return {
-      targetLinks: ''
+      targetLinks: '',
+      carSourceType: '',
+      toLinks: ''
     }
   },
   watch: {
     info(n, o) {
-      console.log(n, 'nnnnnnnn')
+      // console.log(n, 'nnnnnnnn')
     }
   },
   mounted() {
-    console.log(this.info, 'info')
+    // console.log(this.info, 'info')
     this.info.forEach(item => {
-      // <!--<a :href="'/zhuanxian/list?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea"><span>{{ item.title }}</span></a>-->
-      // item.endArea === null ? '' : item.endArea
-      // item.endArea == null ? '' : item.endArea
+      this.carSourceType = ''
+      this.targetLinks = ''
+
       switch (item.startProvince) {
         case null:
           item.startProvince = ''
@@ -64,21 +66,27 @@ export default {
         case null:
           item.endArea = ''
       }
-      switch (item.type) {
-        case '1000':
-          this.targetLinks = '/gongsi/'
-        case '2000':
-          this.targetLinks = '/zhuanxian/list'
-        case '3000':
-          this.targetLinks = '/cheyuan'
-        case '3001':
-          this.targetLinks = '/cheyuan'
-        case '4000':
-          this.targetLinks = '/huoyuan'
-        case '4001':
-          this.targetLinks = '/gongsi/'
+      if (item.type == '1000') {
+        this.targetLinks = '/gongsi/'
       }
-      console.log(item, 'item')
+      if (item.type == '2000') {
+        this.targetLinks = '/zhuanxian/list'
+      }
+      if (item.type == '3000') {
+        this.targetLinks = '/cheyuan'
+      }
+      if (item.type == '3001') {
+        this.targetLinks = '/cheyuan'
+        this.carSourceType = 'AF01801'
+      }
+      if (item.type == '4000') {
+        this.targetLinks = '/huoyuan'
+      }
+      if (item.type == '4001') {
+        this.targetLinks = '/member/' + item.companyId + '-huo'
+      }
+      item.targetLinks = this.targetLinks
+      item.carSourceType = this.carSourceType
     })
   },
   methods: {
@@ -112,8 +120,8 @@ ul.footerLinks {
     padding-top: 20px;
     float: left;
     span {
-      width: 126px;
-      padding-right: 40px;
+      /*width: 126px;*/
+      /*padding-right: 40px;*/
       color: #333;
       font-size: 14px;
     }

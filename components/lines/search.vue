@@ -81,157 +81,32 @@
           <li class="hot-label-item">
             <a 
               class="hot-label-link" 
-              href="/zhuanxian/110000.htm">北京市</a>
+              href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E5%B9%BF%E5%B7%9E%E5%B8%82&endp=%E4%B8%8A%E6%B5%B7%E5%B8%82&endc=%E4%B8%8A%E6%B5%B7%E5%B8%82">广州市到上海市零担物流专线</a>
           </li>
           <li class="hot-label-item">
             <a 
               class="hot-label-link" 
-              href="/zhuanxian/120000.htm">天津市</a>
+              href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E5%B9%BF%E5%B7%9E%E5%B8%82&endp=%E6%B9%96%E5%8C%97%E7%9C%81&endc=%E6%AD%A6%E6%B1%89%E5%B8%82">广州市到武汉市零担物流专线</a>
           </li>
           <li class="hot-label-item">
             <a 
               class="hot-label-link" 
-              href="/zhuanxian/130100.htm">河北省</a>
+              href="/zhuanxian/list?&startp=%E5%8C%97%E4%BA%AC%E5%B8%82&startc=%E5%8C%97%E4%BA%AC%E5%B8%82&endp=%E4%B8%8A%E6%B5%B7%E5%B8%82&endc=%E4%B8%8A%E6%B5%B7%E5%B8%82">北京市到上海市零担物流专线</a>
           </li>
           <li class="hot-label-item">
             <a 
               class="hot-label-link" 
-              href="/zhuanxian/140100.htm">山西省</a>
+              href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E6%B7%B1%E5%9C%B3%E5%B8%82&endp=%E6%B5%99%E6%B1%9F%E7%9C%81&endc=%E6%9D%AD%E5%B7%9E%E5%B8%82">深圳市到杭州市零担物流专线</a>
           </li>
           <li class="hot-label-item">
             <a 
               class="hot-label-link" 
-              href="/zhuanxian/210100.htm">辽宁省</a>
+              href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E6%B7%B1%E5%9C%B3%E5%B8%82&endp=%E9%87%8D%E5%BA%86%E5%B8%82&endc=%E9%87%8D%E5%BA%86%E5%B8%82">深圳市到重庆市零担物流专线</a>
           </li>
           <li class="hot-label-item">
             <a 
               class="hot-label-link" 
-              href="/zhuanxian/220100.htm">吉林省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/310000.htm">上海市</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/320100.htm">江苏省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/330100.htm">浙江省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/340100.htm">安徽省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/350100.htm">福建省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/360100.htm">江西省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/370100.htm">山东省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/410100.htm">河南省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/420100.htm">湖北省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/430100.htm">湖南省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/440100.htm">广东省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/460100.htm">海南省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/500000.htm">重庆市</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/510100.htm">四川省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/520100.htm">贵州省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/530100.htm">云南省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/610100.htm">陕西省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/620100.htm">甘肃省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/630100.htm">青海省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/230100.htm">黑龙江省</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/540100.htm">西藏自治区</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/150100.htm">内蒙古自治区</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/640100.htm">宁夏回族自治区</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/450100.htm">广西壮族自治区</a>
-          </li>
-          <li class="hot-label-item">
-            <a 
-              class="hot-label-link" 
-              href="/zhuanxian/650100.htm">新疆维吾尔自治区</a>
+              href="/zhuanxian/list?&startp=%E5%8C%97%E4%BA%AC%E5%B8%82&startc=%E5%8C%97%E4%BA%AC%E5%B8%82&endp=%E9%BB%91%E9%BE%99%E6%B1%9F%E7%9C%81&endc=%E5%93%88%E5%B0%94%E6%BB%A8%E5%B8%82">北京市到哈尔滨市零担物流专线</a>
           </li>
         </ul>
       </div>

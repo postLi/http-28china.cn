@@ -423,7 +423,7 @@
           </p>
           <p class="arc_right05">
             <a 
-              :href=" '/member/' + oneCompany.account + '.html'"
+              :href=" '/member/' + oneCompany.companyId + ''"
               target="_blank"><input
                 readonly="" 
                 value="进入官网"></a>
@@ -458,7 +458,7 @@
         <div class="arc_left2">
           <div class="arc_left2_bt" >
             <span>公司网点分布</span><i><a 
-              :href="'/member/' + oneCompany.account + '-wangdian.html'"
+              :href="'/member/' + oneCompany.companyId + '-wangdian'"
               target="_blank" >更多</a></i>
           </div>
           <div class="arc_left2_nr">
@@ -468,7 +468,7 @@
               class="tjwd_list">
               <p class="p01"><span>{{ item.pointName.substring(0, 12) + '..' }}</span></p>
               <p class="p02"><img src="../../static/images/04gongsi.png" >&nbsp;<span><a
-                :href="'/member/' + item.creater + '.html'"
+                :href="'/member/' + item.companyId + ''"
                 target="_blank">{{ item.companyName.substring(0, 16) + '..' }}</a></span></p>
               <p class="p03">
                 <i>联系人：</i><span >{{ item.name }}</span> &nbsp; <i>手机号：</i><font>{{ item.mobile }}</font>

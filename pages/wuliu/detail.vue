@@ -269,7 +269,7 @@
                   :href=" '/plus/list.php?tid=77&uid=' + item.account +'&publishId=' + item.companyId"
                   target="_blank"><input value="下单"></a>
                 </p><p class="p2"><a
-                  :href="'/member/' + item.account + '.html'"
+                  :href="'/member/' + item.companyId + ''"
                   target="_blank"><input value="查看官网"></a>
               </p><p class="p3"/></li>
             </ul>
@@ -330,7 +330,7 @@
           <p class="p4"><i>电话：</i><font> {{ item.mobile }}</font></p>
           <p class="p5"><i data-v-63732202="">地址：</i><font>{{ item.address }}</font></p>
           <p class="p6"><a 
-            :href="'/member/'+item.mobile+'.html'"
+            :href="'/member/'+item.companyId+''"
             target="_blank"><span data-v-63732202="">查看&nbsp;&gt;</span></a></p>
         </div>
 

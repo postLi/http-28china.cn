@@ -334,7 +334,7 @@ export default {
     store.commit('member/setId', params.id)
     await store.dispatch('member/GETCOMPANYINFO', params.id)
     await store.dispatch('member/GETCOMPANYLINEINFO', {
-      publishId: store.state.member.company.id,
+      publishId: params.id,
       pageSize: 10,
       currentPage: 1
     })

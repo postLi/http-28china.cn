@@ -700,8 +700,9 @@ function process01(){
 				var isVip=datas[i].isVip;
 		    var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-				var arcurl="/wlzx/2018/0509/7.html?id="+rangeId+"&publishId="+publishId; 
-				$("#tj_a011").attr("href","/member/"+account+".html");
+				var arcurl="/zhuanxian/detail?id="+rangeId+"&publishId="+publishId; 
+				var companyId= datas[i].companyId
+				$("#tj_a011").attr("href","/member/"+companyId+"");
 				$("#tj_a011").html(publishName);
 			    $("#tj102").html(assessNumber);
 				$("#tj101").html(browseNumber);
@@ -827,7 +828,7 @@ var totalPage=8;
 				var isVip=datas[i].isVip;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-				var arcurl="/wlzx/2018/0509/7.html?id="+rangeId+"&publishId="+companyId; 
+				var arcurl="/zhuanxian/detail?id="+rangeId+"&publishId="+companyId; 
 				var orderurl="/plus/list.php?tid=77&uid="+account+"&id="+rangeId+"&publishId="+companyId;
 				$("#nr_a21").attr("href",arcurl);
 				$("#wlzx_list_view").attr("onclick","window.open('"+arcurl+"')")
@@ -850,7 +851,7 @@ var totalPage=8;
 				$("#nr02_1").html(start);
 				$("#nr02_2").html(end);
 				$("#nr02").attr("href",arcurl);
-		        $("#nr03").attr("href","/member/"+account+".html");
+		        $("#nr03").attr("href","/member/"+companyId+"");
 				$("#nr04").html(companyName);
 				$("#nr05").html(transportRemark);
 				$("#nr06").html(address);

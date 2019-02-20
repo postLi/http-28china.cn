@@ -385,7 +385,7 @@ function member_03(companyId2) {
         var departureHzData = datas[i].departureHzData
         var departureHzTime = datas[i].departureHzTime
         var arcurl =
-          '/wlzx/2018/0509/7.html?id=' + id + '&publishId=' + companyId
+          '/zhuanxian/detail?id=' + id + '&publishId=' + companyId
 
         // $('#nr001').html(start)
         // $('#nr002').html(end)

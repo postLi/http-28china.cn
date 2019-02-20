@@ -41,25 +41,25 @@
       <div class="advice-list">
         <ul>
           <li>
-            <a href="/zhuanxian/list?startp=广东省&startc=广州市">广州市</a>
-            <a href="/zhuanxian/list?startp=北京市&startc=北京市">北京市</a>
-            <a href="/zhuanxian/list?startp=福建省&startc=福州市">福州市</a>
-            <a href="/zhuanxian/list?startp=福建省&startc=厦门市">厦门市</a>
-            <a href="/zhuanxian/list?startp=广东省&startc=深圳市">深圳市</a>
-            <a href="/zhuanxian/list?startp=广东省&startc=佛山市">佛山市</a>
-            <a href="/zhuanxian/list?startp=广东省&startc=东莞市">东莞市</a>
-            <a href="/zhuanxian/list?startp=重庆市&startc=重庆市">重庆市</a>
-            <a href="/zhuanxian/list?startp=江苏省&startc=南京市">南京市</a>
-            <a href="/zhuanxian/list?startp=江苏省&startc=苏州市">苏州市</a>
-            <a href="/zhuanxian/list?startp=河南省&startc=郑州市">郑州市</a>
-            <a href="/zhuanxian/list?startp=湖北省&startc=武汉市">武汉市</a>
-            <a href="/zhuanxian/list?startp=湖南省&startc=长沙市">长沙市</a>
-            <a href="/zhuanxian/list?startp=辽宁省&startc=沈阳市">沈阳市</a>
-            <a href="/zhuanxian/list?startp=上海市&startc=上海市">上海市</a>
-            <a href="/zhuanxian/list?startp=山东省&startc=济南市">济南市</a>
-            <a href="/zhuanxian/list?startp=四川省&startc=成都市">成都市</a>
-            <a href="/zhuanxian/list?startp=天津市&startc=天津市">天津市</a>
-            <a href="/zhuanxian/list?startp=浙江省&startc=杭州市">杭州市</a>
+            <a href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E5%B9%BF%E5%B7%9E%E5%B8%82">广州市</a>
+            <a href="/zhuanxian/list?&startp=%E5%8C%97%E4%BA%AC%E5%B8%82&startc=%E5%8C%97%E4%BA%AC%E5%B8%82">北京市</a>
+            <a href="/zhuanxian/list?&startp=%E7%A6%8F%E5%BB%BA%E7%9C%81&startc=%E7%A6%8F%E5%B7%9E%E5%B8%82">福州市</a>
+            <a href="/zhuanxian/list?&startp=%E7%A6%8F%E5%BB%BA%E7%9C%81&startc=%E5%8E%A6%E9%97%A8%E5%B8%82">厦门市</a>
+            <a href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E6%B7%B1%E5%9C%B3%E5%B8%82">深圳市</a>
+            <a href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E4%BD%9B%E5%B1%B1%E5%B8%82">佛山市</a>
+            <a href="/zhuanxian/list?&startp=%E5%B9%BF%E4%B8%9C%E7%9C%81&startc=%E4%B8%9C%E8%8E%9E%E5%B8%82">东莞市</a>
+            <a href="/zhuanxian/list?&startp=%E9%87%8D%E5%BA%86%E5%B8%82&startc=%E9%87%8D%E5%BA%86%E5%B8%82">重庆市</a>
+            <a href="/zhuanxian/list?&startp=%E6%B1%9F%E8%8B%8F%E7%9C%81&startc=%E5%8D%97%E4%BA%AC%E5%B8%82">南京市</a>
+            <a href="/zhuanxian/list?&startp=%E6%B1%9F%E8%8B%8F%E7%9C%81&startc=%E8%8B%8F%E5%B7%9E%E5%B8%82">苏州市</a>
+            <a href="/zhuanxian/list?&startp=%E6%B2%B3%E5%8D%97%E7%9C%81&startc=%E9%83%91%E5%B7%9E%E5%B8%82">郑州市</a>
+            <a href="/zhuanxian/list?&startp=%E6%B9%96%E5%8C%97%E7%9C%81&startc=%E6%AD%A6%E6%B1%89%E5%B8%82">武汉市</a>
+            <a href="/zhuanxian/list?&startp=%E6%B9%96%E5%8D%97%E7%9C%81&startc=%E9%95%BF%E6%B2%99%E5%B8%82">长沙市</a>
+            <a href="/zhuanxian/list?&startp=%E8%BE%BD%E5%AE%81%E7%9C%81&startc=%E6%B2%88%E9%98%B3%E5%B8%82">沈阳市</a>
+            <a href="/zhuanxian/list?&startp=%E4%B8%8A%E6%B5%B7%E5%B8%82&startc=%E4%B8%8A%E6%B5%B7%E5%B8%82">上海市</a>
+            <a href="/zhuanxian/list?&startp=%E5%B1%B1%E4%B8%9C%E7%9C%81&startc=%E6%B5%8E%E5%8D%97%E5%B8%82">济南市</a>
+            <a href="/zhuanxian/list?&startp=%E5%9B%9B%E5%B7%9D%E7%9C%81&startc=%E6%88%90%E9%83%BD%E5%B8%82">成都市</a>
+            <a href="/zhuanxian/list?&startp=%E5%A4%A9%E6%B4%A5%E5%B8%82&startc=%E5%A4%A9%E6%B4%A5%E5%B8%82">天津市</a>
+            <a href="/zhuanxian/list?&startp=%E6%B5%99%E6%B1%9F%E7%9C%81&startc=%E6%9D%AD%E5%B7%9E%E5%B8%82">杭州市</a>
           </li>
         </ul>
       </div>
@@ -81,7 +81,7 @@
                 <!-- <span class="list-icon lines-sprite-icons icon-start"></span> -->
                 <span id="tj01">广东-东莞</span><img 
                   class="xiao-jian-tou" 
-                  src="/templets/default/images/wzlImg/sjt.png"><span id="tj02">河北-石家庄</span>
+                  src="/images/wzlImg/sjt.png"><span id="tj02">河北-石家庄</span>
               </div>
               <div class="list-title advice-list-title" >
                 <span class="list-icon lines-sprite-icons icon-end"/>
@@ -108,15 +108,15 @@
               <div class="advice-unit-details">
                 <span class="number_linst"><img 
                   id="tj_shiming" 
-                  src="/templets/default/images/list_wlzx/10shiming.png" 
+                  src="/images/list_wlzx/10shiming.png" 
                   class="img"></span>
                 <span class="number_linst"><img 
                   id="tj_xinyong" 
-                  src="/templets/default/images/list_wlzx/11xinyong.png" 
+                  src="/images/list_wlzx/11xinyong.png" 
                   class="img"></span>
                 <span class="number_linst"><img 
                   id="tj_danbao" 
-                  src="/templets/default/images/list_wlzx/12danbao.png" 
+                  src="/images/list_wlzx/12danbao.png" 
                   class="img"></span>
               </div>
               <div class="advice-unit-details">
@@ -124,7 +124,7 @@
                   id="tj09" 
                   href="" 
                   target="_blank"><span class="number_look" >查看详情<img 
-                    src="/templets/default/images/wzlImg/qjt.png" 
+                    src="/images/wzlImg/qjt.png" 
                     class="img"></span></a>
               </div>
             </li>

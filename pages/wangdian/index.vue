@@ -326,7 +326,7 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
     prefix = '/api'
   }
   let res = await $axios.post(prefix + '/28-web/pointNetwork/list', parm) //车源信息列表
-  // console.log('99999999', res.data.data.list)
+  console.log('99999999', parm, res)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
       if (item.pointName.length > 15) {

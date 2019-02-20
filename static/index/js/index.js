@@ -379,7 +379,7 @@ function process_01(vo1){
 				var publishName = datas[i].publishName;
 				var transportAging = datas[i].transportAging;
 				var transportAgingUnit = datas[i].transportAgingUnit.replace("多","");
-				var url="/wlzx/2018/0509/7.html?id="+id+"&publishId="+publishId;
+				var url="/zhuanxian/detail?id="+id+"&publishId="+publishId;
 		        $("#nr_a01").attr("href",url);
 		        $("#nr_a02").attr("href",url);
 		        $("#nr_a03").attr("href",url);
@@ -396,7 +396,8 @@ function process_01(vo1){
 		        $("#nr002").html(heavyPrice);
 		        $("#nr003").html(lightPrice);
 				$("#nr004").html(transportAging+transportAgingUnit);
-				$("#nr005").attr("href","/member/"+account+"");
+				var companyId = datas[i].companyId
+				$("#nr005").attr("href","/member/"+companyId+"");
 				$("#nr006").html(publishName);
 				 var s1='<li>';
 				 var s2=$("#js001 li").html();	
@@ -544,8 +545,9 @@ function process_03(vo3){
 				var account=datas[i].account;
 				var createTime = datas[i].createTime.substring(5,10);	    
 		        var  url="/huoyuan/2018/0508/2.html?id="+id+"&shipperId="+shipperId;
-                $("#nr_a31").attr("href",url);
-                $("#nr_a32").attr("href","/member/"+account+"");
+								$("#nr_a31").attr("href",url);
+								var companyId = datas[i].companyId
+                $("#nr_a32").attr("href","/member/"+companyId+"");
                 $("#nr_a33").attr("href",url);
                 $("#nr_a34").attr("href",url);
                 $("#nr_a35").attr("href",url);
@@ -606,12 +608,13 @@ function wlgs_tj(){
 			for(var i=0;i<3;i++){
 				var companyName=datas[i].companyName;
 				var account=datas[i].account;
+				var companyId = datas[i].companyId
 
-				$("#tj_01").attr("href","/member/"+account+"");
+				$("#tj_01").attr("href","/member/"+companyId+"");
 				$("#tj_02").html(i+1);
 				var imgsrc="/images/index/wlgs_tj_0"+i+".png";
 				$("#tj_03").attr("src",imgsrc);
-				$("#tj_04").attr("href","/member/"+account+"");
+				$("#tj_04").attr("href","/member/"+companyId+"");
 				$("#tj_04").html(companyName);
 				 var s1='<li class="arank">';
 				 var s2=$("#wlgs_tj1 li").html();	
@@ -626,10 +629,11 @@ function wlgs_tj(){
 				var companyName=datas[i].companyName;
 				var account=datas[i].account;
 
-				$("#tj_05").attr("href","/member/"+account+"");
+				var companyId = datas[i].companyId
+				$("#tj_05").attr("href","/member/"+companyId+"");
 				$("#tj_06").html(i+1);
 				$("#tj_07").html(companyName);
-				$("#tj_07").attr("href","/member/"+account+"");
+				$("#tj_07").attr("href","/member/"+companyId+"");
 				 var s1='<li class="arank arank2">';
 				 var s2=$("#wlgs_tj2 li").html();	
 				 var s3='</li>'
@@ -769,11 +773,11 @@ function wlgs(vo4){
 				}
 		
 				if(!datas[i].productService){var productService=""; }
-	             $('#wlgs_a').attr("href",'/member/'+account+'');
-                 $('#wlgs_a1').attr("href",'/member/'+account+'');
-                 $('#wlgs_a2').attr("href",'/member/'+account+'');
-                 $('#wlgs_a3').attr("href",'/member/'+account+'');
-                 $('#wlgs_a4').attr("href",'/member/'+account+'');
+	             $('#wlgs_a').attr("href",'/member/'+companyId+'');
+                 $('#wlgs_a1').attr("href",'/member/'+companyId+'');
+                 $('#wlgs_a2').attr("href",'/member/'+companyId+'');
+                 $('#wlgs_a3').attr("href",'/member/'+companyId+'');
+                 $('#wlgs_a4').attr("href",'/member/'+companyId+'');
                  $('#wlgs_name').html(companyName);
                  $('#wlgs_postion').html(belongCityName);
                  $('#wlgs_jyfw').html(productService);

@@ -441,8 +441,8 @@ function process01() {
         var isVip = datas[i].isVip
         var authStatus = datas[i].authStatus
         var collateral = datas[i].collateral
-        $('#tj010').attr('href', '/member/' + account + '')
-        $('#tj_05').attr('href', '/member/' + account + '')
+        $('#tj010').attr('href', '/member/' + companyId + '')
+        $('#tj_05').attr('href', '/member/' + companyId + '')
         $('#tj_01').html(companyName)
         $('#tj_02').html(contactsName)
         $('#tj_03').html(contactsTel + ' ' + mobile)
@@ -617,7 +617,7 @@ function process02(currentPage) {
         // window.location='/gongsi?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
         var orderurl =
           '/member/' +
-          account +
+          companyId +
           '-order?action=order' +
           '&publishId=' +
           companyId
@@ -661,11 +661,11 @@ function process02(currentPage) {
         $('#nr06').html(address)
         $('#nr07').html(productService)
         $('#nr08').html(otherService)
-        $('#nr02').attr('href', '/member/' + account + '')
-        $('#nr_a21').attr('href', '/member/' + account + '')
+        $('#nr02').attr('href', '/member/' + companyId + '')
+        $('#nr_a21').attr('href', '/member/' + companyId + '')
         $('#wlzx_list_view').attr(
           'onclick',
-          "window.open('/member/" + account + "-jianjie')"
+          "window.open('/member/" + companyId + "-jianjie')"
         )
         $('#fahuo').attr('onclick', "window.open('" + orderurl + "')")
         $('#nr11').attr(

@@ -276,7 +276,7 @@
                   <img src="/line/images/04gongsi.png">
                   <a
                     id="nr03"
-                    :href="'/member/'+item.publishId"
+                    :href="'/member/'+item.companyId"
                     target="_blank"><font
                       class="">{{ item.companyName }}</font></a>
                   <a
@@ -450,7 +450,7 @@
             <div class="p p1">
               <img src="/line/images/04gongsi.png"><span><a
                 id="tj_a011"
-                :href="'/member/'+ item.publishId"
+                :href="'/member/'+ item.companyId"
                 target="_blank">{{ item.companyName }}</a></span>
               <img
                 id="tj_shiming"
@@ -1282,7 +1282,7 @@ export default {
   /**/
   .ss56-common-sprite11,
   .ss56-common-sprite-icon {
-    background: url('../../static/line/images/downicon.png') no-repeat 0 11px;
+    background: url('/line/images/downicon.png') no-repeat 0 11px;
   }
 
   .icon-through {

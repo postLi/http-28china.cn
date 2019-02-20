@@ -735,8 +735,8 @@ export default {
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
-          $('#current1').text(current)
-          let hyList = await getHyList(this.$axios, current, {
+          // $('#current1').text(current)
+          let hyList = await getHyList(this.$axios, {
             startProvince: this.startProvince,
             startCity: this.startCity,
             startArea: this.startArea,
@@ -1771,7 +1771,7 @@ body {
   top: 8px;
 }
 .ss56-common-sprite1 {
-  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
 .ltl-ico-end {

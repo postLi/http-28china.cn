@@ -156,7 +156,7 @@ function process03(startCity, endCity) {
           $('#nr0911').html(startAddress)
           $('#nr0912').html(endAddress)
           $('#nr0913').html(wlName)
-          $('#nr0913').attr('href', '/member/' + account + '.html')
+          $('#nr0913').attr('href', '/member/' + companyId + '')
           $('#nr0914').html(goodsName)
           $('#nr0915').html(goodsWeight + '吨')
           $('#nr0916').html(goodsVolume + '立方米')

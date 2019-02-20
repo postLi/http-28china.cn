@@ -365,8 +365,8 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         var authStatus = datas[i].authStatus
         var collateral = datas[i].collateral
         var arcurl =
-          '/wlzx/2018/0509/7.html?id=' + id + '&publishId=' + publishId
-        $('#tj023').attr('href', '/member/' + account + '.html')
+          '/zhuanxian/detail?id=' + id + '&publishId=' + publishId
+        $('#tj023').attr('href', '/member/' + companyId + '')
         $('#tj023').html(publishName)
         $('#tj021').html(start)
         $('#tj022').html(end)

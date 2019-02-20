@@ -702,6 +702,7 @@ function process02() {
         }
 
         var creater = datas[i].creater
+        var companyId = datas[i].companyId
         $('#nr1011').html(pointName)
         $('#nr1012').html(companyName)
         $('#nr1013').html(name)
@@ -711,7 +712,7 @@ function process02() {
           address = address.replace(belongCityName, '')
         }
         $('#nr1016').html(address)
-        $('#nr1012').attr('href', '/member/' + creater + '')
+        $('#nr1012').attr('href', '/member/' + companyId + '')
 
         var s1 = '<div class="tjwd_list">'
         var s2 = $('.tjwd_list').html()
@@ -746,10 +747,10 @@ function process3(startCity, endCity) {
       if (!qq) {
         $('#qq').css('display', 'none')
       }
-      var companyName = datas.companyName
-      if (companyName.length > 13) {
-        companyName = companyName.substring(0, 13) + '..'
-      }
+      // var companyName = datas.companyName
+      // if (companyName.length > 13) {
+      //   companyName = companyName.substring(0, 13) + '..'
+      // }
       var contactsName = datas.contactsName
       var mobile = datas.mobile
 
@@ -758,22 +759,22 @@ function process3(startCity, endCity) {
       if (address && address.length > 20) {
         address = address.substring(0, 20) + '..'
       }
-      var serverPriceScore = datas.serverPriceScore
-      var serverQualityScore = datas.serverQualityScore
-      var transportAgingScore = datas.transportAgingScore
-      if (!serverPriceScore) {
-        serverPriceScore = 5
-      }
-      if (!serverQualityScore) {
-        serverQualityScore = 5
-      }
-      if (!transportAgingScore) {
-        transportAgingScore = 5
-      }
+      // var serverPriceScore = datas.serverPriceScore
+      // var serverQualityScore = datas.serverQualityScore
+      // var transportAgingScore = datas.transportAgingScore
+      // if (!serverPriceScore) {
+      //   serverPriceScore = 5
+      // }
+      // if (!serverQualityScore) {
+      //   serverQualityScore = 5
+      // }
+      // if (!transportAgingScore) {
+      //   transportAgingScore = 5
+      // }
 
-      $('#nr1041').html(serverQualityScore)
-      $('#nr1042').html(transportAgingScore)
-      $('#nr1043').html(serverPriceScore)
+      // $('#nr1041').html(serverQualityScore)
+      // $('#nr1042').html(transportAgingScore)
+      // $('#nr1043').html(serverPriceScore)
       if (credit >= 0 && credit <= 3) {
         $('.xy_zuan:eq(0)').css('display', 'inline')
       }
@@ -864,18 +865,19 @@ function process3(startCity, endCity) {
       $('#order_arc').click(function () {
         window.open(orderurl)
       })
-      $('#nr1020').html(companyName)
-      $('#nr1021').html(contactsName)
-      $('#nr1022').html(mobile)
-      $('#nr1023').attr(
-        'href',
-        'http://wpa.qq.com/msgrd?v=3&uin=' + qq + '&site=qq&menu=yes'
-      )
-      $('#nr1024').attr('href', '/member/' + account + '')
-      $('#wd_more').attr('href', '/member/' + account + '-wangdian')
+      // $('#nr1020').html(companyName)
+      // $('#nr1021').html(contactsName)
+      // $('#nr1022').html(mobile)
+      // $('#nr1023').attr(
+      //   'href',
+      //   'http://wpa.qq.com/msgrd?v=3&uin=' + qq + '&site=qq&menu=yes'
+      // )
+      var companyId = datas.companyId
+      $('#nr1024').attr('href', '/member/' + companyId + '')
+      $('#wd_more').attr('href', '/member/' + companyId + '-wangdian')
 
       $('#nr1036').html(collateral)
-      $('#nr10232').html(address)
+      // $('#nr10232').html(address)
     },
     error: function (err) {
       console.log(err.responseText)
@@ -1058,8 +1060,9 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         var isVip = datas[i].isVip
         var authStatus = datas[i].authStatus
         var collateral = datas[i].collateral
+        var companyId = datas[i].companyId
         var arcurl = '/wlzx/2018/0509/7?id=' + id + '&publishId=' + publishId
-        $('#tj023').attr('href', '/member/' + account + '')
+        $('#tj023').attr('href', '/member/' + companyId + '')
         $('#tj023').html(publishName)
         $('#tj021').html(start)
         $('#tj022').html(end)
@@ -1295,3 +1298,16 @@ $('#pj_submit').click(function () {
 })
 
 //提交评价 E
+
+$(function () {
+  $("#wlLineFrom input").citypicker({
+    // province: startp,
+    // city: startc,
+    // district: starta
+  });
+  $("#wlLineTo input").citypicker({
+    // province: endp,
+    // city: endc,
+    // district: enda
+  });
+})

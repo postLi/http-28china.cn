@@ -894,7 +894,7 @@ function process08(startProvince,startCity,endProvince,endCity,rangeIds){
 			    var isVip=datas[i].isVip;
 		        var authStatus=datas[i].authStatus;
 		        var collateral=datas[i].collateral;
-				var arcurl="/wlzx/2018/0509/7.html?id="+id+"&publishId="+publishId; 
+				var arcurl="/zhuanxian/detail?id="+id+"&publishId="+publishId; 
 				$("#tj023").attr("href","/member/"+account+".html");
 				$("#tj023").html(publishName);
 				$("#tj021").html(start);

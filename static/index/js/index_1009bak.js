@@ -206,7 +206,7 @@ function process1(vo1){
 				var publishName = datas[i].publishName;
 				var transportAging = datas[i].transportAging;
 				var transportAgingUnit = datas[i].transportAgingUnit.replace("多","");
-				var url="/wlzx/2018/0509/7.html?id="+id+"&publishId="+publishId;
+				var url="/zhuanxian/detail?id="+id+"&publishId="+publishId;
 		        $("#nr_a01").attr("href",url);
 		        $("#nr_a02").attr("href",url);
 		        $("#nr_a03").attr("href",url);

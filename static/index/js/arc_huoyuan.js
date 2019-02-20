@@ -307,12 +307,13 @@ function process03(startCity,endCity){
 				if(!goodsNum){goodsNum=0}
 				var goodsWeight=datas[i].goodsWeight;
 				var goodsVolume=datas[i].goodsVolume;
+				var companyId = datas[i].companyId
 				var createTime=datas[i].createTime.substring(0,19);
 		        var  url="/huoyuan/2018/0508/2.html?id="+aid+"&shipperId="+shipperId;
 		        $("#nr0911").html(startAddress);
 		        $("#nr0912").html(endAddress);
 		        $("#nr0913").html(wlName);
-		        $("#nr0913").attr("href","/member/"+account+".html");
+		        $("#nr0913").attr("href","/member/"+companyId+"");
 		        $("#nr0914").html(goodsName);
 		        $("#nr0915").html(goodsWeight+"吨");
 		        $("#nr0916").html(goodsVolume+"立方米");

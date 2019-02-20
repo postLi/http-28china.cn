@@ -919,12 +919,12 @@ export default {
     store.commit('member/setId', params.id)
     await store.dispatch('member/GETCOMPANYINFO', params.id)
     await store.dispatch('member/GETCOMPANYPOINTINFO', {
-      companyId: store.state.member.company.id,
+      companyId: params.id,
       pageSize: 8,
       currentPage: 1
     })
     await store.dispatch('member/GETCOMPANYLINEINFO', {
-      publishId: store.state.member.company.id,
+      publishId: params.id,
       pageSize: 4,
       currentPage: 1
     })

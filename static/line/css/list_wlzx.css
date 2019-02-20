@@ -179,13 +179,13 @@ margin-left: 30px;
   cursor: pointer;
 }
 
-.list_tiaoj {
+.lll-zhuangXian .list_tiaoj {
   width: 1036px;
   height: 39px;
   background-color: #f1f1f1;
   border: solid 1px #e6e6e6;
   border-top: 2px solid #2577E3;
-  margin-bottom: 14px;
+  /*margin-bottom: 14px;*/
   background: no-repeat url(../images/list_wlzx/xiajt.png) #f1f1f1 363px 16px;
   position: relative;
   color: #666;
@@ -762,7 +762,7 @@ margin-left: 30px;
 /*货源信息 E */
 
 .list_none {
-  display: none;
+  /*display: none;*/
 }
 
 .list_none span {
@@ -782,15 +782,15 @@ margin-left: 30px;
   margin: 20px 0 20px 400px;
 }
 
-.tj_none {
-  display: none;
+.tj_none, .hot_none {
+  /*display: none;*/
   background-color: #fff;
   width: 100%;
   height: 220px;
   margin-top: -1px;
 }
 
-.tj_none span {
+.tj_none span, .hot_none span {
   float: left;
   width: 100%;
   text-align: center;

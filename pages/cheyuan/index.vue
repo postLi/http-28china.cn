@@ -55,7 +55,7 @@
                 </div>
                 <img
                   class="fl list_img"
-                  src="../../static/images/02jiantou.png">
+                  src="/images/02jiantou.png">
                 <div
                   id="carLineTo"
                   class="fl list_input"
@@ -89,7 +89,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF018"
-                  :class="[item.code === carType ? 'now':'']"
+                  :class="[item.code === vo.carType ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF018Click(item)">{{ item.name }}</a>
@@ -99,7 +99,7 @@
               <dd>
                 <a
                   v-for="(item,index) in carSourceList"
-                  :class="[item.value === carSourceType ? 'now':'']"
+                  :class="[item.value === vo.carSourceType ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="carSourceTypeClick(item)">{{ item.name }}</a>
@@ -109,7 +109,7 @@
               <dd>
                 <a
                   v-for="(item,index) in longCarList"
-                  :class="[item.value === isLongCar ? 'now':'']"
+                  :class="[item.value === vo.isLongCar ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="longCarClick(item)">{{ item.name }}</a>
@@ -119,7 +119,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF031"
-                  :class="[item.id === AF031Id ? 'now':'']"
+                  :class="[item.id === vo.AF031Id ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF031Click(item)">{{ index===0? item.name : item.name + '米' }}</a>
@@ -129,7 +129,7 @@
               <dd>
                 <a
                   v-for="(item,index) in AF032"
-                  :class="[item.id === AF032Id ? 'now':'']"
+                  :class="[item.id === vo.AF032Id ? 'now':'']"
                   :key="index"
                   href="javascript:"
                   @click="AF032Click(item)">{{ index===0? item.name : item.name + '吨' }}</a>
@@ -148,15 +148,15 @@
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
-            <img src="../../static/images/none_pic.png">
+            <img src="/images/none_pic.png">
           </div>
           <ul 
             v-for="(item,index) in carInfoList" 
             :key="index" 
             class="wlzx_list">
             <li id="cy_list_0">
-              <div class="sc_num"><img src="_nuxt/static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
-              <div class="view_num"><img src="_nuxt/static/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
+              <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+              <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
             </li>
             <li class="cy_list_4">
               <a
@@ -182,7 +182,8 @@
                 <font>{{ item.carTypeName }}</font>
                 <font>长<b>{{ item.carLength }}</b>米</font>
                 <font>载重<b>{{ item.carLoad }}</b>吨</font>
-              <font id="nr055"/></p>
+                <font>{{ item.carSourceTypeName }}</font>
+              </p>
               <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                 <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
               <font>{{ item.createrName?item.createrName:'' }}</font></p>
@@ -191,8 +192,8 @@
             <li class="cy_list_3">
               <p class="p1"><img
                 v-if="item.driverStatus === 'AF0010403'"
-                src="../../static/images/list_wlzx/10shiming.png"></P>
-                <!--<p class="p2"><img id="list_xinyong" src="../../static/images/list_wlzx/11xinyong.png"/></P>-->
+                src="/images/list_wlzx/10shiming.png"></P>
+                <!--<p class="p2"><img id="list_xinyong" src="/images/list_wlzx/11xinyong.png"/></P>-->
             </li>
             <li class="wlzx_list_6">
               <p class="p2"><a
@@ -234,7 +235,7 @@
                 v-for="(item,index) in recommendBy28"
                 :key="index" 
                 class="hot-cities-li"><a
-                  :href="'/cheyuan/detail?id='+ item.companyId" 
+                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
@@ -245,38 +246,28 @@
       <!-- 最新车源start -->
       <div class="list_new">
         <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
-        <ul class="list_new_ul">
-          <li>
-            <div class="li_one">
-              <a>广东省广州市->北京市</a>
-              <span>2019-02-24 12:11:00</span>
-            </div>
-            <div class="li_two">
-              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
-              <span><a class="li_check">查看详情</a></span>
-            </div>
-          </li>
-          <li>
-            <div class="li_one">
-              <a>广东省广州市->北京市</a>
-              <span>2019-02-24 12:11:00</span>
-            </div>
-            <div class="li_two">
-              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
-              <span><a class="li_check">查看详情</a></span>
-            </div>
-          </li>
-          <li>
-            <div class="li_one">
-              <a>广东省广州市->北京市</a>
-              <span>2019-02-24 12:11:00</span>
-            </div>
-            <div class="li_two">
-              <a><span>长2米</span>|<span>载重5吨</span>|<span>本地车</span></a>
-              <span><a class="li_check">查看详情</a></span>
-            </div>
-          </li>
-        </ul>
+        <div class="list_new_box">
+          <ul 
+            class="list_new_ul">
+            <li
+              v-for="(item,index) in newestCar"
+              :key="index"
+              class="manage_box"
+            >
+              <div class="li_one">
+                <a :title="item.startProvince+item.startCity+'->'+item.endProvince+item.endCity">{{ item.startProvince }}{{ item.startCity }}->{{ item.endProvince }}{{ item.endCity }}</a>
+                <span>{{ item.createTime }}</span>
+              </div>
+              <div class="li_two">
+                <a><span>长{{ item.carLength }}米</span>|<span>载重{{ item.carLoad }}吨</span>|<span>{{ item.carSourceTypeName }}</span></a>
+                <span><a
+                  :href="'/cheyuan/detail?id=' + item.id"
+                  class="li_check">查看详情</a></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+
       </div>
       <!-- 最新车源end -->
 
@@ -353,7 +344,7 @@
         <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
         <div class="rc_list">
           <div class="left"><p>1</p></div>
-          <div class="img"><img src="../../static/images/index/wlgs_tj_00.png" ></div>
+          <div class="img"><img src="/images/index/wlgs_tj_00.png" ></div>
           <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
         </div>
         <div class="rc_list">
@@ -367,42 +358,57 @@
         <div class="list-box-r-top">
           <form action="">
             <h2 class="list_help_title">帮我找优质运力</h2>
-            <div class="ltl-input">
+            <div 
+              id="form0" 
+              class="ltl-input0">
               <input 
-                id="right-bar-form" 
-                autocomplete="off" 
-                wtmap="" 
+                id="right-bar-form"
+                data-toggle="city-picker"
+                data-level="district"
                 type="text" 
                 class="ltl-location" 
                 placeholder="请选择出发地">
               <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
             </div>
-            <div class="ltl-input">
-              <input 
-                id="right-bar-to" 
-                autocomplete="off" 
-                wtmap="" 
+            <div 
+              id="form1" 
+              class="ltl-input0">
+              <input
+                autocomplete="off"
+                data-toggle="city-picker"
+                data-level="district"
                 type="text" 
                 class="ltl-location" 
                 placeholder="请选择目到达地">
               <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
             </div>
-            <div class="ltl-input">
-              <input 
-                id="right-bar-to" 
-                autocomplete="off" 
-                wtmap="" 
-                type="text" 
-                class="ltl-location" 
-                placeholder="请选择类型">
+            <div 
+              id="form2" 
+              class="ltl-input0">
+              <select 
+                v-model="checkNotice.selectValue"
+                :style="{'color':checkNotice.selectValue === '请选择类型'?'#aaaaaa':'#333333'}"
+                class="ltl-select">
+                <option>请选择类型</option>
+                <option 
+                  v-for="(item,index) in AF018Select"
+                  :value="item.code"
+                  :key="index">{{ item.name }}</option>
+              </select>
               <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
             </div>
+
             <div class="ltl-input">
               <input 
-                type="text" 
-                class="ltl-phone" 
-                placeholder="11位手机号">
-              <span class="ltl-button">找到通知我</span>
+                v-model="checkNotice.phone" 
+                :placeholder="phoneHolder" 
+                type="text"
+                class="ltl-phone"
+                maxlength="11"
+              >
+              <span 
+                class="ltl-button" 
+                @click="sendNotice()">找到通知我</span>
             </div>
           </form>
         </div>
@@ -418,7 +424,7 @@
               v-for="(item,index) in hotRecommend" 
               :key="index" 
               class="hot-cities-li"><a
-                :href="'/cheyuan/detail?id='+ item.companyId"
+                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
         </div>
@@ -426,10 +432,10 @@
           <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
           <ul class="hot-cities">
             <li 
-              v-for="(item,index) in hotRecommend" 
+              v-for="(item,index) in startFromRecommend"
               :key="index"
               class="hot-cities-li" ><a
-                :href="'/cheyuan/detail?id='+ item.companyId"
+                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
         </div>
@@ -469,113 +475,54 @@ export default {
   },
   data() {
     return {
-      recommendList: [], //车源信息推荐列表
-      dataset: [],
-      carInfoList: [], //车源信息列表
       pages: 0,
       currentPage: 1,
-      AF032: [], //载重列表
-      AF032Id: '',
-      carLoadLower: '', //载重
-      carLoadUpper: '', //载重
-      AF031: [], //车厢长度列表
-      AF031Id: '',
-      carLengthLower: '', //车厢长度
-      carLengthUpper: '', //车厢长度
       longCarList: [
         { name: '不限', value: '' },
         { name: '即时车源', value: '1' },
         { name: '长期车源', value: '0' }
       ],
-      isLongCar: '', //即时/长期
       carSourceList: [
         { name: '不限', value: '' },
         { name: '本地车', value: 'AF01802' },
         { name: '回程车', value: 'AF01801' }
       ],
-      carSourceType: '', //车源类型
-      AF018: [], //车辆类型列表
-      carType: '', //车辆类型
-      startProvince: '',
-      startCity: '',
-      startArea: '',
-      endProvince: '',
-      endCity: '',
-      endArea: '',
-      recommendBy28: {}, //28快运为您推荐
-      recommendBy28Label: '',
-      startFromRecommend: [], //广州市出发的车源
-      startFromRecommendLabel: '',
-      hotRecommend: [], //全国热门车源信息
-      hotRecommendLabel: ''
+      inTerVar: null,
+      checkNotice: {
+        start: '',
+        end: '',
+        selectValue: '请选择类型',
+        phone: ''
+      },
+      phoneHolder: '请输入正确手机号'
     }
   },
   async asyncData({ $axios, app, query }) {
-    let carType = '',
-      carSourceType = '',
-      isLongCar = '',
-      AF032Id = '',
-      AF031Id = '',
-      carLengthLower = '',
-      carLengthUpper = '',
-      carLoadLower = '',
-      carLoadUpper = '',
-      endArea = '',
-      endCity = '',
-      endProvince = '',
-      startArea = '',
-      startCity = '',
-      startProvince = ''
-    if (query.carType) {
-      carType = query.carType
-    }
-    if (query.carSourceType) {
-      carSourceType = query.carSourceType
-    }
-    if (query.isLongCar) {
-      isLongCar = query.isLongCar
-    }
-    if (query.AF032Id) {
-      AF032Id = query.AF032Id
-    }
-    if (query.AF031Id) {
-      AF031Id = query.AF031Id
-    }
-    if (query.carLengthLower) {
-      carLengthLower = query.carLengthLower
-    }
-    if (query.carLengthUpper) {
-      carLengthUpper = query.carLengthUpper
-    }
-    if (query.carLoadLower) {
-      carLoadLower = query.carLoadLower
-    }
-    if (query.carLoadUpper) {
-      carLoadUpper = query.carLoadUpper
-    }
-    if (query.endArea) {
-      endArea = query.endArea
-    }
-    if (query.endCity) {
-      endCity = query.endCity
-    }
-    if (query.endProvince) {
-      endProvince = query.endProvince
-    }
-    if (query.startArea) {
-      startArea = query.startArea
-    }
-    if (query.startCity) {
-      startCity = query.startCity
-    } else {
-      startCity = app.$cookies.get('currentAreaFullName')
-    }
-    if (query.startProvince) {
-      startProvince = query.startProvince
-    } else {
-      startProvince = app.$cookies.get('currentProvinceFullName')
+    let vo = {
+      carType: query.carType ? query.carType : '', //车辆类型
+      carSourceType: query.carSourceType ? query.carSourceType : '', //车源类型
+      isLongCar: query.isLongCar ? query.isLongCar : '', //即时/长期
+      AF032Id: query.AF032Id ? query.AF032Id : '',
+      AF031Id: query.AF031Id ? query.AF031Id : '',
+      carLengthLower: query.carLengthLower ? query.carLengthLower : '', //车厢长度
+      carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
+      carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
+      carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
+      endArea: query.endArea ? query.endArea : '',
+      endCity: query.endCity ? query.endCity : '',
+      endProvince: query.endProvince ? query.endProvince : '',
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
     }
     let AF018 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
+    )
+    let AF018Select = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
     )
     if (AF018.data.status === 200) {
@@ -593,84 +540,81 @@ export default {
     if (AF032.data.status === 200) {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
-    let vo = {
-      startProvince: startProvince,
-      startCity: startCity,
-      startArea: startArea,
-      endProvince: endProvince,
-      endCity: endCity,
-      endArea: endArea,
-      carType: carType,
-      isLongCar: isLongCar,
-      carSourceType: carSourceType,
-      AF031Id: AF031Id,
-      AF032Id: AF032Id,
-      carLengthLower: carLengthLower,
-      carLengthUpper: carLengthUpper,
-      carLoadLower: carLoadLower,
-      carLoadUpper: carLoadUpper
-    }
     let carInfoList = await getCarInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
     //车源底部推荐
-    let recommend = await $axios.post('/28-web/carInfo/related/links', {
-      endArea: endArea,
-      endCity: endCity,
-      endProvince: endProvince,
-      startArea: startArea,
-      startCity: startCity,
-      startProvince: startProvince
-    })
+    let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
+    let newestCarRes = await $axios.get('/28-web/carInfo/newestCar') //最新车源推荐列表
     return {
-      AF018: AF018.data.status === 200 ? AF018.data.data : [],
-      AF031: AF031.data.status === 200 ? AF031.data.data : [],
-      AF032: AF032.data.status === 200 ? AF032.data.data : [],
+      AF018: AF018.data.status === 200 ? AF018.data.data : [], //车辆类型列表
+      AF018Select: AF018Select.data.status === 200 ? AF018Select.data.data : [], //优质运力 车辆类型列表
+      AF031: AF031.data.status === 200 ? AF031.data.data : [], //车厢长度列表
+      AF032: AF032.data.status === 200 ? AF032.data.data : [], //载重列表
       recommendList:
-        recommendList.data.status === 200 ? recommendList.data.data : [],
+        recommendList.data.status === 200 ? recommendList.data.data : [], //车源信息推荐列表
       recommendBy28:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.links
-          : {},
+          : [], //28快运为您推荐
       recommendBy28Label:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.label
-          : {},
+          : '',
       startFromRecommend:
         recommend.data.status === 200
           ? recommend.data.data.startFromRecommend.links
-          : {},
+          : [], //广州市出发的车源
       startFromRecommendLabel:
         recommend.data.status === 200
           ? recommend.data.data.startFromRecommend.label
-          : {},
+          : '',
       hotRecommend:
         recommend.data.status === 200
           ? recommend.data.data.hotRecommend.links
-          : {},
+          : [], ////全国热门车源信息
       hotRecommendLabel:
         recommend.data.status === 200
           ? recommend.data.data.hotRecommend.label
-          : {},
+          : '',
       carInfoList: carInfoList.list,
       pages: carInfoList.pages,
-      carType: carType,
-      carSourceType: carSourceType,
-      isLongCar: isLongCar,
-      AF032Id: AF032Id,
-      AF031Id: AF031Id,
-      carLengthLower: carLengthLower,
-      carLengthUpper: carLengthUpper,
-      carLoadLower: carLoadLower,
-      carLoadUpper: carLoadUpper,
-      endArea: endArea,
-      endCity: endCity,
-      endProvince: endProvince,
-      startArea: startArea,
-      startCity: startCity,
-      startProvince: startProvince
+      vo: vo,
+      newestCar: newestCarRes.data.status === 200 ? newestCarRes.data.data : []
     }
   },
   mounted() {
+    let rollContainer_h = $('.list_new_box').height()
+    let roll = $('.list_new_ul')
+    roll.append(roll.html())
+    let number = 4
+    let l = this.newestCar.length
+    let manage_box_h = $('.manage_box').height()
+    let startScroll = () => {
+      this.inTerVar = setInterval(() => {
+        roll
+          .stop()
+          .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
+            if (number > l) {
+              number = 4
+              roll.css('top', '0px')
+            }
+          })
+        number = number + 4
+      }, 6000)
+    }
+    if (manage_box_h * l > rollContainer_h) {
+      startScroll()
+    }
+    $('.list_new_box').hover(
+      () => {
+        clearInterval(this.inTerVar)
+        this.inTerVar = null
+      },
+      () => {
+        startScroll()
+      }
+    )
+
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
@@ -682,55 +626,89 @@ export default {
       $('.select_con').css('display', 'block')
     })
     $('#list_nav_a').html(
-      this.startCity +
-        this.startArea +
+      this.vo.startCity +
+        this.vo.startArea +
         ' 到 ' +
-        this.endCity +
-        this.endArea +
+        this.vo.endCity +
+        this.vo.endArea +
         ' 车源信息'
     )
     if (
-      (!this.startCity && !this.startArea) ||
-      (!this.endCity && !this.endArea)
+      (!this.vo.startCity && !this.vo.startArea) ||
+      (!this.vo.endCity && !this.vo.endArea)
     ) {
       $('#list_nav_a').html(
-        this.startCity +
-          this.startArea +
+        this.vo.startCity +
+          this.vo.startArea +
           '  ' +
-          this.endCity +
-          this.endArea +
+          this.vo.endCity +
+          this.vo.endArea +
           '车源信息'
       )
     }
     $('#carLineFrom input').citypicker({
-      province: this.startProvince,
-      city: this.startCity,
-      district: this.startArea
+      province: this.vo.startProvince,
+      city: this.vo.startCity,
+      district: this.vo.startArea
     })
     $('#carLineTo input').citypicker({
-      province: this.endProvince,
-      city: this.endCity,
-      district: this.endArea
+      province: this.vo.endProvince,
+      city: this.vo.endCity,
+      district: this.vo.endArea
     })
     this.pagination()
   },
+  destroyed() {
+    clearInterval(this.inTerVar)
+    this.inTerVar = null
+  },
   methods: {
+    sendNotice() {
+      if (this.checkNotice.start === '') {
+        $('#form0').css('border-color', 'red')
+      } else {
+        $('#form0').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.end === '') {
+        $('#form1').css('border-color', 'red')
+      } else {
+        $('#form1').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.selectValue === '请选择类型') {
+        $('#form2').css('border-color', 'red')
+      } else {
+        $('#form2').css('border-color', '#e5e5e5')
+      }
+      let re = /^1[3|4|5|7|8|9]\d{9}$/
+      if (this.checkNotice.phone === '') {
+        $('.ltl-phone').css('border-color', 'red')
+        this.phoneHolder = '请输入正确手机号'
+      } else {
+        if (re.test(this.checkNotice.phone)) {
+          $('.ltl-phone').css('border-color', '#e5e5e5')
+        } else {
+          $('.ltl-phone').css('border-color', 'red')
+          this.checkNotice.phone = ''
+          this.phoneHolder = '请输入正确手机号'
+        }
+      }
+    },
     searchDo() {
       let list1 = [],
         list2 = []
       $('#carLineFrom .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
-      this.startProvince = list1[0] ? list1[0] : ''
-      this.startCity = list1[1] ? list1[1] : ''
-      this.startArea = list1[2] ? list1[2] : ''
+      this.vo.startProvince = list1[0] ? list1[0] : ''
+      this.vo.startCity = list1[1] ? list1[1] : ''
+      this.vo.startArea = list1[2] ? list1[2] : ''
 
       $('#carLineTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
-      this.endProvince = list2[0] ? list2[0] : ''
-      this.endCity = list2[1] ? list2[1] : ''
-      this.endArea = list2[2] ? list2[2] : ''
+      this.vo.endProvince = list2[0] ? list2[0] : ''
+      this.vo.endCity = list2[1] ? list2[1] : ''
+      this.vo.endArea = list2[2] ? list2[2] : ''
     },
     async search() {
       this.searchDo()
@@ -740,63 +718,65 @@ export default {
       // this.currentPage = carInfoList.currentPage
       // this.pagination()
       window.location.href = `/cheyuan?carLengthLower=${
-        this.carLengthLower
-      }&AF031Id=${this.AF031Id}&carLengthUpper=${this.carLengthUpper}&AF032Id=${
-        this.AF032Id
-      }&carLoadLower=${this.carLoadLower}&carLoadUpper=${
-        this.carLoadUpper
-      }&carSourceType=${this.carSourceType}&carType=${this.carType}&endArea=${
-        this.endArea
-      }&endCity=${this.endCity}&endProvince=${this.endProvince}&isLongCar=${
-        this.isLongCar
-      }&startArea=${this.startArea}&startCity=${this.startCity}&startProvince=${
-        this.startProvince
-      }`
+        this.vo.carLengthLower
+      }&AF031Id=${this.vo.AF031Id}&carLengthUpper=${
+        this.vo.carLengthUpper
+      }&AF032Id=${this.vo.AF032Id}&carLoadLower=${
+        this.vo.carLoadLower
+      }&carLoadUpper=${this.vo.carLoadUpper}&carSourceType=${
+        this.vo.carSourceType
+      }&carType=${this.vo.carType}&endArea=${this.vo.endArea}&endCity=${
+        this.vo.endCity
+      }&endProvince=${this.vo.endProvince}&isLongCar=${
+        this.vo.isLongCar
+      }&startArea=${this.vo.startArea}&startCity=${
+        this.vo.startCity
+      }&startProvince=${this.vo.startProvince}`
     },
     AF032Click(item) {
-      this.AF032Id = item.id
+      this.vo.AF032Id = item.id
       if (item.name.indexOf('<') !== -1) {
-        this.carLoadLower = 0
-        this.carLoadUpper = item.name.substring(1, 20)
-      } else if (item.name.indexOf('>') != -1) {
-        this.carLoadLower = item.name.substring(1, 20)
-        this.carLoadUpper = 9999
+        this.vo.carLoadLower = 0
+        this.vo.carLoadUpper = item.name.substring(1, 20)
+      } else if (item.name.indexOf('>') !== -1) {
+        this.vo.carLoadLower = item.name.substring(1, 20)
+        this.vo.carLoadUpper = 9999
       } else if (item.name === '不限') {
-        this.carLoadLower = ''
-        this.carLoadUpper = ''
+        this.vo.carLoadLower = ''
+        this.vo.carLoadUpper = ''
       } else {
-        this.carLoadLower = item.name.split('-', 2)[0]
-        this.carLoadUpper = item.name.split('-', 2)[1]
+        this.vo.carLoadLower = item.name.split('-', 2)[0]
+        this.vo.carLoadUpper = item.name.split('-', 2)[1]
       }
       this.search()
     },
     AF031Click(item) {
-      this.AF031Id = item.id
+      this.vo.AF031Id = item.id
       if (item.name.indexOf('<') !== -1) {
-        this.carLengthLower = 0
-        this.carLengthUpper = item.name.substring(1, 20)
-      } else if (item.name.indexOf('>') != -1) {
-        this.carLengthLower = item.name.substring(1, 20)
-        this.carLengthUpper = 9999
+        this.vo.carLengthLower = 0
+        this.vo.carLengthUpper = item.name.substring(1, 20)
+      } else if (item.name.indexOf('>') !== -1) {
+        this.vo.carLengthLower = item.name.substring(1, 20)
+        this.vo.carLengthUpper = 9999
       } else if (item.name === '不限') {
-        this.carLengthLower = ''
-        this.carLengthUpper = ''
+        this.vo.carLengthLower = ''
+        this.vo.carLengthUpper = ''
       } else {
-        this.carLengthLower = item.name.split('-', 2)[0]
-        this.carLengthUpper = item.name.split('-', 2)[1]
+        this.vo.carLengthLower = item.name.split('-', 2)[0]
+        this.vo.carLengthUpper = item.name.split('-', 2)[1]
       }
       this.search()
     },
     longCarClick(item) {
-      this.isLongCar = item.value
+      this.vo.isLongCar = item.value
       this.search()
     },
     carSourceTypeClick(item) {
-      this.carSourceType = item.value
+      this.vo.carSourceType = item.value
       this.search()
     },
     AF018Click(item) {
-      this.carType = item.code
+      this.vo.carType = item.code
       this.search()
     },
     pagination() {
@@ -806,21 +786,7 @@ export default {
         callback: async current => {
           $('#current1').text(current)
           this.searchDo()
-          let carInfoList = await getCarInfoList(this.$axios, current, {
-            startProvince: this.startProvince,
-            startCity: this.startCity,
-            startArea: this.startArea,
-            endProvince: this.endProvince,
-            endCity: this.endCity,
-            endArea: this.endArea,
-            carType: this.carType,
-            isLongCar: this.isLongCar,
-            carSourceType: this.carSourceType,
-            carLengthLower: this.carLengthLower,
-            carLengthUpper: this.carLengthUpper,
-            carLoadLower: this.carLoadLower,
-            carLoadUpper: this.carLoadUpper
-          })
+          let carInfoList = await getCarInfoList(this.$axios, current, this.vo)
           this.carInfoList = carInfoList.list
           this.pages = carInfoList.pages
           this.current = carInfoList.current
@@ -966,8 +932,7 @@ body {
   height: 28px;
   color: #f9f9f9;
   padding-left: 20px;
-  background: no-repeat url(../../static/images/list_wlzx/wlgs_search.png) 10px
-    6px #3f94ee;
+  background: no-repeat url(/images/list_wlzx/wlgs_search.png) 10px 6px #3f94ee;
 }
 #flush {
   width: 70px;
@@ -1004,8 +969,7 @@ body {
   background-color: #f1f1f1;
   border: solid 1px #e6e6e6;
   margin-bottom: 14px;
-  background: no-repeat url(../../static/images/list_wlzx/xiajt.png) #f1f1f1
-    363px 16px;
+  background: no-repeat url(/images/list_wlzx/xiajt.png) #f1f1f1 363px 16px;
   position: relative;
 }
 .list_tiaoj span {
@@ -1196,7 +1160,7 @@ body {
 }
 
 .wlzx_list_6 .p3 input {
-  background: no-repeat url(../../static/images/article_wlzx/15qq.gif) 12px 3px;
+  background: no-repeat url(/images/article_wlzx/15qq.gif) 12px 3px;
 
   padding-left: 15px;
   width: 87px;
@@ -1553,7 +1517,7 @@ body {
 .icon-btn-arrow-down-2 {
   margin-top: 5px;
   display: inline-block;
-  background: url(../../static/images/list_wlzx/xiajt.png);
+  background: url(/images/list_wlzx/xiajt.png);
   background-repeat: no-repeat;
   width: 12px;
   height: 7px;
@@ -1571,7 +1535,7 @@ body {
 .icon-btn-arrow-up-2 {
   margin-top: 5px;
   display: inline-block;
-  background: url(../../static/images/list_wlzx/up_jt.png);
+  background: url(/images/list_wlzx/up_jt.png);
   background-repeat: no-repeat;
   width: 12px;
   height: 7px;
@@ -1581,14 +1545,12 @@ body {
 
 #carLineFrom {
   width: 220px;
-  background: url(../../static/images/list_wlzx/start_addr.png) no-repeat 200px
-    8px #fff;
+  background: url(/images/list_wlzx/start_addr.png) no-repeat 200px 8px #fff;
   background-size: 16px 17px;
 }
 #carLineTo {
   width: 220px;
-  background: url(../../static/images/list_wlzx/end_addr.png) no-repeat 200px
-    8px #fff;
+  background: url(/images/list_wlzx/end_addr.png) no-repeat 200px 8px #fff;
   background-size: 16px 17px;
 }
 #cy_list_0 {
@@ -1640,7 +1602,7 @@ body {
 }
 
 .lines-sprite-icons {
-  background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
   color: #333;
@@ -1705,24 +1667,30 @@ body {
 .che_box {
   float: left;
 }
-
+.list_new_box {
+  height: 240px;
+  overflow: hidden;
+  margin-top: 20px;
+}
 .list_new {
   float: left;
   margin-left: 20px;
   margin-bottom: 20px;
+  background-color: white;
 }
 .list_new .list_new_ul {
+  position: relative;
   width: 342px;
   background: #fff;
-  padding: 20px;
+  padding: 0 20px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
 .list_new .list_new_ul li {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  /*flex: 1;*/
+  /*display: flex;*/
+  /*flex-direction: column;*/
 }
 .li_one {
   display: flex;
@@ -1742,6 +1710,9 @@ body {
   flex: 1;
   cursor: pointer;
   color: #333333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .li_one span {
   flex: 1;
@@ -1773,11 +1744,33 @@ body {
 .list-box-r-top {
   width: 100%;
   box-sizing: border-box;
-  background: url(../../static/images/list_wlzx/che_background.png) no-repeat;
+  background: url(/images/list_wlzx/che_background.png) no-repeat;
   /* background: #fff; */
   padding: 20px 20px;
   /* border: 1px solid #ececec; */
   margin-bottom: 10px;
+}
+.ltl-input0 {
+  position: relative;
+  margin: 7px 0 10px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: white;
+  font-size: 14px;
+  line-height: 32px;
+}
+.ltl-select {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  border: none;
+  outline: none;
+}
+.ltl-select option {
+  color: #333333;
 }
 .ltl-input {
   position: relative;
@@ -1806,7 +1799,7 @@ body {
   top: 8px;
 }
 .ss56-common-sprite1 {
-  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
 .ltl-ico-end {
@@ -1820,7 +1813,7 @@ body {
   top: 8px;
 }
 .ss56-common-sprite2 {
-  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
 .list_help_title {
@@ -1863,7 +1856,7 @@ body {
   float: right;
 }
 .lines-sprite-icons {
-  background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
   color: #333;

@@ -46,26 +46,24 @@
                   name="dopost"
                   value="search" >
                 <div
-                  id="carLineFrom"
+                  id="addressFrom"
                   class="fl list_input"
                   style="position:relative;" >
                   <input
-                    id="address"
                     name="cfd"
-                    style="height: 80%;border: none;outline: none;"
+                    style="height: 100%;width:100%;border: none;outline: none;"
                     data-toggle="city-picker"
                     data-level="district"
                     type="text"
                     placeholder="请输入出发地" >
                 </div>
                 <div
-                  id="carLineTo"
+                  id="addressTo"
                   class="fl list_input"
                   style="position:relative" >
                   <input
-                    id="jwd"
                     name="ddd"
-                    style="height: 80%;border: none;outline: none;"
+                    style="height: 100%;width:100%;border: none;outline: none;"
                     data-toggle="city-picker"
                     data-level="district"
                     type="text"
@@ -76,12 +74,14 @@
                   name="Submit2"
                   readonly=""
                   value=" 搜索 "
-                  class="list_button">
+                  class="list_button"
+                  @click="search()">
                 <input
                   id="flush"
                   name="Submit2"
                   readonly=""
-                  value="重置 ">
+                  value="重置 "
+                  @click="reload()">
               </form>
 
 
@@ -93,6 +93,7 @@
               <dd >
                 <input
                   id="companyName"
+                  v-model="companyName"
                   name="cfd"
                   type="text"
                   class="list_input"
@@ -105,6 +106,7 @@
                 style="position: relative;">
                 <input
                   id="select_wlyq"
+                  v-model="parkName"
                   placeholder="请选择园区"
                   class="list_wlzx_yq js_yq">
                 <div id="list_wlzx_yq">
@@ -123,12 +125,15 @@
                     </div>
                     <input
                       id="wlyq_name"
+                      v-model="vo.parkName"
                       class="list_wlyq_input"
                       placeholder="请输入园区名称" >
                     <input
                       class="list_wlyq_cx"
                       readonly=""
-                      value="查询">
+                      value="查询"
+                      @click="seachlist"
+                    >
                   </div>
                   <div
                     id="js010"
@@ -137,11 +142,14 @@
                       <font>暂无园区信息</font>
                     </div>
 
-                    <div
+                    <div 
+                      v-for="(item,index) in logisticsPark" 
+                      :key="index" 
                       class="wlzx_yq_item"
-                      style="display: none;">
-                      <font id="wlzx_yq_01"/>
-                      <span id="wlzx_yq_02"/>
+                      @click="addTitle(item)"
+                    >
+                      <font id="wlzx_yq_01">{{ item.parkName }}</font>
+                      <span id="wlzx_yq_02">{{ item.parkAddress }}</span>
                     </div>
                   </div>
                 </div>
@@ -150,16 +158,20 @@
 
               <dd id="tjcx_02" >
                 <a
-                  class="now all"
-                  href="/plus/list.php?tid=81"
-                >不限</a>
+                  v-for="(item,index) in AF029"
+                  :class="[item.code === vo.belongBrandCode ? 'now':'all']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF029Click(item)">{{ item.name }}</a>
               </dd>
               <dt >其他&nbsp;:</dt>
               <dd id="tjcx_03">
                 <a
-                  class="now all"
-                  href="/plus/list.php?tid=81" >不限</a>
-                <a class="shiming" >实名认证</a>
+                  v-for="(item,index) in AF025"
+                  :class="[item.code === vo.otherServiceCode ? 'now':'all']"
+                  :key="index"
+                  href="javascript:"
+                  @click="AF025Click(item)">{{ item.name }}</a>
               </dd>
             </dl>
           </div>
@@ -176,51 +188,58 @@
               title="距离从近到远">距离最近</span>
           </div>
 
-          <div class="list_none">
+          <div 
+            v-if="WangdiangInfoList.length === 0" 
+            class="list_none" 
+            style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/templets/default/images/none_pic.png">
           </div>
           <ul
+            v-for="(item,index) in WangdiangInfoList"
+            :key="index" 
             class="wlzx_list"
-            style="display: none;">
+          >
 
             <li class="wlzx_list_2">
               <p class="p1"><a
                 id="nr01"
                 href="#"
-                target="_blank">全驰物流荆州网点</a></P>
+                target="_blank">{{ item.pointName }}</a></P>
               <p class="p2"><a
                 id="nr01_1"
                 href="#"
-                target="_blank"><font id="nr02">北京华远物流有限公司</font></a></p>
+                target="_blank"><font id="nr02">{{ item.companyName ? item.companyName : '普通货主' }}</font></a></p>
               <p class="p3"><i>地址：</i><font
                 id="nr03"
-                class="">北京大兴区魏永路博洋仓储物流园</font></p>
-              <p class="p4"><i>约</i><em
-                id="nr04"
-                class=""/><i>公里</i></p>
+                class="">{{ item.pointAddress }}</font></p>
+              <p class="p4"><i>约</i><em id="nr04">{{ item.distance }}</em><i>公里</i></p>
             </li>
             <li class="wlzx_list_3">
-              <p class="p1"><i>联系人：</i><span id="nr05">张总</span></P>
-              <p class="p2"><i>电话：</i><span id="nr06">0731-88818882     17707316111</span></p>
+              <p class="p1"><i>联系人：</i><span id="nr05">{{ item.contactsName }}</span></P>
+              <p class="p2"><i>电话：</i><span id="nr06">{{ item.contactsTel? item.contactsTel + '-' : '' }}{{ item.mobile }}</span></p>
             </li>
             <li class="wlzx_list_4">
-              <p class="p1"><img
-                id="list_shiming"
-                src="../../static/wangdian/images/10shiming.png"></P>
-              <p class="p2"><img
-                id="list_xinyong"
-                src="../../static/wangdian/images/11xinyong.png"></p>
-              <p class="p3"><img
-                id="list_danbao"
-                src="../../static/wangdian/images/12danbao.png"></p>
+              <p 
+                v-if="item.authStatus" 
+                class="p1"><img
+                  id="list_shiming"
+                  src="/wd/images/10shiming.png"></P>
+              <p 
+                v-if="item.isVip" 
+                class="p2" ><img
+                  id="list_xinyong"
+                  src="/wd/images/11xinyong.png"></p>
+              <p 
+                v-if="item.collateral" 
+                class="p3" ><img
+                  id="list_danbao"
+                  src="/wd/images/12danbao.png"></p>
             </li>
             <li class="wlzx_list_6">
               <p class="p1"><a target="_blank"><input
-                id="fahuo"
                 value="下单"></a>
               </p><p class="p2"><a target="_blank"><input
-                id="nr_a01"
                 value="查看"></a>
             </p></li>
           </ul>
@@ -243,55 +262,32 @@
         class="list_right">
 
         <div class="zx_sx"><span class="biaozhi"/><span>物流公司推荐</span></div>
-        <div class="tj_none">
+        <div 
+          v-if="recommendList.length === 0" 
+          class="tj_none" >
           <span>没有相关物流公司推荐</span>
         </div>
         <div
-          class="tj_list"
-          style="display: none;">
+          v-for="(item,index) in recommendList"
+          :key="index" 
+          class="tj_list" 
+        >
           <p class="p1"><a
             id="tj010"
-            target="_blank"><span id="tj_01">北京华远物流有限公司</span></a></p>
-          <p class="p2">
-
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-
+            target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
+          <p class="p7">
+            <!-- <img 
+              v-for="(item,index) in creditImg" 
+              :key="index" 
+              src="../../static/wangdian/images/blue.gif"> -->
+          
           </p>
-          <p class="p3"><i>联系人：</i><font id="tj_02">张总</font></p>
-          <p class="p4"><i>电话：</i><font id="tj_03">0731-88818882  17707316111</font></p>
+
+          <p class="p3"><i>联系人：</i><font id="tj_02">{{ item.contactsName }}</font></p>
+          <p class="p4"><i>电话：</i><font id="tj_03">{{ item.contactsTel ? item.contactsTel + '-' : '' }}{{ item.mobile }}</font></p>
           <p class="p5"><i>地址：</i><font
             id="tj_04"
-            class="">北京大兴区魏永路博洋仓储物流园</font></p>
+            class="">{{ item.address }}</font></p>
           <p class="p6">
             <a
               id="tj_05"
@@ -311,81 +307,268 @@
 </template>
 
 <script>
+import axios from 'axios'
+
+async function getWdiangSearchList($axios, vo) {
+  let res = await $axios.post('/28-web/logisticsPark/search', vo)
+  if (res.data.status === 200) {
+    return res.data.data.list
+  }
+}
+
+async function getWangdiangInfoList($axios, currentPage, vo = {}) {
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 10
+  let prefix = ''
+  if (process.client) {
+    $axios = axios
+    prefix = '/api'
+  }
+  let res = await $axios.post(prefix + '/28-web/pointNetwork/list', parm) //车源信息列表
+  console.log('99999999', parm, res)
+  if (res.data.status === 200) {
+    res.data.data.list.forEach(item => {
+      if (item.pointName.length > 15) {
+        item.pointName = item.pointName.substring(0, 15) + '...'
+      }
+      if (item.companyName.length > 15) {
+        item.companyName = item.companyName.substring(0, 15) + '...'
+      }
+      if (item.pointAddress.length > 15) {
+        item.pointAddress = item.pointAddress.substring(0, 15) + '...'
+      }
+    })
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
+    }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
+  }
+}
+async function getRecommendList($axios, vo) {
+  let parm = vo
+  parm.currentPage = 1
+  parm.pageSize = 10
+  let res = await $axios.post('/28-web/logisticsCompany/recommend', parm)
+  // console.log('4444', res.data.data.list, res.data.data.list[0].credit)
+  if (res.data.status === 200) {
+    res.data.data.list.forEach(item => {
+      if (item.credit >= 0 && item.credit <= 3) {
+      }
+    })
+
+    return res.data.data.list
+  } else {
+    return []
+  }
+}
 export default {
   name: 'Index',
   head: {
     link: [
-      { rel: 'stylesheet', href: '/wangdian/css/list_wangdian.css' },
+      { rel: 'stylesheet', href: '/css/wangdian.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
-    // script: [
-    //   { src: '../js/jquery.pagination.min.js' },
-    //   { src: '../js/WTMap.min.js' },
-    //   { src: './js/city-picker.data.js' },
-    //   { src: './js/city-picker.js' },
-    //   { src: '../../static/gongsi/js/list_wlgs.js' }
-    // ]
     script: [
-      { src: './js/city-picker.data.js' },
-      { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' },
-      { src: '/js/gaodemap2.js' }
+      { src: '/js/city-picker.data.js' },
+      { src: '/js/city-picker.js' },
+      { src: '/js/jquery.pagination.min.js' }
     ]
   },
-  // layout: 'subLayout',
+  data() {
+    return {
+      wangdianInfoList: [], //网点信息列表
+      totalPage: 1,
+      currentPage: 1,
+      parkName: '',
+      startProvince: '',
+      startCity: '',
+      startArea: '',
+      endProvince: '',
+      endCity: '',
+      endArea: '',
+      companyName: '',
+      creditImg: []
+    }
+  },
+  async asyncData({ $axios, app, query }) {
+    let vo = {
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName'),
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startArea: query.startArea ? query.startArea : '',
+      endProvince: query.endProvince ? query.startProvince : '',
+      endCity: query.endCity ? query.endCity : '',
+      endArea: query.endArea ? query.endArea : '',
+      authStatus: query.authStatus ? query.authStatus : '',
+
+      parkName: query.parkName ? query.parkName : '',
+      otherServiceCode: query.otherServiceCode ? query.otherServiceCode : '',
+      belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
+      companyName: query.companyName ? query.companyName : ''
+    }
+    // console.log(vo)
+    //网点列表
+    let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
+    let recommendList = await getRecommendList($axios, vo)
+    // console.log('0000003330', WangdiangInfoList.list)
+    let AF029 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF029' //品牌
+    )
+    let AF025 = await $axios.get(
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
+    )
+
+    let logisticsPark = await getWdiangSearchList($axios, vo)
+    //网点信息列表
+    if (AF029.data.status === 200) {
+      AF029.data.data.unshift({ code: '', name: '不限' })
+    }
+    if (AF025.data.status === 200) {
+      AF025.data.data.unshift({ code: '', name: '不限' })
+    }
+    return {
+      AF029: AF029.data.status === 200 ? AF029.data.data : [],
+      AF025: AF025.data.status === 200 ? AF025.data.data : [],
+      logisticsPark: logisticsPark,
+      WangdiangInfoList: WangdiangInfoList.list,
+      recommendList: recommendList,
+      vo: vo
+    }
+  },
   mounted() {
-    seajs.use(['../js/city.js'], function() {
-      seajs.use(
-        ['../js/city-picker.js', '../js/jquery.pagination.min.js'],
-        function() {
-          seajs.use(['../wangdian/js/list_wangdian.js'], function() {
-            seajs.use(['../js/collection.js'], function() {
-              seajs.use(['../js/gaodemap2.js'], function() {
-                $('.list_tiaoj span').click(function() {
-                  // alert('1')
-                  $('.list_tiaoj span').removeClass('active')
-                  $(this).toggleClass('active')
-                })
-                function onCheckPage() {
-                  var beginPage = parseInt(
-                    document.beginPagefrm.beginPage.value
-                  )
-                  if (isNaN(beginPage)) {
-                    alert('请输入数字！')
-                    return false
-                  }
-                  if (beginPage <= 0) {
-                    beginPage = 1
-                  }
-                  if (beginPage > 100) {
-                    beginPage = 100
-                  }
-                  if (beginPage > 1) {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-                      beginPage
-                  } else {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-                  }
-                  return true
-                }
-                $('#pagination1').pagination({
-                  currentPage: 1,
-                  totalPage: process02(1),
-                  callback: function(current) {
-                    $('#current1').text(current)
-                    process02(current)
-                    window.location.href = '#top'
-                  }
-                })
-              })
-            })
-          })
-        }
-      )
+    let _this = this
+    $('#select_wlyq').mousedown(function() {
+      $('#list_wlzx_yq').css('display', 'block')
     })
+    //排序点击 S
+    $('#seq1').click(async function() {
+      $('#seq2').removeClass('active')
+      $(this).addClass('active')
+      let filterSign = 1
+      let WangdiangInfoList = await getWangdiangInfoList(
+        '',
+        1,
+        Object.assign(
+          {
+            filterSign: 1
+          },
+          _this.vo
+        )
+      )
+      _this.WangdiangInfoList = WangdiangInfoList.list
+    })
+
+    $('#seq2').click(async function() {
+      $('#seq1').removeClass('active')
+      $(this).addClass('active')
+      let filterSign = 2
+      let WangdiangInfoList = await getWangdiangInfoList(
+        '',
+        1,
+        Object.assign(
+          {
+            filterSign: 2
+          },
+          _this.vo
+        )
+      )
+      console.log('WangdiangInfoList.list', WangdiangInfoList.list)
+      _this.WangdiangInfoList = WangdiangInfoList.list
+    })
+    //排序点击 E
+    $('body').click(function(e) {
+      var _con = $('.js_yq') // 设置目标区域(排除此元素)
+      if (!_con.is(e.target) && _con.has(e.target).length === 0) {
+        $('#list_wlzx_yq').css('display', 'none')
+      }
+    })
+    $('#addressFrom input').citypicker({
+      province: this.vo.startProvince,
+      city: this.vo.startCity,
+      district: this.vo.startArea
+    })
+    $('#addressTo input').citypicker({
+      province: this.endProvince,
+      city: this.endCity,
+      district: this.endArea
+    })
+    this.pagination()
+  },
+  methods: {
+    searchDo() {
+      let list1 = [],
+        list2 = []
+      $('#addressFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      this.startProvince = list1[0] ? list1[0] : ''
+      this.startCity = list1[1] ? list1[1] : ''
+      this.startArea = list1[2] ? list1[2] : ''
+
+      $('#addressTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      this.endProvince = list2[0] ? list2[0] : ''
+      this.endCity = list2[1] ? list2[1] : ''
+      this.endArea = list2[2] ? list2[2] : ''
+    },
+    search() {
+      this.searchDo()
+      window.location.href = `/wangdian/?&belongBrandCode=${
+        this.vo.belongBrandCode
+      }&otherServiceCode=${this.vo.otherServiceCode}&companyName=${
+        this.companyName
+      }&parkName=${this.parkName}&endArea=${this.endArea}&endCity=${
+        this.endCity
+      }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
+        this.startCity
+      }&startProvince=${this.startProvince}`
+    },
+    //品牌
+    AF029Click(item) {
+      this.vo.belongBrandCode = item.code
+      this.search()
+    },
+    //其他
+    AF025Click(item) {
+      this.vo.otherServiceCode = item.code
+      this.search()
+    },
+    addTitle(item) {
+      this.parkName = item.parkName
+    },
+    //园区
+    async seachlist() {
+      let list1 = []
+      $('#wlyq_pos .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      this.vo.startProvince = list1[0] ? list1[0] : ''
+      this.vo.startCity = list1[1] ? list1[1] : ''
+      this.vo.startArea = list1[2] ? list1[2] : ''
+      this.logisticsPark = await getWdiangSearchList(this.$axios, this.vo)
+    },
+    pagination() {
+      $('#pagination1').pagination({
+        currentPage: this.currentPage,
+        totalPage: this.pages,
+        callback: async current => {
+          $('#current1').text(current)
+          let hyList = await getWangdiangInfoList(this.$axios, current, this.vo)
+          this.totalPage = hyList.pages
+          this.current = hyList.current
+          window.location.href = '#top'
+        }
+      })
+    }
   }
 }
 </script>
@@ -460,6 +643,10 @@ export default {
     width: 12px;
     height: 7px;
     cursor: pointer;
+  }
+  .select_con dl dd a.now {
+    background: #3371ff;
+    color: #fff;
   }
   /*显示隐藏E */
 }

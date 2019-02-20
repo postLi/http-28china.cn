@@ -231,7 +231,7 @@ function process01(){
           var isVip=datas[i].isVip;
           var authStatus=datas[i].authStatus;
           var collateral=datas[i].collateral;
-          var arcurl="/wlzx/2018/0509/7.html?id="+rangeId+"&publishId="+companyId; 
+          var arcurl="/zhuanxian/detail?id="+rangeId+"&publishId="+companyId; 
           $("#tj03").attr("href","/member/"+account+".html");
           $("#tj03").html(companyName);
           // $("#tj01").html( startLocation.substring(0,6));

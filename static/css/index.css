@@ -3594,6 +3594,10 @@ font-size: 14px;
   /* line-height: 38px; */
   overflow: hidden;
 }
+.header_m .city-picker-span{
+height: 38px;
+  line-height: 38px;
+}
 .hq-news-from .city-picker-span{min-width: 90px ;}
 .index_search .city-picker-span{line-height: 32px;padding-left: 0px;}
 .select_con .city-picker-span{padding-left: 0px;}
@@ -3643,7 +3647,7 @@ font-size: 14px;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   z-index: 99;
   display: none;
-  min-width: 330px;
+  min-width: 320px;
   margin-bottom: 20px;
 }
 

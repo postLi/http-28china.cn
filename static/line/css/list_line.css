@@ -3615,32 +3615,3 @@ a.list-table-unit:hover .list-title {
 
 
 
-.footer{
-  padding-top:27px;
-  font-family: MicrosoftYaHei;
-    height: 176px;
-    font-size:14px;
-    text-align:center;
-    border-top:2px solid #ccc;
-  background-color: #ddd;
-  }
-  .footer1 {
-  width:1200px;
-  }
-  .footer1 a{
-  color:#333;
-  padding: 0 20px;
-  line-height: 1.2;
-  border-right:1px solid #999999;
-  }
-  .footer1 a:last-child{
-    border:none;
-  }
-  .footer2 a{
-  color:#999999;}
-  .footer2 {
-  line-height:24px;
-  padding-top:10px;
-  width:1200px;
-  color:#999999;
-  }

@@ -117,7 +117,7 @@ $(".zx_a3").click(function(){
      if(!enda){enda=""}
    
      
-     s1='/plus/list.php?tid=77&start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
+     s1='/create/order?&start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
      s2='&startj='+startj+'&startw='+startw+'&endj='+endj+'&endw='+endw + '&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda;
 console.log(s1+s2);
 window.open(s1+s2);

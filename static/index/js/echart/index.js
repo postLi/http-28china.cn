@@ -74,7 +74,7 @@ $(function(){
     $('.line-list-echart').css("display","block")
     var start = $(this).find('.linestart').text();
     var end = $(this).find('.lineend').text();
-    var echart_url='/plus/list.php?tid=77&start='+start+'&end='+end+'&startc='+start+'&endc='+end;
+    var echart_url='/create/order?&start='+start+'&end='+end+'&startc='+start+'&endc='+end;
     $('#echart_order').attr("href",echart_url);
     showBigEchart(start,end);
   });

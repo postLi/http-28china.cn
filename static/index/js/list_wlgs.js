@@ -532,7 +532,7 @@ var totalPage=8;
 				var isVip=datas[i].isVip;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-				//var orderurl="/plus/list.php?tid=77&uid="+account+"&publishId="+companyId;
+				//var orderurl="/create/order?&uid="+account+"&publishId="+companyId;
 				var orderurl="/member/"+companyId+"?action=order"+"&publishId="+companyId;
 				var companyFacadeFile=datas[i].companyFacadeFile;
 				if(companyFacadeFile){

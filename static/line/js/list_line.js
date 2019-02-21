@@ -94,7 +94,7 @@
     startstreet = encodeURI(startstreet)
     endstreet = encodeURI(endstreet)
     s1 =
-      '/plus/list.php?tid=77&start=' +
+      '/create/order?&start=' +
       startpcd +
       '&end=' +
       endpcd +

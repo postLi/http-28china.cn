@@ -716,7 +716,7 @@
       $('.continue-create-order').on('click', function() {
         // location.reload(true);
         if (location.href.indexOf('/plus/list.php') !== -1) {
-          location.href = '/plus/list.php?tid=77'
+          location.href = '/create/order?'
         } else {
           location.reload(true)
         }

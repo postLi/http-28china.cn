@@ -613,7 +613,7 @@ function process02(currentPage) {
         var isVip = datas[i].isVip
         var authStatus = datas[i].authStatus
         var collateral = datas[i].collateral
-        //var orderurl="/plus/list.php?tid=77&uid="+account+"&publishId="+companyId;
+        //var orderurl="/create/order?&uid="+account+"&publishId="+companyId;
         // window.location='/gongsi?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
         var orderurl =
           '/member/' +

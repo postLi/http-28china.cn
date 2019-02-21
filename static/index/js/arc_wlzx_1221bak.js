@@ -706,7 +706,7 @@ function process3(startCity,endCity){
 		   }
 		   }
 		   }
-            var orderurl="/plus/list.php?tid=77&uid="+account+"&id="+aid+"&publishId="+publishId;
+            var orderurl="/create/order?&uid="+account+"&id="+aid+"&publishId="+publishId;
             $("#order_arc").click(function(){
             	window.open(orderurl);
             })

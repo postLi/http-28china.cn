@@ -514,7 +514,7 @@ var totalPage=8;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
 				var arcurl="/zhuanxian/detail?id="+rangeId+"&publishId="+companyId; 
-				var orderurl="/plus/list.php?tid=77&uid="+account+"&id="+rangeId+"&publishId="+companyId;
+				var orderurl="/create/order?&uid="+account+"&id="+rangeId+"&publishId="+companyId;
 				$("#nr_a21").attr("href",arcurl);
 				$("#wlzx_list_view").attr("onclick","window.open('"+arcurl+"')")
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")

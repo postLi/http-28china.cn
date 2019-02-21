@@ -455,7 +455,7 @@ $("#check-fee").click(
     }
 
 
-    s1 = '/plus/list.php?tid=77&start=' + startpcd + '&end=' + endpcd + '&startstreet=' + startstreet + '&endstreet=' + endstreet;
+    s1 = '/create/order?&start=' + startpcd + '&end=' + endpcd + '&startstreet=' + startstreet + '&endstreet=' + endstreet;
     s2 = '&startj=' + startj + '&startw=' + startw + '&endj=' + endj + '&endw=' + endw + '&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda;
     console.log(s1 + s2);
     window.open(s1 + s2);
@@ -1053,7 +1053,7 @@ function process02(currentPage) {
           var collateral = datas[i].collateral;
           var rangeLogo1 = "";
           var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
-          var orderurl = "/plus/list.php?tid=77&uid=" + account + "&id=" + rangeId + "&publishId=" + publishId;
+          var orderurl = "/create/order?&uid=" + account + "&id=" + rangeId + "&publishId=" + publishId;
           $("#nr_a21").attr("href", arcurl);
           $("#wlzx_list_view").attr("onclick", "window.open('" + arcurl + "')")
           $("#fahuo").attr("onclick", "window.open('" + orderurl + "')")

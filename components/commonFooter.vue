@@ -236,7 +236,7 @@
             <li class="userreg"><a 
               href="/regisiter" 
               target="_blank"><span>免费注册</span></a><i/><a 
-                href="/member/resetpassword.php" 
+                href="/resetpassword" 
                 target="_blank"><span>忘记密码?</span></a></li>
           </ul>
         </form>

@@ -92,7 +92,13 @@ export default {
         orderBy: '9',
         channelOption: '0'
       },
-      name: 'wlzx'
+      name: 'wlzx',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+          return el
+        })
+      }
     })
   }
 }

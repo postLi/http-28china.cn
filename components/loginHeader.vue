@@ -22,7 +22,7 @@
           <p v-if="$store.state.login.isReg">如注册遇到问题，请拨打客服热线：400-9992828</p>
           <a href="/">返回首页<i class="borderright"/></a>
           <a 
-            href="/plus/list.php?tid=88" 
+            href="/help/ggp/index.jhtml" 
             target="_blank" 
             class="help_link">使用帮助</a>
         </div>

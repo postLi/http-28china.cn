@@ -299,7 +299,7 @@ function process02(currentPage){
         var driverStatus=datas[i].driverStatus;
 
         var arcurl="/zhuanxian/detail?id="+id+"&publishId="+companyId; //下单
-        var orderurl="/plus/list.php?tid=77&uid="+account+"&id="+id+"&publishId="+companyId; //查看详情
+        var orderurl="/create/order?&uid="+account+"&id="+id+"&publishId="+companyId; //查看详情
         $("#nr_a521").attr("onclick","window.open('"+orderurl+"')")
         $("#nr_a522").attr("onclick","window.open('"+arcurl+"')")
         $('#nr_a51').attr("onclick","window.open('"+arcurl+"')")

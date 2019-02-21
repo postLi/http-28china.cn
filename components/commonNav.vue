@@ -317,7 +317,7 @@ export default {
       endc = encodeURI(endc)
       enda = encodeURI(enda)
       window.location =
-        '/plus/list.php?tid=4&startp=' +
+        '/zhuanxian/list?startp=' +
         startp +
         '&startc=' +
         startc +
@@ -372,7 +372,7 @@ export default {
       endc = encodeURI(endc)
       enda = encodeURI(enda)
       window.location =
-        '/plus/list.php?tid=2&startp=' +
+        '/huoyuan?startp=' +
         startp +
         '&startc=' +
         startc +
@@ -427,7 +427,7 @@ export default {
       endc = encodeURI(endc)
       enda = encodeURI(enda)
       window.location =
-        '/plus/list.php?tid=3&startp=' +
+        '/cheyuan?startp=' +
         startp +
         '&startc=' +
         startc +

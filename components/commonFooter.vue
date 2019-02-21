@@ -35,7 +35,7 @@
           <a href="javascript:void(0)">产品与服务</a>
           <a href="javascript:void(0)">云TMS</a>
           <a href="javascript:void(0)">精选案例</a>
-          <a href="/plus/list.php?tid=12">资讯动态</a>
+          <a href="/zixun">资讯动态</a>
           <a 
             href="http://www.anfanet.com/tech-info.html" 
             target="_blank">帮助中心</a>
@@ -234,9 +234,9 @@
               readonly="" 
               value="登录" ></li>
             <li class="userreg"><a 
-              href="/member/index_do.php?fmdo=user&dopost=regnew" 
+              href="/regisiter" 
               target="_blank"><span>免费注册</span></a><i/><a 
-                href="/member/resetpassword.php" 
+                href="/resetpassword" 
                 target="_blank"><span>忘记密码?</span></a></li>
           </ul>
         </form>

@@ -92,7 +92,7 @@ $('#tjcx_02 .all').attr("href",UrlUpdateParams(UrlUpdateParams(window.location.h
 $("#flush").click(	
     	function(){
     		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=2';
+    		window.location.href='/huoyuan';
     })
 //清空条件
 //货源搜索 S
@@ -103,7 +103,7 @@ $("#flush").click(
      var end=$("#HuoyuanTo").val();
     var sstart="&start="+start;
     var send="&end="+end;
-     window.location='/plus/list.php?tid=2'+sstart+send;
+     window.location='/huoyuan'+sstart+send;
     })
 
 
@@ -147,7 +147,7 @@ function tjcx01(){
 				
 				var code=datas[i].code;
         var myurl=UrlUpdateParams(UrlUpdateParams(window.location.href, "goodsWeight1",name1), "goodsWeight2",name2);
-//       var s1='<a  href=/plus/list.php?tid=2'+sstart+send;
+//       var s1='<a  href=/huoyuan'+sstart+send;
 //				 var s2='&goodsWeight1='+name1+'&goodsWeight2='+name2+'>';
 //				 var s3=name+'公斤</a>';
          var s1='<a  href='+myurl+'>';
@@ -211,7 +211,7 @@ function tjcx02(){
 				
 				var code=datas[i].code;
         var myurl=UrlUpdateParams(UrlUpdateParams(window.location.href, "goodsVolume1", name1), "goodsVolume2", name2);
-//       var s1='<a  href=/plus/list.php?tid=2'+sstart+send;
+//       var s1='<a  href=/huoyuan'+sstart+send;
 //				 var s2='&goodsVolume1='+name1+'&goodsVolume2='+name2+'>';
 //				 var s3=name+'立方</a>';
          var s1='<a  href='+myurl+'>';

@@ -162,7 +162,7 @@
                 </span>
                 <!--<a-->
                 <!--class="now all"-->
-                <!--href="/plus/list.php?tid=4">不限</a>-->
+                <!--href="/zhuanxian/list">不限</a>-->
               </dd>
               <dt>选择品牌&nbsp;:</dt>
               <dd id="tjcx_02">
@@ -178,7 +178,7 @@
                 </span>
                 <!--<a-->
                 <!--class="now all"-->
-                <!--href="/plus/list.php?tid=4"-->
+                <!--href="/zhuanxian/list"-->
                 <!--&gt;不限</a>-->
               </dd>
               <dt>其他&nbsp;:</dt>
@@ -195,7 +195,7 @@
                 </span>
                 <!--<a-->
                 <!--class="now all"-->
-                <!--href="/plus/list.php?tid=4">不限</a>-->
+                <!--href="/zhuanxian/list">不限</a>-->
                 <!--<a class="shiming">实名认证</a>-->
               </dd>
             </dl>

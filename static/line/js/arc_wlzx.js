@@ -61,13 +61,13 @@ $('.arc_input3').click(function () {
     '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
   )
   if (search_type == 'zx') {
-    window.open('/plus/list.php?tid=4&start=' + start + '&end=' + end)
+    window.open('/zhuanxian/list?start=' + start + '&end=' + end)
   }
   if (search_type == 'huo') {
-    window.open('/plus/list.php?tid=2&start=' + start + '&end=' + end)
+    window.open('/huoyuan?start=' + start + '&end=' + end)
   }
   if (search_type == 'che') {
-    window.open('/plus/list.php?tid=3&start=' + start + '&end=' + end)
+    window.open('/cheyuan?start=' + start + '&end=' + end)
   }
 })
 
@@ -627,7 +627,7 @@ function process1() {
       )
       $('#arc_nav_a2').attr(
         'href',
-        '/plus/list.php?tid=4' +
+        '/zhuanxian/list?' +
         '&startp=' +
         startProvince +
         '&startc=' +
@@ -639,7 +639,7 @@ function process1() {
       )
       $('#arc_nav_a3').attr(
         'href',
-        '/plus/list.php?tid=4' +
+        '/zhuanxian/list?' +
         '&startp=' +
         startProvince +
         '&startc=' +
@@ -1098,7 +1098,7 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         $('.arc_bottom_more').css('display', 'block')
         $('#arc_bottom_more').attr(
           'href',
-          '/plus/list.php?tid=4&start=' + startCity + '&end=' + endCity
+          '/zhuanxian/list?start=' + startCity + '&end=' + endCity
         )
       }
       if ($('.tj_list').length == 1) {
@@ -1274,7 +1274,7 @@ $('#pj_submit').click(function () {
       })
       $('.login_box').css('display', 'block')
 
-      //window.location='/member/login.php';
+      //window.location='/login';
       return false
     }
   }

@@ -632,7 +632,7 @@
       $('.continue-create-order').on('click', function(){
         // location.reload(true);
         if(location.href.indexOf('/plus/list.php')!==-1){
-          location.href = "/plus/list.php?tid=77";
+          location.href = "/create/order?";
         } else {
           location.reload(true);
         }
@@ -1090,8 +1090,8 @@
           layer.alert('目前不能对自己下单哦，请重新选择物流公司',{
             closeBtn: 0
           },function(){
-            // /plus/list.php?tid=4&start=广东省广州市&end=江西省吉安市
-            var path = '/plus/list.php?tid=4';
+            // /zhuanxian/list?start=广东省广州市&end=江西省吉安市
+            var path = '/zhuanxian/list?';
             if(data[0].provinceCityArea){
               path += '&start=' + data[0].provinceCityArea
             }

@@ -69,7 +69,7 @@ function getCookie(cookieName){
      if(!enda){enda=""}
    
      
-     s1='/plus/list.php?tid=77&start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
+     s1='/create/order?&start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
      s2='&startj='+startj+'&startw='+startw+'&endj='+endj+'&endw='+endw + '&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda;
 console.log(s1+s2);
 window.open(s1+s2);
@@ -111,7 +111,7 @@ window.open(s1+s2);
 console.log($("#yd_nr").val());
 var num=$("#yd_nr").val();
 if(num){
-window.open('/plus/list.php?tid=76&num='+num)
+window.open('/ydcx&num='+num)
 }
 if(!num){alert("请先输入运单号查询！")}
 
@@ -129,7 +129,7 @@ if(!num){alert("请先输入运单号查询！")}
      var end=$("#carLineTo").val();
      
      //alert(start);
-     window.location='/plus/list.php?tid=3&start='+start+'&end='+end;
+     window.location='/cheyuan?start='+start+'&end='+end;
          
 
     })
@@ -142,7 +142,7 @@ if(!num){alert("请先输入运单号查询！")}
      var end=$("#HuoyuanTo").val();
      
      //alert(start);
-     window.location='/plus/list.php?tid=2&start='+start+'&end='+end;
+     window.location='/huoyuan?start='+start+'&end='+end;
          
 
     })
@@ -155,7 +155,7 @@ if(!num){alert("请先输入运单号查询！")}
      var end=$("#wlLineTo").val();
      
      //alert(start);
-     window.location='/plus/list.php?tid=4&start='+start+'&end='+end;
+     window.location='/zhuanxian/list?start='+start+'&end='+end;
          
 
     })

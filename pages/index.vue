@@ -77,7 +77,7 @@
               <input 
                 type="button" 
                 value="快速下单2" 
-                onclick="window.location.href='/plus/list.php?tid=4'">
+                onclick="window.location.href='/zhuanxian/list'">
             </div>
           </div>
           <div 
@@ -99,7 +99,7 @@
               <input 
                 type="button" 
                 value="快速下单3" 
-                onclick="window.location.href='/plus/list.php?tid=4'">
+                onclick="window.location.href='/zhuanxian/list'">
             </div>
           </div>
           <div 
@@ -121,7 +121,7 @@
               <input 
                 type="button" 
                 value="快速下单4" 
-                onclick="window.location.href='/plus/list.php?tid=4'">
+                onclick="window.location.href='/zhuanxian/list'">
             </div>
           </div>
           <div class="main1_1_xx"/>
@@ -193,8 +193,8 @@
                 <span id="ts">您好，欢迎来到28快运！</span>
               </div>
               <div class="operation">
-                <div class="loginBtn"><a href="/member/login.php">登录</a></div>
-                <div class="regBtn"><a href="/member/index_do.php?fmdo=user&amp;dopost=regnew">注册</a></div>
+                <div class="loginBtn"><a href="/login">登录</a></div>
+                <div class="regBtn"><a href="/regisiter">注册</a></div>
               </div>
             </div>
             <div 
@@ -206,12 +206,12 @@
                 <span>您好，<span id="login_name2"/>&nbsp;</span>
                 <span style="cursor: pointer"> <a 
                   class="exit_anfa" 
-                  href="/member/index_do.php?fmdo=login&amp;dopost=exit">【安全退出】</a> </span>
+                  href="/exit">【安全退出】</a> </span>
               </div>
               <div class="operation">
                 <div class="loginBtn"><a 
                   target="_blank" 
-                  href="/member/content_list.php?channelid=1">会员中心</a></div>
+                  href="/hyzx">会员中心</a></div>
                 <div class="regBtn"> <a 
                   id="my_website" 
                   target="_blank" 
@@ -223,16 +223,16 @@
               <ul>
                 <li class="kefu_index">
                   <a 
-                    href="/plus/list.php?tid=12" 
+                    href="/zixun" 
                     onmouseout="kefu_none();">咨讯</a>
                   <a 
-                    href="/plus/list.php?tid=88" 
+                    href="/help/ggp/index.jhtml" 
                     onmouseout="kefu_none();">帮助</a>
                   <a onmouseover="kefu_block();">客服</a>
 
                   <a 
                     target="_blank" 
-                    href="/plus/list.php?tid=69" 
+                    href="/help/tsjy/index.jhtml" 
                     onmouseout="kefu_none();">建议</a>
                 </li>
                 <li><a 
@@ -349,7 +349,7 @@
                                  
                                  
               <div class="more floatr"><a 
-                href="/plus/list.php?tid=4" 
+                href="/zhuanxian/list" 
                 target="_blank">更多&gt;</a></div>		 
             </div>
             <dl class="hy_d">
@@ -473,7 +473,7 @@
                   href="#">即刻比价</a>
                 <a 
                   target="_blank" 
-                  href="/plus/list.php?tid=76">一键查单</a>
+                  href="/ydcx">一键查单</a>
                 <a 
                   id="echart_sx" 
                   href="#">时效查询</a>
@@ -541,7 +541,7 @@
                 class="search_hy" 
                 value=""></div>
             <div class="more floatr"><a 
-              href="/plus/list.php?tid=3" 
+              href="/cheyuan?" 
               target="_blank">更多&gt;</a></div>		 
           </div>
     
@@ -657,7 +657,7 @@
                 class="search_hy" 
                 value=""></div>
             <div class="more floatr"><a 
-              href="/plus/list.php?tid=2" 
+              href="/huoyuan" 
               target="_blank">更多&gt;</a></div>		 
           </div>
     
@@ -834,7 +834,7 @@
             <b>找物流公司</b>
           </div>
           <div class="more2 floatr"><a 
-            href="/plus/list.php?tid=80" 
+            href="/gongsi?" 
             target="_blank">更多&gt;</a></div>		 
         </div>
         <div class="hy clear">
@@ -901,7 +901,7 @@
             <b>找物流园区</b>
           </div>
           <div class="more2 floatr"><a 
-            href="/plus/list.php?tid=1" 
+            href="/wuliu?" 
             target="_blank"><span>更多&gt;</span></a></div>		 
         </div>
         <div class="h10"/>
@@ -1222,7 +1222,7 @@
               class="zx_a1" 
               onclick="document.getElementById('main5_1_nr1').style.display='none';document.getElementById('main5_1_nr2').style.display='block';document.getElementById('more1_5_1').style.display='none';document.getElementById('more2_5_1').style.display='block';">政策法令</a></div>
             <div id="more1_5_1"><a 
-              href="/plus/list.php?tid=52" 
+              href="/zixun/xyzx/index.jhtml" 
               target="_blank">更多&gt;</a></div>
             <div id="more2_5_1"><a 
               href="/a/zcfl/" 
@@ -1319,10 +1319,10 @@
               class="zx_a3" 
               onclick="document.getElementById('main5_3_nr1').style.display='none';document.getElementById('main5_3_nr2').style.display='block';document.getElementById('more1_5_2').style.display='none';document.getElementById('more2_5_2').style.display='block'">仓储与配送</a></div>
             <div id="more1_5_2"><a 
-              href="/plus/list.php?tid=58" 
+              href="/zixun/cgzx/index.jhtml" 
               target="_blank">更多&gt;</a></div>
             <div id="more2_5_2"><a 
-              href="/plus/list.php?tid=59" 
+              href="/zixun/ccyps/index.jhtml" 
               target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
@@ -1466,7 +1466,7 @@
             <div id="bt1_5_2">
             <a onclick="document.getElementById('main5_2_nr1').style.display='block';document.getElementById('main5_2_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none';">客户案例</a></div>
             <div id="more1_5_2"><a 
-              href="/plus/list.php?tid=21" 
+              href="/help/khal/index.jhtml" 
               target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
@@ -1767,7 +1767,7 @@ export default {
             endc = encodeURI(endc)
             enda = encodeURI(enda)
             window.location =
-              '/plus/list.php?tid=3&startp=' +
+              '/cheyuan?startp=' +
               startp +
               '&startc=' +
               startc +
@@ -1825,7 +1825,7 @@ export default {
             endc = encodeURI(endc)
             enda = encodeURI(enda)
             window.location =
-              '/plus/list.php?tid=2&startp=' +
+              '/huoyuan?startp=' +
               startp +
               '&startc=' +
               startc +
@@ -1883,7 +1883,7 @@ export default {
             endc = encodeURI(endc)
             enda = encodeURI(enda)
             window.location =
-              '/plus/list.php?tid=4&startp=' +
+              '/zhuanxian/list?startp=' +
               startp +
               '&startc=' +
               startc +

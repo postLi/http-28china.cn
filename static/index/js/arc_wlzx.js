@@ -53,13 +53,13 @@ var start=$('.arc_input1').val();
 var end=$('.arc_input2').val();
 console.log("搜索类型："+search_type+"出发地："+start+"到达地："+end);	
 if(search_type=='zx'){
-	window.open('/plus/list.php?tid=4&start='+start+'&end='+end);
+	window.open('/zhuanxian/list?start='+start+'&end='+end);
 }
 if(search_type=='huo'){
-	window.open('/plus/list.php?tid=2&start='+start+'&end='+end);
+	window.open('/huoyuan?start='+start+'&end='+end);
 }
 if(search_type=='che'){
-	window.open('/plus/list.php?tid=3&start='+start+'&end='+end);
+	window.open('/cheyuan?start='+start+'&end='+end);
 }
 	
 })
@@ -326,7 +326,7 @@ function process1(){
 		   console.log(startCity+":"+endCity);
 		   var transportRemark=datas.transportRemark;
 		   		   if(transportRemark){transportRemark=transportRemark.substring(0,500)}
-		   if(!transportRemark){transportRemark='暂无专线说明。点击为您推荐<a target="_blank" href="/plus/list.php?tid=4&start='+startCity+'&end='+endCity+'">更多专线</a>'}
+		   if(!transportRemark){transportRemark='暂无专线说明。点击为您推荐<a target="_blank" href="/zhuanxian/list?start='+startCity+'&end='+endCity+'">更多专线</a>'}
 		   //获取目的地城市
 		   var code=getcode(endProvince);
 		   getcity_zx(code,startCity);
@@ -561,8 +561,8 @@ function process1(){
 	        $('#arc_nav_a2').html(startCity+"到"+endCity+"零担物流专线")
             $('#arc_nav_a3').html(startCity+startArea+"到"+endCity+endArea+"零担物流专线")
             $("#arc_nav_a1").attr("href",'/templets/default/htm/'+code_c+'/'+code_c+'_1.htm');
-            $('#arc_nav_a2').attr("href",'/plus/list.php?tid=4'+'&startp='+startProvince+'&startc='+startCity+'&endp='+endProvince+'&endc='+endCity)
-            $('#arc_nav_a3').attr("href",'/plus/list.php?tid=4'+'&startp='+startProvince+'&startc='+startCity+'&starta='+startArea+'&endp='+endProvince+'&endc='+endCity+'&enda='+endArea)
+            $('#arc_nav_a2').attr("href",'/zhuanxian/list?'+'&startp='+startProvince+'&startc='+startCity+'&endp='+endProvince+'&endc='+endCity)
+            $('#arc_nav_a3').attr("href",'/zhuanxian/list?'+'&startp='+startProvince+'&startc='+startCity+'&starta='+startArea+'&endp='+endProvince+'&endc='+endCity+'&enda='+endArea)
 	
 				 
 							
@@ -756,7 +756,7 @@ function process3(startCity,endCity){
 		   }
 		   }
 		   }
-            var orderurl="/plus/list.php?tid=77&uid="+account+"&id="+aid+"&publishId="+publishId;
+            var orderurl="/create/order?&uid="+account+"&id="+aid+"&publishId="+publishId;
             $("#order_arc").click(function(){
             	window.open(orderurl);
             })
@@ -969,7 +969,7 @@ function process08(startProvince,startCity,endProvince,endCity,rangeIds){
 			console.log($('.tj_list').length)
 			if($('.tj_list').length>=10){
 				$('.arc_bottom_more').css("display","block");
-				$('#arc_bottom_more').attr("href","/plus/list.php?tid=4&start="+startCity+"&end="+endCity)
+				$('#arc_bottom_more').attr("href","/zhuanxian/list?start="+startCity+"&end="+endCity)
 				}
 				if($('.tj_list').length==1){
 				$('.arc_bottom').css("display","none");
@@ -1138,7 +1138,7 @@ function process06(evaluationDes,evaluationId,evaluationName,serverPriceStarLeve
         $('.login_box').css("display","block");
         	
 
-      //window.location='/member/login.php';
+      //window.location='/login';
       return false;
                                                 }}
         

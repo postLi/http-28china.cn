@@ -589,7 +589,7 @@
               v-else 
               class="arc_nr2">暂无专线说明。点击为您推荐<a
                 target="_blank" 
-                href="/plus/list.php?tid=4&amp;start=深圳市&amp;end=北京市">更多专线</a></div>
+                href="/zhuanxian/list?amp;start=深圳市&amp;end=北京市">更多专线</a></div>
           </div>
           <div
             :class="[nav4Id === 2 ? '':'arc_nr_none']"

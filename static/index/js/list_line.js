@@ -118,7 +118,7 @@ $("#btn1").click(
       endp=encodeURI(endp)
       endc=encodeURI(endc)
       enda=encodeURI(enda)
-  window.open('/plus/list.php?tid=4&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda);
+  window.open('/zhuanxian/list?startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda);
 
 
 })

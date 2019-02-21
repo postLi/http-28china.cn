@@ -240,7 +240,7 @@
       id="js011" 
       class="arc_bottom"
       style="display: none">
-      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/plus/list.php?tid=2"><span class="arc_bottom_more">更多+</span></a></div>
+      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/huoyuan"><span class="arc_bottom_more">更多+</span></a></div>
 
       <div 
         class="tj_list" 

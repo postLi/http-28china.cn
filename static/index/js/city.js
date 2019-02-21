@@ -74,7 +74,7 @@ function getcity_zx(code,startCity){
         var end = $(this).attr("name");
         //console.log(a);
         console.log(end);
-        window.open('/plus/list.php?tid=4&startc='+startCity+'&endc='+end)
+        window.open('/zhuanxian/list?startc='+startCity+'&endc='+end)
     })
    });	
 			}
@@ -101,7 +101,7 @@ function getcity_zx(code,startCity){
         var end = $(this).attr("name");
         //console.log(a);
         console.log(end);
-        window.open('/plus/list.php?tid=4&startc='+startCity+'&endc='+end)
+        window.open('/zhuanxian/list?startc='+startCity+'&endc='+end)
         
 
     })
@@ -151,7 +151,7 @@ function getcity_huo(code,startCity){
         var end = $(this).attr("name");
         //console.log(a);
         console.log(end);
-        window.open('/plus/list.php?tid=2&start='+startCity+'&end='+end)
+        window.open('/huoyuan?start='+startCity+'&end='+end)
     })
    });	
 			}
@@ -174,7 +174,7 @@ function getcity_huo(code,startCity){
         var end = $(this).attr("name");
         //console.log(a);
         console.log(end);
-        window.open('/plus/list.php?tid=2&start='+startCity+'&end='+end)
+        window.open('/huoyuan?start='+startCity+'&end='+end)
         
 
     })
@@ -225,7 +225,7 @@ function getcity_che(code,startCity){
         var end = $(this).attr("name");
         //console.log(a);
         console.log(end);
-        window.open('/plus/list.php?tid=2&start='+startCity+'&end='+end)
+        window.open('/huoyuan?start='+startCity+'&end='+end)
     })
    });	
 			}
@@ -249,7 +249,7 @@ function getcity_che(code,startCity){
         var end = $(this).attr("name");
         //console.log(a);
         console.log(end);
-        window.open('/plus/list.php?tid=3&start='+startCity+'&end='+end)
+        window.open('/cheyuan?start='+startCity+'&end='+end)
         
 
     })

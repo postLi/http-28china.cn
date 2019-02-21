@@ -136,7 +136,7 @@ vo.defaultSort=1;
 
 var locationProvince=$.cookie('currentProvinceFullName')
 var locationCity = $.cookie('currentAreaFullName')
-$("#arc_nav_a1").attr("href",'/plus/list.php?tid=1'+'&locationProvince='+locationProvince+'&locationCity='+locationCity);
+$("#arc_nav_a1").attr("href",'/wuliu?'+'&locationProvince='+locationProvince+'&locationCity='+locationCity);
 $("#arc_nav_a1").html(locationCity+"物流园区")
 $('#address').val(address);
 $('#companyName').val(companyName);
@@ -146,7 +146,7 @@ $('#companyName').val(companyName);
 $("#flush").click(	
     	function(){
     		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=80';
+    		window.location.href='/gongsi?';
     })
 //清空条件 S
 //切换内容 S
@@ -249,7 +249,7 @@ $('#checked_wangdian').click(function(){
    vo.endArea=enda;
    vo.companyName=companyName;
    process03(1);
-//   window.location='/plus/list.php?tid=4&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda+'&companyName='+companyName;
+//   window.location='/zhuanxian/list?startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda+'&companyName='+companyName;
     })
 //物流专线搜索 E
 
@@ -258,7 +258,7 @@ $('#checked_wangdian').click(function(){
     	
     	function(){
      var wangdian=$("#wangdian").val();
-     window.location='/plus/list.php?tid=80&&wangdian='+wangdian;
+     window.location='/gongsi?&wangdian='+wangdian;
     })
 //物流公司搜索 E
 //数据字典 S
@@ -322,7 +322,7 @@ function tjcx03(){
 		
 		success:function(res){
 			var datas = res.data;
-//			$('.shiming').attr("href",'/plus/list.php?tid=80&address='+address+'&companyName='+companyName+'&authStatus=AF0010403')
+//			$('.shiming').attr("href",'/gongsi?address='+address+'&companyName='+companyName+'&authStatus=AF0010403')
 			for(var i=0;i<datas.length;i++){
 				
 				var name=datas[i].name;	

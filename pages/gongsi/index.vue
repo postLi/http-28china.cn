@@ -83,7 +83,7 @@
               <dd id="tjcx_02" >
                 <a
                   class="now all"
-                  href="/plus/list.php?tid=80"
+                  href="/gongsi?"
                   style="float: left;margin-bottom: 40px; ">不限</a>
               </dd>
               <dt class="otherdt">其他&nbsp;:</dt>
@@ -92,7 +92,7 @@
                 class="otherdd">
                 <a
                   class="now all"
-                  href="/plus/list.php?tid=80" >不限</a>
+                  href="/gongsi?" >不限</a>
                 <a class="shiming" >实名认证</a>
               </dd>
             </dl>

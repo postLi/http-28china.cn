@@ -173,7 +173,7 @@ $('#tjcx_03 .all').attr(
 $('#flush').click(function() {
   // console.log("清空地址")
   window.location.href = '/gongsi'
-  // window.location.href='/plus/list.php?tid=80';
+  // window.location.href='/gongsi?';
 })
 //清空条件
 
@@ -341,7 +341,7 @@ function tjcx03() {
       var datas = res.data
       $('.shiming').attr(
         'href',
-        '/plus/list.php?tid=80&address=' +
+        '/gongsi?address=' +
           address +
           '&companyName=' +
           companyName +

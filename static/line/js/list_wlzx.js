@@ -300,7 +300,7 @@ $('#select_wlyq').mousedown(function () {
 $("#flush").click(
   function () {
     console.log("清空地址")
-    // window.location.href='/plus/list.php?tid=4';
+    // window.location.href='/zhuanxian/list';
     window.location.reload();
   })
 //清空条件
@@ -741,7 +741,7 @@ function tjcx03() {
 //           var name = datas[i].name;
 //           var code = datas[i].code;
 //           var myurl = UrlUpdateParams(window.location.href, "otherServiceCode", code)
-// //       var s1='<a  href=/plus/list.php?tid=4&start='+start+'&end='+end;
+// //       var s1='<a  href=/zhuanxian/list?start='+start+'&end='+end;
 // //				 var s2='&otherServiceCode='+code+'>';
 // //				 var s3=name+'</a>';
 //           var s1 = '<a  href=' + myurl + '>';

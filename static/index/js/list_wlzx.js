@@ -223,7 +223,7 @@ $('#select_wlyq').mousedown(function(){
 $("#flush").click(	
     	function(){
     		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=4';
+    		window.location.href='/zhuanxian/list';
     })
 //清空条件
 
@@ -409,7 +409,7 @@ window.open(s1+s2);
       companyName=encodeURI(companyName)
       parkId=encodeURI(parkId)
       parkName=encodeURI(parkName)
-     window.location='/plus/list.php?tid=4&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda+'&companyName='+companyName+'&parkId='+parkId+'&parkName='+parkName;
+     window.location='/zhuanxian/list?startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda+'&companyName='+companyName+'&parkId='+parkId+'&parkName='+parkName;
     })
 
 
@@ -589,7 +589,7 @@ function tjcx03(){
 				var name=datas[i].name;	
 				var code=datas[i].code;
           var myurl=UrlUpdateParams(window.location.href, "otherServiceCode", code)
-//       var s1='<a  href=/plus/list.php?tid=4&start='+start+'&end='+end;
+//       var s1='<a  href=/zhuanxian/list?start='+start+'&end='+end;
 //				 var s2='&otherServiceCode='+code+'>';
 //				 var s3=name+'</a>';
 				 var s1='<a  href='+myurl+'>';

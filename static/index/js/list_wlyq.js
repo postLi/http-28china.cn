@@ -80,7 +80,7 @@ $("#parkAddress input").citypicker({
   city: locationCity,
   district: locationArea
 });
-//$("#list_nav_a").attr("href",'/plus/list.php?tid=1'+'&locationProvince='+locationProvince+'&locationCity='+locationCity+'&locationArea='+locationArea);
+//$("#list_nav_a").attr("href",'/wuliu?'+'&locationProvince='+locationProvince+'&locationCity='+locationCity+'&locationArea='+locationArea);
 $("#list_nav_a").html(locationCity+locationArea+"物流园区")
 
 
@@ -91,7 +91,7 @@ $('#parkName').val(parkName);
 $("#flush").click(	
     	function(){
     		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=1';
+    		window.location.href='/wuliu?';
     })
 //清空条件
 //园区搜索 S
@@ -121,7 +121,7 @@ $("#flush").click(
       parkName=encodeURI(parkName)
 
       
-     window.location='/plus/list.php?tid=1'+parkAddress+'&parkName='+parkName;
+     window.location='/wuliu?'+parkAddress+'&parkName='+parkName;
     })
 
 

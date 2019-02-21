@@ -577,7 +577,7 @@ export default {
       )
     },
     searchWD() {
-      window.open('/plus/list.php?tid=80&&wangdian=' + this.searchWDKey)
+      window.open('/gongsi?&wangdian=' + this.searchWDKey)
     },
     async selectSort(item) {
       this.sortName = item.name

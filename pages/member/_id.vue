@@ -801,7 +801,7 @@ export default {
           console.log("$('#txtbill').val()", $('#txtbill').val())
           var num = $('#txtbill').val()
           if (num) {
-            //window.open('/plus/list.php?tid=76&num='+num+'&uid='+uid)
+            //window.open('/ydcx&num='+num+'&uid='+uid)
             location.href = uid + '-chajian?num=' + num
           }
           if (!num) {

@@ -150,13 +150,13 @@ if(!startjw){
  startstreet=encodeURI(startstreet)
  endstreet=encodeURI(endstreet)
  
- s1='/plus/list.php?tid=4&start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
+ s1='/zhuanxian/list?start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
  s2='&startj='+startj+'&startw='+startw+'&endj='+endj+'&endw='+endw + '&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda;
 console.log(s1+s2);
 window.open(s1+s2);
 //+
-// window.location='/plus/list.php?tid=4&start='+start+'&end='+end;
-// window.location = '/plus/list.php?tid=4&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda
+// window.location='/zhuanxian/list?start='+start+'&end='+end;
+// window.location = '/zhuanxian/list?startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda
 
 })
 //零担下单 E查询零担运费

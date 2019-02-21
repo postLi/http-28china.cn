@@ -19,6 +19,8 @@ $ yarn start
 $ yarn run generate
 ```
 
+npm install --registry=https://registry.npm.taobao.org
+
 For detailed explanation on how things work, checkout [Nuxt.js docs](https://nuxtjs.org).
 
 assets: 资源文件。放置需要经过 webpack 打包处理的资源文件，如 scss，图片，字体等。

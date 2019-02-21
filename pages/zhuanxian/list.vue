@@ -34,6 +34,7 @@
               <dt>专线线路&nbsp;：</dt>
               <dd>
                 <form
+                  class="form-line"
                   name="zxaddform"
                   method="post"
                   action="">
@@ -550,62 +551,11 @@
               <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>{{ item.popularity }}</i></span></a></li>
             </ul>
           </div>
-          <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
-          <!--<div class="tj_none">-->
-          <!--<span>没有相关线路推荐23</span>-->
-          <!--</div>-->`
         </div>
         <div class="list-box-r-phone">
           <div class="zx_p_tit">帮我找优质承运商</div>
           <div class="list-box-r-top">
             <selectMap/>
-            <!--<form action="">-->
-            <!--<span>出发地</span>-->
-            <!--<div class="ltl-input">-->
-            <!--<input-->
-            <!--id="right-bar-form"-->
-            <!--autocomplete="off"-->
-            <!--wtmap=""-->
-            <!--type="text"-->
-            <!--class="ltl-location"-->
-            <!--placeholder="请选择出发地">-->
-            <!--<i class="ltl-icons ss56-common-sprite-icon ltl-ico-start"/>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<span>目的地</span>&ndash;&gt;-->
-            <!--<div class="ltl-input">-->
-            <!--<input-->
-            <!--id="right-bar-to"-->
-            <!--autocomplete="off"-->
-            <!--wtmap=""-->
-            <!--type="text"-->
-            <!--class="ltl-location"-->
-            <!--placeholder="请选择目的地">-->
-            <!--<i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>-->
-            <!--</div>-->
-            <!--<div class="ltl-input">-->
-            <!--<textarea-->
-            <!--class="textareaDiv"-->
-            <!--placeholder="备注信息，如：期望发货时间、货物体积重量-->
-            <!--等信息..."/>-->
-            <!--</div>-->
-            <!--<div class="ltl-input">-->
-            <!--<input-->
-            <!--type="text"-->
-            <!--class="ltl-location phone-num"-->
-            <!--placeholder="11位手机号"-->
-            <!--style="width: 60%"-->
-            <!--maxlength="11">-->
-            <!--<input-->
-            <!--class="phone-btn"-->
-            <!--type="button"-->
-            <!--value="找到通知我">-->
-            <!--</div>-->
-            <!--&lt;!&ndash;<input&ndash;&gt;-->
-            <!--&lt;!&ndash;id="check-fee"&ndash;&gt;-->
-            <!--&lt;!&ndash;type="button"&ndash;&gt;-->
-            <!--&lt;!&ndash;value="查询零担运费"&ndash;&gt;-->
-            <!--&lt;!&ndash;class="right-top-btn">&ndash;&gt;-->
-            <!--</form>-->
           </div>
         </div>
       </div>
@@ -1255,19 +1205,22 @@ export default {
     cursor: pointer;
   }
   /**/
-  #wlLineFrom {
-    width: 190px;
-    background: url(../../static/line/images/start_addr.png) no-repeat 200px 8px
-      #fff;
-    background-size: 16px 17px;
-    padding-right: 20px;
+  .form-line {
+    #wlLineFrom {
+      width: 190px;
+      background: url(../../static/line/images/start_addr.png) no-repeat 200px
+        8px #fff;
+      background-size: 16px 17px;
+      padding-right: 20px;
+    }
+    #wlLineTo {
+      width: 190px;
+      background: url(/line/images/end_addr.png) no-repeat 200px 8px #fff;
+      background-size: 16px 17px;
+      padding-right: 20px;
+    }
   }
-  #wlLineTo {
-    width: 190px;
-    background: url(/line/images/end_addr.png) no-repeat 200px 8px #fff;
-    background-size: 16px 17px;
-    padding-right: 20px;
-  }
+
   .ss56-common-sprite1 {
     background-image: url(/line/images/qd.png);
     background-repeat: no-repeat;

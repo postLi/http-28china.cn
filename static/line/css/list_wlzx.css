@@ -45,7 +45,7 @@ body {
   width: 1400px;
   height: auto !important;
   margin: 0 auto;
-  overflow: hidden;
+  /*overflow: hidden;*/
 }
 
 .list_left {
@@ -971,8 +971,8 @@ margin-left: 30px;
 .list-box-r-top {
   width: 100%;
   box-sizing: border-box;
-  background: #fff;
-  padding: 20px 20px;
+  /*background: #fff;*/
+  padding: 10px 20px 20px;
   border: 1px solid #ececec;
   margin-bottom: 10px;
 }

@@ -16,7 +16,7 @@ $('.arc_input3').click(function() {
     '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
   )
   if (search_type == 'zx') {
-    window.open('/plus/list.php?tid=4&start=' + start + '&end=' + end)
+    window.open('/zhuanxian/list?start=' + start + '&end=' + end)
   }
   if (search_type == 'huo') {
     window.open('/huoyuan?start=' + start + '&end=' + end)

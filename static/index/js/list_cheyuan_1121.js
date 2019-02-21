@@ -106,7 +106,7 @@ $('#tjcx_05 .all').attr("href",UrlUpdateParams(UrlUpdateParams(window.location.h
 $("#flush").click(	
     	function(){
     		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=3';
+    		window.location.href='/cheyuan?';
     })
 //清空条件
 //车源搜索 S
@@ -115,7 +115,7 @@ $("#flush").click(
     	function(){
      var start=$("#carLineFrom").val();
      var end=$("#carLineTo").val();
-     window.location='/plus/list.php?tid=3&start='+start+'&end='+end;
+     window.location='/cheyuan?start='+start+'&end='+end;
     })
 
 
@@ -140,7 +140,7 @@ function tjcx01(){
 				var name=datas[i].name;	
 				var code=datas[i].code;
         var myurl=UrlUpdateParams(window.location.href, "carType",code);
-//       var s1='<a  href=/plus/list.php?tid=3&start='+start+'&end='+end;
+//       var s1='<a  href=/cheyuan?start='+start+'&end='+end;
 //				 var s2='&carType='+code+'>';
 //				 var s3=name+'</a>';
          var s1='<a href='+myurl+'>';
@@ -236,7 +236,7 @@ function tjcx04(){
 				
 				var code=datas[i].code;
         var myurl=UrlUpdateParams(UrlUpdateParams(window.location.href, "carLength1", name1), "carLength2", name2);
-//       var s1='<a  href=/plus/list.php?tid=3&start='+start+'&end='+end;
+//       var s1='<a  href=/cheyuan?start='+start+'&end='+end;
 //				 var s2='&carLength1='+name1+'&carLength2='+name2+'>';
 //				 var s3=name+'米</a>';
          var s1='<a href='+myurl+'>';
@@ -298,7 +298,7 @@ function tjcx05(){
 				
 				var code=datas[i].code;
         var myurl=UrlUpdateParams(UrlUpdateParams(window.location.href, "carLoad1", name1), "carLoad2", name2);
-//       var s1='<a  href=/plus/list.php?tid=3&start='+start+'&end='+end;
+//       var s1='<a  href=/cheyuan?start='+start+'&end='+end;
 //				 var s2='&carLoad1='+name1+'&carLoad2='+name2+'>';
 //				 var s3=name+'吨</a>';
          var s1='<a href='+myurl+'>';

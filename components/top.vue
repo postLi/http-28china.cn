@@ -14,10 +14,10 @@
           <span class="chgoEm">您好，<span id="login_name1"/>&nbsp;已登录</span>
           <a
             target="_blank"
-            href="/member/content_list.php?channelid=1" >会员中心</a>
+            href="/hyzx" >会员中心</a>
           <a
             class="exit_anfa"
-            href="/member/index_do.php?fmdo=login&dopost=exit">退出登录</a>
+            href="/exit">退出登录</a>
         </div>
         <div class="header_r2">
 

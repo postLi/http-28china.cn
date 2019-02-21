@@ -60,8 +60,17 @@
     <div class="arc_main1">
       <div class="arc_left">
         <div class="arc_left_1">
-          <p class="arc_p1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></p>
-          <p class="arc_p2"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i><i>收藏量：<em class="my_hz_num"/></i></p>
+          <span id="nr072"/><span style="float: left;font-size: 12px;padding-top:6px;"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>
+
+          <p class="arc_p1"><span>广东省，广州市{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span>
+          
+            <span class="arc_p2"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i><i>收藏量：<em class="my_hz_num"/></i></span>
+          </p>
+          <div class="arc_middle1-2"><span><img
+            class="img1"
+            src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：2019-01-18 13:25:20 </span><span><img
+              class="img2"
+              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：<i class="my_cz_num"/></span></div>
         </div>
         <div class="arc_left_2">
           <div class="arc_left_2_1">
@@ -76,10 +85,13 @@
                 class="arc_td2">{{ hyDetail.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</td></tr>
             </table>
             </div>
-            <div class="arc_left_2_1_3">
+            <!-- <div class="arc_left_2_1_3">
               <a href="javascript:void(0)"><img src="../../static/images/article_wlzx/17shoucang.png">&nbsp;<span class="collection_hz">收藏货源</span><i>&nbsp;(&nbsp;<em class="my_hz_num">78</em>人气&nbsp;)</i></a>
-            </div>
+             
+            </div> -->
+            
           </div>
+          
           <div class="arc_left_2_2">
             <div class="collection_zx">
               <div 
@@ -104,11 +116,49 @@
                 class="arc_td2">{{ hyDetail.createTime.substring(0, 19) }}</td></tr>
             </table>
             </div>
-            <div class="arc_left_2_1_3">
+            <!-- <div class="arc_left_2_1_3">
               <img src="../../static/images/article_wlzx/pj_zhuyi.png" ><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
-            </div>
-
+             
+            </div> -->
+           
           </div>
+          <div class="arc_bottom">
+            <div class="arc_left_3">
+              <div>
+                <img
+                  src="/images/28fast_download.png"
+                  width="72"
+                  height="72">
+              </div>
+              <div>
+                下载<span>【28快运APP】</span>，您可查看更多<span>广州</span>到<span>东莞</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!
+              </div>
+
+            </div>
+            <div class="arc_middle5">
+              <div class="arc_m5_1">
+                <span>小贴士：对此货源有意向可点击“抢单”，货主即可看到您的联系信息，提高成交率！</span>
+                <div style="margin-top: 15px">
+                  <a 
+                    href="" 
+                    class="button1">立即下单</a>
+                  <a 
+                    href="javascript:;" 
+                    class="button2" 
+                  ><img 
+                    src="/images/cy/03u41008 2.gif" 
+                  >此线路上新货源提醒我</a>
+                  <span style="margin-left: 47px">
+                    <img src="/images/cy/14fresh.png">
+                    <span
+                      class="arc_middle5-right"
+                      @click="findAnother()">换一个</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
         </div>
 
       </div>
@@ -148,6 +198,9 @@
           <span><i>地址：</i><font v-if="hyDetail.consignorAddress">{{ hyDetail.consignorAddress.substring(0, 10) }}</font></span>
         </p>
         <p class="arc_right05">
+          <a 
+            href="#" 
+            class="website">进入官网</a>
           <input 
             class="collection_hz" 
             style="cursor: pointer;" 
@@ -171,7 +224,7 @@
       </div>
 
     </div>
-    <div class="arc_main2">
+    <!-- <div class="arc_main2">
       <div class="arc_left2">
         <div class="arc_left2_bt" >
           <span>货主介绍</span>
@@ -182,7 +235,6 @@
 
       <div class="arc_right2">
         <div class="arc_right2_bt">
-          <!--<span id="arc_bt1" class="arc_span arc_active">累计评价<font style="color: #eb434d;">30</font></span>-->
           <span 
             id="arc_bt2" 
             class="arc_span arc_active">货主其他求车信息</span>
@@ -227,20 +279,86 @@
           <div 
             id="pagination1" 
             class="page fl"/>
-          <div class="info fl">
-            <!--<p>当前页数：<span id="current1">1</span></p>-->
-          </div>
+          <div class="info fl"/>
         </div>
 
       </div>
       <div class="clear"/>
+    </div> -->
+    <div class="arc_main3">
+      <!-- <div class="left">
+        <div class="zx_sx">
+          <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
+        </div>
+        <div id="echart"/>
+      </div> -->
+      <div class="right">
+        <div class="zx_sx">
+          <span class="biaozhi"/><span>车主综合力评估</span>
+        </div>
+        <div class="content">
+          <div class="content-left">
+            <div class="img">
+              <img
+                src="/images/28fast_download.png"
+                width="82"
+                height="82">
+            </div>
+            <div class="name">企业货主名</div>
+            <div class="name">
+              <img src="/images/article_wlzx/10shiming.png">
+            </div>
+          </div>
+          <div class="content-right">
+            <img src="/images/cy/02gold.png">
+            <div class="content-right-row"><img
+              class="img"
+              src="/images/cy/13hot.png">活跃度：<i>30</i></div>
+            <div class="content-right-row">最近三个月发布货源 <i>15</i> 次</div>
+            <div class="content-right-row">共成交 <i>146</i> 笔订单，收到好评 <i>28</i> 次</div>
+            <div class="content-right-row">大家对他的印象:</div>
+            <div class="content-right-row">
+              <span>付款及时（15）</span>
+              <span>付款及时（15）</span>
+              <span>付款及时（15）</span>
+              <span>最想合作的伙伴（15）</span>
+              <span>付款及时（15）</span>
+              <span>付款及时（15）</span>
+              <span>付款及时（15）</span>
+              <span>付款及时（15）</span>
+            </div>
+            <div
+              class="content-right-row"
+              style="clear: both"
+            >大家对他的印象:</div>
+            <div class="content-right-row">
+              <em>广州<img src="/images/yd_zx.png">武汉</em>
+              <em>广州<img src="/images/yd_zx.png">武汉</em>
+              <em>广州<img src="/images/yd_zx.png">武汉</em>
+            </div>
+            <div
+              class="content-right-row"
+              style="clear: both">
+              <!-- <a
+                href="javascript:;" 
+                class="button1"
+                @click="showPrice()">标准价</a> -->
+              <a
+                href="javascript:;"
+                class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质车源</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
 
     <div 
       id="js011" 
       class="arc_bottom"
       style="display: none">
-      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/plus/list.php?tid=2"><span class="arc_bottom_more">更多+</span></a></div>
+      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/huoyuan"><span class="arc_bottom_more">更多+</span></a></div>
 
       <div 
         class="tj_list" 

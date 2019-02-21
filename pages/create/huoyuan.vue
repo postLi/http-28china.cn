@@ -247,7 +247,7 @@
           <div class="order-success-btns">
             <span class="continue-create-order">继续下单</span>
             <a 
-              href="/plus/list.php?tid=76" 
+              href="/ydcx" 
               class="track-order">跟踪订单</a>
             <a 
               href="/" 

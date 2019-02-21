@@ -80,7 +80,7 @@
                   console.log(2)
                   // 已经注册
                   p.reject(
-                    '手机号已存在，请更换其他手机号或点击<a href="/member/resetpassword.php" target="_blank">找回密码</a>'
+                    '手机号已存在，请更换其他手机号或点击<a href="/resetpassword" target="_blank">找回密码</a>'
                   )
                 } else {
                   console.log(3)

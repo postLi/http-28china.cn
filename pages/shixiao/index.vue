@@ -129,7 +129,7 @@
               </li>
               <li class="wlzx_list_6">
                 <p class="p2"><a 
-                  :href="'/plus/list.php?tid=77&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
+                  :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
                   target="_blank" 
                   class="check_btn" 
                   style="background: #2577e3;color: #fff;">下单</a>

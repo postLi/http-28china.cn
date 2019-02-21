@@ -9,18 +9,18 @@
               href="/" 
               class="wuTong">您好，欢迎来到28快运！</a>&nbsp;&nbsp;&nbsp;&nbsp;
             <a 
-              href="/member/login.php" 
+              href="/login" 
               class="denLu" 
               target="_blank">登录</a>&nbsp;&nbsp;
             <a 
-              href="/member/index_do.php?fmdo=user&dopost=regnew" 
+              href="/regisiter" 
               class="zhuCe" 
               target="_blank">注册</a>&nbsp;&nbsp; </span>
 
           <span id="_userlogin3_2"><span style="color: #666;">您好，<em id="login_name3"/>已登录</span>
             <a 
               target="_blank" 
-              href="/member/content_list.php?channelid=1" 
+              href="/hyzx" 
               style="color: #008be7" >会员中心</a>
             <a 
               class="exit_anfa" 
@@ -59,7 +59,7 @@
         <li class="head_xiantiao"/>
         <li class="top_list1 sel"><a 
           target="_blank" 
-          href="/plus/list.php?tid=69" 
+          href="/help/tsjy/index.jhtml" 
           class="tubiao">帮助中心</a></li>
         <li class="head_xiantiao"/>
         <li class="top_list1 sel"><a 

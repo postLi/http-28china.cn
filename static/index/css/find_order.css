@@ -42,24 +42,24 @@
   border-bottom: 1px solid #81c2f8;
   padding-bottom: 20px;
   padding-left: 46px;
-  background: url(../images/ydcx/01cj.png) no-repeat 0 0;
+  background: url(/images/ydcx/01cj.png) no-repeat 0 0;
   line-height: 1.5;
   font-size: 20px;
   margin-bottom: 10px;
 }
 .find_order_quesiton .find_order_tab_title{
-  background: url(../images/ydcx/02cd.png) no-repeat 0 0;
+  background: url(/images/ydcx/02cd.png) no-repeat 0 0;
 }
 .find_order_tip .find_order_tab_title{
-  background: url(../images/ydcx/05ts.png) no-repeat 0 0;
+  background: url(/images/ydcx/05ts.png) no-repeat 0 0;
 }
 .findo_ico_mobile{
   padding-left: 20px;
-  background: url(../images/ydcx/03dh.png) no-repeat 0 center;
+  background: url(/images/ydcx/03dh.png) no-repeat 0 center;
 }
 .find_ico_qq{
   padding-left:22px;
-  background: url(../images/ydcx/04qq.gif) no-repeat 0 center;
+  background: url(/images/ydcx/04qq.gif) no-repeat 0 center;
 }
 .find_order_tab_tip li{
   font-size: 16px;
@@ -76,11 +76,11 @@
 .find_order_tousu{
   color: #333;
   border: solid 1px #e2e2e2;
-  background: url(../images/ydcx/06jy.png) no-repeat 15px center;
+  background: url(/images/ydcx/06jy.png) no-repeat 15px center;
 }
 .find_order_xiadan{
   color: #fff;
-  background: url(../images/ydcx/07xd.png) no-repeat 15px center #3f94ee;
+  background: url(/images/ydcx/07xd.png) no-repeat 15px center #3f94ee;
   margin-left: 10px;
 }
 /* 右边部分 */
@@ -94,7 +94,7 @@
   padding-left: 40px;
   font-size: 20px;
   color: #333;
-  background: url(../images/ydcx/08hw.png) no-repeat 0 -4px;
+  background: url(/images/ydcx/08hw.png) no-repeat 0 -4px;
   font-weight: normal;
 }
 .find_order_search{
@@ -122,7 +122,7 @@
   top: 0;
   left: 0;
   z-index: 3;
-  /*background: url(../images/ydcx/09ss.png) no-repeat 4px center;*/
+  /*background: url(/images/ydcx/09ss.png) no-repeat 4px center;*/
   color: #999;
   font-size: 14px;
   height: 40px;
@@ -158,7 +158,7 @@ left: 140px;
   position: relative;
 }
 .find_order_default{
-  background: url(../images/ydcx/10tu.png) no-repeat center 90px;
+  background: url(/images/ydcx/10tu.png) no-repeat center 90px;
 }
 .find_order_default p{
   text-align: center;
@@ -174,7 +174,7 @@ left: 140px;
   color: #208CFF;
   font-size: 28px;
   padding-left: 48px;
-  background: url(../images/ydcx/14wjl.png) no-repeat -0  -0;
+  background: url(/images/ydcx/14wjl.png) no-repeat -0  -0;
   line-height: 36px;
 }
 .none_tip_desc{
@@ -278,11 +278,11 @@ left: 140px;
   display: inline-block;
   width: 15px;
   height: 15px;
-  background: url(../images/ydcx/12xs.png) no-repeat center 0;
+  background: url(/images/ydcx/12xs.png) no-repeat center 0;
   margin-left: -7.5px;
 }
 .find_order_create .find_order_line i{
-  background: url(../images/ydcx/11kd.png) no-repeat center 0;
+  background: url(/images/ydcx/11kd.png) no-repeat center 0;
   margin-top: 10px;
 }
 .find_order_create .find_order_line{
@@ -290,7 +290,7 @@ left: 140px;
 }
 
 .find_order_sign .find_order_line i{
-  background: url(../images/ydcx/13dd.png) no-repeat center 0;
+  background: url(/images/ydcx/13dd.png) no-repeat center 0;
   margin-left: -10.5px;
   width: 21px;
   height: 21px;

@@ -190,7 +190,7 @@ $("#HuoyuanTo input").citypicker({
       endp=encodeURI(endp)
       endc=encodeURI(endc)
       enda=encodeURI(enda)
-     window.open('/plus/list.php?tid=2&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda);
+     window.open('/huoyuan?startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda);
     })
 
 

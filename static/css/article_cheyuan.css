@@ -34,7 +34,7 @@ body{background-color: #F9F9F9;}
   box-sizing: border-box;}
 .arc_top2_1{float: left;width: 80px; }
 .arc_top2_1 span{font-size: 16px;color: #2577e3;}
-.arc_top2_2{float: left;width: 1070px;overflow: hidden;}
+.arc_top2_2{float: left;width: 1070px;overflow: hidden;cursor: pointer;}
 .arc_top2_2 span{font-size: 16px;color: #333;margin-right: 40px;}
 .arc_top2_3{float:right;width: 50px;display: none; }
 .arc_top2_3 span{font-size: 16px;color: #666;}
@@ -696,6 +696,7 @@ padding-right: 12px;
   line-height: 28px;
   letter-spacing: 1.1px;
   color: #333333;
+  padding-left:10px;
 }
 
 .rc_list {

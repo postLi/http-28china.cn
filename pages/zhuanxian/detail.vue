@@ -1266,19 +1266,19 @@ export default {
                       $('.city_box').css('display', 'none')
                     })
                     // 更多城市
-
-                    $('#zh_price').mouseover(function() {
-                      $('.price_box1').css('display', 'block')
-                    })
-                    $('#zh_price').mouseout(function() {
-                      $('.price_box1').css('display', 'none')
-                    })
-                    $('#qh_price').mouseover(function() {
-                      $('.price_box2').css('display', 'block')
-                    })
-                    $('#qh_price').mouseout(function() {
-                      $('.price_box2').css('display', 'none')
-                    })
+                    //
+                    // $('#zh_price').mouseover(function() {
+                    //   $('.price_box1').css('display', 'block')
+                    // })
+                    // $('#zh_price').mouseout(function() {
+                    //   $('.price_box1').css('display', 'none')
+                    // })
+                    // $('#qh_price').mouseover(function() {
+                    //   $('.price_box2').css('display', 'block')
+                    // })
+                    // $('#qh_price').mouseout(function() {
+                    //   $('.price_box2').css('display', 'none')
+                    // })
 
                     //  增值服务切换
                     $('#arc_bt1').click(function() {

@@ -90,3 +90,4 @@ dist
 !/pages/zhuanxian/index.vue
 !/pages/zhuanxian/detail.vue
 !/pages/zhuanxian/selectMap.vue
+!/pages/zhuanxian/showPrice.vue

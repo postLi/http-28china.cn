@@ -74,7 +74,7 @@
                 alt=""></li>
               <li @click="downFn">
                 <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
-                <p>多<span style="color: #2577e3">广州</span>到<span style="color: #2577e3">东莞</span>的货源，并可实时接</p>
+                <p>多<span style="color: #2577e3">{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的货源，并可实时接</p>
                 <p>收28快运为您推荐的精品货源提醒!</p>
               </li>
             </ul>
@@ -271,81 +271,71 @@
           </div>
           <div
             class="arc_middle1"
-            style="padding-left: 20px"><span id="nr072"/><span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>
+            style="padding-left: 20px"><span id="nr072"/>
+            <!--<span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>-->
             <ul>
               <li><img
                 src="../../static/line/images/02sj.png"
                 alt=""
-                style="vertical-align: middle;"><span>发布日期：2019-01-18 13:25:20 </span></li>
+                style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
               <li style="padding-left: 26px"><img
                 src="../../static/line/images/03sc.png"
                 alt=""
-                style="vertical-align: middle;"><span>收藏量:5566</span></li>
+                style="vertical-align: middle;"><span>收藏量:{{ linedataA.collectNumber }}</span></li>
             </ul>
           </div>
-          <!--<div class="arc_data">-->
-          <!--<ul>-->
-          <!--<li><img -->
-          <!--src="../../static/images/list_wlzx/hy_item6.png" -->
-          <!--alt=""><span>发布日期：2019-01-18 13:25:20 </span></li>-->
-          <!--</ul>-->
-          <!--</div>-->
-          <!--<div-->
-          <!--class="arc_middle1-21"-->
-          <!--style="padding-left: 20px"><span><img-->
-          <!--class="img1"-->
-          <!--src="../../static/images/list_wlzx/hy_item6.png"></span><span>发布日期：2019-01-18 13:25:20 </span><span><img-->
-          <!--class="img2"-->
-          <!--src="../../static/images/list_wlzx/sc_num.png"></span><span>收藏量：<i class="my_cz_num"/></span></div>-->
           <div class="arc_middle2">
-            <div class="arc_middle2_1">
-              <p class="p1"><i>重货价：</i><span id="nr0741"/><font
-                id="nr073"
-                class="font1"/><span
-                  id="nr074"
-                  class="span2"/><font
-                    id="zh_price"
-                    class="font2">[阶梯价]</font></p>
-              <p class="p2"><i>轻货价：</i><span id="nr0742"/><font
-                id="nr075"
-                class="font1"/><span
-                  id="nr076"
-                  class="span2"/><font
-                    id="qh_price"
-                    class="font2">[阶梯价]</font></p>
-            </div>
-            <div class="arc_middle2_2">
-              <div class="num1"><span id="nr0746"/></div>
-              <div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>
-              <div class="num3"><span>下单量</span></div>
-              <div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
-            </div>
-            <!--阶梯价格 S-->
-            <div
-              id="js018"
-              class="price_box1"
-            >
-              <!--onmouseover="price_block1();"-->
-              <!--onmouseout="price_none1();"-->
-              <div class="price_box_bt">阶梯价（重货）</div>
-              <div
-                class="price_box_item1"
-                style="display: none;"><span id="nr0743"/><i id="nr0720"/><font id="nr0721"/><em id="nr07210">元/吨</em>
-              </div>
-            </div>
+            <ShowPrice :info="linedataA.rangePrices"/>
+            <!--<div class="arc_middle2_1">-->
+            <!--<p class="p1"><i>重货价：</i><span id="nr0741">89</span><font-->
+            <!--id="nr073"-->
+            <!--class="font1"/><span-->
+            <!--id="nr074"-->
+            <!--class="span2"/><font-->
+            <!--id="zh_price"-->
+            <!--class="font2"-->
+            <!--&gt;[阶梯价]</font></p>-->
+            <!--<p class="p2"><i>轻货价：</i><span id="nr0742"/><font-->
+            <!--id="nr075"-->
+            <!--class="font1"/><span-->
+            <!--id="nr076"-->
+            <!--class="span2"/><font-->
+            <!--id="qh_price"-->
+            <!--class="font2"-->
+            <!--&gt;[阶梯价]</font></p>-->
+            <!--</div>-->
+            <!--<div class="arc_middle2_2">-->
+            <!--<div class="num1"><span id="nr0746"/></div>-->
+            <!--<div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>-->
+            <!--<div class="num3"><span>下单量</span></div>-->
+            <!--<div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;阶梯价格 S&ndash;&gt;-->
+            <!--<div-->
+            <!--id="js018"-->
+            <!--class="price_box1"-->
+            <!--&gt;-->
+            <!--&lt;!&ndash;onmouseover="price_block1();"&ndash;&gt;-->
+            <!--&lt;!&ndash;onmouseout="price_none1();"&ndash;&gt;-->
+            <!--<div class="price_box_bt">阶梯价（重货）</div>-->
+            <!--<div-->
+            <!--class="price_box_item1"-->
+            <!--style="display: none;"><span id="nr0743"/><i id="nr0720"/><font id="nr0721"/><em id="nr07210">元/吨</em>-->
+            <!--</div>-->
+            <!--</div>-->
 
-            <div
-              id="js019"
-              class="price_box2"
-            >
-              <!--onmouseover="price_block2();"-->
-              <!--onmouseout="price_none2();"-->
-              <div class="price_box_bt">阶梯价（轻货）</div>
-              <div
-                class="price_box_item2"
-                style="display: none;"><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>
-              </div>
-            </div>
+            <!--<div-->
+            <!--id="js019"-->
+            <!--class="price_box2"-->
+            <!--&gt;-->
+            <!--&lt;!&ndash;onmouseover="price_block2();"&ndash;&gt;-->
+            <!--&lt;!&ndash;onmouseout="price_none2();"&ndash;&gt;-->
+            <!--<div class="price_box_bt">阶梯价（轻货）</div>-->
+            <!--<div-->
+            <!--class="price_box_item2"-->
+            <!--style="display: none;"><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>-->
+            <!--</div>-->
+            <!--</div>-->
           </div>
           <div class="arc_middle3">
             <div class="arc_m3"><i>运输时效：</i><span id="nr077"/></div>
@@ -498,7 +488,7 @@
 
       </div>
       <div class="arc_main1-1">
-        想要更多<span>广州</span>到<span>深圳</span>的车源信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
+        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的车源信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -1034,11 +1024,13 @@
 <script>
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 import FootList from '../../components/footerList'
+import ShowPrice from './showPrice'
 
 export default {
   name: 'Index',
   components: {
-    FootList
+    FootList,
+    ShowPrice
   },
   head: {
     link: [
@@ -1059,6 +1051,8 @@ export default {
   data() {
     return {
       showMoblie: false,
+      isShowWPrice: false,
+      isShowHPrice: false,
       checkMoblie: true,
       showImg: 0,
       pages: 0,
@@ -1086,7 +1080,7 @@ export default {
         pageSize: 5
       })
     ])
-    console.log(linedataC, 'res.data.data.linedataA')
+    console.log(linedataA.data.data, 'res.data.data.linedataA')
     if (linedataA.data.status === 200) {
       lineCode = await getCode($axios, linedataA.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
@@ -1272,7 +1266,7 @@ export default {
                       $('.city_box').css('display', 'none')
                     })
                     // 更多城市
-
+                    //
                     // $('#zh_price').mouseover(function() {
                     //   $('.price_box1').css('display', 'block')
                     // })
@@ -1331,6 +1325,12 @@ export default {
     })
   },
   methods: {
+    showWPrice() {
+      this.isShowWPrice = true
+    },
+    showHPrice() {
+      this.isShowHPrice = true
+    },
     showMoblieFn(showMoblieFn) {
       if (showMoblieFn == false) {
         this.showMoblie = true

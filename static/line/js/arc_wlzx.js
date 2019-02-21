@@ -545,8 +545,8 @@ function process1() {
           if (zhjg) {
             $('#nr0720').html(zhjg + '元/吨')
             $('#nr0721').html(zhjg0)
-            $('#nr07210').html('元/吨')
-            $('#nr0721').css('text-decoration', 'line-through')
+            // $('#nr07210').html('元/吨')
+            // $('#nr0721').css('text-decoration', 'line-through')
             // console.log("重货价格：" + zhjg)
           }
           if (!zhjg) {
@@ -558,9 +558,9 @@ function process1() {
           }
 
           if (zhjg_1) {
-            $('#nr073').html('&yen;&nbsp;' + zhjg_1)
-            $('#nr074').html('&yen;&nbsp;' + zhjg0_1)
-            $('#nr074').css('text-decoration', 'line-through')
+            // $('#nr073').html('&yen;&nbsp;' + zhjg_1)
+            // $('#nr074').html('&yen;&nbsp;' + zhjg0_1)
+            // $('#nr074').css('text-decoration', 'line-through')
           }
           if (!zhjg_1) {
             $('#nr073').html('&yen;&nbsp;' + zhjg0_1)

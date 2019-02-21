@@ -404,6 +404,7 @@ $("#check-fee").click(
     var enda = $("#right-bar-to").attr('thearea')
     var endjw = $("#right-bar-to").attr("thepos");
     var startj,startw, endj,endw;
+    console.log(startjw,'startjw');
     if (startjw) {
       var startj = startjw.split(",", 2)[0];
       var startw = startjw.split(",", 2)[1];

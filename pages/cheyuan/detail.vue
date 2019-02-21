@@ -286,10 +286,14 @@
       <div class="arc_main4">
         <div class="left4">
           <div>
-            <div class="zx_sx">
-              <span class="biaozhi"/><span>更多从{{ cy1.startCity }}出发的货源</span>
+            <div 
+              class="zx_sx" 
+            >
+              <span 
+                class="biaozhi" 
+              /><span>更多从{{ cy1.startCity }}出发的货源</span>
               <i
-                style="cursor: pointer"
+                style="cursor: pointer;float: right;font-size: 14px;"
                 @click="goToCy()">更多></i>
             </div>
             <div class="arc_main4-content">
@@ -373,7 +377,7 @@
             <div class="zx_sx">
               <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的货源</span>
               <i
-                style="cursor: pointer"
+                style="cursor: pointer;float: right;font-size: 14px;"
                 @click="goToCy1()">更多></i>
             </div>
             <div class="arc_main4-content">

@@ -520,7 +520,7 @@
                   alt=""
                   width="50"
                   height="50">
-              <p>{{ lineHots[0].companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+              <p>{{ lineHots[0].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[0].popularity }}</i></span></a></li>
               <li><a
                 :href="'/member/'+lineHots[1].id"
                 style="display: flex;"><span class="hot-num">2</span><img
@@ -528,15 +528,16 @@
                   alt=""
                   width="50"
                   height="50">
-              <p>{{ lineHots[1].companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+              <p>{{ lineHots[1].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[1].popularity }}</i></span></a></li>
               <li><a
                 :href="'/member/'+lineHots[2].id"
-                style="display: flex;"><span class="hot-num">3</span><img
+                style="display: flex;"
+                target="_blank"><span class="hot-num">3</span><img
                   src="/line/images/touxiang3.png"
                   alt=""
                   width="50"
                   height="50">
-              <p>{{ lineHots[2].companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+              <p>{{ lineHots[2].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[2].popularity }}</i></span></a></li>
             </ul>
             <ul
               class="lastul">
@@ -544,8 +545,9 @@
                 v-for="(item, index) in lineHots.slice(-12)"
                 :key="index"><a
                   :href="'/member/'+item.id"
-                  style="display: flex;"><span class="hot-num">{{ index + 4 }}</span>
-              <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>1590</i></span></a></li>
+                  style="display: flex;"
+                  target="_blank"><span class="hot-num">{{ index + 4 }}</span>
+              <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>{{ item.popularity }}</i></span></a></li>
             </ul>
           </div>
           <!--<div class="zx_sx"><span class="biaozhi"/><span>专线信45息推荐</span></div>-->
@@ -556,53 +558,54 @@
         <div class="list-box-r-phone">
           <div class="zx_p_tit">帮我找优质承运商</div>
           <div class="list-box-r-top">
-            <form action="">
-              <!--<span>出发地</span>-->
-              <div class="ltl-input">
-                <input
-                  id="right-bar-form"
-                  autocomplete="off"
-                  wtmap=""
-                  type="text"
-                  class="ltl-location"
-                  placeholder="请选择出发地">
-                <i class="ltl-icons ss56-common-sprite-icon ltl-ico-start"/>
-              </div>
-              <!--<span>目的地</span>-->
-              <div class="ltl-input">
-                <input
-                  id="right-bar-to"
-                  autocomplete="off"
-                  wtmap=""
-                  type="text"
-                  class="ltl-location"
-                  placeholder="请选择目的地">
-                <i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>
-              </div>
-              <div class="ltl-input">
-                <textarea
-                  class="textareaDiv"
-                  placeholder="备注信息，如：期望发货时间、货物体积重量
-等信息..."/>
-              </div>
-              <div class="ltl-input">
-                <input
-                  type="text"
-                  class="ltl-location phone-num"
-                  placeholder="11位手机号"
-                  style="width: 60%"
-                  maxlength="11">
-                <input
-                  class="phone-btn"
-                  type="button"
-                  value="找到通知我">
-              </div>
-              <!--<input-->
-              <!--id="check-fee"-->
-              <!--type="button"-->
-              <!--value="查询零担运费"-->
-              <!--class="right-top-btn">-->
-            </form>
+            <selectMap/>
+            <!--<form action="">-->
+            <!--<span>出发地</span>-->
+            <!--<div class="ltl-input">-->
+            <!--<input-->
+            <!--id="right-bar-form"-->
+            <!--autocomplete="off"-->
+            <!--wtmap=""-->
+            <!--type="text"-->
+            <!--class="ltl-location"-->
+            <!--placeholder="请选择出发地">-->
+            <!--<i class="ltl-icons ss56-common-sprite-icon ltl-ico-start"/>-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<span>目的地</span>&ndash;&gt;-->
+            <!--<div class="ltl-input">-->
+            <!--<input-->
+            <!--id="right-bar-to"-->
+            <!--autocomplete="off"-->
+            <!--wtmap=""-->
+            <!--type="text"-->
+            <!--class="ltl-location"-->
+            <!--placeholder="请选择目的地">-->
+            <!--<i class="ltl-icons ss56-common-sprite11 ltl-ico-end"/>-->
+            <!--</div>-->
+            <!--<div class="ltl-input">-->
+            <!--<textarea-->
+            <!--class="textareaDiv"-->
+            <!--placeholder="备注信息，如：期望发货时间、货物体积重量-->
+            <!--等信息..."/>-->
+            <!--</div>-->
+            <!--<div class="ltl-input">-->
+            <!--<input-->
+            <!--type="text"-->
+            <!--class="ltl-location phone-num"-->
+            <!--placeholder="11位手机号"-->
+            <!--style="width: 60%"-->
+            <!--maxlength="11">-->
+            <!--<input-->
+            <!--class="phone-btn"-->
+            <!--type="button"-->
+            <!--value="找到通知我">-->
+            <!--</div>-->
+            <!--&lt;!&ndash;<input&ndash;&gt;-->
+            <!--&lt;!&ndash;id="check-fee"&ndash;&gt;-->
+            <!--&lt;!&ndash;type="button"&ndash;&gt;-->
+            <!--&lt;!&ndash;value="查询零担运费"&ndash;&gt;-->
+            <!--&lt;!&ndash;class="right-top-btn">&ndash;&gt;-->
+            <!--</form>-->
           </div>
         </div>
       </div>
@@ -639,10 +642,12 @@
 <script>
 import $axios from 'axios'
 import FooterLinks from '../../components/footerLinks'
+import selectMap from './selectMap'
 export default {
   name: 'Index',
   components: {
-    FooterLinks
+    FooterLinks,
+    selectMap
   },
   head: {
     link: [
@@ -844,21 +849,6 @@ export default {
                     currentPage = current
                     fetchLineList(currentPage, orderBy)
                     window.location.href = '#top'
-                  }
-                })
-                $('.phone-btn').click(function() {
-                  var validReg = window.AFLC_VALID
-                  var phoneNum = $('.phone-num').val()
-                  if (validReg.MOBILE.test(phoneNum)) {
-                    layer.alert('请求出错了，请尝试刷新页面')
-                  } else {
-                    layer.alert('请求出错了，请尝试刷新页面11')
-                    // $('.phone-num').val().length = 0
-                    console.log(
-                      $('.phone-num').val(),
-                      $('.phone-num').val().length,
-                      'phoneNum.length'
-                    )
                   }
                 })
                 //切换专线信息
@@ -1167,8 +1157,14 @@ export default {
               background: #8eb9f5 !important;
             }
             p {
-              width: 62%;
+              /*width: 62%;*/
               padding-left: 16px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            .hot-peonum {
+              margin-left: 55px;
             }
           }
         }
@@ -1191,23 +1187,6 @@ export default {
         font-size: 18px;
         font-weight: bold;
         padding-left: 20px;
-      }
-      .list-box-r-top {
-        background: rgba(255, 255, 255, 0.1);
-        padding-top: 0 !important;
-        margin-bottom: 0px !important;
-      }
-
-      .phone-btn {
-        font-size: 14px;
-        padding: 7px 18px;
-        margin-left: 10px;
-        background-color: #589def;
-        color: #ffffff;
-        border-style: none;
-      }
-      .phone-btn:hover {
-        background-color: #2577ff;
       }
     }
   }

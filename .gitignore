@@ -89,3 +89,4 @@ dist
 !/pages/gongsi/index.vue
 !/pages/zhuanxian/index.vue
 !/pages/zhuanxian/detail.vue
+!/pages/zhuanxian/selectMap.vue

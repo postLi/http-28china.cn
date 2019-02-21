@@ -286,12 +286,7 @@
       <div class="clear"/>
     </div> -->
     <div class="arc_main3">
-      <!-- <div class="left">
-        <div class="zx_sx">
-          <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
-        </div>
-        <div id="echart"/>
-      </div> -->
+     
       <div class="right">
         <div class="zx_sx">
           <span class="biaozhi"/><span>车主综合力评估</span>
@@ -300,7 +295,7 @@
           <div class="content-left">
             <div class="img">
               <img
-                src="/images/28fast_download.png"
+                src="/images/cy/09sj.png"
                 width="82"
                 height="82">
             </div>
@@ -310,7 +305,7 @@
             </div>
           </div>
           <div class="content-right">
-            <img src="/images/cy/02gold.png">
+            <img src="/images/cy/gold.png">
             <div class="content-right-row"><img
               class="img"
               src="/images/cy/13hot.png">活跃度：<i>30</i></div>
@@ -351,14 +346,360 @@
         </div>
 
       </div>
+      <div class="left">
+        <div class="zx_sx">
+          <span class="biaozhi"/><span>货主最近货源信息</span>
+        </div>
+        <ul class="zx_sx_new">
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
+        </ul>
+        <!-- <div id="echart"/> -->
+      </div>
     </div>
+    <div class="arc_main4">
+      <div class="left4">
+        <div>
+          <div 
+            class="zx_sx" 
+          >
+            <span 
+              class="biaozhi" 
+            /><span>更多从{{ cy1.startCity }}出发的货源</span>
+            <i
+              style="cursor: pointer;float: right;font-size: 14px;"
+              @click="goToCy()">更多></i>
+          </div>
+          <div class="arc_main4-content">
+            <div
+              v-if="carInfoStartList.length === 0"
+              class="list_none"
+              style="display: block">
+              <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
+              <img src="/images/none_pic.png">
+            </div>
+            <ul
+              v-for="(item,index) in carInfoStartList"
+              :key="index"
+              class="wlzx_list">
+              <li id="cy_list_0">
+                <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+                <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
+              </li>
+              <li class="cy_list_4">
+                <a
+                  :href="'/cheyuan/detail?id=' + item.id"
+                  target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
 
+              </li>
+              <li class="cy_list_1">
+                <p class="p1">
+                  <a
+                    :href="'/cheyuan/detail?id=' + item.id"
+                    class="list-title-a"
+                    target="_blank" >
+                    <span class="list-icon lines-sprite-icons icon-start"/>
+                    <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
+                    <span class="list-icon lines-sprite-icons icon-through"/>
+                    <span class="list-icon lines-sprite-icons icon-end"/>
+                    <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
+                  </a>
+
+                </P>
+                <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font>
+                  <font>{{ item.carTypeName }}</font>
+                  <font>长<b>{{ item.carLength }}</b>米</font>
+                  <font>载重<b>{{ item.carLoad }}</b>吨</font>
+                  <font>{{ item.carSourceTypeName }}</font>
+                </p>
+                <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
+                  <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
+                <font>{{ item.createrName?item.createrName:'' }}</font></p>
+                <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
+              </li>
+              <li class="cy_list_3">
+                <p class="p1"><img
+                  v-if="item.driverStatus === 'AF0010403'"
+                  src="/images/list_wlzx/10shiming.png"></P>
+                  <!--<p class="p2"><img id="list_xinyong" src="/images/list_wlzx/11xinyong.png"/></P>-->
+              </li>
+              <li class="wlzx_list_6">
+                <p class="p2"><a
+                  :href="'/cheyuan/detail?id=' + item.id"
+                  target="_blank" ><input
+                    readonly
+                    value="查看"></a>
+                </p>
+                <p class="p3"><a
+                  v-if="item.qq"
+                  :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
+                  target="_blank"><input
+                    value="QQ交谈">
+                </a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="middle-ad">
+          <img
+            src="/images/cy/10banner.png"
+            alt="广告">
+        </div>
+
+        <div>
+          <div class="zx_sx">
+            <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的货源</span>
+            <i
+              style="cursor: pointer;float: right;font-size: 14px;"
+              @click="goToCy1()">更多></i>
+          </div>
+          <div class="arc_main4-content">
+            <div
+              v-if="carInfoEndList.length === 0"
+              class="list_none"
+              style="display: block">
+              <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
+              <img src="/images/none_pic.png">
+            </div>
+            <ul
+              v-for="(item,index) in carInfoEndList"
+              :key="index"
+              class="wlzx_list">
+              <li id="cy_list_0">
+                <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+                <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
+              </li>
+              <li class="cy_list_4">
+                <a
+                  :href="'/cheyuan/detail?id=' + item.id"
+                  target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
+
+              </li>
+              <li class="cy_list_1">
+                <p class="p1">
+                  <a
+                    :href="'/cheyuan/detail?id=' + item.id"
+                    class="list-title-a"
+                    target="_blank" >
+                    <span class="list-icon lines-sprite-icons icon-start"/>
+                    <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
+                    <span class="list-icon lines-sprite-icons icon-through"/>
+                    <span class="list-icon lines-sprite-icons icon-end"/>
+                    <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
+                  </a>
+
+                </P>
+                <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font>
+                  <font>{{ item.carTypeName }}</font>
+                  <font>长<b>{{ item.carLength }}</b>米</font>
+                  <font>载重<b>{{ item.carLoad }}</b>吨</font>
+                  <font>{{ item.carSourceTypeName }}</font>
+                </p>
+                <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
+                  <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
+                <font>{{ item.createrName?item.createrName:'' }}</font></p>
+                <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
+              </li>
+              <li class="cy_list_3">
+                <p class="p1"><img
+                  v-if="item.driverStatus === 'AF0010403'"
+                  src="/images/list_wlzx/10shiming.png"></P>
+                  <!--<p class="p2"><img id="list_xinyong" src="/images/list_wlzx/11xinyong.png"/></P>-->
+              </li>
+              <li class="wlzx_list_6">
+                <p class="p2"><a
+                  :href="'/cheyuan/detail?id=' + item.id"
+                  target="_blank" ><input
+                    readonly
+                    value="查看"></a>
+                </p>
+                <p class="p3"><a
+                  v-if="item.qq"
+                  :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
+                  target="_blank"><input
+                    value="QQ交谈">
+                </a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="clear: both">
+          <div class="zx_sx1">
+            <span class="biaozhi1"/><span>您可能对这些感兴趣</span>
+          </div>
+          <ul class="hot-cities">
+            <li class="hot-cities-li">
+              <a
+                href="/cheyuan/detail?id=null"
+                class="hot-cities-a">广州到北京物流专线</a>
+            </li>
+            <li class="hot-cities-li">
+              <a
+                href="/cheyuan/detail?id=null"
+                class="hot-cities-a">广州物流专线</a>
+            </li>
+            <li class="hot-cities-li">
+              <a
+                href="/cheyuan/detail?id=null"
+                class="hot-cities-a">北京物流专线</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="right4">
+        <div class="arc_main4-content">
+          <div class="zx_sx">
+            <span class="biaozhi"/><span>28快运平台功能导航源</span>
+          </div>
+          <a
+            v-for="(item,index) in gldhList"
+            :key="index"
+            :href="item.url"
+            class="gldh_list"
+            target="_blank"
+          >
+            <div class="img"><img :src="item.img"></div>
+            <div>
+              <p>{{ item.title }}</p>
+              <p>{{ item.subTitle }}</p>
+            </div>
+          </a>
+        </div>
+
+        <div class="arc_main4-content">
+          <img
+            class="ad"
+            src="/images/cy/09banner.png"
+            alt="广告">
+        </div>
+
+        <div class="arc_main4-content">
+          <div class="zx_sx">
+            <span class="biaozhi"/><span>热门搜索</span>
+          </div>
+          <div style="padding: 10px">
+            <a
+              v-for="(item,index) in hotSearchList"
+              :key="index"
+              :href="item.url"
+              class="rmsx_list"
+              target="_blank">
+              {{ item.name }}
+            </a>
+          </div>
+        </div>
+        <div
+          class="arc_main4-content"
+          style="margin-top: 20px">
+          <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
+          <div class="rc_list">
+            <div class="left"><p>1</p></div>
+            <div class="img"><img src="/images/index/wlgs_tj_00.png" ></div>
+            <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
+          </div>
+          <div class="rc_list">
+            <div class="left"><p>2</p></div>
+            <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
+          </div>
+        </div>
+
+        <div class="arc_main4-content">
+          <img
+            class="ad"
+            src="/images/cy/09banner.png"
+            alt="广告">
+        </div>
+
+        <div class="arc_main4-content">
+          <img
+            class="ad"
+            src="/images/cy/09banner.png"
+            alt="广告">
+        </div>
+
+        <div class="arc_main4-content">
+          <img
+            class="ad"
+            src="/images/cy/09banner.png"
+            alt="广告">
+        </div>
+
+        <div class="arc_main4-content">
+          <img
+            class="ad"
+            src="/images/cy/09banner.png"
+            alt="广告">
+        </div>
+
+        <div class="arc_main4-content">
+          <div class="zx_sx">
+            <span class="biaozhi"/><span>仓储与配送</span>
+          </div>
+          <ul
+            class="ps-list"
+            style="padding-left: 30px;list-style: square">
+            <li>
+              <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+            </li>
+            <li>
+              <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+            </li>
+            <li>
+              <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+    
+    <div class="arc_main4">
+      <div class="zx_sx1">
+        <span class="biaozhi1"/><span>为您推荐车源</span>
+      </div>
+      <ul class="hot-cities">
+        <li class="hot-cities-li">
+          <a
+            href="/cheyuan/detail?id=null"
+            class="hot-cities-a">广州到南京物流专线</a>
+        </li>
+        <li class="hot-cities-li">
+          <a
+            href="/cheyuan/detail?id=null"
+            class="hot-cities-a">广州到南京物流专线</a>
+        </li>
+        <li class="hot-cities-li">
+          <a
+            href="/cheyuan/detail?id=null"
+            class="hot-cities-a">广州到南京物流专线</a>
+        </li>
+      </ul>
+    </div>
 
     <div 
       id="js011" 
       class="arc_bottom"
       style="display: none">
-      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/huoyuan"><span class="arc_bottom_more">更多+</span></a></div>
+      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/plus/list.php?tid=2"><span class="arc_bottom_more">更多+</span></a></div>
 
       <div 
         class="tj_list" 
@@ -400,7 +741,7 @@
   </div>
 </template>
 <script>
-import { getCode, getCity } from '~/components/commonJs.js'
+import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 function setEnable(item) {
   if (item.isEnable >= 0 && item.isEnable <= 3) {
     item.starS = new Array(1)
@@ -455,7 +796,12 @@ export default {
       { rel: 'stylesheet', href: '/css/article_huoyuan.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
     ],
-    script: [{ src: '../js/jquery.pagination.min.js' }]
+    script: [
+      { src: '../vendor/layer/layer.js' },
+      { src: '../js/jquery.pagination.min.js' },
+      { src: '../js/WTMap.min.js' },
+      { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
+    ]
   },
   layout: 'subLayout',
   data() {
@@ -464,27 +810,192 @@ export default {
       otherInfoList: [],
       hyDetail: [],
       pages: 0,
-      currentPage: 1
+      currentPage: 1,
+      gldhList: [
+        {
+          title: '注册28快运会员',
+          subTitle: '免费发布车源货源专线信息，轻松一键搞定',
+          url: '/regisiter',
+          img: '/images/cy/04zc.png'
+        },
+        {
+          title: '快速下单',
+          subTitle: '下单立即响应，甄选优质运力，发货有保障',
+          url: '/',
+          img: '/images/cy/05xd.png'
+        },
+        {
+          title: '发布车源',
+          subTitle: '让客户主动找我，让平台为我撮合',
+          url: '/create/cheyuan',
+          img: '/images/cy/06cy.png'
+        },
+        {
+          title: '发布货源',
+          subTitle: '精准匹配合适物流，方便快捷省钱',
+          url: '/create/huoyuan',
+          img: '/images/cy/07hy.png'
+        },
+        {
+          title: '发布专线',
+          subTitle: '平台智能推荐货源，实施提醒撮合交易',
+          url: '/create/line',
+          img: '/images/cy/08zx.png'
+        }
+      ],
+      hotSearchList: [
+        {
+          name: '广州到杭州货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=杭州市&endProvince=浙江省&startArea=&startCity=广州市&startProvince=广东省'
+        },
+        {
+          name: '山西到甘肃的货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=甘肃省&startArea=&startCity=&startProvince=山西省'
+        },
+        {
+          name: '广东广州到山西太原的货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=太原市&endProvince=山西省&startArea=&startCity=广州市&startProvince=广东省'
+        },
+        {
+          name: '找上海货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=上海市&startProvince=上海市'
+        },
+        {
+          name: '沈阳到广州的货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=广州市&endProvince=广东省&startArea=&startCity=沈阳市&startProvince=辽宁省'
+        },
+        {
+          name: '苏州货源',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=苏州市&startProvince=江苏省'
+        },
+        {
+          name: '上海到江西的运力',
+          url:
+            '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=江西省&isLongCar=&startArea=&startCity=&startProvince=上海市'
+        },
+        {
+          name: '广州出发的专线',
+          url:
+            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=广州市&startProvince=广东省'
+        },
+        {
+          name: '广州物流公司',
+          url:
+            '/gongsi/?tid=80&startp=广东省&startc=广州市&starta=&address=广东省广州市&companyName='
+        },
+        {
+          name: '上海地区运力',
+          url:
+            '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=上海市&startProvince=上海市'
+        }
+      ]
     }
   },
+  // async asyncData({ $axios, app, query }) {
+  //   let zxList
+  //   let hyDetail = await $axios.get('/28-web/lclOrder/detail/' + query.id)
+  //   if (hyDetail.data.status === 200) {
+  //     setEnable(hyDetail.data.data)
+  //     let code = await getCode($axios, hyDetail.data.data.endProvince)
+  //     zxList = await getCity($axios, code, hyDetail.data.data.startCity)
+  //   }
+  //   let otherInfoList = await getOtherInfoList($axios, 1, {
+  //     id: query.id,
+  //     shipperId: query.shipperId
+  //   })
+  //   return {
+  //     hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+  //     zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
+  //     otherInfoList: otherInfoList.list,
+  //     currentPage: otherInfoList.currentPage,
+  //     pages: otherInfoList.pages
+  //   }
+  // },
   async asyncData({ $axios, app, query }) {
-    let zxList
-    let hyDetail = await $axios.get('/28-web/lclOrder/detail/' + query.id)
-    if (hyDetail.data.status === 200) {
-      setEnable(hyDetail.data.data)
-      let code = await getCode($axios, hyDetail.data.data.endProvince)
-      zxList = await getCity($axios, code, hyDetail.data.data.startCity)
+    let zxList, otherCarSourceList, carInfoRes, carInfoRes1
+    const cy1 = await $axios.post('/28-web/lclOrder/detail/' + query.id)
+    console.log('cy1', query.id)
+    if (cy1.data.status === 200) {
+      // cy1.data.data.num = Math.ceil(Math.random() * 30)
+      // cy1.data.data.startTime1 = parseTime(
+      // cy1.data.data.startTime,
+      // '{y}-{m}-{d} {h}:{i}:{s}'
+      // )
+      // let code = await getCode($axios, cy1.data.data.endProvince)
+      // zxList = await getCity($axios, code, cy1.data.data.startCity)
+      // let parm = {
+      //   currentPage: 1,
+      //   pageSize: 10,
+      //   startProvince: cy1.data.data.startProvince,
+      //   startCity: cy1.data.data.startCity
+      // }
+      // carInfoRes = await $axios.post('/28-web/carInfo/list', parm)
+      // let parm1 = {
+      //   currentPage: 1,
+      //   pageSize: 10,
+      //   startProvince: cy1.data.data.endProvince,
+      //   startCity: cy1.data.data.endCity
+      // }
+      // carInfoRes1 = await $axios.post('/28-web/carInfo/list', parm1)
+      //此路线其他车源
+      // otherCarSourceList = await $axios.get(
+      //   '/28-web/carInfo/getOtherCarSourceList/' + query.id
+      // )
+      // if (otherCarSourceList.data.status === 200) {
+      //   otherCarSourceList.data.data.forEach(item => {
+      //     item.createTime1 = parseTime(
+      //       item.createTime,
+      //       '{y}-{m}-{d} {h}:{i}:{s}'
+      //     )
+      //   })
+      // }
     }
-    let otherInfoList = await getOtherInfoList($axios, 1, {
-      id: query.id,
-      shipperId: query.shipperId
-    })
+    //车主其他求货信息
+    // let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
+    //   id: query.id
+    // })
+    //车主月人气榜列表
+    let carPopularityRes = await $axios.get('/28-web/carInfo/carPopularityList')
+    // console.log('车主月人气榜', carPopularityRes.data)
+    //24小时内发布的车源中最新的前10条车源信息
+    let newestCreateCarRes = await $axios.get(
+      '/28chinaservice/carInfo/newestCreateCar'
+    )
+    // console.log(
+    //   '24小时内发布的车源中最新的前10条车源信息',
+    //   newestCreateCarRes.data
+    // )
     return {
-      hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+      cy1: cy1.data.status === 200 ? cy1.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
-      otherInfoList: otherInfoList.list,
-      currentPage: otherInfoList.currentPage,
-      pages: otherInfoList.pages
+      otherCarSourceList:
+        otherCarSourceList && otherCarSourceList.data.status === 200
+          ? otherCarSourceList.data.data
+          : [],
+      carInfoStartList: !carInfoRes
+        ? []
+        : carInfoRes.data.status === 200
+          ? carInfoRes.data.data.list
+          : [],
+      carInfoEndList: !carInfoRes1
+        ? []
+        : carInfoRes1.data.status === 200
+          ? carInfoRes1.data.data.list
+          : [],
+      carPopularityList:
+        carPopularityRes.data.status === 200 ? carPopularityRes.data.data : [],
+      newestCreateCar:
+        newestCreateCarRes.data.status === 200
+          ? newestCreateCarRes.data.data
+          : []
+      // otherCarInfoList: otherCarInfoList.list,
+      // pages: otherCarInfoList.pages
     }
   },
   mounted() {
@@ -510,6 +1021,438 @@ export default {
         })
       })
     })
+    // let myChart = echarts.init(document.getElementById('echart'))
+    // let option = {
+    //   title: { text: '', subtext: '' },
+    //   tooltip: { trigger: 'axis' },
+    //   xAxis: {
+    //     show: false,
+    //     type: 'category',
+    //     boundaryGap: false,
+    //     data: [
+    //       '大品牌报价',
+    //       '优质专线报价',
+    //       '行业均价（高点）',
+    //       '行业均价（低点）',
+    //       '本供应商价'
+    //     ]
+    //   },
+    //   yAxis: {
+    //     axisLine: { show: false },
+    //     axisTick: { show: false },
+    //     axisLabel: { show: false },
+    //     type: 'value',
+    //     max: 15
+    //   },
+    //   series: [
+    //     {
+    //       name: '',
+    //       type: 'line',
+    //       lineStyle: {
+    //         normal: { color: 'rgba(255,173,101, 0.5)' }
+    //       },
+    //       data: [
+    //         11,
+    //         10,
+    //         8,
+    //         6,
+    //         {
+    //           value: 5,
+    //           symbol: 'image:///images/cy/12d.png',
+    //           symbolSize: 20
+    //         }
+    //       ],
+    //       markPoint: {
+    //         symbol: 'image:///images/cy/11wk.png',
+    //         symbolOffset: [0, '-70%'],
+    //         symbolSize: [82, 62],
+    //         itemStyle: {
+    //           color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+    //         },
+    //         label: {
+    //           position: 'insideTop',
+    //           formatter: function(params) {
+    //             // console.log(params)
+    //             return `{color1|${params.name}}\n{color0|${params.value}万}`
+    //           },
+    //           rich: {
+    //             color0: {
+    //               fontSize: 14,
+    //               align: 'center',
+    //               fontWeight: 'normal',
+    //               color: '#FF7836',
+    //               padding: [0, 0, 6, 0]
+    //             },
+    //             color1: {
+    //               fontSize: 12,
+    //               align: 'center',
+    //               fontWeight: 'normal',
+    //               color: '#6F6F6F',
+    //               padding: [0, 0, 6, 0]
+    //             }
+    //           }
+    //         },
+    //         data: [
+    //           {
+    //             name: '',
+    //             type: 'min'
+    //           }
+    //         ]
+    //       },
+    //       itemStyle: {
+    //         normal: {
+    //           color: '#6F6F6F',
+    //           opacity: 1
+    //         },
+    //         emphasis: {
+    //           color: '#6F6F6F'
+    //         }
+    //       },
+    //       symbolSize: 6,
+    //       hoverAnimation: false, //拐点不要动画
+    //       symbol: 'circle',
+    //       label: {
+    //         show: true,
+    //         position: 'bottom',
+    //         textStyle: { color: '#6F6F6F' },
+    //         formatter: function(params) {
+    //           let c0
+    //           if (params.dataIndex <= 1) {
+    //             c0 = 'color1'
+    //           } else {
+    //             c0 = 'color0'
+    //           }
+    //           if (params.dataIndex === 4) {
+    //             return ``
+    //           } else {
+    //             return `{${c0}|${params.value}万}\n{color2|${params.name}}`
+    //           }
+    //         },
+    //         rich: {
+    //           color0: { fontSize: 18, align: 'center', color: '#FF7836' },
+    //           color1: { fontSize: 18, align: 'center', color: '#6F6F6F' },
+    //           color2: {
+    //             color: '#413A43',
+    //             align: 'center',
+    //             fontSize: 14,
+    //             padding: [5, 5, 5, 5]
+    //           }
+    //         }
+    //       },
+    //       tooltip: { show: false }
+    //     },
+    //     {
+    //       name: '',
+    //       type: 'line',
+    //       lineStyle: {
+    //         normal: { color: 'rgba(255,173,101, 1)' }
+    //       },
+    //       areaStyle: {
+    //         normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
+    //       },
+    //       data: [null, null, 8, 6],
+    //       tooltip: { show: false }
+    //     },
+    //     {
+    //       name: '平行于y轴的趋势线',
+    //       type: 'line',
+    //       markLine: {
+    //         name: 'xfdsvffds',
+    //         symbol: ['circle', 'none'],
+    //         symbolSize: 6,
+    //         lineStyle: {
+    //           normal: { color: 'rgba(255,173,101, 1)' }
+    //         },
+    //         label: {
+    //           show: true,
+    //           position: 'end',
+    //           formatter: function(params) {
+    //             if (params.dataIndex === 1) {
+    //               return `{style|建议价格区间}`
+    //             }
+    //           },
+    //           rich: {
+    //             style: {
+    //               fontSize: 15,
+    //               padding: [0, 110, 0, 0],
+    //               color: '#FF7836'
+    //             }
+    //           }
+    //         },
+    //         data: [
+    //           [
+    //             { coord: ['行业均价（高点）', 8] },
+    //             { coord: ['行业均价（高点）', 15] }
+    //           ],
+    //           [
+    //             { coord: ['行业均价（低点）', 6] },
+    //             { coord: ['行业均价（低点）', 15] }
+    //           ]
+    //         ]
+    //       }
+    //     }
+    //   ]
+    // }
+    // myChart.setOption(option)
+    // $('#pagination1').pagination({
+    //   currentPage: this.currentPage,
+    //   totalPage: this.pages,
+    //   callback: async current => {
+    //     $('#current1').text(current)
+    //     // console.log(current)
+    //     let obj = await getOtherCarInfoList(this.$axios, current, {
+    //       id: this.$route.query.id
+    //     })
+    //     this.otherCarInfoList = obj.list
+    //     this.currentPage = obj.currentPage
+    //     this.pages = obj.pages
+    //     window.location.href = '#top'
+    //   }
+    // })
+  },
+  methods: {
+    showPrice() {
+      layer.open({
+        type: 1,
+        title: ' ',
+        area: ['580px', '540px'],
+        closeBtn: 1,
+        shadeClose: true,
+        success: (layero, index) => {
+          let seconds = 5
+          let stop = setInterval(() => {
+            $('#seconds').html(seconds + 'S')
+            seconds--
+            if (seconds < 0) {
+              clearInterval(stop)
+              $('.show1').hide()
+              $('.show2').show()
+              let myChart2 = echarts.init(document.getElementById('echart2'))
+              let option2 = {
+                title: { text: '', subtext: '' },
+                tooltip: { trigger: 'axis' },
+                xAxis: {
+                  show: false,
+                  type: 'category',
+                  boundaryGap: false,
+                  data: [
+                    '大品牌报价',
+                    '优质专线报价',
+                    '行业均价（高点）',
+                    '行业均价（低点）',
+                    '本供应商价'
+                  ]
+                },
+                yAxis: {
+                  axisLine: { show: false },
+                  axisTick: { show: false },
+                  axisLabel: { show: false },
+                  type: 'value',
+                  max: 15
+                },
+                series: [
+                  {
+                    name: '',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 0.5)' }
+                    },
+                    data: [
+                      11,
+                      10,
+                      8,
+                      6,
+                      {
+                        value: 5,
+                        symbol: 'image:///images/cy/12d.png',
+                        symbolSize: 20
+                      }
+                    ],
+                    markPoint: {
+                      symbol: 'image:///images/cy/11wk.png',
+                      symbolOffset: [0, '-70%'],
+                      symbolSize: [82, 62],
+                      itemStyle: {
+                        color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+                      },
+                      label: {
+                        position: 'insideTop',
+                        formatter: function(params) {
+                          // console.log(params)
+                          return `{color1|${params.name}}\n{color0|${
+                            params.value
+                          }万}`
+                        },
+                        rich: {
+                          color0: {
+                            fontSize: 14,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#FF7836',
+                            padding: [0, 0, 6, 0]
+                          },
+                          color1: {
+                            fontSize: 12,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#6F6F6F',
+                            padding: [0, 0, 6, 0]
+                          }
+                        }
+                      },
+                      data: [
+                        {
+                          name: '',
+                          type: 'min'
+                        }
+                      ]
+                    },
+                    itemStyle: {
+                      normal: {
+                        color: '#6F6F6F',
+                        opacity: 1
+                      },
+                      emphasis: {
+                        color: '#6F6F6F'
+                      }
+                    },
+                    symbolSize: 6,
+                    hoverAnimation: false,
+                    symbol: 'circle',
+                    label: {
+                      show: true,
+                      position: 'bottom',
+                      textStyle: { color: '#6F6F6F' },
+                      formatter: function(params) {
+                        let c0
+                        if (params.dataIndex <= 1) {
+                          c0 = 'color1'
+                        } else {
+                          c0 = 'color0'
+                        }
+                        if (params.dataIndex === 4) {
+                          return ``
+                        } else {
+                          return `{${c0}|${params.value}万}\n{color2|${
+                            params.name
+                          }}`
+                        }
+                      },
+                      rich: {
+                        color0: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#FF7836'
+                        },
+                        color1: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#6F6F6F'
+                        },
+                        color2: {
+                          color: '#413A43',
+                          align: 'center',
+                          fontSize: 14,
+                          padding: [5, 5, 5, 5]
+                        }
+                      }
+                    },
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 1)' }
+                    },
+                    areaStyle: {
+                      normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
+                    },
+                    data: [null, null, 8, 6],
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '平行于y轴的趋势线',
+                    type: 'line',
+                    markLine: {
+                      name: 'xfdsvffds',
+                      symbol: ['circle', 'none'],
+                      symbolSize: 6,
+                      lineStyle: {
+                        normal: { color: 'rgba(255,173,101, 1)' }
+                      },
+                      label: {
+                        show: true,
+                        position: 'end',
+                        formatter: function(params) {
+                          if (params.dataIndex === 1) {
+                            return `{style|建议价格区间}`
+                          }
+                        },
+                        rich: {
+                          style: {
+                            fontSize: 15,
+                            padding: [0, 110, 0, 0],
+                            color: '#FF7836'
+                          }
+                        }
+                      },
+                      data: [
+                        [
+                          { coord: ['行业均价（高点）', 8] },
+                          { coord: ['行业均价（高点）', 15] }
+                        ],
+                        [
+                          { coord: ['行业均价（低点）', 6] },
+                          { coord: ['行业均价（低点）', 15] }
+                        ]
+                      ]
+                    }
+                  }
+                ]
+              }
+              myChart2.setOption(option2)
+            }
+          }, 1000)
+        },
+        content:
+          '<div class="show1"><div class="myLayer_title">稍等。。。</div><div class="myLayer_content">28平台智能运输大数据中心正在为您核算从<span>' +
+          this.cy1.startCity +
+          '</span>至<span>' +
+          this.cy1.endCity +
+          '</span>全网优质车源的最新报价</div><div class="myLayer_footer"><span id="seconds">5S</span></div></div>' +
+          '<div class="show2">' +
+          '<div class="myLayer_title2"><span></span> <span>价格参考</span><span>大数据智能模型精准定价，28智能平台指导定价</span></div>' +
+          '<div class="myLayer_content2">广州→深圳17.5米整车</div>' +
+          '<div id="echart2"></div>' +
+          '<div class="myLayer_content2">车主李先平的报价<span>低于</span><i>92.6%的车主</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          '</div>'
+      })
+    },
+    findAnother() {
+      let parm = {
+        strartAddress: this.cy1.strartAddress,
+        endAddress: this.cy1.endAddress
+      }
+      this.$axios.post('/28-web/carInfo/findAnother', parm).then(res => {
+        if (res.data.status === 200) {
+          window.location.href = `/cheyuan/detail?id=${res.data.data.id}`
+        }
+      })
+    },
+    goToCy() {
+      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
+        this.cy1.startCity
+      }&startProvince=${this.cy1.startProvince}`
+    },
+    goToCy1() {
+      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
+        this.cy1.endCity
+      }&startProvince=${this.cy1.endProvince}`
+    },
+    clickImg(int) {
+      this.showImg = int
+    }
   }
 }
 </script>

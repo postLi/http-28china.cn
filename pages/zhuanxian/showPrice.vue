@@ -88,7 +88,9 @@ export default {
       showPrice_box1: false,
       showPrice_box2: false,
       wPrice: [],
-      hPrice: []
+      hPrice: [],
+      wprices: {},
+      hprices: {}
     }
   },
   watch: {
@@ -112,21 +114,23 @@ export default {
     init() {
       this.wPrice = []
       this.hPrice = []
-      // this.info.forEach((item, index) => {
-      //   if (item.type == 0) {
-      //     this.hPrice.push(item)
-      //   }
-      //   if (item.type == 1) {
-      //     this.wPrice.push(item)
-      //   }
-      // })
-      this.info.filter((item, index) => {
+      this.info.forEach((item, index) => {
         if (item.type == 0) {
           this.hPrice.push(item)
         }
         if (item.type == 1) {
           this.wPrice.push(item)
         }
+      })
+      this.info.filter((item, index) => {
+        if (item.type == 0) {
+          this.wprices = Object.assign({}, item)
+          // this.wprices.push(item)
+        }
+        // if (item.type == 1) {
+        //   this.hprices.push(item)
+        // }
+        console.log(this.wprices, 'this.wprices')
       })
       this.wPrice = Object.assign({}, this.wPrice)
       this.hPrice = Object.assign({}, this.hPrice)
@@ -152,7 +156,7 @@ export default {
         this.hPrice[0].startVolume == 0
           ? parseFloat(this.hPrice[0].primeryPrice).toFixed(0)
           : ''
-      console.log(this.wPrice, ' this.endVolume', typeof this.hPrice)
+      console.log(this.hprices, ' this.endVolume', typeof this.wprices)
       // console.log(this.info, 'info')
     }
   }

@@ -271,7 +271,7 @@
           </div>
           <div
             class="arc_middle1"
-            style="padding-left: 20px"><span id="nr072"/>
+            style="padding-left: 20px"><span id="nr072">{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>
             <!--<span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>-->
             <ul>
               <li><img
@@ -285,74 +285,29 @@
             </ul>
           </div>
           <div class="arc_middle2">
-            <ShowPrice :info="linedataA.rangePrices"/>
-            <!--<div class="arc_middle2_1">-->
-            <!--<p class="p1"><i>重货价：</i><span id="nr0741">89</span><font-->
-            <!--id="nr073"-->
-            <!--class="font1"/><span-->
-            <!--id="nr074"-->
-            <!--class="span2"/><font-->
-            <!--id="zh_price"-->
-            <!--class="font2"-->
-            <!--&gt;[阶梯价]</font></p>-->
-            <!--<p class="p2"><i>轻货价：</i><span id="nr0742"/><font-->
-            <!--id="nr075"-->
-            <!--class="font1"/><span-->
-            <!--id="nr076"-->
-            <!--class="span2"/><font-->
-            <!--id="qh_price"-->
-            <!--class="font2"-->
-            <!--&gt;[阶梯价]</font></p>-->
-            <!--</div>-->
-            <!--<div class="arc_middle2_2">-->
-            <!--<div class="num1"><span id="nr0746"/></div>-->
-            <!--<div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>-->
-            <!--<div class="num3"><span>下单量</span></div>-->
-            <!--<div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>-->
-            <!--</div>-->
-            <!--&lt;!&ndash;阶梯价格 S&ndash;&gt;-->
-            <!--<div-->
-            <!--id="js018"-->
-            <!--class="price_box1"-->
-            <!--&gt;-->
-            <!--&lt;!&ndash;onmouseover="price_block1();"&ndash;&gt;-->
-            <!--&lt;!&ndash;onmouseout="price_none1();"&ndash;&gt;-->
-            <!--<div class="price_box_bt">阶梯价（重货）</div>-->
-            <!--<div-->
-            <!--class="price_box_item1"-->
-            <!--style="display: none;"><span id="nr0743"/><i id="nr0720"/><font id="nr0721"/><em id="nr07210">元/吨</em>-->
-            <!--</div>-->
-            <!--</div>-->
-
-            <!--<div-->
-            <!--id="js019"-->
-            <!--class="price_box2"-->
-            <!--&gt;-->
-            <!--&lt;!&ndash;onmouseover="price_block2();"&ndash;&gt;-->
-            <!--&lt;!&ndash;onmouseout="price_none2();"&ndash;&gt;-->
-            <!--<div class="price_box_bt">阶梯价（轻货）</div>-->
-            <!--<div-->
-            <!--class="price_box_item2"-->
-            <!--style="display: none;"><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>-->
-            <!--</div>-->
-            <!--</div>-->
+            <ShowPrice
+              :info="linedataA.rangePrices"
+              :browse="linedataA.browseNumber"/>
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>运输时效：</i><span id="nr077"/></div>
-            <div class="arc_m3"><i>发货频次：</i><span id="nr078"/></div>
-            <div class="arc_m3"><i>最低一票价格：</i><span id="nr079"/></div>
-            <div class="arc_m31"><i style="color: #999">途径:</i> <span>广州天河，深圳罗湖</span></div>
+            <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
+            <div class="arc_m3"><i>发货频次：</i>
+              <span>{{ (linedataA.departureHzData?linedataA.departureHzData:'')+'天'+(linedataA.departureHzTime?linedataA.departureHzTime:'') +'次' }}</span>
+              <!--<span>{{ linedataA.departureHzData?linedataA.departureHzData:''+'天'+linedataA.departureHzTime?linedataA.departureHzTime:'' +'次' }}</span>-->
+            </div>
+            <div class="arc_m3"><i>最低一票价格：</i><span id="nr079"/>{{ linedataA.lowerPrice?'￥'+linedataA.lowerPrice+'元':'面议' }}</div>
+            <!--<div class="arc_m31"><i style="color: #999">途径:</i> <span>广州天河，深圳罗湖</span></div>-->
           </div>
           <div class="arc_middle4">
             <div class="arc_m4_1">
               <div><span>出发地</span></div>
-              <div><i>联系人：</i><span id="nr0710"/></div>
-              <div><i>手机：</i><span id="nr0711"/></div>
+              <div><i>联系人：</i><span>{{ linedataA.startLocationContacts }}</span></div>
+              <div><i>手机：</i><span>{{ linedataA.startLocationContactsMobile }}</span></div>
             </div>
             <div class="arc_m4_2">
               <div><span>到达地</span></div>
-              <div><i>联系人：</i><span id="nr0712"/></div>
-              <div><i>手机：</i><span id="nr0713"/></div>
+              <div><i>联系人：</i><span>{{ linedataA.endLocationContacts }}</span></div>
+              <div><i>手机：</i><span>{{ linedataA.endLocationContactsMobile }}</span></div>
             </div>
           </div>
           <div class="arc_middle5">
@@ -366,8 +321,8 @@
                 id="order_arc"
                 class="arc_m5_2_2"><a
                   id="nr_order"
-                  target="_blank"
-                  href="javascript:void(0)"><span>快速下单</span></a></div>
+                  :href="'/create/line?uid='+ linedataB.account+'&publishId='+linedataA.publishId+'&id='+linedataA.id"
+                  target="_blank"><span>快速下单</span></a></div>
               <div class="arc_m5_2_3">
                 <img
                   src="../../static/line/images/05fresh.png"
@@ -396,37 +351,32 @@
         <div class="arc_right">
           <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
-            <img
+            <span v-if="linedataB.isEq"> <img
+              v-for="(item, index) in linedataB.eq1"
+              :key="index"
               class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
+              src="../../static/gongsi/images/blue.gif"></span>
 
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
+            <span v-if="linedataB.isHZhuan"> <img
+              v-for="(item, index) in linedataB.hZhuan"
+              :key="index"
+              class="xy_zuan"
+              src="../../static/gongsi/images/blue.gif"></span>
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br>
@@ -459,11 +409,12 @@
           <p class="arc_right05">
             <a
               id="nr1024"
-              :href="'/member/'+ linedataB.companyId"
+              :href="'/member/'+ linedataB.id"
               target="_blank"><input
                 id="arc_right05_1"
                 readonly=""
                 value="进入官网"></a>
+            <!--<span>{{ linedataB.id }}</span>-->
             <a><input
               id="collection_wlgs"
               readonly=""
@@ -472,16 +423,27 @@
           <p class="arc_right06">
             <span>相关认证</span>
           </p>
-          <p class="arc_right07">
+
+          <p
+            v-if="linedataB.isRenZhen"
+            class="arc_right07">
             <img
+              v-if="linedataB.showIsVip"
               id="right_xinyong"
               src="../../static/line/images/11xinyong.png">
             <img
+              v-if="linedataB.isAuthStatus"
               id="right_shiming"
               src="../../static/line/images/10shiming.png">
             <img
+              v-if="linedataB.isAuthStatus"
               id="right_baozhengjin"
-              src="../../static/line/images/danbao.png"><span id="nr1037">1000元</span>
+              src="../../static/line/images/danbao.png"><span id="nr1037">{{ linedataB.collateral }}</span>
+          </p>
+          <p
+            v-else
+            class="arc_right07">
+            <br>暂无认证信息
           </p>
 
         </div>
@@ -1026,6 +988,14 @@ import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 import FootList from '../../components/footerList'
 import ShowPrice from './showPrice'
 
+// /range/changeAnother
+async function changeAnother($axios, vo) {
+  let res = await $axios.post('/api/range/changeAnother', vo)
+  // console.log(await $axios.post('/api/range/changeAnother', vo), 'res')
+  if (res.data.status === 200) {
+    return res.data.data
+  }
+}
 export default {
   name: 'Index',
   components: {
@@ -1064,7 +1034,8 @@ export default {
   async asyncData({ $axios, app, query }) {
     let aurl = '',
       lineCode,
-      lineCity
+      lineCity,
+      lineChangeAnother
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
@@ -1080,14 +1051,115 @@ export default {
         pageSize: 5
       })
     ])
-    console.log(linedataA.data.data, 'res.data.data.linedataA')
+
     if (linedataA.data.status === 200) {
       lineCode = await getCode($axios, linedataA.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
+      let vo = {
+        endArea: linedataA.data.data.endArea,
+        endCity: linedataA.data.data.endCity,
+        endProvince: linedataA.data.data.endProvince,
+        startArea: linedataA.data.data.startArea,
+        startCity: linedataA.data.data.startCity,
+        startProvince: linedataA.data.data.startProvince
+      }
+      // lineChangeAnother = await changeAnother($axios, vo)
+      // console.log(lineChangeAnother, 'lineChangeAnother')
       linedataA.data.data.num = Math.ceil(Math.random() * 30)
       linedataC.data.data.list.forEach(item => {
         item.num = Math.ceil(Math.random() * 30)
       })
+
+      // credit
+      // linedataB.data.data
+      // console.log(linedataA.data.data, 'res.data.data.linedataB')
+      let authStatus = linedataB.data.data.authStatus
+      let collateral = linedataB.data.data.collateral
+      let isVip = linedataB.data.data.isVip
+      let credit = linedataB.data.data.credit
+      let productService = linedataB.data.data.productService
+      let otherServiceCode = linedataB.data.data.productService
+      // for(var i = 1; i < 8 ; i ++){
+      //
+      // }
+      let arr = new Array()
+      arr = otherServiceCode.split(',')
+      // console.log(typeof otherServiceCode, 'otherServiceCode', otherServiceCode)
+
+      if (!isVip || isVip == 0) {
+        linedataB.data.data.showIsVip = false
+      }
+      if (authStatus == 'AF0010403') {
+        linedataB.data.data.isAuthStatus = true
+        linedataB.data.data.isRenZhen = true
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+      if (authStatus != 'AF0010403') {
+        linedataB.data.data.isAuthStatus = false
+        linedataB.data.data.isRenZhen = false
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+
+      if (collateral > 0) {
+        linedataB.data.data.collateral = linedataB.data.data.collateral + '元'
+        linedataB.data.data.isCollateral = true
+      }
+      if (collateral <= 0) {
+        linedataB.data.data.collateral = ''
+        linedataB.data.data.isCollateral = false
+      }
+      if (
+        authStatus != 'AF0010403' &&
+        (!isVip || isVip == 0) &&
+        (!collateral || collateral == 0)
+      ) {
+        // linedataB.data.data.isRenZhen = true
+        // $('.arc_right07').html('<br/>暂无认证信息')
+      }
+
+      if (credit >= 0 && credit <= 3) {
+        linedataB.data.data.eq1 = 1
+        linedataB.data.data.isEq = true
+        // linedataB.data.data
+      }
+      if (credit >= 4 && credit <= 10) {
+        linedataB.data.data.eq1 = 2
+        linedataB.data.data.isEq = true
+      }
+      if (credit >= 11 && credit <= 40) {
+        linedataB.data.data.eq1 = 3
+        linedataB.data.data.isEq = true
+      }
+      if (credit >= 41 && credit <= 90) {
+        linedataB.data.data.eq1 = 4
+        linedataB.data.data.isEq = true
+      }
+      if (credit >= 91 && credit <= 150) {
+        linedataB.data.data.eq1 = 5
+        linedataB.data.data.isZuan = true
+      }
+      if (credit >= 151 && credit <= 250) {
+        linedataB.data.data.hZhuan = 1
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 251 && credit <= 500) {
+        linedataB.data.data.hZhuan = 2
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 500 && credit <= 1000) {
+        linedataB.data.data.hZhuan = 3
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 1001 && credit <= 2000) {
+        linedataB.data.data.hZhuan = 4
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 2001) {
+        linedataB.data.data.hZhuan = 5
+        linedataB.data.data.isHZhuan = true
+      }
       // console.log(linedataA.data.data, 'res.data.data.linedataB', linedataB)
       return {
         linedataA: linedataA.data.data,
@@ -1122,7 +1194,7 @@ export default {
   },
   mounted() {
     let myChart = echarts.init(document.getElementById('echart'))
-    console.log(myChart, 'myChart')
+    // console.log(myChart, 'myChart')
     let option = {
       title: { text: '', subtext: '' },
       tooltip: { trigger: 'axis' },
@@ -1341,7 +1413,7 @@ export default {
       }
       // this.showMoblie = !showMoblieFn
 
-      console.log(showMoblieFn, 'showMoblieFn')
+      // console.log(showMoblieFn, 'showMoblieFn')
       // this.showMoblie = false
     },
     clickImg(int) {

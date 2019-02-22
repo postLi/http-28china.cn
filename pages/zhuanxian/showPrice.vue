@@ -19,33 +19,31 @@
           :style="hPrimeryPrice?'':'text-decoration:none'"
           class="span2" >{{ hPrimeryPrice }}</span><font
             class="font2"
+            @mouseover="showPrice_box2Fn"
+            @mouseout="hidePrice_box2Fn"
       >[阶梯价]</font></p>
     </div>
     <div class="arc_middle2_2">
       <div class="num1"><span id="nr0746"/></div>
-      <div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>
+      <div class="num2"><a href="javascript:void(0)"><span id="nr0745">{{ browse }}</span></a></div>
       <div class="num3"><span>下单量</span></div>
       <div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
     </div>
     <!--阶梯价格 S-->
     <div
-      v-if="!showPrice_box1"
+      v-if="showPrice_box1"
       id="js018"
       class="price_box1"
     >
-      <!--onmouseover="price_block1();"-->
-      <!--onmouseout="price_none1();"-->
+
       <div class="price_box_bt">阶梯价（重货）</div>
       <div
-        v-for="(item, index) in wPrice"
+        v-for="(item, index) in info"
+        v-if="item.type == 1"
         :key="index"
         class="price_box_item1"
       >
-
-        <span>{{ item.startVolume+'-'+item.endVolume + '吨' }}</span><span>{{ parseFloat(item.discountPrice).toFixed(0)+ '元/吨' }}</span><span>{{ parseFloat(item.primeryPrice).toFixed(0) }}元/吨</span>
-
-        <!--<span id="nr0743">{{ item.startVolume+'-'+item.endVolume + '吨' }}<i id="nr0720">{{ parseFloat(item.discountPrice).toFixed(0)+ '元/吨' }}</i><font id="nr0721">{{ parseFloat(item.primeryPrice).toFixed(0) }}</font><em id="nr07210">元/吨</em>-->
-        <!--</span>-->
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '吨' : item.startVolume + '吨以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/吨' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/吨</em></span>
       </div>
     </div>
 
@@ -58,8 +56,13 @@
       <!--onmouseout="price_none2();"-->
       <div class="price_box_bt">阶梯价（轻货）</div>
       <div
+        v-for="(item, index) in info"
+        v-if="item.type == 0"
+        :key="index"
         class="price_box_item2"
-      ><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>
+      >
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/立方' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/立方</em></span>
+        <!--<span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>-->
       </div>
     </div>
   </div>
@@ -72,6 +75,10 @@ export default {
   props: {
     info: {
       type: [Array, Object],
+      default: () => {}
+    },
+    browse: {
+      type: Number,
       default: () => {}
     }
   },
@@ -89,13 +96,15 @@ export default {
       showPrice_box2: false,
       wPrice: [],
       hPrice: [],
-      wprices: {},
-      hprices: {}
+      infodata: {}
     }
   },
   watch: {
     info(n, o) {
-      // console.log(n, 'nnnnnnnn')
+      console.log(n, 'nnnnnnnn')
+    },
+    browse(n, o) {
+      console.log(n, 'browse')
     }
   },
   mounted() {
@@ -104,16 +113,22 @@ export default {
   methods: {
     hidePrice_box1Fn() {
       this.showPrice_box1 = false
-      // console.log(this.showPrice_box1, 'this.showPrice_box1 nono')
     },
     showPrice_box1Fn() {
       this.showPrice_box1 = true
-      // console.log(this.showPrice_box1, 'this.showPrice_box1')
-      // alert('')
+    },
+    hidePrice_box2Fn() {
+      this.showPrice_box2 = false
+    },
+    showPrice_box2Fn() {
+      this.showPrice_box2 = true
     },
     init() {
-      this.wPrice = []
-      this.hPrice = []
+      this.browse = this.browse ? this.browse : '0'
+      // console.log(this.info, 'info', this.browse)
+      // this.wPrice = []
+      // this.hPrice = []
+      // this.infodata = Object.assign({}, this.info)
       this.info.forEach((item, index) => {
         if (item.type == 0) {
           this.hPrice.push(item)
@@ -121,16 +136,7 @@ export default {
         if (item.type == 1) {
           this.wPrice.push(item)
         }
-      })
-      this.info.filter((item, index) => {
-        if (item.type == 0) {
-          this.wprices = Object.assign({}, item)
-          // this.wprices.push(item)
-        }
-        // if (item.type == 1) {
-        //   this.hprices.push(item)
-        // }
-        console.log(this.wprices, 'this.wprices')
+        // console.log(this.wPrice, 'this.wPrice')
       })
       this.wPrice = Object.assign({}, this.wPrice)
       this.hPrice = Object.assign({}, this.hPrice)
@@ -156,7 +162,7 @@ export default {
         this.hPrice[0].startVolume == 0
           ? parseFloat(this.hPrice[0].primeryPrice).toFixed(0)
           : ''
-      console.log(this.hprices, ' this.endVolume', typeof this.wprices)
+      // console.log(this.hprices, ' this.endVolume', typeof this.wprices)
       // console.log(this.info, 'info')
     }
   }

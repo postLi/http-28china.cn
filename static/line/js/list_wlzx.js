@@ -921,217 +921,217 @@ function process01() {
 
 //物流专线 栏目列表S
 
-function process02(currentPage) {
-  var totalPage = 8;
-  $.ajax(
-    {
-      type: "post",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url: "/api/28-web/range/list",
-      dataType: "json",
-      async: false,
-      data: JSON.stringify(
-        {
-          currentPage: currentPage,
-          pageSize: 6,
-          startProvince: startp,
-          startCity: startc,
-          startArea: starta,
-          endProvince: endp,
-          endCity: endc,
-          endArea: enda,
-          belongBrandCode: belongBrandCode,
-          departureTimeCode: departureTimeCode,
-          otherServiceCode: otherServiceCode,
-          parkId: parkId,
-          companyName: companyName,
-          orderBy: orderBy
-        }
-      ),
-      success: function (res) {
-        // console.log(res, '');
-        // $("#js002 .wlzx_list").not(":eq(0)").remove();
-        if (res.data) {
-          totalPage = res.data.totalPage;
-          // console.log(totalPage);
-        }
-        // console.log(res.data.list,'res.data.list');
-        if (!res.data.list || !res.data.total) {
-          // console.log("内容为空")
-          $(".box").css("display", "none")
-          $(".list_none").css("display", "block")
-        }
-
-        if (!res.data) {
-          return
-        }
-        var datas = res.data.list;
-        for (var i = 0; i < datas.length; i++) {
-
-          var primeryPrice0 = datas[i].primeryPrice0;
-          var discountPrice0 = datas[i].discountPrice0;
-          var primeryPrice1 = datas[i].primeryPrice1;
-          // lightPrice weightPrice
-          var zhjg = datas[i].weightPrice;
-          var qhjg = datas[i].lightPrice;
-          // if (!discountPrice0) {
-          //   qhjg = primeryPrice0
-          // }
-          // if (discountPrice0) {
-          //   qhjg = discountPrice0
-          // }
-          // if (!discountPrice1) {
-          //   zhjg = primeryPrice1
-          // }
-          // if (discountPrice1) {
-          //   zhjg = discountPrice1
-          // }
-          var recommendType = datas[i].recommendType;
-
-
-          var orderNumber = datas[i].orderNumber;
-          var assessNumber = datas[i].assessNumber;
-          var collectNum = datas[i].collectNum;
-          var browseNumber = datas[i].browseNumber;
-          if (!browseNumber) {
-            browseNumber = 0
-          }
-          if (!orderNumber) {
-            orderNumber = 0
-          }
-          if (!assessNumber) {
-            assessNumber = 0
-          }
-          var rangeId = datas[i].id;
-          var publishId = datas[i].publishId;
-          var account = datas[i].account;
-          var companyName = datas[i].companyName;
-          var startCity = datas[i].startCity;
-          var startArea = datas[i].startArea;
-          var endCity = datas[i].endCity;
-          var endArea = datas[i].endArea;
-          if (!startCity) {
-            startCity = ""
-          }
-          if (!endCity) {
-            endCity = ""
-          }
-          if (!startArea) {
-            startArea = ""
-          }
-          if (!endArea) {
-            endArea = ""
-          }
-          var start = startCity + startArea;
-          var end = endCity + endArea;
-          if (start && start.length > 7) {
-            start = start.substring(0, 7) + ".."
-          }
-          if (end && end.length > 7) {
-            end = end.substring(0, 7) + ".."
-          }
-
-          var publishName = datas[i].publishName;
-          var transportAging = datas[i].transportAging;
-          var transportAgingUnit = datas[i].transportAgingUnit.replace("多", "");
-          if (datas[i].transportRemark) {
-            var transportRemark = datas[i].transportRemark.substring(0, 10);
-          }
-          if (!datas[i].transportRemark) {
-            var transportRemark = "暂无"
-          }
-          var qq = datas[i].qq;
-          var address = datas[i].address;
-          if (address && address.length > 24) {
-            address = address.substring(0, 24) + "..";
-          }
-          var departureHzData = datas[i].departureHzData;
-          var departureHzTime = datas[i].departureHzTime;
-          var isVip = datas[i].isVip;
-          var authStatus = datas[i].authStatus;
-          var collateral = datas[i].collateral;
-          var rangeLogo1 = "";
-          var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
-          var orderurl = "/create/order?&uid=" + account + "&id=" + rangeId + "&publishId=" + publishId;
-          $("#nr_a21").attr("href", arcurl);
-          $("#wlzx_list_view").attr("onclick", "window.open('" + arcurl + "')")
-          $("#fahuo").attr("onclick", "window.open('" + orderurl + "')")
-          var num0 = Math.random();
-          var num = Math.ceil(num0 * 30);
-          // console.log(num,'num');
-          var src1 = "/line/images/bg" + num + ".png";
-
-          if (datas[i].rangeLogo) {
-            if (datas[i].rangeLogo.indexOf(',')) {
-              rangeLogo1 = datas[i].rangeLogo.split(',')[0]
-              $(".nr_a21_img img").eq(i).attr("src", datas[i].rangeLogo.split(',')[0]);
-            } else {
-              rangeLogo1 = datas[i].rangeLogo
-              $(".nr_a21_img img").eq[i].attr("src", rangeLogo1);
-              // $(".nr_a21_img img").attr("src",src1);
-            }
-          }
-          if (datas[i].rangeLogo =='' ) {
-            $(".scrollLoading").attr("src", src1);
-          }
-          $(".nr_a21_img img").attr("alt", companyName);
-          // $("#nr01").attr("alt",companyName);
-          $("#nr02_1").html(start);
-          $("#nr02_2").html(end);
-          $("#nr02").attr("href", arcurl);
-          $("#nr03").attr("href", "/member/" + publishId + "");
-          $("#nr04").html(companyName);
-          $("#nr05").html(transportRemark);
-          $("#nr06").html(address);
-          $("#nr07").html(zhjg);
-          $("#nr08").html(qhjg);
-          $("#nr1001").html(browseNumber);
-          $("#nr1002").html(assessNumber);
-          $("#nr09").html(transportAging + transportAgingUnit);
-          if (!transportAging || !transportAgingUnit) {
-            $("#nr09").html("")
-          }
-          $("#nr10").html(departureHzData + "天" + departureHzTime + "次");
-          if (!departureHzData || !departureHzTime) {
-            $("#nr10").html("")
-          }
-          $("#nr11").attr("href", "tencent://message/?uin=" + qq + "&Site=&menu=yes");
-          var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
-          var s2 = $(".wlzx_list").html();
-          var s3 = '</ul>'
-          // $("#js002").append(s1 + s2 + s3);
-          if (!collateral || collateral == 0) {
-
-            $('.wlzx_list' + i + ' #list_danbao').css("display", "none")
-          }
-          if (!isVip || isVip == 0) {
-
-            $('.wlzx_list' + i + ' #list_xinyong').css("display", "none")
-          }
-          if (authStatus != "AF0010403") {
-            $('.wlzx_list' + i + ' #list_shiming').css("display", "none")
-          }
-
-          if (!qq) {
-            $('.wlzx_list' + i + ' #qq').css("display", "none");
-          }
-
-          if (recommendType == 1) {
-            $('.wlzx_list' + i + ' #tj_icon_1').css("display", "inline");
-          }
-
-        }
-      }, error: function (err) {
-        // console.log(err.responseText);
-
-
-      }
-    })
-  // console.log("最终总页数：" + totalPage)
-  return totalPage;
-}
+// function process02(currentPage) {
+//   var totalPage = 8;
+//   $.ajax(
+//     {
+//       type: "post",
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       url: "/api/28-web/range/list",
+//       dataType: "json",
+//       async: false,
+//       data: JSON.stringify(
+//         {
+//           currentPage: currentPage,
+//           pageSize: 6,
+//           startProvince: startp,
+//           startCity: startc,
+//           startArea: starta,
+//           endProvince: endp,
+//           endCity: endc,
+//           endArea: enda,
+//           belongBrandCode: belongBrandCode,
+//           departureTimeCode: departureTimeCode,
+//           otherServiceCode: otherServiceCode,
+//           parkId: parkId,
+//           companyName: companyName,
+//           orderBy: orderBy
+//         }
+//       ),
+//       success: function (res) {
+//         // console.log(res, '');
+//         // $("#js002 .wlzx_list").not(":eq(0)").remove();
+//         if (res.data) {
+//           totalPage = res.data.totalPage;
+//           // console.log(totalPage);
+//         }
+//         // console.log(res.data.list,'res.data.list');
+//         if (!res.data.list || !res.data.total) {
+//           // console.log("内容为空")
+//           $(".box").css("display", "none")
+//           $(".list_none").css("display", "block")
+//         }
+//
+//         if (!res.data) {
+//           return
+//         }
+//         var datas = res.data.list;
+//         for (var i = 0; i < datas.length; i++) {
+//
+//           var primeryPrice0 = datas[i].primeryPrice0;
+//           var discountPrice0 = datas[i].discountPrice0;
+//           var primeryPrice1 = datas[i].primeryPrice1;
+//           // lightPrice weightPrice
+//           var zhjg = datas[i].weightPrice;
+//           var qhjg = datas[i].lightPrice;
+//           // if (!discountPrice0) {
+//           //   qhjg = primeryPrice0
+//           // }
+//           // if (discountPrice0) {
+//           //   qhjg = discountPrice0
+//           // }
+//           // if (!discountPrice1) {
+//           //   zhjg = primeryPrice1
+//           // }
+//           // if (discountPrice1) {
+//           //   zhjg = discountPrice1
+//           // }
+//           var recommendType = datas[i].recommendType;
+//
+//
+//           var orderNumber = datas[i].orderNumber;
+//           var assessNumber = datas[i].assessNumber;
+//           var collectNum = datas[i].collectNum;
+//           var browseNumber = datas[i].browseNumber;
+//           if (!browseNumber) {
+//             browseNumber = 0
+//           }
+//           if (!orderNumber) {
+//             orderNumber = 0
+//           }
+//           if (!assessNumber) {
+//             assessNumber = 0
+//           }
+//           var rangeId = datas[i].id;
+//           var publishId = datas[i].publishId;
+//           var account = datas[i].account;
+//           var companyName = datas[i].companyName;
+//           var startCity = datas[i].startCity;
+//           var startArea = datas[i].startArea;
+//           var endCity = datas[i].endCity;
+//           var endArea = datas[i].endArea;
+//           if (!startCity) {
+//             startCity = ""
+//           }
+//           if (!endCity) {
+//             endCity = ""
+//           }
+//           if (!startArea) {
+//             startArea = ""
+//           }
+//           if (!endArea) {
+//             endArea = ""
+//           }
+//           var start = startCity + startArea;
+//           var end = endCity + endArea;
+//           if (start && start.length > 7) {
+//             start = start.substring(0, 7) + ".."
+//           }
+//           if (end && end.length > 7) {
+//             end = end.substring(0, 7) + ".."
+//           }
+//
+//           var publishName = datas[i].publishName;
+//           var transportAging = datas[i].transportAging;
+//           var transportAgingUnit = datas[i].transportAgingUnit.replace("多", "");
+//           if (datas[i].transportRemark) {
+//             var transportRemark = datas[i].transportRemark.substring(0, 10);
+//           }
+//           if (!datas[i].transportRemark) {
+//             var transportRemark = "暂无"
+//           }
+//           var qq = datas[i].qq;
+//           var address = datas[i].address;
+//           if (address && address.length > 24) {
+//             address = address.substring(0, 24) + "..";
+//           }
+//           var departureHzData = datas[i].departureHzData;
+//           var departureHzTime = datas[i].departureHzTime;
+//           var isVip = datas[i].isVip;
+//           var authStatus = datas[i].authStatus;
+//           var collateral = datas[i].collateral;
+//           var rangeLogo1 = "";
+//           var arcurl = "/zhuanxian/detail?id=" + rangeId + "&publishId=" + publishId;
+//           var orderurl = "/create/order?&uid=" + account + "&id=" + rangeId + "&publishId=" + publishId;
+//           $("#nr_a21").attr("href", arcurl);
+//           $("#wlzx_list_view").attr("onclick", "window.open('" + arcurl + "')")
+//           $("#fahuo").attr("onclick", "window.open('" + orderurl + "')")
+//           var num0 = Math.random();
+//           var num = Math.ceil(num0 * 30);
+//           // console.log(num,'num');
+//           var src1 = "/line/images/bg" + num + ".png";
+//
+//           if (datas[i].rangeLogo) {
+//             if (datas[i].rangeLogo.indexOf(',')) {
+//               rangeLogo1 = datas[i].rangeLogo.split(',')[0]
+//               $(".nr_a21_img img").eq(i).attr("src", datas[i].rangeLogo.split(',')[0]);
+//             } else {
+//               rangeLogo1 = datas[i].rangeLogo
+//               $(".nr_a21_img img").eq[i].attr("src", rangeLogo1);
+//               // $(".nr_a21_img img").attr("src",src1);
+//             }
+//           }
+//           if (datas[i].rangeLogo =='' ) {
+//             $(".scrollLoading").attr("src", src1);
+//           }
+//           $(".nr_a21_img img").attr("alt", companyName);
+//           // $("#nr01").attr("alt",companyName);
+//           $("#nr02_1").html(start);
+//           $("#nr02_2").html(end);
+//           $("#nr02").attr("href", arcurl);
+//           $("#nr03").attr("href", "/member/" + publishId + "");
+//           $("#nr04").html(companyName);
+//           $("#nr05").html(transportRemark);
+//           $("#nr06").html(address);
+//           $("#nr07").html(zhjg);
+//           $("#nr08").html(qhjg);
+//           $("#nr1001").html(browseNumber);
+//           $("#nr1002").html(assessNumber);
+//           $("#nr09").html(transportAging + transportAgingUnit);
+//           if (!transportAging || !transportAgingUnit) {
+//             $("#nr09").html("")
+//           }
+//           $("#nr10").html(departureHzData + "天" + departureHzTime + "次");
+//           if (!departureHzData || !departureHzTime) {
+//             $("#nr10").html("")
+//           }
+//           $("#nr11").attr("href", "tencent://message/?uin=" + qq + "&Site=&menu=yes");
+//           var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
+//           var s2 = $(".wlzx_list").html();
+//           var s3 = '</ul>'
+//           // $("#js002").append(s1 + s2 + s3);
+//           if (!collateral || collateral == 0) {
+//
+//             $('.wlzx_list' + i + ' #list_danbao').css("display", "none")
+//           }
+//           if (!isVip || isVip == 0) {
+//
+//             $('.wlzx_list' + i + ' #list_xinyong').css("display", "none")
+//           }
+//           if (authStatus != "AF0010403") {
+//             $('.wlzx_list' + i + ' #list_shiming').css("display", "none")
+//           }
+//
+//           if (!qq) {
+//             $('.wlzx_list' + i + ' #qq').css("display", "none");
+//           }
+//
+//           if (recommendType == 1) {
+//             $('.wlzx_list' + i + ' #tj_icon_1').css("display", "inline");
+//           }
+//
+//         }
+//       }, error: function (err) {
+//         // console.log(err.responseText);
+//
+//
+//       }
+//     })
+//   // console.log("最终总页数：" + totalPage)
+//   return totalPage;
+// }
 
 // process02(1);
 //物流专线栏目列表 E

@@ -660,7 +660,7 @@ function process1() {
   })
 }
 
-process1()
+// process1()
 //物流专线详情页 E
 
 //物流专线 网点列表S
@@ -726,7 +726,7 @@ function process02() {
   })
 }
 
-process02()
+// process02()
 //物流专线网点列表 E
 
 //物流专线公司  S
@@ -825,6 +825,7 @@ function process3(startCity, endCity) {
         // console.log("is not Vip");
         $('#right_xinyong').css('display', 'none')
       }
+      // authStatus = 'AF0010403'
       if (authStatus != 'AF0010403') {
         // console.log("is not shiming");
         $('#right_shiming').css('display', 'none')
@@ -977,7 +978,7 @@ function process5() {
       $('#nr1046').html('(' + medium + ')')
       $('#nr1047').html('(' + bad + ')')
       $('#nr1048').html(count)
-      $('#nr0745').html(count)
+      // $('#nr0745').html(count)
     },
     error: function (err) {
       console.log(err);
@@ -985,7 +986,7 @@ function process5() {
   })
 }
 
-process5()
+// process5()
 //物流评价数量 E
 //物流专线 其他列表S
 function process08(startProvince, startCity, endProvince, endCity, rangeIds) {

@@ -30,7 +30,7 @@
               <dd><form
                 name="zxaddform"
                 method="post"
-                action="" 
+                action=""
                 style="float:left;"
               >
                 <input
@@ -137,9 +137,9 @@
                       <font>暂无园区信息</font>
                     </div>
 
-                    <div 
-                      v-for="(item,index) in logisticsPark" 
-                      :key="index" 
+                    <div
+                      v-for="(item,index) in logisticsPark"
+                      :key="index"
                       class="wlzx_yq_item"
                       @click="addTitle(item)"
                     >
@@ -183,16 +183,16 @@
               title="距离从近到远">距离最近</span>
           </div>
 
-          <div 
-            v-if="WangdiangInfoList.length === 0" 
-            class="list_none" 
+          <div
+            v-if="WangdiangInfoList.length === 0"
+            class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/templets/default/images/none_pic.png">
           </div>
           <ul
             v-for="(item,index) in WangdiangInfoList"
-            :key="index" 
+            :key="index"
             class="wlzx_list"
           >
 
@@ -215,29 +215,29 @@
               <p class="p2"><i>电话：</i><span id="nr06">{{ item.contactsTel? item.contactsTel + '-' : '' }}{{ item.mobile }}</span></p>
             </li>
             <li class="wlzx_list_4">
-              <p 
-                v-if="item.authStatus" 
+              <p
+                v-if="item.authStatus"
                 class="p1"><img
                   id="list_shiming"
                   src="/wd/images/10shiming.png"></P>
-              <p 
-                v-if="item.isVip" 
+              <p
+                v-if="item.isVip"
                 class="p2" ><img
                   id="list_xinyong"
                   src="/wd/images/11xinyong.png"></p>
-              <p 
-                v-if="item.collateral" 
+              <p
+                v-if="item.collateral"
                 class="p3" ><img
                   id="list_danbao"
                   src="/wd/images/12danbao.png"></p>
             </li>
             <li class="wlzx_list_6">
               <p class="p1"><a target="_blank"><input
-                value="下单" 
+                value="下单"
                 readonly></a>
               </p><p class="p2"><a target="_blank"><input
-                value="查看" 
-                readonly 
+                value="查看"
+                readonly
               ></a>
             </p></li>
           </ul>
@@ -260,34 +260,34 @@
         class="list_right">
 
         <div class="zx_sx"><span class="biaozhi"/><span>物流公司推荐</span></div>
-        <div 
-          v-if="recommendList.length === 0" 
+        <div
+          v-if="recommendList.length === 0"
           class="tj_none" >
           <span>没有相关物流公司推荐</span>
         </div>
         <div
           v-for="(item,index) in recommendList"
-          :key="index" 
-          class="tj_list" 
+          :key="index"
+          class="tj_list"
         >
           <p class="p1"><a
             id="tj010"
             target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
-            
-          <p 
-            v-if="item.showcreadimg" 
+
+          <p
+            v-if="item.showcreadimg"
             class="p7" >
-            <img 
+            <img
               v-for="(i,index) in item.creditImg"
-              :key="index" 
+              :key="index"
               src="/wd/images/blue.gif" >
           </p>
-          <p 
-            v-if="item.showcreadeng" 
+          <p
+            v-if="item.showcreadeng"
             class="p7" >
-            <img 
+            <img
               v-for="(i,index) in item.creditdeng"
-              :key="index" 
+              :key="index"
               src="/wd/images/34huanguan.gif" >
           </p>
 

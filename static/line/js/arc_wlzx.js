@@ -623,6 +623,7 @@ function process1() {
       )
       $('#arc_nav_a1').attr(
         'href',
+        'href',
         '/templets/default/htm/' + code_c + '/' + code_c + '_1.htm'
       )
       $('#arc_nav_a2').attr(
@@ -830,7 +831,7 @@ function process3(startCity, endCity) {
         // console.log("is not shiming");
         $('#right_shiming').css('display', 'none')
       }
-
+      // collateral 保证金  isVip: '0', 承运商
       var collateral = datas.collateral
       $('#nr1037').html(collateral + '元')
       if (!collateral || collateral == 0) {

@@ -324,10 +324,13 @@
                   :href="'/create/line?uid='+ linedataB.account+'&publishId='+linedataA.publishId+'&id='+linedataA.id"
                   target="_blank"><span>快速下单</span></a></div>
               <div class="arc_m5_2_3">
-                <img
+                <!--<img-->
+                <!--src="../../static/line/images/05fresh.png"-->
+                <!--alt="">-->
+                <!--<span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"><span>换一个</span></a></span>-->
+                <span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"> <img
                   src="../../static/line/images/05fresh.png"
-                  alt="">
-                <span>换一个</span>
+                  alt=""><span style="padding-left: 5px">换一个</span></a></span>
               </div>
             </div>
           </div>
@@ -458,7 +461,8 @@
           <div class="zx_sx">
             <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
           </div>
-          <div id="echart"/>
+          <ShowEchart :info="LineeEchartInfo"/>
+          <!--<div id="echart"/>-->
         </div>
         <div class="right">
           <div class="zx_sx">
@@ -987,20 +991,21 @@
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 import FootList from '../../components/footerList'
 import ShowPrice from './showPrice'
+import ShowEchart from './showEchart'
+// async function echartInfo($axios, rangeId) {
+//   let res = await $axios.post('/28-web/range/getRangePriceReference/' + rangeId)
+//   console.log(res, 'res')
+//   // if (res.data.status === 200) {
+//   //   return res.data.data.list
+//   // }
+// }
 
-// /range/changeAnother
-async function changeAnother($axios, vo) {
-  let res = await $axios.post('/api/range/changeAnother', vo)
-  // console.log(await $axios.post('/api/range/changeAnother', vo), 'res')
-  if (res.data.status === 200) {
-    return res.data.data
-  }
-}
 export default {
   name: 'Index',
   components: {
     FootList,
-    ShowPrice
+    ShowPrice,
+    ShowEchart
   },
   head: {
     link: [
@@ -1035,10 +1040,14 @@ export default {
     let aurl = '',
       lineCode,
       lineCity,
-      lineChangeAnother
+      LineCAnother,
+      LineeEInfo
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
+
+    // /range/getRangePriceReference/{rangeId}
+    // 专线详情_专线价格参考
     let [linedataA, linedataB, linedataC, linedataD] = await Promise.all([
       $axios.get(aurl + `/api/28-web/range/${query.id}`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/${query.publishId}`),
@@ -1063,8 +1072,24 @@ export default {
         startCity: linedataA.data.data.startCity,
         startProvince: linedataA.data.data.startProvince
       }
-      // lineChangeAnother = await changeAnother($axios, vo)
-      // console.log(lineChangeAnother, 'lineChangeAnother')
+      LineCAnother = await $axios.post(
+        aurl + '/api/28-web/range/changeAnother',
+        vo
+      )
+      LineeEInfo = await $axios.post(
+        aurl +
+          '/api/28-web/range/getRangePriceReference/' +
+          linedataA.data.data.id
+      )
+      // allServiceNameList:   allServiceCodeList    所有服务codes
+
+      // console.log(linedataB.data.data, 'linedataBlinedataB')
+      LineCAnother.data.data =
+        LineCAnother.data.status == 200 ? LineCAnother.data.data : ''
+      LineeEInfo.data.data =
+        LineeEInfo.data.status == 200 ? LineeEInfo.data.data : ''
+      // console.log(LineCAnother.data.data, 'LineChangeAnother')
+
       linedataA.data.data.num = Math.ceil(Math.random() * 30)
       linedataC.data.data.list.forEach(item => {
         item.num = Math.ceil(Math.random() * 30)
@@ -1072,7 +1097,7 @@ export default {
 
       // credit
       // linedataB.data.data
-      // console.log(linedataA.data.data, 'res.data.data.linedataB')
+      // console.log(linedataB.data.data, 'res.data.data.linedataB')
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip
@@ -1084,7 +1109,7 @@ export default {
       // }
       let arr = new Array()
       arr = otherServiceCode.split(',')
-      // console.log(typeof otherServiceCode, 'otherServiceCode', otherServiceCode)
+      // console.log(linedataB.data.data, 'linedataB.data.data')
 
       if (!isVip || isVip == 0) {
         linedataB.data.data.showIsVip = false
@@ -1166,7 +1191,9 @@ export default {
         linedataB: linedataB.data.data,
         lineLists: linedataC.data.data.list,
         lineRecoms: linedataD.data.data,
-        lineCitys: lineCity.data.data
+        LineeEchartInfo: LineeEInfo.data.data,
+        lineCitys: lineCity.data.data,
+        LineChangeAnother: LineCAnother.data.data
       }
     }
     // let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
@@ -1193,128 +1220,8 @@ export default {
     // }
   },
   mounted() {
-    let myChart = echarts.init(document.getElementById('echart'))
-    // console.log(myChart, 'myChart')
-    let option = {
-      title: { text: '', subtext: '' },
-      tooltip: { trigger: 'axis' },
-      xAxis: {
-        show: false,
-        type: 'category',
-        boundaryGap: false,
-        data: [
-          '大品牌报价',
-          '优质专线报价',
-          '行业均价（高点）',
-          '行业均价（低点）',
-          '本供应商价'
-        ]
-      },
-      yAxis: {
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: { show: false },
-        type: 'value',
-        max: 15
-      },
-      series: [
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 0.5)' }
-          },
-          data: [11, 10, 8, 6, 5],
-          label: {
-            show: true,
-            position: 'bottom',
-            textStyle: { color: '#6F6F6F' },
-            formatter: function(params) {
-              let c0
-              if (params.dataIndex <= 1) {
-                c0 = 'color1'
-              } else {
-                c0 = 'color0'
-              }
-              return `{${c0}|${params.value}万}\n{color2|${params.name}}`
-            },
-            rich: {
-              color0: {
-                fontSize: 18,
-                align: 'center',
-                color: '#FF7836'
-              },
-              color1: {
-                fontSize: 18,
-                align: 'center',
-                color: '#6F6F6F'
-              },
-              color2: {
-                color: '#413A43',
-                align: 'center',
-                fontSize: 14,
-                padding: [5, 5, 5, 5]
-              }
-            }
-          },
-          tooltip: { show: false }
-        },
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 1)' }
-          },
-          areaStyle: {
-            normal: {
-              origin: 'end',
-              color: 'rgba(255,161,77, 0.5)'
-            }
-          },
-          data: [null, null, 8, 6],
-          tooltip: { show: false }
-        },
-        {
-          name: '平行于y轴的趋势线',
-          type: 'line',
-          markLine: {
-            name: 'xfdsvffds',
-            symbol: 'none',
-            lineStyle: {
-              normal: { color: 'rgba(255,173,101, 1)' }
-            },
-            label: {
-              show: true,
-              position: 'end',
-              formatter: function(params) {
-                console.log(params)
-                if (params.dataIndex === 1) {
-                  return `{style|建议价格区间}`
-                }
-              },
-              rich: {
-                style: {
-                  fontSize: 15,
-                  padding: [0, 110, 0, 0],
-                  color: '#FF7836'
-                }
-              }
-            },
-            data: [
-              [
-                { coord: ['行业均价（高点）', 8] },
-                { coord: ['行业均价（高点）', 15] }
-              ],
-              [
-                { coord: ['行业均价（低点）', 6] },
-                { coord: ['行业均价（低点）', 15] }
-              ]
-            ]
-          }
-        }
-      ]
-    }
-    myChart.setOption(option)
+    // console.log(this.$route.query.id, 'id')
+
     seajs.use(['/layer/layer.js'], function() {
       seajs.use(
         ['../js/city.js', '../js/city-picker.data.js', '../js/calculator.js'],
@@ -1428,6 +1335,10 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian-detail {
+  .pj_price_box {
+    top: 70%;
+    z-index: 1;
+  }
   /*background: rgb(249, 249, 249);*/
   .clearfix:after {
     content: ' ';

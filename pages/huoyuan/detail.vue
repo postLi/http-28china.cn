@@ -303,7 +303,7 @@
      
       <div class="right">
         <div class="zx_sx">
-          <span class="biaozhi"/><span>车主综合力评估</span>
+          <span class="biaozhi"/><span>货主综合力评估</span>
         </div>
         <div class="content">
           <div class="content-left">
@@ -322,19 +322,23 @@
             <img src="/images/cy/gold.png">
             <div class="content-right-row"><img
               class="img"
-              src="/images/cy/13hot.png">活跃度：<i>30</i></div>
-            <div class="content-right-row">最近三个月发布货源 <i>15</i> 次</div>
-            <div class="content-right-row">共成交 <i>146</i> 笔订单，收到好评 <i>28</i> 次</div>
+              src="/images/cy/13hot.png">活跃度：<i>{{ huoComprehensive.liveness }}</i></div>
+            <div class="content-right-row">最近三个月发布货源 <i>{{ huoComprehensive.lastThreeMonthSupplyNum }}</i> 次</div>
+            <div class="content-right-row">共成交 <i>{{ huoComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ huoComprehensive.evaGoodCount }}</i> 次</div>
             <div class="content-right-row">大家对他的印象:</div>
-            <div class="content-right-row">
-              <span>付款及时（15）</span>
-              <span>付款及时（15）</span>
+            <div 
+              v-for="(item,index) in huoComprehensive.label" 
+              :key="index" 
+              class="content-right-row">
+              <span 
+              >{{ item.name }}（item.count）</span>
+              <!-- <span>付款及时（15）</span>
               <span>付款及时（15）</span>
               <span>最想合作的伙伴（15）</span>
               <span>付款及时（15）</span>
               <span>付款及时（15）</span>
               <span>付款及时（15）</span>
-              <span>付款及时（15）</span>
+              <span>付款及时（15）</span> -->
             </div>
             <div
               class="content-right-row"
@@ -1133,9 +1137,18 @@ export default {
     let huoInfoLists = await $axios.post('28-web/lclOrder/list', parm)
     //最新货源信息
     let newestHuoyuanRes = await $axios.get('/28-web/lclOrder/newList')
-    // console.log(newestHuoyuanRes.data.data, '333huoInforRos')
+    // 货主综合力评估
+    let huoComprehensives = await $axios.get(
+      '/28-web/shipper/comprehensive?orderId=' + query.id
+    )
+    console.log(huoComprehensives.data.data.label, '333huoInforRos')
     return {
       hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+      huoComprehensive:
+        huoComprehensives.data.status === 200
+          ? huoComprehensives.data.data
+          : [],
+      // huoLabel: huoComprehensives.data.data.label,
       newestHuoyuanRe:
         newestHuoyuanRes.data.status === 200 ? newestHuoyuanRes.data.data : [],
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
@@ -1208,14 +1221,14 @@ export default {
   },
   methods: {
     goToCy() {
-      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.cy1.startCity
-      }&startProvince=${this.cy1.startProvince}`
+      window.location.href = `/huoyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
+        this.hyDetail.startCity
+      }&startProvince=${this.hyDetail.startProvince}`
     },
     goToCy1() {
-      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.cy1.endCity
-      }&startProvince=${this.cy1.endProvince}`
+      window.location.href = `/huoyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
+        this.hyDetail.endCity
+      }&startProvince=${this.hyDetail.endProvince}`
     },
     clickImg(int) {
       this.showImg = int

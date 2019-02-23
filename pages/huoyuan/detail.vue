@@ -62,7 +62,7 @@
         <div class="arc_left_1">
           <span id="nr072"/><span style="float: left;font-size: 12px;padding-top:6px;"> 用户{{ hyDetail.consignorPhone }}<span style="color: #2577e3;font-size: 12px;">{{ hyDetail.startCity }}</span>到<span style="color: #2577e3;font-size: 12px;">{{ hyDetail.endCity }}</span>货源  3分钟前</span>
 
-          <p class="arc_p1"><span>广东省，广州市{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span>
+          <p class="arc_p1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span>
           
             <span class="arc_p2"><img 
               class="imgarc_p2"
@@ -354,7 +354,7 @@
                 @click="showPrice()">标准价</a> -->
               <a
                 href="javascript:;"
-                class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质车源</a>
+                class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
             </div>
           </div>
         </div>
@@ -365,6 +365,54 @@
           <span class="biaozhi"/><span>货主最近货源信息</span>
         </div>
         <ul class="zx_sx_new">
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
+          <li>
+            <span>广州市市辖区</span>
+            <span>兰州市市辖区</span>
+            <span>汽车摩托</span>
+            <span>1400公斤</span>
+            <span>25方</span>
+            <span>2018-05-12</span>
+          </li>
           <li>
             <span>广州市市辖区</span>
             <span>兰州市市辖区</span>
@@ -841,20 +889,39 @@
         </div>
 
         <div class="arc_main4-content">
-          <div class="zx_sx">
+          <!-- <div class="zx_sx">
             <span class="biaozhi"/><span>仓储与配送</span>
-          </div>
+          </div> -->
           <ul
             class="ps-list"
             style="padding-left: 30px;list-style: square">
             <li>
-              <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+              <div class="btn_span">
+                <span>代理</span>
+                <span>其他</span>
+              </div>
+              <a href="">货运全国，一站式服务！</a>
             </li>
             <li>
-              <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+              <div class="btn_span">
+                <span>供应</span>
+                <span>报关行</span>
+              </div>
+              <a href="">长期供应香港进出口拖车报关！</a>
             </li>
             <li>
-              <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+              <div class="btn_span">
+                <span>合作</span>
+                <span>其他</span>
+              </div>
+              <a href="">货运全国，一站式服务！</a>
+            </li>
+            <li>
+              <div class="btn_span">
+                <span>代理</span>
+                <span>其他</span>
+              </div>
+              <a href="">货运全国，一站式服务！</a>
             </li>
           </ul>
         </div>

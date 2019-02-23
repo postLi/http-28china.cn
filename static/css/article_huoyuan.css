@@ -42,7 +42,7 @@ margin-bottom: 12px; margin-top: 10px;
 .arc_top2_2 span{font-size: 16px;color: #333;margin-right: 40px;}
 .arc_top2_3{float:right;width: 50px;display: none; }
 .arc_top2_3 span{font-size: 16px;color: #666;}
-.arc_main1{height: 509px; width: 1400px;    padding: 35px 0;background: #fff;}
+.arc_main1{height: 509px; width: 1400px;  float: left;  padding: 35px 0;background: #fff;}
 .arc_main2{height: auto;width: 100%;margin-bottom: 29px;border: solid 1px #E2E2E2;overflow:hidden; clear: both;}
 .arc_bottom{height:auto;width: 100%;margin-bottom: 30px;clear: both;}
 .arc_left{float:left;width: 1057px;height: 509;margin-right: 38px;}
@@ -51,7 +51,7 @@ margin-bottom: 12px; margin-top: 10px;
 height:48px;text-align: center;
 /* padding-top: 30px; */
 }
-.arc_p1 span{color: #2577e3;float:left;margin-left:30px;font-size: 20px;}
+.arc_p1 span{color: #2577e3;float:left;margin-left:136px;font-size: 20px;}
 .arc_left_1 .arc_p2{
 float:right;text-align: center;	
 }
@@ -567,7 +567,9 @@ table tr:nth-child(odd){
   
   }
 
-
+.img1{
+  margin: 1px 2px 2px 2px;
+}
   .arc_main3{
     margin-top: 20px;
     float: left;
@@ -576,19 +578,19 @@ table tr:nth-child(odd){
 .arc_main3 .left{
   float: left;
   /* width: 556px; */
-  height: 415px;
+  height: 400px;
   flex:3;
   background-color: #ffffff;
   margin-left: 20px;
-  border:1px solid #ddd;
+  /* border:1px solid #ddd; */
 }
 .arc_main3 .right{
   float: left;
   /* width: 820px; */
   flex: 2;
-  height: 415px;
+  height: 400px;
   background-color: #ffffff;
-  border:1px solid #ddd;
+  /* border:1px solid #ddd; */
 }
 .zx_sx_new{
   display: flex;
@@ -797,6 +799,8 @@ table tr:nth-child(odd){
   line-height: 28px;
   letter-spacing: 1.1px;
   color: #333333;
+  list-style: none;
+  margin-bottom: 10px;
 }
 .list_none span {
   float: left;
@@ -1528,20 +1532,32 @@ table tr:nth-child(odd){
   float: left;
   margin-right: 7px;
 }
-
-
-
-/* .list_input {
-  width: 161px;
-  height: 30px;
-  line-height: 30px;
-  border-radius: 2px;
-  border: solid 1px #e5e5e5;
-  background: none;
-  color: #333;
-  font-size: 13px;
-  padding-left: 9px;
-} */
+.btn_span{
+  border:1px solid #fa9925;
+  border-radius: 4px;
+  float: left;
+  font-size: 12px;
+  float: left;
+  margin-right: 5px;
+  height: 20px;
+  line-height: 20px;
+  float: left;
+  margin-top: 3px;
+}
+.btn_span span:nth-child(1){
+  color:#fff;
+  background-color: #fa9925;
+  float: left;
+  padding: 0 5px;
+}
+.btn_span span:nth-child(2){
+  padding: 0 5px;
+  float: left;
+}
+.active{
+  color:#fff;
+  background-color: #fa9925;
+}
 
 
 

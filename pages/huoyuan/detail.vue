@@ -364,72 +364,22 @@
         <div class="zx_sx">
           <span class="biaozhi"/><span>货主最近货源信息</span>
         </div>
-        <ul class="zx_sx_new">
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-          <li>
-            <span>广州市市辖区</span>
-            <span>兰州市市辖区</span>
-            <span>汽车摩托</span>
-            <span>1400公斤</span>
-            <span>25方</span>
-            <span>2018-05-12</span>
-          </li>
-        </ul>
+        <div class="list_new_box">
+          <ul class="zx_sx_new">
+            <li 
+              v-for="(item,index) in newestHuoyuanRe"
+              :key="index" 
+              class="manage_box" >
+              <span>{{ item.startProvinceCityArea }}</span>
+              <span>{{ item.endProvinceCityArea }}</span>
+              <span>{{ item.goodsName }}</span>
+              <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
+              <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
+              <span>{{ item.createTime }}</span>
+            </li>
+          </ul>
+        </div>
+       
         <!-- <div id="echart"/> -->
       </div>
     </div>
@@ -932,7 +882,7 @@
     
     <div class="arc_main4">
       <div class="zx_sx1">
-        <span class="biaozhi1"/><span>为您推荐车源</span>
+        <span class="biaozhi1"/><span>更多从广州出发的品牌货源</span>
       </div>
       <ul class="hot-cities">
         <li class="hot-cities-li">
@@ -1000,6 +950,7 @@
 </template>
 <script>
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+import FooterLinks from '../../components/footerLinks'
 function setEnable(item) {
   if (item.isEnable >= 0 && item.isEnable <= 3) {
     item.starS = new Array(1)
@@ -1049,6 +1000,9 @@ async function getOtherInfoList($axios, current, vo = {}) {
 }
 export default {
   name: 'Detail',
+  components: {
+    FooterLinks
+  },
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/article_huoyuan.css' },
@@ -1065,6 +1019,7 @@ export default {
   data() {
     return {
       zxList: [],
+      inTerVar: null,
       otherInfoList: [],
       hyDetail: [],
       pages: 0,
@@ -1174,10 +1129,15 @@ export default {
       startProvince: hyDetail.data.data.startProvince,
       startCity: hyDetail.data.data.startCity
     }
+    //货源列表
     let huoInfoLists = await $axios.post('28-web/lclOrder/list', parm)
-    console.log(huoInfoLists.data.data.list, '333huoInforRos')
+    //最新货源信息
+    let newestHuoyuanRes = await $axios.get('/28-web/lclOrder/newList')
+    // console.log(newestHuoyuanRes.data.data, '333huoInforRos')
     return {
       hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+      newestHuoyuanRe:
+        newestHuoyuanRes.data.status === 200 ? newestHuoyuanRes.data.data : [],
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       huoInfoList:
         huoInfoLists.data.status === 200 ? huoInfoLists.data.data.list : [],
@@ -1188,6 +1148,37 @@ export default {
   },
 
   mounted() {
+    let rollContainer_h = $('.list_new_box').height()
+    let roll = $('.zx_sx_new')
+    roll.append(roll.html())
+    let number = 4
+    let l = this.newestHuoyuanRe.length
+    let manage_box_h = $('.manage_box').height()
+    let startScroll = () => {
+      this.inTerVar = setInterval(() => {
+        roll
+          .stop()
+          .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
+            if (number > l) {
+              number = 4
+              roll.css('top', '0px')
+            }
+          })
+        number = number + 4
+      }, 6000)
+    }
+    if (manage_box_h * l > rollContainer_h) {
+      startScroll()
+    }
+    $('.list_new_box').hover(
+      () => {
+        clearInterval(this.inTerVar)
+        this.inTerVar = null
+      },
+      () => {
+        startScroll()
+      }
+    )
     $('#pagination1').pagination({
       currentPage: this.currentPage,
       totalPage: this.pages,
@@ -1203,13 +1194,17 @@ export default {
         window.location.href = '#top'
       }
     })
-    seajs.use(['../js/city.js'], function() {
-      seajs.use(['../js/arc_huoyuan.js'], function() {
-        seajs.use(['../js/collection.js'], function() {
-          seajs.use(['../js/gaodemap2.js'], function() {})
-        })
-      })
-    })
+    // seajs.use(['../js/city.js'], function() {
+    //   seajs.use(['../js/arc_huoyuan.js'], function() {
+    //     seajs.use(['../js/collection.js'], function() {
+    //       seajs.use(['../js/gaodemap2.js'], function() {})
+    //     })
+    //   })
+    // })
+  },
+  destroyed() {
+    clearInterval(this.inTerVar)
+    this.inTerVar = null
   },
   methods: {
     goToCy() {

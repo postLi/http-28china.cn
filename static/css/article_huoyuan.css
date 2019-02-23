@@ -592,16 +592,41 @@ table tr:nth-child(odd){
   background-color: #ffffff;
   /* border:1px solid #ddd; */
 }
+.list_new_box {
+  height: 324px;
+  overflow: hidden;
+  float: left;
+  width: 100%;
+  margin-top: 10px;
+  /* margin-top: 20px; */
+}
 .zx_sx_new{
+  /* height: 350px; */
+  position: relative;
+  /* overflow: hidden; */
   display: flex;
+  /* background: #fff; */
   flex-direction: column;
+  box-sizing: border-box;
 }
 .zx_sx_new li{
   flex: 1;
   display: flex;
-  margin-top:20px;
+  margin:10px 0;
   color: #333333;
   font-size: 14px;
+}
+.zx_sx_new li span:nth-child(1){
+  flex: 2;
+}
+.zx_sx_new li span:nth-child(2){
+  flex: 2;
+}
+.zx_sx_new li span:nth-child(1){
+  flex: 2;
+}
+.zx_sx_new li span:nth-child(6){
+  flex: 2;
 }
 .zx_sx_new li span{
   flex: 1;

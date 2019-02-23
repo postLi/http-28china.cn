@@ -467,7 +467,7 @@
                 <a 
                   id="echart_order" 
                   target="_blank" 
-                  href="#">闪电下单</a>
+                  href="/create/order">闪电下单</a>
                 <a 
                   id="echart_price" 
                   href="#">即刻比价</a>
@@ -476,7 +476,7 @@
                   href="/ydcx">一键查单</a>
                 <a 
                   id="echart_sx" 
-                  href="#">时效查询</a>
+                  href="/shixiao">时效查询</a>
               </div>
             </div>
           </div>
@@ -1220,40 +1220,90 @@
               onclick="document.getElementById('main5_1_nr1').style.display='block';document.getElementById('main5_1_nr2').style.display='none';document.getElementById('more1_5_1').style.display='block';document.getElementById('more2_5_1').style.display='none';">物流资讯</a></div>
             <div id="bt2_5_1"><a 
               class="zx_a1" 
-              onclick="document.getElementById('main5_1_nr1').style.display='none';document.getElementById('main5_1_nr2').style.display='block';document.getElementById('more1_5_1').style.display='none';document.getElementById('more2_5_1').style.display='block';">政策法令</a></div>
+              onclick="document.getElementById('main5_1_nr1').style.display='none';document.getElementById('main5_1_nr2').style.display='block';document.getElementById('more1_5_1').style.display='none';document.getElementById('more2_5_1').style.display='block';">理政资讯</a></div>
             <div id="more1_5_1"><a 
               href="/zixun/xyzx/index.jhtml" 
               target="_blank">更多&gt;</a></div>
             <div id="more2_5_1"><a 
-              href="/a/zcfl/" 
+              href="/zixun/lzzx/index.jhtml" 
               target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
           <div id="main5_1_nr1">
-            <a href="/wlzx/xingyezixun/2018/0629/320.html"><img 
-              src="/uploads/181211/1-1Q21114512A04.png" 
-              alt="中国重汽不停车服务入驻凯立德物流地图生态"></a>
-            <a href="/wlzx/xingyezixun/2018/0629/320.html"><span>中国重汽不停车服务入驻凯立德物流地图生态</span></a>
-   
-            <br>
-            <div class="h18"/>
-            <a href="/a/zjgd/2018/0523/114.html">因为这个补贴政策的调整，纯电动物流车“懵”</a>	<br>
-            <a href="/a/zjgd/2018/0515/34.html">萨拉戈萨将成为中国企业物流宝地</a>	<br>
-            <a href="/a/zjgd/2018/0523/113.html">九江石化“智能仓库”建成投用</a>	<br>
+            <template 
+              v-for="(item, index) in $store.state.line.index_wlzx" 
+            >
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title"
+                :key="index" 
+                target="_blank">
+                <img 
+                  :src="item.typeImg" 
+                  :alt="item.title" >
+              </a>
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                <span>{{ item.title }}</span>
+              </a>
+              <a 
+                v-if="index !== 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                {{ item.title }}
+              </a>
+              <br :key="index" >
+              <div 
+                v-if="index === 0" 
+                :key="index" 
+                class="h18" />
+            </template>
  
           </div>
 
           <div id="main5_1_nr2">
-            <a href="/a/zcfl/2018/0514/27.html"><img 
-              src="/uploads/180914/1-1P914201R1910.jpg" 
-              alt="新疆密集出台方案 推动物流中心转型升级"></a>
-            <a href="/a/zcfl/2018/0514/27.html"><span>新疆密集出台方案 推动物流中心转型升级</span></a>
- 
-            <br>
-            <div class="h18"/>
-            <a href="/a/zcfl/2018/0523/111.html">江苏省出台物流新政建设五大通道完善四大枢纽</a>	<br>
-            <a href="/a/zcfl/2018/0515/30.html">在渝港资项目达2849个 物流等产业迎新机遇</a>	<br>
-            <a href="/a/zcfl/2018/0515/29.html">安徽省首次发布社会物流统计报告</a>	<br>
+            <template 
+              v-for="(item, index) in $store.state.line.index_lzzx" 
+            >
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title"
+                :key="index" 
+                target="_blank">
+                <img 
+                  :src="item.typeImg" 
+                  :alt="item.title" >
+              </a>
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                <span>{{ item.title }}</span>
+              </a>
+              <a 
+                v-if="index !== 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                {{ item.title }}
+              </a>
+              <br :key="index" >
+              <div 
+                v-if="index === 0" 
+                :key="index" 
+                class="h18" />
+            </template>
   
   
           </div>
@@ -1266,43 +1316,91 @@
               onclick="document.getElementById('main5_2_nr1').style.display='block';document.getElementById('main5_2_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none';">物流前沿</a></div>
             <div id="bt2_5_2"><a 
               class="zx_a2" 
-              onclick="document.getElementById('main5_2_nr1').style.display='none';document.getElementById('main5_2_nr2').style.display='block';document.getElementById('more1_5_2').style.display='none';document.getElementById('more2_5_2').style.display='block';">专家观点</a></div>
+              onclick="document.getElementById('main5_2_nr1').style.display='none';document.getElementById('main5_2_nr2').style.display='block';document.getElementById('more1_5_2').style.display='none';document.getElementById('more2_5_2').style.display='block';">物流行业分析</a></div>
             <div id="more1_5_2"><a 
-              href="/a/wlqy/" 
+              href="/zixun/wlqy/index.jhtml" 
               target="_blank">更多&gt;</a></div>
             <div id="more2_5_2"><a 
-              href="/a/zjgd/" 
+              href="/zixun/wlxyfx/index.jhtml" 
               target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
           <div id="main5_2_nr1">
-
-            <a href="/a/wlqy/2018/0515/32.html"><img 
-              src="/uploads/181211/1-1Q211145152321.png" 
-              alt="车联网：时代的新经济引擎 不可忽视"></a>
-            <a href="/a/wlqy/2018/0515/32.html"><span>车联网：时代的新经济引擎 不可忽视</span></a>
-   
-            <br>
-            <div class="h18"/>
-            <a href="/a/wlqy/2018/0629/351.html">向快递外卖包装宣战 “绿色物流”加速推进</a>	<br>
-            <a href="/a/wlqy/2018/0629/350.html">专线物流为什么难出巨头？</a>	<br>
-            <a href="/a/wlqy/2018/0629/349.html">“最后一公里”的快递柜战争，怎么打？</a>	<br>
+            <template 
+              v-for="(item, index) in $store.state.line.index_wlqy" 
+            >
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title"
+                :key="index" 
+                target="_blank">
+                <img 
+                  :src="item.typeImg" 
+                  :alt="item.title" >
+              </a>
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                <span>{{ item.title }}</span>
+              </a>
+              <a 
+                v-if="index !== 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                {{ item.title }}
+              </a>
+              <br :key="index" >
+              <div 
+                v-if="index === 0" 
+                :key="index" 
+                class="h18" />
+            </template>
  
   
           </div>
 
           <div id="main5_2_nr2">
-            <a href="/a/zjgd/2018/0523/112.html"><img 
-              src="/uploads/180914/1-1P9142009352K.jpg" 
-              alt="2020年基本建成国家车联网产业标准体系"></a>
-            <a href="/a/zjgd/2018/0523/112.html"><span>2020年基本建成国家车联网产业标准体系</span></a>
-
-            <br>
-            <div class="h18"/>
-                          
-            <a href="/a/zjgd/2018/0523/114.html">因为这个补贴政策的调整，纯电动物流车“懵”</a>	<br>
-            <a href="/a/zjgd/2018/0515/34.html">萨拉戈萨将成为中国企业物流宝地</a>	<br>
-            <a href="/a/zjgd/2018/0523/113.html">九江石化“智能仓库”建成投用</a>	<br>
+            <template 
+              v-for="(item, index) in $store.state.line.index_wlxyfx" 
+            >
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title"
+                :key="index" 
+                target="_blank">
+                <img 
+                  :src="item.typeImg" 
+                  :alt="item.title" >
+              </a>
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                <span>{{ item.title }}</span>
+              </a>
+              <a 
+                v-if="index !== 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                {{ item.title }}
+              </a>
+              <br :key="index" >
+              <div 
+                v-if="index === 0" 
+                :key="index" 
+                class="h18" />
+            </template>
   
   
           </div>
@@ -1328,32 +1426,81 @@
           <div class="clear"/>
           <div id="main5_3_nr1">
 
-            <a href="/wlzx/caigouzixun/2018/0629/301.html"><img 
-              src="/uploads/181211/1-1Q211145222544.png" 
-              alt="打造“智慧”与“绿色”供应链生态圈"></a>
-            <a href="/wlzx/caigouzixun/2018/0629/301.html"><span>打造“智慧”与“绿色”供应链生态圈</span></a>
-   
-            <br>
-            <div class="h18"/>
-            <a href="/wlzx/caigouzixun/2018/0629/308.html">山东临沂：规范化程序采购廉租房</a>	<br>
-            <a href="/wlzx/caigouzixun/2018/0629/307.html">应建立工贸结合的大型跨国经营企业集团</a>	<br>
-            <a href="/wlzx/caigouzixun/2018/0629/306.html">2013北京采购论坛成功举办</a>	<br>
+            <template 
+              v-for="(item, index) in $store.state.line.index_cgzx" 
+            >
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title"
+                :key="index" 
+                target="_blank">
+                <img 
+                  :src="item.typeImg" 
+                  :alt="item.title" >
+              </a>
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                <span>{{ item.title }}</span>
+              </a>
+              <a 
+                v-if="index !== 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                {{ item.title }}
+              </a>
+              <br :key="index" >
+              <div 
+                v-if="index === 0" 
+                :key="index" 
+                class="h18" />
+            </template>
  
   
           </div>
 
           <div id="main5_3_nr2">
-            <a href="/wlzx/cangchuyupeisong/2018/0629/289.html"><img 
-              src="/uploads/180914/1-1P9142009352K.jpg" 
-              alt="走在战斗路上的顺丰，能否经得住苏宁式考验"></a>
-            <a href="/wlzx/cangchuyupeisong/2018/0629/289.html"><span>走在战斗路上的顺丰，能否经得住苏宁式考验</span></a>
-
-            <br>
-            <div class="h18"/>
-                          
-            <a href="/wlzx/cangchuyupeisong/2018/0629/291.html">2018外卖配送如何发力</a>	<br>
-            <a href="/wlzx/cangchuyupeisong/2018/0629/290.html">聋哑小哥送外卖顺便要钱？真相让人泪奔</a>	<br>
-            <a href="/wlzx/cangchuyupeisong/2018/0629/288.html">末端共同配送这把良药，让通达系吃下去有点难</a>	<br>
+            <template 
+              v-for="(item, index) in $store.state.line.index_ccyps" 
+            >
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title"
+                :key="index" 
+                target="_blank">
+                <img 
+                  :src="item.typeImg" 
+                  :alt="item.title" >
+              </a>
+              <a 
+                v-if="index === 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                <span>{{ item.title }}</span>
+              </a>
+              <a 
+                v-if="index !== 0" 
+                :href="item.url" 
+                :title="item.title" 
+                :key="index" 
+                target="_blank">
+                {{ item.title }}
+              </a>
+              <br :key="index" >
+              <div 
+                v-if="index === 0" 
+                :key="index" 
+                class="h18" />
+            </template>
   
   
           </div>
@@ -1464,63 +1611,33 @@
           <div id="main5_2_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_2">
-            <a onclick="document.getElementById('main5_2_nr1').style.display='block';document.getElementById('main5_2_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none';">客户案例</a></div>
+            <a >客户案例</a></div>
             <div id="more1_5_2"><a 
               href="/help/khal/index.jhtml" 
               target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
           <div id="main6_2_nr1">
-            <div class="anli">
-              <div class="floatl"><a href="/a/khal/2018/0516/42.html"><img 
-                src="/uploads/181211/1-1Q2111452512c.png" 
-                alt="选择安发中国推广，正确无悔的" 
-                width="90px" 
-                height="68px"></a>	</div>
+            <div 
+              v-for="(item, index) in $store.state.line.index_khal" 
+              :key="index"
+              class="anli">
+              <div class="floatl"><a 
+                :href="item.url" 
+                :title="item.title" 
+                target="_blank"><img 
+                  :src="item.typeImg" 
+                  :alt="item.title" 
+                  width="90px" 
+                  height="68px"></a>	</div>
               <div class="anlixq">
-                <span>选择安发中国推广，正确无悔的</span><br>
-                <a href="/a/khal/2018/0516/42.html">—上海畅心物流有限公司温经理随着互联网对物流行业的影响，近...</a>
-                <br>
-		
-		
-              </div>			
-			 
+                <span>{{ item.title }}</span><br>
+                <a 
+                  :href="item.url" 
+                  target="_blank">{{ (item. description || '').substr(0,28) + '...' }}</a>
+              </div>	
             </div>
-            <div class="anli">
-              <div class="floatl"><a href="/a/khal/2018/0516/43.html"><img 
-                src="/uploads/181211/1-1Q2111452512c.png" 
-                alt="从使用到经营，一条致富之路！" 
-                width="90px" 
-                height="68px"></a>	</div>
-              <div class="anlixq">
-                <span>从使用到经营，一条致富之路！</span><br>
-                <a href="/a/khal/2018/0516/43.html">—天恒物流青岛分公司李经理加入物通网已经有三年多的时...</a>
-                <br>
-		
-		
-              </div>			
-			 
-            </div>
-            <div class="anli">
-              <div class="floatl"><a href="/a/khal/2018/0516/44.html"><img 
-                src="/uploads/181211/1-1Q2111452512c.png" 
-                alt="选择安发中国，正确无悔的选择" 
-                width="90px" 
-                height="68px"></a>	</div>
-              <div class="anlixq">
-                <span>选择安发中国，正确无悔的选择</span><br>
-                <a href="/a/khal/2018/0516/44.html">—上海畅心物流有限公司温经理随着互联网对物流行业的影响，近...</a>
-                <br>
-		
-		
-              </div>			
-			 
-            </div>
-   
-
-   
-                        
-                          			                 
+             			                 
           </div>
 
 
@@ -1584,9 +1701,6 @@
       <!--会员量/客户案例/常用实用工具  E-->
       <!--合作伙伴 S-->
       <div class="partner center w1400">
-        <!--
-	<img src="/templets/default/index_files/btn.png" style="width:100%;height: 100%">
-		-->
         <div class="bt"><span>28快运可以为您提供什么服务保障？</span></div>
         <div class="bt2"><span>集结众多货运能力，提供真实可靠的物流服务</span></div>
         <div style="width:1400px;height:322px;">
@@ -1677,10 +1791,74 @@ export default {
   components: {},
   data() {
     return {
-      title: '专线列表页面',
+      title: '首页',
       lists: [],
       ip: ''
     }
+  },
+  async fetch({ store, params, $axios, error }) {
+    // 多个栏目的参数配置
+    let paramsObj = {
+      index_khal: {
+        channelIds: '118',
+        count: '3',
+        // checked: 'true',
+        // recommend: '1',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      index_wlzx: {
+        channelIds: '94',
+        count: '4',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      index_lzzx: {
+        channelIds: '97',
+        count: '4',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      index_wlqy: {
+        channelIds: '105',
+        count: '4',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      index_wlxyfx: {
+        channelIds: '107',
+        count: '4',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      index_cgzx: {
+        channelIds: '100',
+        count: '4',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      index_ccyps: {
+        channelIds: '101',
+        count: '4',
+        orderBy: '9',
+        channelOption: '0'
+      }
+    }
+    let theparams = Object.values(paramsObj).map(el => JSON.stringify(el))
+    let names = Object.keys(paramsObj)
+
+    await store.dispatch('line/GETMULTYNEWSINFO', {
+      params: '{' + theparams.join(';') + '}',
+      names: names,
+      preFn: data => {
+        return data.map(els => {
+          return els.map(el => {
+            el.url = el.url.replace('http://192.168.1.79/anfacms', '/help')
+            return el
+          })
+        })
+      }
+    })
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/index/css/echarts.css' }]

@@ -2402,3 +2402,71 @@ border-radius: 3px;
   padding-bottom: 20px;
   border-bottom: 1px dotted #e7e7e7;
 }
+
+/*弹框*/
+
+.myLayer_title{
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  margin: 20px;
+}
+.myLayer_content{
+  margin: 20px;
+  font-size: 18px;
+}
+.myLayer_content span {
+  color: #2577e3;
+}
+.myLayer_footer {
+  text-align: center;
+}
+.myLayer_footer #seconds{
+  border: 1px solid #3333;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 30px;
+}
+.show2{
+  display: none;
+}
+.myLayer_title2{
+  padding: 10px;
+}
+.myLayer_title2 span {
+  font-size: 16px;
+  display: table-cell;
+  vertical-align: middle;
+}
+.myLayer_title2 span:nth-of-type(1){
+  background-color: #f66618;
+  width: 5px;
+  height: 25px;
+  margin: 0 10px;
+}
+.myLayer_title2 span:nth-of-type(2){
+  padding-left: 10px;
+  color: #f66618;
+}
+.myLayer_title2 span:nth-of-type(3){
+  padding-left: 10px;
+}
+.myLayer_content2{
+  padding: 10px;
+  font-size: 16px;
+  color: #f66618;
+}
+.myLayer_content2 i{
+  color: red;
+}
+.myLayer_content2 span{
+  text-decoration: underline;
+}
+#echart,#echart2{
+  width: 556px;height:340px;
+}
+
+/*弹框*/

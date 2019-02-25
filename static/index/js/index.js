@@ -88,20 +88,6 @@ function sjtj() {
 }
 sjtj()
 //数据统计 E
-//物流资讯类切换效果 S
-$('.zx_a1').click(function() {
-  $('.zx_a1').css('color', '#333')
-  $(this).css('color', '#2577e3')
-})
-$('.zx_a2').click(function() {
-  $('.zx_a2').css('color', '#333')
-  $(this).css('color', '#2577e3')
-})
-$('.zx_a3').click(function() {
-  $('.zx_a3').css('color', '#333')
-  $(this).css('color', '#2577e3')
-})
-//物流资讯类切换效果 E
 
 //零担下单 S
 $('#order_01').click(function() {
@@ -717,8 +703,8 @@ function wlgs_tj() {
         var account = datas[i].account
         var companyId = datas[i].companyId
 
-        $('#tj_01').attr('href', '/member/' + companyId + '')
-        $('#tj_02').html(i + 1)
+        // $('#tj_01').attr('href', '/member/' + companyId + '')
+        // $('#tj_02').html(i + 1)
         var imgsrc = '/images/index/wlgs_tj_0' + i + '.png'
         $('#tj_03').attr('src', imgsrc)
         $('#tj_04').attr('href', '/member/' + companyId + '')
@@ -759,7 +745,7 @@ function wlgs_tj() {
     }
   })
 }
-wlgs_tj()
+// wlgs_tj()
 //门户物流公司推荐 E
 
 //门户物流园区列表S

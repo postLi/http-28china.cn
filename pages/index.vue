@@ -1149,51 +1149,36 @@
             <div class="xt_bottom"/>	
             <b>物流公司推荐</b>
           </div>
-          <ul id="wlgs_tj"> 
-            <div id="wlgs_tj1">
+          <ul id="wlgs_tj">
+            <template v-for="(item, index) in $store.state.company.recommend" >
               <li 
-                class="arank" 
-                style="display: none;">
-                <div class="avatar"><a 
-                  id="tj_01" 
-                  href="" 
-                  target="_blank" 
-                  title=""><span id="tj_02"/></a></div> 
+                :key="index" 
+                :class="index > 2 ? 'arank2' : ''" 
+                class="arank">
+                <div 
+                  :class="index > 2 ? 'avatar2' : ''" 
+                  class="avatar">
+                  <a 
+                    :href="'/member/' + item.companyId + ''" 
+                    :title="item.companyName" 
+                    target="_blank"><span>{{ index + 1 }}</span></a>
+                </div>
                 <div class="info">
-                  <div class="wlgs_pic"><img 
-                    id="tj_03" 
-                    class="scrollLoading" 
-                    src="/images/index/wlgs_tj_01.png" 
-                    alt=""></div>
+                  <div 
+                    v-if="index < 3" 
+                    class="wlgs_pic"><img 
+                      :src="'/images/index/wlgs_tj_0'+(index )+'.png'" 
+                      class="scrollLoading" 
+                      alt=""></div>
                   <div class="company"><a 
-                    id="tj_04" 
-                    href="#" 
+                    :href="'/member/' + item.companyId + ''" 
+                    :title="item.companyName" 
                     target="_blank" 
-                    class="yh" 
-                    title="#"/></div>
+                    class="yh">{{ item.companyName }}</a></div>
                 </div>
               </li>
-   
-            </div>
-    
-
-            <div id="wlgs_tj2">
-              <li 
-                class="arank arank2" 
-                style="display: none;">
-                <div class="avatar avatar2"><a 
-                  id="tj_05" 
-                  href="" 
-                  target="_blank" 
-                  title=""><span id="tj_06"/></a></div> 
-                <div class="company"><a 
-                  id="tj_07" 
-                  href="" 
-                  target="_blank" 
-                  class="yh" 
-                  title=""/> </div>
-              </li>
-            </div>
+            </template> 
+            
      
           </ul>
 
@@ -1212,24 +1197,30 @@
       <div 
         id="rf07" 
         class="main5 center">
-        <div class="main5_1">
+        <div class="main5_1 jtabwrap">
           <div id="main5_1_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_1"><a 
-              class="zx_a1" 
-              onclick="document.getElementById('main5_1_nr1').style.display='block';document.getElementById('main5_1_nr2').style.display='none';document.getElementById('more1_5_1').style.display='block';document.getElementById('more2_5_1').style.display='none';">物流资讯</a></div>
+              class="zx_a1 jtabtit" 
+            >物流资讯</a></div>
             <div id="bt2_5_1"><a 
-              class="zx_a1" 
-              onclick="document.getElementById('main5_1_nr1').style.display='none';document.getElementById('main5_1_nr2').style.display='block';document.getElementById('more1_5_1').style.display='none';document.getElementById('more2_5_1').style.display='block';">理政资讯</a></div>
-            <div id="more1_5_1"><a 
-              href="/zixun/xyzx/index.jhtml" 
-              target="_blank">更多&gt;</a></div>
-            <div id="more2_5_1"><a 
-              href="/zixun/lzzx/index.jhtml" 
-              target="_blank">更多&gt;</a></div>
+              class="zx_a1 jtabtit" 
+            >理政资讯</a></div>
+            <div 
+              id="more1_5_1" 
+              class="morelink"><a 
+                href="/zixun/xyzx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
+            <div 
+              id="more2_5_1" 
+              class="morelink"><a 
+                href="/zixun/lzzx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div id="main5_1_nr1">
+          <div 
+            id="main5_1_nr1" 
+            class="jtabcon">
             <template 
               v-for="(item, index) in $store.state.line.index_wlzx" 
             >
@@ -1268,7 +1259,9 @@
  
           </div>
 
-          <div id="main5_1_nr2">
+          <div 
+            id="main5_1_nr2" 
+            class="jtabcon">
             <template 
               v-for="(item, index) in $store.state.line.index_lzzx" 
             >
@@ -1308,24 +1301,30 @@
   
           </div>
         </div>
-        <div class="main5_2">
+        <div class="main5_2 jtabwrap">
           <div id="main5_2_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_2"><a 
-              class="zx_a2" 
-              onclick="document.getElementById('main5_2_nr1').style.display='block';document.getElementById('main5_2_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none';">物流前沿</a></div>
+              class="zx_a2 jtabtit" 
+            >物流前沿</a></div>
             <div id="bt2_5_2"><a 
-              class="zx_a2" 
-              onclick="document.getElementById('main5_2_nr1').style.display='none';document.getElementById('main5_2_nr2').style.display='block';document.getElementById('more1_5_2').style.display='none';document.getElementById('more2_5_2').style.display='block';">物流行业分析</a></div>
-            <div id="more1_5_2"><a 
-              href="/zixun/wlqy/index.jhtml" 
-              target="_blank">更多&gt;</a></div>
-            <div id="more2_5_2"><a 
-              href="/zixun/wlxyfx/index.jhtml" 
-              target="_blank">更多&gt;</a></div>
+              class="zx_a2 jtabtit" 
+            >物流行业分析</a></div>
+            <div 
+              id="more1_5_2" 
+              class="morelink"><a 
+                href="/zixun/wlqy/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
+            <div 
+              id="more2_5_2" 
+              class="morelink"><a 
+                href="/zixun/wlxyfx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div id="main5_2_nr1">
+          <div 
+            id="main5_2_nr1" 
+            class="jtabcon">
             <template 
               v-for="(item, index) in $store.state.line.index_wlqy" 
             >
@@ -1365,7 +1364,9 @@
   
           </div>
 
-          <div id="main5_2_nr2">
+          <div 
+            id="main5_2_nr2" 
+            class="jtabcon">
             <template 
               v-for="(item, index) in $store.state.line.index_wlxyfx" 
             >
@@ -1407,24 +1408,30 @@
         </div>
 
 
-        <div class="main5_3">
+        <div class="main5_3 jtabwrap">
           <div id="main5_3_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_2"><a 
-              class="zx_a3" 
-              onclick="document.getElementById('main5_3_nr1').style.display='block';document.getElementById('main5_3_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none'">采购资讯</a></div>
+              class="zx_a3 jtabtit" 
+            >采购资讯</a></div>
             <div id="bt2_5_2"><a 
-              class="zx_a3" 
-              onclick="document.getElementById('main5_3_nr1').style.display='none';document.getElementById('main5_3_nr2').style.display='block';document.getElementById('more1_5_2').style.display='none';document.getElementById('more2_5_2').style.display='block'">仓储与配送</a></div>
-            <div id="more1_5_2"><a 
-              href="/zixun/cgzx/index.jhtml" 
-              target="_blank">更多&gt;</a></div>
-            <div id="more2_5_2"><a 
-              href="/zixun/ccyps/index.jhtml" 
-              target="_blank">更多&gt;</a></div>
+              class="zx_a3 jtabtit" 
+            >仓储与配送</a></div>
+            <div 
+              id="more1_5_2" 
+              class="morelink"><a 
+                href="/zixun/cgzx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
+            <div 
+              id="more2_5_2" 
+              class="morelink"><a 
+                href="/zixun/ccyps/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div id="main5_3_nr1">
+          <div 
+            id="main5_3_nr1" 
+            class="jtabcon">
 
             <template 
               v-for="(item, index) in $store.state.line.index_cgzx" 
@@ -1465,7 +1472,9 @@
   
           </div>
 
-          <div id="main5_3_nr2">
+          <div 
+            id="main5_3_nr2" 
+            class="jtabcon">
             <template 
               v-for="(item, index) in $store.state.line.index_ccyps" 
             >
@@ -1859,6 +1868,11 @@ export default {
         })
       }
     })
+
+    // 获取推荐物流公司
+    await store.dispatch('company/GETRECOMMEND', {
+      data: { pageSize: 8 }
+    })
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/index/css/echarts.css' }]
@@ -2196,6 +2210,27 @@ export default {
           })
           tab.mouseout(function() {
             MyMar = setInterval(Marquee, speed)
+          })
+          // 资讯切换
+          $('.jtabtit').on('click', function() {
+            var par = $(this).closest('.jtabwrap')
+            var jtits = par.find('.jtabtit')
+            var jcons = par.find('.jtabcon')
+            var links = par.find('.morelink')
+            var inx = jtits.index($(this))
+            jtits
+              .css('color', '#333')
+              .eq(inx)
+              .css('color', '#2577e3')
+            jcons
+              .hide()
+              .eq(inx)
+              .show()
+            links
+              .hide()
+              .eq(inx)
+              .show()
+            return false
           })
         }
       )

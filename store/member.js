@@ -178,7 +178,7 @@ export const actions = {
     console.log('payload3', payload)
     return new Promise((resolve, reject) => {
       axios
-        .post(aurl + '/api/28-web/range/company/list', payload)
+        .post(aurl + '/api/28chinaservice/range/company/list', payload)
         .then(res => {
           let data = res.data
           if (data.status === 200) {

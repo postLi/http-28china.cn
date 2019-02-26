@@ -6,8 +6,7 @@ if (process.server) {
 }
 
 export const state = () => ({
-  recommend: [],
-  index_list: []
+  recommend: []
 })
 
 export const mutations = {
@@ -38,30 +37,6 @@ export const actions = {
         })
         .catch(err => {
           console.log('payload-GETRECOMMEND', payload, err)
-          resolve()
-        })
-    })
-  },
-  // 获取物流公司列表
-  GETCOMPANYLIST({ commit }, payload) {
-    return new Promise(resolve => {
-      axios
-        .post(aurl + '/api/28-web/logisticsCompany/list', payload.data)
-        .then(res => {
-          let data = res.data
-          if (data.status === 200) {
-            // console.log('1payload-GETCOMPANYLIST', data.data.list[0])
-            let ndata = data.data ? data.data.list || [] : []
-            ndata = payload.preFn ? payload.preFn(ndata) : ndata
-            commit('setInfo', {
-              name: payload.name,
-              data: ndata
-            })
-          }
-          resolve()
-        })
-        .catch(err => {
-          console.log('payload-GETCOMPANYLIST', payload, err)
           resolve()
         })
     })

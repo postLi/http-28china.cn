@@ -12,7 +12,7 @@
           <div class="find_order_tab_title">常见问题</div>
           <ul>
             <li 
-              v-for="(item, index) in $store.state.line.cjwt"
+              v-for="(item, index) in $store.state.news.cjwt"
               :key="index">
               <a 
                 :title="item.title" 
@@ -109,7 +109,7 @@ export default {
     }
   },
   async fetch({ store, params, $axios, error }) {
-    await store.dispatch('line/GETNEWSINFO', {
+    await store.dispatch('news/GETNEWSINFO', {
       params: {
         channelIds: '113,114,115,116',
         count: '6',

@@ -80,6 +80,7 @@ module.exports = {
   */
   axios: {
     proxy: true,
+    debug: true,
     prefix: '/api', // baseURL
     credentials: true
     // See https://github.com/nuxt-community/axios-module#options

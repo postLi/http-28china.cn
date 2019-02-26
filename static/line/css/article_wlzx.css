@@ -762,6 +762,24 @@ body {
   margin-top: 12px;
   margin-right: 12px;
 }
+.arc_main5 .main3_1_1 {
+  height: 40px;
+}
+.arc_main5 .floatl b {
+  margin-right: 156px;
+  font-size: 16px;
+  color: #2577e3;
+  padding-left: 17px;
+  float: left;
+}
+.arc_main5 .xt_left {
+  width: 2px;
+  height: 20px;
+  background-color: #3f94ee;
+  position: absolute;
+  top: 8px;
+  left: 1px;
+}
 .arc_main5 {
   display: inline-block;
   width: 1000px;
@@ -2468,5 +2486,27 @@ border-radius: 3px;
 #echart,#echart2{
   width: 556px;height:340px;
 }
+/*找我*/
+.input-group-addon{
+  padding: 10px 0;
+}
+.layui-layer-rim1{
+  text-align: center;
+}
+.layui-layer-rim1 .layui-btn.layui-btn-danger{
+  width: 300px;
+}
+.find_layui-btn p{
+  padding-top: 20px;
+}
+.tipPhone{
+  display: none;
+}
+/*找我*/
+/*更多评论*/
+.layui-layer-rim2 .input-group2 span{
+  padding-right: 20px;
+}
+/*更多评论*/
 
 /*弹框*/

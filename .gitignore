@@ -6,6 +6,7 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+package-lock.json
 
 # Runtime data
 pids
@@ -88,3 +89,5 @@ dist
 !/pages/gongsi/index.vue
 !/pages/zhuanxian/index.vue
 !/pages/zhuanxian/detail.vue
+!/pages/zhuanxian/selectMap.vue
+!/pages/zhuanxian/showPrice.vue

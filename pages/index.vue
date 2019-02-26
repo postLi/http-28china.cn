@@ -77,7 +77,7 @@
               <input 
                 type="button" 
                 value="快速下单2" 
-                onclick="window.location.href='/plus/list.php?tid=4'">
+                onclick="window.location.href='/zhuanxian/list'">
             </div>
           </div>
           <div 
@@ -99,7 +99,7 @@
               <input 
                 type="button" 
                 value="快速下单3" 
-                onclick="window.location.href='/plus/list.php?tid=4'">
+                onclick="window.location.href='/zhuanxian/list'">
             </div>
           </div>
           <div 
@@ -121,7 +121,7 @@
               <input 
                 type="button" 
                 value="快速下单4" 
-                onclick="window.location.href='/plus/list.php?tid=4'">
+                onclick="window.location.href='/zhuanxian/list'">
             </div>
           </div>
           <div class="main1_1_xx"/>
@@ -193,8 +193,8 @@
                 <span id="ts">您好，欢迎来到28快运！</span>
               </div>
               <div class="operation">
-                <div class="loginBtn"><a href="/member/login.php">登录</a></div>
-                <div class="regBtn"><a href="/member/index_do.php?fmdo=user&amp;dopost=regnew">注册</a></div>
+                <div class="loginBtn"><a href="/login">登录</a></div>
+                <div class="regBtn"><a href="/regisiter">注册</a></div>
               </div>
             </div>
             <div 
@@ -206,12 +206,12 @@
                 <span>您好，<span id="login_name2"/>&nbsp;</span>
                 <span style="cursor: pointer"> <a 
                   class="exit_anfa" 
-                  href="/member/index_do.php?fmdo=login&amp;dopost=exit">【安全退出】</a> </span>
+                  href="/exit">【安全退出】</a> </span>
               </div>
               <div class="operation">
                 <div class="loginBtn"><a 
                   target="_blank" 
-                  href="/member/content_list.php?channelid=1">会员中心</a></div>
+                  href="/hyzx">会员中心</a></div>
                 <div class="regBtn"> <a 
                   id="my_website" 
                   target="_blank" 
@@ -223,16 +223,16 @@
               <ul>
                 <li class="kefu_index">
                   <a 
-                    href="/plus/list.php?tid=12" 
+                    href="/zixun" 
                     onmouseout="kefu_none();">咨讯</a>
                   <a 
-                    href="/plus/list.php?tid=88" 
+                    href="/help/ggp/index.jhtml" 
                     onmouseout="kefu_none();">帮助</a>
                   <a onmouseover="kefu_block();">客服</a>
 
                   <a 
                     target="_blank" 
-                    href="/plus/list.php?tid=69" 
+                    href="/help/tsjy/index.jhtml" 
                     onmouseout="kefu_none();">建议</a>
                 </li>
                 <li><a 
@@ -320,7 +320,7 @@
                       type="text" 
                       name="" 
                       class="" 
-                      placeholder="&nbsp;请选择出发地" 
+                      placeholder="请选择出发地" 
                       readonly="">
                   </div>
                   <em>→</em>
@@ -335,7 +335,7 @@
                       type="text" 
                       name="" 
                       class="" 
-                      placeholder="&nbsp;请选择到达地" 
+                      placeholder="请选择到达地" 
                       readonly="">
                   </div>                               
                        
@@ -349,7 +349,7 @@
                                  
                                  
               <div class="more floatr"><a 
-                href="/plus/list.php?tid=4" 
+                href="/zhuanxian/list" 
                 target="_blank">更多&gt;</a></div>		 
             </div>
             <dl class="hy_d">
@@ -361,58 +361,69 @@
               <dd class="d006">物流公司</dd>
               <dd class="d007">操作</dd>
             </dl>
-            <div class="none_zx"><span>暂无专线信息</span>
+            <div 
+              v-if="$store.state.line.index_list.length === 0" 
+              class="none_zx"><span>暂无专线信息</span>
             </div>          
                     
-            <div class="clear scroll_nr2 ">
-
-                        	
-
-                        	 
+            <div 
+              v-else 
+              class="clear scroll_nr2 ">
               <ul 
                 id="js001" 
                 class="hy_nr " 
                 style="margin-top: 0px;">
-                        	 	
-                <li style="display: none;">
-                  <a 
-                    id="nr_a01" 
-                    target="_blank"><span 
-                      id="nr001" 
-                      class="t001"/></a>
-                  <a 
-                    id="nr_a01" 
-                    target="_blank"><span 
-                      id="nr001_2" 
-                      class="t002"/></a>
-                  <a 
-                    id="nr_a02" 
-                    target="_blank" 
-                    href=""><span class="t003"><font 
+
+                <template v-for="(item, index) in $store.state.line.index_list" >
+
+                  <li :key="index">
+                    <a 
+                      id="nr_a01"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId" 
+                      target="_blank"><span 
+                        id="nr001" 
+                        class="t001">{{ item.startCity + item.startArea }}</span></a>
+                    <a 
+                      id="nr_a01"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span 
+                        id="nr001_2" 
+                        class="t002">{{ item.endCity + item.endArea }}</span></a>
+                    <a 
+                      id="nr_a02" 
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
+                      target="_blank"  
+                    ><span class="t003"><font 
                       id="nr002" 
-                      style="color:#f00"/>元/公斤</span></a>
-                  <a 
-                    id="nr_a03" 
-                    target="_blank"><span class="t004"><font 
-                      id="nr003" 
-                      style="color:#f00"/>元/方</span> </a>
-                  <a 
-                    id="nr_a04" 
-                    target="_blank"><span 
-                      id="nr004" 
-                      class="t005"/></a>
-                  <a 
-                    id="nr005" 
-                    target="_blank" 
-                    href="#"><span 
-                      id="nr006" 
-                      class="t006"/></a>
-                  <a 
-                    id="nr_a05" 
-                    target="_blank"><span 
-                      id="t006" 
-                      class="t007">详情</span></a>         
-                </li>
+                      style="color:#f00">{{ item.weightPrice }}</font>元/公斤</span></a>
+                    <a 
+                      id="nr_a03"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span class="t004"><font 
+                        id="nr003" 
+                        style="color:#f00">{{ item.lightPrice }}</font>元/方</span> </a>
+                    <a 
+                      id="nr_a04"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span 
+                        id="nr004" 
+                        class="t005">{{ item.transportAging + (item.transportAgingUnit || '').replace('多', '') }}</span></a>
+                    <a 
+                      id="nr005" 
+                      :href="'/member/' + item.companyId" 
+                      target="_blank"><span 
+                        id="nr006" 
+                        class="t006">{{ item.companyName }}</span></a>
+                    <a 
+                      id="nr_a05"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span 
+                        id="t006" 
+                        class="t007">详情</span></a>         
+                  </li>
+                </template>    
+                        	 	
+                
               </ul>
                           
 
@@ -467,16 +478,16 @@
                 <a 
                   id="echart_order" 
                   target="_blank" 
-                  href="#">闪电下单</a>
+                  href="/create/order">闪电下单</a>
                 <a 
                   id="echart_price" 
                   href="#">即刻比价</a>
                 <a 
                   target="_blank" 
-                  href="/plus/list.php?tid=76">一键查单</a>
+                  href="/ydcx">一键查单</a>
                 <a 
                   id="echart_sx" 
-                  href="#">时效查询</a>
+                  href="/shixiao">时效查询</a>
               </div>
             </div>
           </div>
@@ -515,7 +526,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择出发地" 
+                    placeholder="请选择出发地" 
                     readonly="">
                 </div>
                 <em>→</em>
@@ -530,7 +541,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择到达地" 
+                    placeholder="请选择到达地" 
                     readonly="">
                 </div>                               
                        
@@ -541,7 +552,7 @@
                 class="search_hy" 
                 value=""></div>
             <div class="more floatr"><a 
-              href="/plus/list.php?tid=3" 
+              href="/cheyuan?" 
               target="_blank">更多&gt;</a></div>		 
           </div>
     
@@ -556,53 +567,71 @@
               <dd class="d7">运输价格</dd>
               <dd class="d8">操作</dd>
             </dl>
-            <div class="none_cy"><span>暂无车源信息</span>
+            <div 
+              v-if="$store.state.cheyuan.index_list.length === 0" 
+              class="none_cy"><span>暂无车源信息</span>
             </div>            
                         
-            <div class="clear scroll_nr3">
+            <div 
+              v-else 
+              class="clear scroll_nr3">
               <ul 
                 id="js003" 
                 class="hy_nr" 
                 style="margin-top: 0px;">
-                <li style="display: none;">
-                  <a id="nr_a11"><span 
-                    id="nr021" 
-                    class="t1"/></a>
-                  <a id="nr_a11"><span 
-                    id="nr021_2" 
-                    class="t2"/></a>
-                  <a 
-                    id="nr_a12" 
-                    target="_blank"><span 
-                      id="nr022" 
-                      class="t3"/></a>
-                  <a 
-                    id="nr_a13" 
-                    target="_blank"><span 
-                      id="nr023" 
-                      class="t4"/></a>
-                  <a 
-                    id="nr_a14" 
-                    target="_blank"><span class="t5"><font 
-                      id="nr024" 
-                      style="color: #f00;"/>米</span></a>
-                  <a 
-                    id="nr_a15" 
-                    target="_blank"><span class="t6"><font 
-                      id="nr025" 
-                      style="color: #f00;"/>吨</span></a>
-                  <a 
-                    id="nr_a16" 
-                    target="_blank"><span class="t7"><font 
-                      id="nr026" 
-                      style="color: #f00;"/></span></a>
-                  <a 
-                    id="nr_a17" 
-                    target="_blank"><span 
-                      id="t7" 
-                      class="t8">查看</span></a>
-                </li>
+                <template v-for="(item, index) in $store.state.cheyuan.index_list" >
 
+                  <li :key="index">
+                    <a 
+                      id="nr_a11"
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :title="item.strartAddress"><span 
+                        id="nr021" 
+                        class="t1">{{ item.strartAddress }}</span></a>
+                    <a 
+                      id="nr_a11" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :title="item.endAddress"><span 
+                        id="nr021_2" 
+                        class="t2">{{ item.endAddress }}</span></a>
+                    <a 
+                      id="nr_a12" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span 
+                        id="nr022" 
+                        class="t3">{{ (item.carNum || '').replace(/^(..).*(..)$/, '$1***$2') }}</span></a>
+                    <a 
+                      id="nr_a13"
+                      :href="'/cheyuan/detail?id='+item.driverId" 
+                      target="_blank"><span 
+                        id="nr023" 
+                        class="t4">{{ item.carTypeName }}</span></a>
+                    <a 
+                      id="nr_a14"
+                      :href="'/cheyuan/detail?id='+item.driverId" 
+                      target="_blank"><span class="t5"><font 
+                        id="nr024" 
+                        style="color: #f00;">{{ item.carLength }}</font>米</span></a>
+                    <a 
+                      id="nr_a15" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span class="t6"><font 
+                        id="nr025" 
+                        style="color: #f00;">{{ item.carLoad }}</font>吨</span></a>
+                    <a 
+                      id="nr_a16" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span class="t7"><font 
+                        id="nr026" 
+                        style="color: #f00;">{{ item.expectPrice }}</font></span></a>
+                    <a 
+                      id="nr_a17" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span 
+                        id="t7" 
+                        class="t8">查看</span></a>
+                  </li>
+                </template>
                             
               </ul>
 
@@ -632,7 +661,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择出发地" 
+                    placeholder="请选择出发地" 
                     readonly="">
                 </div>
                 <em>→</em>
@@ -647,7 +676,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择到达地" 
+                    placeholder="请选择到达地" 
                     readonly="">
                 </div>  
               </div>   
@@ -657,7 +686,7 @@
                 class="search_hy" 
                 value=""></div>
             <div class="more floatr"><a 
-              href="/plus/list.php?tid=2" 
+              href="/huoyuan" 
               target="_blank">更多&gt;</a></div>		 
           </div>
     
@@ -672,11 +701,15 @@
               <dd class="d7">发布时间</dd>
               <dd class="d8">操作</dd>
             </dl>
-            <div class="none_hy"><span>暂无货源信息</span>
+            <div 
+              v-if="$store.state.huoyuan.index_list.length === 0" 
+              class="none_hy"><span>暂无货源信息</span>
             </div>
                         
                         
-            <div class="clear scroll_nr1">
+            <div 
+              v-else 
+              class="clear scroll_nr1">
  
                         	
                         	
@@ -685,34 +718,56 @@
                 class="hy_nr " 
                 style="margin-top: 0px;">
 
-                <li style="display: none;">                                      
-                  <a id="nr_a31"><span 
-                    id="nr031" 
-                    class="t1"/></a>
-                  <a id="nr_a31"><span 
-                    id="nr031_2" 
-                    class="t2"/></a>
-                  <a id="nr_a33"><span 
-                    id="nr033" 
-                    class="t3"/></a>
-                  <a id="nr_a34"><span class="t4"><font 
-                    id="nr034" 
-                    style="color: #f00;"/></span></a>
-                  <a id="nr_a35"><span class="t5"><font 
-                    id="nr035" 
-                    style="color: #f00;"/></span></a>
-                  <a id="nr_a36"><span 
-                    id="nr036" 
-                    class="t6"/></a>
-                  <a id="nr_a37"><span 
-                    id="nr037" 
-                    class="t7"/></a>
-                  <a 
-                    id="nr_a38" 
-                    target="_blank"><span 
-                      id="t8" 
-                      class="t8">查看</span></a>
-                </li>
+                <template v-for="(item, index) in $store.state.huoyuan.index_list" >
+
+                  <li :key="index">                                     
+                    <a 
+                      id="nr_a31"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      :title="item.startProvinceCityArea"><span 
+                        id="nr031" 
+                        class="t1">{{ item.startProvinceCityArea }}</span></a>
+                    <a 
+                      id="nr_a31"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      :title="item.endProvinceCityArea"><span 
+                        id="nr031_2" 
+                        class="t2">{{ item.endProvinceCityArea }}</span></a>
+                    <a 
+                      id="nr_a33"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
+                    ><span 
+                      id="nr033" 
+                      class="t3">{{ item.goodsName || item.goodsTypeName }}</span></a>
+                    <a 
+                      id="nr_a34" 
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span class="t4"><font 
+                        id="nr034" 
+                        style="color: #f00;">{{ item.goodsWeight }}公斤</font></span></a>5
+                    <a 
+                      id="nr_a35" 
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span class="t5"><font 
+                        id="nr035" 
+                        style="color: #f00;">{{ item.goodsVolume }}方</font></span></a>
+                    <a 
+                      id="nr_a36" 
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span 
+                        id="nr036" 
+                        class="t6">{{ item.orderType }}</span></a>
+                    <a 
+                      id="nr_a37"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      :title="item.createTime"><span 
+                        id="nr037" 
+                        class="t7">{{ (item.createTime || '').replace(/^.*-(\d{2}-\d{2}).*/, '$1') }}</span></a>
+                    <a 
+                      id="nr_a38"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      target="_blank"><span 
+                        id="t8" 
+                        class="t8">查看</span></a>
+                  </li>
+                </template>
                             
               </ul>
 
@@ -834,7 +889,7 @@
             <b>找物流公司</b>
           </div>
           <div class="more2 floatr"><a 
-            href="/plus/list.php?tid=80" 
+            href="/gongsi?" 
             target="_blank">更多&gt;</a></div>		 
         </div>
         <div class="hy clear">
@@ -848,46 +903,54 @@
             <dd class="d0004">操作</dd>
                 
           </dl>
-          <div class="none_wlgs"><span>暂无物流公司信息</span>
+          
+          <div 
+            v-if="$store.state.company.recommend.length === 0" 
+            class="none_wlgs"><span>暂无物流公司信息</span>
           </div>          
-          <div class="clear scroll_nr4">
+          <div 
+            v-else 
+            class="clear scroll_nr4">
+            
             <ul 
               id="js_wlgs" 
               class="wlyq_nr">
-                                
-    
-              <li style="display: none;">
-                <a 
-                  id="wlgs_a1" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlgs_name" 
-                    class="t0001"/></a>
-                <a 
-                  id="wlgs_a2" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlgs_postion" 
-                    class="t0002"/></a>
-                <a 
-                  id="wlgs_a3" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlgs_jyfw" 
-                    class="t0003"/></a>
-                <span 
-                  id="t77" 
-                  class="t0004"><a 
-                    id="wlgs_a" 
-                    href="#" 
-                    target="_blank">查看</a></span>
-              </li>
 
-       
-                                
+              <template v-for="(item, index) in $store.state.company.index_list" >
+              
+                <li :key="index">
+                  <a 
+                    id="wlgs_a1" 
+                    :href="'/member/' + item.id + ''"  
+                    :title="item.companyName"
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlgs_name"
+                       
+                      class="t0001">{{ item.companyName }}</span></a>
+                  <a 
+                    id="wlgs_a2" 
+                    :href="'/member/' + item.id + ''"  
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlgs_postion" 
+                      class="t0002">{{ item.belongCityName }}</span></a>
+                  <a 
+                    id="wlgs_a3" 
+                    :href="'/member/' + item.id + ''"  
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlgs_jyfw"
+                      :title="(item.productService || '').replace(/(\[|\])/g, '')" 
+                      class="t0003">{{ (item.productService || '').replace(/(\[|\])/g, '') }}</span></a>
+                  <span 
+                    id="t77" 
+                    class="t0004"><a 
+                      id="wlgs_a" 
+                      :href="'/member/' + item.id + ''"  
+                      target="_blank">查看</a></span>
+                </li>
+              </template>           
                                 
             </ul>
           </div>
@@ -901,7 +964,7 @@
             <b>找物流园区</b>
           </div>
           <div class="more2 floatr"><a 
-            href="/plus/list.php?tid=1" 
+            href="/wuliu?" 
             target="_blank"><span>更多&gt;</span></a></div>		 
         </div>
         <div class="h10"/>
@@ -917,37 +980,43 @@
             <ul 
               id="js_wlyq" 
               class="wlyq_nr">
-                                
+
+              <template v-for="(item, index) in $store.state.wuliu.index_list" >
+              
+                <li :key="index">
+                  <a 
+                    id="wlyq_a1" 
+                    :title="item.parkName" 
+                    :href="'/wuliu/detail?id='+item.id"
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlyq_name" 
+                      class="t01">{{ item.parkName }}</span></a>
+                  <a 
+                    id="wlyq_a2" 
+                    :title="item.parkAddress" 
+                    :href="'/wuliu/detail?id='+item.id"
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlyq_postion" 
+                      class="t02">{{ item.parkAddress }}</span></a>
+                  <a 
+                    id="wlyq_a3" 
+                    :href="'/wuliu/detail?id='+item.id" 
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlyq_num" 
+                      class="t03">{{ item.netWorkNumber }}</span></a>
+                  <span 
+                    id="t77" 
+                    class="t04"><a 
+                      id="wlyq_a4" 
+                      :href="'/wuliu/detail?id='+item.id" 
+                      target="_blank">查看</a></span>
+                </li>
+              </template>    
     
-              <li style="display: none;">
-                <a 
-                  id="wlyq_a1" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlyq_name" 
-                    class="t01"/></a>
-                <a 
-                  id="wlyq_a2" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlyq_postion" 
-                    class="t02"/></a>
-                <a 
-                  id="wlyq_a3" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlyq_num" 
-                    class="t03"/></a>
-                <span 
-                  id="t77" 
-                  class="t04"><a 
-                    id="wlyq_a4" 
-                    href="#" 
-                    target="_blank">查看</a></span>
-              </li>
+              
 
        
                                 
@@ -973,172 +1042,25 @@
     	</em> 
     	-->
             <span><a 
-              href="/a/wuliushangwuxinxi/" 
+              href="/zixun/wlswxx/index.jhtml" 
               title="更多物流商务信息">更多&gt;</a></span></div>
           <ul class="swlist fls">
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-              class="cur">代理</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-                  title="货运全国，一站式服务！">货运全国，一站式服务！</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-                  title="提供广州蚂蚁搬家服务">提供广州蚂蚁搬家服务</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-              class="cur">代理</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-                  title="广州市DHL国际快递">广州市DHL国际快递</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-                  title="长期供应广州至新疆到门费用">长期供应广州至新疆到门费用</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-                  title="长期供应广州至新西兰双清到门费用">长期供应广州至新西兰双清到门费用</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-                  title="长期供应玖灵越南专线越南货运">长期供应玖灵越南专线越南货运</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-                  title="黄埔报关拖车，贴心码头服务看点多">黄埔报关拖车，贴心码头服务看点多</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-              class="cur">代理</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-                  title="黄埔报关行，乌冲通关样样行">黄埔报关行，乌冲通关样样行</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-                  title="代理东莞虎门港、沙田港进出口报关，">代理东莞虎门港、沙田港进出口报关，</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-                  title="代理中山港、小榄港拖车报关公司">代理中山港、小榄港拖车报关公司</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-                  title="供应汕头国集港、广澳港、永泰港，拖">供应汕头国集港、广澳港、永泰港，拖</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-                  title="长期供应广州至迪拜海空运双清包税到">长期供应广州至迪拜海空运双清包税到</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-                  title="长期供应香港进出口拖车报关">长期供应香港进出口拖车报关</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-                  title="长期供应广州至印尼海运双清包税到门">长期供应广州至印尼海运双清包税到门</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-                  title="供应江门高沙港、外海港，拖车报关公">供应江门高沙港、外海港，拖车报关公</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-                  title="长期供应珠三角进出口拖车报关">长期供应珠三角进出口拖车报关</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-                class="tag">公路运输</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-                  title="长期供应沧州河间红瑞货运信息部新疆">长期供应沧州河间红瑞货运信息部新疆</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-                  title="原飞航物流招合作伙伴">原飞航物流招合作伙伴</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-                    class="cur">详情</a></span></li>
-
+            <li
+              v-for="(item, index) in $store.state.news.index_wlswxx"
+              :key="index"
+              :class="index%2 ? 'extra' : ''"
+              class="nods"
+            >
+              <a 
+                :href="item.url" 
+                class="cur">代理</a><a 
+                  :href="item.url" 
+                  class="tag">其他</a><a 
+                    :href="item.url" 
+                    :title="item.title">{{ item.title }}</a><span><a 
+                      :href="item.url" 
+                      class="cur">详情</a></span>
+            </li>
           </ul>
 
 
@@ -1149,51 +1071,36 @@
             <div class="xt_bottom"/>	
             <b>物流公司推荐</b>
           </div>
-          <ul id="wlgs_tj"> 
-            <div id="wlgs_tj1">
+          <ul id="wlgs_tj">
+            <template v-for="(item, index) in $store.state.company.recommend" >
               <li 
-                class="arank" 
-                style="display: none;">
-                <div class="avatar"><a 
-                  id="tj_01" 
-                  href="" 
-                  target="_blank" 
-                  title=""><span id="tj_02"/></a></div> 
+                :key="index" 
+                :class="index > 2 ? 'arank2' : ''" 
+                class="arank">
+                <div 
+                  :class="index > 2 ? 'avatar2' : ''" 
+                  class="avatar">
+                  <a 
+                    :href="'/member/' + item.companyId + ''" 
+                    :title="item.companyName" 
+                    target="_blank"><span>{{ index + 1 }}</span></a>
+                </div>
                 <div class="info">
-                  <div class="wlgs_pic"><img 
-                    id="tj_03" 
-                    class="scrollLoading" 
-                    src="/images/index/wlgs_tj_01.png" 
-                    alt=""></div>
+                  <div 
+                    v-if="index < 3" 
+                    class="wlgs_pic"><img 
+                      :src="'/images/index/wlgs_tj_0'+(index )+'.png'" 
+                      class="scrollLoading" 
+                      alt=""></div>
                   <div class="company"><a 
-                    id="tj_04" 
-                    href="#" 
+                    :href="'/member/' + item.companyId + ''" 
+                    :title="item.companyName" 
                     target="_blank" 
-                    class="yh" 
-                    title="#"/></div>
+                    class="yh">{{ item.companyName }}</a></div>
                 </div>
               </li>
-   
-            </div>
-    
-
-            <div id="wlgs_tj2">
-              <li 
-                class="arank arank2" 
-                style="display: none;">
-                <div class="avatar avatar2"><a 
-                  id="tj_05" 
-                  href="" 
-                  target="_blank" 
-                  title=""><span id="tj_06"/></a></div> 
-                <div class="company"><a 
-                  id="tj_07" 
-                  href="" 
-                  target="_blank" 
-                  class="yh" 
-                  title=""/> </div>
-              </li>
-            </div>
+            </template> 
+            
      
           </ul>
 
@@ -1212,155 +1119,98 @@
       <div 
         id="rf07" 
         class="main5 center">
-        <div class="main5_1">
+        <div class="main5_1 jtabwrap">
           <div id="main5_1_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_1"><a 
-              class="zx_a1" 
-              onclick="document.getElementById('main5_1_nr1').style.display='block';document.getElementById('main5_1_nr2').style.display='none';document.getElementById('more1_5_1').style.display='block';document.getElementById('more2_5_1').style.display='none';">物流资讯</a></div>
+              class="zx_a1 jtabtit" 
+            >物流资讯</a></div>
             <div id="bt2_5_1"><a 
-              class="zx_a1" 
-              onclick="document.getElementById('main5_1_nr1').style.display='none';document.getElementById('main5_1_nr2').style.display='block';document.getElementById('more1_5_1').style.display='none';document.getElementById('more2_5_1').style.display='block';">政策法令</a></div>
-            <div id="more1_5_1"><a 
-              href="/plus/list.php?tid=52" 
-              target="_blank">更多&gt;</a></div>
-            <div id="more2_5_1"><a 
-              href="/a/zcfl/" 
-              target="_blank">更多&gt;</a></div>
+              class="zx_a1 jtabtit" 
+            >理政资讯</a></div>
+            <div 
+              id="more1_5_1" 
+              class="morelink"><a 
+                href="/zixun/xyzx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
+            <div 
+              id="more2_5_1" 
+              class="morelink"><a 
+                href="/zixun/lzzx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div id="main5_1_nr1">
-            <a href="/wlzx/xingyezixun/2018/0629/320.html"><img 
-              src="/uploads/181211/1-1Q21114512A04.png" 
-              alt="中国重汽不停车服务入驻凯立德物流地图生态"></a>
-            <a href="/wlzx/xingyezixun/2018/0629/320.html"><span>中国重汽不停车服务入驻凯立德物流地图生态</span></a>
-   
-            <br>
-            <div class="h18"/>
-            <a href="/a/zjgd/2018/0523/114.html">因为这个补贴政策的调整，纯电动物流车“懵”</a>	<br>
-            <a href="/a/zjgd/2018/0515/34.html">萨拉戈萨将成为中国企业物流宝地</a>	<br>
-            <a href="/a/zjgd/2018/0523/113.html">九江石化“智能仓库”建成投用</a>	<br>
- 
-          </div>
+          <NewsList 
+            id="main5_1_nr1" 
+            :list="$store.state.news.index_wlzx" />
 
-          <div id="main5_1_nr2">
-            <a href="/a/zcfl/2018/0514/27.html"><img 
-              src="/uploads/180914/1-1P914201R1910.jpg" 
-              alt="新疆密集出台方案 推动物流中心转型升级"></a>
-            <a href="/a/zcfl/2018/0514/27.html"><span>新疆密集出台方案 推动物流中心转型升级</span></a>
- 
-            <br>
-            <div class="h18"/>
-            <a href="/a/zcfl/2018/0523/111.html">江苏省出台物流新政建设五大通道完善四大枢纽</a>	<br>
-            <a href="/a/zcfl/2018/0515/30.html">在渝港资项目达2849个 物流等产业迎新机遇</a>	<br>
-            <a href="/a/zcfl/2018/0515/29.html">安徽省首次发布社会物流统计报告</a>	<br>
-  
-  
-          </div>
+          <NewsList 
+            id="main5_1_nr2" 
+            :list="$store.state.news.index_lzzx" />
+
         </div>
-        <div class="main5_2">
+        <div class="main5_2 jtabwrap">
           <div id="main5_2_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_2"><a 
-              class="zx_a2" 
-              onclick="document.getElementById('main5_2_nr1').style.display='block';document.getElementById('main5_2_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none';">物流前沿</a></div>
+              class="zx_a2 jtabtit" 
+            >物流前沿</a></div>
             <div id="bt2_5_2"><a 
-              class="zx_a2" 
-              onclick="document.getElementById('main5_2_nr1').style.display='none';document.getElementById('main5_2_nr2').style.display='block';document.getElementById('more1_5_2').style.display='none';document.getElementById('more2_5_2').style.display='block';">专家观点</a></div>
-            <div id="more1_5_2"><a 
-              href="/a/wlqy/" 
-              target="_blank">更多&gt;</a></div>
-            <div id="more2_5_2"><a 
-              href="/a/zjgd/" 
-              target="_blank">更多&gt;</a></div>
+              class="zx_a2 jtabtit" 
+            >物流行业分析</a></div>
+            <div 
+              id="more1_5_2" 
+              class="morelink"><a 
+                href="/zixun/wlqy/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
+            <div 
+              id="more2_5_2" 
+              class="morelink"><a 
+                href="/zixun/wlxyfx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div id="main5_2_nr1">
+          <NewsList 
+            id="main5_2_nr1" 
+            :list="$store.state.news.index_wlqy" />
 
-            <a href="/a/wlqy/2018/0515/32.html"><img 
-              src="/uploads/181211/1-1Q211145152321.png" 
-              alt="车联网：时代的新经济引擎 不可忽视"></a>
-            <a href="/a/wlqy/2018/0515/32.html"><span>车联网：时代的新经济引擎 不可忽视</span></a>
-   
-            <br>
-            <div class="h18"/>
-            <a href="/a/wlqy/2018/0629/351.html">向快递外卖包装宣战 “绿色物流”加速推进</a>	<br>
-            <a href="/a/wlqy/2018/0629/350.html">专线物流为什么难出巨头？</a>	<br>
-            <a href="/a/wlqy/2018/0629/349.html">“最后一公里”的快递柜战争，怎么打？</a>	<br>
- 
-  
-          </div>
+          <NewsList 
+            id="main5_2_nr2" 
+            :list="$store.state.news.index_wlxyfx" />
 
-          <div id="main5_2_nr2">
-            <a href="/a/zjgd/2018/0523/112.html"><img 
-              src="/uploads/180914/1-1P9142009352K.jpg" 
-              alt="2020年基本建成国家车联网产业标准体系"></a>
-            <a href="/a/zjgd/2018/0523/112.html"><span>2020年基本建成国家车联网产业标准体系</span></a>
-
-            <br>
-            <div class="h18"/>
-                          
-            <a href="/a/zjgd/2018/0523/114.html">因为这个补贴政策的调整，纯电动物流车“懵”</a>	<br>
-            <a href="/a/zjgd/2018/0515/34.html">萨拉戈萨将成为中国企业物流宝地</a>	<br>
-            <a href="/a/zjgd/2018/0523/113.html">九江石化“智能仓库”建成投用</a>	<br>
-  
-  
-          </div>
         </div>
 
 
-        <div class="main5_3">
+        <div class="main5_3 jtabwrap">
           <div id="main5_3_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_2"><a 
-              class="zx_a3" 
-              onclick="document.getElementById('main5_3_nr1').style.display='block';document.getElementById('main5_3_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none'">采购资讯</a></div>
+              class="zx_a3 jtabtit" 
+            >采购资讯</a></div>
             <div id="bt2_5_2"><a 
-              class="zx_a3" 
-              onclick="document.getElementById('main5_3_nr1').style.display='none';document.getElementById('main5_3_nr2').style.display='block';document.getElementById('more1_5_2').style.display='none';document.getElementById('more2_5_2').style.display='block'">仓储与配送</a></div>
-            <div id="more1_5_2"><a 
-              href="/plus/list.php?tid=58" 
-              target="_blank">更多&gt;</a></div>
-            <div id="more2_5_2"><a 
-              href="/plus/list.php?tid=59" 
-              target="_blank">更多&gt;</a></div>
+              class="zx_a3 jtabtit" 
+            >仓储与配送</a></div>
+            <div 
+              id="more1_5_2" 
+              class="morelink"><a 
+                href="/zixun/cgzx/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
+            <div 
+              id="more2_5_2" 
+              class="morelink"><a 
+                href="/zixun/ccyps/index.jhtml" 
+                target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div id="main5_3_nr1">
+          <NewsList 
+            id="main5_3_nr1" 
+            :list="$store.state.news.index_cgzx" />
 
-            <a href="/wlzx/caigouzixun/2018/0629/301.html"><img 
-              src="/uploads/181211/1-1Q211145222544.png" 
-              alt="打造“智慧”与“绿色”供应链生态圈"></a>
-            <a href="/wlzx/caigouzixun/2018/0629/301.html"><span>打造“智慧”与“绿色”供应链生态圈</span></a>
-   
-            <br>
-            <div class="h18"/>
-            <a href="/wlzx/caigouzixun/2018/0629/308.html">山东临沂：规范化程序采购廉租房</a>	<br>
-            <a href="/wlzx/caigouzixun/2018/0629/307.html">应建立工贸结合的大型跨国经营企业集团</a>	<br>
-            <a href="/wlzx/caigouzixun/2018/0629/306.html">2013北京采购论坛成功举办</a>	<br>
- 
-  
-          </div>
+          <NewsList 
+            id="main5_3_nr2" 
+            :list="$store.state.news.index_ccyps" />
 
-          <div id="main5_3_nr2">
-            <a href="/wlzx/cangchuyupeisong/2018/0629/289.html"><img 
-              src="/uploads/180914/1-1P9142009352K.jpg" 
-              alt="走在战斗路上的顺丰，能否经得住苏宁式考验"></a>
-            <a href="/wlzx/cangchuyupeisong/2018/0629/289.html"><span>走在战斗路上的顺丰，能否经得住苏宁式考验</span></a>
-
-            <br>
-            <div class="h18"/>
-                          
-            <a href="/wlzx/cangchuyupeisong/2018/0629/291.html">2018外卖配送如何发力</a>	<br>
-            <a href="/wlzx/cangchuyupeisong/2018/0629/290.html">聋哑小哥送外卖顺便要钱？真相让人泪奔</a>	<br>
-            <a href="/wlzx/cangchuyupeisong/2018/0629/288.html">末端共同配送这把良药，让通达系吃下去有点难</a>	<br>
-  
-  
-          </div>
         </div>
-
-
-
       </div>
 
       <!--物流资讯/物流前沿/网点加盟招商 E-->
@@ -1464,63 +1314,33 @@
           <div id="main5_2_1">
             <div class="xt_bottom_w92"/>
             <div id="bt1_5_2">
-            <a onclick="document.getElementById('main5_2_nr1').style.display='block';document.getElementById('main5_2_nr2').style.display='none';document.getElementById('more1_5_2').style.display='block';document.getElementById('more2_5_2').style.display='none';">客户案例</a></div>
+            <a >客户案例</a></div>
             <div id="more1_5_2"><a 
-              href="/plus/list.php?tid=21" 
+              href="/help/khal/index.jhtml" 
               target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
           <div id="main6_2_nr1">
-            <div class="anli">
-              <div class="floatl"><a href="/a/khal/2018/0516/42.html"><img 
-                src="/uploads/181211/1-1Q2111452512c.png" 
-                alt="选择安发中国推广，正确无悔的" 
-                width="90px" 
-                height="68px"></a>	</div>
+            <div 
+              v-for="(item, index) in $store.state.news.index_khal" 
+              :key="index"
+              class="anli">
+              <div class="floatl"><a 
+                :href="item.url" 
+                :title="item.title" 
+                target="_blank"><img 
+                  :src="item.typeImg" 
+                  :alt="item.title" 
+                  width="90px" 
+                  height="68px"></a>	</div>
               <div class="anlixq">
-                <span>选择安发中国推广，正确无悔的</span><br>
-                <a href="/a/khal/2018/0516/42.html">—上海畅心物流有限公司温经理随着互联网对物流行业的影响，近...</a>
-                <br>
-		
-		
-              </div>			
-			 
+                <span>{{ item.title }}</span><br>
+                <a 
+                  :href="item.url" 
+                  target="_blank">{{ (item. description || '').substr(0,28) + '...' }}</a>
+              </div>	
             </div>
-            <div class="anli">
-              <div class="floatl"><a href="/a/khal/2018/0516/43.html"><img 
-                src="/uploads/181211/1-1Q2111452512c.png" 
-                alt="从使用到经营，一条致富之路！" 
-                width="90px" 
-                height="68px"></a>	</div>
-              <div class="anlixq">
-                <span>从使用到经营，一条致富之路！</span><br>
-                <a href="/a/khal/2018/0516/43.html">—天恒物流青岛分公司李经理加入物通网已经有三年多的时...</a>
-                <br>
-		
-		
-              </div>			
-			 
-            </div>
-            <div class="anli">
-              <div class="floatl"><a href="/a/khal/2018/0516/44.html"><img 
-                src="/uploads/181211/1-1Q2111452512c.png" 
-                alt="选择安发中国，正确无悔的选择" 
-                width="90px" 
-                height="68px"></a>	</div>
-              <div class="anlixq">
-                <span>选择安发中国，正确无悔的选择</span><br>
-                <a href="/a/khal/2018/0516/44.html">—上海畅心物流有限公司温经理随着互联网对物流行业的影响，近...</a>
-                <br>
-		
-		
-              </div>			
-			 
-            </div>
-   
-
-   
-                        
-                          			                 
+             			                 
           </div>
 
 
@@ -1584,9 +1404,6 @@
       <!--会员量/客户案例/常用实用工具  E-->
       <!--合作伙伴 S-->
       <div class="partner center w1400">
-        <!--
-	<img src="/templets/default/index_files/btn.png" style="width:100%;height: 100%">
-		-->
         <div class="bt"><span>28快运可以为您提供什么服务保障？</span></div>
         <div class="bt2"><span>集结众多货运能力，提供真实可靠的物流服务</span></div>
         <div style="width:1400px;height:322px;">
@@ -1672,15 +1489,127 @@
 
 <script>
 import axios from 'axios'
+import NewsList from '@/components/index/newsList.vue'
 
 export default {
-  components: {},
+  components: {
+    NewsList
+  },
   data() {
     return {
-      title: '专线列表页面',
+      title: '首页',
       lists: [],
       ip: ''
     }
+  },
+  async fetch({ store, params, $axios, error }) {
+    // 多个栏目的参数配置
+    let paramsObj = {
+      index_khal: {
+        channelIds: '118',
+        count: 3,
+        // checked: 'true',
+        // recommend: '1',
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_wlzx: {
+        channelIds: '94',
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_lzzx: {
+        channelIds: '97',
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_wlqy: {
+        channelIds: '105',
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_wlxyfx: {
+        channelIds: '107',
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_cgzx: {
+        channelIds: '100',
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_ccyps: {
+        channelIds: '101',
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_wlswxx: {
+        channelIds: '119',
+        count: 16,
+        orderBy: 9,
+        channelOption: 0
+      }
+    }
+    let theparams = Object.values(paramsObj).map(el => JSON.stringify(el))
+    let names = Object.keys(paramsObj)
+
+    await store.dispatch('news/GETMULTYNEWSINFO', {
+      params: '{' + theparams.join(';') + '}',
+      names: names,
+      preFn: data => {
+        return data.map((els, index) => {
+          return els.map(el => {
+            el.url = el.url.replace(
+              'http://192.168.1.79/anfacms',
+              index === 0 ? '/help' : '/zixun'
+            )
+            // console.log('el typemg', el.typeImg)
+            return el
+          })
+        })
+      }
+    })
+
+    // 获取推荐物流公司
+    await store.dispatch('company/GETRECOMMEND', {
+      data: { pageSize: 8 }
+    })
+
+    // 获取物流公司列表
+    await store.dispatch('company/GETCOMPANYLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
+    })
+
+    // 获取物流园区列表
+    await store.dispatch('wuliu/GETLIST', {
+      data: { pageSize: 9 },
+      name: 'index_list'
+    })
+
+    // 获取专线列表
+    await store.dispatch('line/GETLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
+    })
+
+    // 获取货源列表
+    await store.dispatch('huoyuan/GETLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
+    })
+
+    // 获取车源列表
+    await store.dispatch('cheyuan/GETLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
+    })
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/index/css/echarts.css' }]
@@ -1693,9 +1622,11 @@ export default {
           '/index/js/gaodemap2.js',
           '/index/js/index.js',
           '/index/js/floatBar.min.js',
-          '/index/js/memu.js'
+          '/index/js/memu.js',
+          '/index/js/map/echarts.min.js'
         ],
         function() {
+          seajs.use(['/index/js/echart/index.js'])
           $(function() {
             $('a[_for]').mouseover(function() {
               $(this)
@@ -1723,7 +1654,7 @@ export default {
             //alert("1");
             $('.kefu_box').css('display', 'none')
           }
-          $('.nods:nth-child(even)').addClass('extra')
+          // $('.nods:nth-child(even)').addClass('extra')
           //header车源搜索 S
           $('#search_cheyuan0').click(function() {
             var list1 = [],
@@ -1767,7 +1698,7 @@ export default {
             endc = encodeURI(endc)
             enda = encodeURI(enda)
             window.location =
-              '/plus/list.php?tid=3&startp=' +
+              '/cheyuan?startp=' +
               startp +
               '&startc=' +
               startc +
@@ -1825,7 +1756,7 @@ export default {
             endc = encodeURI(endc)
             enda = encodeURI(enda)
             window.location =
-              '/plus/list.php?tid=2&startp=' +
+              '/huoyuan?startp=' +
               startp +
               '&startc=' +
               startc +
@@ -1883,7 +1814,7 @@ export default {
             endc = encodeURI(endc)
             enda = encodeURI(enda)
             window.location =
-              '/plus/list.php?tid=4&startp=' +
+              '/zhuanxian/list?startp=' +
               startp +
               '&startc=' +
               startc +
@@ -2018,6 +1949,27 @@ export default {
           })
           tab.mouseout(function() {
             MyMar = setInterval(Marquee, speed)
+          })
+          // 资讯切换
+          $('.jtabtit').on('click', function() {
+            var par = $(this).closest('.jtabwrap')
+            var jtits = par.find('.jtabtit')
+            var jcons = par.find('.jtabcon')
+            var links = par.find('.morelink')
+            var inx = jtits.index($(this))
+            jtits
+              .css('color', '#333')
+              .eq(inx)
+              .css('color', '#2577e3')
+            jcons
+              .hide()
+              .eq(inx)
+              .show()
+            links
+              .hide()
+              .eq(inx)
+              .show()
+            return false
           })
         }
       )

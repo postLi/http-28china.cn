@@ -80,14 +80,14 @@
                 <dd id="tjcx_01">
                   <a 
                     class="now all" 
-                    href="/plus/list.php?tid=2">不限</a>
+                    href="/huoyuan">不限</a>
 
                 </dd>
                 <dt>体积区间&nbsp;:</dt>
                 <dd id="tjcx_02">
                   <a 
                     class="now all" 
-                    href="/plus/list.php?tid=2">不限</a>
+                    href="/huoyuan">不限</a>
 
                 </dd>
 
@@ -96,13 +96,13 @@
                 <dd id="tjcx_03">
                   <a 
                     class="now all" 
-                    href="/plus/list.php?tid=2">不限</a>
+                    href="/huoyuan">不限</a>
                   <a 
                     class="" 
-                    href="/plus/list.php?tid=2">单次急发货源</a>
+                    href="/huoyuan">单次急发货源</a>
                   <a 
                     class="" 
-                    href="/plus/list.php?tid=2">长期稳定货源</a>
+                    href="/huoyuan">长期稳定货源</a>
                 </dd>
 
 

@@ -266,7 +266,7 @@
               </li>
               <li class="wlzx_list_6">
                 <p class="p1"><a
-                  :href=" '/plus/list.php?tid=77&uid=' + item.account +'&publishId=' + item.companyId"
+                  :href=" '/create/order?&uid=' + item.account +'&publishId=' + item.companyId"
                   target="_blank"><input value="下单"></a>
                 </p><p class="p2"><a
                   :href="'/member/' + item.companyId + ''"
@@ -577,7 +577,7 @@ export default {
       )
     },
     searchWD() {
-      window.open('/plus/list.php?tid=80&&wangdian=' + this.searchWDKey)
+      window.open('/gongsi?&wangdian=' + this.searchWDKey)
     },
     async selectSort(item) {
       this.sortName = item.name

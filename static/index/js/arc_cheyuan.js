@@ -28,13 +28,13 @@ var start=$('.arc_input1').val();
 var end=$('.arc_input2').val();
 console.log("搜索类型："+search_type+"出发地："+start+"到达地："+end);	
 if(search_type=='zx'){
-	window.open('/plus/list.php?tid=4&start='+start+'&end='+end);
+	window.open('/zhuanxian/list?start='+start+'&end='+end);
 }
 if(search_type=='huo'){
-	window.open('/plus/list.php?tid=2&start='+start+'&end='+end);
+	window.open('/huoyuan?start='+start+'&end='+end);
 }
 if(search_type=='che'){
-	window.open('/plus/list.php?tid=3&start='+start+'&end='+end);
+	window.open('/cheyuan?start='+start+'&end='+end);
 }
 	
 })
@@ -156,8 +156,8 @@ function cy1(){
             
             $('#arc_nav_a1').html(startCity+"到"+endCity+"车源信息")
             $('#arc_nav_a2').html(startCity+startArea+"到"+endCity+endArea+"车源信息")
-            $('#arc_nav_a1').attr("href",'/plus/list.php?tid=3'+'&startp='+startProvince+'&startc='+startCity+'&endp='+endProvince+'&endc='+endCity)
-            $('#arc_nav_a2').attr("href",'/plus/list.php?tid=3'+'&startp='+startProvince+'&startc='+startCity+'&starta='+startArea+'&endp='+endProvince+'&endc='+endCity+'&enda='+endArea)
+            $('#arc_nav_a1').attr("href",'/cheyuan?'+'&startp='+startProvince+'&startc='+startCity+'&endp='+endProvince+'&endc='+endCity)
+            $('#arc_nav_a2').attr("href",'/cheyuan?'+'&startp='+startProvince+'&startc='+startCity+'&starta='+startArea+'&endp='+endProvince+'&endc='+endCity+'&enda='+endArea)
             cy2(driverId,endCity,startCity);
 
 				
@@ -249,7 +249,7 @@ function cy2(driverId,endCity,startCity){
 			    console.log("长度"+$('.tj_list').length);
 					if($('.tj_list').length>=10){
 				$('.arc_bottom_more').css("display","block");
-				$('#arc_bottom_more').attr("href","/plus/list.php?tid=3&start="+startCity+"&end="+endCity)
+				$('#arc_bottom_more').attr("href","/cheyuan?start="+startCity+"&end="+endCity)
 				}
 				if($('.tj_list').length==1){
 				$('.arc_bottom').css("display","none");

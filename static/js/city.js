@@ -204,7 +204,7 @@ function getcity_che(code, startCity) {
             //console.log(a);
             console.log(end)
             window.open(
-              '/plus/list.php?tid=2&start=' + startCity + '&end=' + end
+              '/huoyuan?start=' + startCity + '&end=' + end
             )
           })
         })

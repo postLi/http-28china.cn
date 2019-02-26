@@ -164,6 +164,9 @@ a:hover span{
   line-height:35px;
   color:#333333;
   font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .t1{padding-left: 17px;}
 .t5,.t6,.t7{width: 100px;}
@@ -817,6 +820,9 @@ a:hover span{
   height: 49px;
   line-height: 49px;
 }
+.wlyq_nr{
+  height: auto;
+}
 .wlyq_d,.wlyq_nr dd{border-bottom: solid 1px #e6e6e6;}
 .wlyq_nr li:nth-child(odd) span{
   /* background-color: #f2f2f2; */
@@ -842,6 +848,7 @@ a:hover span{
   line-height:49px;
   color:#333;
   font-size: 14px;
+  white-space: nowrap; overflow: hidden;text-overflow: ellipsis;
 }
 .d01{text-align: left;padding-left: 17px;width:22%;}
 .d02{width: 32%;}
@@ -854,6 +861,7 @@ a:hover span{
   height:40px;
   line-height:40px;
   color:#333333;
+  white-space: nowrap; overflow: hidden;text-overflow: ellipsis;
 }
 .t01{width: 200px;text-align: left;}
 .t02{width: 250px;}
@@ -868,6 +876,7 @@ a:hover span{
   line-height:49px;
   color:#333;
   font-size: 14px;
+  white-space: nowrap; overflow: hidden;text-overflow: ellipsis;
 }
 .d0001{text-align: left;padding-left: 17px;width:22%;}
 .d0002{width: 22%;}
@@ -880,6 +889,7 @@ a:hover span{
   height:40px;
   line-height:40px;
   color:#333333;
+  white-space: nowrap; overflow: hidden;text-overflow: ellipsis;
 }
 .t0001{width: 200px;text-align: left;}
 .t0002{width: 150px;}
@@ -1213,12 +1223,13 @@ font-size:32px;
   width: 1400px;
   height: 25px;
   font-family: PingFangSC-Medium;
-  font-size: 18px;
-  color: #2577e3;
+  font-size: 24px;
+  font-weight: bold;
+  color: #157ee2;
   text-align: center;
   float: left;
   letter-spacing: 1.4px;
-  margin-top: 26px;margin-bottom: 6px;
+  margin-top: 26px;margin-bottom: 16px;
 }
 .partner .bt2{
   width: 1400px;
@@ -1232,15 +1243,15 @@ font-size:32px;
   float: left;
 }
 .partner .partner_item{
-  width: 333px;
+  width: 332px;
   height: 320px;
   background-color: #fff;
   float: left;
-  margin-right: 20px;
+  margin-left: 15px;
   text-align: center;
   border: solid 1px #3f94ee;
 }
-.partner .partner_item:nth-child(4){margin-right: 0;}
+.partner .partner_item:nth-child(1){margin-left: 10px;}
 .partner_item img{
   width: 306px;
   height: 178px;

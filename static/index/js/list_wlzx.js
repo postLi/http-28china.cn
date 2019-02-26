@@ -223,7 +223,7 @@ $('#select_wlyq').mousedown(function(){
 $("#flush").click(	
     	function(){
     		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=4';
+    		window.location.href='/zhuanxian/list';
     })
 //清空条件
 
@@ -356,7 +356,7 @@ if(!startjw){
  if(!enda){enda=""}
 
  
- s1='/plus/list.php?tid=77&start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
+ s1='/create/order?&start='+startpcd+'&end='+endpcd + '&startstreet='+startstreet + '&endstreet='+endstreet;
  s2='&startj='+startj+'&startw='+startw+'&endj='+endj+'&endw='+endw + '&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda;
 console.log(s1+s2);
 window.open(s1+s2);
@@ -409,7 +409,7 @@ window.open(s1+s2);
       companyName=encodeURI(companyName)
       parkId=encodeURI(parkId)
       parkName=encodeURI(parkName)
-     window.location='/plus/list.php?tid=4&startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda+'&companyName='+companyName+'&parkId='+parkId+'&parkName='+parkName;
+     window.location='/zhuanxian/list?startp='+startp+'&startc='+startc+'&starta='+starta+'&endp='+endp+'&endc='+endc+'&enda='+enda+'&companyName='+companyName+'&parkId='+parkId+'&parkName='+parkName;
     })
 
 
@@ -589,7 +589,7 @@ function tjcx03(){
 				var name=datas[i].name;	
 				var code=datas[i].code;
           var myurl=UrlUpdateParams(window.location.href, "otherServiceCode", code)
-//       var s1='<a  href=/plus/list.php?tid=4&start='+start+'&end='+end;
+//       var s1='<a  href=/zhuanxian/list?start='+start+'&end='+end;
 //				 var s2='&otherServiceCode='+code+'>';
 //				 var s3=name+'</a>';
 				 var s1='<a  href='+myurl+'>';
@@ -829,7 +829,7 @@ var totalPage=8;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
 				var arcurl="/zhuanxian/detail?id="+rangeId+"&publishId="+companyId; 
-				var orderurl="/plus/list.php?tid=77&uid="+account+"&id="+rangeId+"&publishId="+companyId;
+				var orderurl="/create/order?&uid="+account+"&id="+rangeId+"&publishId="+companyId;
 				$("#nr_a21").attr("href",arcurl);
 				$("#wlzx_list_view").attr("onclick","window.open('"+arcurl+"')")
 				$("#fahuo").attr("onclick","window.open('"+orderurl+"')")

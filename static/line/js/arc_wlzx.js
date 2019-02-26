@@ -61,13 +61,13 @@ $('.arc_input3').click(function () {
     '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
   )
   if (search_type == 'zx') {
-    window.open('/plus/list.php?tid=4&start=' + start + '&end=' + end)
+    window.open('/zhuanxian/list?start=' + start + '&end=' + end)
   }
   if (search_type == 'huo') {
-    window.open('/plus/list.php?tid=2&start=' + start + '&end=' + end)
+    window.open('/huoyuan?start=' + start + '&end=' + end)
   }
   if (search_type == 'che') {
-    window.open('/plus/list.php?tid=3&start=' + start + '&end=' + end)
+    window.open('/cheyuan?start=' + start + '&end=' + end)
   }
 })
 
@@ -545,8 +545,8 @@ function process1() {
           if (zhjg) {
             $('#nr0720').html(zhjg + '元/吨')
             $('#nr0721').html(zhjg0)
-            $('#nr07210').html('元/吨')
-            $('#nr0721').css('text-decoration', 'line-through')
+            // $('#nr07210').html('元/吨')
+            // $('#nr0721').css('text-decoration', 'line-through')
             // console.log("重货价格：" + zhjg)
           }
           if (!zhjg) {
@@ -558,9 +558,9 @@ function process1() {
           }
 
           if (zhjg_1) {
-            $('#nr073').html('&yen;&nbsp;' + zhjg_1)
-            $('#nr074').html('&yen;&nbsp;' + zhjg0_1)
-            $('#nr074').css('text-decoration', 'line-through')
+            // $('#nr073').html('&yen;&nbsp;' + zhjg_1)
+            // $('#nr074').html('&yen;&nbsp;' + zhjg0_1)
+            // $('#nr074').css('text-decoration', 'line-through')
           }
           if (!zhjg_1) {
             $('#nr073').html('&yen;&nbsp;' + zhjg0_1)
@@ -623,11 +623,12 @@ function process1() {
       )
       $('#arc_nav_a1').attr(
         'href',
+        'href',
         '/templets/default/htm/' + code_c + '/' + code_c + '_1.htm'
       )
       $('#arc_nav_a2').attr(
         'href',
-        '/plus/list.php?tid=4' +
+        '/zhuanxian/list?' +
         '&startp=' +
         startProvince +
         '&startc=' +
@@ -639,7 +640,7 @@ function process1() {
       )
       $('#arc_nav_a3').attr(
         'href',
-        '/plus/list.php?tid=4' +
+        '/zhuanxian/list?' +
         '&startp=' +
         startProvince +
         '&startc=' +
@@ -660,7 +661,7 @@ function process1() {
   })
 }
 
-process1()
+// process1()
 //物流专线详情页 E
 
 //物流专线 网点列表S
@@ -726,7 +727,7 @@ function process02() {
   })
 }
 
-process02()
+// process02()
 //物流专线网点列表 E
 
 //物流专线公司  S
@@ -825,11 +826,12 @@ function process3(startCity, endCity) {
         // console.log("is not Vip");
         $('#right_xinyong').css('display', 'none')
       }
+      // authStatus = 'AF0010403'
       if (authStatus != 'AF0010403') {
         // console.log("is not shiming");
         $('#right_shiming').css('display', 'none')
       }
-
+      // collateral 保证金  isVip: '0', 承运商
       var collateral = datas.collateral
       $('#nr1037').html(collateral + '元')
       if (!collateral || collateral == 0) {
@@ -977,7 +979,7 @@ function process5() {
       $('#nr1046').html('(' + medium + ')')
       $('#nr1047').html('(' + bad + ')')
       $('#nr1048').html(count)
-      $('#nr0745').html(count)
+      // $('#nr0745').html(count)
     },
     error: function (err) {
       console.log(err);
@@ -985,7 +987,7 @@ function process5() {
   })
 }
 
-process5()
+// process5()
 //物流评价数量 E
 //物流专线 其他列表S
 function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
@@ -1098,7 +1100,7 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         $('.arc_bottom_more').css('display', 'block')
         $('#arc_bottom_more').attr(
           'href',
-          '/plus/list.php?tid=4&start=' + startCity + '&end=' + endCity
+          '/zhuanxian/list?start=' + startCity + '&end=' + endCity
         )
       }
       if ($('.tj_list').length == 1) {
@@ -1274,7 +1276,7 @@ $('#pj_submit').click(function () {
       })
       $('.login_box').css('display', 'block')
 
-      //window.location='/member/login.php';
+      //window.location='/login';
       return false
     }
   }

@@ -582,6 +582,7 @@ export default {
       newestCar: newestCarRes.data.status === 200 ? newestCarRes.data.data : []
     }
   },
+
   mounted() {
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')

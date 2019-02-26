@@ -54,7 +54,7 @@
                 <span class="changevcode">看不清？</span>
               </li>
               <li><span class="label"/><span class="next-btn">下一步</span></li>
-              <li class="last"><span class="label"/><a href="/member/index_do.php?fmdo=user&dopost=regnew">免费注册</a> | <a href="/member/login.php">会员登录</a></li>
+              <li class="last"><span class="label"/><a href="/regisiter">免费注册</a> | <a href="/login">会员登录</a></li>
             </ul>
           </div>
         </div>
@@ -102,7 +102,7 @@
           <div class="step_con">
             <div class="success-tip">
               <a 
-                href="/member/login.php" 
+                href="/login" 
                 class="last-btn">重新登录</a> <a 
                   class="normal-btn" 
                   href="/">返回首页</a>

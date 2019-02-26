@@ -72,7 +72,10 @@ export default {
       if (item.type == '2000') {
         this.targetLinks = '/zhuanxian/list'
       }
-      if (item.type == '3000') {
+      if (item.type == '2001') {
+        this.targetLinks = '/member/' + item.companyId + '-line'
+      }
+      if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
         this.targetLinks = '/cheyuan'
       }
       if (item.type == '3001') {

@@ -30,7 +30,7 @@
               <dd><form
                 name="zxaddform"
                 method="post"
-                action="" 
+                action=""
                 style="float:left;"
               >
                 <input
@@ -83,13 +83,8 @@
                   value="重置 "
                   @click="reload()">
               </form>
-
-
               </dd>
-
-
               <dt>公司名称&nbsp;:</dt>
-
               <dd >
                 <input
                   id="companyName"
@@ -142,9 +137,9 @@
                       <font>暂无园区信息</font>
                     </div>
 
-                    <div 
-                      v-for="(item,index) in logisticsPark" 
-                      :key="index" 
+                    <div
+                      v-for="(item,index) in logisticsPark"
+                      :key="index"
                       class="wlzx_yq_item"
                       @click="addTitle(item)"
                     >
@@ -188,16 +183,16 @@
               title="距离从近到远">距离最近</span>
           </div>
 
-          <div 
-            v-if="WangdiangInfoList.length === 0" 
-            class="list_none" 
+          <div
+            v-if="WangdiangInfoList.length === 0"
+            class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/templets/default/images/none_pic.png">
           </div>
           <ul
             v-for="(item,index) in WangdiangInfoList"
-            :key="index" 
+            :key="index"
             class="wlzx_list"
           >
 
@@ -220,27 +215,30 @@
               <p class="p2"><i>电话：</i><span id="nr06">{{ item.contactsTel? item.contactsTel + '-' : '' }}{{ item.mobile }}</span></p>
             </li>
             <li class="wlzx_list_4">
-              <p 
-                v-if="item.authStatus" 
+              <p
+                v-if="item.authStatus"
                 class="p1"><img
                   id="list_shiming"
                   src="/wd/images/10shiming.png"></P>
-              <p 
-                v-if="item.isVip" 
+              <p
+                v-if="item.isVip"
                 class="p2" ><img
                   id="list_xinyong"
                   src="/wd/images/11xinyong.png"></p>
-              <p 
-                v-if="item.collateral" 
+              <p
+                v-if="item.collateral"
                 class="p3" ><img
                   id="list_danbao"
                   src="/wd/images/12danbao.png"></p>
             </li>
             <li class="wlzx_list_6">
               <p class="p1"><a target="_blank"><input
-                value="下单"></a>
+                value="下单"
+                readonly></a>
               </p><p class="p2"><a target="_blank"><input
-                value="查看"></a>
+                value="查看"
+                readonly
+              ></a>
             </p></li>
           </ul>
         </div>
@@ -262,25 +260,35 @@
         class="list_right">
 
         <div class="zx_sx"><span class="biaozhi"/><span>物流公司推荐</span></div>
-        <div 
-          v-if="recommendList.length === 0" 
+        <div
+          v-if="recommendList.length === 0"
           class="tj_none" >
           <span>没有相关物流公司推荐</span>
         </div>
         <div
           v-for="(item,index) in recommendList"
-          :key="index" 
-          class="tj_list" 
+          :key="index"
+          class="tj_list"
         >
           <p class="p1"><a
             id="tj010"
             target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
-          <p class="p7">
-            <!-- <img 
-              v-for="(item,index) in creditImg" 
-              :key="index" 
-              src="../../static/wangdian/images/blue.gif"> -->
-          
+
+          <p
+            v-if="item.showcreadimg"
+            class="p7" >
+            <img
+              v-for="(i,index) in item.creditImg"
+              :key="index"
+              src="/wd/images/blue.gif" >
+          </p>
+          <p
+            v-if="item.showcreadeng"
+            class="p7" >
+            <img
+              v-for="(i,index) in item.creditdeng"
+              :key="index"
+              src="/wd/images/34huanguan.gif" >
           </p>
 
           <p class="p3"><i>联系人：</i><font id="tj_02">{{ item.contactsName }}</font></p>
@@ -294,8 +302,6 @@
               target="_blank"><span>查看&nbsp;&gt;</span></a>
           </p>
         </div>
-
-
 
       </div>
 
@@ -326,7 +332,6 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
     prefix = '/api'
   }
   let res = await $axios.post(prefix + '/28-web/pointNetwork/list', parm) //车源信息列表
-  console.log('99999999', parm, res)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
       if (item.pointName.length > 15) {
@@ -353,13 +358,7 @@ async function getRecommendList($axios, vo) {
   parm.currentPage = 1
   parm.pageSize = 10
   let res = await $axios.post('/28-web/logisticsCompany/recommend', parm)
-  // console.log('4444', res.data.data.list, res.data.data.list[0].credit)
   if (res.data.status === 200) {
-    res.data.data.list.forEach(item => {
-      if (item.credit >= 0 && item.credit <= 3) {
-      }
-    })
-
     return res.data.data.list
   } else {
     return []
@@ -391,8 +390,7 @@ export default {
       endProvince: '',
       endCity: '',
       endArea: '',
-      companyName: '',
-      creditImg: []
+      companyName: ''
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -414,11 +412,51 @@ export default {
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
       companyName: query.companyName ? query.companyName : ''
     }
-    // console.log(vo)
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
-    // console.log('0000003330', WangdiangInfoList.list)
+    recommendList.forEach(item => {
+      if (item.credit >= 0 && item.credit <= 3) {
+        item.showcreadimg = true
+        item.creditImg = 1
+      }
+      if (item.credit >= 4 && item.credit <= 10) {
+        item.showcreadimg = true
+        item.creditImg = 2
+      }
+      if (item.credit >= 11 && item.credit <= 40) {
+        item.showcreadimg = true
+        item.creditImg = 3
+      }
+      if (item.credit >= 41 && item.credit <= 90) {
+        item.showcreadimg = true
+        item.creditImg = 4
+      }
+      if (item.credit >= 91 && item.credit <= 150) {
+        item.showcreadimg = true
+        item.creditImg = 5
+      }
+      if (item.credit >= 151 && item.credit <= 250) {
+        item.showcreadeng = true
+        item.creditdeng = 1
+      }
+      if (item.credit >= 251 && item.credit <= 500) {
+        item.showcreadeng = true
+        item.creditdeng = 2
+      }
+      if (item.credit >= 500 && item.credit <= 1000) {
+        item.showcreadeng = true
+        item.creditdeng = 3
+      }
+      if (item.credit >= 1001 && item.credit <= 2000) {
+        item.showcreadeng = true
+        item.creditdeng = 4
+      }
+      if (item.credit >= 2001) {
+        item.showcreadeng = true
+        item.creditdeng = 5
+      }
+    })
     let AF029 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF029' //品牌
     )
@@ -444,6 +482,16 @@ export default {
     }
   },
   mounted() {
+    $('.collapse').click(function() {
+      $('.collapse').css('display', 'none')
+      $('.expand').css('display', 'inline-block')
+      $('.select_con').css('display', 'none')
+    })
+    $('.expand').click(function() {
+      $('.collapse').css('display', 'inline-block')
+      $('.expand').css('display', 'none')
+      $('.select_con').css('display', 'block')
+    })
     let _this = this
     $('#select_wlyq').mousedown(function() {
       $('#list_wlzx_yq').css('display', 'block')
@@ -480,7 +528,6 @@ export default {
           _this.vo
         )
       )
-      console.log('WangdiangInfoList.list', WangdiangInfoList.list)
       _this.WangdiangInfoList = WangdiangInfoList.list
     })
     //排序点击 E
@@ -568,6 +615,9 @@ export default {
           window.location.href = '#top'
         }
       })
+    },
+    reload() {
+      window.location.href = '/wangdian'
     }
   }
 }

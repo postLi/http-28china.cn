@@ -120,7 +120,7 @@ $('#tjcx_03 .all').attr("href",UrlUpdateParams(window.location.href, "otherServi
 $("#flush").click(	
     	function(){
     		console.log("清空地址")
-    		window.location.href='/plus/list.php?tid=80';
+    		window.location.href='/gongsi?';
     })
 //清空条件
 
@@ -219,7 +219,7 @@ $("#flush").click(
       companyName=encodeURI(companyName);
      var address=startp+startc+starta;
      var companyName=$("#companyName").val();
-      window.location='/plus/list.php?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
+      window.location='/gongsi?startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
     })
 
 
@@ -286,7 +286,7 @@ function tjcx03(){
 		
 		success:function(res){
 			var datas = res.data;
-			$('.shiming').attr("href",'/plus/list.php?tid=80&address='+address+'&companyName='+companyName+'&authStatus=AF0010403')
+			$('.shiming').attr("href",'/gongsi?address='+address+'&companyName='+companyName+'&authStatus=AF0010403')
 		    if(!datas){return ;}
 			for(var i=0;i<datas.length;i++){
 				
@@ -532,7 +532,7 @@ var totalPage=8;
 				var isVip=datas[i].isVip;
 				var authStatus=datas[i].authStatus;
 		    var collateral=datas[i].collateral;
-				//var orderurl="/plus/list.php?tid=77&uid="+account+"&publishId="+companyId;
+				//var orderurl="/create/order?&uid="+account+"&publishId="+companyId;
 				var orderurl="/member/"+companyId+"?action=order"+"&publishId="+companyId;
 				var companyFacadeFile=datas[i].companyFacadeFile;
 				if(companyFacadeFile){

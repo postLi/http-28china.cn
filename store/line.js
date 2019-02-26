@@ -5,7 +5,10 @@ if (process.server) {
   aurl = 'http://localhost:3000'
 }
 
-export const state = () => ({ wlzx: [] })
+export const state = () => ({
+  recommend: [],
+  index_list: []
+})
 
 export const mutations = {
   setInfo(state, param) {
@@ -14,28 +17,52 @@ export const mutations = {
 }
 
 export const actions = {
-  // 获取公司信息
-  GETNEWSINFO({ commit }, payload) {
-    // console.log('payload-lineinfopayload', payload)
+  // 获取首页推荐列表
+  GETRECOMMEND({ commit }, payload) {
+    // console.log('payload-GETLIST', payload)
     return new Promise(resolve => {
       axios
-        .get(aurl + '/anfacms/api/front/content/list', {
-          params: payload.params
-        })
+        .post(aurl + '/api/28-web/logisticsPark/list', payload.data)
         .then(res => {
           let data = res.data
-          if (data.code === '200') {
-            console.log('payload-lineinfo', data.body)
+          if (data.status === 200) {
+            // console.log('1payload-GETRECOMMEND', data.data)
+            let ndata = data.data ? data.data.list || [] : []
+            ndata = payload.preFn ? payload.preFn(ndata) : ndata
             commit('setInfo', {
-              name: payload.name,
-              data: data.body || []
+              name: 'recommend',
+              data: ndata
             })
-
-            resolve()
           }
+          resolve()
         })
         .catch(err => {
-          console.log('payload-line', payload, err.response)
+          console.log('payload-GETRECOMMEND', payload, err)
+          resolve()
+        })
+    })
+  },
+  // 获取专线列表
+  GETLIST({ commit }, payload) {
+    // console.log('payload-GETLIST', payload)
+    return new Promise(resolve => {
+      axios
+        .post(aurl + '/api/28-web/range/list', payload.data)
+        .then(res => {
+          let data = res.data
+          if (data.status === 200) {
+            // console.log('1payload-GETLIST', data.data.list[0])
+            let ndata = data.data ? data.data.list || [] : []
+            ndata = payload.preFn ? payload.preFn(ndata) : ndata
+            commit('setInfo', {
+              name: payload.name,
+              data: ndata
+            })
+          }
+          resolve()
+        })
+        .catch(err => {
+          console.log('payload-GETLIST', payload, err)
           resolve()
         })
     })

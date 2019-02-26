@@ -74,7 +74,7 @@
                 alt=""></li>
               <li @click="downFn">
                 <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
-                <p>多<span style="color: #2577e3">广州</span>到<span style="color: #2577e3">东莞</span>的货源，并可实时接</p>
+                <p>多<span style="color: #2577e3">{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的货源，并可实时接</p>
                 <p>收28快运为您推荐的精品货源提醒!</p>
               </li>
             </ul>
@@ -271,98 +271,43 @@
           </div>
           <div
             class="arc_middle1"
-            style="padding-left: 20px"><span id="nr072"/><span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>
+            style="padding-left: 20px"><span id="nr072">{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>
+            <!--<span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>-->
             <ul>
               <li><img
                 src="../../static/line/images/02sj.png"
                 alt=""
-                style="vertical-align: middle;"><span>发布日期：2019-01-18 13:25:20 </span></li>
+                style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
               <li style="padding-left: 26px"><img
                 src="../../static/line/images/03sc.png"
                 alt=""
-                style="vertical-align: middle;"><span>收藏量:5566</span></li>
+                style="vertical-align: middle;"><span>收藏量:{{ linedataA.collectNumber }}</span></li>
             </ul>
           </div>
-          <!--<div class="arc_data">-->
-          <!--<ul>-->
-          <!--<li><img -->
-          <!--src="../../static/images/list_wlzx/hy_item6.png" -->
-          <!--alt=""><span>发布日期：2019-01-18 13:25:20 </span></li>-->
-          <!--</ul>-->
-          <!--</div>-->
-          <!--<div-->
-          <!--class="arc_middle1-21"-->
-          <!--style="padding-left: 20px"><span><img-->
-          <!--class="img1"-->
-          <!--src="../../static/images/list_wlzx/hy_item6.png"></span><span>发布日期：2019-01-18 13:25:20 </span><span><img-->
-          <!--class="img2"-->
-          <!--src="../../static/images/list_wlzx/sc_num.png"></span><span>收藏量：<i class="my_cz_num"/></span></div>-->
           <div class="arc_middle2">
-            <div class="arc_middle2_1">
-              <p class="p1"><i>重货价：</i><span id="nr0741"/><font
-                id="nr073"
-                class="font1"/><span
-                  id="nr074"
-                  class="span2"/><font
-                    id="zh_price"
-                    class="font2">[阶梯价]</font></p>
-              <p class="p2"><i>轻货价：</i><span id="nr0742"/><font
-                id="nr075"
-                class="font1"/><span
-                  id="nr076"
-                  class="span2"/><font
-                    id="qh_price"
-                    class="font2">[阶梯价]</font></p>
-            </div>
-            <div class="arc_middle2_2">
-              <div class="num1"><span id="nr0746"/></div>
-              <div class="num2"><a href="javascript:void(0)"><span id="nr0745"/></a></div>
-              <div class="num3"><span>下单量</span></div>
-              <div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
-            </div>
-            <!--阶梯价格 S-->
-            <div
-              id="js018"
-              class="price_box1"
-            >
-              <!--onmouseover="price_block1();"-->
-              <!--onmouseout="price_none1();"-->
-              <div class="price_box_bt">阶梯价（重货）</div>
-              <div
-                class="price_box_item1"
-                style="display: none;"><span id="nr0743"/><i id="nr0720"/><font id="nr0721"/><em id="nr07210">元/吨</em>
-              </div>
-            </div>
-
-            <div
-              id="js019"
-              class="price_box2"
-            >
-              <!--onmouseover="price_block2();"-->
-              <!--onmouseout="price_none2();"-->
-              <div class="price_box_bt">阶梯价（轻货）</div>
-              <div
-                class="price_box_item2"
-                style="display: none;"><span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>
-              </div>
-            </div>
+            <ShowPrice
+              :info="linedataA.rangePrices"
+              :browse="linedataA.browseNumber"/>
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>运输时效：</i><span id="nr077"/></div>
-            <div class="arc_m3"><i>发货频次：</i><span id="nr078"/></div>
-            <div class="arc_m3"><i>最低一票价格：</i><span id="nr079"/></div>
-            <div class="arc_m31"><i style="color: #999">途径:</i> <span>广州天河，深圳罗湖</span></div>
+            <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
+            <div class="arc_m3"><i>发货频次：</i>
+              <span>{{ (linedataA.departureHzData?linedataA.departureHzData:'')+'天'+(linedataA.departureHzTime?linedataA.departureHzTime:'') +'次' }}</span>
+              <!--<span>{{ linedataA.departureHzData?linedataA.departureHzData:''+'天'+linedataA.departureHzTime?linedataA.departureHzTime:'' +'次' }}</span>-->
+            </div>
+            <div class="arc_m3"><i>最低一票价格：</i><span id="nr079"/>{{ linedataA.lowerPrice?'￥'+linedataA.lowerPrice+'元':'面议' }}</div>
+            <!--<div class="arc_m31"><i style="color: #999">途径:</i> <span>广州天河，深圳罗湖</span></div>-->
           </div>
           <div class="arc_middle4">
             <div class="arc_m4_1">
               <div><span>出发地</span></div>
-              <div><i>联系人：</i><span id="nr0710"/></div>
-              <div><i>手机：</i><span id="nr0711"/></div>
+              <div><i>联系人：</i><span>{{ linedataA.startLocationContacts }}</span></div>
+              <div><i>手机：</i><span>{{ linedataA.startLocationContactsMobile }}</span></div>
             </div>
             <div class="arc_m4_2">
               <div><span>到达地</span></div>
-              <div><i>联系人：</i><span id="nr0712"/></div>
-              <div><i>手机：</i><span id="nr0713"/></div>
+              <div><i>联系人：</i><span>{{ linedataA.endLocationContacts }}</span></div>
+              <div><i>手机：</i><span>{{ linedataA.endLocationContactsMobile }}</span></div>
             </div>
           </div>
           <div class="arc_middle5">
@@ -376,13 +321,16 @@
                 id="order_arc"
                 class="arc_m5_2_2"><a
                   id="nr_order"
-                  target="_blank"
-                  href="javascript:void(0)"><span>快速下单</span></a></div>
+                  :href="'/create/line?uid='+ linedataB.account+'&publishId='+linedataA.publishId+'&id='+linedataA.id"
+                  target="_blank"><span>快速下单</span></a></div>
               <div class="arc_m5_2_3">
-                <img
+                <!--<img-->
+                <!--src="../../static/line/images/05fresh.png"-->
+                <!--alt="">-->
+                <!--<span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"><span>换一个</span></a></span>-->
+                <span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"> <img
                   src="../../static/line/images/05fresh.png"
-                  alt="">
-                <span>换一个</span>
+                  alt=""><span style="padding-left: 5px">换一个</span></a></span>
               </div>
             </div>
           </div>
@@ -406,37 +354,17 @@
         <div class="arc_right">
           <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
-            <img
+            <span v-if="linedataB.isEq"> <img
+              v-for="(item, index) in linedataB.eq1"
+              :key="index"
               class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
-            <img
-              class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif">
+              src="../../static/gongsi/images/blue.gif"></span>
 
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
-            <img
-              class="xy_guan"
-              src="../../static/gongsi/images/34huanguan.gif">
+            <span v-if="linedataB.isHZhuan"> <img
+              v-for="(item, index) in linedataB.hZhuan"
+              :key="index"
+              class="xy_zuan"
+              src="../../static/gongsi/images/blue.gif"></span>
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br>
@@ -469,11 +397,12 @@
           <p class="arc_right05">
             <a
               id="nr1024"
-              :href="'/member/'+ linedataB.companyId"
+              :href="'/member/'+ linedataB.id"
               target="_blank"><input
                 id="arc_right05_1"
                 readonly=""
                 value="进入官网"></a>
+            <!--<span>{{ linedataB.id }}</span>-->
             <a><input
               id="collection_wlgs"
               readonly=""
@@ -482,23 +411,34 @@
           <p class="arc_right06">
             <span>相关认证</span>
           </p>
-          <p class="arc_right07">
+
+          <p
+            v-if="linedataB.isRenZhen"
+            class="arc_right07">
             <img
+              v-if="linedataB.showIsVip"
               id="right_xinyong"
               src="../../static/line/images/11xinyong.png">
             <img
+              v-if="linedataB.isAuthStatus"
               id="right_shiming"
               src="../../static/line/images/10shiming.png">
             <img
+              v-if="linedataB.isAuthStatus"
               id="right_baozhengjin"
-              src="../../static/line/images/danbao.png"><span id="nr1037">1000元</span>
+              src="../../static/line/images/danbao.png"><span id="nr1037">{{ linedataB.collateral }}</span>
+          </p>
+          <p
+            v-else
+            class="arc_right07">
+            <br>暂无认证信息
           </p>
 
         </div>
 
       </div>
       <div class="arc_main1-1">
-        想要更多<span>广州</span>到<span>深圳</span>的车源信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
+        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的车源信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -506,7 +446,8 @@
           <div class="zx_sx">
             <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
           </div>
-          <div id="echart"/>
+          <ShowEchart :info="LineeEchartInfo"/>
+          <!--<div id="echart"/>-->
         </div>
         <div class="right">
           <div class="zx_sx">
@@ -520,29 +461,46 @@
                 style="clear: both">
                 <ul>
                   <li>
+                    <!--<div class="content-right-row-left"><span>送货上门</span><span>保价运输</span><span>运费到付</span><span>运费到付</span>-->
+                    <!--<span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>
+
                     <div class="content-right-row-left"><span>送货上门</span><span>保价运输</span><span>运费到付</span><span>运费到付</span>
-                    <span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>
-                    <div class="content-right-row-right"> <p style="padding-top: 10px">全部</p>
-                    <p>（15）</p></div>
+                   <span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>-->
+                    <!--allServiceNameList-->
+                    <div
+
+                      class="content-right-row-left">
+                      <span
+                        v-for="(item, index) in linedataB.allServiceNameList"
+                        :key="index"
+                        @click="showfind">{{ item }}</span>
+                    </div>
+                    <div
+                      v-if="linedataB.allServiceNameList.length >8"
+                      class="content-right-row-right"> <p style="padding-top: 10px">全部</p>
+                    <p>（{{ linedataB.allServiceNameList.length }}）</p></div>
                   </li>
                   <li>
-                    <p><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
-                    <p><span>证件已认证</span>承运商的运输货物安全保证金已交纳5000元！</p>
-                    <p><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
+                    <p v-if="linedataB.authStatus =='AF0010403'"><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
+                    <p v-if="linedataB.collateral != 0"><span>已交保证金</span>承运商的运输货物安全保证金已交纳{{ linedataB.collateral?linedataB.collateral.toFixed(1)+'元':'' }}！</p>
+                    <p v-if="linedataB.isVip != 0"><span>推荐承运商</span>承运商的运营资质证件已经核实！</p>
                   </li>
                 </ul>
 
                 <div style="padding-left: 65px;display: inline-block">
+
                   <a
                     href="javascript:;"
-                    class="button1">标准价</a>
+                    class="button1"
+                    @click="showfind()">标准价</a>
                   <a
                     onclick="$('.pj_price_box').show()"
                     href="javascript:;"
                     class="button1">精准报价</a>
                   <a
                     href="javascript:;"
-                    class="button2"><img
+                    class="button2"
+                    @click="showFindFn()"><img
                       src="../../static/line/images/06fm.gif"
                       style="vertical-align: middle;padding-right: 15px">帮我选择优质专线</a>
                 </div>
@@ -560,7 +518,7 @@
             src="../../static/line/images/07hege.png"
             alt="">
           <ul class="top_tit">
-            <li>此专线物流公司诚信值超过<span style="color: #f88700;border-bottom: 1px solid #f88700">92.3%</span>的同行</li>
+            <li>此专线物流公司诚信值超过<span style="color: #f88700;border-bottom: 1px solid #f88700">{{ linedataE.greaterCreditRate }}%</span>的同行</li>
             <li>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</li>
           </ul>
           <!--<div class="top_tit"><p>此专线物流公司诚信值超过<span style="color: #f88700;">92.3%</span>的同行</p>-->
@@ -1034,11 +992,22 @@
 <script>
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 import FootList from '../../components/footerList'
+import ShowPrice from './showPrice'
+import ShowEchart from './showEchart'
+// async function echartInfo($axios, rangeId) {
+//   let res = await $axios.post('/28-web/range/getRangePriceReference/' + rangeId)
+//   console.log(res, 'res')
+//   // if (res.data.status === 200) {
+//   //   return res.data.data.list
+//   // }
+// }
 
 export default {
   name: 'Index',
   components: {
-    FootList
+    FootList,
+    ShowPrice,
+    ShowEchart
   },
   head: {
     link: [
@@ -1059,10 +1028,20 @@ export default {
   data() {
     return {
       showMoblie: false,
+      isShowWPrice: false,
+      isShowHPrice: false,
       checkMoblie: true,
       showImg: 0,
       pages: 0,
       currentPage: 1,
+      linedataA: {},
+      linedataB: {},
+      linedataE: {},
+      LineeEchartInfo: [],
+      cargoType0: {},
+      cargoType1: {},
+      sendEchart: [],
+      sendEchart1: [],
       linedata: {},
       lineCitys: []
     }
@@ -1070,11 +1049,22 @@ export default {
   async asyncData({ $axios, app, query }) {
     let aurl = '',
       lineCode,
-      lineCity
+      lineCity,
+      LineCAnother,
+      LineeEInfo
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
-    let [linedataA, linedataB, linedataC, linedataD] = await Promise.all([
+
+    // /range/getRangePriceReference/{rangeId}
+    // 专线详情_专线价格参考
+    let [
+      linedataA,
+      linedataB,
+      linedataC,
+      linedataD,
+      linedataE
+    ] = await Promise.all([
       $axios.get(aurl + `/api/28-web/range/${query.id}`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/${query.publishId}`),
       $axios.post(aurl + `/api/28-web/range/list`, {
@@ -1084,23 +1074,146 @@ export default {
       $axios.post(aurl + `/api/28-web/range/recommend`, {
         currentPage: 1,
         pageSize: 5
-      })
+      }),
+      $axios.post(
+        aurl +
+          `/api/28-web/logisticsCompany/comprehensive?companyId=${
+            query.publishId
+          }`
+      )
     ])
-    console.log(linedataC, 'res.data.data.linedataA')
+
     if (linedataA.data.status === 200) {
       lineCode = await getCode($axios, linedataA.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
+      let vo = {
+        endArea: linedataA.data.data.endArea,
+        endCity: linedataA.data.data.endCity,
+        endProvince: linedataA.data.data.endProvince,
+        startArea: linedataA.data.data.startArea,
+        startCity: linedataA.data.data.startCity,
+        startProvince: linedataA.data.data.startProvince
+      }
+      LineCAnother = await $axios.post(
+        aurl + '/api/28-web/range/changeAnother',
+        vo
+      )
+      LineeEInfo = await $axios.post(
+        aurl +
+          '/api/28-web/range/getRangePriceReference/' +
+          linedataA.data.data.id
+      )
+      // allServiceNameList:   allServiceCodeList    所有服务codes
+
+      LineCAnother.data.data =
+        LineCAnother.data.status == 200 ? LineCAnother.data.data : ''
+      LineeEInfo.data.data =
+        LineeEInfo.data.status == 200 ? LineeEInfo.data.data : ''
+      // console.log(LineCAnother.data.data, 'LineChangeAnother')
+
       linedataA.data.data.num = Math.ceil(Math.random() * 30)
       linedataC.data.data.list.forEach(item => {
         item.num = Math.ceil(Math.random() * 30)
       })
+      linedataB.data.data.companyName =
+        linedataB.data.data.companyName.length > 13
+          ? linedataB.data.data.companyName.substring(0, 13) + '..'
+          : linedataB.data.data.companyName
+      linedataE.data.data.lowerPriceRate = linedataE.data.data.lowerPriceRate
+        ? linedataE.data.data.lowerPriceRate + '%'
+        : ''
+      // credit
+      // linedataB.data.data
+      console.log(linedataE.data.data, 'res.data.data.linedataE')
+      let authStatus = linedataB.data.data.authStatus
+      let collateral = linedataB.data.data.collateral
+      let isVip = linedataB.data.data.isVip
+      let credit = linedataB.data.data.credit
+
+      if (!isVip || isVip == 0) {
+        linedataB.data.data.showIsVip = false
+      }
+      if (authStatus == 'AF0010403') {
+        linedataB.data.data.isAuthStatus = true
+        linedataB.data.data.isRenZhen = true
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+      if (authStatus != 'AF0010403') {
+        linedataB.data.data.isAuthStatus = false
+        linedataB.data.data.isRenZhen = false
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+
+      if (collateral > 0) {
+        linedataB.data.data.collateral = linedataB.data.data.collateral + '元'
+        linedataB.data.data.isCollateral = true
+      }
+      if (collateral <= 0) {
+        linedataB.data.data.collateral = ''
+        linedataB.data.data.isCollateral = false
+      }
+      if (
+        authStatus != 'AF0010403' &&
+        (!isVip || isVip == 0) &&
+        (!collateral || collateral == 0)
+      ) {
+        // linedataB.data.data.isRenZhen = true
+        // $('.arc_right07').html('<br/>暂无认证信息')
+      }
+
+      if (credit >= 0 && credit <= 3) {
+        linedataB.data.data.eq1 = 1
+        linedataB.data.data.isEq = true
+        // linedataB.data.data
+      }
+      if (credit >= 4 && credit <= 10) {
+        linedataB.data.data.eq1 = 2
+        linedataB.data.data.isEq = true
+      }
+      if (credit >= 11 && credit <= 40) {
+        linedataB.data.data.eq1 = 3
+        linedataB.data.data.isEq = true
+      }
+      if (credit >= 41 && credit <= 90) {
+        linedataB.data.data.eq1 = 4
+        linedataB.data.data.isEq = true
+      }
+      if (credit >= 91 && credit <= 150) {
+        linedataB.data.data.eq1 = 5
+        linedataB.data.data.isZuan = true
+      }
+      if (credit >= 151 && credit <= 250) {
+        linedataB.data.data.hZhuan = 1
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 251 && credit <= 500) {
+        linedataB.data.data.hZhuan = 2
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 500 && credit <= 1000) {
+        linedataB.data.data.hZhuan = 3
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 1001 && credit <= 2000) {
+        linedataB.data.data.hZhuan = 4
+        linedataB.data.data.isHZhuan = true
+      }
+      if (credit >= 2001) {
+        linedataB.data.data.hZhuan = 5
+        linedataB.data.data.isHZhuan = true
+      }
       // console.log(linedataA.data.data, 'res.data.data.linedataB', linedataB)
       return {
         linedataA: linedataA.data.data,
         linedataB: linedataB.data.data,
         lineLists: linedataC.data.data.list,
         lineRecoms: linedataD.data.data,
-        lineCitys: lineCity.data.data
+        linedataE: linedataE.data.status == 200 ? linedataE.data.data : '',
+        LineeEchartInfo: LineeEInfo.data.data,
+        lineCitys: lineCity.data.data,
+        LineChangeAnother: LineCAnother.data.data
       }
     }
     // let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
@@ -1127,128 +1240,8 @@ export default {
     // }
   },
   mounted() {
-    let myChart = echarts.init(document.getElementById('echart'))
-    console.log(myChart, 'myChart')
-    let option = {
-      title: { text: '', subtext: '' },
-      tooltip: { trigger: 'axis' },
-      xAxis: {
-        show: false,
-        type: 'category',
-        boundaryGap: false,
-        data: [
-          '大品牌报价',
-          '优质专线报价',
-          '行业均价（高点）',
-          '行业均价（低点）',
-          '本供应商价'
-        ]
-      },
-      yAxis: {
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: { show: false },
-        type: 'value',
-        max: 15
-      },
-      series: [
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 0.5)' }
-          },
-          data: [11, 10, 8, 6, 5],
-          label: {
-            show: true,
-            position: 'bottom',
-            textStyle: { color: '#6F6F6F' },
-            formatter: function(params) {
-              let c0
-              if (params.dataIndex <= 1) {
-                c0 = 'color1'
-              } else {
-                c0 = 'color0'
-              }
-              return `{${c0}|${params.value}万}\n{color2|${params.name}}`
-            },
-            rich: {
-              color0: {
-                fontSize: 18,
-                align: 'center',
-                color: '#FF7836'
-              },
-              color1: {
-                fontSize: 18,
-                align: 'center',
-                color: '#6F6F6F'
-              },
-              color2: {
-                color: '#413A43',
-                align: 'center',
-                fontSize: 14,
-                padding: [5, 5, 5, 5]
-              }
-            }
-          },
-          tooltip: { show: false }
-        },
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 1)' }
-          },
-          areaStyle: {
-            normal: {
-              origin: 'end',
-              color: 'rgba(255,161,77, 0.5)'
-            }
-          },
-          data: [null, null, 8, 6],
-          tooltip: { show: false }
-        },
-        {
-          name: '平行于y轴的趋势线',
-          type: 'line',
-          markLine: {
-            name: 'xfdsvffds',
-            symbol: 'none',
-            lineStyle: {
-              normal: { color: 'rgba(255,173,101, 1)' }
-            },
-            label: {
-              show: true,
-              position: 'end',
-              formatter: function(params) {
-                console.log(params)
-                if (params.dataIndex === 1) {
-                  return `{style|建议价格区间}`
-                }
-              },
-              rich: {
-                style: {
-                  fontSize: 15,
-                  padding: [0, 110, 0, 0],
-                  color: '#FF7836'
-                }
-              }
-            },
-            data: [
-              [
-                { coord: ['行业均价（高点）', 8] },
-                { coord: ['行业均价（高点）', 15] }
-              ],
-              [
-                { coord: ['行业均价（低点）', 6] },
-                { coord: ['行业均价（低点）', 15] }
-              ]
-            ]
-          }
-        }
-      ]
-    }
-    myChart.setOption(option)
+    // console.log(this.$route.query.id, 'id')
+
     seajs.use(['/layer/layer.js'], function() {
       seajs.use(
         ['../js/city.js', '../js/city-picker.data.js', '../js/calculator.js'],
@@ -1272,7 +1265,7 @@ export default {
                       $('.city_box').css('display', 'none')
                     })
                     // 更多城市
-
+                    //
                     // $('#zh_price').mouseover(function() {
                     //   $('.price_box1').css('display', 'block')
                     // })
@@ -1331,6 +1324,12 @@ export default {
     })
   },
   methods: {
+    showWPrice() {
+      this.isShowWPrice = true
+    },
+    showHPrice() {
+      this.isShowHPrice = true
+    },
     showMoblieFn(showMoblieFn) {
       if (showMoblieFn == false) {
         this.showMoblie = true
@@ -1341,7 +1340,7 @@ export default {
       }
       // this.showMoblie = !showMoblieFn
 
-      console.log(showMoblieFn, 'showMoblieFn')
+      // console.log(showMoblieFn, 'showMoblieFn')
       // this.showMoblie = false
     },
     clickImg(int) {
@@ -1349,13 +1348,521 @@ export default {
     },
     downFn() {
       window.open('http://h5.28tms.com/')
+    },
+    showFindFn() {
+      layer.open({
+        id: 1,
+        type: 1,
+        title: '闪电服务',
+        skin: 'layui-layer-rim',
+        area: ['450px', 'auto'],
+
+        content:
+          ' <div class="row" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
+          '<div class="col-sm-12">' +
+          '<div class="input-group">' +
+          '<p class="input-group-addon"> ' +
+          '<span>您要寻找的专线:广州至深圳专线</span>' +
+          '</p>' +
+          '</div>' +
+          '</div>' +
+          '<div class="col-sm-12">' +
+          '<div class="input-group">' +
+          '<input id="firstpwd" class="form-control" placeholder="请输入您的手机号">' +
+          '</div>' +
+          '</div>' +
+          '<div class="col-sm-12" style="margin-top: 10px">' +
+          '<div class="input-group">' +
+          '<span class="input-group-addon">确认密码:</span>' +
+          '<input id="secondpwd" type="password" class="form-control" placeholder="请再输入一次密码">' +
+          '</div>' +
+          '</div>' +
+          '</div>',
+        btn: ['保存', '取消'],
+        btn1: function(index, layero) {},
+        btn2: function(index, layero) {
+          layer.close(index)
+        }
+      })
+    },
+    showfind() {
+      layer.open({
+        type: 1,
+        title: ' ',
+        area: ['580px', '540px'],
+        closeBtn: 1,
+        shadeClose: true,
+        success: (layero, index) => {
+          if (process.server) {
+            return
+          }
+          this.LineeEchartInfo.forEach((item, index) => {
+            if (item.cargoType === '0') {
+              this.cargoType0 = item
+              this.comInfo(this.sendEchart, this.cargoType0)
+            }
+          })
+          this.LineeEchartInfo.forEach((item, index) => {
+            if (item.cargoType === '1') {
+              this.cargoType1 = item
+              this.comInfo(this.sendEchart1, this.cargoType1)
+            }
+          })
+          let maxY = this.sendEchart[0]
+          this.sendEchart.forEach(el => {
+            if (maxY < el) {
+              maxY = el
+            }
+          })
+
+          let maxY1 = this.sendEchart1[0]
+          this.sendEchart1.forEach(el => {
+            if (maxY1 < el) {
+              maxY1 = el
+            }
+          })
+          console.log(this.sendEchart, 'sendEchartsendEchart')
+          let seconds = 5
+          let stop = setInterval(() => {
+            $('#seconds').html(seconds + 'S')
+            seconds--
+            if (seconds < 0) {
+              clearInterval(stop)
+              $('.show1').hide()
+              $('.show2').show()
+              let myChart2 = echarts.init(document.getElementById('echart2'))
+              let option2 = {
+                title: { text: '', subtext: '' },
+                tooltip: { trigger: 'axis' },
+                legend: {
+                  data: ['重货', '轻货'],
+                  selected: {
+                    // 选中'系列1'
+                    重货: true,
+                    // 不选中'系列2'
+                    轻货: false
+                  },
+                  bottom: 30,
+                  left: 'left',
+                  selectedMode: 'single',
+                  textStyle: {
+                    color: '#FFA657' // 值域文字颜色
+                  }
+                },
+                xAxis: {
+                  show: false,
+                  type: 'category',
+                  boundaryGap: false,
+                  data: [
+                    '大品牌报价',
+                    '优质承运商报价',
+                    '行业均价（高点）',
+                    '行业均价（低点）',
+                    '本供应商价'
+                  ]
+                },
+                yAxis: {
+                  axisLine: { show: false },
+                  axisTick: { show: false },
+                  axisLabel: { show: false },
+                  type: 'value',
+                  max: maxY1
+                },
+                series: [
+                  {
+                    name: '重货',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 0.5)' }
+                    },
+                    data: this.sendEchart,
+                    markPoint: {
+                      symbol: 'image:///images/cy/11wk.png',
+                      symbolOffset: [0, '-70%'],
+                      symbolSize: [82, 62],
+                      itemStyle: {
+                        color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+                      },
+                      label: {
+                        position: 'insideTop',
+                        formatter: function(params) {
+                          // console.log(params)
+                          return `{color1|${params.name}}\n{color0|${
+                            params.value
+                          }万}`
+                        },
+                        rich: {
+                          color0: {
+                            fontSize: 14,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#FF7836',
+                            padding: [0, 0, 6, 0]
+                          },
+                          color1: {
+                            fontSize: 12,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#6F6F6F',
+                            padding: [0, 0, 6, 0]
+                          }
+                        }
+                      },
+                      data: [
+                        {
+                          name: '',
+                          type: 'min'
+                        }
+                      ]
+                    },
+                    itemStyle: {
+                      normal: {
+                        color: '#6F6F6F',
+                        opacity: 1
+                      },
+                      emphasis: {
+                        color: '#6F6F6F'
+                      }
+                    },
+                    symbolSize: 6,
+                    hoverAnimation: false, //拐点不要动画
+                    symbol: 'rect',
+                    label: {
+                      show: true,
+                      position: 'bottom',
+                      textStyle: { color: '#6F6F6F' },
+                      formatter: function(params) {
+                        let c0
+                        if (params.dataIndex <= 1) {
+                          c0 = 'color1'
+                        } else {
+                          c0 = 'color0'
+                        }
+                        if (params.dataIndex === 4) {
+                          return ``
+                        } else {
+                          return `{${c0}|${params.value}万}\n{color2|${
+                            params.name
+                          }}`
+                        }
+                      },
+                      rich: {
+                        color0: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#FF7836'
+                        },
+                        color1: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#6F6F6F'
+                        },
+                        color2: {
+                          color: '#413A43',
+                          align: 'center',
+                          fontSize: 14,
+                          padding: [5, 5, 5, 5]
+                        }
+                      }
+                    },
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '重货',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 1)' }
+                    },
+                    areaStyle: {
+                      normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
+                    },
+                    data: [null, null, this.sendEchart[2], this.sendEchart[3]],
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '重货',
+                    type: 'line',
+                    markLine: {
+                      name: 'xfdsvffds',
+                      symbol: ['circle', 'none'],
+                      symbolSize: 6,
+                      lineStyle: {
+                        normal: { color: 'rgba(255,173,101, 1)' }
+                      },
+                      label: {
+                        show: true,
+                        position: 'end',
+                        formatter: function(params) {
+                          if (params.dataIndex === 1) {
+                            return `{style|建议价格区间}`
+                          }
+                        },
+                        rich: {
+                          style: {
+                            fontSize: 15,
+                            padding: [0, 110, 0, 0],
+                            color: '#FF7836'
+                          }
+                        }
+                      },
+                      data: [
+                        [
+                          { coord: ['行业均价（高点）', this.sendEchart[2]] },
+                          { coord: ['行业均价（高点）', maxY] }
+                        ],
+                        [
+                          { coord: ['行业均价（低点）', this.sendEchart[3]] },
+                          { coord: ['行业均价（低点）', maxY] }
+                        ]
+                      ]
+                    }
+                  },
+                  {
+                    name: '轻货',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 0.5)' }
+                    },
+                    data: this.sendEchart1,
+                    markPoint: {
+                      symbol: 'image:///images/cy/11wk.png',
+                      symbolOffset: [0, '-70%'],
+                      symbolSize: [82, 62],
+                      itemStyle: {
+                        color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+                      },
+                      label: {
+                        position: 'insideTop',
+                        formatter: function(params) {
+                          // console.log(params)
+                          return `{color1|${params.name}}\n{color0|${
+                            params.value
+                          }万}`
+                        },
+                        rich: {
+                          color0: {
+                            fontSize: 14,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#FF7836',
+                            padding: [0, 0, 6, 0]
+                          },
+                          color1: {
+                            fontSize: 12,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#6F6F6F',
+                            padding: [0, 0, 6, 0]
+                          }
+                        }
+                      },
+                      data: [
+                        {
+                          name: '',
+                          type: 'min'
+                        }
+                      ]
+                    },
+                    itemStyle: {
+                      normal: {
+                        color: '#6F6F6F',
+                        opacity: 1
+                      },
+                      emphasis: {
+                        color: '#6F6F6F'
+                      }
+                    },
+                    symbolSize: 6,
+                    hoverAnimation: false, //拐点不要动画
+                    symbol: 'rect',
+                    label: {
+                      show: true,
+                      position: 'bottom',
+                      textStyle: { color: '#6F6F6F' },
+                      formatter: function(params) {
+                        let c0
+                        if (params.dataIndex <= 1) {
+                          c0 = 'color1'
+                        } else {
+                          c0 = 'color0'
+                        }
+                        if (params.dataIndex === 4) {
+                          return ``
+                        } else {
+                          return `{${c0}|${params.value}万}\n{color2|${
+                            params.name
+                          }}`
+                        }
+                      },
+                      rich: {
+                        color0: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#FF7836'
+                        },
+                        color1: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#6F6F6F'
+                        },
+                        color2: {
+                          color: '#413A43',
+                          align: 'center',
+                          fontSize: 14,
+                          padding: [5, 5, 5, 5]
+                        }
+                      }
+                    },
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '轻货',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 1)' }
+                    },
+                    areaStyle: {
+                      normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
+                    },
+                    data: [
+                      null,
+                      null,
+                      this.sendEchart1[2],
+                      this.sendEchart1[3]
+                    ],
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '轻货',
+                    type: 'line',
+                    markLine: {
+                      name: 'xfdsvffds',
+                      symbol: ['circle', 'none'],
+                      symbolSize: 6,
+                      lineStyle: {
+                        normal: { color: 'rgba(255,173,101, 1)' }
+                      },
+                      label: {
+                        show: true,
+                        position: 'end',
+                        formatter: function(params) {
+                          if (params.dataIndex === 1) {
+                            return `{style|建议价格区间}`
+                          }
+                        },
+                        rich: {
+                          style: {
+                            fontSize: 15,
+                            padding: [0, 110, 0, 0],
+                            color: '#FF7836'
+                          }
+                        }
+                      },
+                      data: [
+                        [
+                          { coord: ['行业均价（高点）', this.sendEchart1[2]] },
+                          { coord: ['行业均价（高点）', maxY1] }
+                        ],
+                        [
+                          { coord: ['行业均价（低点）', this.sendEchart1[3]] },
+                          { coord: ['行业均价（低点）', maxY1] }
+                        ]
+                      ]
+                    }
+                  }
+                ]
+              }
+              myChart2.setOption(option2)
+            }
+          }, 1000)
+        },
+        content:
+          '<div class="show1" style="text-align: center"><div class="myLayer_title">稍等。。。</div><div class="myLayer_content">28平台智能运输大数据中心正在为您核算' +
+          '<p >从' +
+          '<span>' +
+          this.linedataA.startCity.substring(
+            0,
+            this.linedataA.startCity.length - 1
+          ) +
+          '</span>至<span>' +
+          this.linedataA.endCity.substring(
+            0,
+            this.linedataA.endCity.length - 1
+          ) +
+          '</span>' +
+          '</p>' +
+          '全网优质车源的最新报价</div><div class="myLayer_footer"><span id="seconds">5S</span></div></div>' +
+          '<div class="show2">' +
+          '<div class="myLayer_title2"><span></span> <span>价格参考</span><span>大数据智能模型精准定价，28智能平台指导定价</span></div>' +
+          '<div class="myLayer_content2">' +
+          this.linedataA.startCity.substring(
+            0,
+            this.linedataA.startCity.length - 1
+          ) +
+          '→' +
+          this.linedataA.endCity.substring(
+            0,
+            this.linedataA.endCity.length - 1
+          ) +
+          '专线</div>' +
+          '<div id="echart2"></div>' +
+          '<div class="myLayer_content2">' +
+          this.linedataB.companyName +
+          '的报价<span>低于</span><i>' +
+          this.linedataE.lowerPriceRate +
+          '的承运商</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          '</div>'
+      })
+    },
+    comInfo(sendEchart, cargoType) {
+      // console.log(cargoType, 'cargoType')
+      sendEchart[0] = cargoType.standardFamousBrandPrice
+      sendEchart[1] = cargoType.standardHighQualityPrice
+      sendEchart[2] = cargoType.standardHighAveragePrice
+      sendEchart[3] = cargoType.standardLowAveragePrice
+      sendEchart[4] = {
+        value: 15,
+        symbol: 'image:///images/cy/12d.png',
+        symbolSize: 20
+      }
     }
   }
 }
+//
+// +
+// this.linedataB.companyName.length >
+// 13
+//   ? this.linedataB.companyName.substring(0, 13) + '..'
+//   : this.linedataB.companyName +
 </script>
 
 <style lang="scss">
 .lll-zhuangXian-detail {
+  /*弹框*/
+  /*.myLayer_title {*/
+  /*text-align: center;*/
+  /*font-size: 22px;*/
+  /*font-weight: bold;*/
+  /*margin: 20px;*/
+  /*}*/
+  /*.myLayer_content {*/
+  /*margin: 20px;*/
+  /*font-size: 18px;*/
+  /*}*/
+  /*.myLayer_footer #seconds {*/
+  /*border: 1px solid #3333;*/
+  /*width: 50px;*/
+  /*height: 50px;*/
+  /*display: inline-block;*/
+  /*line-height: 50px;*/
+  /*text-align: center;*/
+  /*border-radius: 30px;*/
+  /*}*/
+  /*弹框*/
+  .pj_price_box {
+    top: 70%;
+    z-index: 1;
+  }
   /*background: rgb(249, 249, 249);*/
   .clearfix:after {
     content: ' ';
@@ -1372,9 +1879,7 @@ export default {
     padding: 20px 0 0 15px;
     font-size: 14px;
   }
-  #echart {
-    height: 340px;
-  }
+
   /**/
   /*#wlLineFrom {*/
   /*width: 190px;*/

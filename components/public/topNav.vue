@@ -17,7 +17,7 @@
           href="http://biz.28china.cn">企业货主登录</a>
         <a 
           target="_blank" 
-          href="/plus/list.php?tid=88">帮助中心</a>
+          href="/help/ggp/index.jhtml">帮助中心</a>
       </div>
     </div>
   </div>

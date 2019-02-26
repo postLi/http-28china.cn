@@ -60,12 +60,24 @@
     <div class="arc_main1">
       <div class="arc_left">
         <div class="arc_left_1">
-          <span id="nr072"/><span style="float: left;font-size: 12px;padding-top:6px;"> 用户{{ newestHuoyuanRe.creater }}<span style="color: #2577e3;font-size: 12px;">{{ newestHuoyuanRe.startCity }}</span>到<span style="color: #2577e3;font-size: 12px;">{{ newestHuoyuanRe.endCity }}</span>货源{{ newestHuoyuanRe.time }}分钟前</span>
+          <div class="top_left">
+            <ul 
+              class="top_left_ul" >
+              <li 
+                v-for="(item,index) in newList" 
+                :key="index" 
+                class="top_left_ul_li" >
+                <span>用户<em style="color: #2577e3;">{{ item.creater }}</em></span>
+                <span><em style="color: #2577e3;">{{ item.startCity }}</em>到</span>
+                <span><em style="color: #2577e3;">{{ item.endCity }}</em>货源</span>
+                <span>{{ item.time }}3分钟前</span>
+              </li>
+            </ul>
+          </div>
           <p class="arc_p1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span>
             <span class="arc_p2"><img 
               class="imgarc_p2"
               src="/images/list_wlzx/ll_num.png"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i>
-              <!-- <i>收藏量：<em class="my_hz_num"/></i> -->
             </span>
           </p>
           <div class="arc_middle1-2"><span><img
@@ -168,10 +180,12 @@
         </div>
 
       </div>
-      <div class="arc_right">
-        <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ hyDetail.companyName }}</span></p>
+      <div 
+        v-if="archival.shipperType === 'AF00107'" 
+        class="arc_right">
+        <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
         <p
-          v-if="hyDetail.isEnable >= 0 && hyDetail.isEnable <= 150"
+          v-if="archival.credit >= 0 && archival.credit <= 150"
           class="arc_right02" ><i>信誉：</i>
           <img
             v-for="(item1,index1) in hyDetail.starS"
@@ -181,7 +195,7 @@
             style="display: inline">
         </p>
         <p
-          v-if="hyDetail.isEnable >= 151"
+          v-if="archival.isEnable >= 151"
           class="arc_right02" ><i>信誉：</i>
           <img
             v-for="(item1,index1) in hyDetail.starB"
@@ -192,16 +206,16 @@
         </p>
         <p class="arc_right03">
           <span>质量</span><span>时效</span><span>价格</span><br >
-          <font>4.7</font><font>4.8</font><font>4.9</font>
+          <font>{{ archival.serverQualityScore }}</font><font>{{ archival.transportAgingScore }}</font><font>{{ archival.serverPriceScore }}</font>
         </p>
         <p class="arc_right04">
-          <span class="arc_right04_1"><i>联系人：</i><font>{{ hyDetail.consignor }}</font></span>
-          <span><i>手机：</i><font>{{ hyDetail.consignorPhone }}</font></span>
+          <span class="arc_right04_1"><i>联系人：</i><font>{{ archival.contactsName }}</font></span>
+          <span><i>手机：</i><font>{{ archival.mobile }}</font></span>
           <span><i>Q&nbsp;Q：</i><a
-            v-if="hyDetail.qq"
-            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + hyDetail.qq + '&site=qq&menu=yes'" 
+            v-if="archival.qq"
+            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
             target="_blank"><input value="QQ交谈"></a></span>
-          <span><i>地址：</i><font v-if="hyDetail.consignorAddress">{{ hyDetail.consignorAddress.substring(0, 10) }}</font></span>
+          <span><i>地址：</i><font v-if="archival.consignorAddress">{{ archival.consignorAddress.substring(0, 10) }}</font></span>
         </p>
         <p class="arc_right05">
           <a 
@@ -223,12 +237,35 @@
           <img
             v-if="hyDetail.authStatus === 'AF0010403'"
             src="/images/article_wlzx/10shiming.png">
-          <!--<img src="/images/article_wlzx/25baozhengjin.png"/>-->
           <span v-if="hyDetail.authStatus !== 'AF0010403' && (!hyDetail.isVip || hyDetail.isVip === 0)">暂无认证信息</span>
         </p>
 
       </div>
-
+      <div 
+        
+        class="arc_right1">
+        <div class="arc_top_title">
+          <h4 v-if="archival.shipperType === 'AF0010101'" >货主档案</h4>
+          <h4 else="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4>
+        </div>
+        <div 
+          v-if="archival.shipperType === 'AF0010101'" 
+          class="arc_top_img">
+          <img src="/images/cy/gold.png">
+        </div>
+        <div class="arc_middle">
+          <img src="/images/cy/09sj.png">
+          <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
+          <p><img src="/images/article_wlzx/10shiming.png"></p>
+          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
+        </div>
+        <ul class="bottom_ul">
+          <li>联系人：{{ archival.contacts }}</li>
+          <li>手机：<a style="list-style:underline">查看电话</a></li>
+          <li>已加入：{{ archival.registerDays }}天</li>
+          <li>好评数：{{ archival.evaGoodCount }}</li>
+        </ul>
+      </div>
     </div>
     <div class="arc_main3">
      
@@ -266,22 +303,9 @@
               <span 
               >{{ item.name }}（{{ item.count }}）</span>
             </div>
-            <!-- <div 
-              class="content-right-row"
-              style="clear: both"
-            >大家对他的印象:</div>
-            <div class="content-right-row">
-              <em>广州<img src="/images/yd_zx.png">武汉</em>
-              <em>广州<img src="/images/yd_zx.png">武汉</em>
-              <em>广州<img src="/images/yd_zx.png">武汉</em>
-            </div> -->
             <div
               class="content-right-row"
               style="clear: both">
-              <!-- <a
-                href="javascript:;" 
-                class="button1"
-                @click="showPrice()">标准价</a> -->
               <a
                 href="javascript:;"
                 class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
@@ -321,7 +345,6 @@
               style="cursor: pointer;float: right;font-size: 14px;"
               @click="goToCy()">更多></i>
           </div>
-          <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
           <div 
             v-if="huoInfoList.length === 0" 
             class="list_none" 
@@ -410,7 +433,6 @@
               style="cursor: pointer;float: right;font-size: 14px;"
               @click="goToCy()">更多></i>
           </div>
-          <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
           <div 
             v-if="huoInfoList.length === 0" 
             class="list_none" 
@@ -583,9 +605,6 @@
         </div>
 
         <div class="arc_main4-content">
-          <!-- <div class="zx_sx">
-            <span class="biaozhi"/><span>仓储与配送</span>
-          </div> -->
           <ul
             class="ps-list"
             style="padding-left: 30px;list-style: square">
@@ -701,21 +720,23 @@
   </div>
 </template>
 <script>
-async function getOtherInfoList($axios, current, vo = {}) {
-  let parm = vo
-  parm.currentPage = current
-  parm.pageSize = 5
-  let res = await $axios.post('/28-web/lclOrder/findOtherInfoList', parm)
-  if (res.data.status === 200) {
-    return {
-      list: res.data.data.list,
-      pages: res.data.data.pages,
-      currentPage: res.data.data.pageNum
-    }
-  } else {
-    return { list: [], pages: 0, currentPage: 1 }
-  }
-}
+// async function getOtherInfoList($axios, current, vo = {}) {
+//   return { list: [], pages: 0, currentPage: 1 }
+//   let parm = vo
+//   parm.currentPage = current
+//   parm.pageSize = 5
+//   let res = await $axios.post('/28-web/lclOrder/findOtherInfoList', parm)
+//   if (res.data.status === 200) {
+//     return {
+//       list: res.data.data.list,
+//       pages: res.data.data.pages,
+//       currentPage: res.data.data.pageNum
+//     }
+//   } else {
+//     return { list: [], pages: 0, currentPage: 1 }
+//   }
+// }
+
 export default {
   name: 'Detail',
   components: {
@@ -738,6 +759,7 @@ export default {
     return {
       zxList: [],
       inTerVar: null,
+      inTerVar1: null,
       otherInfoList: [],
       hyDetail: [],
       pages: 0,
@@ -778,34 +800,23 @@ export default {
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    let hyDetail = await $axios.get('/28-web/lclOrder/detail/' + query.id)
-    let otherInfoList = await getOtherInfoList($axios, 1, {
-      id: query.id,
-      shipperId: query.shipperId
-    })
+    let hyDetail = await $axios
+      .get('/28-web/lclOrder/detail/' + query.id)
+      .catch(err => {
+        // console.log('huoComprehensives2:', err)
+      })
+    // let otherInfoList = await getOtherInfoList($axios, 1, {
+    //   id: query.id,
+    //   shipperId: query.shipperId
+    // }).catch(err => {
+    //   console.log('huoComprehensives3:', err)
+    // })
     let parm = {
       currentPage: 1,
       pageSize: 10,
       startProvince: hyDetail.data.data.startProvince,
       startCity: hyDetail.data.data.startCity
     }
-    //顶部轮播
-    let newList = await $axios.get('/28-web/lclOrder/newList')
-    //货源列表
-    let huoInfoLists = await $axios.post('28-web/lclOrder/list', parm)
-    //最新货源信息
-    // let newestHuoyuanRes = await $axios.post('/28-web/lclOrder/shipper/lastList', pram2)
-    let newestHuoyuanRes = await $axios.post('/28-web/shipper/lastList')
-    // 货主综合力评估
-    let huoComprehensives = await $axios.get(
-      '/28-web/shipper/comprehensive?shipperId=' + query.shipperId
-    )
-    //货源热门搜索
-    let hotSearchs = await $axios.get('28-web/hotSearch/supply/detail/links')
-    // console.log(hotSearchs.data.data.links, 'hotSearchs')
-    //企业人气榜
-    let popularitys = await $axios.get('28-web/logisticsCompany/popularity')
-    //底部推荐
     let parm1 = {
       endArea: hyDetail.data.data.endArea,
       endCity: hyDetail.data.data.endCity,
@@ -814,8 +825,39 @@ export default {
       startCity: hyDetail.data.data.startCity,
       startProvince: hyDetail.data.data.startProvince
     }
+    //货主档案
+    let archivals = await $axios.post(
+      '/28-web/shipper/archival?shipperId=' + query.shipperId
+    )
+    console.log(archivals.data.data, 'item province:')
+    //顶部轮播
+    let newLists = await $axios.get('/28-web/lclOrder/newList')
+    //货源列表
+    let huoInfoLists = await $axios
+      .post('/28-web/lclOrder/list', parm)
+      .catch(err => {
+        // console.log('huoComprehensives4:', err)
+      })
+    //最新货源信息
+    let newestHuoyuanRes = await $axios
+      .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
+      .catch(err => {
+        // console.log('newestHuoyuanRes:', err)
+      })
+    // 货主综合力评估
+    let huoComprehensives = await $axios
+      .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
+      .catch(err => {
+        // console.log('huoComprehensives:', err)
+      })
+    //货源热门搜索
+    let hotSearchs = await $axios.get('/28-web/hotSearch/supply/detail/links')
+    //企业人气榜
+    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
+    //底部推荐
+
     let huoLinks = await $axios.post(
-      '28-web/lclOrder/detail/related/links',
+      '/28-web/lclOrder/detail/related/links',
       parm1
     )
     let footLink = item => {
@@ -871,8 +913,8 @@ export default {
     huoLinks.data.data.brandOrder.links.forEach(footLink)
     huoLinks.data.data.interestOrder.links.forEach(footLink)
     hotSearchs.data.data.links.forEach(footLink)
-    console.log(huoComprehensives.data.data, 'item province:')
     return {
+      archival: archivals.data.status === 200 ? archivals.data.data : [],
       hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
       popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       huoComprehensive:
@@ -880,11 +922,14 @@ export default {
           ? huoComprehensives.data.data
           : [],
       newestHuoyuanRe:
-        newestHuoyuanRes.data.status === 200 ? newestHuoyuanRes.data.data : [],
+        newestHuoyuanRes.data.status === 200
+          ? newestHuoyuanRes.data.data.list
+          : [],
+      newList: newLists.data.status === 200 ? newLists.data.data : [],
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       huoInfoList:
         huoInfoLists.data.status === 200 ? huoInfoLists.data.data.list : [],
-      otherInfoList: otherInfoList.list,
+      // otherInfoList: otherInfoList.list,
       huoLink:
         huoLinks.data.status === 200 ? huoLinks.data.data.brandOrder.links : [],
       huoLabel:
@@ -898,14 +943,15 @@ export default {
           ? huoLinks.data.data.interestOrder.label
           : '',
       hotSearchList:
-        hotSearchs.data.status === 200 ? hotSearchs.data.data.links : [],
-      currentPage: otherInfoList.currentPage,
-      pages: otherInfoList.pages
+        hotSearchs.data.status === 200 ? hotSearchs.data.data.links : []
+      // currentPage: otherInfoList.currentPage,
+      // pages: otherInfoList.pages
     }
   },
 
   mounted() {
-    // console.log(this.huoComprehensive, '55333huoInforRos')
+    // console.log(this.newestHuoyuanRe, '55333huoInforRos')
+    // console.log(this.hyDetail)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.zx_sx_new')
     roll.append(roll.html())
@@ -937,19 +983,42 @@ export default {
         startScroll()
       }
     )
+
+    let top_left_h = $('.top_left').height()
+    let roll_ul_h = $('.top_left_ul')
+    roll_ul_h.append(roll_ul_h.html())
+    let num = 1
+    let newList_l = this.newList.length
+    let left_ul_li = $('.top_left_ul_li').height()
+    let startScroll_top = () => {
+      this.inTerVar1 = setInterval(() => {
+        roll_ul_h
+          .stop()
+          .animate({ top: `${num * -left_ul_li}px` }, 2000, () => {
+            if (num > newList_l) {
+              num = 1
+              roll_ul_h.css('top', '0px')
+            }
+          })
+        num = num + 1
+      }, 3000)
+    }
+    if (left_ul_li * newList_l > top_left_h) {
+      startScroll_top()
+    }
     $('#pagination1').pagination({
       currentPage: this.currentPage,
       totalPage: this.pages,
       callback: async current => {
         $('#current1').text(current)
-        let otherInfoList = await getOtherInfoList(this.$axios, current, {
-          id: this.$route.query.id,
-          shipperId: this.$route.shipperId
-        })
-        this.otherInfoList = otherInfoList.list
-        this.currentPage = otherInfoList.currentPage
-        this.pages = otherInfoList.pages
-        window.location.href = '#top'
+        // let otherInfoList = await getOtherInfoList(this.$axios, current, {
+        //   id: this.$route.query.id,
+        //   shipperId: this.$route.shipperId
+        // })
+        // this.otherInfoList = otherInfoList.list
+        // this.currentPage = otherInfoList.currentPage
+        // this.pages = otherInfoList.pages
+        // window.location.href = '#top'
       }
     })
     // seajs.use(['../js/city.js'], function() {
@@ -977,6 +1046,27 @@ export default {
     },
     clickImg(int) {
       this.showImg = int
+    },
+    //点击换一个
+    findAnother() {
+      let _this = this
+      let obj = {
+        endArea: this.hyDetail.endArea,
+        endCity: this.hyDetail.endCity,
+        endProvince: this.hyDetail.endProvince,
+        startArea: this.hyDetail.startArea,
+        startCity: this.hyDetail.startCity,
+        startProvince: this.hyDetail.startProvince
+      }
+      // console.log(obj, 'obj')
+      this.$axios.post('/28-web/lclOrder/another', obj).then(res => {
+        if (res.data.status === 200) {
+          console.log(res.data.data.id, '00000000')
+          window.location.href = `/huoyuan/detail?id=${
+            res.data.data.id
+          }&shipperId=${res.data.data.shipperId}`
+        }
+      })
     }
   }
 }

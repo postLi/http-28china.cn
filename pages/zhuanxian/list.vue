@@ -618,7 +618,6 @@ export default {
   },
   async asyncData({ $axios, query }) {
     let aurl = ''
-    let orderBy = 'default'
     let startp = query.startp
     let startc = query.startc
     let starta = query.starta

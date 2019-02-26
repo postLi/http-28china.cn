@@ -340,10 +340,50 @@
       <div 
         class="w1036 list_hy">
         <div class="listInfo1">
-          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ hyDetail.startCity }}出发的货源</span>
-            <i 
-              style="cursor: pointer;float: right;font-size: 14px;"
-              @click="goToCy()">更多></i>
+          <div class="main3_1_1">
+            <div class="floatl">
+              <b class="b_title">更多从{{ hyDetail.startCity }}出发的货源</b>
+        
+              <div class="index_search floatl">
+                <div 
+                  id="wlLineFrom" 
+                  class="fl index_search_input" 
+                  style="position:relative;">
+                  <input 
+                    style="height: 100%;" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    type="text" 
+                    name="" 
+                    class="" 
+                    placeholder="请选择出发地" 
+                    readonly="">
+                </div>
+                <em>→</em>
+                <div 
+                  id="wlLineTo" 
+                  class="fl index_search_input" 
+                  style="position:relative;">            
+                  <input 
+                    style="height: 100%;" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    type="text" 
+                    name="" 
+                    class="" 
+                    placeholder="请选择到达地" 
+                    readonly="">
+                </div>                               
+                       
+              </div>               
+              <input 
+                id="search_wlLine" 
+                type="button" 
+                class="search_hy" 
+                value=""></div>                        
+            <div class="more floatr"><a 
+              href="/huoyuan" 
+              target="_blank">更多&gt;</a></div>		 
           </div>
           <div 
             v-if="huoInfoList.length === 0" 
@@ -748,6 +788,8 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
     ],
     script: [
+      { src: '/js/city-picker.data.js' },
+      { src: '/js/city-picker.js' },
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
       { src: '../js/WTMap.min.js' },
@@ -950,6 +992,16 @@ export default {
   },
 
   mounted() {
+    $('#wlLineFrom input').citypicker({
+      // province: this.hyDetail.startProvince,
+      // city: this.hyDetail.startCity,
+      // district: this.hyDetail.startArea
+    })
+    $('#wlLineTo input').citypicker({
+      // province: this.hyDetail.endProvince,
+      // city: this.hyDetail.endCity,
+      // district: this.hyDetail.endArea
+    })
     // console.log(this.newestHuoyuanRe, '55333huoInforRos')
     // console.log(this.hyDetail)
     let rollContainer_h = $('.list_new_box').height()
@@ -1001,7 +1053,7 @@ export default {
             }
           })
         num = num + 1
-      }, 3000)
+      }, 6000)
     }
     if (left_ul_li * newList_l > top_left_h) {
       startScroll_top()

@@ -44,6 +44,35 @@ const extendAxiosInstance = axios => {
   }
 }
 
+const log = (level, ...messages) => console[level]('[Axios]', ...messages)
+
+const setupDebugInterceptor = axios => {
+  // request
+  axios.onRequestError(error => {
+    log('error', 'Request error:', error)
+  })
+
+  // response
+  axios.onResponseError(error => {
+    log('error', 'Response error:', error)
+  })
+  axios.onResponse(res => {
+      log(
+        'info',
+        '[' + (res.status + ' ' + res.statusText) + ']',
+        '[' + res.config.method.toUpperCase() + ']',
+        res.config.url)
+
+      if (process.browser) {
+        console.log(res)
+      } else {
+        console.log(JSON.stringify(res.data, undefined, 2))
+      }
+
+      return res
+  })
+}
+
 const setupCredentialsInterceptor = axios => {
   // Send credentials only to relative and API Backend requests
   axios.onRequest(config => {
@@ -159,7 +188,7 @@ export default (ctx, inject) => {
   extendAxiosInstance(axios)
 
   // Setup interceptors
-
+  setupDebugInterceptor(axios)
   setupCredentialsInterceptor(axios)
   setupProgress(axios, ctx)
 

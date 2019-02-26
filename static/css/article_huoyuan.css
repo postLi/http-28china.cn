@@ -606,6 +606,7 @@ table tr:nth-child(odd){
   /* overflow: hidden; */
   display: flex;
   /* background: #fff; */
+  width: 777px;
   flex-direction: column;
   box-sizing: border-box;
 }
@@ -635,7 +636,7 @@ table tr:nth-child(odd){
 .arc_main3 .right .content{background-color: white;height: 340px;display: flex;}
 .arc_main3 .right .content .content-left{
   float: left;
-  /* width: 140px; */
+  width: 140px;
   padding: 0 32px;
   height: inherit;
 }
@@ -651,7 +652,7 @@ table tr:nth-child(odd){
 .arc_main3 .right .content .content-left .img img{border-radius: 50px;}
 .arc_main3 .right .content .content-right{
   float: right;
-  /* width: 540px; */
+  width: 400px;
   height: inherit;
   font-size: 14px;
   padding-top: 26px;
@@ -786,7 +787,8 @@ table tr:nth-child(odd){
 }
 
 .rc_list {
-  margin: 10px 0;
+  padding: 10px;
+  /* box-sizing: border-box; */
 }
 .rc_list div {
   display: table-cell;
@@ -797,10 +799,19 @@ table tr:nth-child(odd){
   height: 20px;
   line-height: 20px;
   width: 20px;
-  background-color: red;
   text-align: center;
   color: #ffffff;
-  margin: 0 17px;
+  margin: 0 15px;
+  background-color: #8eb9f5;
+}
+.oneColor{
+  background-color:#f65050 !important ;
+}
+.twoColor{
+  background-color: #ff8547 !important ;
+}
+.trihColor{
+  background-color: #ffac38 !important ;
 }
 .rc_list .img {
   border-radius: 50px;
@@ -812,6 +823,19 @@ table tr:nth-child(odd){
   color: #333333;
   width: 100%;
 }
+.rc_list .img img{
+  width: 50px;
+  display: block;
+  border-radius: 50%;
+}
+.rc_list .right span:nth-child(1) {
+ display: inline-block;
+ width: 150px;
+}
+.rc_list .right span:nth-child(2) {
+  display: inline-block;
+  width: 100px;
+ }
 .ps-list {
   padding: 10px;
 }
@@ -847,9 +871,16 @@ table tr:nth-child(odd){
 .hot-cities-li {
   display: inline-block;
   padding: 10px;
+  width: 10.5%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 14px;
+    cursor: pointer;
 }
 .hot-cities-a {
   font-size: 14px;
+  cursor: pointer;
 }
 
 

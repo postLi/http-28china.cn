@@ -6,22 +6,7 @@ if (process.server) {
 }
 
 export const state = () => ({
-  wlzx: [],
-  cjwt: [],
-  khal: [],
-  zcfl: [],
-  wlqy: [],
-  zjgd: [],
-  cgzx: [],
-  ccyps: [],
-  index_wlzx: [],
-  index_cjwt: [],
-  index_khal: [],
-  index_lzzx: [],
-  index_wlqy: [],
-  index_wlxyfx: [],
-  index_cgzx: [],
-  index_ccyps: []
+  recommend: []
 })
 
 export const mutations = {
@@ -31,30 +16,27 @@ export const mutations = {
 }
 
 export const actions = {
-  // 获取资讯信息
-  GETNEWSINFO({ commit }, payload) {
+  // 获取首页推荐列表
+  GETRECOMMEND({ commit }, payload) {
     // console.log('payload-lineinfopayload', payload)
     return new Promise(resolve => {
       axios
-        .get(aurl + '/anfacms/api/front/content/list', {
-          params: payload.params
-        })
+        .post(aurl + '/api/28-web/logisticsCompany/recommend', payload.data)
         .then(res => {
           let data = res.data
-          if (data.code === '200') {
-            // console.log('payload-lineinfo', data.body)
-            let ndata = data.body || []
+          if (data.status === 200) {
+            console.log('1payload-GETRECOMMEND', data.data)
+            let ndata = data.data ? data.data.list || [] : []
             ndata = payload.preFn ? payload.preFn(ndata) : ndata
             commit('setInfo', {
-              name: payload.name,
+              name: 'recommend',
               data: ndata
             })
-
-            resolve()
           }
+          resolve()
         })
         .catch(err => {
-          console.log('payload-line', payload, err.response)
+          console.log('payload-GETRECOMMEND', payload, err)
           resolve()
         })
     })

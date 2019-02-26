@@ -155,7 +155,7 @@ function setSelectArea(a, b, c, d) {
     delete vo1.startCity
   }
 
-  window.process_01 && process_01(vo1)
+  //window.process_01 && process_01(vo1)
   // console.log(vo1)
   vo2 = {}
   vo2.startProvince = bfull
@@ -165,7 +165,7 @@ function setSelectArea(a, b, c, d) {
     delete vo2.startCity
   }
 
-  window.process_02 && process_02(vo2)
+  // window.process_02 && process_02(vo2)
   // console.log(vo2)
   vo3 = {}
   vo3.startProvince = bfull
@@ -176,7 +176,7 @@ function setSelectArea(a, b, c, d) {
     delete vo3.startCity
   }
 
-  window.process_03 && process_03(vo3)
+  // window.process_03 && process_03(vo3)
   // console.log(vo3)
   vo4 = {}
   vo4.address = bfull + afull
@@ -184,7 +184,7 @@ function setSelectArea(a, b, c, d) {
     delete vo4.address
   }
 
-  window.wlgs && wlgs(vo4)
+  // window.wlgs && wlgs(vo4)
   // console.log(vo4)
 }
 

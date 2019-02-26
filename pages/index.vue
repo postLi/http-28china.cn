@@ -320,7 +320,7 @@
                       type="text" 
                       name="" 
                       class="" 
-                      placeholder="&nbsp;请选择出发地" 
+                      placeholder="请选择出发地" 
                       readonly="">
                   </div>
                   <em>→</em>
@@ -335,7 +335,7 @@
                       type="text" 
                       name="" 
                       class="" 
-                      placeholder="&nbsp;请选择到达地" 
+                      placeholder="请选择到达地" 
                       readonly="">
                   </div>                               
                        
@@ -361,58 +361,69 @@
               <dd class="d006">物流公司</dd>
               <dd class="d007">操作</dd>
             </dl>
-            <div class="none_zx"><span>暂无专线信息</span>
+            <div 
+              v-if="$store.state.line.index_list.length === 0" 
+              class="none_zx"><span>暂无专线信息</span>
             </div>          
                     
-            <div class="clear scroll_nr2 ">
-
-                        	
-
-                        	 
+            <div 
+              v-else 
+              class="clear scroll_nr2 ">
               <ul 
                 id="js001" 
                 class="hy_nr " 
                 style="margin-top: 0px;">
-                        	 	
-                <li style="display: none;">
-                  <a 
-                    id="nr_a01" 
-                    target="_blank"><span 
-                      id="nr001" 
-                      class="t001"/></a>
-                  <a 
-                    id="nr_a01" 
-                    target="_blank"><span 
-                      id="nr001_2" 
-                      class="t002"/></a>
-                  <a 
-                    id="nr_a02" 
-                    target="_blank" 
-                    href=""><span class="t003"><font 
+
+                <template v-for="(item, index) in $store.state.line.index_list" >
+
+                  <li :key="index">
+                    <a 
+                      id="nr_a01"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId" 
+                      target="_blank"><span 
+                        id="nr001" 
+                        class="t001">{{ item.startCity + item.startArea }}</span></a>
+                    <a 
+                      id="nr_a01"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span 
+                        id="nr001_2" 
+                        class="t002">{{ item.endCity + item.endArea }}</span></a>
+                    <a 
+                      id="nr_a02" 
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
+                      target="_blank"  
+                    ><span class="t003"><font 
                       id="nr002" 
-                      style="color:#f00"/>元/公斤</span></a>
-                  <a 
-                    id="nr_a03" 
-                    target="_blank"><span class="t004"><font 
-                      id="nr003" 
-                      style="color:#f00"/>元/方</span> </a>
-                  <a 
-                    id="nr_a04" 
-                    target="_blank"><span 
-                      id="nr004" 
-                      class="t005"/></a>
-                  <a 
-                    id="nr005" 
-                    target="_blank" 
-                    href="#"><span 
-                      id="nr006" 
-                      class="t006"/></a>
-                  <a 
-                    id="nr_a05" 
-                    target="_blank"><span 
-                      id="t006" 
-                      class="t007">详情</span></a>         
-                </li>
+                      style="color:#f00">{{ item.weightPrice }}</font>元/公斤</span></a>
+                    <a 
+                      id="nr_a03"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span class="t004"><font 
+                        id="nr003" 
+                        style="color:#f00">{{ item.lightPrice }}</font>元/方</span> </a>
+                    <a 
+                      id="nr_a04"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span 
+                        id="nr004" 
+                        class="t005">{{ item.transportAging + (item.transportAgingUnit || '').replace('多', '') }}</span></a>
+                    <a 
+                      id="nr005" 
+                      :href="'/member/' + item.companyId" 
+                      target="_blank"><span 
+                        id="nr006" 
+                        class="t006">{{ item.companyName }}</span></a>
+                    <a 
+                      id="nr_a05"
+                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"  
+                      target="_blank"><span 
+                        id="t006" 
+                        class="t007">详情</span></a>         
+                  </li>
+                </template>    
+                        	 	
+                
               </ul>
                           
 
@@ -515,7 +526,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择出发地" 
+                    placeholder="请选择出发地" 
                     readonly="">
                 </div>
                 <em>→</em>
@@ -530,7 +541,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择到达地" 
+                    placeholder="请选择到达地" 
                     readonly="">
                 </div>                               
                        
@@ -556,53 +567,71 @@
               <dd class="d7">运输价格</dd>
               <dd class="d8">操作</dd>
             </dl>
-            <div class="none_cy"><span>暂无车源信息</span>
+            <div 
+              v-if="$store.state.cheyuan.index_list.length === 0" 
+              class="none_cy"><span>暂无车源信息</span>
             </div>            
                         
-            <div class="clear scroll_nr3">
+            <div 
+              v-else 
+              class="clear scroll_nr3">
               <ul 
                 id="js003" 
                 class="hy_nr" 
                 style="margin-top: 0px;">
-                <li style="display: none;">
-                  <a id="nr_a11"><span 
-                    id="nr021" 
-                    class="t1"/></a>
-                  <a id="nr_a11"><span 
-                    id="nr021_2" 
-                    class="t2"/></a>
-                  <a 
-                    id="nr_a12" 
-                    target="_blank"><span 
-                      id="nr022" 
-                      class="t3"/></a>
-                  <a 
-                    id="nr_a13" 
-                    target="_blank"><span 
-                      id="nr023" 
-                      class="t4"/></a>
-                  <a 
-                    id="nr_a14" 
-                    target="_blank"><span class="t5"><font 
-                      id="nr024" 
-                      style="color: #f00;"/>米</span></a>
-                  <a 
-                    id="nr_a15" 
-                    target="_blank"><span class="t6"><font 
-                      id="nr025" 
-                      style="color: #f00;"/>吨</span></a>
-                  <a 
-                    id="nr_a16" 
-                    target="_blank"><span class="t7"><font 
-                      id="nr026" 
-                      style="color: #f00;"/></span></a>
-                  <a 
-                    id="nr_a17" 
-                    target="_blank"><span 
-                      id="t7" 
-                      class="t8">查看</span></a>
-                </li>
+                <template v-for="(item, index) in $store.state.cheyuan.index_list" >
 
+                  <li :key="index">
+                    <a 
+                      id="nr_a11"
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :title="item.strartAddress"><span 
+                        id="nr021" 
+                        class="t1">{{ item.strartAddress }}</span></a>
+                    <a 
+                      id="nr_a11" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :title="item.endAddress"><span 
+                        id="nr021_2" 
+                        class="t2">{{ item.endAddress }}</span></a>
+                    <a 
+                      id="nr_a12" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span 
+                        id="nr022" 
+                        class="t3">{{ (item.carNum || '').replace(/^(..).*(..)$/, '$1***$2') }}</span></a>
+                    <a 
+                      id="nr_a13"
+                      :href="'/cheyuan/detail?id='+item.driverId" 
+                      target="_blank"><span 
+                        id="nr023" 
+                        class="t4">{{ item.carTypeName }}</span></a>
+                    <a 
+                      id="nr_a14"
+                      :href="'/cheyuan/detail?id='+item.driverId" 
+                      target="_blank"><span class="t5"><font 
+                        id="nr024" 
+                        style="color: #f00;">{{ item.carLength }}</font>米</span></a>
+                    <a 
+                      id="nr_a15" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span class="t6"><font 
+                        id="nr025" 
+                        style="color: #f00;">{{ item.carLoad }}</font>吨</span></a>
+                    <a 
+                      id="nr_a16" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span class="t7"><font 
+                        id="nr026" 
+                        style="color: #f00;">{{ item.expectPrice }}</font></span></a>
+                    <a 
+                      id="nr_a17" 
+                      :href="'/cheyuan/detail?id='+item.driverId"
+                      target="_blank"><span 
+                        id="t7" 
+                        class="t8">查看</span></a>
+                  </li>
+                </template>
                             
               </ul>
 
@@ -632,7 +661,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择出发地" 
+                    placeholder="请选择出发地" 
                     readonly="">
                 </div>
                 <em>→</em>
@@ -647,7 +676,7 @@
                     type="text" 
                     name="" 
                     class="" 
-                    placeholder="&nbsp;请选择到达地" 
+                    placeholder="请选择到达地" 
                     readonly="">
                 </div>  
               </div>   
@@ -672,11 +701,15 @@
               <dd class="d7">发布时间</dd>
               <dd class="d8">操作</dd>
             </dl>
-            <div class="none_hy"><span>暂无货源信息</span>
+            <div 
+              v-if="$store.state.huoyuan.index_list.length === 0" 
+              class="none_hy"><span>暂无货源信息</span>
             </div>
                         
                         
-            <div class="clear scroll_nr1">
+            <div 
+              v-else 
+              class="clear scroll_nr1">
  
                         	
                         	
@@ -685,34 +718,56 @@
                 class="hy_nr " 
                 style="margin-top: 0px;">
 
-                <li style="display: none;">                                      
-                  <a id="nr_a31"><span 
-                    id="nr031" 
-                    class="t1"/></a>
-                  <a id="nr_a31"><span 
-                    id="nr031_2" 
-                    class="t2"/></a>
-                  <a id="nr_a33"><span 
-                    id="nr033" 
-                    class="t3"/></a>
-                  <a id="nr_a34"><span class="t4"><font 
-                    id="nr034" 
-                    style="color: #f00;"/></span></a>
-                  <a id="nr_a35"><span class="t5"><font 
-                    id="nr035" 
-                    style="color: #f00;"/></span></a>
-                  <a id="nr_a36"><span 
-                    id="nr036" 
-                    class="t6"/></a>
-                  <a id="nr_a37"><span 
-                    id="nr037" 
-                    class="t7"/></a>
-                  <a 
-                    id="nr_a38" 
-                    target="_blank"><span 
-                      id="t8" 
-                      class="t8">查看</span></a>
-                </li>
+                <template v-for="(item, index) in $store.state.huoyuan.index_list" >
+
+                  <li :key="index">                                     
+                    <a 
+                      id="nr_a31"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      :title="item.startProvinceCityArea"><span 
+                        id="nr031" 
+                        class="t1">{{ item.startProvinceCityArea }}</span></a>
+                    <a 
+                      id="nr_a31"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      :title="item.endProvinceCityArea"><span 
+                        id="nr031_2" 
+                        class="t2">{{ item.endProvinceCityArea }}</span></a>
+                    <a 
+                      id="nr_a33"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
+                    ><span 
+                      id="nr033" 
+                      class="t3">{{ item.goodsName || item.goodsTypeName }}</span></a>
+                    <a 
+                      id="nr_a34" 
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span class="t4"><font 
+                        id="nr034" 
+                        style="color: #f00;">{{ item.goodsWeight }}公斤</font></span></a>5
+                    <a 
+                      id="nr_a35" 
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span class="t5"><font 
+                        id="nr035" 
+                        style="color: #f00;">{{ item.goodsVolume }}方</font></span></a>
+                    <a 
+                      id="nr_a36" 
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span 
+                        id="nr036" 
+                        class="t6">{{ item.orderType }}</span></a>
+                    <a 
+                      id="nr_a37"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      :title="item.createTime"><span 
+                        id="nr037" 
+                        class="t7">{{ (item.createTime || '').replace(/^.*-(\d{2}-\d{2}).*/, '$1') }}</span></a>
+                    <a 
+                      id="nr_a38"
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
+                      target="_blank"><span 
+                        id="t8" 
+                        class="t8">查看</span></a>
+                  </li>
+                </template>
                             
               </ul>
 
@@ -848,46 +903,54 @@
             <dd class="d0004">操作</dd>
                 
           </dl>
-          <div class="none_wlgs"><span>暂无物流公司信息</span>
+          
+          <div 
+            v-if="$store.state.company.recommend.length === 0" 
+            class="none_wlgs"><span>暂无物流公司信息</span>
           </div>          
-          <div class="clear scroll_nr4">
+          <div 
+            v-else 
+            class="clear scroll_nr4">
+            
             <ul 
               id="js_wlgs" 
               class="wlyq_nr">
-                                
-    
-              <li style="display: none;">
-                <a 
-                  id="wlgs_a1" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlgs_name" 
-                    class="t0001"/></a>
-                <a 
-                  id="wlgs_a2" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlgs_postion" 
-                    class="t0002"/></a>
-                <a 
-                  id="wlgs_a3" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlgs_jyfw" 
-                    class="t0003"/></a>
-                <span 
-                  id="t77" 
-                  class="t0004"><a 
-                    id="wlgs_a" 
-                    href="#" 
-                    target="_blank">查看</a></span>
-              </li>
 
-       
-                                
+              <template v-for="(item, index) in $store.state.company.index_list" >
+              
+                <li :key="index">
+                  <a 
+                    id="wlgs_a1" 
+                    :href="'/member/' + item.id + ''"  
+                    :title="item.companyName"
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlgs_name"
+                       
+                      class="t0001">{{ item.companyName }}</span></a>
+                  <a 
+                    id="wlgs_a2" 
+                    :href="'/member/' + item.id + ''"  
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlgs_postion" 
+                      class="t0002">{{ item.belongCityName }}</span></a>
+                  <a 
+                    id="wlgs_a3" 
+                    :href="'/member/' + item.id + ''"  
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlgs_jyfw"
+                      :title="(item.productService || '').replace(/(\[|\])/g, '')" 
+                      class="t0003">{{ (item.productService || '').replace(/(\[|\])/g, '') }}</span></a>
+                  <span 
+                    id="t77" 
+                    class="t0004"><a 
+                      id="wlgs_a" 
+                      :href="'/member/' + item.id + ''"  
+                      target="_blank">查看</a></span>
+                </li>
+              </template>           
                                 
             </ul>
           </div>
@@ -917,37 +980,43 @@
             <ul 
               id="js_wlyq" 
               class="wlyq_nr">
-                                
+
+              <template v-for="(item, index) in $store.state.wuliu.index_list" >
+              
+                <li :key="index">
+                  <a 
+                    id="wlyq_a1" 
+                    :title="item.parkName" 
+                    :href="'/wuliu/detail?id='+item.id"
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlyq_name" 
+                      class="t01">{{ item.parkName }}</span></a>
+                  <a 
+                    id="wlyq_a2" 
+                    :title="item.parkAddress" 
+                    :href="'/wuliu/detail?id='+item.id"
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlyq_postion" 
+                      class="t02">{{ item.parkAddress }}</span></a>
+                  <a 
+                    id="wlyq_a3" 
+                    :href="'/wuliu/detail?id='+item.id" 
+                    target="_blank" 
+                    style="color: #fff;"><span 
+                      id="wlyq_num" 
+                      class="t03">{{ item.netWorkNumber }}</span></a>
+                  <span 
+                    id="t77" 
+                    class="t04"><a 
+                      id="wlyq_a4" 
+                      :href="'/wuliu/detail?id='+item.id" 
+                      target="_blank">查看</a></span>
+                </li>
+              </template>    
     
-              <li style="display: none;">
-                <a 
-                  id="wlyq_a1" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlyq_name" 
-                    class="t01"/></a>
-                <a 
-                  id="wlyq_a2" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlyq_postion" 
-                    class="t02"/></a>
-                <a 
-                  id="wlyq_a3" 
-                  href="#" 
-                  target="_blank" 
-                  style="color: #fff;"><span 
-                    id="wlyq_num" 
-                    class="t03"/></a>
-                <span 
-                  id="t77" 
-                  class="t04"><a 
-                    id="wlyq_a4" 
-                    href="#" 
-                    target="_blank">查看</a></span>
-              </li>
+              
 
        
                                 
@@ -973,172 +1042,25 @@
     	</em> 
     	-->
             <span><a 
-              href="/a/wuliushangwuxinxi/" 
+              href="/zixun/wlswxx/index.jhtml" 
               title="更多物流商务信息">更多&gt;</a></span></div>
           <ul class="swlist fls">
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-              class="cur">代理</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-                  title="货运全国，一站式服务！">货运全国，一站式服务！</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/372.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-                  title="提供广州蚂蚁搬家服务">提供广州蚂蚁搬家服务</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/371.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-              class="cur">代理</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-                  title="广州市DHL国际快递">广州市DHL国际快递</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/370.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-                  title="长期供应广州至新疆到门费用">长期供应广州至新疆到门费用</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/369.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-                  title="长期供应广州至新西兰双清到门费用">长期供应广州至新西兰双清到门费用</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/368.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-                  title="长期供应玖灵越南专线越南货运">长期供应玖灵越南专线越南货运</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/367.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-                  title="黄埔报关拖车，贴心码头服务看点多">黄埔报关拖车，贴心码头服务看点多</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/366.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-              class="cur">代理</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-                  title="黄埔报关行，乌冲通关样样行">黄埔报关行，乌冲通关样样行</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/365.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-                  title="代理东莞虎门港、沙田港进出口报关，">代理东莞虎门港、沙田港进出口报关，</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/364.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-                  title="代理中山港、小榄港拖车报关公司">代理中山港、小榄港拖车报关公司</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/363.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-                  title="供应汕头国集港、广澳港、永泰港，拖">供应汕头国集港、广澳港、永泰港，拖</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/362.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-                  title="长期供应广州至迪拜海空运双清包税到">长期供应广州至迪拜海空运双清包税到</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/361.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-                  title="长期供应香港进出口拖车报关">长期供应香港进出口拖车报关</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/360.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-                  title="长期供应广州至印尼海运双清包税到门">长期供应广州至印尼海运双清包税到门</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/359.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-              class="cur">供应</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-                  title="供应江门高沙港、外海港，拖车报关公">供应江门高沙港、外海港，拖车报关公</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/358.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-                class="tag">报关行</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-                  title="长期供应珠三角进出口拖车报关">长期供应珠三角进出口拖车报关</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/357.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-                class="tag">公路运输</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-                  title="长期供应沧州河间红瑞货运信息部新疆">长期供应沧州河间红瑞货运信息部新疆</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/356.html" 
-                    class="cur">详情</a></span></li>
-            <li class="nods"><a 
-              href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-              class="cur">合作</a><a 
-                href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-                class="tag">其他</a><a 
-                  href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-                  title="原飞航物流招合作伙伴">原飞航物流招合作伙伴</a><span><a 
-                    href="/a/wuliushangwuxinxi/2018/0703/355.html" 
-                    class="cur">详情</a></span></li>
-
+            <li
+              v-for="(item, index) in $store.state.news.index_wlswxx"
+              :key="index"
+              :class="index%2 ? 'extra' : ''"
+              class="nods"
+            >
+              <a 
+                :href="item.url" 
+                class="cur">代理</a><a 
+                  :href="item.url" 
+                  class="tag">其他</a><a 
+                    :href="item.url" 
+                    :title="item.title">{{ item.title }}</a><span><a 
+                      :href="item.url" 
+                      class="cur">详情</a></span>
+            </li>
           </ul>
 
 
@@ -1218,88 +1140,14 @@
                 target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div 
+          <NewsList 
             id="main5_1_nr1" 
-            class="jtabcon">
-            <template 
-              v-for="(item, index) in $store.state.line.index_wlzx" 
-            >
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title"
-                :key="index" 
-                target="_blank">
-                <img 
-                  :src="item.typeImg" 
-                  :alt="item.title" >
-              </a>
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                <span>{{ item.title }}</span>
-              </a>
-              <a 
-                v-if="index !== 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                {{ item.title }}
-              </a>
-              <br :key="index" >
-              <div 
-                v-if="index === 0" 
-                :key="index" 
-                class="h18" />
-            </template>
- 
-          </div>
+            :list="$store.state.news.index_wlzx" />
 
-          <div 
+          <NewsList 
             id="main5_1_nr2" 
-            class="jtabcon">
-            <template 
-              v-for="(item, index) in $store.state.line.index_lzzx" 
-            >
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title"
-                :key="index" 
-                target="_blank">
-                <img 
-                  :src="item.typeImg" 
-                  :alt="item.title" >
-              </a>
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                <span>{{ item.title }}</span>
-              </a>
-              <a 
-                v-if="index !== 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                {{ item.title }}
-              </a>
-              <br :key="index" >
-              <div 
-                v-if="index === 0" 
-                :key="index" 
-                class="h18" />
-            </template>
-  
-  
-          </div>
+            :list="$store.state.news.index_lzzx" />
+
         </div>
         <div class="main5_2 jtabwrap">
           <div id="main5_2_1">
@@ -1322,89 +1170,14 @@
                 target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div 
+          <NewsList 
             id="main5_2_nr1" 
-            class="jtabcon">
-            <template 
-              v-for="(item, index) in $store.state.line.index_wlqy" 
-            >
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title"
-                :key="index" 
-                target="_blank">
-                <img 
-                  :src="item.typeImg" 
-                  :alt="item.title" >
-              </a>
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                <span>{{ item.title }}</span>
-              </a>
-              <a 
-                v-if="index !== 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                {{ item.title }}
-              </a>
-              <br :key="index" >
-              <div 
-                v-if="index === 0" 
-                :key="index" 
-                class="h18" />
-            </template>
- 
-  
-          </div>
+            :list="$store.state.news.index_wlqy" />
 
-          <div 
+          <NewsList 
             id="main5_2_nr2" 
-            class="jtabcon">
-            <template 
-              v-for="(item, index) in $store.state.line.index_wlxyfx" 
-            >
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title"
-                :key="index" 
-                target="_blank">
-                <img 
-                  :src="item.typeImg" 
-                  :alt="item.title" >
-              </a>
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                <span>{{ item.title }}</span>
-              </a>
-              <a 
-                v-if="index !== 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                {{ item.title }}
-              </a>
-              <br :key="index" >
-              <div 
-                v-if="index === 0" 
-                :key="index" 
-                class="h18" />
-            </template>
-  
-  
-          </div>
+            :list="$store.state.news.index_wlxyfx" />
+
         </div>
 
 
@@ -1429,94 +1202,15 @@
                 target="_blank">更多&gt;</a></div>
           </div>
           <div class="clear"/>
-          <div 
+          <NewsList 
             id="main5_3_nr1" 
-            class="jtabcon">
+            :list="$store.state.news.index_cgzx" />
 
-            <template 
-              v-for="(item, index) in $store.state.line.index_cgzx" 
-            >
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title"
-                :key="index" 
-                target="_blank">
-                <img 
-                  :src="item.typeImg" 
-                  :alt="item.title" >
-              </a>
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                <span>{{ item.title }}</span>
-              </a>
-              <a 
-                v-if="index !== 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                {{ item.title }}
-              </a>
-              <br :key="index" >
-              <div 
-                v-if="index === 0" 
-                :key="index" 
-                class="h18" />
-            </template>
- 
-  
-          </div>
-
-          <div 
+          <NewsList 
             id="main5_3_nr2" 
-            class="jtabcon">
-            <template 
-              v-for="(item, index) in $store.state.line.index_ccyps" 
-            >
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title"
-                :key="index" 
-                target="_blank">
-                <img 
-                  :src="item.typeImg" 
-                  :alt="item.title" >
-              </a>
-              <a 
-                v-if="index === 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                <span>{{ item.title }}</span>
-              </a>
-              <a 
-                v-if="index !== 0" 
-                :href="item.url" 
-                :title="item.title" 
-                :key="index" 
-                target="_blank">
-                {{ item.title }}
-              </a>
-              <br :key="index" >
-              <div 
-                v-if="index === 0" 
-                :key="index" 
-                class="h18" />
-            </template>
-  
-  
-          </div>
+            :list="$store.state.news.index_ccyps" />
+
         </div>
-
-
-
       </div>
 
       <!--物流资讯/物流前沿/网点加盟招商 E-->
@@ -1628,7 +1322,7 @@
           <div class="clear"/>
           <div id="main6_2_nr1">
             <div 
-              v-for="(item, index) in $store.state.line.index_khal" 
+              v-for="(item, index) in $store.state.news.index_khal" 
               :key="index"
               class="anli">
               <div class="floatl"><a 
@@ -1795,9 +1489,12 @@
 
 <script>
 import axios from 'axios'
+import NewsList from '@/components/index/newsList.vue'
 
 export default {
-  components: {},
+  components: {
+    NewsList
+  },
   data() {
     return {
       title: '首页',
@@ -1810,59 +1507,69 @@ export default {
     let paramsObj = {
       index_khal: {
         channelIds: '118',
-        count: '3',
+        count: 3,
         // checked: 'true',
         // recommend: '1',
-        orderBy: '9',
-        channelOption: '0'
+        orderBy: 9,
+        channelOption: 0
       },
       index_wlzx: {
         channelIds: '94',
-        count: '4',
-        orderBy: '9',
-        channelOption: '0'
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
       },
       index_lzzx: {
         channelIds: '97',
-        count: '4',
-        orderBy: '9',
-        channelOption: '0'
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
       },
       index_wlqy: {
         channelIds: '105',
-        count: '4',
-        orderBy: '9',
-        channelOption: '0'
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
       },
       index_wlxyfx: {
         channelIds: '107',
-        count: '4',
-        orderBy: '9',
-        channelOption: '0'
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
       },
       index_cgzx: {
         channelIds: '100',
-        count: '4',
-        orderBy: '9',
-        channelOption: '0'
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
       },
       index_ccyps: {
         channelIds: '101',
-        count: '4',
-        orderBy: '9',
-        channelOption: '0'
+        count: 4,
+        orderBy: 9,
+        channelOption: 0
+      },
+      index_wlswxx: {
+        channelIds: '119',
+        count: 16,
+        orderBy: 9,
+        channelOption: 0
       }
     }
     let theparams = Object.values(paramsObj).map(el => JSON.stringify(el))
     let names = Object.keys(paramsObj)
 
-    await store.dispatch('line/GETMULTYNEWSINFO', {
+    await store.dispatch('news/GETMULTYNEWSINFO', {
       params: '{' + theparams.join(';') + '}',
       names: names,
       preFn: data => {
-        return data.map(els => {
+        return data.map((els, index) => {
           return els.map(el => {
-            el.url = el.url.replace('http://192.168.1.79/anfacms', '/help')
+            el.url = el.url.replace(
+              'http://192.168.1.79/anfacms',
+              index === 0 ? '/help' : '/zixun'
+            )
+            // console.log('el typemg', el.typeImg)
             return el
           })
         })
@@ -1872,6 +1579,36 @@ export default {
     // 获取推荐物流公司
     await store.dispatch('company/GETRECOMMEND', {
       data: { pageSize: 8 }
+    })
+
+    // 获取物流公司列表
+    await store.dispatch('company/GETCOMPANYLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
+    })
+
+    // 获取物流园区列表
+    await store.dispatch('wuliu/GETLIST', {
+      data: { pageSize: 9 },
+      name: 'index_list'
+    })
+
+    // 获取专线列表
+    await store.dispatch('line/GETLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
+    })
+
+    // 获取货源列表
+    await store.dispatch('huoyuan/GETLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
+    })
+
+    // 获取车源列表
+    await store.dispatch('cheyuan/GETLIST', {
+      data: { pageSize: 27 },
+      name: 'index_list'
     })
   },
   head: {
@@ -1885,9 +1622,11 @@ export default {
           '/index/js/gaodemap2.js',
           '/index/js/index.js',
           '/index/js/floatBar.min.js',
-          '/index/js/memu.js'
+          '/index/js/memu.js',
+          '/index/js/map/echarts.min.js'
         ],
         function() {
+          seajs.use(['/index/js/echart/index.js'])
           $(function() {
             $('a[_for]').mouseover(function() {
               $(this)
@@ -1915,7 +1654,7 @@ export default {
             //alert("1");
             $('.kefu_box').css('display', 'none')
           }
-          $('.nods:nth-child(even)').addClass('extra')
+          // $('.nods:nth-child(even)').addClass('extra')
           //header车源搜索 S
           $('#search_cheyuan0').click(function() {
             var list1 = [],

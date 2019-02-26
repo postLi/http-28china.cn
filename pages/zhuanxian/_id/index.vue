@@ -83,7 +83,7 @@ export default {
   },
   methods: {},
   async fetch({ store, params, $axios, error }) {
-    await store.dispatch('line/GETNEWSINFO', {
+    await store.dispatch('news/GETNEWSINFO', {
       params: {
         channelIds: '94,95,96,97,98,99',
         count: '10',

@@ -60,21 +60,31 @@
     <div class="arc_main1">
       <div class="arc_left">
         <div class="arc_left_1">
-          <span id="nr072"/><span style="float: left;font-size: 12px;padding-top:6px;"> 用户{{ hyDetail.consignorPhone }}<span style="color: #2577e3;font-size: 12px;">{{ hyDetail.startCity }}</span>到<span style="color: #2577e3;font-size: 12px;">{{ hyDetail.endCity }}</span>货源  3分钟前</span>
-
+          <div class="top_left">
+            <ul 
+              class="top_left_ul" >
+              <li 
+                v-for="(item,index) in newList" 
+                :key="index" 
+                class="top_left_ul_li" >
+                <span>用户<em style="color: #2577e3;">{{ item.creater }}</em></span>
+                <span><em style="color: #2577e3;">{{ item.startCity }}</em>到</span>
+                <span><em style="color: #2577e3;">{{ item.endCity }}</em>货源</span>
+                <span>{{ item.time }}3分钟前</span>
+              </li>
+            </ul>
+          </div>
           <p class="arc_p1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span>
-          
             <span class="arc_p2"><img 
               class="imgarc_p2"
-              src="../../static/images/list_wlzx/ll_num.png"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i>
-              <!-- <i>收藏量：<em class="my_hz_num"/></i> -->
+              src="/images/list_wlzx/ll_num.png"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i>
             </span>
           </p>
           <div class="arc_middle1-2"><span><img
             class="img1"
-            src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：2019-01-18 13:25:20 </span><span><img
+            src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：{{ hyDetail.createTime }}</span><span><img
               class="img2"
-              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：<i class="my_cz_num"/></span></div>
+              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：{{ hyDetail.collectNumber }}<i class="my_cz_num"/></span></div>
         </div>
         <div class="arc_left_2">
           <div class="arc_left_2_1">
@@ -94,7 +104,7 @@
             </table>
             </div>
             <!-- <div class="arc_left_2_1_3">
-              <a href="javascript:void(0)"><img src="../../static/images/article_wlzx/17shoucang.png">&nbsp;<span class="collection_hz">收藏货源</span><i>&nbsp;(&nbsp;<em class="my_hz_num">78</em>人气&nbsp;)</i></a>
+              <a href="javascript:void(0)"><img src="/images/article_wlzx/17shoucang.png">&nbsp;<span class="collection_hz">收藏货源</span><i>&nbsp;(&nbsp;<em class="my_hz_num">78</em>人气&nbsp;)</i></a>
              
             </div> -->
             
@@ -104,9 +114,9 @@
             <div class="collection_zx">
               <div 
                 class="bt_close" 
-                onclick="$('.collection_zx').hide()" ><img src="../../static/images/article_wlzx/xxx.png"></div>
+                onclick="$('.collection_zx').hide()" ><img src="/images/article_wlzx/xxx.png"></div>
               <div class="collection_zx_nr">
-                <img src="../../static/images/article_wlzx/yes.png">
+                <img src="/images/article_wlzx/yes.png">
                 <span>成功加入</span><a 
                   id="collection_url" 
                   target="_blank" 
@@ -119,19 +129,13 @@
               <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.consignor }}</td></tr>
               <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.consignorPhone }}</td></tr>
-              <tr><td class="arc_td1">装货时间：</td><td 
-                v-if="hyDetail.createTime"
-                class="arc_td2">{{ hyDetail.createTime.substring(0, 19) }}</td></tr>
-              <tr><td class="arc_td1">里程：</td><td 
-                v-if="hyDetail.createTime"
-                class="arc_td2">{{ hyDetail.createTime.substring(0, 19) }}</td></tr>
-              <tr><td class="arc_td1">期望运价：</td><td 
-                v-if="hyDetail.createTime"
-                class="arc_td2">{{ hyDetail.createTime.substring(0, 19) }}</td></tr>
+              <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
+              <tr><td class="arc_td1">里程：</td><td class="arc_td2">{{ hyDetail.distance }}</td></tr>
+              <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>
             </table>
             </div>
             <!-- <div class="arc_left_2_1_3">
-              <img src="../../static/images/article_wlzx/pj_zhuyi.png" ><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
+              <img src="/images/article_wlzx/pj_zhuyi.png" ><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
              
             </div> -->
            
@@ -176,40 +180,42 @@
         </div>
 
       </div>
-      <div class="arc_right">
-        <p class="arc_right01"><img src="../../static/images/article_wlzx/04gongsi.png"><span>{{ hyDetail.companyName }}</span></p>
+      <div 
+        v-if="archival.shipperType === 'AF00107'" 
+        class="arc_right">
+        <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
         <p
-          v-if="hyDetail.isEnable >= 0 && hyDetail.isEnable <= 150"
+          v-if="archival.credit >= 0 && archival.credit <= 150"
           class="arc_right02" ><i>信誉：</i>
           <img
             v-for="(item1,index1) in hyDetail.starS"
             :key="index1"
             class="xy_zuan"
-            src="../../static/images/article_wlzx/gold.png"
+            src="/images/article_wlzx/gold.png"
             style="display: inline">
         </p>
         <p
-          v-if="hyDetail.isEnable >= 151"
+          v-if="archival.isEnable >= 151"
           class="arc_right02" ><i>信誉：</i>
           <img
             v-for="(item1,index1) in hyDetail.starB"
             :key="index1"
             class="xy_zuan"
-            src="../../static/images/article_wlzx/yellowguan.png"
+            src="/images/article_wlzx/yellowguan.png"
             style="display: inline">
         </p>
         <p class="arc_right03">
           <span>质量</span><span>时效</span><span>价格</span><br >
-          <font>4.7</font><font>4.8</font><font>4.9</font>
+          <font>{{ archival.serverQualityScore }}</font><font>{{ archival.transportAgingScore }}</font><font>{{ archival.serverPriceScore }}</font>
         </p>
         <p class="arc_right04">
-          <span class="arc_right04_1"><i>联系人：</i><font>{{ hyDetail.consignor }}</font></span>
-          <span><i>手机：</i><font>{{ hyDetail.consignorPhone }}</font></span>
+          <span class="arc_right04_1"><i>联系人：</i><font>{{ archival.contactsName }}</font></span>
+          <span><i>手机：</i><font>{{ archival.mobile }}</font></span>
           <span><i>Q&nbsp;Q：</i><a
-            v-if="hyDetail.qq"
-            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + hyDetail.qq + '&site=qq&menu=yes'" 
+            v-if="archival.qq"
+            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
             target="_blank"><input value="QQ交谈"></a></span>
-          <span><i>地址：</i><font v-if="hyDetail.consignorAddress">{{ hyDetail.consignorAddress.substring(0, 10) }}</font></span>
+          <span><i>地址：</i><font v-if="archival.consignorAddress">{{ archival.consignorAddress.substring(0, 10) }}</font></span>
         </p>
         <p class="arc_right05">
           <a 
@@ -227,78 +233,40 @@
         <p class="arc_right07">
           <img
             v-if="hyDetail.isVip"
-            src="../../static/images/article_wlzx/11xinyong.png">
+            src="/images/article_wlzx/11xinyong.png">
           <img
             v-if="hyDetail.authStatus === 'AF0010403'"
-            src="../../static/images/article_wlzx/10shiming.png">
-          <!--<img src="../../static/images/article_wlzx/25baozhengjin.png"/>-->
+            src="/images/article_wlzx/10shiming.png">
           <span v-if="hyDetail.authStatus !== 'AF0010403' && (!hyDetail.isVip || hyDetail.isVip === 0)">暂无认证信息</span>
         </p>
 
       </div>
-
-    </div>
-    <!-- <div class="arc_main2">
-      <div class="arc_left2">
-        <div class="arc_left2_bt" >
-          <span>货主介绍</span>
+      <div 
+        
+        class="arc_right1">
+        <div class="arc_top_title">
+          <h4 v-if="archival.shipperType === 'AF0010101'" >货主档案</h4>
+          <h4 else="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4>
         </div>
-
-        <div class="arc_left2_nr">{{ hyDetail.shipperDesc ? hyDetail.shipperDesc.substring(0, 400) :'暂未填写简介信息！' }}</div>
-      </div>
-
-      <div class="arc_right2">
-        <div class="arc_right2_bt">
-          <span 
-            id="arc_bt2" 
-            class="arc_span arc_active">货主其他求车信息</span>
-        </div>
-
-        <div class="arc_nr arc_right2_nr ">
-          <div 
-            v-for="(item,index) in otherInfoList" 
-            :key="index" 
-            class="arc_list_item">
-            <a 
-              :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
-              target="_blank"><div
-                v-if="item.startProvinceCityArea && item.endProvinceCityArea" 
-                class="arc_list_item_bt">{{ item.startProvinceCityArea + '	&rarr;' + item.endProvinceCityArea }}</div></a>
-            <div class="arc_list_item_nr">
-              <div class="arc_list_item_nr1">
-                <i>货源信息：</i><span>{{ item.goodsName }}  </span><em/>
-                <span ><font>{{ item.goodsNum }}</font>件 </span><em/>
-                <span ><font>{{ item.goodsWeight }}</font>公斤  </span><em/>
-                <span ><font>{{ item.goodsVolume }}</font>立方米  </span>
-              </div>
-              <div class="arc_list_item_nr2">
-                <i>发布时间：</i><span v-if="item.createTime">{{ item.createTime.substring(0, 16) }}</span>
-
-              </div>
-              <div class="arc_list_item_nr3">
-                <a
-                  :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><input value="查看"></a>
-              </div>
-
-            </div>
-          </div>
-
-
-        </div>
-
-
         <div 
-          class="box" 
-          style="float: right;margin-right: 200px;">
-          <div 
-            id="pagination1" 
-            class="page fl"/>
-          <div class="info fl"/>
+          v-if="archival.shipperType === 'AF0010101'" 
+          class="arc_top_img">
+          <img src="/images/cy/gold.png">
         </div>
-
+        <div class="arc_middle">
+          <img src="/images/cy/09sj.png">
+          <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
+          <p><img src="/images/article_wlzx/10shiming.png"></p>
+          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
+        </div>
+        <ul class="bottom_ul">
+          <li>联系人：{{ archival.contacts }}</li>
+          <li>手机：<a style="list-style:underline">查看电话</a></li>
+          <li>已加入：{{ archival.registerDays }}天</li>
+          <li>好评数：{{ archival.evaGoodCount }}</li>
+        </ul>
       </div>
-      <div class="clear"/>
-    </div> -->
+    </div>
     <div class="arc_main3">
      
       <div class="right">
@@ -313,9 +281,11 @@
                 width="82"
                 height="82">
             </div>
-            <div class="name">企业货主名</div>
+            <div class="name">{{ huoComprehensive.shipperTypeName }}</div>
             <div class="name">
-              <img src="/images/article_wlzx/10shiming.png">
+              <img 
+                v-if="huoComprehensive.accountStatus === 'AF0010403'" 
+                src="/images/article_wlzx/10shiming.png">
             </div>
           </div>
           <div class="content-right">
@@ -327,35 +297,15 @@
             <div class="content-right-row">共成交 <i>{{ huoComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ huoComprehensive.evaGoodCount }}</i> 次</div>
             <div class="content-right-row">大家对他的印象:</div>
             <div 
-              v-for="(item,index) in huoComprehensive.label" 
+              v-for="(item,index) in huoComprehensive.labels" 
               :key="index" 
               class="content-right-row">
               <span 
-              >{{ item.name }}（item.count）</span>
-              <!-- <span>付款及时（15）</span>
-              <span>付款及时（15）</span>
-              <span>最想合作的伙伴（15）</span>
-              <span>付款及时（15）</span>
-              <span>付款及时（15）</span>
-              <span>付款及时（15）</span>
-              <span>付款及时（15）</span> -->
-            </div>
-            <div
-              class="content-right-row"
-              style="clear: both"
-            >大家对他的印象:</div>
-            <div class="content-right-row">
-              <em>广州<img src="/images/yd_zx.png">武汉</em>
-              <em>广州<img src="/images/yd_zx.png">武汉</em>
-              <em>广州<img src="/images/yd_zx.png">武汉</em>
+              >{{ item.name }}（{{ item.count }}）</span>
             </div>
             <div
               class="content-right-row"
               style="clear: both">
-              <!-- <a
-                href="javascript:;" 
-                class="button1"
-                @click="showPrice()">标准价</a> -->
               <a
                 href="javascript:;"
                 class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
@@ -383,211 +333,58 @@
             </li>
           </ul>
         </div>
-       
-        <!-- <div id="echart"/> -->
       </div>
     </div>
     <div class="arc_main4">
-      <!-- <div class="left4">
-        <div>
-          <div 
-            class="zx_sx" 
-          >
-            <span 
-              class="biaozhi" 
-            /><span>更多从{{ cy1.startCity }}出发的货源</span>
-            <i
-              style="cursor: pointer;float: right;font-size: 14px;"
-              @click="goToCy()">更多></i>
-          </div>
-          <div class="arc_main4-content">
-            <div
-              v-if="cy1.length === 0"
-              class="list_none"
-              style="display: block">
-              <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
-              <img src="/images/none_pic.png">
-            </div>
-            <ul
-              v-for="(item,index) in cy1"
-              :key="index"
-              class="wlzx_list">
-              <li id="cy_list_0">
-                <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
-                <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
-              </li>
-              <li class="cy_list_4">
-                <a
-                  :href="'/cheyuan/detail?id=' + item.id"
-                  target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
-
-              </li>
-              <li class="cy_list_1">
-                <p class="p1">
-                  <a
-                    :href="'/cheyuan/detail?id=' + item.id"
-                    class="list-title-a"
-                    target="_blank" >
-                    <span class="list-icon lines-sprite-icons icon-start"/>
-                    <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
-                    <span class="list-icon lines-sprite-icons icon-through"/>
-                    <span class="list-icon lines-sprite-icons icon-end"/>
-                    <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
-                  </a>
-
-                </P>
-                <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font>
-                  <font>{{ item.carTypeName }}</font>
-                  <font>长<b>{{ item.carLength }}</b>米</font>
-                  <font>载重<b>{{ item.carLoad }}</b>吨</font>
-                  <font>{{ item.carSourceTypeName }}</font>
-                </p>
-                <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
-                  <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
-                <font>{{ item.createrName?item.createrName:'' }}</font></p>
-                <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
-              </li>
-              <li class="cy_list_3">
-                <p class="p1"><img
-                  v-if="item.driverStatus === 'AF0010403'"
-                  src="/images/list_wlzx/10shiming.png"></P>
-              </li>
-              <li class="wlzx_list_6">
-                <p class="p2"><a
-                  :href="'/cheyuan/detail?id=' + item.id"
-                  target="_blank" ><input
-                    readonly
-                    value="查看"></a>
-                </p>
-                <p class="p3"><a
-                  v-if="item.qq"
-                  :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
-                  target="_blank"><input
-                    value="QQ交谈">
-                </a></p>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="middle-ad">
-          <img
-            src="/images/cy/10banner.png"
-            alt="广告">
-        </div>
-
-        <div>
-          <div class="zx_sx">
-            <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的货源</span>
-            <i
-              style="cursor: pointer;float: right;font-size: 14px;"
-              @click="goToCy1()">更多></i>
-          </div>
-          <div class="arc_main4-content">
-            <div
-              v-if="cy1.length === 0"
-              class="list_none"
-              style="display: block">
-              <span>暂时没有找到您要查询的信息，可以看看其他车源哦</span>
-              <img src="/images/none_pic.png">
-            </div>
-            <ul
-              v-for="(item,index) in cy1"
-              :key="index"
-              class="wlzx_list">
-              <li id="cy_list_0">
-                <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
-                <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
-              </li>
-              <li class="cy_list_4">
-                <a
-                  :href="'/cheyuan/detail?id=' + item.id"
-                  target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
-
-              </li>
-              <li class="cy_list_1">
-                <p class="p1">
-                  <a
-                    :href="'/cheyuan/detail?id=' + item.id"
-                    class="list-title-a"
-                    target="_blank" >
-                    <span class="list-icon lines-sprite-icons icon-start"/>
-                    <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
-                    <span class="list-icon lines-sprite-icons icon-through"/>
-                    <span class="list-icon lines-sprite-icons icon-end"/>
-                    <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
-                  </a>
-
-                </P>
-                <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font>
-                  <font>{{ item.carTypeName }}</font>
-                  <font>长<b>{{ item.carLength }}</b>米</font>
-                  <font>载重<b>{{ item.carLoad }}</b>吨</font>
-                  <font>{{ item.carSourceTypeName }}</font>
-                </p>
-                <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
-                  <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
-                <font>{{ item.createrName?item.createrName:'' }}</font></p>
-                <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
-              </li>
-              <li class="cy_list_3">
-                <p class="p1"><img
-                  v-if="item.driverStatus === 'AF0010403'"
-                  src="/images/list_wlzx/10shiming.png"></P>
-              </li>
-              <li class="wlzx_list_6">
-                <p class="p2"><a
-                  :href="'/cheyuan/detail?id=' + item.id"
-                  target="_blank" ><input
-                    readonly
-                    value="查看"></a>
-                </p>
-                <p class="p3"><a
-                  v-if="item.qq"
-                  :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
-                  target="_blank"><input
-                    value="QQ交谈">
-                </a></p>
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div style="clear: both">
-          <div class="zx_sx1">
-            <span class="biaozhi1"/><span>您可能对这些感兴趣</span>
-          </div>
-          <ul class="hot-cities">
-            <li class="hot-cities-li">
-              <a
-                href="/cheyuan/detail?id=null"
-                class="hot-cities-a">广州到北京物流专线</a>
-            </li>
-            <li class="hot-cities-li">
-              <a
-                href="/cheyuan/detail?id=null"
-                class="hot-cities-a">广州物流专线</a>
-            </li>
-            <li class="hot-cities-li">
-              <a
-                href="/cheyuan/detail?id=null"
-                class="hot-cities-a">北京物流专线</a>
-            </li>
-          </ul>
-        </div>
-
-      </div> -->
-
       <!-- 货源列表 -->
       <div 
         class="w1036 list_hy">
         <div class="listInfo1">
-          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ hyDetail.startCity }}出发的货源</span>
-            <i 
-              style="cursor: pointer;float: right;font-size: 14px;"
-              @click="goToCy()">更多></i>
+          <div class="main3_1_1">
+            <div class="floatl">
+              <b class="b_title">更多从{{ hyDetail.startCity }}出发的货源</b>
+        
+              <div class="index_search floatl">
+                <div 
+                  id="wlLineFrom" 
+                  class="fl index_search_input" 
+                  style="position:relative;">
+                  <input 
+                    style="height: 100%;" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    type="text" 
+                    name="" 
+                    class="" 
+                    placeholder="请选择出发地" 
+                    readonly="">
+                </div>
+                <em>→</em>
+                <div 
+                  id="wlLineTo" 
+                  class="fl index_search_input" 
+                  style="position:relative;">            
+                  <input 
+                    style="height: 100%;" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    type="text" 
+                    name="" 
+                    class="" 
+                    placeholder="请选择到达地" 
+                    readonly="">
+                </div>                               
+                       
+              </div>               
+              <input 
+                id="search_wlLine" 
+                type="button" 
+                class="search_hy" 
+                value=""></div>                        
+            <div class="more floatr"><a 
+              href="/huoyuan" 
+              target="_blank">更多&gt;</a></div>		 
           </div>
-          <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
           <div 
             v-if="huoInfoList.length === 0" 
             class="list_none" 
@@ -615,14 +412,14 @@
                 </div>
               </a>
               <div class="distance_total">[全程<em>{{ item.distance }}</em>公里]</div>
-              <div class="sc_num"><img src="../../static/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
-              <div class="view_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
+              <div class="sc_num"><img src="/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
+              <div class="view_num"><img src="/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
             </li>
           
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
-              <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
+              <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsVolume }}<font >立方米</font></span>
@@ -630,21 +427,21 @@
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><img
                 v-if="item.authStatus === 'AF0010403'"
-                src="../../static/images/list_wlzx/10shiming.png"></P>
+                src="/images/list_wlzx/10shiming.png"></P>
               <p class="p2"><img
                 v-if="item.isVip && item.isVip === '1'"
-                src="../../static/images/list_wlzx/11xinyong.png"></P>
+                src="/images/list_wlzx/11xinyong.png"></P>
             </li>
 
             <li class="wlzx_list_6">
@@ -676,7 +473,6 @@
               style="cursor: pointer;float: right;font-size: 14px;"
               @click="goToCy()">更多></i>
           </div>
-          <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
           <div 
             v-if="huoInfoList.length === 0" 
             class="list_none" 
@@ -704,14 +500,14 @@
                 </div>
               </a>
               <div class="distance_total">[全程<em>{{ item.distance }}</em>公里]</div>
-              <div class="sc_num"><img src="../../static/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
-              <div class="view_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
+              <div class="sc_num"><img src="/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
+              <div class="view_num"><img src="/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
             </li>
           
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
-              <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
+              <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsVolume }}<font >立方米</font></span>
@@ -719,21 +515,21 @@
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><img
                 v-if="item.authStatus === 'AF0010403'"
-                src="../../static/images/list_wlzx/10shiming.png"></P>
+                src="/images/list_wlzx/10shiming.png"></P>
               <p class="p2"><img
                 v-if="item.isVip && item.isVip === '1'"
-                src="../../static/images/list_wlzx/11xinyong.png"></P>
+                src="/images/list_wlzx/11xinyong.png"></P>
             </li>
 
             <li class="wlzx_list_6">
@@ -753,10 +549,6 @@
           </ul>
         </div>
       </div>
- 
-    
-
-
       <div class="right4">
         <div class="arc_main4-content">
           <div class="zx_sx">
@@ -792,26 +584,36 @@
             <a
               v-for="(item,index) in hotSearchList"
               :key="index"
-              :href="item.url"
+              :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
               class="rmsx_list"
               target="_blank">
-              {{ item.name }}
+              {{ item.title }}
             </a>
           </div>
         </div>
         <div
           class="arc_main4-content"
           style="margin-top: 20px">
-          <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
-          <div class="rc_list">
-            <div class="left"><p>1</p></div>
-            <div class="img"><img src="/images/index/wlgs_tj_00.png" ></div>
-            <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
+          <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
+          <div 
+            v-for="(item,index) in popularity" 
+            :key="index" 
+            class="rc_list">
+            <a :href="'/member/'+item.id">
+              <div class="left">
+                <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
+              </div>
+              <div 
+                v-if="index < 3" 
+                class="img">
+                <img :src="item.companyFile" >
+              </div>
+              <div class="right">
+                <span>{{ item.companyName }}</span>
+                <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
+              </div>
+            </a>
           </div>
-          <div class="rc_list">
-            <div class="left"><p>2</p></div>
-            <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
-          </div>
         </div>
 
         <div class="arc_main4-content">
@@ -843,9 +645,6 @@
         </div>
 
         <div class="arc_main4-content">
-          <!-- <div class="zx_sx">
-            <span class="biaozhi"/><span>仓储与配送</span>
-          </div> -->
           <ul
             class="ps-list"
             style="padding-left: 30px;list-style: square">
@@ -886,23 +685,31 @@
     
     <div class="arc_main4">
       <div class="zx_sx1">
-        <span class="biaozhi1"/><span>更多从广州出发的品牌货源</span>
+        <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
       </div>
       <ul class="hot-cities">
-        <li class="hot-cities-li">
+        <li 
+          v-for="(item,index) in huoLink" 
+          :key="index" 
+          class="hot-cities-li" >
           <a
-            href="/cheyuan/detail?id=null"
-            class="hot-cities-a">广州到南京物流专线</a>
+            :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
+            class="hot-cities-a">{{ item.title }}</a>
         </li>
-        <li class="hot-cities-li">
+      </ul>
+    </div>
+    <div class="arc_main4">
+      <div class="zx_sx1">
+        <span class="biaozhi1"/><span>{{ interesLabel }}</span>
+      </div>
+      <ul class="hot-cities">
+        <li 
+          v-for="(item,index) in interestOrder" 
+          :key="index" 
+          class="hot-cities-li" >
           <a
-            href="/cheyuan/detail?id=null"
-            class="hot-cities-a">广州到南京物流专线</a>
-        </li>
-        <li class="hot-cities-li">
-          <a
-            href="/cheyuan/detail?id=null"
-            class="hot-cities-a">广州到南京物流专线</a>
+            :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
+            class="hot-cities-a">{{ item.title }}</a>
         </li>
       </ul>
     </div>
@@ -953,59 +760,27 @@
   </div>
 </template>
 <script>
-import { getCode, getCity, parseTime } from '~/components/commonJs.js'
-import FooterLinks from '../../components/footerLinks'
-function setEnable(item) {
-  if (item.isEnable >= 0 && item.isEnable <= 3) {
-    item.starS = new Array(1)
-  }
-  if (item.isEnable >= 4 && item.isEnable <= 10) {
-    item.starS = new Array(2)
-  }
-  if (item.isEnable >= 11 && item.isEnable <= 40) {
-    item.starS = new Array(3)
-  }
-  if (item.isEnable >= 41 && item.isEnable <= 90) {
-    item.starS = new Array(4)
-  }
-  if (item.isEnable >= 91 && item.isEnable <= 150) {
-    item.starS = new Array(5)
-  }
-  if (item.isEnable >= 151 && item.isEnable <= 250) {
-    item.starB = new Array(1)
-  }
-  if (item.isEnable >= 251 && item.isEnable <= 500) {
-    item.starB = new Array(2)
-  }
-  if (item.isEnable >= 501 && item.isEnable <= 1000) {
-    item.starB = new Array(3)
-  }
-  if (item.isEnable >= 1001 && item.isEnable <= 2000) {
-    item.starB = new Array(4)
-  }
-  if (item.isEnable >= 2001) {
-    item.starB = new Array(5)
-  }
-}
-async function getOtherInfoList($axios, current, vo = {}) {
-  let parm = vo
-  parm.currentPage = current
-  parm.pageSize = 5
-  let res = await $axios.post('/28-web/lclOrder/findOtherInfoList', parm)
-  if (res.data.status === 200) {
-    return {
-      list: res.data.data.list,
-      pages: res.data.data.pages,
-      currentPage: res.data.data.pageNum
-    }
-  } else {
-    return { list: [], pages: 0, currentPage: 1 }
-  }
-}
+// async function getOtherInfoList($axios, current, vo = {}) {
+//   return { list: [], pages: 0, currentPage: 1 }
+//   let parm = vo
+//   parm.currentPage = current
+//   parm.pageSize = 5
+//   let res = await $axios.post('/28-web/lclOrder/findOtherInfoList', parm)
+//   if (res.data.status === 200) {
+//     return {
+//       list: res.data.data.list,
+//       pages: res.data.data.pages,
+//       currentPage: res.data.data.pageNum
+//     }
+//   } else {
+//     return { list: [], pages: 0, currentPage: 1 }
+//   }
+// }
+
 export default {
   name: 'Detail',
   components: {
-    FooterLinks
+    // FooterLinks
   },
   head: {
     link: [
@@ -1013,6 +788,8 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
     ],
     script: [
+      { src: '/js/city-picker.data.js' },
+      { src: '/js/city-picker.js' },
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
       { src: '../js/WTMap.min.js' },
@@ -1024,6 +801,7 @@ export default {
     return {
       zxList: [],
       inTerVar: null,
+      inTerVar1: null,
       otherInfoList: [],
       hyDetail: [],
       pages: 0,
@@ -1059,108 +837,173 @@ export default {
           url: '/create/line',
           img: '/images/cy/08zx.png'
         }
-      ],
-      hotSearchList: [
-        {
-          name: '广州到杭州货源',
-          url:
-            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=杭州市&endProvince=浙江省&startArea=&startCity=广州市&startProvince=广东省'
-        },
-        {
-          name: '山西到甘肃的货源',
-          url:
-            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=甘肃省&startArea=&startCity=&startProvince=山西省'
-        },
-        {
-          name: '广东广州到山西太原的货源',
-          url:
-            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=太原市&endProvince=山西省&startArea=&startCity=广州市&startProvince=广东省'
-        },
-        {
-          name: '找上海货源',
-          url:
-            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=上海市&startProvince=上海市'
-        },
-        {
-          name: '沈阳到广州的货源',
-          url:
-            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=广州市&endProvince=广东省&startArea=&startCity=沈阳市&startProvince=辽宁省'
-        },
-        {
-          name: '苏州货源',
-          url:
-            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=苏州市&startProvince=江苏省'
-        },
-        {
-          name: '上海到江西的运力',
-          url:
-            '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=江西省&isLongCar=&startArea=&startCity=&startProvince=上海市'
-        },
-        {
-          name: '广州出发的专线',
-          url:
-            '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=广州市&startProvince=广东省'
-        },
-        {
-          name: '广州物流公司',
-          url:
-            '/gongsi/?tid=80&startp=广东省&startc=广州市&starta=&address=广东省广州市&companyName='
-        },
-        {
-          name: '上海地区运力',
-          url:
-            '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=上海市&startProvince=上海市'
-        }
       ]
     }
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    let hyDetail = await $axios.get('/28-web/lclOrder/detail/' + query.id)
-    // console.log(hyDetail)
-    if (hyDetail.data.status === 200) {
-      setEnable(hyDetail.data.data)
-      let code = await getCode($axios, hyDetail.data.data.endProvince)
-      zxList = await getCity($axios, code, hyDetail.data.data.startCity)
-    }
-    let otherInfoList = await getOtherInfoList($axios, 1, {
-      id: query.id,
-      shipperId: query.shipperId
-    })
+    let hyDetail = await $axios
+      .get('/28-web/lclOrder/detail/' + query.id)
+      .catch(err => {
+        // console.log('huoComprehensives2:', err)
+      })
+    // let otherInfoList = await getOtherInfoList($axios, 1, {
+    //   id: query.id,
+    //   shipperId: query.shipperId
+    // }).catch(err => {
+    //   console.log('huoComprehensives3:', err)
+    // })
     let parm = {
       currentPage: 1,
       pageSize: 10,
       startProvince: hyDetail.data.data.startProvince,
       startCity: hyDetail.data.data.startCity
     }
-    //货源列表
-    let huoInfoLists = await $axios.post('28-web/lclOrder/list', parm)
-    //最新货源信息
-    let newestHuoyuanRes = await $axios.get('/28-web/lclOrder/newList')
-    // 货主综合力评估
-    let huoComprehensives = await $axios.get(
-      '/28-web/shipper/comprehensive?orderId=' + query.id
+    let parm1 = {
+      endArea: hyDetail.data.data.endArea,
+      endCity: hyDetail.data.data.endCity,
+      endProvince: hyDetail.data.data.endProvince,
+      startArea: hyDetail.data.data.startArea,
+      startCity: hyDetail.data.data.startCity,
+      startProvince: hyDetail.data.data.startProvince
+    }
+    //货主档案
+    let archivals = await $axios.post(
+      '/28-web/shipper/archival?shipperId=' + query.shipperId
     )
-    console.log(huoComprehensives.data.data.label, '333huoInforRos')
+    console.log(archivals.data.data, 'item province:')
+    //顶部轮播
+    let newLists = await $axios.get('/28-web/lclOrder/newList')
+    //货源列表
+    let huoInfoLists = await $axios
+      .post('/28-web/lclOrder/list', parm)
+      .catch(err => {
+        // console.log('huoComprehensives4:', err)
+      })
+    //最新货源信息
+    let newestHuoyuanRes = await $axios
+      .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
+      .catch(err => {
+        // console.log('newestHuoyuanRes:', err)
+      })
+    // 货主综合力评估
+    let huoComprehensives = await $axios
+      .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
+      .catch(err => {
+        // console.log('huoComprehensives:', err)
+      })
+    //货源热门搜索
+    let hotSearchs = await $axios.get('/28-web/hotSearch/supply/detail/links')
+    //企业人气榜
+    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
+    //底部推荐
+
+    let huoLinks = await $axios.post(
+      '/28-web/lclOrder/detail/related/links',
+      parm1
+    )
+    let footLink = item => {
+      switch (item.startProvince) {
+        case null:
+          item.startProvince = ''
+      }
+      switch (item.startCity) {
+        case null:
+          item.startCity = ''
+      }
+      switch (item.startArea) {
+        case null:
+          item.startArea = ''
+      }
+      switch (item.endProvince) {
+        case null:
+          item.endProvince = ''
+      }
+      switch (item.endCity) {
+        case null:
+          item.endCity = ''
+      }
+      switch (item.endArea) {
+        case null:
+          item.endArea = ''
+      }
+      item.carSourceType = ''
+      item.targetLinks = ''
+      if (item.type == '1000') {
+        item.targetLinks = '/gongsi/'
+      }
+      if (item.type == '2000') {
+        item.targetLinks = '/zhuanxian/list'
+      }
+      if (item.type == '2001') {
+        item.targetLinks = '/member/' + item.companyId + '-line'
+      }
+      if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
+        item.targetLinks = '/cheyuan'
+      }
+      if (item.type == '3001') {
+        item.targetLinks = '/cheyuan'
+        item.carSourceType = 'AF01801'
+      }
+      if (item.type == '4000') {
+        item.targetLinks = '/huoyuan'
+      }
+      if (item.type == '4001') {
+        item.targetLinks = '/member/' + item.companyId + '-huo'
+      }
+    }
+    huoLinks.data.data.brandOrder.links.forEach(footLink)
+    huoLinks.data.data.interestOrder.links.forEach(footLink)
+    hotSearchs.data.data.links.forEach(footLink)
     return {
+      archival: archivals.data.status === 200 ? archivals.data.data : [],
       hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+      popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       huoComprehensive:
         huoComprehensives.data.status === 200
           ? huoComprehensives.data.data
           : [],
-      // huoLabel: huoComprehensives.data.data.label,
       newestHuoyuanRe:
-        newestHuoyuanRes.data.status === 200 ? newestHuoyuanRes.data.data : [],
+        newestHuoyuanRes.data.status === 200
+          ? newestHuoyuanRes.data.data.list
+          : [],
+      newList: newLists.data.status === 200 ? newLists.data.data : [],
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       huoInfoList:
         huoInfoLists.data.status === 200 ? huoInfoLists.data.data.list : [],
-      otherInfoList: otherInfoList.list,
-      currentPage: otherInfoList.currentPage,
-      pages: otherInfoList.pages
+      // otherInfoList: otherInfoList.list,
+      huoLink:
+        huoLinks.data.status === 200 ? huoLinks.data.data.brandOrder.links : [],
+      huoLabel:
+        huoLinks.data.status === 200 ? huoLinks.data.data.brandOrder.label : '',
+      interestOrder:
+        huoLinks.data.status === 200
+          ? huoLinks.data.data.interestOrder.links
+          : [],
+      interesLabel:
+        huoLinks.data.status === 200
+          ? huoLinks.data.data.interestOrder.label
+          : '',
+      hotSearchList:
+        hotSearchs.data.status === 200 ? hotSearchs.data.data.links : []
+      // currentPage: otherInfoList.currentPage,
+      // pages: otherInfoList.pages
     }
   },
 
   mounted() {
+    $('#wlLineFrom input').citypicker({
+      // province: this.hyDetail.startProvince,
+      // city: this.hyDetail.startCity,
+      // district: this.hyDetail.startArea
+    })
+    $('#wlLineTo input').citypicker({
+      // province: this.hyDetail.endProvince,
+      // city: this.hyDetail.endCity,
+      // district: this.hyDetail.endArea
+    })
+    // console.log(this.newestHuoyuanRe, '55333huoInforRos')
+    // console.log(this.hyDetail)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.zx_sx_new')
     roll.append(roll.html())
@@ -1192,19 +1035,42 @@ export default {
         startScroll()
       }
     )
+
+    let top_left_h = $('.top_left').height()
+    let roll_ul_h = $('.top_left_ul')
+    roll_ul_h.append(roll_ul_h.html())
+    let num = 1
+    let newList_l = this.newList.length
+    let left_ul_li = $('.top_left_ul_li').height()
+    let startScroll_top = () => {
+      this.inTerVar1 = setInterval(() => {
+        roll_ul_h
+          .stop()
+          .animate({ top: `${num * -left_ul_li}px` }, 2000, () => {
+            if (num > newList_l) {
+              num = 1
+              roll_ul_h.css('top', '0px')
+            }
+          })
+        num = num + 1
+      }, 6000)
+    }
+    if (left_ul_li * newList_l > top_left_h) {
+      startScroll_top()
+    }
     $('#pagination1').pagination({
       currentPage: this.currentPage,
       totalPage: this.pages,
       callback: async current => {
         $('#current1').text(current)
-        let otherInfoList = await getOtherInfoList(this.$axios, current, {
-          id: this.$route.query.id,
-          shipperId: this.$route.shipperId
-        })
-        this.otherInfoList = otherInfoList.list
-        this.currentPage = otherInfoList.currentPage
-        this.pages = otherInfoList.pages
-        window.location.href = '#top'
+        // let otherInfoList = await getOtherInfoList(this.$axios, current, {
+        //   id: this.$route.query.id,
+        //   shipperId: this.$route.shipperId
+        // })
+        // this.otherInfoList = otherInfoList.list
+        // this.currentPage = otherInfoList.currentPage
+        // this.pages = otherInfoList.pages
+        // window.location.href = '#top'
       }
     })
     // seajs.use(['../js/city.js'], function() {
@@ -1232,6 +1098,27 @@ export default {
     },
     clickImg(int) {
       this.showImg = int
+    },
+    //点击换一个
+    findAnother() {
+      let _this = this
+      let obj = {
+        endArea: this.hyDetail.endArea,
+        endCity: this.hyDetail.endCity,
+        endProvince: this.hyDetail.endProvince,
+        startArea: this.hyDetail.startArea,
+        startCity: this.hyDetail.startCity,
+        startProvince: this.hyDetail.startProvince
+      }
+      // console.log(obj, 'obj')
+      this.$axios.post('/28-web/lclOrder/another', obj).then(res => {
+        if (res.data.status === 200) {
+          console.log(res.data.data.id, '00000000')
+          window.location.href = `/huoyuan/detail?id=${
+            res.data.data.id
+          }&shipperId=${res.data.data.shipperId}`
+        }
+      })
     }
   }
 }

@@ -148,7 +148,7 @@
       <div class="lines-news-list">
         <ul>
           <li 
-            v-for="(item, index) in $store.state.line.wlzx"
+            v-for="(item, index) in $store.state.news.wlzx"
             :key="index">
             <a 
               :href="item.url" 

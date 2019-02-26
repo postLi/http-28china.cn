@@ -28,6 +28,8 @@ export default {
     if (process.server) {
       return
     }
+    console.log(this.info, 'this.info')
+    // `cargo_type`  （重货1、轻货0）'
     this.info.forEach((item, index) => {
       if (item.cargoType === '0') {
         this.cargoType0 = item
@@ -376,8 +378,19 @@ export default {
       sendEchart[1] = cargoType.highAveragePrice
       sendEchart[2] = cargoType.highQualityPrice
       sendEchart[3] = cargoType.lowAveragePrice
+
+      // lightDiscountPrice 轻货价的承运商价
+      let price = ''
+      if (cargoType.cargoType == 1) {
+        price = cargoType.weightDiscountPrice
+        console.log(price, 'price')
+      }
+      if (cargoType.cargoType == 0) {
+        price = cargoType.lightDiscountPrice
+        console.log(price, 'price2')
+      }
       sendEchart[4] = {
-        value: 15,
+        value: price,
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }

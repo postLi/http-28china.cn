@@ -29,7 +29,6 @@ export default {
       return
     }
     this.info.forEach((item, index) => {
-      console.log(item, 'item')
       if (item.cargoType === '0') {
         this.cargoType0 = item
         this.comInfo(this.sendEchart, this.cargoType0)
@@ -41,15 +40,6 @@ export default {
         this.comInfo(this.sendEchart1, this.cargoType1)
       }
     })
-    // let arr = this.info.filter((item, index) => {
-    //   return item.cargoType === '0'
-    // })
-    // this.cargoType1 = this.info.filter((item, index) => {
-    //   return item.cargoType === '1'
-    // })
-
-    // this.comInfo(this.sendEchart1, this.cargoType1)
-    console.log(this.sendEchart1, 'this.cargoType1')
     let maxY = this.sendEchart[0]
     this.sendEchart.forEach(el => {
       if (maxY < el) {
@@ -63,23 +53,9 @@ export default {
         maxY1 = el
       }
     })
-
-    // maxY1 *= 1.5
-    // let maxY1 = this.sendEchart1[0]
-    // this.sendEchart1.forEach(el => {
-    //   if (maxY1 < el) {
-    //     maxY1 = el
-    //   }
-    // })
-    //
-    // maxY1 *= 1.5
-
-    // console.log(this.sendEchart1, 'this.sendEchart1')
-    // let echartInfos = await echartInfo($axios, this.$route.query.id)
-    // console.log(echartInfos, 'echartInfos')
     let myChart = echarts.init(document.getElementById('echart'))
-    // console.log(myChart, 'myChart')
-    let option = {
+
+    let option2 = {
       title: { text: '', subtext: '' },
       tooltip: { trigger: 'axis' },
       legend: {
@@ -90,6 +66,8 @@ export default {
           // 不选中'系列2'
           轻货: false
         },
+        bottom: 30,
+        left: 'left',
         selectedMode: 'single',
         textStyle: {
           color: '#FFA657' // 值域文字颜色
@@ -101,10 +79,10 @@ export default {
         boundaryGap: false,
         data: [
           '大品牌报价',
-          '优质承运商报价',
+          '优质专线报价',
           '行业均价（高点）',
           '行业均价（低点）',
-          '本承运商价'
+          '本供应商价'
         ]
       },
       yAxis: {
@@ -112,7 +90,7 @@ export default {
         axisTick: { show: false },
         axisLabel: { show: false },
         type: 'value',
-        max: [maxY * 1.2, maxY1 * 1.2]
+        max: maxY1
       },
       series: [
         {
@@ -170,7 +148,7 @@ export default {
           },
           symbolSize: 6,
           hoverAnimation: false, //拐点不要动画
-          symbol: 'circle',
+          symbol: 'rect',
           label: {
             show: true,
             position: 'bottom',
@@ -185,7 +163,7 @@ export default {
               if (params.dataIndex === 4) {
                 return ``
               } else {
-                return `{${c0}|${params.value}元/公斤}\n{color2|${params.name}}`
+                return `{${c0}|${params.value}万}\n{color2|${params.name}}`
               }
             },
             rich: {
@@ -208,12 +186,9 @@ export default {
             normal: { color: 'rgba(255,173,101, 1)' }
           },
           areaStyle: {
-            normal: {
-              origin: 'end',
-              color: 'rgba(255,161,77, 0.5)'
-            }
+            normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
           },
-          data: [null, null, 239, 194],
+          data: [null, null, this.sendEchart[2], this.sendEchart[3]],
           tooltip: { show: false }
         },
         {
@@ -222,6 +197,7 @@ export default {
           markLine: {
             name: 'xfdsvffds',
             symbol: ['circle', 'none'],
+            symbolSize: 6,
             lineStyle: {
               normal: { color: 'rgba(255,173,101, 1)' }
             },
@@ -229,7 +205,6 @@ export default {
               show: true,
               position: 'end',
               formatter: function(params) {
-                // console.log(params)
                 if (params.dataIndex === 1) {
                   return `{style|建议价格区间}`
                 }
@@ -244,11 +219,11 @@ export default {
             },
             data: [
               [
-                { coord: ['行业均价（高点）', 239] },
+                { coord: ['行业均价（高点）', this.sendEchart[2]] },
                 { coord: ['行业均价（高点）', maxY] }
               ],
               [
-                { coord: ['行业均价（低点）', 194] },
+                { coord: ['行业均价（低点）', this.sendEchart[3]] },
                 { coord: ['行业均价（低点）', maxY] }
               ]
             ]
@@ -309,7 +284,7 @@ export default {
           },
           symbolSize: 6,
           hoverAnimation: false, //拐点不要动画
-          symbol: 'circle',
+          symbol: 'rect',
           label: {
             show: true,
             position: 'bottom',
@@ -347,12 +322,9 @@ export default {
             normal: { color: 'rgba(255,173,101, 1)' }
           },
           areaStyle: {
-            normal: {
-              origin: 'end',
-              color: 'rgba(255,161,77, 0.5)'
-            }
+            normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
           },
-          data: [null, null, 958.17, 785.53],
+          data: [null, null, this.sendEchart1[2], this.sendEchart1[3]],
           tooltip: { show: false }
         },
         {
@@ -361,6 +333,7 @@ export default {
           markLine: {
             name: 'xfdsvffds',
             symbol: ['circle', 'none'],
+            symbolSize: 6,
             lineStyle: {
               normal: { color: 'rgba(255,173,101, 1)' }
             },
@@ -368,7 +341,6 @@ export default {
               show: true,
               position: 'end',
               formatter: function(params) {
-                // console.log(params)
                 if (params.dataIndex === 1) {
                   return `{style|建议价格区间}`
                 }
@@ -383,11 +355,11 @@ export default {
             },
             data: [
               [
-                { coord: ['行业均价（高点）', 239] },
+                { coord: ['行业均价（高点）', this.sendEchart1[2]] },
                 { coord: ['行业均价（高点）', maxY1] }
               ],
               [
-                { coord: ['行业均价（低点）', 194] },
+                { coord: ['行业均价（低点）', this.sendEchart1[3]] },
                 { coord: ['行业均价（低点）', maxY1] }
               ]
             ]
@@ -395,11 +367,7 @@ export default {
         }
       ]
     }
-
-    // option.series[0].data = Object.assign([], this.sendEchart)
-    // this.sendEchar = option.series.data
-    // console.log(option.series[0].data, 'option.series.data', this.sendEchart)
-    myChart.setOption(option)
+    myChart.setOption(option2)
   },
   methods: {
     comInfo(sendEchart, cargoType) {

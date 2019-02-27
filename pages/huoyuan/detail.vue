@@ -103,11 +103,6 @@
               class="arc_td2">{{ hyDetail.remark }}</td></tr>
             </table>
             </div>
-            <!-- <div class="arc_left_2_1_3">
-              <a href="javascript:void(0)"><img src="/images/article_wlzx/17shoucang.png">&nbsp;<span class="collection_hz">收藏货源</span><i>&nbsp;(&nbsp;<em class="my_hz_num">78</em>人气&nbsp;)</i></a>
-             
-            </div> -->
-            
           </div>
           
           <div class="arc_left_2_2">
@@ -134,11 +129,6 @@
               <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>
             </table>
             </div>
-            <!-- <div class="arc_left_2_1_3">
-              <img src="/images/article_wlzx/pj_zhuyi.png" ><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
-             
-            </div> -->
-           
           </div>
           <div class="arc_bottom">
             <div class="arc_left_3">
@@ -163,6 +153,7 @@
                   <a 
                     href="javascript:;" 
                     class="button2" 
+                    @click="openAdd()"
                   ><img 
                     src="/images/cy/03u41008 2.gif" 
                   >此线路上新货源提醒我</a>
@@ -261,7 +252,15 @@
         </div>
         <ul class="bottom_ul">
           <li>联系人：{{ archival.contacts }}</li>
-          <li>手机：<a style="list-style:underline">查看电话</a></li>
+          <li>手机：
+            <a 
+              v-show="checkMoblie"
+              style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
+              @click="showMoblieFn(showMoblie)">查看电话</a>
+            <a 
+              v-show="showMoblie"
+              style="color: #333" 
+              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li>
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
@@ -336,7 +335,7 @@
       </div>
     </div>
     <div class="arc_main4">
-      <!-- 货源列表 -->
+      <!-- 货源列表start -->
       <div 
       class="w1036 list_hy">
         <div class="listInfo1">
@@ -380,7 +379,8 @@
                 id="search_wlLine" 
                 type="button" 
                 class="search_hy" 
-                value=""></div>                        
+                value="" 
+                @click="search()"></div>                        
             <div class="more floatr"><a 
               href="/huoyuan" 
               target="_blank">更多&gt;</a></div>		 
@@ -549,6 +549,7 @@
           </ul>
         </div>
       </div>
+      <!-- 货源列表end -->
       <div class="right4">
         <div class="arc_main4-content">
           <div class="zx_sx">
@@ -754,33 +755,16 @@
         </p>
       </div>
 
-
     </div>
-
+    <Add :is-show-add.sync="isShowAdd"/>
   </div>
 </template>
 <script>
-// async function getOtherInfoList($axios, current, vo = {}) {
-//   return { list: [], pages: 0, currentPage: 1 }
-//   let parm = vo
-//   parm.currentPage = current
-//   parm.pageSize = 5
-//   let res = await $axios.post('/28-web/lclOrder/findOtherInfoList', parm)
-//   if (res.data.status === 200) {
-//     return {
-//       list: res.data.data.list,
-//       pages: res.data.data.pages,
-//       currentPage: res.data.data.pageNum
-//     }
-//   } else {
-//     return { list: [], pages: 0, currentPage: 1 }
-//   }
-// }
-
+import Add from './add'
 export default {
   name: 'Detail',
   components: {
-    // FooterLinks
+    Add
   },
   head: {
     link: [
@@ -799,6 +783,9 @@ export default {
   layout: 'subLayout',
   data() {
     return {
+      showMoblie: false,
+      checkMoblie: true,
+      isShowAdd: false,
       zxList: [],
       inTerVar: null,
       inTerVar1: null,
@@ -806,6 +793,12 @@ export default {
       hyDetail: [],
       pages: 0,
       currentPage: 1,
+      startProvince: '',
+      startCity: '',
+      startArea: '',
+      endProvince: '',
+      endCity: '',
+      endArea: '',
       gldhList: [
         {
           title: '注册28快运会员',
@@ -847,12 +840,6 @@ export default {
       .catch(err => {
         // console.log('huoComprehensives2:', err)
       })
-    // let otherInfoList = await getOtherInfoList($axios, 1, {
-    //   id: query.id,
-    //   shipperId: query.shipperId
-    // }).catch(err => {
-    //   console.log('huoComprehensives3:', err)
-    // })
     let parm = {
       currentPage: 1,
       pageSize: 10,
@@ -986,8 +973,6 @@ export default {
           : '',
       hotSearchList:
         hotSearchs.data.status === 200 ? hotSearchs.data.data.links : []
-      // currentPage: otherInfoList.currentPage,
-      // pages: otherInfoList.pages
     }
   },
 
@@ -1002,8 +987,6 @@ export default {
       // city: this.hyDetail.endCity,
       // district: this.hyDetail.endArea
     })
-    // console.log(this.newestHuoyuanRe, '55333huoInforRos')
-    // console.log(this.hyDetail)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.zx_sx_new')
     roll.append(roll.html())
@@ -1058,34 +1041,51 @@ export default {
     if (left_ul_li * newList_l > top_left_h) {
       startScroll_top()
     }
-    $('#pagination1').pagination({
-      currentPage: this.currentPage,
-      totalPage: this.pages,
-      callback: async current => {
-        $('#current1').text(current)
-        // let otherInfoList = await getOtherInfoList(this.$axios, current, {
-        //   id: this.$route.query.id,
-        //   shipperId: this.$route.shipperId
-        // })
-        // this.otherInfoList = otherInfoList.list
-        // this.currentPage = otherInfoList.currentPage
-        // this.pages = otherInfoList.pages
-        // window.location.href = '#top'
-      }
-    })
-    // seajs.use(['../js/city.js'], function() {
-    //   seajs.use(['../js/arc_huoyuan.js'], function() {
-    //     seajs.use(['../js/collection.js'], function() {
-    //       seajs.use(['../js/gaodemap2.js'], function() {})
-    //     })
-    //   })
-    // })
   },
   destroyed() {
     clearInterval(this.inTerVar)
     this.inTerVar = null
   },
   methods: {
+    openAdd() {
+      console.log('11111')
+      this.isShowAdd = true
+    },
+    showMoblieFn(showMoblieFn) {
+      if (showMoblieFn == false) {
+        this.showMoblie = true
+        this.checkMoblie = false
+      } else {
+        this.checkMoblie = true
+        this.showMoblie = false
+      }
+    },
+    searchDo() {
+      let list1 = [],
+        list2 = []
+      $('#wlLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      this.startProvince = list1[0] ? list1[0] : ''
+      this.startCity = list1[1] ? list1[1] : ''
+      this.startArea = list1[2] ? list1[2] : ''
+
+      $('#wlLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      this.endProvince = list2[0] ? list2[0] : ''
+      this.endCity = list2[1] ? list2[1] : ''
+      this.endArea = list2[2] ? list2[2] : ''
+    },
+    search() {
+      this.searchDo()
+      //
+      window.location.href = `/huoyuan?endArea=${this.endArea}&endCity=${
+        this.endCity
+      }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
+        this.startCity
+      }&startProvince=${this.startProvince}`
+    },
     goToCy() {
       window.location.href = `/huoyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
         this.hyDetail.startCity

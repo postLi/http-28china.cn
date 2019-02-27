@@ -734,7 +734,7 @@ export default {
     let _this = this
     // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
     // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
-    seajs.use(['/js/city.js', 'layer'], function() {
+    seajs.use(['/js/city.js', '/js/city-picker.data.js', 'layer'], function() {
       seajs.use(
         [
           '/js/city-picker.js',

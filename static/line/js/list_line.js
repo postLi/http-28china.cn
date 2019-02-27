@@ -171,7 +171,7 @@
     endc = encodeURI(endc)
     enda = encodeURI(enda)
     window.open(
-      '/zhuanxian?tid=4&startp=' +
+      '/zhuanxian/list?tid=4&startp=' +
         startp +
         '&startc=' +
         startc +

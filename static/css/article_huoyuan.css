@@ -8,6 +8,9 @@ body {
 	margin: 0 auto;	
 	/* background-color: #fff; */
 }
+a{
+  cursor: pointer;
+}
 .arc_top1{height: 32px;width: 1400px;
 margin-bottom: 12px; margin-top: 10px;
 	}
@@ -555,7 +558,6 @@ text-align: center;
 }
 .arc_middle5 .arc_m5_1 img{
   position: relative;
-  top: 5px;
   right: 5px;
   width: 16px;
 	height: 20px;

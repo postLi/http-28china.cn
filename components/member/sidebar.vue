@@ -1,7 +1,6 @@
 <template>
   <div class="side_left">
-    <ul><li  
-      class="side_title"><span>关于我们</span></li>
+    <ul><li class="side_title"><span>关于我们</span></li>
       <li 
         :class="tpath.indexOf('jianjie') !== -1 ? 'active' : ''" 
         class="side_memu"><a :href="$store.state.member.id + '-jianjie'"><span>公司简介</span></a></li>

@@ -418,7 +418,7 @@
               v-if="oneCompany.qq"
               :href="'http://wpa.qq.com/msgrd?v=3&uin=' + oneCompany.qq + '&site=qq&menu=yes'" 
               target="_blank"><input
-                value="QQ交谈"></a></span>
+            value="QQ交谈"></a></span>
             <span><i>地址：</i><font>{{ oneCompany.address }}</font></span>
           </p>
           <p class="arc_right05">
@@ -733,7 +733,7 @@
                 id="pagination1" 
                 class="page fl"/>
               <div class="info fl">
-                <!--<p>当前页数：<span id="current1">1</span></p>-->
+              <!--<p>当前页数：<span id="current1">1</span></p>-->
               </div>
             </div>
             <!--分页-->

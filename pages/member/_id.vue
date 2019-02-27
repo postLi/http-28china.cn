@@ -136,7 +136,7 @@
                 <img src="/member/images/index/cp_08.jpg">
               </li>
               <li 
-                class="item9">
+              class="item9">
                 <img src="/member/images/index/cp_09.jpg">
               </li>
             </ul>

@@ -469,7 +469,7 @@
                     <!--allServiceNameList-->
                     <div
 
-                      class="content-right-row-left">
+                    class="content-right-row-left">
                       <span
                         v-for="(item, index) in linedataB.allServiceNameList"
                         :key="index"
@@ -620,7 +620,7 @@
         style="clear: both"
         class="clearfix">
         <div
-          class="arc_main5">
+        class="arc_main5">
           <div
             id="js002"
             class="w1036 list_wlzx">
@@ -676,9 +676,9 @@
                 :key="index"
                 class="wlzx_list">
                 <li id="wlzx_list_0">
-                  <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
+                <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
 
-                  <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
+                <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
                 </li>
                 <li class="wlzx_list_1">
                   <a
@@ -720,7 +720,7 @@
                       id="nr03"
                       :href="'/member/'+item.publishId"
                       target="_blank"><font
-                        class="">{{ item.companyName }}</font></a>
+                    class="">{{ item.companyName }}</font></a>
                     <a
                       id="nr11"
                       target="_blank"

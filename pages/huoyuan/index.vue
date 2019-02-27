@@ -209,17 +209,17 @@
             id="pagination1"
             class="page fl"/>
           <div class="info fl">
-            <!--<p>当前页数：<span id="current1">1</span></p>-->
+          <!--<p>当前页数：<span id="current1">1</span></p>-->
           </div>
         </div>
         <!--分页-->
 
         <!-- 28为您推荐start -->
         <div
-          class="hot-city-layer line-city-box">
+        class="hot-city-layer line-city-box">
           <div class="hot-city-unit">
             <h3 
-              class="news-unit-title line-title">28快运为您推荐</h3>
+            class="news-unit-title line-title">28快运为您推荐</h3>
             <ul class="hot-cities">
               <li class="hot-cities-li"><a 
                 class="hot-cities-a" 
@@ -271,7 +271,7 @@
           class="che_box">
           <div class="tj_list">
             <div class="p p1"><img src="../../static/images/04gongsi.png" ><span><a
-              target="_blank" >{{ item.companyName }}</a></span>
+            target="_blank" >{{ item.companyName }}</a></span>
               <span class="img_icon">
                 <img
                   v-if="item.authStatus === 'AF0010403'"

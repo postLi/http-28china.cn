@@ -53,7 +53,6 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
 export default {
   name: 'Add',
   props: {
@@ -61,10 +60,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  head: {
-    link: [{ rel: 'stylesheet', href: '/layer3/css/layui.css' }],
-    script: [{ src: '/layer3/layui.js' }]
   },
   info: {
     props: [Array, Object],

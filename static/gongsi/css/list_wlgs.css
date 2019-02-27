@@ -516,4 +516,31 @@ width: 342px;
 	height:20px;
 	width:15.83px;
 }
-.wlgs_bg{width: 1903px;margin-top: -30px;overflow: hidden;}
+
+/**/
+.header_list{
+  width: 1400px;
+  height: 420px !important;
+  margin: 0 auto;
+  /*overflow: hidden;*/
+  margin-top: 21px;
+}
+.header_list ul.first_ul li{
+  float: left;
+}
+.header_list ul.first_ul li.first_li{
+  width: 200px;
+  border: 1px solid #ccc;
+  height: 420px
+}
+.header_list ul.first_ul li.sec_li{
+  width: 860px;
+  border: 1px solid #ccc;
+  height: 420px
+}
+.header_list ul.first_ul li.last_li{
+  width: 280px;
+  border: 1px solid #ccc;
+  height: 420px
+}
+/**/

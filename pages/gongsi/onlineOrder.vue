@@ -124,7 +124,7 @@
                   </tr>
                 </thead>
                 <tbody class="lineinfo">
-                  <!-- <tr>
+                <!-- <tr>
                     <td class="order-company-name"><label ><input type="checkbox" name="" id="  ">武汉京昌物流</label></td>
                     <td class="order-company-ico">
                         <img src="/member/space/company/images/order/28ico.png" alt="">
@@ -233,11 +233,11 @@
                 href="/h5/EnterpriseAgreement.html"
                 target="_blank"
                 rel="noopener noreferrer">《
-                <!--<?php echo $cfg_webname; ?>服务协议-->
-                》</a> <a
-                  href="/h5/SecrecyAgreement.html"
-                  target="_blank"
-                  rel="noopener noreferrer">《网络用户信息保密协议》</a>
+              <!--<?php echo $cfg_webname; ?>服务协议-->
+              》</a> <a
+                href="/h5/SecrecyAgreement.html"
+                target="_blank"
+                rel="noopener noreferrer">《网络用户信息保密协议》</a>
             </label>
           </div>
           <div class="order-submit-btn">立即下单</div>

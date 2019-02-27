@@ -206,7 +206,7 @@
                 v-if="item.qq"
                 :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
                 target="_blank"><input
-                  value="QQ交谈">
+                value="QQ交谈">
               </a></p>
             </li>
           </ul>
@@ -219,7 +219,7 @@
             id="pagination1"
             class="page fl"/>
           <div class="info fl">
-            <!--<p>当前页数：<span id="current1">1</span></p>-->
+          <!--<p>当前页数：<span id="current1">1</span></p>-->
           </div>
         </div>
         <!--分页-->
@@ -248,7 +248,7 @@
         <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
         <div class="list_new_box">
           <ul 
-            class="list_new_ul">
+          class="list_new_ul">
             <li
               v-for="(item,index) in newestCar"
               :key="index"

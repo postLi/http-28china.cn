@@ -85,13 +85,13 @@
             </td></tr>
 
             <tr class="deductible"><td><i>*</i>免赔额：</td><td id="insuranceDeductibles">
-              <!--<span>每次事故绝对免赔为人民币1000元或损失金额的5%，两者以高者为准‘针对盗抢事故，每次事故绝对免赔为损失金额的20%</span>-->
+            <!--<span>每次事故绝对免赔为人民币1000元或损失金额的5%，两者以高者为准‘针对盗抢事故，每次事故绝对免赔为损失金额的20%</span>-->
             </td></tr>
             <tr class="fee_total"><td><i>*</i>保费合计：</td><td id="insuranceFee">
-              <!--<font>10.00</font><em>元</em>-->
+            <!--<font>10.00</font><em>元</em>-->
             </td></tr>
             <tr class="fee_total"><td><i>*</i>费率：</td><td id="insuranceRate">
-              <!--<font>10.00</font><em>元</em>-->
+            <!--<font>10.00</font><em>元</em>-->
             </td></tr>
             <tr class="next_step3"><td><a 
               target="_self" 

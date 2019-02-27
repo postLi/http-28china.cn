@@ -469,7 +469,7 @@
                     <!--allServiceNameList-->
                     <div
 
-                      class="content-right-row-left">
+                    class="content-right-row-left">
                       <span
                         v-for="(item, index) in linedataB.allServiceNameList"
                         :key="index"
@@ -627,7 +627,7 @@
         style="clear: both"
         class="clearfix">
         <div
-          class="arc_main5">
+        class="arc_main5">
           <div
             id="js002"
             class="w1036 list_wlzx">
@@ -683,9 +683,9 @@
                 :key="index"
                 class="wlzx_list">
                 <li id="wlzx_list_0">
-                  <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
+                <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
 
-                  <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
+                <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
                 </li>
                 <li class="wlzx_list_1">
                   <a
@@ -727,7 +727,7 @@
                       id="nr03"
                       :href="'/member/'+item.publishId"
                       target="_blank"><font
-                        class="">{{ item.companyName }}</font></a>
+                    class="">{{ item.companyName }}</font></a>
                     <a
                       id="nr11"
                       target="_blank"
@@ -811,7 +811,7 @@
           </div>
         </div>
         <div class="arc_main6">
-          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}出发的专线</span></div>
+          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ queryCitys.endCity || queryCitys.endProvince }}出发的专线</span></div>
           <div
             v-if="!lineRecoms.length"
             class="tj_none">
@@ -931,7 +931,13 @@
 
 <script>
 import $axios from 'axios'
-import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+import {
+  isZXcity,
+  getSEListParams,
+  getCode,
+  getCity,
+  parseTime
+} from '~/components/commonJs.js'
 // import { AFLC_VALID } from '~/static/js/AFLC_API.js'
 // import { AFLC_VALID } from '../../static/js/AFLC_API'
 import ShowPrice from './showPrice'
@@ -1109,21 +1115,22 @@ export default {
       //   endCity: endc,
       //   endArea: enda
       // }),
-      linedataD = await $axios.post(
-        aurl + '/api/28-web/range/recommend',
-        (vo = {
-          currentPage: 1,
-          pageSize: 5
-        })
-      )
+      let queryCitys = getSEListParams(linedataA.data.data)
+      // 从目的地出发的专线
+      linedataD = await $axios.post(aurl + '/api/28-web/range/recommend', {
+        currentPage: 1,
+        pageSize: 5,
+        startProvince: queryCitys.endProvince,
+        startCity: queryCitys.endCity
+      })
 
-      linedataC = await $axios.post(
-        aurl + '/api/28-web/range/list',
-        (vo = {
-          currentPage: 1,
-          pageSize: 6
-        })
-      )
+      // 从出发地出发的专线
+      linedataC = await $axios.post(aurl + '/api/28-web/range/list', {
+        currentPage: 1,
+        pageSize: 6,
+        startProvince: queryCitys.startProvince,
+        startCity: queryCitys.startCity
+      })
       LineCAnother = await $axios.post(
         aurl + '/api/28-web/range/changeAnother',
         vo
@@ -1154,7 +1161,7 @@ export default {
         : ''
       // credit
       // linedataB.data.data
-      console.log(linedataG.data.data, 'linedataG.data.data')
+      // console.log(linedataG.data.data, 'linedataG.data.data')
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip
@@ -1246,7 +1253,8 @@ export default {
         linedataG: linedataG.data.status == 200 ? linedataG.data.data : '',
         LineeEchartInfo: LineeEInfo.data.data,
         lineCitys: lineCity.data.data,
-        LineChangeAnother: LineCAnother.data.data
+        LineChangeAnother: LineCAnother.data.data,
+        queryCitys
       }
     }
     // let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)

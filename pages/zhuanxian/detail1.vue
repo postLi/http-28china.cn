@@ -89,7 +89,7 @@
                 @click="clickImg(2)"></a>
           </div>
           <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span
-            id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
+          id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
         </div>
         <div class="arc_middle">
           <div class="collection_zx">
@@ -708,7 +708,7 @@
                 id="pagination1"
                 class="page fl"/>
               <div class="info fl">
-                <!--<p>当前页数：<span id="current1">1</span></p>-->
+              <!--<p>当前页数：<span id="current1">1</span></p>-->
               </div>
             </div>
             <!--分页-->

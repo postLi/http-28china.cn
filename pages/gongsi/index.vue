@@ -54,16 +54,46 @@
               <li>
                 <p>北京吉盛通达物流有限公司</p>
                 <p><span>整车运输</span><span>仓储配送</span><span>整车运输...</span></p>
-                <p/>
+                <p><span>推荐承运商
+
+                </span><a href="#">进入官网</a></p>
               </li>
             </ul>
           </div>
         </li>
       </ul>
     </div>
+    <div class="header_links">
+      <div class="header_links_l">
+        <ul>
+          <!--<li v-for="(item, index) in 10" :key="10" ><p>满生货运中心</p><p><span>零担整车</span><span>大件运输-->
 
+          <!--</span></p></li>-->
+          <li
+            v-for="(item, index) in 10"
+            :key="index"
+            style="float:left;padding: 15px 40px 15px 40px"><a href="#">
+              <p>满生货运中心</p><p><span>零担整车</span><span>大件运输</span></p>
+          </a></li>
+        </ul>
+      </div>
+      <div class="header_links_r">
+        <p>运单查询</p>
+        <input
+          type="text"
+          name="title"
+          required
+          lay-verify="required"
+          placeholder="请输入运单号，例如1809260061"
+          autocomplete="off"
+          class="layui-input">
+        <div><button class="layui-btn">立即查询</button></div>
+      </div>
+    </div>
     <div class="list_box" >
-
+      <div class="list_down"><a
+        href="http://h5.28tms.com/"
+        target="_blank">下载<span>【28快运APP】</span>，实时接收推荐的精品车货源与合作信息，在线下单推荐优质承运商，便捷查询运单。</a></div>
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a
           id="list_nav_a"

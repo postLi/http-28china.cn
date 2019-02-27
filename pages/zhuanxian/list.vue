@@ -215,9 +215,9 @@
             title="交易量从高到低">交易量</span><span
               id="seq2"
               title="运输时效从低到高">运输时效</span><span
-                id="seq3">重货价格</span>
+              id="seq3">重货价格</span>
             <div
-              id="tj_price">
+            id="tj_price">
               <span id="tj_price1">轻货价格从低到高</span>
               <span id="tj_price2">重货价格从低到高</span>
             </div>
@@ -231,7 +231,7 @@
           <!--lineList-->
           <!--<span>{{lineLists.length}}</span>-->
           <div
-            v-else >
+          v-else >
             <ul
               v-for="(item , index) in lineLists"
               :key="index"
@@ -281,7 +281,7 @@
                     id="nr03"
                     :href="'/member/'+item.companyId"
                     target="_blank"><font
-                      class="">{{ item.companyName }}</font></a>
+                  class="">{{ item.companyName }}</font></a>
                   <a
                     id="nr11"
                     target="_blank"
@@ -370,7 +370,7 @@
               id="pagination1"
               class="page fl"/>
             <div class="info fl">
-              <!--<p>当前页数：<span id="current1">1</span></p>-->
+            <!--<p>当前页数：<span id="current1">1</span></p>-->
             </div>
           </div>
         </div>
@@ -541,7 +541,7 @@
               <p>{{ lineHots[2].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[2].popularity }}</i></span></a></li>
             </ul>
             <ul
-              class="lastul">
+            class="lastul">
               <li
                 v-for="(item, index) in lineHots.slice(-12)"
                 :key="index"><a
@@ -563,21 +563,21 @@
     </div>
     <div class="lll-line-bot">
       <div
-        class="lll-recommend clearfix">
+      class="lll-recommend clearfix">
         <div
           class="zx_sx"
         ><span class="biaozhi"/><span>{{ lineLinks.hotRecommend.label }}</span></div>
         <FooterLinks :info="lineLinks.hotRecommend.links"/>
       </div>
       <div
-        class="lll-recommend clearfix">
+      class="lll-recommend clearfix">
         <div
           class="zx_sx"
         ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
         <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
       </div>
       <div
-        class="lll-recommend clearfix">
+      class="lll-recommend clearfix">
         <div
           class="zx_sx"
         ><span class="biaozhi"/><span>{{ lineLinks.startFromRecommend.label }}</span></div>
@@ -618,7 +618,6 @@ export default {
   },
   async asyncData({ $axios, query }) {
     let aurl = ''
-    let orderBy = 'default'
     let startp = query.startp
     let startc = query.startc
     let starta = query.starta
@@ -735,7 +734,7 @@ export default {
     let _this = this
     // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
     // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
-    seajs.use(['/js/city.js', 'layer'], function() {
+    seajs.use(['/js/city.js', '/js/city-picker.data.js', 'layer'], function() {
       seajs.use(
         [
           '/js/city-picker.js',

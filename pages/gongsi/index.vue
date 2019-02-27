@@ -1,9 +1,69 @@
-<script src="../../static/gongsi/js/list_wlgs.js">
-</script>
+
 <template>
   <div class="lll-gongsi">
-    <div class="wlgs_bg center"><img src="../../static/gongsi/images/banner_wlgs.png" ></div>
+    <div class="header_list">
+      <ul class="first_ul">
+        <li class="first_li">
+          <div class="company">
+            <div class="company_name"><img
+              src="../../static/gongsi/images/wlyq_gs.png"
+              alt=""><span>公司名</span></div>
+            <div class="company_address">
+              <ul>
+                <li
+                  v-for="(item, index) in 10"
+                  :key="index" >不限</li>
+              </ul>
+            </div>
+          </div>
+        </li>
+        <li class="sec_li">
+          <div class="top">
+            <div
+              id="test1"
+              class="layui-carousel"
+              style="width: 100%; height: 250px;">
+              <div carousel-item>
+                <div>条目1</div>
+                <div>条目2</div>
+                <div>条目3</div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="bot"
+            style="width: 100%; height: 140px;">
+            <a
+              v-for="(item, index) in 3"
+              :key="index"
+              href="#"><img
+                src="../../static/gongsi/images/wlgs_danbao.png"
+                alt=""></a>
+          </div>
+        </li>
+        <li class="last_li">
+          <div class="btn_top"><button class="layui-btn">实力承运商入驻</button></div>
+          <div class="rem_bot">
+            <div class="rem_bot_t">
+              <div class="rem_bot_titp"><img
+                src=""
+                alt=""><span>优质承运商推荐</span></div>
+            </div>
+            <p>优质承运商推荐，钱力心</p>
+            <ul class="rem_bot_b">
+              <li>
+                <p>北京吉盛通达物流有限公司</p>
+                <p><span>整车运输</span><span>仓储配送</span><span>整车运输...</span></p>
+                <p/>
+              </li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+
     <div class="list_box" >
+
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a
           id="list_nav_a"
@@ -209,7 +269,7 @@
             id="pagination1"
             class="page fl"/>
           <div class="info fl">
-            <!--<p>当前页数：<span id="current1">1</span></p>-->
+          <!--<p>当前页数：<span id="current1">1</span></p>-->
           </div>
         </div>
         <!--分页-->
@@ -295,61 +355,93 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/gongsi/css/list_wlgs.css' },
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/WTMap.css' }
+      { rel: 'stylesheet', href: '/css/WTMap.css' },
+      { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
     ]
   },
   mounted() {
-    seajs.use(['../js/city.js'], function() {
-      seajs.use(
-        ['./js/city-picker.js', './js/jquery.pagination.min.js'],
-        function() {
-          seajs.use(['../gongsi/js/list_wlgs.js'], function() {
-            seajs.use(['../js/collection.js'], function() {
-              seajs.use(['../js/gaodemap2.js'], function() {
-                $('.list_tiaoj span').click(function() {
-                  //alert("1");
-                  $('.list_tiaoj span').removeClass('active')
-                  $(this).toggleClass('active')
-                })
-                function onCheckPage() {
-                  var beginPage = parseInt(
-                    document.beginPagefrm.beginPage.value
-                  )
-                  if (isNaN(beginPage)) {
-                    alert('请输入数字！')
-                    return false
+    // layui.use('carousel', () => {
+    //   var carousel = layui.carousel
+    //   //建造实例
+    //   carousel.render({
+    //     elem: '#test1',
+    //     width: '100%', //设置容器宽度
+    //     arrow: 'always' //始终显示箭头
+    //     //,anim: 'updown' //切换动画方式
+    //   })
+    // })
+    seajs.use(
+      ['../js/city.js', '/layer/layer.js', '/layer/dist/layui.js'],
+      function() {
+        seajs.use(
+          ['../js/city-picker.js', './js/jquery.pagination.min.js'],
+          function() {
+            seajs.use(['../gongsi/js/list_wlgs.js'], function() {
+              seajs.use(['../js/collection.js'], function() {
+                seajs.use(['../js/gaodemap2.js'], function() {
+                  layui.use('carousel', function() {
+                    var carousel = layui.carousel
+                    //建造实例
+                    carousel.render({
+                      elem: '#test1',
+                      width: '100%', //设置容器宽度
+                      arrow: 'always' //始终显示箭头
+                      //,anim: 'updown' //切换动画方式
+                    })
+                  })
+                  $('.list_tiaoj span').click(function() {
+                    //alert("1");
+                    $('.list_tiaoj span').removeClass('active')
+                    $(this).toggleClass('active')
+                  })
+                  function onCheckPage() {
+                    var beginPage = parseInt(
+                      document.beginPagefrm.beginPage.value
+                    )
+                    if (isNaN(beginPage)) {
+                      alert('请输入数字！')
+                      return false
+                    }
+                    if (beginPage <= 0) {
+                      beginPage = 1
+                    }
+                    if (beginPage > 100) {
+                      beginPage = 100
+                    }
+                    if (beginPage > 1) {
+                      document.beginPagefrm.action =
+                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
+                        beginPage
+                    } else {
+                      document.beginPagefrm.action =
+                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
+                    }
+                    return true
                   }
-                  if (beginPage <= 0) {
-                    beginPage = 1
-                  }
-                  if (beginPage > 100) {
-                    beginPage = 100
-                  }
-                  if (beginPage > 1) {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-                      beginPage
-                  } else {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-                  }
-                  return true
-                }
-                $('#pagination1').pagination({
-                  currentPage: 1,
-                  totalPage: process02(1),
-                  callback: function(current) {
-                    $('#current1').text(current)
-                    process02(current)
-                    window.location.href = '#top'
-                  }
+                  $('#pagination1').pagination({
+                    currentPage: 1,
+                    totalPage: process02(1),
+                    callback: function(current) {
+                      $('#current1').text(current)
+                      process02(current)
+                      window.location.href = '#top'
+                    }
+                  })
                 })
               })
             })
-          })
-        }
-      )
-    })
+          }
+        )
+      }
+    )
+  },
+  methods: {
+    btbs() {
+      layer.open({
+        type: 1,
+        content: '传入任意的文本或html' //这里content是一个普通的String
+      })
+    }
   }
 }
 </script>

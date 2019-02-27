@@ -150,7 +150,7 @@
           <div class="arc_middle4">
             <div class="arc_m3"><i>联系人：</i><span>{{ cy1.belongDriver }}</span></div>
             <div class="arc_m3"><i>手机：</i><span><font
-              style="color: #eb434d;">{{ cy1.phone }}</font></span></div>
+            style="color: #eb434d;">{{ cy1.phone }}</font></span></div>
             <div class="arc_m3_2"><i>说明：</i><span>{{ cy1.carTagName }}</span><span v-if="cy1.remark">{{ '|'+cy1.remark.substring(0, 30) }}</span></div>
           </div>
 
@@ -205,7 +205,7 @@
               src="/images/article_wlzx/10shiming.png">
             <!--<img src="/templets/default/images/article_wlzx/25baozhengjin.png"/>-->
             <span
-              v-if="cy1.driverStatus !== 'AF0010403'">暂无认证信息</span>
+            v-if="cy1.driverStatus !== 'AF0010403'">暂无认证信息</span>
           </div>
 
         </div>
@@ -360,7 +360,7 @@
                     v-if="item.qq"
                     :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
                     target="_blank"><input
-                      value="QQ交谈">
+                    value="QQ交谈">
                   </a></p>
                 </li>
               </ul>
@@ -444,7 +444,7 @@
                     v-if="item.qq"
                     :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
                     target="_blank"><input
-                      value="QQ交谈">
+                    value="QQ交谈">
                   </a></p>
                 </li>
               </ul>

@@ -5,7 +5,7 @@
         <span>{{ wEndVolume }}</span>
         <!--<span>{{ '0'+ '-' + wPrice[0].endVolume + '吨' }}</span>-->
         <font
-          class="font1">{{ wDiscountPrice }}</font>
+        class="font1">{{ wDiscountPrice }}</font>
         <span
           :style="wPrimeryPrice?'':'text-decoration:none'"
           class="span2">{{ wPrimeryPrice }}</span>
@@ -15,12 +15,12 @@
           @mouseout="hidePrice_box1Fn"
       >[阶梯价]</font></p>
       <p class="p2"><i>轻货价：</i> <span>{{ pEndVolume }}</span><font
-        class="font1">{{ hDiscountPrice }}</font><span
-          :style="hPrimeryPrice?'':'text-decoration:none'"
-          class="span2" >{{ hPrimeryPrice }}</span><font
-            class="font2"
-            @mouseover="showPrice_box2Fn"
-            @mouseout="hidePrice_box2Fn"
+      class="font1">{{ hDiscountPrice }}</font><span
+        :style="hPrimeryPrice?'':'text-decoration:none'"
+        class="span2" >{{ hPrimeryPrice }}</span><font
+          class="font2"
+          @mouseover="showPrice_box2Fn"
+          @mouseout="hidePrice_box2Fn"
       >[阶梯价]</font></p>
     </div>
     <div class="arc_middle2_2">

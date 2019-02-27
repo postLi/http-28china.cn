@@ -71,10 +71,10 @@
             <div class="order-title">货物信息</div>
             <div class="order-caro-con">
               <div class="order-cargo-title clearfix">
-                <!-- <span><span class="required">*</span>货物名称</span> -->
-                <!-- <span>总件数</span> -->
-                <!-- <span><span class="required">*</span>预估重量</span> -->
-                <!-- <span><span class="required">*</span>预估体积</span> -->
+              <!-- <span><span class="required">*</span>货物名称</span> -->
+              <!-- <span>总件数</span> -->
+              <!-- <span><span class="required">*</span>预估重量</span> -->
+              <!-- <span><span class="required">*</span>预估体积</span> -->
               </div>
               <ul class="order-cargo-list">
                 <li>

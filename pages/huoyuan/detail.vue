@@ -62,7 +62,7 @@
         <div class="arc_left_1">
           <div class="top_left">
             <ul 
-              class="top_left_ul" >
+            class="top_left_ul" >
               <li 
                 v-for="(item,index) in newList" 
                 :key="index" 
@@ -93,14 +93,14 @@
               <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsName }}</font></td></tr>
               <tr><td class="arc_td1">数量：</td><td class="arc_td2">{{ hyDetail.goodsNum ? hyDetail.goodsNum + '件': '' }}</td></tr>
               <tr><td class="arc_td1">重量：</td><td
-                class="arc_td2">{{ hyDetail.goodsWeight }}公斤</td></tr>
+              class="arc_td2">{{ hyDetail.goodsWeight }}公斤</td></tr>
               <tr><td class="arc_td1">体积：</td><td class="arc_td2">{{ hyDetail.goodsVolume }}立方米</td></tr>
               <tr><td class="arc_td1">有效期：</td><td
-                class="arc_td2">{{ hyDetail.orderClass }}</td></tr>
+              class="arc_td2">{{ hyDetail.orderClass }}</td></tr>
               <tr><td class="arc_td1">其他：</td><td
-                class="arc_td2">{{ hyDetail.extraName }}</td></tr>
+              class="arc_td2">{{ hyDetail.extraName }}</td></tr>
               <tr><td class="arc_td1">备注：</td><td
-                class="arc_td2">{{ hyDetail.remark }}</td></tr>
+              class="arc_td2">{{ hyDetail.remark }}</td></tr>
             </table>
             </div>
           </div>
@@ -234,7 +234,7 @@
       </div>
       <div 
         
-        class="arc_right1">
+      class="arc_right1">
         <div class="arc_top_title">
           <h4 v-if="archival.shipperType === 'AF0010101'" >货主档案</h4>
           <h4 else="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4>
@@ -337,7 +337,7 @@
     <div class="arc_main4">
       <!-- 货源列表start -->
       <div 
-        class="w1036 list_hy">
+      class="w1036 list_hy">
         <div class="listInfo1">
           <div class="main3_1_1">
             <div class="floatl">

@@ -438,7 +438,7 @@
 
       </div>
       <div class="arc_main1-1">
-        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的车源信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
+        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -469,7 +469,7 @@
                     <!--allServiceNameList-->
                     <div
 
-                      class="content-right-row-left">
+                    class="content-right-row-left">
                       <span
                         v-for="(item, index) in linedataB.allServiceNameList"
                         :key="index"
@@ -477,8 +477,15 @@
                     </div>
                     <div
                       v-if="linedataB.allServiceNameList.length >8"
-                      class="content-right-row-right"> <p style="padding-top: 10px">全部</p>
-                    <p>（{{ linedataB.allServiceNameList.length }}）</p></div>
+                      class="content-right-row-right">
+                      <a
+                        :href="'/member/'+linedataA.publishId+'-cpfw'"
+                        target="_blank"
+                        style="color: #fa9925">
+                        <p style="padding-top: 10px">全部</p>
+                        <p>（{{ linedataB.allServiceNameList.length }}）</p>
+                      </a>
+                    </div>
                   </li>
                   <li>
                     <p v-if="linedataB.authStatus =='AF0010403'"><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
@@ -519,7 +526,7 @@
             alt="">
           <ul class="top_tit">
             <li>此专线物流公司诚信值超过<span style="color: #f88700;border-bottom: 1px solid #f88700">{{ linedataE.greaterCreditRate }}%</span>的同行</li>
-            <li>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</li>
+            <li>{{ linedataE.qualificationNum }}项经营资质认证，{{ linedataE.serviceNum }}项平台物流服务标准监督，{{ linedataE.evaCount }}人评价反馈</li>
           </ul>
           <!--<div class="top_tit"><p>此专线物流公司诚信值超过<span style="color: #f88700;">92.3%</span>的同行</p>-->
           <!--<p>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</p></div>-->
@@ -533,21 +540,30 @@
               <img
                 src="../../static/line/images/09sj.png"
                 alt="">
-              <p>江苏大本赢物流有限公司</p>
+              <p>{{ linedataE.companyName }}</p>
             </div>
             <div class="bot_left_pj">
               <ul>
                 <li>
-                  <p>92%</p>
-                  <p><span class="unActive"/>好评</p>
+                  <p>{{ linedataE.evaGoodRate }}%</p>
+                  <p><span
+                    :class="indexPl==0?'active':'unActive'"
+                    class="unActive"
+                    @click="showPingLunFn(0)"/>好评</p>
                 </li>
                 <li>
-                  <p>92%</p>
-                  <p><span class="unActive active"/>好评</p>
+                  <p>{{ linedataE.evaMiddleRate }}%</p>
+                  <p><span
+                    :class="indexPl==1?'active':'unActive'"
+                    class="unActive"
+                    @click="showPingLunFn(1)"/>中评</p>
                 </li>
                 <li>
-                  <p>92%</p>
-                  <p><span class="unActive active"/>好评</p>
+                  <p>{{ linedataE.evaBadCount }}%</p>
+                  <p><span
+                    :class="indexPl==2?'active':'unActive'"
+                    class="unActive"
+                    @click="showPingLunFn(2)"/>差评</p>
                 </li>
               </ul>
             </div>
@@ -561,7 +577,9 @@
               style="width: 288px; margin: 0;"
               class="bot_left_btn">
               <!-- layui 2.2.5 新增 -->
-              <button class="layui-btn layui-btn-fluid">免费咨询公司情况</button>
+              <button
+                class="layui-btn layui-btn-fluid"
+                @click="showgongsiFn()">免费咨询公司情况</button>
             </div>
             <div class="bot_left_tip">
               以上信息根据网上用户提报，仅代表此<br>
@@ -569,79 +587,38 @@
             </div>
           </div>
           <div class="bot_right">
-            <div class="bot_right_btn">
-              <button class="layui-btn layui-btn-primary">原始按钮</button>
+            <p v-if="!linedataF.length">此用户没有评论</p>
+            <div v-else>
+              <div class="bot_right_btn">
+              <!--<button-->
+              <!--class="layui-btn layui-btn-primary"-->
+              <!--@click="moreFn()">更多</button>-->
+              </div>
+              <ul>
+                <li
+                  v-for="(item, index) in linedataF"
+
+                  :key="index">
+                  <div class="bot_right_per">
+                    <p>{{ item.evaluationName }}</p>
+                    <p>
+                      <img
+                        v-for="( item, index ) in 4"
+                        :key="index"
+                        src="../../static/line/images/13z.png"
+                        alt="">
+                    </p>
+                  </div>
+                  <div class="bot_right_detail">
+                    <p>{{ item.evaluationDes }}</p>
+                    <p>{{ item.createTime }}</p>
+                    <div class="huifu">
+                      <p>[回复]：{{ item.replyDes }}</p>
+                    </div>
+                  </div>
+                </li>
+              </ul>
             </div>
-            <ul>
-              <li>
-                <div class="bot_right_per">
-                  <p>134****1323</p>
-                  <p>
-                    <img
-                      src="../../static/line/images/13z.png"
-                      alt="">
-                  </p>
-                </div>
-                <div class="bot_right_detail">
-                  <p>送货速度快，态度好</p>
-                  <p>2018-06-30  15:46</p>
-                  <div class="huifu">
-                    <p>[回复]：谢谢一直支持！</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="bot_right_per">
-                  <p>134****1323</p>
-                  <p>
-                    <img
-                      src="../../static/line/images/13z.png"
-                      alt="">
-                  </p>
-                </div>
-                <div class="bot_right_detail">
-                  <p>送货速度快，态度好</p>
-                  <p>2018-06-30  15:46</p>
-                  <div class="huifu">
-                    <p>[回复]：谢谢一直支持！</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="bot_right_per">
-                  <p>134****1323</p>
-                  <p>
-                    <img
-                      src="../../static/line/images/13z.png"
-                      alt="">
-                  </p>
-                </div>
-                <div class="bot_right_detail">
-                  <p>送货速度快，态度好</p>
-                  <p>2018-06-30  15:46</p>
-                  <div class="huifu">
-                    <p>[回复]：谢谢一直支持！</p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="bot_right_per">
-                  <p>134****1323</p>
-                  <p>
-                    <img
-                      src="../../static/line/images/13z.png"
-                      alt="">
-                  </p>
-                </div>
-                <div class="bot_right_detail">
-                  <p>送货速度快，态度好</p>
-                  <p>2018-06-30  15:46</p>
-                  <div class="huifu">
-                    <p>[回复]：谢谢一直支持！</p>
-                  </div>
-                </div>
-              </li>
-            </ul>
           </div>
         </div>
       </div>
@@ -650,89 +627,55 @@
         style="clear: both"
         class="clearfix">
         <div
-          class="arc_main5">
+        class="arc_main5">
           <div
             id="js002"
             class="w1036 list_wlzx">
-
-            <div class="zx_sx1">
-              <div><span class="arc_main5_tit">更多从广州出发的专线</span>
-                <div
-                  class="searchForm"
-                  style="display: inline-block;padding-left: 108px">
-                  <form
-                    name="zxaddform"
-                    method="post"
-                    action=""
-                  >
+            <div class="main3_1_1">
+              <div class="xt_left"/>
+              <div class="floatl">
+                <!--{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) -->
+                <b>更多从{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}出发的专线</b>
+                <div class="index_search floatl">
+                  <div
+                    id="HuoyuanFrom"
+                    class="fl index_search_input"
+                    style="position:relative;">
                     <input
-                      name="a7"
-                      type="hidden"
-                      value="0">
+                      style="height: 100%;"
+                      data-toggle="city-picker"
+                      data-level="district"
+                      type="text"
+                      name=""
+                      class=""
+                      placeholder="&nbsp;请选择出发地"
+                      readonly="">
+                  </div>
+                  <em>→</em>
+                  <div
+                    id="HuoyuanTo"
+                    class="fl index_search_input"
+                    style="position:relative;">
                     <input
-                      type="hidden"
-                      name="mid"
-                      value="19">
-                    <input
-                      type="hidden"
-                      name="dopost"
-                      value="search">
-                    <div
-                      id="wlLineFrom"
-                      class="fl list_input"
-                      style="position:relative;">
-                      <input
-                        name="cfd"
-                        style="height: 100%;"
-                        data-level="district"
-                        type="text"
-                        placeholder="请输入出发地">
-                    </div>
-                    <img
-                      class="fl list_img"
-                      src="/line/images/02jiantou.png">
-                    <div
-                      id="wlLineTo"
-                      class="fl list_input"
-                      style="position:relative;">
-                      <input
-                        name="ddd"
-                        style="height: 100%;"
-                        data-level="district"
-                        type="text"
-                        placeholder="请输入到达地">
-                    </div>
-                    <input
-                      id="search_wlLine"
-                      readonly="readonly"
-                      name="Submit2"
-                      value=" 搜索 "
-                      class="list_button">
-
-                      <!--<input-->
-                      <!--id="wlgs_name"-->
-                      <!--name="wlgs"-->
-                      <!--type="text"-->
-                      <!--class="list_input"-->
-                      <!--style="margin-left: 16px;"-->
-                      <!--placeholder="请输入公司名称">-->
-                      <!--<input-->
-                      <!--id="search_wlLine"-->
-                      <!--readonly=""-->
-                      <!--name="Submit2"-->
-                      <!--value=" 搜索 "-->
-                      <!--class="list_button">-->
-                      <!--<input-->
-                      <!--id="flush"-->
-                      <!--readonly=""-->
-                      <!--name="Submit2"-->
-                      <!--value="重置 "-->
-                      <!--class="list_button">-->
-                  </form>
+                      style="height: 100%;"
+                      data-toggle="city-picker"
+                      data-level="district"
+                      type="text"
+                      name=""
+                      class=""
+                      placeholder="&nbsp;请选择到达地"
+                      readonly="">
+                  </div>
                 </div>
-              </div>
+                <input
+                  id="search_huoyuan"
+                  type="button"
+                  class="search_hy"
+                  value=""></div>
+              <div class="more floatr"><a
+                href="/zhuanxian/list"
+                target="_blank">更多&gt;</a></div>
             </div>
-
             <div
             >
               <ul
@@ -740,9 +683,9 @@
                 :key="index"
                 class="wlzx_list">
                 <li id="wlzx_list_0">
-                  <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
+                <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
 
-                  <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
+                <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
                 </li>
                 <li class="wlzx_list_1">
                   <a
@@ -784,7 +727,7 @@
                       id="nr03"
                       :href="'/member/'+item.publishId"
                       target="_blank"><font
-                        class="">{{ item.companyName }}</font></a>
+                    class="">{{ item.companyName }}</font></a>
                     <a
                       id="nr11"
                       target="_blank"
@@ -868,7 +811,7 @@
           </div>
         </div>
         <div class="arc_main6">
-          <div class="zx_sx"><span class="biaozhi"/><span>更多从深圳出发的专线</span></div>
+          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ queryCitys.endCity || queryCitys.endProvince }}出发的专线</span></div>
           <div
             v-if="!lineRecoms.length"
             class="tj_none">
@@ -940,16 +883,9 @@
           <div class="lll-recommend clearfix">
             <div
               class="zx_sx"
-            ><span class="biaozhi"/><span>北京出发物流专线</span></div>
+            ><span class="biaozhi"/><span>{{ linedataG.brandRecommend.label }}</span></div>
             <!--<FootList/>-->
-            <ul>
-              <li>
-                <span>广州到北京</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北京</span><span>广州车源信息</span><span>北京车源信息</span>
-              </li>
-              <li>
-                <span>广州到北京物</span><span>广州物流专线</span><span>北京物流专线</span><span>北京物流公司</span><span>广州到北</span><span>广州车源信息</span><span>北京车源信息</span>
-              </li>
-            </ul>
+            <FooterLinks :info="linedataG.brandRecommend.links"/>
           </div>
         </div>
       </div>
@@ -959,28 +895,32 @@
             <div
               class="zx_sx"
               style="border-color: #e7e7e7"
-            ><span class="biaozhi"/><span>你可能对这些感兴趣</span></div>
-            <FootList/>
+            ><span class="biaozhi"/><span>{{ linedataG.interestedRecommend.label }}</span></div>
+            <FooterLinks :info="linedataG.interestedRecommend.links"/>
+            <!--linedataG    brandRecommend:-->
+            <!--<FootList/>-->
           </div>
         </div>
         <div class="arc_main8_2">
-          <div class="lll-recommend clearfix">
+          <div
+            class="lll-recommend clearfix"
+            style="padding-top: 10px;">
             <div
               class="zx_sx"
               style="border-color: #e7e7e7"
-            ><span class="biaozhi"/><span>广州出发物流专线</span></div>
-            <FootList/>
+            ><span class="biaozhi"/><span>{{ linedataG.startFromRecommend.label }}</span></div>
+            <FooterLinks :info="linedataG.startFromRecommend.links"/>
           </div>
         </div>
-        <div class="arc_main8_3">
-          <div class="lll-recommend clearfix">
-            <div
-              class="zx_sx"
-              style="border-color: #e7e7e7"
-            ><span class="biaozhi"/><span>深圳出发物流专线</span></div>
-            <FootList/>
-          </div>
-        </div>
+        <!--<div class="arc_main8_3">-->
+        <!--<div class="lll-recommend clearfix">-->
+        <!--<div-->
+        <!--class="zx_sx"-->
+        <!--style="border-color: #e7e7e7"-->
+        <!--&gt;<span class="biaozhi"/><span>{{ linedataG.startArriveRecommend.label }}</span></div>-->
+        <!--<FooterLinks :info="linedataG.startArriveRecommend.links"/>-->
+        <!--</div>-->
+        <!--</div>-->
       </div>
 
     </div>
@@ -990,10 +930,19 @@
 </template>
 
 <script>
-import { getCode, getCity, parseTime } from '~/components/commonJs.js'
-import FootList from '../../components/footerList'
+import $axios from 'axios'
+import {
+  isZXcity,
+  getSEListParams,
+  getCode,
+  getCity,
+  parseTime
+} from '~/components/commonJs.js'
+// import { AFLC_VALID } from '~/static/js/AFLC_API.js'
+// import { AFLC_VALID } from '../../static/js/AFLC_API'
 import ShowPrice from './showPrice'
 import ShowEchart from './showEchart'
+import FooterLinks from '../../components/footerLinks'
 // async function echartInfo($axios, rangeId) {
 //   let res = await $axios.post('/28-web/range/getRangePriceReference/' + rangeId)
 //   console.log(res, 'res')
@@ -1005,8 +954,8 @@ import ShowEchart from './showEchart'
 export default {
   name: 'Index',
   components: {
-    FootList,
     ShowPrice,
+    FooterLinks,
     ShowEchart
   },
   head: {
@@ -1020,6 +969,7 @@ export default {
     ],
     script: [
       { src: '../js/jquery.pagination.min.js' },
+      { src: '../js/AFLC_API.js' },
       // { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
@@ -1027,6 +977,7 @@ export default {
   layout: 'subLayout',
   data() {
     return {
+      isTit: false,
       showMoblie: false,
       isShowWPrice: false,
       isShowHPrice: false,
@@ -1037,55 +988,103 @@ export default {
       linedataA: {},
       linedataB: {},
       linedataE: {},
+      linedataF: {},
       LineeEchartInfo: [],
+      LineChangeAnother: {},
       cargoType0: {},
       cargoType1: {},
       sendEchart: [],
       sendEchart1: [],
       linedata: {},
-      lineCitys: []
+      form: {},
+      lineCitys: [],
+      msgMobile: '',
+      indexPl: 0
     }
   },
+  // /range/detail/related/links
+  // 专线详情推荐链接
   async asyncData({ $axios, app, query }) {
     let aurl = '',
       lineCode,
       lineCity,
       LineCAnother,
+      linedataC,
+      linedataD,
       LineeEInfo
+    let startp = query.startp
+    let startc = query.startc
+    let starta = query.starta
+    let endp = query.endp
+    // let starta = query.starta
+    let enda = query.enda
+    let endc = query.endc
+
+    if (!startp || startp == 'null') {
+      startp = ''
+    }
+    if (!startc || startc == 'null') {
+      startc = ''
+    }
+    if (!starta || starta == 'null') {
+      starta = ''
+    }
+    if (!endp || endp == 'null') {
+      endp = ''
+    }
+    if (!enda || enda == 'null') {
+      enda = ''
+    }
+    if (!endc || endc == 'null') {
+      endc = ''
+    }
     if (process.server) {
       aurl = 'http://localhost:3000'
     }
 
     // /range/getRangePriceReference/{rangeId}
     // 专线详情_专线价格参考
+    // if (pj_zh == '好评') {
+    //   var assessLevel = 'AF0360101'
+    // }
+    // if (pj_zh == '中评') {
+    //   var assessLevel = 'AF0360102'
+    // }
+    // if (pj_zh == '差评') {
+    //   var assessLevel = 'AF0360103'
+    // }
     let [
       linedataA,
       linedataB,
-      linedataC,
-      linedataD,
-      linedataE
+      linedataE,
+      linedataF,
+      linedataG
     ] = await Promise.all([
       $axios.get(aurl + `/api/28-web/range/${query.id}`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/${query.publishId}`),
-      $axios.post(aurl + `/api/28-web/range/list`, {
-        currentPage: 1,
-        pageSize: 6
-      }),
-      $axios.post(aurl + `/api/28-web/range/recommend`, {
-        currentPage: 1,
-        pageSize: 5
-      }),
       $axios.post(
         aurl +
           `/api/28-web/logisticsCompany/comprehensive?companyId=${
             query.publishId
           }`
-      )
+      ),
+      $axios.post(aurl + `/api/28-web/rangeEva/range/list`, {
+        currentPage: 1,
+        pageSize: 3,
+        transportRangeId: query.id,
+        assessLevel: 'AF0360101'
+      }),
+      $axios.post(aurl + `/api/28-web/range/detail/related/links`, {
+        startProvince: startp,
+        startCity: startc,
+        startArea: starta,
+        endProvince: endp,
+        endCity: endc,
+        endArea: enda
+      })
     ])
 
     if (linedataA.data.status === 200) {
-      lineCode = await getCode($axios, linedataA.data.data.endProvince)
-      lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
       let vo = {
         endArea: linedataA.data.data.endArea,
         endCity: linedataA.data.data.endCity,
@@ -1094,6 +1093,44 @@ export default {
         startCity: linedataA.data.data.startCity,
         startProvince: linedataA.data.data.startProvince
       }
+      lineCode = await getCode($axios, linedataA.data.data.endProvince)
+      lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
+      // $axios.post(aurl + `/api/28-web/range/recommend`, {
+      //   currentPage: 1,
+      //   pageSize: 5,
+      //   startProvince: startp,
+      //   startCity: startc,
+      //   startArea: starta,
+      //   endProvince: endp,
+      //   endCity: endc,
+      //   endArea: enda
+      // }),
+      // $axios.post(aurl + `/api/28-web/range/list`, {
+      //   currentPage: 1,
+      //   pageSize: 6,
+      //   startProvince: startp,
+      //   startCity: startc,
+      //   startArea: starta,
+      //   endProvince: endp,
+      //   endCity: endc,
+      //   endArea: enda
+      // }),
+      let queryCitys = getSEListParams(linedataA.data.data)
+      // 从目的地出发的专线
+      linedataD = await $axios.post(aurl + '/api/28-web/range/recommend', {
+        currentPage: 1,
+        pageSize: 5,
+        startProvince: queryCitys.endProvince,
+        startCity: queryCitys.endCity
+      })
+
+      // 从出发地出发的专线
+      linedataC = await $axios.post(aurl + '/api/28-web/range/list', {
+        currentPage: 1,
+        pageSize: 6,
+        startProvince: queryCitys.startProvince,
+        startCity: queryCitys.startCity
+      })
       LineCAnother = await $axios.post(
         aurl + '/api/28-web/range/changeAnother',
         vo
@@ -1124,7 +1161,7 @@ export default {
         : ''
       // credit
       // linedataB.data.data
-      console.log(linedataE.data.data, 'res.data.data.linedataE')
+      // console.log(linedataG.data.data, 'linedataG.data.data')
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip
@@ -1204,6 +1241,7 @@ export default {
         linedataB.data.data.hZhuan = 5
         linedataB.data.data.isHZhuan = true
       }
+      // console.log(linedataF.data.data.list, 'linedataF')
       // console.log(linedataA.data.data, 'res.data.data.linedataB', linedataB)
       return {
         linedataA: linedataA.data.data,
@@ -1211,9 +1249,12 @@ export default {
         lineLists: linedataC.data.data.list,
         lineRecoms: linedataD.data.data,
         linedataE: linedataE.data.status == 200 ? linedataE.data.data : '',
+        linedataF: linedataF.data.status == 200 ? linedataF.data.data.list : '',
+        linedataG: linedataG.data.status == 200 ? linedataG.data.data : '',
         LineeEchartInfo: LineeEInfo.data.data,
         lineCitys: lineCity.data.data,
-        LineChangeAnother: LineCAnother.data.data
+        LineChangeAnother: LineCAnother.data.data,
+        queryCitys
       }
     }
     // let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
@@ -1251,6 +1292,63 @@ export default {
             seajs.use(['/line/js/arc_wlzx.js'], function() {
               seajs.use(['../js/collection.js'], function() {
                 seajs.use(['../js/gaodemap2.js'], function() {
+                  //header货源搜索 S
+                  $('#search_huoyuan').click(function() {
+                    var list1 = [],
+                      list2 = []
+                    $('#HuoyuanFrom .select-item').each(function(i, e) {
+                      list1.push($(this).text())
+                    })
+                    var startp = list1[0]
+                    var startc = list1[1]
+                    var starta = list1[2]
+
+                    $('#HuoyuanTo .select-item').each(function(i, e) {
+                      list2.push($(this).text())
+                    })
+                    var endp = list2[0]
+                    var endc = list2[1]
+                    var enda = list2[2]
+
+                    if (!startp) {
+                      startp = ''
+                    }
+                    if (!startc) {
+                      startc = ''
+                    }
+                    if (!starta) {
+                      starta = ''
+                    }
+                    if (!endp) {
+                      endp = ''
+                    }
+                    if (!endc) {
+                      endc = ''
+                    }
+                    if (!enda) {
+                      enda = ''
+                    }
+                    startp = encodeURI(startp)
+                    startc = encodeURI(startc)
+                    starta = encodeURI(starta)
+                    endp = encodeURI(endp)
+                    endc = encodeURI(endc)
+                    enda = encodeURI(enda)
+                    window.location =
+                      '/zhuanxian/list?startp=' +
+                      startp +
+                      '&startc=' +
+                      startc +
+                      '&starta=' +
+                      starta +
+                      '&endp=' +
+                      endp +
+                      '&endc=' +
+                      endc +
+                      '&enda=' +
+                      enda
+                  })
+                  //header货源搜索 E
                   //  <!-- 阶梯价格浮层弹出效果 E-
 
                   function mousePrice() {
@@ -1324,11 +1422,146 @@ export default {
     })
   },
   methods: {
-    showWPrice() {
-      this.isShowWPrice = true
+    moreFn() {
+      layer.open({
+        id: 1,
+        type: 1,
+        title: this.linedataB.companyName + '-用户评价',
+        skin: 'layui-layer-rim2',
+        area: ['800px', '700px'],
+        success: (layero, index) => {
+          // $('.layui-btn-danger').onclick(() => {
+          //   console.log($('.layui-input').value, 'vakhhhfd')
+          // })
+          $('.layui-btn-danger').on('click', '')
+        },
+        //   <p>
+        //   <img
+        // v-for="( item, index ) in 4"
+        //   :key="index"
+        // src="../../static/line/images/13z.png"
+        // alt="">
+        //   </p>
+        content:
+          ' <div class="row_find" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
+          '<div class="col-sm-12">' +
+          '<div class="input-group2">' +
+          '<span>全部(0)</span>' +
+          '<span>好评(0)</span>' +
+          '<span>中评(0)</span>' +
+          '<span>差评(0)</span>' +
+          '</div>' +
+          '</div>' +
+          '<div class="col-sm-12">' +
+          '<div class="input-group3">' +
+          '<ul>' +
+          '<li>' +
+          '<div class="pl_left" ' +
+          '<p>eiuriurui</p>' +
+          '<p><img src="../../static/line/images/13z.png" width=50, height=20></p>' +
+          '</div>' +
+          '</li>' +
+          '</ul>' +
+          '</div>' +
+          '</div>' +
+          '<div class="col-sm-12" style="margin-top: 10px">' +
+          '<div class="input-group find_layui-btn">' +
+          '<button class="layui-btn layui-btn-danger">提交</button>' +
+          '</div>' +
+          '</div>' +
+          '</div>'
+      })
+
+      var mobile = $('.layui-input').val()
+      $('.tipPhone').hide()
+      $('.find_layui-btn .layui-btn-danger').click(() => {
+        let validReg = window.AFLC_VALID
+        let form = {}
+        form.mobile = mobile
+        form.companyId = this.LineChangeAnother.companyId
+        mobile = $('.layui-input').val()
+        if (mobile) {
+          $('.tipPhone').hide()
+          if (validReg.MOBILE.test(mobile)) {
+            $('.tipPhone').hide()
+            let aurl = ''
+            if (process.server) {
+              aurl = 'http://localhost:3000'
+            }
+            form.mobile = mobile
+            // console.lo
+            $axios
+              .post(aurl + '/api/28-web/logisticsCompany/consult/save', form)
+              .then(res => {
+                // console.log(res, 'resresres')
+                if (res.data.status === 200) {
+                  layer.msg(
+                    '提交成功，客服稍后将会与您联系',
+                    {
+                      tiem: 3000
+                    },
+                    () => {}
+                  )
+                  location.reload()
+                } else {
+                  layer.msg(
+                    res.data.errorInfo ? res.data.errorInfo : res.data.text
+                  )
+                }
+              })
+          } else {
+            $('.tipPhone').show()
+            $('.layui-input').val('')
+          }
+        } else {
+          $('.tipPhone').show()
+          $('.layui-input').val('')
+        }
+      })
     },
-    showHPrice() {
-      this.isShowHPrice = true
+    showPingLunFn(index) {
+      // /range/getRangePriceReference/{rangeId}
+      // 专线详情_专线价格参考
+      // if (pj_zh == '好评') {
+      //   var assessLevel = 'AF0360101'
+      // }
+      // if (pj_zh == '中评') {
+      //   var assessLevel = 'AF0360102'
+      // }
+      // if (pj_zh == '差评') {
+      //   var assessLevel = 'AF0360103'
+      // }
+      let assessLevel = ''
+
+      // console.log(index, 'index')
+      if (index == 0) {
+        assessLevel = 'AF0360101'
+      } else if (index == 1) {
+        assessLevel = 'AF0360102'
+      } else if (index == 2) {
+        assessLevel = 'AF0360103'
+      }
+      this.indexPl = index
+      let aurl = ''
+      if (process.server) {
+        aurl = 'http://localhost:3000'
+      }
+      $axios
+        .post(aurl + `/api/28-web/rangeEva/range/list`, {
+          currentPage: 1,
+          pageSize: 3,
+          transportRangeId: this.linedataA.id,
+          assessLevel: assessLevel
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            this.linedataF = res.data.data.list
+            // console.log(this.linedataF, 'resresres')
+          } else {
+            layer.msg(res.data.errorInfo ? res.data.errorInfo : res.data.text)
+          }
+        })
+      // this.indexPl
     },
     showMoblieFn(showMoblieFn) {
       if (showMoblieFn == false) {
@@ -1349,39 +1582,186 @@ export default {
     downFn() {
       window.open('http://h5.28tms.com/')
     },
-    showFindFn() {
+    showgongsiFn() {
       layer.open({
         id: 1,
         type: 1,
-        title: '闪电服务',
-        skin: 'layui-layer-rim',
-        area: ['450px', 'auto'],
-
+        title: '您要咨询的公司',
+        skin: 'layui-layer-rim1',
+        area: ['500px', '300px'],
+        success: (layero, index) => {
+          // $('.layui-btn-danger').onclick(() => {
+          //   console.log($('.layui-input').value, 'vakhhhfd')
+          // })
+          $('.layui-btn-danger').on('click', '')
+        },
         content:
-          ' <div class="row" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
+          ' <div class="row_find" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
           '<div class="col-sm-12">' +
           '<div class="input-group">' +
           '<p class="input-group-addon"> ' +
-          '<span>您要寻找的专线:广州至深圳专线</span>' +
+          '<span>' +
+          this.linedataB.companyName +
+          '</span>' +
           '</p>' +
           '</div>' +
           '</div>' +
           '<div class="col-sm-12">' +
           '<div class="input-group">' +
-          '<input id="firstpwd" class="form-control" placeholder="请输入您的手机号">' +
+          '<input type="text" name="title" required  lay-verify="required" placeholder="请输入您的手机号" autocomplete="off" class="layui-input" maxlength="11" id="layui-input">' +
+          '<p class="tipPhone" style="color: red">*手机号码格式不正确</p>' +
           '</div>' +
           '</div>' +
           '<div class="col-sm-12" style="margin-top: 10px">' +
+          '<div class="input-group find_layui-btn">' +
+          '<button class="layui-btn layui-btn-danger">提交</button>' +
+          '</div>' +
+          '</div>' +
+          '</div>'
+      })
+
+      var mobile = $('.layui-input').val()
+      $('.tipPhone').hide()
+      $('.find_layui-btn .layui-btn-danger').click(() => {
+        let validReg = window.AFLC_VALID
+        let form = {}
+        form.mobile = mobile
+        form.companyId = this.LineChangeAnother.companyId
+        mobile = $('.layui-input').val()
+        if (mobile) {
+          $('.tipPhone').hide()
+          if (validReg.MOBILE.test(mobile)) {
+            $('.tipPhone').hide()
+            let aurl = ''
+            if (process.server) {
+              aurl = 'http://localhost:3000'
+            }
+            form.mobile = mobile
+            // console.lo
+            $axios
+              .post(aurl + '/api/28-web/logisticsCompany/consult/save', form)
+              .then(res => {
+                // console.log(res, 'resresres')
+                if (res.data.status === 200) {
+                  layer.msg(
+                    '提交成功，客服稍后将会与您联系',
+                    {
+                      tiem: 3000
+                    },
+                    () => {}
+                  )
+                  location.reload()
+                } else {
+                  layer.msg(
+                    res.data.errorInfo ? res.data.errorInfo : res.data.text
+                  )
+                }
+              })
+          } else {
+            $('.tipPhone').show()
+            $('.layui-input').val('')
+          }
+        } else {
+          $('.tipPhone').show()
+          $('.layui-input').val('')
+        }
+      })
+    },
+    showFindFn() {
+      layer.open({
+        id: 1,
+        type: 1,
+        title: '闪电服务',
+        skin: 'layui-layer-rim1',
+        area: ['500px', '300px'],
+        success: (layero, index) => {
+          // $('.layui-btn-danger').onclick(() => {
+          //   console.log($('.layui-input').value, 'vakhhhfd')
+          // })
+          $('.layui-btn-danger').on('click', '')
+        },
+        content:
+          ' <div class="row_find" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
+          '<div class="col-sm-12">' +
           '<div class="input-group">' +
-          '<span class="input-group-addon">确认密码:</span>' +
-          '<input id="secondpwd" type="password" class="form-control" placeholder="请再输入一次密码">' +
+          '<p class="input-group-addon"> ' +
+          '<span>您要寻找的专线:' +
+          this.linedataA.startCity.substring(
+            0,
+            this.linedataA.startCity.length - 1
+          ) +
+          '至' +
+          this.linedataA.endCity.substring(
+            0,
+            this.linedataA.endCity.length - 1
+          ) +
+          '专线</span>' +
+          '</p>' +
           '</div>' +
           '</div>' +
-          '</div>',
-        btn: ['保存', '取消'],
-        btn1: function(index, layero) {},
-        btn2: function(index, layero) {
-          layer.close(index)
+          '<div class="col-sm-12">' +
+          '<div class="input-group">' +
+          '<input type="text" name="title" required  lay-verify="required" placeholder="请输入您的手机号" autocomplete="off" class="layui-input" maxlength="11" id="layui-input">' +
+          '<p class="tipPhone" style="color: red">*手机号码格式不正确</p>' +
+          '</div>' +
+          '</div>' +
+          '<div class="col-sm-12" style="margin-top: 10px">' +
+          '<div class="input-group find_layui-btn">' +
+          '<button class="layui-btn layui-btn-danger">提交</button>' +
+          '<p>提交成功后将平台会为您智能筛选，推荐优质承运商与您联系</p>' +
+          '</div>' +
+          '</div>' +
+          '</div>'
+      })
+
+      var msgMobile = $('.layui-input').val()
+      $('.tipPhone').hide()
+      $('.find_layui-btn .layui-btn-danger').click(() => {
+        let validReg = window.AFLC_VALID
+        let form = {}
+        form.msgMobile = msgMobile
+        form.startProvince = this.linedataA.startProvince
+        form.startCity = this.linedataA.startCity
+        form.startArea = this.linedataA.startArea
+        form.endProvince = this.linedataA.endProvince
+        form.endCity = this.linedataA.endCity
+        form.endArea = this.linedataA.endArea
+        msgMobile = $('.layui-input').val()
+        if (msgMobile) {
+          $('.tipPhone').hide()
+          if (validReg.MOBILE.test($('.layui-input').val())) {
+            $('.tipPhone').hide()
+            let aurl = ''
+            if (process.server) {
+              aurl = 'http://localhost:3000'
+            }
+            form.msgMobile = msgMobile
+            $axios
+              .post(aurl + '/api/28-web/helpFind/range/create', form)
+              .then(res => {
+                // console.log(res, 'resresres')
+                if (res.data.status === 200) {
+                  layer.msg(
+                    '提交成功，客服稍后将会与您联系',
+                    {
+                      tiem: 3000
+                    },
+                    () => {}
+                  )
+                  location.reload()
+                } else {
+                  layer.msg(
+                    res.data.errorInfo ? res.data.errorInfo : res.data.text
+                  )
+                }
+              })
+          } else {
+            $('.tipPhone').show()
+            $('.layui-input').val('')
+          }
+        } else {
+          $('.tipPhone').show()
+          $('.layui-input').val('')
         }
       })
     },

@@ -1,17 +1,13 @@
 
 export default {
-  name: 'NuxtChild',
+  name: 'nuxt-child',
   functional: true,
   props: {
     nuxtChildKey: {
       type: String,
       default: ''
     },
-    keepAlive: Boolean,
-    keepAliveProps: {
-      type: Object,
-      default: undefined
-    }
+    keepAlive: Boolean
   },
   render(h, { parent, data, props }) {
     data.nuxtChild = true

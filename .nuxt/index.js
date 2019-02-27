@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import Meta from 'vue-meta'
 import { createRouter } from './router.js'
-import NoSsr from './components/no-ssr.js'
+import NoSSR from './components/no-ssr.js'
 import NuxtChild from './components/nuxt-child.js'
+import NuxtLink from './components/nuxt-link.js'
 import NuxtError from '..\\layouts\\error.vue'
 import Nuxt from './components/nuxt.js'
 import App from './App.js'
@@ -11,20 +12,20 @@ import { createStore } from './store.js'
 
 /* Plugins */
 
-import nuxt_plugin_cookieuniversalnuxt_045b8140 from 'nuxt_plugin_cookieuniversalnuxt_045b8140' // Source: ./cookie-universal-nuxt.js (mode: 'all')
-import nuxt_plugin_axios_0e81e090 from 'nuxt_plugin_axios_0e81e090' // Source: ./axios.js (mode: 'all')
-import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (mode: 'client')
+import nuxt_plugin_cookieuniversalnuxt_045b8140 from 'nuxt_plugin_cookieuniversalnuxt_045b8140' // Source: ./cookie-universal-nuxt.js
+import nuxt_plugin_axios_0e81e090 from 'nuxt_plugin_axios_0e81e090' // Source: ./axios.js
+import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (ssr: false)
 
-// Component: <NoSsr>
-Vue.component(NoSsr.name, NoSsr)
+// Component: <no-ssr>
+Vue.component(NoSSR.name, NoSSR)
 
-// Component: <NuxtChild>
+// Component: <nuxt-child>
 Vue.component(NuxtChild.name, NuxtChild)
-Vue.component('NChild', NuxtChild)
 
-// Component NuxtLink is imported in server.js or client.js
+// Component: <nuxt-link>
+Vue.component(NuxtLink.name, NuxtLink)
 
-// Component: <Nuxt>`
+// Component: <nuxt>`
 Vue.component(Nuxt.name, Nuxt)
 
 // vue-meta configuration

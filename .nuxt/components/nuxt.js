@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import { compile } from '../utils'
 
@@ -6,25 +7,28 @@ import NuxtError from '../..\\layouts\\error.vue'
 import NuxtChild from './nuxt-child'
 
 export default {
-  name: 'Nuxt',
-  components: {
-    NuxtChild,
-    NuxtError
-  },
+  name: 'nuxt',
   props: {
-    nuxtChildKey: {
-      type: String,
-      default: undefined
-    },
-    keepAlive: Boolean,
-    keepAliveProps: {
-      type: Object,
-      default: undefined
-    },
-    name: {
-      type: String,
-      default: 'default'
+    nuxtChildKey: String,
+    keepAlive: Boolean
+  },
+  render(h) {
+    // If there is some error
+    if (this.nuxt.err) {
+      return h('nuxt-error', {
+        props: {
+          error: this.nuxt.err
+        }
+      })
     }
+    // Directly return nuxt child
+    return h('nuxt-child', {
+      key: this.routerViewKey,
+      props: this.$props
+    })
+  },
+  beforeCreate() {
+    Vue.util.defineReactive(this, 'nuxt', this.$root.$options.nuxt)
   },
   computed: {
     routerViewKey() {
@@ -39,22 +43,8 @@ export default {
       return this.$route.path
     }
   },
-  beforeCreate() {
-    Vue.util.defineReactive(this, 'nuxt', this.$root.$options.nuxt)
-  },
-  render(h) {
-    // If there is some error
-    if (this.nuxt.err) {
-      return h('NuxtError', {
-        props: {
-          error: this.nuxt.err
-        }
-      })
-    }
-    // Directly return nuxt child
-    return h('NuxtChild', {
-      key: this.routerViewKey,
-      props: this.$props
-    })
+  components: {
+    NuxtChild,
+    NuxtError
   }
 }

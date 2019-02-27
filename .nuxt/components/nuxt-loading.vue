@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: 'NuxtLoading',
+  name: 'nuxt-loading',
   data() {
     return {
       percent: 0,

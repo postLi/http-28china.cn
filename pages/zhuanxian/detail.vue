@@ -590,9 +590,9 @@
             <p v-if="!linedataF.length">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
-                <!--<button-->
-                <!--class="layui-btn layui-btn-primary"-->
-                <!--@click="moreFn()">更多</button>-->
+              <!--<button-->
+              <!--class="layui-btn layui-btn-primary"-->
+              <!--@click="moreFn()">更多</button>-->
               </div>
               <ul>
                 <li

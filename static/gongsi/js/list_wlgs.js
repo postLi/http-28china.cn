@@ -520,7 +520,18 @@ function process01() {
 
 process01()
 //物流公司 推荐列表 E
-
+$(function() {
+  $('#wlLineFrom input').citypicker({
+    province: startp,
+    city: startc,
+    district: starta
+  })
+  $('#wlLineTo input').citypicker({
+    province: GetUrlParam('endp'),
+    city: GetUrlParam('endc'),
+    district: GetUrlParam('enda')
+  })
+})
 //物流公司 栏目列表S
 function process02(currentPage) {
   var totalPage = 8
@@ -534,7 +545,7 @@ function process02(currentPage) {
     async: false,
     data: JSON.stringify({
       currentPage: currentPage,
-      pageSize: 20,
+      pageSize: 2,
       vo: vo //JSON.stringify({})
     }),
     success: function(res) {

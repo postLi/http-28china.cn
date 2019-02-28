@@ -912,15 +912,6 @@
             <FooterLinks :info="linedataG.startFromRecommend.links"/>
           </div>
         </div>
-        <!--<div class="arc_main8_3">-->
-        <!--<div class="lll-recommend clearfix">-->
-        <!--<div-->
-        <!--class="zx_sx"-->
-        <!--style="border-color: #e7e7e7"-->
-        <!--&gt;<span class="biaozhi"/><span>{{ linedataG.startArriveRecommend.label }}</span></div>-->
-        <!--<FooterLinks :info="linedataG.startArriveRecommend.links"/>-->
-        <!--</div>-->
-        <!--</div>-->
       </div>
 
     </div>

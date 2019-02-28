@@ -55,7 +55,27 @@
 
 <script>
 export default {
-  name: 'HotList'
+  name: 'HotList',
+  props: {
+    lines: {
+      type: [Object, Array],
+      default: () => {}
+    }
+  },
+  data() {
+    return {
+      lineHots: {}
+    }
+  },
+  watch: {
+    lines(n, o) {
+      console.log(n, 'nnnnnnnn')
+    }
+  },
+  mounted() {
+    this.lineHots = this.lines
+  },
+  methods: {}
 }
 </script>
 

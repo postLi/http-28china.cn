@@ -756,11 +756,14 @@
       </div>
 
     </div>
-    <Add :is-show-add.sync="isShowAdd"/>
+    <Add 
+      :is-show-add.sync="isShowAdd" 
+      :data-info="dataInfo"/>
   </div>
 </template>
 <script>
 import Add from './add'
+import $axios from 'axios'
 export default {
   name: 'Detail',
   components: {
@@ -799,6 +802,7 @@ export default {
       endProvince: '',
       endCity: '',
       endArea: '',
+      dataInfo: {},
       gldhList: [
         {
           title: '注册28快运会员',
@@ -1048,8 +1052,38 @@ export default {
   },
   methods: {
     openAdd() {
-      console.log('11111')
-      this.isShowAdd = true
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        $axios
+          .post(
+            '/api/28-web/companyLine/subscribe?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token,
+            this.dataInfo
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.isShowAdd = true
+        this.dataInfo.startProvince = this.hyDetail.startProvince
+        this.dataInfo.startCity = this.hyDetail.startCity
+        this.dataInfo.startArea = this.hyDetail.startArea
+        this.dataInfo.endProvince = this.hyDetail.endProvince
+        this.dataInfo.endCity = this.hyDetail.endCity
+        this.dataInfo.endArea = this.hyDetail.endArea
+        console.log(this.dataInfo)
+      }
     },
     showMoblieFn(showMoblieFn) {
       if (showMoblieFn == false) {

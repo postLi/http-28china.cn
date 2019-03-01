@@ -1144,7 +1144,6 @@ export default {
         startCity: this.hyDetail.startCity,
         startProvince: this.hyDetail.startProvince
       }
-      // console.log(obj, 'obj')
       this.$axios.post('/28-web/lclOrder/another', obj).then(res => {
         if (res.data.status === 200) {
           console.log(res.data.data.id, '00000000')

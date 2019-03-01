@@ -30,6 +30,7 @@
               lay-verify="required" 
               maxlength="11" 
               class="text_phone"
+              @keyup.enter="done()"
               type="text" 
               placeholder="请输入手机号">
             <p class="phone_err">{{ ShowmobileErr? '*' + mobileErr : '' }}</p>
@@ -39,6 +40,7 @@
               class="text_num"
               v-model="textnum"
               type="text" 
+              maxlength="11"
               placeholder="请输入验证码">
             <a
             @click="phoneText()">{{ getMoblie ? times + '秒' : '获取验证码' }}</a>
@@ -106,11 +108,6 @@ export default {
       },
       deep: true
     }
-    // dataInfo: {
-    //   handler(cval, oval) {
-    //     console.log(this.dataInfo, 'dataInfo')
-    //   }
-    // }
   },
   mounted() {
     console.log(this.dataInfo, 'dataInfo')
@@ -128,40 +125,65 @@ export default {
     closeMe() {
       this.$emit('update:isShowAdd', false)
     },
+    done() {
+      console.log('done')
+    },
     submitBtn() {
       let _this = this
+      var validReg = window.AFLC_VALID
+      var AFLC_VALID = window.AFLC_VALID
       this.dataInfo.mobile = _this.mobile
       this.dataInfo.textnum = _this.textnum
-      if (this.mobile && this.textnum) {
-        this.Showtextnum = false
-        this.ShowmobileErr = false
-        this.numErr = ''
-        this.mobileErr = ''
+      // if (this.mobile && this.textnum) {
+      //   console.log(this.mobile, '5555')
+      //   if (validReg.MOBILE.test(this.mobile)) {
+      //     this.Showtextnum = false
+      //     this.ShowmobileErr = false
+      //     this.numErr = ''
+      //     this.mobileErr = ''
+      //     console.log(this.mobile, '6666')
+      //     $axios
+      //       .post('/api/28-web/companyLine/subscribe', this.dataInfo)
+      //       .then(res => {
+      //         if (res.data.status === 200) {
+      //           layer.msg('订阅成功')
+      //         }
+      //         if (res.data.errorInfo) {
+      //           layer.msg(res.data.errorInfo)
+      //         }
+      //       })
+      //       .catch(err => {
+      //         console.log('提交捕获异常')
+      //       })
+      //   } else {
+      //     this.ShowmobileErr = true
+      //     this.mobileErr = '请填写有效的手机号'
+      //     console.log(this.mobile, '7777')
+      //   }
+      // } else {
+      //   console.log(this.mobile, '4444')
+      //   this.Showtextnum = true
+      //   this.numErr = '请填写验证码'
+      //   this.ShowmobileErr = true
+      //   this.mobileErr = '请填写手机号'
+      // }
+      if (this.mobile) {
+        console.log('1111')
         if (validReg.MOBILE.test(this.mobile)) {
-          $axios
-            .post('/api/28-web/companyLine/subscribe', this.dataInfo)
-            .then(res => {
-              if (res.data.status === 200) {
-                layer.msg('订阅成功')
-              }
-              if (res.data.errorInfo) {
-                layer.msg(res.data.errorInfo)
-              }
-            })
-            .catch(err => {
-              console.log('提交捕获异常')
-            })
+          console.log('yes1111')
         } else {
-          this.ShowmobileErr = true
-          this.mobileErr = '请填写有效的手机号'
+          console.log('2222')
         }
       } else {
-        this.Showtextnum = true
-        this.numErr = '请填写验证码'
-        this.ShowmobileErr = true
-        this.mobileErr = '请填写手机号'
+        console.log('no1111')
+        return
       }
-      console.log(this.numErr)
+      if (this.mobile && this.textnum) {
+        console.log('ajax')
+      } else {
+        console.log('twoNo')
+        return
+      }
     },
     phoneText() {
       let _this = this
@@ -188,18 +210,6 @@ export default {
         this.mobileErr = '请填写手机号'
       }
     },
-    startCountDown: function(el, time) {
-      let _this = this
-      el.text(time + '秒后再次操作')
-      setTimeout(function() {
-        if (time > 0) {
-          _this.startCountDown(el, time - 1)
-        } else {
-          el.removeClass('disabled')
-          el.text('获取短信验证码')
-        }
-      }, 1000)
-    },
     startCount() {
       let stop = setInterval(() => {
         this.times--
@@ -209,7 +219,6 @@ export default {
           this.times = 60
         }
       }, 1000)
-      console.log(stop)
     }
   }
 }

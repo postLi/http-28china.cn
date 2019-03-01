@@ -751,7 +751,7 @@ table tr:nth-child(odd){
 }
 .arc_main3 .right .content .content-right .img{
   position: relative;
-  top: 3px;
+  vertical-align: middle;
 }
 
 .arc_main3 .right .content .content-right .button1{

@@ -26,6 +26,11 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/index.css' },
       { rel: 'stylesheet', href: '/css/list_huo.css' }
+    ],
+    script: [
+      {
+        src: '/index/js/memu.js'
+      }
     ]
   }
 }

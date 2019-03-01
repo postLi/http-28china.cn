@@ -191,7 +191,7 @@
           <li
             id="wlzx"
             style="margin-left: 20px;"
-          ><a href="/zhaunxian/list" >物流专线</a></li>
+          ><a href="/zhuanxian/list" >物流专线</a></li>
           <li
             id="hy"
             style="margin-left: 20px;"><a href="/huoyuan">货源信息</a></li>

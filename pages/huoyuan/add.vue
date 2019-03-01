@@ -1,7 +1,7 @@
 <template>
   <div 
     v-show="isShow" 
-    class="popDialog">
+    class="wzlAdd">
     <div 
       :key="dialogKey" 
       class="add1_content">
@@ -22,7 +22,6 @@
           </li>
           <li class="cont_ul_li" >
             <input 
-              id="layui-input"
               v-model="mobile"
               name="title" 
               required 
@@ -30,6 +29,7 @@
               lay-verify="required" 
               maxlength="11" 
               class="text_phone"
+              @keyup.enter="done()"
               type="text" 
               placeholder="请输入手机号">
             <p class="phone_err">{{ ShowmobileErr? '*' + mobileErr : '' }}</p>
@@ -39,6 +39,7 @@
               class="text_num"
               v-model="textnum"
               type="text" 
+              maxlength="11"
               placeholder="请输入验证码">
             <a
             @click="phoneText()">{{ getMoblie ? times + '秒' : '获取验证码' }}</a>
@@ -106,14 +107,8 @@ export default {
       },
       deep: true
     }
-    // dataInfo: {
-    //   handler(cval, oval) {
-    //     console.log(this.dataInfo, 'dataInfo')
-    //   }
-    // }
   },
   mounted() {
-    console.log(this.dataInfo, 'dataInfo')
     this.handleView()
   },
   methods: {
@@ -128,40 +123,51 @@ export default {
     closeMe() {
       this.$emit('update:isShowAdd', false)
     },
+    done() {
+      console.log('done')
+    },
     submitBtn() {
+      console.log(this.userType)
       let _this = this
+      var validReg = window.AFLC_VALID
+      var AFLC_VALID = window.AFLC_VALID
       this.dataInfo.mobile = _this.mobile
       this.dataInfo.textnum = _this.textnum
-      if (this.mobile && this.textnum) {
-        this.Showtextnum = false
-        this.ShowmobileErr = false
-        this.numErr = ''
-        this.mobileErr = ''
+      this.dataInfo.userType = _this.userType
+      if (this.mobile) {
         if (validReg.MOBILE.test(this.mobile)) {
-          $axios
-            .post('/api/28-web/companyLine/subscribe', this.dataInfo)
-            .then(res => {
-              if (res.data.status === 200) {
-                layer.msg('订阅成功')
-              }
-              if (res.data.errorInfo) {
-                layer.msg(res.data.errorInfo)
-              }
-            })
-            .catch(err => {
-              console.log('提交捕获异常')
-            })
+          this.Showtextnum = false
+          this.ShowmobileErr = false
+          this.numErr = ''
+          this.mobileErr = ''
         } else {
           this.ShowmobileErr = true
           this.mobileErr = '请填写有效的手机号'
         }
       } else {
-        this.Showtextnum = true
-        this.numErr = '请填写验证码'
         this.ShowmobileErr = true
         this.mobileErr = '请填写手机号'
+        return
       }
-      console.log(this.numErr)
+      if (this.mobile && this.textnum) {
+        $axios
+          .post('/api/28-web/companyLine/subscribe', this.dataInfo)
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.Showtextnum = true
+        this.numErr = '请填写验证码'
+        return
+      }
     },
     phoneText() {
       let _this = this
@@ -188,18 +194,6 @@ export default {
         this.mobileErr = '请填写手机号'
       }
     },
-    startCountDown: function(el, time) {
-      let _this = this
-      el.text(time + '秒后再次操作')
-      setTimeout(function() {
-        if (time > 0) {
-          _this.startCountDown(el, time - 1)
-        } else {
-          el.removeClass('disabled')
-          el.text('获取短信验证码')
-        }
-      }, 1000)
-    },
     startCount() {
       let stop = setInterval(() => {
         this.times--
@@ -209,13 +203,12 @@ export default {
           this.times = 60
         }
       }, 1000)
-      console.log(stop)
     }
   }
 }
 </script>
 <style lang="scss">
-.popDialog {
+.wzlAdd {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;

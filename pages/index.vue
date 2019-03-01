@@ -1622,7 +1622,6 @@ export default {
           '/index/js/gaodemap2.js',
           '/index/js/index.js',
           '/index/js/floatBar.min.js',
-          '/index/js/memu.js',
           '/index/js/map/echarts.min.js'
         ],
         function() {

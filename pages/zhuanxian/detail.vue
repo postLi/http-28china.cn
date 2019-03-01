@@ -477,8 +477,15 @@
                     </div>
                     <div
                       v-if="linedataB.allServiceNameList.length >8"
-                      class="content-right-row-right"> <p style="padding-top: 10px">全部</p>
-                    <p>（{{ linedataB.allServiceNameList.length }}）</p></div>
+                      class="content-right-row-right">
+                      <a
+                        :href="'/member/'+linedataA.publishId+'-cpfw'"
+                        target="_blank"
+                        style="color: #fa9925">
+                        <p style="padding-top: 10px">全部</p>
+                        <p>（{{ linedataB.allServiceNameList.length }}）</p>
+                      </a>
+                    </div>
                   </li>
                   <li>
                     <p v-if="linedataB.authStatus =='AF0010403'"><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
@@ -583,9 +590,9 @@
             <p v-if="!linedataF.length">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
-                <button
-                  class="layui-btn layui-btn-primary"
-                  @click="moreFn()">更多</button>
+              <!--<button-->
+              <!--class="layui-btn layui-btn-primary"-->
+              <!--@click="moreFn()">更多</button>-->
               </div>
               <ul>
                 <li
@@ -905,15 +912,6 @@
             <FooterLinks :info="linedataG.startFromRecommend.links"/>
           </div>
         </div>
-        <!--<div class="arc_main8_3">-->
-        <!--<div class="lll-recommend clearfix">-->
-        <!--<div-->
-        <!--class="zx_sx"-->
-        <!--style="border-color: #e7e7e7"-->
-        <!--&gt;<span class="biaozhi"/><span>{{ linedataG.startArriveRecommend.label }}</span></div>-->
-        <!--<FooterLinks :info="linedataG.startArriveRecommend.links"/>-->
-        <!--</div>-->
-        <!--</div>-->
       </div>
 
     </div>
@@ -1289,14 +1287,14 @@ export default {
                   $('#search_huoyuan').click(function() {
                     var list1 = [],
                       list2 = []
-                    $('#HuoyuanFrom0 .select-item').each(function(i, e) {
+                    $('#HuoyuanFrom .select-item').each(function(i, e) {
                       list1.push($(this).text())
                     })
                     var startp = list1[0]
                     var startc = list1[1]
                     var starta = list1[2]
 
-                    $('#HuoyuanTo0 .select-item').each(function(i, e) {
+                    $('#HuoyuanTo .select-item').each(function(i, e) {
                       list2.push($(this).text())
                     })
                     var endp = list2[0]
@@ -1328,7 +1326,7 @@ export default {
                     endc = encodeURI(endc)
                     enda = encodeURI(enda)
                     window.location =
-                      '/huoyuan?startp=' +
+                      '/zhuanxian/list?startp=' +
                       startp +
                       '&startc=' +
                       startc +

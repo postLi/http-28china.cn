@@ -1,0 +1,316 @@
+<template>
+  <div class="detail_list">
+    <div
+      id="js002"
+      class="w1036" >
+
+      <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
+
+
+      <div class="list_none">
+        <span>暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
+        <img src="/static/gongsi/images/none_pic.png">
+        <!--<img src="../../static/gongsi/images/none_pic.png">-->
+      </div>
+
+
+
+      <ul
+        class="wlzx_list"
+        style="display: none;" >
+        <li class="wlzx_list_1"><a
+          id="nr_a21"
+          target="_blank"><img
+            id="nr01"
+            class="scrollLoading"
+            width="150"
+            height="98"
+        ></a></li>
+        <li class="wlzx_list_2">
+          <p class="p1"><a
+            id="nr02"
+            href="#"
+          >广州运力集团</a>
+
+            <img
+              v-for="(item,i) in 5"
+              :key="i"
+              class="xy_zuan"
+              src="/static/gongsi/images/blue.gif">
+            <!--<img-->
+            <!--class="xy_zuan"-->
+            <!--src="../../static/gongsi/images/blue.gif">-->
+            <!--<img-->
+            <!--class="xy_zuan"-->
+            <!--src="../../static/gongsi/images/blue.gif">-->
+            <!--<img-->
+            <!--class="xy_zuan"-->
+            <!--src="../../static/gongsi/images/blue.gif">-->
+            <!--<img-->
+            <!--class="xy_zuan"-->
+            <!--src="../../static/gongsi/images/blue.gif">-->
+            <img
+              v-for="(item,i) in 5"
+              :key="i"
+              class="xy_guan"
+              src="/static/gongsi/images/34huanguan.gif">
+            <!--<img-->
+            <!--class="xy_guan"-->
+            <!--src="../../static/gongsi/images/34huanguan.gif">-->
+            <!--<img-->
+            <!--class="xy_guan"-->
+            <!--src="../../static/gongsi/images/34huanguan.gif">-->
+            <!--<img-->
+            <!--class="xy_guan"-->
+            <!--src="../../static/gongsi/images/34huanguan.gif">-->
+            <!--<img-->
+            <!--class="xy_guan"-->
+            <!--src="../../static/gongsi/images/34huanguan.gif">-->
+            <img
+              class="wlgs_shiming"
+              src="/static/gongsi/images/wlgs_shiming.png">
+            <img
+              class="wlgs_xinyong"
+              src="/static/gongsi/images/xinyong.png">
+            <img
+              class="wlgs_danbao"
+              src="/static/gongsi/images/wlgs_danbao.png">
+
+          </P>
+          <p class="p2"><i>联系人：</i><font id="nr04">张总</font><a
+            id="nr11"
+            target="_blank"
+            href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img src="/static/gongsi/images/15qq.gif"></a></p>
+          <p class="p3"><i>电话：</i><font id="nr05">0731-88818882  17707316111</font></p>
+          <p class="p4"><i>地址：</i><font
+            id="nr06"
+            class="">北京大兴区魏永路博洋仓储物流园</font></p>
+        </li>
+        <li class="wlzx_list_3">
+          <p class="p1"><i>经营范围：</i><span id="nr07">整车 零担 特大货物运输</span></P>
+          <p class="p2"><i>增值服务：</i><span id="nr08">送货上门 保价 到付 代收货款</span></p>
+        </li>
+        <li class="wlzx_list_6">
+          <p class="p1"><a
+            id="nr_order"
+            target="_blank"><input
+              id="fahuo"
+              readonly=""
+              value="下单"></a>
+          </p><p class="p2"><a
+            id="nr_a22"
+            target="_blank"><input
+              id="wlzx_list_view"
+              readonly=""
+              value="查看官网"></a>
+        </p><p class="p3"/></li>
+      </ul>
+
+    </div>
+
+    <!--分页-->
+    <div
+    class="box">
+      <div
+        id="pagination1"
+        class="page fl"/>
+      <div class="info fl">
+      <!--<p>当前页数：<span id="current1">1</span></p>-->
+      </div>
+    </div>
+    <!--分页-->
+
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'DetailList',
+  props: {
+    lineLists: {
+      type: [Object, Array],
+      default: () => {}
+    }
+  },
+  watch: {
+    lineLists(n, o) {
+      console.log(n, 'nnnnnnnn')
+    }
+  },
+  mounted() {},
+  methods: {}
+}
+</script>
+
+<style lang="scss">
+.detail_list {
+  .clearfix:after {
+    content: ' ';
+    display: table;
+  }
+  .clearfix:before {
+    content: '';
+    display: table;
+  }
+  .clearfix:after {
+    clear: both;
+  }
+  .w1036 {
+    width: 1036px;
+    /*OVERFLOW: hidden;*/
+    border: 1px solid #eee;
+    border-bottom: 0;
+    border-bottom: 2px solid #2577e3;
+    margin-bottom: 1px;
+  }
+  .wlzx_list {
+    border: 0px;
+    width: 1034px;
+    height: 150px;
+    padding-top: 30px;
+    overflow: hidden;
+    margin-bottom: 1px;
+    border-bottom: #e4e4e4 1px solid;
+    transition: all 0.4s;
+    li {
+      height: 140px;
+      float: left;
+      overflow: hidden;
+      a {
+        img {
+          transition: 0.7s;
+          &:hover {
+            transform: scale(1.05);
+          }
+        }
+      }
+    }
+    .wlzx_list_1 {
+      width: 150px;
+      margin-left: 30px;
+      img:hover {
+        transform: scale(1.05);
+      }
+    }
+    .wlzx_list_2 {
+      margin-left: 30px;
+      width: 295px;
+      margin-left: 20px;
+    }
+    .wlzx_list_3 {
+      width: 310px;
+      margin-left: 15px;
+    }
+    .wlzx_list_4 {
+      width: 90px;
+      margin-left: 70px;
+    }
+    .wlzx_list_5 {
+      width: 75px;
+      margin-left: 65px;
+    }
+    .wlzx_list_6 {
+      width: 110px;
+      margin-left: 50px;
+      p input {
+        display: block;
+        width: 102px;
+        height: 26px;
+        line-height: 26px;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 14px;
+        cursor: pointer;
+        border: solid 1px #dedede;
+      }
+      .p1,
+      .p2 {
+        margin-bottom: 12px;
+      }
+      .p1 input {
+        background-color: #2577e3;
+        color: #fff;
+        border: 0px;
+        height: 28px;
+      }
+      .p1 input:hover {
+        background-color: #2577ff;
+      }
+
+      .p3 input {
+        background: no-repeat url(../static/gongsi/images/15qq.gif) 12px 3px;
+        /*background: no-repeat url(../images/article_wlzx/15qq.gif) 12px 3px;*/
+
+        padding-left: 15px;
+        width: 87px;
+      }
+    }
+  }
+  .list_none {
+    display: none;
+    span {
+      float: left;
+      width: 100%;
+      text-align: center;
+      height: 40px;
+      line-height: 40px;
+      font-size: 16px;
+      margin-top: 40px;
+    }
+    img {
+      float: left;
+      width: 300px;
+      height: 160px;
+      margin: 20px 0 20px 400px;
+    }
+  }
+
+  .wlzx_list_2 p {
+    line-height: 30px;
+  }
+  .wlzx_list_2 .p1 {
+    margin-bottom: 10px;
+  }
+  .wlzx_list_2 .p1 a {
+    font-weight: bold;
+    padding-right: 5px;
+  }
+  .wlzx_list_2 .p1 a:hover {
+    color: #fa5000;
+  }
+  .wlzx_list_2 .p1 img {
+    display: none;
+  }
+  .wlzx_list_2 i {
+    color: #666;
+    padding-left: 0px;
+    font-size: 14px;
+  }
+  .wlzx_list_2 font {
+    color: #333;
+    font-size: 14px;
+  }
+  .wlzx_list_2 .p2 {
+    position: relative;
+  }
+  .wlzx_list_2 .p2 img {
+    position: absolute;
+    left: 105px;
+    top: 3px;
+  }
+  .wlzx_list_3 p {
+    line-height: 30px;
+  }
+  .wlzx_list_3 .p1 {
+    margin-top: 35px;
+  }
+  .wlzx_list_3 p i {
+    color: #666;
+  }
+  .wlzx_list_6 .p1 {
+    margin-top: 20px;
+    margin-bottom: 22px;
+  }
+}
+</style>

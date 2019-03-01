@@ -404,7 +404,7 @@ function changeStart() {
   var myurl8 = UrlUpdateParams(myurl7, 'locationCity', '')
   var myurl9 = UrlUpdateParams(myurl8, 'locationArea', '')
   var myurl = UrlUpdateParams(myurl9, 'startArea', '')
-  if (myurl.indexOf('templets') != -1) {
+  if (/zhuanxian\/\d+\.htm/g.test(location.pathname)) {
     gotoline()
     return
   }

@@ -356,7 +356,7 @@ export default {
       // console.log(item.advService, 'advService')
     })
 
-    console.log(listD.data.data, 'listD1')
+    // console.log(listD.data.data, 'listD1')
     return {
       lineHots: listA.data.data,
       lineLinks: listC.data.data,

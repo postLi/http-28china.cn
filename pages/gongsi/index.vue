@@ -25,9 +25,9 @@
               class="layui-carousel"
               style="width: 100%; height: 250px;">
               <div carousel-item>
-                <div style="background: skyblue">条目1</div>
-                <div style="background: cornflowerblue">条目2</div>
-                <div style="background: blanchedalmond">条目3</div>
+                <div><img src="//res.layui.com/images/layui/demo/1.png"></div>
+                <div><img src="//res.layui.com/images/layui/demo/2.png"></div>
+                <div><img src="//res.layui.com/images/layui/demo/3.png"></div>
               </div>
             </div>
           </div>
@@ -37,9 +37,14 @@
             <a
               v-for="(item, index) in 3"
               :key="index"
-              href="#"><img
-                src="../../static/gongsi/images/wlgs_danbao.png"
-                alt=""></a>
+              href="#"
+              style="display: inline-block; width: 30%;height: 100%;background: skyblue;margin-left: 10px">
+              <!--<img-->
+              <!--src="../../static/gongsi/images/wlgs_danbao.png"-->
+              <!--alt=""-->
+              <!--style="width: 30%;height: 135px;"-->
+            <!--&gt;-->
+            </a>
           </div>
         </li>
         <li class="last_li">

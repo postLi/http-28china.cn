@@ -24,11 +24,14 @@
             <button
               type="text"
               style="background: #fff;border: none;cursor: pointer">
-              <img
-                src="../static/gongsi/images/close.png"
-                alt=""
-                width="30"
-              >
+              <i
+                class="layui-icon layui-icon-face-smile"
+                style="font-size: 30px; color: #1E9FFF;"/>
+                <!--<img-->
+                <!--src="../static/gongsi/images/close.png"-->
+                <!--alt=""-->
+                <!--width="30"-->
+                <!--&gt;-->
             </button>
           </div>
         </div>

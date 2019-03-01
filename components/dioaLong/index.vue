@@ -24,7 +24,7 @@
               @click="handleView()" >我是车主</span>
           </li>
           <li 
-            class="cont_ul_li" >
+          class="cont_ul_li" >
             <input 
               class="text_phone"
               type="text" 

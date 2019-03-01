@@ -1,7 +1,7 @@
 <template>
   <div 
     v-show="isShow" 
-    class="popDialog">
+    class="wzlAdd">
     <div 
       :key="dialogKey" 
       class="add1_content">
@@ -22,7 +22,6 @@
           </li>
           <li class="cont_ul_li" >
             <input 
-              id="layui-input"
               v-model="mobile"
               name="title" 
               required 
@@ -110,7 +109,6 @@ export default {
     }
   },
   mounted() {
-    console.log(this.dataInfo, 'dataInfo')
     this.handleView()
   },
   methods: {
@@ -129,59 +127,45 @@ export default {
       console.log('done')
     },
     submitBtn() {
+      console.log(this.userType)
       let _this = this
       var validReg = window.AFLC_VALID
       var AFLC_VALID = window.AFLC_VALID
       this.dataInfo.mobile = _this.mobile
       this.dataInfo.textnum = _this.textnum
-      // if (this.mobile && this.textnum) {
-      //   console.log(this.mobile, '5555')
-      //   if (validReg.MOBILE.test(this.mobile)) {
-      //     this.Showtextnum = false
-      //     this.ShowmobileErr = false
-      //     this.numErr = ''
-      //     this.mobileErr = ''
-      //     console.log(this.mobile, '6666')
-      //     $axios
-      //       .post('/api/28-web/companyLine/subscribe', this.dataInfo)
-      //       .then(res => {
-      //         if (res.data.status === 200) {
-      //           layer.msg('订阅成功')
-      //         }
-      //         if (res.data.errorInfo) {
-      //           layer.msg(res.data.errorInfo)
-      //         }
-      //       })
-      //       .catch(err => {
-      //         console.log('提交捕获异常')
-      //       })
-      //   } else {
-      //     this.ShowmobileErr = true
-      //     this.mobileErr = '请填写有效的手机号'
-      //     console.log(this.mobile, '7777')
-      //   }
-      // } else {
-      //   console.log(this.mobile, '4444')
-      //   this.Showtextnum = true
-      //   this.numErr = '请填写验证码'
-      //   this.ShowmobileErr = true
-      //   this.mobileErr = '请填写手机号'
-      // }
+      this.dataInfo.userType = _this.userType
       if (this.mobile) {
-        console.log('1111')
         if (validReg.MOBILE.test(this.mobile)) {
-          console.log('yes1111')
+          this.Showtextnum = false
+          this.ShowmobileErr = false
+          this.numErr = ''
+          this.mobileErr = ''
         } else {
-          console.log('2222')
+          this.ShowmobileErr = true
+          this.mobileErr = '请填写有效的手机号'
         }
       } else {
-        console.log('no1111')
+        this.ShowmobileErr = true
+        this.mobileErr = '请填写手机号'
         return
       }
       if (this.mobile && this.textnum) {
-        console.log('ajax')
+        $axios
+          .post('/api/28-web/companyLine/subscribe', this.dataInfo)
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
       } else {
-        console.log('twoNo')
+        this.Showtextnum = true
+        this.numErr = '请填写验证码'
         return
       }
     },
@@ -224,7 +208,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.popDialog {
+.wzlAdd {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;

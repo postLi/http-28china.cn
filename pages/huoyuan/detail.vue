@@ -148,8 +148,10 @@
                 <span>小贴士：对此货源有意向可点击“抢单”，货主即可看到您的联系信息，提高成交率！</span>
                 <div style="margin-top: 15px">
                   <a 
-                    href="" 
-                    class="button1">立即下单</a>
+                    href="javascript:;" 
+                    class="button1"
+                    @click="openOrder()" 
+                  >立即下单</a>
                   <a 
                     href="javascript:;" 
                     class="button2" 
@@ -307,7 +309,8 @@
               style="clear: both">
               <a
                 href="javascript:;"
-                class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
+                class="button2"
+                @click="openHelp()"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
             </div>
           </div>
         </div>
@@ -759,15 +762,21 @@
     <Add 
       :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
+    <Lelp :is-show-help.sync="isShowHelp" />
+    <Order :is-show-order.sync="isShowOrder"/>
   </div>
 </template>
 <script>
 import Add from './add'
+import Lelp from './help'
+import Order from './order'
 import $axios from 'axios'
 export default {
   name: 'Detail',
   components: {
-    Add
+    Add,
+    Lelp,
+    Order
   },
   head: {
     link: [
@@ -789,6 +798,8 @@ export default {
       showMoblie: false,
       checkMoblie: true,
       isShowAdd: false,
+      isShowHelp: false,
+      isShowOrder: false,
       zxList: [],
       inTerVar: null,
       inTerVar1: null,
@@ -860,7 +871,7 @@ export default {
     }
     //货主档案
     let archivals = await $axios.post(
-      '/28-web/shipper/archival?shipperId=' + query.shipperId
+      '/28-web/shipper/archival?sshipperId=' + query.shipperId
     )
     console.log(archivals.data.data, 'item province:')
     //顶部轮播
@@ -1076,6 +1087,72 @@ export default {
           })
       } else {
         this.isShowAdd = true
+        this.dataInfo.startProvince = this.hyDetail.startProvince
+        this.dataInfo.startCity = this.hyDetail.startCity
+        this.dataInfo.startArea = this.hyDetail.startArea
+        this.dataInfo.endProvince = this.hyDetail.endProvince
+        this.dataInfo.endCity = this.hyDetail.endCity
+        this.dataInfo.endArea = this.hyDetail.endArea
+      }
+    },
+    openHelp() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        $axios
+          .post(
+            '/api/28-web/companyLine/subscribe?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token,
+            this.dataInfo
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.isShowHelp = true
+        this.dataInfo.startProvince = this.hyDetail.startProvince
+        this.dataInfo.startCity = this.hyDetail.startCity
+        this.dataInfo.startArea = this.hyDetail.startArea
+        this.dataInfo.endProvince = this.hyDetail.endProvince
+        this.dataInfo.endCity = this.hyDetail.endCity
+        this.dataInfo.endArea = this.hyDetail.endArea
+      }
+    },
+    openOrder() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        $axios
+          .post(
+            '/api/28-web/companyLine/subscribe?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token,
+            this.dataInfo
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.isShowOrder = true
         this.dataInfo.startProvince = this.hyDetail.startProvince
         this.dataInfo.startCity = this.hyDetail.startCity
         this.dataInfo.startArea = this.hyDetail.startArea

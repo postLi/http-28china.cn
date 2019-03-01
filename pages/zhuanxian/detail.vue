@@ -469,7 +469,7 @@
                     <!--allServiceNameList-->
                     <div
 
-                      class="content-right-row-left">
+                    class="content-right-row-left">
                       <span
                         v-for="(item, index) in linedataB.allServiceNameList"
                         :key="index"
@@ -477,8 +477,15 @@
                     </div>
                     <div
                       v-if="linedataB.allServiceNameList.length >8"
-                      class="content-right-row-right"> <p style="padding-top: 10px">全部</p>
-                    <p>（{{ linedataB.allServiceNameList.length }}）</p></div>
+                      class="content-right-row-right">
+                      <a
+                        :href="'/member/'+linedataA.publishId+'-cpfw'"
+                        target="_blank"
+                        style="color: #fa9925">
+                        <p style="padding-top: 10px">全部</p>
+                        <p>（{{ linedataB.allServiceNameList.length }}）</p>
+                      </a>
+                    </div>
                   </li>
                   <li>
                     <p v-if="linedataB.authStatus =='AF0010403'"><span>证件已认证</span>承运商的运营资质证件已经核实！</p>
@@ -583,9 +590,9 @@
             <p v-if="!linedataF.length">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
-                <button
-                  class="layui-btn layui-btn-primary"
-                  @click="moreFn()">更多</button>
+              <!--<button-->
+              <!--class="layui-btn layui-btn-primary"-->
+              <!--@click="moreFn()">更多</button>-->
               </div>
               <ul>
                 <li
@@ -620,7 +627,7 @@
         style="clear: both"
         class="clearfix">
         <div
-          class="arc_main5">
+        class="arc_main5">
           <div
             id="js002"
             class="w1036 list_wlzx">
@@ -676,9 +683,9 @@
                 :key="index"
                 class="wlzx_list">
                 <li id="wlzx_list_0">
-                  <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
+                <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
 
-                  <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
+                <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
                 </li>
                 <li class="wlzx_list_1">
                   <a
@@ -720,7 +727,7 @@
                       id="nr03"
                       :href="'/member/'+item.publishId"
                       target="_blank"><font
-                        class="">{{ item.companyName }}</font></a>
+                    class="">{{ item.companyName }}</font></a>
                     <a
                       id="nr11"
                       target="_blank"
@@ -804,7 +811,7 @@
           </div>
         </div>
         <div class="arc_main6">
-          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}出发的专线</span></div>
+          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ queryCitys.endCity || queryCitys.endProvince }}出发的专线</span></div>
           <div
             v-if="!lineRecoms.length"
             class="tj_none">
@@ -905,15 +912,6 @@
             <FooterLinks :info="linedataG.startFromRecommend.links"/>
           </div>
         </div>
-        <!--<div class="arc_main8_3">-->
-        <!--<div class="lll-recommend clearfix">-->
-        <!--<div-->
-        <!--class="zx_sx"-->
-        <!--style="border-color: #e7e7e7"-->
-        <!--&gt;<span class="biaozhi"/><span>{{ linedataG.startArriveRecommend.label }}</span></div>-->
-        <!--<FooterLinks :info="linedataG.startArriveRecommend.links"/>-->
-        <!--</div>-->
-        <!--</div>-->
       </div>
 
     </div>
@@ -924,7 +922,13 @@
 
 <script>
 import $axios from 'axios'
-import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+import {
+  isZXcity,
+  getSEListParams,
+  getCode,
+  getCity,
+  parseTime
+} from '~/components/commonJs.js'
 // import { AFLC_VALID } from '~/static/js/AFLC_API.js'
 // import { AFLC_VALID } from '../../static/js/AFLC_API'
 import ShowPrice from './showPrice'
@@ -1102,21 +1106,22 @@ export default {
       //   endCity: endc,
       //   endArea: enda
       // }),
-      linedataD = await $axios.post(
-        aurl + '/api/28-web/range/recommend',
-        (vo = {
-          currentPage: 1,
-          pageSize: 5
-        })
-      )
+      let queryCitys = getSEListParams(linedataA.data.data)
+      // 从目的地出发的专线
+      linedataD = await $axios.post(aurl + '/api/28-web/range/recommend', {
+        currentPage: 1,
+        pageSize: 5,
+        startProvince: queryCitys.endProvince,
+        startCity: queryCitys.endCity
+      })
 
-      linedataC = await $axios.post(
-        aurl + '/api/28-web/range/list',
-        (vo = {
-          currentPage: 1,
-          pageSize: 6
-        })
-      )
+      // 从出发地出发的专线
+      linedataC = await $axios.post(aurl + '/api/28-web/range/list', {
+        currentPage: 1,
+        pageSize: 6,
+        startProvince: queryCitys.startProvince,
+        startCity: queryCitys.startCity
+      })
       LineCAnother = await $axios.post(
         aurl + '/api/28-web/range/changeAnother',
         vo
@@ -1147,7 +1152,7 @@ export default {
         : ''
       // credit
       // linedataB.data.data
-      console.log(linedataG.data.data, 'linedataG.data.data')
+      // console.log(linedataG.data.data, 'linedataG.data.data')
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip
@@ -1239,7 +1244,8 @@ export default {
         linedataG: linedataG.data.status == 200 ? linedataG.data.data : '',
         LineeEchartInfo: LineeEInfo.data.data,
         lineCitys: lineCity.data.data,
-        LineChangeAnother: LineCAnother.data.data
+        LineChangeAnother: LineCAnother.data.data,
+        queryCitys
       }
     }
     // let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
@@ -1281,14 +1287,14 @@ export default {
                   $('#search_huoyuan').click(function() {
                     var list1 = [],
                       list2 = []
-                    $('#HuoyuanFrom0 .select-item').each(function(i, e) {
+                    $('#HuoyuanFrom .select-item').each(function(i, e) {
                       list1.push($(this).text())
                     })
                     var startp = list1[0]
                     var startc = list1[1]
                     var starta = list1[2]
 
-                    $('#HuoyuanTo0 .select-item').each(function(i, e) {
+                    $('#HuoyuanTo .select-item').each(function(i, e) {
                       list2.push($(this).text())
                     })
                     var endp = list2[0]
@@ -1320,7 +1326,7 @@ export default {
                     endc = encodeURI(endc)
                     enda = encodeURI(enda)
                     window.location =
-                      '/huoyuan?startp=' +
+                      '/zhuanxian/list?startp=' +
                       startp +
                       '&startc=' +
                       startc +

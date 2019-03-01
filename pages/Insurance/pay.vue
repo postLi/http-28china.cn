@@ -34,8 +34,8 @@
               class="pay_input2" 
               value="支付宝支付">
           </li>
-          <li class="item_left pay_money_sm">应付金额：</li><li class="item_right pay_money">
-            <!--<font>100.00</font><em>元</em>-->
+          <li class="item_left pay_money_sm">应付金额：</li>
+          <li class="item_right pay_money"><!--<font>100.00</font><em>元</em>-->
           </li>
           <li class="agree"><span class="agree_none"/><font>我已阅读并接受<a 
             href="#" 

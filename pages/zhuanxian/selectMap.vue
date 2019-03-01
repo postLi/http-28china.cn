@@ -41,21 +41,14 @@
     <textarea
       v-model="form.memo"
       maxlength="100"
-      name=""
-      required
-      lay-verify="required"
       placeholder="备注信息，如：期望发货时间、货物体积重量
 等信息..."
-      class="layui-textarea"/>
+      class="textare"/>
     <input
       v-model="form.msgMobile"
-      type="text"
-      name="title"
-      required
-      lay-verify="required"
       placeholder="11位手机号 "
       autocomplete="off"
-      class="layui-input"
+      class="textinput"
       maxlength="11">
     <input
       class="phone-btn"
@@ -147,6 +140,20 @@ export default {
     }
   },
   mounted() {
+    seajs.use('../js/city-picker.js', function() {
+      // console.log(this.$route.startp, 'this.$route.query')
+      // $('#wlLineFrom input').citypicker({
+      //   province: this.$route.query.startp ? this.$route.query.startp : '',
+      //   city: this.$route.query.startc ? this.$route.query.startc : '',
+      //   city: this.$route.query.starta ? this.$route.query.starta : ''
+      // })
+      // $('#wlLineTo input').citypicker({
+      //   province: this.$route.query.endp ? this.$route.query.endp : '',
+      //   province: this.$route.query.endc ? this.$route.query.endc : '',
+      //   province: this.$route.query.enda ? this.$route.query.enda : ''
+      // })
+    })
+
     // console.log(this.$refs.rightbarorm.value, 'rightbarorm')
     // console.log(this.$refs.rightbarorm.thepcd, 'rightbarorm')
   },
@@ -233,8 +240,18 @@ export default {
     background: #fff;
     padding-right: 20px;
     margin-bottom: 10px;
+    .list_input {
+      width: 161px;
+      height: 32px;
+      border-radius: 2px;
+      border: solid 1px #e5e5e5;
+      background: none;
+      color: #333;
+      font-size: 13px;
+      padding-left: 9px;
+    }
   }
-  .layui-textarea {
+  .textare {
     width: 282px;
     height: 64px;
     padding: 10px 12px 10px 12px;
@@ -242,7 +259,7 @@ export default {
     border-radius: 3px;
     margin-bottom: 10px;
   }
-  .layui-input {
+  .textinput {
     width: 180px;
     height: 34px;
     border: solid 1px #e5e5e5;

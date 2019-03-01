@@ -11,7 +11,7 @@
           <div class="left_bt"><span>{{ gatewayData.parkName }}</span></div>
           <div class="left_nr">
             <div class="left_nr_1"><img
-              :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'../../static/images/article_wlzx/wlyq_pic.png'"></div>
+            :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'../../static/images/article_wlzx/wlyq_pic.png'"></div>
             <div class="left_nr_2">
               <div 
                 id="allmap" 
@@ -169,7 +169,7 @@
               id="pagination1" 
               class="page fl"/>
             <div class="info fl">
-              <!--<p>当前页数：<span id="current1">1</span></p>-->
+            <!--<p>当前页数：<span id="current1">1</span></p>-->
             </div>
           </div>
           <!--分页-->
@@ -282,7 +282,7 @@
               id="pagination2" 
               class="page fl"/>
             <div class="info fl">
-              <!--<p>当前页数：<span id="current1">1</span></p>-->
+            <!--<p>当前页数：<span id="current1">1</span></p>-->
             </div>
           </div>
           <!--分页-->

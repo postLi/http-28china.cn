@@ -215,9 +215,9 @@
             title="交易量从高到低">交易量</span><span
               id="seq2"
               title="运输时效从低到高">运输时效</span><span
-                id="seq3">重货价格</span>
+              id="seq3">重货价格</span>
             <div
-              id="tj_price">
+            id="tj_price">
               <span id="tj_price1">轻货价格从低到高</span>
               <span id="tj_price2">重货价格从低到高</span>
             </div>
@@ -231,7 +231,7 @@
           <!--lineList-->
           <!--<span>{{lineLists.length}}</span>-->
           <div
-            v-else >
+          v-else >
             <ul
               v-for="(item , index) in lineLists"
               :key="index"
@@ -281,7 +281,7 @@
                     id="nr03"
                     :href="'/member/'+item.companyId"
                     target="_blank"><font
-                      class="">{{ item.companyName }}</font></a>
+                  class="">{{ item.companyName }}</font></a>
                   <a
                     id="nr11"
                     target="_blank"
@@ -370,7 +370,7 @@
               id="pagination1"
               class="page fl"/>
             <div class="info fl">
-              <!--<p>当前页数：<span id="current1">1</span></p>-->
+            <!--<p>当前页数：<span id="current1">1</span></p>-->
             </div>
           </div>
         </div>
@@ -500,84 +500,32 @@
             </div>
           </div>
         </div>
-        <div class="list-box-r-hot">
+        <HotList :lines="lineHots"/>
 
-          <div class="zx_sx"><span class="biaozhi"/>企业月人气榜</div>
-          <div
-            v-if="!lineHots.length"
-            class="hot_none">
-            <span>没有相关企业月人气榜</span>
-          </div>
-          <div
-            v-else
-            class="hot-ul">
-            <ul
-
-            >
-              <li><a
-                :href="'/member/'+lineHots[0].id"
-                style="display: flex;"><span class="hot-num">1</span><img
-                  src="/line/images/touxiang1.png"
-                  alt=""
-                  width="50"
-                  height="50">
-              <p>{{ lineHots[0].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[0].popularity }}</i></span></a></li>
-              <li><a
-                :href="'/member/'+lineHots[1].id"
-                style="display: flex;"><span class="hot-num">2</span><img
-                  src="/line/images/touxiang2.png"
-                  alt=""
-                  width="50"
-                  height="50">
-              <p>{{ lineHots[1].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[1].popularity }}</i></span></a></li>
-              <li><a
-                :href="'/member/'+lineHots[2].id"
-                style="display: flex;"
-                target="_blank"><span class="hot-num">3</span><img
-                  src="/line/images/touxiang3.png"
-                  alt=""
-                  width="50"
-                  height="50">
-              <p>{{ lineHots[2].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[2].popularity }}</i></span></a></li>
-            </ul>
-            <ul
-              class="lastul">
-              <li
-                v-for="(item, index) in lineHots.slice(-12)"
-                :key="index"><a
-                  :href="'/member/'+item.id"
-                  style="display: flex;"
-                  target="_blank"><span class="hot-num">{{ index + 4 }}</span>
-              <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>{{ item.popularity }}</i></span></a></li>
-            </ul>
-          </div>
-        </div>
         <div class="list-box-r-phone">
           <div class="zx_p_tit">帮我找优质承运商</div>
-          <div class="list-box-r-top">
-            <selectMap/>
-          </div>
+          <selectMap/>
         </div>
       </div>
 
     </div>
     <div class="lll-line-bot">
       <div
-        class="lll-recommend clearfix">
+      class="lll-recommend clearfix">
         <div
           class="zx_sx"
         ><span class="biaozhi"/><span>{{ lineLinks.hotRecommend.label }}</span></div>
         <FooterLinks :info="lineLinks.hotRecommend.links"/>
       </div>
       <div
-        class="lll-recommend clearfix">
+      class="lll-recommend clearfix">
         <div
           class="zx_sx"
         ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
         <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
       </div>
       <div
-        class="lll-recommend clearfix">
+      class="lll-recommend clearfix">
         <div
           class="zx_sx"
         ><span class="biaozhi"/><span>{{ lineLinks.startFromRecommend.label }}</span></div>
@@ -593,11 +541,13 @@
 import $axios from 'axios'
 import FooterLinks from '../../components/footerLinks'
 import selectMap from './selectMap'
+import HotList from '../../components/hotList'
 export default {
   name: 'Index',
   components: {
     FooterLinks,
-    selectMap
+    selectMap,
+    HotList
   },
   head: {
     link: [
@@ -734,7 +684,7 @@ export default {
     let _this = this
     // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
     // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
-    seajs.use(['/js/city.js', 'layer'], function() {
+    seajs.use(['/js/city.js', '/js/city-picker.data.js', 'layer'], function() {
       seajs.use(
         [
           '/js/city-picker.js',
@@ -1032,91 +982,6 @@ export default {
     .tj_list_box {
       .tj_list4 {
         border-bottom: none;
-      }
-    }
-    .list-box-r-hot {
-      /*min-height: 246px;*/
-      /*height: auto !important;*/
-      /*width: 344px;*/
-      /*margin: 0px 0px 0 16px;*/
-      /*float: left;*/
-      margin-top: 20px;
-      background: #fff;
-      padding-bottom: 10px;
-
-      .zx_sx {
-        border-bottom: 2px solid #2577e3;
-        margin-bottom: 1px;
-        color: #2577e3;
-      }
-      .hot-ul {
-        ul:first-of-type,
-        ul:last-of-type {
-          li {
-            display: flex;
-            padding: 20px 14px 0px 16px;
-            font-size: 14px;
-            .hot-num {
-              width: 20px;
-              height: 20px;
-              background: #f65050;
-              text-align: center;
-              line-height: 20px;
-              color: #fff;
-              margin-top: 20px;
-            }
-            img {
-              margin: 0 8px 0 15px;
-            }
-            p {
-              margin-top: 20px;
-              color: #333;
-              /*padding-right: 10px;*/
-              width: 138px;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-            }
-            span.hot-peonum {
-              margin-top: 20px;
-              font-size: 12px;
-              padding-left: 10px;
-              color: #666;
-              i {
-                color: #f14747;
-                padding-left: 5px;
-              }
-            }
-          }
-          li:nth-child(2) {
-            .hot-num {
-              background: #ff8547;
-            }
-          }
-          li:nth-child(3) {
-            .hot-num {
-              background: #ffac38;
-            }
-          }
-        }
-        ul.lastul {
-          li {
-            padding: 0px 14px 0px 16px;
-            span.hot-num {
-              background: #8eb9f5 !important;
-            }
-            p {
-              /*width: 62%;*/
-              padding-left: 16px;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-            }
-            .hot-peonum {
-              margin-left: 55px;
-            }
-          }
-        }
       }
     }
     .list-box-r-phone {

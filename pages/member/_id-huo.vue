@@ -162,7 +162,7 @@
           id="pagination1" 
           class="page fl"/>
         <div class="info fl">
-          <!--<p>当前页数：<span id="current1">1</span></p>-->
+        <!--<p>当前页数：<span id="current1">1</span></p>-->
         </div>
       </div>
     </div>

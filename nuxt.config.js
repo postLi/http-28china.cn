@@ -2,7 +2,7 @@ const pkg = require('./package')
 
 module.exports = {
   mode: 'universal',
-
+  modern: true, // 编译为现代 ES Module，并自动分辨浏览器输出
   /*
   ** Headers of the page
   */
@@ -80,7 +80,7 @@ module.exports = {
   */
   axios: {
     proxy: true,
-    debug: true,
+    // debug: true,
     prefix: '/api', // baseURL
     credentials: true
     // See https://github.com/nuxt-community/axios-module#options

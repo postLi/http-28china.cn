@@ -70,8 +70,7 @@
       </div>
       <div class="pwd_login">
         <!--<form name="form1" id="form1" method="POST" action="/member/index_do.php">-->
-        <form 
-          name="form1" >
+        <form name="form1" >
           <input 
             type="hidden" 
             name="fmdo" 

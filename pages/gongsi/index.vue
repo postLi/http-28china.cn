@@ -9,7 +9,7 @@
               src="../../static/gongsi/images/wlyq_gs.png"
               alt=""><span>公司名</span></div>
             <div class="company_address">
-              <ul>
+              <ul style="padding: 10px">
                 <li
                   v-for="(item, index) in 10"
                   :key="index"
@@ -25,9 +25,9 @@
               class="layui-carousel"
               style="width: 100%; height: 250px;">
               <div carousel-item>
-                <div>条目1</div>
-                <div>条目2</div>
-                <div>条目3</div>
+                <div style="background: skyblue">条目1</div>
+                <div style="background: cornflowerblue">条目2</div>
+                <div style="background: blanchedalmond">条目3</div>
               </div>
             </div>
           </div>
@@ -45,7 +45,8 @@
         <li class="last_li">
           <div class="btn_top"><button
             class="layui-btn"
-            @click="callme">实力承运商入驻</button></div>
+            @click="callme"
+            style="width: 280px;background: #3f94ee">实力承运商入驻</button></div>
           <div class="rem_bot">
             <div class="rem_bot_t">
               <div class="rem_bot_titp"><img
@@ -69,14 +70,14 @@
     <div class="header_links">
       <div class="header_links_l">
         <ul>
-          <!--<li v-for="(item, index) in 10" :key="10" ><p>满生货运中心</p><p><span>零担整车</span><span>大件运输-->
-
-          <!--</span></p></li>-->
           <li
-            v-for="(item, index) in 10"
+            v-for="(item, index) in lineAdviseRecommend"
             :key="index"
             style="float:left;padding: 15px 40px 15px 40px"><a href="#">
-              <p>满生货运中心</p><p><span>零担整车</span><span>大件运输</span></p>
+              <p>{{ item.contactsName }}</p><p
+              ><span
+                v-for="(item, index) in item.advService"
+                :key="index">{{ item }}</span></p>
           </a></li>
         </ul>
       </div>
@@ -90,7 +91,10 @@
           placeholder="请输入运单号，例如1809260061"
           autocomplete="off"
           class="layui-input">
-        <div><button class="layui-btn">立即查询</button></div>
+        <div><button
+          class="layui-btn"
+          style="width: 280px"
+        >立即查询</button></div>
       </div>
     </div>
     <div class="list_box" >
@@ -204,8 +208,8 @@
         <div class="list_right">
           <div
             id="js007"
-            class="list_right">
-            <div class="zx_sx"><span class="biaozhi"/><span>物流公司推荐</span></div>
+            class="">
+            <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span></div>
             <div class="tj_none">
               <span>没有相关物流公司推荐</span>
             </div>
@@ -254,10 +258,13 @@
         </div>
       </div>
     </div>
-    <Add :is-add = "isAdd"/>
+    <Add
+      :show = "isAdd"
+      @close="noaddFn"/>
   </div>
 </template>
 <script>
+import $axios from 'axios'
 import DetailList from '../../components/detailList'
 import HotList from '../../components/hotList'
 import selectMap from '../zhuanxian/selectMap'
@@ -327,15 +334,28 @@ export default {
     let vo1 = vo
     delete vo1.currentPage
     delete vo1.pageSize
-    let [listA, listB, listC] = await Promise.all([
+    // /logisticsCompany/adviseRecommend
+    // 广告推荐物流公司
+    let [listA, listB, listC, listD] = await Promise.all([
       $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
       $axios.post(aurl + '/api/28-web/logisticsCompany/list', vo),
-      $axios.post(aurl + `/api/28-web/range/related/links`, vo1)
+      $axios.post(aurl + `/api/28-web/range/related/links`, vo1),
+      $axios.get(aurl + `/api/28-web/logisticsCompany/adviseRecommend`)
     ])
-    console.log(listC.data.data, 'listA')
+
+    // (lineAdviseRecommend.productServiceCode?lineAdviseRecommend.productServiceCode:lineAdviseRecommend.otherService)
+    listD.data.data.forEach(item => {
+      item.advService = item.productService
+        ? item.productService
+        : item.otherService
+      // console.log(item.advService, 'advService')
+    })
+
+    console.log(listD.data.data, 'listD1')
     return {
       lineHots: listA.data.data,
-      lineLinks: listC.data.data
+      lineLinks: listC.data.data,
+      lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : ''
     }
   },
   head: {
@@ -347,7 +367,6 @@ export default {
     ]
   },
   mounted() {
-    console.log(this.vo, 'vovo')
     // layui.use('carousel', () => {
     //   var carousel = layui.carousel
     //   //建造实例
@@ -458,7 +477,14 @@ export default {
   },
   methods: {
     callme() {
+      this.addFn()
+      console.log(this.isAdd)
+    },
+    addFn() {
       this.isAdd = true
+    },
+    noaddFn() {
+      this.isAdd = false
     },
     btbs() {
       layer.open({

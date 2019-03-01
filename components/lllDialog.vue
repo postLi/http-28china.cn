@@ -1,32 +1,43 @@
 <template>
   <div class="dialog">
-    <!--外层的遮罩 点击事件用来关闭弹窗，isShow控制弹窗显示 隐藏的props-->
     <div
       class="dialog-cover back"
-      v-if="isShow"
+      v-if="showdiv"
       @click="closeMyself"/>
-    <!-- transition 这里可以加一些简单的动画效果 -->
     <transition name="drop">
-      <!--style 通过props 控制内容的样式  -->
       <div
         class="dialog-content"
-        :style="{top:topDistance+'%',width:widNum+'%',left:leftSite+'%'}"
-        v-if="isShow">
+        v-if="showdiv">
         <div class="dialog_head back">
-          <!--弹窗头部 title-->
-          <slot name="header">提示信息</slot>
+          <div
+            style="float: left"
+            class="dialog_tit">
+            <slot
+              name="header"
+              style="float: left;">{{ title }}</slot>
+          </div>
+          <div
+            class="layui-btn-group"
+            style="float: right"
+            @click="closeMyself"
+          >
+            <button
+              type="text"
+              style="background: #fff;border: none;cursor: pointer">
+              <img
+                src="../static/gongsi/images/close.png"
+                alt=""
+                width="30"
+              >
+            </button>
+          </div>
         </div>
         <div
-          class="dialog_main"
-          :style="{paddingTop:pdt+'px',paddingBottom:pdb+'px'}">
-          <!--弹窗的内容-->
-          <slot name="main">弹窗内容</slot>
+        class="dialog_main">
+          <slot name="main">内容</slot>
         </div>
-        <!--弹窗关闭按钮-->
-        <div
-          class="foot_close"
-          @click="closeMyself">
-          <div class="close_img back"/>
+        <div class="dialog_footer">
+          <slot name="footer">底部</slot>
         </div>
       </div>
     </transition>
@@ -42,6 +53,10 @@ export default {
       default: false,
       required: true //必须
     },
+    title: {
+      type: String,
+      default: '标题'
+    },
     //下面这些属性会绑定到div上面 详情参照上面的html结构
     // 如： :style="{top:topDistance+'%',width:widNum+'%'}"
     widNum: {
@@ -50,29 +65,30 @@ export default {
       default: 86.5
     },
     leftSite: {
-      // 左定位
       type: Number,
       default: 6.5
     },
     topDistance: {
-      //top上边距
       type: Number,
       default: 35
     },
     pdt: {
-      //上padding
       type: Number,
       default: 22
     },
     pdb: {
-      //下padding
       type: Number,
       default: 47
     }
   },
+  computed: {
+    showdiv(n) {
+      return this.isShow
+    }
+  },
   methods: {
     closeMyself() {
-      this.$emit('on-close')
+      this.$emit('close')
       //如果需要传参的话，可以在"on-close"后面再加参数，然后在父组件的函数里接收就可以了。
     }
   }
@@ -85,26 +101,41 @@ export default {
   position: relative;
   color: #2e2c2d;
   font-size: 16px;
-}
-// 遮罩 设置背景层，z-index值要足够大确保能覆盖，高度 宽度设置满 做到全屏遮罩
-.dialog-cover {
-  background: rgba(0, 0, 0, 0.8);
-  position: fixed;
-  z-index: 200;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-}
-// 内容层 z-index要比遮罩大，否则会被遮盖，
-.dialog-content {
-  position: fixed;
-  top: 35%;
-  // 移动端使用felx布局
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 300;
+
+  .dialog-cover {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .dialog-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 546px;
+    box-shadow: -2px 0px 8px 0px rgba(169, 169, 169, 0.35);
+    border-radius: 5px;
+    z-index: 300;
+    background: #fff;
+  }
+  .dialog_head {
+    .dialog_tit {
+      display: inline-block;
+      width: 89%;
+      padding: 10px;
+      text-align: center;
+      color: #666;
+      font-size: 18px;
+    }
+  }
+  .dialog_main {
+    padding: 10px;
+    display: inline-block;
+    font-size: 14px;
+  }
 }
 </style>

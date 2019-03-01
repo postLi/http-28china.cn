@@ -44,35 +44,6 @@ const extendAxiosInstance = axios => {
   }
 }
 
-const log = (level, ...messages) => console[level]('[Axios]', ...messages)
-
-const setupDebugInterceptor = axios => {
-  // request
-  axios.onRequestError(error => {
-    log('error', 'Request error:', error)
-  })
-
-  // response
-  axios.onResponseError(error => {
-    log('error', 'Response error:', error)
-  })
-  axios.onResponse(res => {
-      log(
-        'info',
-        '[' + (res.status + ' ' + res.statusText) + ']',
-        '[' + res.config.method.toUpperCase() + ']',
-        res.config.url)
-
-      if (process.browser) {
-        console.log(res)
-      } else {
-        console.log(JSON.stringify(res.data, undefined, 2))
-      }
-
-      return res
-  })
-}
-
 const setupCredentialsInterceptor = axios => {
   // Send credentials only to relative and API Backend requests
   axios.onRequest(config => {
@@ -101,11 +72,19 @@ const setupProgress = (axios, ctx) => {
 
   let currentRequests = 0
 
-  axios.onRequest(() => {
+  axios.onRequest(config => {
+    if (config && config.progress === false) {
+      return
+    }
+
     currentRequests++
   })
 
-  axios.onResponse(() => {
+  axios.onResponse(response => {
+    if (response && response.config && response.config.progress === false) {
+      return
+    }
+
     currentRequests--
     if (currentRequests <= 0) {
       currentRequests = 0
@@ -113,15 +92,22 @@ const setupProgress = (axios, ctx) => {
     }
   })
 
-  axios.onError(() => {
+  axios.onError(error => {
+    if (error && error.config && error.config.progress === false) {
+      return
+    }
+
     currentRequests--
     $loading().fail()
     $loading().finish()
   })
 
   const onProgress = e => {
+    if (!currentRequests) {
+      return
+    }
     const progress = ((e.loaded * 100) / (e.total * currentRequests))
-    $loading().set(progress)
+    $loading().set(Math.min(100, progress))
   }
 
   axios.defaults.onUploadProgress = onProgress
@@ -132,8 +118,8 @@ export default (ctx, inject) => {
   const axiosOptions = {
     // baseURL
     baseURL : process.browser
-      ? (process.env.API_URL_BROWSER || '/api')
-      : (process.env.API_URL || 'http://localhost:3000/api'),
+      ? '/api'
+      : (process.env._AXIOS_BASE_URL_ || 'http://localhost:3000/api'),
 
     // Create fresh objects for all default header scopes
     // Axios creates only one which is shared across SSR requests!
@@ -163,7 +149,7 @@ export default (ctx, inject) => {
   extendAxiosInstance(axios)
 
   // Setup interceptors
-  setupDebugInterceptor(axios)
+
   setupCredentialsInterceptor(axios)
   setupProgress(axios, ctx)
 

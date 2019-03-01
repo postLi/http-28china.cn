@@ -1,0 +1,2 @@
+exports.ids=[39],exports.modules={390:function(e,t,o){"use strict";o.r(t);var r={validate({context:e}){e.redirect(301,"/")}},d=o(0),component=Object(d.a)(r,void 0,void 0,!1,null,null,"0815e9a4");t.default=component.exports}};
+//# sourceMappingURL=b613d5a91c602b17c9b6.js.map

@@ -24,8 +24,10 @@ const _5946830d = () => interopDefault(import('..\\pages\\create\\cheyuan.vue' /
 const _7425156f = () => interopDefault(import('..\\pages\\create\\huoyuan.vue' /* webpackChunkName: "pages_create_huoyuan" */))
 const _1d5ea800 = () => interopDefault(import('..\\pages\\create\\line.vue' /* webpackChunkName: "pages_create_line" */))
 const _e1c8241c = () => interopDefault(import('..\\pages\\create\\order.vue' /* webpackChunkName: "pages_create_order" */))
+const _47926d2c = () => interopDefault(import('..\\pages\\gongsi\\add.vue' /* webpackChunkName: "pages_gongsi_add" */))
 const _51b44f84 = () => interopDefault(import('..\\pages\\gongsi\\onlineOrder.vue' /* webpackChunkName: "pages_gongsi_onlineOrder" */))
 const _220305c2 = () => interopDefault(import('..\\pages\\help\\utils.js' /* webpackChunkName: "pages_help_utils" */))
+const _40945546 = () => interopDefault(import('..\\pages\\huoyuan\\add.vue' /* webpackChunkName: "pages_huoyuan_add" */))
 const _e0089e88 = () => interopDefault(import('..\\pages\\huoyuan\\detail.vue' /* webpackChunkName: "pages_huoyuan_detail" */))
 const _3a17a23e = () => interopDefault(import('..\\pages\\Insurance\\pay.vue' /* webpackChunkName: "pages_Insurance_pay" */))
 const _49e09405 = () => interopDefault(import('..\\pages\\Insurance\\product.vue' /* webpackChunkName: "pages_Insurance_product" */))
@@ -66,15 +68,32 @@ const _698eb11c = () => interopDefault(import('..\\pages\\index.vue' /* webpackC
 Vue.use(Router)
 
 if (process.client) {
-  window.history.scrollRestoration = 'manual'
+  if ('scrollRestoration' in window.history) {
+    window.history.scrollRestoration = 'manual'
+
+    // reset scrollRestoration to auto when leaving page, allowing page reload
+    // and back-navigation from other pages to use the browser to restore the
+    // scrolling position.
+    window.addEventListener('beforeunload', () => {
+      window.history.scrollRestoration = 'auto'
+    })
+
+    // Setting scrollRestoration to manual again when returning to this page.
+    window.addEventListener('load', () => {
+      window.history.scrollRestoration = 'manual'
+    })
+  }
 }
 const scrollBehavior = function (to, from, savedPosition) {
   // if the returned position is falsy or an empty object,
   // will retain current scroll position.
   let position = false
 
-  // if no children detected
-  if (to.matched.length < 2) {
+  // if no children detected and scrollToTop is not explicitly disabled
+  if (
+    to.matched.length < 2 &&
+    to.matched.every(r => r.components.default.options.scrollToTop !== false)
+  ) {
     // scroll to the top of the page
     position = { x: 0, y: 0 }
   } else if (to.matched.some(r => r.components.default.options.scrollToTop)) {
@@ -209,6 +228,10 @@ export function createRouter() {
       component: _e1c8241c,
       name: "create-order"
     }, {
+      path: "/gongsi/add",
+      component: _47926d2c,
+      name: "gongsi-add"
+    }, {
       path: "/gongsi/onlineOrder",
       component: _51b44f84,
       name: "gongsi-onlineOrder"
@@ -216,6 +239,10 @@ export function createRouter() {
       path: "/help/utils",
       component: _220305c2,
       name: "help-utils"
+    }, {
+      path: "/huoyuan/add",
+      component: _40945546,
+      name: "huoyuan-add"
     }, {
       path: "/huoyuan/detail",
       component: _e0089e88,

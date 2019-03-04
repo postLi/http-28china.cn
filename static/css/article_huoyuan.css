@@ -712,6 +712,8 @@ table tr:nth-child(odd){
 }
 .arc_main3 .right .content .content-right-row{
   margin-bottom: 5px;
+  width: 100%;
+  float: left;
 }
 .arc_main3 .right .content .content-right-row span{
   background-color: #75b3ff;

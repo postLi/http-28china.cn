@@ -139,7 +139,8 @@
                   height="72">
               </div>
               <div>
-                下载<span>【28快运APP】</span>，您可查看更多<span>广州</span>到<span>东莞</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!
+                <a href="http://h5.28tms.com/">
+                下载<span>【28快运APP】</span>，您可查看更多<span>{{ hyDetail.startCity }}</span>到<span>{{ hyDetail.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
               </div>
 
             </div>
@@ -297,11 +298,10 @@
             <div class="content-right-row">最近三个月发布货源 <i>{{ huoComprehensive.lastThreeMonthSupplyNum }}</i> 次</div>
             <div class="content-right-row">共成交 <i>{{ huoComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ huoComprehensive.evaGoodCount }}</i> 次</div>
             <div class="content-right-row">大家对他的印象:</div>
-            <div 
-              v-for="(item,index) in huoComprehensive.labels" 
-              :key="index" 
-              class="content-right-row">
+            <div class="content-right-row">
               <span 
+                v-for="(item,index) in huoComprehensive.labels" 
+                :key="index" 
               >{{ item.name }}（{{ item.count }}）</span>
             </div>
             <div

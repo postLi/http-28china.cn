@@ -25,7 +25,7 @@
               type="text"
               style="background: #fff;border: none;cursor: pointer">
               <i
-                class="layui-icon layui-icon-face-smile"
+                class="layui-icon layui-icon-close"
                 style="font-size: 30px; color: #1E9FFF;"/>
                 <!--<img-->
                 <!--src="../static/gongsi/images/close.png"-->

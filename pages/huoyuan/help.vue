@@ -9,7 +9,7 @@
         class="closeMe" 
         @click="closeMe()"><a>关闭</a></div>
       <div class="huo_content">
-        <h4>您要订阅的货源：广州到长沙</h4>
+        <h4>订阅货主货源信息</h4>
         <ul class="cont_ul">
           <li class="cont_ul_li">
             <span 
@@ -273,6 +273,7 @@ export default {
   color: #fff;
   cursor: pointer;
   margin-left: 18px;
+  margin-bottom: 20px;
 }
 .text_err {
   text-align: left;
@@ -293,7 +294,7 @@ export default {
 }
 .cont_ul_li {
   cursor: pointer;
-  margin: 12px 0;
+  margin: 20px 0 0 63px;
   float: left;
   position: relative;
 }
@@ -321,8 +322,9 @@ export default {
 }
 .huo_content {
   float: left;
-  margin: 20px 62px;
+  // margin: 20px 62px;
   text-align: center;
+  padding-bottom: 20px;
 }
 .huo_content h4 {
   font-size: 22px;

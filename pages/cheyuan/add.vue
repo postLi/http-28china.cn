@@ -11,15 +11,6 @@
       <div class="huo_content">
         <h4>您要订阅的货源：{{ dataInfo.startCity + '至' + dataInfo.endCity + '货源' }}</h4>
         <ul class="cont_ul">
-          <li class="cont_ul_li">
-            <span 
-              :class="isActiveFirst?'actives' :''"
-              @click="handleView('aflc-5')"
-            >我是物流公司</span>
-            <span 
-              :class="isActiveFirst?'' :'actives'"
-              @click="handleView('aflc-1')" >我是车主</span>
-          </li>
           <li class="cont_ul_li" >
             <input 
               v-model="mobile"
@@ -41,15 +32,13 @@
               type="text" 
               maxlength="11"
               placeholder="请输入验证码">
-            <a
-            @click="phoneText()">{{ getMoblie ? times + '秒' : '获取验证码' }}</a>
             <p class="text_err">{{ Showtextnum ? '*' + numErr : '' }}</p>
           </li>
           <li class="cont_ul_li">
             <input 
               class="text_btn"
               type="text" 
-              value="提交" 
+              value="找到通知我" 
               readonly
               @click="submitBtn()">
           </li>
@@ -108,18 +97,8 @@ export default {
       deep: true
     }
   },
-  mounted() {
-    this.handleView()
-  },
+  mounted() {},
   methods: {
-    handleView(type) {
-      this.isActiveFirst = !this.isActiveFirst
-      if (type === 'aflc-5') {
-        this.userType = 'aflc-5'
-      } else {
-        this.userType = 'aflc-1'
-      }
-    },
     closeMe() {
       this.$emit('update:isShowAdd', false)
       // this.$emit('close')
@@ -166,31 +145,6 @@ export default {
         return
       }
     },
-    phoneText() {
-      let _this = this
-      var validReg = window.AFLC_VALID
-      var AFLC_VALID = window.AFLC_VALID
-      if (this.mobile) {
-        if (validReg.MOBILE.test(this.mobile)) {
-          this.ShowmobileErr = false
-          $axios
-            .post('/api/aflc-common/aflcCommonSms/sendCodeSms/' + _this.mobile)
-            .then(res => {
-              if (res.status === 200) {
-                layer.msg('验证码发送成功')
-                this.getMoblie = true
-                _this.startCount()
-              }
-            })
-        } else {
-          this.ShowmobileErr = true
-          this.mobileErr = '请填写有效的手机号'
-        }
-      } else {
-        this.ShowmobileErr = true
-        this.mobileErr = '请填写手机号'
-      }
-    },
     startCount() {
       let stop = setInterval(() => {
         this.times--
@@ -214,6 +168,9 @@ export default {
   left: 0;
   display: block;
   padding: 12% 30%;
+}
+a {
+  cursor: pointer;
 }
 .add1_content {
   width: 532px;

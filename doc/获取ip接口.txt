@@ -1,0 +1,19 @@
+http://ip.taobao.com/service/getIpInfo.php?ip=219.137.141.111
+
+{"code":0,"data":{"ip":"219.137.141.111","country":"中国","area":"","region":"广东","city":"广州","county":"XX","isp":"电信","country_id":"CN","area_id":"","region_id":"440000","city_id":"440100","county_id":"xx","isp_id":"100017"}}
+
+http://opendata.baidu.com/api.php?query=219.137.141.111&co=&resource_id=6006&t=1433920989928&ie=utf8&oe=utf-8&format=json
+
+{"status":"0","t":"1433920989928","set_cache_time":"","data":[{"location":"广东省广州市天河区 电信","titlecont":"IP地址查询","origip":"219.137.141.111","origipquery":"219.137.141.111","showlamp":"1","showLikeShare":1,"shareImage":1,"ExtendedLocation":"","OriginQuery":"219.137.141.111","tplt":"ip","resourceid":"6006","fetchkey":"219.137.141.111","appinfo":"","role_id":0,"disp_type":0}]}
+
+https://ip.tianqiapi.com/?ip=27.193.13.255
+
+{"ip":"27.193.13.255","country":"\u4e2d\u56fd","province":"\u5c71\u4e1c\u7701","city":"\u9752\u5c9b\u5e02","isp":"\u8054\u901a"}
+
+http://pv.sohu.com/cityjson?ie=utf-8
+
+var returnCitySN = {"cip": "219.137.141.111", "cid": "440106", "cname": "广东省广州市天河区"};
+
+
+参考文档
+https://blog.csdn.net/fanblog/article/details/78771961

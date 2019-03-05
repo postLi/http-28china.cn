@@ -232,8 +232,8 @@
             <div class="lll-recommend clearfix">
               <div
                 class="zx_sx1"
-              ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.recommendBy28.label }}</span></div>
-              <FooterLinks :info="lineLinks.recommendBy28.links"/>
+              ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.brandRecommend.label }}</span></div>
+              <FooterLinks :info="lineLinks.brandRecommend.links"/>
             </div>
           </div>
         </div>
@@ -304,9 +304,9 @@
             <div
               class="zx_sx"
               style="border-color: #e7e7e7"
-            ><span class="biaozhi"/><span>{{ lineLinks.recommendBy28.label }}</span></div>
+            ><span class="biaozhi"/><span>{{ lineLinks.interestedRecommend.label }}</span></div>
             <FooterLinks
-              :info="lineLinks.recommendBy28.links"
+              :info="lineLinks.interestedRecommend.links"
               :types="types"/>
               <!--linedataG    brandRecommend:-->
               <!--<FootList/>-->
@@ -405,7 +405,11 @@ export default {
     ] = await Promise.all([
       $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
       $axios.post(aurl + '/api/28-web/logisticsCompany/list', vo),
-      $axios.post(aurl + `/api/28-web/range/related/links`, vo1),
+      $axios.post(
+        aurl + `/api/28-web/logisticsCompany/list/related/links`,
+        vo1
+      ),
+      // $axios.post(aurl + `/api/28-web/range/related/links`, vo1),
       $axios.get(aurl + `/api/28-web/logisticsCompany/adviseRecommend`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/excellent`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/enter`),
@@ -435,7 +439,7 @@ export default {
       code: ''
     }
     listH.data.data.unshift(codeObj)
-    console.log(listH.data.data, 'listH')
+    console.log(listC.data.data, 'lineLinks')
     return {
       lineHots: listA.data.data,
       lineLinks: listC.data.data,

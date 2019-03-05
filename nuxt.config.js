@@ -56,6 +56,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
+    { src: '~/plugins/vue-extend' },
+    { src: '~/plugins/lozad', mode: 'client' },
     {
       src: '~/plugins/axios',
       ssr: false
@@ -71,9 +73,9 @@ module.exports = {
     // Doc: https://bootstrap-vue.js.org/docs/
     // 'bootstrap-vue/nuxt'
     // Simple usage
-    'cookie-universal-nuxt',
+    'cookie-universal-nuxt'
     // With options
-    ['cookie-universal-nuxt']
+    // ['cookie-universal-nuxt']
   ],
   /*
   ** Axios module configuration
@@ -104,6 +106,10 @@ module.exports = {
   },
 
   vendor: ['axios'],
+
+  router: {
+    middleware: 'ipinfo'
+  },
 
   /*
   ** Build configuration

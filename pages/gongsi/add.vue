@@ -16,6 +16,7 @@
           <label class="layui-form-label"><i style="color: red">*</i>公司名称:</label>
           <div class="layui-input-block">
             <input
+              maxlength="30"
               type="text"
               placeholder="请输入公司名称"
               class="layui-input"
@@ -30,6 +31,7 @@
           <label class="layui-form-label"><i style="color: red">*</i>联系人:</label>
           <div class="layui-input-block">
             <input
+              maxlength="20"
               type="text"
               placeholder="请输入联系人"
               class="layui-input"
@@ -58,6 +60,7 @@
           <label class="layui-form-label">给我留言:</label>
           <div class="layui-input-block">
             <textarea
+              maxlength="100"
               placeholder="请输入留言"
               class="layui-textarea"
               v-model="form.msg"/>
@@ -162,32 +165,41 @@ export default {
       }
       if (this.types == 1) {
         this.form.type = 1
+        this.form.source = 1
       } else {
         this.form.type = 2
+        this.form.source = 2
       }
       console.log(this.form, 'this.form')
       $axios
         .post(
           // /leavingmsg/
           // 插入物流公司留言信息表信息
-          aurl + '/api/28-web/leavingmsg',
-          this.from
+          aurl + '/xlapi/28-web/leavingmsg/',
+          this.form
         )
         .then(res => {
           console.log(res, 'ressss')
-          layer.msg(
-            '提交成功，客服稍后将会与您联系',
-            {
-              tiem: 3000
-            },
-            () => {}
-          )
+          if (res.data.status == 200) {
+            layer.msg(
+              '提交成功，客服稍后将会与您联系',
+              {
+                tiem: 3000
+              },
+              () => {}
+            )
+            this.$emit('close')
+            this.form = {}
+          } else {
+            // res.data.status
+          }
         })
     },
     // 留言类型（type  ） 1-入驻 2-推荐
     closeDialog() {
-      // this.show = false
       this.$emit('close')
+      this.form = {}
+      this.ismobile = false
       // this.$emit('update:show', false)
 
       //把绑定的弹窗数组 设为false即可关闭弹窗

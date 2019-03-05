@@ -162,8 +162,10 @@ export default {
       }
       if (this.types == 1) {
         this.form.type = 1
+        this.form.source = 1
       } else {
         this.form.type = 2
+        this.form.source = 2
       }
       console.log(this.form, 'this.form')
       $axios

@@ -1502,7 +1502,10 @@ export default {
       ip: ''
     }
   },
-  async fetch({ store, params, $axios, error }) {
+  async fetch({ store, params, $axios, error, app }) {
+    // 判断这一段逻辑是否在cookie生成之后才执行
+    console.log('before fetch cookie: ', app.$cookies.get('currentProvince'))
+
     // 多个栏目的参数配置
     let paramsObj = {
       index_khal: {

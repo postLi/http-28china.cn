@@ -10,8 +10,8 @@
   {
     "code": "110100",
     "parent_code": "110000",
-    "name": "北京城区",
-    "alias": "北京城区",
+    "name": "北京市",
+    "alias": "北京",
     "pinyin": "BeiJingChengQu",
     "level": 2
   },
@@ -26,8 +26,8 @@
   {
     "code": "120100",
     "parent_code": "120000",
-    "name": "天津城区",
-    "alias": "天津城区",
+    "name": "天津市",
+    "alias": "天津",
     "pinyin": "TianJinChengQu",
     "level": 2
   },
@@ -608,11 +608,11 @@
     "level": 2
   },
   {
-    "code": "231081",
+    "code": "231000",
     "parent_code": "230000",
-    "name": "绥芬河市",
-    "alias": "绥芬河",
-    "pinyin": "SuiFenHe",
+    "name": "牡丹江市",
+    "alias": "牡丹江",
+    "pinyin": "MuDanJiang",
     "level": 2
   },
   {
@@ -650,8 +650,8 @@
   {
     "code": "310100",
     "parent_code": "310000",
-    "name": "上海城区",
-    "alias": "上海城区",
+    "name": "上海市",
+    "alias": "上海",
     "pinyin": "ShangHaiChengQu",
     "level": 2
   },
@@ -748,6 +748,14 @@
     "parent_code": "320000",
     "name": "镇江市",
     "alias": "镇江",
+    "pinyin": "ZhenJiang",
+    "level": 2
+  },
+  {
+    "code": "321200",
+    "parent_code": "320000",
+    "name": "泰州市",
+    "alias": "泰州",
     "pinyin": "ZhenJiang",
     "level": 2
   },
@@ -952,6 +960,14 @@
     "level": 2
   },
   {
+    "code": "341300",
+    "parent_code": "340000",
+    "name": "宿州市",
+    "alias": "宿州",
+    "pinyin": "SuZhou",
+    "level": 2
+  },
+  {
     "code": "341500",
     "parent_code": "340000",
     "name": "六安市",
@@ -1108,6 +1124,14 @@
     "parent_code": "360000",
     "name": "新余市",
     "alias": "新余",
+    "pinyin": "XinYu",
+    "level": 2
+  },
+  {
+    "code": "360600",
+    "parent_code": "360000",
+    "name": "鹰潭市",
+    "alias": "鹰潭",
     "pinyin": "XinYu",
     "level": 2
   },
@@ -1384,6 +1408,14 @@
     "level": 2
   },
   {
+    "code": "411100",
+    "parent_code": "410000",
+    "name": "漯河市",
+    "alias": "漯河",
+    "pinyin": "XuChang",
+    "level": 2
+  },
+  {
     "code": "411200",
     "parent_code": "410000",
     "name": "三门峡市",
@@ -1429,14 +1461,6 @@
     "name": "驻马店市",
     "alias": "驻马店",
     "pinyin": "ZhuMaDian",
-    "level": 2
-  },
-  {
-    "code": "419001",
-    "parent_code": "410000",
-    "name": "济源市",
-    "alias": "济源",
-    "pinyin": "JiYuan",
     "level": 2
   },
   {
@@ -1551,38 +1575,7 @@
     "pinyin": "EnShiTuJiaZuMiaoZu",
     "level": 2
   },
-  {
-    "code": "429004",
-    "parent_code": "420000",
-    "name": "仙桃市",
-    "alias": "仙桃",
-    "pinyin": "XianTao",
-    "level": 2
-  },
-  {
-    "code": "429005",
-    "parent_code": "420000",
-    "name": "潜江市",
-    "alias": "潜江",
-    "pinyin": "QianJiang",
-    "level": 2
-  },
-  {
-    "code": "429006",
-    "parent_code": "420000",
-    "name": "天门市",
-    "alias": "天门",
-    "pinyin": "TianMen",
-    "level": 2
-  },
-  {
-    "code": "429021",
-    "parent_code": "420000",
-    "name": "神农架林区",
-    "alias": "神农架林区",
-    "pinyin": "ShenNongJiaLinQu",
-    "level": 2
-  },
+  
   {
     "code": "430000",
     "parent_code": null,
@@ -2032,22 +2025,6 @@
     "level": 2
   },
   {
-    "code": "469001",
-    "parent_code": "460000",
-    "name": "五指山市",
-    "alias": "五指山",
-    "pinyin": "WuZhiShan",
-    "level": 2
-  },
-  {
-    "code": "469002",
-    "parent_code": "460000",
-    "name": "琼海市",
-    "alias": "琼海",
-    "pinyin": "QiongHai",
-    "level": 2
-  },
-  {
     "code": "469003",
     "parent_code": "460000",
     "name": "儋州市",
@@ -2055,110 +2032,7 @@
     "pinyin": "DanZhou",
     "level": 2
   },
-  {
-    "code": "469005",
-    "parent_code": "460000",
-    "name": "文昌市",
-    "alias": "文昌",
-    "pinyin": "WenChang",
-    "level": 2
-  },
-  {
-    "code": "469006",
-    "parent_code": "460000",
-    "name": "万宁市",
-    "alias": "万宁",
-    "pinyin": "WanNing",
-    "level": 2
-  },
-  {
-    "code": "469007",
-    "parent_code": "460000",
-    "name": "东方市",
-    "alias": "东方",
-    "pinyin": "DongFang",
-    "level": 2
-  },
-  {
-    "code": "469021",
-    "parent_code": "460000",
-    "name": "定安县",
-    "alias": "定安",
-    "pinyin": "DingAn",
-    "level": 2
-  },
-  {
-    "code": "469022",
-    "parent_code": "460000",
-    "name": "屯昌县",
-    "alias": "屯昌",
-    "pinyin": "TunChang",
-    "level": 2
-  },
-  {
-    "code": "469023",
-    "parent_code": "460000",
-    "name": "澄迈县",
-    "alias": "澄迈",
-    "pinyin": "ChengMai",
-    "level": 2
-  },
-  {
-    "code": "469024",
-    "parent_code": "460000",
-    "name": "临高县",
-    "alias": "临高",
-    "pinyin": "LinGao",
-    "level": 2
-  },
-  {
-    "code": "469025",
-    "parent_code": "460000",
-    "name": "白沙黎族自治县",
-    "alias": "白沙黎族",
-    "pinyin": "BaiShaLiZu",
-    "level": 2
-  },
-  {
-    "code": "469026",
-    "parent_code": "460000",
-    "name": "昌江黎族自治县",
-    "alias": "昌江黎族",
-    "pinyin": "ChangJiangLiZu",
-    "level": 2
-  },
-  {
-    "code": "469027",
-    "parent_code": "460000",
-    "name": "乐东黎族自治县",
-    "alias": "乐东黎族",
-    "pinyin": "LeDongLiZu",
-    "level": 2
-  },
-  {
-    "code": "469028",
-    "parent_code": "460000",
-    "name": "陵水黎族自治县",
-    "alias": "陵水黎族",
-    "pinyin": "LingShuiLiZu",
-    "level": 2
-  },
-  {
-    "code": "469029",
-    "parent_code": "460000",
-    "name": "保亭黎族苗族自治县",
-    "alias": "保亭",
-    "pinyin": "BaoTingLiZuMiaoZu",
-    "level": 2
-  },
-  {
-    "code": "469030",
-    "parent_code": "460000",
-    "name": "琼中黎族苗族自治县",
-    "alias": "琼中",
-    "pinyin": "QiongZhongLiZuMiaoZu",
-    "level": 2
-  },
+  
   {
     "code": "500000",
     "parent_code": null,
@@ -2170,8 +2044,8 @@
   {
     "code": "500100",
     "parent_code": "500000",
-    "name": "重庆城区",
-    "alias": "重庆城区",
+    "name": "重庆市",
+    "alias": "重庆",
     "pinyin": "ZhongQingChengQu",
     "level": 2
   },
@@ -3087,38 +2961,7 @@
     "pinyin": "ALeiTaiDeQu",
     "level": 2
   },
-  {
-    "code": "659001",
-    "parent_code": "650000",
-    "name": "石河子市",
-    "alias": "石河子",
-    "pinyin": "ShiHeZi",
-    "level": 2
-  },
-  {
-    "code": "659002",
-    "parent_code": "650000",
-    "name": "阿拉尔市",
-    "alias": "阿拉尔",
-    "pinyin": "ALaEr",
-    "level": 2
-  },
-  {
-    "code": "659003",
-    "parent_code": "650000",
-    "name": "图木舒克市",
-    "alias": "图木舒克",
-    "pinyin": "TuMuShuKe",
-    "level": 2
-  },
-  {
-    "code": "659004",
-    "parent_code": "650000",
-    "name": "五家渠市",
-    "alias": "五家渠",
-    "pinyin": "WuJiaQu",
-    "level": 2
-  },
+  
   {
     "code": "630200",
     "parent_code": "630000",

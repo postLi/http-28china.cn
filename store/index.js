@@ -1,7 +1,15 @@
 export const state = () => ({
   counter: 0,
   pageClass: '',
-  baseUrl: 'http://192.168.1.188:825'
+  baseUrl: 'http://192.168.1.188:825',
+  area: {
+    currentArea: '',
+    currentAreaFullName: '',
+    currentAreaName: '',
+    currentProvince: '',
+    currentProvinceFullName: '',
+    currentProvinceName: ''
+  }
 })
 
 export const mutations = {
@@ -10,5 +18,8 @@ export const mutations = {
   },
   increment(state) {
     state.counter++
+  },
+  setAreaInfo(state, payload) {
+    state.area = payload
   }
 }

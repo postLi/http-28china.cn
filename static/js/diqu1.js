@@ -40,9 +40,9 @@ function getCityNameByCode(code) {
 // 专线数据字典 S
 
 function cx01() {
-  return $.getJSON('/templets/default/js/regions.json').done(function(res) {
+  return $.getJSON('/js/regions.json').done(function(res) {
     REGIONSDATA = res
-    console.log(REGIONSDATA, 'REGIONSDATA')
+    console.log(res, 'resresresres')
     var datas = []
     $.each(res, function(inx, el) {
       if (el.level === 1) {
@@ -50,12 +50,36 @@ function cx01() {
       }
     })
     REGIONSDATA_CITY = datas
-
+    // console.log(REGIONSDATA_CITY, 'REGIONSDATA_CITY')
     renderDropdownList(datas, true)
     // 初始化横向的导航
     // cx02(null)
     // 初始化页面
     detectWhereYouFrom()
+    //初始化
+    var s1 = ''
+
+    // s1 +=
+    //   '<span style="width: 33%; text-align: center;display: inline-block;">不限</span>'
+
+    for (var i = 0; i < datas.length; i++) {
+      var name = datas[i].alias
+      var code = datas[i].code
+      // var name1 = name.substring(0, 2)
+
+      s1 +=
+        '<span data-pinyin="' +
+        datas[i].pinyin +
+        '" name="' +
+        code +
+        '"  style="width: 33%; text-align: center;display: inline-block;padding: 5px 0;">' +
+        name +
+        '</span>'
+    }
+    // console.log(s1, 's1s1s1s1')
+    $('.company_address #index_map1').html(s1)
+
+    //
   })
 }
 
@@ -63,23 +87,24 @@ function renderDropdownList(datas, isprovince) {
   var s = ''
   if (!isprovince) {
     s +=
-      '<a class="returnAllMap"><span  style="color:blue;cursor:pointer;">[返回]</span></a>'
+      '<a class="returnAllMap"><span  style="color:blue;cursor:pointer;float: left;min-width: 70px;height: 30px;font-size: 13px;line-height: 30px;">[不限]</span></a>'
   }
   for (var i = 0; i < datas.length; i++) {
     var name = datas[i].alias
     var code = datas[i].code
     // var name1 = name.substring(0, 2)
+
     s +=
       '<a href="#" data-pinyin="' +
       datas[i].pinyin +
       '" name="' +
       code +
-      '" ><span>' +
+      '" ><span  style="float: left;min-width: 70px;height: 30px;font-size: 13px;color: #333;line-height: 30px;">' +
       name +
       '</span></a>'
   }
 
-  $('#map_box').html(s)
+  $('.company_address #map_box1').html(s)
 }
 
 function cx02(code) {
@@ -89,7 +114,7 @@ function cx02(code) {
       datas.push(el)
     }
   })
-  console.log('datas:', code, datas)
+  // console.log('datas:', code, datas)
 
   renderDropdownList(datas)
 }
@@ -145,8 +170,8 @@ function setSelectArea(a, b, c, d) {
     // 表示选择的是直辖市之类的
     $('#index_map').data('renderchina', true)
   }
-
-  $('#diqu').html(a)
+  // console.log(a, 'aaaaaaaaaaaa');
+  $('.company_address #diqu').html(a)
 
   vo1 = {}
   vo1.startProvince = bfull
@@ -156,8 +181,8 @@ function setSelectArea(a, b, c, d) {
     delete vo1.startCity
   }
 
-  window.process_01 && process_01(vo1)
-  console.log(vo1)
+  //window.process_01 && process_01(vo1)
+  // console.log(vo1)
   vo2 = {}
   vo2.startProvince = bfull
   vo2.startCity = afull
@@ -166,8 +191,8 @@ function setSelectArea(a, b, c, d) {
     delete vo2.startCity
   }
 
-  window.process_02 && process_02(vo2)
-  console.log(vo2)
+  // window.process_02 && process_02(vo2)
+  // console.log(vo2)
   vo3 = {}
   vo3.startProvince = bfull
   vo3.startCity = afull
@@ -177,21 +202,21 @@ function setSelectArea(a, b, c, d) {
     delete vo3.startCity
   }
 
-  window.process_03 && process_03(vo3)
-  console.log(vo3)
+  // window.process_03 && process_03(vo3)
+  // console.log(vo3)
   vo4 = {}
   vo4.address = bfull + afull
   if (!b || b == 'null') {
     delete vo4.address
   }
 
-  //window.wlgs && wlgs(vo4)
-  console.log(vo4)
+  // window.wlgs && wlgs(vo4)
+  // console.log(vo4)
 }
 
-$('#diqu').html('')
+$('.company_address #diqu').html('')
 // 点击下拉框
-$('.map_box').on('click', 'a', function(e) {
+$('.company_address .map_box1').on('click', 'a', function(e) {
   e.preventDefault()
   var a = $(this)
     .children('span')
@@ -207,21 +232,21 @@ $('.map_box').on('click', 'a', function(e) {
 
   // 如果选择到的是直辖市、特别行政区，则当选中市级了
   if (/(香港|澳门|台湾)/.test(a)) {
-    $('#map_box').css('display', 'none')
+    $('.company_address #map_box1').css('display', 'none')
     setSelectArea(a, b, b, a)
     REGIONSDATA_SELECTED_DATA = {}
     changeStart()
   } else {
     // 判断是展开下级还是下级被选中
     if (REGIONSDATA_SELECTED_DATA.province) {
-      $('#diqu').html(a)
+      $('.company_address #diqu').html(a)
       setSelectArea(
         a,
         b,
         REGIONSDATA_SELECTED_DATA.provinceCode,
         REGIONSDATA_SELECTED_DATA.province
       )
-      $('#map_box').css('display', 'none')
+      $('.company_address #map_box1').css('display', 'none')
       changeStart()
     } else {
       REGIONSDATA_SELECTED_DATA.province = a
@@ -230,14 +255,14 @@ $('.map_box').on('click', 'a', function(e) {
     }
   }
 
-  console.log('切换到省市' + a + b + c)
+  // console.log('切换到省市' + a + b + c)
 })
 
-$('#index_map').on({
+$('.company_address #index_map1').on({
   mouseenter: function() {
     var code = $(this).data('rendercode')
     var isall = $(this).data('renderchina')
-    if ($('.map_box').css('display') === 'none') {
+    if ($('.company_address .map_box1').css('display') === 'none') {
       if (isall) {
         REGIONSDATA_SELECTED_DATA = {}
         renderDropdownList(REGIONSDATA_CITY, true)
@@ -245,24 +270,23 @@ $('#index_map').on({
         cx02(code)
       }
     }
-  },
-  mouseover: function() {
-    $('.map_box').css('display', 'block')
-  },
-  mouseout: function() {
-    $('.map_box').css('display', 'none')
   }
+  // mouseover: function() {
+  //   $('.company_address .map_box1').css('display', 'block')
+  // },
+  // mouseout: function() {
+  //   $('.company_address .map_box1').css('display', 'none')
+  // }
 })
-$('#map_box').on({
+$('.company_address #map_box1').on({
   mouseout: function() {
-    $('.map_box').css('display', 'block')
+    $('.company_address .map_box1').css('display', 'block')
   }
 })
 
 cx01()
 // cx02(' ')
 // 专线数据字典 E
-
 
 // 处理自动跳转
 function detectWhereYouFrom() {
@@ -286,7 +310,7 @@ function detectWhereYouFrom() {
 
     setSelectArea('广州', '440100', '440000', '广东')
     cx02('440000')
-    $('#diqu').show()
+    $('.company_address #diqu').show()
   }
   if (area) {
     // 判断能否找到对应的地区
@@ -303,7 +327,8 @@ function detectWhereYouFrom() {
     })
     if (find) {
       setSelectArea(areaname, area, province, provincename)
-      $('#diqu').text(areaname)
+      // console.log(areaname, 'areanameareaname')
+      $('.company_address #diqu').text(areaname)
     }
   }
   // 当找不到且选的为非全国时，调用第三方ip库判断
@@ -312,7 +337,7 @@ function detectWhereYouFrom() {
       .done(function() {
         if (window.returnCitySN) {
           var city = returnCitySN.cname
-          console.log(city)
+          // console.log(city)
           // 先从前到后判断
           // 先找省
           // 再找市
@@ -327,7 +352,7 @@ function detectWhereYouFrom() {
               REGIONSDATA_SELECTED_DATA.provinceCode = ele.code
             }
           })
-          console.log('find1:', find1)
+          // console.log('find1:', find1)
           if (find1) {
             $.each(REGIONSDATA, function(index, ele) {
               if (city.indexOf(find1.name + ele.name) === 0) {
@@ -364,7 +389,7 @@ function detectWhereYouFrom() {
         } else {
           defaultFn()
         }
-        $('#diqu').show()
+        $('.company_address #diqu').show()
       })
       .fail(function() {
         // 如果加载失败，则默认为广州
@@ -372,7 +397,7 @@ function detectWhereYouFrom() {
         defaultFn()
       })
   } else {
-    $('#diqu').show()
+    $('.company_address #diqu').show()
   }
 }
 

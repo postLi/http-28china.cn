@@ -850,60 +850,80 @@ export default {
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    let hyDetail = await $axios
+    let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {
-        // console.log('huoComprehensives2:', err)
+        console.log('hyDetail:', err)
       })
     let parm = {
       currentPage: 1,
       pageSize: 10,
-      startProvince: hyDetail.data.data.startProvince,
-      startCity: hyDetail.data.data.startCity
+      startProvince: hyDetails.data.data.startProvince
+        ? hyDetails.data.data.startProvince
+        : '',
+      startCity: hyDetails.data.data.startCity
+        ? hyDetails.data.data.startCity
+        : ''
     }
     let parm1 = {
-      endArea: hyDetail.data.data.endArea,
-      endCity: hyDetail.data.data.endCity,
-      endProvince: hyDetail.data.data.endProvince,
-      startArea: hyDetail.data.data.startArea,
-      startCity: hyDetail.data.data.startCity,
-      startProvince: hyDetail.data.data.startProvince
+      endArea: hyDetails.data.data.endArea,
+      endCity: hyDetails.data.data.endCity,
+      endProvince: hyDetails.data.data.endProvince,
+      startArea: hyDetails.data.data.startArea,
+      startCity: hyDetails.data.data.startCity,
+      startProvince: hyDetails.data.data.startProvince
     }
     //货主档案
-    let archivals = await $axios.post(
-      '/28-web/shipper/archival?sshipperId=' + query.shipperId
-    )
-    console.log(archivals.data.data, 'item province:')
+    let archivals = await $axios
+      .post('/28-web/shipper/archival?sshipperId=' + query.shipperId)
+      .catch(err => {
+        console.log('archivals')
+      })
+    // console.log(archivals.data.data, 'item province:')
     //顶部轮播
-    let newLists = await $axios.get('/28-web/lclOrder/newList')
+    let newLists = await $axios
+      .get('/28-web/lclOrder/newList')
+      .catch(err => {})
+      .catch(err => {
+        console.log('newLists')
+      })
     //货源列表
     let huoInfoLists = await $axios
       .post('/28-web/lclOrder/list', parm)
       .catch(err => {
-        // console.log('huoComprehensives4:', err)
+        console.log('huoComprehensives4:', err)
       })
     //最新货源信息
     let newestHuoyuanRes = await $axios
       .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
       .catch(err => {
-        // console.log('newestHuoyuanRes:', err)
+        console.log('newestHuoyuanRes:', err)
       })
     // 货主综合力评估
     let huoComprehensives = await $axios
       .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
       .catch(err => {
-        // console.log('huoComprehensives:', err)
+        console.log('huoComprehensives:', err)
       })
     //货源热门搜索
-    let hotSearchs = await $axios.get('/28-web/hotSearch/supply/detail/links')
+    let hotSearchs = await $axios
+      .get('/28-web/hotSearch/supply/detail/links')
+      .catch(err => {
+        console.log('hotSearchs')
+      })
     //企业人气榜
-    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
+    let popularitys = await $axios
+      .get('/28-web/logisticsCompany/popularity')
+      .catch(err => {
+        console.log('popularitys')
+      })
     //底部推荐
 
-    let huoLinks = await $axios.post(
-      '/28-web/lclOrder/detail/related/links',
-      parm1
-    )
+    let huoLinks = await $axios
+      .post('/28-web/lclOrder/detail/related/links', parm1)
+      .catch(err => {
+        console.log('huoLinks')
+      })
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -959,7 +979,7 @@ export default {
     hotSearchs.data.data.links.forEach(footLink)
     return {
       archival: archivals.data.status === 200 ? archivals.data.data : [],
-      hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+      hyDetail: hyDetails.data.status === 200 ? hyDetails.data.data : {},
       popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       huoComprehensive:
         huoComprehensives.data.status === 200
@@ -1062,6 +1082,14 @@ export default {
     this.inTerVar = null
   },
   methods: {
+    getCity() {
+      this.dataInfo.startProvince = this.hyDetail.startProvince
+      this.dataInfo.startCity = this.hyDetail.startCity
+      this.dataInfo.startArea = this.hyDetail.startArea
+      this.dataInfo.endProvince = this.hyDetail.endProvince
+      this.dataInfo.endCity = this.hyDetail.endCity
+      this.dataInfo.endArea = this.hyDetail.endArea
+    },
     openAdd() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
@@ -1087,12 +1115,7 @@ export default {
           })
       } else {
         this.isShowAdd = true
-        this.dataInfo.startProvince = this.hyDetail.startProvince
-        this.dataInfo.startCity = this.hyDetail.startCity
-        this.dataInfo.startArea = this.hyDetail.startArea
-        this.dataInfo.endProvince = this.hyDetail.endProvince
-        this.dataInfo.endCity = this.hyDetail.endCity
-        this.dataInfo.endArea = this.hyDetail.endArea
+        this.getCity()
       }
     },
     openHelp() {
@@ -1120,12 +1143,7 @@ export default {
           })
       } else {
         this.isShowHelp = true
-        this.dataInfo.startProvince = this.hyDetail.startProvince
-        this.dataInfo.startCity = this.hyDetail.startCity
-        this.dataInfo.startArea = this.hyDetail.startArea
-        this.dataInfo.endProvince = this.hyDetail.endProvince
-        this.dataInfo.endCity = this.hyDetail.endCity
-        this.dataInfo.endArea = this.hyDetail.endArea
+        this.getCity()
       }
     },
     openOrder() {
@@ -1153,13 +1171,7 @@ export default {
           })
       } else {
         this.isShowOrder = true
-        this.dataInfo.startProvince = this.hyDetail.startProvince
-        this.dataInfo.startCity = this.hyDetail.startCity
-        this.dataInfo.startArea = this.hyDetail.startArea
-        this.dataInfo.endProvince = this.hyDetail.endProvince
-        this.dataInfo.endCity = this.hyDetail.endCity
-        this.dataInfo.endArea = this.hyDetail.endArea
-        console.log(this.dataInfo)
+        this.getCity()
       }
     },
     showMoblieFn(showMoblieFn) {
@@ -1221,14 +1233,18 @@ export default {
         startCity: this.hyDetail.startCity,
         startProvince: this.hyDetail.startProvince
       }
-      this.$axios.post('/28-web/lclOrder/another', obj).then(res => {
-        if (res.data.status === 200) {
-          console.log(res.data.data.id, '00000000')
-          window.location.href = `/huoyuan/detail?id=${
-            res.data.data.id
-          }&shipperId=${res.data.data.shipperId}`
-        }
-      })
+      this.$axios
+        .post('/28-web/lclOrder/another', obj)
+        .then(res => {
+          if (res.data.status === 200) {
+            window.location.href = `/huoyuan/detail?id=${
+              res.data.data.id
+            }&shipperId=${res.data.data.shipperId}`
+          }
+        })
+        .catch(err => {
+          console.log('捕获异常')
+        })
     }
   }
 }

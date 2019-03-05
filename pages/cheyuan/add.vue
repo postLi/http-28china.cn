@@ -9,8 +9,29 @@
         class="closeMe" 
         @click="closeMe()"><a>关闭</a></div>
       <div class="huo_content">
-        <h4>您要订阅的货源：{{ dataInfo.startCity + '至' + dataInfo.endCity + '货源' }}</h4>
+        <h4>您要选择的车源：{{ dataInfo.startCity + '至' + dataInfo.endCity + '车源' }}</h4>
         <ul class="cont_ul">
+          <div class="layui-form-item">
+            <div class="layui-input-block">
+              <select 
+                name="city" 
+                @click="selectd"
+                v-model="carType"
+                lay-verify="required">
+                <option 
+                  value="" 
+                  disabled 
+                  selected>请选择您需要的车型</option>
+                <option 
+                  v-for="(item,index) in selectData"
+                  :key="index" 
+                  :value="item.code">{{ item.name }}</option>
+              </select>
+              <p 
+                class="text_err" 
+                style="margin-left:81px;">{{ Showtextnum ? '*' + numErr : '' }}</p>
+            </div>
+          </div>
           <li class="cont_ul_li" >
             <input 
               v-model="mobile"
@@ -24,15 +45,6 @@
               type="text" 
               placeholder="请输入手机号">
             <p class="phone_err">{{ ShowmobileErr? '*' + mobileErr : '' }}</p>
-          </li>
-          <li class="cont_ul_li">
-            <input 
-              class="text_num"
-              v-model="textnum"
-              type="text" 
-              maxlength="11"
-              placeholder="请输入验证码">
-            <p class="text_err">{{ Showtextnum ? '*' + numErr : '' }}</p>
           </li>
           <li class="cont_ul_li">
             <input 
@@ -74,6 +86,8 @@ export default {
       ShowmobileErr: false,
       Showtextnum: false,
       showTitme: '',
+      selectData: [],
+      carType: '',
       mobile: '',
       textnum: '',
       userType: '',
@@ -81,7 +95,6 @@ export default {
       mobileErr: ''
     }
   },
-  async asyncData() {},
   computed: {
     isShow() {
       return this.isShowAdd
@@ -97,19 +110,41 @@ export default {
       deep: true
     }
   },
-  mounted() {},
+  mounted(val) {
+    $axios
+      .get('/api/28-web/sysDict/getSysDictByCodeGet/AF018')
+      .then(res => {
+        console.log(res)
+        if (res.data.status === 200) {
+          this.selectData = res.data.data
+        }
+      })
+      .catch(err => {
+        console.log('提交捕获异常')
+      })
+  },
   methods: {
     closeMe() {
       this.$emit('update:isShowAdd', false)
-      // this.$emit('close')
+      this.reset()
+      // this.dialogKey = Math.random()
+    },
+    selectd(val) {
+      this.carType = val.target.value
+      if (this.carType !== '') {
+        this.Showtextnum = false
+      }
+    },
+    reset() {
+      this.mobile = ''
     },
     submitBtn() {
       let _this = this
       var validReg = window.AFLC_VALID
       var AFLC_VALID = window.AFLC_VALID
       this.dataInfo.mobile = _this.mobile
-      this.dataInfo.textnum = _this.textnum
-      this.dataInfo.userType = _this.userType
+      this.dataInfo.carType = _this.carType
+      console.log(this.carType)
       if (this.mobile) {
         if (validReg.MOBILE.test(this.mobile)) {
           this.Showtextnum = false
@@ -125,35 +160,25 @@ export default {
         this.mobileErr = '请填写手机号'
         return
       }
-      if (this.mobile && this.textnum) {
+
+      if (this.mobile && this.carType != '') {
+        this.Showtextnum = false
         $axios
-          .post('/api/28-web/companyLine/subscribe', this.dataInfo)
+          .post('/api/28-web/helpFind/carInfo/create', this.dataInfo)
           .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('订阅成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
+            if (res.data.status === 100) {
+              layer.msg('操作成功')
+              this.reset()
             }
           })
           .catch(err => {
-            console.log('提交捕获异常')
+            console.log('捕获异常')
           })
       } else {
         this.Showtextnum = true
-        this.numErr = '请填写验证码'
+        this.numErr = '请选择您需要的车型'
         return
       }
-    },
-    startCount() {
-      let stop = setInterval(() => {
-        this.times--
-        if (this.times <= 0) {
-          clearInterval(stop)
-          this.getMoblie = false
-          this.times = 60
-        }
-      }, 1000)
     }
   }
 }
@@ -191,10 +216,6 @@ a {
 .closeMe a {
   margin-right: 20px;
 }
-.times {
-  display: none !important;
-  position: absolute;
-}
 .text_phone {
   width: 358px;
   height: 40px;
@@ -203,14 +224,7 @@ a {
   padding-left: 8px;
   margin-left: 18px;
 }
-.text_num {
-  width: 358px;
-  height: 40px;
-  border-radius: 4px;
-  border: solid 1px #cccccc;
-  padding-left: 8px;
-  margin-left: 18px;
-}
+
 .cont_ul_li a {
   display: block;
   position: absolute;
@@ -230,7 +244,7 @@ a {
   margin-left: 18px;
   margin-bottom: 20px;
 }
-.text_err {
+.phone_err {
   text-align: left;
   font-size: 12px;
   margin-left: 18px;
@@ -238,13 +252,12 @@ a {
   color: #f77d07;
   position: absolute;
 }
-.phone_err {
+.text_err {
   text-align: left;
   font-size: 12px;
   margin-left: 18px;
   margin-top: 5px;
   color: #f77d07;
-  // display: none;
   position: absolute;
 }
 .cont_ul_li {
@@ -286,5 +299,14 @@ a {
   height: 22px;
   line-height: 22px;
   padding: 20px;
+}
+.layui-input-block select {
+  width: 368px;
+  height: 42px;
+  border-radius: 4px;
+  border: solid 1px #cccccc;
+}
+.layui-input-block {
+  margin-left: 0px !important;
 }
 </style>

@@ -1,7 +1,15 @@
 
 <template>
   <div class="lll-gongsi">
+
     <div class="header_list">
+      <div
+        class="list_nav"
+        style="margin-bottom: 10px">
+        <a href="/">物流首页</a>&gt;<a
+          id="list_nav_a"
+          href="">物流公司</a>
+      </div>
       <ul class="first_ul">
         <li class="first_li">
           <div class="company">
@@ -206,55 +214,64 @@
       <div
         class="list_checkbox"
         style="display: flex">
-        <form
-          class="layui-form"
-        >
-          <div
-            class="layui-form-item"
-            pane="">
-            <div
-              class="layui-input-block"
-              style="margin-left: 0">
-              <input
-                type="checkbox"
-                name="like"
-                lay-filter="f_all"
-                lay-skin="primary"
-                :title="listH[0].name"
-                checked="">
-              <input
-                v-for="(item, i) in listH.slice(1)"
-                :key="i"
-                lay-filter="c_one"
-                type="checkbox"
-                name="like"
-                lay-skin="primary"
-                :title="item.name"
-                checked=""
-                class="checkbox_class"
-              >
-            </div>
-          </div>
 
+        <form
+          action=""
+          method="get">
+          <label
+            v-for="(item, i) in 5"
+            :key="i">
+            <input
+              type="checkbox"
+              value="" >132 </label>
         </form>
-        <div style="display: inherit;padding-left: 125px;">
+        <!--<form-->
+        <!--class="layui-form"-->
+        <!--&gt;-->
+        <!--<div-->
+        <!--class="layui-form-item"-->
+        <!--pane="">-->
+        <!--<div-->
+        <!--class="layui-input-block"-->
+        <!--style="margin-left: 0">-->
+        <!--<input-->
+        <!--type="checkbox"-->
+        <!--name="like"-->
+        <!--lay-filter="f_all"-->
+        <!--lay-skin="primary"-->
+        <!--:title="listH[0].name"-->
+        <!--checked="">-->
+        <!--<input-->
+        <!--v-for="(item, i) in listH.slice(1)"-->
+        <!--:key="i"-->
+        <!--lay-filter="c_one"-->
+        <!--type="checkbox"-->
+        <!--name="like"-->
+        <!--lay-skin="primary"-->
+        <!--:title="item.name"-->
+        <!--checked=""-->
+        <!--class="checkbox_class"-->
+        <!--&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</form>-->
+        <div style="display: inherit;padding-left:200px;position: relative">
           <input
             type="text"
             placeholder="公司名称"
-            class="layui-input">
-          <i
+            class="layui-input parkname"
+            style="width: 275px"
+            v-model="parkname">
+          <a :href="'/gongsi/?parkName='+ parkname"><i
             class="layui-icon layui-icon-search"
-            style="font-size: 30px; color: #1E9FFF;display: inherit;vertical-align: middle"
-            @click="layuiclick"/>
+            style="font-size: 20px; color: #1E9FFF;display: inherit;vertical-align: middle;position: absolute; top: 7px;right: 10px;cursor: pointer"
+          /></a>
         </div>
 
       </div>
 
-      <div class="list_nav">
-        <a href="/">物流首页</a>&gt;<a
-          id="list_nav_a"
-          href="">物流公司</a>
-      </div>
+
       <div class="list_center">
         <div class="list_left">
           <DetailList/>
@@ -369,7 +386,8 @@ export default {
   data() {
     return {
       isAdd: false,
-      types: 0
+      types: 0,
+      parkname: ''
       // lineHots: []
     }
   },
@@ -457,18 +475,20 @@ export default {
       item.advService = item.productServiceNameList
         ? item.productServiceNameList
         : item.otherServiceNameList
+      // console.log(item.advService.slice(3), 'bbbb')
     })
     listG.data.data.forEach(item => {
       item.advService = item.productServiceNameList
         ? item.productServiceNameList
         : item.otherServiceNameList
     })
+
     let codeObj = {
       name: '不限',
       code: ''
     }
     listH.data.data.unshift(codeObj)
-    console.log(listF.data.data, 'listF')
+    // console.log(listF.data.data, 'listF')
     return {
       lineHots: listA.data.data,
       lineLinks: listC.data.data,
@@ -511,6 +531,7 @@ export default {
                   layui.use('form', function() {
                     var form = layui.form
                     form.on('checkbox(f_all)', function(data) {
+                      // console.log($(this), '$(this)')
                       var item = $('.checkbox_class')
                       item.each(function() {
                         if ($(this).prop('checked')) {
@@ -518,12 +539,21 @@ export default {
                         } else {
                           $(this).prop('checked', true)
                         }
-                        console.log(
-                          $(this).prop('checked'),
-                          "$(this).prop('checked')"
-                        )
                       })
-                      form.render('checkbox')
+                      // var item = $(".cityId");
+                      // item.each(function() {
+                      //   if ($(this).prop('checked')) {
+                      //     $(this).prop('checked', false)
+                      //   } else {
+                      //     $(this).prop('checked', true)
+                      //   }
+                      // })
+
+                      // item.each(function() {
+                      //   if ($(this).prop('checked')) {
+                      //     $(this).prop('checked', false)
+                      //   }
+                      // })
                       // form.render()
                     })
                   })
@@ -645,6 +675,7 @@ export default {
   .clearfix:after {
     clear: both;
   }
+
   .zx_sx1 {
     border-bottom: 1px solid #e7e7e7;
     line-height: 50px;

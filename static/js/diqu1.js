@@ -42,13 +42,30 @@ function getCityNameByCode(code) {
 function cx01() {
   return $.getJSON('/js/regions.json').done(function(res) {
     REGIONSDATA = res
-    console.log(res, 'resresresres')
+    // console.log(res, 'resresresres')
     var datas = []
+    var childDatas = []
+    var childInfo = []
     $.each(res, function(inx, el) {
       if (el.level === 1) {
         datas.push(el)
       }
+      if (el.level === 2) {
+        childDatas.push(el)
+      }
+      // console.log(el.code == el.parent_code, 'nameddddd')
     })
+    // $.each(datas,function (index, el) {
+    //   $.each(childDatas,function (index, item) {
+    //     if(el.code ==item.parent_code){
+    //       console.log(item,'item')
+    //       childInfo.push(item)
+    //     }
+    //   })
+    // })
+
+    // console.log(childInfo,'childInfo')
+    // console.log(childDatas, 'childDatas')
     REGIONSDATA_CITY = datas
     // console.log(REGIONSDATA_CITY, 'REGIONSDATA_CITY')
     renderDropdownList(datas, true)
@@ -68,18 +85,25 @@ function cx01() {
       // var name1 = name.substring(0, 2)
 
       s1 +=
-        '<span data-pinyin="' +
+        '<span ' +
+        'class="spanclass"' +
+        'data-pinyin="' +
         datas[i].pinyin +
         '" name="' +
         code +
         '"  style="width: 33%; text-align: center;display: inline-block;padding: 5px 0;">' +
         name +
         '</span>'
+
+      // var childcode = datas[i].code
     }
+    // console.log(datas, 'datassssssss');
     // console.log(s1, 's1s1s1s1')
     $('.company_address #index_map1').html(s1)
 
     //
+
+    // $('.company_address .index_map1')
   })
 }
 
@@ -270,13 +294,13 @@ $('.company_address #index_map1').on({
         cx02(code)
       }
     }
+  },
+  mouseover: function() {
+    $('.company_address .map_box1').css('display', 'block')
+  },
+  mouseout: function() {
+    $('.company_address .map_box1').css('display', 'none')
   }
-  // mouseover: function() {
-  //   $('.company_address .map_box1').css('display', 'block')
-  // },
-  // mouseout: function() {
-  //   $('.company_address .map_box1').css('display', 'none')
-  // }
 })
 $('.company_address #map_box1').on({
   mouseout: function() {

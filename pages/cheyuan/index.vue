@@ -155,13 +155,15 @@
             :key="index" 
             class="wlzx_list">
             <li id="cy_list_0">
-              <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+              <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNumber?item.collectNumber:0 }}</em>收藏量</i></span></div>
               <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
             </li>
             <li class="cy_list_4">
               <a
                 :href="'/cheyuan/detail?id=' + item.id"
-                target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
+                target="_blank">
+                <img :src="item.carFile?item.carFile.split(',')[0]:''" >
+              </a>
 
             </li>
             <li class="cy_list_1">
@@ -585,6 +587,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.carInfoList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())

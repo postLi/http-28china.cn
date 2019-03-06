@@ -855,6 +855,7 @@ export default {
       .catch(err => {
         console.log('hyDetail:', err)
       })
+    console.log(hyDetails, 'hyDetails')
     let parm = {
       currentPage: 1,
       pageSize: 10,
@@ -1012,6 +1013,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.huoLink)
     $('#wlLineFrom input').citypicker({
       // province: this.hyDetail.startProvince,
       // city: this.hyDetail.startCity,

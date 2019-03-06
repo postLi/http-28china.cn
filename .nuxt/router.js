@@ -19,16 +19,20 @@ const _71e062dd = () => interopDefault(import('..\\pages\\wangdian\\index.vue' /
 const _4b8549a8 = () => interopDefault(import('..\\pages\\wuliu\\index.vue' /* webpackChunkName: "pages_wuliu_index" */))
 const _6ad0a932 = () => interopDefault(import('..\\pages\\ydcx\\index.vue' /* webpackChunkName: "pages_ydcx_index" */))
 const _48a02420 = () => interopDefault(import('..\\pages\\zixun\\index.vue' /* webpackChunkName: "pages_zixun_index" */))
+const _75ecba68 = () => interopDefault(import('..\\pages\\cheyuan\\add.vue' /* webpackChunkName: "pages_cheyuan_add" */))
 const _699ca05a = () => interopDefault(import('..\\pages\\cheyuan\\detail.vue' /* webpackChunkName: "pages_cheyuan_detail" */))
 const _5946830d = () => interopDefault(import('..\\pages\\create\\cheyuan.vue' /* webpackChunkName: "pages_create_cheyuan" */))
 const _7425156f = () => interopDefault(import('..\\pages\\create\\huoyuan.vue' /* webpackChunkName: "pages_create_huoyuan" */))
 const _1d5ea800 = () => interopDefault(import('..\\pages\\create\\line.vue' /* webpackChunkName: "pages_create_line" */))
 const _e1c8241c = () => interopDefault(import('..\\pages\\create\\order.vue' /* webpackChunkName: "pages_create_order" */))
 const _47926d2c = () => interopDefault(import('..\\pages\\gongsi\\add.vue' /* webpackChunkName: "pages_gongsi_add" */))
+const _aaa81492 = () => interopDefault(import('..\\pages\\gongsi\\add1.vue' /* webpackChunkName: "pages_gongsi_add1" */))
 const _51b44f84 = () => interopDefault(import('..\\pages\\gongsi\\onlineOrder.vue' /* webpackChunkName: "pages_gongsi_onlineOrder" */))
 const _220305c2 = () => interopDefault(import('..\\pages\\help\\utils.js' /* webpackChunkName: "pages_help_utils" */))
 const _40945546 = () => interopDefault(import('..\\pages\\huoyuan\\add.vue' /* webpackChunkName: "pages_huoyuan_add" */))
 const _e0089e88 = () => interopDefault(import('..\\pages\\huoyuan\\detail.vue' /* webpackChunkName: "pages_huoyuan_detail" */))
+const _21a62f28 = () => interopDefault(import('..\\pages\\huoyuan\\help.vue' /* webpackChunkName: "pages_huoyuan_help" */))
+const _d736539a = () => interopDefault(import('..\\pages\\huoyuan\\order.vue' /* webpackChunkName: "pages_huoyuan_order" */))
 const _3a17a23e = () => interopDefault(import('..\\pages\\Insurance\\pay.vue' /* webpackChunkName: "pages_Insurance_pay" */))
 const _49e09405 = () => interopDefault(import('..\\pages\\Insurance\\product.vue' /* webpackChunkName: "pages_Insurance_product" */))
 const _601ad30a = () => interopDefault(import('..\\pages\\Insurance\\step1.vue' /* webpackChunkName: "pages_Insurance_step1" */))
@@ -208,6 +212,10 @@ export function createRouter() {
       component: _48a02420,
       name: "zixun"
     }, {
+      path: "/cheyuan/add",
+      component: _75ecba68,
+      name: "cheyuan-add"
+    }, {
       path: "/cheyuan/detail",
       component: _699ca05a,
       name: "cheyuan-detail"
@@ -232,6 +240,10 @@ export function createRouter() {
       component: _47926d2c,
       name: "gongsi-add"
     }, {
+      path: "/gongsi/add1",
+      component: _aaa81492,
+      name: "gongsi-add1"
+    }, {
       path: "/gongsi/onlineOrder",
       component: _51b44f84,
       name: "gongsi-onlineOrder"
@@ -247,6 +259,14 @@ export function createRouter() {
       path: "/huoyuan/detail",
       component: _e0089e88,
       name: "huoyuan-detail"
+    }, {
+      path: "/huoyuan/help",
+      component: _21a62f28,
+      name: "huoyuan-help"
+    }, {
+      path: "/huoyuan/order",
+      component: _d736539a,
+      name: "huoyuan-order"
     }, {
       path: "/Insurance/pay",
       component: _3a17a23e,

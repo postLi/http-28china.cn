@@ -23,7 +23,9 @@ export const state = () => ({
   index_wlxyfx: [],
   index_cgzx: [],
   index_ccyps: [],
-  index_wlswxx: []
+  index_wlswxx: [],
+  // 车源详情
+  cheyuan_ccyps: []
 })
 
 export const mutations = {

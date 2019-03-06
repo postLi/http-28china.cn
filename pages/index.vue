@@ -235,15 +235,18 @@
                     href="/help/tsjy/index.jhtml"
                     onmouseout="kefu_none();">建议</a>
                 </li>
-                <li><a
+                <li
+                  :key="index"
+                  v-for="(item, index) in $store.state.news.index_wlzx.slice(0,3)"
+                >
+                  <a 
+                    target="_blank" 
+                    :href="item.url" >{{ item.title }}</a>
+                </li>
+                <!-- <li><a
                   target="_blank"
-                  href="/wlzx/xingyezixun/2018/0629/320.html">中国重汽不停车服务入驻凯立德物流地图生态</a></li>
-                <li><a
-                  target="_blank"
-                  href="/wlzx/xingyezixun/2018/0629/318.html">老企鹅新「舞台」：前腾讯T4专家向伟出任</a></li>
-                <li><a
-                  target="_blank"
-                  href="/wlzx/xingyezixun/2018/0629/323.html">雄安新区将打造集约智能共享的物流体系</a></li>
+                  href="/wlzx/xingyezixun/2018/0629/320.html">中国重汽不停车服务入驻凯立德物流地图生态</a></li> -->
+
 
               </ul>
             </div>
@@ -584,49 +587,49 @@
                   <li :key="index">
                     <a
                       id="nr_a11"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       :title="item.strartAddress"><span
                         id="nr021"
                         class="t1">{{ item.strartAddress }}</span></a>
                     <a
                       id="nr_a11"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       :title="item.endAddress"><span
                         id="nr021_2"
                         class="t2">{{ item.endAddress }}</span></a>
                     <a
                       id="nr_a12"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       target="_blank"><span
                         id="nr022"
                         class="t3">{{ (item.carNum || '').replace(/^(..).*(..)$/, '$1***$2') }}</span></a>
                     <a
                       id="nr_a13"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       target="_blank"><span
                         id="nr023"
                         class="t4">{{ item.carTypeName }}</span></a>
                     <a
                       id="nr_a14"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       target="_blank"><span class="t5"><font
                         id="nr024"
                         style="color: #f00;">{{ item.carLength }}</font>米</span></a>
                     <a
                       id="nr_a15"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       target="_blank"><span class="t6"><font
                         id="nr025"
                         style="color: #f00;">{{ item.carLoad }}</font>吨</span></a>
                     <a
                       id="nr_a16"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       target="_blank"><span class="t7"><font
                         id="nr026"
                         style="color: #f00;">{{ item.expectPrice }}</font></span></a>
                     <a
                       id="nr_a17"
-                      :href="'/cheyuan/detail?id='+item.driverId"
+                      :href="'/cheyuan/detail?id='+item.id"
                       target="_blank"><span
                         id="t7"
                         class="t8">查看</span></a>
@@ -743,7 +746,7 @@
                       id="nr_a34"
                       :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span class="t4"><font
                         id="nr034"
-                        style="color: #f00;">{{ item.goodsWeight }}公斤</font></span></a>5
+                        style="color: #f00;">{{ item.goodsWeight }}公斤</font></span></a>
                     <a
                       id="nr_a35"
                       :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span class="t5"><font

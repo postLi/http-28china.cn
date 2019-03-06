@@ -5,16 +5,36 @@
       <ul class="first_ul">
         <li class="first_li">
           <div class="company">
-            <div class="company_name"><img
+            <div
+              class="company_name"
+              style="padding: 15px 0 5px 20px"
+            ><img
               src="../../static/gongsi/images/wlyq_gs.png"
-              alt=""><span>公司所在地     </span></div>
+              alt=""><span style="padding-left: 20px">公司所在地</span></div>
             <div class="company_address">
-              <ul style="padding: 10px">
-                <li
-                  v-for="(item, index) in 10"
-                  :key="index"
-                  style="width: 33%; text-align: center">不限</li>
-              </ul>
+              <div
+                id="index_map1"
+                class="header_middles">
+                <span
+                  v-for="(item, i) in 3"
+                  :key="i"
+                  id="diqu"
+                  style="width: 33%; text-align: center;display: inline-block;">全国</span>
+                <!--<a href="" style="width: 33%; text-align: center"><span id="diqu">全国</span><i/></a>-->
+                <div
+                  id="map_box1"
+                  class="map_box1"
+                  style="position: absolute;left: 18%;top: 29%;display: none;width: 510px;height: 150px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 20px;">
+                  <a href="/"><span style="color: #3F94EE;font-weight: bold;" >全&nbsp;国</span></a>
+                </div>
+
+              </div>
+              <!--<ul style="padding: 10px">-->
+              <!--<li-->
+              <!--v-for="(item, index) in 10"-->
+              <!--:key="index"-->
+              <!--style="width: 33%; text-align: center">不限</li>-->
+              <!--</ul>-->
             </div>
           </div>
         </li>
@@ -156,16 +176,18 @@
               <ul
                 class="echart_scroll_nr1"
               >
-                <li
-                  v-for="(item, i) in listG"
-                  :key="i"
+                <!--<li-->
+                <!--v-for="(item, i) in listF"-->
+                <!--:key="i"-->
 
-                ><a
+                <!--&gt;<a-->
+                <!--href="javascript:void(0)"-->
+                <!--target="_blank"><span>{{ item.companyName?item.companyName:'' }}</span></a></li>-->
+                <li><a
                   href="javascript:void(0)"
-                  target="_blank"><span>{{ item.companyName?item.companyName:'' }}</span></a></li>
-                  <!--<li><a-->
-                  <!--href="javascript:void(0)"-->
-                  <!--target="_blank"><span>广州发合肥</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
+                  target="_blank"
+                  v-for="(item, i) in 10"
+                  :key="i"><span>广州发合肥</span></a></li>
                   <!--<li><a-->
                   <!--href="javascript:void(0)"-->
                   <!--target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
@@ -186,23 +208,31 @@
         style="display: flex">
         <form
           class="layui-form"
-
-        > <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+        >
           <div
             class="layui-form-item"
             pane="">
-            <!--<label class="layui-form-label">原始复选框</label>-->
             <div
               class="layui-input-block"
               style="margin-left: 0">
               <input
-                v-for="(item, i) in listH"
+                type="checkbox"
+                name="like"
+                lay-filter="f_all"
+                lay-skin="primary"
+                :title="listH[0].name"
+                checked="">
+              <input
+                v-for="(item, i) in listH.slice(1)"
                 :key="i"
+                lay-filter="c_one"
                 type="checkbox"
                 name="like"
                 lay-skin="primary"
                 :title="item.name"
-                checked="">
+                checked=""
+                class="checkbox_class"
+              >
             </div>
           </div>
 
@@ -409,7 +439,6 @@ export default {
         aurl + `/api/28-web/logisticsCompany/list/related/links`,
         vo1
       ),
-      // $axios.post(aurl + `/api/28-web/range/related/links`, vo1),
       $axios.get(aurl + `/api/28-web/logisticsCompany/adviseRecommend`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/excellent`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/enter`),
@@ -439,12 +468,13 @@ export default {
       code: ''
     }
     listH.data.data.unshift(codeObj)
-    console.log(listC.data.data, 'lineLinks')
+    console.log(listF.data.data, 'listF')
     return {
       lineHots: listA.data.data,
       lineLinks: listC.data.data,
       lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : '',
       listE: listE.data.status == 200 ? listE.data.data : '',
+      // listF: listF.data.data == [] ? '' : '',
       listF: listF.data.status == 200 ? listF.data.data : '',
       listG: listG.data.status == 200 ? listG.data.data : '',
       listH: listH.data.status == 200 ? listH.data.data : ''
@@ -459,16 +489,6 @@ export default {
     ]
   },
   mounted() {
-    // layui.use('carousel', () => {
-    //   var carousel = layui.carousel
-    //   //建造实例
-    //   carousel.render({
-    //     elem: '#test1',
-    //     width: '100%', //设置容器宽度
-    //     arrow: 'always' //始终显示箭头
-    //     //,anim: 'updown' //切换动画方式
-    //   })
-    // })
     seajs.use(
       [
         '../js/city.js',
@@ -485,21 +505,30 @@ export default {
           ],
           function() {
             seajs.use(['../gongsi/js/list_wlgs.js'], function() {
-              seajs.use(['../js/collection.js'], function() {
+              seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
                 seajs.use(['../js/gaodemap2.js'], function() {
                   //
                   layui.use('form', function() {
                     var form = layui.form
-                    form.render()
-
-                    // $("input:checkbox[name='like']:checked").each(function(i) {
-                    //   arr[i] = $(this).val()
-                    //   console.log(arr[i], 'arr[i]', i)
-                    // })
+                    form.on('checkbox(f_all)', function(data) {
+                      var item = $('.checkbox_class')
+                      item.each(function() {
+                        if ($(this).prop('checked')) {
+                          $(this).prop('checked', false)
+                        } else {
+                          $(this).prop('checked', true)
+                        }
+                        console.log(
+                          $(this).prop('checked'),
+                          "$(this).prop('checked')"
+                        )
+                      })
+                      form.render('checkbox')
+                      // form.render()
+                    })
                   })
-                  //
-                  //echart滚动脚本
-                  var speed = 30 //数字越大速度越慢
+
+                  var speed = 30
                   var tab = $('.echart_scroll_nr')
                   var tab1 = $('.echart_scroll_nr1')
                   var tab2 = $('.echart_scroll_nr2')
@@ -578,13 +607,6 @@ export default {
     )
   },
   methods: {
-    layuiclick() {
-      var like = document.getElementsByName('like')
-      console.log(like, 'like')
-      var like_val = []
-      for (k in obj) {
-      }
-    },
     findMe() {
       this.addFn()
       this.types = 2

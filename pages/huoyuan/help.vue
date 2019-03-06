@@ -122,6 +122,11 @@ export default {
     },
     closeMe() {
       this.$emit('update:isShowHelp', false)
+      this.reset()
+    },
+    reset() {
+      this.mobile = ''
+      this.textnum = ''
     },
     done() {
       console.log('done')

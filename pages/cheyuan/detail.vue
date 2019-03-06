@@ -1,8 +1,11 @@
 <template>
   <div>
     <div class="arc_top1">
-      <div class="arc_top1_1"><span>{{ cy1.startCity + cy1.startArea + '&nbsp;&rarr;&nbsp;' + cy1.endCity + cy1.endArea }}</span></div>
-
+      <!-- <div class="arc_top1_1"><span>{{ cy1.startCity ? cy1.startCity : '' + cy1.startArea ? cy1.startArea : '' + '&nbsp;&rarr;&nbsp;' + cy1.endCity ? cy1.endCity : '' + cy1.endArea ? cy1.endArea : '' }}</span></div> -->
+      <div class="arc_top1_1">
+        <span>{{ cy1.startCity ? cy1.startCity : '' + cy1.startArea ? cy1.startArea : '' }}</span>&nbsp;&rarr;&nbsp;
+        <span>{{ cy1.endCity ? cy1.endCity : '' + cy1.endArea ? cy1.endArea : '' }}</span>
+      </div>
       <div class="arc_top1_3"><input
         class="arc_input3"
         value="搜全网"> </div>

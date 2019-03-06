@@ -122,7 +122,12 @@ export default {
     },
     closeMe() {
       this.$emit('update:isShowAdd', false)
+      this.reset()
       // this.$emit('close')
+    },
+    reset() {
+      this.mobile = ''
+      this.textnum = ''
     },
     submitBtn() {
       let _this = this

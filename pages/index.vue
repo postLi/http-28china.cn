@@ -905,7 +905,7 @@
           </dl>
 
           <div
-            v-if="$store.state.company.recommend.length === 0"
+            v-if="$store.state.company.index_list.length === 0"
             class="none_wlgs"><span>暂无物流公司信息</span>
           </div>
           <div
@@ -1503,8 +1503,26 @@ export default {
     }
   },
   async fetch({ store, params, $axios, error, app }) {
-    // 判断这一段逻辑是否在cookie生成之后才执行
-    console.log('before fetch cookie: ', app.$cookies.get('currentProvince'))
+    // console.log(
+    //   'before fetch cookie1111111: ',
+    //   app.$cookies.get('currentProvince')
+    // )
+
+    let cookie = app.$cookies
+
+    let areaData = {
+      currentArea: cookie.get('currentArea'),
+      currentAreaFullName: cookie.get('currentAreaFullName'),
+      currentAreaName: cookie.get('currentAreaName'),
+      currentProvince: cookie.get('currentProvince'),
+      currentProvinceFullName: cookie.get('currentProvinceFullName'),
+      currentProvinceName: cookie.get('currentProvinceName')
+    }
+
+    if (!areaData.currentProvince) {
+      areaData = store.state.area
+    }
+    // console.log('before fetch cookie2222: ', areaData.currentAreaName)
 
     // 多个栏目的参数配置
     let paramsObj = {

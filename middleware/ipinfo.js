@@ -19,7 +19,9 @@ function isDottedIPv4(s) {
 }
 
 export default ({ route, store, req, $axios, app }) => {
+  // console.log('before fetch cookie222222: ')
   return new Promise(reslove => {
+    // console.log('before fetch cookie33333: ')
     let defaultArea = {
       currentArea: '440100',
       currentAreaFullName: '广州市',
@@ -30,14 +32,42 @@ export default ({ route, store, req, $axios, app }) => {
     }
     if (process.server) {
       let setdate = new Date(new Date().getTime() + 365 * 24 * 60 * 60 * 1000)
-      let fn = (obj = {}) => {
-        for (let i in obj) {
-          app.$cookies.set(i, obj[i], {
-            expires: setdate,
-            path: '/'
-          })
+      let fn = (obj = {}, needFixed) => {
+        let fnfn = () => {
+          for (let i in obj) {
+            app.$cookies.set(i, obj[i], {
+              expires: setdate,
+              path: '/'
+            })
+          }
+          store.commit('setAreaInfo', obj)
+          reslove()
         }
-        reslove()
+        if (needFixed) {
+          $axios
+            .get('http://localhost:3000/js/regions.json')
+            .then(res => {
+              // console.log('data:', res.data)
+              let data = res.data
+              let find
+              data.forEach(el => {
+                if (el.code === obj.currentArea) {
+                  find = true
+                }
+              })
+              if (!find) {
+                obj = defaultArea
+              }
+              fnfn()
+            })
+            .catch(err => {
+              fnfn()
+            })
+        } else {
+          fnfn()
+        }
+
+        // console.log('before fetch cookie44444: ')
       }
       // 判断是否有存在的cookie
       if (!app.$cookies.get('currentProvince')) {
@@ -45,7 +75,7 @@ export default ({ route, store, req, $axios, app }) => {
         let ip = getClientIp(req)
         // 测试ip
         // ip = '123.125.71.38' // 北京ip
-        // ip = '23.125.171.138' // 随意构造的ip 美国ip
+        ip = '23.125.171.138' // 随意构造的ip 美国ip
         if (ip) {
           // 如果是内网ip不作处理
           let reg = /^(127\.0\.0\.1)|(localhost)|(10\.\d{1,3}\.\d{1,3}\.\d{1,3})|(172\.((1[6-9])|(2\d)|(3[01]))\.\d{1,3}\.\d{1,3})|(192\.168\.\d{1,3}\.\d{1,3})$/
@@ -62,21 +92,24 @@ export default ({ route, store, req, $axios, app }) => {
                 $axios
                   .get('http://ip.taobao.com/service/getIpInfo.php?ip=' + ip)
                   .then(res => {
-                    console.log('trytime ok:', trytime)
+                    // console.log('trytime ok:', trytime)
                     let data = res.data
                     if (data) {
                       if (data.code === 0) {
                         let rdata = data.data
                         if (rdata.region_id) {
                           // 服务端不进行匹配，由客户端代码进行匹配修正......
-                          fn({
-                            currentArea: rdata.city_id,
-                            currentAreaFullName: rdata.city,
-                            currentAreaName: rdata.city,
-                            currentProvince: rdata.region_id,
-                            currentProvinceFullName: rdata.region,
-                            currentProvinceName: rdata.region
-                          })
+                          fn(
+                            {
+                              currentArea: rdata.city_id,
+                              currentAreaFullName: rdata.city,
+                              currentAreaName: rdata.city,
+                              currentProvince: rdata.region_id,
+                              currentProvinceFullName: rdata.region,
+                              currentProvinceName: rdata.region
+                            },
+                            true
+                          )
                         } else {
                           fn(defaultArea)
                         }

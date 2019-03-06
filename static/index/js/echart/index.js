@@ -85,7 +85,7 @@ $(function() {
     },
     getInfo: function(start, end) {
       return this._warpper(
-        $.get(this.url + '/api-plugin/cms/cmspricetrend/v1/getPriceLists', {
+        $.get(this.url + '/28-web/priceTrend/getPriceLists', {
           fromadd: start,
           toadd: end
         })

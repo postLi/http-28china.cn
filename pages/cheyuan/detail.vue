@@ -579,14 +579,12 @@
             <ul
               class="ps-list"
               style="padding-left: 30px;list-style: square">
-              <li>
-                <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
-              </li>
-              <li>
-                <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
-              </li>
-              <li>
-                <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+              <li 
+                :key="index" 
+                v-for="(item, index) in $store.state.news.cheyuan_ccyps">
+                <a 
+                  :href="item.url" 
+                  target="_blank">{{ item.title }}</a>
               </li>
             </ul>
           </div>
@@ -763,6 +761,24 @@ export default {
       //   }
       // ]
     }
+  },
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: '101',
+        count: 8,
+        orderBy: 9,
+        channelOption: 0
+      },
+      name: 'cheyuan_ccyps',
+      preFn: data => {
+        return data.map((el, index) => {
+          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+
+          return el
+        })
+      }
+    })
   },
   async asyncData({ $axios, app, query }) {
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1
@@ -1400,7 +1416,7 @@ export default {
             console.log('提交捕获异常')
           })
       } else {
-        window.location.href = 'http://127.0.0.1:3000/login'
+        window.location.href = '/login'
       }
     },
     cenclecollected() {

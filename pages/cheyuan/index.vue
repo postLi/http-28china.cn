@@ -161,7 +161,9 @@
             <li class="cy_list_4">
               <a
                 :href="'/cheyuan/detail?id=' + item.id"
-                target="_blank"><img :src="item.carFile?item.carFile.split(',')[0]:''" ></a>
+                target="_blank">
+                <img :src="item.carFile?item.carFile.split(',')[0]:''" >
+              </a>
 
             </li>
             <li class="cy_list_1">
@@ -585,6 +587,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.carInfoList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())

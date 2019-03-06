@@ -139,7 +139,8 @@
                   height="72">
               </div>
               <div>
-                下载<span>【28快运APP】</span>，您可查看更多<span>广州</span>到<span>东莞</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!
+                <a href="http://h5.28tms.com/">
+                下载<span>【28快运APP】</span>，您可查看更多<span>{{ hyDetail.startCity }}</span>到<span>{{ hyDetail.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
               </div>
 
             </div>
@@ -148,8 +149,10 @@
                 <span>小贴士：对此货源有意向可点击“抢单”，货主即可看到您的联系信息，提高成交率！</span>
                 <div style="margin-top: 15px">
                   <a 
-                    href="" 
-                    class="button1">立即下单</a>
+                    href="javascript:;" 
+                    class="button1"
+                    @click="openOrder()" 
+                  >立即下单</a>
                   <a 
                     href="javascript:;" 
                     class="button2" 
@@ -295,11 +298,10 @@
             <div class="content-right-row">最近三个月发布货源 <i>{{ huoComprehensive.lastThreeMonthSupplyNum }}</i> 次</div>
             <div class="content-right-row">共成交 <i>{{ huoComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ huoComprehensive.evaGoodCount }}</i> 次</div>
             <div class="content-right-row">大家对他的印象:</div>
-            <div 
-              v-for="(item,index) in huoComprehensive.labels" 
-              :key="index" 
-              class="content-right-row">
+            <div class="content-right-row">
               <span 
+                v-for="(item,index) in huoComprehensive.labels" 
+                :key="index" 
               >{{ item.name }}（{{ item.count }}）</span>
             </div>
             <div
@@ -307,7 +309,8 @@
               style="clear: both">
               <a
                 href="javascript:;"
-                class="button2"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
+                class="button2"
+                @click="openHelp()"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
             </div>
           </div>
         </div>
@@ -759,15 +762,21 @@
     <Add 
       :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
+    <Lelp :is-show-help.sync="isShowHelp" />
+    <Order :is-show-order.sync="isShowOrder"/>
   </div>
 </template>
 <script>
 import Add from './add'
+import Lelp from './help'
+import Order from './order'
 import $axios from 'axios'
 export default {
   name: 'Detail',
   components: {
-    Add
+    Add,
+    Lelp,
+    Order
   },
   head: {
     link: [
@@ -789,6 +798,8 @@ export default {
       showMoblie: false,
       checkMoblie: true,
       isShowAdd: false,
+      isShowHelp: false,
+      isShowOrder: false,
       zxList: [],
       inTerVar: null,
       inTerVar1: null,
@@ -839,60 +850,80 @@ export default {
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    let hyDetail = await $axios
+    let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {
-        // console.log('huoComprehensives2:', err)
+        console.log('hyDetail:', err)
       })
     let parm = {
       currentPage: 1,
       pageSize: 10,
-      startProvince: hyDetail.data.data.startProvince,
-      startCity: hyDetail.data.data.startCity
+      startProvince: hyDetails.data.data.startProvince
+        ? hyDetails.data.data.startProvince
+        : '',
+      startCity: hyDetails.data.data.startCity
+        ? hyDetails.data.data.startCity
+        : ''
     }
     let parm1 = {
-      endArea: hyDetail.data.data.endArea,
-      endCity: hyDetail.data.data.endCity,
-      endProvince: hyDetail.data.data.endProvince,
-      startArea: hyDetail.data.data.startArea,
-      startCity: hyDetail.data.data.startCity,
-      startProvince: hyDetail.data.data.startProvince
+      endArea: hyDetails.data.data.endArea,
+      endCity: hyDetails.data.data.endCity,
+      endProvince: hyDetails.data.data.endProvince,
+      startArea: hyDetails.data.data.startArea,
+      startCity: hyDetails.data.data.startCity,
+      startProvince: hyDetails.data.data.startProvince
     }
     //货主档案
-    let archivals = await $axios.post(
-      '/28-web/shipper/archival?shipperId=' + query.shipperId
-    )
-    console.log(archivals.data.data, 'item province:')
+    let archivals = await $axios
+      .post('/28-web/shipper/archival?sshipperId=' + query.shipperId)
+      .catch(err => {
+        console.log('archivals')
+      })
+    // console.log(archivals.data.data, 'item province:')
     //顶部轮播
-    let newLists = await $axios.get('/28-web/lclOrder/newList')
+    let newLists = await $axios
+      .get('/28-web/lclOrder/newList')
+      .catch(err => {})
+      .catch(err => {
+        console.log('newLists')
+      })
     //货源列表
     let huoInfoLists = await $axios
       .post('/28-web/lclOrder/list', parm)
       .catch(err => {
-        // console.log('huoComprehensives4:', err)
+        console.log('huoComprehensives4:', err)
       })
     //最新货源信息
     let newestHuoyuanRes = await $axios
       .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
       .catch(err => {
-        // console.log('newestHuoyuanRes:', err)
+        console.log('newestHuoyuanRes:', err)
       })
     // 货主综合力评估
     let huoComprehensives = await $axios
       .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
       .catch(err => {
-        // console.log('huoComprehensives:', err)
+        console.log('huoComprehensives:', err)
       })
     //货源热门搜索
-    let hotSearchs = await $axios.get('/28-web/hotSearch/supply/detail/links')
+    let hotSearchs = await $axios
+      .get('/28-web/hotSearch/supply/detail/links')
+      .catch(err => {
+        console.log('hotSearchs')
+      })
     //企业人气榜
-    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
+    let popularitys = await $axios
+      .get('/28-web/logisticsCompany/popularity')
+      .catch(err => {
+        console.log('popularitys')
+      })
     //底部推荐
 
-    let huoLinks = await $axios.post(
-      '/28-web/lclOrder/detail/related/links',
-      parm1
-    )
+    let huoLinks = await $axios
+      .post('/28-web/lclOrder/detail/related/links', parm1)
+      .catch(err => {
+        console.log('huoLinks')
+      })
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -948,7 +979,7 @@ export default {
     hotSearchs.data.data.links.forEach(footLink)
     return {
       archival: archivals.data.status === 200 ? archivals.data.data : [],
-      hyDetail: hyDetail.data.status === 200 ? hyDetail.data.data : {},
+      hyDetail: hyDetails.data.status === 200 ? hyDetails.data.data : {},
       popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       huoComprehensive:
         huoComprehensives.data.status === 200
@@ -1051,6 +1082,14 @@ export default {
     this.inTerVar = null
   },
   methods: {
+    getCity() {
+      this.dataInfo.startProvince = this.hyDetail.startProvince
+      this.dataInfo.startCity = this.hyDetail.startCity
+      this.dataInfo.startArea = this.hyDetail.startArea
+      this.dataInfo.endProvince = this.hyDetail.endProvince
+      this.dataInfo.endCity = this.hyDetail.endCity
+      this.dataInfo.endArea = this.hyDetail.endArea
+    },
     openAdd() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
@@ -1076,13 +1115,63 @@ export default {
           })
       } else {
         this.isShowAdd = true
-        this.dataInfo.startProvince = this.hyDetail.startProvince
-        this.dataInfo.startCity = this.hyDetail.startCity
-        this.dataInfo.startArea = this.hyDetail.startArea
-        this.dataInfo.endProvince = this.hyDetail.endProvince
-        this.dataInfo.endCity = this.hyDetail.endCity
-        this.dataInfo.endArea = this.hyDetail.endArea
-        console.log(this.dataInfo)
+        this.getCity()
+      }
+    },
+    openHelp() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        $axios
+          .post(
+            '/api/28-web/companyLine/subscribe?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token,
+            this.dataInfo
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.isShowHelp = true
+        this.getCity()
+      }
+    },
+    openOrder() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        $axios
+          .post(
+            '/api/28-web/companyLine/subscribe?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token,
+            this.dataInfo
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.isShowOrder = true
+        this.getCity()
       }
     },
     showMoblieFn(showMoblieFn) {
@@ -1144,15 +1233,18 @@ export default {
         startCity: this.hyDetail.startCity,
         startProvince: this.hyDetail.startProvince
       }
-      // console.log(obj, 'obj')
-      this.$axios.post('/28-web/lclOrder/another', obj).then(res => {
-        if (res.data.status === 200) {
-          console.log(res.data.data.id, '00000000')
-          window.location.href = `/huoyuan/detail?id=${
-            res.data.data.id
-          }&shipperId=${res.data.data.shipperId}`
-        }
-      })
+      this.$axios
+        .post('/28-web/lclOrder/another', obj)
+        .then(res => {
+          if (res.data.status === 200) {
+            window.location.href = `/huoyuan/detail?id=${
+              res.data.data.id
+            }&shipperId=${res.data.data.shipperId}`
+          }
+        })
+        .catch(err => {
+          console.log('捕获异常')
+        })
     }
   }
 }

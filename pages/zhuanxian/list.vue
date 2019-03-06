@@ -96,7 +96,7 @@
                     class="list_button">
                 </form>
               </dd>
-              <div style="display: none">
+              <div>
                 <dt>所属园区&nbsp;：</dt>
                 <dd
                   id="tjcx_00"
@@ -665,6 +665,7 @@ export default {
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
       return {
+        lineListsTotalPage: listA.data.data.pages,
         lineLists: listA.data.data.list,
         lineRecoms: listB.data.data,
         lineLinks: listC.data.data,
@@ -741,7 +742,7 @@ export default {
                 // onCheckPage()
                 $('#pagination1').pagination({
                   currentPage: 1,
-                  totalPage: 6,
+                  totalPage: _this.lineListsTotalPage,
                   callback: function(current) {
                     $('#current1').text(current)
                     // orderBy = ''

@@ -540,7 +540,8 @@ export default {
     if (AF032.data.status === 200) {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
-    let carInfoList = await getCarInfoList($axios, 1, vo)
+    let carInfoLists = await getCarInfoList($axios, 1, vo)
+    // console.log(vo, 'carInfoLists4444444')
     let recommendList = await getRecommendList($axios, vo)
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
@@ -576,8 +577,8 @@ export default {
         recommend.data.status === 200
           ? recommend.data.data.hotRecommend.label
           : '',
-      carInfoList: carInfoList.list,
-      pages: carInfoList.pages,
+      carInfoList: carInfoLists.list,
+      pages: carInfoLists.pages,
       vo: vo,
       newestCar: newestCarRes.data.status === 200 ? newestCarRes.data.data : []
     }

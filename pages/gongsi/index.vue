@@ -5,16 +5,36 @@
       <ul class="first_ul">
         <li class="first_li">
           <div class="company">
-            <div class="company_name"><img
+            <div
+              class="company_name"
+              style="padding: 15px 0 5px 20px"
+            ><img
               src="../../static/gongsi/images/wlyq_gs.png"
-              alt=""><span>公司名</span></div>
+              alt=""><span style="padding-left: 20px">公司所在地</span></div>
             <div class="company_address">
-              <ul>
-                <li
-                  v-for="(item, index) in 10"
-                  :key="index"
-                  style="width: 33%; text-align: center">不限</li>
-              </ul>
+              <div
+                id="index_map1"
+                class="header_middles">
+                <span
+                  v-for="(item, i) in 3"
+                  :key="i"
+                  id="diqu"
+                  style="width: 33%; text-align: center;display: inline-block;">全国</span>
+                <!--<a href="" style="width: 33%; text-align: center"><span id="diqu">全国</span><i/></a>-->
+                <div
+                  id="map_box1"
+                  class="map_box1"
+                  style="position: absolute;left: 18%;top: 29%;display: none;width: 510px;height: 150px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 20px;">
+                  <a href="/"><span style="color: #3F94EE;font-weight: bold;" >全&nbsp;国</span></a>
+                </div>
+
+              </div>
+              <!--<ul style="padding: 10px">-->
+              <!--<li-->
+              <!--v-for="(item, index) in 10"-->
+              <!--:key="index"-->
+              <!--style="width: 33%; text-align: center">不限</li>-->
+              <!--</ul>-->
             </div>
           </div>
         </li>
@@ -25,9 +45,9 @@
               class="layui-carousel"
               style="width: 100%; height: 250px;">
               <div carousel-item>
-                <div>条目1</div>
-                <div>条目2</div>
-                <div>条目3</div>
+                <div
+                  v-for="(item, i) in 3"
+                  :key="i"><img src="../../static/gongsi/images/demo/header.png"></div>
               </div>
             </div>
           </div>
@@ -37,29 +57,60 @@
             <a
               v-for="(item, index) in 3"
               :key="index"
-              href="#"><img
-                src="../../static/gongsi/images/wlgs_danbao.png"
-                alt=""></a>
+              href="#"
+              style="padding: 0 10px 0 10px"
+            >
+              <img
+                src="../../static/gongsi/images/demo/gg.png"
+                alt=""
+                style="width: 30%;height: 135px;"
+              >
+            </a>
           </div>
         </li>
         <li class="last_li">
           <div class="btn_top"><button
             class="layui-btn"
-            @click="callme">实力承运商入驻</button></div>
-          <div class="rem_bot">
+            @click="callme"
+            style="width: 280px;background: #3f94ee">实力承运商入驻</button></div>
+          <div
+            class="rem_bot"
+            style="margin-top: 10px"
+          >
             <div class="rem_bot_t">
-              <div class="rem_bot_titp"><img
-                src=""
-                alt=""><span>优质承运商推荐</span></div>
+              <div
+                class="rem_bot_titp"
+                style="text-align: center"><img
+                  src=""
+                  alt=""><span style="font-size: 20px;text-align: center">优质承运商推荐</span></div>
             </div>
-            <p>优质承运商推荐，钱力心</p>
-            <ul class="rem_bot_b">
-              <li>
-                <p>北京吉盛通达物流有限公司</p>
-                <p><span>整车运输</span><span>仓储配送</span><span>整车运输...</span></p>
-                <p><span>推荐承运商
+            <p style="text-align: center;padding-top: 10px">优质承运商推荐，钱力心</p>
+            <ul
+              class="rem_bot_b"
+              style="padding: 60px 15px 15px">
+              <li
+                v-for="(item,i) in listE"
+                :key="i"
+                style="padding-top: 10px">
+                <p>{{ item.companyName }}</p>
+                <p>
+                  <!--<span-->
+                  <!--style="padding-right: 10px"-->
+                  <!--v-for="(item, i) in item.advService"-->
+                  <!--:key="i"-->
+                  <!--&gt;{{ item.length > 3 ? item.substring(0, 3) + '...' : '' }}</span>-->
+                  <!--&lt;!&ndash;<span style="padding-right: 10px">仓储配送</span>-->
+                  <span
+                    style="padding-right: 10px;color: #ccc"
+                    v-for="(item, i) in (item.advService.length>3?item.advService.slice(3):item.advService)"
+                    :key="i">{{ item }}</span>
+                </p>
+                <p><span style="color: rgb(255,122,35)">推荐承运商
 
-                </span><a href="#">进入官网</a></p>
+                </span><a
+                  :href="'/member/'+item.id"
+                  target="_blank"
+                  style="float: right;cursor: pointer" >进入官网</a></p>
               </li>
             </ul>
           </div>
@@ -69,28 +120,45 @@
     <div class="header_links">
       <div class="header_links_l">
         <ul>
-          <!--<li v-for="(item, index) in 10" :key="10" ><p>满生货运中心</p><p><span>零担整车</span><span>大件运输-->
-
-          <!--</span></p></li>-->
           <li
-            v-for="(item, index) in 10"
+            v-for="(item, index) in lineAdviseRecommend"
             :key="index"
             style="float:left;padding: 15px 40px 15px 40px"><a href="#">
-              <p>满生货运中心</p><p><span>零担整车</span><span>大件运输</span></p>
+              <p>{{ item.contactsName?item.contactsName:'' }}</p>
+
+              <p
+                v-if="item.advService.length"
+              ><span
+                v-for="(item, index) in item.advService"
+                :key="index">{{ item }}</span></p>
+
           </a></li>
         </ul>
       </div>
-      <div class="header_links_r">
-        <p>运单查询运单查询</p>
+      <div
+        class="header_links_r"
+        style="position: relative"
+      >
+        <p style="font-size: 18px;color: #0d91e9;padding: 15px 0 10px 10px ">运单查询运单查询</p>
         <input
-          type="text"
-          name="title"
-          required
-          lay-verify="required"
-          placeholder="请输入运单号，例如1809260061"
-          autocomplete="off"
-          class="layui-input">
-        <div><button class="layui-btn">立即查询</button></div>
+          id="yd_nr"
+          rows="3"
+          cols="20"
+          placeholder="请输入运单号，例如："
+          style="width: 230px;margin-left: 10px">
+        <input
+        type="button">
+        <div
+          class="ydh"
+          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 55px;color:#0d91e9;margin-left: 10px"
+        >
+          <span>1809260061</span>
+        </div>
+        <div><button
+          id="yd_cx1"
+          class="layui-btn"
+          style="width: 260px;margin-top: 10px;border-radius: 3px;margin-left: 10px"
+        >立即查询</button></div>
       </div>
     </div>
     <div class="list_box" >
@@ -108,16 +176,18 @@
               <ul
                 class="echart_scroll_nr1"
               >
-                <li
-                  v-for="(item, i) in 6"
-                  :key="i"
+                <!--<li-->
+                <!--v-for="(item, i) in listF"-->
+                <!--:key="i"-->
 
-                ><a
+                <!--&gt;<a-->
+                <!--href="javascript:void(0)"-->
+                <!--target="_blank"><span>{{ item.companyName?item.companyName:'' }}</span></a></li>-->
+                <li><a
                   href="javascript:void(0)"
-                  target="_blank"><span>广州发武汉广州发武汉{{ i }}</span></a></li>
-                  <!--<li><a-->
-                  <!--href="javascript:void(0)"-->
-                  <!--target="_blank"><span>广州发合肥</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
+                  target="_blank"
+                  v-for="(item, i) in 10"
+                  :key="i"><span>广州发合肥</span></a></li>
                   <!--<li><a-->
                   <!--href="javascript:void(0)"-->
                   <!--target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
@@ -138,49 +208,46 @@
         style="display: flex">
         <form
           class="layui-form"
-
-        > <!-- 提示：如果你不想用form，你可以换成div等任何一个普通元素 -->
+        >
           <div
             class="layui-form-item"
             pane="">
-            <!--<label class="layui-form-label">原始复选框</label>-->
-            <div class="layui-input-block">
+            <div
+              class="layui-input-block"
+              style="margin-left: 0">
               <input
-                v-for="(item, i) in 10"
-                :key="i"
                 type="checkbox"
-                name="like1[write]"
+                name="like"
+                lay-filter="f_all"
                 lay-skin="primary"
-                title="写作"
+                :title="listH[0].name"
                 checked="">
-            </div>
-          </div>
-
-        </form>
-        <form
-          class="layui-form layui-form-pane"
-          action="">
-          <div class="layui-form-item">
-            <label class="layui-form-label">密码框</label>
-            <div class="layui-input-inline">
               <input
-                type="password"
-                name="password"
-                required=""
-                lay-verify="required"
-                placeholder="公司名称"
-                autocomplete="off"
-                class="layui-input">
-
+                v-for="(item, i) in listH.slice(1)"
+                :key="i"
+                lay-filter="c_one"
+                type="checkbox"
+                name="like"
+                lay-skin="primary"
+                :title="item.name"
+                checked=""
+                class="checkbox_class"
+              >
             </div>
-            <div class="layui-form-mid layui-word-aux"> <img
-
-              src="../../static/images/yd_search.png"
-              alt=""
-              style="border: 1px solid #ccc;"></div>
-            <div class="layui-form-mid layui-word-aux">辅助文字</div>
           </div>
+
         </form>
+        <div style="display: inherit;padding-left: 125px;">
+          <input
+            type="text"
+            placeholder="公司名称"
+            class="layui-input">
+          <i
+            class="layui-icon layui-icon-search"
+            style="font-size: 30px; color: #1E9FFF;display: inherit;vertical-align: middle"
+            @click="layuiclick"/>
+        </div>
+
       </div>
 
       <div class="list_nav">
@@ -195,8 +262,8 @@
             <div class="lll-recommend clearfix">
               <div
                 class="zx_sx1"
-              ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.recommendBy28.label }}</span></div>
-              <FooterLinks :info="lineLinks.recommendBy28.links"/>
+              ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.brandRecommend.label }}</span></div>
+              <FooterLinks :info="lineLinks.brandRecommend.links"/>
             </div>
           </div>
         </div>
@@ -204,12 +271,33 @@
         <div class="list_right">
           <div
             id="js007"
-            class="list_right">
-            <div class="zx_sx"><span class="biaozhi"/><span>物流公司推荐</span></div>
-            <div class="tj_none">
+            class="">
+            <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
+              <i
+                style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer"
+                @click="findMe">我也想出现在这里</i>
+            </div>
+            <div
+              class="tj_none"
+              v-if="!listG.length">
               <span>没有相关物流公司推荐</span>
             </div>
+            <ul>
+              <li
+                style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
+                v-for="(item, i) in listG"
+                :key="i">
+                <p style="font-size: 25px;color: rgb(253,240,3)">{{ item.companyName }}</p>
+                <p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>
+                <div><span
+                  style="font-size: 20px;color: #fff"
+                  v-for="(item, i) in item.advService"
+                  :key="i"
 
+                >{{ item }}</span></div>
+                <p style="font-size: 25px;color: #fff">{{ item.mobile }}</p>
+              </li>
+            </ul>
           </div>
           <HotList :lines="lineHots"/>
           <div class="list-box-r-phone">
@@ -246,18 +334,23 @@
             <div
               class="zx_sx"
               style="border-color: #e7e7e7"
-            ><span class="biaozhi"/><span>{{ lineLinks.recommendBy28.label }}</span></div>
-            <FooterLinks :info="lineLinks.recommendBy28.links"/>
-            <!--linedataG    brandRecommend:-->
-            <!--<FootList/>-->
+            ><span class="biaozhi"/><span>{{ lineLinks.interestedRecommend.label }}</span></div>
+            <FooterLinks
+              :info="lineLinks.interestedRecommend.links"
+              :types="types"/>
+              <!--linedataG    brandRecommend:-->
+              <!--<FootList/>-->
           </div>
         </div>
       </div>
     </div>
-    <Add :is-add = "isAdd"/>
+    <Add
+      :show = "isAdd"
+      @close="noaddFn"/>
   </div>
 </template>
 <script>
+import $axios from 'axios'
 import DetailList from '../../components/detailList'
 import HotList from '../../components/hotList'
 import selectMap from '../zhuanxian/selectMap'
@@ -275,7 +368,8 @@ export default {
   },
   data() {
     return {
-      isAdd: false
+      isAdd: false,
+      types: 0
       // lineHots: []
     }
   },
@@ -327,15 +421,63 @@ export default {
     let vo1 = vo
     delete vo1.currentPage
     delete vo1.pageSize
-    let [listA, listB, listC] = await Promise.all([
+    // /logisticsCompany/adviseRecommend
+    // 广告推荐物流公司
+    let [
+      listA,
+      listB,
+      listC,
+      listD,
+      listE,
+      listF,
+      listG,
+      listH
+    ] = await Promise.all([
       $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
       $axios.post(aurl + '/api/28-web/logisticsCompany/list', vo),
-      $axios.post(aurl + `/api/28-web/range/related/links`, vo1)
+      $axios.post(
+        aurl + `/api/28-web/logisticsCompany/list/related/links`,
+        vo1
+      ),
+      $axios.get(aurl + `/api/28-web/logisticsCompany/adviseRecommend`),
+      $axios.get(aurl + `/api/28-web/logisticsCompany/excellent`),
+      $axios.get(aurl + `/api/28-web/logisticsCompany/enter`),
+      $axios.get(aurl + `/api/28-web/logisticsCompany/enterpriseRecommend`),
+      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    console.log(listC.data.data, 'listA')
+
+    // (lineAdviseRecommend.productServiceCode?lineAdviseRecommend.productServiceCode:lineAdviseRecommend.otherService)
+    listD.data.data.forEach(item => {
+      item.advService = item.productServiceNameList
+        ? item.productServiceNameList
+        : item.otherServiceNameList
+      // console.log(item.advService, 'advService')
+    })
+    listE.data.data.forEach(item => {
+      item.advService = item.productServiceNameList
+        ? item.productServiceNameList
+        : item.otherServiceNameList
+    })
+    listG.data.data.forEach(item => {
+      item.advService = item.productServiceNameList
+        ? item.productServiceNameList
+        : item.otherServiceNameList
+    })
+    let codeObj = {
+      name: '不限',
+      code: ''
+    }
+    listH.data.data.unshift(codeObj)
+    console.log(listF.data.data, 'listF')
     return {
       lineHots: listA.data.data,
-      lineLinks: listC.data.data
+      lineLinks: listC.data.data,
+      lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : '',
+      listE: listE.data.status == 200 ? listE.data.data : '',
+      // listF: listF.data.data == [] ? '' : '',
+      listF: listF.data.status == 200 ? listF.data.data : '',
+      listG: listG.data.status == 200 ? listG.data.data : '',
+      listH: listH.data.status == 200 ? listH.data.data : ''
     }
   },
   head: {
@@ -347,19 +489,13 @@ export default {
     ]
   },
   mounted() {
-    console.log(this.vo, 'vovo')
-    // layui.use('carousel', () => {
-    //   var carousel = layui.carousel
-    //   //建造实例
-    //   carousel.render({
-    //     elem: '#test1',
-    //     width: '100%', //设置容器宽度
-    //     arrow: 'always' //始终显示箭头
-    //     //,anim: 'updown' //切换动画方式
-    //   })
-    // })
     seajs.use(
-      ['../js/city.js', '/layer/layer.js', '/layer/dist/layui.js'],
+      [
+        '../js/city.js',
+        '/layer/layer.js',
+        '/layer/dist/layui.js',
+        '/js/AFLC_API.js'
+      ],
       function() {
         seajs.use(
           [
@@ -369,16 +505,30 @@ export default {
           ],
           function() {
             seajs.use(['../gongsi/js/list_wlgs.js'], function() {
-              seajs.use(['../js/collection.js'], function() {
+              seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
                 seajs.use(['../js/gaodemap2.js'], function() {
                   //
                   layui.use('form', function() {
-                    var form = layui.form()
-                    form.render()
+                    var form = layui.form
+                    form.on('checkbox(f_all)', function(data) {
+                      var item = $('.checkbox_class')
+                      item.each(function() {
+                        if ($(this).prop('checked')) {
+                          $(this).prop('checked', false)
+                        } else {
+                          $(this).prop('checked', true)
+                        }
+                        console.log(
+                          $(this).prop('checked'),
+                          "$(this).prop('checked')"
+                        )
+                      })
+                      form.render('checkbox')
+                      // form.render()
+                    })
                   })
-                  //
-                  //echart滚动脚本
-                  var speed = 30 //数字越大速度越慢
+
+                  var speed = 30
                   var tab = $('.echart_scroll_nr')
                   var tab1 = $('.echart_scroll_nr1')
                   var tab2 = $('.echart_scroll_nr2')
@@ -457,8 +607,20 @@ export default {
     )
   },
   methods: {
+    findMe() {
+      this.addFn()
+      this.types = 2
+    },
     callme() {
+      this.addFn()
+      this.types = 1
+      console.log(this.isAdd)
+    },
+    addFn() {
       this.isAdd = true
+    },
+    noaddFn() {
+      this.isAdd = false
     },
     btbs() {
       layer.open({

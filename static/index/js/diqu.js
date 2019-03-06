@@ -42,6 +42,7 @@ function getCityNameByCode(code) {
 function cx01() {
   return $.getJSON('/templets/default/js/regions.json').done(function(res) {
     REGIONSDATA = res
+    console.log(REGIONSDATA, 'REGIONSDATA')
     var datas = []
     $.each(res, function(inx, el) {
       if (el.level === 1) {
@@ -261,6 +262,7 @@ $('#map_box').on({
 cx01()
 // cx02(' ')
 // 专线数据字典 E
+
 
 // 处理自动跳转
 function detectWhereYouFrom() {

@@ -50,7 +50,7 @@ export const actions = {
         .then(res => {
           let data = res.data
           if (data.status === 200) {
-            // console.log('1payload-GETCOMPANYLIST', data.data.list[0])
+            // console.log('1payload-GETCOMPANYLIST', data.data.list)
             let ndata = data.data ? data.data.list || [] : []
             ndata = payload.preFn ? payload.preFn(ndata) : ndata
             commit('setInfo', {

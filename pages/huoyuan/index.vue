@@ -149,7 +149,7 @@
 
                 </div>
               </a>
-              <div class="distance_total">[全程<em>{{ item.distance }}</em>公里]</div>
+              <div class="distance_total">[全程<em>{{ item.distance ? item.distance : 0 }}</em>公里]</div>
               <div class="sc_num"><img src="../../static/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
               <div class="view_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
             </li>
@@ -159,14 +159,16 @@
               <p class="p1"/>
               <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
               <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i>
-                <span>{{ item.goodsNum }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
+                <span>{{ item.goodsNum ? item.goodsNum : 0 }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsVolume }}<font >立方米</font></span>
               </p>
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+              <p 
+                class="p1" 
+                :title="item.companyName"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
               <p class="p2"><img src="../../static/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
@@ -256,102 +258,104 @@
         </div>
         <!-- 28为您推荐end -->
       </div>
-
-      <div class="list_right">
-        <div class="zx_sx"><span class="biaozhi"/><span>货源推荐</span></div>
-        <div 
-          v-if="recommendList.length === 0" 
-          class="tj_none hy_tj_none" 
-          style="display: block">
-          <span>没有相关货源推荐</span>
-        </div>
-        <div 
-          v-for="(item,index) in recommendList" 
-          :key="index" 
-          class="che_box">
-          <div class="tj_list">
-            <div class="p p1"><img src="../../static/images/04gongsi.png" ><span><a
-            target="_blank" >{{ item.companyName }}</a></span>
-              <span class="img_icon">
-                <img
-                  v-if="item.authStatus === 'AF0010403'"
-                  src="../../static/images/list_wlzx/shiming.png" >
-                <img
-                  v-if="item.isVip && item.isVip === '1'"
-                  src="../../static/images/list_wlzx/xinyong.png" >
-              </span>
+      <div class="box_right">
+        <div class="list_right">
+          <div class="zx_sx"><span class="biaozhi"/><span>货源推荐</span></div>
+          <div 
+            v-if="recommendList.length === 0" 
+            class="tj_none hy_tj_none" 
+            style="display: block">
+            <span>没有相关货源推荐</span>
+          </div>
+          <div 
+            v-for="(item,index) in recommendList" 
+            :key="index" 
+            class="che_box">
+            <div class="tj_list">
+              <div class="p p1"><img src="../../static/images/04gongsi.png" ><span><a
+              target="_blank" >{{ item.companyName }}</a></span>
+                <span class="img_icon">
+                  <img
+                    v-if="item.authStatus === 'AF0010403'"
+                    src="../../static/images/list_wlzx/shiming.png" >
+                  <img
+                    v-if="item.isVip && item.isVip === '1'"
+                    src="../../static/images/list_wlzx/xinyong.png" >
+                </span>
               
 
-            </div>
-            <div class="p p2">
-              <a
-                :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
-                class="list-title-a"
-                target="_blank" >
-                <span class="list-icon lines-sprite-icons icon-start"/>
-                <em>{{ item.start }}</em>
-                <span class="list-icon lines-sprite-icons icon-through"/>
-                <span class="list-icon lines-sprite-icons icon-end"/>
-                <em>{{ item.end }}</em>
-              </a>
-            </div>
+              </div>
+              <div class="p p2">
+                <a
+                  :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
+                  class="list-title-a"
+                  target="_blank" >
+                  <span class="list-icon lines-sprite-icons icon-start"/>
+                  <em>{{ item.start }}</em>
+                  <span class="list-icon lines-sprite-icons icon-through"/>
+                  <span class="list-icon lines-sprite-icons icon-end"/>
+                  <em>{{ item.end }}</em>
+                </a>
+              </div>
 
-            <div class="p p3">
-              <ul>
-                <li class="tj_left"><i>货物：</i><span v-if="item.goodsName">{{ item.goodsName }}</span></li>
-                <li class="tj_right"><i>数量：</i><span v-if="item.goodsNum">{{ item.goodsNum }}件</span></li>
-                <li class="tj_left"><i >重量：</i><font v-if="item.goodsWeight">{{ item.goodsWeight }}</font><em>公斤</em></li>
-                <li class="tj_right"><i >体积：</i><font v-if="item.goodsVolume">{{ item.goodsVolume }}</font><em>立方米</em></li>
-              </ul>
-            </div>
-            <div class="p p6">
-              <div class="sc_num1"><img src="../../static/images/list_wlzx/ll_num.png"><span><i><em>{{ item.browseNumber ? item.browseNumber: 0 }}</em></i>浏览</span></div>
-              <div class="view_num1"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum ? item.collectNum: 0 }}</em>人收藏</i></span></div>
+              <div class="p p3">
+                <ul>
+                  <li class="tj_left"><i>货物：</i><span 
+                    :title="item.goodsTypeName"
+                    v-if="item.goodsTypeName">{{ item.goodsTypeName }}</span></li>
+                  <li class="tj_right"><i>数量：</i><span v-if="item.goodsNum">{{ item.goodsNum ? item.goodsNum : 0 }}件</span></li>
+                  <li class="tj_left"><i >重量：</i><font v-if="item.goodsWeight">{{ item.goodsWeight }}</font><em>公斤</em></li>
+                  <li class="tj_right"><i >体积：</i><font v-if="item.goodsVolume">{{ item.goodsVolume }}</font><em>立方米</em></li>
+                </ul>
+              </div>
+              <div class="p p6">
+                <div class="sc_num1"><img src="../../static/images/list_wlzx/ll_num.png"><span><i><em>{{ item.browseNumber ? item.browseNumber: 0 }}</em></i>浏览</span></div>
+                <div class="view_num1"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum ? item.collectNum: 0 }}</em>人收藏</i></span></div>
+              </div>
             </div>
           </div>
+
         </div>
 
-      </div>
-
-      <!-- 订阅优质货源start -->
-      <div class="list_help">
-        <div class="list-box-r-top">
-          <form action="">
-            <h2 class="list_help_title">订阅优质货源</h2>
-            <div class="ltl-input">
+        <!-- 订阅优质货源start -->
+        <div class="list_help">
+          <div class="list-box-r-top">
+            <form action="">
+              <h2 class="list_help_title">订阅优质货源</h2>
+              <div class="ltl-input">
+                <input 
+                  id="right-bar-form" 
+                  autocomplete="off" 
+                  wtmap="" 
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择出发地">
+                <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+              </div>
+              <div class="ltl-input">
+                <input 
+                  id="right-bar-to" 
+                  autocomplete="off" 
+                  wtmap="" 
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择目到达地">
+                <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+              </div>
+              <div class="ltl-input">
+                <h4 class="ltl-text">订阅货源，第一时间获得系统消息通知</h4>
+                <h4 class="ltl-text">已有18965人订阅后达成交易</h4>
+              </div>
               <input 
-                id="right-bar-form" 
-                autocomplete="off" 
-                wtmap="" 
-                type="text" 
-                class="ltl-location" 
-                placeholder="请选择出发地">
-              <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
-            </div>
-            <div class="ltl-input">
-              <input 
-                id="right-bar-to" 
-                autocomplete="off" 
-                wtmap="" 
-                type="text" 
-                class="ltl-location" 
-                placeholder="请选择目到达地">
-              <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
-            </div>
-            <div class="ltl-input">
-              <h4 class="ltl-text">订阅货源，第一时间获得系统消息通知</h4>
-              <h4 class="ltl-text">已有18965人订阅后达成交易</h4>
-            </div>
-            <input 
-              id="check-fee" 
-              type="button" 
-              value="上新提醒我" 
-              class="right-top-btn">
-          </form>
+                id="check-fee" 
+                type="button" 
+                value="上新提醒我" 
+                class="right-top-btn">
+            </form>
+          </div>
         </div>
-      </div>
       <!-- 订阅优质货源end -->
-
+      </div>
       <!-- 全国热门物流专线start -->
       <div class="hot-city-layer main-width">
         <div class="hot-city-unit hot_box ">
@@ -620,7 +624,10 @@ export default {
       goodsWeightUpper: goodsWeightUpper
     }
     let hyList = await getHyList($axios, 1, vo)
+    // console.log('hyList:', hyList.list[0])
     let recommendList = await getRecommendList($axios, vo)
+    // console.log('recommendList:', recommendList[0])
+
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],
@@ -859,7 +866,7 @@ body {
   height: auto !important;
   width: 344px;
   margin: 0px 0px 0 16px;
-  float: left;
+  /* float: left; */
 }
 .list_hy_page2 {
   width: 1400px;
@@ -1056,6 +1063,8 @@ body {
 }
 .wlzx_list_2 .p1 {
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .wlzx_list_2 .p1 a {
   color: #333333;
@@ -1240,6 +1249,14 @@ body {
   font-size: 13px;
   color: #333;
 }
+.tj_list .p3 .tj_left span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 86px;
+  vertical-align: middle;
+}
 .tj_list .p3 font {
   font-size: 13px;
   color: #eb434d;
@@ -1348,6 +1365,9 @@ body {
 /*车源信息 E */
 
 /*货源信息 S */
+.box_right {
+  float: right;
+}
 .wlzx_list_01 {
   width: 180px;
   margin-left: 30px;

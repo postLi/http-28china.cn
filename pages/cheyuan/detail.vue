@@ -126,9 +126,9 @@
           </div>
           <div class="arc_middle1-2"><span><img
             class="img1"
-            src="/images/list_wlzx/hy_item6.png"></span><span>发布日期：2019-01-18 13:25:20 </span><span><img
+            src="/images/list_wlzx/hy_item6.png"></span><span>发布日期：{{ cy1.createTime }} </span><span><img
               class="img2"
-              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：<i class="my_cz_num"/></span></div>
+              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：<i class="my_cz_num"/>{{ cy1.collectNumber ? cy1.collectNumber : 0 }}</span></div>
           <div class="arc_middle2">
             <div class="arc_middle2_1">
               <p class="p1"><i>运价：</i><font
@@ -352,7 +352,7 @@
                   <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                     <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
                   <font>{{ item.createrName?item.createrName:'' }}</font></p>
-                  <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
+                  <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
                 </li>
                 <li class="cy_list_3">
                   <p class="p1"><img
@@ -464,23 +464,16 @@
 
           <div style="clear: both">
             <div class="zx_sx1">
-              <span class="biaozhi1"/><span>您可能对这些感兴趣</span>
+              <span class="biaozhi1"/><span>{{ interesLabel }}</span>
             </div>
             <ul class="hot-cities">
-              <li class="hot-cities-li">
+              <li 
+                v-for="(item,index) in interestOrder" 
+                :key="index" 
+                class="hot-cities-li" >
                 <a
-                  href="/cheyuan/detail?id=null"
-                  class="hot-cities-a">广州到北京物流专线</a>
-              </li>
-              <li class="hot-cities-li">
-                <a
-                  href="/cheyuan/detail?id=null"
-                  class="hot-cities-a">广州物流专线</a>
-              </li>
-              <li class="hot-cities-li">
-                <a
-                  href="/cheyuan/detail?id=null"
-                  class="hot-cities-a">北京物流专线</a>
+                  :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
+                  class="hot-cities-a">{{ item.title }}</a>
               </li>
             </ul>
           </div>
@@ -579,14 +572,12 @@
             <ul
               class="ps-list"
               style="padding-left: 30px;list-style: square">
-              <li>
-                <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
-              </li>
-              <li>
-                <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
-              </li>
-              <li>
-                <a href="">末端共同配送这把良药，让通达系吃下去有点难</a>
+              <li 
+                :key="index" 
+                v-for="(item, index) in $store.state.news.cheyuan_ccyps">
+                <a 
+                  :href="item.url" 
+                  target="_blank">{{ item.title }}</a>
               </li>
             </ul>
           </div>
@@ -764,6 +755,24 @@ export default {
       // ]
     }
   },
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: '101',
+        count: 8,
+        orderBy: 9,
+        channelOption: 0
+      },
+      name: 'cheyuan_ccyps',
+      preFn: data => {
+        return data.map((el, index) => {
+          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+
+          return el
+        })
+      }
+    })
+  },
   async asyncData({ $axios, app, query }) {
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
@@ -788,6 +797,7 @@ export default {
         startProvince: cy1.data.data.endProvince,
         startCity: cy1.data.data.endCity
       }
+
       carInfoRes1 = await $axios.post('/28-web/carInfo/list', parm1)
       //此路线其他车源
       // otherCarSourceList = await $axios.get(
@@ -802,6 +812,15 @@ export default {
       //   })
       // }
     }
+    let parm2 = {
+      endArea: cy1.data.data.endArea,
+      endCity: cy1.data.data.endCity,
+      endProvince: cy1.data.data.endProvince,
+      startArea: cy1.data.data.startArea,
+      startCity: cy1.data.data.startCity,
+      startProvince: cy1.data.data.startProvince
+    }
+    console.log(parm2, 'parm2')
     //车主其他求货信息
     // let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
     //   id: query.id
@@ -822,6 +841,12 @@ export default {
       })
     //货源热门搜索
     let hotSearchs = await $axios.get('/28-web/hotSearch/carInfo/detail/links')
+    //底部推荐
+    let cheLinks = await $axios
+      .post('/28-web/carInfo/detail/related/links', parm2)
+      .catch(err => {})
+    // console.log(cheLinks.data.data.interestedRecommend.links, 'cheLinks')
+
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -873,7 +898,7 @@ export default {
       }
     }
     hotSearchs.data.data.links.forEach(footLink)
-
+    cheLinks.data.data.interestedRecommend.links.forEach(footLink)
     // console.log(hotSearchs.data.data, 'cheComprehensive1')
     // console.log(
     //   '24小时内发布的车源中最新的前10条车源信息',
@@ -882,6 +907,18 @@ export default {
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
+      interestOrder:
+        cheLinks.data.status === 200
+          ? cheLinks.data.data.interestedRecommend.links
+          : [],
+      cheLabel:
+        cheLinks.data.status === 200 ? cheLinks.data.data.recommend.label : '',
+      cheLink:
+        cheLinks.data.status === 200 ? cheLinks.data.data.recommend.links : [],
+      interesLabel:
+        cheLinks.data.status === 200
+          ? cheLinks.data.data.interestedRecommend.label
+          : [],
       cheComprehensive:
         cheComprehensives.data.status === 200
           ? cheComprehensives.data.data
@@ -1400,7 +1437,7 @@ export default {
             console.log('提交捕获异常')
           })
       } else {
-        window.location.href = 'http://127.0.0.1:3000/login'
+        window.location.href = '/login'
       }
     },
     cenclecollected() {

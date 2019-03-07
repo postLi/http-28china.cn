@@ -185,11 +185,13 @@
 }
 .find_order_company{
   height: 36px;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
   line-height: 36px;
   text-indent: 24px;
   color: #333;
   font-size: 14px;
+  text-decoration: underline;
+  color: #409eff;
 }
 .find_order_list{
   padding: 24px;
@@ -289,4 +291,71 @@
   margin-left: -10.5px;
   width: 21px;
   height: 21px;
+}
+/**
+ * 轨迹跟踪
+ */
+
+ #find_order_map {
+  width: 100%;
+  height: 600px;
+  border: 1px solid #ddd;
+  display: none;
+  position: relative;
+}
+
+.find_order_tabs {
+  background-color: #f7f7f7;
+  height: 36px;
+  line-height: 36px;
+  font-size: 14px;
+}
+
+.find_order_tabs a {
+  padding: 9px 12px;
+  cursor: pointer;
+  color: #333;
+  margin: 0;
+}
+
+.find_order_tabs a.active,
+.find_order_tabs a:hover {
+  background-color: #2b8ff6;
+  color: #fff;
+}
+
+
+/**
+* 轨迹跟踪提示框层
+*/
+
+.map_empty_panel {
+  width: 280px;
+  height: 60px;
+  text-align: center;
+  line-height: 24px;
+  background-color: rgba(255, 255, 255, 0.9);
+  position: absolute;
+  z-index: 1000;
+  top: 50%;
+  left: 50%;
+  margin-left: -125px;
+  margin-top: -30px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 10px #ccc;
+}
+
+.map_empty_tips {
+  margin: 13px auto;
+  color: rgba(17, 137, 255);
+}
+
+.map_empty_tips:before {
+  content: '';
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  background: url(/images/ydcx/14wjl.png) no-repeat -0 -0;
 }

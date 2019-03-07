@@ -20,29 +20,30 @@
               src="../../static/gongsi/images/wlyq_gs.png"
               alt=""><span style="padding-left: 20px">公司所在地</span></div>
             <div class="company_address">
-              <div
+              <ul
+                v-for="(item,i) in 1"
+                :key="i"
                 id="index_map1"
-                class="header_middles">
-                <span
-                  v-for="(item, i) in 3"
-                  :key="i"
-                  id="diqu"
-                  style="width: 33%; text-align: center;display: inline-block;">全国</span>
-                <!--<a href="" style="width: 33%; text-align: center"><span id="diqu">全国</span><i/></a>-->
-                <div
-                  id="map_box1"
-                  class="map_box1"
-                  style="position: absolute;left: 18%;top: 29%;display: none;width: 510px;height: 150px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 20px;">
-                  <a href="/"><span style="color: #3F94EE;font-weight: bold;" >全&nbsp;国</span></a>
-                </div>
-
-              </div>
-              <!--<ul style="padding: 10px">-->
-              <!--<li-->
-              <!--v-for="(item, index) in 10"-->
-              <!--:key="index"-->
-              <!--style="width: 33%; text-align: center">不限</li>-->
-              <!--</ul>-->
+                class="header_middles"
+                style="width: 100%;">
+                <li style="position: relative;width: 30%;text-align: center;"><span
+                  class="spanclass"
+                  id="spanclass"
+                  data-pinyin="pinyin"
+                  name="name">全国</span>
+                  <ul
+                    class="index_uls"
+                    style="position: absolute;left: -1%;top: 98%;display: block;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
+                    <li
+                    style="width: 33%;text-align: center;"><a
+                      href="#"
+                      class="liclass"
+                      id="liclass"
+                      data-pinyin="pinyin"
+                      name="name"><span>广州</span></a></li>
+                  </ul>
+                </li>
+              </ul>
             </div>
           </div>
         </li>
@@ -215,16 +216,18 @@
         class="list_checkbox"
         style="display: flex">
 
-        <form
-          action=""
-          method="get">
-          <label
-            v-for="(item, i) in 5"
-            :key="i">
-            <input
-              type="checkbox"
-              value="" >132 </label>
-        </form>
+        <!--<form-->
+        <!--action=""-->
+        <!--method="get">-->
+        <!--<label-->
+        <!--v-for="(item, i) in 5"-->
+        <!--:key="i">-->
+        <!--<input-->
+        <!--type="checkbox"-->
+        <!--value="" >132 </label>-->
+        <!--</form>-->
+
+
         <!--<form-->
         <!--class="layui-form"-->
         <!--&gt;-->
@@ -235,27 +238,41 @@
         <!--class="layui-input-block"-->
         <!--style="margin-left: 0">-->
         <!--<input-->
+        <!--class="buxian"-->
         <!--type="checkbox"-->
-        <!--name="like"-->
+        <!--name="fall"-->
         <!--lay-filter="f_all"-->
         <!--lay-skin="primary"-->
         <!--:title="listH[0].name"-->
-        <!--checked="">-->
+        <!--checked="false">-->
         <!--<input-->
         <!--v-for="(item, i) in listH.slice(1)"-->
         <!--:key="i"-->
         <!--lay-filter="c_one"-->
         <!--type="checkbox"-->
-        <!--name="like"-->
+        <!--name="qall"-->
         <!--lay-skin="primary"-->
         <!--:title="item.name"-->
-        <!--checked=""-->
+        <!--checked="false"-->
         <!--class="checkbox_class"-->
         <!--&gt;-->
         <!--</div>-->
         <!--</div>-->
 
         <!--</form>-->
+        <div class="form_class">
+
+          <ul>
+            <li
+              v-for="(item, i) in 2"
+              :key="i">
+              <input
+                type="checkbox"
+                class="input_class">
+              <label for="">ereree</label>
+            </li>
+          </ul>
+        </div>
         <div style="display: inherit;padding-left:200px;position: relative">
           <input
             type="text"
@@ -488,7 +505,11 @@ export default {
       code: ''
     }
     listH.data.data.unshift(codeObj)
-    // console.log(listF.data.data, 'listF')
+    //checkbox
+    listH.data.data.forEach(item => {
+      item.checked = false
+    })
+    console.log(listH.data.data, 'listH')
     return {
       lineHots: listA.data.data,
       lineLinks: listC.data.data,
@@ -530,31 +551,25 @@ export default {
                   //
                   layui.use('form', function() {
                     var form = layui.form
+                    $("[name='fall']").prop('checked', 'false')
+                    console.log(
+                      $("[name='fall']").prop('checked', 'false'),
+                      ' $("[name=\'like\']")'
+                    )
                     form.on('checkbox(f_all)', function(data) {
-                      // console.log($(this), '$(this)')
+                      var a1 = data.elem.checked
                       var item = $('.checkbox_class')
-                      item.each(function() {
-                        if ($(this).prop('checked')) {
-                          $(this).prop('checked', false)
-                        } else {
+                      if (a1 == false) {
+                        item.each(function() {
                           $(this).prop('checked', true)
-                        }
-                      })
-                      // var item = $(".cityId");
-                      // item.each(function() {
-                      //   if ($(this).prop('checked')) {
-                      //     $(this).prop('checked', false)
-                      //   } else {
-                      //     $(this).prop('checked', true)
-                      //   }
-                      // })
-
-                      // item.each(function() {
-                      //   if ($(this).prop('checked')) {
-                      //     $(this).prop('checked', false)
-                      //   }
-                      // })
-                      // form.render()
+                        })
+                      } else {
+                        item.each(function() {
+                          $(this).prop('checked', false)
+                        })
+                      }
+                      console.log(a1, 'a121212')
+                      form.render()
                     })
                   })
 
@@ -675,7 +690,43 @@ export default {
   .clearfix:after {
     clear: both;
   }
+  .form_class {
+    ul {
+      li {
+        input {
+          width: 16px;
+          height: 16px;
+          margin-top: 0;
+          background-color: #fff;
+          border: 1px solid #c9c9c9;
+          border-radius: 2px;
+          color: #fff;
+          text-align: center;
+          line-height: 15px;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+          -ms-appearance: none;
+          -o-appearance: none;
+          appearance: none;
+          outline: none;
+        }
 
+        input:hover {
+          border-color: #43adea;
+        }
+
+        input:checked {
+          color: #fff;
+          background-color: #43adea;
+          border: 1px solid #43adea;
+        }
+
+        input:after {
+          content: '✔';
+        }
+      }
+    }
+  }
   .zx_sx1 {
     border-bottom: 1px solid #e7e7e7;
     line-height: 50px;

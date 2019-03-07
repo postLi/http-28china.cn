@@ -4,17 +4,31 @@ module.exports = {
   mode: 'universal',
   modern: true, // 编译为现代 ES Module，并自动分辨浏览器输出
   /*
-  ** Headers of the page
-  */
+   ** Headers of the page
+   */
   head: {
     title: '28快运网-物流配送-物流货运-物流公司-一站式物流服务平台',
     titleTemplate: '%s | 28快运网',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'renderer', content: 'webkit' },
-      { name: 'X-UA-Compatible', content: 'IE=Edge,chrome=1' },
-      { name: 'force-rendering', content: 'webkit' },
+      {
+        charset: 'utf-8'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
+      {
+        name: 'renderer',
+        content: 'webkit'
+      },
+      {
+        name: 'X-UA-Compatible',
+        content: 'IE=Edge,chrome=1'
+      },
+      {
+        name: 'force-rendering',
+        content: 'webkit'
+      },
       {
         hid: 'description',
         name: 'description',
@@ -31,19 +45,31 @@ module.exports = {
     htmlAttrs: {
       lang: 'zh-CN'
     },
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
-    script: [{ src: '/vendor/jquery-1.12.4.min.js' }]
+    link: [
+      {
+        rel: 'icon',
+        type: 'image/x-icon',
+        href: '/favicon.ico'
+      }
+    ],
+    script: [
+      {
+        src: '/vendor/jquery-1.12.4.min.js'
+      }
+    ]
   },
 
   /*
-  ** Customize the progress-bar color
-  */
-  loading: { color: '#fff' },
+   ** Customize the progress-bar color
+   */
+  loading: {
+    color: '#fff'
+  },
   // loading: '~components/loading.vue',
 
   /*
-  ** 公共 css
-  */
+   ** 公共 css
+   */
   // css: ['~/css/index.css', '~/css/list_huo.css'],
   css: [
     /*     {
@@ -53,11 +79,16 @@ module.exports = {
   ],
 
   /*
-  ** Plugins to load before mounting the App
-  */
+   ** Plugins to load before mounting the App
+   */
   plugins: [
-    { src: '~/plugins/vue-extend' },
-    { src: '~/plugins/lozad', mode: 'client' },
+    {
+      src: '~/plugins/vue-extend'
+    },
+    {
+      src: '~/plugins/lozad',
+      mode: 'client'
+    },
     {
       src: '~/plugins/axios',
       ssr: false
@@ -65,8 +96,8 @@ module.exports = {
   ],
 
   /*
-  ** Nuxt.js modules
-  */
+   ** Nuxt.js modules
+   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
     '@nuxtjs/axios',
@@ -78,8 +109,8 @@ module.exports = {
     // ['cookie-universal-nuxt']
   ],
   /*
-  ** Axios module configuration
-  */
+   ** Axios module configuration
+   */
   axios: {
     proxy: true,
     // debug: true,
@@ -94,6 +125,13 @@ module.exports = {
       changeOrigin: true,
       pathRewrite: {
         '^/api': ''
+      }
+    },
+    '/79api/': {
+      target: 'http://192.168.1.79:7010', // 代理地址
+      changeOrigin: true,
+      pathRewrite: {
+        '^/79api': ''
       }
     },
     '/anfacms/': {
@@ -112,12 +150,12 @@ module.exports = {
   },
 
   /*
-  ** Build configuration
-  */
+   ** Build configuration
+   */
   build: {
     /*
-    ** You can extend webpack config here
-    */
+     ** You can extend webpack config here
+     */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

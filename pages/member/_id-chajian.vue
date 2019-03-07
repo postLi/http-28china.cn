@@ -20,9 +20,17 @@
           </div>
           <!-- 有内容 -->
           <div class="find_order_content find_order_content_info find_order_con hide">
+            <div class="find_order_tabs">
+              <a 
+                href="javascript:;" 
+                class="active">运单详情</a>
+              <a 
+              href="javascript:;">轨迹跟踪</a>
+            </div>
+            <div id="find_order_map"/>
             <span class="return_search">返回搜索列表</span>
-            <div class="find_order_company"/>
-            <div class="find_order_list">
+            <div class="find_order_company find_order_desc"/>
+            <div class="find_order_list find_order_desc">
               <ul>
               <!-- <li class="find_order_sign">
 						<span class="find_order_date">2018-070120011</span>
@@ -58,9 +66,6 @@
             <div class="none_tip_desc">请您仔细核对物流公司名称和运单号码</div>
           </div>
         </div>
- 
- 
-        
       </div>
     </div>
   </div>
@@ -78,6 +83,19 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/member/css/list.css' },
       { rel: 'stylesheet', href: '/member/css/find_order.css' }
+    ],
+    script: [
+      {
+        src:
+          'https://webapi.amap.com/maps?v=1.4.8&key=e61aa7ddc6349acdb3b57c062080f730&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder&callback=loadedGaodeMap'
+      },
+      {
+        src: '//webapi.amap.com/ui/1.0/main.js'
+      },
+      { src: '/js/domap.js' }
+      // {
+      //   src: '/member/js/find_order.js'
+      // }
     ]
   },
   layout: 'member',
@@ -88,6 +106,9 @@ export default {
         '/index/js/city-picker.js',
         '/member/js/index.js',
         '/index/js/collection.js',
+        // 'https://webapi.amap.com/maps?v=1.4.8&key=e61aa7ddc6349acdb3b57c062080f730&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder&callback=loadedGaodeMap',
+        // '//webapi.amap.com/ui/1.0/main.js',
+        // '/js/domap.js',
         '/member/js/find_order.js'
       ],
       function() {}

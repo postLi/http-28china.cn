@@ -57,9 +57,17 @@
         </div>
         <!-- 有内容 -->
         <div class="find_order_content find_order_content_info find_order_con hide">
+          <div class="find_order_tabs">
+            <a 
+              href="javascript:;" 
+              class="active">运单详情</a>
+            <a 
+            href="javascript:;">轨迹跟踪</a>
+          </div>
+          <div id="find_order_map"/>
           <span class="return_search">返回搜索列表</span>
-          <div class="find_order_company"/>
-          <div class="find_order_list">
+          <div class="find_order_company find_order_desc"/>
+          <div class="find_order_list find_order_desc">
             <ul>
             <!-- <li class="find_order_sign">
 						<span class="find_order_date">2018-070120011</span>
@@ -105,7 +113,14 @@ export default {
       title: '运单查询',
       // meta: [{ hid: 'description', name: 'description', content: this.desc }],
       link: [{ rel: 'stylesheet', href: '/index/css/find_order.css' }],
-      script: []
+      script: [
+        { src: 'js/domap.js' },
+        {
+          src:
+            'https://webapi.amap.com/maps?v=1.4.8&key=e61aa7ddc6349acdb3b57c062080f730&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder&callback=loadedGaodeMap'
+        },
+        { src: '//webapi.amap.com/ui/1.0/main.js' }
+      ]
     }
   },
   async fetch({ store, params, $axios, error }) {
@@ -132,6 +147,8 @@ export default {
       if (!$) {
         return
       }
+      // 初始化地图-轨迹跟踪
+      initDoMap('find_order_map', 'control')
       jQuery.getParams = function(_keystr, url) {
         var keystr = _keystr || ''
         var args = url || location.search
@@ -248,6 +265,7 @@ export default {
               if (res.data.length === 1) {
                 $('.return_search').hide()
                 findById(res.data[0].id)
+                getOrderLine(res.data[0].orgId, res.data[0].shipSn)
               } else {
                 $('.return_search').show()
                 var data = res.data
@@ -263,6 +281,10 @@ export default {
                   str +=
                     '<li><span rel="' +
                     data[i].id +
+                    '" data-name="' +
+                    data[i].orgId +
+                    '" data-ship="' +
+                    data[i].shipSn +
                     '" class="find_company_order">' +
                     data[i].shipSn +
                     ' <i>' +
@@ -348,11 +370,33 @@ export default {
       // 列表点击公司
       $('.find_order_company_list').on('click', 'span', function() {
         findById($(this).attr('rel'))
+        getOrderLine($(this).attr('data-name'), $(this).attr('data-ship'))
       })
       // 返回公司列表
       $('.return_search').on('click', function() {
         $('.find_order_content_info').addClass('hide')
         $('.find_order_search_list').removeClass('hide')
+      })
+      // 切换tab详情及轨迹
+      $('.find_order_tabs a').on('click', function() {
+        $('.find_order_tabs a').removeClass('active')
+        $(this).addClass('active')
+        if (
+          $(this)
+            .text()
+            .indexOf('轨迹跟踪') !== -1
+        ) {
+          $('.find_order_desc').hide()
+          $('#find_order_map').show()
+
+          if (window.pathSimplifierIns && pathNavigs && pathNavigs.length) {
+            console.log('pathNavigs', pathNavigs, window.pathSimplifierIns)
+            window.pathSimplifierIns.setFitView()
+          }
+        } else {
+          $('#find_order_map').hide()
+          $('.find_order_desc').show()
+        }
       })
     })(window.jQuery)
   }

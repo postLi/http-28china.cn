@@ -463,7 +463,7 @@ a:hover span{
 
 }
 .main1_3 .main1_c{
-  width:326px;
+  width:396px;
   height:130px;
   float: left;
   margin-top: 10px;
@@ -475,6 +475,9 @@ a:hover span{
   font-size: 14px;
   color:#333;
   margin-left: 20px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .main1_3 .main1_c ul li a{
   margin-right: 25px;

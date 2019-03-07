@@ -42,12 +42,17 @@ function getCityNameByCode(code) {
 function cx01() {
   return $.getJSON('/js/regions.json').done(function(res) {
     REGIONSDATA = res
-    console.log(res, 'resresresres')
+    // console.log(res, 'resresresres')
     var datas = []
+    var childDatas = []
     $.each(res, function(inx, el) {
       if (el.level === 1) {
         datas.push(el)
       }
+      if (el.level === 2) {
+        childDatas.push(el)
+      }
+      // console.log(el.code == el.parent_code, 'nameddddd')
     })
     REGIONSDATA_CITY = datas
     // console.log(REGIONSDATA_CITY, 'REGIONSDATA_CITY')
@@ -58,29 +63,99 @@ function cx01() {
     detectWhereYouFrom()
     //初始化
     var s1 = ''
+    var s2 = ''
 
     // s1 +=
     //   '<span style="width: 33%; text-align: center;display: inline-block;">不限</span>'
-
+    s1 += `
+     <li style="position: relative;width: 30%;text-align: center; float: left;padding: 6px 0"class="spanclass"
+                  id="spanclass"
+                
+                  ><span
+                 >不限</span>
+                  </li>
+      `
     for (var i = 0; i < datas.length; i++) {
       var name = datas[i].alias
       var code = datas[i].code
-      // var name1 = name.substring(0, 2)
 
-      s1 +=
-        '<span data-pinyin="' +
-        datas[i].pinyin +
-        '" name="' +
-        code +
-        '"  style="width: 33%; text-align: center;display: inline-block;padding: 5px 0;">' +
-        name +
-        '</span>'
+      s1 += `
+     <li style="position: relative;width: 30%;text-align: center; float: left;padding: 6px 0;cursor: pointer"class="spanclass"
+                  id="spanclass"
+                  data-pinyin="${datas[i].pinyin}"
+                  name="${code}"
+                  ><span
+                 >${name}</span>
+                  <ul
+                    class="index_uls"
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 150px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;border-radius: 3px">
+                    <li style="width: 33%;"><a href="#"><span>广州</span></a></li>
+                  </ul>
+                  </li>
+      `
     }
-    // console.log(s1, 's1s1s1s1')
     $('.company_address #index_map1').html(s1)
+    $('.index_uls').html('')
+    $('#index_map1').on('mouseenter', '.spanclass', function(e) {
+      e.preventDefault()
+      $(this)
+        .children('.index_uls')
+        .html()
+      // $(this)
+      //   .children('.index_uls')
+      //   .show()
+      // console.log($(this).children('.index_uls'), 'p[yuy')
+      var name = $(this).attr('name')
+      var items = []
+      items = childDatas.filter(function(item) {
+        items = []
+        return item.parent_code == name
+      })
+      // console.log(items,'itemsitemsitemsitems');
+      s2 = `
+        
+      `
+      for (var i = 0; i < items.length; i++) {
+        s2 += `
+        <li 
+         style="width: 33%;text-align: center;float: left;cursor: pointer"><a 
+         :href='"/gongsi/" '
+         class="liclass"
+         id="liclass"
+         data-pinyin="${items[i].pinyin}"
+                      name="${items[i].code}"><span>${
+          items[i].alias
+        }</span></a></li>
+      `
+      }
+      $('.index_uls').html(s2)
+      // console.log(items, 'itemsitems')
 
-    //
+      // alert('dfdfer')
+      //1. 获取id值
+      // var cid = $(this).attr("data-id");
+      //2. 页面跳转
+      // location.href="details.html?cid="+cid
+    })
+    $('#index_map1').on('mouseover', '.spanclass', function(e) {
+      $(this)
+        .children('.index_uls')
+        .show()
+    })
+    $('#index_map1').on('mouseleave', '.spanclass', function(e) {
+      e.preventDefault()
+      $(this)
+        .children('.index_uls')
+        .hide()
+    })
   })
+
+  // $('#index_map1').on('mouseout', '.spanclass', function(e) {
+  //   $(this)
+  //     .children('.index_uls')
+  //     .css('display', 'none')
+  //   // $('.company_address .map_box1').css('display', 'none')
+  // })
 }
 
 function renderDropdownList(datas, isprovince) {
@@ -215,6 +290,7 @@ function setSelectArea(a, b, c, d) {
 }
 
 $('.company_address #diqu').html('')
+
 // 点击下拉框
 $('.company_address .map_box1').on('click', 'a', function(e) {
   e.preventDefault()
@@ -270,13 +346,13 @@ $('.company_address #index_map1').on({
         cx02(code)
       }
     }
+  },
+  mouseover: function() {
+    $('.company_address .map_box1').css('display', 'block')
+  },
+  mouseout: function() {
+    $('.company_address .map_box1').css('display', 'none')
   }
-  // mouseover: function() {
-  //   $('.company_address .map_box1').css('display', 'block')
-  // },
-  // mouseout: function() {
-  //   $('.company_address .map_box1').css('display', 'none')
-  // }
 })
 $('.company_address #map_box1').on({
   mouseout: function() {

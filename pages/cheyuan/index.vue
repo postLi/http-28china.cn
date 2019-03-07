@@ -155,7 +155,7 @@
             :key="index" 
             class="wlzx_list">
             <li id="cy_list_0">
-              <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum?item.collectNum:0 }}</em>收藏量</i></span></div>
+              <div class="sc_num"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNumber?item.collectNumber:0 }}</em>收藏量</i></span></div>
               <div class="view_num"><img src="/images/wzlImg/lll.png"><span><i><em>{{ item.browseNumber?item.browseNumber:0 }}</em>浏览量</i></span></div>
             </li>
             <li class="cy_list_4">

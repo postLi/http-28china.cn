@@ -166,7 +166,9 @@
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName.substring(0,5) + '...' }}</i></P>
+              <p 
+                class="p1" 
+                :title="item.companyName"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
               <p class="p2"><img src="../../static/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
@@ -298,8 +300,10 @@
 
               <div class="p p3">
                 <ul>
-                  <li class="tj_left"><i>货物：</i><span v-if="item.goodsName">{{ item.goodsName }}</span></li>
-                  <li class="tj_right"><i>数量：</i><span v-if="item.goodsNum">{{ item.goodsNum ? item.goodsName : 0 }}件</span></li>
+                  <li class="tj_left"><i>货物：</i><span 
+                    :title="item.goodsTypeName"
+                    v-if="item.goodsTypeName">{{ item.goodsTypeName }}</span></li>
+                  <li class="tj_right"><i>数量：</i><span v-if="item.goodsNum">{{ item.goodsNum ? item.goodsNum : 0 }}件</span></li>
                   <li class="tj_left"><i >重量：</i><font v-if="item.goodsWeight">{{ item.goodsWeight }}</font><em>公斤</em></li>
                   <li class="tj_right"><i >体积：</i><font v-if="item.goodsVolume">{{ item.goodsVolume }}</font><em>立方米</em></li>
                 </ul>
@@ -620,7 +624,10 @@ export default {
       goodsWeightUpper: goodsWeightUpper
     }
     let hyList = await getHyList($axios, 1, vo)
+    // console.log('hyList:', hyList.list[0])
     let recommendList = await getRecommendList($axios, vo)
+    // console.log('recommendList:', recommendList[0])
+
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],
@@ -1056,6 +1063,8 @@ body {
 }
 .wlzx_list_2 .p1 {
   overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .wlzx_list_2 .p1 a {
   color: #333333;
@@ -1239,6 +1248,14 @@ body {
 .tj_list .p4 span {
   font-size: 13px;
   color: #333;
+}
+.tj_list .p3 .tj_left span {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 86px;
+  vertical-align: middle;
 }
 .tj_list .p3 font {
   font-size: 13px;

@@ -8,8 +8,10 @@
     <!--href="">货源信息</a>-->
     <!--</div>-->
     <div class="arc_top1">
-      <div class="arc_top1_1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></div>
-
+      <!-- <div class="arc_top1_1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></div> -->
+      <img 
+        width="135px" 
+        src="/img/logo.png" >
       <div class="arc_top1_3"><a 
         id="search_huo" 
         target="_blank"><input 
@@ -30,7 +32,7 @@
 
     </div>
     <div class="arc_toptitle">
-      <h1>北京华远物流有限公司</h1>
+      <h1>{{ hyDetail.companyName ? hyDetail.companyName : '货源详情' }}</h1>
       <ul class="two_tltle">
         <li><a href="/gongsi/">公司官网</a></li>
         <li><a href="/zhuanxian/list">专线信息</a></li>

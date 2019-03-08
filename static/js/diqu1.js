@@ -129,7 +129,7 @@ function cx01() {
       `
       }
       $('.index_uls').html(s2)
-      // console.log(items, 'itemsitems')
+      console.log(items, 'itemsitems')
 
       // alert('dfdfer')
       //1. 获取id值
@@ -156,6 +156,7 @@ function cx01() {
   //     .css('display', 'none')
   //   // $('.company_address .map_box1').css('display', 'none')
   // })
+//  28fast.com 官网新需求、 修改页面、打包上线、优化打包体积
 }
 
 function renderDropdownList(datas, isprovince) {

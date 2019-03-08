@@ -188,7 +188,7 @@
               </p>
               <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                 <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
-              <font>{{ item.createrName?item.createrName:'' }}</font></p>
+              <font>{{ item.creater }}</font></p>
               <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
             </li>
             <li class="cy_list_3">
@@ -204,12 +204,12 @@
                   readonly
                   value="查看"></a>
               </p>
-              <p class="p3"><a
+              <!-- <p class="p3"><a
                 v-if="item.qq"
                 :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
                 target="_blank"><input
                 value="QQ交谈">
-              </a></p>
+              </a></p> -->
             </li>
           </ul>
         </div>
@@ -278,7 +278,7 @@
         <div class="zx_sx"><span class="biaozhi"/><span>车源信息推荐</span></div>
 
         <div 
-          v-if="recommendList.length === 0" 
+          v-if="$store.state.cheyuan.list_recommend.length === 0" 
           class="tj_none cy_tj_none" 
           style="display: block">
           <span>没有相关车源推荐</span>
@@ -286,7 +286,7 @@
 
         <div class="che_box">
           <div 
-            v-for="(item,index) in recommendList" 
+            v-for="(item,index) in $store.state.cheyuan.list_recommend" 
             :key="index" 
             class="tj_list">
             <p class="p1">
@@ -295,10 +295,10 @@
                 class="list-title-a"
                 target="_blank" >
                 <span class="list-icon lines-sprite-icons icon-start"/>
-                <em>{{ (item.startCity + item.startArea).length > 6 ? (item.startCity + item.startArea).substring(0, 6) + '..' : item.startCity + item.startArea }}</em>
+                <em>{{ item.startCity + item.startArea }}</em>
                 <span class="list-icon lines-sprite-icons icon-through"/>
                 <span class="list-icon lines-sprite-icons icon-end"/>
-                <em>{{ (item.endCity + item.endArea).length > 6 ? (item.endCity + item.endArea).substring(0, 6) + '..' : item.endCity + item.endArea }}</em>
+                <em>{{ item.endCity + item.endArea }}</em>
               </a>
 
             </p>
@@ -339,19 +339,21 @@
         
       </div>
 
-      <!--企业月人气榜start-->
+      <!--车主月人气榜start-->
       <div 
         class="list_right"
         style="margin-top: 20px">
-        <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
-        <div class="rc_list">
-          <div class="left"><p>1</p></div>
-          <div class="img"><img src="/images/index/wlgs_tj_00.png" ></div>
-          <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
-        </div>
-        <div class="rc_list">
-          <div class="left"><p>2</p></div>
-          <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
+        <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
+        <div 
+          v-for="(item, index) in $store.state.cheyuan.list_pop_carowner" 
+          :key="index"
+          :class="index < 3 ? 'rc_list'+index : ''" 
+          class="rc_list">
+          <div class="left"><p>{{ index+1 }}</p></div>
+          <div 
+            v-if="index < 3" 
+            class="img"><img :src="'/images/index/wlgs_tj_0'+index+'.png'" ></div>
+          <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red">{{ item.popNum }}</i></span></div>
         </div>
       </div>
 
@@ -389,9 +391,9 @@
               class="ltl-input0">
               <select 
                 v-model="checkNotice.selectValue"
-                :style="{'color':checkNotice.selectValue === '请选择类型'?'#aaaaaa':'#333333'}"
+                :style="{'color':checkNotice.selectValue === '请选择车型'?'#aaaaaa':'#333333'}"
                 class="ltl-select">
-                <option>请选择类型</option>
+                <option>请选择车型</option>
                 <option 
                   v-for="(item,index) in AF018Select"
                   :value="item.code"
@@ -448,7 +450,6 @@
 </template>
 
 <script>
-import { getRecommendList } from './index.js' //车源信息推荐列表
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -493,11 +494,63 @@ export default {
       checkNotice: {
         start: '',
         end: '',
-        selectValue: '请选择类型',
+        selectValue: '请选择车型',
         phone: ''
       },
       phoneHolder: '请输入正确手机号'
     }
+  },
+  async fetch({ $axios, app, query, store }) {
+    let cookie = app.$cookies
+
+    let areaData = {
+      currentArea: cookie.get('currentArea'),
+      currentAreaFullName: cookie.get('currentAreaFullName'),
+      currentAreaName: cookie.get('currentAreaName'),
+      currentProvince: cookie.get('currentProvince'),
+      currentProvinceFullName: cookie.get('currentProvinceFullName'),
+      currentProvinceName: cookie.get('currentProvinceName')
+    }
+
+    if (!areaData.currentProvince) {
+      areaData = store.state.area
+    }
+
+    let vo = {
+      carType: query.carType ? query.carType : '', //车辆类型
+      carSourceType: query.carSourceType ? query.carSourceType : '', //车源类型
+      isLongCar: query.isLongCar ? query.isLongCar : '', //即时/长期
+      AF032Id: query.AF032Id ? query.AF032Id : '',
+      AF031Id: query.AF031Id ? query.AF031Id : '',
+      carLengthLower: query.carLengthLower ? query.carLengthLower : '', //车厢长度
+      carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
+      carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
+      carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
+      endArea: query.endArea ? query.endArea : '',
+      endCity: query.endCity ? query.endCity : '',
+      endProvince: query.endProvince ? query.endProvince : '',
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : areaData.currentAreaFullName,
+      startProvince: query.startProvince
+        ? query.startProvince
+        : areaData.currentProvinceFullName
+    }
+    // 获取物流公司列表
+    let vor = Object.assign({ pageSize: 5 }, vo)
+    // console.log('vor:', vor)
+    await store.dispatch('cheyuan/GETRECOMMEND', {
+      data: {
+        startProvince: vo.startProvince,
+        startCity: vo.startCity,
+        pageSize: 5
+      },
+      name: 'list_recommend'
+    })
+    await store.dispatch('cheyuan/GETPOPCARLIST', {
+      name: 'list_pop_carowner'
+    })
   },
   async asyncData({ $axios, app, query }) {
     let vo = {
@@ -522,39 +575,37 @@ export default {
         : app.$cookies.get('currentProvinceFullName')
     }
     let AF018 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
+      '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
     )
-    let AF018Select = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
-    )
+    // let AF018Select = await $axios.get(
+    //   '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
+    // )
     if (AF018.data.status === 200) {
       AF018.data.data.unshift({ code: '', name: '不限' })
     }
     let AF031 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF031' //车厢长度列表
+      '/28-web/sysDict/getSysDictByCodeGet/AF031' //车厢长度列表
     )
     if (AF031.data.status === 200) {
       AF031.data.data.unshift({ id: '', name: '不限' })
     }
     let AF032 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF032' //载重列表
+      '/28-web/sysDict/getSysDictByCodeGet/AF032' //载重列表
     )
     if (AF032.data.status === 200) {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
     let carInfoLists = await getCarInfoList($axios, 1, vo)
-    // console.log(vo, 'carInfoLists4444444')
-    let recommendList = await getRecommendList($axios, vo)
+    console.log(carInfoLists, 'carInfoLists4444444')
+
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
     let newestCarRes = await $axios.get('/28-web/carInfo/newestCar') //最新车源推荐列表
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [], //车辆类型列表
-      AF018Select: AF018Select.data.status === 200 ? AF018Select.data.data : [], //优质运力 车辆类型列表
+      AF018Select: AF018.data.status === 200 ? AF018.data.data : [], //优质运力 车辆类型列表
       AF031: AF031.data.status === 200 ? AF031.data.data : [], //车厢长度列表
       AF032: AF032.data.status === 200 ? AF032.data.data : [], //载重列表
-      recommendList:
-        recommendList.data.status === 200 ? recommendList.data.data : [], //车源信息推荐列表
       recommendBy28:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.links
@@ -813,8 +864,8 @@ body {
 }
 .zx_sx {
   overflow: hidden;
-  line-height: 50px;
-  height: 50px;
+  line-height: 60px;
+  height: 60px;
   color: #585858;
   font-size: 18px;
   font-weight: bold;
@@ -1306,7 +1357,7 @@ body {
 
 /*车源信息 S */
 .cy_list_1 {
-  width: 455px;
+  width: 495px;
   margin-left: 30px;
 }
 .cy_list_2 {
@@ -1335,6 +1386,7 @@ body {
 .cy_list_1 p {
   height: 40px;
   line-height: 40px;
+  white-space: nowrap;
 }
 .cy_list_1 p a {
   /* color: #eb434d; */
@@ -1353,6 +1405,9 @@ body {
   font-size: 14px;
   color: #333;
   padding-right: 25px;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .cy_list_2 p {
@@ -1613,6 +1668,14 @@ body {
   color: #333;
   font-size: 16px;
 }
+.list-title-a em {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 6em;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .list-title {
   font-weight: 300;
   font-size: 18px;
@@ -1673,9 +1736,10 @@ body {
   float: left;
 }
 .list_new_box {
-  height: 240px;
+  height: 400px;
   overflow: hidden;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 .list_new {
   float: left;
@@ -1696,20 +1760,21 @@ body {
   /*flex: 1;*/
   /*display: flex;*/
   /*flex-direction: column;*/
+  margin-bottom: 5px;
 }
 .li_one {
   display: flex;
-  font-size: 14px;
+  font-size: 12px;
   flex: 1;
-  height: 30px;
-  line-height: 30px;
+  height: 20px;
+  line-height: 20px;
 }
 .li_two {
   display: flex;
-  font-size: 14px;
+  font-size: 12px;
   flex: 1;
-  height: 30px;
-  line-height: 30px;
+  height: 20px;
+  line-height: 20px;
 }
 .li_one a {
   flex: 1;
@@ -1954,10 +2019,19 @@ body {
   height: 20px;
   line-height: 20px;
   width: 20px;
-  background-color: red;
+  background-color: #8eb9f5;
   text-align: center;
   color: #ffffff;
   margin: 0 17px;
+}
+.rc_list0 .left p {
+  background-color: #f65050;
+}
+.rc_list1 .left p {
+  background-color: #ff8547;
+}
+.rc_list2 .left p {
+  background-color: #ffac38;
 }
 .rc_list .img {
   border-radius: 50px;

@@ -127,7 +127,6 @@ export default {
     closeMe() {
       this.$emit('update:isShowAdd', false)
       this.reset()
-      // this.dialogKey = Math.random()
     },
     selectd(val) {
       this.carType = val.target.value
@@ -144,7 +143,6 @@ export default {
       var AFLC_VALID = window.AFLC_VALID
       this.dataInfo.mobile = _this.mobile
       this.dataInfo.carType = _this.carType
-      console.log(this.carType)
       if (this.mobile) {
         if (validReg.MOBILE.test(this.mobile)) {
           this.Showtextnum = false
@@ -168,7 +166,7 @@ export default {
           .then(res => {
             if (res.data.status === 100) {
               layer.msg('操作成功')
-              this.reset()
+              this.closeMe()
             }
           })
           .catch(err => {

@@ -192,12 +192,12 @@
                   readonly
                   value="查看"></a>
               </p>
-              <p class="p2"><a
+              <!-- <p class="p2"><a
                 v-if="item.qq"
                 :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
                 target="_blank">
               <input value="QQ交谈"></a>
-              </p>
+              </p> -->
             </li>
           </ul>
 

@@ -1,10 +1,3 @@
-import axios from 'axios'
-
-let aurl = ''
-if (process.server) {
-  aurl = 'http://localhost:3000'
-}
-
 export const state = () => ({
   recommend: [],
   index_list: []
@@ -21,8 +14,8 @@ export const actions = {
   GETRECOMMEND({ commit }, payload) {
     // console.log('payload-lineinfopayload', payload)
     return new Promise(resolve => {
-      axios
-        .post(aurl + '/api/28-web/logisticsCompany/recommend', payload.data)
+      this.$axios
+        .post('/28-web/logisticsCompany/recommend', payload.data)
         .then(res => {
           let data = res.data
           if (data.status === 200) {
@@ -45,8 +38,8 @@ export const actions = {
   // 获取物流公司列表
   GETCOMPANYLIST({ commit }, payload) {
     return new Promise(resolve => {
-      axios
-        .post(aurl + '/api/28-web/logisticsCompany/list', payload.data)
+      this.$axios
+        .post('/28-web/logisticsCompany/list', payload.data)
         .then(res => {
           let data = res.data
           if (data.status === 200) {

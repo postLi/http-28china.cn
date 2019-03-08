@@ -1,11 +1,18 @@
 <template>
   <div>
     <div class="arc_top1">
-      <!-- <div class="arc_top1_1"><span>{{ cy1.startCity ? cy1.startCity : '' + cy1.startArea ? cy1.startArea : '' + '&nbsp;&rarr;&nbsp;' + cy1.endCity ? cy1.endCity : '' + cy1.endArea ? cy1.endArea : '' }}</span></div> -->
-      <div class="arc_top1_1">
+      <!-- <div class="arc_top1_1">
         <span>{{ cy1.startCity ? cy1.startCity : '' + cy1.startArea ? cy1.startArea : '' }}</span>&nbsp;&rarr;&nbsp;
         <span>{{ cy1.endCity ? cy1.endCity : '' + cy1.endArea ? cy1.endArea : '' }}</span>
-      </div>
+      </div> -->
+      <!-- <div>
+        <img 
+          width="135px" 
+          src="/img/logo.png" >
+      </div> -->
+      <img 
+        width="135px" 
+        src="/img/logo.png" >
       <div class="arc_top1_3"><input
         class="arc_input3"
         value="搜全网"> </div>
@@ -20,7 +27,6 @@
           class="arc_input2"
           wtmap=""
           placeholder="到达地">
-
       </div>
     </div>
 
@@ -151,8 +157,18 @@
           </div>
           <div class="arc_middle4">
             <div class="arc_m3"><i>联系人：</i><span>{{ cy1.belongDriver }}</span></div>
-            <div class="arc_m3"><i>手机：</i><span><font
-            style="color: #eb434d;">{{ cy1.phone }}</font></span></div>
+            <div class="arc_m3"><i>手机：</i>
+              <span>
+                <a 
+                  v-show="checkMoblie1"
+                  @click="showMoblieFns(showMoblie1)"
+                  style="color: #3f94ee;border-bottom: 1px solid #3f94ee">查看电话</a>
+                <font 
+                  v-show="showMoblie1"
+                  @click="showMoblieFns(showMoblie1)"
+                  style="color: #333" >{{ cy1.phone }}</font>
+              </span>
+            </div>
             <div class="arc_m3_2"><i>说明：</i><span>{{ cy1.carTagName }}</span><span v-if="cy1.remark">{{ '|'+cy1.remark.substring(0, 30) }}</span></div>
           </div>
 
@@ -178,10 +194,19 @@
             <span class="arc_right04_1"><i>车牌号：</i><font v-if="cy1.carNum">{{ cy1.carNum.substring(0, 2) + '***' + cy1.carNum.substring(6, 10) }}</font></span>
             <span><i>常驻地：</i><font v-if="cy1.usualPlace">{{ cy1.usualPlace.substring(0, 10) }}</font></span>
             <span><i>车长：</i><font>{{ cy1.carLength }}米</font></span>
-            <span><i>车辆类型：</i><font>{{ cy1.carTypeName }}</font></span>
-            <span><i>车辆载重：</i><font>{{ cy1.carLoad }}吨</font></span>
+            <span><i>类型：</i><font>{{ cy1.carTypeName }}</font></span>
+            <span><i>载重：</i><font>{{ cy1.carLoad }}吨</font></span>
             <span><i>联系人：</i><font>{{ cy1.belongDriver }}</font></span>
-            <span><i>手机号：</i><font>{{ cy1.phone }}</font></span>
+            <span><i>手机：</i>
+              <a 
+                v-show="checkMoblie2"
+                @click="showMoblieFn(showMoblie2)"
+                style="color: #3f94ee;border-bottom: 1px solid #3f94ee">查看电话</a>
+              <font 
+                v-show="showMoblie2"
+                @click="showMoblieFn(showMoblie2)"
+                style="color: #333" >{{ cy1.phone }}</font>
+            </span>
             <span><a
               :href="'http://wpa.qq.com/msgrd?v=3&uin=' + cy1.qq + '&site=qq&menu=yes'"
               target="_blank"><i>Q&nbsp;Q：</i><input
@@ -242,7 +267,7 @@
             <div class="content-left">
               <div class="img">
                 <img
-                  src="/images/28fast_download.png"
+                  src="/images/cy/09sj.png"
                   width="82"
                   height="82">
               </div>
@@ -367,12 +392,12 @@
                       readonly
                       value="查看"></a>
                   </p>
-                  <p class="p3"><a
+                  <!-- <p class="p3"><a
                     v-if="item.qq"
                     :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
                     target="_blank"><input
                     value="QQ交谈">
-                  </a></p>
+                  </a></p> -->
                 </li>
               </ul>
             </div>
@@ -451,12 +476,12 @@
                       readonly
                       value="查看"></a>
                   </p>
-                  <p class="p3"><a
+                  <!-- <p class="p3"><a
                     v-if="item.qq"
                     :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
                     target="_blank"><input
                     value="QQ交谈">
-                  </a></p>
+                  </a></p> -->
                 </li>
               </ul>
             </div>
@@ -522,7 +547,7 @@
               </a>
             </div>
           </div>
-          <div
+          <!-- <div
             class="arc_main4-content"
             style="margin-top: 20px">
             <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
@@ -535,6 +560,30 @@
               <div class="left"><p>2</p></div>
               <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
             </div>
+          </div> -->
+          <div
+            class="arc_main4-content"
+            style="margin-top: 20px">
+            <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
+            <div 
+              v-for="(item,index) in popularity" 
+              :key="index" 
+              class="rc_list">
+              <a :href="'/member/'+item.id">
+                <div class="left">
+                  <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
+                </div>
+                <div 
+                  v-if="index < 3" 
+                  class="img">
+                  <!-- <img :src="item.companyFile" > -->
+                </div>
+                <div class="right">
+                  <span>{{ item.belongDriver ? item.belongDriver : '' + item.carNum }}</span>
+                  <span style="float: right;margin-right:15px">人气值：<i style="color: red">{{ item.popNum }}</i></span>
+                </div>
+              </a>
+            </div>
           </div>
 
           <div class="arc_main4-content">
@@ -543,7 +592,6 @@
               src="/images/cy/09banner.png"
               alt="广告">
           </div>
-
           <div class="arc_main4-content">
             <img
               class="ad"
@@ -588,23 +636,16 @@
 
       <div class="arc_main4">
         <div class="zx_sx1">
-          <span class="biaozhi1"/><span>为您推荐车源</span>
+          <span class="biaozhi1"/><span>{{ cheLabel }}</span>
         </div>
         <ul class="hot-cities">
-          <li class="hot-cities-li">
+          <li 
+            v-for="(item,index) in cheLink" 
+            :key="index" 
+            class="hot-cities-li" >
             <a
-              href="/cheyuan/detail?id=null"
-              class="hot-cities-a">广州到南京物流专线</a>
-          </li>
-          <li class="hot-cities-li">
-            <a
-              href="/cheyuan/detail?id=null"
-              class="hot-cities-a">广州到南京物流专线</a>
-          </li>
-          <li class="hot-cities-li">
-            <a
-              href="/cheyuan/detail?id=null"
-              class="hot-cities-a">广州到南京物流专线</a>
+              :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
+              class="hot-cities-a">{{ item.title }}</a>
           </li>
         </ul>
       </div>
@@ -662,6 +703,10 @@ export default {
       otherCarInfoList: [],
       handle: '',
       collection: '',
+      showMoblie1: false,
+      checkMoblie1: true,
+      showMoblie2: false,
+      checkMoblie2: true,
       isShowCollect: true,
       isCencelCollect: false,
       isShowAdd: false,
@@ -846,7 +891,12 @@ export default {
       .post('/28-web/carInfo/detail/related/links', parm2)
       .catch(err => {})
     // console.log(cheLinks.data.data.interestedRecommend.links, 'cheLinks')
-
+    //企业人气榜
+    let popularitys = await $axios
+      .get('/28-web/carInfo/carPopularityList')
+      .catch(err => {
+        console.log('popularitys')
+      })
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -943,6 +993,7 @@ export default {
         newestCreateCarRes.data.status === 200
           ? newestCreateCarRes.data.data
           : [],
+      popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       hotSearchList:
         hotSearchs.data.status === 200 ? hotSearchs.data.data.links : []
       // otherCarInfoList: otherCarInfoList.list,
@@ -1407,6 +1458,24 @@ export default {
           window.location.href = `/cheyuan/detail?id=${res.data.data.id}`
         }
       })
+    },
+    showMoblieFns(showMoblieFns) {
+      if (showMoblieFns == false) {
+        this.showMoblie1 = true
+        this.checkMoblie1 = false
+      } else {
+        this.checkMoblie1 = true
+        this.showMoblie1 = false
+      }
+    },
+    showMoblieFn(showMoblieFn) {
+      if (showMoblieFn == false) {
+        this.showMoblie2 = true
+        this.checkMoblie2 = false
+      } else {
+        this.checkMoblie2 = true
+        this.showMoblie2 = false
+      }
     },
     collected() {
       let access_token = $.cookie('access_token')

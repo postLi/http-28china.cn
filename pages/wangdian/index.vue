@@ -313,8 +313,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
   if (res.data.status === 200) {
@@ -327,11 +325,8 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   parm.currentPage = currentPage
   parm.pageSize = 10
   let prefix = ''
-  if (process.client) {
-    $axios = axios
-    prefix = '/api'
-  }
-  let res = await $axios.post(prefix + '/28-web/pointNetwork/list', parm) //车源信息列表
+
+  let res = await $axios.post('/28-web/pointNetwork/list', parm) //车源信息列表
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
       if (item.pointName.length > 15) {

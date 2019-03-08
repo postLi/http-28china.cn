@@ -1,4 +1,4 @@
-<template>
+<template> 
   <div class="arc_main">
     <!--<div class="arc_nav">-->
     <!--<a href="/">物流首页</a>&gt;<a -->
@@ -8,8 +8,10 @@
     <!--href="">货源信息</a>-->
     <!--</div>-->
     <div class="arc_top1">
-      <div class="arc_top1_1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></div>
-
+      <!-- <div class="arc_top1_1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></div> -->
+      <img 
+        width="135px" 
+        src="/img/logo.png" >
       <div class="arc_top1_3"><a 
         id="search_huo" 
         target="_blank"><input 
@@ -28,6 +30,15 @@
           placeholder="到达地">
       </div>
 
+    </div>
+    <div class="arc_toptitle">
+      <h1>{{ hyDetail.companyName ? hyDetail.companyName : '货源详情' }}</h1>
+      <ul class="two_tltle">
+        <li><a href="/gongsi/">公司官网</a></li>
+        <li><a href="/zhuanxian/list">专线信息</a></li>
+        <li><a href="/huoyuan">货源信息</a></li>
+        <li><a href="/wangdian">网点信息</a></li>
+      </ul>
     </div>
     <div class="arc_top2">
       <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
@@ -90,7 +101,7 @@
           <div class="arc_left_2_1">
             <div class="arc_left_2_1_1"><span>货源信息</span></div>
             <div class="arc_left_2_1_2"><table>
-              <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsName }}</font></td></tr>
+              <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsName ? hyDetail.goodsName : '' }}</font></td></tr>
               <tr><td class="arc_td1">数量：</td><td class="arc_td2">{{ hyDetail.goodsNum ? hyDetail.goodsNum + '件': '' }}</td></tr>
               <tr><td class="arc_td1">重量：</td><td
               class="arc_td2">{{ hyDetail.goodsWeight }}公斤</td></tr>
@@ -423,14 +434,14 @@
               <p class="p1"/>
               <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
-                <span>{{ item.goodsNum }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
+                <span>{{ item.goodsNum ? item.goodsNum : '' }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsVolume }}<font >立方米</font></span>
               </p>
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
-              <p class="p1"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName?item.companyName.substring(0,5) + '...': '' }}</i></P>
               <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
@@ -454,12 +465,12 @@
                   readonly
                   value="查看"></a>
               </p>
-              <p class="p2"><a
+              <!-- <p class="p2"><a
                 v-if="item.qq"
                 :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
                 target="_blank">
               <input value="QQ交谈"></a>
-              </p>
+              </p> -->
             </li>
           </ul>
         </div>
@@ -471,10 +482,57 @@
         </div>
        
         <div class="listInfo2">
-          <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ hyDetail.endCity }}出发的货源</span>
+          <!-- <div class="zx_sx">
+            <span class="biaozhi"/><span>更多从{{ hyDetail.endCity }}出发的货源</span>
             <i 
               style="cursor: pointer;float: right;font-size: 14px;"
               @click="goToCy()">更多></i>
+          </div> -->
+          <div class="main3_1_1">
+            <div class="floatl">
+              <b class="b_title">更多从{{ hyDetail.endCity }}出发的货源</b>
+        
+              <div class="index_search floatl">
+                <div 
+                  id="wlLineFrom" 
+                  class="fl index_search_input" 
+                  style="position:relative;">
+                  <input 
+                    style="height: 100%;" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    type="text" 
+                    name="" 
+                    class="" 
+                    placeholder="请选择出发地" 
+                    readonly="">
+                </div>
+                <em>→</em>
+                <div 
+                  id="wlLineTo" 
+                  class="fl index_search_input" 
+                  style="position:relative;">            
+                  <input 
+                    style="height: 100%;" 
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    type="text" 
+                    name="" 
+                    class="" 
+                    placeholder="请选择到达地" 
+                    readonly="">
+                </div>                               
+                       
+              </div>               
+              <input 
+                id="search_wlLine" 
+                type="button" 
+                class="search_hy" 
+                value="" 
+                @click="search()"></div>                        
+            <div class="more floatr"><a 
+              href="/huoyuan" 
+              target="_blank">更多&gt;</a></div>		 
           </div>
           <div 
             v-if="huoInfoList.length === 0" 
@@ -518,7 +576,7 @@
             </li>
             <li class="wlzx_list_2">
               <p class="p3"/>
-              <p class="p1"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName?item.companyName.substring(0,5) + '...': '' }}</i></P>
               <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
@@ -542,12 +600,12 @@
                   readonly
                   value="查看"></a>
               </p>
-              <p class="p2"><a
+              <!-- <p class="p2"><a
                 v-if="item.qq"
                 :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
                 target="_blank">
               <input value="QQ交谈"></a>
-              </p>
+              </p> -->
             </li>
           </ul>
         </div>
@@ -978,6 +1036,7 @@ export default {
     huoLinks.data.data.brandOrder.links.forEach(footLink)
     huoLinks.data.data.interestOrder.links.forEach(footLink)
     hotSearchs.data.data.links.forEach(footLink)
+    console.log(99999999999)
     return {
       archival: archivals.data.status === 200 ? archivals.data.data : [],
       hyDetail: hyDetails.data.status === 200 ? hyDetails.data.data : {},
@@ -1013,70 +1072,72 @@ export default {
   },
 
   mounted() {
-    console.log(this.huoLink)
-    $('#wlLineFrom input').citypicker({
-      // province: this.hyDetail.startProvince,
-      // city: this.hyDetail.startCity,
-      // district: this.hyDetail.startArea
-    })
-    $('#wlLineTo input').citypicker({
-      // province: this.hyDetail.endProvince,
-      // city: this.hyDetail.endCity,
-      // district: this.hyDetail.endArea
-    })
-    let rollContainer_h = $('.list_new_box').height()
-    let roll = $('.zx_sx_new')
-    roll.append(roll.html())
-    let number = 4
-    let l = this.newestHuoyuanRe.length
-    let manage_box_h = $('.manage_box').height()
-    let startScroll = () => {
-      this.inTerVar = setInterval(() => {
-        roll
-          .stop()
-          .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
-            if (number > l) {
-              number = 4
-              roll.css('top', '0px')
-            }
-          })
-        number = number + 4
-      }, 6000)
-    }
-    if (manage_box_h * l > rollContainer_h) {
-      startScroll()
-    }
-    $('.list_new_box').hover(
-      () => {
-        clearInterval(this.inTerVar)
-        this.inTerVar = null
-      },
-      () => {
+    if (process.client) {
+      console.log(this.huoLink)
+      $('#wlLineFrom input').citypicker({
+        // province: this.hyDetail.startProvince,
+        // city: this.hyDetail.startCity,
+        // district: this.hyDetail.startArea
+      })
+      $('#wlLineTo input').citypicker({
+        // province: this.hyDetail.endProvince,
+        // city: this.hyDetail.endCity,
+        // district: this.hyDetail.endArea
+      })
+      let rollContainer_h = $('.list_new_box').height()
+      let roll = $('.zx_sx_new')
+      roll.append(roll.html())
+      let number = 4
+      let l = this.newestHuoyuanRe.length
+      let manage_box_h = $('.manage_box').height()
+      let startScroll = () => {
+        this.inTerVar = setInterval(() => {
+          roll
+            .stop()
+            .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
+              if (number > l) {
+                number = 4
+                roll.css('top', '0px')
+              }
+            })
+          number = number + 4
+        }, 6000)
+      }
+      if (manage_box_h * l > rollContainer_h) {
         startScroll()
       }
-    )
+      $('.list_new_box').hover(
+        () => {
+          clearInterval(this.inTerVar)
+          this.inTerVar = null
+        },
+        () => {
+          startScroll()
+        }
+      )
 
-    let top_left_h = $('.top_left').height()
-    let roll_ul_h = $('.top_left_ul')
-    roll_ul_h.append(roll_ul_h.html())
-    let num = 1
-    let newList_l = this.newList.length
-    let left_ul_li = $('.top_left_ul_li').height()
-    let startScroll_top = () => {
-      this.inTerVar1 = setInterval(() => {
-        roll_ul_h
-          .stop()
-          .animate({ top: `${num * -left_ul_li}px` }, 2000, () => {
-            if (num > newList_l) {
-              num = 1
-              roll_ul_h.css('top', '0px')
-            }
-          })
-        num = num + 1
-      }, 6000)
-    }
-    if (left_ul_li * newList_l > top_left_h) {
-      startScroll_top()
+      let top_left_h = $('.top_left').height()
+      let roll_ul_h = $('.top_left_ul')
+      roll_ul_h.append(roll_ul_h.html())
+      let num = 1
+      let newList_l = this.newList.length
+      let left_ul_li = $('.top_left_ul_li').height()
+      let startScroll_top = () => {
+        this.inTerVar1 = setInterval(() => {
+          roll_ul_h
+            .stop()
+            .animate({ top: `${num * -left_ul_li}px` }, 2000, () => {
+              if (num > newList_l) {
+                num = 1
+                roll_ul_h.css('top', '0px')
+              }
+            })
+          num = num + 1
+        }, 6000)
+      }
+      if (left_ul_li * newList_l > top_left_h) {
+        startScroll_top()
+      }
     }
   },
   destroyed() {

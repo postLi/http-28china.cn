@@ -11,7 +11,6 @@ const _5d8e2dc2 = () => interopDefault(import('..\\pages\\hyzx.vue' /* webpackCh
 const _523c2de8 = () => interopDefault(import('..\\pages\\Insurance\\index.vue' /* webpackChunkName: "pages_Insurance_index" */))
 const _d63f6aee = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages_login" */))
 const _439cb518 = () => interopDefault(import('..\\pages\\member\\index.vue' /* webpackChunkName: "pages_member_index" */))
-const _2d80ada3 = () => interopDefault(import('..\\pages\\page2.vue' /* webpackChunkName: "pages_page2" */))
 const _49721514 = () => interopDefault(import('..\\pages\\regisiter.vue' /* webpackChunkName: "pages_regisiter" */))
 const _2997438a = () => interopDefault(import('..\\pages\\resetpassword.vue' /* webpackChunkName: "pages_resetpassword" */))
 const _b977c922 = () => interopDefault(import('..\\pages\\shixiao\\index.vue' /* webpackChunkName: "pages_shixiao_index" */))
@@ -39,7 +38,6 @@ const _601ad30a = () => interopDefault(import('..\\pages\\Insurance\\step1.vue' 
 const _5ffea408 = () => interopDefault(import('..\\pages\\Insurance\\step2.vue' /* webpackChunkName: "pages_Insurance_step2" */))
 const _5fe27506 = () => interopDefault(import('..\\pages\\Insurance\\step3.vue' /* webpackChunkName: "pages_Insurance_step3" */))
 const _57305d19 = () => interopDefault(import('..\\pages\\Insurance\\success.vue' /* webpackChunkName: "pages_Insurance_success" */))
-const _ed20c140 = () => interopDefault(import('..\\pages\\product\\detail.vue' /* webpackChunkName: "pages_product_detail" */))
 const _5d926204 = () => interopDefault(import('..\\pages\\shixiao\\detail.vue' /* webpackChunkName: "pages_shixiao_detail" */))
 const _85120a2a = () => interopDefault(import('..\\pages\\wuliu\\detail.vue' /* webpackChunkName: "pages_wuliu_detail" */))
 const _afdc8b7a = () => interopDefault(import('..\\pages\\zhuanxian\\detail.vue' /* webpackChunkName: "pages_zhuanxian_detail" */))
@@ -62,7 +60,6 @@ const _96c53b7e = () => interopDefault(import('..\\pages\\member\\_id-order.vue'
 const _79bdda5c = () => interopDefault(import('..\\pages\\member\\_id-wangdian.vue' /* webpackChunkName: "pages_member__id-wangdian" */))
 const _3ffbacc2 = () => interopDefault(import('..\\pages\\member\\_id-webnotice.vue' /* webpackChunkName: "pages_member__id-webnotice" */))
 const _20851d80 = () => interopDefault(import('..\\pages\\member\\_id.vue' /* webpackChunkName: "pages_member__id" */))
-const _310f4dbb = () => interopDefault(import('..\\pages\\product\\_id.vue' /* webpackChunkName: "pages_product__id" */))
 const _66e21fca = () => interopDefault(import('..\\pages\\zhuanxian\\_id\\index.vue' /* webpackChunkName: "pages_zhuanxian__id_index" */))
 const _c5fa9be6 = () => interopDefault(import('..\\pages\\help\\_menu\\_id.vue' /* webpackChunkName: "pages_help__menu__id" */))
 const _3919a364 = () => interopDefault(import('..\\pages\\zhuanxian\\_id\\_area.vue' /* webpackChunkName: "pages_zhuanxian__id__area" */))
@@ -180,10 +177,6 @@ export function createRouter() {
       component: _439cb518,
       name: "member"
     }, {
-      path: "/page2",
-      component: _2d80ada3,
-      name: "page2"
-    }, {
       path: "/regisiter",
       component: _49721514,
       name: "regisiter"
@@ -292,10 +285,6 @@ export function createRouter() {
       component: _57305d19,
       name: "Insurance-success"
     }, {
-      path: "/product/detail",
-      component: _ed20c140,
-      name: "product-detail"
-    }, {
       path: "/shixiao/detail",
       component: _5d926204,
       name: "shixiao-detail"
@@ -383,10 +372,6 @@ export function createRouter() {
       path: "/member/:id",
       component: _20851d80,
       name: "member-id"
-    }, {
-      path: "/product/:id?",
-      component: _310f4dbb,
-      name: "product-id"
     }, {
       path: "/zhuanxian/:id?",
       component: _66e21fca,

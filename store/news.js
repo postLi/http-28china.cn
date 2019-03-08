@@ -1,10 +1,3 @@
-import axios from 'axios'
-
-let aurl = ''
-if (process.server) {
-  aurl = 'http://localhost:3000'
-}
-
 export const state = () => ({
   wlzx: [],
   cjwt: [],
@@ -39,8 +32,8 @@ export const actions = {
   GETNEWSINFO({ commit }, payload) {
     // console.log('payload-lineinfopayload', payload)
     return new Promise(resolve => {
-      axios
-        .get(aurl + '/anfacms/api/front/content/list', {
+      this.$axios
+        .get('/anfacms/api/front/content/list', {
           params: payload.params
         })
         .then(res => {
@@ -68,11 +61,9 @@ export const actions = {
     // console.log('payload-lineinfopayload', payload)
     // {{'channelIds':'118','count':2,'orderBy' :9,'channelOption' :0};{'channelIds':'94,95,96,97,98,99','count':5,'orderBy' :9,'channelOption' :0}}
     return new Promise(resolve => {
-      axios
+      this.$axios
         .post(
-          aurl +
-            '/anfacms/api/front/content/jsonsList?paramsJson=' +
-            payload.params
+          '/anfacms/api/front/content/jsonsList?paramsJson=' + payload.params
         )
         .then(res => {
           let data = res.data

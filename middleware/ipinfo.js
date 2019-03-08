@@ -45,7 +45,7 @@ export default ({ route, store, req, $axios, app }) => {
         }
         if (needFixed) {
           $axios
-            .get('http://localhost:3000/js/regions.json')
+            .get('/js/regions.json')
             .then(res => {
               // console.log('data:', res.data)
               let data = res.data
@@ -75,7 +75,7 @@ export default ({ route, store, req, $axios, app }) => {
         let ip = getClientIp(req)
         // 测试ip
         // ip = '123.125.71.38' // 北京ip
-        ip = '23.125.171.138' // 随意构造的ip 美国ip
+        // ip = '23.125.171.138' // 随意构造的ip 美国ip
         if (ip) {
           // 如果是内网ip不作处理
           let reg = /^(127\.0\.0\.1)|(localhost)|(10\.\d{1,3}\.\d{1,3}\.\d{1,3})|(172\.((1[6-9])|(2\d)|(3[01]))\.\d{1,3}\.\d{1,3})|(192\.168\.\d{1,3}\.\d{1,3})$/

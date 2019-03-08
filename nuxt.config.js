@@ -90,6 +90,7 @@ module.exports = {
 
   proxy: {
     '/api/': {
+      // target: 'http://192.168.1.233:7010', // 代理地址
       target: 'http://192.168.1.157:7010', // 代理地址
       changeOrigin: true,
       pathRewrite: {
@@ -102,6 +103,13 @@ module.exports = {
       /* pathRewrite: {
         '^/api': ''
       } */
+    },
+    '/api/anfacms/': {
+      target: 'http://192.168.1.79', // 代理地址
+      changeOrigin: true,
+      pathRewrite: {
+        '^/api/anfacms': '/anfacms'
+      }
     }
   },
 

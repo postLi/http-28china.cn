@@ -343,23 +343,43 @@
             </div>
           </div>
           <div class="list-box-r-news">
-            <div class="today_news"><div class="zx_sx"><span class="biaozhi"/><span>今日要闻</span><a href="#">更多>></a></div>
-              <p>瑞幸融资翻倍，背后是同城物流的暗战
+            <div class="today_news"><div class="zx_sx"><span class="biaozhi"/><span>今日要闻</span><a href="/zixun/">更多>></a></div>
+              <p>{{ gongsi_jryw01.title }}
               </p>
               <div style="display: flex"><img
                 src="/static/gongsi/images/wlgs_danbao.png"
-                alt=""><span>双12是主打新零售场景的购物节，不论是天猫、京东等电商平台，还是每日优鲜、盒马鲜生等新零售物种都展开了…<a
-                  href="#"
+                alt=""><span>{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
+                  :href="gongsi_jryw01.url"
                   style="color: #0d91e9">[详细]</a></span></div>
               <ul>
                 <li
-                  v-for="(item, i) in 10"
-                  :key="i">瑞幸融资估值翻倍，背后是同城物流的...
+                  v-for="(item, i) in gongsi_jryw"
+                  :key="i"><a 
+                    :href="item.url" 
+                    target="_blank">{{ item.title }}</a>
 
                 </li>
               </ul>
             </div>
-            <div class="wuliu_news"/>
+            <div class="wuliu_news">
+              <div class="zx_sx"><span class="biaozhi"/><span>物流资讯</span><a href="/zixun/">更多>></a></div>
+              <p>{{ gongsi_wlzx01.title }}
+              </p>
+              <div style="display: flex"><img
+                src="/static/gongsi/images/wlgs_danbao.png"
+                alt=""><span>{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
+                  :href="gongsi_wlzx01.url"
+                  style="color: #0d91e9">[详细]</a></span></div>
+              <ul>
+                <li
+                  v-for="(item, i) in gongsi_wlzx"
+                  :key="i"><a 
+                    :href="item.url" 
+                    target="_blank">{{ item.title }}</a>
+
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -425,6 +445,43 @@ export default {
       isChecked: false
       // lineHots: []
     }
+  },
+  async fetch({ store, params, $axios, error, app }) {
+    // 今日要闻
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds:
+          '94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110',
+        count: 6,
+        orderBy: 2,
+        channelOption: 0
+      },
+      name: 'gongsi_jryw',
+      preFn: data => {
+        return data.map((el, index) => {
+          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+
+          return el
+        })
+      }
+    })
+    // 物流资讯
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: '101',
+        count: 6,
+        orderBy: 9,
+        channelOption: 0
+      },
+      name: 'gongsi_wlzx',
+      preFn: data => {
+        return data.map((el, index) => {
+          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+
+          return el
+        })
+      }
+    })
   },
   async asyncData({ $axios, app, query }) {
     let aurl = ''
@@ -515,6 +572,20 @@ export default {
       listF: listF.data.status == 200 ? listF.data.data : '',
       listG: listG.data.status == 200 ? listG.data.data : '',
       listH: listH.data.status == 200 ? listH.data.data : ''
+    }
+  },
+  computed: {
+    gongsi_jryw() {
+      return this.$store.state.news.gongsi_jryw.slice(1)
+    },
+    gongsi_wlzx() {
+      return this.$store.state.news.gongsi_wlzx.slice(1)
+    },
+    gongsi_jryw01() {
+      return this.$store.state.news.gongsi_jryw[0]
+    },
+    gongsi_wlzx01() {
+      return this.$store.state.news.gongsi_wlzx[0]
     }
   },
   head: {

@@ -865,7 +865,7 @@ export default {
       startCity: cy1.data.data.startCity,
       startProvince: cy1.data.data.startProvince
     }
-    console.log(parm2, 'parm2')
+    // console.log(parm2, 'parm2')
     //车主其他求货信息
     // let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
     //   id: query.id

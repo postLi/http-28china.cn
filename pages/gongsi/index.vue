@@ -21,7 +21,7 @@
               alt=""><span style="padding-left: 20px">公司所在地</span></div>
             <div class="company_address">
               <ul
-                v-for="(item,i) in 1" 
+                v-for="(item,i) in 1"
                 :key="i"
                 id="index_map1"
                 class="header_middles"
@@ -132,11 +132,12 @@
           <li
             v-for="(item, index) in lineAdviseRecommend"
             :key="index"
-            style="float:left;width: 20%"><a href="#">
-              <p style="font-size: 16px;color: #0d91e9">{{ item.companyName?item.companyName:'' }}</p>
+            style="float:left;width: 20%;text-align: center"><a href="#">
+              <p style="font-size: 16px;color: #0d91e9;padding-top: 20px">{{ item.companyName?item.companyName:'' }}</p>
 
               <p
                 v-if="item.advService.length"
+                style="padding: 10px 0 10px;font-size: 12px"
               ><span
                 v-for="(item, index) in (item.advService?item.advService.slice(0,2):'')"
                 :key="index">{{ item }}</span></p>
@@ -171,9 +172,13 @@
       </div>
     </div>
     <div class="list_box" >
-      <div class="list_down"><a
-        href="http://h5.28tms.com/"
-        target="_blank">下载<span>【28快运APP】</span>，实时接收推荐的精品车货源与合作信息，在线下单推荐优质承运商，便捷查询运单。</a></div>
+      <div
+        class="list_down"
+        style="background: rgb(255,247,227);padding: 10px 0;font-size: 20px;"><a
+          href="http://h5.28tms.com/"
+          target="_blank"
+          style="color: #0d91e9"
+      >下载<span style="color: rgb(255,116,23)">【28快运APP】</span>，实时接收推荐的精品车货源与合作信息，在线下单推荐优质承运商，便捷查询运单。</a></div>
       <div class="banner h62">
         <div class="echart_scroll">
           <div
@@ -222,31 +227,21 @@
             <li
             style="float: left;padding-right: 20px">
 
+              <input
+                type="checkbox"
+                id="buxian"
+                class="input_class"
+                :data-code="listH[0].code"
+                :data-pcode="listH[0].pcode">
               <label
                 for=""
-              >
-                <input
-                  type="checkbox"
-                  id="buxian"
-                  class="input_class"
-                  :data-code="listH[0].code"
-                  :data-pcode="listH[0].pcode"
-                  style="padding-left: 5px">
-              {{ listH[0].name }}</label>
-              <!--<input-->
-              <!--type="checkbox"-->
-              <!--id="buxian"-->
-              <!--class="input_class"-->
-              <!--:data-code="listH[0].code"-->
-              <!--:data-pcode="listH[0].pcode">-->
-              <!--<label-->
-              <!--for=""-->
-              <!--style="padding-left: 10px">{{ listH[0].name }}</label>-->
+                style="padding-left: 10px">{{ listH[0].name }}</label>
             </li>
             <li
               v-for="(item, i) in listH.slice(1)"
               :key="i"
-              style="float: left;padding-right: 20px">
+              style="float: left;padding-right: 20px"
+              class="checkobxli">
               <input
                 type="checkbox"
                 id="input_class"
@@ -278,7 +273,27 @@
 
       <div class="list_center">
         <div class="list_left">
-          <DetailList/>
+          <!--<div-->
+          <!--v-if="gsList.length"-->
+          <!--class="list_none">-->
+          <!--<span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px;font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span>-->
+          <!--<img-->
+          <!--src="/line/images/none_pic.png"-->
+          <!--style="float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;">-->
+          <!--</div>-->
+          <DetailList :info="gsList"/>
+          <!--分页-->
+          <div
+            v-if="gsList.length"
+            class="box">
+            <div
+              id="pagination1"
+              class="page fl"/>
+            <div class="info fl">
+            <!--<p>当前页数：<span id="current1">1</span></p>-->
+            </div>
+          </div>
+          <!--分页-->
           <div class="lll-line--othet">
             <div class="lll-recommend clearfix">
               <div
@@ -377,7 +392,22 @@ import HotList from '../../components/hotList'
 import selectMap from '../zhuanxian/selectMap'
 import FooterLinks from '../../components/footerLinks'
 import Add from './add'
-
+async function getGSList($axios, currentPage, vo = {}) {
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 20
+  let aurl = ''
+  if (process.server) {
+    aurl = 'http://localhost:3000'
+  }
+  let res = await $axios.post(aurl + '/api/28-web/logisticsCompany/list', parm)
+  if (res.data.status === 200) {
+    console.log(res, 'resresresresres')
+  }
+  return {
+    list: res.data.data.list
+  }
+}
 export default {
   name: `index`,
   components: {
@@ -398,35 +428,11 @@ export default {
   },
   async asyncData({ $axios, app, query }) {
     let aurl = ''
-    // let startp = query.startp
-    // let startc = query.startc
-    // let starta = query.starta
-    // let endp = query.endp
-    // // let starta = query.starta
-    // let enda = query.enda
-    // let endc = query.endc
-    //
-    // if (!startp || startp == 'null') {
-    //   startp = ''
-    // }
-    // if (!startc || startc == 'null') {
-    //   startc = ''
-    // }
-    // if (!starta || starta == 'null') {
-    //   starta = ''
-    // }
-    // if (!endp || endp == 'null') {
-    //   endp = ''
-    // }
-    // if (!enda || enda == 'null') {
-    //   enda = ''
-    // }
-    // if (!endc || endc == 'null') {
-    //   endc = ''
-    // }
     let vo = {
       currentPage: 1,
       pageSize: 5,
+      locationCity: query.locationCity ? query.locationCity : '',
+      locationProvince: query.locationProvince ? query.locationProvince : '',
       endArea: query.endArea ? query.endArea : '',
       endCity: query.endCity ? query.endCity : '',
       endProvince: query.endProvince ? query.endProvince : '',
@@ -444,20 +450,12 @@ export default {
     let vo1 = vo
     delete vo1.currentPage
     delete vo1.pageSize
+    delete vo1.locationProvince
+    delete vo1.locationCity
     // /logisticsCompany/adviseRecommend
     // 广告推荐物流公司
-    let [
-      listA,
-      listB,
-      listC,
-      listD,
-      listE,
-      listF,
-      listG,
-      listH
-    ] = await Promise.all([
+    let [listA, listC, listD, listE, listF, listG, listH] = await Promise.all([
       $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
-      $axios.post(aurl + '/api/28-web/logisticsCompany/list', vo),
       $axios.post(
         aurl + `/api/28-web/logisticsCompany/list/related/links`,
         vo1
@@ -468,26 +466,30 @@ export default {
       $axios.get(aurl + `/api/28-web/logisticsCompany/enterpriseRecommend`),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
+    if (listD.data.status == 200) {
+      listD.data.data.forEach(item => {
+        item.advService = item.productServiceNameList
+          ? item.productServiceNameList
+          : item.otherServiceNameList
 
-    // (lineAdviseRecommend.productServiceCode?lineAdviseRecommend.productServiceCode:lineAdviseRecommend.otherService)
-    listD.data.data.forEach(item => {
-      item.advService = item.productServiceNameList
-        ? item.productServiceNameList
-        : item.otherServiceNameList
-
-      // console.log(item.advService, 'advService')
-    })
-    listE.data.data.forEach(item => {
-      item.advService = item.productServiceNameList
-        ? item.productServiceNameList
-        : item.otherServiceNameList
-      // console.log(item.advService.slice(3), 'bbbb')
-    })
-    listG.data.data.forEach(item => {
-      item.advService = item.productServiceNameList
-        ? item.productServiceNameList
-        : item.otherServiceNameList
-    })
+        // console.log(item.advService, 'advService')
+      })
+    }
+    if (listE.data.status == 200) {
+      listE.data.data.forEach(item => {
+        item.advService = item.productServiceNameList
+          ? item.productServiceNameList
+          : item.otherServiceNameList
+        // console.log(item.advService.slice(3), 'bbbb')
+      })
+    }
+    if (listG.data.status == 200) {
+      listG.data.data.forEach(item => {
+        item.advService = item.productServiceNameList
+          ? item.productServiceNameList
+          : item.otherServiceNameList
+      })
+    }
 
     let codeObj = {
       name: '不限',
@@ -498,12 +500,17 @@ export default {
     listH.data.data.forEach(item => {
       item.checked = false
     })
-    console.log(listD.data.data, 'listD45445')
+    // console.log(listH.data.data, 'listHlistH')
+
+    // getGSList
+    let gsList = await getGSList($axios, 1, vo)
+    console.log(gsList, 'gsList.list', vo)
     return {
       lineHots: listA.data.data,
       lineLinks: listC.data.data,
       lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : '',
       listE: listE.data.status == 200 ? listE.data.data : '',
+      gsList: gsList.list,
       // listF: listF.data.data == [] ? '' : '',
       listF: listF.data.status == 200 ? listF.data.data : '',
       listG: listG.data.status == 200 ? listG.data.data : '',
@@ -538,8 +545,8 @@ export default {
               seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
                 seajs.use(['../js/gaodemap2.js'], function() {
                   $('#buxian').change(function() {
-                    var item = $('.input_class')
-                    // console.log($(this), 'thisddfd')
+                    // var item = $('.input_class')
+                    console.log($(this).attr('data-code'), 'data-code')
                     if ($(this).prop('checked')) {
                       $('input[name=checkbox]').prop('checked', false)
                       // $("[name='checkbox']").attr('checked', 'true')
@@ -548,8 +555,23 @@ export default {
                       // $("[name='checkbox']").attr('checked', 'false')
                       // alert('2')
                     }
-                    // if()
                   })
+                  var newArr = new Array()
+                  $('input[name=checkbox]:checkbox').click(function() {
+                    $('input[name=checkbox]:checkbox').each(function() {
+                      // newArr = []
+                      if ($(this).prop('checked')) {
+                        newArr.push($(this).attr('data-code'))
+                      }
+                    })
+                    var uniqueNames = []
+                    $.each(newArr, function(i, el) {
+                      if ($.inArray(el, uniqueNames) === -1)
+                        uniqueNames.push(el)
+                    })
+                    console.log(uniqueNames)
+                  })
+
                   //
                   layui.use('form', function() {
                     var form = layui.form

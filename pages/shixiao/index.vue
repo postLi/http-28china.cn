@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div class="shixiao_banner">
+      <img src="/member/images/banner_gsjj.png">
+    </div>
     <div class="shixiao_box">
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a 

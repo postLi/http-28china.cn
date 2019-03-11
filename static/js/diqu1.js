@@ -64,7 +64,7 @@ function cx01() {
     //初始化
     var s1 = ''
     var s2 = ''
-
+    // console.log(datas, 'datas')
     // s1 +=
     //   '<span style="width: 33%; text-align: center;display: inline-block;">不限</span>'
     s1 += `
@@ -78,12 +78,14 @@ function cx01() {
     for (var i = 0; i < datas.length; i++) {
       var name = datas[i].alias
       var code = datas[i].code
+      var locationProvince = datas[i].name
 
       s1 += `
      <li style="position: relative;width: 30%;text-align: center; float: left;padding: 6px 0;cursor: pointer"class="spanclass"
                   id="spanclass"
                   data-pinyin="${datas[i].pinyin}"
                   name="${code}"
+                  locationProvince="${locationProvince}"
                   ><span
                  >${name}</span>
                   <ul
@@ -101,17 +103,15 @@ function cx01() {
       $(this)
         .children('.index_uls')
         .html()
-      // $(this)
-      //   .children('.index_uls')
-      //   .show()
-      // console.log($(this).children('.index_uls'), 'p[yuy')
       var name = $(this).attr('name')
+      var locationProvince = $(this).attr('locationProvince')
       var items = []
       items = childDatas.filter(function(item) {
         items = []
         return item.parent_code == name
       })
-      // console.log(items,'itemsitemsitemsitems');
+
+      // herf="gongsi?locationCity=${items[i].name}&locationProvince=${locationProvince}"
       s2 = `
         
       `
@@ -119,9 +119,10 @@ function cx01() {
         s2 += `
         <li 
          style="width: 33%;text-align: center;float: left;cursor: pointer"><a 
-         :href='"/gongsi/" '
+     href="/gongsi?locationCity=${items[i].name}&locationProvince=${locationProvince}"
          class="liclass"
          id="liclass"
+         locationCity="${items[i].name}"
          data-pinyin="${items[i].pinyin}"
                       name="${items[i].code}"><span>${
           items[i].alias
@@ -129,7 +130,7 @@ function cx01() {
       `
       }
       $('.index_uls').html(s2)
-      console.log(items, 'itemsitems')
+      // console.log(items, 'itemsitems')
 
       // alert('dfdfer')
       //1. 获取id值
@@ -156,7 +157,6 @@ function cx01() {
   //     .css('display', 'none')
   //   // $('.company_address .map_box1').css('display', 'none')
   // })
-//  28fast.com 官网新需求、 修改页面、打包上线、优化打包体积
 }
 
 function renderDropdownList(datas, isprovince) {

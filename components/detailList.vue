@@ -7,118 +7,115 @@
       <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
 
 
-      <div class="list_none">
-        <span>暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
-        <img src="/static/gongsi/images/none_pic.png">
-        <!--<img src="../../static/gongsi/images/none_pic.png">-->
-      </div>
-
-
-
-      <ul
-        class="wlzx_list"
-        style="display: none;" >
-        <li class="wlzx_list_1"><a
-          id="nr_a21"
-          target="_blank"><img
-            id="nr01"
-            class="scrollLoading"
-            width="150"
-            height="98"
-        ></a></li>
-        <li class="wlzx_list_2">
-          <p class="p1"><a
-            id="nr02"
-            href="#"
-          >广州运力集团</a>
-
-            <img
-              v-for="(item,i) in 5"
-              :key="i"
-              class="xy_zuan"
-              src="/static/gongsi/images/blue.gif">
-            <!--<img-->
-            <!--class="xy_zuan"-->
-            <!--src="../../static/gongsi/images/blue.gif">-->
-            <!--<img-->
-            <!--class="xy_zuan"-->
-            <!--src="../../static/gongsi/images/blue.gif">-->
-            <!--<img-->
-            <!--class="xy_zuan"-->
-            <!--src="../../static/gongsi/images/blue.gif">-->
-            <!--<img-->
-            <!--class="xy_zuan"-->
-            <!--src="../../static/gongsi/images/blue.gif">-->
-            <img
-              v-for="(item,i) in 5"
-              :key="i"
-              class="xy_guan"
-              src="/static/gongsi/images/34huanguan.gif">
-            <!--<img-->
-            <!--class="xy_guan"-->
-            <!--src="../../static/gongsi/images/34huanguan.gif">-->
-            <!--<img-->
-            <!--class="xy_guan"-->
-            <!--src="../../static/gongsi/images/34huanguan.gif">-->
-            <!--<img-->
-            <!--class="xy_guan"-->
-            <!--src="../../static/gongsi/images/34huanguan.gif">-->
-            <!--<img-->
-            <!--class="xy_guan"-->
-            <!--src="../../static/gongsi/images/34huanguan.gif">-->
-            <img
-              class="wlgs_shiming"
-              src="/static/gongsi/images/wlgs_shiming.png">
-            <img
-              class="wlgs_xinyong"
-              src="/static/gongsi/images/xinyong.png">
-            <img
-              class="wlgs_danbao"
-              src="/static/gongsi/images/wlgs_danbao.png">
-
-          </P>
-          <p class="p2"><i>联系人：</i><font id="nr04">张总</font><a
-            id="nr11"
-            target="_blank"
-            href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img src="/static/gongsi/images/15qq.gif"></a></p>
-          <p class="p3"><i>电话：</i><font id="nr05">0731-88818882  17707316111</font></p>
-          <p class="p4"><i>地址：</i><font
-            id="nr06"
-            class="">北京大兴区魏永路博洋仓储物流园</font></p>
-        </li>
-        <li class="wlzx_list_3">
-          <p class="p1"><i>经营范围：</i><span id="nr07">整车 零担 特大货物运输</span></P>
-          <p class="p2"><i>增值服务：</i><span id="nr08">送货上门 保价 到付 代收货款</span></p>
-        </li>
-        <li class="wlzx_list_6">
-          <p class="p1"><a
-            id="nr_order"
-            target="_blank"><input
-              id="fahuo"
-              readonly=""
-              value="下单"></a>
-          </p><p class="p2"><a
-            id="nr_a22"
-            target="_blank"><input
-              id="wlzx_list_view"
-              readonly=""
-              value="查看官网"></a>
-        </p><p class="p3"/></li>
-      </ul>
-
-    </div>
-
-    <!--分页-->
-    <div
-    class="box">
       <div
-        id="pagination1"
-        class="page fl"/>
-      <div class="info fl">
-      <!--<p>当前页数：<span id="current1">1</span></p>-->
+        v-if="!info.length"
+        class="list_none">
+        <span>暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
+        <img src="../static/gongsi/images/none_pic.png">
       </div>
+
+
+
+      <div v-else>
+        <ul
+          v-for="(item, index) in info"
+          :key="index"
+          class="wlzx_list">
+          <li class="wlzx_list_1"><a
+            id="nr_a21"
+            target="_blank">
+            <img
+              :data-code="item.companyFacadeFile"
+              :src="item.companyFacadeFile"
+              id="nr01"
+              class="scrollLoading"
+              width="150"
+              height="98"
+          ></a></li>
+          <li class="wlzx_list_2">
+            <p class="p1"><a
+              id="nr02"
+              href="#"
+            >广州运力集团</a>
+
+              <img
+                v-for="(item,i) in 5"
+                :key="i"
+                class="xy_zuan"
+                src="/static/gongsi/images/blue.gif">
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <img
+                v-for="(item,i) in 5"
+                :key="i"
+                class="xy_guan"
+                src="/static/gongsi/images/34huanguan.gif">
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="xy_guan"-->
+              <!--src="../../static/gongsi/images/34huanguan.gif">-->
+              <img
+                class="wlgs_shiming"
+                src="/static/gongsi/images/wlgs_shiming.png">
+              <img
+                class="wlgs_xinyong"
+                src="/static/gongsi/images/xinyong.png">
+              <img
+                class="wlgs_danbao"
+                src="/static/gongsi/images/wlgs_danbao.png">
+
+            </P>
+            <p class="p2"><i>联系人：</i><font id="nr04">张总</font><a
+              id="nr11"
+              target="_blank"
+              href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img src="/static/gongsi/images/15qq.gif"></a></p>
+            <p class="p3"><i>电话：</i><font id="nr05">0731-88818882  17707316111</font></p>
+            <p class="p4"><i>地址：</i><font
+              id="nr06"
+              class="">北京大兴区魏永路博洋仓储物流园</font></p>
+          </li>
+          <li class="wlzx_list_3">
+            <p class="p1"><i>经营范围：</i><span id="nr07">整车 零担 特大货物运输</span></P>
+            <p class="p2"><i>增值服务：</i><span id="nr08">送货上门 保价 到付 代收货款</span></p>
+          </li>
+          <li class="wlzx_list_6">
+            <p class="p1"><a
+              id="nr_order"
+              target="_blank"><input
+                id="fahuo"
+                readonly=""
+                value="下单"></a>
+            </p><p class="p2"><a
+              id="nr_a22"
+              target="_blank"><input
+                id="wlzx_list_view"
+                readonly=""
+                value="查看官网"></a>
+          </p><p class="p3"/></li>
+        </ul>
+      </div>
+
     </div>
-    <!--分页-->
+
+
 
 
   </div>
@@ -128,17 +125,19 @@
 export default {
   name: 'DetailList',
   props: {
-    lineLists: {
+    info: {
       type: [Object, Array],
       default: () => {}
     }
   },
   watch: {
-    lineLists(n, o) {
+    info(n, o) {
       console.log(n, 'nnnnnnnn')
     }
   },
-  mounted() {},
+  mounted() {
+    console.log(this.info, 'infofdf')
+  },
   methods: {}
 }
 </script>
@@ -248,7 +247,7 @@ export default {
     }
   }
   .list_none {
-    display: none;
+    /*display: none;*/
     span {
       float: left;
       width: 100%;

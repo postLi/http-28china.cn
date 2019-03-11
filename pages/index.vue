@@ -1491,7 +1491,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import NewsList from '@/components/index/newsList.vue'
 
 export default {

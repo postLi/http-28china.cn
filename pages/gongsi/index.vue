@@ -21,7 +21,7 @@
               alt=""><span style="padding-left: 20px">公司所在地</span></div>
             <div class="company_address">
               <ul
-                v-for="(item,i) in 1"
+                v-for="(item,i) in 1" 
                 :key="i"
                 id="index_map1"
                 class="header_middles"
@@ -132,13 +132,13 @@
           <li
             v-for="(item, index) in lineAdviseRecommend"
             :key="index"
-            style="float:left;padding: 15px 40px 15px 40px"><a href="#">
-              <p>{{ item.contactsName?item.contactsName:'' }}</p>
+            style="float:left;width: 20%"><a href="#">
+              <p style="font-size: 16px;color: #0d91e9">{{ item.companyName?item.companyName:'' }}</p>
 
               <p
                 v-if="item.advService.length"
               ><span
-                v-for="(item, index) in item.advService"
+                v-for="(item, index) in (item.advService?item.advService.slice(0,2):'')"
                 :key="index">{{ item }}</span></p>
 
           </a></li>
@@ -214,62 +214,49 @@
       </div>
       <div
         class="list_checkbox"
-        style="display: flex">
+        style="display: flex;    line-height: 38px;">
 
-        <!--<form-->
-        <!--action=""-->
-        <!--method="get">-->
-        <!--<label-->
-        <!--v-for="(item, i) in 5"-->
-        <!--:key="i">-->
-        <!--<input-->
-        <!--type="checkbox"-->
-        <!--value="" >132 </label>-->
-        <!--</form>-->
-
-
-        <!--<form-->
-        <!--class="layui-form"-->
-        <!--&gt;-->
-        <!--<div-->
-        <!--class="layui-form-item"-->
-        <!--pane="">-->
-        <!--<div-->
-        <!--class="layui-input-block"-->
-        <!--style="margin-left: 0">-->
-        <!--<input-->
-        <!--class="buxian"-->
-        <!--type="checkbox"-->
-        <!--name="fall"-->
-        <!--lay-filter="f_all"-->
-        <!--lay-skin="primary"-->
-        <!--:title="listH[0].name"-->
-        <!--checked="false">-->
-        <!--<input-->
-        <!--v-for="(item, i) in listH.slice(1)"-->
-        <!--:key="i"-->
-        <!--lay-filter="c_one"-->
-        <!--type="checkbox"-->
-        <!--name="qall"-->
-        <!--lay-skin="primary"-->
-        <!--:title="item.name"-->
-        <!--checked="false"-->
-        <!--class="checkbox_class"-->
-        <!--&gt;-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--</form>-->
         <div class="form_class">
 
           <ul>
             <li
-              v-for="(item, i) in 2"
-              :key="i">
+            style="float: left;padding-right: 20px">
+
+              <label
+                for=""
+              >
+                <input
+                  type="checkbox"
+                  id="buxian"
+                  class="input_class"
+                  :data-code="listH[0].code"
+                  :data-pcode="listH[0].pcode"
+                  style="padding-left: 5px">
+              {{ listH[0].name }}</label>
+              <!--<input-->
+              <!--type="checkbox"-->
+              <!--id="buxian"-->
+              <!--class="input_class"-->
+              <!--:data-code="listH[0].code"-->
+              <!--:data-pcode="listH[0].pcode">-->
+              <!--<label-->
+              <!--for=""-->
+              <!--style="padding-left: 10px">{{ listH[0].name }}</label>-->
+            </li>
+            <li
+              v-for="(item, i) in listH.slice(1)"
+              :key="i"
+              style="float: left;padding-right: 20px">
               <input
                 type="checkbox"
-                class="input_class">
-              <label for="">ereree</label>
+                id="input_class"
+                name = "checkbox"
+                class="input_class"
+                :data-code="item.code"
+                :data-pcode="item.pcode">
+              <label
+                for=""
+                style="padding-left: 5px">{{ item.name }}</label>
             </li>
           </ul>
         </div>
@@ -404,7 +391,8 @@ export default {
     return {
       isAdd: false,
       types: 0,
-      parkname: ''
+      parkname: '',
+      isChecked: false
       // lineHots: []
     }
   },
@@ -486,6 +474,7 @@ export default {
       item.advService = item.productServiceNameList
         ? item.productServiceNameList
         : item.otherServiceNameList
+
       // console.log(item.advService, 'advService')
     })
     listE.data.data.forEach(item => {
@@ -509,7 +498,7 @@ export default {
     listH.data.data.forEach(item => {
       item.checked = false
     })
-    console.log(listH.data.data, 'listH')
+    console.log(listD.data.data, 'listD45445')
     return {
       lineHots: listA.data.data,
       lineLinks: listC.data.data,
@@ -548,29 +537,23 @@ export default {
             seajs.use(['../gongsi/js/list_wlgs.js'], function() {
               seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
                 seajs.use(['../js/gaodemap2.js'], function() {
+                  $('#buxian').change(function() {
+                    var item = $('.input_class')
+                    // console.log($(this), 'thisddfd')
+                    if ($(this).prop('checked')) {
+                      $('input[name=checkbox]').prop('checked', false)
+                      // $("[name='checkbox']").attr('checked', 'true')
+                      // alert('1')
+                    } else {
+                      // $("[name='checkbox']").attr('checked', 'false')
+                      // alert('2')
+                    }
+                    // if()
+                  })
                   //
                   layui.use('form', function() {
                     var form = layui.form
-                    $("[name='fall']").prop('checked', 'false')
-                    console.log(
-                      $("[name='fall']").prop('checked', 'false'),
-                      ' $("[name=\'like\']")'
-                    )
-                    form.on('checkbox(f_all)', function(data) {
-                      var a1 = data.elem.checked
-                      var item = $('.checkbox_class')
-                      if (a1 == false) {
-                        item.each(function() {
-                          $(this).prop('checked', true)
-                        })
-                      } else {
-                        item.each(function() {
-                          $(this).prop('checked', false)
-                        })
-                      }
-                      console.log(a1, 'a121212')
-                      form.render()
-                    })
+                    form.render()
                   })
 
                   var speed = 30

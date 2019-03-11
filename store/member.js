@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 export const state = () => ({
   company: {
     account: '',
@@ -89,11 +87,6 @@ export const state = () => ({
   pageType: '' // findpassword login
 })
 
-let aurl = ''
-if (process.server) {
-  aurl = 'http://localhost:3000'
-}
-
 export const mutations = {
   setCompany(state, param) {
     state.company = param
@@ -125,8 +118,8 @@ export const actions = {
   GETCOMPANYINFO({ commit }, payload) {
     return new Promise(resolve => {
       console.log('payload', payload)
-      axios
-        .get(aurl + '/api/28-web/logisticsCompany/info/' + payload)
+      this.$axios
+        .get('/28-web/logisticsCompany/info/' + payload)
         .then(res => {
           let data = res.data
           console.log('GETCOMPANYINFO:', data)
@@ -154,8 +147,8 @@ export const actions = {
   // 获取公司网点信息
   GETCOMPANYPOINTINFO({ commit }, payload) {
     return new Promise((resolve, reject) => {
-      axios
-        .post(aurl + '/api/28-web/pointNetwork/findCompanyNet', payload)
+      this.$axios
+        .post('/28-web/pointNetwork/findCompanyNet', payload)
         .then(res => {
           let data = res.data
 
@@ -177,8 +170,8 @@ export const actions = {
   GETCOMPANYLINEINFO({ commit }, payload) {
     console.log('payload3', payload)
     return new Promise((resolve, reject) => {
-      axios
-        .post(aurl + '/api/28chinaservice/range/company/list', payload)
+      this.$axios
+        .post('/28chinaservice/range/company/list', payload)
         .then(res => {
           let data = res.data
           if (data.status === 200) {

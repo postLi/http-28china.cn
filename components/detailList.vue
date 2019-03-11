@@ -21,76 +21,83 @@
           v-for="(item, index) in info"
           :key="index"
           class="wlzx_list">
-          <li class="wlzx_list_1"><a
+          <li
+            class="wlzx_list_1"
+            style="position: relative"
+          ><a
             id="nr_a21"
+            :href="'/member/'+ item.id"
             target="_blank">
             <img
-              :data-code="item.companyFacadeFile"
-              :src="item.companyFacadeFile"
-              id="nr01"
+              v-if="item.companyFacadeFile == '' || item.companyFacadeFile == null"
+              src="../static/images/pic/bg1.png"
               class="scrollLoading"
-              width="150"
-              height="98"
-          ></a></li>
+              width="165"
+              height="125"
+            >
+            <!--:src="require('../static/images/pic/bg' + item.num + '.png')"-->
+            <img
+              v-else
+              :data-code="item.num"
+              :src="item.companyFacadeFile"
+              class="scrollLoading"
+              width="165"
+              height="125"
+            >
+            <p style="position: absolute;bottom: 25px;left: 0px;color: white;width: 150px;padding: 12px 0;font-size: 14px;text-align: center;background: rgba(0,0,0,0.5)">{{ item.companyName }}</p>
+          </a></li>
           <li class="wlzx_list_2">
-            <p class="p1"><a
-              id="nr02"
-              href="#"
-            >广州运力集团</a>
-
+            <p class="p1">
+              <!--<a-->
+              <!--id="nr02"-->
+              <!--href="#"-->
+              <!--&gt;广州运力集团</a>-->
+              <i style="">信誉:</i>
               <img
-                v-for="(item,i) in 5"
-                :key="i"
                 class="xy_zuan"
-                src="/static/gongsi/images/blue.gif">
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <img
-                v-for="(item,i) in 5"
-                :key="i"
-                class="xy_guan"
-                src="/static/gongsi/images/34huanguan.gif">
-              <!--<img-->
-              <!--class="xy_guan"-->
-              <!--src="../../static/gongsi/images/34huanguan.gif">-->
-              <!--<img-->
-              <!--class="xy_guan"-->
-              <!--src="../../static/gongsi/images/34huanguan.gif">-->
-              <!--<img-->
-              <!--class="xy_guan"-->
-              <!--src="../../static/gongsi/images/34huanguan.gif">-->
-              <!--<img-->
-              <!--class="xy_guan"-->
-              <!--src="../../static/gongsi/images/34huanguan.gif">-->
-              <img
-                class="wlgs_shiming"
-                src="/static/gongsi/images/wlgs_shiming.png">
-              <img
-                class="wlgs_xinyong"
-                src="/static/gongsi/images/xinyong.png">
-              <img
-                class="wlgs_danbao"
-                src="/static/gongsi/images/wlgs_danbao.png">
+                src="../static/gongsi/images/blue.gif">
+                <!--<img-->
+                <!--class="xy_zuan"-->
+                <!--src="require('../static/gongsi/images/blue.gif')">-->
+                <!--<img-->
+                <!--class="xy_zuan"-->
+                <!--src="../../static/gongsi/images/blue.gif">-->
+                <!--<img-->
+                <!--class="xy_zuan"-->
+                <!--src="../../static/gongsi/images/blue.gif">-->
+                <!--<img-->
+                <!--class="xy_zuan"-->
+                <!--src="../../static/gongsi/images/blue.gif">-->
+                <!--<img-->
+                <!--class="xy_zuan"-->
+                <!--src="../../static/gongsi/images/blue.gif">-->
+                <!--<img-->
+                <!--v-for="(item,i) in 5"-->
+                <!--:key="i"-->
+                <!--class="xy_guan"-->
+                <!--src="../static/gongsi/images/34huanguan.gif">-->
+                <!--<img-->
+                <!--class="wlgs_shiming"-->
+                <!--src="../static/gongsi/images/wlgs_shiming.png">-->
+                <!--<img-->
+                <!--class="wlgs_xinyong"-->
+                <!--src="../static/gongsi/images/xinyong.png">-->
+                <!--<img-->
+                <!--class="wlgs_danbao"-->
+                <!--src="../static/gongsi/images/wlgs_danbao.png">-->
 
             </P>
-            <p class="p2"><i>联系人：</i><font id="nr04">张总</font><a
+            <p class="p2"><i>联系人：</i><font id="nr04">{{ item.contactsName }}</font><a
               id="nr11"
               target="_blank"
               href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img src="/static/gongsi/images/15qq.gif"></a></p>
-            <p class="p3"><i>电话：</i><font id="nr05">0731-88818882  17707316111</font></p>
+            <p class="p3"><i>电话：</i><font id="nr05">{{ (item.contactsTel?item.contactsTel:'') + (item.mobile?','+item.mobile:'') }}</font></p>
             <p class="p4"><i>地址：</i><font
               id="nr06"
               class="">北京大兴区魏永路博洋仓储物流园</font></p>
+            <p class="p5"><img
+              src="../static/gongsi/images/15qq.gif"
+              alt="">qq交谈</p>
           </li>
           <li class="wlzx_list_3">
             <p class="p1"><i>经营范围：</i><span id="nr07">整车 零担 特大货物运输</span></P>
@@ -132,13 +139,18 @@ export default {
   },
   watch: {
     info(n, o) {
-      console.log(n, 'nnnnnnnn')
+      console.log(this.info, 'nnnnnnnn')
     }
   },
   mounted() {
     console.log(this.info, 'infofdf')
+    this.info.forEach(item => {
+      item.num = Math.ceil(Math.random() * 30)
+    })
   },
-  methods: {}
+  methods: {
+    creditFn() {}
+  }
 }
 </script>
 
@@ -264,12 +276,46 @@ export default {
       margin: 20px 0 20px 400px;
     }
   }
-
+  .wlzx_list_2 {
+    p {
+      line-height: 25px;
+    }
+    .p1 {
+      /*margin-bottom: 10px;*/
+      a {
+        font-weight: bold;
+        padding-right: 5px;
+      }
+      a:hover {
+        color: #fa5000;
+      }
+      img {
+        /*display: none;*/
+      }
+      i {
+        color: #666;
+        padding-left: 0px;
+        font-size: 14px;
+      }
+      font {
+        color: #333;
+        font-size: 14px;
+      }
+    }
+    .p2 {
+      position: relative;
+      img {
+        position: absolute;
+        left: 105px;
+        top: 3px;
+      }
+    }
+  }
   .wlzx_list_2 p {
-    line-height: 30px;
+    line-height: 25px;
   }
   .wlzx_list_2 .p1 {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
   }
   .wlzx_list_2 .p1 a {
     font-weight: bold;
@@ -279,24 +325,7 @@ export default {
     color: #fa5000;
   }
   .wlzx_list_2 .p1 img {
-    display: none;
-  }
-  .wlzx_list_2 i {
-    color: #666;
-    padding-left: 0px;
-    font-size: 14px;
-  }
-  .wlzx_list_2 font {
-    color: #333;
-    font-size: 14px;
-  }
-  .wlzx_list_2 .p2 {
-    position: relative;
-  }
-  .wlzx_list_2 .p2 img {
-    position: absolute;
-    left: 105px;
-    top: 3px;
+    /*display: none;*/
   }
   .wlzx_list_3 p {
     line-height: 30px;

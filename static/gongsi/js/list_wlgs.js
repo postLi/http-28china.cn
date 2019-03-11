@@ -563,228 +563,230 @@ $(function() {
     district: GetUrlParam('enda')
   })
 })
+
+
 //物流公司 栏目列表S
-function process02(currentPage) {
-  var totalPage = 8
-  $.ajax({
-    type: 'post',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    url: '/api/28-web/logisticsCompany/list',
-    dataType: 'json',
-    async: false,
-    data: JSON.stringify({
-      currentPage: currentPage,
-      pageSize: 2,
-      vo: vo //JSON.stringify({})
-    }),
-    success: function(res) {
-      $('#js002 .wlzx_list')
-        .not(':eq(0)')
-        .remove()
-      if (res.data) {
-        totalPage = res.data.totalPage
-        // console.log(totalPage);
-      }
-      if (!res.data || !res.data.total) {
-        console.log('内容为空')
-        $('.box').css('display', 'none')
-        $('.list_none').css('display', 'block')
-        return
-      }
+// function process02(currentPage) {
+//   var totalPage = 8
+//   $.ajax({
+//     type: 'post',
+//     headers: {
+//       'Content-Type': 'application/json'
+//     },
+//     url: '/api/28-web/logisticsCompany/list',
+//     dataType: 'json',
+//     async: false,
+//     data: JSON.stringify({
+//       currentPage: currentPage,
+//       pageSize: 2,
+//       vo: vo //JSON.stringify({})
+//     }),
+//     success: function(res) {
+//       $('#js002 .wlzx_list')
+//         .not(':eq(0)')
+//         .remove()
+//       if (res.data) {
+//         totalPage = res.data.totalPage
+//         // console.log(totalPage);
+//       }
+//       if (!res.data || !res.data.total) {
+//         console.log('内容为空')
+//         $('.box').css('display', 'none')
+//         $('.list_none').css('display', 'block')
+//         return
+//       }
+//
+//       var datas = res.data.list
+//       for (var i = 0; i < datas.length; i++) {
+//         var id = datas[i].id
+//         var companyId = datas[i].id
+//         var account = datas[i].account
+//         var companyName = datas[i].companyName
+//         if (companyName.length > 8) {
+//           companyName = companyName.substring(0, 8) + '..'
+//         }
+//         var contactsName = datas[i].contactsName
+//         if (contactsName && contactsName.length > 3) {
+//           contactsName = contactsName.substring(0, 3) + '..'
+//         }
+//
+//         var contactsTel = datas[i].contactsTel
+//         if (!contactsTel) {
+//           contactsTel = ''
+//         }
+//         if (contactsTel.length > 12) {
+//           contactsTel = contactsTel.substring(0, 12) + '..'
+//         }
+//         var mobile = datas[i].mobile
+//         if (!mobile) {
+//           mobile = ''
+//         }
+//         var reg0 = new RegExp(',', 'g')
+//         var reg1 = new RegExp('"', 'g')
+//         if (datas[i].productService) {
+//           var productService0 = datas[i].productService.replace(reg0, ' ')
+//           var productService1 = productService0.replace(reg1, '')
+//           var productService2 = productService1.replace('[', '')
+//           var productService = productService2.replace(']', '')
+//           if (productService.length > 18) {
+//             productService = productService.substring(0, 18) + '..'
+//           }
+//         }
+//         if (!datas[i].productService) {
+//           var productService = ''
+//         }
+//         if (datas[i].otherService) {
+//           var otherService0 = datas[i].otherService.replace(reg0, ' ')
+//           var otherService1 = otherService0.replace(reg1, '')
+//           var otherService2 = otherService1.replace('[', '')
+//           var otherService = otherService2.replace(']', '')
+//           if (otherService.length > 18) {
+//             otherService = otherService.substring(0, 18) + '..'
+//           }
+//         }
+//         if (!datas[i].otherService) {
+//           var otherService = ''
+//         }
+//         var credit = datas[i].credit
+//
+//         var qq = datas[i].qq
+//         var address = datas[i].address
+//         if (address && address.length > 16) {
+//           address = address.substring(0, 16) + '..'
+//         }
+//         var isVip = datas[i].isVip
+//         var authStatus = datas[i].authStatus
+//         var collateral = datas[i].collateral
+//         //var orderurl="/create/order?&uid="+account+"&publishId="+companyId;
+//         // window.location='/gongsi?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
+//         var orderurl =
+//           '/member/' +
+//           companyId +
+//           '-order?action=order' +
+//           '&publishId=' +
+//           companyId
+//         // var orderurl="/member/"+account+".html?action=order"+"&publishId="+companyId;
+//         var companyFacadeFile = ''
+//         if (datas[i].companyFacadeFile) {
+//           if (datas[i].companyFacadeFile.indexOf(',')) {
+//             companyFacadeFile = datas[i].companyFacadeFile.split(',')[0]
+//             // $('#nr01').attr('src', datas[i].companyFacadeFile.split(',')[0])
+//           } else {
+//             companyFacadeFile = datas[i].companyFacadeFile
+//             console.log(companyFacadeFile, 'companyFacadeFilecompanyFacadeFile')
+//           }
+//         }
+//         if (
+//           datas[i].companyFacadeFile === null ||
+//           datas[i].companyFacadeFile == ''
+//         ) {
+//           var num0 = Math.random()
+//           var num = Math.ceil(num0 * 30)
+//           var src1 = '/zhuanxian/images/bg' + num + '.png'
+//           $('#nr01').attr('src', src1)
+//         }
+//         // if (companyFacadeFile) {
+//         //   var companyFacadeFile = datas[i].companyFacadeFile.split(",")[0];
+//         // }
+//         // var num0 = Math.random();
+//         // var num = Math.ceil(num0 * 30);
+//         // var src1 = "/zhuanxian/images/bg" + num + ".png";
+//         // if (!companyFacadeFile) {
+//         //   $("#nr01").attr("src", src1);
+//         //   console.log($("#nr01").attr("src", src1),'lll');
+//         // }
+//         // if (companyFacadeFile) {
+//         //   $("#nr01").attr("src", companyFacadeFile);
+//         //   console.log($("#nr01").attr("src", companyFacadeFile),'jjjj')
+//         // }
+//         $('#nr02').html(companyName)
+//         $('#nr04').html(contactsName)
+//         $('#nr05').html(contactsTel + ' ' + mobile)
+//         $('#nr06').html(address)
+//         $('#nr07').html(productService)
+//         $('#nr08').html(otherService)
+//         $('#nr02').attr('href', '/member/' + companyId + '')
+//         $('#nr_a21').attr('href', '/member/' + companyId + '')
+//         $('#wlzx_list_view').attr(
+//           'onclick',
+//           "window.open('/member/" + companyId + "-jianjie')"
+//         )
+//         $('#fahuo').attr('onclick', "window.open('" + orderurl + "')")
+//         $('#nr11').attr(
+//           'href',
+//           'http://wpa.qq.com/msgrd?v=3&uin=' + qq + '&site=qq&menu=yes'
+//         )
+//         var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
+//         var s2 = $('.wlzx_list').html()
+//         var s3 = '</ul>'
+//         $('#js002').append(s1 + s2 + s3)
+//
+//         if (credit >= 0 && credit <= 3) {
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
+//         }
+//         if (credit >= 4 && credit <= 10) {
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(1)').css('display', 'inline')
+//         }
+//         if (credit >= 11 && credit <= 40) {
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(1)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(2)').css('display', 'inline')
+//         }
+//         if (credit >= 41 && credit <= 90) {
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(1)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(2)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_zuan:eq(3)').css('display', 'inline')
+//         }
+//         if (credit >= 91 && credit <= 150) {
+//           $('.wlzx_list' + i + ' .xy_zuan').css('display', 'inline')
+//         }
+//
+//         if (credit >= 151 && credit <= 250) {
+//           $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
+//         }
+//         if (credit >= 251 && credit <= 500) {
+//           $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_guan:eq(1)').css('display', 'inline')
+//         }
+//         if (credit >= 500 && credit <= 1000) {
+//           $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_guan:eq(1)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_guan:eq(2)').css('display', 'inline')
+//         }
+//         if (credit >= 1001 && credit <= 2000) {
+//           $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_guan:eq(1)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_guan:eq(2)').css('display', 'inline')
+//           $('.wlzx_list' + i + ' .xy_guan:eq(3)').css('display', 'inline')
+//         }
+//         if (credit >= 2001) {
+//           $('.wlzx_list' + i + ' .xy_guan').css('display', 'inline')
+//         }
+//
+//         if (collateral > 0) {
+//           $('.wlzx_list' + i + ' .wlgs_danbao').css('display', 'inline')
+//         }
+//         if (isVip == 1) {
+//           $('.wlzx_list' + i + ' .wlgs_xinyong').css('display', 'inline')
+//         }
+//         if (authStatus == 'AF0010403') {
+//           // console.log("is  shiming");
+//           $('.wlzx_list' + i + ' .wlgs_shiming').css('display', 'inline')
+//         }
+//         if (!qq) {
+//           $('.wlzx_list' + i + ' .wlzx_list_2 #nr11 img').css('display', 'none')
+//         }
+//       }
+//     },
+//     error: function(err) {
+//       console.log(err.responseText)
+//     }
+//   })
+//   console.log('最终总页数：' + totalPage)
+//   return totalPage
+// }
 
-      var datas = res.data.list
-      for (var i = 0; i < datas.length; i++) {
-        var id = datas[i].id
-        var companyId = datas[i].id
-        var account = datas[i].account
-        var companyName = datas[i].companyName
-        if (companyName.length > 8) {
-          companyName = companyName.substring(0, 8) + '..'
-        }
-        var contactsName = datas[i].contactsName
-        if (contactsName && contactsName.length > 3) {
-          contactsName = contactsName.substring(0, 3) + '..'
-        }
-
-        var contactsTel = datas[i].contactsTel
-        if (!contactsTel) {
-          contactsTel = ''
-        }
-        if (contactsTel.length > 12) {
-          contactsTel = contactsTel.substring(0, 12) + '..'
-        }
-        var mobile = datas[i].mobile
-        if (!mobile) {
-          mobile = ''
-        }
-        var reg0 = new RegExp(',', 'g')
-        var reg1 = new RegExp('"', 'g')
-        if (datas[i].productService) {
-          var productService0 = datas[i].productService.replace(reg0, ' ')
-          var productService1 = productService0.replace(reg1, '')
-          var productService2 = productService1.replace('[', '')
-          var productService = productService2.replace(']', '')
-          if (productService.length > 18) {
-            productService = productService.substring(0, 18) + '..'
-          }
-        }
-        if (!datas[i].productService) {
-          var productService = ''
-        }
-        if (datas[i].otherService) {
-          var otherService0 = datas[i].otherService.replace(reg0, ' ')
-          var otherService1 = otherService0.replace(reg1, '')
-          var otherService2 = otherService1.replace('[', '')
-          var otherService = otherService2.replace(']', '')
-          if (otherService.length > 18) {
-            otherService = otherService.substring(0, 18) + '..'
-          }
-        }
-        if (!datas[i].otherService) {
-          var otherService = ''
-        }
-        var credit = datas[i].credit
-
-        var qq = datas[i].qq
-        var address = datas[i].address
-        if (address && address.length > 16) {
-          address = address.substring(0, 16) + '..'
-        }
-        var isVip = datas[i].isVip
-        var authStatus = datas[i].authStatus
-        var collateral = datas[i].collateral
-        //var orderurl="/create/order?&uid="+account+"&publishId="+companyId;
-        // window.location='/gongsi?tid=80&startp='+startp+'&startc='+startc+'&starta='+starta+'&address='+address+'&companyName='+companyName;
-        var orderurl =
-          '/member/' +
-          companyId +
-          '-order?action=order' +
-          '&publishId=' +
-          companyId
-        // var orderurl="/member/"+account+".html?action=order"+"&publishId="+companyId;
-        var companyFacadeFile = ''
-        if (datas[i].companyFacadeFile) {
-          if (datas[i].companyFacadeFile.indexOf(',')) {
-            companyFacadeFile = datas[i].companyFacadeFile.split(',')[0]
-            $('#nr01').attr('src', datas[i].companyFacadeFile.split(',')[0])
-          } else {
-            companyFacadeFile = datas[i].companyFacadeFile
-            console.log(companyFacadeFile, 'companyFacadeFilecompanyFacadeFile')
-          }
-        }
-        if (
-          datas[i].companyFacadeFile === null ||
-          datas[i].companyFacadeFile == ''
-        ) {
-          var num0 = Math.random()
-          var num = Math.ceil(num0 * 30)
-          var src1 = '/zhuanxian/images/bg' + num + '.png'
-          $('#nr01').attr('src', src1)
-        }
-        // if (companyFacadeFile) {
-        //   var companyFacadeFile = datas[i].companyFacadeFile.split(",")[0];
-        // }
-        // var num0 = Math.random();
-        // var num = Math.ceil(num0 * 30);
-        // var src1 = "/zhuanxian/images/bg" + num + ".png";
-        // if (!companyFacadeFile) {
-        //   $("#nr01").attr("src", src1);
-        //   console.log($("#nr01").attr("src", src1),'lll');
-        // }
-        // if (companyFacadeFile) {
-        //   $("#nr01").attr("src", companyFacadeFile);
-        //   console.log($("#nr01").attr("src", companyFacadeFile),'jjjj')
-        // }
-        $('#nr02').html(companyName)
-        $('#nr04').html(contactsName)
-        $('#nr05').html(contactsTel + ' ' + mobile)
-        $('#nr06').html(address)
-        $('#nr07').html(productService)
-        $('#nr08').html(otherService)
-        $('#nr02').attr('href', '/member/' + companyId + '')
-        $('#nr_a21').attr('href', '/member/' + companyId + '')
-        $('#wlzx_list_view').attr(
-          'onclick',
-          "window.open('/member/" + companyId + "-jianjie')"
-        )
-        $('#fahuo').attr('onclick', "window.open('" + orderurl + "')")
-        $('#nr11').attr(
-          'href',
-          'http://wpa.qq.com/msgrd?v=3&uin=' + qq + '&site=qq&menu=yes'
-        )
-        var s1 = '<ul class="wlzx_list wlzx_list' + i + '">'
-        var s2 = $('.wlzx_list').html()
-        var s3 = '</ul>'
-        $('#js002').append(s1 + s2 + s3)
-
-        if (credit >= 0 && credit <= 3) {
-          $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
-        }
-        if (credit >= 4 && credit <= 10) {
-          $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_zuan:eq(1)').css('display', 'inline')
-        }
-        if (credit >= 11 && credit <= 40) {
-          $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_zuan:eq(1)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_zuan:eq(2)').css('display', 'inline')
-        }
-        if (credit >= 41 && credit <= 90) {
-          $('.wlzx_list' + i + ' .xy_zuan:eq(0)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_zuan:eq(1)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_zuan:eq(2)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_zuan:eq(3)').css('display', 'inline')
-        }
-        if (credit >= 91 && credit <= 150) {
-          $('.wlzx_list' + i + ' .xy_zuan').css('display', 'inline')
-        }
-
-        if (credit >= 151 && credit <= 250) {
-          $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
-        }
-        if (credit >= 251 && credit <= 500) {
-          $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_guan:eq(1)').css('display', 'inline')
-        }
-        if (credit >= 500 && credit <= 1000) {
-          $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_guan:eq(1)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_guan:eq(2)').css('display', 'inline')
-        }
-        if (credit >= 1001 && credit <= 2000) {
-          $('.wlzx_list' + i + ' .xy_guan:eq(0)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_guan:eq(1)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_guan:eq(2)').css('display', 'inline')
-          $('.wlzx_list' + i + ' .xy_guan:eq(3)').css('display', 'inline')
-        }
-        if (credit >= 2001) {
-          $('.wlzx_list' + i + ' .xy_guan').css('display', 'inline')
-        }
-
-        if (collateral > 0) {
-          $('.wlzx_list' + i + ' .wlgs_danbao').css('display', 'inline')
-        }
-        if (isVip == 1) {
-          $('.wlzx_list' + i + ' .wlgs_xinyong').css('display', 'inline')
-        }
-        if (authStatus == 'AF0010403') {
-          // console.log("is  shiming");
-          $('.wlzx_list' + i + ' .wlgs_shiming').css('display', 'inline')
-        }
-        if (!qq) {
-          $('.wlzx_list' + i + ' .wlzx_list_2 #nr11 img').css('display', 'none')
-        }
-      }
-    },
-    error: function(err) {
-      console.log(err.responseText)
-    }
-  })
-  console.log('最终总页数：' + totalPage)
-  return totalPage
-}
-
-process02(1)
+// process02(1)
 //物流公司栏目列表 E

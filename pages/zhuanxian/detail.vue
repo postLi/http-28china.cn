@@ -364,7 +364,7 @@
               v-for="(item, index) in linedataB.hZhuan"
               :key="index"
               class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif"></span>
+              src="../../static/gongsi/images/34huanguan.gif"></span>
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br>

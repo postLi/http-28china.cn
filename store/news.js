@@ -18,7 +18,10 @@ export const state = () => ({
   index_ccyps: [],
   index_wlswxx: [],
   // 车源详情
-  cheyuan_ccyps: []
+  cheyuan_ccyps: [],
+  // 公司列表页
+  gongsi_jryw: [],
+  gongsi_wlzx: []
 })
 
 export const mutations = {
@@ -51,7 +54,7 @@ export const actions = {
           }
         })
         .catch(err => {
-          console.log('payload-line', payload, err.response)
+          // console.log('payload-line', payload, err.response)
           resolve()
         })
     })

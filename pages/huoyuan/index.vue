@@ -450,9 +450,15 @@ async function getHyList($axios, currentPage, vo = {}) {
       if (item.end && item.end.length > 6) {
         item.end = item.end.substring(0, 6) + '..'
       }
+<<<<<<< HEAD
       if (item.goodsTypeName.length > 14) {
         item.goodsTypeName = item.goodsTypeName.substring(0, 14) + '..'
       }
+=======
+      /* if (item.goodsTypeName.length > 14) {
+        item.goodsTypeName = item.goodsTypeName.substring(0, 14) + '..'
+      } */
+>>>>>>> af86aae40bbb5dc37481708140714d8e0f14c89a
     })
     return {
       list: res.data.data.list,
@@ -484,9 +490,15 @@ async function getRecommendList($axios, vo) {
       if (item.end && item.end.length > 6) {
         item.end = item.end.substring(0, 6) + '..'
       }
+<<<<<<< HEAD
       if (item.goodsTypeName.length > 6) {
         item.goodsTypeName = item.goodsTypeName.substring(0, 6) + '..'
       }
+=======
+      /* if (item.goodsTypeName.length > 6) {
+        item.goodsTypeName = item.goodsTypeName.substring(0, 6) + '..'
+      } */
+>>>>>>> af86aae40bbb5dc37481708140714d8e0f14c89a
       // if (item.goodsWeight.length > 5) {
       //   item.goodsWeight = item.goodsWeight.substring(0, 5) + '..'
       // }

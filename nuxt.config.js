@@ -90,8 +90,8 @@ module.exports = {
       mode: 'client'
     },
     {
-      src: '~/plugins/axios',
-      ssr: false
+      src: '~/plugins/axios'
+      // ssr: false
     }
   ],
 

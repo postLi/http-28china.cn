@@ -21,9 +21,6 @@ export default {
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/member/css/index.css' }]
-  },
-  fetch({ store, params }) {
-    store.commit('member/setId', params.id)
   }
 }
 </script>

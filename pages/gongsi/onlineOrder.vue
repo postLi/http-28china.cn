@@ -127,7 +127,7 @@
                 <!-- <tr>
                     <td class="order-company-name"><label ><input type="checkbox" name="" id="  ">武汉京昌物流</label></td>
                     <td class="order-company-ico">
-                        <img src="/member/space/company/images/order/28ico.png" alt="">
+                        <img src="/member/images/order/28ico.png" alt="">
                     </td>
                     <td>10元</td>
                     <td class="jietibox"><i>0.15</i>元/公斤 <span class="seeJieti">阶梯价格</span>

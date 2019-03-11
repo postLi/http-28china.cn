@@ -596,7 +596,7 @@ export default {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
     let carInfoLists = await getCarInfoList($axios, 1, vo)
-    console.log(carInfoLists, 'carInfoLists4444444')
+    // console.log(carInfoLists, 'carInfoLists4444444')
 
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)

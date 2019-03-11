@@ -7,7 +7,7 @@
         id="js005" 
         class="right">
         <div class="right_bt1">
-          <div class="right_bt1_1"><img src="space/company/images/huo.png"><span>货源信息</span></div>
+          <div class="right_bt1_1"><img src="/member/images/huo.png"><span>货源信息</span></div>
           <div class="huo_tj">
     			
             <div class="select_con">
@@ -45,7 +45,7 @@
 
                   <img 
                     class="fl list_img" 
-                    src="/templets/default/images/02jiantou.png">
+                    src="/images/02jiantou.png">
 
                   <div 
                     id="HuoyuanTo" 
@@ -139,10 +139,10 @@
             <li class="hy_item03">
               <p class="p1"><img 
                 id="list_shiming" 
-                src="/templets/default/images/10shiming.png"></p>
+                src="/images/10shiming.png"></p>
               <p class="p2"><img 
                 id="list_xinyong" 
-                src="/templets/default/images/11xinyong.png"></p>
+                src="/images/11xinyong.png"></p>
             </li>
             <li class="hy_item04">
               <p class="p1"><span><em id="nr048"/>浏览量</span></p>

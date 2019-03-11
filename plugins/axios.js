@@ -40,7 +40,11 @@ export default function(app) {
   // )
 
   // 请求回调
-  axios.onRequest(config => {})
+  axios.onRequest(config => {
+    if (config.url.indexOf('/anfacms/') !== -1) {
+      config.baseURL = config.baseURL.replace('/api', '')
+    }
+  })
 
   // 返回回调
   axios.onResponse(res => {})

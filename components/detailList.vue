@@ -30,7 +30,7 @@
             target="_blank">
             <img
               v-if="item.companyFacadeFile == '' || item.companyFacadeFile == null"
-              src="../static/images/pic/bg1.png"
+              :src="require('../static/images/pic/bg' + item.num + '.png')"
               class="scrollLoading"
               width="165"
               height="125"
@@ -44,76 +44,99 @@
               width="165"
               height="125"
             >
-            <p style="position: absolute;bottom: 25px;left: 0px;color: white;width: 150px;padding: 12px 0;font-size: 14px;text-align: center;background: rgba(0,0,0,0.5)">{{ item.companyName }}</p>
           </a></li>
           <li class="wlzx_list_2">
             <p class="p1">
-              <!--<a-->
-              <!--id="nr02"-->
-              <!--href="#"-->
-              <!--&gt;广州运力集团</a>-->
-              <i style="">信誉:</i>
-              <img
-                class="xy_zuan"
-                src="../static/gongsi/images/blue.gif">
-                <!--<img-->
-                <!--class="xy_zuan"-->
-                <!--src="require('../static/gongsi/images/blue.gif')">-->
-                <!--<img-->
-                <!--class="xy_zuan"-->
-                <!--src="../../static/gongsi/images/blue.gif">-->
-                <!--<img-->
-                <!--class="xy_zuan"-->
-                <!--src="../../static/gongsi/images/blue.gif">-->
-                <!--<img-->
-                <!--class="xy_zuan"-->
-                <!--src="../../static/gongsi/images/blue.gif">-->
-                <!--<img-->
-                <!--class="xy_zuan"-->
-                <!--src="../../static/gongsi/images/blue.gif">-->
-                <!--<img-->
-                <!--v-for="(item,i) in 5"-->
-                <!--:key="i"-->
-                <!--class="xy_guan"-->
-                <!--src="../static/gongsi/images/34huanguan.gif">-->
-                <!--<img-->
-                <!--class="wlgs_shiming"-->
-                <!--src="../static/gongsi/images/wlgs_shiming.png">-->
-                <!--<img-->
-                <!--class="wlgs_xinyong"-->
-                <!--src="../static/gongsi/images/xinyong.png">-->
-                <!--<img-->
-                <!--class="wlgs_danbao"-->
-                <!--src="../static/gongsi/images/wlgs_danbao.png">-->
+              <a
+                id="nr02"
+                href="#"
+              ><span>{{ item.companyName }}</span>
+                <span v-if="item.isEq">
+                  <img
+                    v-for="(item, index) in item.eq1"
+                    :key="index"
+                    class="xy_zuan"
+                    src="../static/gongsi/images/blue.gif">
+                </span>
+                <span v-if="item.isHZhuan">
+                  <img
+                    v-for="(item, index) in item.hZhuan"
+                    :key="index"
+                    class="xy_zuan"
+                    src="../static/gongsi/images/34huanguan.gif">
+                </span>
+                <span v-if="item.isHZhuan">
+                  <img
+                    v-for="(item, index) in item.hZhuan"
+                    :key="index"
+                    class="xy_zuan"
+                    src="../static/gongsi/images/34huanguan.gif">
+                </span>
+              </a>
+              <!--<i style="">信誉:</i>-->
+
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="require('../static/gongsi/images/blue.gif')">-->
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <!--<img-->
+              <!--class="xy_zuan"-->
+              <!--src="../../static/gongsi/images/blue.gif">-->
+              <!--<img-->
+              <!--v-for="(item,i) in 5"-->
+              <!--:key="i"-->
+              <!--class="xy_guan"-->
+              <!--src="../static/gongsi/images/34huanguan.gif">-->
+              <!--<img-->
+              <!--class="wlgs_shiming"-->
+              <!--src="../static/gongsi/images/wlgs_shiming.png">-->
+              <!--<img-->
+              <!--class="wlgs_xinyong"-->
+              <!--src="../static/gongsi/images/xinyong.png">-->
+              <!--<img-->
+              <!--class="wlgs_danbao"-->
+              <!--src="../static/gongsi/images/wlgs_danbao.png">-->
 
             </P>
             <p class="p2"><i>联系人：</i><font id="nr04">{{ item.contactsName }}</font><a
-              id="nr11"
-              target="_blank"
-              href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img src="/static/gongsi/images/15qq.gif"></a></p>
+              style="padding-left: 5px"
+              :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
+              target="_blank"><img
+                src="../static/gongsi/images/15qq.gif"
+                alt=""></a></p>
             <p class="p3"><i>电话：</i><font id="nr05">{{ (item.contactsTel?item.contactsTel:'') + (item.mobile?','+item.mobile:'') }}</font></p>
             <p class="p4"><i>地址：</i><font
-              id="nr06"
-              class="">北京大兴区魏永路博洋仓储物流园</font></p>
-            <p class="p5"><img
-              src="../static/gongsi/images/15qq.gif"
-              alt="">qq交谈</p>
+            class="">{{ item.address.length>18?item.address.substring(0,17)+'..' :item.address }}</font></p>
           </li>
           <li class="wlzx_list_3">
-            <p class="p1"><i>经营范围：</i><span id="nr07">整车 零担 特大货物运输</span></P>
-            <p class="p2"><i>增值服务：</i><span id="nr08">送货上门 保价 到付 代收货款</span></p>
+            <p class="p1"><i>经营范围：</i><span
+              v-for="(item,index) in item.productServiceNameList.slice(0,3)"
+              :key="index"
+              style="padding-right: 5px">{{ item }}</span>..</P>
+            <p class="p2"><i>增值服务：</i><span
+              v-for="(item,index) in item.allServiceNameList.slice(0,3)"
+              :key="index"
+              style="padding-right: 5px"
+            >{{ item }}</span>..</p>
+
           </li>
           <li class="wlzx_list_6">
             <p class="p1"><a
-              id="nr_order"
+              :href="'/member/'+item.id+'-order'+'?publishId='+item.id"
               target="_blank"><input
-                id="fahuo"
                 readonly=""
                 value="下单"></a>
             </p><p class="p2"><a
-              id="nr_a22"
+              :href="'/member/'+item.id"
               target="_blank"><input
-                id="wlzx_list_view"
                 readonly=""
                 value="查看官网"></a>
           </p><p class="p3"/></li>
@@ -149,7 +172,9 @@ export default {
     })
   },
   methods: {
-    creditFn() {}
+    openqq() {
+      window.open('http://wpa.qq.com/msgrd?v=3&uin=4009992828&site=qq&menu=yes')
+    }
   }
 }
 </script>
@@ -331,7 +356,7 @@ export default {
     line-height: 30px;
   }
   .wlzx_list_3 .p1 {
-    margin-top: 35px;
+    /*margin-top: 35px;*/
   }
   .wlzx_list_3 p i {
     color: #666;

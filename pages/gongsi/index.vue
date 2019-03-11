@@ -273,19 +273,17 @@
 
       <div class="list_center">
         <div class="list_left">
-          <!--<div-->
-          <!--v-if="gsList.length"-->
-          <!--class="list_none">-->
-          <!--<span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px;font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span>-->
-          <!--<img-->
-          <!--src="/line/images/none_pic.png"-->
-          <!--style="float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;">-->
-          <!--</div>-->
-          <DetailList :info="gsList"/>
+          <DetailList :info="gsList.slice(0,10)"/>
+          <img
+            src="../../static/gongsi/images/listbg.png"
+            alt=""
+            width="1040"
+          >
+          <DetailList :info="gsList.slice(10)"/>
           <!--分页-->
           <div
-            v-if="gsList.length"
-            class="box">
+
+          class="box">
             <div
               id="pagination1"
               class="page fl"/>
@@ -343,38 +341,55 @@
             </div>
           </div>
           <div class="list-box-r-news">
-            <div class="today_news"><div class="zx_sx"><span class="biaozhi"/><span>今日要闻</span><a href="/zixun/">更多>></a></div>
-              <p>{{ gongsi_jryw01.title }}
+            <div class="today_news"><div
+              class="zx_sx"
+              style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a
+                href="/zixun/"
+                style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+                target="_blank"
+            >更多>></a></div>
+              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_jryw01.title }}
               </p>
               <div style="display: flex"><img
-                src="/static/gongsi/images/wlgs_danbao.png"
-                alt=""><span>{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
+                width="120"
+                height="98"
+                :src="gongsi_jryw01.typeImg||'/gongsi/images/u1075.png'"
+                alt=""><span style="padding-left: 5px">{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
                   :href="gongsi_jryw01.url"
                   style="color: #0d91e9">[详细]</a></span></div>
               <ul>
                 <li
                   v-for="(item, i) in gongsi_jryw"
-                  :key="i"><a 
-                    :href="item.url" 
+                  :key="i"
+                  style="padding-top: 15px"><a
+                    :href="item.url"
                     target="_blank">{{ item.title }}</a>
 
                 </li>
               </ul>
             </div>
             <div class="wuliu_news">
-              <div class="zx_sx"><span class="biaozhi"/><span>物流资讯</span><a href="/zixun/">更多>></a></div>
-              <p>{{ gongsi_wlzx01.title }}
+              <div
+                class="zx_sx"
+                style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">物流资讯</span><a
+                  href="/zixun/"
+                  style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+                  target="_blank">更多>></a></div>
+              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_wlzx01.title }}
               </p>
               <div style="display: flex"><img
-                src="/static/gongsi/images/wlgs_danbao.png"
-                alt=""><span>{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
+                width="120"
+                height="98"
+                :src="gongsi_jryw01.typeImg||'/gongsi/images/u1075.png'"
+                alt=""><span style="padding-left: 5px">{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
                   :href="gongsi_wlzx01.url"
                   style="color: #0d91e9">[详细]</a></span></div>
               <ul>
                 <li
                   v-for="(item, i) in gongsi_wlzx"
-                  :key="i"><a 
-                    :href="item.url" 
+                  :key="i"
+                  style="padding-top: 15px"><a
+                    :href="item.url"
                     target="_blank">{{ item.title }}</a>
 
                 </li>
@@ -422,7 +437,9 @@ async function getGSList($axios, currentPage, vo = {}) {
   }
   let res = await $axios.post(aurl + '/api/28-web/logisticsCompany/list', parm)
   if (res.data.status === 200) {
-    console.log(res, 'resresresresres')
+    // res.data.data.forEach(item => {
+    //   item.num = Math.ceil(Math.random() * 30)
+    // })
   }
   return {
     list: res.data.data.list
@@ -442,7 +459,8 @@ export default {
       isAdd: false,
       types: 0,
       parkname: '',
-      isChecked: false
+      isChecked: false,
+      checkboxItem: []
       // lineHots: []
     }
   },
@@ -458,6 +476,7 @@ export default {
       },
       name: 'gongsi_jryw',
       preFn: data => {
+        // console.log(data, 'datadfdf')
         return data.map((el, index) => {
           el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
 
@@ -484,6 +503,7 @@ export default {
     })
   },
   async asyncData({ $axios, app, query }) {
+    // console.log(query, 'queryquery')
     let aurl = ''
     let vo = {
       currentPage: 1,
@@ -507,8 +527,8 @@ export default {
     let vo1 = vo
     delete vo1.currentPage
     delete vo1.pageSize
-    delete vo1.locationProvince
-    delete vo1.locationCity
+    // delete vo1.locationProvince
+    // delete vo1.locationCity
     // /logisticsCompany/adviseRecommend
     // 广告推荐物流公司
     let [listA, listC, listD, listE, listF, listG, listH] = await Promise.all([
@@ -552,15 +572,102 @@ export default {
       name: '不限',
       code: ''
     }
-    listH.data.data.unshift(codeObj)
+    if (listH.data.status == 200) {
+      listH.data.data.unshift(codeObj)
+      listH.data.data.forEach(item => {
+        item.checked = false
+      })
+    }
+
     //checkbox
-    listH.data.data.forEach(item => {
-      item.checked = false
-    })
+
     // console.log(listH.data.data, 'listHlistH')
 
     // getGSList
     let gsList = await getGSList($axios, 1, vo)
+    gsList.list.forEach(item => {
+      item.num = Math.ceil(Math.random() * 30)
+      let authStatus = item.authStatus
+      let collateral = item.collateral
+      let isVip = item.isVip
+      let credit = item.credit
+
+      if (!isVip || isVip == 0) {
+        item.showIsVip = false
+      }
+      if (authStatus == 'AF0010403') {
+        item.isAuthStatus = true
+        item.isRenZhen = true
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+      if (authStatus != 'AF0010403') {
+        item.isAuthStatus = false
+        item.isRenZhen = false
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+
+      if (collateral > 0) {
+        item.collateral = item.collateral + '元'
+        item.isCollateral = true
+      }
+      if (collateral <= 0) {
+        item.collateral = ''
+        item.isCollateral = false
+      }
+      if (
+        authStatus != 'AF0010403' &&
+        (!isVip || isVip == 0) &&
+        (!collateral || collateral == 0)
+      ) {
+        // linedataB.data.data.isRenZhen = true
+        // $('.arc_right07').html('<br/>暂无认证信息')
+      }
+
+      if (credit >= 0 && credit <= 3) {
+        item.eq1 = 1
+        item.isEq = true
+        // linedataB.data.data
+      }
+      if (credit >= 4 && credit <= 10) {
+        item.eq1 = 2
+        item.isEq = true
+      }
+      if (credit >= 11 && credit <= 40) {
+        item.eq1 = 3
+        item.isEq = true
+      }
+      if (credit >= 41 && credit <= 90) {
+        item.eq1 = 4
+        item.isEq = true
+      }
+      if (credit >= 91 && credit <= 150) {
+        item.eq1 = 5
+        item.isZuan = true
+      }
+      if (credit >= 151 && credit <= 250) {
+        item.hZhuan = 1
+        item.isHZhuan = true
+      }
+      if (credit >= 251 && credit <= 500) {
+        item.hZhuan = 2
+        item.isHZhuan = true
+      }
+      if (credit >= 500 && credit <= 1000) {
+        item.hZhuan = 3
+        item.isHZhuan = true
+      }
+      if (credit >= 1001 && credit <= 2000) {
+        item.hZhuan = 4
+        item.isHZhuan = true
+      }
+      if (credit >= 2001) {
+        item.hZhuan = 5
+        item.isHZhuan = true
+      }
+    })
+
     console.log(gsList, 'gsList.list', vo)
     return {
       lineHots: listA.data.data,
@@ -620,11 +727,7 @@ export default {
                     console.log($(this).attr('data-code'), 'data-code')
                     if ($(this).prop('checked')) {
                       $('input[name=checkbox]').prop('checked', false)
-                      // $("[name='checkbox']").attr('checked', 'true')
-                      // alert('1')
                     } else {
-                      // $("[name='checkbox']").attr('checked', 'false')
-                      // alert('2')
                     }
                   })
                   var newArr = new Array()
@@ -639,8 +742,11 @@ export default {
                     $.each(newArr, function(i, el) {
                       if ($.inArray(el, uniqueNames) === -1)
                         uniqueNames.push(el)
+                      this.checkboxItem.push(el)
                     })
-                    console.log(uniqueNames)
+                    // var checkboxItem = []
+                    // checkboxItem.push(uniqueNames)
+                    console.log(this.checkboxItem, 'uniqueNames')
                   })
 
                   //

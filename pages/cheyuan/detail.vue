@@ -124,9 +124,13 @@
           <div class="arc_middle1"><span>{{ cy1.strartAddress + '&nbsp;&rarr;&nbsp;' + cy1.endAddress }}</span>
             <div class="release_box">
               <div class="release_scroll">
-                <div class="manage_box">用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
-                <div class="manage_box">用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
-                <div class="manage_box">用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
+                <div 
+                  class="manage_box"
+                  v-for="(item,index) in newList"
+                  :key="index"
+                >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>货源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
+              <!-- <div class="manage_box">用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
+                <div class="manage_box">用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div> -->
               </div>
             </div>
           </div>
@@ -866,10 +870,13 @@ export default {
       startProvince: cy1.data.data.startProvince
     }
     console.log(parm2, 'parm2')
-    //车主其他求货信息
-    // let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
-    //   id: query.id
-    // })
+    //最新货源信息
+    let newLists = await $axios
+      .post('/28-web//carInfo/newest/publish')
+      .catch(err => {
+        // console.log('newestHuoyuanRes:', err)
+      })
+    // console.log(newLists.data.data, 'newestCheyuanRes')
     //车主月人气榜列表
     let carPopularityRes = await $axios.get('/28-web/carInfo/carPopularityList')
     // console.log('车主月人气榜', carPopularityRes.data)
@@ -949,6 +956,7 @@ export default {
     }
     hotSearchs.data.data.links.forEach(footLink)
     cheLinks.data.data.interestedRecommend.links.forEach(footLink)
+    cheLinks.data.data.recommend.links.forEach(footLink)
     // console.log(hotSearchs.data.data, 'cheComprehensive1')
     // console.log(
     //   '24小时内发布的车源中最新的前10条车源信息',
@@ -957,6 +965,7 @@ export default {
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
+      newList: newLists.data.status === 200 ? newLists.data.data : [],
       interestOrder:
         cheLinks.data.status === 200
           ? cheLinks.data.data.interestedRecommend.links
@@ -1006,7 +1015,7 @@ export default {
     let roll = $('.release_scroll')
     roll.append(roll.html())
     let number = 1
-    let l = this.newestCreateCar.length
+    let l = this.newList.length
     let manage_box_h = $('.manage_box').height()
     let startScroll = () => {
       this.inTerVar = setInterval(() => {

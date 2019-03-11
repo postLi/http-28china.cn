@@ -157,7 +157,7 @@
 
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
+              <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
               <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum ? item.goodsNum : 0 }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
@@ -450,8 +450,8 @@ async function getHyList($axios, currentPage, vo = {}) {
       if (item.end && item.end.length > 6) {
         item.end = item.end.substring(0, 6) + '..'
       }
-      if (item.goodsName.length > 14) {
-        item.goodsName = item.goodsName.substring(0, 14) + '..'
+      if (item.goodsTypeName.length > 14) {
+        item.goodsTypeName = item.goodsTypeName.substring(0, 14) + '..'
       }
     })
     return {
@@ -484,8 +484,8 @@ async function getRecommendList($axios, vo) {
       if (item.end && item.end.length > 6) {
         item.end = item.end.substring(0, 6) + '..'
       }
-      if (item.goodsName.length > 6) {
-        item.goodsName = item.goodsName.substring(0, 6) + '..'
+      if (item.goodsTypeName.length > 6) {
+        item.goodsTypeName = item.goodsTypeName.substring(0, 6) + '..'
       }
       // if (item.goodsWeight.length > 5) {
       //   item.goodsWeight = item.goodsWeight.substring(0, 5) + '..'

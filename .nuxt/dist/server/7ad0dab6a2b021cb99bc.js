@@ -1,2 +1,0 @@
-exports.ids=[63],exports.modules={152:function(r,n,e){"use strict";function t(r=""){return(r+="").replace(/href="http:\/\/192\.168\.1\.79/gim,'href="').replace(/href="\/anfacms/gim,'href="/zixun').replace(/src="\/zixun\//gim,'src="/anfacms/')}function c(path){return"http://192.168.1.79/anfacms/"+path.replace("/zixun","")}e.r(n),e.d(n,"formatAnfaTms",function(){return t}),e.d(n,"makeAnfaTmsUrl",function(){return c})}};
-//# sourceMappingURL=7ad0dab6a2b021cb99bc.js.map

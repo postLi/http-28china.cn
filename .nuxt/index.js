@@ -15,7 +15,7 @@ import nuxt_plugin_cookieuniversalnuxt_045b8140 from 'nuxt_plugin_cookieuniversa
 import nuxt_plugin_axios_0e81e090 from 'nuxt_plugin_axios_0e81e090' // Source: ./axios.js (mode: 'all')
 import nuxt_plugin_vueextend_3a130592 from 'nuxt_plugin_vueextend_3a130592' // Source: ..\\plugins\\vue-extend (mode: 'all')
 import nuxt_plugin_lozad_343857f8 from 'nuxt_plugin_lozad_343857f8' // Source: ..\\plugins\\lozad (mode: 'client')
-import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (mode: 'client')
+import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (mode: 'all')
 
 // Component: <NoSsr>
 Vue.component(NoSsr.name, NoSsr)
@@ -157,10 +157,10 @@ async function createApp(ssrContext) {
   if (typeof nuxt_plugin_cookieuniversalnuxt_045b8140 === 'function') await nuxt_plugin_cookieuniversalnuxt_045b8140(app.context, inject)
   if (typeof nuxt_plugin_axios_0e81e090 === 'function') await nuxt_plugin_axios_0e81e090(app.context, inject)
   if (typeof nuxt_plugin_vueextend_3a130592 === 'function') await nuxt_plugin_vueextend_3a130592(app.context, inject)
+  if (typeof nuxt_plugin_axios_3566aa80 === 'function') await nuxt_plugin_axios_3566aa80(app.context, inject)
 
   if (process.client) {
     if (typeof nuxt_plugin_lozad_343857f8 === 'function') await nuxt_plugin_lozad_343857f8(app.context, inject)
-    if (typeof nuxt_plugin_axios_3566aa80 === 'function') await nuxt_plugin_axios_3566aa80(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

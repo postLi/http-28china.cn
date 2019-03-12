@@ -143,10 +143,10 @@ export const actions = {
     return new Promise(resolve => {
       console.log('payload', payload)
       this.$axios
-        .get('/28-web/logisticsCompany222/info/' + payload)
+        .get('/28-web/logisticsCompany/info/' + payload)
         .then(res => {
           let data = res.data
-          console.log('GETCOMPANYINFO:', data)
+          // console.log('GETCOMPANYINFO:', data)
           if (data.status === 200) {
             let ordata = data.data
             let ps = ordata.productServiceCode

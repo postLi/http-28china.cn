@@ -64,17 +64,17 @@
               :src="linedataA.rangeLogo.split(',')[showImg]">
             <img
               v-else
-              :src="require('../../static/images/pic/bg' + linedataA.num + '.png')"
+              :src="'/images/pic/bg' + linedataA.num + '.png'"
               alt="">
           </div>
           <div class="arc_left_down">
             <ul>
               <li><img
-                src="../../static/line/images/04ewm.png"
+                src="/line/images/04ewm.png"
                 alt=""></li>
               <li @click="downFn">
                 <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
-                <p>多<span style="color: #2577e3">{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的货源，并可实时接</p>
+                <p>多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的货源，并可实时接</p>
                 <p>收28快运为您推荐的精品货源提醒!</p>
               </li>
             </ul>
@@ -85,32 +85,32 @@
           <!--v-if="linedataA.rangeLogo"-->
           <!--:src="linedataA.rangeLogo.split(',')[0]"-->
           <!--@click="clickImg(0)"><img-->
-          <!--:src="require('../../static/images/pic/bg' + linedataA.num + '.png')"-->
+          <!--:src="require('/images/pic/bg' + linedataA.num + '.png')"-->
           <!--@click="clickImg(0)"></a>-->
           <!--<a href="javascript:void(0)"><img-->
           <!--v-if="linedataA.rangeLogo"-->
           <!--:src="linedataA.rangeLogo.split(',')[1]"-->
           <!--@click="clickImg(1)"><img-->
-          <!--:src="require('../../static/images/pic/bg' + linedataA.num + '.png')"-->
+          <!--:src="require('/images/pic/bg' + linedataA.num + '.png')"-->
           <!--@click="clickImg(1)"></a>-->
           <!--<a href="javascript:void(0)"><img-->
           <!--v-if="linedataA.rangeLogo"-->
           <!--:src="linedataA.rangeLogo.split(',')[2]"-->
           <!--@click="clickImg(2)"><img-->
           <!--v-else-->
-          <!--:src="require('../../static/images/pic/bg' + linedataA.num + '.png')"-->
+          <!--:src="require('/images/pic/bg' + linedataA.num + '.png')"-->
           <!--@click="clickImg(2)"></a>-->
           <!--</div>-->
-          <!--<div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span-->
+          <!--<div class="arc_left_3"><a href="javascript:void(0)"><img src="/line/images/17shoucang.png">&nbsp;<span-->
           <!--id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>-->
         </div>
         <div class="arc_middle">
           <div class="collection_zx">
             <div
               class="bt_close"
-              onclick="$('.collection_zx').hide()"><img src="../../static/line/images/xxx.png"></div>
+              onclick="$('.collection_zx').hide()"><img src="/line/images/xxx.png"></div>
             <div class="collection_zx_nr">
-              <img src="../../static/line/images/yes.png">
+              <img src="/line/images/yes.png">
               <span>成功加入</span><a
                 id="collection_url"
                 target="_blank"
@@ -121,7 +121,7 @@
             <div class="pj_price_box1">
               <div
                 class="bt_close"
-                onclick="$('.pj_price_box').hide()"><img src="../../static/line/images/xxx.png"></div>
+                onclick="$('.pj_price_box').hide()"><img src="/line/images/xxx.png"></div>
             </div>
             <div class="pj_price_box2">试算价格</div>
             <div class="item-form plr20">
@@ -275,11 +275,11 @@
             <!--<span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>-->
             <ul>
               <li><img
-                src="../../static/line/images/02sj.png"
+                src="/line/images/02sj.png"
                 alt=""
                 style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
               <li style="padding-left: 26px"><img
-                src="../../static/line/images/03sc.png"
+                src="/line/images/03sc.png"
                 alt=""
                 style="vertical-align: middle;"><span>收藏量:{{ linedataA.collectNumber }}</span></li>
             </ul>
@@ -325,11 +325,11 @@
                   target="_blank"><span>快速下单</span></a></div>
               <div class="arc_m5_2_3">
                 <!--<img-->
-                <!--src="../../static/line/images/05fresh.png"-->
+                <!--src="/line/images/05fresh.png"-->
                 <!--alt="">-->
                 <!--<span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"><span>换一个</span></a></span>-->
                 <span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"> <img
-                  src="../../static/line/images/05fresh.png"
+                  src="/line/images/05fresh.png"
                   alt=""><span style="padding-left: 5px">换一个</span></a></span>
               </div>
             </div>
@@ -337,14 +337,14 @@
           <!--<div class="arc_middle6">-->
           <!--<div class="arc_m6_1"><i>增值服务：</i></div>-->
           <!--<div class="arc_m6_2">-->
-          <!--<div class="item_zzfw1"><img src="../../static/line/images/item_zzfw1.png"><span>送货上门</span></div>-->
-          <!--<div class="item_zzfw2"><img src="../../static/line/images/item_zzfw2.png"><span>保价运输</span></div>-->
-          <!--<div class="item_zzfw3"><img src="../../static/line/images/item_zzfw3.png"><span>运费到付</span></div>-->
-          <!--<div class="item_zzfw4"><img src="../../static/line/images/item_zzfw4.png"><span>代收货款</span></div>-->
-          <!--<div class="item_zzfw5"><img src="../../static/line/images/item_zzfw5.png"><span>上门提货</span></div>-->
-          <!--<div class="item_zzfw6"><img src="../../static/line/images/item_zzfw6.png"><span>开发票</span></div>-->
-          <!--<div class="item_zzfw7"><img src="../../static/line/images/item_zzfw7.png"><span>签单回收</span></div>-->
-          <!--<div class="item_zzfw8"><img src="../../static/line/images/item_zzfw8.png"><span>时效保障</span></div>-->
+          <!--<div class="item_zzfw1"><img src="/line/images/item_zzfw1.png"><span>送货上门</span></div>-->
+          <!--<div class="item_zzfw2"><img src="/line/images/item_zzfw2.png"><span>保价运输</span></div>-->
+          <!--<div class="item_zzfw3"><img src="/line/images/item_zzfw3.png"><span>运费到付</span></div>-->
+          <!--<div class="item_zzfw4"><img src="/line/images/item_zzfw4.png"><span>代收货款</span></div>-->
+          <!--<div class="item_zzfw5"><img src="/line/images/item_zzfw5.png"><span>上门提货</span></div>-->
+          <!--<div class="item_zzfw6"><img src="/line/images/item_zzfw6.png"><span>开发票</span></div>-->
+          <!--<div class="item_zzfw7"><img src="/line/images/item_zzfw7.png"><span>签单回收</span></div>-->
+          <!--<div class="item_zzfw8"><img src="/line/images/item_zzfw8.png"><span>时效保障</span></div>-->
 
           <!--&lt;!&ndash;<img src="/templets/default/images/article_wlzx/18zengzhifw.png"/>&ndash;&gt;-->
 
@@ -352,19 +352,19 @@
           <!--</div>-->
         </div>
         <div class="arc_right">
-          <p class="arc_right01"><img src="../../static/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
+          <p class="arc_right01"><img src="/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
             <span v-if="linedataB.isEq"> <img
               v-for="(item, index) in linedataB.eq1"
               :key="index"
               class="xy_zuan"
-              src="../../static/gongsi/images/blue.gif"></span>
+              src="/gongsi/images/blue.gif"></span>
 
             <span v-if="linedataB.isHZhuan"> <img
               v-for="(item, index) in linedataB.hZhuan"
               :key="index"
               class="xy_zuan"
-              src="../../static/gongsi/images/34huanguan.gif"></span>
+              src="/gongsi/images/34huanguan.gif"></span>
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br>
@@ -418,15 +418,15 @@
             <img
               v-if="linedataB.showIsVip"
               id="right_xinyong"
-              src="../../static/line/images/11xinyong.png">
+              src="/line/images/11xinyong.png">
             <img
               v-if="linedataB.isAuthStatus"
               id="right_shiming"
-              src="../../static/line/images/10shiming.png">
+              src="/line/images/10shiming.png">
             <img
               v-if="linedataB.isAuthStatus"
               id="right_baozhengjin"
-              src="../../static/line/images/danbao.png"><span id="nr1037">{{ linedataB.collateral }}</span>
+              src="/line/images/danbao.png"><span id="nr1037">{{ linedataB.collateral }}</span>
           </p>
           <p
             v-else
@@ -508,7 +508,7 @@
                     href="javascript:;"
                     class="button2"
                     @click="showFindFn()"><img
-                      src="../../static/line/images/06fm.gif"
+                      src="/line/images/06fm.gif"
                       style="vertical-align: middle;padding-right: 15px">帮我选择优质专线</a>
                 </div>
               </div>
@@ -522,7 +522,7 @@
         style="clear: both">
         <div class="arc_main4_top">
           <img
-            src="../../static/line/images/07hege.png"
+            src="/line/images/07hege.png"
             alt="">
           <ul class="top_tit">
             <li>此专线物流公司诚信值超过<span style="color: #f88700;border-bottom: 1px solid #f88700">{{ linedataE.greaterCreditRate }}%</span>的同行</li>
@@ -531,14 +531,14 @@
           <!--<div class="top_tit"><p>此专线物流公司诚信值超过<span style="color: #f88700;">92.3%</span>的同行</p>-->
           <!--<p>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</p></div>-->
           <img
-            src="../../static/line/images/08gold.png"
+            src="/line/images/08gold.png"
             alt="">
         </div>
         <div class="arc_main4_bot">
           <div class="bot_left">
             <div class="bot_left_per">
               <img
-                src="../../static/line/images/09sj.png"
+                src="/line/images/09sj.png"
                 alt="">
               <p>{{ linedataE.companyName }}</p>
             </div>
@@ -569,7 +569,7 @@
             </div>
             <div class="bot_left_ts">
               <img
-                src="../../static/line/images/12xx.png"
+                src="/line/images/12xx.png"
                 alt="">
               <span>公司未收到重大服务投诉</span>
             </div>
@@ -605,7 +605,7 @@
                       <img
                         v-for="( item, index ) in 4"
                         :key="index"
-                        src="../../static/line/images/13z.png"
+                        src="/line/images/13z.png"
                         alt="">
                     </p>
                   </div>
@@ -695,7 +695,7 @@
                     class="nr_a21_img">
                     <img
                       v-if="item.rangeLogo==''"
-                      :src="require('../../static/images/pic/bg' + item.num + '.png')"
+                      :src="'/images/pic/bg' + item.num + '.png'"
                       width="180"
                       height="180">
                     <img
@@ -733,7 +733,7 @@
                       target="_blank"
                       href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img
                         id="qq"
-                        src="../../static/gongsi/images/15qq.gif"></a>
+                        src="/gongsi/images/15qq.gif"></a>
                         <!--<img-->
                         <!--id="tj_icon_1"-->
                         <!--src="/line/images/wtjzx.gif">-->
@@ -930,7 +930,7 @@ import {
   parseTime
 } from '~/components/commonJs.js'
 // import { AFLC_VALID } from '~/static/js/AFLC_API.js'
-// import { AFLC_VALID } from '../../static/js/AFLC_API'
+// import { AFLC_VALID } from '/js/AFLC_API'
 import ShowPrice from './showPrice'
 import ShowEchart from './showEchart'
 import FooterLinks from '../../components/footerLinks'
@@ -1029,9 +1029,9 @@ export default {
     if (!endc || endc == 'null') {
       endc = ''
     }
-    if (process.server) {
+    /*     if (process.server) {
       aurl = 'http://localhost:3000'
-    }
+    } */
 
     // /range/getRangePriceReference/{rangeId}
     // 专线详情_专线价格参考
@@ -1051,21 +1051,19 @@ export default {
       linedataF,
       linedataG
     ] = await Promise.all([
-      $axios.get(aurl + `/api/28-web/range/${query.id}`),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/${query.publishId}`),
+      $axios.get(aurl + `/28-web/range/${query.id}`),
+      $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
       $axios.post(
         aurl +
-          `/api/28-web/logisticsCompany/comprehensive?companyId=${
-            query.publishId
-          }`
+          `/28-web/logisticsCompany/comprehensive?companyId=${query.publishId}`
       ),
-      $axios.post(aurl + `/api/28-web/rangeEva/range/list`, {
+      $axios.post(aurl + `/28-web/rangeEva/range/list`, {
         currentPage: 1,
         pageSize: 3,
         transportRangeId: query.id,
         assessLevel: 'AF0360101'
       }),
-      $axios.post(aurl + `/api/28-web/range/detail/related/links`, {
+      $axios.post(aurl + `/28-web/range/detail/related/links`, {
         startProvince: startp,
         startCity: startc,
         startArea: starta,
@@ -1086,7 +1084,7 @@ export default {
       }
       lineCode = await getCode($axios, linedataA.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
-      // $axios.post(aurl + `/api/28-web/range/recommend`, {
+      // $axios.post(aurl + `/28-web/range/recommend`, {
       //   currentPage: 1,
       //   pageSize: 5,
       //   startProvince: startp,
@@ -1096,7 +1094,7 @@ export default {
       //   endCity: endc,
       //   endArea: enda
       // }),
-      // $axios.post(aurl + `/api/28-web/range/list`, {
+      // $axios.post(aurl + `/28-web/range/list`, {
       //   currentPage: 1,
       //   pageSize: 6,
       //   startProvince: startp,
@@ -1108,7 +1106,7 @@ export default {
       // }),
       let queryCitys = getSEListParams(linedataA.data.data)
       // 从目的地出发的专线
-      linedataD = await $axios.post(aurl + '/api/28-web/range/recommend', {
+      linedataD = await $axios.post(aurl + '/28-web/range/recommend', {
         currentPage: 1,
         pageSize: 5,
         startProvince: queryCitys.endProvince,
@@ -1116,20 +1114,15 @@ export default {
       })
 
       // 从出发地出发的专线
-      linedataC = await $axios.post(aurl + '/api/28-web/range/list', {
+      linedataC = await $axios.post(aurl + '/28-web/range/list', {
         currentPage: 1,
         pageSize: 6,
         startProvince: queryCitys.startProvince,
         startCity: queryCitys.startCity
       })
-      LineCAnother = await $axios.post(
-        aurl + '/api/28-web/range/changeAnother',
-        vo
-      )
+      LineCAnother = await $axios.post(aurl + '/28-web/range/changeAnother', vo)
       LineeEInfo = await $axios.post(
-        aurl +
-          '/api/28-web/range/getRangePriceReference/' +
-          linedataA.data.data.id
+        aurl + '/28-web/range/getRangePriceReference/' + linedataA.data.data.id
       )
       // allServiceNameList:   allServiceCodeList    所有服务codes
 
@@ -1248,9 +1241,9 @@ export default {
         queryCitys
       }
     }
-    // let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
+    // let res = await $axios.get(aurl + `/28-web/range/${query.id}`)
     // // console.log(
-    // //   `/api/28-web/range/${query.id}`,
+    // //   `/28-web/range/${query.id}`,
     // //   'res',
     // //   res.data,
     // //   res.data.data.endLocation
@@ -1273,144 +1266,145 @@ export default {
   },
   mounted() {
     // console.log(this.$route.query.id, 'id')
+    if (process.client) {
+      seajs.use(['/layer/layer.js'], function() {
+        seajs.use(
+          ['../js/city.js', '../js/city-picker.data.js', '../js/calculator.js'],
+          function() {
+            seajs.use(['../js/city-picker.js'], function() {
+              // $('#wlLineFrom input').citypicker()
+              seajs.use(['/line/js/arc_wlzx.js'], function() {
+                seajs.use(['../js/collection.js'], function() {
+                  seajs.use(['../js/gaodemap2.js'], function() {
+                    //header货源搜索 S
+                    $('#search_huoyuan').click(function() {
+                      var list1 = [],
+                        list2 = []
+                      $('#HuoyuanFrom .select-item').each(function(i, e) {
+                        list1.push($(this).text())
+                      })
+                      var startp = list1[0]
+                      var startc = list1[1]
+                      var starta = list1[2]
 
-    seajs.use(['/layer/layer.js'], function() {
-      seajs.use(
-        ['../js/city.js', '../js/city-picker.data.js', '../js/calculator.js'],
-        function() {
-          seajs.use(['../js/city-picker.js'], function() {
-            // $('#wlLineFrom input').citypicker()
-            seajs.use(['/line/js/arc_wlzx.js'], function() {
-              seajs.use(['../js/collection.js'], function() {
-                seajs.use(['../js/gaodemap2.js'], function() {
-                  //header货源搜索 S
-                  $('#search_huoyuan').click(function() {
-                    var list1 = [],
-                      list2 = []
-                    $('#HuoyuanFrom .select-item').each(function(i, e) {
-                      list1.push($(this).text())
+                      $('#HuoyuanTo .select-item').each(function(i, e) {
+                        list2.push($(this).text())
+                      })
+                      var endp = list2[0]
+                      var endc = list2[1]
+                      var enda = list2[2]
+
+                      if (!startp) {
+                        startp = ''
+                      }
+                      if (!startc) {
+                        startc = ''
+                      }
+                      if (!starta) {
+                        starta = ''
+                      }
+                      if (!endp) {
+                        endp = ''
+                      }
+                      if (!endc) {
+                        endc = ''
+                      }
+                      if (!enda) {
+                        enda = ''
+                      }
+                      startp = encodeURI(startp)
+                      startc = encodeURI(startc)
+                      starta = encodeURI(starta)
+                      endp = encodeURI(endp)
+                      endc = encodeURI(endc)
+                      enda = encodeURI(enda)
+                      window.location =
+                        '/zhuanxian/list?startp=' +
+                        startp +
+                        '&startc=' +
+                        startc +
+                        '&starta=' +
+                        starta +
+                        '&endp=' +
+                        endp +
+                        '&endc=' +
+                        endc +
+                        '&enda=' +
+                        enda
                     })
-                    var startp = list1[0]
-                    var startc = list1[1]
-                    var starta = list1[2]
+                    //header货源搜索 E
+                    //  <!-- 阶梯价格浮层弹出效果 E-
 
-                    $('#HuoyuanTo .select-item').each(function(i, e) {
-                      list2.push($(this).text())
-                    })
-                    var endp = list2[0]
-                    var endc = list2[1]
-                    var enda = list2[2]
+                    function mousePrice() {
+                      // 更多城市
+                      $('.arc_top2_3').mouseover(function() {
+                        $('.city_box').css('display', 'block')
+                      })
+                      $('.city_box').mouseover(function() {
+                        $('.city_box').css('display', 'block')
+                      })
+                      $('.city_box').mouseover(function() {
+                        $('.city_box').css('display', 'none')
+                      })
+                      // 更多城市
+                      //
+                      // $('#zh_price').mouseover(function() {
+                      //   $('.price_box1').css('display', 'block')
+                      // })
+                      // $('#zh_price').mouseout(function() {
+                      //   $('.price_box1').css('display', 'none')
+                      // })
+                      // $('#qh_price').mouseover(function() {
+                      //   $('.price_box2').css('display', 'block')
+                      // })
+                      // $('#qh_price').mouseout(function() {
+                      //   $('.price_box2').css('display', 'none')
+                      // })
 
-                    if (!startp) {
-                      startp = ''
+                      //  增值服务切换
+                      $('#arc_bt1').click(function() {
+                        //alert("1");
+                        $('.arc_span').removeClass('arc_active')
+                        $(this).addClass('arc_active')
+                        $('.arc_nr').addClass('arc_nr_none')
+                        $('#arc_nr1').removeClass('arc_nr_none')
+                      })
+                      $('#arc_bt2').click(function() {
+                        //alert("1_2");
+                        $('.arc_span').removeClass('arc_active')
+                        $(this).addClass('arc_active')
+                        $('.arc_nr').addClass('arc_nr_none')
+                        $('#arc_nr2').removeClass('arc_nr_none')
+                      })
+
+                      $('#arc_bt3').click(function() {
+                        //alert("2");
+                        $('.arc_span').removeClass('arc_active')
+                        $(this).addClass('arc_active')
+                        $('.arc_nr').addClass('arc_nr_none')
+                        $('#arc_nr3').removeClass('arc_nr_none')
+                      })
+
+                      $('#arc_bt4').click(function() {
+                        //alert("3");
+                        $('.arc_span').removeClass('arc_active')
+                        $(this).addClass('arc_active')
+                        $('.arc_nr').addClass('arc_nr_none')
+                        $('#arc_nr4').removeClass('arc_nr_none')
+                      })
+                      //  增值服务切换
                     }
-                    if (!startc) {
-                      startc = ''
-                    }
-                    if (!starta) {
-                      starta = ''
-                    }
-                    if (!endp) {
-                      endp = ''
-                    }
-                    if (!endc) {
-                      endc = ''
-                    }
-                    if (!enda) {
-                      enda = ''
-                    }
-                    startp = encodeURI(startp)
-                    startc = encodeURI(startc)
-                    starta = encodeURI(starta)
-                    endp = encodeURI(endp)
-                    endc = encodeURI(endc)
-                    enda = encodeURI(enda)
-                    window.location =
-                      '/zhuanxian/list?startp=' +
-                      startp +
-                      '&startc=' +
-                      startc +
-                      '&starta=' +
-                      starta +
-                      '&endp=' +
-                      endp +
-                      '&endc=' +
-                      endc +
-                      '&enda=' +
-                      enda
+
+                    mousePrice()
+                    //  <!-- 阶梯价格浮层弹出效果 E-
                   })
-                  //header货源搜索 E
-                  //  <!-- 阶梯价格浮层弹出效果 E-
-
-                  function mousePrice() {
-                    // 更多城市
-                    $('.arc_top2_3').mouseover(function() {
-                      $('.city_box').css('display', 'block')
-                    })
-                    $('.city_box').mouseover(function() {
-                      $('.city_box').css('display', 'block')
-                    })
-                    $('.city_box').mouseover(function() {
-                      $('.city_box').css('display', 'none')
-                    })
-                    // 更多城市
-                    //
-                    // $('#zh_price').mouseover(function() {
-                    //   $('.price_box1').css('display', 'block')
-                    // })
-                    // $('#zh_price').mouseout(function() {
-                    //   $('.price_box1').css('display', 'none')
-                    // })
-                    // $('#qh_price').mouseover(function() {
-                    //   $('.price_box2').css('display', 'block')
-                    // })
-                    // $('#qh_price').mouseout(function() {
-                    //   $('.price_box2').css('display', 'none')
-                    // })
-
-                    //  增值服务切换
-                    $('#arc_bt1').click(function() {
-                      //alert("1");
-                      $('.arc_span').removeClass('arc_active')
-                      $(this).addClass('arc_active')
-                      $('.arc_nr').addClass('arc_nr_none')
-                      $('#arc_nr1').removeClass('arc_nr_none')
-                    })
-                    $('#arc_bt2').click(function() {
-                      //alert("1_2");
-                      $('.arc_span').removeClass('arc_active')
-                      $(this).addClass('arc_active')
-                      $('.arc_nr').addClass('arc_nr_none')
-                      $('#arc_nr2').removeClass('arc_nr_none')
-                    })
-
-                    $('#arc_bt3').click(function() {
-                      //alert("2");
-                      $('.arc_span').removeClass('arc_active')
-                      $(this).addClass('arc_active')
-                      $('.arc_nr').addClass('arc_nr_none')
-                      $('#arc_nr3').removeClass('arc_nr_none')
-                    })
-
-                    $('#arc_bt4').click(function() {
-                      //alert("3");
-                      $('.arc_span').removeClass('arc_active')
-                      $(this).addClass('arc_active')
-                      $('.arc_nr').addClass('arc_nr_none')
-                      $('#arc_nr4').removeClass('arc_nr_none')
-                    })
-                    //  增值服务切换
-                  }
-
-                  mousePrice()
-                  //  <!-- 阶梯价格浮层弹出效果 E-
                 })
               })
             })
-          })
-        }
-      )
-    })
+          }
+        )
+      })
+    }
   },
   methods: {
     moreFn() {
@@ -1430,7 +1424,7 @@ export default {
         //   <img
         // v-for="( item, index ) in 4"
         //   :key="index"
-        // src="../../static/line/images/13z.png"
+        // src="/line/images/13z.png"
         // alt="">
         //   </p>
         content:
@@ -1449,7 +1443,7 @@ export default {
           '<li>' +
           '<div class="pl_left" ' +
           '<p>eiuriurui</p>' +
-          '<p><img src="../../static/line/images/13z.png" width=50, height=20></p>' +
+          '<p><img src="/line/images/13z.png" width=50, height=20></p>' +
           '</div>' +
           '</li>' +
           '</ul>' +
@@ -1482,7 +1476,7 @@ export default {
             form.mobile = mobile
             // console.lo
             $axios
-              .post(aurl + '/api/28-web/logisticsCompany/consult/save', form)
+              .post(aurl + '/28-web/logisticsCompany/consult/save', form)
               .then(res => {
                 // console.log(res, 'resresres')
                 if (res.data.status === 200) {
@@ -1538,7 +1532,7 @@ export default {
         aurl = 'http://localhost:3000'
       }
       $axios
-        .post(aurl + `/api/28-web/rangeEva/range/list`, {
+        .post(aurl + `/28-web/rangeEva/range/list`, {
           currentPage: 1,
           pageSize: 3,
           transportRangeId: this.linedataA.id,
@@ -1630,7 +1624,7 @@ export default {
             form.mobile = mobile
             // console.lo
             $axios
-              .post(aurl + '/api/28-web/logisticsCompany/consult/save', form)
+              .post(aurl + '/28-web/logisticsCompany/consult/save', form)
               .then(res => {
                 // console.log(res, 'resresres')
                 if (res.data.status === 200) {
@@ -1728,7 +1722,7 @@ export default {
             }
             form.msgMobile = msgMobile
             $axios
-              .post(aurl + '/api/28-web/helpFind/range/create', form)
+              .post(aurl + '/28-web/helpFind/range/create', form)
               .then(res => {
                 // console.log(res, 'resresres')
                 if (res.data.status === 200) {
@@ -2254,7 +2248,7 @@ export default {
   /**/
   /*#wlLineFrom {*/
   /*width: 190px;*/
-  /*background: url(../../static/line/images/start_addr.png) no-repeat 200px 8px*/
+  /*background: url(/line/images/start_addr.png) no-repeat 200px 8px*/
   /*#fff;*/
   /*background-size: 16px 17px;*/
   /*padding-right: 20px;*/
@@ -2282,7 +2276,7 @@ export default {
     height: 30px;
     border-radius: 2px;
     font-size: 16px;
-    background: no-repeat url(../../static/line/images/wlgs_search.png) 10px 6px;
+    background: no-repeat url(/line/images/wlgs_search.png) 10px 6px;
     text-align: left;
     /*padding-left: 30px;*/
     /*margin-left: 20px;*/

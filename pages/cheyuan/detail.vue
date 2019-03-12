@@ -869,8 +869,6 @@ export default {
       startCity: cy1.data.data.startCity,
       startProvince: cy1.data.data.startProvince
     }
-<<<<<<< HEAD
-    console.log(parm2, 'parm2')
     //最新货源信息
     let newLists = await $axios
       .post('/28-web//carInfo/newest/publish')
@@ -878,13 +876,7 @@ export default {
         // console.log('newestHuoyuanRes:', err)
       })
     // console.log(newLists.data.data, 'newestCheyuanRes')
-=======
-    // console.log(parm2, 'parm2')
-    //车主其他求货信息
-    // let otherCarInfoList = await getOtherCarInfoList($axios, 1, {
-    //   id: query.id
-    // })
->>>>>>> af86aae40bbb5dc37481708140714d8e0f14c89a
+
     //车主月人气榜列表
     let carPopularityRes = await $axios.get('/28-web/carInfo/carPopularityList')
     // console.log('车主月人气榜', carPopularityRes.data)

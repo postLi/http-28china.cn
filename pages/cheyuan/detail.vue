@@ -153,7 +153,7 @@
 
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>车辆类型：</i><span>{{ cy1.carTypeName }}</span><span>{{ cy1.isLongCar === 1 ? '(即时车源)' : '(长期车源)' }}</span></div>
+            <div class="arc_m3"><i>车辆类型：</i><span>{{ cy1.carTypeName }}</span><span>({{ cy1.isLongCarName }})</span></div>
             <div class="arc_m3"><i>车辆载重：</i><span>{{ cy1.carLoad }}吨</span></div>
             <div class="arc_m3_2"><i>车长：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i><span>{{ cy1.carLength }}米</span></div>
             <div class="arc_m3_2"><i>途径点：&nbsp;&nbsp;&nbsp;</i><span>{{ cy1.viaAddress ? cy1.viaAddress : '暂无' }}</span></div>
@@ -163,14 +163,8 @@
             <div class="arc_m3"><i>联系人：</i><span>{{ cy1.belongDriver }}</span></div>
             <div class="arc_m3"><i>手机：</i>
               <span>
-                <a 
-                  v-show="checkMoblie1"
-                  @click="showMoblieFns(showMoblie1)"
-                  style="color: #3f94ee;border-bottom: 1px solid #3f94ee">查看电话</a>
                 <font 
-                  v-show="showMoblie1"
-                  @click="showMoblieFns(showMoblie1)"
-                  style="color: #333" >{{ cy1.phone }}</font>
+                style="color: #333" >{{ cy1.phone }}</font>
               </span>
             </div>
             <div class="arc_m3_2"><i>说明：</i><span>{{ cy1.carTagName }}</span><span v-if="cy1.remark">{{ '|'+cy1.remark.substring(0, 30) }}</span></div>
@@ -202,14 +196,8 @@
             <span><i>载重：</i><font>{{ cy1.carLoad }}吨</font></span>
             <span><i>联系人：</i><font>{{ cy1.belongDriver }}</font></span>
             <span><i>手机：</i>
-              <a 
-                v-show="checkMoblie2"
-                @click="showMoblieFn(showMoblie2)"
-                style="color: #3f94ee;border-bottom: 1px solid #3f94ee">查看电话</a>
               <font 
-                v-show="showMoblie2"
-                @click="showMoblieFn(showMoblie2)"
-                style="color: #333" >{{ cy1.phone }}</font>
+              style="color: #333" >{{ cy1.phone }}</font>
             </span>
             <span><a
               :href="'http://wpa.qq.com/msgrd?v=3&uin=' + cy1.qq + '&site=qq&menu=yes'"
@@ -359,19 +347,15 @@
 
                 </li>
                 <li class="cy_list_1">
-                  <p class="p1">
-                    <a
-                      :href="'/cheyuan/detail?id=' + item.id"
-                      class="list-title-a"
-                      target="_blank" >
-                      <span class="list-icon lines-sprite-icons icon-start"/>
-                      <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
-                      <span class="list-icon lines-sprite-icons icon-through"/>
-                      <span class="list-icon lines-sprite-icons icon-end"/>
-                      <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
-                    </a>
-
-                  </P>
+                  <a
+                    :href="'/cheyuan/detail?id=' + item.id"
+                    target="_blank" >
+                    <span class="list-icon lines-sprite-icons icon-start"/>
+                    <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
+                    <span class="list-icon lines-sprite-icons icon-through"/>
+                    <span class="list-icon lines-sprite-icons icon-end"/>
+                    <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
+                  </a>
                   <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font>
                     <font>{{ item.carTypeName }}</font>
                     <font>长<b>{{ item.carLength }}</b>米</font>
@@ -443,8 +427,10 @@
 
                 </li>
                 <li class="cy_list_1">
-                  <p class="p1">
-                    <!-- <a
+                  <img src="/images/list_wlzx/02jiantou.png">
+                  <!-- <h1>xaioafdjasl;</h1> -->
+                  <!-- <p class="p1"> -->
+                  <!-- <a
                       :href="'/cheyuan/detail?id=' + item.id"
                       class="list-title-a"
                       target="_blank" >
@@ -454,21 +440,21 @@
                       <span class="list-icon lines-sprite-icons icon-end"/>
                       <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
                     </a> -->
-                    <a
-                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
-                      class="list-title-a"
-                      target="_blank" >
-                      <div class="position">
-                        <span class="list-icon lines-sprite-icons icon-start"/>
-                        <em>{{ item.startCity }}</em>
-                        <span class="list-icon lines-sprite-icons icon-through"/>
-                        <span class="list-icon lines-sprite-icons icon-end"/>
-                        <em>{{ item.endCity }}</em>
+                  <a
+                    :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
+                    class="list-title-a"
+                    target="_blank" >
+                    <div class="position">
+                      <span class="list-icon lines-sprite-icons icon-start"/>
+                      <em>{{ item.startCity }}</em>
+                      <span class="list-icon lines-sprite-icons icon-through"/>
+                      <span class="list-icon lines-sprite-icons icon-end"/>
+                      <em>{{ item.endCity }}</em>
 
-                      </div>
-                    </a>
+                    </div>
+                  </a>
 
-                  </P>
+                  <!-- </P> -->
                   <p class="p2"><i>车辆：</i><font>{{ item.carNum }}</font>
                     <font>{{ item.carTypeName }}</font>
                     <font>长<b>{{ item.carLength }}</b>米</font>
@@ -720,10 +706,10 @@ export default {
       otherCarInfoList: [],
       handle: '',
       collection: '',
-      showMoblie1: false,
-      checkMoblie1: true,
-      showMoblie2: false,
-      checkMoblie2: true,
+      // showMoblie1: false,
+      // checkMoblie1: true,
+      // showMoblie2: false,
+      // checkMoblie2: true,
       isShowCollect: true,
       isCencelCollect: false,
       isShowAdd: false,
@@ -1446,24 +1432,24 @@ export default {
         }
       })
     },
-    showMoblieFns(showMoblieFns) {
-      if (showMoblieFns == false) {
-        this.showMoblie1 = true
-        this.checkMoblie1 = false
-      } else {
-        this.checkMoblie1 = true
-        this.showMoblie1 = false
-      }
-    },
-    showMoblieFn(showMoblieFn) {
-      if (showMoblieFn == false) {
-        this.showMoblie2 = true
-        this.checkMoblie2 = false
-      } else {
-        this.checkMoblie2 = true
-        this.showMoblie2 = false
-      }
-    },
+    // showMoblieFns(showMoblieFns) {
+    //   if (showMoblieFns == false) {
+    //     this.showMoblie1 = true
+    //     this.checkMoblie1 = false
+    //   } else {
+    //     this.checkMoblie1 = true
+    //     this.showMoblie1 = false
+    //   }
+    // },
+    // showMoblieFn(showMoblieFn) {
+    //   if (showMoblieFn == false) {
+    //     this.showMoblie2 = true
+    //     this.checkMoblie2 = false
+    //   } else {
+    //     this.checkMoblie2 = true
+    //     this.showMoblie2 = false
+    //   }
+    // },
     collected() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')

@@ -243,7 +243,7 @@ function member_01() {
   })
   return { aid: aid, jwd: jwd }
 }
-member_01()
+// member_01()
 //通过账号获取专线公司id E
 
 //网站主页网点列表S
@@ -384,8 +384,7 @@ function member_03(companyId2) {
         var address = datas[i].address
         var departureHzData = datas[i].departureHzData
         var departureHzTime = datas[i].departureHzTime
-        var arcurl =
-          '/zhuanxian/detail?id=' + id + '&publishId=' + companyId
+        var arcurl = '/zhuanxian/detail?id=' + id + '&publishId=' + companyId
 
         // $('#nr001').html(start)
         // $('#nr002').html(end)

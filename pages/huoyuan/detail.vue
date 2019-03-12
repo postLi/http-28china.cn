@@ -246,15 +246,46 @@
 
       </div>
       <div 
-      class="arc_right1">
+        class="arc_right1" 
+        v-if="archival.shipperType === 'AF0010101'">
         <div class="arc_top_title">
-          <h4 v-if="archival.shipperType === 'AF0010101'" >货主档案</h4>
-          <h4 v-if="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4>
+          <h4>货主档案</h4>
+          <!-- <h4 v-if="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4> -->
         </div>
         <div 
-          v-if="archival.shipperType === 'AF0010101'" 
-          class="arc_top_img">
+        class="arc_top_img">
           <img src="/images/cy/gold.png">
+        </div>
+        <div class="arc_middle">
+          <img src="/images/cy/09sj.png">
+          <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
+          <p><img src="/images/article_wlzx/10shiming.png"></p>
+          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
+        </div>
+        <ul class="bottom_ul">
+          <li>联系人：{{ archival.contacts }}</li>
+          <li>手机：
+            <a 
+              v-show="checkMoblie"
+              style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
+              @click="showMoblieFn(showMoblie)">查看电话</a>
+            <a 
+              v-show="showMoblie"
+              style="color: #333" 
+              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li>
+          <li>已加入：{{ archival.registerDays }}天</li>
+          <li>好评数：{{ archival.evaGoodCount }}</li>
+        </ul>
+      </div>
+      <div 
+        class="arc_right1" 
+        v-if="archival.shipperType === 'AF0010102'">
+        <div class="arc_top_title">
+          <h4>{{ archival.companyName }}</h4>
+        </div>
+        <div 
+        class="arc_top_img">
+        <!-- <img src="/images/cy/gold.png"> -->
         </div>
         <div class="arc_middle">
           <img src="/images/cy/09sj.png">
@@ -911,7 +942,7 @@ export default {
       .catch(err => {
         // console.log('hyDetail:', err)
       })
-    console.log(hyDetails, 'hyDetails')
+    // console.log(hyDetails, 'hyDetails')
     let parm = {
       currentPage: 1,
       pageSize: 10,

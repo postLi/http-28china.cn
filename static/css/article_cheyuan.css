@@ -253,6 +253,50 @@ width: 55px;margin-top: -2px;}
 	text-align: center;
 	line-height: 42px;
 }
+.lines-sprite-icons {
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+}
+.list-title {
+  font-weight: 300;
+  font-size: 18px;
+  color: #333;
+}
+.icon-through {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-position: -6px -62px;
+  position: relative;
+  top: 3px;
+  margin: 0 10px;
+}
+.icon-through {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-position: -6px -62px;
+  position: relative;
+  top: 3px;
+  margin: 0 10px;
+}
+.icon-end {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -6px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
+.icon-start {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -34px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
 .arc_middle5 .arc_m5_2_1{background-color: #fff;margin-left: 23px;}
 .arc_middle5 .arc_m5_2_1 span{font-size: 16px;color: #eb434d;}
 .arc_middle5 .arc_m5_2_2 span{font-size: 16px;color: #fff;}
@@ -282,8 +326,22 @@ width: 55px;margin-top: -2px;}
 .arc_right .arc_right02{height: 55px;line-height:55px;width: 304px;border: 0;}
 .arc_right02 i{color: #999;}
 .arc_right .arc_right03{height: 76px;width: 304px;border-top:dashed 1px #e2e2e2;border-bottom:dashed  1px #e2e2e2;}
-.arc_right03 span{color: #666;padding-right: 30px;margin-top: 17px; width:46px;display: block;float: left;}
-.arc_right03 font{color: #eb434d;padding-right: 30px;margin-top: 10px;width:46px;display: block;float: left;}
+.arc_right03 span{
+  color: #666;
+  padding-right: 30px;
+  margin-top: 17px;
+  width: 46px;
+  display: block;
+  float: left;
+  text-align: center;}
+.arc_right03 font{   
+  color: #eb434d;
+  padding-right: 30px;
+  margin-top: 10px;
+  width: 46px;
+  display: block;
+  text-align: center;
+  float: left;}
 .arc_right .arc_right04{height: 130px;width: 280px;}
 .arc_right04 span{float: left;display: block;height: 32px;line-height: 32px;width: 280px;}
 .arc_right04_1{margin-top: 10px;}

@@ -444,7 +444,7 @@
                 </li>
                 <li class="cy_list_1">
                   <p class="p1">
-                    <a
+                    <!-- <a
                       :href="'/cheyuan/detail?id=' + item.id"
                       class="list-title-a"
                       target="_blank" >
@@ -453,6 +453,19 @@
                       <span class="list-icon lines-sprite-icons icon-through"/>
                       <span class="list-icon lines-sprite-icons icon-end"/>
                       <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
+                    </a> -->
+                    <a
+                      :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
+                      class="list-title-a"
+                      target="_blank" >
+                      <div class="position">
+                        <span class="list-icon lines-sprite-icons icon-start"/>
+                        <em>{{ item.startCity }}</em>
+                        <span class="list-icon lines-sprite-icons icon-through"/>
+                        <span class="list-icon lines-sprite-icons icon-end"/>
+                        <em>{{ item.endCity }}</em>
+
+                      </div>
                     </a>
 
                   </P>
@@ -580,11 +593,11 @@
                 <div 
                   v-if="index < 3" 
                   class="img">
-                  <!-- <img :src="item.companyFile" > -->
+                  <img :src="item.companyFile" >
                 </div>
                 <div class="right">
-                  <span>{{ item.belongDriver ? item.belongDriver : '' + item.carNum }}</span>
-                  <span style="float: right;margin-right:15px">人气值：<i style="color: red">{{ item.popNum }}</i></span>
+                  <span>{{ item.companyName }}</span>
+                  <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
                 </div>
               </a>
             </div>
@@ -848,18 +861,6 @@ export default {
       }
 
       carInfoRes1 = await $axios.post('/28-web/carInfo/list', parm1)
-      //此路线其他车源
-      // otherCarSourceList = await $axios.get(
-      //   '/28-web/carInfo/getOtherCarSourceList/' + query.id
-      // )
-      // if (otherCarSourceList.data.status === 200) {
-      //   otherCarSourceList.data.data.forEach(item => {
-      //     item.createTime1 = parseTime(
-      //       item.createTime,
-      //       '{y}-{m}-{d} {h}:{i}:{s}'
-      //     )
-      //   })
-      // }
     }
     let parm2 = {
       endArea: cy1.data.data.endArea,
@@ -871,19 +872,10 @@ export default {
     }
     //最新货源信息
     let newLists = await $axios
-      .post('/28-web//carInfo/newest/publish')
+      .post('/28-web/carInfo/newest/publish')
       .catch(err => {
         // console.log('newestHuoyuanRes:', err)
       })
-    // console.log(newLists.data.data, 'newestCheyuanRes')
-
-    //车主月人气榜列表
-    let carPopularityRes = await $axios.get('/28-web/carInfo/carPopularityList')
-    // console.log('车主月人气榜', carPopularityRes.data)
-    //24小时内发布的车源中最新的前10条车源信息
-    let newestCreateCarRes = await $axios.get(
-      '/28chinaservice/carInfo/newestCreateCar'
-    )
     let driverId = cy1.data.data.driverId
     //综合力评估
     let cheComprehensives = await $axios
@@ -897,10 +889,9 @@ export default {
     let cheLinks = await $axios
       .post('/28-web/carInfo/detail/related/links', parm2)
       .catch(err => {})
-    // console.log(cheLinks.data.data.interestedRecommend.links, 'cheLinks')
     //企业人气榜
     let popularitys = await $axios
-      .get('/28-web/carInfo/carPopularityList')
+      .get('/28-web/logisticsCompany/popularity')
       .catch(err => {
         console.log('popularitys')
       })
@@ -957,11 +948,6 @@ export default {
     hotSearchs.data.data.links.forEach(footLink)
     cheLinks.data.data.interestedRecommend.links.forEach(footLink)
     cheLinks.data.data.recommend.links.forEach(footLink)
-    // console.log(hotSearchs.data.data, 'cheComprehensive1')
-    // console.log(
-    //   '24小时内发布的车源中最新的前10条车源信息',
-    //   newestCreateCarRes.data
-    // )
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
@@ -996,17 +982,9 @@ export default {
         : carInfoRes1.data.status === 200
           ? carInfoRes1.data.data.list
           : [],
-      carPopularityList:
-        carPopularityRes.data.status === 200 ? carPopularityRes.data.data : [],
-      newestCreateCar:
-        newestCreateCarRes.data.status === 200
-          ? newestCreateCarRes.data.data
-          : [],
       popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       hotSearchList:
         hotSearchs.data.status === 200 ? hotSearchs.data.data.links : []
-      // otherCarInfoList: otherCarInfoList.list,
-      // pages: otherCarInfoList.pages
     }
   },
   mounted() {

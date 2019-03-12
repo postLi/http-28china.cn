@@ -936,7 +936,7 @@ export default {
       .catch(err => {
         // console.log('archivals')
       })
-    console.log(archivals.data.data, 'archivals.data.data')
+    // console.log(archivals.data.data, 'archivals.data.data')
     //顶部轮播
     let newLists = await $axios
       .get('/28-web/lclOrder/newList')
@@ -1067,7 +1067,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.hyDetail, 'hyDetail')
+    // console.log(this.hyDetail, 'hyDetail')
     if (process.client) {
       console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({

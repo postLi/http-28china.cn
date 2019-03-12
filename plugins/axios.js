@@ -1,3 +1,23 @@
+function logReqInfos(app, res, isError) {
+  let cfg = res.config
+  app.store.commit('setErrorReqList', {
+    config: {
+      baseURL: cfg.data,
+      data: cfg.data,
+      headers: cfg.headers,
+      method: cfg.method,
+      timeout: cfg.timeout,
+      url: cfg.url,
+      withCredentials: cfg.withCredentials,
+      xsrfCookieName: cfg.xsrfCookieName,
+      xsrfHeaderName: cfg.xsrfHeaderName
+    },
+    data: res.data,
+    status: res.status,
+    isError: !!isError
+  })
+}
+
 export default function(app) {
   let axios = app.$axios
   let redirect = app.redirect
@@ -81,16 +101,9 @@ $axios :
         res.data.status === 200 ||
         res.config.url.indexOf('.json') !== -1
       ) {
-        app.store.commit('setErrorReqList', {
-          config: res.config,
-          data: res.data
-        })
+        logReqInfos(app, res)
       } else {
-        app.store.commit('setErrorReqList', {
-          config: res.config,
-          data: res.data,
-          isError: true
-        })
+        logReqInfos(app, res, true)
       }
     }
   })
@@ -99,12 +112,7 @@ $axios :
     for (let i in err) {
       console.log(i, ':')
     }
-    app.store.commit('setErrorReqList', {
-      config: err.config,
-      data: err.data,
-      status: err.status,
-      isError: true
-    })
+    logReqInfos(app, err, true)
     // }
   })
   //onResponseError

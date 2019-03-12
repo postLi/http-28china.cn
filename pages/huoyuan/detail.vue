@@ -245,7 +245,7 @@
         </p>
 
       </div>
-      <!-- <div 
+      <div 
       class="arc_right1">
         <div class="arc_top_title">
           <h4 v-if="archival.shipperType === 'AF0010101'" >货主档案</h4>
@@ -276,7 +276,7 @@
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
-      </div> -->
+      </div>
     </div>
     <div class="arc_main3">
      

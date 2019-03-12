@@ -945,7 +945,7 @@
                     style="color: #fff;"><span
                       id="wlgs_jyfw"
                       :title="(item.productService || '').replace(/(\[|\])/g, '')"
-                      class="t0003">{{ (item.productService || '').replace(/(\[|\])/g, '') }}</span></a>
+                      class="t0003">{{ (item.productService || '').replace(/(\[|\]|")/g, '') }}</span></a>
                   <span
                     id="t77"
                     class="t0004"><a

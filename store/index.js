@@ -9,7 +9,8 @@ export const state = () => ({
     currentProvince: '',
     currentProvinceFullName: '',
     currentProvinceName: ''
-  }
+  },
+  errorReqList: []
 })
 
 export const mutations = {
@@ -21,5 +22,8 @@ export const mutations = {
   },
   setAreaInfo(state, payload) {
     state.area = payload
+  },
+  setErrorReqList(state, payload) {
+    state.errorReqList.push(payload)
   }
 }

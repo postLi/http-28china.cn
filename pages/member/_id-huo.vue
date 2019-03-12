@@ -126,10 +126,13 @@
           </ul>
         </div>
     	
-        <div class="huo_none"><span>暂无货源信息</span></div>
+        <div
+          class="huo_none" 
+          v-if="list.length < 1"><span>暂无货源信息</span></div>
         <div 
+          v-else
           class="hy_item" 
-          style="display: none;">
+        >
           <ul>
             <li class="hy_item01"><a 
               id="nr041" 
@@ -181,24 +184,32 @@ export default {
     link: [{ rel: 'stylesheet', href: '/member/css/list.css' }]
   },
   layout: 'member',
+  computed: {
+    list() {
+      return this.$store.state.member.huoList.list
+    },
+    total() {
+      return this.$store.state.member.huoList.total
+    }
+  },
   mounted() {
+    let _this = this
     seajs.use(
       ['/member/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
       function() {
         seajs.use(
           [
             '/index/js/city-picker.js',
-            '/member/js/index.js',
             '/index/js/collection.js',
             '/member/js/huo.js'
           ],
           function() {
             $('#pagination1').pagination({
               currentPage: 1,
-              totalPage: get_huo(1).totalPage,
+              totalPage: _this.total,
               callback: function(current) {
                 $('#current1').text(current)
-                get_huo(current)
+                this.fetchData(current)
               }
             })
           }
@@ -206,9 +217,25 @@ export default {
       }
     )
   },
-  async fetch({ store, params, $axios, error }) {
+  methods: {
+    fetchData(pnum) {
+      store.dispatch('member/getCompanyHuo', {
+        shipperId: params.id,
+        pageSize: 10,
+        currentPage: pnum
+      })
+    }
+  },
+  fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
-    await store.dispatch('member/GETCOMPANYINFO', params.id)
+    return Promise.all([
+      store.dispatch('member/GETCOMPANYINFO', params.id),
+      store.dispatch('member/getCompanyHuo', {
+        shipperId: params.id,
+        pageSize: 10,
+        currentPage: 1
+      })
+    ])
   }
 }
 </script>

@@ -33,7 +33,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.info, 'info')
+    // console.log(this.info, 'info')
     if (process.client && this.info.length) {
       this.datas = this.info.map(item => {
         this.carSourceType = ''

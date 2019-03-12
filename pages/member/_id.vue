@@ -5,8 +5,8 @@
       class="index-banner">
       <div class="banner_text">
         <span>
-          <em id="nr_name">{{ $store.state.member.company.contactsName }}</em>&nbsp;
-          <em id="nr_tel">{{ $store.state.member.company.mobile }}</em>
+          <em id="nr_name">{{ company.contactsName }}</em>&nbsp;
+          <em id="nr_tel">{{ company.mobile }}</em>
         </span>
       </div>
       <div class="banner-box">
@@ -75,7 +75,7 @@
           </a>
           <a
             id="btn_offerTime"
-            :href="$store.state.member.id + '-order?uid=' + $store.state.member.id + '&publishId=' + $store.state.member.id" 
+            :href="mid + '-order?uid=' + mid + '&publishId=' + mid" 
             class="menu-item js-express-price item-3 need_companyId" 
             target="_blank"
           >
@@ -86,7 +86,7 @@
           </a>
           <a
             id="qq"
-            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + $store.state.member.company.qq + '&site=qq&menu=yes'"
+            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + company.qq + '&site=qq&menu=yes'"
             class="menu-item js-express-complain item-4"
             target="_blank"
           >
@@ -622,7 +622,7 @@
             <li class="zx_item05">
               <a 
                 id="nr0007" 
-                :href="$store.state.member.id + '-order?id=' + item.id + '&publishId=' + item.companyId"
+                :href="mid + '-order?id=' + item.id + '&publishId=' + item.companyId"
                 target="_blank" >
                 <input 
                   class="input1" 
@@ -708,7 +708,7 @@
           </div>
           <div 
             id="nr082" 
-            class="main4_nr">{{ $store.state.member.company.companyDes ? $store.state.member.company.companyDes.substring(0, 470) + '...' : '暂无内容' }}</div>
+            class="main4_nr">{{ company.companyDes ? company.companyDes.substring(0, 470) + '...' : '暂无内容' }}</div>
         </div>
         <div class="main4_right">
           <div 
@@ -756,6 +756,12 @@ export default {
     },
     olen() {
       return this.$store.state.member.company.otherServiceCode.length
+    },
+    mid() {
+      return this.$store.state.member.id
+    },
+    company() {
+      return this.$store.state.member.company
     }
   },
   mounted() {
@@ -770,10 +776,9 @@ export default {
         '/index/js/collection.js'
       ],
       function() {
-        var productServiceCode =
-          _this.$store.state.member.company.productServiceCode
+        var productServiceCode = _this.company.productServiceCode
         var n = productServiceCode.length
-        var uid = _this.$store.state.member.id
+        var uid = _this.mid
         for (var i = 1; i < 10; i++) {
           if (productServiceCode) {
             if (productServiceCode.indexOf('AF0270' + i) != -1) {

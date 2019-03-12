@@ -1,6 +1,33 @@
 export default function(app) {
   let axios = app.$axios
   let redirect = app.redirect
+
+  /* isStatic :
+isDev :
+isHMR :
+app :
+store :
+payload :
+error :
+base :
+env :
+req :
+res :
+redirect :
+beforeNuxtRender :
+next :
+_redirected :
+_errored :
+route :
+params :
+query :
+$axios :
+ */
+
+  /* for (let i in app) {
+    console.log(i, ':')
+  } */
+
   // 基本配置
   axios.defaults.timeout = 30000
   axios.defaults.baseUrl = ''
@@ -47,7 +74,40 @@ export default function(app) {
   })
 
   // 返回回调
-  axios.onResponse(res => {})
+  axios.onResponse(res => {
+    if (process.server) {
+      if (
+        res.data.code === '200' ||
+        res.data.status === 200 ||
+        res.config.url.indexOf('.json') !== -1
+      ) {
+        app.store.commit('setErrorReqList', {
+          config: res.config,
+          data: res.data
+        })
+      } else {
+        app.store.commit('setErrorReqList', {
+          config: res.config,
+          data: res.data,
+          isError: true
+        })
+      }
+    }
+  })
+  axios.onResponseError(err => {
+    // if (process.server) {
+    for (let i in err) {
+      console.log(i, ':')
+    }
+    app.store.commit('setErrorReqList', {
+      config: err.config,
+      data: err.data,
+      status: err.status,
+      isError: true
+    })
+    // }
+  })
+  //onResponseError
 
   // 错误回调
   axios.onError(error => {

@@ -1,14 +1,6 @@
 <template> 
   <div class="arc_main">
-    <!--<div class="arc_nav">-->
-    <!--<a href="/">物流首页</a>&gt;<a -->
-    <!--id="arc_nav_a1" -->
-    <!--href="">货源信息</a>&gt;<a -->
-    <!--id="arc_nav_a2" -->
-    <!--href="">货源信息</a>-->
-    <!--</div>-->
     <div class="arc_top1">
-      <!-- <div class="arc_top1_1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span></div> -->
       <img 
         width="135px" 
         src="/img/logo.png" >
@@ -33,11 +25,19 @@
     </div>
     <div class="arc_toptitle">
       <h1>{{ hyDetail.companyName ? hyDetail.companyName : '货源详情' }}</h1>
-      <ul class="two_tltle">
-        <li><a href="/gongsi/">公司官网</a></li>
-        <li><a href="/zhuanxian/list">专线信息</a></li>
-        <li><a href="/huoyuan">货源信息</a></li>
-        <li><a href="/wangdian">网点信息</a></li>
+      
+      <ul 
+        class="two_tltle" 
+        v-if="hyDetail.companyName">
+        <li/>
+        <li><a 
+          style="float:left"
+          :href="/member/ + hyDetail.lgCompanyId">公司官网</a><a :href="/member/ + hyDetail.lgCompanyId + '-line'">专线信息</a></li>
+        <li><a  
+          style="float:left" 
+          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a><a  
+        :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
+        <li/>
       </ul>
     </div>
     <div class="arc_top2">
@@ -72,8 +72,7 @@
       <div class="arc_left">
         <div class="arc_left_1">
           <div class="top_left">
-            <ul 
-            class="top_left_ul" >
+            <ul class="top_left_ul" >
               <li 
                 v-for="(item,index) in newList" 
                 :key="index" 
@@ -101,7 +100,7 @@
           <div class="arc_left_2_1">
             <div class="arc_left_2_1_1"><span>货源信息</span></div>
             <div class="arc_left_2_1_2"><table>
-              <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsName ? hyDetail.goodsName : '' }}</font></td></tr>
+              <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsTypeName ? hyDetail.goodsTypeName : '' }}</font></td></tr>
               <tr><td class="arc_td1">数量：</td><td class="arc_td2">{{ hyDetail.goodsNum ? hyDetail.goodsNum + '件': '' }}</td></tr>
               <tr><td class="arc_td1">重量：</td><td
               class="arc_td2">{{ hyDetail.goodsWeight }}公斤</td></tr>
@@ -247,11 +246,10 @@
 
       </div>
       <div 
-        
       class="arc_right1">
         <div class="arc_top_title">
           <h4 v-if="archival.shipperType === 'AF0010101'" >货主档案</h4>
-          <h4 else="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4>
+          <h4 v-if="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4>
         </div>
         <div 
           v-if="archival.shipperType === 'AF0010101'" 
@@ -339,7 +337,7 @@
               class="manage_box" >
               <span>{{ item.startProvinceCityArea }}</span>
               <span>{{ item.endProvinceCityArea }}</span>
-              <span>{{ item.goodsName }}</span>
+              <span>{{ item.goodsTypeName }}</span>
               <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
               <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
               <span>{{ item.createTime }}</span>
@@ -432,7 +430,7 @@
           
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum ? item.goodsNum : '' }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
@@ -567,7 +565,7 @@
           
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsName }} </font></p>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
@@ -911,7 +909,7 @@ export default {
     let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {
-        console.log('hyDetail:', err)
+        // console.log('hyDetail:', err)
       })
     console.log(hyDetails, 'hyDetails')
     let parm = {
@@ -934,54 +932,53 @@ export default {
     }
     //货主档案
     let archivals = await $axios
-      .post('/28-web/shipper/archival?sshipperId=' + query.shipperId)
+      .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
       .catch(err => {
-        console.log('archivals')
+        // console.log('archivals')
       })
-    // console.log(archivals.data.data, 'item province:')
+    console.log(archivals.data.data, 'archivals.data.data')
     //顶部轮播
     let newLists = await $axios
       .get('/28-web/lclOrder/newList')
       .catch(err => {})
       .catch(err => {
-        console.log('newLists')
+        // console.log('newLists')
       })
     //货源列表
     let huoInfoLists = await $axios
       .post('/28-web/lclOrder/list', parm)
       .catch(err => {
-        console.log('huoComprehensives4:', err)
+        // console.log('huoComprehensives4:', err)
       })
     //最新货源信息
     let newestHuoyuanRes = await $axios
       .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
       .catch(err => {
-        console.log('newestHuoyuanRes:', err)
+        // console.log('newestHuoyuanRes:', err)
       })
     // 货主综合力评估
     let huoComprehensives = await $axios
       .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
       .catch(err => {
-        console.log('huoComprehensives:', err)
+        // console.log('huoComprehensives:', err)
       })
     //货源热门搜索
     let hotSearchs = await $axios
       .get('/28-web/hotSearch/supply/detail/links')
       .catch(err => {
-        console.log('hotSearchs')
+        // console.log('hotSearchs')
       })
     //企业人气榜
     let popularitys = await $axios
       .get('/28-web/logisticsCompany/popularity')
       .catch(err => {
-        console.log('popularitys')
+        // console.log('popularitys')
       })
     //底部推荐
-
     let huoLinks = await $axios
       .post('/28-web/lclOrder/detail/related/links', parm1)
       .catch(err => {
-        console.log('huoLinks')
+        // console.log('huoLinks')
       })
     let footLink = item => {
       switch (item.startProvince) {
@@ -1036,7 +1033,6 @@ export default {
     huoLinks.data.data.brandOrder.links.forEach(footLink)
     huoLinks.data.data.interestOrder.links.forEach(footLink)
     hotSearchs.data.data.links.forEach(footLink)
-    console.log(99999999999)
     return {
       archival: archivals.data.status === 200 ? archivals.data.data : [],
       hyDetail: hyDetails.data.status === 200 ? hyDetails.data.data : {},
@@ -1053,7 +1049,6 @@ export default {
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       huoInfoList:
         huoInfoLists.data.status === 200 ? huoInfoLists.data.data.list : [],
-      // otherInfoList: otherInfoList.list,
       huoLink:
         huoLinks.data.status === 200 ? huoLinks.data.data.brandOrder.links : [],
       huoLabel:
@@ -1072,6 +1067,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.hyDetail, 'hyDetail')
     if (process.client) {
       console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({

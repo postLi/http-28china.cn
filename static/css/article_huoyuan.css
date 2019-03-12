@@ -144,8 +144,14 @@ float:right;text-align: center;
 .arc_right .arc_right02 img{display:none;}
 .arc_right02 i{color: #999;}
 .arc_right .arc_right03{height: 76px;width: 280px;border-top:dashed 1px #e2e2e2;border-bottom:dashed  1px #e2e2e2;}
-.arc_right03 span{color: #666;padding-right: 30px;margin-top: 17px; width:46px;display: block;float: left;}
-.arc_right03 font{color: #eb434d;padding-right: 30px;margin-top: 10px;width:46px;display: block;float: left;}
+.arc_right03 span{    text-align: center;color: #666;padding-right: 30px;margin-top: 17px; width:46px;display: block;float: left;}
+.arc_right03 font{    color: #eb434d;
+  padding-right: 30px;
+  margin-top: 10px;
+  width: 46px;
+  display: block;
+  float: left;
+  text-align: center;}
 .arc_right .arc_right04{height: 130px;width: 228px;}
 .arc_right04 span{float: left;display: block;height: 32px;line-height: 32px;width: 100%;}
 .arc_right04_1{margin-top: 10px;}

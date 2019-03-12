@@ -1,10 +1,10 @@
 <template>
   <div class="yuanqu">
     <div class="list_box">
-      <div class="header">
-        <img
-          src="../../static/yuanqu/images/hearder.png"
-          alt="">
+      <div class="herder">
+      <!-- <img 
+          src="../../static/yuanqu/images/hearder.png" 
+          alt=""> -->
       </div>
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a
@@ -13,12 +13,10 @@
       </div>
       <div class="list_left">
         <div
-          class=""
+          class="w1036"
           style=" background-color: #fff;">
 
-          <div 
-            class="select_con"
-            style="float:left;width: 900px;">
+          <div class="select_con">
 
             <dl>
               <dt><span>园区所在地&nbsp;：</span></dt>
@@ -57,59 +55,21 @@
                   placeholder="请输入园区名称" >
                 <input
                   id="search_wlyq"
-                  value=" 搜索园区 "
+                  value=" 搜索 "
                   readonly=""
                   class="list_button"
-                  style="width:100px"
                   @click="search()">
-                  <!-- <input
+                <input
                   id="flush"
                   name="Submit2"
                   value="重置 "
                   readonly=""
                   class="list_button"
-                  @click="reload()"> -->
+                  @click="reload()">
               </form>
               </dd>
 
             </dl>
-
-          </div>
-          <div><a 
-            href="/regisiter"
-            target="_blank"><button
-              id="yd_cx1"
-              class="layui-btn"
-              style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;float:right"
-          >物流公司入驻</button></a></div>
-          
-        </div>
-        <div 
-          class="clearfix"
-          style="clear: both;"><i>热门：</i><span 
-            v-for="(item, index) in 5"
-            :key="index" 
-            style="padding-right:10px">上海</span>
-        </div>
-        <div class="tuijian">
-          <div class="tuijian_title">
-            <h5 style="color:rgb(196,69,76);font-size:18px">推荐园区</h5>
-            <a href=""><span style="float:right"> 更多></span></a>
-          </div>
-          <div class="tuijian_content">
-            <ul>
-              <li>
-                <a 
-                  href=""
-                  style="position:relative"><img 
-                    src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg" 
-                    width="260"
-                    height="165"
-                    alt=""><span style="position:absolute;bottom:1px;left:1px">安发物流园</span></a>
-                <p>推荐指数
-
-              </p></li>
-            </ul>
           </div>
         </div>
         <div class="w1036 list_wlyq">
@@ -169,7 +129,7 @@
 
       </div>
 
-      <!-- <div class="list_right">
+      <div class="list_right">
         <div class="zx_sx"><span class="biaozhi"/><span>园区推荐</span></div>
         <div class="tj_none hy_tj_none">
           <span>暂无相关园区推荐</span>
@@ -194,7 +154,7 @@
             <div class="p p5"><span>{{ item.browseNumber }}</span></div>
           </a>
         </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -221,14 +181,16 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/basic.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/yuanqu/css/list_wlyq.css' },
-      { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
-      // { rel: 'stylesheet', href: '/css/list_wlyq.css' }
+      { rel: 'stylesheet', href: '/css/list_wlyq.css' }
     ],
     script: [
-      { src: './js/city-picker.data.js' },
-      { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' }
+      { src: '../js/city.js' },
+      { src: '/layer/dist/layui.js' },
+      { src: '../js/city-picker.js' },
+      { src: '../js/jquery.pagination.min.js' }
+      // { src: './js/city-picker.data.js' },
+      // { src: './js/city-picker.js' },
+      // { src: './js/jquery.pagination.min.js' }
     ]
   },
   data() {
@@ -326,16 +288,5 @@ export default {
 
 <style lang="scss">
 .yuanqu {
-  .clearfix:after {
-    content: ' ';
-    display: table;
-  }
-  .clearfix:before {
-    content: '';
-    display: table;
-  }
-  .clearfix:after {
-    clear: both;
-  }
 }
 </style>

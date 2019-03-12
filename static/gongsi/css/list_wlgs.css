@@ -296,6 +296,7 @@ width: 342px;
 .lll-gongsi .header_links{
   margin-top: 0;
   padding-top: 20px;
+  height:206px;
 }
 .header_list ul.first_ul li.first_li{
   float: left;
@@ -314,7 +315,7 @@ padding: 0 21px
 }
 .header_list ul.first_ul li.last_li{
   float: left;
-  width: 280px;
+  width: 298px;
   /* border: 1px solid #ccc; */
   height: 420px;
   background: #fff;
@@ -400,5 +401,26 @@ padding: 0 21px
   padding-bottom: 40px;
   border-bottom: 1px solid #e7e7e7;
 }
-.lll-gongsi .header_links_l li:nth-of-type()
+.lll-gongsi .header_links_l li{
+  margin-right: 10px;
+}
+.lll-gongsi .header_links_l li:nth-of-type(4),.lll-gongsi .header_links_l li:last-of-type{
+  margin-right: 0;
+}
+.lll-gongsi .header_links_l li:nth-of-type(n+5){
+  margin-top: 10px;
+}
+
+.lll-gongsi .header_links_r .header_links_r_search{
+position: relative
+}
+.lll-gongsi .header_links_r .header_links_r_search::before{
+  position: absolute;
+  top: 18px;
+  left: -20px;
+  content:'';
+height: 20px;
+width: 3px;
+background: #2577e3;
+  }
 /*arc_main8*/

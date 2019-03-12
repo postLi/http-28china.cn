@@ -1,7 +1,7 @@
 <template>
   <ul class="footerLinks">
     <li
-      v-for="(item, index) in info"
+      v-for="(item, index) in datas"
       :key="index"
     >
       <a
@@ -21,84 +21,77 @@ export default {
   props: {
     info: {
       type: [Array, Object],
-      default: () => {}
+      default: () => []
     }
   },
   data() {
     return {
       targetLinks: '',
       carSourceType: '',
-      toLinks: ''
-    }
-  },
-  watch: {
-    info(n, o) {
-      // console.log(n, 'nnnnnnnn')
+      toLinks: '',
+      datas: []
     }
   },
   mounted() {
-    // console.log(this.info, 'info')
-    this.info.forEach(item => {
-      this.carSourceType = ''
-      this.targetLinks = ''
+    console.log(this.info, 'info')
+    if (process.client && this.info.length) {
+      this.datas = this.info.map(item => {
+        this.carSourceType = ''
+        this.targetLinks = ''
+        item = Object.assign({}, item)
 
-      switch (item.startProvince) {
-        case null:
-          item.startProvince = ''
-      }
-      switch (item.startCity) {
-        case null:
-          item.startCity = ''
-      }
-      switch (item.startArea) {
-        case null:
-          item.startArea = ''
-      }
-      switch (item.endProvince) {
-        case null:
-          item.endProvince = ''
-      }
-      switch (item.endCity) {
-        case null:
-          item.endCity = ''
-      }
-      switch (item.endArea) {
-        case null:
-          item.endArea = ''
-      }
-      if (item.type == '1000') {
-        this.targetLinks = '/gongsi/'
-      }
-      if (item.type == '2000') {
-        this.targetLinks = '/zhuanxian/list'
-      }
-      if (item.type == '2001') {
-        this.targetLinks = '/member/' + item.companyId + '-line'
-      }
-      if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
-        this.targetLinks = '/cheyuan'
-      }
-      if (item.type == '3001') {
-        this.targetLinks = '/cheyuan'
-        this.carSourceType = 'AF01801'
-      }
-      if (item.type == '4000') {
-        this.targetLinks = '/huoyuan'
-      }
-      if (item.type == '4001') {
-        this.targetLinks = '/member/' + item.companyId + '-huo'
-      }
-      item.targetLinks = this.targetLinks
-      item.carSourceType = this.carSourceType
-    })
+        item.startProvince = item.startProvince || ''
+
+        switch (item.startCity) {
+          case null:
+            item.startCity = ''
+        }
+        switch (item.startArea) {
+          case null:
+            item.startArea = ''
+        }
+        switch (item.endProvince) {
+          case null:
+            item.endProvince = ''
+        }
+        switch (item.endCity) {
+          case null:
+            item.endCity = ''
+        }
+        switch (item.endArea) {
+          case null:
+            item.endArea = ''
+        }
+        if (item.type == '1000') {
+          this.targetLinks = '/gongsi/'
+        }
+        if (item.type == '2000') {
+          this.targetLinks = '/zhuanxian/list'
+        }
+        if (item.type == '2001') {
+          this.targetLinks = '/member/' + item.companyId + '-line'
+        }
+        if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
+          this.targetLinks = '/cheyuan'
+        }
+        if (item.type == '3001') {
+          this.targetLinks = '/cheyuan'
+          this.carSourceType = 'AF01801'
+        }
+        if (item.type == '4000') {
+          this.targetLinks = '/huoyuan'
+        }
+        if (item.type == '4001') {
+          this.targetLinks = '/member/' + item.companyId + '-huo'
+        }
+        item.targetLinks = this.targetLinks
+        item.carSourceType = this.carSourceType
+        return item
+      })
+    }
   },
   methods: {
-    switchFn(item) {
-      switch (item) {
-        case null:
-          item = ''
-      }
-    }
+    switchFn(item) {}
   }
 }
 

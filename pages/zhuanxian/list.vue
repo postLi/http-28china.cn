@@ -1,6 +1,4 @@
 
-<script src="../../store/member.js">
-</script>
 <template>
   <div class="lll-zhuangXian">
     <div class="list_box">
@@ -594,11 +592,9 @@ export default {
     if (!endc || endc == 'null') {
       endc = ''
     }
-    if (process.server) {
-      aurl = 'http://localhost:3000'
-    }
+
     let [listA, listB, listC, listD, codeA, codeB, codeC] = await Promise.all([
-      $axios.post(aurl + `/api/28-web/range/list`, {
+      $axios.post(aurl + `/28-web/range/list`, {
         currentPage: 1,
         pageSize: 6,
         startProvince: startp,
@@ -612,7 +608,7 @@ export default {
         otherServiceCode: query.otherServiceCode,
         parkId: query.parkId
       }),
-      $axios.post(aurl + `/api/28-web/range/recommend`, {
+      $axios.post(aurl + `/28-web/range/recommend`, {
         currentPage: 1,
         pageSize: 5,
         startProvince: startp,
@@ -627,7 +623,7 @@ export default {
         parkId: query.parkId,
         companyName: query.companyName
       }),
-      $axios.post(aurl + `/api/28-web/range/related/links`, {
+      $axios.post(aurl + `/28-web/range/related/links`, {
         startProvince: startp,
         startCity: startc,
         startArea: starta,
@@ -635,10 +631,10 @@ export default {
         endCity: endc,
         endArea: enda
       }),
-      $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
-      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF026'),
-      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF029'),
-      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
+      $axios.get(aurl + '/28-web/logisticsCompany/popularity'),
+      $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF026'),
+      $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF029'),
+      $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
     console.log(listD.data.data.slice(-13).length, 'listD')
     //codeA过节后继续
@@ -682,194 +678,200 @@ export default {
     // }
   },
   mounted() {
-    let _this = this
-    // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
-    // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
-    seajs.use(['/js/city.js', '/js/city-picker.data.js', 'layer'], function() {
+    if (process.client) {
+      let _this = this
+      // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
+      // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
       seajs.use(
-        [
-          '/js/city-picker.js',
-          '/js/jquery.pagination.min.js',
-          '/js/AFLC_API.js'
-        ],
+        ['/js/city.js', '/js/city-picker.data.js', 'layer'],
         function() {
-          seajs.use(['/line/js/list_wlzx.js'], function() {
-            seajs.use(['/js/collection.js'], function() {
-              seajs.use(['/js/gaodemap2.js'], function() {
-                let orderBy = 'default'
-                let currentPage = 1
-                $('.list_tiaoj span').click(function() {
-                  //alert("1");
-                  $('.list_tiaoj span').removeClass('active')
-                  $(this).toggleClass('active')
-                })
-
-                function onCheckPage() {
-                  var beginPage = parseInt(
-                    document.beginPagefrm.beginPage.value
-                  )
-                  if (isNaN(beginPage)) {
-                    alert('请输入数字！')
-                    return false
-                  }
-                  if (beginPage <= 0) {
-                    beginPage = 1
-                  }
-                  if (beginPage > 100) {
-                    beginPage = 100
-                  }
-                  if (beginPage > 1) {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-                      beginPage
-                  } else {
-                    document.beginPagefrm.action =
-                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-                  }
-                  return true
-                }
-
-                // $('#pagination1').pagination({
-                //   currentPage: 1,
-                //   totalPage: process02(1),
-                //   callback: function(current) {
-                //     console.log(current, 'current')
-                //     $('#current1').text(current)
-                //     process02(current)
-                //     window.location.href = '#top'
-                //   }
-                // })
-                // onCheckPage()
-                $('#pagination1').pagination({
-                  currentPage: 1,
-                  totalPage: _this.lineListsTotalPage,
-                  callback: function(current) {
-                    $('#current1').text(current)
-                    // orderBy = ''
-                    currentPage = current
-                    fetchLineList(currentPage, orderBy)
-                    window.location.href = '#top'
-                  }
-                })
-                //切换专线信息
-                function clickPrice() {
-                  $('#seq0').click(function() {
-                    console.log('clear排序')
-                    orderBy = 'default'
-                    fetchLineList(currentPage, orderBy)
-                  })
-                  $('#seq1').click(function() {
-                    console.log('orderNumber排序')
-                    orderBy = 'orderDesc'
-                    fetchLineList(currentPage, orderBy)
-                  })
-                  $('#seq2').click(function() {
-                    console.log('transportAging排序')
-                    orderBy = 'transportAgingAsc'
-                    fetchLineList(currentPage, orderBy)
-                  })
-                  $('#tj_price2').click(function() {
-                    $('#tj_price').css('display', 'none')
-                    // console.log('weigthPrice排序')
-                    orderBy = 'weigthPrice'
-                    fetchLineList(currentPage, orderBy)
-                  })
-                  $('#tj_price1').click(function() {
-                    $('#tj_price').css('display', 'none')
-                    // console.log('lightPrice排序')
-                    orderBy = 'lightPrice'
-                    fetchLineList(currentPage, orderBy)
-                  })
-                }
-                function fetchLineList(currentPage, orderBy) {
-                  let aurl = ''
-                  let startp = _this.$route.query.startp
-                  let startc = _this.$route.query.startc
-                  let starta = _this.$route.query.starta
-                  let endp = _this.$route.query.endp
-                  let enda = _this.$route.query.enda
-                  let endc = _this.$route.query.endc
-                  let belongBrandCode = _this.$route.query.belongBrandCode
-                  let departureTimeCode = _this.$route.query.departureTimeCode
-                  let otherServiceCode = _this.$route.query.otherServiceCode
-                  let parkId = _this.$route.query.parkId
-                  let companyName = _this.$route.query.companyName
-                  //
-                  // if (
-                  //   !startp ||
-                  //   startp == 'null' ||
-                  //   !startc ||
-                  //   startc == 'null' ||
-                  //   !starta ||
-                  //   starta == 'null' ||
-                  //   !endp ||
-                  //   endp == 'null' ||
-                  //   !enda ||
-                  //   enda == 'null' ||
-                  //   !endc ||
-                  //   endc == 'null' ||
-                  //   !departureTimeCode ||
-                  //   departureTimeCode == 'null' ||
-                  //   !otherServiceCode ||
-                  //   otherServiceCode == 'null' ||
-                  //   !parkId ||
-                  //   parkId == 'null' ||
-                  //   !companyName ||
-                  //   companyName == 'null'
-                  // ) {
-                  //   startp = ''
-                  //   startc = ''
-                  //   starta = ''
-                  //   endp = ''
-                  //   enda = ''
-                  //   endc = ''
-                  //   // belongBrandCode = ''
-                  //   departureTimeCode = ''
-                  //   otherServiceCode = ''
-                  //   parkId = ''
-                  //   companyName = ''
-                  // }
-
-                  if (process.server) {
-                    aurl = 'http://localhost:3000'
-                  }
-                  $axios
-                    .post(aurl + `/api/28-web/range/list`, {
-                      currentPage: currentPage,
-                      pageSize: 6,
-                      orderBy: orderBy,
-                      startProvince: startp,
-                      startCity: startc,
-                      startArea: starta,
-                      endProvince: endp,
-                      endCity: endc,
-                      endArea: enda,
-                      belongBrandCode: belongBrandCode,
-                      departureTimeCode: departureTimeCode,
-                      otherServiceCode: otherServiceCode,
-                      parkId: parkId
+          seajs.use(
+            [
+              '/js/city-picker.js',
+              '/js/jquery.pagination.min.js',
+              '/js/AFLC_API.js'
+            ],
+            function() {
+              seajs.use(['/line/js/list_wlzx.js'], function() {
+                seajs.use(['/js/collection.js'], function() {
+                  seajs.use(['/js/gaodemap2.js'], function() {
+                    let orderBy = 'default'
+                    let currentPage = 1
+                    $('.list_tiaoj span').click(function() {
+                      //alert("1");
+                      $('.list_tiaoj span').removeClass('active')
+                      $(this).toggleClass('active')
                     })
-                    .then(res => {
-                      // res.data.data.num = Math.ceil(Math.random() * 30)
-                      // console.log('this.lineList12:', res.data.data)
-                      res.data.data.list.forEach(item => {
-                        item.num = Math.ceil(Math.random() * 30)
-                        // console.log('this.lineList:', item.num)
+
+                    function onCheckPage() {
+                      var beginPage = parseInt(
+                        document.beginPagefrm.beginPage.value
+                      )
+                      if (isNaN(beginPage)) {
+                        alert('请输入数字！')
+                        return false
+                      }
+                      if (beginPage <= 0) {
+                        beginPage = 1
+                      }
+                      if (beginPage > 100) {
+                        beginPage = 100
+                      }
+                      if (beginPage > 1) {
+                        document.beginPagefrm.action =
+                          '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
+                          beginPage
+                      } else {
+                        document.beginPagefrm.action =
+                          '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
+                      }
+                      return true
+                    }
+
+                    // $('#pagination1').pagination({
+                    //   currentPage: 1,
+                    //   totalPage: process02(1),
+                    //   callback: function(current) {
+                    //     console.log(current, 'current')
+                    //     $('#current1').text(current)
+                    //     process02(current)
+                    //     window.location.href = '#top'
+                    //   }
+                    // })
+                    // onCheckPage()
+                    $('#pagination1').pagination({
+                      currentPage: 1,
+                      totalPage: _this.lineListsTotalPage,
+                      callback: function(current) {
+                        $('#current1').text(current)
+                        // orderBy = ''
+                        currentPage = current
+                        fetchLineList(currentPage, orderBy)
+                        window.location.href = '#top'
+                      }
+                    })
+                    //切换专线信息
+                    function clickPrice() {
+                      $('#seq0').click(function() {
+                        console.log('clear排序')
+                        orderBy = 'default'
+                        fetchLineList(currentPage, orderBy)
                       })
-                      _this.lineLists = res.data.data.list
-
-                      // return {
-                      //   lineList: res.data.data.list
+                      $('#seq1').click(function() {
+                        console.log('orderNumber排序')
+                        orderBy = 'orderDesc'
+                        fetchLineList(currentPage, orderBy)
+                      })
+                      $('#seq2').click(function() {
+                        console.log('transportAging排序')
+                        orderBy = 'transportAgingAsc'
+                        fetchLineList(currentPage, orderBy)
+                      })
+                      $('#tj_price2').click(function() {
+                        $('#tj_price').css('display', 'none')
+                        // console.log('weigthPrice排序')
+                        orderBy = 'weigthPrice'
+                        fetchLineList(currentPage, orderBy)
+                      })
+                      $('#tj_price1').click(function() {
+                        $('#tj_price').css('display', 'none')
+                        // console.log('lightPrice排序')
+                        orderBy = 'lightPrice'
+                        fetchLineList(currentPage, orderBy)
+                      })
+                    }
+                    function fetchLineList(currentPage, orderBy) {
+                      let aurl = ''
+                      let startp = _this.$route.query.startp
+                      let startc = _this.$route.query.startc
+                      let starta = _this.$route.query.starta
+                      let endp = _this.$route.query.endp
+                      let enda = _this.$route.query.enda
+                      let endc = _this.$route.query.endc
+                      let belongBrandCode = _this.$route.query.belongBrandCode
+                      let departureTimeCode =
+                        _this.$route.query.departureTimeCode
+                      let otherServiceCode = _this.$route.query.otherServiceCode
+                      let parkId = _this.$route.query.parkId
+                      let companyName = _this.$route.query.companyName
+                      //
+                      // if (
+                      //   !startp ||
+                      //   startp == 'null' ||
+                      //   !startc ||
+                      //   startc == 'null' ||
+                      //   !starta ||
+                      //   starta == 'null' ||
+                      //   !endp ||
+                      //   endp == 'null' ||
+                      //   !enda ||
+                      //   enda == 'null' ||
+                      //   !endc ||
+                      //   endc == 'null' ||
+                      //   !departureTimeCode ||
+                      //   departureTimeCode == 'null' ||
+                      //   !otherServiceCode ||
+                      //   otherServiceCode == 'null' ||
+                      //   !parkId ||
+                      //   parkId == 'null' ||
+                      //   !companyName ||
+                      //   companyName == 'null'
+                      // ) {
+                      //   startp = ''
+                      //   startc = ''
+                      //   starta = ''
+                      //   endp = ''
+                      //   enda = ''
+                      //   endc = ''
+                      //   // belongBrandCode = ''
+                      //   departureTimeCode = ''
+                      //   otherServiceCode = ''
+                      //   parkId = ''
+                      //   companyName = ''
                       // }
-                    })
-                }
-                clickPrice()
+
+                      if (process.server) {
+                        aurl = 'http://localhost:3000'
+                      }
+                      $axios
+                        .post(aurl + `/28-web/range/list`, {
+                          currentPage: currentPage,
+                          pageSize: 6,
+                          orderBy: orderBy,
+                          startProvince: startp,
+                          startCity: startc,
+                          startArea: starta,
+                          endProvince: endp,
+                          endCity: endc,
+                          endArea: enda,
+                          belongBrandCode: belongBrandCode,
+                          departureTimeCode: departureTimeCode,
+                          otherServiceCode: otherServiceCode,
+                          parkId: parkId
+                        })
+                        .then(res => {
+                          // res.data.data.num = Math.ceil(Math.random() * 30)
+                          // console.log('this.lineList12:', res.data.data)
+                          res.data.data.list.forEach(item => {
+                            item.num = Math.ceil(Math.random() * 30)
+                            // console.log('this.lineList:', item.num)
+                          })
+                          _this.lineLists = res.data.data.list
+
+                          // return {
+                          //   lineList: res.data.data.list
+                          // }
+                        })
+                    }
+                    clickPrice()
+                  })
+                })
               })
-            })
-          })
+            }
+          )
         }
       )
-    })
+    }
   },
   methods: {}
 }

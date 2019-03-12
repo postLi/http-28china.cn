@@ -307,16 +307,16 @@
 
           </div>
           <!--分页-->
-          <div
+          <!-- <div
             class="box" 
             style="float: right;margin-right: 370px;">
             <div 
               id="pagination1" 
               class="page fl"/>
             <div class="info fl">
-            <!-- <p>当前页数：<span id="current1">1</span></p> -->
+              <p>当前页数：<span id="current1">1</span></p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       
@@ -528,8 +528,27 @@ img {
 .shixiao_left {
   float: left;
   width: 220px;
-  background: pink;
+  background: #ffffff;
   margin-right: 7px;
+}
+.left_top {
+  /* float: left; */
+}
+.left_top_ul {
+  text-align: center;
+}
+.left_top_ul h1 {
+  line-height: 40px;
+  font-size: 22px;
+  padding: 40px 0;
+  background: red;
+  color: #fff;
+}
+.left_top_ul li {
+  height: 40px;
+  line-height: 40px;
+  font-size: 22px;
+  padding: 20px 0;
 }
 .shixiao_right {
   float: left;
@@ -670,6 +689,7 @@ img {
   font-size: 14px;
   /* color: #333; */
 }
+
 /*时效end*/
 .list_nav {
   height: 52px;

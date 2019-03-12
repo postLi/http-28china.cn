@@ -704,31 +704,31 @@ export default {
     ]
   },
   mounted() {
-    $('#buxian').change(() => {
-      // var item = $('.input_class')
-      console.log($(this), 'this-code')
-      if ($(this).prop('checked')) {
-        $('input[name=checkbox]').prop('checked', false)
-      } else {
-      }
-    })
-    var newArr = new Array()
-    $('input[name=checkbox]:checkbox').click(() => {
-      $('input[name=checkbox]:checkbox').each(() => {
-        // newArr = []
-        if ($(this).prop('checked')) {
-          newArr.push($(this).attr('data-code'))
-        }
-      })
-      var uniqueNames = []
-      $.each(newArr, (i, el) => {
-        if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el)
-        this.checkboxItem.push(el)
-      })
-      // var checkboxItem = []
-      // checkboxItem.push(uniqueNames)
-      console.log(this.checkboxItem, 'uniqueNames')
-    })
+    // $('#buxian').change(() => {
+    //   // var item = $('.input_class')
+    //   console.log($(this), 'this-code')
+    //   if ($(this).prop('checked')) {
+    //     $('input[name=checkbox]').prop('checked', false)
+    //   } else {
+    //   }
+    // })
+    // var newArr = new Array()
+    // $('input[name=checkbox]:checkbox').click(() => {
+    //   $('input[name=checkbox]:checkbox').each(() => {
+    //     // newArr = []
+    //     if ($(this).prop('checked')) {
+    //       newArr.push($(this).attr('data-code'))
+    //     }
+    //   })
+    //   var uniqueNames = []
+    //   $.each(newArr, (i, el) => {
+    //     if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el)
+    //     this.checkboxItem.push(el)
+    //   })
+    //   // var checkboxItem = []
+    //   // checkboxItem.push(uniqueNames)
+    //   console.log(this.checkboxItem, 'uniqueNames')
+    // })
     seajs.use(
       [
         '../js/city.js',
@@ -747,32 +747,32 @@ export default {
             seajs.use(['../gongsi/js/list_wlgs.js'], function() {
               seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
                 seajs.use(['../js/gaodemap2.js'], function() {
-                  // $('#buxian').change(function() {
-                  //   // var item = $('.input_class')
-                  //   console.log($(this).attr('data-code'), 'data-code')
-                  //   if ($(this).prop('checked')) {
-                  //     $('input[name=checkbox]').prop('checked', false)
-                  //   } else {
-                  //   }
-                  // })
-                  // var newArr = new Array()
-                  // $('input[name=checkbox]:checkbox').click(function() {
-                  //   $('input[name=checkbox]:checkbox').each(function() {
-                  //     // newArr = []
-                  //     if ($(this).prop('checked')) {
-                  //       newArr.push($(this).attr('data-code'))
-                  //     }
-                  //   })
-                  //   var uniqueNames = []
-                  //   $.each(newArr, function(i, el) {
-                  //     if ($.inArray(el, uniqueNames) === -1)
-                  //       uniqueNames.push(el)
-                  //     this.checkboxItem.push(el)
-                  //   })
-                  //   // var checkboxItem = []
-                  //   // checkboxItem.push(uniqueNames)
-                  //   console.log(this.checkboxItem, 'uniqueNames')
-                  // })
+                  $('#buxian').change(function() {
+                    // var item = $('.input_class')
+                    console.log($(this).attr('data-code'), 'data-code')
+                    if ($(this).prop('checked')) {
+                      $('input[name=checkbox]').prop('checked', false)
+                    } else {
+                    }
+                  })
+                  var newArr = new Array()
+                  $('input[name=checkbox]:checkbox').click(function() {
+                    $('input[name=checkbox]:checkbox').each(function() {
+                      // newArr = []
+                      if ($(this).prop('checked')) {
+                        newArr.push($(this).attr('data-code'))
+                      }
+                    })
+                    var uniqueNames = []
+                    $.each(newArr, function(i, el) {
+                      if ($.inArray(el, uniqueNames) === -1)
+                        uniqueNames.push(el)
+                      this.checkboxItem.push(el)
+                    })
+                    // var checkboxItem = []
+                    // checkboxItem.push(uniqueNames)
+                    console.log(this.checkboxItem, 'uniqueNames')
+                  })
 
                   //
                   layui.use('form', function() {

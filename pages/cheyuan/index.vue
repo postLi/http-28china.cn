@@ -596,11 +596,14 @@ export default {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
     let carInfoLists = await getCarInfoList($axios, 1, vo)
-    console.log(carInfoLists, 'carInfoLists4444444')
+    // console.log(carInfoLists, 'carInfoLists4444444')
 
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
-    let newestCarRes = await $axios.get('/28-web/carInfo/newestCar') //最新车源推荐列表
+    let newestCarRes = await $axios.post('/28-web/carInfo/newest/recommend', {
+      currentPage: 1,
+      pageSize: 20
+    }) //最新车源推荐列表
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [], //车辆类型列表
       AF018Select: AF018.data.status === 200 ? AF018.data.data : [], //优质运力 车辆类型列表

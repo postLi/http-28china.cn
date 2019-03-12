@@ -1,168 +1,325 @@
 <template>
   <div>
+    <div class="shixiao_banner">
+      <img src="/member/images/banner_gsjj.png">
+    </div>
     <div class="shixiao_box">
-      <div class="list_nav">
-        <a href="/">物流首页</a>&gt;<a 
-          id="list_nav_a" 
-          href="">专线时效</a>
+      <div class="shixiao_left">
+        <div class="left_top">
+          <ul class="left_top_ul">
+            <h1>帮助信息</h1>
+            <li>时效查询</li>
+            <li>网点查询</li>
+            <li>运单查询</li>
+            <li>快速下单</li>
+          </ul>
+        </div>
       </div>
-      <div class="list_left">
-        <div class="list_search">
-          <!-- 出发地 -->
-          <div class="order-line-from clearfix">
-            <div class="order-form-item">
-              <div class="order-form-label"/>
-              <div 
-                id="carLineFrom" 
-                class="order-form-input shixiao-input">
-                <input 
-                  style="height: 100%;border: none;outline: none;"
-                  data-toggle="city-picker" 
-                  data-level="district" 
-                  maxlength="40" 
-                  placeholder="请选择出发地" 
-                  type="text">
-                <img 
-                  src="../../static/images/wzlImg/qidian.png"
-                  class="qd">
+      <div class="shixiao_right">
+        <div class="list_left">
+          <div class="list_search">
+            <div class="zx_sx">
+              <span class="biaozhi"/><span >时效查询</span>
+              <div class="list_nav">
+                <a href="/">物流首页</a>&gt;<a 
+                  id="list_nav_a" 
+                  href="">专线时效</a>
               </div>
             </div>
+            <!-- 出发地 -->
+            <div class="order-line-from clearfix">
+              <div class="order-form-item">
+                <div class="order-form-label"/>
+                <div 
+                  id="carLineFrom" 
+                  class="order-form-input shixiao-input">
+                  <input 
+                    style="height: 100%;border: none;outline: none;"
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    maxlength="40" 
+                    placeholder="请选择出发地" 
+                    type="text">
+                  <img 
+                    src="../../static/images/wzlImg/qidian.png"
+                    class="qd">
+                </div>
+              </div>
 
-            <div class="order-form-item">
-              <img 
-                src="../../static/images/wzlImg/refresh.png"
-                class="qiehuan">
-            </div>
-            <div class="order-form-item form-detail">
-              <div class="order-form-label"/>
-              <div 
-                id="carLineTo" 
-                class="order-form-input shixiao-input">
-                <input 
-                  style="height: 100%;border: none;outline: none;"
-                  data-toggle="city-picker" 
-                  data-level="district" 
-                  placeholder="请选择到达地" 
-                  wtmap="" 
-                  maxlength="40" 
-                  type="text">
+              <div class="order-form-item">
                 <img 
-                  src="../../static/images/wzlImg/zhongdian.png"
-                  class="wzl">
+                  src="../../static/images/wzlImg/refresh.png"
+                  class="qiehuan">
+              </div>
+              <div class="order-form-item form-detail">
+                <div class="order-form-label"/>
+                <div 
+                  id="carLineTo" 
+                  class="order-form-input shixiao-input">
+                  <input 
+                    style="height: 100%;border: none;outline: none;"
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    placeholder="请选择到达地" 
+                    wtmap="" 
+                    maxlength="40" 
+                    type="text">
+                  <img 
+                    src="../../static/images/wzlImg/zhongdian.png"
+                    class="wzl">
+                </div>
+              </div>
+              <div class="order-form-item">
+                <span 
+                  class="search" 
+                  @click="search(1)">查询</span>
               </div>
             </div>
-            <div class="order-form-item">
+          </div>
+
+          <div 
+            id="js006" 
+            class="w1130">
+            <div class="zx_sx"><span class="biaozhi"/><span >优质承运商推荐</span></div>
+            <div class="list_box">
+              <ul class="ul_list">
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+              </ul>
+            </div>
+            <!-- <div class="list_tiaoj">
               <span 
-                class="search" 
-                @click="search(1)">查询</span>
+                v-for="(item,index) in sortList" 
+                :key="index"
+                :class="[sortId === item.id ? 'active' : '']"
+                @click="selectSort(item)">{{ item.name }}</span>
+            </div> -->
+
+            <!-- <div 
+              v-if="listRangesAging.length === 0" 
+              class="list_none" 
+              style="display: block">
+              <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
+              <img src="../../static/images/none_pic.png">
+            </div> -->
+            <div class="zx_sx"><span class="biaozhi"/><span >广州出发热门专线</span></div>
+            <div class="list_box">
+              <ul class="ul_host">
+                <li>
+                  <p>物流商：薏米滴答 
+                    <!-- <img
+                    src="/wd/images/blue.gif" > -->
+                    <img
+                    src="/wd/images/34huanguan.gif" >
+                    <img
+                    src="/wd/images/34huanguan.gif" >
+                  </p>
+                  <h4>河源市->深圳市</h4>
+                  <p style="font-size:12px;">重货：<span class="num_color">23.4</span>元/公斤</p>
+                  <p style="font-size:12px;">轻货：<span class="num_color">455.4</span>元/公斤</p>
+                  <p>累计成交：<span class="num_color">53452</span>单</p>
+                  <div class="titles">
+                    <span>担保交易</span>
+                    <span>234人说好</span>
+                    <span>立即下单</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- 全国热门物流专线start -->
+            <div class="hot-city-layer main-width">
+              <div class="hot-city-unit hot_box ">
+                <h3 class="news-unit-title">全国热门物流货运专线</h3>
+                <ul class="hot-cities">
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440300.html">深圳找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440100.html">广州找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441900.html">东莞市到上海市货源</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f140400.html">长治找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440500.html">汕头找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440600.html">佛山找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440700.html">江门找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440800.html">湛江找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440900.html">茂名找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441200.html">肇庆找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440300.html">深圳找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440100.html">广州找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441900.html">东莞市到上海市货源</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f140400.html">长治找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440500.html">汕头找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440600.html">佛山找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440700.html">江门找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440800.html">湛江找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440900.html">茂名找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441200.html">肇庆找车拉货</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- 全国热门物流专线end -->
+            <!-- <div 
+              v-for="(item,index) in listRangesAging" 
+              :key="index" 
+              class="wzl_box">
+              <div 
+                v-if="currentPage === 1"
+                class="wzl_log"><span :class="[index <3 ? 'bgr' : '']">TOP<i>{{ index + 1 }}</i></span></div>
+              <ul 
+                class="wlzx_list" 
+                style="border:none" >
+                <li class="cy_list_1">
+                  <p class="p1"><a 
+                    :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                    target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
+                  <p class="p2"><img src="../../static/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
+                  <p class="p3"><img 
+                    src="../../static/images/wzlImg/2.png"
+                    style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
+                  <p class="p4"><img src="../../static/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
+                </li>
+                <li class="cy_list_7">
+                  <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
+                </li>
+                <li class="cy_list_2">
+                  <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
+                  <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
+                  <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
+
+                </li>
+                <li class="cy_list_3">
+                  <p class="p1"><img
+                    v-if="item.authStatus === 'AF0010403'"
+                    src="../../static/images/list_wlzx/10shiming.png"></P>
+                  <p class="p2"><img
+                    v-if="item.isVip && item.isVip === 1"
+                    src="../../static/images/list_wlzx/11xinyong.png"></P>
+                  <p class="p3"><img
+                    v-if="item.collateral && item.collateral !== 0"
+                    src="../../static/images/list_wlzx/12danbao.png"></P>
+                </li>
+
+                <li class="cy_list_4">
+                  <p><img 
+                    class="numlll" 
+                    src="../../static/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
+                  <p><img 
+                    class="numlll" 
+                    src="../../static/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
+                </li>
+                <li class="wlzx_list_6">
+                  <p class="p2"><a 
+                    :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
+                    target="_blank" 
+                    class="check_btn" 
+                    style="background: #2577e3;color: #fff;">下单</a>
+                  </p><p class="p2"><a
+                    :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"
+                    class="check_btn">查看</a>
+                  </p><p 
+                    v-if="item.qq" 
+                    class="p3"><a
+                      :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
+                      target="_blank"><input
+                        readonly="readonly" 
+                        value="QQ交谈"></a>
+                </p></li>
+              </ul>
+            </div> -->
+
+
+
+          </div>
+          <!--分页-->
+          <div
+            class="box" 
+            style="float: right;margin-right: 370px;">
+            <div 
+              id="pagination1" 
+              class="page fl"/>
+            <div class="info fl">
+            <!-- <p>当前页数：<span id="current1">1</span></p> -->
             </div>
           </div>
         </div>
-
-        <div 
-          id="js006" 
-          class="w1130">
-          <div class="zx_sx"><span class="biaozhi"/><span >为您推荐</span></div>
-          <div class="list_tiaoj">
-            <span 
-              v-for="(item,index) in sortList" 
-              :key="index"
-              :class="[sortId === item.id ? 'active' : '']"
-              @click="selectSort(item)">{{ item.name }}</span>
-          </div>
-
-          <div 
-            v-if="listRangesAging.length === 0" 
-            class="list_none" 
-            style="display: block">
-            <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
-            <img src="../../static/images/none_pic.png">
-          </div>
-          <div 
-            v-for="(item,index) in listRangesAging" 
-            :key="index" 
-            class="wzl_box">
-            <div 
-              v-if="currentPage === 1"
-              class="wzl_log"><span :class="[index <3 ? 'bgr' : '']">TOP<i>{{ index + 1 }}</i></span></div>
-            <ul 
-              class="wlzx_list" 
-              style="border:none" >
-              <li class="cy_list_1">
-                <p class="p1"><a 
-                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
-                  target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
-                <p class="p2"><img src="../../static/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
-                <p class="p3"><img 
-                  src="../../static/images/wzlImg/2.png"
-                  style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
-                <p class="p4"><img src="../../static/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
-              </li>
-              <li class="cy_list_7">
-                <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
-              </li>
-              <li class="cy_list_2">
-                <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
-                <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
-                <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
-
-              </li>
-              <li class="cy_list_3">
-                <p class="p1"><img
-                  v-if="item.authStatus === 'AF0010403'"
-                  src="../../static/images/list_wlzx/10shiming.png"></P>
-                <p class="p2"><img
-                  v-if="item.isVip && item.isVip === 1"
-                  src="../../static/images/list_wlzx/11xinyong.png"></P>
-                <p class="p3"><img
-                  v-if="item.collateral && item.collateral !== 0"
-                  src="../../static/images/list_wlzx/12danbao.png"></P>
-              </li>
-
-              <li class="cy_list_4">
-                <p><img 
-                  class="numlll" 
-                  src="../../static/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
-                <p><img 
-                  class="numlll" 
-                  src="../../static/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
-              </li>
-              <li class="wlzx_list_6">
-                <p class="p2"><a 
-                  :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
-                  target="_blank" 
-                  class="check_btn" 
-                  style="background: #2577e3;color: #fff;">下单</a>
-                </p><p class="p2"><a
-                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId"
-                  target="_blank"
-                  class="check_btn">查看</a>
-                </p><p 
-                  v-if="item.qq" 
-                  class="p3"><a
-                    :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
-                    target="_blank"><input
-                      readonly="readonly" 
-                      value="QQ交谈"></a>
-              </p></li>
-            </ul>
-          </div>
-
-
-
-        </div>
-        <!--分页-->
-        <div
-          class="box" 
-          style="float: right;margin-right: 370px;">
-          <div 
-            id="pagination1" 
-            class="page fl"/>
-          <div class="info fl">
-          <!-- <p>当前页数：<span id="current1">1</span></p> -->
-          </div>
-        </div>
       </div>
+      
 
     </div>
 
@@ -170,23 +327,23 @@
 </template>
 
 <script>
-async function getListRangesAging($axios, currentPage, vo = {}) {
-  let list, totalPage
-  let parm = {
-    currentPage: currentPage,
-    pageSize: 20,
-    vo
-  }
-  await $axios
-    .post('/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging', parm)
-    .then(res => {
-      if (res.data.status === 200) {
-        list = res.data.data.list
-        totalPage = res.data.data.totalPage
-      }
-    })
-  return { list, totalPage, currentPage }
-}
+// async function getListRangesAging($axios, currentPage, vo = {}) {
+//   let list, totalPage
+//   let parm = {
+//     currentPage: currentPage,
+//     pageSize: 20,
+//     vo
+//   }
+//   await $axios
+//     .post('/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging', parm)
+//     .then(res => {
+//       if (res.data.status === 200) {
+//         list = res.data.data.list
+//         totalPage = res.data.data.totalPage
+//       }
+//     })
+//   return { list, totalPage, currentPage }
+// }
 export default {
   name: 'ShiXiao',
   head: {
@@ -220,13 +377,13 @@ export default {
         ? query.startProvince
         : app.$cookies.get('currentProvinceFullName')
     }
-    let listRangesAgingData = await getListRangesAging($axios, 1, vo)
+    // let listRangesAgingData = await getListRangesAging($axios, 1, vo)
     return {
-      listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
-      totalPage: listRangesAgingData.totalPage
-        ? listRangesAgingData.totalPage
-        : 0,
-      currentPage: listRangesAgingData.currentPage,
+      // listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
+      // totalPage: listRangesAgingData.totalPage
+      //   ? listRangesAgingData.totalPage
+      //   : 0,
+      // currentPage: listRangesAgingData.currentPage,
       vo: vo
     }
   },
@@ -304,16 +461,16 @@ export default {
       },
       false
     )
-    this.loadPagination()
+    // this.loadPagination()
   },
   methods: {
-    async selectSort(item) {
-      this.sortId = item.id
-      let vo = this.vo
-      vo.filterSign = this.sortId
-      let obj = await getListRangesAging(this.$axios, this.currentPage, vo)
-      this.listRangesAging = obj.list
-    },
+    // async selectSort(item) {
+    //   this.sortId = item.id
+    //   let vo = this.vo
+    //   vo.filterSign = this.sortId
+    //   let obj = await getListRangesAging(this.$axios, this.currentPage, vo)
+    //   this.listRangesAging = obj.list
+    // },
     async search() {
       let list1 = [],
         list2 = []
@@ -334,22 +491,22 @@ export default {
       }&endProvince=${this.vo.endProvince}&startArea=${
         this.vo.startArea
       }&startCity=${this.vo.startCity}&startProvince=${this.vo.startProvince}`
-    },
-    loadPagination() {
-      $('#pagination1').pagination({
-        currentPage: this.currentPage,
-        totalPage: this.totalPage,
-        callback: async current => {
-          $('#current1').text(current)
-          let vo = this.vo
-          vo.filterSign = this.sortId
-          let obj = await getListRangesAging(this.$axios, current, vo)
-          this.listRangesAging = obj.list
-          this.currentPage = obj.currentPage
-          window.location.href = '#top'
-        }
-      })
     }
+    // loadPagination() {
+    //   $('#pagination1').pagination({
+    //     currentPage: this.currentPage,
+    //     totalPage: this.totalPage,
+    //     callback: async current => {
+    //       $('#current1').text(current)
+    //       let vo = this.vo
+    //       vo.filterSign = this.sortId
+    //       let obj = await getListRangesAging(this.$axios, current, vo)
+    //       this.listRangesAging = obj.list
+    //       this.currentPage = obj.currentPage
+    //       window.location.href = '#top'
+    //     }
+    //   })
+    // }
   }
 }
 </script>
@@ -359,14 +516,170 @@ export default {
 body {
   background-color: #f9f9f9;
 }
+img {
+  vertical-align: middle;
+}
 .shixiao_box {
   width: 1400px;
   height: auto !important;
   margin: 0 auto;
   overflow: hidden;
 }
+.shixiao_left {
+  float: left;
+  width: 220px;
+  background: pink;
+  margin-right: 7px;
+}
+.shixiao_right {
+  float: left;
+  width: 1173px;
+}
+.list_box {
+  float: left;
+  width: 100%;
+  background: #fff;
+}
+.ul_list {
+  width: 1052px;
+  border: 1px solid #cccccc;
+  float: left;
+  margin: 30px;
+  padding: 30px;
+}
+.num_color {
+  color: red;
+}
+.ul_list li {
+  margin-bottom: 30px;
+  text-align: center;
+  width: 210px;
+  box-sizing: border-box;
+  float: left;
+  border-left: 1px solid #cccc;
+}
+.ul_list li:nth-child(1) {
+  border: none;
+}
+.ul_list li:nth-child(6) {
+  border: none;
+}
+.ul_list li h4 {
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  color: #2577e3;
+}
+.ul_list li span {
+  height: 30px;
+  line-height: 30px;
+}
+.ul_host {
+  width: 1052px;
+  float: left;
+  padding: 30px;
+}
+.ul_host li {
+  width: 270px;
+  background: #e4efff;
+  position: relative;
+  padding-bottom: 40px;
+}
+.ul_host li .titles {
+  bottom: 0%;
+  left: 0%;
+  position: absolute;
+  background: #2e2e2e;
+  color: #fff;
+  height: 28px;
+  line-height: 28px;
+  width: 99%;
+  padding: 5px 0 5px 1%;
+  text-align: left;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  display: flex;
+}
+.ul_host li .titles span {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+}
+.ul_host li p {
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  margin-left: 20px;
+  color: #666666;
+}
+.ul_host li h4 {
+  font-size: 18px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.main-width {
+  width: 1173px;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.hot_box {
+  border-bottom: 1px dashed #dfdfdf;
+}
+.hot-city-unit {
+  box-sizing: border-box;
+  /* border: 1px solid #ececec; */
+  background: #fff;
+  padding: 10px;
+}
+.news-unit-title:after {
+  position: absolute;
+  content: '';
+  height: 15px;
+  width: 3px;
+  left: 0;
+  top: 8px;
+  background: #589def;
+}
+.news-unit-title {
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 15px;
+  /* border-bottom: 1px solid #ededed; */
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333333;
+}
+.line-city-box {
+  max-width: 1036px;
+  float: left;
+}
+.line-title {
+  color: #3f94ee;
+  border-bottom: 2px solid #3f94ee;
+}
+.hot-cities-li {
+  display: inline-block;
+  padding: 10px;
+}
+.hot-cities-a {
+  font-size: 14px;
+  /* color: #333; */
+}
+/*时效end*/
+.list_nav {
+  height: 52px;
+  line-height: 52px;
+  float: left;
+  font-size: 14px;
+  color: #666666;
+  font-weight: normal;
+}
 .zx_sx {
-  /* PADDING-top: 6px;  */
   overflow: hidden;
   line-height: 50px;
   height: 50px;
@@ -374,8 +687,9 @@ body {
   font-size: 18px;
   font-weight: bold;
   background-color: #fff;
-  /* border-bottom: 1px solid #ddd; */
   border-bottom: 2px solid #2577e3;
+  float: left;
+  width: 100%;
 }
 .zx_sx span {
   float: left;
@@ -395,14 +709,11 @@ body {
   float: left;
 }
 .w1130 {
-  /* width: 1130px; */
   width: 100%;
   float: left;
-  /*    OVERFLOW: hidden;*/
   min-height: 400px;
 }
 .search:hover {
-  /* background: red; */
   opacity: 0.8;
 }
 #nr_a521:hover {
@@ -471,7 +782,6 @@ body {
   font-size: 15px;
   background: no-repeat url(../../static/images/01search.png) 45px 6px;
   text-align: left;
-  /*padding-left: 8px;*/
   margin-left: 8px;
   cursor: pointer;
 }
@@ -505,13 +815,9 @@ body {
   cursor: pointer;
 }
 .list_tiaoj {
-  /* width: 1130px; */
   width: 100%;
   height: 39px;
   background-color: #f1f1f1;
-  /* border: solid 1px #e6e6e6; */
-  /* margin-bottom: 14px; */
-  /* background: no-repeat url(../images/list_wlzx/xiajt.png) #f1f1f1 363px 16px; */
   position: relative;
 }
 .list_tiaoj span {
@@ -535,7 +841,6 @@ body {
   left: 300px;
   top: 40px;
   margin-left: 0px;
-  /* border-radius: 6px;*/
   display: none;
   background-color: #fff;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
@@ -553,11 +858,8 @@ body {
 }
 
 .wlzx_list {
-  /* width: 1128px; */
   width: 100%;
-  /* height: 120px; */
   padding-top: 20px;
-  /* border: solid 1px #dfdfdf; */
   margin-top: -1px;
   background-color: #fff;
   float: left;
@@ -568,14 +870,6 @@ body {
   width: 1400px;
   border-bottom: 1px solid #ddd;
 }
-/* .wlzx_list:hover{
-      transform: translateY(-3px);
-      transition-delay: 0.1s;
-      box-shadow: 0px 20px 20px -17px rgba(0, 0, 0, 0.40);
-      opacity: 0.8;
-      background-color: #C4E7FF;
-      cursor: pointer;
-    } */
 .wlzx_list:hover {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   transform: translate3d(0, -2px, 0);
@@ -594,37 +888,6 @@ body {
 .wlzx_list img:hover {
   transform: scale(1.05);
 }
-/* .wlzx_list_1{
-      width: 150px;
-      margin-left: 9px;
-
-  }
-  .wlzx_list_2{
-      width: 300px;
-      margin-left: 20px;
-
-  }
-  .wlzx_list_3{
-      width: 150px;
-      margin-left: 30px;
-
-
-  }
-  .wlzx_list_4{
-      width: 90px;
-      margin-left: 70px;
-
-  }
-  .wlzx_list_5{
-      width: 75px;
-      margin-left: 65px;
-
-  }
-  .wlzx_list_6{
-      width: 110px;
-      margin-left: 130px;
-
-  } */
 
 .wlzx_list_2 p {
   height: 26px;
@@ -1090,7 +1353,9 @@ body {
 .order-line-from {
   /* margin-bottom: 20px; */
   background: #fff;
-  padding: 20px 80px;
+  padding: 20px 0px;
+  float: left;
+  width: 100%;
 }
 .order-line-from .qd {
   position: absolute;

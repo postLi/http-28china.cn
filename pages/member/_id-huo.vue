@@ -7,7 +7,7 @@
         id="js005" 
         class="right">
         <div class="right_bt1">
-          <div class="right_bt1_1"><img src="space/company/images/huo.png"><span>货源信息</span></div>
+          <div class="right_bt1_1"><img src="/member/images/huo.png"><span>货源信息</span></div>
           <div class="huo_tj">
     			
             <div class="select_con">
@@ -45,7 +45,7 @@
 
                   <img 
                     class="fl list_img" 
-                    src="/templets/default/images/02jiantou.png">
+                    src="/images/02jiantou.png">
 
                   <div 
                     id="HuoyuanTo" 
@@ -126,10 +126,13 @@
           </ul>
         </div>
     	
-        <div class="huo_none"><span>暂无货源信息</span></div>
+        <div
+          class="huo_none" 
+          v-if="list.length < 1"><span>暂无货源信息</span></div>
         <div 
+          v-else
           class="hy_item" 
-          style="display: none;">
+        >
           <ul>
             <li class="hy_item01"><a 
               id="nr041" 
@@ -139,10 +142,10 @@
             <li class="hy_item03">
               <p class="p1"><img 
                 id="list_shiming" 
-                src="/templets/default/images/10shiming.png"></p>
+                src="/images/10shiming.png"></p>
               <p class="p2"><img 
                 id="list_xinyong" 
-                src="/templets/default/images/11xinyong.png"></p>
+                src="/images/11xinyong.png"></p>
             </li>
             <li class="hy_item04">
               <p class="p1"><span><em id="nr048"/>浏览量</span></p>
@@ -181,24 +184,32 @@ export default {
     link: [{ rel: 'stylesheet', href: '/member/css/list.css' }]
   },
   layout: 'member',
+  computed: {
+    list() {
+      return this.$store.state.member.huoList.list
+    },
+    total() {
+      return this.$store.state.member.huoList.total
+    }
+  },
   mounted() {
+    let _this = this
     seajs.use(
       ['/member/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
       function() {
         seajs.use(
           [
             '/index/js/city-picker.js',
-            '/member/js/index.js',
             '/index/js/collection.js',
             '/member/js/huo.js'
           ],
           function() {
             $('#pagination1').pagination({
               currentPage: 1,
-              totalPage: get_huo(1).totalPage,
+              totalPage: _this.total,
               callback: function(current) {
                 $('#current1').text(current)
-                get_huo(current)
+                this.fetchData(current)
               }
             })
           }
@@ -206,9 +217,25 @@ export default {
       }
     )
   },
-  async fetch({ store, params, $axios, error }) {
+  methods: {
+    fetchData(pnum) {
+      store.dispatch('member/getCompanyHuo', {
+        shipperId: params.id,
+        pageSize: 10,
+        currentPage: pnum
+      })
+    }
+  },
+  fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
-    await store.dispatch('member/GETCOMPANYINFO', params.id)
+    return Promise.all([
+      store.dispatch('member/GETCOMPANYINFO', params.id),
+      store.dispatch('member/getCompanyHuo', {
+        shipperId: params.id,
+        pageSize: 10,
+        currentPage: 1
+      })
+    ])
   }
 }
 </script>

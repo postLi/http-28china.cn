@@ -32,6 +32,17 @@ export default {
         src: '/index/js/memu.js'
       }
     ]
+  },
+  mounted() {
+    console.groupCollapsed('服务端请求信息:')
+    this.$store.state.errorReqList.forEach(el => {
+      if (el.isError) {
+        console.error(el.config.url, ': ', el.config, el.data, el)
+      } else {
+        console.log(el.config.url, ': ', el.config, el.data, el)
+      }
+    })
+    console.groupEnd()
   }
 }
 </script>

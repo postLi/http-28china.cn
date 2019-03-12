@@ -15,7 +15,7 @@
       </div>
       <!--公司名称-->
       <div class="comHeader fl">
-        <h1 class="comName cmne"><em id="nr081">{{ $store.state.member.company.companyName }}</em></h1>
+        <h1 class="comName cmne"><em id="nr081">{{ company.companyName }}</em></h1>
       </div>
       <div class="top_xiantiao fl"/>
       <div 
@@ -23,14 +23,14 @@
         @mousemove="showCompany = true" 
         @mouseout="showCompany = false"> 
         <ul><li><span>服务质量</span></li><li><span>运输时效</span></li><li><span>收费价格</span></li></ul>
-        <ul><li><i id="num001">{{ $store.state.member.company.serverPriceScore || '5' }}</i></li><li><i id="num002">{{ $store.state.member.company.serverQualityScore || '5' }}</i></li><li><i id="num003">{{ $store.state.member.company.transportAgingScore || '5' }}</i></li></ul>
+        <ul><li><i id="num001">{{ company.serverPriceScore || '5' }}</i></li><li><i id="num002">{{ company.serverQualityScore || '5' }}</i></li><li><i id="num003">{{ company.transportAgingScore || '5' }}</i></li></ul>
       </div>
       <div 
         id="collection_website" 
         class="top_shouchang fl"> <img src="/member/images/000shouchang.png"></div>
       <div class="top_right_num fr">
         <ul><li><span>收藏量</span></li><li><span>评价数</span></li></ul>
-        <ul><li><i id="num004">{{ $store.state.member.company.collectNumber || '0' }}</i></li><li><i id="num005">{{ $store.state.member.company.assessNumber || '0' }}</i></li><li/></ul>
+        <ul><li><i id="num004">{{ company.collectNumber || '0' }}</i></li><li><i id="num005">{{ company.assessNumber || '0' }}</i></li><li/></ul>
          	
       </div>
       <div class="clear"/>
@@ -42,24 +42,27 @@
         <ul>
           <li class="bzj">
             <img src="/member/images/box/baozhengjin.png" >
-            <span id="bzj_1">{{ $store.state.member.company.collateral > 0 ? '该公司已签署消费者保障协议' : '该公司暂未缴纳保证金' }}</span>
+            <span id="bzj_1">{{ company.collateral > 0 ? '该公司已签署消费者保障协议' : '该公司暂未缴纳保证金' }}</span>
             <font 
-              v-if="$store.state.member.company.collateral > 0" 
-              id="bzj_2">已缴纳<i id="bzj_money">¥<em>{{ $store.state.member.company.collateral }}</em></i>保证金</font>
+              v-if="company.collateral > 0" 
+              id="bzj_2">已缴纳<i id="bzj_money">¥<em>{{ company.collateral }}</em></i>保证金</font>
           </li>
           <li class="box_item">
             <div class="item_left">总信誉值</div>
             <div 
-              v-if="$store.state.member.company.credit >=0 " 
-              class="item_right item01"><img src="/member/images/box/xinyu.gif" ><img src="/member/images/box/xinyu.gif" ></div>
+              v-if="company.credit >=0 " 
+              class="item_right item01"><img 
+                v-for="(item, index) in company.credit" 
+                :key="index" 
+                src="/member/images/box/xinyu.gif" ></div>
           </li>
           <li class="box_item">
             <div class="item_left">平台信用</div>
             <div class="item_right item02"><img 
-              v-if="$store.state.member.company.authStatus === 'AF0010403'"
+              v-if="company.authStatus === 'AF0010403'"
               id="shiming" 
               src="/images/list_wlzx/10shiming.png" ><img 
-                v-if="$store.state.member.company.isVip === 1"
+                v-if="company.isVip === 1"
                 id="xinyong" 
                 src="/images/list_wlzx/11xinyong.png" ></div>
           </li>
@@ -96,16 +99,16 @@
             <div class="item_left">成立时间</div>
             <div 
               id="box_foundTime" 
-              class="item_right item04">{{ $store.state.member.company.foundTime }}</div>
+              class="item_right item04">{{ company.foundTime }}</div>
           </li>
           <li class="box_item box_item5">
             <div class="item_left">联系信息</div>
-            <div class="item_right item04"><div class="item04_1"><i>联系人：</i><span id="box_lxr">{{ $store.state.member.company.contactsName }}</span><font id="box_mobile"/></div> 
+            <div class="item_right item04"><div class="item04_1"><i>联系人：</i><span id="box_lxr">{{ company.contactsName }}</span><font id="box_mobile"/></div> 
               <a 
                 id="box_qq" 
-                :href="'http://wpa.qq.com/msgrd?v=3&uin=' + $store.state.member.company.qq + '&site=qq&menu=yes'" 
+                :href="'http://wpa.qq.com/msgrd?v=3&uin=' + company.qq + '&site=qq&menu=yes'" 
                 target="_blank"><div class="item04_2"><img src="/member/images/box/qq.gif" >&nbsp;QQ交谈</div></a>
-              <div class="item04_3"><i>地址：</i><span id="box_address">{{ $store.state.member.company.address }}</span></div>
+              <div class="item04_3"><i>地址：</i><span id="box_address">{{ company.address }}</span></div>
             </div>
           </li>
     		
@@ -123,8 +126,11 @@ export default {
     }
   },
   computed: {
+    company() {
+      return this.$store.state.member.company
+    },
     opdata() {
-      return this.$store.state.member.company.otherServiceCode
+      return this.$store.state.member.company.otherServiceCodeList
     }
   }
 }

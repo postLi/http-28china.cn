@@ -1,6 +1,53 @@
+function logReqInfos(app, res, isError) {
+  let cfg = res.config
+  app.store.commit('setErrorReqList', {
+    config: {
+      baseURL: cfg.data,
+      data: cfg.data,
+      headers: cfg.headers,
+      method: cfg.method,
+      timeout: cfg.timeout,
+      url: cfg.url,
+      withCredentials: cfg.withCredentials,
+      xsrfCookieName: cfg.xsrfCookieName,
+      xsrfHeaderName: cfg.xsrfHeaderName
+    },
+    data: res.data,
+    status: res.status,
+    isError: !!isError
+  })
+}
+
 export default function(app) {
   let axios = app.$axios
   let redirect = app.redirect
+
+  /* isStatic :
+isDev :
+isHMR :
+app :
+store :
+payload :
+error :
+base :
+env :
+req :
+res :
+redirect :
+beforeNuxtRender :
+next :
+_redirected :
+_errored :
+route :
+params :
+query :
+$axios :
+ */
+
+  /* for (let i in app) {
+    console.log(i, ':')
+  } */
+
   // 基本配置
   axios.defaults.timeout = 30000
   axios.defaults.baseUrl = ''
@@ -40,10 +87,35 @@ export default function(app) {
   // )
 
   // 请求回调
-  axios.onRequest(config => {})
+  axios.onRequest(config => {
+    if (config.url.indexOf('/anfacms/') !== -1) {
+      config.baseURL = config.baseURL.replace('/api', '')
+    }
+  })
 
   // 返回回调
-  axios.onResponse(res => {})
+  axios.onResponse(res => {
+    if (process.server) {
+      if (
+        res.data.code === '200' ||
+        res.data.status === 200 ||
+        res.config.url.indexOf('.json') !== -1
+      ) {
+        logReqInfos(app, res)
+      } else {
+        logReqInfos(app, res, true)
+      }
+    }
+  })
+  axios.onResponseError(err => {
+    // if (process.server) {
+    for (let i in err) {
+      console.log(i, ':')
+    }
+    logReqInfos(app, err, true)
+    // }
+  })
+  //onResponseError
 
   // 错误回调
   axios.onError(error => {

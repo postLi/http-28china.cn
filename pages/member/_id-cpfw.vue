@@ -105,10 +105,10 @@ export default {
   },
   computed: {
     opdata() {
-      return this.$store.state.member.company.otherServiceCode
+      return this.$store.state.member.company.otherServiceCodeList
     },
     psdata() {
-      return this.$store.state.member.company.productServiceCode
+      return this.$store.state.member.company.productServiceCodeList
     }
   },
   head: {

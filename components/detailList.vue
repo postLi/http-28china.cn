@@ -164,7 +164,7 @@ export default {
   watch: {
     info: {
       handler(n, o) {
-        // console.log(n, 'nnn')
+        console.log(n, 'nnn')
       },
       deep: true
     }

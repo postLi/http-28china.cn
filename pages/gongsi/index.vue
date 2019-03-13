@@ -85,7 +85,7 @@
           <div class="btn_top"><button
             class="layui-btn"
             @click="callme"
-            style="width: 280px;background: #3f94ee;height:48px">实力承运商入驻</button></div>
+            style="width: 298px;background: #3f94ee;height:48px">实力承运商入驻</button></div>
           <div
             class="rem_bot"
             style="margin-top: 10px"
@@ -151,9 +151,11 @@
       </div>
       <div
         class="header_links_r"
-        style="position: relative"
+        style="position: relative;margin-left: 20px;background: #fff;padding-left: 20px"
       >
-        <p style="font-size: 18px;color: #0d91e9;padding: 15px 0 10px 10px ">运单查询运单查询</p>
+        <p 
+          style="font-size: 18px;color: #0d91e9;padding: 15px 0 40px 10px " 
+          class="header_links_r_search">运单查询</p>
         <input
           id="yd_nr"
           rows="3"
@@ -161,51 +163,59 @@
           placeholder="请输入运单号，例如："
           style="width: 230px;margin-left: 10px">
         <input
-        type="button">
+        
+          type="button"
+          style="height: 30px;">
         <div
           class="ydh"
-          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 55px;color:#0d91e9;margin-left: 10px"
+          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 85px;color:#0d91e9;margin-left: 30px"
         >
           <span>1809260061</span>
         </div>
         <div><button
           id="yd_cx1"
           class="layui-btn"
-          style="width: 260px;margin-top: 10px;border-radius: 3px;margin-left: 10px"
+          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top:50px"
         >立即查询</button></div>
       </div>
     </div>
     <div class="list_box" >
       <div
         class="list_down"
-        style="background: rgb(255,247,227);padding: 10px 0;font-size: 20px;"><a
+        style="background-color:#fff7e4;border: solid 1px #f7e9c8;padding: 13px 0 14px 17px;font-size: 14px;"><a
           href="http://h5.28tms.com/"
           target="_blank"
-          style="color: #0d91e9"
+          style="color: #2577e3"
       >下载<span style="color: rgb(255,116,23)">【28快运APP】</span>，实时接收推荐的精品车货源与合作信息，在线下单推荐优质承运商，便捷查询运单。</a></div>
       <div class="banner h62">
         <div class="echart_scroll">
           <div
             class="fl echart_scroll_sm"
-            style="padding-left: 20px;"
+            style="padding-left: 20px;color: #333333;"
           >最新入驻企业</div>
           <div class="fl echart_scroll_nr">
             <div class="fl echart_scroll_nr800">
               <ul
                 class="echart_scroll_nr1"
               >
-                <!--<li-->
-                <!--v-for="(item, i) in listF"-->
-                <!--:key="i"-->
+                <li
+                  v-for="(item, i) in listF"
+                  :key="i">
 
-                <!--&gt;<a-->
-                <!--href="javascript:void(0)"-->
-                <!--target="_blank"><span>{{ item.companyName?item.companyName:'' }}</span></a></li>-->
-                <li><a
+                  <a
+                    :href="'/member/'+ item.id"
+                    target="_blank"><span style="font-size: 14px;color: #333333;">{{ item.companyName?item.companyName:'' }}</span>
+                  </a>
+                  <!-- </li> -->
+                
+                  <!-- <li><a
                   href="javascript:void(0)"
                   target="_blank"
                   v-for="(item, i) in 10"
-                  :key="i"><span>广州发合肥</span></a></li>
+                  :key="i"><span>广州发合肥</span></a></li> -->
+
+
+
                   <!--<li><a-->
                   <!--href="javascript:void(0)"-->
                   <!--target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
@@ -215,7 +225,7 @@
                   <!--<li><a-->
                   <!--href="javascript:void(0)"-->
                   <!--target="_blank"><span>广州发郑州</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
-              </ul>
+              </li></ul>
               <ul class="echart_scroll_nr2"/>
             </div>
           </div>
@@ -223,13 +233,13 @@
       </div>
       <div
         class="list_checkbox"
-        style="display: flex;    line-height: 38px;">
+        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px">
 
         <div class="form_class">
 
           <ul>
             <li
-            style="float: left;padding-right: 20px">
+            style="float: left;padding-right: 32px">
 
               <input
                 type="checkbox"
@@ -239,12 +249,12 @@
                 :data-pcode="listH[0].pcode">
               <label
                 for=""
-                style="padding-left: 10px">{{ listH[0].name }}</label>
+                style="padding-left: 5px">{{ listH[0].name }}</label>
             </li>
             <li
               v-for="(item, i) in listH.slice(1)"
               :key="i"
-              style="float: left;padding-right: 20px"
+              style="float: left;padding-right: 32px"
               class="checkobxli">
               <input
                 type="checkbox"
@@ -259,16 +269,16 @@
             </li>
           </ul>
         </div>
-        <div style="display: inherit;padding-left:200px;position: relative">
+        <div style="display: inherit;padding-left:55px;position: relative">
           <input
             type="text"
             placeholder="公司名称"
             class="layui-input parkname"
-            style="width: 275px"
+            style="width: 280px"
             v-model="companyName">
           <a :href="'/gongsi/?companyName='+ companyName"><i
             class="layui-icon layui-icon-search"
-            style="font-size: 20px; color: #1E9FFF;display: inherit;vertical-align: middle;position: absolute; top: 7px;right: 10px;cursor: pointer"
+            style="font-size: 20px; color: #1E9FFF;display: inherit;vertical-align: middle;position: absolute; top: 3px;right: 10px;cursor: pointer"
           /></a>
         </div>
 
@@ -284,8 +294,10 @@
           <div
             v-if="!getgsListFn.length"
             class="list_none">
-            <span>暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
-            <img src="../../static/gongsi/images/none_pic.png">
+            <span style="  float: left;width: 100%;text-align: center;height: 40px;line-height: 40px;font-size: 16px; margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
+            <img 
+              src="../../static/gongsi/images/none_pic.png"
+              style="float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;">
           </div>
           <DetailList :info="getgsListFn"/>
           <img
@@ -730,7 +742,8 @@ export default {
     ]
   },
   mounted() {
-    // console.log(this.gsList, 'rtrtebuxuan')
+    this.companyName = this.$route.query.companyName
+    console.log(this.$route.query.companyName, '$route')
     // this.companyName = decodeURI(GetUrlParam('companyName')) || ''
     var newArr = new Array()
     let _this = this
@@ -753,9 +766,11 @@ export default {
           decodeURI(GetUrlParam('locationProvince')) == 'null'
             ? ''
             : decodeURI(GetUrlParam('locationProvince'))
-        decodeURI(GetUrlParam('companyName')) == 'null'
-          ? ''
-          : decodeURI(GetUrlParam('companyName'))
+
+        vo.companyName =
+          decodeURI(GetUrlParam('companyName')) == 'null'
+            ? ''
+            : decodeURI(GetUrlParam('companyName'))
         let getgsList = await getGSList($axios, 1, vo)
         _this.gsLists = getgsList.list
         _this.gsList.forEach(item => {
@@ -796,9 +811,10 @@ export default {
         decodeURI(GetUrlParam('locationProvince')) == 'null'
           ? ''
           : decodeURI(GetUrlParam('locationProvince'))
-      decodeURI(GetUrlParam('companyName')) == 'null'
-        ? ''
-        : decodeURI(GetUrlParam('companyName'))
+      vo.companyName =
+        decodeURI(GetUrlParam('companyName')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('companyName'))
       let getgsList = await getGSList($axios, 1, vo)
       _this.gsList = getgsList.list
       _this.gsList.forEach(item => {

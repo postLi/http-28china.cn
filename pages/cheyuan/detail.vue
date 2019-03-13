@@ -153,7 +153,7 @@
 
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>车辆类型：</i><span>{{ cy1.carTypeName }}</span><span>{{ cy1.isLongCar === 1 ? '(即时车源)' : '(长期车源)' }}</span></div>
+            <div class="arc_m3"><i>车辆类型：</i><span>{{ cy1.carTypeName }}</span><span>({{ cy1.isLongCarName }})</span></div>
             <div class="arc_m3"><i>车辆载重：</i><span>{{ cy1.carLoad }}吨</span></div>
             <div class="arc_m3_2"><i>车长：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i><span>{{ cy1.carLength }}米</span></div>
             <div class="arc_m3_2"><i>途径点：&nbsp;&nbsp;&nbsp;</i><span>{{ cy1.viaAddress ? cy1.viaAddress : '暂无' }}</span></div>

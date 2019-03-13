@@ -75,9 +75,10 @@
 
                 <dt>发车时间&nbsp;:</dt>
                 <dd id="tjcx_01">
-                  <a 
-                    class="now all" 
-                    href="/huoyuan">不限</a>
+                  <SelectType 
+                    v-model="stime"
+                    get-code
+                    :list="AF026" />
 
                 </dd>
 
@@ -178,11 +179,13 @@
 <script>
 import MemberBanner from '~/components/member/banner'
 import MemberSidebar from '~/components/member/sidebar2'
+import SelectType from '~/components/common/selectType'
 
 export default {
   components: {
     MemberBanner,
-    MemberSidebar
+    MemberSidebar,
+    SelectType
   },
   head: {
     link: [
@@ -191,20 +194,105 @@ export default {
     ]
   },
   layout: 'member',
+  data() {
+    return {
+      stime: '',
+      query: {
+        departureTimeCode: '',
+        endArea: '',
+        endCity: '',
+        endProvince: '',
+        startArea: '',
+        startCity: '',
+        startProvince: '',
+        orderBy: ''
+      }
+    }
+  },
+  computed: {
+    AF026() {
+      return this.$store.state.dictList.AF026
+    }
+  },
+
   mounted() {
     let _this = this
     let uid = this.$store.state.member.id
     seajs.use(
-      ['/member/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
+      ['/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
       function() {
         seajs.use(
           [
-            '/index/js/city-picker.js',
+            '/index/js/city-picker.js'
             // '/index/js/collection.js',
 
-            '/member/js/line.js'
+            // '/member/js/line.js'
           ],
           function() {
+            var startp = $.getParams('startp')
+            var endp = $.getParams('endp')
+            var startc = $.getParams('startc')
+            var endc = $.getParams('endc')
+            var starta = $.getParams('starta')
+            var enda = $.getParams('enda')
+            $('#wlLineFrom input').citypicker({
+              province: startp,
+              city: startc,
+              district: starta
+            })
+            $('#wlLineTo input').citypicker({
+              province: endp,
+              city: endc,
+              district: enda
+            })
+
+            //排序点击 S
+            $('#seq0').click(function() {
+              //清空
+              _this.query.orderBy = ''
+              _this.fetchData(1)
+              _this.setPagination()
+            })
+            $('#seq1').click(function() {
+              //orderBy: "orderDesc"
+              _this.query.orderBy = 'orderDesc'
+              _this.fetchData(1)
+              _this.setPagination()
+            })
+            $('#seq2').click(function() {
+              //orderBy: "transportAgingAsc"
+              _this.query.orderBy = 'transportAgingAsc'
+              _this.fetchData(1)
+              _this.setPagination()
+            })
+            $('#seq3').mouseenter(function() {
+              $('#tj_price').css('display', 'block')
+            })
+            $('#seq3').mouseleave(function() {
+              $('#tj_price').css('display', 'none')
+            })
+            $('#tj_price').mouseenter(function() {
+              $('#tj_price').css('display', 'block')
+            })
+            $('#tj_price').mouseleave(function() {
+              $('#tj_price').css('display', 'none')
+            })
+            $('#tj_price2').click(function() {
+              $('#tj_price').css('display', 'none')
+              //orderBy: "weigthPrice"
+              _this.query.orderBy = 'weigthPrice'
+              _this.fetchData(1)
+              _this.setPagination()
+            })
+            $('#tj_price1').click(function() {
+              $('#tj_price').css('display', 'none')
+              //orderBy: "lightPrice"
+              _this.query.orderBy = 'lightPrice'
+              _this.fetchData(1)
+              _this.setPagination()
+            })
+            //排序点击 E
+
             $('.list_tiaoj span').click(function() {
               //alert("1");
               $('.list_tiaoj span').removeClass('active')
@@ -219,54 +307,30 @@ export default {
               $('#wlLineFrom .select-item').each(function(i, e) {
                 list1.push($(this).text())
               })
-              var startp = list1[0]
-              var startc = list1[1]
-              var starta = list1[2]
+              var startp = list1[0] || ''
+              var startc = list1[1] || ''
+              var starta = list1[2] || ''
 
               $('#wlLineTo .select-item').each(function(i, e) {
                 list2.push($(this).text())
               })
-              var endp = list2[0]
-              var endc = list2[1]
-              var enda = list2[2]
-              if (!startp) {
-                startp = ''
-              }
-              if (!startc) {
-                startc = ''
-              }
-              if (!starta) {
-                starta = ''
-              }
-              if (!endp) {
-                endp = ''
-              }
-              if (!endc) {
-                endc = ''
-              }
-              if (!enda) {
-                enda = ''
-              }
-              startp = encodeURI(startp)
-              startc = encodeURI(startc)
-              starta = encodeURI(starta)
-              endp = encodeURI(endp)
-              endc = encodeURI(endc)
-              enda = encodeURI(enda)
-              window.location =
-                uid +
-                '-line?startp=' +
-                startp +
-                '&startc=' +
-                startc +
-                '&starta=' +
-                starta +
-                '&endp=' +
-                endp +
-                '&endc=' +
-                endc +
-                '&enda=' +
-                enda
+              var endp = list2[0] || ''
+              var endc = list2[1] || ''
+              var enda = list2[2] || ''
+
+              _this.query.startProvince = encodeURI(startp)
+              _this.query.startCity = encodeURI(startc)
+              _this.query.startArea = encodeURI(starta)
+              _this.query.endProvince = encodeURI(endp)
+              _this.query.endCity = encodeURI(endc)
+              _this.query.endArea = encodeURI(enda)
+              // 设置参数
+              // 重新请求
+              // 重新设置分页
+              _this.query.departureTimeCode = _this.stime
+              _this.fetchData(1).then(res => {
+                _this.setPagination()
+              })
             })
 
             // 搜索全站
@@ -276,34 +340,17 @@ export default {
               $('#wlLineFrom .select-item').each(function(i, e) {
                 list1.push($(this).text())
               })
-              var startp = list1[0]
-              var startc = list1[1]
-              var starta = list1[2]
+              var startp = list1[0] || ''
+              var startc = list1[1] || ''
+              var starta = list1[2] || ''
 
               $('#wlLineTo .select-item').each(function(i, e) {
                 list2.push($(this).text())
               })
-              var endp = list2[0]
-              var endc = list2[1]
-              var enda = list2[2]
-              if (!startp) {
-                startp = ''
-              }
-              if (!startc) {
-                startc = ''
-              }
-              if (!starta) {
-                starta = ''
-              }
-              if (!endp) {
-                endp = ''
-              }
-              if (!endc) {
-                endc = ''
-              }
-              if (!enda) {
-                enda = ''
-              }
+              var endp = list2[0] || ''
+              var endc = list2[1] || ''
+              var enda = list2[2] || ''
+
               startp = encodeURI(startp)
               startc = encodeURI(startc)
               starta = encodeURI(starta)
@@ -332,26 +379,36 @@ export default {
   },
   async fetch({ store, params, $axios, error, querys }) {
     store.commit('member/setId', params.id)
-    await store.dispatch('member/GETCOMPANYINFO', params.id)
-    await store.dispatch('member/GETCOMPANYLINEINFO', {
-      publishId: params.id,
-      pageSize: 10,
-      currentPage: 1
-    })
+    return Promise.all([
+      store.dispatch('getDictList', {
+        name: 'AF026'
+      }),
+      store.dispatch('member/GETCOMPANYINFO', params.id),
+      store.dispatch('member/GETCOMPANYLINEINFO', {
+        publishId: params.id,
+        pageSize: 10,
+        currentPage: 1
+      })
+    ])
   },
   methods: {
+    fetchData(pnum) {
+      return this.$store.dispatch('member/GETCOMPANYLINEINFO', {
+        publishId: this.$store.state.member.company.id,
+        pageSize: 10,
+        currentPage: pnum,
+        ...this.query
+      })
+    },
     setPagination() {
+      let _this = this
       $('#pagination1').pagination({
         currentPage: 1,
         count: 10,
         totalPage: this.$store.state.member.lineTotal,
         callback: function(current) {
           $('#current1').text(current)
-          this.$store.dispatch('member/GETCOMPANYLINEINFO', {
-            publishId: this.$store.state.member.company.id,
-            pageSize: 10,
-            currentPage: current
-          })
+          _this.fetchData(current)
         }
       })
     },

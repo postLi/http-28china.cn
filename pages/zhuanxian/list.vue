@@ -536,7 +536,6 @@
 </template>
 
 <script>
-import $axios from 'axios'
 import FooterLinks from '../../components/footerLinks'
 import selectMap from './selectMap'
 import HotList from '../../components/hotList'
@@ -679,6 +678,7 @@ export default {
   mounted() {
     if (process.client) {
       let _this = this
+      let $axios = this.$axios
       // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
       // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
       seajs.use(

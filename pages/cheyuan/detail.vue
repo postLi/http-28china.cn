@@ -550,20 +550,6 @@
               </a>
             </div>
           </div>
-          <!-- <div
-            class="arc_main4-content"
-            style="margin-top: 20px">
-            <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
-            <div class="rc_list">
-              <div class="left"><p>1</p></div>
-              <div class="img"><img src="/images/index/wlgs_tj_00.png" ></div>
-              <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
-            </div>
-            <div class="rc_list">
-              <div class="left"><p>2</p></div>
-              <div class="right"><span>李先生 粤A***56</span><span style="float: right">人气值：<i style="color: red">123</i></span></div>
-            </div>
-          </div> -->
           <div
             class="arc_main4-content"
             style="margin-top: 20px">
@@ -581,7 +567,9 @@
                   class="img">
                   <img :src="item.companyFile" >
                 </div>
-                <div class="right">
+                <div 
+                  class="right"
+                  style="padding-right:18px">
                   <span>{{ item.companyName }}</span>
                   <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
                 </div>

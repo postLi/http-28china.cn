@@ -189,8 +189,16 @@ white-space: nowrap;text-overflow: ellipsis;overflow: hidden;
 
 .hy_item01{width: 225px;padding-left: 15px;padding-right: 70px;}
 .hy_item01 a{color: #333;}
+.hy_item01 em, .hy_item02 span{
+    display: inline-block;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 8em;
+    text-overflow: ellipsis;
+}
 .hy_item02{width: 340px;}
-.hy_item02 span{float: left;}
+.hy_item02 span{float: left;max-width: 6em;}
 .hy_item02 i{color:#eb434d;}
 .hy_item02 em{
 	float: left;

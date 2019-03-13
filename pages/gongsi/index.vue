@@ -698,19 +698,17 @@ export default {
       }
     })
 
-    console.log(gsList, 'gsList.list', vo)
+    console.log(listH, 'gsList.list')
     return {
-      lineHots: listA.data.data,
-      lineLinks: listC.data.data,
+      lineHots: listA.data.status == 200 ? listA.data.data : '',
+      lineLinks: listC.data.status == 200 ? listC.data.data : '',
       lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : '',
       listE: listE.data.status == 200 ? listE.data.data : '',
       gsList: gsList.list,
       // listF: listF.data.data == [] ? '' : '',
       listF: listF.data.status == 200 ? listF.data.data : '',
       listG: listG.data.status == 200 ? listG.data.data : '',
-      listH: listH.data.status == 200 ? listH.data.data : '',
-      vo: vo,
-      locationCity: vo.locationCity
+      listH: listH.data.status == 200 ? listH.data.data : ''
     }
   },
   computed: {
@@ -776,7 +774,7 @@ export default {
         _this.gsList.forEach(item => {
           item.num = Math.ceil(Math.random() * 30)
         })
-        console.log(getgsList.list, vo, 'buxuan')
+        // console.log(getgsList.list, vo, 'buxuan')
         // return gsLists
       } else {
       }

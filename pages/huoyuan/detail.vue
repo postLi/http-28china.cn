@@ -588,6 +588,7 @@
                   <span class="list-icon lines-sprite-icons icon-end"/>
                   <em>{{ item.endCity }}</em>
 
+
                 </div>
               </a>
               <div class="distance_total">[全程<em>{{ item.distance }}</em>公里]</div>
@@ -939,7 +940,11 @@ export default {
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    let hyDetails = await $axios.get('/28-web/lclOrder/detail/' + query.id)
+    let hyDetails = await $axios
+      .get('/28-web/lclOrder/detail/' + query.id)
+      .catch(err => {
+        console.log(err)
+      })
     let parm = {
       currentPage: 1,
       pageSize: 10,
@@ -965,31 +970,51 @@ export default {
         : ''
     }
     //货主档案
-    let archivals = await $axios.post(
-      '/28-web/shipper/archival?shipperId=' + query.shipperId
-    )
+    let archivals = await $axios
+      .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
+      .catch(err => {
+        console.log(err)
+      })
     //顶部轮播
-    let newLists = await $axios.get('/28-web/lclOrder/newList')
+    let newLists = await $axios.get('/28-web/lclOrder/newList').catch(err => {
+      console.log(err)
+    })
     //货源列表
-    let huoInfoLists = await $axios.post('/28-web/lclOrder/list', parm)
+    let huoInfoLists = await $axios
+      .post('/28-web/lclOrder/list', parm)
+      .catch(err => {
+        console.log(err)
+      })
     //最新货源信息
-    let newestHuoyuanRes = await $axios.post(
-      '/28-web/lclOrder/shipper/lastList',
-      { shipperId: query.shipperId }
-    )
+    let newestHuoyuanRes = await $axios
+      .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
+      .catch(err => {
+        console.log(err)
+      })
     // 货主综合力评估
-    let huoComprehensives = await $axios.get(
-      '/28-web/shipper/comprehensive?shipperId=' + query.shipperId
-    )
+    let huoComprehensives = await $axios
+      .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
+      .catch(err => {
+        console.log(err)
+      })
     //货源热门搜索
-    let hotSearchs = await $axios.get('/28-web/hotSearch/supply/detail/links')
+    let hotSearchs = await $axios
+      .get('/28-web/hotSearch/supply/detail/links')
+      .catch(err => {
+        console.log(err)
+      })
     //企业人气榜
-    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
+    let popularitys = await $axios
+      .get('/28-web/logisticsCompany/popularity')
+      .catch(err => {
+        console.log(err)
+      })
     //底部推荐
-    let huoLinks = await $axios.post(
-      '/28-web/lclOrder/detail/related/links',
-      parm1
-    )
+    let huoLinks = await $axios
+      .post('/28-web/lclOrder/detail/related/links', parm1)
+      .catch(err => {
+        console.log(err)
+      })
     let footLink = item => {
       switch (item.startProvince) {
         case null:

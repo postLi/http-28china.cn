@@ -463,7 +463,10 @@ async function getHyList($axios, currentPage, vo = {}) {
   let res = await $axios.post('/28-web/lclOrder/list', parm)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
-      if (item.companyName) {
+      for (let i in item) {
+        item[i] = item[i] === null ? '' : item[i]
+      }
+      if (item.companyName && item.companyName > 8) {
         item.companyName = item.companyName.substring(0, 8) + '..'
       }
       if (!item.companyName) {
@@ -497,6 +500,9 @@ async function getRecommendList($axios, vo) {
   let res = await $axios.post('/28-web/lclOrder/recommendList', parm)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
+      for (let i in item) {
+        item[i] = item[i] === null ? '' : item[i]
+      }
       if (item.companyName && item.companyName > 12) {
         item.companyName = item.companyName.substring(0, 12) + '..'
       }

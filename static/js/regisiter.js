@@ -490,7 +490,7 @@
       // 获取微信登录信息
       window.addEventListener('message', function(e) {
         var payload = e.data
-        if (e.data.indexOf('code:') !== -1) {
+        if (e.data && e.data.indexOf('code:') !== -1) {
           var code = e.data.split(':')[1]
           $('body').trigger('wxLoginSuccess', code)
         }

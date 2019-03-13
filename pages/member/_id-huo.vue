@@ -78,36 +78,25 @@
 
                 <dt>重量区间&nbsp;:</dt>
                 <dd id="tjcx_01">
-                  <a 
-                    class="now all" 
-                    href="/huoyuan">不限</a>
-
+                  <SelectType 
+                    v-model="weight"
+                    :list="AF03801" />
                 </dd>
                 <dt>体积区间&nbsp;:</dt>
                 <dd id="tjcx_02">
-                  <a 
-                    class="now all" 
-                    href="/huoyuan">不限</a>
-
+                  <SelectType 
+                    v-model="volumn"
+                    :list="AF03802" />
                 </dd>
 
 
                 <dt>货源类型&nbsp;:</dt>
                 <dd id="tjcx_03">
-                  <a 
-                    class="now all" 
-                    href="/huoyuan">不限</a>
-                  <a 
-                    class="" 
-                    href="/huoyuan">单次急发货源</a>
-                  <a 
-                    class="" 
-                    href="/huoyuan">长期稳定货源</a>
+                  <SelectType 
+                    :list="AF04907" 
+                    v-model="orderClass"
+                    get-code />
                 </dd>
-
-
-
-
               </dl>
             </div>
 
@@ -131,14 +120,25 @@
           v-if="list.length < 1"><span>暂无货源信息</span></div>
         <div 
           v-else
-          class="hy_item" 
+          class="hy_item"
+          v-for="(item, index) in list" 
+          :key="index" 
         >
-          <ul>
+          <ul 
+          >
             <li class="hy_item01"><a 
+              :href="'/zhuanxian/detail?id=' + item.id"
               id="nr041" 
               target="_blank" 
-              href="#"><span><em id="nr042"/>→<em id="nr043"/></span></a></li>
-            <li class="hy_item02"><span id="nr044"/><em/><span><i id="nr045"/>件</span><em/><span><i id="nr046"/>公斤</span><em/><span id="nr047"/></li>
+            ><span><em 
+              :title="item.startProvinceCityArea" 
+              id="nr042">{{ item.startProvinceCityArea }}</em>→<em 
+                :title="item.endProvinceCityArea" 
+                id="nr043">{{ item.endProvinceCityArea }}</em></span></a></li>
+            <li class="hy_item02"><span 
+              :title="item.goodsTypeName" 
+              id="nr044"
+            >{{ item.goodsTypeName }}</span><em/><span><i id="nr045">{{ item.goodsNum }}</i>件</span><em/><span><i id="nr046">{{ item.goodsWeight }}</i>公斤</span><em/><span id="nr047">{{ item.goodsVolume }}立方</span></li>
             <li class="hy_item03">
               <p class="p1"><img 
                 id="list_shiming" 
@@ -148,11 +148,12 @@
                 src="/images/11xinyong.png"></p>
             </li>
             <li class="hy_item04">
-              <p class="p1"><span><em id="nr048"/>浏览量</span></p>
-              <p class="p2"><span><em id="nr049">61</em>收藏量</span></p>
+              <p class="p1"><span><em id="nr048">{{ item.browseNumber }}</em>浏览量</span></p>
+              <p class="p2"><span><em id="nr049">{{ item.collectNumber }}</em>收藏量</span></p>
             </li>
             <li class="hy_item05"><a 
-              id="nr0410" 
+              id="nr0410"
+              :href="'/zhuanxian/detail?id=' + item.id" 
               target="_blank"><input value="查看"></a></li>
           </ul>    		
         </div>
@@ -173,56 +174,205 @@
 </template>
 <script>
 import MemberBanner from '~/components/member/banner'
+import SelectType from '~/components/common/selectType'
 import MemberSidebar from '~/components/member/sidebar2'
 
 export default {
   components: {
     MemberBanner,
-    MemberSidebar
+    MemberSidebar,
+    SelectType
   },
   head: {
-    link: [{ rel: 'stylesheet', href: '/member/css/list.css' }]
+    link: [
+      { rel: 'stylesheet', href: '/member/css/list.css' },
+      { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
+    ]
   },
   layout: 'member',
+  data() {
+    return {
+      volumn: [],
+      weight: [],
+      orderClass: '',
+      query: {
+        goodsVolumeLower: '',
+        goodsVolumeUpper: '',
+        goodsWeightLower: '',
+        goodsWeightUpper: '',
+        orderClass: '',
+        endArea: '',
+        endCity: '',
+        endProvince: '',
+        startArea: '',
+        startCity: '',
+        startProvince: ''
+      }
+    }
+  },
   computed: {
     list() {
       return this.$store.state.member.huoList.list
     },
     total() {
       return this.$store.state.member.huoList.total
+    },
+    AF03801() {
+      return this.$store.state.dictList.AF03801
+    },
+    AF03802() {
+      return this.$store.state.dictList.AF03802
+    },
+    AF04907() {
+      return this.$store.state.dictList.AF04907
     }
   },
+
   mounted() {
     let _this = this
     seajs.use(
-      ['/member/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
+      ['/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
       function() {
         seajs.use(
           [
             '/index/js/city-picker.js',
-            '/index/js/collection.js',
-            '/member/js/huo.js'
+            '/index/js/collection.js'
+            // '/member/js/huo.js'
           ],
           function() {
-            $('#pagination1').pagination({
-              currentPage: 1,
-              totalPage: _this.total,
-              callback: function(current) {
-                $('#current1').text(current)
-                this.fetchData(current)
-              }
+            var startp = $.getParams('startp')
+            var endp = $.getParams('endp')
+            var startc = $.getParams('startc')
+            var endc = $.getParams('endc')
+            var starta = $.getParams('starta')
+            var enda = $.getParams('enda')
+            $('#HuoyuanFrom input').citypicker({
+              province: startp,
+              city: startc,
+              district: starta
             })
+            $('#HuoyuanTo input').citypicker({
+              province: endp,
+              city: endc,
+              district: enda
+            })
+            //货源搜索 S
+            $('#search_huoyuan1').click(function() {
+              var list1 = [],
+                list2 = []
+              $('#HuoyuanFrom .select-item').each(function(i, e) {
+                list1.push($(this).text())
+              })
+              var startp = list1[0] || ''
+              var startc = list1[1] || ''
+              var starta = list1[2] || ''
+
+              $('#HuoyuanTo .select-item').each(function(i, e) {
+                list2.push($(this).text())
+              })
+              var endp = list2[0] || ''
+              var endc = list2[1] || ''
+              var enda = list2[2] || ''
+
+              _this.query.startProvince = encodeURI(startp)
+              _this.query.startCity = encodeURI(startc)
+              _this.query.startArea = encodeURI(starta)
+              _this.query.endProvince = encodeURI(endp)
+              _this.query.endCity = encodeURI(endc)
+              _this.query.endArea = encodeURI(enda)
+              // 设置参数
+              // 重新请求
+              // 重新设置分页
+              _this.getParam()
+              _this.fetchData(1).then(res => {
+                _this.initPage()
+              })
+
+              /* window.location =
+                uid +
+                '-huo.html?startp=' +
+                startp +
+                '&startc=' +
+                startc +
+                '&starta=' +
+                starta +
+                '&endp=' +
+                endp +
+                '&endc=' +
+                endc +
+                '&enda=' +
+                enda */
+            })
+            // 搜全站
+            $('#search_huoyuan2').click(function() {
+              var list1 = [],
+                list2 = []
+              $('#HuoyuanFrom .select-item').each(function(i, e) {
+                list1.push($(this).text())
+              })
+              var startp = list1[0] || ''
+              var startc = list1[1] || ''
+              var starta = list1[2] || ''
+
+              $('#HuoyuanTo .select-item').each(function(i, e) {
+                list2.push($(this).text())
+              })
+              var endp = list2[0] || ''
+              var endc = list2[1] || ''
+              var enda = list2[2] || ''
+
+              startp = encodeURI(startp)
+              startc = encodeURI(startc)
+              starta = encodeURI(starta)
+              endp = encodeURI(endp)
+              endc = encodeURI(endc)
+              enda = encodeURI(enda)
+              window.open(
+                '/huoyuan?startp=' +
+                  startp +
+                  '&startc=' +
+                  startc +
+                  '&starta=' +
+                  starta +
+                  '&endp=' +
+                  endp +
+                  '&endc=' +
+                  endc +
+                  '&enda=' +
+                  enda
+              )
+            })
+            _this.initPage()
           }
         )
       }
     )
   },
   methods: {
+    getParam() {
+      this.query.orderClass = this.orderClass
+      this.query.goodsVolumeLower = this.volumn[0] || ''
+      this.query.goodsVolumeUpper = this.volumn[1] || ''
+      this.query.goodsWeightLower = this.weight[0] || ''
+      this.query.goodsWeightUpper = this.weight[1] || ''
+    },
     fetchData(pnum) {
-      store.dispatch('member/getCompanyHuo', {
-        shipperId: params.id,
+      return this.$store.dispatch('member/getCompanyHuo', {
+        shipperId: this.$route.params.id,
         pageSize: 10,
-        currentPage: pnum
+        currentPage: pnum,
+        ...this.query
+      })
+    },
+    initPage() {
+      let _this = this
+      $('#pagination1').pagination({
+        currentPage: 1,
+        totalPage: _this.total,
+        callback: function(current) {
+          $('#current1').text(current)
+          _this.fetchData(current)
+        }
       })
     }
   },
@@ -230,6 +380,15 @@ export default {
     store.commit('member/setId', params.id)
     return Promise.all([
       store.dispatch('member/GETCOMPANYINFO', params.id),
+      store.dispatch('getDictList', {
+        name: 'AF03801'
+      }),
+      store.dispatch('getDictList', {
+        name: 'AF03802'
+      }),
+      store.dispatch('getDictList', {
+        name: 'AF04907'
+      }),
       store.dispatch('member/getCompanyHuo', {
         shipperId: params.id,
         pageSize: 10,

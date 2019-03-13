@@ -294,7 +294,7 @@
           <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
         </div>
         <ul class="bottom_ul">
-          <li>联系人：{{ archival.contacts }}</li>
+          <li>联系人：{{ archival.contacts } }</li>
           <li>手机：
             <a 
               v-show="checkMoblie"

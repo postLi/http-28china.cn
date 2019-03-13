@@ -141,7 +141,7 @@ export const actions = {
   // 获取公司信息
   GETCOMPANYINFO({ commit }, payload) {
     return new Promise(resolve => {
-      console.log('payload', payload)
+      // console.log('payload', payload)
       this.$axios
         .get('/28-web/logisticsCompany/info/' + payload)
         .then(res => {
@@ -181,7 +181,7 @@ export const actions = {
 
             resolve()
           } else {
-            reject('1111')
+            resolve()
           }
         })
         .catch(err => {
@@ -192,7 +192,7 @@ export const actions = {
   },
   // 获取公司专线信息
   GETCOMPANYLINEINFO({ commit }, payload) {
-    console.log('payload3', payload)
+    // console.log('payload3', payload)
     return new Promise((resolve, reject) => {
       this.$axios
         .post('/28-web/range/company/list', payload)
@@ -215,10 +215,10 @@ export const actions = {
   },
   // 获取公司专线信息
   getCompanyHuo({ commit }, payload) {
-    console.log('payload3', payload)
+    // console.log('payload3', payload)
     return new Promise((resolve, reject) => {
       this.$axios
-        .post('/28-web/lclOrder/list', payload)
+        .post('/28-web/lclOrder/company/list', payload)
         .then(res => {
           let data = res.data
           if (data.status === 200) {

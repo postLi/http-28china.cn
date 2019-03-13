@@ -3,7 +3,7 @@
     <div
       id="js002"
       class="w1036" >
-
+      <!-- 
       <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
 
 
@@ -12,11 +12,11 @@
         class="list_none">
         <span>暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
         <img src="../static/gongsi/images/none_pic.png">
-      </div>
+      </div> -->
 
 
 
-      <div v-else>
+      <div>
         <ul
           v-for="(item, index) in info"
           :key="index"
@@ -160,16 +160,20 @@ export default {
       default: () => {}
     }
   },
+
   watch: {
-    info(n, o) {
-      console.log(this.info, 'nnnnnnnn')
+    info: {
+      handler(n, o) {
+        console.log(n, 'nnn')
+      },
+      deep: true
     }
   },
   mounted() {
-    console.log(this.info, 'infofdf')
-    this.info.forEach(item => {
-      item.num = Math.ceil(Math.random() * 30)
-    })
+    // console.log(this.info, 'infofdf')
+    // this.info.forEach(item => {
+    //   // item.num = Math.ceil(Math.random() * 30)
+    // })
   },
   methods: {
     openqq() {

@@ -752,10 +752,10 @@ export default {
   layout: 'member',
   computed: {
     plen() {
-      return this.$store.state.member.company.productServiceCode.length
+      return this.$store.state.member.company.productServiceCodeList.length
     },
     olen() {
-      return this.$store.state.member.company.otherServiceCode.length
+      return this.$store.state.member.company.otherServiceCodeList.length
     },
     mid() {
       return this.$store.state.member.id
@@ -766,144 +766,151 @@ export default {
   },
   mounted() {
     var _this = this
-    seajs.use(
-      [
-        '/index/js/city-picker.data.js',
-        '/js/gaodemap2.js',
-        '/index/js/city-picker.js',
-        '/member/js/index.js',
-        '/member/js/banner.js',
-        '/index/js/collection.js'
-      ],
-      function() {
-        var productServiceCode = _this.company.productServiceCode
-        var n = productServiceCode.length
-        var uid = _this.mid
-        for (var i = 1; i < 10; i++) {
-          if (productServiceCode) {
-            if (productServiceCode.indexOf('AF0270' + i) != -1) {
-              $('.main1_left .item' + i).css('display', 'block')
-              $('#cp0' + i).css('display', 'block')
+    seajs.use(['/index/js/city-picker.data.js'], function() {
+      seajs.use(
+        [
+          '/js/gaodemap2.js',
+          '/index/js/city-picker.js',
+          // '/member/js/index.js',
+          '/member/js/banner.js',
+          '/index/js/collection.js'
+        ],
+        function() {
+          var productServiceCodeList = _this.company.productServiceCodeList
+          var n = productServiceCodeList.length
+          var otherServiceCodeList = _this.company.otherServiceCodeList
+          var uid = _this.mid
+          for (var i = 1; i < 10; i++) {
+            if (productServiceCodeList) {
+              if (productServiceCodeList.indexOf('AF0270' + i) != -1) {
+                $('.main1_left .item' + i).css('display', 'block')
+                $('#cp0' + i).css('display', 'block')
+              }
+            }
+            if (otherServiceCodeList && i < 9) {
+              if (otherServiceCodeList.indexOf('AF0250' + i) != -1) {
+                $('.main1_right .item' + i).css('display', 'block')
+              }
             }
           }
+          if (n == 9) {
+            $('.main1_left .item9').css('display', 'none')
+          }
+
+          $('body').click(function(e) {
+            var _con = $('.bill-search ') // 设置目标区域(排除此元素)
+            if (!_con.is(e.target) && _con.has(e.target).length === 0) {
+              $('.bill-search').removeClass('show')
+            }
+          })
+
+          $('#txtbill').mousedown(function() {
+            $('.bill-search').addClass('show')
+          })
+
+          $('#btn_onlineTracking').click(function() {
+            console.log("$('#txtbill').val()", $('#txtbill').val())
+            var num = $('#txtbill').val()
+            if (num) {
+              //window.open('/ydcx&num='+num+'&uid='+uid)
+              location.href = uid + '-chajian?num=' + num
+            }
+            if (!num) {
+              alert('请先输入运单号查询！')
+            }
+          })
+
+          if ($('.news_item').length <= 2) {
+            $('.news_item0').css('display', 'block')
+          }
+
+          //专线搜索 S
+          $('#search_wlLine').click(function() {
+            var list1 = [],
+              list2 = []
+            $('#wlLineFrom')
+              .parent('div')
+              .find('.select-item')
+              .each(function(i, e) {
+                list1.push($(this).text())
+              })
+            var startp = list1[0]
+            var startc = list1[1]
+            var starta = list1[2]
+
+            $('#wlLineTo')
+              .parent('div')
+              .find('.select-item')
+              .each(function(i, e) {
+                list2.push($(this).text())
+              })
+            var endp = list2[0]
+            var endc = list2[1]
+            var enda = list2[2]
+            if (!startp) {
+              startp = ''
+            }
+            if (!startc) {
+              startc = ''
+            }
+            if (!starta) {
+              starta = ''
+            }
+            if (!endp) {
+              endp = ''
+            }
+            if (!endc) {
+              endc = ''
+            }
+            if (!enda) {
+              enda = ''
+            }
+            startp = encodeURI(startp)
+            startc = encodeURI(startc)
+            starta = encodeURI(starta)
+            endp = encodeURI(endp)
+            endc = encodeURI(endc)
+            enda = encodeURI(enda)
+            location.href =
+              uid +
+              '-line?startp=' +
+              startp +
+              '&startc=' +
+              startc +
+              '&starta=' +
+              starta +
+              '&endp=' +
+              endp +
+              '&endc=' +
+              endc +
+              '&enda=' +
+              enda
+          })
+
+          //网点搜索 S
+          $('#search_wangdian').click(function() {
+            var list1 = []
+            $('#wangdian')
+              .parent('div')
+              .find('.select-item')
+              .each(function(i, e) {
+                list1.push($(this).text())
+              })
+            var startp = encodeURI(list1[0] || '')
+            var startc = encodeURI(list1[1] || '')
+            var starta = encodeURI(list1[2] || '')
+            location.href =
+              uid +
+              '-wangdian?startp=' +
+              startp +
+              '&startc=' +
+              startc +
+              '&starta=' +
+              starta
+          })
         }
-        if (n == 9) {
-          $('.main1_left .item9').css('display', 'none')
-        }
-
-        $('body').click(function(e) {
-          var _con = $('.bill-search ') // 设置目标区域(排除此元素)
-          if (!_con.is(e.target) && _con.has(e.target).length === 0) {
-            $('.bill-search').removeClass('show')
-          }
-        })
-
-        $('#txtbill').mousedown(function() {
-          $('.bill-search').addClass('show')
-        })
-
-        $('#btn_onlineTracking').click(function() {
-          console.log("$('#txtbill').val()", $('#txtbill').val())
-          var num = $('#txtbill').val()
-          if (num) {
-            //window.open('/ydcx&num='+num+'&uid='+uid)
-            location.href = uid + '-chajian?num=' + num
-          }
-          if (!num) {
-            alert('请先输入运单号查询！')
-          }
-        })
-
-        if ($('.news_item').length <= 2) {
-          $('.news_item0').css('display', 'block')
-        }
-
-        //专线搜索 S
-        $('#search_wlLine').click(function() {
-          var list1 = [],
-            list2 = []
-          $('#wlLineFrom')
-            .parent('div')
-            .find('.select-item')
-            .each(function(i, e) {
-              list1.push($(this).text())
-            })
-          var startp = list1[0]
-          var startc = list1[1]
-          var starta = list1[2]
-
-          $('#wlLineTo')
-            .parent('div')
-            .find('.select-item')
-            .each(function(i, e) {
-              list2.push($(this).text())
-            })
-          var endp = list2[0]
-          var endc = list2[1]
-          var enda = list2[2]
-          if (!startp) {
-            startp = ''
-          }
-          if (!startc) {
-            startc = ''
-          }
-          if (!starta) {
-            starta = ''
-          }
-          if (!endp) {
-            endp = ''
-          }
-          if (!endc) {
-            endc = ''
-          }
-          if (!enda) {
-            enda = ''
-          }
-          startp = encodeURI(startp)
-          startc = encodeURI(startc)
-          starta = encodeURI(starta)
-          endp = encodeURI(endp)
-          endc = encodeURI(endc)
-          enda = encodeURI(enda)
-          location.href =
-            uid +
-            '-line?startp=' +
-            startp +
-            '&startc=' +
-            startc +
-            '&starta=' +
-            starta +
-            '&endp=' +
-            endp +
-            '&endc=' +
-            endc +
-            '&enda=' +
-            enda
-        })
-
-        //网点搜索 S
-        $('#search_wangdian').click(function() {
-          var list1 = []
-          $('#wangdian')
-            .parent('div')
-            .find('.select-item')
-            .each(function(i, e) {
-              list1.push($(this).text())
-            })
-          var startp = encodeURI(list1[0] || '')
-          var startc = encodeURI(list1[1] || '')
-          var starta = encodeURI(list1[2] || '')
-          location.href =
-            uid +
-            '-wangdian?startp=' +
-            startp +
-            '&startc=' +
-            startc +
-            '&starta=' +
-            starta
-        })
-      }
-    )
+      )
+    })
   },
   methods: {
     findPrice(arr, type) {

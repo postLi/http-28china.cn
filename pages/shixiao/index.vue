@@ -14,6 +14,77 @@
             <li>快速下单</li>
           </ul>
         </div>
+        <div class="list_kehu">
+          <h2 class="list_help_title">客户服务</h2>
+          <div class="kf_num">
+            <button>客服1</button>
+            <button>客服2</button>
+          </div>
+        </div>
+        <!-- 帮我找优质运动start -->
+        <div class="list_help">
+          <h2 class="list_help_title">帮我找优质运力</h2>
+          <div class="list-box-r-top">
+            <form action="">
+              <div 
+                id="form0" 
+                class="ltl-input0">
+                <input 
+                  id="right-bar-form"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择出发地">
+                <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+              </div>
+              <div 
+                id="form1" 
+                class="ltl-input0">
+                <input
+                  autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择目到达地">
+                <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+              </div>
+              <textarea
+                maxlength="100"
+                style="padding:16px;height:80px;"
+                placeholder="备注信息，如：期望发货时间、货物体积重量等信息..."
+                class="textare"/>
+              <div class="ltl-input">
+                <input 
+                  placeholder="请输入手机号" 
+                  type="text"
+                  class="ltl-phone"
+                  maxlength="11"
+                >
+                <span 
+                  class="ltl-button" 
+                  @click="sendNotice()">找到通知我</span>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- 帮我找优质运动end -->
+        <div class="list_ewm">
+          <h2 class="list_help_title">便捷查询运单</h2>
+          <div class="order_content">
+            <div class="imgbox">
+              <img 
+                src="/images/28fast_download.png" 
+                width="100" 
+                height="100">
+            </div>
+            <div class="textbox">
+              <a href="http://h5.28tms.com/">
+              下载【28快运APP】，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="shixiao_right">
         <div class="list_left">
@@ -41,14 +112,14 @@
                     placeholder="请选择出发地" 
                     type="text">
                   <img 
-                    src="../../static/images/wzlImg/qidian.png"
+                    src="/images/wzlImg/qidian.png"
                     class="qd">
                 </div>
               </div>
 
               <div class="order-form-item">
                 <img 
-                  src="../../static/images/wzlImg/refresh.png"
+                  src="/images/wzlImg/refresh.png"
                   class="qiehuan">
               </div>
               <div class="order-form-item form-detail">
@@ -65,7 +136,7 @@
                     maxlength="40" 
                     type="text">
                   <img 
-                    src="../../static/images/wzlImg/zhongdian.png"
+                    src="/images/wzlImg/zhongdian.png"
                     class="wzl">
                 </div>
               </div>
@@ -76,6 +147,87 @@
               </div>
             </div>
           </div>
+          <div class="list_tiaoj">
+            <span 
+              v-for="(item,index) in sortList" 
+              :key="index"
+              :class="[sortId === item.id ? 'active' : '']"
+              @click="selectSort(item)">{{ item.name }}</span>
+          </div>
+
+          <div 
+            v-if="listRangesAging.length === 0" 
+            class="list_none" 
+            style="display: block">
+            <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
+            <img src="/images/none_pic.png">
+          </div>
+          <!-- <div 
+            v-for="(item,index) in listRangesAging" 
+            :key="index" 
+            class="wzl_box">
+            <ul 
+              class="wlzx_list" 
+              style="border:none" >
+              <li class="cy_list_1">
+                <p class="p1"><a 
+                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                  target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
+                <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
+                <p class="p3"><img 
+                  src="/images/wzlImg/2.png"
+                  style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
+                <p class="p4"><img src="/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
+              </li>
+              <li class="cy_list_7">
+                <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
+              </li>
+              <li class="cy_list_2">
+                <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
+                <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
+                <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
+
+              </li>
+              <li class="cy_list_3">
+                <p class="p1"><img
+                  v-if="item.authStatus === 'AF0010403'"
+                  src="/images/list_wlzx/10shiming.png"></P>
+                <p class="p2"><img
+                  v-if="item.isVip && item.isVip === 1"
+                  src="/images/list_wlzx/11xinyong.png"></P>
+                <p class="p3"><img
+                  v-if="item.collateral && item.collateral !== 0"
+                  src="/images/list_wlzx/12danbao.png"></P>
+              </li>
+
+              <li class="cy_list_4">
+                <p><img 
+                  class="numlll" 
+                  src="/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
+                <p><img 
+                  class="numlll" 
+                  src="/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
+              </li>
+              <li class="wlzx_list_6">
+                <p class="p2"><a 
+                  :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
+                  target="_blank" 
+                  class="check_btn" 
+                  style="background: #2577e3;color: #fff;">下单</a>
+                </p><p class="p2"><a
+                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId"
+                  target="_blank"
+                  class="check_btn">查看</a>
+                </p><p 
+                  v-if="item.qq" 
+                  class="p3"><a
+                    :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
+                    target="_blank"><input
+                      readonly="readonly" 
+                      value="QQ交谈"></a>
+              </p></li>
+            </ul>
+          </div> -->
 
           <div 
             id="js006" 
@@ -83,7 +235,16 @@
             <div class="zx_sx"><span class="biaozhi"/><span >优质承运商推荐</span></div>
             <div class="list_box">
               <ul class="ul_list">
-                <li>
+                <li 
+                  v-for="(item,index) in excellent" 
+                  :key="index"
+                >
+                  <h4>{{ item.companyName }}</h4>
+                  <span 
+                    v-for="(i,n) in item.allServiceNameList" 
+                    :key="n">{{ i }}</span>
+                </li>
+                <!-- <li>
                   <h4>满生货运中心</h4>
                   <span>零担整车 大件运输</span>
                 </li>
@@ -118,11 +279,7 @@
                 <li>
                   <h4>满生货运中心</h4>
                   <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
+                </li> -->
               </ul>
             </div>
             <!-- <div class="list_tiaoj">
@@ -138,7 +295,7 @@
               class="list_none" 
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
-              <img src="../../static/images/none_pic.png">
+              <img src="/images/none_pic.png">
             </div> -->
             <div class="zx_sx"><span class="biaozhi"/><span >广州出发热门专线</span></div>
             <div class="list_box">
@@ -247,11 +404,11 @@
                   <p class="p1"><a 
                     :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
                     target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
-                  <p class="p2"><img src="../../static/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
+                  <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
                   <p class="p3"><img 
-                    src="../../static/images/wzlImg/2.png"
+                    src="/images/wzlImg/2.png"
                     style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
-                  <p class="p4"><img src="../../static/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
+                  <p class="p4"><img src="/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
                 </li>
                 <li class="cy_list_7">
                   <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
@@ -265,22 +422,22 @@
                 <li class="cy_list_3">
                   <p class="p1"><img
                     v-if="item.authStatus === 'AF0010403'"
-                    src="../../static/images/list_wlzx/10shiming.png"></P>
+                    src="/images/list_wlzx/10shiming.png"></P>
                   <p class="p2"><img
                     v-if="item.isVip && item.isVip === 1"
-                    src="../../static/images/list_wlzx/11xinyong.png"></P>
+                    src="/images/list_wlzx/11xinyong.png"></P>
                   <p class="p3"><img
                     v-if="item.collateral && item.collateral !== 0"
-                    src="../../static/images/list_wlzx/12danbao.png"></P>
+                    src="/images/list_wlzx/12danbao.png"></P>
                 </li>
 
                 <li class="cy_list_4">
                   <p><img 
                     class="numlll" 
-                    src="../../static/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
+                    src="/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
                   <p><img 
                     class="numlll" 
-                    src="../../static/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
+                    src="/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
                 </li>
                 <li class="wlzx_list_6">
                   <p class="p2"><a 
@@ -307,16 +464,16 @@
 
           </div>
           <!--分页-->
-          <div
+          <!-- <div
             class="box" 
             style="float: right;margin-right: 370px;">
             <div 
               id="pagination1" 
               class="page fl"/>
             <div class="info fl">
-            <!-- <p>当前页数：<span id="current1">1</span></p> -->
+              <p>当前页数：<span id="current1">1</span></p>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
       
@@ -327,23 +484,23 @@
 </template>
 
 <script>
-// async function getListRangesAging($axios, currentPage, vo = {}) {
-//   let list, totalPage
-//   let parm = {
-//     currentPage: currentPage,
-//     pageSize: 20,
-//     vo
-//   }
-//   await $axios
-//     .post('/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging', parm)
-//     .then(res => {
-//       if (res.data.status === 200) {
-//         list = res.data.data.list
-//         totalPage = res.data.data.totalPage
-//       }
-//     })
-//   return { list, totalPage, currentPage }
-// }
+async function getListRangesAging($axios, currentPage, vo = {}) {
+  let list, totalPage
+  let parm = {
+    currentPage: currentPage,
+    pageSize: 20,
+    vo
+  }
+  await $axios
+    .post('/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging', parm)
+    .then(res => {
+      if (res.data.status === 200) {
+        list = res.data.data.list
+        totalPage = res.data.data.totalPage
+      }
+    })
+  return { list, totalPage, currentPage }
+}
 export default {
   name: 'ShiXiao',
   head: {
@@ -377,14 +534,31 @@ export default {
         ? query.startProvince
         : app.$cookies.get('currentProvinceFullName')
     }
-    // let listRangesAgingData = await getListRangesAging($axios, 1, vo)
+    let parmes = {
+      currentPage: 1,
+      pageSize: 8,
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
+    }
+    let listRangesAgingData = await getListRangesAging($axios, 1, vo)
+    //优质承运商推荐
+    let excellents = await $axios.get('/28-web/logisticsCompany/excellent')
+    //推荐专线/range/hot/list热门专线
+    // let hotLines = await $axios.post('/28-web/hot/list', parmes)
+    // console.log(hotLines, 'hotLines')
     return {
-      // listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
-      // totalPage: listRangesAgingData.totalPage
-      //   ? listRangesAgingData.totalPage
-      //   : 0,
-      // currentPage: listRangesAgingData.currentPage,
-      vo: vo
+      listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
+      totalPage: listRangesAgingData.totalPage
+        ? listRangesAgingData.totalPage
+        : 0,
+      currentPage: listRangesAgingData.currentPage,
+      vo: vo,
+      excellent: excellents.status === 200 ? excellents.data.data : []
     }
   },
   mounted() {
@@ -464,13 +638,13 @@ export default {
     // this.loadPagination()
   },
   methods: {
-    // async selectSort(item) {
-    //   this.sortId = item.id
-    //   let vo = this.vo
-    //   vo.filterSign = this.sortId
-    //   let obj = await getListRangesAging(this.$axios, this.currentPage, vo)
-    //   this.listRangesAging = obj.list
-    // },
+    async selectSort(item) {
+      this.sortId = item.id
+      let vo = this.vo
+      vo.filterSign = this.sortId
+      let obj = await getListRangesAging(this.$axios, this.currentPage, vo)
+      this.listRangesAging = obj.list
+    },
     async search() {
       let list1 = [],
         list2 = []
@@ -528,8 +702,27 @@ img {
 .shixiao_left {
   float: left;
   width: 220px;
-  background: pink;
+  background: #ffffff;
   margin-right: 7px;
+}
+.left_top {
+  /* float: left; */
+}
+.left_top_ul {
+  text-align: center;
+}
+.left_top_ul h1 {
+  line-height: 40px;
+  font-size: 22px;
+  padding: 40px 0;
+  background: red;
+  color: #fff;
+}
+.left_top_ul li {
+  height: 40px;
+  line-height: 40px;
+  font-size: 22px;
+  padding: 20px 0;
 }
 .shixiao_right {
   float: left;
@@ -573,6 +766,9 @@ img {
 .ul_list li span {
   height: 30px;
   line-height: 30px;
+  display: block;
+  width: 100px;
+  float: left;
 }
 .ul_host {
   width: 1052px;
@@ -670,6 +866,7 @@ img {
   font-size: 14px;
   /* color: #333; */
 }
+
 /*时效end*/
 .list_nav {
   height: 52px;
@@ -780,13 +977,13 @@ img {
   background-color: #fff;
   color: #eb434d;
   font-size: 15px;
-  background: no-repeat url(../../static/images/01search.png) 45px 6px;
+  background: no-repeat url(/images/01search.png) 45px 6px;
   text-align: left;
   margin-left: 8px;
   cursor: pointer;
 }
 #flush {
-  background: no-repeat url(../../static/images/flush.png) 10px 6px;
+  background: no-repeat url(/images/flush.png) 10px 6px;
   padding-left: 30px;
   width: 50px;
   border: solid 1px #e3e3e3;
@@ -819,6 +1016,7 @@ img {
   height: 39px;
   background-color: #f1f1f1;
   position: relative;
+  float: left;
 }
 .list_tiaoj span {
   display: block;
@@ -981,7 +1179,7 @@ img {
 }
 
 .wlzx_list_6 .p3 input {
-  background: no-repeat url(../../static/images/article_wlzx/15qq.gif) 12px 3px;
+  background: no-repeat url(/images/article_wlzx/15qq.gif) 12px 3px;
 
   padding-left: 15px;
   width: 87px;
@@ -1424,7 +1622,7 @@ img {
   line-height: 30px;
   color: #fff;
   text-align: center;
-  background: url(../../static/images/wzlImg/bule.png) no-repeat;
+  background: url(/images/wzlImg/bule.png) no-repeat;
 }
 .wzl_log .bgr {
   display: block;
@@ -1433,7 +1631,7 @@ img {
   line-height: 30px;
   color: #fff;
   text-align: center;
-  background: url(../../static/images/wzlImg/red.png) no-repeat;
+  background: url(/images/wzlImg/red.png) no-repeat;
 }
 .qiehuan {
   cursor: pointer;
@@ -1446,5 +1644,182 @@ img {
   -webkit-transform: rotate(180deg); /* Safari and Chrome */
   -o-transform: rotate(180deg); /* Opera */
   -moz-transform: rotate(180deg); /* Firefox */
+}
+.list_kehu {
+  float: left;
+  width: 100%;
+}
+.list_help {
+  width: 220px;
+  box-sizing: border-box;
+  float: left;
+  margin-top: 20px;
+}
+.list_help_title {
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  background: red;
+  color: #fff;
+}
+.list_ewm {
+  float: left;
+  width: 100%;
+}
+.imgbox {
+  text-align: center;
+  margin: 10px;
+}
+.order_content {
+  padding: 10px;
+}
+.list-box-r-top {
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding: 15px 15px;
+  margin-bottom: 10px;
+}
+.ltl-input0 {
+  position: relative;
+  margin: 7px 0 10px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: white;
+  font-size: 14px;
+  line-height: 32px;
+}
+.ltl-select {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  border: none;
+  outline: none;
+}
+.ltl-select option {
+  color: #333333;
+}
+.ltl-input {
+  position: relative;
+  margin: 7px 0 10px 0;
+}
+.right-top-btn {
+  display: block;
+  height: 40px;
+  width: 300px;
+  background: #3f94ee;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  margin-top: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+.ltl-ico-start {
+  background-position: 0px 8px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  /* right: 5px; */
+  top: 8px;
+}
+.ss56-common-sprite1 {
+  background-image: url(/images/list_wlzx/select_icon.png);
+  background-repeat: no-repeat;
+}
+.ltl-ico-end {
+  background-position: 0px 8px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 5px;
+  top: 8px;
+}
+.ss56-common-sprite2 {
+  background-image: url(/images/list_wlzx/select_icon.png);
+  background-repeat: no-repeat;
+}
+/* .list_help_title {
+  color: #3f94ee;
+} */
+.ltl-location {
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 35px;
+  line-height: 35px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  /* border-radius: 4px; */
+  padding-right: 50px;
+  outline: 0;
+}
+.ltl-phone {
+  width: 115px;
+  border: 1px solid #ccc;
+  height: 35px;
+  line-height: 35px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  outline: 0;
+  float: left;
+}
+.ltl-button {
+  display: block;
+  width: 75px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #589def;
+  color: #fff;
+  border: 1px solid #589def;
+  cursor: pointer;
+  float: left;
+}
+.lines-sprite-icons {
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+}
+.list-title-a {
+  color: #333;
+  font-size: 16px;
+}
+.list-title {
+  font-weight: 300;
+  font-size: 18px;
+  color: #333;
+}
+.icon-through {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-position: -6px -62px;
+  position: relative;
+  top: 3px;
+  margin: 0 10px;
+}
+.icon-end {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -6px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
+.icon-start {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -34px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
 }
 </style>

@@ -11,14 +11,16 @@
           href="">物流公司</a>
       </div>
       <ul class="first_ul">
-        <li class="first_li">
+        <li 
+          class="first_li" 
+          style="background: #fff;">
           <div class="company">
             <div
               class="company_name"
               style="padding: 15px 0 5px 20px"
             ><img
               src="../../static/gongsi/images/wlyq_gs.png"
-              alt=""><span style="padding-left: 20px">公司所在地</span></div>
+              alt=""><span style="padding-left: 5px;color:#333;font-weight:both">公司所在地</span></div>
             <div class="company_address">
               <ul
                 v-for="(item,i) in 1"
@@ -47,7 +49,9 @@
             </div>
           </div>
         </li>
-        <li class="sec_li">
+        <li 
+          class="sec_li"
+          style="margin:0 20px;">
           <div class="top">
             <div
               id="test1"
@@ -67,12 +71,12 @@
               v-for="(item, index) in 3"
               :key="index"
               href="#"
-              style="padding: 0 10px 0 10px"
+              
             >
               <img
                 src="../../static/gongsi/images/demo/gg.png"
                 alt=""
-                style="width: 30%;height: 135px;"
+                style="width: 248px;height: 135px;"
               >
             </a>
           </div>
@@ -81,7 +85,7 @@
           <div class="btn_top"><button
             class="layui-btn"
             @click="callme"
-            style="width: 280px;background: #3f94ee">实力承运商入驻</button></div>
+            style="width: 298px;background: #3f94ee;height:48px">实力承运商入驻</button></div>
           <div
             class="rem_bot"
             style="margin-top: 10px"
@@ -100,26 +104,25 @@
               <li
                 v-for="(item,i) in listE"
                 :key="i"
-                style="padding-top: 10px">
-                <p>{{ item.companyName }}</p>
-                <p>
-                  <!--<span-->
-                  <!--style="padding-right: 10px"-->
-                  <!--v-for="(item, i) in item.advService"-->
-                  <!--:key="i"-->
-                  <!--&gt;{{ item.length > 3 ? item.substring(0, 3) + '...' : '' }}</span>-->
-                  <!--&lt;!&ndash;<span style="padding-right: 10px">仓储配送</span>-->
+                style="padding-top: 10px;font-size:16px; padding-left: 10px;">
+                <div><span 
+                  class="rem_bot_b_title" 
+                  style="color:#333">{{ item.companyName.length>10?item.companyName.substring(10)+'..':item.companyName }}</span>
+                  <img 
+                    src="../../static/gongsi/images/15qq.gif" 
+                    alt=""></div>
+                <p style="padding-top:2px">
+                
                   <span
-                    style="padding-right: 10px;color: #ccc"
-                    v-for="(item, i) in (item.advService.length>3?item.advService.slice(3):item.advService)"
+                    style="padding-right: 16px;color: #666;font-size:14px"
+                    v-for="(item, i) in (item.advService.length>3?item.advService.slice(0,3):item.advService)"
                     :key="i">{{ item }}</span>
                 </p>
-                <p><span style="color: rgb(255,122,35)">推荐承运商
-
-                </span><a
-                  :href="'/member/'+item.id"
-                  target="_blank"
-                  style="float: right;cursor: pointer" >进入官网</a></p>
+                <p>
+                  <a
+                    :href="'/member/'+item.id"
+                    target="_blank"
+                    style="cursor: pointer;color:#2577e3;font-size:14px" >进入官网</a></p>
               </li>
             </ul>
           </div>
@@ -130,26 +133,29 @@
       <div class="header_links_l">
         <ul>
           <li
-            v-for="(item, index) in lineAdviseRecommend"
+            v-for="(item, index) in lineAdviseRecommend.slice(0,8)"
             :key="index"
-            style="float:left;width: 20%;text-align: center"><a href="#">
-              <p style="font-size: 16px;color: #0d91e9;padding-top: 20px">{{ item.companyName?item.companyName:'' }}</p>
+            style="float:left;width: 248px;height:95px;text-align: center;border: solid 1px #e0e0e0;"><a href="#">
+              <p style="font-size: 16px;color: #2577e3;padding-top: 20px;">{{ item.companyName?item.companyName:'' }}</p>
 
               <p
                 v-if="item.advService.length"
-                style="padding: 10px 0 10px;font-size: 12px"
+                style="padding: 10px 0 10px;font-size: 13px;color:#666"
               ><span
                 v-for="(item, index) in (item.advService?item.advService.slice(0,2):'')"
-                :key="index">{{ item }}</span></p>
+                :key="index"
+                style="padding-right:10px;color: #666;font-size: 13px;">{{ item }}</span></p>
 
           </a></li>
         </ul>
       </div>
       <div
         class="header_links_r"
-        style="position: relative"
+        style="position: relative;margin-left: 20px;background: #fff;padding-left: 20px"
       >
-        <p style="font-size: 18px;color: #0d91e9;padding: 15px 0 10px 10px ">运单查询运单查询</p>
+        <p 
+          style="font-size: 18px;color: #0d91e9;padding: 15px 0 40px 10px " 
+          class="header_links_r_search">运单查询</p>
         <input
           id="yd_nr"
           rows="3"
@@ -157,51 +163,59 @@
           placeholder="请输入运单号，例如："
           style="width: 230px;margin-left: 10px">
         <input
-        type="button">
+        
+          type="button"
+          style="height: 30px;">
         <div
           class="ydh"
-          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 55px;color:#0d91e9;margin-left: 10px"
+          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 85px;color:#0d91e9;margin-left: 30px"
         >
           <span>1809260061</span>
         </div>
         <div><button
           id="yd_cx1"
           class="layui-btn"
-          style="width: 260px;margin-top: 10px;border-radius: 3px;margin-left: 10px"
+          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top:50px"
         >立即查询</button></div>
       </div>
     </div>
     <div class="list_box" >
       <div
         class="list_down"
-        style="background: rgb(255,247,227);padding: 10px 0;font-size: 20px;"><a
+        style="background-color:#fff7e4;border: solid 1px #f7e9c8;padding: 13px 0 14px 17px;font-size: 14px;"><a
           href="http://h5.28tms.com/"
           target="_blank"
-          style="color: #0d91e9"
+          style="color: #2577e3"
       >下载<span style="color: rgb(255,116,23)">【28快运APP】</span>，实时接收推荐的精品车货源与合作信息，在线下单推荐优质承运商，便捷查询运单。</a></div>
       <div class="banner h62">
         <div class="echart_scroll">
           <div
             class="fl echart_scroll_sm"
-            style="padding-left: 20px;"
+            style="padding-left: 20px;color: #333333;"
           >最新入驻企业</div>
           <div class="fl echart_scroll_nr">
             <div class="fl echart_scroll_nr800">
               <ul
                 class="echart_scroll_nr1"
               >
-                <!--<li-->
-                <!--v-for="(item, i) in listF"-->
-                <!--:key="i"-->
+                <li
+                  v-for="(item, i) in listF"
+                  :key="i">
 
-                <!--&gt;<a-->
-                <!--href="javascript:void(0)"-->
-                <!--target="_blank"><span>{{ item.companyName?item.companyName:'' }}</span></a></li>-->
-                <li><a
+                  <a
+                    :href="'/member/'+ item.id"
+                    target="_blank"><span style="font-size: 14px;color: #333333;">{{ item.companyName?item.companyName:'' }}</span>
+                  </a>
+                  <!-- </li> -->
+                
+                  <!-- <li><a
                   href="javascript:void(0)"
                   target="_blank"
                   v-for="(item, i) in 10"
-                  :key="i"><span>广州发合肥</span></a></li>
+                  :key="i"><span>广州发合肥</span></a></li> -->
+
+
+
                   <!--<li><a-->
                   <!--href="javascript:void(0)"-->
                   <!--target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
@@ -211,7 +225,7 @@
                   <!--<li><a-->
                   <!--href="javascript:void(0)"-->
                   <!--target="_blank"><span>广州发郑州</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
-              </ul>
+              </li></ul>
               <ul class="echart_scroll_nr2"/>
             </div>
           </div>
@@ -219,13 +233,13 @@
       </div>
       <div
         class="list_checkbox"
-        style="display: flex;    line-height: 38px;">
+        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px">
 
         <div class="form_class">
 
           <ul>
             <li
-            style="float: left;padding-right: 20px">
+            style="float: left;padding-right: 32px">
 
               <input
                 type="checkbox"
@@ -235,12 +249,12 @@
                 :data-pcode="listH[0].pcode">
               <label
                 for=""
-                style="padding-left: 10px">{{ listH[0].name }}</label>
+                style="padding-left: 5px">{{ listH[0].name }}</label>
             </li>
             <li
               v-for="(item, i) in listH.slice(1)"
               :key="i"
-              style="float: left;padding-right: 20px"
+              style="float: left;padding-right: 32px"
               class="checkobxli">
               <input
                 type="checkbox"
@@ -255,16 +269,16 @@
             </li>
           </ul>
         </div>
-        <div style="display: inherit;padding-left:200px;position: relative">
+        <div style="display: inherit;padding-left:55px;position: relative">
           <input
             type="text"
             placeholder="公司名称"
             class="layui-input parkname"
-            style="width: 275px"
-            v-model="parkname">
-          <a :href="'/gongsi/?parkName='+ parkname"><i
+            style="width: 280px"
+            v-model="companyName">
+          <a :href="'/gongsi/?companyName='+ companyName"><i
             class="layui-icon layui-icon-search"
-            style="font-size: 20px; color: #1E9FFF;display: inherit;vertical-align: middle;position: absolute; top: 7px;right: 10px;cursor: pointer"
+            style="font-size: 20px; color: #1E9FFF;display: inherit;vertical-align: middle;position: absolute; top: 3px;right: 10px;cursor: pointer"
           /></a>
         </div>
 
@@ -273,13 +287,25 @@
 
       <div class="list_center">
         <div class="list_left">
-          <DetailList :info="gsList.slice(0,10)"/>
+          
+          <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
+
+
+          <div
+            v-if="!getgsListFn.length"
+            class="list_none">
+            <span style="  float: left;width: 100%;text-align: center;height: 40px;line-height: 40px;font-size: 16px; margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
+            <img 
+              src="../../static/gongsi/images/none_pic.png"
+              style="float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;">
+          </div>
+          <DetailList :info="getgsListFn"/>
           <img
             src="../../static/gongsi/images/listbg.png"
             alt=""
             width="1040"
           >
-          <DetailList :info="gsList.slice(10)"/>
+          <DetailList :info="getgsListsFn"/>
           <!--分页-->
           <div
 
@@ -458,9 +484,13 @@ export default {
     return {
       isAdd: false,
       types: 0,
-      parkname: '',
+      companyName: '',
       isChecked: false,
-      checkboxItem: []
+      checkboxItem: [],
+      gsList: [],
+      getgsList: [],
+      vo: {},
+      locationCity: ''
       // lineHots: []
     }
   },
@@ -678,7 +708,9 @@ export default {
       // listF: listF.data.data == [] ? '' : '',
       listF: listF.data.status == 200 ? listF.data.data : '',
       listG: listG.data.status == 200 ? listG.data.data : '',
-      listH: listH.data.status == 200 ? listH.data.data : ''
+      listH: listH.data.status == 200 ? listH.data.data : '',
+      vo: vo,
+      locationCity: vo.locationCity
     }
   },
   computed: {
@@ -693,6 +725,12 @@ export default {
     },
     gongsi_wlzx01() {
       return this.$store.state.news.gongsi_wlzx[0]
+    },
+    getgsListFn() {
+      return this.gsList.length > 20 ? this.gsList.slice(0, 10) : this.gsList
+    },
+    getgsListsFn() {
+      return this.gsList.length > 20 ? this.gsList.slice(10) : this.gsList
     }
   },
   head: {
@@ -704,6 +742,86 @@ export default {
     ]
   },
   mounted() {
+    this.companyName = this.$route.query.companyName
+    console.log(this.$route.query.companyName, '$route')
+    // this.companyName = decodeURI(GetUrlParam('companyName')) || ''
+    var newArr = new Array()
+    let _this = this
+    var uniqueNames = []
+    $('#buxian').change(async function() {
+      // console.log(this.gsList, 'gsList')
+      // console.log($(this).attr('data-code'), 'data-code')
+      if ($(this).prop('checked')) {
+        $('input[name=checkbox]').prop('checked', false)
+
+        uniqueNames.push($(this).attr('data-code'))
+        _this.checkboxItem = uniqueNames
+        let vo = {}
+        vo.otherServiceCodes = this.checkboxItem
+        vo.locationCity =
+          decodeURI(GetUrlParam('locationCity')) == 'null'
+            ? ''
+            : decodeURI(GetUrlParam('locationCity'))
+        vo.locationProvince =
+          decodeURI(GetUrlParam('locationProvince')) == 'null'
+            ? ''
+            : decodeURI(GetUrlParam('locationProvince'))
+
+        vo.companyName =
+          decodeURI(GetUrlParam('companyName')) == 'null'
+            ? ''
+            : decodeURI(GetUrlParam('companyName'))
+        let getgsList = await getGSList($axios, 1, vo)
+        _this.gsLists = getgsList.list
+        _this.gsList.forEach(item => {
+          item.num = Math.ceil(Math.random() * 30)
+        })
+        console.log(getgsList.list, vo, 'buxuan')
+        // return gsLists
+      } else {
+      }
+    })
+    // console.log(this.gsList, 'rtrtebuxuandfdd122')
+
+    $('input[name=checkbox]:checkbox').click(async function() {
+      $('input[name=checkbox]:checkbox').each(function() {
+        if ($(this).prop('checked')) {
+          newArr.push($(this).attr('data-code'))
+          $('#buxian').prop('checked', false)
+          // if()
+          // console.log(newArr, 'newfdf')
+        }
+      })
+
+      $.each(newArr, function(i, el) {
+        if ($.inArray(el, uniqueNames) === -1) {
+          uniqueNames.push(el)
+        }
+      })
+
+      // var checkboxItem = []
+      _this.checkboxItem = uniqueNames
+      let vo = {}
+      vo.otherServiceCodes = this.checkboxItem
+      vo.locationCity =
+        decodeURI(GetUrlParam('locationCity')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('locationCity'))
+      vo.locationProvince =
+        decodeURI(GetUrlParam('locationProvince')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('locationProvince'))
+      vo.companyName =
+        decodeURI(GetUrlParam('companyName')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('companyName'))
+      let getgsList = await getGSList($axios, 1, vo)
+      _this.gsList = getgsList.list
+      _this.gsList.forEach(item => {
+        item.num = Math.ceil(Math.random() * 30)
+      })
+      console.log(getgsList.list, vo, this.gsList, 'quanxuan')
+    })
     seajs.use(
       [
         '../js/city.js',
@@ -722,32 +840,32 @@ export default {
             seajs.use(['../gongsi/js/list_wlgs.js'], function() {
               seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
                 seajs.use(['../js/gaodemap2.js'], function() {
-                  $('#buxian').change(function() {
-                    // var item = $('.input_class')
-                    console.log($(this).attr('data-code'), 'data-code')
-                    if ($(this).prop('checked')) {
-                      $('input[name=checkbox]').prop('checked', false)
-                    } else {
-                    }
-                  })
-                  var newArr = new Array()
-                  $('input[name=checkbox]:checkbox').click(function() {
-                    $('input[name=checkbox]:checkbox').each(function() {
-                      // newArr = []
-                      if ($(this).prop('checked')) {
-                        newArr.push($(this).attr('data-code'))
-                      }
-                    })
-                    var uniqueNames = []
-                    $.each(newArr, function(i, el) {
-                      if ($.inArray(el, uniqueNames) === -1)
-                        uniqueNames.push(el)
-                      this.checkboxItem.push(el)
-                    })
-                    // var checkboxItem = []
-                    // checkboxItem.push(uniqueNames)
-                    console.log(this.checkboxItem, 'uniqueNames')
-                  })
+                  // $('#buxian').change(function() {
+                  //   // var item = $('.input_class')
+                  //   console.log($(this).attr('data-code'), 'data-code')
+                  //   if ($(this).prop('checked')) {
+                  //     $('input[name=checkbox]').prop('checked', false)
+                  //   } else {
+                  //   }
+                  // })
+                  // var newArr = new Array()
+                  // $('input[name=checkbox]:checkbox').click(function() {
+                  //   $('input[name=checkbox]:checkbox').each(function() {
+                  //     // newArr = []
+                  //     if ($(this).prop('checked')) {
+                  //       newArr.push($(this).attr('data-code'))
+                  //     }
+                  //   })
+                  //   var uniqueNames = []
+                  //   $.each(newArr, function(i, el) {
+                  //     if ($.inArray(el, uniqueNames) === -1)
+                  //       uniqueNames.push(el)
+                  //     this.checkboxItem.push(el)
+                  //   })
+                  //   // var checkboxItem = []
+                  //   // checkboxItem.push(uniqueNames)
+                  //   console.log(this.checkboxItem, 'uniqueNames')
+                  // })
 
                   //
                   layui.use('form', function() {
@@ -834,6 +952,9 @@ export default {
     )
   },
   methods: {
+    getFung(vo) {
+      let gslist = getGSList($axios, 1, vo)
+    },
     findMe() {
       this.addFn()
       this.types = 2

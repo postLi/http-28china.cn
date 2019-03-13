@@ -42,7 +42,9 @@
           :key="index"
           class="wd_item">
           <ul>
-            <li class="wd_item01"><span id="nr031">{{ item.pointName }}</span></li>
+            <li class="wd_item01"><span 
+              :title="item.pointName" 
+              id="nr031">{{ item.pointName }}</span></li>
             <li class="wd_item02"><span id="nr032">{{ item.belongCityName }}</span></li>
             <li class="wd_item03"><span id="nr033">{{ item.name }}</span></li>
             <li class="wd_item04"><span id="nr034">{{ item.mobile }}</span></li>
@@ -82,6 +84,13 @@ export default {
     ]
   },
   layout: 'member',
+  data() {
+    return {
+      query: {
+        belongCityName: ''
+      }
+    }
+  },
   mounted() {
     let uid = this.$store.state.member.id
     let _this = this
@@ -158,12 +167,14 @@ export default {
   },
   async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
-    await store.dispatch('member/GETCOMPANYINFO', params.id)
-    await store.dispatch('member/GETCOMPANYPOINTINFO', {
-      companyId: store.state.member.company.id,
-      pageSize: 10,
-      currentPage: 1
-    })
+    await Promise.all([
+      store.dispatch('member/GETCOMPANYINFO', params.id),
+      store.dispatch('member/GETCOMPANYPOINTINFO', {
+        companyId: store.state.member.company.id,
+        pageSize: 10,
+        currentPage: 1
+      })
+    ])
   }
 }
 </script>

@@ -91,3 +91,4 @@ typings/
 !/pages/zhuanxian/detail.vue
 !/pages/zhuanxian/selectMap.vue
 !/pages/zhuanxian/showPrice.vue
+!/static/yuanqu/css/list_wlyq.css

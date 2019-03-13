@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[17],{451:function(n,e,t){"use strict";t.r(e);var l={name:"Exit",mounted(){location.href="/"}},o=t(1),component=Object(o.a)(l,function(){var n=this.$createElement;return(this._self._c||n)("div")},[],!1,null,null,null);e.default=component.exports}}]);

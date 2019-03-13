@@ -436,8 +436,7 @@ async function getHyList($axios, currentPage, vo = {}) {
   let res = await $axios.post('/28-web/lclOrder/list', parm)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
-      if (item.companyName && item.companyName > 8) {
-        item.companyName = item.companyName.substring(0, 8) + '..'
+      if (item.companyName) {
         item.companyName = item.companyName.substring(0, 8) + '..'
       }
       if (!item.companyName) {
@@ -445,13 +444,13 @@ async function getHyList($axios, currentPage, vo = {}) {
       }
       item.start = item.startCity + item.startArea
       item.end = item.endCity + item.endArea
-      if (item.start && item.start.length > 6) {
+      if (item.start) {
         item.start = item.start.substring(0, 6) + '..'
       }
-      if (item.end && item.end.length > 6) {
+      if (item.end) {
         item.end = item.end.substring(0, 6) + '..'
       }
-      if (item.goodsTypeName.length > 14) {
+      if (item.goodsTypeName) {
         item.goodsTypeName = item.goodsTypeName.substring(0, 14) + '..'
       }
     })
@@ -479,22 +478,15 @@ async function getRecommendList($axios, vo) {
       }
       item.start = item.startCity + item.startArea
       item.end = item.endCity + item.endArea
-      if (item.start && item.start.length > 6) {
+      if (item.start) {
         item.start = item.start.substring(0, 6) + '..'
       }
-      if (item.end && item.end.length > 6) {
+      if (item.end) {
         item.end = item.end.substring(0, 6) + '..'
       }
-      if (item.goodsTypeName.length > 6) {
+      if (item.goodsTypeName) {
         item.goodsTypeName = item.goodsTypeName.substring(0, 6) + '..'
       }
-
-      // if (item.goodsWeight.length > 5) {
-      //   item.goodsWeight = item.goodsWeight.substring(0, 5) + '..'
-      // }
-      // if (item.goodsVolume.length > 5) {
-      //   item.goodsVolume = item.goodsVolume.substring(0, 5) + '..'
-      // }
     })
 
     return res.data.data.list

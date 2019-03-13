@@ -132,8 +132,13 @@
             <div class="arc_left_2_1_2"><table>
               <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font>{{ hyDetail.startProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
-              <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.consignor }}</td></tr>
-              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.consignorPhone }}</td></tr>
+              <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.contacts }}</td></tr>
+              <tr><td class="arc_td1">联系电话：</td><td 
+                class="arc_td2" 
+              >
+                <a 
+                  :class="[showCheck ? '' : 'color']"
+                  @click="checkPhone()">{{ showCheck ? hyDetail.mobile : '查看手机' }}<a/></a></td></tr>
               <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
               <tr><td class="arc_td1">里程：</td><td class="arc_td2">{{ hyDetail.distance }}</td></tr>
               <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>
@@ -223,7 +228,7 @@
         </p>
         <p class="arc_right05">
           <a 
-            href="#" 
+            :href="/member/+ archival.companyId" 
             class="website">进入官网</a>
           <input 
             class="collection_hz" 
@@ -250,7 +255,6 @@
         v-if="archival.shipperType === 'AF0010101'">
         <div class="arc_top_title">
           <h4>货主档案</h4>
-          <!-- <h4 v-if="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4> -->
         </div>
         <div 
         class="arc_top_img">
@@ -283,10 +287,6 @@
         <div class="arc_top_title">
           <h4>{{ archival.companyName }}</h4>
         </div>
-        <div 
-        class="arc_top_img">
-        <!-- <img src="/images/cy/gold.png"> -->
-        </div>
         <div class="arc_middle">
           <img src="/images/cy/09sj.png">
           <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
@@ -294,7 +294,7 @@
           <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
         </div>
         <ul class="bottom_ul">
-          <li>联系人：{{ archival.contacts } }</li>
+          <li>联系人：{{ archival.contacts }}</li>
           <li>手机：
             <a 
               v-show="checkMoblie"
@@ -308,6 +308,7 @@
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
       </div>
+     
     </div>
     <div class="arc_main3">
      
@@ -887,6 +888,7 @@ export default {
       isShowAdd: false,
       isShowHelp: false,
       isShowOrder: false,
+      showCheck: false,
       zxList: [],
       inTerVar: null,
       inTerVar1: null,
@@ -937,12 +939,7 @@ export default {
   },
   async asyncData({ $axios, app, query }) {
     let zxList
-    let hyDetails = await $axios
-      .get('/28-web/lclOrder/detail/' + query.id)
-      .catch(err => {
-        // console.log('hyDetail:', err)
-      })
-    // console.log(hyDetails, 'hyDetails')
+    let hyDetails = await $axios.get('/28-web/lclOrder/detail/' + query.id)
     let parm = {
       currentPage: 1,
       pageSize: 10,
@@ -957,60 +954,42 @@ export default {
       endArea: hyDetails.data.data.endArea,
       endCity: hyDetails.data.data.endCity,
       endProvince: hyDetails.data.data.endProvince,
-      startArea: hyDetails.data.data.startArea,
-      startCity: hyDetails.data.data.startCity,
+      startArea: hyDetails.data.data.startArea
+        ? hyDetails.data.data.startArea
+        : '',
+      startCity: hyDetails.data.data.startCity
+        ? hyDetails.data.data.startCity
+        : '',
       startProvince: hyDetails.data.data.startProvince
+        ? hyDetails.data.data.startProvince
+        : ''
     }
     //货主档案
-    let archivals = await $axios
-      .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
-      .catch(err => {
-        // console.log('archivals')
-      })
-    // console.log(archivals.data.data, 'archivals.data.data')
+    let archivals = await $axios.post(
+      '/28-web/shipper/archival?shipperId=' + query.shipperId
+    )
     //顶部轮播
-    let newLists = await $axios
-      .get('/28-web/lclOrder/newList')
-      .catch(err => {})
-      .catch(err => {
-        // console.log('newLists')
-      })
+    let newLists = await $axios.get('/28-web/lclOrder/newList')
     //货源列表
-    let huoInfoLists = await $axios
-      .post('/28-web/lclOrder/list', parm)
-      .catch(err => {
-        // console.log('huoComprehensives4:', err)
-      })
+    let huoInfoLists = await $axios.post('/28-web/lclOrder/list', parm)
     //最新货源信息
-    let newestHuoyuanRes = await $axios
-      .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
-      .catch(err => {
-        // console.log('newestHuoyuanRes:', err)
-      })
+    let newestHuoyuanRes = await $axios.post(
+      '/28-web/lclOrder/shipper/lastList',
+      { shipperId: query.shipperId }
+    )
     // 货主综合力评估
-    let huoComprehensives = await $axios
-      .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
-      .catch(err => {
-        // console.log('huoComprehensives:', err)
-      })
+    let huoComprehensives = await $axios.get(
+      '/28-web/shipper/comprehensive?shipperId=' + query.shipperId
+    )
     //货源热门搜索
-    let hotSearchs = await $axios
-      .get('/28-web/hotSearch/supply/detail/links')
-      .catch(err => {
-        // console.log('hotSearchs')
-      })
+    let hotSearchs = await $axios.get('/28-web/hotSearch/supply/detail/links')
     //企业人气榜
-    let popularitys = await $axios
-      .get('/28-web/logisticsCompany/popularity')
-      .catch(err => {
-        // console.log('popularitys')
-      })
+    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
     //底部推荐
-    let huoLinks = await $axios
-      .post('/28-web/lclOrder/detail/related/links', parm1)
-      .catch(err => {
-        // console.log('huoLinks')
-      })
+    let huoLinks = await $axios.post(
+      '/28-web/lclOrder/detail/related/links',
+      parm1
+    )
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -1098,9 +1077,7 @@ export default {
   },
 
   mounted() {
-    // console.log(this.hyDetail, 'hyDetail')
     if (process.client) {
-      console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({
         // province: this.hyDetail.startProvince,
         // city: this.hyDetail.startCity,
@@ -1172,6 +1149,9 @@ export default {
     this.inTerVar = null
   },
   methods: {
+    checkPhone() {
+      this.showCheck = !this.showCheck
+    },
     getCity() {
       this.dataInfo.startProvince = this.hyDetail.startProvince
       this.dataInfo.startCity = this.hyDetail.startCity
@@ -1340,4 +1320,8 @@ export default {
 }
 </script>
 <style scoped>
+.color {
+  color: #3f94ee;
+  border-bottom: 1px solid #3f94ee;
+}
 </style>

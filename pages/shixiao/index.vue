@@ -534,10 +534,23 @@ export default {
         ? query.startProvince
         : app.$cookies.get('currentProvinceFullName')
     }
+    let parmes = {
+      currentPage: 1,
+      pageSize: 8,
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
+    }
     let listRangesAgingData = await getListRangesAging($axios, 1, vo)
     //优质承运商推荐
     let excellents = await $axios.get('/28-web/logisticsCompany/excellent')
-    console.log(excellents.data.data, 'excellent')
+    //推荐专线/range/hot/list热门专线
+    // let hotLines = await $axios.post('/28-web/hot/list', parmes)
+    // console.log(hotLines, 'hotLines')
     return {
       listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
       totalPage: listRangesAgingData.totalPage
@@ -753,6 +766,9 @@ img {
 .ul_list li span {
   height: 30px;
   line-height: 30px;
+  display: block;
+  width: 100px;
+  float: left;
 }
 .ul_host {
   width: 1052px;

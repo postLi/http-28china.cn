@@ -8,7 +8,7 @@
             alt="">
         </a>
       </div>
-      <div 
+      <div
         class="list_nav"
         style="padding-top:20px"
       >
@@ -26,7 +26,7 @@
             style="float:left;width: 900px;">
 
             <dl>
-              <dt><span>园区所在地&nbsp;：</span></dt>
+              <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt>
               <dd><form
                 name="zxaddform"
                 method="post"
@@ -85,7 +85,7 @@
             target="_blank"><button
               id="yd_cx1"
               class="layui-btn"
-              style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;float:right"
+              style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;float:right;height:45px;line-height:45px"
           >物流公司入驻</button></a></div>
 
         </div>
@@ -93,33 +93,33 @@
           class="clearfix"
           style="clear: both;"><i>热门：</i>
           <a
-            
+
             href="/wuliu?locationProvince=上海市&locationCity=上海市"
             target="_blank">
             <span
             style="padding-right:10px">上海</span>
           </a>
           <a
-            
+
             href="/wuliu?locationProvince=北京市&locationCity=北京市"
             target="_blank">
             <span
             style="padding-right:10px">北京</span>
           </a>
           <a
-            
+
             href="/wuliu?locationProvince=广东省&locationCity=深圳市"
             target="_blank">
             <span
             style="padding-right:10px">深圳</span>
           </a>
           <a
-            
+
             href="/wuliu?locationProvince=重庆市&locationCity=重庆市"
             target="_blank">
             <span
             style="padding-right:10px">重庆</span>
-          </a> 
+          </a>
           <a
             href="/wuliu?locationProvince=天津市&locationCity=天津市"
             target="_blank">
@@ -131,7 +131,7 @@
             target="_blank">
             <span
             style="padding-right:10px">苏州</span>
-          </a> 
+          </a>
           <a
             href="/wuliu?locationProvince=四川省&locationCity=成都市"
             target="_blank">
@@ -155,7 +155,7 @@
           <div class="tuijian_content">
             <ul>
               <li
-                v-for="(item,i) in 5"
+                v-for="(item,i) in getRecommendList"
                 :key="i"
                 style="float:left;padding-right:20px">
                 <a
@@ -164,12 +164,12 @@
                     src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
                     width="260"
                     height="165"
-                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.5);color:rgb(255,255,255);    padding: 10px 94px;">安发物流园</span>
+                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);    padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName }}</span>
                 <span style="position:absolute;bottom:50px;left:1px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 10px 20px;">招商中</span></a>
                 <p style="width: 260px;text-align: center;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
-                  v-for="(item,i) in 4"
+                  v-for="(item,i) in 1"
                   :key="i"
-                  src="../../static/gongsi/images/danbao.png"
+                  src="../../static/yuanqu/images/zhishu.png"
                   alt=""
                 >
 
@@ -203,12 +203,13 @@
             </div>
             <ul>
               <li
-                v-for="(item,i) in 5"
+                v-for="(item,i) in getNewestList"
                 :key="i"
                 style="padding-top: 20px"><img
-                  src="../../static/gongsi/images/danbao.png"
-                  alt=""><span style="padding: 0px 40px 0 30px">安发物流园
-              </span><span><i style="padding-right:10px">地址:</i>广东省广州市白云区石井镇潭村西南侧地段</span></li>
+                  src="../../static/yuanqu/images/jiantou.png"
+                  alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item. parkName }}
+                </span><span 
+              style="width: 300px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress }}</span></li>
             </ul>
           </div>
           <div
@@ -360,7 +361,7 @@
             style="width: 670px;float: left">
             <div
               class="zixuntitle"
-              style="padding:30px 0 25px">
+              style="padding:30px 0 25px;margin-bottom:10px">
               <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">行业资讯
               </h5>
               <a href=""><span style="float:right"> 更多>></span></a>
@@ -387,8 +388,8 @@
             style="width: 670px;float: left;margin-left:40px">
             <div
               class="zixun_title"
-              style="padding:30px 0 25px">
-              <h5 style="color:rgb(196,69,76);font-size:18px">仓储与配送
+              style="padding:30px 0 25px;margin-bottom:10px">
+              <h5 style="color:rgb(196,69,76);font-size:18px;    float: left;">仓储与配送
               </h5>
               <a href=""><span style="float:right"> 更多>></span></a>
             </div>
@@ -417,30 +418,30 @@
             href="/regisiter"
             target="_blank"><buttom style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</buttom></a>
         </div>
-        <!--分页-->
-        <div
-          class="box"
-          style="float: right;margin-right: 170px;">
-          <div
-            id="pagination1"
-            class="page fl"/>
-          <div class="info fl">
-          <!--<p>当前页数：<span id="current1">1</span></p>-->
-          </div>
-        </div>
-        <!--分页-->
+        <!--&lt;!&ndash;分页&ndash;&gt;-->
+        <!--<div-->
+        <!--class="box"-->
+        <!--style="float: right;margin-right: 170px;">-->
+        <!--<div-->
+        <!--id="pagination1"-->
+        <!--class="page fl"/>-->
+        <!--<div class="info fl">-->
+        <!--&lt;!&ndash;<p>当前页数：<span id="current1">1</span></p>&ndash;&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;分页&ndash;&gt;-->
 
-        <div class="bottom_wlyq" >
-          <div class="bottom_wlyq_bt">您可能对这些感兴趣</div>
-          <div class="bottom_wlyq_nr">
-            <div
-              v-for="(item,index) in getLogisticsPark"
-              :key="index"
-              class="bottom_wlyq_item"><a
-                :href="'/wuliu/detail?id=' + item.id"
-                target="_blank">{{ item.parkName }}</a></div>
-          </div>
-        </div>
+        <!--<div class="bottom_wlyq" >-->
+        <!--<div class="bottom_wlyq_bt">您可能对这些感兴趣</div>-->
+        <!--<div class="bottom_wlyq_nr">-->
+        <!--<div-->
+        <!--v-for="(item,index) in getLogisticsPark"-->
+        <!--:key="index"-->
+        <!--class="bottom_wlyq_item"><a-->
+        <!--:href="'/wuliu/detail?id=' + item.id"-->
+        <!--target="_blank">{{ item.parkName }}</a></div>-->
+        <!--</div>-->
+        <!--</div>-->
 
       </div>
 
@@ -538,7 +539,28 @@ export default {
       parm1
     )
     let getGateWayListData = await gateWayList($axios, 1, vo)
+    // LLl
+    let parm2 = vo
+    parm2.currentPage = 1
+    parm2.pageSize = 5
+    delete parm2.parkName
+    let getRecommendList = await $axios.post(
+      '/28-web/logisticsPark/main/recommend/list',
+      parm2
+    )
+    let getNewestList = await $axios.post(
+      '/28-web//logisticsPark/newest/list',
+      parm2
+    )
+    console.log(getNewestList.data.data.list, 'getRecommendList', parm2)
+
     return {
+      getRecommendList:
+        getRecommendList.data.status === 200
+          ? getRecommendList.data.data.list
+          : [],
+      getNewestList:
+        getNewestList.data.status === 200 ? getNewestList.data.data.list : [],
       getGateWayList: getGateWayListData.list,
       pages: getGateWayListData.pages,
       currentPage: getGateWayListData.currentPage,

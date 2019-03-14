@@ -147,6 +147,12 @@
               </div>
             </div>
           </div>
+          <div 
+            class="list_none" 
+            v-if="listRangesAging.length === 0">
+            <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
+            <img src="/images/none_pic.png">
+          </div>
           <div class="list_tiaoj">
             <span 
               v-for="(item,index) in sortList" 
@@ -155,14 +161,8 @@
               @click="selectSort(item)">{{ item.name }}</span>
           </div>
 
+          
           <div 
-            v-if="listRangesAging.length === 0" 
-            class="list_none" 
-            style="display: block">
-            <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
-            <img src="/images/none_pic.png">
-          </div>
-          <!-- <div 
             v-for="(item,index) in listRangesAging" 
             :key="index" 
             class="wzl_box">
@@ -227,7 +227,7 @@
                       value="QQ交谈"></a>
               </p></li>
             </ul>
-          </div> -->
+          </div>
 
           <div 
             id="js006" 
@@ -516,7 +516,7 @@ export default {
       listRangesAging: [],
       totalPage: 0,
       currentPage: 1,
-      sortList: [{ id: 1, name: '综合排序' }, { id: 2, name: '运输排序' }],
+      sortList: [{ id: 1, name: '综合排序' }, { id: 2, name: '运输时效' }],
       sortId: 1
     }
   },
@@ -545,12 +545,22 @@ export default {
         ? query.startProvince
         : app.$cookies.get('currentProvinceFullName')
     }
-    let listRangesAgingData = await getListRangesAging($axios, 1, vo)
+    let listRangesAgingData = await getListRangesAging($axios, 1, vo).catch(
+      err => {
+        console.log(err)
+      }
+    )
     //优质承运商推荐
-    let excellents = await $axios.get('/28-web/logisticsCompany/excellent')
+    let excellents = await $axios
+      .get('/28-web/logisticsCompany/excellent')
+      .catch(err => {
+        console.log(err)
+      })
     //推荐专线/range/hot/list热门专线
-    // let hotLines = await $axios.post('/28-web/hot/list', parmes)
-    // console.log(hotLines, 'hotLines')
+    let hotLines = await $axios.post('/28-web/hot/list', parmes).catch(err => {
+      console.log(err)
+    })
+    console.log(hotLines, 'hotLines')
     return {
       listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
       totalPage: listRangesAgingData.totalPage
@@ -750,6 +760,9 @@ img {
   box-sizing: border-box;
   float: left;
   border-left: 1px solid #cccc;
+  padding: 0 10px;
+  height: 150px;
+  overflow: hidden;
 }
 .ul_list li:nth-child(1) {
   border: none;
@@ -767,8 +780,13 @@ img {
   height: 30px;
   line-height: 30px;
   display: block;
-  width: 100px;
+  width: 50px;
+  overflow: hidden;
   float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  margin: 0 5px;
 }
 .ul_host {
   width: 1052px;
@@ -1074,6 +1092,8 @@ img {
 }
 .cy_list_1 img {
   vertical-align: middle;
+  float: left;
+  margin-top: 6px;
 }
 .wlzx_list li {
   height: 140px;
@@ -1278,20 +1298,20 @@ img {
 
 /*时效查询 S */
 .cy_list_1 {
-  width: 400px;
-  margin-left: 30px;
+  width: 300px;
+  margin-left: 20px;
 }
 .cy_list_2 {
   width: 150px;
-  margin-left: 80px;
+  margin-left: 40px;
 }
 .cy_list_3 {
   width: 100px;
-  margin-left: 80px;
+  margin-left: 40px;
 }
 .cy_list_4 {
   width: 100px;
-  margin-left: 80px;
+  margin-left: 50px;
 }
 
 .cy_list_5 {
@@ -1304,7 +1324,7 @@ img {
 }
 .cy_list_7 {
   width: 100px;
-  margin-left: 50px;
+  margin-left: 20px;
 }
 .cy_list_1 .p1 {
   margin-bottom: 3px;
@@ -1329,9 +1349,20 @@ img {
   font-size: 16px;
 }
 .cy_list_1 p i {
-  font-size: 14px;
+  font-size: 13px;
   color: #666;
+  float: left;
 }
+.cy_list_1 .p4 font {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 30px;
+  width: 220px;
+  display: block;
+  float: left;
+}
+
 .cy_list_1 p span {
   font-size: 14px;
   color: #666;
@@ -1522,6 +1553,7 @@ img {
 /* 出发地到达地 */
 .list_search {
   /* margin: 0 60px; */
+  float: left;
 }
 .order-form-item {
   float: left;
@@ -1564,7 +1596,7 @@ img {
   float: left;
 }
 .nr056 {
-  width: 300px;
+  width: 190px;
   float: left;
   overflow: hidden;
   text-overflow: ellipsis;

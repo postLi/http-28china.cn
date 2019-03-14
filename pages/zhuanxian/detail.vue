@@ -278,16 +278,20 @@
                 src="/line/images/02sj.png"
                 alt=""
                 style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
-              <li style="padding-left: 26px"><img
+              <li 
+                style="padding-left: 26px"
+                @click="openCollectNumber"
+              ><img
                 src="/line/images/03sc.png"
                 alt=""
-                style="vertical-align: middle;"><span>收藏量:{{ linedataA.collectNumber }}</span></li>
+                style="vertical-align: middle;"
+              ><span>收藏量:{{ linedataA.collectNumber }}</span></li>
             </ul>
           </div>
           <div class="arc_middle2">
             <ShowPrice
               :info="linedataA.rangePrices"
-              :browse="linedataA.browseNumber"/>
+              :browse="linedataE.evaCount"/>
           </div>
           <div class="arc_middle3">
             <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
@@ -375,15 +379,18 @@
               id="nr1021"
               style="color: #333">{{ linedataB.contactsName }}</font></span>
             <span><i>手机：</i>
+              <!--<font-->
+              <!--v-show="checkMoblie"-->
+              <!--style="color: #3f94ee;border-bottom: 1px solid #3f94ee"-->
+              <!--@click="showMoblieFn(showMoblie)">查看电话</font>-->
+              <!--<font-->
+              <!--v-show="showMoblie"-->
+              <!--id="nr1022"-->
+              <!--style="color: #333"-->
+              <!--@click="showMoblieFn(showMoblie)">{{ linedataB.mobile }}</font>-->
               <font
-                v-show="checkMoblie"
-                style="color: #3f94ee;border-bottom: 1px solid #3f94ee"
-                @click="showMoblieFn(showMoblie)">查看电话</font>
-              <font
-                v-show="showMoblie"
                 id="nr1022"
-                style="color: #333"
-                @click="showMoblieFn(showMoblie)">{{ linedataB.mobile }}</font>
+                style="color: #333">{{ linedataB.mobile }}</font>
             </span>
             <span><i>Q&nbsp;Q：</i><a
               id="nr1023"
@@ -406,7 +413,8 @@
             <a><input
               id="collection_wlgs"
               readonly=""
-              value="收藏"></a>
+              value="收藏"
+              @click="openCollection"></a>
           </p>
           <p class="arc_right06">
             <span>相关认证</span>
@@ -587,7 +595,7 @@
             </div>
           </div>
           <div class="bot_right">
-            <p v-if="!linedataF.length">此用户没有评论</p>
+            <p v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
               <!--<button-->
@@ -678,134 +686,142 @@
             </div>
             <div
             >
-              <ul
-                v-for="(item , index) in lineLists"
-                :key="index"
-                class="wlzx_list">
-                <li id="wlzx_list_0">
-                <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
+              <div
+                class="list_none"
+                v-if="lineLists==null||
+              !lineLists.length"><span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px; font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span> <img
+                src="../../static/images/none_pic.png"
+                style=" float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;"></div>
+              <div v-else>
+                <ul
+                  v-for="(item , index) in lineLists"
+                  :key="index"
+                  class="wlzx_list">
+                  <li id="wlzx_list_0">
+                  <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
 
-                <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
-                </li>
-                <li class="wlzx_list_1">
-                  <a
-                    id="nr_a21"
-                    :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
-                    target="_blank"
-                    class="nr_a21_img">
-                    <img
-                      v-if="item.rangeLogo==''"
-                      :src="'/images/pic/bg' + item.num + '.png'"
-                      width="180"
-                      height="180">
-                    <img
-                      v-else
-                      :src="item.rangeLogo"
-                      class="scrollLoading"
-                      width="180"
-                      height="180">
-                </a></li>
-                <li class="wlzx_list_2">
-                  <p class="p1">
+                  <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
+                  </li>
+                  <li class="wlzx_list_1">
                     <a
-                      id="nr02"
+                      id="nr_a21"
                       :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
-                      class="list-title-a"
-                      target="_blank">
-                      <span class="list-icon lines-sprite-icons icon-start"/>
-                      <em>{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
-                      <!--<em >{{ item.startCity }}</em><em>{{ item.startArea }}</em>-->
-                      <span class="list-icon lines-sprite-icons icon-through"/>
-                      <span class="list-icon lines-sprite-icons icon-end"/>
-                      <em>{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
-                      <!--<em>{{ item.endCity.length>7?item.endCity.substring(0,7)+'..': item.endCity }}</em><em >{{ item.endArea.length>7?item.endArea.substring(0,7)+'..': item.endArea }}</em>-->
-                    </a>
-                  </P>
-                  <p class="p2">
-                    <!--<img src="/line/images/04gongsi.png">-->
-                    <a
-                      id="nr03"
-                      :href="'/member/'+item.publishId"
-                      target="_blank"><font
-                    class="">{{ item.companyName }}</font></a>
-                    <a
-                      id="nr11"
                       target="_blank"
-                      href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img
-                        id="qq"
-                        src="/gongsi/images/15qq.gif"></a>
-                        <!--<img-->
-                        <!--id="tj_icon_1"-->
-                        <!--src="/line/images/wtjzx.gif">-->
-                  </p>
-                  <!--<p class="p5">-->
-                  <!--<img-->
-                  <!--id="list_shiming"-->
-                  <!--src="/line/images/10shiming.png">-->
-                  <!--<img-->
-                  <!--id="list_xinyong"-->
-                  <!--src="/line/images/11xinyong.png">-->
-                  <!--<img-->
-                  <!--id="list_danbao"-->
-                  <!--src="/line/images/12danbao.png">-->
-                  <!--</p>-->
-                  <p
-                    class="p21"
-                    style="padding-top: 5px;">
-                    <img
-                      id="tj_shiming"
-                      src="/line/images/shiming.png">
-                    <img
-                      id="tj_xinyong"
-                      src="/line/images/xinyong.png">
-                    <img
-                      id="tj_danbao"
-                      src="/line/images/danbao.png">
-                  </p>
-                  <p class="p3">
-                  <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,10):'暂无' }}</font></p>
-                  <p class="p4"><i>地址：</i><font
-                    id="nr06"
-                    class="">{{ item.address.length>20?item.address.substring(0,20)+'..':item.address }}</font></p>
-                </li>
-                <li class="wlzx_list_3">
-                  <p class="p0_0">
-                    <img src="/line/images/ll_num.png"><span>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</span>
-                    <img
-                      style="padding-left: 30px"
-                      src="/line/images/pj_num.png"><span>{{ item.assessNumber?item.assessNumber:'0' }}条评论</span>
-                  </p>
-                  <p class="p1"><i
-                    class="zhuo"
-                    style="color: #666">重货：<span style="color: #ff4747">{{ parseFloat(item.weightPrice).toFixed(1) }}</span></i><span style="color: #333">元/公斤</span></P>
-                  <p class="p2"><i
-                    class="zhuo"
-                    style="color: #666">轻货：</i><span style="color: #ff4747">{{ parseFloat(item.lightPrice).toFixed(1) }}</span><span style="color: #333">元/m³</span></p>
-                  <p class="p3"><i>时效：</i><span>{{ item.transportAging?item.transportAging:'' }}{{ item.transportAging?item.transportAgingUnit:'暂无' }}</span></p>
-                  <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
-                </li>
-                <li class="wlzx_list_6">
-                  <p class="p1"><a
-                    id="nr_order"
-                    :href="'/create/line?id='+ item.id+'&publishId='+ item.publishId+'&uid='+ item.account"
-                    target="_blank"><input
-                      readonly=""
-                      value="下单"
+                      class="nr_a21_img">
+                      <img
+                        v-if="item.rangeLogo==''"
+                        :src="'/images/pic/bg' + item.num + '.png'"
+                        width="180"
+                        height="180">
+                      <img
+                        v-else
+                        :src="item.rangeLogo"
+                        class="scrollLoading"
+                        width="180"
+                        height="180">
+                  </a></li>
+                  <li class="wlzx_list_2">
+                    <p class="p1">
+                      <a
+                        id="nr02"
+                        :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
+                        class="list-title-a"
+                        target="_blank">
+                        <span class="list-icon lines-sprite-icons icon-start"/>
+                        <em>{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
+                        <!--<em >{{ item.startCity }}</em><em>{{ item.startArea }}</em>-->
+                        <span class="list-icon lines-sprite-icons icon-through"/>
+                        <span class="list-icon lines-sprite-icons icon-end"/>
+                        <em>{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
+                      <!--<em>{{ item.endCity.length>7?item.endCity.substring(0,7)+'..': item.endCity }}</em><em >{{ item.endArea.length>7?item.endArea.substring(0,7)+'..': item.endArea }}</em>-->
+                      </a>
+                    </P>
+                    <p class="p2">
+                      <!--<img src="/line/images/04gongsi.png">-->
+                      <a
+                        id="nr03"
+                        :href="'/member/'+item.publishId"
+                        target="_blank"><font
+                      class="">{{ item.companyName }}</font></a>
+                      <a
+                        id="nr11"
+                        target="_blank"
+                        href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img
+                          id="qq"
+                          src="/gongsi/images/15qq.gif"></a>
+                          <!--<img-->
+                          <!--id="tj_icon_1"-->
+                          <!--src="/line/images/wtjzx.gif">-->
+                    </p>
+                    <!--<p class="p5">-->
+                    <!--<img-->
+                    <!--id="list_shiming"-->
+                    <!--src="/line/images/10shiming.png">-->
+                    <!--<img-->
+                    <!--id="list_xinyong"-->
+                    <!--src="/line/images/11xinyong.png">-->
+                    <!--<img-->
+                    <!--id="list_danbao"-->
+                    <!--src="/line/images/12danbao.png">-->
+                    <!--</p>-->
+                    <p
+                      class="p21"
+                      style="padding-top: 5px;">
+                      <img
+                        id="tj_shiming"
+                        src="/line/images/shiming.png">
+                      <img
+                        id="tj_xinyong"
+                        src="/line/images/xinyong.png">
+                      <img
+                        id="tj_danbao"
+                        src="/line/images/danbao.png">
+                    </p>
+                    <p class="p3">
+                    <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,10):'暂无' }}</font></p>
+                    <p class="p4"><i>地址：</i><font
+                      id="nr06"
+                      class="">{{ item.address.length>20?item.address.substring(0,20)+'..':item.address }}</font></p>
+                  </li>
+                  <li class="wlzx_list_3">
+                    <p class="p0_0">
+                      <img src="/line/images/ll_num.png"><span>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</span>
+                      <img
+                        style="padding-left: 30px"
+                        src="/line/images/pj_num.png"><span>{{ item.assessNumber?item.assessNumber:'0' }}条评论</span>
+                    </p>
+                    <p class="p1"><i
+                      class="zhuo"
+                      style="color: #666">重货：<span style="color: #ff4747">{{ parseFloat(item.weightPrice).toFixed(1) }}</span></i><span style="color: #333">元/公斤</span></P>
+                    <p class="p2"><i
+                      class="zhuo"
+                      style="color: #666">轻货：</i><span style="color: #ff4747">{{ parseFloat(item.lightPrice).toFixed(1) }}</span><span style="color: #333">元/m³</span></p>
+                    <p class="p3"><i>时效：</i><span>{{ item.transportAging?item.transportAging:'' }}{{ item.transportAging?item.transportAgingUnit:'暂无' }}</span></p>
+                    <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
+                  </li>
+                  <li class="wlzx_list_6">
+                    <p class="p1"><a
+                      id="nr_order"
+                      :href="'/create/line?id='+ item.id+'&publishId='+ item.publishId+'&uid='+ item.account"
+                      target="_blank"><input
+                        readonly=""
+                        value="下单"
 
-                  ></a>
-                  </p>
-                  <!--/:href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"-->
-                  <!--onclick="'/create/line?id='+ item.id+'?uid='+ item.account+'&publishId='+item.publishId'"-->
-                  <p class="p2"><a
-                    id="nr_a22"
-                    :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
-                    target="_blank"><input
-                      readonly=""
-                      value="查看"
-                      style="color: #3f94ee"></a>
-                  </p>
-                <p class="p3"/></li>
-              </ul>
+                    ></a>
+                    </p>
+                    <!--/:href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"-->
+                    <!--onclick="'/create/line?id='+ item.id+'?uid='+ item.account+'&publishId='+item.publishId'"-->
+                    <p class="p2"><a
+                      id="nr_a22"
+                      :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
+                      target="_blank"><input
+                        readonly=""
+                        value="查看"
+                        style="color: #3f94ee"></a>
+                    </p>
+                  <p class="p3"/></li>
+                </ul>
+              </div>
             </div>
 
           </div>
@@ -813,7 +829,7 @@
         <div class="arc_main6">
           <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ queryCitys.endCity || queryCitys.endProvince }}出发的专线</span></div>
           <div
-            v-if="!lineRecoms.length"
+            v-if="!lineRecoms.length ||lineRecoms==null"
             class="tj_none">
             <span>没有相关线路推荐</span>
           </div>
@@ -915,12 +931,15 @@
       </div>
 
     </div>
-
+    <Add
+      :is-show-add.sync="isShowAdd"
+      :data-info="dataInfo"/>
   </div>
 
 </template>
 
 <script>
+import Add from '../huoyuan/add'
 import $axios from 'axios'
 import {
   isZXcity,
@@ -947,7 +966,8 @@ export default {
   components: {
     ShowPrice,
     FooterLinks,
-    ShowEchart
+    ShowEchart,
+    Add
   },
   head: {
     link: [
@@ -968,11 +988,13 @@ export default {
   layout: 'subLayout',
   data() {
     return {
+      dataInfo: {},
       isTit: false,
       showMoblie: false,
       isShowWPrice: false,
       isShowHPrice: false,
       checkMoblie: true,
+      isShowAdd: false,
       showImg: 0,
       pages: 0,
       currentPage: 1,
@@ -990,7 +1012,9 @@ export default {
       form: {},
       lineCitys: [],
       msgMobile: '',
-      indexPl: 0
+      indexPl: 0,
+      kongxin: '/line/images/03sc.png'
+      // xin: '/line/images/xin.png'
     }
   },
   // /range/detail/related/links
@@ -1226,18 +1250,25 @@ export default {
         linedataB.data.data.isHZhuan = true
       }
       // console.log(linedataF.data.data.list, 'linedataF')
-      // console.log(linedataA.data.data, 'res.data.data.linedataB', linedataB)
+      console.log(
+        aurl + `/28-web/logisticsCompany/${query.publishId}`,
+        'res.data.data.LineCAnotherLineCAnother',
+        linedataE.data
+      )
       return {
-        linedataA: linedataA.data.data,
-        linedataB: linedataB.data.data,
-        lineLists: linedataC.data.data.list,
-        lineRecoms: linedataD.data.data,
+        linedataA: linedataA.data.status == 200 ? linedataA.data.data : '',
+        linedataB: linedataB.data.status == 200 ? linedataB.data.data : '',
+        lineLists:
+          linedataC.data.data.status == 200 ? linedataC.data.data.list : '',
+        lineRecoms: linedataD.data.status == 200 ? linedataD.data.data : '',
         linedataE: linedataE.data.status == 200 ? linedataE.data.data : '',
         linedataF: linedataF.data.status == 200 ? linedataF.data.data.list : '',
         linedataG: linedataG.data.status == 200 ? linedataG.data.data : '',
-        LineeEchartInfo: LineeEInfo.data.data,
-        lineCitys: lineCity.data.data,
-        LineChangeAnother: LineCAnother.data.data,
+        LineeEchartInfo:
+          LineeEInfo.data.status == 200 ? LineeEInfo.data.data : '',
+        lineCitys: lineCity.data.status == 200 ? lineCity.data.data : '',
+        LineChangeAnother:
+          LineCAnother.data.status == 200 ? LineCAnother.data.data : '',
         queryCitys
       }
     }
@@ -1505,6 +1536,7 @@ export default {
       })
     },
     showPingLunFn(index) {
+      // alert(index, 'index')
       // /range/getRangePriceReference/{rangeId}
       // 专线详情_专线价格参考
       // if (pj_zh == '好评') {
@@ -1532,16 +1564,16 @@ export default {
         aurl = 'http://localhost:3000'
       }
       $axios
-        .post(aurl + `/28-web/rangeEva/range/list`, {
+        .post(aurl + `/api/28-web/rangeEva/range/list`, {
           currentPage: 1,
           pageSize: 3,
           transportRangeId: this.linedataA.id,
           assessLevel: assessLevel
         })
         .then(res => {
+          console.log(res, 'resresres')
           if (res.data.status === 200) {
             this.linedataF = res.data.data.list
-            // console.log(this.linedataF, 'resresres')
           } else {
             layer.msg(res.data.errorInfo ? res.data.errorInfo : res.data.text)
           }
@@ -1786,7 +1818,7 @@ export default {
               maxY1 = el
             }
           })
-          console.log(this.sendEchart, 'sendEchartsendEchart')
+          // console.log(this.sendEchart, 'sendEchartsendEchart')
           let seconds = 5
           let stop = setInterval(() => {
             $('#seconds').html(seconds + 'S')
@@ -1836,154 +1868,6 @@ export default {
                 series: [
                   {
                     name: '重货',
-                    type: 'line',
-                    lineStyle: {
-                      normal: { color: 'rgba(255,173,101, 0.5)' }
-                    },
-                    data: this.sendEchart,
-                    markPoint: {
-                      symbol: 'image:///images/cy/11wk.png',
-                      symbolOffset: [0, '-70%'],
-                      symbolSize: [82, 62],
-                      itemStyle: {
-                        color: 'white' //需要把原本的样式变成白色，字体才能正常显示
-                      },
-                      label: {
-                        position: 'insideTop',
-                        formatter: function(params) {
-                          // console.log(params)
-                          return `{color1|${params.name}}\n{color0|${
-                            params.value
-                          }万}`
-                        },
-                        rich: {
-                          color0: {
-                            fontSize: 14,
-                            align: 'center',
-                            fontWeight: 'normal',
-                            color: '#FF7836',
-                            padding: [0, 0, 6, 0]
-                          },
-                          color1: {
-                            fontSize: 12,
-                            align: 'center',
-                            fontWeight: 'normal',
-                            color: '#6F6F6F',
-                            padding: [0, 0, 6, 0]
-                          }
-                        }
-                      },
-                      data: [
-                        {
-                          name: '',
-                          type: 'min'
-                        }
-                      ]
-                    },
-                    itemStyle: {
-                      normal: {
-                        color: '#6F6F6F',
-                        opacity: 1
-                      },
-                      emphasis: {
-                        color: '#6F6F6F'
-                      }
-                    },
-                    symbolSize: 6,
-                    hoverAnimation: false, //拐点不要动画
-                    symbol: 'rect',
-                    label: {
-                      show: true,
-                      position: 'bottom',
-                      textStyle: { color: '#6F6F6F' },
-                      formatter: function(params) {
-                        let c0
-                        if (params.dataIndex <= 1) {
-                          c0 = 'color1'
-                        } else {
-                          c0 = 'color0'
-                        }
-                        if (params.dataIndex === 4) {
-                          return ``
-                        } else {
-                          return `{${c0}|${params.value}万}\n{color2|${
-                            params.name
-                          }}`
-                        }
-                      },
-                      rich: {
-                        color0: {
-                          fontSize: 18,
-                          align: 'center',
-                          color: '#FF7836'
-                        },
-                        color1: {
-                          fontSize: 18,
-                          align: 'center',
-                          color: '#6F6F6F'
-                        },
-                        color2: {
-                          color: '#413A43',
-                          align: 'center',
-                          fontSize: 14,
-                          padding: [5, 5, 5, 5]
-                        }
-                      }
-                    },
-                    tooltip: { show: false }
-                  },
-                  {
-                    name: '重货',
-                    type: 'line',
-                    lineStyle: {
-                      normal: { color: 'rgba(255,173,101, 1)' }
-                    },
-                    areaStyle: {
-                      normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
-                    },
-                    data: [null, null, this.sendEchart[2], this.sendEchart[3]],
-                    tooltip: { show: false }
-                  },
-                  {
-                    name: '重货',
-                    type: 'line',
-                    markLine: {
-                      name: 'xfdsvffds',
-                      symbol: ['circle', 'none'],
-                      symbolSize: 6,
-                      lineStyle: {
-                        normal: { color: 'rgba(255,173,101, 1)' }
-                      },
-                      label: {
-                        show: true,
-                        position: 'end',
-                        formatter: function(params) {
-                          if (params.dataIndex === 1) {
-                            return `{style|建议价格区间}`
-                          }
-                        },
-                        rich: {
-                          style: {
-                            fontSize: 15,
-                            padding: [0, 110, 0, 0],
-                            color: '#FF7836'
-                          }
-                        }
-                      },
-                      data: [
-                        [
-                          { coord: ['行业均价（高点）', this.sendEchart[2]] },
-                          { coord: ['行业均价（高点）', maxY] }
-                        ],
-                        [
-                          { coord: ['行业均价（低点）', this.sendEchart[3]] },
-                          { coord: ['行业均价（低点）', maxY] }
-                        ]
-                      ]
-                    }
-                  },
-                  {
-                    name: '轻货',
                     type: 'line',
                     lineStyle: {
                       normal: { color: 'rgba(255,173,101, 0.5)' }
@@ -2081,7 +1965,7 @@ export default {
                     tooltip: { show: false }
                   },
                   {
-                    name: '轻货',
+                    name: '重货',
                     type: 'line',
                     lineStyle: {
                       normal: { color: 'rgba(255,173,101, 1)' }
@@ -2098,7 +1982,7 @@ export default {
                     tooltip: { show: false }
                   },
                   {
-                    name: '轻货',
+                    name: '重货',
                     type: 'line',
                     markLine: {
                       name: 'xfdsvffds',
@@ -2131,6 +2015,154 @@ export default {
                         [
                           { coord: ['行业均价（低点）', this.sendEchart1[3]] },
                           { coord: ['行业均价（低点）', maxY1] }
+                        ]
+                      ]
+                    }
+                  },
+                  {
+                    name: '轻货',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 0.5)' }
+                    },
+                    data: this.sendEchart,
+                    markPoint: {
+                      symbol: 'image:///images/cy/11wk.png',
+                      symbolOffset: [0, '-70%'],
+                      symbolSize: [82, 62],
+                      itemStyle: {
+                        color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+                      },
+                      label: {
+                        position: 'insideTop',
+                        formatter: function(params) {
+                          // console.log(params)
+                          return `{color1|${params.name}}\n{color0|${
+                            params.value
+                          }万}`
+                        },
+                        rich: {
+                          color0: {
+                            fontSize: 14,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#FF7836',
+                            padding: [0, 0, 6, 0]
+                          },
+                          color1: {
+                            fontSize: 12,
+                            align: 'center',
+                            fontWeight: 'normal',
+                            color: '#6F6F6F',
+                            padding: [0, 0, 6, 0]
+                          }
+                        }
+                      },
+                      data: [
+                        {
+                          name: '',
+                          type: 'min'
+                        }
+                      ]
+                    },
+                    itemStyle: {
+                      normal: {
+                        color: '#6F6F6F',
+                        opacity: 1
+                      },
+                      emphasis: {
+                        color: '#6F6F6F'
+                      }
+                    },
+                    symbolSize: 6,
+                    hoverAnimation: false, //拐点不要动画
+                    symbol: 'rect',
+                    label: {
+                      show: true,
+                      position: 'bottom',
+                      textStyle: { color: '#6F6F6F' },
+                      formatter: function(params) {
+                        let c0
+                        if (params.dataIndex <= 1) {
+                          c0 = 'color1'
+                        } else {
+                          c0 = 'color0'
+                        }
+                        if (params.dataIndex === 4) {
+                          return ``
+                        } else {
+                          return `{${c0}|${params.value}万}\n{color2|${
+                            params.name
+                          }}`
+                        }
+                      },
+                      rich: {
+                        color0: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#FF7836'
+                        },
+                        color1: {
+                          fontSize: 18,
+                          align: 'center',
+                          color: '#6F6F6F'
+                        },
+                        color2: {
+                          color: '#413A43',
+                          align: 'center',
+                          fontSize: 14,
+                          padding: [5, 5, 5, 5]
+                        }
+                      }
+                    },
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '轻货',
+                    type: 'line',
+                    lineStyle: {
+                      normal: { color: 'rgba(255,173,101, 1)' }
+                    },
+                    areaStyle: {
+                      normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
+                    },
+                    data: [null, null, this.sendEchart[2], this.sendEchart[3]],
+                    tooltip: { show: false }
+                  },
+                  {
+                    name: '轻货',
+                    type: 'line',
+                    markLine: {
+                      name: 'xfdsvffds',
+                      symbol: ['circle', 'none'],
+                      symbolSize: 6,
+                      lineStyle: {
+                        normal: { color: 'rgba(255,173,101, 1)' }
+                      },
+                      label: {
+                        show: true,
+                        position: 'end',
+                        formatter: function(params) {
+                          if (params.dataIndex === 1) {
+                            return `{style|建议价格区间}`
+                          }
+                        },
+                        rich: {
+                          style: {
+                            fontSize: 15,
+                            padding: [0, 110, 0, 0],
+                            color: '#FF7836'
+                          }
+                        }
+                      },
+                      data: [
+                        [
+                          { coord: ['行业均价（高点）', this.sendEchart[2]] },
+                          { coord: ['行业均价（高点）', maxY] }
+                        ],
+                        [
+                          { coord: ['行业均价（低点）', this.sendEchart[3]] },
+                          { coord: ['行业均价（低点）', maxY] }
                         ]
                       ]
                     }
@@ -2189,6 +2221,47 @@ export default {
         value: 15,
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
+      }
+    },
+    openCollection() {},
+    openCollectNumber() {
+      // let aurl = ''
+      if (process.server) {
+        aurl = 'http://localhost:3000'
+      }
+      let transportRangeId = this.$route.query.id
+      // // 操作：collect收藏；cancelCollect取消收藏
+      let handle = 'collect'
+      // console.log(this.$route.query.id, 'this.$route')
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        $axios
+          .post(
+            aurl +
+              '/api/28-web/collect/transportRange?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token +
+              '&transportRangeId=' +
+              transportRangeId +
+              '&handle=' +
+              handle
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.isShowAdd = true
+        // this.getCity()
       }
     }
   }

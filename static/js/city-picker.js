@@ -745,7 +745,7 @@
     return this
   }
 
-  $(function() {
+  $(window).on('load', function() {
     $('[data-toggle="city-picker"]').citypicker()
   })
 })

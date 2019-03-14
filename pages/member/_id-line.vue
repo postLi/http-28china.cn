@@ -383,7 +383,13 @@ export default {
       store.dispatch('getDictList', {
         name: 'AF026'
       }),
-      store.dispatch('member/GETCOMPANYINFO', params.id),
+      store.dispatch('member/GETCOMPANYINFO', params.id).catch(err => {
+        if (err.type === 'network') {
+          error({ statusCode: 500, message: err.msg })
+        } else {
+          error({ statusCode: 404, message: err.msg })
+        }
+      }),
       store.dispatch('member/GETCOMPANYLINEINFO', {
         publishId: params.id,
         pageSize: 10,

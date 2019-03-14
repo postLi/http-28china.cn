@@ -342,7 +342,7 @@
       <!--车主月人气榜start-->
       <div 
         class="list_right"
-        style="margin-top: 20px">
+        style="margin-top: 20px;background:#fff;">
         <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
         <div 
           v-for="(item, index) in $store.state.cheyuan.list_pop_carowner" 
@@ -353,7 +353,7 @@
           <div 
             v-if="index < 3" 
             class="img"><img :src="'/images/index/wlgs_tj_0'+index+'.png'" ></div>
-          <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red">{{ item.popNum }}</i></span></div>
+          <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
         </div>
       </div>
 
@@ -502,7 +502,6 @@ export default {
   },
   async fetch({ $axios, app, query, store }) {
     let cookie = app.$cookies
-
     let areaData = {
       currentArea: cookie.get('currentArea'),
       currentAreaFullName: cookie.get('currentAreaFullName'),
@@ -1811,7 +1810,7 @@ body {
   width: 342px;
   margin-left: 20px;
   box-sizing: border-box;
-  float: left;
+  float: right;
   margin-top: 20px;
 }
 .list-box-r-top {
@@ -2009,6 +2008,11 @@ body {
 .hot-cities-a {
   font-size: 14px;
   /* color: #333; */
+  display: block;
+  width: 133px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .rc_list {
   margin: 10px 0;

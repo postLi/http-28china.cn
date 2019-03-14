@@ -242,16 +242,25 @@ export default {
       ]
     }
   },
+  head: {
+    script: [
+      {
+        src: '/js/city-picker.data.js'
+      },
+      {
+        src: '/js/city-picker.js'
+      },
+      {
+        src: '/js/diqu.js'
+      }
+    ]
+  },
   watch: {
     $route: 'routeChange'
   },
   mounted() {
     this.changeNav()
-    seajs.use([location.origin + '/js/city-picker.data.js'], function() {
-      seajs.use([location.origin + '/js/city-picker.js'], function() {
-        seajs.use([location.origin + '/js/diqu.js'])
-      })
-    })
+
     if (process.client) {
       $('.h_m_search1')
         .find('a')

@@ -33,6 +33,7 @@ const _220305c2 = () => interopDefault(import('..\\pages\\help\\utils.js' /* web
 const _40945546 = () => interopDefault(import('..\\pages\\huoyuan\\add.vue' /* webpackChunkName: "pages_huoyuan_add" */))
 const _e0089e88 = () => interopDefault(import('..\\pages\\huoyuan\\detail.vue' /* webpackChunkName: "pages_huoyuan_detail" */))
 const _21a62f28 = () => interopDefault(import('..\\pages\\huoyuan\\help.vue' /* webpackChunkName: "pages_huoyuan_help" */))
+const _11827c4f = () => interopDefault(import('..\\pages\\huoyuan\\huizong.vue' /* webpackChunkName: "pages_huoyuan_huizong" */))
 const _d736539a = () => interopDefault(import('..\\pages\\huoyuan\\order.vue' /* webpackChunkName: "pages_huoyuan_order" */))
 const _3a17a23e = () => interopDefault(import('..\\pages\\Insurance\\pay.vue' /* webpackChunkName: "pages_Insurance_pay" */))
 const _49e09405 = () => interopDefault(import('..\\pages\\Insurance\\product.vue' /* webpackChunkName: "pages_Insurance_product" */))
@@ -268,6 +269,10 @@ export function createRouter() {
       path: "/huoyuan/help",
       component: _21a62f28,
       name: "huoyuan-help"
+    }, {
+      path: "/huoyuan/huizong",
+      component: _11827c4f,
+      name: "huoyuan-huizong"
     }, {
       path: "/huoyuan/order",
       component: _d736539a,

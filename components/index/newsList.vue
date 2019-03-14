@@ -9,7 +9,7 @@
         v-if="index === 0" 
         :href="item.url" 
         :title="item.title"
-        :key="index" 
+        :key="'a'+index" 
         target="_blank">
         <img 
           :src="item.typeImg || '/images/index/28w.png'" 
@@ -19,7 +19,7 @@
         v-if="index === 0" 
         :href="item.url" 
         :title="item.title" 
-        :key="index" 
+        :key="'b'+index" 
         target="_blank">
         <span>{{ item.title }}</span>
       </a>
@@ -27,14 +27,14 @@
         v-if="index !== 0" 
         :href="item.url" 
         :title="item.title" 
-        :key="index" 
+        :key="'c'+index" 
         target="_blank">
         {{ item.title }}
       </a>
       <br :key="index" >
       <div 
         v-if="index === 0" 
-        :key="index" 
+        :key="'d'+index" 
         class="h18" />
     </template>
  

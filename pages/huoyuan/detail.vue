@@ -132,8 +132,8 @@
             <div class="arc_left_2_1_2"><table>
               <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font>{{ hyDetail.startProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
-              <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.consignor }}</td></tr>
-              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.consignorPhone }}</td></tr>
+              <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.contacts }}</td></tr>
+              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.mobile }}</td></tr>
               <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
               <tr><td class="arc_td1">里程：</td><td class="arc_td2">{{ hyDetail.distance }}</td></tr>
               <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>

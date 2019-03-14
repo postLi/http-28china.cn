@@ -86,7 +86,7 @@ function sjtj() {
     }
   })
 }
-sjtj()
+// sjtj()
 //数据统计 E
 
 //零担下单 S

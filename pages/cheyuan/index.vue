@@ -1917,6 +1917,7 @@ body {
   outline: 0;
   margin-right: 5px;
 }
+
 .ltl-button {
   display: block;
   width: 92px;

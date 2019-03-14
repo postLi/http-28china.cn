@@ -27,54 +27,55 @@
 
             <dl>
               <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt>
-              <dd><form
-                name="zxaddform"
-                method="post"
-                action="" >
-                <input
-                  name="a7"
-                  type="hidden"
-                  value="0">
-                <input
-                  type="hidden"
-                  name="mid"
-                  value="19" >
-                <input
-                  type="hidden"
-                  name="dopost"
-                  value="search" >
-                <div
-                  id="parkAddress"
-                  class="fl list_input"
-                  style="position:relative;" >
+              <dd>
+                <form
+                  name="zxaddform"
+                  method="post"
+                  action="" >
                   <input
-                    style="height: 100%;border: none;outline: none;"
-                    data-toggle="city-picker"
-                    data-level="district"
+                    name="a7"
+                    type="hidden"
+                    value="0">
+                  <input
+                    type="hidden"
+                    name="mid"
+                    value="19" >
+                  <input
+                    type="hidden"
+                    name="dopost"
+                    value="search" >
+                  <div
+                    id="parkAddress"
+                    class="fl list_input"
+                    style="position:relative;" >
+                    <input
+                      style="height: 100%;border: none;outline: none;"
+                      data-toggle="city-picker"
+                      data-level="district"
+                      type="text"
+                      placeholder="请选择省-市-区" >
+                  </div>
+                  <span>&nbsp;园区名称&nbsp;：</span>
+                  <input
+                    v-model="vo.parkName"
                     type="text"
-                    placeholder="请选择省-市-区" >
-                </div>
-                <span>&nbsp;园区名称&nbsp;：</span>
-                <input
-                  v-model="vo.parkName"
-                  type="text"
-                  class="list_input"
-                  placeholder="请输入园区名称" >
-                <input
-                  id="search_wlyq"
-                  value=" 搜索园区 "
-                  readonly=""
-                  class="list_button"
-                  style="width:100px"
-                  @click="search()">
-                  <!-- <input
+                    class="list_input"
+                    placeholder="请输入园区名称" >
+                  <input
+                    id="search_wlyq"
+                    value=" 搜索园区 "
+                    readonly=""
+                    class="list_button"
+                    style="width:100px"
+                    @click="search()">
+                    <!-- <input
                   id="flush"
                   name="Submit2"
                   value="重置 "
                   readonly=""
                   class="list_button"
                   @click="reload()"> -->
-              </form>
+                </form>
               </dd>
 
             </dl>
@@ -165,7 +166,11 @@
                     width="260"
                     height="165"
                     alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);    padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName }}</span>
-                <span style="position:absolute;bottom:50px;left:1px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 10px 20px;">招商中</span></a>
+                  <span
+                    v-if="item.isInvestment==true"
+                    style="position:absolute;bottom:50px;left:1px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 10px 20px;">招商中</span>
+                </a>
+                <!-- ourRatings -->
                 <p style="width: 260px;text-align: center;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
                   v-for="(item,i) in 1"
                   :key="i"
@@ -208,8 +213,8 @@
                 style="padding-top: 20px"><img
                   src="../../static/yuanqu/images/jiantou.png"
                   alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item. parkName }}
-                </span><span 
-              style="width: 300px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress }}</span></li>
+                </span><span
+              style="width: 320px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress.length > 13?item.parkAddress+'...':item.parkAddress }}</span></li>
             </ul>
           </div>
           <div
@@ -226,16 +231,59 @@
               <div>
                 <ul>
                   <li
-                    v-for="(item,i) in 6"
-                    :key="i"
-                    style="float:left;padding-right:20px;padding-top:10px"><a
-                      href=""
-                      style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
-                        src="../../static/gongsi/images/danbao.png"
-                        alt=""
-                        width="40"
-                        style="padding-right:20px"
+                  style="float:left;padding-right:20px;padding-top:10px"><a
+                    href=""
+                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                      src="../../static/yuanqu/images/xiadan.png"
+                      alt=""
+                      width="40"
+                      style="padding-right:20px"
                   >快速下单</a></li>
+                  <li
+                  style="float:left;padding-right:20px;padding-top:10px"><a
+                    href="/create/line"
+                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                      src="../../static/yuanqu/images/line.png"
+                      alt=""
+                      width="40"
+                      style="padding-right:20px"
+                  >发布专线</a></li>
+                  <li
+                  style="float:left;padding-right:20px;padding-top:10px"><a
+                    href="/create/cheyuan"
+                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                      src="../../static/yuanqu/images/cheyuan.png"
+                      alt=""
+                      width="40"
+                      style="padding-right:20px"
+                  >发布车源</a></li>
+                  <li
+                  style="float:left;padding-right:20px;padding-top:10px"><a
+                    href=""
+                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                      src="../../static/yuanqu/images/check.png"
+                      alt=""
+                      width="40"
+                      style="padding-right:20px"
+                  >运单查询</a></li>
+                  <li
+                  style="float:left;padding-right:20px;padding-top:10px"><a
+                    href=""
+                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                      src="../../static/yuanqu/images/shixiao.png"
+                      alt=""
+                      width="40"
+                      style="padding-right:20px"
+                  >时效查询</a></li>
+                  <li
+                  style="float:left;padding-right:20px;padding-top:10px;margin-bottom:10px"><a
+                    href=""
+                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                      src="../../static/yuanqu/images/wangdian.png"
+                      alt=""
+                      width="40"
+                      style="padding-right:20px"
+                  >网点查询</a></li>
                 </ul>
               </div>
               <div
@@ -249,8 +297,11 @@
                     <input
                       style=" height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
                       type="text"
-                      placeholder="请输入">
-                    <span style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: rgb(51,153,255) ;display: inline-block">园区入驻</span>
+                      placeholder="请输入"
+                      v-model="inputData">
+                    <span
+                      style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: rgb(51,153,255) ;display: inline-block;color:#fff"
+                      @click="openYuanqu">园区入驻</span>
                     <p style="padding-top: 10px">入驻免费提供发布信息，园区宣传</p>
                     <!--<label class="layui-form-label">园区入驻1</label>-->
                   </div>
@@ -282,12 +333,64 @@
             <span style="padding-left:30px;"><i style="color:rgb(249,155,42)">1365</i>个园区，为您优选10个热门园区</span>
             <a href=""><span style="float:right"> 更多></span></a>
           </div>
+          <div
+            class="select_con"
+            style="width: 900px;    width: 900px;border: 1px solid #eee;border-left: 0;border-right: 0;border-bottom: none;padding: 15px 0;margin: 0;">
 
+            <dl>
+              <!-- <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt> -->
+              <dd>
+                <form
+                  name="zxaddform"
+                  method="post"
+                  action="" >
+                  <input
+                    name="a7"
+                    type="hidden"
+                    value="0">
+                  <input
+                    type="hidden"
+                    name="mid"
+                    value="19" >
+                  <input
+                    type="hidden"
+                    name="dopost"
+                    value="search" >
+                  <div
+                    id="parkAddress"
+                    class="fl list_input"
+                    style="position:relative;" >
+                    <input
+                      style="height: 100%;border: none;outline: none;"
+                      data-toggle="city-picker"
+                      data-level="district"
+                      type="text"
+                      placeholder="请选择园区所在地" >
+                  </div>
+                  <!-- <span>&nbsp;园区名称&nbsp;：</span>
+                  <input
+                    v-model="vo.parkName"
+                    type="text"
+                    class="list_input"
+                    placeholder="请输入园区名称" > -->
+                  <input
+                    id="search_wlyq"
+                    value=" 搜索园区 "
+                    readonly=""
+                    class="list_button"
+                    style="width:100px"
+                    @click="search1()">
+                </form>
+              </dd>
+
+            </dl>
+
+          </div>
 
         </div>
         <div class=" list_wlyq">
           <div
-            v-if="getGateWayList.length === 0"
+            v-if="getHottList.length === 0 || getHottList.list ==null "
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
@@ -295,25 +398,65 @@
           </div>
 
           <ul
-            v-for="(item,index) in getGateWayList"
+            v-for="(item,index) in getHottList.list"
             :key="index"
-            class="wlzx_list">
+            class="wlzx_list"
+            style="margin-right: 0px;width:260px;height:360px">
             <a
               :href="'/wuliu/detail?id=' + item.id"
               target="_blank">
-              <li class="wlzx_list_01"><img
-                :src="item.parkSignPicture?item.parkSignPicture:'../../static/images/list_wlzx/wlyq_pic.png'"
-                class="scrollLoading"
-                width="268"
-                height="268"></li>
+              <!-- require('../static/images/pic/bg' + item.num + '.png') -->
+              <li 
+                style="height: 200px;"
+                class="wlzx_list_01"><img
+                  :src="item.parkSignPicture?item.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
+                  class="scrollLoading"
+                  width="240"
+                  height="210"></li>
               <li class="wlzx_list_02"><span>{{ item.parkName }}</span></li>
               <li class="wlzx_list_03"><font>{{ item.transportNumber?item.transportNumber: 0 }}</font><i>条</i><span>优质专线</span></li>
-              <li class="wlzx_list_04"><span>{{ item.parkAddress }}</span></li>
-              <li class="wlzx_list_05"><span>{{ item.browseNumber }}</span></li>
+              <li 
+                style="margin-bottom:0"
+                class="wlzx_list_04"><span>{{ item.parkAddress }}</span></li>
+              <li class="wlzx_list_05">
+                <img 
+                  style="width:20px;height:20"
+                  src="../../static/yuanqu/images/weibo.png" 
+                  alt="">
+              <span style="vertical-align:middle;pading-left:5px">{{ item.browseNumber }}</span></li>
             </a>
           </ul>
 
         </div>
+        <!--<div class=" list_wlyq">-->
+        <!--<div-->
+        <!--v-if="getGateWayList.length === 0"-->
+        <!--class="list_none"-->
+        <!--style="display: block">-->
+        <!--<span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>-->
+        <!--<img src="../../static/images/none_pic.png">-->
+        <!--</div>-->
+
+        <!--<ul-->
+        <!--v-for="(item,index) in getGateWayList"-->
+        <!--:key="index"-->
+        <!--class="wlzx_list">-->
+        <!--<a-->
+        <!--:href="'/wuliu/detail?id=' + item.id"-->
+        <!--target="_blank">-->
+        <!--<li class="wlzx_list_01"><img-->
+        <!--:src="item.parkSignPicture?item.parkSignPicture:'../../static/images/list_wlzx/wlyq_pic.png'"-->
+        <!--class="scrollLoading"-->
+        <!--width="268"-->
+        <!--height="268"></li>-->
+        <!--<li class="wlzx_list_02"><span>{{ item.parkName }}</span></li>-->
+        <!--<li class="wlzx_list_03"><font>{{ item.transportNumber?item.transportNumber: 0 }}</font><i>条</i><span>优质专线</span></li>-->
+        <!--<li class="wlzx_list_04"><span>{{ item.parkAddress }}</span></li>-->
+        <!--<li class="wlzx_list_05"><span>{{ item.browseNumber }}</span></li>-->
+        <!--</a>-->
+        <!--</ul>-->
+
+        <!--</div>-->
         <img src="../../static/gongsi/images/listbg.png">
         <div
           class="youzhi"
@@ -509,6 +652,7 @@ export default {
   },
   data() {
     return {
+      inputData: '',
       pages: 0, //总页数
       currentPage: 1 //当前页
     }
@@ -552,9 +696,14 @@ export default {
       '/28-web//logisticsPark/newest/list',
       parm2
     )
-    console.log(getNewestList.data.data.list, 'getRecommendList', parm2)
+    let parm3 = vo
+    parm3.pageSize = 10
+    let getHottList = await $axios.post('/28-web/logisticsPark/hot/list', parm3)
+    // /logisticsPark/hot/list
+    console.log(getHottList.data.data.list, 'getHottList', parm3)
 
     return {
+      getHottList: getHottList.data.status === 200 ? getHottList.data.data : [],
       getRecommendList:
         getRecommendList.data.status === 200
           ? getRecommendList.data.data.list
@@ -587,6 +736,23 @@ export default {
     this.loadPagination()
   },
   methods: {
+    openYuanqu() {
+      // inputData
+    },
+    async search1() {
+      let list1 = []
+      $('#parkAddress .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      this.vo.locationProvince = list1[0] ? list1[0] : ''
+      this.vo.locationCity = list1[1] ? list1[1] : ''
+      this.vo.locationArea = list1[2] ? list1[2] : ''
+      window.location.href = `/wuliu?locationProvince=${
+        this.vo.locationProvince
+      }&locationCity=${this.vo.locationCity}&locationArea=${
+        this.vo.locationArea
+      }`
+    },
     async search() {
       let list1 = []
       $('#parkAddress .select-item').each(function(i, e) {
@@ -595,7 +761,7 @@ export default {
       this.vo.locationProvince = list1[0] ? list1[0] : ''
       this.vo.locationCity = list1[1] ? list1[1] : ''
       this.vo.locationArea = list1[2] ? list1[2] : ''
-      window.location.href = `/wuliu1?locationProvince=${
+      window.location.href = `/wuliu?locationProvince=${
         this.vo.locationProvince
       }&locationCity=${this.vo.locationCity}&locationArea=${
         this.vo.locationArea

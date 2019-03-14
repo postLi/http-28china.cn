@@ -608,6 +608,11 @@
             <div class="zx_sx">
               <span class="biaozhi"/><span>仓储与配送</span>
             </div>
+            <div 
+              class="list_none" 
+              v-if="$store.state.news.cheyuan_ccyps.length === 0">
+              <span>暂无仓储与配送</span>
+            </div>
             <ul
               class="ps-list"
               style="padding-left: 30px;list-style: square">
@@ -792,22 +797,26 @@ export default {
     }
   },
   async fetch({ store, params, $axios, error, app }) {
-    await store.dispatch('news/GETNEWSINFO', {
-      params: {
-        channelIds: '101',
-        count: 8,
-        orderBy: 9,
-        channelOption: 0
-      },
-      name: 'cheyuan_ccyps',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+    await store
+      .dispatch('news/GETNEWSINFO', {
+        params: {
+          channelIds: '101',
+          count: 8,
+          orderBy: 9,
+          channelOption: 0
+        },
+        name: 'cheyuan_ccyps',
+        preFn: data => {
+          return data.map((el, index) => {
+            el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
 
-          return el
-        })
-      }
-    })
+            return el
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   async asyncData({ $axios, app, query }) {
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1

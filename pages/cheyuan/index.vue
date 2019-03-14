@@ -537,13 +537,13 @@ export default {
         : areaData.currentProvinceFullName
     }
     // 获取物流公司列表
-    let vor = Object.assign({ pageSize: 5 }, vo)
+    let vor = Object.assign({ pageSize: 10 }, vo)
     // console.log('vor:', vor)
     await store.dispatch('cheyuan/GETRECOMMEND', {
       data: {
         startProvince: vo.startProvince,
         startCity: vo.startCity,
-        pageSize: 5
+        pageSize: 10
       },
       name: 'list_recommend'
     })
@@ -1661,6 +1661,7 @@ body {
 .list_cy {
   margin-top: 20px;
   padding-bottom: 20px;
+  background: #fff;
 }
 
 .lines-sprite-icons {

@@ -4,9 +4,9 @@
       <li 
         :class="tpath.indexOf('jianjie') !== -1 ? 'active' : ''" 
         class="side_memu"><a :href="mid + '-jianjie'"><span>公司简介</span></a></li>
-      <li 
+      <!-- <li 
         :class="tpath.indexOf('webnotice') !== -1 ? 'active' : ''" 
-        class="side_memu"><a :href="mid + '-webnotice'"><span>公司动态</span></a></li>
+        class="side_memu"><a :href="mid + '-webnotice'"><span>公司动态</span></a></li> -->
       <li 
         :class="tpath.indexOf('contactus') !== -1 ? 'active' : ''" 
         class="side_memu"><a :href="mid + '-contactus'"><span>联系我们</span></a></li>

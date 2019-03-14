@@ -136,18 +136,11 @@ module.exports = {
       }
     },
     '/anfacms/': {
-      target: 'http://192.168.1.79', // 代理地址
+      target: 'http://192.168.1.180', // 代理地址
       changeOrigin: true
       /* pathRewrite: {
         '^/api': ''
       } */
-    },
-    '/api/anfacms/': {
-      target: 'http://192.168.1.79', // 代理地址
-      changeOrigin: true,
-      pathRewrite: {
-        '^/api/anfacms': '/anfacms'
-      }
     }
   },
 

@@ -7,5 +7,5 @@ export function formatAnfaTms(str = '') {
 }
 
 export function makeAnfaTmsUrl(path) {
-  return 'http://192.168.1.79/anfacms/' + path.replace('/zixun', '')
+  return 'http://192.168.1.180/anfacms/' + path.replace('/zixun', '')
 }

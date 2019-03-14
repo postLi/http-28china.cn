@@ -379,7 +379,13 @@ export default {
   fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
     return Promise.all([
-      store.dispatch('member/GETCOMPANYINFO', params.id),
+      store.dispatch('member/GETCOMPANYINFO', params.id).catch(err => {
+        if (err.type === 'network') {
+          error({ statusCode: 500, message: err.msg })
+        } else {
+          error({ statusCode: 404, message: err.msg })
+        }
+      }),
       store.dispatch('getDictList', {
         name: 'AF03801'
       }),

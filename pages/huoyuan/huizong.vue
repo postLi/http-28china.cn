@@ -28,7 +28,36 @@
         </div>
         <div class="col2">
           <div class="ad">
-            幻灯片
+            <div v-swiper:mySwiper="swiperOption">
+              <div class="swiper-wrapper">
+                <div 
+                  class="swiper-slide" 
+                  :key="index"
+                  v-for="(banner, index) in banners">
+                  <img :src="banner">
+                </div>
+                <!-- <div lass="swiper-slide" >
+                  <img src="../../static/images/huizong/banner01.jpg">
+                </div>
+                <div lass="swiper-slide" >
+                  <img src="../../static/images/huizong/banner01.jpg">
+                </div>
+                <div lass="swiper-slide" >
+                  <img src="../../static/images/huizong/banner01.jpg">
+                </div> -->
+              </div>
+              <div class="swiper-pagination swiper-pagination-bullets"/>
+            </div>
+            <!-- <swiper :options="swiperOption">
+              <swiper-slide class="slide-1">11111111111111</swiper-slide>
+              <swiper-slide class="slide-2">22222222222</swiper-slide>
+              <swiper-slide class="slide-3">3333333333</swiper-slide>
+              <swiper-slide class="slide-4">4444444444444</swiper-slide>
+              <swiper-slide class="slide-5">55555555555</swiper-slide>
+              <div 
+                class="swiper-pagination" 
+                slot="pagination"/>
+            </swiper> -->
           </div>
           <div class="type clearfix">
             <div class="type_box"><a href=""><img src="../../static/images/huizong/type01.png"></a></div>
@@ -174,7 +203,33 @@
           <ul class="info_user_list">
             <li>
               <div class="info_user">
-                <span class="user">用户159****4895 </span>
+                <span class="user">11用户159****4895 </span>
+                <span class="time">3分钟前</span>
+              </div>
+              <div class="info_text ">
+                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+                <a 
+                  href=""
+                  class="link fr">查看货源</a>
+              </div>
+            </li>
+            <li>
+              <div class="info_user">
+                <span class="user">22用户159****4895 </span>
+                <span class="time">3分钟前</span>
+              </div>
+              <div class="info_text ">
+                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+                <a 
+                  href=""
+                  class="link fr">查看货源</a>
+              </div>
+            </li>
+            <li>
+              <div class="info_user">
+                <span class="user">333用户159****4895 </span>
                 <span class="time">3分钟前</span>
               </div>
               <div class="info_text ">
@@ -219,12 +274,19 @@
         <h3 class="gr_tit">货源推荐</h3>
         <div class="gr_text"><span>180789</span>条货源，为您优选12条优质货源</div>
         <div class="gr_sch">
-          <div class="city_box"><input 
-            type="text" 
-            placeholder="请输入出发地" 
-            id="pageinp1"></div>
+          <div class="city_box">
+            <input 
+              type="text" 
+              placeholder="请输入出发地" 
+              id="groom_pageinp1">
+          </div>
           <div class="icon_box"><i class="iconfont iconjiantou_xiangyou_o"/></div>
-          <div class="city_box"><span class="placeholder">请输入到达地</span></div>
+          <div class="city_box">
+            <input 
+              type="text" 
+              placeholder="请输入到达地" 
+              id="groom_pageinp2">
+          </div>
           <div class="btn_box"><a href="">搜索</a></div>
         </div>
         <a 
@@ -567,12 +629,18 @@
         <div class="col2">
           <div class="subscribe">
             <h3 class="tit"><i class="iconfont icondingyue"/>订阅优质支援</h3>
-            <div class="city_box">
-              <span class="placeholder">请选择出发地</span>
+            <div class="city_box clearfix">
+              <input 
+                type="text" 
+                placeholder="请输入出发地" 
+                id="sb_pageinp1">
               <i class="iconfont iconjiantou32"/>
             </div>
-            <div class="city_box">
-              <span class="placeholder">请选择到达地</span>
+            <div class="city_box clearfix">
+              <input 
+                type="text" 
+                placeholder="请输入到达地" 
+                id="sb_pageinp2">
               <i class="iconfont iconjiantou32"/>
             </div>
             <div class="text">
@@ -873,6 +941,8 @@
   </div>
 </template>
 <script>
+import 'swiper/dist/css/swiper.css'
+
 export default {
   name: 'HuiZong',
   head: {
@@ -881,31 +951,52 @@ export default {
         rel: 'stylesheet',
         href: '//at.alicdn.com/t/font_1076232_oy814mxm79.css'
       }
+    ],
+    script: [
+      // {
+      //   src: '/js/jq_scroll.js'
+      // }
     ]
   },
   data() {
     return {
-      items: [
-        {
-          id: 2
+      swiperOption: {
+        spaceBetween: 30,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
         },
-        {
-          id: 1
-        },
-        {
-          id: 3
-        },
-        {
-          id: 4
+        effect: 'fade',
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true,
+          clickable: true
         }
+      },
+      banners: [
+        require('../../static/images/huizong/banner01.jpg'),
+        require('../../static/images/huizong/banner02.jpg'),
+        require('../../static/images/huizong/banner03.jpg')
+        // '../../static/images/huizong/weixin.png',
+        // '../../static/images/huizong/weixin.png'
       ]
     }
   },
   mounted() {
-    seajs.use(['/js/insurance.js', 'layer'], function() {
+    // this.mySwiper
+    seajs.use(['layer', '/js/jq_scroll.js'], function() {
       console.log($)
       console.log(layer)
-      $('#pageinp1').citypicker()
+      $('#groom_pageinp1').citypicker()
+      $('#groom_pageinp2').citypicker()
+      $('#sb_pageinp1').citypicker()
+      $('#sb_pageinp2').citypicker()
+
+      $('.hy_info .info_user_box').Scroll({
+        line: 1,
+        speed: 500,
+        timer: 2000
+      })
     })
   }
 }
@@ -1038,6 +1129,9 @@ $f_12: 12px;
 .ad {
   height: 290px;
   background: $white;
+  .swiper-container {
+    height: 290px;
+  }
 }
 .type {
   margin-top: 10px;
@@ -1297,6 +1391,7 @@ $f_12: 12px;
     }
   }
   .info_user_box {
+    overflow: hidden;
     margin-left: 50px;
     width: 510px;
     height: 60px;
@@ -1417,11 +1512,11 @@ $f_12: 12px;
       @extend .fl;
     }
     .city_box {
+      position: relative;
       padding-left: 10px;
       width: 190px;
-      cursor: pointer;
-      .placeholder {
-        color: $light_gray;
+      > input {
+        border: 0;
       }
     }
     .icon_box {
@@ -1488,19 +1583,21 @@ $f_12: 12px;
       }
     }
     .city_box {
+      position: relative;
       margin-bottom: 10px;
       padding: 0 10px;
       height: 40px;
       line-height: 40px;
       background: $white;
       border: 1px solid $border_color;
-      cursor: pointer;
-      .placeholder,
-      .iconfont {
-        color: $light_gray;
+      > input {
+        border: 0;
       }
       .iconfont {
-        @extend .fr;
+        position: absolute;
+        top: 0;
+        right: 5px;
+        color: $light_gray;
       }
     }
     .text {

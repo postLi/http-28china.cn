@@ -92,7 +92,8 @@ module.exports = {
     {
       src: '~/plugins/axios'
       // ssr: false
-    }
+    },
+    { src: '~/plugins/swiper', ssr: false }
   ],
 
   /*

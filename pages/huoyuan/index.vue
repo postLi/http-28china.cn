@@ -324,6 +324,31 @@
           </div>
 
         </div>
+        <!--车主月人气榜start-->
+        <div
+          class="arc_main4-content"
+          style="margin-top: 20px">
+          <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
+          <div 
+            v-for="(item,index) in popularity" 
+            :key="index" 
+            class="rc_list">
+            <a :href="'/member/'+item.id">
+              <div class="left">
+                <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
+              </div>
+              <div 
+                v-if="index < 3" 
+                class="img">
+                <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
+              </div>
+              <div class="right">
+                <span>{{ item.companyName }}</span>
+                <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
 
         <!-- 订阅优质货源start -->
         <div class="list_help">

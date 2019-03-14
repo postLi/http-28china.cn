@@ -17,8 +17,9 @@
         <div class="list_kehu">
           <h2 class="list_help_title">客户服务</h2>
           <div class="kf_num">
-            <button>客服1</button>
-            <button>客服2</button>
+            <!-- <button>客服1</button>
+            <button>客服2</button> -->
+            <img src="/images/wzlImg.kf.jpg">
           </div>
         </div>
         <!-- 帮我找优质运动start -->

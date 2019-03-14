@@ -245,84 +245,85 @@
         <!-- 28为您推荐end -->
          
       </div>
-      <!-- 最新车源start -->
-      <div class="list_new">
-        <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
-        <div class="list_new_box">
-          <ul 
-          class="list_new_ul">
-            <li
-              v-for="(item,index) in newestCar"
-              :key="index"
-              class="manage_box"
-            >
-              <div class="li_one">
-                <a :title="item.startProvince+item.startCity+'->'+item.endProvince+item.endCity">{{ item.startProvince }}{{ item.startCity }}->{{ item.endProvince }}{{ item.endCity }}</a>
-                <span>{{ item.createTime }}</span>
-              </div>
-              <div class="li_two">
-                <a><span>长{{ item.carLength }}米</span>|<span>载重{{ item.carLoad }}吨</span>|<span>{{ item.carSourceTypeName }}</span></a>
-                <span><a
-                  :href="'/cheyuan/detail?id=' + item.id"
-                  class="li_check">查看详情</a></span>
-              </div>
-            </li>
-          </ul>
+      <div class="che_right_box">
+        <!-- 最新车源start -->
+        <div class="list_new">
+          <div class="zx_sx"><span class="biaozhi"/><span>最新车源</span></div>
+          <div class="list_new_box">
+            <ul 
+            class="list_new_ul">
+              <li
+                v-for="(item,index) in newestCar"
+                :key="index"
+                class="manage_box"
+              >
+                <div class="li_one">
+                  <a :title="item.startProvince+item.startCity+'->'+item.endProvince+item.endCity">{{ item.startProvince }}{{ item.startCity }}->{{ item.endProvince }}{{ item.endCity }}</a>
+                  <span>{{ item.createTime }}</span>
+                </div>
+                <div class="li_two">
+                  <a><span>长{{ item.carLength }}米</span>|<span>载重{{ item.carLoad }}吨</span>|<span>{{ item.carSourceTypeName }}</span></a>
+                  <span><a
+                    :href="'/cheyuan/detail?id=' + item.id"
+                    class="li_check">查看详情</a></span>
+                </div>
+              </li>
+            </ul>
+          </div>
+
         </div>
+        <!-- 最新车源end -->
 
-      </div>
-      <!-- 最新车源end -->
+        <div class="list_right">
 
-      <div class="list_right">
+          <div class="zx_sx"><span class="biaozhi"/><span>车源信息推荐</span></div>
 
-        <div class="zx_sx"><span class="biaozhi"/><span>车源信息推荐</span></div>
-
-        <div 
-          v-if="$store.state.cheyuan.list_recommend.length === 0" 
-          class="tj_none cy_tj_none" 
-          style="display: block">
-          <span>没有相关车源推荐</span>
-        </div>
-
-        <div class="che_box">
           <div 
-            v-for="(item,index) in $store.state.cheyuan.list_recommend" 
-            :key="index" 
-            class="tj_list">
-            <p class="p1">
-              <a
-                :href=" '/cheyuan/detail?id=' + item.id"
-                class="list-title-a"
-                target="_blank" >
-                <span class="list-icon lines-sprite-icons icon-start"/>
-                <em>{{ item.startCity + item.startArea }}</em>
-                <span class="list-icon lines-sprite-icons icon-through"/>
-                <span class="list-icon lines-sprite-icons icon-end"/>
-                <em>{{ item.endCity + item.endArea }}</em>
-              </a>
+            v-if="$store.state.cheyuan.list_recommend.length === 0" 
+            class="tj_none cy_tj_none" 
+            style="display: block">
+            <span>没有相关车源推荐</span>
+          </div>
 
-            </p>
-            <div class="che_che">
-              <p class="p3"><i>车辆载重：</i><span><b>{{ item.carLoad }}吨</b></span><em>车长：</em><font><b>{{ item.carLength }}米</b></font></p>
-              <p class="p3">
-                <i>车源类型：</i><span>{{ item.carSourceTypeName }}</span><em>车辆类型：</em><font>{{ item.carTypeName }}</font>
+          <div class="che_box">
+            <div 
+              v-for="(item,index) in $store.state.cheyuan.list_recommend" 
+              :key="index" 
+              class="tj_list">
+              <p class="p1">
+                <a
+                  :href=" '/cheyuan/detail?id=' + item.id"
+                  class="list-title-a"
+                  target="_blank" >
+                  <span class="list-icon lines-sprite-icons icon-start"/>
+                  <em>{{ item.startCity + item.startArea }}</em>
+                  <span class="list-icon lines-sprite-icons icon-through"/>
+                  <span class="list-icon lines-sprite-icons icon-end"/>
+                  <em>{{ item.endCity + item.endArea }}</em>
+                </a>
+
               </p>
-              <p class="p4">
-                <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span>{{ item.usualPlace }}</span>
-              </p>
-            </div>
+              <div class="che_che">
+                <p class="p3"><i>车辆载重：</i><span><b>{{ item.carLoad }}吨</b></span><em>车长：</em><font><b>{{ item.carLength }}米</b></font></p>
+                <p class="p3">
+                  <i>车源类型：</i><span>{{ item.carSourceTypeName }}</span><em>车辆类型：</em><font>{{ item.carTypeName }}</font>
+                </p>
+                <p class="p4">
+                  <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span>{{ item.usualPlace }}</span>
+                </p>
+              </div>
             
-            <!-- <p class="p4">
+              <!-- <p class="p4">
               <i>发车时间：</i><span id="nr0518"/>
             </p> -->
-            <div class="p5">
-              <span v-if="item.driverStatus === 'AF0010403'">
-                <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
-                <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span>
-                <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span>
-              </span>
-              <span>{{ item.startTime }}</span>
-            </div>
+              <div class="p5">
+                <span v-if="item.driverStatus === 'AF0010403'">
+                  <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
+                  <span><img src="member/images/list_wlzx/wlgs_xinyong.png" ></span>
+                  <span><img src="member/images/list_wlzx/wlgs_danbao.png" ></span>
+                </span>
+                <span>{{ item.startTime }}</span>
+              </div>
             <!-- <p class="p5">
               <img src="member/images/list_wlzx/wlgs_xinyong.png" >
             </p>
@@ -333,91 +334,93 @@
               <div class="sc_num1"><img src="member/images/list_wlzx/sc_num.png"><span><i><em id="tj101"/>人收藏</i></span></div>
               <div class="view_num1"><img src="member/images/list_wlzx/ll_num.png"><span><i><em id="tj102"/>浏览量</i></span></div>
             </div> -->
-          </div>
+            </div>
          
-        </div>
+          </div>
         
-      </div>
+        </div>
 
-      <!--车主月人气榜start-->
-      <div 
-        class="list_right"
-        style="margin-top: 20px;background:#fff;">
-        <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
+        <!--车主月人气榜start-->
         <div 
-          v-for="(item, index) in $store.state.cheyuan.list_pop_carowner" 
-          :key="index"
-          :class="index < 3 ? 'rc_list'+index : ''" 
-          class="rc_list">
-          <div class="left"><p>{{ index+1 }}</p></div>
+          class="list_right"
+          style="margin-top: 20px;background:#fff;">
+          <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
           <div 
-            v-if="index < 3" 
-            class="img"><img :src="'/images/index/wlgs_tj_0'+index+'.png'" ></div>
-          <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
+            v-for="(item, index) in $store.state.cheyuan.list_pop_carowner" 
+            :key="index"
+            :class="index < 3 ? 'rc_list'+index : ''" 
+            class="rc_list">
+            <div class="left"><p>{{ index+1 }}</p></div>
+            <div 
+              v-if="index < 3" 
+              class="img"><img :src="'/images/index/wlgs_tj_0'+index+'.png'" ></div>
+            <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
+          </div>
         </div>
-      </div>
 
-      <!-- 帮我找优质运动start -->
-      <div class="list_help">
-        <div class="list-box-r-top">
-          <form action="">
-            <h2 class="list_help_title">帮我找优质运力</h2>
-            <div 
-              id="form0" 
-              class="ltl-input0">
-              <input 
-                id="right-bar-form"
-                data-toggle="city-picker"
-                data-level="district"
-                type="text" 
-                class="ltl-location" 
-                placeholder="请选择出发地">
-              <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
-            </div>
-            <div 
-              id="form1" 
-              class="ltl-input0">
-              <input
-                autocomplete="off"
-                data-toggle="city-picker"
-                data-level="district"
-                type="text" 
-                class="ltl-location" 
-                placeholder="请选择目到达地">
-              <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
-            </div>
-            <div 
-              id="form2" 
-              class="ltl-input0">
-              <select 
-                v-model="checkNotice.selectValue"
-                :style="{'color':checkNotice.selectValue === '请选择车型'?'#aaaaaa':'#333333'}"
-                class="ltl-select">
-                <option>请选择车型</option>
-                <option 
-                  v-for="(item,index) in AF018Select"
-                  :value="item.code"
-                  :key="index">{{ item.name }}</option>
-              </select>
-              <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
-            </div>
+        <!-- 帮我找优质运动start -->
+        <div class="list_help">
+          <div class="list-box-r-top">
+            <form action="">
+              <h2 class="list_help_title">帮我找优质运力</h2>
+              <div 
+                id="form0" 
+                class="ltl-input0">
+                <input 
+                  id="right-bar-form"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择出发地">
+                <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+              </div>
+              <div 
+                id="form1" 
+                class="ltl-input0">
+                <input
+                  autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择目到达地">
+                <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+              </div>
+              <div 
+                id="form2" 
+                class="ltl-input0">
+                <select 
+                  v-model="checkNotice.selectValue"
+                  :style="{'color':checkNotice.selectValue === '请选择车型'?'#aaaaaa':'#333333'}"
+                  class="ltl-select">
+                  <option>请选择车型</option>
+                  <option 
+                    v-for="(item,index) in AF018Select"
+                    :value="item.code"
+                    :key="index">{{ item.name }}</option>
+                </select>
+                <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+              </div>
 
-            <div class="ltl-input">
-              <input 
-                v-model="checkNotice.phone" 
-                :placeholder="phoneHolder" 
-                type="text"
-                class="ltl-phone"
-                maxlength="11"
-              >
-              <span 
-                class="ltl-button" 
-                @click="sendNotice()">找到通知我</span>
-            </div>
-          </form>
+              <div class="ltl-input">
+                <input 
+                  v-model="checkNotice.phone" 
+                  :placeholder="phoneHolder" 
+                  type="text"
+                  class="ltl-phone"
+                  maxlength="11"
+                >
+                <span 
+                  class="ltl-button" 
+                  @click="sendNotice()">找到通知我</span>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
       <!-- 帮我找优质运动end -->
+      </div>
+
 
       <!-- 全国热门物流专线start -->
       <div class="hot-city-layer main-width">
@@ -514,7 +517,6 @@ export default {
     if (!areaData.currentProvince) {
       areaData = store.state.area
     }
-
     let vo = {
       carType: query.carType ? query.carType : '', //车辆类型
       carSourceType: query.carSourceType ? query.carSourceType : '', //车源类型
@@ -627,7 +629,7 @@ export default {
       hotRecommend:
         recommend.data.status === 200
           ? recommend.data.data.hotRecommend.links
-          : [], ////全国热门车源信息
+          : [], //全国热门车源信息
       hotRecommendLabel:
         recommend.data.status === 200
           ? recommend.data.data.hotRecommend.label
@@ -934,7 +936,7 @@ body {
   float: left;
   /* border: 1px solid #ddd; */
   box-sizing: border-box;
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 .list_right > ul {
   float: left;
@@ -1746,7 +1748,7 @@ body {
 }
 .list_new {
   float: left;
-  margin-left: 20px;
+  /* margin-left: 20px; */
   margin-bottom: 20px;
   background-color: white;
 }
@@ -2050,5 +2052,9 @@ body {
 .rc_list .right {
   color: #333333;
   width: 100%;
+}
+.che_right_box {
+  float: right;
+  width: 344px;
 }
 </style>

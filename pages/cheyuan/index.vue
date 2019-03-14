@@ -189,7 +189,7 @@
               <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                 <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
               <font>{{ item.creater }}</font></p>
-              <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
+              <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
             </li>
             <li class="cy_list_3">
               <p class="p1"><img
@@ -1917,6 +1917,7 @@ body {
   outline: 0;
   margin-right: 5px;
 }
+
 .ltl-button {
   display: block;
   width: 92px;

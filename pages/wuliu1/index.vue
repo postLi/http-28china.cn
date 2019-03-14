@@ -1,20 +1,32 @@
 <template>
-  <div>
+  <div class="yuanqu">
     <div class="list_box">
-      <div class="list_nav">
+      <div class="header">
+        <a href="">
+          <img
+            src="../../static/yuanqu/images/hearder.png"
+            alt="">
+        </a>
+      </div>
+      <div
+        class="list_nav"
+        style="padding-top:20px"
+      >
         <a href="/">物流首页</a>&gt;<a
           id="list_nav_a"
           href="">物流园区</a>
       </div>
       <div class="list_left">
         <div
-          class="w1036"
+          class=""
           style=" background-color: #fff;">
 
-          <div class="select_con">
+          <div
+            class="select_con"
+            style="float:left;width: 900px;">
 
             <dl>
-              <dt><span>园区所在地&nbsp;：</span></dt>
+              <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt>
               <dd><form
                 name="zxaddform"
                 method="post"
@@ -50,24 +62,230 @@
                   placeholder="请输入园区名称" >
                 <input
                   id="search_wlyq"
-                  value=" 搜索 "
+                  value=" 搜索园区 "
                   readonly=""
                   class="list_button"
+                  style="width:100px"
                   @click="search()">
-                <input
+                  <!-- <input
                   id="flush"
                   name="Submit2"
                   value="重置 "
                   readonly=""
                   class="list_button"
-                  @click="reload()">
+                  @click="reload()"> -->
               </form>
               </dd>
 
             </dl>
+
+          </div>
+          <div><a
+            href="/regisiter"
+            target="_blank"><button
+              id="yd_cx1"
+              class="layui-btn"
+              style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;float:right;height:45px;line-height:45px"
+          >物流公司入驻</button></a></div>
+
+        </div>
+        <div
+          class="clearfix"
+          style="clear: both;"><i>热门：</i>
+          <a
+
+            href="/wuliu?locationProvince=上海市&locationCity=上海市"
+            target="_blank">
+            <span
+            style="padding-right:10px">上海</span>
+          </a>
+          <a
+
+            href="/wuliu?locationProvince=北京市&locationCity=北京市"
+            target="_blank">
+            <span
+            style="padding-right:10px">北京</span>
+          </a>
+          <a
+
+            href="/wuliu?locationProvince=广东省&locationCity=深圳市"
+            target="_blank">
+            <span
+            style="padding-right:10px">深圳</span>
+          </a>
+          <a
+
+            href="/wuliu?locationProvince=重庆市&locationCity=重庆市"
+            target="_blank">
+            <span
+            style="padding-right:10px">重庆</span>
+          </a>
+          <a
+            href="/wuliu?locationProvince=天津市&locationCity=天津市"
+            target="_blank">
+            <span
+            style="padding-right:10px">天津</span>
+          </a>
+          <a
+            href="/wuliu?locationProvince=江苏省&locationCity=苏州市"
+            target="_blank">
+            <span
+            style="padding-right:10px">苏州</span>
+          </a>
+          <a
+            href="/wuliu?locationProvince=四川省&locationCity=成都市"
+            target="_blank">
+            <span
+            style="padding-right:10px">成都</span>
+          </a>
+          <a
+            href="/wuliu?locationProvince=湖北省&locationCity=武汉市"
+            target="_blank">
+            <span
+            style="padding-right:10px">武汉</span>
+          </a>
+        </div>
+        <div class="tuijian">
+          <div
+            class="tuijian_title"
+            style=" height: 50px; line-height: 50px;">
+            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">推荐园区</h5>
+            <a href=""><span style="float:right"> 更多></span></a>
+          </div>
+          <div class="tuijian_content">
+            <ul>
+              <li
+                v-for="(item,i) in getRecommendList"
+                :key="i"
+                style="float:left;padding-right:20px">
+                <a
+                  href=""
+                  style="position:relative"><img
+                    src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
+                    width="260"
+                    height="165"
+                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);    padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName }}</span>
+                <span style="position:absolute;bottom:50px;left:1px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 10px 20px;">招商中</span></a>
+                <p style="width: 260px;text-align: center;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
+                  v-for="(item,i) in 1"
+                  :key="i"
+                  src="../../static/yuanqu/images/zhishu.png"
+                  alt=""
+                >
+
+              </p></li>
+            </ul>
           </div>
         </div>
-        <div class="w1036 list_wlyq">
+        <div
+          class="new"
+          style="clear: both;">
+          <div
+            class="new_title"
+            style="padding:30px 0 25px">
+            <h5 style="color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
+            <!--<a href=""><span style="float:right"> 更多></span></a>-->
+          </div>
+
+
+        </div>
+        <div>
+          <div
+            class="ruzhu"
+            style="width: 635px;float: left">
+            <div
+              class="ruzhu_title"
+              style="padding:30px 0 25px">
+              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">新入驻园区
+
+              </h5>
+              <a href=""><span style="float:right"> 更多></span></a>
+            </div>
+            <ul>
+              <li
+                v-for="(item,i) in getNewestList"
+                :key="i"
+                style="padding-top: 20px"><img
+                  src="../../static/yuanqu/images/jiantou.png"
+                  alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item. parkName }}
+                </span><span 
+              style="width: 300px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress }}</span></li>
+            </ul>
+          </div>
+          <div
+            class="zizhu"
+            style="width: 670px;float: left;margin-left:40px">
+            <div
+              class="zizhu_title"
+              style="padding:30px 0 25px">
+              <h5 style="color:rgb(196,69,76);font-size:18px">自助服务
+              </h5>
+              <!-- <a href=""><span style="float:right"> 更多></span></a> -->
+            </div>
+            <div class="zizhu_content">
+              <div>
+                <ul>
+                  <li
+                    v-for="(item,i) in 6"
+                    :key="i"
+                    style="float:left;padding-right:20px;padding-top:10px"><a
+                      href=""
+                      style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                        src="../../static/gongsi/images/danbao.png"
+                        alt=""
+                        width="40"
+                        style="padding-right:20px"
+                  >快速下单</a></li>
+                </ul>
+              </div>
+              <div
+                class="zizhu_bot"
+                style="border:1px solid #ccc;width:660px;height:150px;clear: both;margin-top:20px">
+                <div>
+                  <!-- <label class="layui-form-label">短输入框</label> -->
+                  <div
+                    class="layui-input-inline "
+                    style="margin: 30px 20px 10px 20px;    float: left;">
+                    <input
+                      style=" height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
+                      type="text"
+                      placeholder="请输入">
+                    <span style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: rgb(51,153,255) ;display: inline-block">园区入驻</span>
+                    <p style="padding-top: 10px">入驻免费提供发布信息，园区宣传</p>
+                    <!--<label class="layui-form-label">园区入驻1</label>-->
+                  </div>
+                  <div
+                    style="display: inline-block;margin:20px;background:rgb(242,242,242)"
+                    class="zizhu_bot_r">
+                    <img
+                      src="../../static/gongsi/images/u1075.png"
+                      alt=""
+                      style="width: 90px;height: 80px;float:left">
+                    <p style="width: 150px;float:left;padding-left: 10px"><a
+
+                      href="http://h5.28tms.com/"
+                      target="_blank">下载<i style="color:rgb(0,102,255)">【28快运APP】</i>，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a></p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div
+          class="hot"
+          style="clear: both;">
+          <div
+            class="hot_title"
+            style="padding:30px 0 25px 0">
+            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">热门园区</h5>
+            <span style="padding-left:30px;"><i style="color:rgb(249,155,42)">1365</i>个园区，为您优选10个热门园区</span>
+            <a href=""><span style="float:right"> 更多></span></a>
+          </div>
+
+
+        </div>
+        <div class=" list_wlyq">
           <div
             v-if="getGateWayList.length === 0"
             class="list_none"
@@ -96,35 +314,138 @@
           </ul>
 
         </div>
-
-        <!--分页-->
+        <img src="../../static/gongsi/images/listbg.png">
         <div
-          class="box"
-          style="float: right;margin-right: 170px;">
+          class="youzhi"
+          style="clear: both;">
           <div
-            id="pagination1"
-            class="page fl"/>
-          <div class="info fl">
-          <!--<p>当前页数：<span id="current1">1</span></p>-->
+            class="youzhi_title"
+            style="padding:30px 0 25px 0">
+            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">热门园区</h5>
+            <span style="padding-left:30px;">货主说好才是真的好</span>
+            <a href=""><span style="float:right"> 所有物流企业></span></a>
           </div>
-        </div>
-        <!--分页-->
+          <div class="youzhi_content">
+            <ul>
+              <li
+                v-for="(item,i) in 5"
+                :key="i"
+                style="float:left;padding-right:20px">
+                <a
+                  href=""
+                  style="position:relative"><img
+                    src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
+                    width="260"
+                    height="165"
+                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.5);color:rgb(255,255,255);    padding: 10px 94px;">安发物流园</span>
+                <span style="position:absolute;bottom:40px;left:5px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 5px 20px;border-radius:5px">NO1</span></a>
+                <p style="width: 260px;padding-top:10px;color: rgb(51,153,255);font-size:16px">安发物流园</p>
+                <p style="width: 260px;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
+                  v-for="(item,i) in 4"
+                  :key="i"
+                  src="../../static/gongsi/images/danbao.png"
+                  alt=""
+                >
 
-        <div class="bottom_wlyq" >
-          <div class="bottom_wlyq_bt">您可能对这些感兴趣</div>
-          <div class="bottom_wlyq_nr">
+                </p>
+                <p style="width: 260px;padding-top:10px">好评率98.2%
+
+              </p></li>
+            </ul>
+          </div>
+
+        </div>
+        <div>
+          <div
+            class="zixun_l"
+            style="width: 670px;float: left">
             <div
-              v-for="(item,index) in getLogisticsPark"
-              :key="index"
-              class="bottom_wlyq_item"><a
-                :href="'/wuliu/detail?id=' + item.id"
-                target="_blank">{{ item.parkName }}</a></div>
+              class="zixuntitle"
+              style="padding:30px 0 25px;margin-bottom:10px">
+              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">行业资讯
+              </h5>
+              <a href=""><span style="float:right"> 更多>></span></a>
+            </div>
+            <div
+              class="zixun_content"
+              style="position:relative">
+              <a
+                href=""
+              > <img
+                src="../../static/gongsi/images/u1075.png"
+                style="width:280px;height:170px;float:left"><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
+              <ul style="float:left">
+                <li
+                  v-for="(item,i) in 5"
+                  :key="i"
+                  style="padding-top:15px"><p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></li>
+              </ul>
+            </div>
+
+          </div>
+          <div
+            class="zixun_r"
+            style="width: 670px;float: left;margin-left:40px">
+            <div
+              class="zixun_title"
+              style="padding:30px 0 25px;margin-bottom:10px">
+              <h5 style="color:rgb(196,69,76);font-size:18px;    float: left;">仓储与配送
+              </h5>
+              <a href=""><span style="float:right"> 更多>></span></a>
+            </div>
+            <div
+              class="zixun_content"
+              style="position:relative">
+              <a
+                href=""
+              > <img
+                src="../../static/gongsi/images/u1075.png"
+                style="width:280px;height:170px;float:left"><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
+              <ul style="float:left">
+                <li
+                  v-for="(item,i) in 5"
+                  :key="i"
+                  style="padding-top:15px"><p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></li>
+              </ul>
+            </div>
           </div>
         </div>
+        <div
+          class="getyouzhi"
+          style="clear: both;    text-align: center;padding-top: 100px;font-size:28px;color:rgb(60,180,69);font-width:bloth;">
+          <span>快速成为承运商获取优质货源</span>
+          <a
+            href="/regisiter"
+            target="_blank"><buttom style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</buttom></a>
+        </div>
+        <!--&lt;!&ndash;分页&ndash;&gt;-->
+        <!--<div-->
+        <!--class="box"-->
+        <!--style="float: right;margin-right: 170px;">-->
+        <!--<div-->
+        <!--id="pagination1"-->
+        <!--class="page fl"/>-->
+        <!--<div class="info fl">-->
+        <!--&lt;!&ndash;<p>当前页数：<span id="current1">1</span></p>&ndash;&gt;-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--&lt;!&ndash;分页&ndash;&gt;-->
+
+        <!--<div class="bottom_wlyq" >-->
+        <!--<div class="bottom_wlyq_bt">您可能对这些感兴趣</div>-->
+        <!--<div class="bottom_wlyq_nr">-->
+        <!--<div-->
+        <!--v-for="(item,index) in getLogisticsPark"-->
+        <!--:key="index"-->
+        <!--class="bottom_wlyq_item"><a-->
+        <!--:href="'/wuliu/detail?id=' + item.id"-->
+        <!--target="_blank">{{ item.parkName }}</a></div>-->
+        <!--</div>-->
+        <!--</div>-->
 
       </div>
 
-      <div class="list_right">
+      <!-- <div class="list_right">
         <div class="zx_sx"><span class="biaozhi"/><span>园区推荐</span></div>
         <div class="tj_none hy_tj_none">
           <span>暂无相关园区推荐</span>
@@ -149,7 +470,7 @@
             <div class="p p5"><span>{{ item.browseNumber }}</span></div>
           </a>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -176,7 +497,9 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/basic.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/list_wlyq.css' }
+      { rel: 'stylesheet', href: '/yuanqu/css/list_wlyq.css' },
+      { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
+      // { rel: 'stylesheet', href: '/css/list_wlyq.css' }
     ],
     script: [
       { src: './js/city-picker.data.js' },
@@ -216,7 +539,28 @@ export default {
       parm1
     )
     let getGateWayListData = await gateWayList($axios, 1, vo)
+    // LLl
+    let parm2 = vo
+    parm2.currentPage = 1
+    parm2.pageSize = 5
+    delete parm2.parkName
+    let getRecommendList = await $axios.post(
+      '/28-web/logisticsPark/main/recommend/list',
+      parm2
+    )
+    let getNewestList = await $axios.post(
+      '/28-web//logisticsPark/newest/list',
+      parm2
+    )
+    console.log(getNewestList.data.data.list, 'getRecommendList', parm2)
+
     return {
+      getRecommendList:
+        getRecommendList.data.status === 200
+          ? getRecommendList.data.data.list
+          : [],
+      getNewestList:
+        getNewestList.data.status === 200 ? getNewestList.data.data.list : [],
       getGateWayList: getGateWayListData.list,
       pages: getGateWayListData.pages,
       currentPage: getGateWayListData.currentPage,
@@ -251,7 +595,7 @@ export default {
       this.vo.locationProvince = list1[0] ? list1[0] : ''
       this.vo.locationCity = list1[1] ? list1[1] : ''
       this.vo.locationArea = list1[2] ? list1[2] : ''
-      window.location.href = `/wuliu?locationProvince=${
+      window.location.href = `/wuliu1?locationProvince=${
         this.vo.locationProvince
       }&locationCity=${this.vo.locationCity}&locationArea=${
         this.vo.locationArea
@@ -277,5 +621,18 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.yuanqu {
+  .clearfix:after {
+    content: ' ';
+    display: table;
+  }
+  .clearfix:before {
+    content: '';
+    display: table;
+  }
+  .clearfix:after {
+    clear: both;
+  }
+}
 </style>

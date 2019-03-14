@@ -221,7 +221,7 @@
             </div>
           </div>
           <div
-            v-if="!lineLists.length"
+            v-if="!lineLists.length || lineLists==null"
             class="list_none">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/line/images/none_pic.png">
@@ -359,7 +359,7 @@
 
         <!--分页-->
         <div
-          v-if="lineLists.length"
+          v-if="lineLists.length || !lineLists==null"
           class="clearfix">
           <div
             class="box"
@@ -436,7 +436,7 @@
         </div>
         <div class="zx_sx"><span class="biaozhi"/><span>专线信息推荐</span></div>
         <div
-          v-if="!lineRecoms.length"
+          v-if="!lineRecoms.length||lineRecoms==null"
           class="tj_none">
           <span>没有相关线路推荐</span>
         </div>
@@ -635,8 +635,6 @@ export default {
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    console.log(listD.data.data.slice(-13).length, 'listD')
-    //codeA过节后继续
     // console.log(codeB, 'codeA')
     if (
       listA.data.status == 200 ||
@@ -660,14 +658,15 @@ export default {
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
       return {
-        lineListsTotalPage: listA.data.data.pages,
-        lineLists: listA.data.data.list,
-        lineRecoms: listB.data.data,
-        lineLinks: listC.data.data,
-        lineHots: listD.data.data,
-        lineCodeA: codeA.data.data,
-        lineCodeB: codeB.data.data,
-        lineCodeC: codeC.data.data
+        lineListsTotalPage:
+          listA.data.status == 200 ? listA.data.data.pages : '',
+        lineLists: listA.data.status == 200 ? listA.data.data.list : '',
+        lineRecoms: listB.data.status == 200 ? listB.data.data : '',
+        lineLinks: listC.data.status == 200 ? listC.data.data : '',
+        lineHots: listD.data.status == 200 ? listD.data.data : '',
+        lineCodeA: codeA.data.status == 200 ? codeA.data.data : '',
+        lineCodeB: codeB.data.status == 200 ? codeB.data.data : '',
+        lineCodeC: codeC.data.status ? codeC.data.data : ''
       }
     }
   },
@@ -834,7 +833,7 @@ export default {
                         aurl = 'http://localhost:3000'
                       }
                       $axios
-                        .post(aurl + `/28-web/range/list`, {
+                        .post(aurl + `/api/28-web/range/list`, {
                           currentPage: currentPage,
                           pageSize: 6,
                           orderBy: orderBy,

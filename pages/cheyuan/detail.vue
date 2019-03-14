@@ -103,7 +103,7 @@
             </div>
             <div>
               <a href="http://h5.28tms.com/">
-              下载<span>【28快运APP】</span>，您可查看更多<span>广州</span>到<span>东莞</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
+              下载<span>【28快运APP】</span>，您可查看更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
             </div>
 
           </div>
@@ -153,11 +153,11 @@
 
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>车辆类型：</i><span>{{ cy1.carTypeName }}</span><span>({{ cy1.isLongCarName }})</span></div>
+            <div class="arc_m3"><i>车辆类型：</i><span>{{ cy1.carTypeName ? cy1.carTypeName : '' }}</span><span v-if="cy1.isLongCarName">({{ cy1.isLongCarName }})</span></div>
             <div class="arc_m3"><i>车辆载重：</i><span>{{ cy1.carLoad }}吨</span></div>
             <div class="arc_m3_2"><i>车长：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i><span>{{ cy1.carLength }}米</span></div>
             <div class="arc_m3_2"><i>途径点：&nbsp;&nbsp;&nbsp;</i><span>{{ cy1.viaAddress ? cy1.viaAddress : '暂无' }}</span></div>
-            <div class="arc_m3_2"><i>发车时间：&nbsp;</i><span>{{ cy1.startTime1 }}</span></div>
+            <div class="arc_m3_2"><i>发车时间：&nbsp;</i><span>{{ cy1.startTime ? cy1.startTime : '随时发车' }}</span></div>
           </div>
           <div class="arc_middle4">
             <div class="arc_m3"><i>联系人：</i><span>{{ cy1.belongDriver }}</span></div>
@@ -167,7 +167,7 @@
                 style="color: #333" >{{ cy1.phone }}</font>
               </span>
             </div>
-            <div class="arc_m3_2"><i>说明：</i><span>{{ cy1.carTagName }}</span><span v-if="cy1.remark">{{ '|'+cy1.remark.substring(0, 30) }}</span></div>
+            <div class="arc_m3_2"><i>说明：</i><span>{{ cy1.carTagName ? cy1.carTagName : '暂无说明' }}</span><span v-if="cy1.remark">{{ '|'+cy1.remark.substring(0, 30) }}</span></div>
           </div>
 
           <div class="arc_middle5">
@@ -239,7 +239,7 @@
 
       </div>
       <div class="arc_main1-1">
-        想要更多<span>广州</span>到<span>深圳</span>的车源信息，您可以<a
+        想要更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的车源信息，您可以<a
           href="/create/cheyuan" 
           style="color: #75b3ff;">发布车源</a>，让车主主动来联系您，达成交易
       </div>
@@ -364,7 +364,7 @@
                   </p>
                   <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                     <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
-                  <font>{{ item.createrName?item.createrName:'' }}</font></p>
+                  <font>{{ item.creater?item.creater:'' }}</font></p>
                   <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
                 </li>
                 <li class="cy_list_3">
@@ -464,7 +464,7 @@
                   <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                     <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
                   <font>{{ item.createrName?item.createrName:'' }}</font></p>
-                  <p class="p4"><i>说明：</i><font>{{ item.remark }}</font></p>
+                  <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
                 </li>
                 <li class="cy_list_3">
                   <p class="p1"><img
@@ -607,6 +607,11 @@
           <div class="arc_main4-content">
             <div class="zx_sx">
               <span class="biaozhi"/><span>仓储与配送</span>
+            </div>
+            <div 
+              class="list_none" 
+              v-if="$store.state.news.cheyuan_ccyps.length === 0">
+              <span>暂无仓储与配送</span>
             </div>
             <ul
               class="ps-list"
@@ -792,22 +797,26 @@ export default {
     }
   },
   async fetch({ store, params, $axios, error, app }) {
-    await store.dispatch('news/GETNEWSINFO', {
-      params: {
-        channelIds: '101',
-        count: 8,
-        orderBy: 9,
-        channelOption: 0
-      },
-      name: 'cheyuan_ccyps',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+    await store
+      .dispatch('news/GETNEWSINFO', {
+        params: {
+          channelIds: '101',
+          count: 8,
+          orderBy: 9,
+          channelOption: 0
+        },
+        name: 'cheyuan_ccyps',
+        preFn: data => {
+          return data.map((el, index) => {
+            el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
 
-          return el
-        })
-      }
-    })
+            return el
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err)
+      })
   },
   async asyncData({ $axios, app, query }) {
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1

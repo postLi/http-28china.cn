@@ -279,13 +279,23 @@
                 alt=""
                 style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
               <li 
-                style="padding-left: 26px"
+                style="padding-left: 26px;cursor:pointer"
                 @click="openCollectNumber"
-              ><img
-                src="/line/images/03sc.png"
-                alt=""
-                style="vertical-align: middle;"
-              ><span>收藏量:{{ linedataA.collectNumber }}</span></li>
+              >
+                <img
+                  v-if="isXin==false"
+                  src="/line/images/03sc.png"
+                  alt=""
+                  style="vertical-align: middle;"
+                >
+                <img
+                  v-else
+                  src="../../static/line/images/xin.png"
+                  alt=""
+                  style="vertical-align: middle;width:20px"
+                >
+                <span>收藏量:{{ linedataA.collectNumber }}</span>
+              </li>
             </ul>
           </div>
           <div class="arc_middle2">
@@ -332,7 +342,7 @@
                 <!--src="/line/images/05fresh.png"-->
                 <!--alt="">-->
                 <!--<span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"><span>换一个</span></a></span>-->
-                <span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"> <img
+                <span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&publishId='+LineChangeAnother.companyId"> <img
                   src="/line/images/05fresh.png"
                   alt=""><span style="padding-left: 5px">换一个</span></a></span>
               </div>
@@ -595,7 +605,9 @@
             </div>
           </div>
           <div class="bot_right">
-            <p v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
+            <p 
+              style="margin-top: 20px;"
+              v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
               <!--<button-->
@@ -995,6 +1007,7 @@ export default {
       isShowHPrice: false,
       checkMoblie: true,
       isShowAdd: false,
+      isXin: false,
       showImg: 0,
       pages: 0,
       currentPage: 1,
@@ -1073,7 +1086,8 @@ export default {
       linedataB,
       linedataE,
       linedataF,
-      linedataG
+      linedataG,
+      linedataH
     ] = await Promise.all([
       $axios.get(aurl + `/28-web/range/${query.id}`),
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1088,6 +1102,14 @@ export default {
         assessLevel: 'AF0360101'
       }),
       $axios.post(aurl + `/28-web/range/detail/related/links`, {
+        startProvince: startp,
+        startCity: startc,
+        startArea: starta,
+        endProvince: endp,
+        endCity: endc,
+        endArea: enda
+      }),
+      $axios.post(aurl + `/28-web/collect/transportRange`, {
         startProvince: startp,
         startCity: startc,
         startArea: starta,
@@ -1256,19 +1278,19 @@ export default {
         linedataE.data
       )
       return {
-        linedataA: linedataA.data.status == 200 ? linedataA.data.data : '',
-        linedataB: linedataB.data.status == 200 ? linedataB.data.data : '',
+        linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
+        linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
         lineLists:
-          linedataC.data.data.status == 200 ? linedataC.data.data.list : '',
-        lineRecoms: linedataD.data.status == 200 ? linedataD.data.data : '',
-        linedataE: linedataE.data.status == 200 ? linedataE.data.data : '',
-        linedataF: linedataF.data.status == 200 ? linedataF.data.data.list : '',
-        linedataG: linedataG.data.status == 200 ? linedataG.data.data : '',
+          linedataC.data.data.status == 200 ? linedataC.data.data.list : [],
+        lineRecoms: linedataD.data.status == 200 ? linedataD.data.data : [],
+        linedataE: linedataE.data.status == 200 ? linedataE.data.data : [],
+        linedataF: linedataF.data.status == 200 ? linedataF.data.data.list : [],
+        linedataG: linedataG.data.status == 200 ? linedataG.data.data : [],
         LineeEchartInfo:
-          LineeEInfo.data.status == 200 ? LineeEInfo.data.data : '',
-        lineCitys: lineCity.data.status == 200 ? lineCity.data.data : '',
+          LineeEInfo.data.status == 200 ? LineeEInfo.data.data : [],
+        lineCitys: lineCity.data.status == 200 ? lineCity.data.data : [],
         LineChangeAnother:
-          LineCAnother.data.status == 200 ? LineCAnother.data.data : '',
+          LineCAnother.data.status == 200 ? LineCAnother.data.data : [],
         queryCitys
       }
     }
@@ -1296,6 +1318,31 @@ export default {
     // }
   },
   mounted() {
+    // console.log(this.linedataA, 'this.linedataA')
+    // let aurl = ''
+    // if (process.server) {
+    //   aurl = 'http://localhost:3000'
+    // }
+    // let transportRangeId = this.$route.query.id
+    // // // 操作：collect收藏；cancelCollect取消收藏
+    // let handle = 'check'
+    // // console.log(this.$route.query.id, 'this.$route')
+    // let access_token = $.cookie('access_token')
+    // let user_token = $.cookie('user_token')
+    // //         let user_token = 'eyJpZCI6IjExMDU0Mzc4MjU3MzU1ODk4ODgiLCJ1c2VybmFtZSI6IjE3NjIwOTI0MjYzIiwidXNlcnR5cGUiOiJhZmxjLTUiLCJjaGFubmFsIjoibW9iaWxlX2xvZ2luIiwiYWNjZXNzVG9rZW4iOiIkMmEkMTAkeFRvcmlCZnhjSmY0OTdSdmF0R2U0Li5aVXNneUlmbGlpbHYwRWtKODlzRDB1eVBrLmpGMWkiLCJuYW1lIjoi5rW36b6f54mp5rWBIiwibGdDb21wYW55SWQiOiIxMTA1NDM3ODI1NzM1NTg5ODg4IiwiY3VycmVudFRpbWUiOjE1NTI1NDc1MzcxNTN9
+    // // '
+    // let colletcNum = $axios.post(
+    //   aurl +
+    //     `/28-web/collect/transportRange?access_token=` +
+    //     access_token +
+    //     '&user_token=' +
+    //     user_token +
+    //     '&transportRangeId=' +
+    //     transportRangeId +
+    //     '&handle=' +
+    //     handle
+    // )
+    // console.log(colletcNum, 'colletcNum')
     // console.log(this.$route.query.id, 'id')
     if (process.client) {
       seajs.use(['/layer/layer.js'], function() {
@@ -1613,7 +1660,7 @@ export default {
           $('.layui-btn-danger').on('click', '')
         },
         content:
-          ' <div class="row_find" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
+          ' <div class="row_find" style="width: 490px;  margin-left:7px; margin-top:10px;">' +
           '<div class="col-sm-12">' +
           '<div class="input-group">' +
           '<p class="input-group-addon"> ' +
@@ -1624,7 +1671,7 @@ export default {
           '</div>' +
           '</div>' +
           '<div class="col-sm-12">' +
-          '<div class="input-group">' +
+          '<div class="input-group" style="width: 280px;        margin-left: 105px;">' +
           '<input type="text" name="title" required  lay-verify="required" placeholder="请输入您的手机号" autocomplete="off" class="layui-input" maxlength="11" id="layui-input">' +
           '<p class="tipPhone" style="color: red">*手机号码格式不正确</p>' +
           '</div>' +
@@ -1698,7 +1745,7 @@ export default {
           $('.layui-btn-danger').on('click', '')
         },
         content:
-          ' <div class="row_find" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
+          ' <div class="row_find" style="width: 490px;  margin-left:7px; margin-top:10px;">' +
           '<div class="col-sm-12">' +
           '<div class="input-group">' +
           '<p class="input-group-addon"> ' +
@@ -1717,7 +1764,7 @@ export default {
           '</div>' +
           '</div>' +
           '<div class="col-sm-12">' +
-          '<div class="input-group">' +
+          '<div class="input-group" style="width: 280px;        margin-left: 105px;">' +
           '<input type="text" name="title" required  lay-verify="required" placeholder="请输入您的手机号" autocomplete="off" class="layui-input" maxlength="11" id="layui-input">' +
           '<p class="tipPhone" style="color: red">*手机号码格式不正确</p>' +
           '</div>' +
@@ -2223,9 +2270,51 @@ export default {
         symbolSize: 20
       }
     },
-    openCollection() {},
+    openCollection() {
+      console.log(this.linedataA, 'this.linedataA')
+      let aurl = ''
+      if (process.server) {
+        aurl = 'http://localhost:3000'
+      }
+      let transportRangeId = this.$route.query.id
+      // // 操作：collect收藏；cancelCollect取消收藏
+      let handle = 'collect'
+      // console.log(this.$route.query.id, 'this.$route')
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        $axios
+          .post(
+            aurl +
+              '/api/28-web/collect/company?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token +
+              '&transportRangeId=' +
+              transportRangeId +
+              '&handle=' +
+              handle
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('订阅成功')
+              // this.isXin = true
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        this.isShowAdd = true
+        this.getCity()
+      }
+    },
     openCollectNumber() {
-      // let aurl = ''
+      console.log(this.linedataA, 'this.linedataA')
+      let aurl = ''
       if (process.server) {
         aurl = 'http://localhost:3000'
       }
@@ -2251,6 +2340,7 @@ export default {
           .then(res => {
             if (res.data.status === 200) {
               layer.msg('订阅成功')
+              this.isXin = true
             }
             if (res.data.errorInfo) {
               layer.msg(res.data.errorInfo)
@@ -2261,8 +2351,16 @@ export default {
           })
       } else {
         this.isShowAdd = true
-        // this.getCity()
+        this.getCity()
       }
+    },
+    getCity() {
+      this.dataInfo.startProvince = this.linedataA.startProvince
+      this.dataInfo.startCity = this.linedataA.startCity
+      this.dataInfo.startArea = this.linedataA.startArea
+      this.dataInfo.endProvince = this.linedataA.endProvince
+      this.dataInfo.endCity = this.linedataA.endCity
+      this.dataInfo.endArea = this.linedataA.endArea
     }
   }
 }

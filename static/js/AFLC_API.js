@@ -1,84 +1,96 @@
-// 扩展jquery的方法
-  /** cookie http://www.2cto.com/kf/201205/133505.html **/
-  jQuery.cookie=function(d,c,a){if("undefined"!=typeof c){a=a||{};null===c&&(c="",a=$.extend({},a),a.expires=-1);var b="";if(a.expires&&("number"==typeof a.expires||a.expires.toUTCString))"number"==typeof a.expires?(b=new Date,b.setTime(b.getTime()+864E5*a.expires)):b=a.expires,b="; expires="+b.toUTCString();var e=a.path?"; path="+a.path:"",f=a.domain?"; domain="+a.domain:"",a=a.secure?"; secure":"";document.cookie=[d,"=",encodeURIComponent(c),b,e,f,a].join("")}else{c=null;if(document.cookie&&""!=document.cookie){a=
-    document.cookie.split(";");for(b=0;b<a.length;b++)if(e=jQuery.trim(a[b]),e.substring(0,d.length+1)==d+"="){c=decodeURIComponent(e.substring(d.length+1));break}}return c}};
-jQuery.getParams = function(_keystr,url) {
-  var keystr = _keystr || '';
-  var args = url || location.search;
-  args = args.replace(/&amp;/ig,"&");
-  if(!args){return "";}
-  var reg = new RegExp('[\?&]' + keystr + '=([^&]*)[&$]?', 'i');
-  var chk = args.match(reg);
-  return chk ? decodeURIComponent(chk[1]) : "";
-};
-
 //设置统一token
 $(document).ajaxSend(function(event, jqXHR, ajaxOptions) {
-  var access_token = $.cookie('access_token');
+  var access_token = $.cookie('access_token')
   // console.log('ajaxOptions:',ajaxOptions)
-  if(access_token && ajaxOptions.url.indexOf('access_token=')===-1){
+  if (access_token && ajaxOptions.url.indexOf('access_token=') === -1) {
     // ajaxOptions.
-    ajaxOptions.url = ajaxOptions.url + (ajaxOptions.url.indexOf('?')!==-1 ? '&' : '?') + 'access_token=' + access_token
+    ajaxOptions.url =
+      ajaxOptions.url +
+      (ajaxOptions.url.indexOf('?') !== -1 ? '&' : '?') +
+      'access_token=' +
+      access_token
   }
-});
+})
 
 // 接口相关
 var AFWL_API = {
   // url: 'http://192.168.1.188:886/api',
-  constant:{
+  constant: {
     LINK_MEMBER: 'http://member.28china.cn',
     LINK_TMS: 'http://www.28tms.cn'
   },
-  init: function(){
-    var lc = location.host;
-    var c = this.constant;
-    if(lc.indexOf('192.168.1.157')!==-1){
+  init: function() {
+    var lc = location.host
+    var c = this.constant
+    if (lc.indexOf('192.168.1.157') !== -1) {
       c.LINK_MEMBER = 'http://192.168.1.157:9526'
       c.LINK_TMS = 'http://192.168.1.157:9528'
-    } else if(lc.indexOf('192.168.1.188')!==-1){
+    } else if (lc.indexOf('192.168.1.188') !== -1) {
       c.LINK_MEMBER = 'http://192.168.1.188:9526'
       c.LINK_TMS = 'http://192.168.1.188:9528'
-    } else if(lc.indexOf('192.168.1.170')!==-1){
+    } else if (lc.indexOf('192.168.1.170') !== -1) {
       c.LINK_MEMBER = 'http://192.168.1.188:9524'
       c.LINK_TMS = 'http://192.168.1.157:9528'
     }
   },
   url: '/api',
   url99: '/api',
-  _warpper: function(pro){
-    var defer = $.Deferred();
-    pro.done(function(res){
-      if(res.status === 200 || res.access_token){
-        defer.resolve(res);
-      } else {
-        defer.reject(res);
-      }
-    }).fail(function(){
-      defer.reject({
-        text: '网络错误！',
-        status: 100
-      });
-    });
+  _warpper: function(pro) {
+    var defer = $.Deferred()
+    pro
+      .done(function(res) {
+        if (res.status === 200 || res.access_token) {
+          defer.resolve(res)
+        } else {
+          defer.reject(res)
+        }
+      })
+      .fail(function() {
+        defer.reject({
+          text: '网络错误！',
+          status: 100
+        })
+      })
 
-    return defer.promise();
+    return defer.promise()
   },
   // 保存登陆后的信息
-  setCookieData: function(data){
+  setCookieData: function(data) {
     // 获取域名
-    var domain = location.hostname;
-    if(domain.indexOf('28china.cn')!==-1){
-      domain = '.28china.cn';
+    var domain = location.hostname
+    if (domain.indexOf('28china.cn') !== -1) {
+      domain = '.28china.cn'
     }
-    $.cookie('access_token', data.access_token,{ expires: 7,domain: domain, path: '/' });
-    $.cookie('login_mobile', data.mobile,{ expires: 7,domain: domain, path: '/' });
-    $.cookie('login_userName', data.userName,{ expires: 7,domain: domain, path: '/' });
-    $.cookie('login_userId', data.id,{ expires: 7,domain: domain, path: '/' });
-    $.cookie('login_userToken', data.userToken,{ expires: 7,domain: domain, path: '/' });
-    $.cookie('login_type', data.login_type,{ expires: 7,domain: domain, path: '/' });
+    $.cookie('access_token', data.access_token, {
+      expires: 7,
+      domain: domain,
+      path: '/'
+    })
+    $.cookie('login_mobile', data.mobile, {
+      expires: 7,
+      domain: domain,
+      path: '/'
+    })
+    $.cookie('login_userName', data.userName, {
+      expires: 7,
+      domain: domain,
+      path: '/'
+    })
+    $.cookie('login_userId', data.id, { expires: 7, domain: domain, path: '/' })
+    $.cookie('login_userToken', data.userToken, {
+      expires: 7,
+      domain: domain,
+      path: '/'
+    })
+    $.cookie('login_type', data.login_type, {
+      expires: 7,
+      domain: domain,
+      path: '/'
+    })
   },
-  login: function(username, password){
-    var defer = $.Deferred();
-    var _this = this;
+  login: function(username, password) {
+    var defer = $.Deferred()
+    var _this = this
 
     var grant_type = 'password'
     var scope = 'webApp'
@@ -96,54 +108,64 @@ var AFWL_API = {
       },
       data: form
     }) */
-    this._warpper($.ajax({
-      url: this.url + '/api-uaa/password/token',
-      method: 'POST',
-      type: 'POST',
-      // 如果用jq，必须设置以下三项，避免jq 的中间处理
-      processData:false,
-      cache: false,
-      contentType: false,
+    this._warpper(
+      $.ajax({
+        url: this.url + '/api-uaa/password/token',
+        method: 'POST',
+        type: 'POST',
+        // 如果用jq，必须设置以下三项，避免jq 的中间处理
+        processData: false,
+        cache: false,
+        contentType: false,
 
-      headers: {
-        // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
-        //'Content-Type': 'multipart/form-data',
-        'authorization': 'Basic d2ViQXBwOndlYkFwcA=='
-      },
-      data: form
-    })).done(function(res){
-      if(res.access_token){
-        _this.getInfoByMobile(res.access_token,username.split('|')[0],username.split('|')[1]).done(function(r){
-          if(r.data){
-            var data = r.data;
-            // 将登陆返回字段赋给获取信息的返回值
-            for(var i in res){
-              data[i] = res[i]
-            }
+        headers: {
+          // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
+          //'Content-Type': 'multipart/form-data',
+          authorization: 'Basic d2ViQXBwOndlYkFwcA=='
+        },
+        data: form
+      })
+    )
+      .done(function(res) {
+        if (res.access_token) {
+          _this
+            .getInfoByMobile(
+              res.access_token,
+              username.split('|')[0],
+              username.split('|')[1]
+            )
+            .done(function(r) {
+              if (r.data) {
+                var data = r.data
+                // 将登陆返回字段赋给获取信息的返回值
+                for (var i in res) {
+                  data[i] = res[i]
+                }
 
-            data.login_type = username.split('|')[1]
+                data.login_type = username.split('|')[1]
 
-            _this.setCookieData(data);
+                _this.setCookieData(data)
 
-            defer.resolve(data);
-          } else {
-            defer.reject(r);
-          }
-        }).fail(function(err){
-          defer.reject(err);
-        });
-      } else {
-        defer.reject(res);
-      }
-
-    }).fail(function(err){
-      defer.reject(err);
-    });
-    return defer.promise();
+                defer.resolve(data)
+              } else {
+                defer.reject(r)
+              }
+            })
+            .fail(function(err) {
+              defer.reject(err)
+            })
+        } else {
+          defer.reject(res)
+        }
+      })
+      .fail(function(err) {
+        defer.reject(err)
+      })
+    return defer.promise()
   },
-  loginByMobile: function(username, code){
-    var defer = $.Deferred();
-    var _this = this;
+  loginByMobile: function(username, code) {
+    var defer = $.Deferred()
+    var _this = this
 
     var grant_type = 'authorization_code'
     var scope = 'webApp'
@@ -152,63 +174,79 @@ var AFWL_API = {
     form.append('code', code)
     form.append('grant_type', grant_type)
 
-    this._warpper($.ajax({
-      url: this.url + '/api-uaa/mobile/token',
-      method: 'POST',
-      type: 'POST',
-      // 如果用jq，必须设置以下三项，避免jq 的中间处理
-      processData:false,
-      cache: false,
-      contentType: false,
+    this._warpper(
+      $.ajax({
+        url: this.url + '/api-uaa/mobile/token',
+        method: 'POST',
+        type: 'POST',
+        // 如果用jq，必须设置以下三项，避免jq 的中间处理
+        processData: false,
+        cache: false,
+        contentType: false,
 
-      headers: {
-        // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
-        //'Content-Type': 'multipart/form-data',
-        'authorization': 'Basic d2ViQXBwOndlYkFwcA=='
-      },
-      data: form
-    })).done(function(res){
-      if(res.access_token){
-        _this.getInfoByMobile(res.access_token,username.split('|')[0],username.split('|')[1]).done(function(r){
-          if(r.data){
-            var data = r.data;
-            // 将登陆返回字段赋给获取信息的返回值
-            for(var i in res){
-              data[i] = res[i]
-            }
+        headers: {
+          // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
+          //'Content-Type': 'multipart/form-data',
+          authorization: 'Basic d2ViQXBwOndlYkFwcA=='
+        },
+        data: form
+      })
+    )
+      .done(function(res) {
+        if (res.access_token) {
+          _this
+            .getInfoByMobile(
+              res.access_token,
+              username.split('|')[0],
+              username.split('|')[1]
+            )
+            .done(function(r) {
+              if (r.data) {
+                var data = r.data
+                // 将登陆返回字段赋给获取信息的返回值
+                for (var i in res) {
+                  data[i] = res[i]
+                }
 
-            data.login_type = username.split('|')[1]
+                data.login_type = username.split('|')[1]
 
-            _this.setCookieData(data);
+                _this.setCookieData(data)
 
-            defer.resolve(data);
-          } else {
-            defer.reject(r);
-          }
-        }).fail(function(err){
-          defer.reject(err);
-        });
-      } else {
-        defer.reject(res);
-      }
+                defer.resolve(data)
+              } else {
+                defer.reject(r)
+              }
+            })
+            .fail(function(err) {
+              defer.reject(err)
+            })
+        } else {
+          defer.reject(res)
+        }
+      })
+      .fail(function(err) {
+        defer.reject(err)
+      })
 
-    }).fail(function(err){
-      defer.reject(err);
-    });
-
-    return defer.promise();
+    return defer.promise()
   },
   /**
    * 返回数据包含 userName memberPwd
    */
-  loginByToken: function(access_token){
-    var _this = this;
+  loginByToken: function(access_token) {
+    var _this = this
     access_token = access_token || ''
-    return this._warpper($.get(this.url + '/aflc-uc/usercenter/aflcLogisticsCompanyAccout/v1/getAccoutInfo',{
-      access_token:access_token
-    })).done(function(res){
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-uc/usercenter/aflcLogisticsCompanyAccout/v1/getAccoutInfo',
+        {
+          access_token: access_token
+        }
+      )
+    ).done(function(res) {
       var data = res.data
-      if(data){
+      if (data) {
         data.access_token = access_token
         data.login_type = 'aflc-5'
         _this.setCookieData(data)
@@ -220,28 +258,36 @@ var AFWL_API = {
   /**
    * isphone 是否用access_token登录
    */
-  phplogin: function(userid,pwd, isphone){
+  phplogin: function(userid, pwd, isphone) {
     return $.ajax({
-        type:"post",
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        url:"/member/index_do.php?fmdo=login&dopost="+(isphone ? "login3" : "login2")+"&gourl=/&userid="+userid+"&pwd="+pwd
-      });
+      type: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      url:
+        '/member/index_do.php?fmdo=login&dopost=' +
+        (isphone ? 'login3' : 'login2') +
+        '&gourl=/&userid=' +
+        userid +
+        '&pwd=' +
+        pwd
+    })
   },
   // 获取用户信息
-  getInfo: function(mobile, memberType, access_token){
-    return this._warpper($.get(this.url + '/aflc-common/common/aflcMemberCenter/v1/getUserInfo',{
-      mobile:mobile,
-      memberType:memberType,
-      access_token:access_token
-    }));
+  getInfo: function(mobile, memberType, access_token) {
+    return this._warpper(
+      $.get(this.url + '/aflc-common/common/aflcMemberCenter/v1/getUserInfo', {
+        mobile: mobile,
+        memberType: memberType,
+        access_token: access_token
+      })
+    )
   },
-  getInfoByMobile: function(access_token,mobile,type){
-    if(type === 'aflc-5'){
+  getInfoByMobile: function(access_token, mobile, type) {
+    if (type === 'aflc-5') {
       // 物流商
       return this.getLogisticsCompanyInfo(mobile, access_token)
-    } else if(type === 'aflc-2'){
+    } else if (type === 'aflc-2') {
       // 货主
       return this.getShipperInfo(mobile, access_token)
     } else {
@@ -250,47 +296,85 @@ var AFWL_API = {
     }
   },
   // 获取车主信息
-  getDriverInfo: function(mobile,access_token){
-    return this._warpper($.get(this.url + '/aflc-common/common/aflcMemberCenter/v1/getDriverInfoByMobile',{
-      access_token:access_token,
-      mobile: mobile
-    }))
+  getDriverInfo: function(mobile, access_token) {
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-common/common/aflcMemberCenter/v1/getDriverInfoByMobile',
+        {
+          access_token: access_token,
+          mobile: mobile
+        }
+      )
+    )
   },
   // 获取物流商信息
-  getLogisticsCompanyInfo: function(mobile,access_token){
-    return this._warpper($.get(this.url + '/aflc-common/common/aflcMemberCenter/v1/getLogisticsCompanyInfoByMobile',{
-      access_token:access_token,
-      mobile: mobile
-    }))
+  getLogisticsCompanyInfo: function(mobile, access_token) {
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-common/common/aflcMemberCenter/v1/getLogisticsCompanyInfoByMobile',
+        {
+          access_token: access_token,
+          mobile: mobile
+        }
+      )
+    )
   },
   // 获取货主信息
-  getShipperInfo: function(mobile,access_token){
-    return this._warpper($.get(this.url + '/aflc-common/common/aflcMemberCenter/v1/getShipperInfoByMobile',{
-      access_token:access_token,
-      mobile: mobile
-    }))
+  getShipperInfo: function(mobile, access_token) {
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-common/common/aflcMemberCenter/v1/getShipperInfoByMobile',
+        {
+          access_token: access_token,
+          mobile: mobile
+        }
+      )
+    )
   },
   // 根据token获取用户名
-  getUserNameByAccessToken: function(access_token){
-    return this._warpper($.get(this.url + '/aflc-common/common/aflcMemberCenter/v1/getUserNameByAccessToken', {
-      access_token: access_token
-    }));
+  getUserNameByAccessToken: function(access_token) {
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-common/common/aflcMemberCenter/v1/getUserNameByAccessToken',
+        {
+          access_token: access_token
+        }
+      )
+    )
   },
-  vcode: function(width, height){
-    var w = width || 140;
-    var h = height || 40;
-    return this.url + '/aflc-common/common/aflcMemberCenter/v1/getImageCodeAndUID?imageWidth='+w+'&imageHeight=' + h;
+  vcode: function(width, height) {
+    var w = width || 140
+    var h = height || 40
+    return (
+      this.url +
+      '/aflc-common/common/aflcMemberCenter/v1/getImageCodeAndUID?imageWidth=' +
+      w +
+      '&imageHeight=' +
+      h
+    )
   },
-  checkVcode: function(code){
-    return $.get(this.url + '/aflc-common/common/aflcMemberCenter/v1/checkImageCodeAndUID/' + code);
+  checkVcode: function(code) {
+    return $.get(
+      this.url +
+        '/aflc-common/common/aflcMemberCenter/v1/checkImageCodeAndUID/' +
+        code
+    )
   },
-  getMobileCode: function(phone){
-    return this._warpper($.post(this.url + '/aflc-common/aflcCommonSms/sendCodeSms/' + phone));
+  getMobileCode: function(phone) {
+    return this._warpper(
+      $.post(this.url + '/aflc-common/aflcCommonSms/sendCodeSms/' + phone)
+    )
   },
-  checkMobileCode: function(phone, code){
-    return $.post(this.url + '/aflc-common/aflcCommonSms/check/'+phone+'/' + code);
+  checkMobileCode: function(phone, code) {
+    return $.post(
+      this.url + '/aflc-common/aflcCommonSms/check/' + phone + '/' + code
+    )
   },
-  getWxInfo: function(){
+  getWxInfo: function() {
     return $.get(this.url + '/api-uaa/wx/qr/wxinit')
   },
   /**
@@ -300,13 +384,25 @@ var AFWL_API = {
    * @param {*} type 用户角色类型
    * @param {*} origin 来源
    */
-  bindWxUser: function(username,openid,type,origin,unionid){
-    return $.get(this.url + '/api-common/common/user/v1/wx/regAndbindingByUnionid/'+username+'/'+openid+'/'+(origin || 'AF0030105')+'/' + type + '/'+ unionid)
+  bindWxUser: function(username, openid, type, origin, unionid) {
+    return $.get(
+      this.url +
+        '/api-common/common/user/v1/wx/regAndbindingByUnionid/' +
+        username +
+        '/' +
+        openid +
+        '/' +
+        (origin || 'AF0030105') +
+        '/' +
+        type +
+        '/' +
+        unionid
+    )
   },
   /**
    * 获取绑定的信息
    */
-  getBindInfo: function(code, userType, origin){
+  getBindInfo: function(code, userType, origin) {
     /* var defer = $.Deferred();
     if(Math.random()>0.5){
       defer.resolve({data:{}});
@@ -316,13 +412,13 @@ var AFWL_API = {
 
     return defer.promise(); */
     //origin=28china&roleType=aflc-1&code=123xxasd123
-    return $.get(this.url + '/api-uaa/wx/qr/wxlogincheck',{
+    return $.get(this.url + '/api-uaa/wx/qr/wxlogincheck', {
       origin: origin || 'AF0030105',
       roleType: userType,
       code: code
-    });
+    })
   },
-  getBindedInfo: function(code, roleType, origin){
+  getBindedInfo: function(code, roleType, origin) {
     var grant_type = 'authorization_code'
     var scope = 'webApp'
     var form = new FormData()
@@ -335,14 +431,14 @@ var AFWL_API = {
       url: this.url + '/api-uaa/qrwechat/token',
       type: 'POST',
       // 如果用jq，必须设置以下三项，避免jq 的中间处理
-      processData:false,
+      processData: false,
       cache: false,
       contentType: false,
 
       headers: {
         // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
         //'Content-Type': 'multipart/form-data',
-        'authorization': 'Basic d2ViQXBwOndlYkFwcA=='
+        authorization: 'Basic d2ViQXBwOndlYkFwcA=='
       },
       data: form
     })
@@ -362,18 +458,18 @@ var AFWL_API = {
   "smsCode": "string"
 }
    */
-  regisiterByMobile: function(data){
-    data = $.extend(true,{},data)
+  regisiterByMobile: function(data) {
+    data = $.extend(true, {}, data)
     data.password = $.md5(data.password)
     return $.ajax({
-      type: "POST",
-      url: this.url + "/aflc-common/common/aflcMemberCenter/v1/userRegister",
-      contentType: "application/json; charset=utf-8",
+      type: 'POST',
+      url: this.url + '/aflc-common/common/aflcMemberCenter/v1/userRegister',
+      contentType: 'application/json; charset=utf-8',
       data: JSON.stringify(data),
-      dataType: "json"
-    });
+      dataType: 'json'
+    })
   },
-  regisiter: function(data){
+  regisiter: function(data) {
     /* {
       "belongCity": "string",
       "belongCityName": "string",
@@ -388,18 +484,26 @@ var AFWL_API = {
       "registerOriginName": "string",
       "smsCode": "string"
     } */
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-common/common/aflcMemberCenter/v1/register",
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url: this.url + '/aflc-common/common/aflcMemberCenter/v1/register',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
     //return $.post(this.url + '/aflc-common/common/aflcMemberCenter/v1/register', data);
   },
-  getCityInfo: function(code){
+  getCityInfo: function(code) {
     code = code || ''
-    return this._warpper($.get(this.url + '/aflc-common/common/aflcCommonPCA/v1/findAflcCommonPCAByCode?code=' + code));
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-common/common/aflcCommonPCA/v1/findAflcCommonPCAByCode?code=' +
+          code
+      )
+    )
   },
   /**
    * {
@@ -411,7 +515,7 @@ var AFWL_API = {
    * passwordSure
    * }
    */
-  findPassword: function(data){
+  findPassword: function(data) {
     var form = {}
     form.mobile = data.mobile
     form.password = $.md5(data.password)
@@ -420,71 +524,89 @@ var AFWL_API = {
     form.imageCode = data.imageCode
     form.memberType = data.memberType
 
-
     return $.ajax({
-      url: this.url + '/aflc-common/common/aflcMemberCenter/v1/retrievePassword',
+      url:
+        this.url + '/aflc-common/common/aflcMemberCenter/v1/retrievePassword',
       // url: this.url + '/aflc-common/common/aflcMemberCenter/v1/retrievePassword?' + $.param(data),
-      type:"put",
+      type: 'put',
       //processData:false,
       //cache: false,
       // contentType: false,
 
       headers: {
         // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded'
         // 'authorization': 'Basic d2ViQXBwOndlYkFwcA=='
       },
       data: $.param(form),
-      timeout:20000
-    });
+      timeout: 20000
+    })
   },
   // 检查手机账号是否已注册
-  checkMobileIsRegister: function(data){
+  checkMobileIsRegister: function(data) {
     var form = new FormData()
     form.append('mobile', data.mobile)
     form.append('memberType', data.memberType)
 
     return $.ajax({
-      url: this.url + '/aflc-common/common/aflcMemberCenter/v1/checkMobileIsRegister',
+      url:
+        this.url +
+        '/aflc-common/common/aflcMemberCenter/v1/checkMobileIsRegister',
       // url: this.url + '/aflc-common/common/aflcMemberCenter/v1/retrievePassword?' + $.param(data),
-      type:"post",
+      type: 'post',
       //processData:false,
       //cache: false,
       // contentType: false,
 
       headers: {
         // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/x-www-form-urlencoded'
         // 'authorization': 'Basic d2ViQXBwOndlYkFwcA=='
       },
       data: $.param(data),
-      timeout:20000
-    });
+      timeout: 20000
+    })
   },
-  findByNum: function(num){
-    return this._warpper($.get(this.url + '/aflc-portal/order/fclOrder/v1/queryCompanyBySerial/' + num))
+  findByNum: function(num) {
+    return this._warpper(
+      $.get(
+        this.url + '/aflc-portal/order/fclOrder/v1/queryCompanyBySerial/' + num
+      )
+    )
   },
-  getInfoById: function(id){
-    return this._warpper($.get(this.url + '/aflc-portal/order/fclOrder/v1/queryWaybillStateById/' + id))
+  getInfoById: function(id) {
+    return this._warpper(
+      $.get(
+        this.url + '/aflc-portal/order/fclOrder/v1/queryWaybillStateById/' + id
+      )
+    )
   },
-  getCompanyOrder: function(cid, num){
-    return this._warpper($.get(this.url + '/aflc-portal/order/fclOrder/v1/queryCurrentCompanyWaybillInfoBySerial',{
-      'userName': cid,
-      'serial': num
-    }))
+  getCompanyOrder: function(cid, num) {
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-portal/order/fclOrder/v1/queryCurrentCompanyWaybillInfoBySerial',
+        {
+          userName: cid,
+          serial: num
+        }
+      )
+    )
   },
   // 下单相关
-  postCreateOrder: function(data, param){
-    var str = '?' + $.param(param);
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-order/order/fclOrder/v1/createOrder" + str,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  postCreateOrder: function(data, param) {
+    var str = '?' + $.param(param)
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url: this.url + '/aflc-order/order/fclOrder/v1/createOrder' + str,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   },
-/*   getGoodsPrice: function(publishId, weight, volume, startLocation, endLocation){
+  /*   getGoodsPrice: function(publishId, weight, volume, startLocation, endLocation){
     return $.get(this.url + '/aflc-order/order/fclOrder/v1/getGoodsPrice', {
         publishId:publishId,
         weight:weight,
@@ -502,71 +624,105 @@ var AFWL_API = {
         dataType: "json"
       });
   }, */
-  postAddContact: function(data, param){
-    var str = '?' + $.param(param);
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-uc/usercenter/aflcShipperContacts/v1/add" + str,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  postAddContact: function(data, param) {
+    var str = '?' + $.param(param)
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url: this.url + '/aflc-uc/usercenter/aflcShipperContacts/v1/add' + str,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   },
-  getContactList: function(data, param){
-    var str = '?' + $.param(param);
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-uc/usercenter/aflcShipperContacts/v1/list" + str,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  getContactList: function(data, param) {
+    var str = '?' + $.param(param)
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url: this.url + '/aflc-uc/usercenter/aflcShipperContacts/v1/list' + str,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   },
-  putChangeContact: function(data, param){
-    var str = '?' + $.param(param);
-    return this._warpper($.ajax({
-      type: "PUT",
-      url: this.url + "/aflc-uc/usercenter/aflcShipperContacts/v1/update" + str,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  putChangeContact: function(data, param) {
+    var str = '?' + $.param(param)
+    return this._warpper(
+      $.ajax({
+        type: 'PUT',
+        url:
+          this.url + '/aflc-uc/usercenter/aflcShipperContacts/v1/update' + str,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   },
-  getTotalPrice: function(data){
-    return this._warpper($.get(this.url + '/aflc-order/order/fclOrder/v1/getEstimateTotalPieces', data))
+  getTotalPrice: function(data) {
+    return this._warpper(
+      $.get(
+        this.url + '/aflc-order/order/fclOrder/v1/getEstimateTotalPieces',
+        data
+      )
+    )
   },
-  getBestNet: function(cid, data){
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-uc/usercenter/aflcPointNetwork/v1/listPointByCompanyId/" + cid,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  getBestNet: function(cid, data) {
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url:
+          this.url +
+          '/aflc-uc/usercenter/aflcPointNetwork/v1/listPointByCompanyId/' +
+          cid,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   },
-  getAllNet: function(cid, data){
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-uc/usercenter/aflcPointNetwork/v1/listCompanyPointByCompanyId/" + cid,
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  getAllNet: function(cid, data) {
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url:
+          this.url +
+          '/aflc-uc/usercenter/aflcPointNetwork/v1/listCompanyPointByCompanyId/' +
+          cid,
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   },
-  getCompany: function(data){
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-uc/usercenter/aflcTransportRange/v1/findRangesWithCreateOrder",
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  getCompany: function(data) {
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url:
+          this.url +
+          '/aflc-uc/usercenter/aflcTransportRange/v1/findRangesWithCreateOrder',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   },
-  getSelectType: function(type){
-    return this._warpper($.get(this.url + '/aflc-common/sysDict/getSysDictByCodeGet/' + type))
+  getSelectType: function(type) {
+    return this._warpper(
+      $.get(this.url + '/aflc-common/sysDict/getSysDictByCodeGet/' + type)
+    )
   },
-  getLineInfo: function(id){
-    return this._warpper($.get(this.url + '/aflc-uc/usercenter/aflcTransportRange/v1/findMemberAflcTransportRange/' + id));
+  getLineInfo: function(id) {
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-uc/usercenter/aflcTransportRange/v1/findMemberAflcTransportRange/' +
+          id
+      )
+    )
   },
   /**
    * 新增车源信息
@@ -611,18 +767,20 @@ var AFWL_API = {
     "viaAddressName": "string"
   }
   */
-  postNewCar: function(data){
-    return this._warpper($.ajax({
-      type: "POST",
-      url: this.url + "/aflc-uc/usercenter/aflcCarInfo/v1/add",
-      contentType: "application/json; charset=utf-8",
-      data: JSON.stringify(data),
-      dataType: "json"
-    }));
+  postNewCar: function(data) {
+    return this._warpper(
+      $.ajax({
+        type: 'POST',
+        url: this.url + '/aflc-uc/usercenter/aflcCarInfo/v1/add',
+        contentType: 'application/json; charset=utf-8',
+        data: JSON.stringify(data),
+        dataType: 'json'
+      })
+    )
   }
-};
+}
 
-AFWL_API.init();
+AFWL_API.init()
 
 // 公共验证规则
 var AFLC_VALID = {
@@ -663,7 +821,7 @@ var AFLC_VALID = {
   ONLY_NUMBER_AND_PUNCTUATION: /^[0-9~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$/,
   // 同时包含字母数字和符号
   LETTER_AND_NUMBER_AND_PUNCTUATION: /^[a-zA-Z0-9~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$/,
-//       LETTER_AND_NUMBER_AND_PUNCTUATION : /(^[a-zA-Z]+$)&(^[0-9]+$)(^[~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$)/,
+  //       LETTER_AND_NUMBER_AND_PUNCTUATION : /(^[a-zA-Z]+$)&(^[0-9]+$)(^[~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$)/,
   // 纯数字从1开始
   ONLY_NUMBER_GT: /^[1-9]\d*$/,
   // 不可以为空格
@@ -692,4 +850,4 @@ var AFLC_VALID = {
     }
     return s
   }
-};
+}

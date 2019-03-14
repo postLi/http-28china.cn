@@ -2,7 +2,9 @@
   <div class="yuanqu">
     <div class="list_box">
       <div class="header">
-        <a href="">
+        <a
+          href="/wuliu/detail?id=1"
+          target="_blank">
           <img
             src="../../static/yuanqu/images/hearder.png"
             alt="">
@@ -151,7 +153,9 @@
             class="tuijian_title"
             style=" height: 50px; line-height: 50px;">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">推荐园区</h5>
-            <a href=""><span style="float:right"> 更多></span></a>
+            <a 
+              href="/wuliu"
+              target="_blank"><span style="float:right"> 更多></span></a>
           </div>
           <div class="tuijian_content">
             <ul>
@@ -160,7 +164,8 @@
                 :key="i"
                 style="float:left;padding-right:20px">
                 <a
-                  href=""
+                  :href="'/wuliu/detail?id=' + item.id"
+                  target="_blank"
                   style="position:relative"><img
                     src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
                     width="260"
@@ -207,14 +212,20 @@
               <a href=""><span style="float:right"> 更多></span></a>
             </div>
             <ul>
+              <!-- :href="'/wuliu/detail?id=' + item.id"
+                  target="_blank" -->
               <li
                 v-for="(item,i) in getNewestList"
                 :key="i"
-                style="padding-top: 20px"><img
-                  src="../../static/yuanqu/images/jiantou.png"
-                  alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item. parkName }}
-                </span><span
-              style="width: 320px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress.length > 13?item.parkAddress+'...':item.parkAddress }}</span></li>
+                style="padding-top: 20px"><a 
+                
+                  :href="'/wuliu/detail?id=' + item.id"
+                  target="_blank">
+                  <img
+                    src="../../static/yuanqu/images/jiantou.png"
+                    alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item. parkName }}
+                  </span><span
+              style="width: 320px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress.length > 13?item.parkAddress+'...':item.parkAddress }}</span></a></li>
             </ul>
           </div>
           <div
@@ -297,11 +308,15 @@
                     <input
                       style=" height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
                       type="text"
-                      placeholder="请输入"
+                      maxlength="11"
+                      placeholder="输入您的手机号"
                       v-model="inputData">
                     <span
                       style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: rgb(51,153,255) ;display: inline-block;color:#fff"
                       @click="openYuanqu">园区入驻</span>
+                    <p 
+                      style="color:red;padding-top:5px"
+                      v-if="isMobile">请输入正确手机号</p>
                     <p style="padding-top: 10px">入驻免费提供发布信息，园区宣传</p>
                     <!--<label class="layui-form-label">园区入驻1</label>-->
                   </div>
@@ -331,7 +346,9 @@
             style="padding:30px 0 25px 0">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">热门园区</h5>
             <span style="padding-left:30px;"><i style="color:rgb(249,155,42)">1365</i>个园区，为您优选10个热门园区</span>
-            <a href=""><span style="float:right"> 更多></span></a>
+            <a 
+              href="/wuliu"
+              target="_blank"><span style="float:right"> 更多></span></a>
           </div>
           <div
             class="select_con"
@@ -401,7 +418,7 @@
             v-for="(item,index) in getHottList.list"
             :key="index"
             class="wlzx_list"
-            style="margin-right: 0px;width:260px;height:360px">
+            style="margin-right: 0px;width:260px;height:360px;margin-top: 0px;">
             <a
               :href="'/wuliu/detail?id=' + item.id"
               target="_blank">
@@ -414,7 +431,14 @@
                   width="240"
                   height="210"></li>
               <li class="wlzx_list_02"><span>{{ item.parkName }}</span></li>
-              <li class="wlzx_list_03"><font>{{ item.transportNumber?item.transportNumber: 0 }}</font><i>条</i><span>优质专线</span></li>
+              <li class="wlzx_list_03">
+                <span>
+                  <font style="padding-left: 0px;">{{ item.transportNumber?item.transportNumber: 0 }}</font><i>条</i><span style="padding-left: 2px;">优质专线</span>
+                </span>
+                <span>
+                  <font style="padding-left: 0px;">{{ item.netWorkNumber?item.netWorkNumber: 0 }}</font><i/><span style="padding-left: 2px;">家物流网点</span>
+                </span>
+              </li>
               <li 
                 style="margin-bottom:0"
                 class="wlzx_list_04"><span>{{ item.parkAddress }}</span></li>
@@ -457,33 +481,42 @@
         <!--</ul>-->
 
         <!--</div>-->
-        <img src="../../static/gongsi/images/listbg.png">
+        <img 
+          style="margin-top:20px"
+          src="../../static/gongsi/images/listbg.png">
         <div
           class="youzhi"
           style="clear: both;">
           <div
             class="youzhi_title"
             style="padding:30px 0 25px 0">
-            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">热门园区</h5>
+            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">本月优质承运</h5>
             <span style="padding-left:30px;">货主说好才是真的好</span>
-            <a href=""><span style="float:right"> 所有物流企业></span></a>
+            <a 
+              href="/gongsi"
+              target="_blank"><span style="float:right"> 所有物流企业></span></a>
           </div>
           <div class="youzhi_content">
             <ul>
               <li
-                v-for="(item,i) in 5"
+                v-for="(item,i) in getExcellentList"
                 :key="i"
                 style="float:left;padding-right:20px">
                 <a
-                  href=""
+                  :href="'/gongsi?id=' + item.id"
+                  target="_blank"
                   style="position:relative"><img
                     src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
                     width="260"
                     height="165"
-                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.5);color:rgb(255,255,255);    padding: 10px 94px;">安发物流园</span>
-                <span style="position:absolute;bottom:40px;left:5px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 5px 20px;border-radius:5px">NO1</span></a>
-                <p style="width: 260px;padding-top:10px;color: rgb(51,153,255);font-size:16px">安发物流园</p>
-                <p style="width: 260px;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
+                    alt="">
+                  <!-- <span style="display: inline-block;width: 255px;position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.5);color:rgb(255,255,255);padding: 10px 0px;text-align: center;">{{ item.companyName }}</span> -->
+                  <span 
+                    :class="'noclass'+i"
+                    class="NOclass"
+                    style="position:absolute;bottom:40px;left:5px;color:rgb(255,255,255);    padding: 5px 20px;border-radius:5px">NO{{ i+1 }}</span></a>
+                <p style="width: 260px;padding-top:10px;color: rgb(51,153,255);font-size:16px">{{ item.companyName }}</p>
+                <p style="width: 260px;padding-top:10px"><span style="padding-right:10px">推荐指数{{ i+1 }}</span><img
                   v-for="(item,i) in 4"
                   :key="i"
                   src="../../static/gongsi/images/danbao.png"
@@ -491,7 +524,7 @@
                 >
 
                 </p>
-                <p style="width: 260px;padding-top:10px">好评率98.2%
+                <p style="width: 260px;padding-top:10px">好评率{{ item.excellentRate }}%
 
               </p></li>
             </ul>
@@ -507,13 +540,16 @@
               style="padding:30px 0 25px;margin-bottom:10px">
               <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">行业资讯
               </h5>
-              <a href=""><span style="float:right"> 更多>></span></a>
+              <a 
+                href="/zixun"
+                target="_blank"><span style="float:right"> 更多>></span></a>
             </div>
             <div
               class="zixun_content"
               style="position:relative">
               <a
-                href=""
+                href="/zixun"
+                target="_blank"
               > <img
                 src="../../static/gongsi/images/u1075.png"
                 style="width:280px;height:170px;float:left"><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
@@ -615,10 +651,15 @@
         </div>
       </div> -->
     </div>
+    <Add
+      :show = "isAdd"
+      @close="noaddFn"/>
   </div>
 </template>
 
 <script>
+import $axios from 'axios'
+import Add from './add'
 async function gateWayList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -636,6 +677,9 @@ async function gateWayList($axios, currentPage, vo = {}) {
 }
 export default {
   name: 'WuLiu',
+  components: {
+    Add
+  },
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/basic.css' },
@@ -647,12 +691,15 @@ export default {
     script: [
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
+      { src: '/js/AFLC_API.js' },
       { src: './js/jquery.pagination.min.js' }
     ]
   },
   data() {
     return {
+      isAdd: false,
       inputData: '',
+      isMobile: false,
       pages: 0, //总页数
       currentPage: 1 //当前页
     }
@@ -698,11 +745,17 @@ export default {
     )
     let parm3 = vo
     parm3.pageSize = 10
+    let flag = 'excellentRate'
     let getHottList = await $axios.post('/28-web/logisticsPark/hot/list', parm3)
+    let getExcellentList = await $axios.get(
+      '/28-web/logisticsCompany/excellent?flag=' + flag
+    )
     // /logisticsPark/hot/list
-    console.log(getHottList.data.data.list, 'getHottList', parm3)
+    console.log(getExcellentList.data.data, 'getExcellentList')
 
     return {
+      getExcellentList:
+        getExcellentList.data.status === 200 ? getExcellentList.data.data : [],
       getHottList: getHottList.data.status === 200 ? getHottList.data.data : [],
       getRecommendList:
         getRecommendList.data.status === 200
@@ -736,7 +789,40 @@ export default {
     this.loadPagination()
   },
   methods: {
+    addFn() {
+      this.isAdd = true
+    },
+    noaddFn() {
+      this.isAdd = false
+    },
     openYuanqu() {
+      if (this.inputData) {
+        var validReg = window.AFLC_VALID
+        console.log(validReg)
+        let aurl = ''
+        if (process.server) {
+          aurl = 'http://localhost:3000'
+        }
+        if (validReg.MOBILE.test(this.inputData)) {
+          this.addFn()
+          alert(this.inputData)
+          // $axios
+          //   .post(aurl + '/api/28-web/helpFind/range/create', this.form)
+          //   .then(res => {
+          //     // console.log(res.data, 'resresres')
+          //     if (res.data.status === 200) {
+          //       layer.msg('提交成功，客服稍后将会与您联系')
+          //     } else {
+          //       layer.msg(
+          //         res.data.errorInfo ? res.data.errorInfo : res.data.text
+          //       )
+          //     }
+          //   })
+        } else {
+          this.isMobile = true
+          this.inputData = ''
+        }
+      }
       // inputData
     },
     async search1() {
@@ -747,11 +833,11 @@ export default {
       this.vo.locationProvince = list1[0] ? list1[0] : ''
       this.vo.locationCity = list1[1] ? list1[1] : ''
       this.vo.locationArea = list1[2] ? list1[2] : ''
-      window.location.href = `/wuliu?locationProvince=${
-        this.vo.locationProvince
-      }&locationCity=${this.vo.locationCity}&locationArea=${
-        this.vo.locationArea
-      }`
+      window.open(
+        `/wuliu?locationProvince=${this.vo.locationProvince}&locationCity=${
+          this.vo.locationCity
+        }&locationArea=${this.vo.locationArea}`
+      )
     },
     async search() {
       let list1 = []
@@ -761,11 +847,11 @@ export default {
       this.vo.locationProvince = list1[0] ? list1[0] : ''
       this.vo.locationCity = list1[1] ? list1[1] : ''
       this.vo.locationArea = list1[2] ? list1[2] : ''
-      window.location.href = `/wuliu?locationProvince=${
-        this.vo.locationProvince
-      }&locationCity=${this.vo.locationCity}&locationArea=${
-        this.vo.locationArea
-      }&parkName=${this.vo.parkName}`
+      window.open(
+        `/wuliu?locationProvince=${this.vo.locationProvince}&locationCity=${
+          this.vo.locationCity
+        }&locationArea=${this.vo.locationArea}&parkName=${this.vo.parkName}`
+      )
     },
     reload() {
       window.location.href = '/wuliu'
@@ -799,6 +885,25 @@ export default {
   }
   .clearfix:after {
     clear: both;
+  }
+  .youzhi_content {
+    ul {
+      .noclass0 {
+        display: block !important;
+        background: rgb(230, 80, 13);
+      }
+      .noclass1 {
+        display: block !important;
+        background: rgb(102, 105, 255) !important;
+      }
+      .noclass2 {
+        display: block !important;
+        background: rgb(60, 180, 109);
+      }
+      .NOclass {
+        display: none;
+      }
+    }
   }
 }
 </style>

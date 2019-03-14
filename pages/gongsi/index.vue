@@ -35,7 +35,7 @@
                   name="name">全国</span>
                   <ul
                     class="index_uls"
-                    style="position: absolute;left: -1%;top: 98%;display: block;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
                     <li
                     style="width: 33%;text-align: center;"><a
                       href="#"
@@ -138,7 +138,9 @@
           <li
             v-for="(item, index) in lineAdviseRecommend.slice(0,8)"
             :key="index"
-            style="float:left;width: 248px;height:95px;text-align: center;border: solid 1px #e0e0e0;"><a href="#">
+            style="float:left;width: 248px;height:95px;text-align: center;border: solid 1px #e0e0e0;"><a
+              target="_blank"
+              :href="'/member/'+ item.id">
               <p style="font-size: 16px;color: #2577e3;padding-top: 20px;">{{ item.companyName?item.companyName:'' }}</p>
 
               <p
@@ -611,6 +613,9 @@ export default {
         item.advService = item.productServiceNameList
           ? item.productServiceNameList
           : item.otherServiceNameList
+        item.isR = Math.ceil(Math.random() * 255)
+        item.isG = Math.ceil(Math.random() * 255)
+        item.iB = Math.ceil(Math.random() * 255)
       })
     }
 
@@ -714,7 +719,7 @@ export default {
       }
     })
 
-    console.log(listH, 'gsList.list')
+    console.log(listG.data.data, 'listGlistG.list')
     return {
       lineHots: listA.data.status == 200 ? listA.data.data : [],
       lineLinks: listC.data.status == 200 ? listC.data.data : [],

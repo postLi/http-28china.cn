@@ -1679,7 +1679,7 @@ table tr:nth-child(odd){
   line-height: 16px;
   overflow: hidden;
   margin-top:7px;
-  width: 276px;
+  width: 315px;
 }
 .top_left ul{
   float: left;
@@ -1699,6 +1699,7 @@ table tr:nth-child(odd){
   padding: 30px;
   color: #fff;
   font-size: 34px;
+  margin-left: -135px;
 }
 .two_tltle{
   color: #fff;

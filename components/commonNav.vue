@@ -249,9 +249,6 @@ export default {
       },
       {
         src: '/js/city-picker.js'
-      },
-      {
-        src: '/js/diqu.js'
       }
     ]
   },
@@ -262,6 +259,7 @@ export default {
     this.changeNav()
 
     if (process.client) {
+      seajs.use(['/js/diqu.js'])
       $('.h_m_search1')
         .find('a')
         .on('click', function(e) {

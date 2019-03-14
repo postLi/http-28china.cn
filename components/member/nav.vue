@@ -35,10 +35,10 @@
           :class="tpath.indexOf('order') !== -1 ? 'nav-current' : ''" 
           target="_blank"
           class="need_companyId">在线下单</a></li>
-        <li><a 
+        <!-- <li><a 
           id="menu_5" 
           :href="mid + '-webnotice'" 
-          :class="tpath.indexOf('webnotice') !== -1 ? 'nav-current' : ''">公司动态</a></li>
+          :class="tpath.indexOf('webnotice') !== -1 ? 'nav-current' : ''">公司动态</a></li> -->
             
         <li><a 
           id="menu_6" 

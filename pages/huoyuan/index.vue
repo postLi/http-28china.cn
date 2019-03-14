@@ -56,7 +56,7 @@
                 </div>
                 <img
                   class="fl list_img"
-                  src="../../static/images/list_wlzx/02jiantou.png">
+                  src="/images/list_wlzx/02jiantou.png">
                 <div
                   id="HuoyuanTo"
                   class="fl list_input"
@@ -127,7 +127,7 @@
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他货源哦</span>
-            <img src="../../static/images/none_pic.png">
+            <img src="/images/none_pic.png">
           </div>
           <ul
             v-for="(item,index) in hyList"
@@ -150,15 +150,15 @@
                 </div>
               </a>
               <div class="distance_total">[全程<em>{{ item.distance ? item.distance : 0 }}</em>公里]</div>
-              <div class="sc_num"><img src="../../static/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
-              <div class="view_num"><img src="../../static/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
+              <div class="sc_num"><img src="/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
+              <div class="view_num"><img src="/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
             </li>
 
 
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
-              <p class="p3"><img src="../../static/images/list_wlzx/hy_item2.png"><i>规格：</i>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
+              <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum ? item.goodsNum : 0 }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsVolume }}<font >立方米</font></span>
@@ -168,21 +168,21 @@
               <p class="p3"/>
               <p
                 class="p1"
-                :title="item.companyName"><img src="../../static/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
+                :title="item.companyName"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
             </li>
             <li class="wlzx_list_4">
               <p class="p3"/>
-              <p class="p1"><img src="../../static/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
-              <p class="p2"><img src="../../static/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><img
                 v-if="item.authStatus === 'AF0010403'"
-                src="../../static/images/list_wlzx/10shiming.png"></P>
+                src="/images/list_wlzx/10shiming.png"></P>
               <p class="p2"><img
                 v-if="item.isVip && item.isVip === '1'"
-                src="../../static/images/list_wlzx/11xinyong.png"></P>
+                src="/images/list_wlzx/11xinyong.png"></P>
             </li>
 
             <li class="wlzx_list_6">
@@ -280,15 +280,15 @@
             :key="index"
             class="che_box">
             <div class="tj_list">
-              <div class="p p1"><img src="../../static/images/04gongsi.png" ><span><a
+              <div class="p p1"><img src="/images/04gongsi.png" ><span><a
               target="_blank" >{{ item.companyName }}</a></span>
                 <span class="img_icon">
                   <img
                     v-if="item.authStatus === 'AF0010403'"
-                    src="../../static/images/list_wlzx/shiming.png" >
+                    src="/images/list_wlzx/shiming.png" >
                   <img
                     v-if="item.isVip && item.isVip === '1'"
-                    src="../../static/images/list_wlzx/xinyong.png" >
+                    src="/images/list_wlzx/xinyong.png" >
                 </span>
 
 
@@ -317,8 +317,8 @@
                 </ul>
               </div>
               <div class="p p6">
-                <div class="sc_num1"><img src="../../static/images/list_wlzx/ll_num.png"><span><i><em>{{ item.browseNumber ? item.browseNumber: 0 }}</em></i>浏览</span></div>
-                <div class="view_num1"><img src="../../static/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum ? item.collectNum: 0 }}</em>人收藏</i></span></div>
+                <div class="sc_num1"><img src="/images/list_wlzx/ll_num.png"><span><i><em>{{ item.browseNumber ? item.browseNumber: 0 }}</em></i>浏览</span></div>
+                <div class="view_num1"><img src="/images/list_wlzx/sc_num.png"><span><i><em>{{ item.collectNum ? item.collectNum: 0 }}</em>人收藏</i></span></div>
               </div>
             </div>
           </div>
@@ -579,6 +579,9 @@ export default {
       startArea = '',
       startCity = '',
       startProvince = ''
+    if (query.orderClass) {
+      orderClass = query.orderClass
+    }
     if (query.goodsVolumeLower) {
       goodsVolumeLower = query.goodsVolumeLower
     }
@@ -651,7 +654,6 @@ export default {
       goodsWeightUpper: goodsWeightUpper
     }
     let hyList = await getHyList($axios, 1, vo)
-    // console.log('hyList:', hyList.list[0])
     let recommendList = await getRecommendList($axios, vo)
     // console.log('recommendList:', recommendList[0])
     //货源底部推荐
@@ -706,6 +708,8 @@ export default {
     }
   },
   mounted() {
+    console.log('hyList:', this.hyList)
+
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
@@ -1011,8 +1015,7 @@ body {
   background-color: #f1f1f1;
   border: solid 1px #e6e6e6;
   margin-bottom: 14px;
-  background: no-repeat url(../../static/images/list_wlzx/xiajt.png) #f1f1f1
-    363px 16px;
+  background: no-repeat url(/images/list_wlzx/xiajt.png) #f1f1f1 363px 16px;
   position: relative;
 }
 .list_tiaoj span {
@@ -1581,7 +1584,7 @@ body {
 .icon-btn-arrow-down-2 {
   margin-top: 5px;
   display: inline-block;
-  background: url(../../static/images/list_wlzx/xiajt.png);
+  background: url(/images/list_wlzx/xiajt.png);
   background-repeat: no-repeat;
   width: 12px;
   height: 7px;
@@ -1599,7 +1602,7 @@ body {
 .icon-btn-arrow-up-2 {
   margin-top: 5px;
   display: inline-block;
-  background: url(../../static/images/list_wlzx/up_jt.png);
+  background: url(/images/list_wlzx/up_jt.png);
   background-repeat: no-repeat;
   width: 12px;
   height: 7px;
@@ -1610,15 +1613,13 @@ body {
 /*V1.1版本S*/
 #HuoyuanFrom {
   width: 222px;
-  background: url(../../static/images/list_wlzx/start_addr.png) no-repeat 200px
-    8px #fff;
+  background: url(/images/list_wlzx/start_addr.png) no-repeat 200px 8px #fff;
   background-size: 16px 17px;
   padding-right: 20px;
 }
 #HuoyuanTo {
   width: 222px;
-  background: url(../../static/images/list_wlzx/end_addr.png) no-repeat 200px
-    8px #fff;
+  background: url(/images/list_wlzx/end_addr.png) no-repeat 200px 8px #fff;
   background-size: 16px 17px;
   padding-right: 20px;
 }
@@ -1632,8 +1633,7 @@ body {
   border-radius: 2px;
   color: #f9f9f9;
   font-size: 13px;
-  background: no-repeat url(../../static/images/white_search.png) 10px 6px
-    #3f94ee;
+  background: no-repeat url(/images/white_search.png) 10px 6px #3f94ee;
   text-align: left;
   padding-left: 30px;
   padding-right: 5px;
@@ -1717,8 +1717,7 @@ body {
   width: 180px;
   height: 24px;
 
-  background: url(../../static/images/list_wlzx/distance.png) #010101 no-repeat
-    155px 5px;
+  background: url(/images/list_wlzx/distance.png) #010101 no-repeat 155px 5px;
   opacity: 0.5;
 }
 .distance span {
@@ -1733,13 +1732,13 @@ body {
   border: solid 1px #dedede;
   font-size: 13px;
   color: #333;
-  background: no-repeat url(../../static/images/article_wlzx/15qq.gif) 12px 3px;
+  background: no-repeat url(/images/article_wlzx/15qq.gif) 12px 3px;
   padding-left: 15px;
   width: 87px;
 }
 
 .lines-sprite-icons {
-  background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
   font-family: MicrosoftYaHei;
@@ -1843,7 +1842,7 @@ body {
 .list-box-r-top {
   width: 100%;
   box-sizing: border-box;
-  background: url(../../static/images/list_wlzx/che_background.png) no-repeat;
+  background: url(/images/list_wlzx/che_background.png) no-repeat;
   /* background: #fff; */
   padding: 20px 20px;
   /* border: 1px solid #ececec; */
@@ -1890,7 +1889,7 @@ body {
   top: 8px;
 }
 .ss56-common-sprite2 {
-  background-image: url(../../static/images/list_wlzx/select_icon.png);
+  background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
 .list_help_title {
@@ -1918,7 +1917,7 @@ body {
   color: #999999;
 }
 .lines-sprite-icons {
-  background: url(../../static/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
 }
 .list-title-a {
   color: #333;

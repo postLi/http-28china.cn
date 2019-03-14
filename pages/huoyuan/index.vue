@@ -604,6 +604,9 @@ export default {
       startArea = '',
       startCity = '',
       startProvince = ''
+    if (query.orderClass) {
+      orderClass = query.orderClass
+    }
     if (query.goodsVolumeLower) {
       goodsVolumeLower = query.goodsVolumeLower
     }

@@ -50,7 +50,8 @@
             <p class="p1">
               <a
                 id="nr02"
-                href="#"
+                :href="'/member/'+ item.id"
+                target="_blank"
               ><span>{{ item.companyName }}</span>
                 <span v-if="item.isEq">
                   <img

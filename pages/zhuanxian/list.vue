@@ -659,14 +659,14 @@ export default {
       codeC.data.data.unshift(codeObj)
       return {
         lineListsTotalPage:
-          listA.data.status == 200 ? listA.data.data.pages : '',
-        lineLists: listA.data.status == 200 ? listA.data.data.list : '',
-        lineRecoms: listB.data.status == 200 ? listB.data.data : '',
-        lineLinks: listC.data.status == 200 ? listC.data.data : '',
-        lineHots: listD.data.status == 200 ? listD.data.data : '',
-        lineCodeA: codeA.data.status == 200 ? codeA.data.data : '',
-        lineCodeB: codeB.data.status == 200 ? codeB.data.data : '',
-        lineCodeC: codeC.data.status ? codeC.data.data : ''
+          listA.data.status == 200 ? listA.data.data.pages : [],
+        lineLists: listA.data.status == 200 ? listA.data.data.list : [],
+        lineRecoms: listB.data.status == 200 ? listB.data.data : [],
+        lineLinks: listC.data.status == 200 ? listC.data.data : [],
+        lineHots: listD.data.status == 200 ? listD.data.data : [],
+        lineCodeA: codeA.data.status == 200 ? codeA.data.data : [],
+        lineCodeB: codeB.data.status == 200 ? codeB.data.data : [],
+        lineCodeC: codeC.data.status ? codeC.data.data : []
       }
     }
   },

@@ -3,7 +3,7 @@
     <div
       id="js002"
       class="w1036" >
-      <!-- 
+      <!--
       <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
 
 
@@ -20,7 +20,8 @@
         <ul
           v-for="(item, index) in info"
           :key="index"
-          class="wlzx_list">
+          class="wlzx_list"
+          style="margin-right: 0px;">
           <li
             class="wlzx_list_1"
             style="position: relative"

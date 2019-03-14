@@ -11,15 +11,15 @@
           href="">物流公司</a>
       </div>
       <ul class="first_ul">
-        <li 
-          class="first_li" 
+        <li
+          class="first_li"
           style="background: #fff;">
           <div class="company">
             <div
               class="company_name"
               style="padding: 15px 0 5px 20px"
             ><img
-              src="../../static/gongsi/images/wlyq_gs.png"
+              src="../../static/gongsi/images/01dw.png"
               alt=""><span style="padding-left: 5px;color:#333;font-weight:both">公司所在地</span></div>
             <div class="company_address">
               <ul
@@ -49,7 +49,7 @@
             </div>
           </div>
         </li>
-        <li 
+        <li
           class="sec_li"
           style="margin:0 20px;">
           <div class="top">
@@ -60,7 +60,7 @@
               <div carousel-item>
                 <div
                   v-for="(item, i) in 3"
-                  :key="i"><img src="../../static/gongsi/images/demo/header.png"></div>
+                  :key="i"><img src="../../static/gongsi/images/02banner.png"></div>
               </div>
             </div>
           </div>
@@ -71,10 +71,10 @@
               v-for="(item, index) in 3"
               :key="index"
               href="#"
-              
+
             >
               <img
-                src="../../static/gongsi/images/demo/gg.png"
+                src="../../static/gongsi/images/03shuju.png"
                 alt=""
                 style="width: 248px;height: 135px;"
               >
@@ -93,26 +93,29 @@
             <div class="rem_bot_t">
               <div
                 class="rem_bot_titp"
-                style="text-align: center"><img
-                  src=""
-                  alt=""><span style="font-size: 20px;text-align: center">优质承运商推荐</span></div>
+                style="text-align: center;color: #ffffff;padding-top: 10px; "><img
+                  src="../../static/gongsi/images/06tj.png"
+                  style=""
+                  alt=""><span style="font-size: 20px;text-align: center;vertical-align: middle;padding-left:10px">优质承运商推荐</span>
+              <p style="text-align: center;">优质承运商推荐，钱力心</p></div>
+
             </div>
-            <p style="text-align: center;padding-top: 10px">优质承运商推荐，钱力心</p>
+
             <ul
               class="rem_bot_b"
-              style="padding: 60px 15px 15px">
+              style="padding: 10px 15px 15px">
               <li
                 v-for="(item,i) in listE"
                 :key="i"
                 style="padding-top: 10px;font-size:16px; padding-left: 10px;">
-                <div><span 
-                  class="rem_bot_b_title" 
+                <div><span
+                  class="rem_bot_b_title"
                   style="color:#333">{{ item.companyName.length>10?item.companyName.substring(10)+'..':item.companyName }}</span>
-                  <img 
-                    src="../../static/gongsi/images/15qq.gif" 
+                  <img
+                    src="../../static/gongsi/images/04tuijian.png"
                     alt=""></div>
                 <p style="padding-top:2px">
-                
+
                   <span
                     style="padding-right: 16px;color: #666;font-size:14px"
                     v-for="(item, i) in (item.advService.length>3?item.advService.slice(0,3):item.advService)"
@@ -122,7 +125,7 @@
                   <a
                     :href="'/member/'+item.id"
                     target="_blank"
-                    style="cursor: pointer;color:#2577e3;font-size:14px" >进入官网</a></p>
+                    style="cursor: pointer;color:#2577e3;font-size:14px;padding-top:5px" >进入官网</a></p>
               </li>
             </ul>
           </div>
@@ -153,8 +156,8 @@
         class="header_links_r"
         style="position: relative;margin-left: 20px;background: #fff;padding-left: 20px"
       >
-        <p 
-          style="font-size: 18px;color: #0d91e9;padding: 15px 0 40px 10px " 
+        <p
+          style="font-size: 18px;color: #0d91e9;padding: 15px 0 40px 10px;font-weight: bold "
           class="header_links_r_search">运单查询</p>
         <input
           id="yd_nr"
@@ -163,7 +166,7 @@
           placeholder="请输入运单号，例如："
           style="width: 230px;margin-left: 10px">
         <input
-        
+
           type="button"
           style="height: 30px;">
         <div
@@ -207,7 +210,7 @@
                     target="_blank"><span style="font-size: 14px;color: #333333;">{{ item.companyName?item.companyName:'' }}</span>
                   </a>
                   <!-- </li> -->
-                
+
                   <!-- <li><a
                   href="javascript:void(0)"
                   target="_blank"
@@ -287,7 +290,7 @@
 
       <div class="list_center">
         <div class="list_left">
-          
+
           <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
 
 
@@ -295,7 +298,7 @@
             v-if="!getgsListFn.length"
             class="list_none">
             <span style="  float: left;width: 100%;text-align: center;height: 40px;line-height: 40px;font-size: 16px; margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他物流公司哦</span>
-            <img 
+            <img
               src="../../static/gongsi/images/none_pic.png"
               style="float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;">
           </div>
@@ -347,15 +350,24 @@
                 style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
                 v-for="(item, i) in listG"
                 :key="i">
-                <p style="font-size: 25px;color: rgb(253,240,3)">{{ item.companyName }}</p>
-                <p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>
-                <div><span
-                  style="font-size: 20px;color: #fff"
-                  v-for="(item, i) in item.advService"
-                  :key="i"
+                <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
+                <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
+                <div
+                style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
+                  <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
+                  <span
+                    style="font-size: 12px;color: #fff;padding-right: 5px"
+                    v-for="(item, i) in item.advService"
+                    :key="i"
 
                 >{{ item }}</span></div>
-                <p style="font-size: 25px;color: #fff">{{ item.mobile }}</p>
+                <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
+                  <img
+                    v-if="item.mobile || item.mobile != null"
+                    src="../../static/gongsi/images/phoneico.png"
+                    alt="">
+                  <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
+                </p>
               </li>
             </ul>
           </div>
@@ -368,7 +380,7 @@
           </div>
           <div class="list-box-r-news">
             <div
-              v-if="gongsi_jryw01" 
+              v-if="gongsi_jryw01"
               class="today_news"><div
                 class="zx_sx"
                 style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a
@@ -396,8 +408,8 @@
                 </li>
               </ul>
             </div>
-            <div 
-              v-if="gongsi_wlzx01" 
+            <div
+              v-if="gongsi_wlzx01"
               class="wuliu_news">
               <div
                 class="zx_sx"
@@ -704,15 +716,15 @@ export default {
 
     console.log(listH, 'gsList.list')
     return {
-      lineHots: listA.data.status == 200 ? listA.data.data : '',
-      lineLinks: listC.data.status == 200 ? listC.data.data : '',
-      lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : '',
-      listE: listE.data.status == 200 ? listE.data.data : '',
+      lineHots: listA.data.status == 200 ? listA.data.data : [],
+      lineLinks: listC.data.status == 200 ? listC.data.data : [],
+      lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : [],
+      listE: listE.data.status == 200 ? listE.data.data : [],
       gsList: gsList.list,
       // listF: listF.data.data == [] ? '' : '',
-      listF: listF.data.status == 200 ? listF.data.data : '',
-      listG: listG.data.status == 200 ? listG.data.data : '',
-      listH: listH.data.status == 200 ? listH.data.data : ''
+      listF: listF.data.status == 200 ? listF.data.data : [],
+      listG: listG.data.status == 200 ? listG.data.data : [],
+      listH: listH.data.status == 200 ? listH.data.data : []
     }
   },
   computed: {
@@ -729,10 +741,10 @@ export default {
       return this.$store.state.news.gongsi_wlzx[0]
     },
     getgsListFn() {
-      return this.gsList.length > 20 ? this.gsList.slice(0, 10) : this.gsList
+      return this.gsList.slice(0, 10)
     },
     getgsListsFn() {
-      return this.gsList.length > 20 ? this.gsList.slice(10) : this.gsList
+      return this.gsList.slice(10)
     }
   },
   head: {
@@ -983,6 +995,13 @@ export default {
 </script>
 <style lang="scss">
 .lll-gongsi {
+  .header_links_l ul li {
+    background: url('../../static/gongsi/images/05bg.png');
+  }
+  .rem_bot_t {
+    background: url('../../static/gongsi/images/tj.png') no-repeat;
+    height: 95px;
+  }
   margin-bottom: 100px;
   .clearfix:after {
     content: ' ';

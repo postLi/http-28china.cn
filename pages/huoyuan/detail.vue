@@ -80,7 +80,7 @@
                 <span>用户<em style="color: #2577e3;">{{ item.creater }}</em></span>
                 <span><em style="color: #2577e3;">{{ item.startCity }}</em>到</span>
                 <span><em style="color: #2577e3;">{{ item.endCity }}</em>货源</span>
-                <span>{{ item.time }}3分钟前</span>
+                <span>{{ item.time }}前</span>
               </li>
             </ul>
           </div>

@@ -140,13 +140,13 @@ export const actions = {
   },
   // 获取公司信息
   GETCOMPANYINFO({ commit }, payload) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       // console.log('payload', payload)
       this.$axios
         .get('/28-web/logisticsCompany/info/' + payload)
         .then(res => {
           let data = res.data
-          // console.log('GETCOMPANYINFO:', data)
+          console.log('GETCOMPANYINFO:', data)
           if (data.status === 200) {
             let ordata = data.data
             let ps = ordata.productServiceCode
@@ -158,13 +158,20 @@ export const actions = {
             ordata.otherServiceCode = os
 
             commit('setCompany', ordata)
-
             resolve()
+          } else {
+            reject({
+              type: 'info',
+              msg: '查无此ID信息'
+            })
           }
         })
         .catch(err => {
           console.log('payload2', payload, err)
-          resolve()
+          reject({
+            type: 'network',
+            msg: '网络请求失败'
+          })
         })
     })
   },
@@ -200,12 +207,8 @@ export const actions = {
           let data = res.data
           if (data.status === 200) {
             commit('setLineList', data.data)
-
-            resolve()
-          } else {
-            console.log('1122 error', data)
-            reject('1122')
           }
+          resolve()
         })
         .catch(err => {
           console.log('payload2', payload, err.response)
@@ -213,7 +216,7 @@ export const actions = {
         })
     })
   },
-  // 获取公司专线信息
+  // 获取公司货源信息
   getCompanyHuo({ commit }, payload) {
     // console.log('payload3', payload)
     return new Promise((resolve, reject) => {

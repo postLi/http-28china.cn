@@ -419,7 +419,13 @@ export default {
   },
   async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)
-    await store.dispatch('member/GETCOMPANYINFO', params.id)
+    await store.dispatch('member/GETCOMPANYINFO', params.id).catch(err => {
+      if (err.type === 'network') {
+        error({ statusCode: 500, message: err.msg })
+      } else {
+        error({ statusCode: 404, message: err.msg })
+      }
+    })
   }
 }
 </script>

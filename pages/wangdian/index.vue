@@ -410,6 +410,7 @@ export default {
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
+    console.log(recommendList, 'recommendList')
     recommendList.forEach(item => {
       if (item.credit >= 0 && item.credit <= 3) {
         item.showcreadimg = true

@@ -324,6 +324,31 @@
           </div>
 
         </div>
+        <!--车主月人气榜start-->
+        <div
+          class="arc_main4-content"
+          style="margin-top: 20px">
+          <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
+          <div 
+            v-for="(item,index) in popularity" 
+            :key="index" 
+            class="rc_list">
+            <a :href="'/member/'+item.id">
+              <div class="left">
+                <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
+              </div>
+              <div 
+                v-if="index < 3" 
+                class="img">
+                <img :src="item.companyFile" >
+              </div>
+              <div class="right">
+                <span>{{ item.companyName }}</span>
+                <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
+              </div>
+            </a>
+          </div>
+        </div>
 
         <!-- 订阅优质货源start -->
         <div class="list_help">
@@ -373,7 +398,7 @@
               v-for="(item,index) in hotRecommend" 
               :key="index" 
               class="hot-cities-li"><a
-                href="'/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                :href="'/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
           <!-- <ul class="hot-cities">
@@ -656,13 +681,17 @@ export default {
     // console.log('recommendList:', recommendList[0])
     //货源底部推荐
     let recommend = await $axios.post('/28-web/lclOrder/list/related/links', vo)
-    console.log(
-      recommend.data.data.recommendBy28.links,
-      'ffffffffffffffffffffff'
-    )
+    //企业人气榜
+    let popularitys = await $axios
+      .get('/28-web/logisticsCompany/popularity')
+      .catch(err => {
+        console.log(err)
+      })
+    console.log(popularitys.data.data, 'ffffffffffffffffffffff')
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],
+      popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       recommendBy28:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.links
@@ -919,9 +948,9 @@ body {
 .list_right {
   min-height: 246px;
   height: auto !important;
-  width: 344px;
+  width: 347px;
   margin: 0px 0px 0 16px;
-  /* float: left; */
+  float: left;
 }
 .list_hy_page2 {
   width: 1400px;
@@ -1227,7 +1256,7 @@ body {
   background-color: #fff;
   /* margin-top: -1px; */
   border-bottom: 1px solid #dedede;
-  width: 342px;
+  width: 348px;
   font-size: 14px;
   transition: all 0.4s;
   float: left;
@@ -1422,6 +1451,7 @@ body {
 /*货源信息 S */
 .box_right {
   float: right;
+  width: 364px;
 }
 .wlzx_list_01 {
   width: 180px;
@@ -1708,6 +1738,7 @@ body {
 }
 .list_hy {
   margin-top: 20px;
+  background: #fff;
 }
 
 .distance {
@@ -1995,6 +2026,7 @@ body {
 .line-city-box {
   max-width: 1036px;
   float: left;
+  width: 1043px;
 }
 .line-title {
   color: #3f94ee;
@@ -2012,5 +2044,93 @@ body {
   white-space: nowrap;
   overflow: hidden;
   /* color: #333; */
+}
+.arc_main4-content {
+  background-color: #ffffff;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-left: 16px;
+}
+.zx_sx {
+  line-height: 50px;
+  height: 49px;
+  color: #2577e3;
+  font-size: 18px;
+  background-color: #fff;
+  border-bottom: 1px solid #2577e3;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.rc_list {
+  padding: 10px;
+  /* box-sizing: border-box; */
+}
+.rc_list div {
+  display: table-cell;
+  vertical-align: middle;
+  font-size: 14px;
+}
+.rc_list .left p {
+  height: 20px;
+  line-height: 20px;
+  width: 20px;
+  text-align: center;
+  color: #ffffff;
+  margin: 0 15px;
+  background-color: #8eb9f5;
+}
+.oneColor {
+  background-color: #f65050 !important ;
+}
+.twoColor {
+  background-color: #ff8547 !important ;
+}
+.trihColor {
+  background-color: #ffac38 !important ;
+}
+.rc_list .img {
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  padding-right: 9px;
+}
+.rc_list .right {
+  color: #333333;
+  width: 100%;
+}
+.rc_list .img img {
+  width: 50px;
+  display: block;
+  border-radius: 50%;
+}
+.rc_list .right span:nth-child(1) {
+  display: inline-block;
+  width: 120px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.rc_list .right span:nth-child(2) {
+  display: inline-block;
+  width: 100px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.ps-list {
+  padding: 10px;
+}
+
+.ps-list li {
+  list-style: square;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  line-height: 28px;
+  letter-spacing: 1.1px;
+  color: #333333;
+  list-style: none;
+  margin-bottom: 10px;
 }
 </style>

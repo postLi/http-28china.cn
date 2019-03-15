@@ -427,6 +427,7 @@
                 style="height: 200px;"
                 class="wlzx_list_01"><img
                   :src="item.parkSignPicture?item.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
+                  
                   class="scrollLoading"
                   width="240"
                   height="210"></li>

@@ -28,14 +28,16 @@
                 id="index_map1"
                 class="header_middles"
                 style="width: 100%;">
-                <li style="position: relative;width: 30%;text-align: center;"><span
+                <li
+                  style="position: relative;width: 30%;text-align: center;border-radius:5px
+                "><span
                   class="spanclass"
                   id="spanclass"
                   data-pinyin="pinyin"
                   name="name">全国</span>
                   <ul
                     class="index_uls"
-                    style="position: absolute;left: -1%;top: 98%;display: block;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
                     <li
                     style="width: 33%;text-align: center;"><a
                       href="#"
@@ -138,7 +140,9 @@
           <li
             v-for="(item, index) in lineAdviseRecommend.slice(0,8)"
             :key="index"
-            style="float:left;width: 248px;height:95px;text-align: center;border: solid 1px #e0e0e0;"><a href="#">
+            style="float:left;width: 248px;height:95px;text-align: center;border: solid 1px #e0e0e0;"><a
+              target="_blank"
+              :href="'/member/'+ item.id">
               <p style="font-size: 16px;color: #2577e3;padding-top: 20px;">{{ item.companyName?item.companyName:'' }}</p>
 
               <p
@@ -312,7 +316,8 @@
           <!--分页-->
           <div
 
-          class="box">
+            class="box"
+            style="float: right;margin-right: 170px;">
             <div
               id="pagination1"
               class="page fl"/>
@@ -342,36 +347,43 @@
             </div>
             <div
               class="tj_none"
-              v-if="!listG.length">
+              v-if="!listG.length || listG==null">
               <span>没有相关物流公司推荐</span>
             </div>
             <ul>
               <li
                 style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
                 v-for="(item, i) in listG"
-                :key="i">
-                <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
-                <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
-                <div
-                style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
-                  <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
-                  <span
-                    style="font-size: 12px;color: #fff;padding-right: 5px"
-                    v-for="(item, i) in item.advService"
-                    :key="i"
+                :key="i"
+                :class="'bg'+i">
+                <a
+                  :href="'/member/'+ item.id"
+                  target="_blank">
+                  <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
+                  <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
+                  <div
+                  style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
+                    <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
+                    <span
+                      style="font-size: 12px;color: #fff;padding-right: 5px"
+                      v-for="(item, i) in item.advService"
+                      :key="i"
 
-                >{{ item }}</span></div>
-                <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
-                  <img
-                    v-if="item.mobile || item.mobile != null"
-                    src="../../static/gongsi/images/phoneico.png"
-                    alt="">
-                  <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
-                </p>
+                  >{{ item }}</span></div>
+                  <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
+                    <img
+                      v-if="item.mobile || item.mobile != null"
+                      src="../../static/gongsi/images/phoneico.png"
+                      alt="">
+                    <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
+                  </p>
+                </a>
               </li>
             </ul>
           </div>
-          <HotList :lines="lineHots"/>
+          <HotList
+            :lines="lineHots"
+            :gongsi="true"/>
           <div class="list-box-r-phone">
             <div class="zx_p_tit">帮我找优质承运商</div>
             <div class="list-box-r-top">
@@ -388,54 +400,62 @@
                   style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
                   target="_blank"
               >更多>></a></div>
-              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_jryw01.title }}
-              </p>
-              <div style="display: flex"><img
-                width="120"
-                height="98"
-                :src="gongsi_jryw01.typeImg||'/gongsi/images/u1075.png'"
-                alt=""><span style="padding-left: 5px">{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
-                  :href="gongsi_jryw01.url"
-                  style="color: #0d91e9">[详细]</a></span></div>
-              <ul>
-                <li
-                  v-for="(item, i) in gongsi_jryw"
-                  :key="i"
-                  style="padding-top: 15px"><a
-                    :href="item.url"
-                    target="_blank">{{ item.title }}</a>
+              <div style="padding: 0 20px 10px 10px;background:#fff">
+                <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_jryw01.title }}
+                </p>
+                <div style="display: flex"><img
+                  style="width: 120px;height: 98px;display: inline-block;"
+                  width="120"
+                  height="98"
+                  :src="gongsi_jryw01.typeImg||'/gongsi/images/u1075.png'"
+                  alt=""><span style="padding-left: 5px">{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
+                    :href="gongsi_jryw01.url"
+                    style="color: #0d91e9">[详细]</a></span>
+                </div>
 
-                </li>
-              </ul>
+                <ul>
+                  <li
+                    v-for="(item, i) in gongsi_jryw"
+                    :key="i"
+                    style="padding-top: 15px"><a
+                      :href="item.url"
+                      target="_blank">{{ item.title }}</a>
+
+                  </li>
+                </ul>
+              </div>
             </div>
             <div
               v-if="gongsi_wlzx01"
-              class="wuliu_news">
+              class="wuliu_news"
+              style="margin-top: 10px;">
               <div
                 class="zx_sx"
                 style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">物流资讯</span><a
                   href="/zixun/"
                   style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
                   target="_blank">更多>></a></div>
-              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_wlzx01.title }}
-              </p>
-              <div style="display: flex"><img
-                width="120"
-                height="98"
-                :src="gongsi_wlzx01.typeImg||'/gongsi/images/u1075.png'"
-                alt=""><span style="padding-left: 5px">{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
-                  :href="gongsi_wlzx01.url"
-                  style="color: #0d91e9">[详细]</a></span></div>
-              <ul>
-                <li
-                  v-for="(item, i) in gongsi_wlzx"
-                  :key="i"
-                  style="padding-top: 15px"><a
-                    :href="item.url"
-                    target="_blank">{{ item.title }}</a>
+              <div style="padding: 0 20px 10px 10px;background:#fff">
+                <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_wlzx01.title }}
+                </p>
+                <div style="display: flex"><img
+                  width="120"
+                  height="98"
+                  :src="gongsi_wlzx01.typeImg||'/gongsi/images/u1075.png'"
+                  alt=""><span style="padding-left: 5px">{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
+                    :href="gongsi_wlzx01.url"
+                    style="color: #0d91e9">[详细]</a></span></div>
+                <ul>
+                  <li
+                    v-for="(item, i) in gongsi_wlzx"
+                    :key="i"
+                    style="padding-top: 15px"><a
+                      :href="item.url"
+                      target="_blank">{{ item.title }}</a>
 
-                </li>
-              </ul>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -479,12 +499,13 @@ async function getGSList($axios, currentPage, vo = {}) {
   }
   let res = await $axios.post(aurl + '/api/28-web/logisticsCompany/list', parm)
   if (res.data.status === 200) {
-    // res.data.data.forEach(item => {
-    //   item.num = Math.ceil(Math.random() * 30)
-    // })
-  }
-  return {
-    list: res.data.data.list
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
+    }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
   }
 }
 export default {
@@ -498,6 +519,8 @@ export default {
   },
   data() {
     return {
+      pages: 0, //总页数
+      currentPage: 1, //当前页
       isAdd: false,
       types: 0,
       companyName: '',
@@ -611,6 +634,9 @@ export default {
         item.advService = item.productServiceNameList
           ? item.productServiceNameList
           : item.otherServiceNameList
+        item.isR = Math.ceil(Math.random() * 255)
+        item.isG = Math.ceil(Math.random() * 255)
+        item.iB = Math.ceil(Math.random() * 255)
       })
     }
 
@@ -714,7 +740,7 @@ export default {
       }
     })
 
-    console.log(listH, 'gsList.list')
+    console.log(listG.data.data, 'listGlistG.list')
     return {
       lineHots: listA.data.status == 200 ? listA.data.data : [],
       lineLinks: listC.data.status == 200 ? listC.data.data : [],
@@ -724,7 +750,8 @@ export default {
       // listF: listF.data.data == [] ? '' : '',
       listF: listF.data.status == 200 ? listF.data.data : [],
       listG: listG.data.status == 200 ? listG.data.data : [],
-      listH: listH.data.status == 200 ? listH.data.data : []
+      listH: listH.data.status == 200 ? listH.data.data : [],
+      vo: vo
     }
   },
   computed: {
@@ -753,25 +780,34 @@ export default {
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' },
       { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
-    ]
+    ],
+    script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
     this.companyName = this.$route.query.companyName
-    console.log(this.$route.query.companyName, '$route')
+
+    // console.log(this.$route.query.companyName, '$route')
     // this.companyName = decodeURI(GetUrlParam('companyName')) || ''
     var newArr = new Array()
     let _this = this
     var uniqueNames = []
+    var buxuan = []
     $('#buxian').change(async function() {
       // console.log(this.gsList, 'gsList')
       // console.log($(this).attr('data-code'), 'data-code')
       if ($(this).prop('checked')) {
         $('input[name=checkbox]').prop('checked', false)
-
-        uniqueNames.push($(this).attr('data-code'))
-        _this.checkboxItem = uniqueNames
+        buxuan.push($(this).attr('data-code'))
+        // uniqueNames.push($(this).attr('data-code'))
+        // $.each(newArr, function(i, el) {
+        //   if ($.inArray(el, uniqueNames) === -1) {
+        //     uniqueNames.push(el)
+        //   }
+        // })
+        _this.checkboxItem = buxuan
+        console.log(_this.checkboxItem, 'uniqueNames1')
         let vo = {}
-        vo.otherServiceCodes = this.checkboxItem
+        vo.otherServiceCodes = _this.checkboxItem
         vo.locationCity =
           decodeURI(GetUrlParam('locationCity')) == 'null'
             ? ''
@@ -787,23 +823,22 @@ export default {
             : decodeURI(GetUrlParam('companyName'))
         let getgsList = await getGSList($axios, 1, vo)
         _this.gsLists = getgsList.list
-        _this.gsList.forEach(item => {
-          item.num = Math.ceil(Math.random() * 30)
-        })
-        // console.log(getgsList.list, vo, 'buxuan')
+        // _this.gsList.forEach(item => {
+        //   item.num = Math.ceil(Math.random() * 30)
+        // })
+        console.log(_this.gsList, vo, 'buxuan')
         // return gsLists
       } else {
       }
     })
-    // console.log(this.gsList, 'rtrtebuxuandfdd122')
 
     $('input[name=checkbox]:checkbox').click(async function() {
       $('input[name=checkbox]:checkbox').each(function() {
         if ($(this).prop('checked')) {
           newArr.push($(this).attr('data-code'))
           $('#buxian').prop('checked', false)
-          // if()
-          // console.log(newArr, 'newfdf')
+        } else {
+          console.log($(this).attr('data-code'), '$(this)')
         }
       })
 
@@ -816,7 +851,7 @@ export default {
       // var checkboxItem = []
       _this.checkboxItem = uniqueNames
       let vo = {}
-      vo.otherServiceCodes = this.checkboxItem
+      vo.otherServiceCodes = _this.checkboxItem
       vo.locationCity =
         decodeURI(GetUrlParam('locationCity')) == 'null'
           ? ''
@@ -844,128 +879,135 @@ export default {
         '/js/AFLC_API.js'
       ],
       function() {
-        seajs.use(
-          [
-            '../js/city-picker.js',
-            './js/jquery.pagination.min.js',
-            '/js/AFLC_API.js'
-          ],
-          function() {
-            seajs.use(['../gongsi/js/list_wlgs.js'], function() {
-              seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
-                seajs.use(['../js/gaodemap2.js'], function() {
-                  // $('#buxian').change(function() {
-                  //   // var item = $('.input_class')
-                  //   console.log($(this).attr('data-code'), 'data-code')
-                  //   if ($(this).prop('checked')) {
-                  //     $('input[name=checkbox]').prop('checked', false)
-                  //   } else {
-                  //   }
-                  // })
-                  // var newArr = new Array()
-                  // $('input[name=checkbox]:checkbox').click(function() {
-                  //   $('input[name=checkbox]:checkbox').each(function() {
-                  //     // newArr = []
-                  //     if ($(this).prop('checked')) {
-                  //       newArr.push($(this).attr('data-code'))
-                  //     }
-                  //   })
-                  //   var uniqueNames = []
-                  //   $.each(newArr, function(i, el) {
-                  //     if ($.inArray(el, uniqueNames) === -1)
-                  //       uniqueNames.push(el)
-                  //     this.checkboxItem.push(el)
-                  //   })
-                  //   // var checkboxItem = []
-                  //   // checkboxItem.push(uniqueNames)
-                  //   console.log(this.checkboxItem, 'uniqueNames')
-                  // })
+        seajs.use(['../js/city-picker.js', '/js/AFLC_API.js'], function() {
+          seajs.use(['../gongsi/js/list_wlgs.js'], function() {
+            seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
+              seajs.use(['../js/gaodemap2.js'], function() {
+                // this.loadPagination()
+                // $('#buxian').change(function() {
+                //   // var item = $('.input_class')
+                //   console.log($(this).attr('data-code'), 'data-code')
+                //   if ($(this).prop('checked')) {
+                //     $('input[name=checkbox]').prop('checked', false)
+                //   } else {
+                //   }
+                // })
+                // var newArr = new Array()
+                // $('input[name=checkbox]:checkbox').click(function() {
+                //   $('input[name=checkbox]:checkbox').each(function() {
+                //     // newArr = []
+                //     if ($(this).prop('checked')) {
+                //       newArr.push($(this).attr('data-code'))
+                //     }
+                //   })
+                //   var uniqueNames = []
+                //   $.each(newArr, function(i, el) {
+                //     if ($.inArray(el, uniqueNames) === -1)
+                //       uniqueNames.push(el)
+                //     this.checkboxItem.push(el)
+                //   })
+                //   // var checkboxItem = []
+                //   // checkboxItem.push(uniqueNames)
+                //   console.log(this.checkboxItem, 'uniqueNames')
+                // })
 
-                  //
-                  layui.use('form', function() {
-                    var form = layui.form
-                    form.render()
-                  })
+                //
+                layui.use('form', function() {
+                  var form = layui.form
+                  form.render()
+                })
 
-                  var speed = 30
-                  var tab = $('.echart_scroll_nr')
-                  var tab1 = $('.echart_scroll_nr1')
-                  var tab2 = $('.echart_scroll_nr2')
-                  tab2.html(tab1.html())
-                  console.log('tab2:' + tab2.html())
-                  function Marquee() {
-                    if (tab2[0].offsetWidth - tab[0].scrollLeft <= 0) {
-                      tab[0].scrollLeft -= tab1[0].offsetWidth
-                      //console.log('tab1[0].offsetWidth:'+tab1[0].offsetWidth)
-                    } else {
-                      tab[0].scrollLeft++
-                      //console.log('tab[0].scrollLeft:'+tab1[0].scrollLeft)
-                    }
+                var speed = 30
+                var tab = $('.echart_scroll_nr')
+                var tab1 = $('.echart_scroll_nr1')
+                var tab2 = $('.echart_scroll_nr2')
+                tab2.html(tab1.html())
+                console.log('tab2:' + tab2.html())
+                function Marquee() {
+                  if (tab2[0].offsetWidth - tab[0].scrollLeft <= 0) {
+                    tab[0].scrollLeft -= tab1[0].offsetWidth
+                    //console.log('tab1[0].offsetWidth:'+tab1[0].offsetWidth)
+                  } else {
+                    tab[0].scrollLeft++
+                    //console.log('tab[0].scrollLeft:'+tab1[0].scrollLeft)
                   }
-                  var MyMar = setInterval(Marquee, speed)
-                  tab.mouseover(function() {
-                    clearInterval(MyMar)
-                  })
-                  tab.mouseout(function() {
-                    MyMar = setInterval(Marquee, speed)
-                  })
-                  layui.use('carousel', function() {
-                    var carousel = layui.carousel
-                    //建造实例
-                    carousel.render({
-                      elem: '#test1',
-                      width: '100%', //设置容器宽度
-                      arrow: 'always' //始终显示箭头
-                      //,anim: 'updown' //切换动画方式
-                    })
-                  })
-                  $('.list_tiaoj span').click(function() {
-                    //alert("1");
-                    $('.list_tiaoj span').removeClass('active')
-                    $(this).toggleClass('active')
-                  })
-                  function onCheckPage() {
-                    var beginPage = parseInt(
-                      document.beginPagefrm.beginPage.value
-                    )
-                    if (isNaN(beginPage)) {
-                      alert('请输入数字！')
-                      return false
-                    }
-                    if (beginPage <= 0) {
-                      beginPage = 1
-                    }
-                    if (beginPage > 100) {
-                      beginPage = 100
-                    }
-                    if (beginPage > 1) {
-                      document.beginPagefrm.action =
-                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-                        beginPage
-                    } else {
-                      document.beginPagefrm.action =
-                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-                    }
-                    return true
-                  }
-                  $('#pagination1').pagination({
-                    currentPage: 1,
-                    totalPage: process02(1),
-                    callback: function(current) {
-                      $('#current1').text(current)
-                      process02(current)
-                      window.location.href = '#top'
-                    }
+                }
+                var MyMar = setInterval(Marquee, speed)
+                tab.mouseover(function() {
+                  clearInterval(MyMar)
+                })
+                tab.mouseout(function() {
+                  MyMar = setInterval(Marquee, speed)
+                })
+                layui.use('carousel', function() {
+                  var carousel = layui.carousel
+                  //建造实例
+                  carousel.render({
+                    elem: '#test1',
+                    width: '100%', //设置容器宽度
+                    arrow: 'always' //始终显示箭头
+                    //,anim: 'updown' //切换动画方式
                   })
                 })
+                $('.list_tiaoj span').click(function() {
+                  //alert("1");
+                  $('.list_tiaoj span').removeClass('active')
+                  $(this).toggleClass('active')
+                })
+                function onCheckPage() {
+                  var beginPage = parseInt(
+                    document.beginPagefrm.beginPage.value
+                  )
+                  if (isNaN(beginPage)) {
+                    alert('请输入数字！')
+                    return false
+                  }
+                  if (beginPage <= 0) {
+                    beginPage = 1
+                  }
+                  if (beginPage > 100) {
+                    beginPage = 100
+                  }
+                  if (beginPage > 1) {
+                    document.beginPagefrm.action =
+                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
+                      beginPage
+                  } else {
+                    document.beginPagefrm.action =
+                      '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
+                  }
+                  return true
+                }
+                // $('#pagination1').pagination({
+                //   currentPage: 1,
+                //   totalPage: process02(1),
+                //   callback: function(current) {
+                //     $('#current1').text(current)
+                //     process02(current)
+                //     window.location.href = '#top'
+                //   }
+                // })
               })
             })
-          }
-        )
+          })
+        })
       }
     )
   },
   methods: {
+    loadPagination() {
+      $('#pagination1').pagination({
+        currentPage: this.currentPage,
+        totalPage: this.pages,
+        callback: async current => {
+          $('#current1').text(current)
+          let obj = await getGSList(this.$axios, current, this.vo)
+          this.gsList = obj.list
+          this.currentPage = obj.currentPage
+          window.location.href = '#top'
+        }
+      })
+    },
     getFung(vo) {
       let gslist = getGSList($axios, 1, vo)
     },
@@ -1190,5 +1232,60 @@ export default {
     cursor: pointer;
   }
   /*显示隐藏E */
+  // 推荐企业
+  .list_right {
+    ul {
+      .bg0 {
+        background: rgb(208, 104, 106) !important;
+      }
+      .bg1 {
+        background: rgb(25, 138, 194) !important;
+      }
+      .bg2 {
+        background: rgb(254, 59, 79) !important;
+      }
+      .bg3 {
+        background: rgb(208, 104, 103) !important;
+      }
+      .bg4 {
+        background: rgb(25, 138, 194) !important;
+      }
+      .bg5 {
+        background: rgb(254, 59, 79) !important;
+      }
+      .bg6 {
+        background: rgb(25, 138, 194) !important;
+      }
+      .bg7 {
+        background: rgb(208, 104, 106) !important;
+      }
+      .bg8 {
+        background: rgb(25, 138, 194) !important;
+      }
+      .bg9 {
+        background: rgb(208, 104, 103) !important;
+      }
+      .bg10 {
+        background: rgb(254, 59, 79) !important;
+      }
+      .bg11 {
+        background: rgb(25, 138, 194) !important;
+      }
+      .bg12 {
+        background: rgb(208, 104, 106) !important;
+      }
+    }
+  }
+  // 推荐企业
+  .first_li {
+    .company_address {
+      ul#index_map1 {
+        li.spanclass:hover {
+          background: rgb(78, 142, 212);
+          color: #fff;
+        }
+      }
+    }
+  }
 }
 </style>

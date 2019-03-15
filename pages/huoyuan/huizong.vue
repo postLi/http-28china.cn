@@ -82,7 +82,7 @@
     <!--货源-->
     <div class="bj_2">
       <div class="owner">
-        <h3 class="title">优质货主</h3>
+        <h3 class="p_title">优质货主</h3>
         <ul class="p_owner_list clearfix">
           <li>
             <a href="">
@@ -139,7 +139,7 @@
     </div>
     <!-- 优质货主 -->
     <div class="our clearfix">
-      <h3 class="title">选择我们，您可以</h3>
+      <h3 class="p_title">选择我们，您可以</h3>
       <div class="col1 clearfix">
         <div class="our_tool">
           <div class="pic"><img src="../../static/images/huizong/our_01.jpg"></div>
@@ -680,7 +680,7 @@
     <!-- 发布信息 -->
     <div class="bj_2">
       <div class="rank_people clearfix">
-        <div class="title_box">
+        <div class="p_title_box">
           <h3 class="title">货量达人榜</h3>
           <span class="text">近3个月发布货源最多的货主</span>
         </div>
@@ -742,7 +742,7 @@
     <!-- 货量达人榜 -->
     <div class="bj_2">
       <div class="company_owner">
-        <div class="title_box">
+        <div class="p_title_box">
           <h3 class="title">本月优质企业货主</h3>
           <span class="text">稳定货源，好评率高</span>
         </div>  
@@ -796,7 +796,7 @@
     <!-- 本月优质企业货主 -->
     <div class="bj_2">
       <div class="our_virtue">
-        <h3 class="title">选择我们，您可以</h3>
+        <h3 class="p_title">选择我们，您可以</h3>
         <ul class="virtue_list clearfix">
           <li>
             <div class="pic"><img src="../../static/images/huizong/u295.png"></div>
@@ -879,7 +879,7 @@
     <!-- 新手步骤 -->
     <div class="bj_2">
       <div class="hy_partner">
-        <h3 class="title">我们的合作伙伴</h3>
+        <h3 class="p_title">我们的合作伙伴</h3>
         <ul class="partner_list clearfix">
           <li><img src="../../static/images/huizong/partner1.jpg" ></li>
           <li><img src="../../static/images/huizong/partner2.jpg" ></li>
@@ -899,7 +899,7 @@
     <!-- 合作伙伴 -->
     <div class="bj_2">
       <div class="answers">
-        <div class="title_box">
+        <div class="p_title_box">
           <h3 class="title">28问答</h3>
           <a 
             href="" 
@@ -942,7 +942,6 @@
 </template>
 <script>
 import 'swiper/dist/css/swiper.css'
-
 export default {
   name: 'HuiZong',
   head: {
@@ -1003,68 +1002,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-//公共颜色的变量
-$tit_color: #333; //标题颜色
-$border_color: #ddd; //边框的颜色
-$line_color: #eee; //分割线的颜色
-$gray: #666;
-$light_gray: #999;
-$light_Violet: #c8b6e0; //淡紫色
-$blue: #3399ff; //蓝色
-$orange: #f9552a;
-$light_orange: #f7722a;
-$white: #fff;
-$green: #3cb46d;
-$red: #ff0000;
-$light_red: #f65050; //浅红色
-$light_violet: #9966cc; //紫色
-/*公共的变量*/
-$w_1440: 1440px;
-$f_16: 16px;
-$f_14: 14px;
-$f_12: 12px;
-
-/*公共清楚浮动方法*/
-.fl {
-  float: left;
-}
-.fr {
-  float: right;
-}
-.clearfix:after {
-  content: '.';
-  clear: both;
-  height: 0;
-  overflow: hidden;
-  visibility: hidden;
-  display: block;
-}
-.clearfix {
-  zoom: 1;
-}
-/*公共标题*/
-.title {
-  padding: 25px 0;
-  font-size: 25px;
-  color: $tit_color;
-}
-.title_box {
-  overflow: hidden;
-  padding: 25px 0;
-  line-height: 25px;
-  .title {
-    @extend .title;
-    @extend .fl;
-    padding: 0;
-  }
-  .text {
-    @extend .fl;
-    padding-left: 35px;
-    color: $light_gray;
-  }
-}
-/*本页面公共的函数*/
-
+@import '~/assets/scss/common.scss';
 /*1、货源导航*/
 .bj_1 {
   box-sizing: border-box;
@@ -2023,9 +1961,10 @@ $f_12: 12px;
 }
 /*新手步骤*/
 .novice_steps {
+  overflow: hidden;
   margin: 0 auto;
   width: $w_1440;
-  height: 240px;
+  height: 234px;
   .right-ward-container {
     position: relative;
     width: 180px;
@@ -2156,7 +2095,7 @@ $f_12: 12px;
   margin: 0 auto;
   width: $w_1440;
   font-size: $f_14;
-  .title_box {
+  .p_title_box {
     position: relative;
     .title {
       float: none;

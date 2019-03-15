@@ -693,7 +693,7 @@
               <div 
                 v-if="index < 3" 
                 class="img">
-                <img :src="item.companyFile" >
+                <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
                 <span>{{ item.companyName }}</span>
@@ -863,11 +863,8 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
     ],
     script: [
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
@@ -1118,35 +1115,40 @@ export default {
       })
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
-      roll.append(roll.html())
-      let number = 4
+
       let l = this.newestHuoyuanRe.length
-      let manage_box_h = $('.manage_box').height()
-      let startScroll = () => {
-        this.inTerVar = setInterval(() => {
-          roll
-            .stop()
-            .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
-              if (number > l) {
-                number = 4
-                roll.css('top', '0px')
-              }
-            })
-          number = number + 4
-        }, 6000)
-      }
-      if (manage_box_h * l > rollContainer_h) {
-        startScroll()
-      }
-      $('.list_new_box').hover(
-        () => {
-          clearInterval(this.inTerVar)
-          this.inTerVar = null
-        },
-        () => {
+
+      //  当不足一页的数据时，不需要滚动展示
+      if (l > 8) {
+        roll.append(roll.html())
+        let number = 4
+        let manage_box_h = $('.manage_box').height()
+        let startScroll = () => {
+          this.inTerVar = setInterval(() => {
+            roll
+              .stop()
+              .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
+                if (number > l) {
+                  number = 4
+                  roll.css('top', '0px')
+                }
+              })
+            number = number + 4
+          }, 6000)
+        }
+        if (manage_box_h * l > rollContainer_h) {
           startScroll()
         }
-      )
+        $('.list_new_box').hover(
+          () => {
+            clearInterval(this.inTerVar)
+            this.inTerVar = null
+          },
+          () => {
+            startScroll()
+          }
+        )
+      }
 
       let top_left_h = $('.top_left').height()
       let roll_ul_h = $('.top_left_ul')

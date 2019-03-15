@@ -396,7 +396,8 @@
 
       <div
         id="js007"
-        class="list_right">
+        class="list_right"
+        style="margin-bottom: 20px;">
 
         <div class="list-box-r-top">
           <form action="">

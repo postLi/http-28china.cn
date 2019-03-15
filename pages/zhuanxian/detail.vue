@@ -278,7 +278,7 @@
                 src="/line/images/02sj.png"
                 alt=""
                 style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
-              <li 
+              <li
                 style="padding-left: 26px;cursor:pointer"
                 @click="openCollectNumber"
               >
@@ -298,7 +298,9 @@
               </li>
             </ul>
           </div>
-          <div class="arc_middle2">
+          <div
+            v-if="linedataA.rangePrices != [] || linedataA.rangePrices !=null"
+            class="arc_middle2">
             <ShowPrice
               :info="linedataA.rangePrices"
               :browse="linedataE.evaCount"/>
@@ -605,7 +607,7 @@
             </div>
           </div>
           <div class="bot_right">
-            <p 
+            <p
               style="margin-top: 20px;"
               v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
             <div v-else>
@@ -700,7 +702,7 @@
             >
               <div
                 class="list_none"
-                v-if="lineLists==null||
+                v-if="lineLists=null||
               !lineLists.length"><span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px; font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span> <img
                 src="../../static/images/none_pic.png"
                 style=" float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;"></div>
@@ -1130,26 +1132,6 @@ export default {
       }
       lineCode = await getCode($axios, linedataA.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
-      // $axios.post(aurl + `/28-web/range/recommend`, {
-      //   currentPage: 1,
-      //   pageSize: 5,
-      //   startProvince: startp,
-      //   startCity: startc,
-      //   startArea: starta,
-      //   endProvince: endp,
-      //   endCity: endc,
-      //   endArea: enda
-      // }),
-      // $axios.post(aurl + `/28-web/range/list`, {
-      //   currentPage: 1,
-      //   pageSize: 6,
-      //   startProvince: startp,
-      //   startCity: startc,
-      //   startArea: starta,
-      //   endProvince: endp,
-      //   endCity: endc,
-      //   endArea: enda
-      // }),
       let queryCitys = getSEListParams(linedataA.data.data)
       // 从目的地出发的专线
       linedataD = await $axios.post(aurl + '/28-web/range/recommend', {
@@ -1274,8 +1256,8 @@ export default {
       // console.log(linedataF.data.data.list, 'linedataF')
       console.log(
         aurl + `/28-web/logisticsCompany/${query.publishId}`,
-        'res.data.data.LineCAnotherLineCAnother',
-        linedataE.data
+        'res.data.data.linedataA',
+        linedataA.data
       )
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
@@ -1396,19 +1378,34 @@ export default {
                       endp = encodeURI(endp)
                       endc = encodeURI(endc)
                       enda = encodeURI(enda)
-                      window.location =
+                      window.open(
                         '/zhuanxian/list?startp=' +
-                        startp +
-                        '&startc=' +
-                        startc +
-                        '&starta=' +
-                        starta +
-                        '&endp=' +
-                        endp +
-                        '&endc=' +
-                        endc +
-                        '&enda=' +
-                        enda
+                          startp +
+                          '&startc=' +
+                          startc +
+                          '&starta=' +
+                          starta +
+                          '&endp=' +
+                          endp +
+                          '&endc=' +
+                          endc +
+                          '&enda=' +
+                          enda
+                      )
+
+                      // window.location =
+                      //   '/zhuanxian/list?startp=' +
+                      //   startp +
+                      //   '&startc=' +
+                      //   startc +
+                      //   '&starta=' +
+                      //   starta +
+                      //   '&endp=' +
+                      //   endp +
+                      //   '&endc=' +
+                      //   endc +
+                      //   '&enda=' +
+                      //   enda
                     })
                     //header货源搜索 E
                     //  <!-- 阶梯价格浮层弹出效果 E-

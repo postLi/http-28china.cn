@@ -69,7 +69,7 @@
         </div>
         <div class="w1036 list_wlyq">
           <div
-            v-if="getGateWayList.length === 0"
+            v-if="getGateWayList==null ||getGateWayList==[]"
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
@@ -83,8 +83,9 @@
             <a
               :href="'/wuliu/detail?id=' + item.id"
               target="_blank">
+              <!-- :src="item.parkSignPicture?item.parkSignPicture:'../../static/images/list_wlzx/wlyq_pic.png'" -->
               <li class="wlzx_list_01"><img
-                :src="item.parkSignPicture?item.parkSignPicture:'../../static/images/list_wlzx/wlyq_pic.png'"
+                :src="item.parkSignPicture?item.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
                 class="scrollLoading"
                 width="268"
                 height="268"></li>
@@ -126,8 +127,11 @@
 
       <div class="list_right">
         <div class="zx_sx"><span class="biaozhi"/><span>园区推荐</span></div>
-        <div class="tj_none hy_tj_none">
-          <span>暂无相关园区推荐</span>
+        <div 
+          v-if="recommendParkList==null||recommendParkList==[]"
+          class=" hy_tj_none"
+          style=" background-color: #fff;height: 220px;border: 1px solid #eee;margin-top: -1px;width: 342px;    height: 186px;">
+          <span style="float: left;width: 100%;text-align: center;height: 100px;line-height: 100px;font-size: 14px; margin-top: 0px;">暂无相关园区推荐</span>
         </div>
         <div
           v-for="(item,index) in recommendParkList"
@@ -139,7 +143,7 @@
             <div class="p p1"><span>{{ item.parkName }}</span></div>
             <div class="p p3">
               <ul>
-                <li class="tj_left tj_left1"><font >{{ item.transportNumber }}条</font></li>
+                <li class="tj_left tj_left1"><font >{{ item.transportNumber||0 }}条</font></li>
                 <li class="tj_right"><span >优质专线</span></li>
                 <li class="tj_left tj_left2"><font>{{ item.netWorkNumber }}<em>家</em></font></li>
                 <li class="tj_right"><span >优质物流公司</span></li>
@@ -204,18 +208,27 @@ export default {
     let parm = vo
     parm.currentPage = 1
     parm.pageSize = 16
+    // let getLogisticsPark = await $axios.post(
+    //   '/28-web/logisticsPark/interestedList',
+    //   parm
+    // )
     let getLogisticsPark = await $axios.post(
-      '/28-web/logisticsPark/interestedList',
+      '/28-web/logisticsPark/interested/list',
       parm
     )
     let parm1 = vo
     parm1.currentPage = 1
     parm1.pageSize = 14
+    // let recommendParkList = await $axios.post(
+    //   '/28-web/logisticsPark/recommendList',
+    //   parm1
+    // )
     let recommendParkList = await $axios.post(
-      '/28-web/logisticsPark/recommendList',
+      '/28-web/logisticsPark/recommend/list',
       parm1
     )
     let getGateWayListData = await gateWayList($axios, 1, vo)
+    console.log(recommendParkList.data.data.list, 'recommendParkList')
     return {
       getGateWayList: getGateWayListData.list,
       pages: getGateWayListData.pages,

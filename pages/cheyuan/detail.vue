@@ -552,7 +552,7 @@
                 <div 
                   v-if="index < 3" 
                   class="img">
-                  <img :src="item.companyFile" >
+                  <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
                 </div>
                 <div 
                   class="right"

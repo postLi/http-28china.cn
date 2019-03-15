@@ -427,19 +427,6 @@
 
                 </li>
                 <li class="cy_list_1">
-                  <img src="/images/list_wlzx/02jiantou.png">
-                  <!-- <h1>xaioafdjasl;</h1> -->
-                  <!-- <p class="p1"> -->
-                  <!-- <a
-                      :href="'/cheyuan/detail?id=' + item.id"
-                      class="list-title-a"
-                      target="_blank" >
-                      <span class="list-icon lines-sprite-icons icon-start"/>
-                      <em>{{ item.startCity?item.startCity:'' + item.startArea?item.startArea:'' }}</em>
-                      <span class="list-icon lines-sprite-icons icon-through"/>
-                      <span class="list-icon lines-sprite-icons icon-end"/>
-                      <em>{{ item.endCity?item.endCity:'' + item.endArea?item.endArea:'' }}</em>
-                    </a> -->
                   <a
                     :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
                     class="list-title-a"
@@ -553,7 +540,7 @@
           <div
             class="arc_main4-content"
             style="margin-top: 20px">
-            <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
+            <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
             <div 
               v-for="(item,index) in popularity" 
               :key="index" 
@@ -570,8 +557,8 @@
                 <div 
                   class="right"
                   style="padding-right:18px">
-                  <span>{{ item.companyName }}</span>
-                  <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
+                  <span>{{ item.driverName + item.carNum }}</span>
+                  <span style="float: right">人气值：<i style="color: red">{{ item.popNum }}</i></span>
                 </div>
               </a>
             </div>
@@ -874,10 +861,11 @@ export default {
       .catch(err => {})
     //企业人气榜
     let popularitys = await $axios
-      .get('/28-web/logisticsCompany/popularity')
+      .get('/28-web/driver/driverPopularityList')
       .catch(err => {
         console.log('popularitys')
       })
+    console.log(popularitys.data.data, 'popularitys')
     let footLink = item => {
       switch (item.startProvince) {
         case null:

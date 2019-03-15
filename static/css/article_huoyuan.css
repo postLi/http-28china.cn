@@ -964,6 +964,7 @@ table tr:nth-child(odd){
 .w1036 {
   max-width: 1000px;
   float: left;
+  width:1000px;
   /*OVERFLOW: hidden;*/
   /* border: 1px solid #eee; */
   /* border-bottom: 0; */
@@ -975,6 +976,7 @@ table tr:nth-child(odd){
 .listInfo2{
   float: left;
   margin-top: 20px;
+  width:100%;
 }
 .wlzx_list {
   width: 1000px;

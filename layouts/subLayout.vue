@@ -21,6 +21,14 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/index.css' },
       { rel: 'stylesheet', href: '/css/list_huo.css' }
+    ],
+    script: [
+      {
+        src: '/js/city-picker.data.js'
+      },
+      {
+        src: '/js/city-picker.js'
+      }
     ]
   },
   mounted() {

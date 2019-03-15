@@ -453,3 +453,90 @@ border: 1px solid #eee;
 .bottom_wlyq_nr{margin-top: 24px;margin-left: 18px;width: 1000px;height: 80px;float: left;overflow: hidden;}
 .bottom_wlyq_item{float: left;font-size: 14px;color: #333;margin-right: 30px;margin-bottom: 24px;min-width: 92px;}
 .list_wlyq{min-height: 280px;}
+
+/*  */
+.tuijian_title h5{
+	position: relative
+}
+.tuijian_title h5::after{
+	position: absolute;
+	content: '';
+	top: 25px;
+	left: 90px;
+	width: 1250px;
+	height: 1px;
+	background: #ccc;
+}
+.ruzhu_title h5{
+	position: relative
+}
+.ruzhu_title h5::after{
+	position: absolute;
+	content: '';
+	top: 12px;
+	left: 118px;
+	width: 450px;
+	height: 1px;
+	background: #ccc;
+}
+.zizhu_title h5{
+	position: relative
+}
+.zizhu_title h5::after{
+	position: absolute;
+	content: '';
+	top: 12px;
+	left: 118px;
+	width: 550px;
+	height: 1px;
+	background: #ccc;
+}
+.hot_title span{
+	position: relative
+}
+.hot_title span::after{
+	position: absolute;
+	content: '';
+	top: 12px;
+	left: 300px;
+	width: 940px;
+	height: 1px;
+	background: #ccc;
+}
+.youzhi_title span{
+	position: relative
+}
+.youzhi_title span::after{
+	position: absolute;
+	content: '';
+	top: 12px;
+	left: 220px;
+	width: 970px;
+	height: 1px;
+	background: #ccc;
+}
+.zixuntitle h5{
+	position: relative
+}
+.zixuntitle h5::after{
+	position: absolute;
+	content: '';
+	top: 12px;
+	left: 100px;
+	width: 500px;
+	height: 1px;
+	background: #ccc;
+}
+.zixun_title h5{
+	position: relative
+}
+.zixun_title h5::after{
+	position: absolute;
+	content: '';
+	top: 12px;
+	left: 100px;
+	width: 500px;
+	height: 1px;
+	background: #ccc;
+}
+/*  */

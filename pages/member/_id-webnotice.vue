@@ -5,7 +5,7 @@
       <MemberSidebar />
       <div class="right main_nr">
         <div class="nr_bt">
-          <div class="nr_bt1"><span>公坸动思</span></div>
+          <div class="nr_bt1"><span>公司动态</span></div>
         </div>	
         <div 
           id="webnotice" 

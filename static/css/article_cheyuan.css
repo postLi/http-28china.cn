@@ -27,7 +27,18 @@ body{background-color: #F9F9F9;}
 	opacity: 0.76;}
 .arc_top1_3 .arc_input3{cursor:pointer;text-align:center;border: 0px;width: 68px;height: 34px;background-color: #2577e3;color: #fff;}
 /*搜索*/
-
+.list_none {
+  /* display: none; */
+}
+.list_none span {
+  float: left;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  margin: 40px 0;
+}
 .arc_top2{    width: 100%;
   min-height: 40px;
   overflow: auto;
@@ -869,7 +880,8 @@ padding-right: 12px;
   height: 180px;
 }
 .cy_list_1 {
-  width: 455px;
+  width: 527px;
+  overflow: hidden;
   margin-left: 30px;
 }
 
@@ -909,7 +921,7 @@ padding-right: 12px;
 }
 .wlzx_list_6 {
   width: 110px;
-  margin-left: 85px;
+  /* margin-left: 85px; */
   margin-top: 63px;
 }
 .wlzx_list_6 p input {
@@ -984,6 +996,7 @@ padding-right: 12px;
   float: right;
   height: 16px;
   overflow: hidden;
+  width:316px;
 }
 .release_scroll{
   position: relative;

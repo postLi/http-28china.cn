@@ -363,7 +363,7 @@
           class="clearfix">
           <div
             class="box"
-            style="float: right;margin-right: 150px;">
+            style="float: right;margin-right: 100px;">
             <div
               id="pagination1"
               class="page fl"/>
@@ -396,7 +396,8 @@
 
       <div
         id="js007"
-        class="list_right">
+        class="list_right"
+        style="margin-bottom: 20px;">
 
         <div class="list-box-r-top">
           <form action="">
@@ -659,14 +660,14 @@ export default {
       codeC.data.data.unshift(codeObj)
       return {
         lineListsTotalPage:
-          listA.data.status == 200 ? listA.data.data.pages : '',
-        lineLists: listA.data.status == 200 ? listA.data.data.list : '',
-        lineRecoms: listB.data.status == 200 ? listB.data.data : '',
-        lineLinks: listC.data.status == 200 ? listC.data.data : '',
-        lineHots: listD.data.status == 200 ? listD.data.data : '',
-        lineCodeA: codeA.data.status == 200 ? codeA.data.data : '',
-        lineCodeB: codeB.data.status == 200 ? codeB.data.data : '',
-        lineCodeC: codeC.data.status ? codeC.data.data : ''
+          listA.data.status == 200 ? listA.data.data.pages : [],
+        lineLists: listA.data.status == 200 ? listA.data.data.list : [],
+        lineRecoms: listB.data.status == 200 ? listB.data.data : [],
+        lineLinks: listC.data.status == 200 ? listC.data.data : [],
+        lineHots: listD.data.status == 200 ? listD.data.data : [],
+        lineCodeA: codeA.data.status == 200 ? codeA.data.data : [],
+        lineCodeB: codeB.data.status == 200 ? codeB.data.data : [],
+        lineCodeC: codeC.data.status ? codeC.data.data : []
       }
     }
   },
@@ -793,47 +794,16 @@ export default {
                       let otherServiceCode = _this.$route.query.otherServiceCode
                       let parkId = _this.$route.query.parkId
                       let companyName = _this.$route.query.companyName
-                      //
-                      // if (
-                      //   !startp ||
-                      //   startp == 'null' ||
-                      //   !startc ||
-                      //   startc == 'null' ||
-                      //   !starta ||
-                      //   starta == 'null' ||
-                      //   !endp ||
-                      //   endp == 'null' ||
-                      //   !enda ||
-                      //   enda == 'null' ||
-                      //   !endc ||
-                      //   endc == 'null' ||
-                      //   !departureTimeCode ||
-                      //   departureTimeCode == 'null' ||
-                      //   !otherServiceCode ||
-                      //   otherServiceCode == 'null' ||
-                      //   !parkId ||
-                      //   parkId == 'null' ||
-                      //   !companyName ||
-                      //   companyName == 'null'
-                      // ) {
-                      //   startp = ''
-                      //   startc = ''
-                      //   starta = ''
-                      //   endp = ''
-                      //   enda = ''
-                      //   endc = ''
-                      //   // belongBrandCode = ''
-                      //   departureTimeCode = ''
-                      //   otherServiceCode = ''
-                      //   parkId = ''
-                      //   companyName = ''
-                      // }
 
                       if (process.server) {
                         aurl = 'http://localhost:3000'
                       }
+                      console.log(
+                        aurl + `/api/28-web/range/list`,
+                        'aurl + `/api/28-web/range/list`'
+                      )
                       $axios
-                        .post(aurl + `/api/28-web/range/list`, {
+                        .post(aurl + `/28-web/range/list`, {
                           currentPage: currentPage,
                           pageSize: 6,
                           orderBy: orderBy,
@@ -849,13 +819,15 @@ export default {
                           parkId: parkId
                         })
                         .then(res => {
-                          // res.data.data.num = Math.ceil(Math.random() * 30)
-                          // console.log('this.lineList12:', res.data.data)
-                          res.data.data.list.forEach(item => {
+                          let getList =
+                            res.data.data.status == 200
+                              ? res.data.data.list
+                              : []
+                          getList.forEach(item => {
                             item.num = Math.ceil(Math.random() * 30)
                             // console.log('this.lineList:', item.num)
                           })
-                          _this.lineLists = res.data.data.list
+                          _this.lineLists = getList
 
                           // return {
                           //   lineList: res.data.data.list

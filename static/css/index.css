@@ -2856,6 +2856,8 @@ a{color:#333;text-decoration:none}
 .yd_item i{float: left;margin-top: 10px;text-align: center;height: 16px;width: 80px;font-size: 16px;color: #f66618;font-weight: bold;}
 .yd_item:nth-child(3){margin-right: 0;}
 .yd_5{height: 38px;line-height: 38px;letter-spacing: 1.1px;width: 350px;clear: both;
+  white-space: nowrap;
+  
   padding-left: 33px;}
 .yd_5 span{color: #333;font-size: 14px;padding:0 5px}
 .yd_5 i{color:#f66618 ;font-size: 14px;padding:0 5px}

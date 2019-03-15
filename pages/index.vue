@@ -149,22 +149,34 @@
             <li class="yd_4">
               <ul>
                 <li class="yd_item">
-                  <img src="/images/yd_huo.png"><span>当前货物</span>
-                  <i id="data001"/>
+                  <img src="/images/yd_huo.png"><span><a 
+                    target="_blank" 
+                    href="/huoyuan">当前货物</a></span>
+                  <i id="data001">{{ dailyData.goodsCount }}</i>
                 </li>
                 <li class="yd_item">
-                  <img src="/images/yd_zx.png"><span>物流专线</span>
-                  <i id="data002"/>
+                  <img src="/images/yd_zx.png"><span><a 
+                    target="_blank"
+                    href="/zhuanxian/list">物流专线</a></span>
+                  <i id="data002">{{ dailyData.transportRangeCount }}</i>
                 </li>
                 <li class="yd_item">
-                  <img src="/images/yd_che.png"><span>车源信息</span>
-                  <i id="data003"/>
+                  <img src="/images/yd_che.png"><span><a 
+                    target="_blank"
+                    href="/cheyuan">车源信息</a></span>
+                  <i id="data003">{{ dailyData.carInfoCount }}</i>
                 </li>
               </ul>
 
             </li>
             <li class="yd_5"><img src="/images/yd_jt.png">
-              <span>今日新增:</span><span>货源</span><i id="data004"/><span>专线</span><i id="data005"/><span>车源</span><i id="data006"/>
+              <span>今日新增:</span><span><a 
+                target="_blank" 
+                href="/huoyuan">货源</a></span><i id="data004">{{ dailyData.toDayGoodsCount }}</i><span><a 
+                  target="_blank"
+                  href="/zhuanxian/list">专线</a></span><i id="data005">{{ dailyData.toDayTransportRangeCount }}</i><span><a 
+                    target="_blank"
+                    href="/cheyuan">车源</a></span><i id="data006">{{ dailyData.toDayCarInfoCount }}</i>
             </li>
 
           </ul>
@@ -1497,11 +1509,17 @@ export default {
   components: {
     NewsList
   },
+
   data() {
     return {
       title: '首页',
       lists: [],
       ip: ''
+    }
+  },
+  computed: {
+    dailyData() {
+      return this.$store.state.dailyData
     }
   },
   async fetch({ store, params, $axios, error, app }) {
@@ -1582,57 +1600,55 @@ export default {
     let theparams = Object.values(paramsObj).map(el => JSON.stringify(el))
     let names = Object.keys(paramsObj)
 
-    await store.dispatch('news/GETMULTYNEWSINFO', {
-      params: '{' + theparams.join(';') + '}',
-      names: names,
-      preFn: data => {
-        return data.map((els, index) => {
-          return els.map(el => {
-            el.url = el.url.replace(
-              'http://192.168.1.79/anfacms',
-              index === 0 ? '/help' : '/zixun'
-            )
-            // console.log('el typemg', el.typeImg)
-            return el
+    await Promise.all([
+      store.dispatch('news/GETMULTYNEWSINFO', {
+        params: '{' + theparams.join(';') + '}',
+        names: names,
+        preFn: data => {
+          return data.map((els, index) => {
+            return els.map(el => {
+              el.url = el.url.replace(
+                'http://192.168.1.79/anfacms',
+                index === 0 ? '/help' : '/zixun'
+              )
+              // console.log('el typemg', el.typeImg)
+              return el
+            })
           })
-        })
-      }
-    })
-
-    // 获取推荐物流公司
-    await store.dispatch('company/GETRECOMMEND', {
-      data: { pageSize: 8 }
-    })
-
-    // 获取物流公司列表
-    await store.dispatch('company/GETCOMPANYLIST', {
-      data: { pageSize: 27 },
-      name: 'index_list'
-    })
-
-    // 获取物流园区列表
-    await store.dispatch('wuliu/GETLIST', {
-      data: { pageSize: 9 },
-      name: 'index_list'
-    })
-
-    // 获取专线列表
-    await store.dispatch('line/GETLIST', {
-      data: { pageSize: 27 },
-      name: 'index_list'
-    })
-
-    // 获取货源列表
-    await store.dispatch('huoyuan/GETLIST', {
-      data: { pageSize: 27 },
-      name: 'index_list'
-    })
-
-    // 获取车源列表
-    await store.dispatch('cheyuan/GETLIST', {
-      data: { pageSize: 27 },
-      name: 'index_list'
-    })
+        }
+      }),
+      // 获取推荐物流公司
+      store.dispatch('company/GETRECOMMEND', {
+        data: { pageSize: 8 }
+      }),
+      // 获取物流公司列表
+      store.dispatch('company/GETCOMPANYLIST', {
+        data: { pageSize: 27 },
+        name: 'index_list'
+      }),
+      // 获取物流园区列表
+      store.dispatch('wuliu/GETLIST', {
+        data: { pageSize: 9 },
+        name: 'index_list'
+      }),
+      // 获取专线列表
+      store.dispatch('line/GETLIST', {
+        data: { pageSize: 27 },
+        name: 'index_list'
+      }),
+      // 获取货源列表
+      store.dispatch('huoyuan/GETLIST', {
+        data: { pageSize: 27 },
+        name: 'index_list'
+      }),
+      // 获取车源列表
+      store.dispatch('cheyuan/GETLIST', {
+        data: { pageSize: 27 },
+        name: 'index_list'
+      }),
+      // 获取统计数据
+      store.dispatch('getDailydata', {})
+    ])
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/index/css/echarts.css' }]

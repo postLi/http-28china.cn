@@ -80,7 +80,7 @@
                 <span>用户<em style="color: #2577e3;">{{ item.creater }}</em></span>
                 <span><em style="color: #2577e3;">{{ item.startCity }}</em>到</span>
                 <span><em style="color: #2577e3;">{{ item.endCity }}</em>货源</span>
-                <span>{{ item.time }}3分钟前</span>
+                <span>{{ item.time }}前</span>
               </li>
             </ul>
           </div>
@@ -132,8 +132,8 @@
             <div class="arc_left_2_1_2"><table>
               <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font>{{ hyDetail.startProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
-              <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.consignor }}</td></tr>
-              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.consignorPhone }}</td></tr>
+              <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.contacts }}</td></tr>
+              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.mobile }}</td></tr>
               <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
               <tr><td class="arc_td1">里程：</td><td class="arc_td2">{{ hyDetail.distance }}</td></tr>
               <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>
@@ -697,7 +697,7 @@
               <div 
                 v-if="index < 3" 
                 class="img">
-                <img :src="item.companyFile" >
+                <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
                 <span>{{ item.companyName }}</span>
@@ -871,11 +871,8 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' }
     ],
     script: [
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
@@ -967,7 +964,7 @@ export default {
       .catch(err => {
         // console.log('archivals')
       })
-    // console.log(archivals.data.data, 'archivals.data.data')
+    console.log(archivals, 'archivals.data.data')
     //顶部轮播
     let newLists = await $axios
       .get('/28-web/lclOrder/newList')
@@ -1113,35 +1110,40 @@ export default {
       })
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
-      roll.append(roll.html())
-      let number = 4
+
       let l = this.newestHuoyuanRe.length
-      let manage_box_h = $('.manage_box').height()
-      let startScroll = () => {
-        this.inTerVar = setInterval(() => {
-          roll
-            .stop()
-            .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
-              if (number > l) {
-                number = 4
-                roll.css('top', '0px')
-              }
-            })
-          number = number + 4
-        }, 6000)
-      }
-      if (manage_box_h * l > rollContainer_h) {
-        startScroll()
-      }
-      $('.list_new_box').hover(
-        () => {
-          clearInterval(this.inTerVar)
-          this.inTerVar = null
-        },
-        () => {
+
+      //  当不足一页的数据时，不需要滚动展示
+      if (l > 8) {
+        roll.append(roll.html())
+        let number = 4
+        let manage_box_h = $('.manage_box').height()
+        let startScroll = () => {
+          this.inTerVar = setInterval(() => {
+            roll
+              .stop()
+              .animate({ top: `${number * -manage_box_h}px` }, 2000, () => {
+                if (number > l) {
+                  number = 4
+                  roll.css('top', '0px')
+                }
+              })
+            number = number + 4
+          }, 6000)
+        }
+        if (manage_box_h * l > rollContainer_h) {
           startScroll()
         }
-      )
+        $('.list_new_box').hover(
+          () => {
+            clearInterval(this.inTerVar)
+            this.inTerVar = null
+          },
+          () => {
+            startScroll()
+          }
+        )
+      }
 
       let top_left_h = $('.top_left').height()
       let roll_ul_h = $('.top_left_ul')

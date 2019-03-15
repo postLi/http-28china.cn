@@ -199,11 +199,11 @@
             <li class="wlzx_list_2">
               <p class="p1"><a
                 id="nr01"
-                href="#"
+                :href="'/member/'+ item.id"
                 target="_blank">{{ item.pointName }}</a></P>
               <p class="p2"><a
                 id="nr01_1"
-                href="#"
+                :href="'/member/'+ item.id"
                 target="_blank"><font id="nr02">{{ item.companyName ? item.companyName : '普通货主' }}</font></a></p>
               <p class="p3"><i>地址：</i><font
                 id="nr03"
@@ -232,12 +232,16 @@
                   src="/wd/images/12danbao.png"></p>
             </li>
             <li class="wlzx_list_6">
-              <p class="p1"><a target="_blank"><input
-                value="下单"
-                readonly></a>
-              </p><p class="p2"><a target="_blank"><input
-                value="查看"
-                readonly
+              <p class="p1"><a
+                :href="'/member/'+ item.id+'-order'+'?publishId='+item.id"
+                target="_blank"><input
+                  value="下单"
+                  readonly></a>
+              </p><p class="p2"><a 
+                :href="'/member/'+ item.id"
+                target="_blank"><input
+                  value="查看"
+                  readonly
               ></a>
             </p></li>
           </ul>

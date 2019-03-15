@@ -467,6 +467,7 @@
                 :key="index" 
                 class="hot-cities-li" >
                 <a
+                  target="_blank"
                   :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
                   class="hot-cities-a">{{ item.title }}</a>
               </li>
@@ -607,6 +608,7 @@
             :key="index" 
             class="hot-cities-li" >
             <a
+              target="_blank"
               :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
               class="hot-cities-a">{{ item.title }}</a>
           </li>

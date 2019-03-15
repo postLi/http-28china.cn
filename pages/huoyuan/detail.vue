@@ -250,7 +250,6 @@
         v-if="archival.shipperType === 'AF0010101'">
         <div class="arc_top_title">
           <h4>货主档案</h4>
-          <!-- <h4 v-if="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4> -->
         </div>
         <div 
         class="arc_top_img">
@@ -283,10 +282,6 @@
         <div class="arc_top_title">
           <h4>{{ archival.companyName }}</h4>
         </div>
-        <div 
-        class="arc_top_img">
-        <!-- <img src="/images/cy/gold.png"> -->
-        </div>
         <div class="arc_middle">
           <img src="/images/cy/09sj.png">
           <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
@@ -310,7 +305,6 @@
       </div>
     </div>
     <div class="arc_main3">
-     
       <div class="right">
         <div class="zx_sx">
           <span class="biaozhi"/><span>货主综合力评估</span>
@@ -492,12 +486,6 @@
                   readonly
                   value="查看"></a>
               </p>
-              <!-- <p class="p2"><a
-                v-if="item.qq"
-                :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                target="_blank">
-              <input value="QQ交谈"></a>
-              </p> -->
             </li>
           </ul>
         </div>
@@ -507,14 +495,7 @@
             src="/images/cy/10banner.png"
             alt="广告">
         </div>
-       
         <div class="listInfo2">
-          <!-- <div class="zx_sx">
-            <span class="biaozhi"/><span>更多从{{ hyDetail.endCity }}出发的货源</span>
-            <i 
-              style="cursor: pointer;float: right;font-size: 14px;"
-              @click="goToCy()">更多></i>
-          </div> -->
           <div class="main3_1_1">
             <div class="floatl">
               <b class="b_title">更多从{{ hyDetail.endCity }}出发的货源</b>
@@ -625,12 +606,6 @@
                   readonly
                   value="查看"></a>
               </p>
-              <!-- <p class="p2"><a
-                v-if="item.qq"
-                :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                target="_blank">
-              <input value="QQ交谈"></a>
-              </p> -->
             </li>
           </ul>
         </div>
@@ -1100,19 +1075,10 @@ export default {
   },
 
   mounted() {
-    // console.log(this.hyDetail, 'hyDetail')
     if (process.client) {
       console.log(this.huoLink)
-      $('#wlLineFrom input').citypicker({
-        // province: this.hyDetail.startProvince,
-        // city: this.hyDetail.startCity,
-        // district: this.hyDetail.startArea
-      })
-      $('#wlLineTo input').citypicker({
-        // province: this.hyDetail.endProvince,
-        // city: this.hyDetail.endCity,
-        // district: this.hyDetail.endArea
-      })
+      $('#wlLineFrom input').citypicker({})
+      $('#wlLineTo input').citypicker({})
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
 

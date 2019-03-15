@@ -1,15 +1,6 @@
 <template>
   <div>
     <div class="arc_top1">
-      <!-- <div class="arc_top1_1">
-        <span>{{ cy1.startCity ? cy1.startCity : '' + cy1.startArea ? cy1.startArea : '' }}</span>&nbsp;&rarr;&nbsp;
-        <span>{{ cy1.endCity ? cy1.endCity : '' + cy1.endArea ? cy1.endArea : '' }}</span>
-      </div> -->
-      <!-- <div>
-        <img 
-          width="135px" 
-          src="/img/logo.png" >
-      </div> -->
       <img 
         width="135px" 
         src="/img/logo.png" >
@@ -129,8 +120,6 @@
                   v-for="(item,index) in newList"
                   :key="index"
                 >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>货源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
-              <!-- <div class="manage_box">用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div>
-                <div class="manage_box">用户159***5898发布<i>广州</i>到<i>长沙</i>货源&nbsp;&nbsp;&nbsp;3分钟前</div> -->
               </div>
             </div>
           </div>
@@ -226,11 +215,9 @@
             <span>相关认证</span>
           </p>
           <div class="arc_right07">
-            <!--<img id="right_xinyong" src="/templets/default/images/article_wlzx/11xinyong.png"/>-->
             <img
               v-if="cy1.driverStatus === 'AF0010403'"
               src="/images/article_wlzx/10shiming.png">
-            <!--<img src="/templets/default/images/article_wlzx/25baozhengjin.png"/>-->
             <span
             v-if="cy1.driverStatus !== 'AF0010403'">暂无认证信息</span>
           </div>
@@ -371,7 +358,6 @@
                   <p class="p1"><img
                     v-if="item.driverStatus === 'AF0010403'"
                     src="/images/list_wlzx/10shiming.png"></P>
-                    <!--<p class="p2"><img id="list_xinyong" src="/images/list_wlzx/11xinyong.png"/></P>-->
                 </li>
                 <li class="wlzx_list_6">
                   <p class="p2"><a
@@ -380,12 +366,6 @@
                       readonly
                       value="查看"></a>
                   </p>
-                  <!-- <p class="p3"><a
-                    v-if="item.qq"
-                    :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
-                    target="_blank"><input
-                    value="QQ交谈">
-                  </a></p> -->
                 </li>
               </ul>
             </div>
@@ -686,10 +666,6 @@ export default {
       otherCarInfoList: [],
       handle: '',
       collection: '',
-      // showMoblie1: false,
-      // checkMoblie1: true,
-      // showMoblie2: false,
-      // checkMoblie2: true,
       isShowCollect: true,
       isCencelCollect: false,
       isShowAdd: false,
@@ -729,58 +705,6 @@ export default {
           img: '/images/cy/08zx.png'
         }
       ]
-      // hotSearchList: [
-      //   {
-      //     name: '广州到杭州货源',
-      //     url:
-      //       '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=杭州市&endProvince=浙江省&startArea=&startCity=广州市&startProvince=广东省'
-      //   },
-      //   {
-      //     name: '山西到甘肃的货源',
-      //     url:
-      //       '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=甘肃省&startArea=&startCity=&startProvince=山西省'
-      //   },
-      //   {
-      //     name: '广东广州到山西太原的货源',
-      //     url:
-      //       '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=太原市&endProvince=山西省&startArea=&startCity=广州市&startProvince=广东省'
-      //   },
-      //   {
-      //     name: '找上海货源',
-      //     url:
-      //       '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=上海市&startProvince=上海市'
-      //   },
-      //   {
-      //     name: '沈阳到广州的货源',
-      //     url:
-      //       '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=广州市&endProvince=广东省&startArea=&startCity=沈阳市&startProvince=辽宁省'
-      //   },
-      //   {
-      //     name: '苏州货源',
-      //     url:
-      //       '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=苏州市&startProvince=江苏省'
-      //   },
-      //   {
-      //     name: '上海到江西的运力',
-      //     url:
-      //       '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=江西省&isLongCar=&startArea=&startCity=&startProvince=上海市'
-      //   },
-      //   {
-      //     name: '广州出发的专线',
-      //     url:
-      //       '/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&startArea=&startCity=广州市&startProvince=广东省'
-      //   },
-      //   {
-      //     name: '广州物流公司',
-      //     url:
-      //       '/gongsi/?tid=80&startp=广东省&startc=广州市&starta=&address=广东省广州市&companyName='
-      //   },
-      //   {
-      //     name: '上海地区运力',
-      //     url:
-      //       '/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=上海市&startProvince=上海市'
-      //   }
-      // ]
     }
   },
   async fetch({ store, params, $axios, error, app }) {
@@ -991,13 +915,6 @@ export default {
         startScroll()
       }
     )
-    // seajs.use(['../js/city.js'], function() {
-    //   seajs.use(['../js/arc_cheyuan.js'], function() {
-    //     seajs.use(['../js/collection.js'], function() {
-    //       seajs.use(['../js/gaodemap2.js'], function() {})
-    //     })
-    //   })
-    // })
     let myChart = echarts.init(document.getElementById('echart'))
     let option = {
       title: { text: '', subtext: '' },
@@ -1417,24 +1334,6 @@ export default {
         }
       })
     },
-    // showMoblieFns(showMoblieFns) {
-    //   if (showMoblieFns == false) {
-    //     this.showMoblie1 = true
-    //     this.checkMoblie1 = false
-    //   } else {
-    //     this.checkMoblie1 = true
-    //     this.showMoblie1 = false
-    //   }
-    // },
-    // showMoblieFn(showMoblieFn) {
-    //   if (showMoblieFn == false) {
-    //     this.showMoblie2 = true
-    //     this.checkMoblie2 = false
-    //   } else {
-    //     this.checkMoblie2 = true
-    //     this.showMoblie2 = false
-    //   }
-    // },
     collected() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')

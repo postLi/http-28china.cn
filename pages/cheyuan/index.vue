@@ -194,7 +194,6 @@
               <p class="p1"><img
                 v-if="item.driverStatus === 'AF0010403'"
                 src="/images/list_wlzx/10shiming.png"></P>
-                <!--<p class="p2"><img id="list_xinyong" src="/images/list_wlzx/11xinyong.png"/></P>-->
             </li>
             <li class="wlzx_list_6">
               <p class="p2"><a
@@ -203,12 +202,6 @@
                   readonly
                   value="查看"></a>
               </p>
-              <!-- <p class="p3"><a
-                v-if="item.qq"
-                :href="'http://wpa.qq.com/msgrd?v=3&uin=' + item.qq + '&site=qq&menu=yes'"
-                target="_blank"><input
-                value="QQ交谈">
-              </a></p> -->
             </li>
           </ul>
         </div>
@@ -310,10 +303,6 @@
                   <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span>{{ item.usualPlace }}</span>
                 </p>
               </div>
-            
-              <!-- <p class="p4">
-              <i>发车时间：</i><span id="nr0518"/>
-            </p> -->
               <div class="p5">
                 <span v-if="item.driverStatus === 'AF0010403'">
                   <span><img src="member/images/list_wlzx/wlgs_shiming.png" ></span>
@@ -322,16 +311,6 @@
                 </span>
                 <span>{{ item.startTime }}</span>
               </div>
-            <!-- <p class="p5">
-              <img src="member/images/list_wlzx/wlgs_xinyong.png" >
-            </p>
-            <p class="p5">
-              <img src="member/images/list_wlzx/wlgs_danbao.png" >
-            </p> -->
-            <!-- <div class="p6">
-              <div class="sc_num1"><img src="member/images/list_wlzx/sc_num.png"><span><i><em id="tj101"/>人收藏</i></span></div>
-              <div class="view_num1"><img src="member/images/list_wlzx/ll_num.png"><span><i><em id="tj102"/>浏览量</i></span></div>
-            </div> -->
             </div>
          
           </div>
@@ -483,13 +462,13 @@ export default {
       currentPage: 1,
       longCarList: [
         { name: '不限', value: '' },
-        { name: '即时车源', value: '1' },
-        { name: '长期车源', value: '0' }
+        { name: '即时车源', value: 'AF0560201' },
+        { name: '长期车源', value: 'AF0560202' }
       ],
       carSourceList: [
         { name: '不限', value: '' },
-        { name: '本地车', value: 'AF01802' },
-        { name: '回程车', value: 'AF01801' }
+        { name: '本地车', value: 'AF0560101' },
+        { name: '回程车', value: 'AF0560102' }
       ],
       inTerVar: null,
       checkNotice: {
@@ -576,9 +555,6 @@ export default {
     let AF018 = await $axios.get(
       '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
     )
-    // let AF018Select = await $axios.get(
-    //   '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
-    // )
     if (AF018.data.status === 200) {
       AF018.data.data.unshift({ code: '', name: '不限' })
     }
@@ -770,11 +746,6 @@ export default {
     },
     async search() {
       this.searchDo()
-      // let carInfoList = await getCarInfoList(this.$axios, 1, this.vo)
-      // this.carInfoList = carInfoList.list
-      // this.pages = carInfoList.pages
-      // this.currentPage = carInfoList.currentPage
-      // this.pagination()
       window.location.href = `/cheyuan?carLengthLower=${
         this.vo.carLengthLower
       }&AF031Id=${this.vo.AF031Id}&carLengthUpper=${

@@ -121,7 +121,6 @@
         </div>
         <div class="w1036 list_hy">
           <div class="zx_sx"><span class="biaozhi"/><span>货源信息</span></div>
-          <!--<div class="list_tiaoj"><span class="active">默认排序</span><span>交易量</span><span>运输时效</span><span>重货价格</span></div>-->
           <div
             v-if="hyList.length === 0"
             class="list_none"
@@ -192,12 +191,6 @@
                   readonly
                   value="查看"></a>
               </p>
-              <!-- <p class="p2"><a
-                v-if="item.qq"
-                :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                target="_blank">
-              <input value="QQ交谈"></a>
-              </p> -->
             </li>
           </ul>
 
@@ -230,38 +223,6 @@
                   :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
-            <!-- <ul class="hot-cities">
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f440300.html">深圳找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f440100.html">广州找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f441900.html">东莞市到上海市货源</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f140400.html">长治找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f440500.html">汕头找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f440600.html">佛山找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f440700.html">江门找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f440800.html">湛江找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f440900.html">茂名找车拉货</a></li>
-              <li class="hot-cities-li"><a
-                class="hot-cities-a"
-                href="/goods/f441200.html">肇庆找车拉货</a></li>
-            </ul> -->
           </div>
         </div>
         <!-- 28为您推荐end -->
@@ -401,68 +362,6 @@
                 :href="'/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
-          <!-- <ul class="hot-cities">
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440300.html">深圳找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440100.html">广州找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441900.html">东莞市到上海市货源</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f140400.html">长治找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440500.html">汕头找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440600.html">佛山找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440700.html">江门找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440800.html">湛江找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440900.html">茂名找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441200.html">肇庆找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440300.html">深圳找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440100.html">广州找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441900.html">东莞市到上海市货源</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f140400.html">长治找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440500.html">汕头找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440600.html">佛山找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440700.html">江门找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440800.html">湛江找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440900.html">茂名找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441200.html">肇庆找车拉货</a></li>
-          </ul> -->
         </div>
       </div>
       <!-- 全国热门物流专线end -->

@@ -403,7 +403,11 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['/js/onlineOrder.js'])
+    if (process.client) {
+      seajs.use(['layer'], function() {
+        seajs.use(['/js/onlineOrder.js'])
+      })
+    }
   }
 }
 </script>

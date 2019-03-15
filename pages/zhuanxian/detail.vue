@@ -1034,7 +1034,7 @@ export default {
   },
   // /range/detail/related/links
   // 专线详情推荐链接
-  async asyncData({ $axios, app, query }) {
+  async asyncData({ $axios, app, query, error }) {
     let aurl = '',
       lineCode,
       lineCity,
@@ -1262,8 +1262,7 @@ export default {
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
-        lineLists:
-          linedataC.data.data.status == 200 ? linedataC.data.data.list : [],
+        lineLists: linedataC.data.status == 200 ? linedataC.data.data.list : [],
         lineRecoms: linedataD.data.status == 200 ? linedataD.data.data : [],
         linedataE: linedataE.data.status == 200 ? linedataE.data.data : [],
         linedataF: linedataF.data.status == 200 ? linedataF.data.data.list : [],
@@ -1275,6 +1274,8 @@ export default {
           LineCAnother.data.status == 200 ? LineCAnother.data.data : [],
         queryCitys
       }
+    } else {
+      error({ statusCode: 500, message: '查找不到该专线信息' })
     }
     // let res = await $axios.get(aurl + `/28-web/range/${query.id}`)
     // // console.log(

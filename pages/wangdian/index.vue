@@ -188,7 +188,7 @@
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
-            <img src="/templets/default/images/none_pic.png">
+            <img src="/images/none_pic.png">
           </div>
           <ul
             v-for="(item,index) in WangdiangInfoList"
@@ -199,11 +199,11 @@
             <li class="wlzx_list_2">
               <p class="p1"><a
                 id="nr01"
-                href="#"
+                :href="'/member/'+ item.companyId"
                 target="_blank">{{ item.pointName }}</a></P>
               <p class="p2"><a
                 id="nr01_1"
-                href="#"
+                :href="'/member/'+ item.companyId"
                 target="_blank"><font id="nr02">{{ item.companyName ? item.companyName : '普通货主' }}</font></a></p>
               <p class="p3"><i>地址：</i><font
                 id="nr03"
@@ -232,12 +232,16 @@
                   src="/wd/images/12danbao.png"></p>
             </li>
             <li class="wlzx_list_6">
-              <p class="p1"><a target="_blank"><input
-                value="下单"
-                readonly></a>
-              </p><p class="p2"><a target="_blank"><input
-                value="查看"
-                readonly
+              <p class="p1"><a 
+                :href="'/member/'+ item.companyId + '-order?publishId=' + item.companyId"
+                target="_blank"><input
+                  value="下单"
+                  readonly></a>
+              </p><p class="p2"><a 
+                :href="'/member/'+ item.companyId"
+                target="_blank"><input
+                  value="查看"
+                  readonly
               ></a>
             </p></li>
           </ul>
@@ -272,6 +276,7 @@
         >
           <p class="p1"><a
             id="tj010"
+            :href="'/member/'+ item.companyId"
             target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
 
           <p
@@ -299,6 +304,7 @@
           <p class="p6">
             <a
               id="tj_05"
+              :href="'/member/'+ item.companyId"
               target="_blank"><span>查看&nbsp;&gt;</span></a>
           </p>
         </div>
@@ -498,8 +504,8 @@ export default {
       $(this).addClass('active')
       let filterSign = 1
       let WangdiangInfoList = await getWangdiangInfoList(
-        '',
-        1,
+        _this.$axios,
+        _this.current,
         Object.assign(
           {
             filterSign: 1
@@ -515,8 +521,8 @@ export default {
       $(this).addClass('active')
       let filterSign = 2
       let WangdiangInfoList = await getWangdiangInfoList(
-        '',
-        1,
+        _this.$axios,
+        _this.current,
         Object.assign(
           {
             filterSign: 2
@@ -608,7 +614,8 @@ export default {
           let hyList = await getWangdiangInfoList(this.$axios, current, this.vo)
           this.totalPage = hyList.pages
           this.current = hyList.current
-          window.location.href = '#top'
+          this.WangdiangInfoList = hyList.list
+          // window.location.href = '#top'
         }
       })
     },

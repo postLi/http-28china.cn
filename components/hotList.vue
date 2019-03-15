@@ -20,7 +20,10 @@
             alt=""
             width="50"
             height="50">
-        <p>{{ lineHots[0].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[0].popularity }}</i></span></a></li>
+          <p>{{ lineHots[0].companyName }}</p>
+          <span 
+            v-if="!gongsi"
+            class="hot-peonum">人气值:<i>{{ lineHots[0].popularity }}</i></span></a></li>
         <li><a
           :href="'/member/'+lineHots[1].id"
           style="display: flex;"><span class="hot-num">2</span><img
@@ -28,7 +31,9 @@
             alt=""
             width="50"
             height="50">
-        <p>{{ lineHots[1].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[1].popularity }}</i></span></a></li>
+          <p>{{ lineHots[1].companyName }}</p><span 
+            v-if="!gongsi"
+            class="hot-peonum">人气值:<i>{{ lineHots[1].popularity }}</i></span></a></li>
         <li><a
           :href="'/member/'+lineHots[2].id"
           style="display: flex;"
@@ -37,17 +42,33 @@
             alt=""
             width="50"
             height="50">
-        <p>{{ lineHots[2].companyName }}</p><span class="hot-peonum">人气值:<i>{{ lineHots[2].popularity }}</i></span></a></li>
+          <p>{{ lineHots[2].companyName }}</p><span 
+            v-if="!gongsi"
+            class="hot-peonum">人气值:<i>{{ lineHots[2].popularity }}</i></span></a></li>
       </ul>
       <ul
-      class="lastul">
+        v-if="gongsi"
+        class="lastul">
+        <li
+          v-for="(item, index) in lineHots"
+          :key="index"><a
+            :href="'/member/'+item.id"
+            style="display: flex;"
+            target="_blank"><span class="hot-num">{{ index + 4 }}</span>
+        <p>{{ item.companyName }}</p></a></li>
+      </ul>
+      <ul
+        v-else
+        class="lastul">
         <li
           v-for="(item, index) in lineHots.slice(-12)"
           :key="index"><a
             :href="'/member/'+item.id"
             style="display: flex;"
             target="_blank"><span class="hot-num">{{ index + 4 }}</span>
-        <p>{{ item.companyName }}</p><span class="hot-peonum">人气值:<i>{{ item.popularity }}</i></span></a></li>
+            <p>{{ item.companyName }}</p><span 
+              class="hot-peonum"
+        >人气值:<i>{{ item.popularity }}</i></span></a></li>
       </ul>
     </div>
   </div>
@@ -60,6 +81,10 @@ export default {
     lines: {
       type: [Object, Array],
       default: () => {}
+    },
+    gongsi: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -70,6 +95,9 @@ export default {
   watch: {
     lines(n, o) {
       console.log(n, 'nnnnnnnn')
+    },
+    gongsi(n, o) {
+      console.log(n, 'gongsi')
     }
   },
   mounted() {

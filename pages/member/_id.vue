@@ -54,7 +54,7 @@
           <a
             id="btn_onlineShipping"
             class="menu-item js-express-ship item-1"
-            href="13001010101-wangdian"
+            :href="mid + '-wangdian'"
             target="_blank"
           >
             <div class="menu-icon">
@@ -65,7 +65,7 @@
           <a
             id="btn_siteQuery"
             class="menu-item js-express-website item-2"
-            href="13001010101-line"
+            :href="mid + '-line'"
             target="_blank"
           >
             <div class="menu-icon">
@@ -547,7 +547,7 @@
             <div class="main2_bt1_3">
               <a 
                 target="_blank" 
-                href="13001010101-line.html">
+                :href="mid +'line'">
                 <span>更多&gt;&gt;</span>
               </a>
             </div>
@@ -672,7 +672,7 @@
           <div class="main3_bt1_3">
             <a 
               target="_blank" 
-              href="13001010101-wangdian.html">
+              :href="mid + '-wangdian'">
               <span>更多&gt;&gt;</span>
             </a>
           </div>
@@ -703,7 +703,7 @@
             <em>
               <a 
                 target="_blank" 
-                href="13001010101-jianjie.html">更多&gt;&gt;</a>
+                :href="mid + '-jianjie'">更多&gt;&gt;</a>
             </em>
           </div>
           <div 
@@ -719,7 +719,7 @@
             <em>
               <a 
                 target="_blank" 
-                href="13001010101-webnotice.html">更多&gt;&gt;</a>
+                :href="mid+'-webnotice'">更多&gt;&gt;</a>
             </em>
           </div>
 

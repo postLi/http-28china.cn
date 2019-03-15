@@ -406,16 +406,17 @@ export default {
   },
   layout: 'member',
   mounted() {
-    seajs.use(
-      [
-        '/index/js/gaodemap2.js',
-        '/member/js/index.js',
-        '/index/js/collection.js',
-        '/member/js/AFLC_API.js',
-        '/member/js/onlineOrder.js'
-      ],
-      function() {}
-    )
+    seajs.use(['/js/AFLC_API.js', 'layer'], function() {
+      seajs.use(
+        [
+          '/index/js/gaodemap2.js',
+          '/member/js/index.js',
+          '/index/js/collection.js',
+          '/member/js/onlineOrder.js'
+        ],
+        function() {}
+      )
+    })
   },
   async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)

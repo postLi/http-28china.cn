@@ -410,13 +410,13 @@
                       target="_blank"
                     ><span class="t003"><font
                       id="nr002"
-                      style="color:#f00">{{ item.weightPrice }}</font>元/公斤</span></a>
+                      style="color:#f00">{{ item.weightDiscountPrice || item.weightPrice }}</font>元/公斤</span></a>
                     <a
                       id="nr_a03"
                       :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
                       target="_blank"><span class="t004"><font
                         id="nr003"
-                        style="color:#f00">{{ item.lightPrice }}</font>元/方</span> </a>
+                        style="color:#f00">{{ item.lightDiscountPrice || item.lightPrice }}</font>元/方</span> </a>
                     <a
                       id="nr_a04"
                       :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"

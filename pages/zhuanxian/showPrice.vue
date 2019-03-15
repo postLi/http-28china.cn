@@ -129,6 +129,9 @@ export default {
       // this.wPrice = []
       // this.hPrice = []
       // this.infodata = Object.assign({}, this.info)
+      let _this = this
+      // this.info = this.info != [] || this.info
+      console.log(this.info, 'this.info')
       this.info.forEach((item, index) => {
         if (item.type == 0) {
           this.hPrice.push(item)

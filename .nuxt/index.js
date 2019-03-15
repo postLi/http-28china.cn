@@ -16,6 +16,7 @@ import nuxt_plugin_axios_0e81e090 from 'nuxt_plugin_axios_0e81e090' // Source: .
 import nuxt_plugin_vueextend_3a130592 from 'nuxt_plugin_vueextend_3a130592' // Source: ..\\plugins\\vue-extend (mode: 'all')
 import nuxt_plugin_lozad_343857f8 from 'nuxt_plugin_lozad_343857f8' // Source: ..\\plugins\\lozad (mode: 'client')
 import nuxt_plugin_axios_3566aa80 from 'nuxt_plugin_axios_3566aa80' // Source: ..\\plugins\\axios (mode: 'all')
+import nuxt_plugin_swiper_3a1c5924 from 'nuxt_plugin_swiper_3a1c5924' // Source: ..\\plugins\\swiper (mode: 'client')
 
 // Component: <NoSsr>
 Vue.component(NoSsr.name, NoSsr)
@@ -161,6 +162,7 @@ async function createApp(ssrContext) {
 
   if (process.client) {
     if (typeof nuxt_plugin_lozad_343857f8 === 'function') await nuxt_plugin_lozad_343857f8(app.context, inject)
+    if (typeof nuxt_plugin_swiper_3a1c5924 === 'function') await nuxt_plugin_swiper_3a1c5924(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first

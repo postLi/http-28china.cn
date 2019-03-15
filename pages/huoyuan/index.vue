@@ -590,6 +590,7 @@ export default {
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],
+      popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       recommendBy28:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.links

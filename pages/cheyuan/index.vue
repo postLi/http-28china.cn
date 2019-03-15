@@ -164,7 +164,6 @@
                 target="_blank">
                 <img :src="item.carFile?item.carFile.split(',')[0]:''" >
               </a>
-
             </li>
             <li class="cy_list_1">
               <p class="p1">
@@ -255,8 +254,7 @@
               <li
                 v-for="(item,index) in newestCar"
                 :key="index"
-                class="manage_box"
-              >
+                class="manage_box">
                 <div class="li_one">
                   <a :title="item.startProvince+item.startCity+'->'+item.endProvince+item.endCity">{{ item.startProvince }}{{ item.startCity }}->{{ item.endProvince }}{{ item.endCity }}</a>
                   <span>{{ item.createTime }}</span>
@@ -597,7 +595,7 @@ export default {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
     let carInfoLists = await getCarInfoList($axios, 1, vo)
-    // console.log(carInfoLists, 'carInfoLists4444444')
+    console.log(vo, 'carInfoLists4444444')
 
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)

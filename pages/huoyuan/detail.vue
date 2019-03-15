@@ -445,13 +445,11 @@
                 class="list-title-a"
                 target="_blank" >
                 <div class="position">
-
                   <span class="list-icon lines-sprite-icons icon-start"/>
                   <em>{{ item.startCity }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
                   <em>{{ item.endCity }}</em>
-
                 </div>
               </a>
               <div class="distance_total">[全程<em>{{ item.distance }}</em>公里]</div>
@@ -464,8 +462,8 @@
               <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum ? item.goodsNum : '' }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
-                <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
-                <span>{{ item.goodsVolume }}<font >立方米</font></span>
+                <span>{{ item.goodsWeight }}<font>公斤&nbsp;|&nbsp;</font></span>
+                <span>{{ item.goodsVolume }}<font>立方米</font></span>
               </p>
             </li>
             <li class="wlzx_list_2">
@@ -564,14 +562,14 @@
               target="_blank">更多&gt;</a></div>		 
           </div>
           <div 
-            v-if="huoInfoList.length === 0" 
+            v-if="huoInfoList1.length === 0" 
             class="list_none" 
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他货源哦</span>
             <img src="/images/none_pic.png">
           </div>
           <ul 
-            v-for="(item,index) in huoInfoList"
+            v-for="(item,index) in huoInfoList1"
             :key="index"
             class="wlzx_list">
             <li id="wlzx_list_0">
@@ -580,13 +578,11 @@
                 class="list-title-a"
                 target="_blank" >
                 <div class="position">
-
                   <span class="list-icon lines-sprite-icons icon-start"/>
                   <em>{{ item.startCity }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
                   <em>{{ item.endCity }}</em>
-
                 </div>
               </a>
               <div class="distance_total">[全程<em>{{ item.distance }}</em>公里]</div>
@@ -804,7 +800,6 @@
         </li>
       </ul>
     </div>
-
     <div 
       id="js011" 
       class="arc_bottom"
@@ -821,16 +816,13 @@
           <img src="[field:global.cfg_templets_skin/]/images/04gongsi.png" >&nbsp;<span><a 
             id="nr0913" 
             href="/member/index.php?uid=ybyb120">广州明科物流有限公司</a></span>
-
         </p>
         <p class="p03">
           <i>货物名称：</i><span id="nr0914">电子电器</span>
-
         </p>
         <p class="p02">
           <span><i>重量：</i><font id="nr0915">15吨</font></span>  <span><i>体积：</i><font id="nr0916">30立方米</font></span>
         </p>
-
         <p class="p04">
           <i>数量：</i><span id="nr0917"/>
         </p>
@@ -961,6 +953,11 @@ export default {
       startCity: hyDetails.data.data.startCity,
       startProvince: hyDetails.data.data.startProvince
     }
+    let parm1t = {
+      startArea: hyDetails.data.data.endArea,
+      startCity: hyDetails.data.data.endCity,
+      startProvince: hyDetails.data.data.startProvince
+    }
     //货主档案
     let archivals = await $axios
       .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
@@ -978,6 +975,12 @@ export default {
     //货源列表
     let huoInfoLists = await $axios
       .post('/28-web/lclOrder/list', parm)
+      .catch(err => {
+        // console.log('huoComprehensives4:', err)
+      })
+    //货源列表
+    let huoInfoListst = await $axios
+      .post('/28-web/lclOrder/list', parm1t)
       .catch(err => {
         // console.log('huoComprehensives4:', err)
       })
@@ -1080,6 +1083,8 @@ export default {
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       huoInfoList:
         huoInfoLists.data.status === 200 ? huoInfoLists.data.data.list : [],
+      huoInfoList1:
+        huoInfoListst.data.status === 200 ? huoInfoListst.data.data.list : [],
       huoLink:
         huoLinks.data.status === 200 ? huoLinks.data.data.brandOrder.links : [],
       huoLabel:

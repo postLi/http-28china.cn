@@ -169,11 +169,11 @@
               <p
                 class="p1"
                 :title="item.companyName"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
-              <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.contacts }}</i></P>
             </li>
             <li class="wlzx_list_4">
               <p class="p3"/>
-              <p class="p1"><img src="/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
+              <p class="p1"><img src="/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass }}</i></P>
               <p class="p2"><img src="/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
             </li>
             <li class="wlzx_list_3">
@@ -227,7 +227,7 @@
                 v-for="(item,index) in recommendBy28"
                 :key="index" 
                 class="hot-cities-li"><a
-                  :href="'/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
             <!-- <ul class="hot-cities">
@@ -398,7 +398,7 @@
               v-for="(item,index) in hotRecommend" 
               :key="index" 
               class="hot-cities-li"><a
-                :href="'/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
           </ul>
           <!-- <ul class="hot-cities">
@@ -473,8 +473,9 @@
             v-for="(item,index) in startFromRecommend"
             :key="index"
             class="hot-cities-li" ><a
-              :href="'/huoyuan?goodsVolumeLower=&AF03801Id=&goodsVolumeUpper=&AF03802Id=&goodsWeightLower=&goodsWeightUpper=&orderClass=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+              :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
               class="hot-cities-a">{{ item.title }}</a></li>
+              
         </ul>
       </div>
     </div>
@@ -604,9 +605,6 @@ export default {
       startArea = '',
       startCity = '',
       startProvince = ''
-    if (query.orderClass) {
-      orderClass = query.orderClass
-    }
     if (query.goodsVolumeLower) {
       goodsVolumeLower = query.goodsVolumeLower
     }
@@ -680,7 +678,7 @@ export default {
     }
     let hyList = await getHyList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
-    // console.log('recommendList:', recommendList[0])
+    console.log('vo:', vo)
     //货源底部推荐
     let recommend = await $axios.post('/28-web/lclOrder/list/related/links', vo)
     //企业人气榜
@@ -689,7 +687,7 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    console.log(popularitys.data.data, 'ffffffffffffffffffffff')
+    // console.log(popularitys.data.data, 'ffffffffffffffffffffff')
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],

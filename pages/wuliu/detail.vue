@@ -10,8 +10,14 @@
         <div class="left_main">
           <div class="left_bt"><span>{{ gatewayData.parkName }}</span></div>
           <div class="left_nr">
-            <div class="left_nr_1"><img
-            :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'../../static/images/article_wlzx/wlyq_pic.png'"></div>
+            <div class="left_nr_1">
+             
+              <img 
+                :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
+                alt="">
+                <!-- <img
+            :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'../../static/images/article_wlzx/wlyq_pic.png'"> -->
+            </div>
             <div class="left_nr_2">
               <div 
                 id="allmap" 
@@ -483,9 +489,14 @@ export default {
       '/aflc-portal/portalt/aflcLogisticsCompany/v1/recommendCompanys',
       parm
     )
-    companysList.data.data.list.forEach(item => {
-      setCredit(item)
-    })
+    let companysList1 = await $axios.get(
+      '/28-web/logisticsCompany/excellent',
+      parm
+    )
+    // companysList.data.data.list.forEach(item => {
+    //   setCredit(item)
+    // })
+    console.log(companysList1.data.data, 'companysList.data.data')
     const transportRange = await getTransportRange($axios, query)
     const logisticsCompany = await getLogisticsCompany($axios, query)
     let AF025 = await $axios.get(

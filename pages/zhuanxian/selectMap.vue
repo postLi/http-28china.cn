@@ -222,6 +222,8 @@ export default {
 
 <style lang="scss">
 .form_findme {
+  padding-bottom: 20px;
+  margin-bottom: 10px;
   .city-picker-span {
     padding-top: 7px;
   }

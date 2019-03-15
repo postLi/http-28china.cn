@@ -303,7 +303,7 @@
             class="arc_middle2">
             <ShowPrice
               :info="linedataA.rangePrices"
-              :browse="linedataE.evaCount"/>
+              :browse="linedataA.assessNumber"/>
           </div>
           <div class="arc_middle3">
             <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
@@ -612,9 +612,9 @@
               v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
-              <!--<button-->
-              <!--class="layui-btn layui-btn-primary"-->
-              <!--@click="moreFn()">更多</button>-->
+                <button
+                  class="layui-btn layui-btn-primary"
+                  @click="moreFn()">更多</button>
               </div>
               <ul>
                 <li
@@ -696,7 +696,8 @@
                   value=""></div>
               <div class="more floatr"><a
                 href="/zhuanxian/list"
-                target="_blank">更多&gt;</a></div>
+                target="_blank"
+              >更多&gt;</a></div>
             </div>
             <div
             >
@@ -946,14 +947,15 @@
 
     </div>
     <Add
-      :is-show-add.sync="isShowAdd"
-      :data-info="dataInfo"/>
+      :show = "isAdd"
+      :info="linedataE"
+      @close="noaddFn"/>
   </div>
 
 </template>
 
 <script>
-import Add from '../huoyuan/add'
+import Add from './add'
 import $axios from 'axios'
 import {
   isZXcity,
@@ -1003,6 +1005,7 @@ export default {
   data() {
     return {
       dataInfo: {},
+      isAdd: false,
       isTit: false,
       showMoblie: false,
       isShowWPrice: false,
@@ -1259,6 +1262,7 @@ export default {
         'res.data.data.linedataA',
         linedataA.data
       )
+      console.log(linedataE.data.data, 'linedataE')
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
@@ -1484,101 +1488,13 @@ export default {
   },
   methods: {
     moreFn() {
-      layer.open({
-        id: 1,
-        type: 1,
-        title: this.linedataB.companyName + '-用户评价',
-        skin: 'layui-layer-rim2',
-        area: ['800px', '700px'],
-        success: (layero, index) => {
-          // $('.layui-btn-danger').onclick(() => {
-          //   console.log($('.layui-input').value, 'vakhhhfd')
-          // })
-          $('.layui-btn-danger').on('click', '')
-        },
-        //   <p>
-        //   <img
-        // v-for="( item, index ) in 4"
-        //   :key="index"
-        // src="/line/images/13z.png"
-        // alt="">
-        //   </p>
-        content:
-          ' <div class="row_find" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
-          '<div class="col-sm-12">' +
-          '<div class="input-group2">' +
-          '<span>全部(0)</span>' +
-          '<span>好评(0)</span>' +
-          '<span>中评(0)</span>' +
-          '<span>差评(0)</span>' +
-          '</div>' +
-          '</div>' +
-          '<div class="col-sm-12">' +
-          '<div class="input-group3">' +
-          '<ul>' +
-          '<li>' +
-          '<div class="pl_left" ' +
-          '<p>eiuriurui</p>' +
-          '<p><img src="/line/images/13z.png" width=50, height=20></p>' +
-          '</div>' +
-          '</li>' +
-          '</ul>' +
-          '</div>' +
-          '</div>' +
-          '<div class="col-sm-12" style="margin-top: 10px">' +
-          '<div class="input-group find_layui-btn">' +
-          '<button class="layui-btn layui-btn-danger">提交</button>' +
-          '</div>' +
-          '</div>' +
-          '</div>'
-      })
-
-      var mobile = $('.layui-input').val()
-      $('.tipPhone').hide()
-      $('.find_layui-btn .layui-btn-danger').click(() => {
-        let validReg = window.AFLC_VALID
-        let form = {}
-        form.mobile = mobile
-        form.companyId = this.LineChangeAnother.companyId
-        mobile = $('.layui-input').val()
-        if (mobile) {
-          $('.tipPhone').hide()
-          if (validReg.MOBILE.test(mobile)) {
-            $('.tipPhone').hide()
-            let aurl = ''
-            if (process.server) {
-              aurl = 'http://localhost:3000'
-            }
-            form.mobile = mobile
-            // console.lo
-            $axios
-              .post(aurl + '/28-web/logisticsCompany/consult/save', form)
-              .then(res => {
-                // console.log(res, 'resresres')
-                if (res.data.status === 200) {
-                  layer.msg(
-                    '提交成功，客服稍后将会与您联系',
-                    {
-                      tiem: 3000
-                    },
-                    () => {}
-                  )
-                  location.reload()
-                } else {
-                  layer.msg(
-                    res.data.errorInfo ? res.data.errorInfo : res.data.text
-                  )
-                }
-              })
-          } else {
-            $('.tipPhone').show()
-            $('.layui-input').val('')
-          }
-        } else {
-          $('.tipPhone').show()
-          $('.layui-input').val('')
-        }
-      })
+      this.addFn()
+    },
+    addFn() {
+      this.isAdd = true
+    },
+    noaddFn() {
+      this.isAdd = false
     },
     showPingLunFn(index) {
       // alert(index, 'index')

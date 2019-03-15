@@ -430,6 +430,10 @@
               class="right-top-btn">
           </form>
         </div>
+        <div class="list-box-r-phone">
+          <div class="zx_p_tit">帮我找优质承运商</div>
+          <selectMap/>
+        </div>
         <div class="list-box-r-top">
           <img
             src="/line/images/guangg.jpg"
@@ -501,10 +505,10 @@
         </div>
         <HotList :lines="lineHots"/>
 
-        <div class="list-box-r-phone">
-          <div class="zx_p_tit">帮我找优质承运商</div>
-          <selectMap/>
-        </div>
+        <!--<div class="list-box-r-phone">-->
+        <!--<div class="zx_p_tit">帮我找优质承运商</div>-->
+        <!--<selectMap/>-->
+        <!--</div>-->
       </div>
 
     </div>

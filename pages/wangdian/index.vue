@@ -612,6 +612,7 @@ export default {
         callback: async current => {
           $('#current1').text(current)
           let hyList = await getWangdiangInfoList(this.$axios, current, this.vo)
+          console.log(hyList, 'hyList')
           this.totalPage = hyList.pages
           this.current = hyList.current
           this.WangdiangInfoList = hyList.list

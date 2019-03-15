@@ -2,8 +2,8 @@
   <div>
     <div class="list_box" >
       <div class="list_nav">
-        <a href="/">物流首页</a>&gt;<a 
-          id="arc_nav_a1" 
+        <a href="/">物流首页</a>&gt;<a
+          id="arc_nav_a1"
           href="">物流园区</a>&gt;<a>{{ gatewayData.parkName }}</a>
       </div>
       <div class="list_left">
@@ -11,28 +11,28 @@
           <div class="left_bt"><span>{{ gatewayData.parkName }}</span></div>
           <div class="left_nr">
             <div class="left_nr_1">
-             
-              <img 
+
+              <img
                 :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
                 alt="">
                 <!-- <img
             :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'../../static/images/article_wlzx/wlyq_pic.png'"> -->
             </div>
             <div class="left_nr_2">
-              <div 
-                id="allmap" 
+              <div
+                id="allmap"
                 onmouseout="$('#allmap').css('display', 'none')"
                 onmouseover="$('#allmap').css('display', 'block')" />
               <ul>
-                <li class="list_yq1"><img src="../../static/images/article_wlzx/peple.png"><span>{{ gatewayData.parkContact }}</span></li>
-                <li class="list_yq2"><img src="../../static/images/article_wlzx/phone-ico.png"><span>{{ gatewayData.parkMobile }}</span></li>
-                <li class="list_yq3"><span>电话：<em>{{ gatewayData.parkNum }}</em></span></li>
+                <li class="list_yq1"><img src="../../static/images/article_wlzx/peple.png"><span>{{ gatewayData.parkContact || '暂无' }}</span></li>
+                <li class="list_yq2"><img src="../../static/images/article_wlzx/phone-ico.png"><span>{{ gatewayData.parkMobile|| '暂无' }}</span></li>
+                <li class="list_yq3"><span>电话：<em>{{ gatewayData.parkNum || '暂无' }}</em></span></li>
                 <li class="list_yq4"><a
                   v-if="gatewayData.contactQq"
                   :href=" 'http://wpa.qq.com/msgrd?v=3&uin=' + gatewayData.contactQq + '&site=qq&menu=yes'"
                   target="_blank"><span>QQ：<em>{{ gatewayData.contactQq }}</em></span></a></li>
                 <li class="list_yq5"><span>区域：<em>{{ gatewayData.locationProvince }}{{ gatewayData.locationCity }}{{ gatewayData.locationArea }}</em></span></li>
-                <li class="list_yq6"><span>详细地址：<em>{{ gatewayData.parkAddress }}</em></span><a
+                <li class="list_yq6"><span>详细地址：<em>{{ gatewayData.parkAddress || '暂无' }}</em></span><a
                   target="_blank"
                   @click="seeMap()">[查看地图]</a></li>
               </ul>
@@ -40,65 +40,65 @@
           </div>
           <div class="left_jianjie_bt"><span class="biaozhi"/><span>园区信息</span></div>
           <div class="left_jianjie_nr">
-            <p>{{ gatewayData.parkIntroduce }}</p>
+            <p>{{ gatewayData.parkIntroduce||'暂无园区信息' }}</p>
           </div>
         </div>
 
-        <div class="list_tiaoj"><span 
-          id="checked_zx" 
+        <div class="list_tiaoj"><span
+          id="checked_zx"
           class="active">物流专线</span><span id="checked_wangdian">物流网点</span></div>
         <div class="list_left_zx">
-          <div 
-            class="w1036" 
+          <div
+            class="w1036"
             style=" background-color: #fff;margin-bottom: 20px;">
 
             <div class="select_con">
               <dl>
                 <dd style="margin-left: -80px;">
-                  <div 
-                    id="wlLineFrom" 
-                    class="fl list_input" 
+                  <div
+                    id="wlLineFrom"
+                    class="fl list_input"
                     style="position:relative;" >
-                    <input 
-                      name="cfd" 
-                      style="height: 100%;" 
-                      data-toggle="city-picker" 
-                      data-level="district" 
+                    <input
+                      name="cfd"
+                      style="height: 100%;"
+                      data-toggle="city-picker"
+                      data-level="district"
                       type="text"
                       placeholder="请输入出发地" >
                   </div>
-                  <img 
-                    class="fl list_img" 
+                  <img
+                    class="fl list_img"
                     src="../../static/images/02jiantou.png">
-                  <div 
-                    id="wlLineTo" 
-                    class="fl list_input" 
+                  <div
+                    id="wlLineTo"
+                    class="fl list_input"
                     style="position:relative;" >
-                    <input 
-                      name="ddd" 
-                      style="height: 100%;" 
-                      data-toggle="city-picker" 
-                      data-level="district" 
-                      type="text" 
+                    <input
+                      name="ddd"
+                      style="height: 100%;"
+                      data-toggle="city-picker"
+                      data-level="district"
+                      type="text"
                       placeholder="请输入到达地" >
                   </div>
 
                   <input
                     v-model="searchWLGS"
-                    type="text" 
+                    type="text"
                     class="list_input"
                     placeholder="请输入公司名称">
                   <input
-                    name="Submit2" 
-                    value="搜索" 
-                    readonly="" 
+                    name="Submit2"
+                    value="搜索"
+                    readonly=""
                     class="list_button"
                     @click="searchWlLine()">
                   <input
                     id="flush"
-                    name="Submit2" 
-                    value="重置" 
-                    readonly="" 
+                    name="Submit2"
+                    value="重置"
+                    readonly=""
                     @click="flush()">
 
                 </dd>
@@ -142,8 +142,8 @@
                 <span>暂时没有找到您要查询的信息，可以看看其他物流园区哦</span>
                 <img src="../../static/images/none_pic.png">
               </div>
-              <li 
-                v-for="(item,index) in transportRange" 
+              <li
+                v-for="(item,index) in transportRange"
                 :key="index">
                 <a
                   :href="'/shixiao/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
@@ -168,11 +168,11 @@
           </div>
 
           <!--分页-->
-          <div 
-            class="box" 
+          <div
+            class="box"
             style="float: right;margin-right: 160px;">
-            <div 
-              id="pagination1" 
+            <div
+              id="pagination1"
               class="page fl"/>
             <div class="info fl">
             <!--<p>当前页数：<span id="current1">1</span></p>-->
@@ -183,8 +183,8 @@
 
 
         <div class="list_left_wangdian">
-          <div 
-            class="w1036" 
+          <div
+            class="w1036"
             style=" background-color: #fff;margin-bottom: 20px;">
 
             <div class="select_con">
@@ -193,12 +193,12 @@
                   <input
                     v-model="searchWDKey"
                     type="text"
-                    class="list_input" 
+                    class="list_input"
                     placeholder="请输入网点名称" >
                   <input
-                    value=" 搜索 " 
-                    readonly="" 
-                    class="list_button" 
+                    value=" 搜索 "
+                    readonly=""
+                    class="list_button"
                     @click="searchWD()">
 
                 </dd>
@@ -212,44 +212,44 @@
             </div>
           </div>
           <div class="w1036" >
-            <div 
-              v-if="logisticsCompany.length === 0" 
+            <div
+              v-if="logisticsCompany.length === 0"
               class="list_none"
               style="display: block;">
               <span>暂时没有找到您要查询的信息，可以看看其他物流园区哦</span>
               <img src="../../static/images/none_pic.png">
             </div>
-            <ul 
-              v-for="(item,index) in logisticsCompany" 
+            <ul
+              v-for="(item,index) in logisticsCompany"
               :key="index"
               class="wlzx_list">
               <li class="wlzx_list_2">
                 <p class="p1">
                   <font>{{ item.pointName }}</font><a
                     v-if="item.qq"
-                    :href="'http://wpa.qq.com/msgrd?v='+ item.qq +'&uin=&site=qq&menu=yes'" 
+                    :href="'http://wpa.qq.com/msgrd?v='+ item.qq +'&uin=&site=qq&menu=yes'"
                     target="_blank"><img src="../../static/images/article_wlzx/15qq.gif"></a>
                 </P>
 
                 <p class="p2"><a href="#">{{ item.companyName }}</a></p>
-                <p 
-                  v-if="item.credit >= 0 && item.credit <= 150" 
+                <p
+                  v-if="item.credit >= 0 && item.credit <= 150"
                   class="p3"><i>信誉：</i>
                   <img
-                    v-for="(item1,index1) in item.starS" 
-                    :key="index1"
-                    class="xy_zuan" 
-                    src="../../static/images/article_wlzx/blue.gif" 
-                    style="display: inline">
-                </p>
-                <p 
-                  v-if="item.credit >= 151" 
-                  class="p3"><i>信誉：</i>
-                  <img
-                    v-for="(item1,index1) in item.starB" 
+                    v-for="(item1,index1) in item.starS"
                     :key="index1"
                     class="xy_zuan"
-                    src="../../static/images/article_wlzx/34huanguan.gif" 
+                    src="../../static/images/article_wlzx/blue.gif"
+                    style="display: inline">
+                </p>
+                <p
+                  v-if="item.credit >= 151"
+                  class="p3"><i>信誉：</i>
+                  <img
+                    v-for="(item1,index1) in item.starB"
+                    :key="index1"
+                    class="xy_zuan"
+                    src="../../static/images/article_wlzx/34huanguan.gif"
                     style="display: inline">
                 </p>
                 <p class="p4"><i>联系人：</i><font>{{ item.contactsName }}</font></p>
@@ -281,11 +281,11 @@
             </ul>
           </div>
           <!--分页-->
-          <div 
-            class="box" 
+          <div
+            class="box"
             style="float: right;margin-right: 170px;">
-            <div 
-              id="pagination2" 
+            <div
+              id="pagination2"
               class="page fl"/>
             <div class="info fl">
             <!--<p>当前页数：<span id="current1">1</span></p>-->
@@ -300,44 +300,50 @@
       <div class="list_right">
 
         <div class="zx_sx"><span class="biaozhi"/><span>承运商推荐</span></div>
-        <div 
-          v-if="companysList.length === 0" 
-          class="tj_none">
+        <div
+          v-if="companysList==[]||companysList ==null"
+          class="tj_none"
+          style="display: block">
           <span>没有相关承运商推荐</span>
         </div>
-        <div 
-          v-for="(item,index) in companysList" 
-          :key="index" 
-          class="tj_list tj_list0">
-          <p class="p1">
-            <span>{{ item.companyName }}</span>
-          </p>
-          <p
-            v-if="item.credit >= 0 && item.credit <= 150"
-            class="p2">
-            <img
-              v-for="(item1,index1) in item.starS"
-              :key="index1"
-              class="xy_zuan"
-              src="../../static/images/article_wlzx/blue.gif" 
-              style="display: inline">
-          </p>
-          <p
-            v-if="item.credit >= 151"
-            class="p2">
-            <img
-              v-for="(item1,index1) in item.starB"
-              :key="index1"
-              class="xy_zuan"
-              src="../../static/images/article_wlzx/34huanguan.gif"
-              style="display: inline">
-          </p>
-          <p class="p3"><i data-v-63732202="">联系人：</i><font>{{ item.contactsName }}</font></p>
-          <p class="p4"><i>电话：</i><font> {{ item.mobile }}</font></p>
-          <p class="p5"><i data-v-63732202="">地址：</i><font>{{ item.address }}</font></p>
-          <p class="p6"><a 
-            :href="'/member/'+item.companyId+''"
-            target="_blank"><span data-v-63732202="">查看&nbsp;&gt;</span></a></p>
+        <div v-else>
+          <div
+            v-for="(item,index) in companysList"
+            :key="index"
+            class="tj_list tj_list0">
+            <p class="p1">
+              <a
+                :href="'/member/'+item.id+''"
+                target="_blank"><span>{{ item.companyName }}</span></a>
+
+            </p>
+            <p
+              v-if="item.credit >= 0 && item.credit <= 150"
+              class="p2">
+              <img
+                v-for="(item1,index1) in item.starS"
+                :key="index1"
+                class="xy_zuan"
+                src="../../static/images/article_wlzx/blue.gif"
+                style="display: inline">
+            </p>
+            <p
+              v-if="item.credit >= 151"
+              class="p2">
+              <img
+                v-for="(item1,index1) in item.starB"
+                :key="index1"
+                class="xy_zuan"
+                src="../../static/images/article_wlzx/34huanguan.gif"
+                style="display: inline">
+            </p>
+            <p class="p3"><i data-v-63732202="">联系人：</i><font>{{ item.contactsName || '暂无' }}</font></p>
+            <p class="p4"><i>电话：</i><font> {{ item.mobile || '暂无' }}</font></p>
+            <p class="p5"><i data-v-63732202="">地址：</i><font>{{ item.address|| '暂无' }}</font></p>
+            <p class="p6"><a
+              :href="'/member/'+item.id+''"
+              target="_blank"><span data-v-63732202="">查看&nbsp;&gt;</span></a></p>
+          </div>
         </div>
 
       </div>
@@ -485,18 +491,22 @@ export default {
         parkId: query.id
       }
     }
-    let companysList = await $axios.post(
-      '/aflc-portal/portalt/aflcLogisticsCompany/v1/recommendCompanys',
-      parm
-    )
-    let companysList1 = await $axios.get(
-      '/28-web/logisticsCompany/excellent',
-      parm
-    )
+    // let companysList = await $axios.post(
+    //   '/aflc-portal/portalt/aflcLogisticsCompany/v1/recommendCompanys',
+    //   parm
+    // )
     // companysList.data.data.list.forEach(item => {
     //   setCredit(item)
     // })
-    console.log(companysList1.data.data, 'companysList.data.data')
+    let flag = ''
+    let companysList = await $axios.get(
+      '/28-web/logisticsCompany/excellent?flag=' + flag
+    )
+    companysList.data.data.forEach(item => {
+      setCredit(item)
+    })
+
+    console.log(gatewayData.data.data, 'gatewayData.data.data')
     const transportRange = await getTransportRange($axios, query)
     const logisticsCompany = await getLogisticsCompany($axios, query)
     let AF025 = await $axios.get(
@@ -507,7 +517,7 @@ export default {
       gatewayData: gatewayData.data.status === 200 ? gatewayData.data.data : {},
       jwd,
       companysList:
-        companysList.data.status === 200 ? companysList.data.data.list : [],
+        companysList.data.status === 200 ? companysList.data.data : [],
       transportRange: transportRange,
       logisticsCompany: logisticsCompany,
       AF025: AF025.data.status === 200 ? AF025.data.data : []

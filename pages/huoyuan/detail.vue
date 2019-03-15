@@ -250,7 +250,6 @@
         v-if="archival.shipperType === 'AF0010101'">
         <div class="arc_top_title">
           <h4>货主档案</h4>
-          <!-- <h4 v-if="archival.shipperType === 'AF0010102'" >{{ archival.companyName }}</h4> -->
         </div>
         <div 
         class="arc_top_img">
@@ -279,13 +278,30 @@
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010102'">
+        v-if="archival.length === 0">
         <div class="arc_top_title">
-          <h4>{{ archival.companyName }}</h4>
+          <h4>货主档案</h4>
         </div>
         <div 
         class="arc_top_img">
-        <!-- <img src="/images/cy/gold.png"> -->
+          <img src="/images/cy/gold.png">
+        </div>
+        <div class="arc_middle">
+          <img src="/images/cy/09sj.png">
+          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">0</i></p>
+        </div>
+        <ul class="bottom_ul">
+          <li>联系人：无</li>
+          <li>手机：无</li>
+          <li>已加入：0天</li>
+          <li>好评数：0</li>
+        </ul>
+      </div>
+      <div 
+        class="arc_right1" 
+        v-if="archival.shipperType === 'AF0010102'">
+        <div class="arc_top_title">
+          <h4>{{ archival.companyName }}</h4>
         </div>
         <div class="arc_middle">
           <img src="/images/cy/09sj.png">
@@ -310,7 +326,6 @@
       </div>
     </div>
     <div class="arc_main3">
-     
       <div class="right">
         <div class="zx_sx">
           <span class="biaozhi"/><span>货主综合力评估</span>
@@ -319,15 +334,15 @@
           <div class="content-left">
             <div class="img">
               <img
-                src="/images/cy/09sj.png"
-                width="82"
-                height="82">
+                src="/images/cy/hztx.png"
+                width="120"
+                height="100">
             </div>
             <div class="name">{{ huoComprehensive.shipperTypeName }}</div>
             <div class="name">
               <img 
                 v-if="huoComprehensive.accountStatus === 'AF0010403'" 
-                src="/images/article_wlzx/10shiming.png">
+                src="/images/cy/hzsmrz.png">
             </div>
           </div>
           <div class="content-right">
@@ -469,7 +484,7 @@
             <li class="wlzx_list_2">
               <p class="p3"/>
               <p class="p1"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName?item.companyName.substring(0,5) + '...': '' }}</i></P>
-              <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.shipperName }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.contacts }}</i></P>
             </li>
             <li class="wlzx_list_4">
               <p class="p3"/>
@@ -492,12 +507,6 @@
                   readonly
                   value="查看"></a>
               </p>
-              <!-- <p class="p2"><a
-                v-if="item.qq"
-                :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                target="_blank">
-              <input value="QQ交谈"></a>
-              </p> -->
             </li>
           </ul>
         </div>
@@ -507,14 +516,7 @@
             src="/images/cy/10banner.png"
             alt="广告">
         </div>
-       
         <div class="listInfo2">
-          <!-- <div class="zx_sx">
-            <span class="biaozhi"/><span>更多从{{ hyDetail.endCity }}出发的货源</span>
-            <i 
-              style="cursor: pointer;float: right;font-size: 14px;"
-              @click="goToCy()">更多></i>
-          </div> -->
           <div class="main3_1_1">
             <div class="floatl">
               <b class="b_title">更多从{{ hyDetail.endCity }}出发的货源</b>
@@ -625,12 +627,6 @@
                   readonly
                   value="查看"></a>
               </p>
-              <!-- <p class="p2"><a
-                v-if="item.qq"
-                :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                target="_blank">
-              <input value="QQ交谈"></a>
-              </p> -->
             </li>
           </ul>
         </div>
@@ -780,6 +776,7 @@
           :key="index" 
           class="hot-cities-li" >
           <a
+            target="_blank"
             :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
             class="hot-cities-a">{{ item.title }}</a>
         </li>
@@ -795,6 +792,7 @@
           :key="index" 
           class="hot-cities-li" >
           <a
+            target="_blank"
             :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
             class="hot-cities-a">{{ item.title }}</a>
         </li>
@@ -850,6 +848,7 @@ import Add from './add'
 import Lelp from './help'
 import Order from './order'
 import $axios from 'axios'
+import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 export default {
   name: 'Detail',
   components: {
@@ -925,7 +924,6 @@ export default {
     }
   },
   async asyncData({ $axios, app, query }) {
-    let zxList
     let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {
@@ -955,6 +953,8 @@ export default {
       startCity: hyDetails.data.data.endCity,
       startProvince: hyDetails.data.data.startProvince
     }
+    let code = await getCode($axios, hyDetails.data.data.endProvince)
+    let zxList = await getCity($axios, code, hyDetails.data.data.startCity)
     //货主档案
     let archivals = await $axios
       .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
@@ -1068,6 +1068,7 @@ export default {
       archival: archivals.data.status === 200 ? archivals.data.data : [],
       hyDetail: hyDetails.data.status === 200 ? hyDetails.data.data : {},
       popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
+      zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
       huoComprehensive:
         huoComprehensives.data.status === 200
           ? huoComprehensives.data.data
@@ -1100,19 +1101,10 @@ export default {
   },
 
   mounted() {
-    // console.log(this.hyDetail, 'hyDetail')
     if (process.client) {
       console.log(this.huoLink)
-      $('#wlLineFrom input').citypicker({
-        // province: this.hyDetail.startProvince,
-        // city: this.hyDetail.startCity,
-        // district: this.hyDetail.startArea
-      })
-      $('#wlLineTo input').citypicker({
-        // province: this.hyDetail.endProvince,
-        // city: this.hyDetail.endCity,
-        // district: this.hyDetail.endArea
-      })
+      $('#wlLineFrom input').citypicker({})
+      $('#wlLineTo input').citypicker({})
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
 

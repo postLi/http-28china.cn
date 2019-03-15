@@ -577,6 +577,7 @@ export default {
     let vo = {
       currentPage: 1,
       pageSize: 5,
+      companyName: query.companyName ? query.companyName : '',
       locationCity: query.locationCity ? query.locationCity : '',
       locationProvince: query.locationProvince ? query.locationProvince : '',
       endArea: query.endArea ? query.endArea : '',

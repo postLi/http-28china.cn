@@ -709,7 +709,8 @@ export default {
       ]
     }
   },
-  async fetch({ store, params, $axios, error, app }) {
+  async fetch({ store, params, $axios, error, app, query }) {
+    await store.dispatch('cheyuan/addBrowserNum', query.id)
     await store
       .dispatch('news/GETNEWSINFO', {
         params: {

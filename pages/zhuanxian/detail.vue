@@ -370,17 +370,7 @@
         <div class="arc_right">
           <p class="arc_right01"><img src="/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
-            <span v-if="linedataB.isEq"> <img
-              v-for="(item, index) in linedataB.eq1"
-              :key="index"
-              class="xy_zuan"
-              src="/gongsi/images/blue.gif"></span>
-
-            <span v-if="linedataB.isHZhuan"> <img
-              v-for="(item, index) in linedataB.hZhuan"
-              :key="index"
-              class="xy_zuan"
-              src="/gongsi/images/34huanguan.gif"></span>
+            <creditIcon :credit="linedataB.credit" />
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br>
@@ -955,6 +945,7 @@
 </template>
 
 <script>
+import creditIcon from '~/components/common/creditIcon'
 import Add from './add'
 import $axios from 'axios'
 import {
@@ -983,7 +974,8 @@ export default {
     ShowPrice,
     FooterLinks,
     ShowEchart,
-    Add
+    Add,
+    creditIcon
   },
   head: {
     link: [
@@ -1215,47 +1207,6 @@ export default {
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
 
-      if (credit >= 0 && credit <= 3) {
-        linedataB.data.data.eq1 = 1
-        linedataB.data.data.isEq = true
-        // linedataB.data.data
-      }
-      if (credit >= 4 && credit <= 10) {
-        linedataB.data.data.eq1 = 2
-        linedataB.data.data.isEq = true
-      }
-      if (credit >= 11 && credit <= 40) {
-        linedataB.data.data.eq1 = 3
-        linedataB.data.data.isEq = true
-      }
-      if (credit >= 41 && credit <= 90) {
-        linedataB.data.data.eq1 = 4
-        linedataB.data.data.isEq = true
-      }
-      if (credit >= 91 && credit <= 150) {
-        linedataB.data.data.eq1 = 5
-        linedataB.data.data.isZuan = true
-      }
-      if (credit >= 151 && credit <= 250) {
-        linedataB.data.data.hZhuan = 1
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 251 && credit <= 500) {
-        linedataB.data.data.hZhuan = 2
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 500 && credit <= 1000) {
-        linedataB.data.data.hZhuan = 3
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 1001 && credit <= 2000) {
-        linedataB.data.data.hZhuan = 4
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 2001) {
-        linedataB.data.data.hZhuan = 5
-        linedataB.data.data.isHZhuan = true
-      }
       // console.log(linedataF.data.data.list, 'linedataF')
       console.log(
         aurl + `/28-web/logisticsCompany/${query.publishId}`,

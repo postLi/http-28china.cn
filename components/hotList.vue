@@ -50,7 +50,7 @@
         v-if="gongsi"
         class="lastul">
         <li
-          v-for="(item, index) in lineHots"
+          v-for="(item, index) in lineHots.slice(-12)"
           :key="index"><a
             :href="'/member/'+item.id"
             style="display: flex;"
@@ -102,6 +102,7 @@ export default {
   },
   mounted() {
     this.lineHots = this.lines
+    console.log(this.lineHots, 'this.lineHots ')
   },
   methods: {}
 }

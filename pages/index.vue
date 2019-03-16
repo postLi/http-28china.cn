@@ -198,7 +198,8 @@
             <div
               id="_userlogin2"
               class="userLogin"
-              style="display:block;">
+              v-if="!islogin"
+            >
               <div class="yhimg"><img src="/images/index/19stx.png"></div>
               <div class="userHeader">
                 <div class="img_"/>
@@ -210,12 +211,13 @@
               </div>
             </div>
             <div
+              v-if="islogin"
               id="_userlogin2_2"
               class="userLogin"
-              style="display:none;">
+            >
               <div class="userHeader">
                 <div class="yhimg"><img src="/images/index/19stx.png"></div>
-                <span>您好，<span id="login_name2"/>&nbsp;</span>
+                <span>您好，<span id="login_name2">{{ username }}</span>&nbsp;</span>
                 <span style="cursor: pointer"> <a
                   class="exit_anfa"
                   href="/exit">【安全退出】</a> </span>
@@ -227,7 +229,7 @@
                 <div class="regBtn"> <a
                   id="my_website"
                   target="_blank"
-                  href="">我的网站</a></div>
+                  :href="'/member/' + ''">我的网站</a></div>
               </div>
             </div>
 
@@ -1514,7 +1516,9 @@ export default {
     return {
       title: '首页',
       lists: [],
-      ip: ''
+      ip: '',
+      islogin: false,
+      username: ''
     }
   },
   computed: {
@@ -1655,6 +1659,12 @@ export default {
   },
   mounted() {
     if (process.client) {
+      let cookies = this.$cookies
+      let acct = cookies.get('access_token')
+      if (acct) {
+        this.islogin = true
+        this.username = cookies.get('login_mobile')
+      }
       seajs.use(
         [
           '/index/js/pic_scroll.js',

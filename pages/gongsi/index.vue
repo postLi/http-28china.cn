@@ -577,6 +577,7 @@ export default {
     let vo = {
       currentPage: 1,
       pageSize: 5,
+      companyName: query.companyName ? query.companyName : '',
       locationCity: query.locationCity ? query.locationCity : '',
       locationProvince: query.locationProvince ? query.locationProvince : '',
       endArea: query.endArea ? query.endArea : '',
@@ -1235,44 +1236,25 @@ export default {
   // 推荐企业
   .list_right {
     ul {
+      .bg0,
+      .bg2,
+      .bg4，,
+      .bg6,
+      .bg8,
+      .bg10,
+      .bg12 {
+        background: rgb(208, 104, 106) !important;
+      }
       .bg0 {
         background: rgb(208, 104, 106) !important;
       }
-      .bg1 {
-        background: rgb(25, 138, 194) !important;
-      }
-      .bg2 {
-        background: rgb(254, 59, 79) !important;
-      }
-      .bg3 {
-        background: rgb(208, 104, 103) !important;
-      }
-      .bg4 {
-        background: rgb(25, 138, 194) !important;
-      }
-      .bg5 {
-        background: rgb(254, 59, 79) !important;
-      }
-      .bg6 {
-        background: rgb(25, 138, 194) !important;
-      }
-      .bg7 {
-        background: rgb(208, 104, 106) !important;
-      }
-      .bg8 {
-        background: rgb(25, 138, 194) !important;
-      }
-      .bg9 {
-        background: rgb(208, 104, 103) !important;
-      }
-      .bg10 {
-        background: rgb(254, 59, 79) !important;
-      }
+      .bg1,
+      .bg3,
+      .bg5,
+      .bg7,
+      .bg9,
       .bg11 {
         background: rgb(25, 138, 194) !important;
-      }
-      .bg12 {
-        background: rgb(208, 104, 106) !important;
       }
     }
   }

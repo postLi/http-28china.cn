@@ -26,7 +26,7 @@
     <div class="arc_middle2_2">
       <div class="num1"><span id="nr0746"/></div>
       <div class="num2"><a href="javascript:void(0)"><span id="nr0745">{{ browse }}</span></a></div>
-      <div class="num3"><span>下单量</span></div>
+      <!--<div class="num3"><span>下单量</span></div>-->
       <div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
     </div>
     <!--阶梯价格 S-->

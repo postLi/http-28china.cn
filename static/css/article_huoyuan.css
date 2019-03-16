@@ -579,7 +579,7 @@ text-align: center;
   height: 40px;
   line-height: 40px;
   text-align: center;
-  background-color: #f88700;
+  background-color: #f8542b;
   border-radius: 3px;
   font-size: 16px;
   color: #ffffff;
@@ -604,7 +604,7 @@ text-align: center;
   width: 288px;
   height: 40px;
   line-height: 40px;
-  background-color: #fa9925;
+  background-color: #f8542b;
   border-radius: 3px;
   font-size: 14px;
   color: #ffffff;
@@ -703,7 +703,7 @@ table tr:nth-child(odd){
 .arc_main3 .right .content .content-left .name {
   margin-top: 10px;
   font-size: 16px;
-  color: #fa9925;
+  color: #f8542b;
 }
 .arc_main3 .right .content .content-left .img img{border-radius: 50px;}
 .arc_main3 .right .content .content-right{
@@ -758,7 +758,7 @@ table tr:nth-child(odd){
   margin: 0 3px;
 }
 .arc_main3 .right .content .content-right i{
-  color: #fa9925;
+  color: #f8542b;
 }
 .arc_main3 .right .content .content-right .img{
   position: relative;
@@ -770,7 +770,7 @@ table tr:nth-child(odd){
   height: 40px;
   line-height: 40px;
   border-radius: 3px;
-  border: solid 1px #fa9925;
+  border: solid 1px #f8542b;
   font-size: 14px;
   color: #f88700;
   display: inline-block;
@@ -782,7 +782,7 @@ table tr:nth-child(odd){
   width: 288px;
   height: 40px;
   line-height: 40px;
-  background-color: #fa9925;
+  background-color: #f8542b;
   border-radius: 3px;
   font-size: 14px;
   color: #ffffff;
@@ -964,6 +964,7 @@ table tr:nth-child(odd){
 .w1036 {
   max-width: 1000px;
   float: left;
+  width:1000px;
   /*OVERFLOW: hidden;*/
   /* border: 1px solid #eee; */
   /* border-bottom: 0; */
@@ -975,6 +976,7 @@ table tr:nth-child(odd){
 .listInfo2{
   float: left;
   margin-top: 20px;
+  width:100%;
 }
 .wlzx_list {
   width: 1000px;
@@ -1647,7 +1649,7 @@ table tr:nth-child(odd){
   margin-right: 7px;
 }
 .btn_span{
-  border:1px solid #fa9925;
+  border:1px solid #f8542b;
   border-radius: 4px;
   float: left;
   font-size: 12px;
@@ -1660,7 +1662,7 @@ table tr:nth-child(odd){
 }
 .btn_span span:nth-child(1){
   color:#fff;
-  background-color: #fa9925;
+  background-color: #f8542b;
   float: left;
   padding: 0 5px;
 }
@@ -1670,7 +1672,7 @@ table tr:nth-child(odd){
 }
 .active{
   color:#fff;
-  background-color: #fa9925;
+  background-color: #f8542b;
 }
 .top_left{
   float: left;

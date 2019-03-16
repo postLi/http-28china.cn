@@ -478,6 +478,9 @@ export default {
         case 'wangdian':
           $('#wd').addClass('nav-active')
           break
+        case 'zixun':
+          $('#news').addClass('nav-active')
+          break
       }
     }
   }

@@ -1508,6 +1508,7 @@
 import NewsList from '@/components/index/newsList.vue'
 
 export default {
+  name: 'HomePage',
   components: {
     NewsList
   },

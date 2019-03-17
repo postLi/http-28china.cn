@@ -251,11 +251,12 @@
               <input
                 type="checkbox"
                 id="buxian"
+                name="buxian"
                 class="input_class"
                 :data-code="listH[0].code"
                 :data-pcode="listH[0].pcode">
               <label
-                for=""
+                for="buxian"
                 style="padding-left: 5px">{{ listH[0].name }}</label>
             </li>
             <li
@@ -659,7 +660,13 @@ export default {
     // getGSList
     let gsList = await getGSList($axios, 1, vo)
     gsList.list.forEach(item => {
-      item.num = Math.ceil(Math.random() * 30)
+      // item.num = Math.ceil(Math.random() * 30)
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      item.num = num % 30
       let authStatus = item.authStatus
       let collateral = item.collateral
       let isVip = item.isVip
@@ -868,7 +875,13 @@ export default {
       let getgsList = await getGSList($axios, 1, vo)
       _this.gsList = getgsList.list
       _this.gsList.forEach(item => {
-        item.num = Math.ceil(Math.random() * 30)
+        // item.num = Math.ceil(Math.random() * 30)
+        let arr = (item.id || '').split('')
+        let num = 0
+        arr.forEach(el => {
+          num += el.charCodeAt(0) || 0
+        })
+        item.num = num % 30
       })
       console.log(getgsList.list, vo, this.gsList, 'quanxuan')
     })

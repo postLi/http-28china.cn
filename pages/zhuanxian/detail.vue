@@ -1155,9 +1155,22 @@ export default {
         LineeEInfo.data.status == 200 ? LineeEInfo.data.data : ''
       // console.log(LineCAnother.data.data, 'LineChangeAnother')
 
-      linedataA.data.data.num = Math.ceil(Math.random() * 30)
+      // linedataA.data.data.num = Math.ceil(Math.random() * 30)
+      let item = linedataA.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      item.num = num % 30
       linedataC.data.data.list.forEach(item => {
-        item.num = Math.ceil(Math.random() * 30)
+        // item.num = Math.ceil(Math.random() * 30)
+        let arr = (item.id || '').split('')
+        let num = 0
+        arr.forEach(el => {
+          num += el.charCodeAt(0) || 0
+        })
+        item.num = num % 30
       })
       linedataB.data.data.companyName =
         linedataB.data.data.companyName.length > 13
@@ -1695,6 +1708,8 @@ export default {
       })
     },
     showfind() {
+      let _this = this
+      clearInterval(_this.stopTimer)
       layer.open({
         type: 1,
         title: ' ',
@@ -1732,11 +1747,11 @@ export default {
           })
           // console.log(this.sendEchart, 'sendEchartsendEchart')
           let seconds = 5
-          let stop = setInterval(() => {
+          _this.stopTimer = setInterval(() => {
             $('#seconds').html(seconds + 'S')
             seconds--
             if (seconds < 0) {
-              clearInterval(stop)
+              clearInterval(_this.stopTimer)
               $('.show1').hide()
               $('.show2').show()
               let myChart2 = echarts.init(document.getElementById('echart2'))

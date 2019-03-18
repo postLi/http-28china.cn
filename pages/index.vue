@@ -1547,6 +1547,11 @@ export default {
     if (!areaData.currentProvince) {
       areaData = store.state.area
     }
+    let paramArea = {
+      province: areaData.currentProvinceFullName,
+      city: areaData.currentAreaFullName,
+      area: ''
+    }
     // console.log('before fetch cookie2222: ', areaData.currentAreaName)
 
     // 多个栏目的参数配置
@@ -1624,31 +1629,31 @@ export default {
       }),
       // 获取推荐物流公司
       store.dispatch('company/GETRECOMMEND', {
-        data: { pageSize: 8 }
+        data: Object.assign({ pageSize: 8 }, paramArea)
       }),
       // 获取物流公司列表
       store.dispatch('company/GETCOMPANYLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取物流园区列表
       store.dispatch('wuliu/GETLIST', {
-        data: { pageSize: 9 },
+        data: Object.assign({ pageSize: 9 }, paramArea),
         name: 'index_list'
       }),
       // 获取专线列表
       store.dispatch('line/GETLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取货源列表
       store.dispatch('huoyuan/GETLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取车源列表
       store.dispatch('cheyuan/GETLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取统计数据

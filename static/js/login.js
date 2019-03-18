@@ -558,7 +558,7 @@ function phplogin(userid, pwd) {
             $.cookie('login_type', usertype, { expires: 7, path: '/' })
             Is_login1()
             Is_login2()
-            phplogin(username, pwd)
+            // phplogin(username, pwd)
             //layer.alert('登录成功');
             $('.login_box').css('display', 'none')
             $('.login_box_mask').hide()

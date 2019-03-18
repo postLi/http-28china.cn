@@ -768,36 +768,10 @@
       return AFWL_API.loginByToken(access_token)
         .done(function(res) {
           if (res.data) {
-            return AFWL_API.phplogin(
-              res.data.userName,
-              res.data.memberPwd,
-              true
-            )
-              .done(function() {
-                $.cookie('access_token', access_token, {
-                  expires: 7,
-                  path: '/'
-                })
-                $.cookie('login_mobile', res.data.userName, {
-                  expires: 7,
-                  path: '/'
-                })
-                $.cookie('login_type', usertype, { expires: 7, path: '/' })
-                // 登录成功
-                if (url) {
-                  location.href = url
-                }
-              })
-              .fail(function(res) {
-                layer.alert(
-                  '登录失败：' +
-                    (res.errorInfo ||
-                      res.message ||
-                      res.text ||
-                      JSON.stringify(res) ||
-                      '未知错误')
-                )
-              })
+            // 登录成功
+            if (url) {
+              location.href = url
+            }
           }
         })
         .fail(function(res) {
@@ -872,22 +846,8 @@
               expires: 7,
               path: '/'
             })
-            // $('#form1').submit();
-            AFWL_API.phplogin(username, pwd)
-              .done(function() {
-                // 登录成功
-                location.href = url || '/'
-              })
-              .fail(function(res) {
-                layer.alert(
-                  '登录失败：' +
-                    (res.errorInfo ||
-                      res.message ||
-                      res.text ||
-                      JSON.stringify(res) ||
-                      '未知错误')
-                )
-              })
+            // 登录成功
+            location.href = url || '/'
           } else {
             layer.alert(
               '登录失败：' +

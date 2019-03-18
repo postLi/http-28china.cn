@@ -358,7 +358,14 @@ async function getRecommendList($axios, vo) {
   let parm = vo
   parm.currentPage = 1
   parm.pageSize = 10
-  let res = await $axios.post('/28-web/logisticsCompany/recommend', parm)
+  let res = await $axios.post(
+    '/28-web/logisticsCompany/pointNetwork/recommend',
+    {
+      province: parm.startProvince,
+      city: parm.startCity,
+      ...parm
+    }
+  )
   if (res.data.status === 200) {
     return res.data.data.list
   } else {

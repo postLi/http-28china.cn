@@ -95,7 +95,7 @@
             class="img1"
             src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：{{ hyDetail.createTime }}</span><span><img
               class="img2"
-              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：{{ hyDetail.collectNumber }}<i class="my_cz_num"/></span></div>
+              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：{{ hyDetail.collectNumber }}<i class="my_hz_num"/></span></div>
         </div>
         <div class="arc_left_2">
           <div class="arc_left_2_1">

@@ -379,16 +379,16 @@
           <div class="lll-recommend clearfix">
             <div
               class="zx_sx1"
-            ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.recommendBy28.label }}</span></div>
-            <FooterLinks :info="lineLinks.recommendBy28.links"/>
+            ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.recommendBy28.label||'' }}</span></div>
+            <FooterLinks :info="lineLinks.recommendBy28.links || []"/>
           </div>
           <div
             class="lll-recommend"
             style="padding-top: 40px;">
             <div
               class="zx_sx"
-            ><span class="biaozhi"/><span>{{ lineLinks.otherRecommend.label }}</span></div>
-            <FooterLinks :info="lineLinks.otherRecommend.links"/>
+            ><span class="biaozhi"/><span>{{ lineLinks.otherRecommend.label ||'' }}</span></div>
+            <FooterLinks :info="lineLinks.otherRecommend.links|| []"/>
           </div>
         </div>
 
@@ -749,7 +749,7 @@ export default {
                     callback: function(current) {
                       $('#current1').text(current)
                       // orderBy = ''
-                      currentPage = current
+                      currentPage = currentAF025
                       fetchLineList(currentPage, orderBy)
                       // window.location.href = '#top'
                     }

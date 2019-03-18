@@ -101,10 +101,10 @@ export default {
   },
   watch: {
     info(n, o) {
-      console.log(n, 'nnnnnnnn')
+      // console.log(n, 'nnnnnnnn')
     },
     browse(n, o) {
-      console.log(n, 'browse')
+      // console.log(n, 'browse')
     }
   },
   mounted() {
@@ -131,7 +131,7 @@ export default {
       // this.infodata = Object.assign({}, this.info)
       let _this = this
       // this.info = this.info != [] || this.info
-      console.log(this.info, 'this.info')
+      // console.log(this.info, 'this.info')
       this.info.forEach((item, index) => {
         if (item.type == 0) {
           this.hPrice.push(item)

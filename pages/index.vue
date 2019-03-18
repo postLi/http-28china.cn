@@ -229,7 +229,7 @@
                 <div class="regBtn"> <a
                   id="my_website"
                   target="_blank"
-                  :href="'/member/' + ''">我的网站</a></div>
+                  :href="'/member/' + $cookies.get('login_userId')">我的网站</a></div>
               </div>
             </div>
 
@@ -755,7 +755,7 @@
                       :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
                     ><span
                       id="nr033"
-                      class="t3">{{ item.goodsName || item.goodsTypeName }}</span></a>
+                      class="t3">{{ item.goodsTypeName }}</span></a>
                     <a
                       id="nr_a34"
                       :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"><span class="t4"><font
@@ -1023,7 +1023,7 @@
                     target="_blank"
                     style="color: #fff;"><span
                       id="wlyq_num"
-                      class="t03">{{ item.netWorkNumber }}</span></a>
+                      class="t03">{{ item.transportNumber }}</span></a>
                   <span
                     id="t77"
                     class="t04"><a

@@ -95,7 +95,7 @@ export default {
       [
         'http://api.map.baidu.com/getscript?v=2.0&ak=e0abRWFWOrgmN7emYjQGPj4Z0vyTVTfo&services=&t=20190102133327',
         '/member/js/index.js',
-        '/index/js/collection.js'
+        '/js/collection.js'
       ],
       function() {
         var map = new BMap.Map('allmap')

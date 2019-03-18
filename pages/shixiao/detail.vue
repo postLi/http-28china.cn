@@ -932,7 +932,7 @@ export default {
       arr.forEach(el => {
         num += el.charCodeAt(0) || 0
       })
-      item.num = num % 30
+      item.num = (num % 30) + 1
       tranDetailRes.data.data.rangePrices1 = tranDetailRes.data.data.rangePrices.filter(
         item => {
           return item.type === '1'

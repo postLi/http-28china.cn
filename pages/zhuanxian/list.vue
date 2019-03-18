@@ -247,7 +247,7 @@
                   class="nr_a21_img">
                   <img
                     v-if="item.rangeLogo==''"
-                    :src="require('../../static/images/pic/bg' + item.num + '.png')"
+                    :src="'/images/pic/bg' + item.num + '.png'"
                     width="180"
                     height="180">
                   <img
@@ -655,7 +655,7 @@ export default {
         arr.forEach(el => {
           num += el.charCodeAt(0) || 0
         })
-        item.num = num % 30
+        item.num = (num % 30) + 1
       })
       // for (var i = 3; i < listD.data.data.length; i--) {
       //   let listD1 = listD.data.data
@@ -828,7 +828,7 @@ export default {
                           arr.forEach(el => {
                             num += el.charCodeAt(0) || 0
                           })
-                          item.num = num % 30
+                          item.num = (num % 30) + 1
                           // console.log('this.lineList:', item.num)
                         })
                         _this.lineLists = getList

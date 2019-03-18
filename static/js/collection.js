@@ -23,10 +23,11 @@ function collection_zx(userType, mobile, collectId) {
         $('.collection_zx').css('display', 'block')
       }
       if (res.status == 40001) {
-        $('.arc_middle').toast({
+        layer.msg('抱歉!系统忙,请稍后再试')
+        /* $('.arc_middle').toast({
           content: '抱歉!系统忙,请稍后再试',
           duration: 3000
-        })
+        }) */
       }
     },
     error: function(err) {
@@ -246,10 +247,11 @@ $('#collection_zx').click(function() {
   var mobile = $.cookie('login_mobile')
   var collectId = aid
   if (!userType || !mobile) {
-    $('.arc_middle').toast({
+    layer.msg('您还未登录，请先登录')
+    /* $('.arc_middle').toast({
       content: '您还未登录，请先登录',
       duration: 3000
-    })
+    }) */
     $('.login_box').css('display', 'block')
   } else {
     var mystatus0 = new Object()
@@ -258,10 +260,11 @@ $('#collection_zx').click(function() {
 
     console.log('mystatus=' + mystatus)
     if (mystatus == 1) {
-      $('.arc_middle').toast({
+      layer.msg('您已收藏过此专线')
+      /* $('.arc_middle').toast({
         content: '您已收藏过此专线',
         duration: 3000
-      })
+      }) */
     }
     if (mystatus != 1) {
       collection_zx(userType, mobile, collectId)
@@ -283,10 +286,11 @@ $('#collection_wlgs').click(function() {
   var mobile = $.cookie('login_mobile')
   var collectId = publishId
   if (!userType || !mobile) {
-    $('.arc_middle').toast({
+    layer.msg('您还未登录，请先登录')
+    /* $('.arc_middle').toast({
       content: '您还未登录，请先登录',
       duration: 3000
-    })
+    }) */
     $('.login_box').css('display', 'block')
   } else {
     var mystatus0 = new Object()
@@ -294,10 +298,11 @@ $('#collection_wlgs').click(function() {
     var mystatus = mystatus0.collection_status
     console.log('mystatus=' + mystatus)
     if (mystatus == 1) {
-      $('.arc_middle').toast({
+      layer.msg('您已收藏过此物流公司')
+      /* $('.arc_middle').toast({
         content: '您已收藏过此物流公司',
         duration: 3000
-      })
+      }) */
     }
     if (mystatus != 1) {
       collection_wlgs(userType, mobile, collectId)
@@ -323,10 +328,11 @@ $('#collection_website').click(function() {
   var collectId = publishId
 
   if (!userType || !mobile) {
-    $('.top_com').toast({
+    layer.msg('您还未登录，请先登录')
+    /* $('.top_com').toast({
       content: '您还未登录，请先登录',
       duration: 3000
-    })
+    }) */
     $('.login_box').css('display', 'block')
   } else {
     var mystatus0 = new Object()
@@ -335,10 +341,11 @@ $('#collection_website').click(function() {
     var mystatus = mystatus0.collection_status
     console.log('mystatus=' + mystatus)
     if (mystatus == 1) {
-      $('.top_com').toast({
+      layer.msg('您已收藏过此物流公司')
+      /* $('.top_com').toast({
         content: '您已收藏过此物流公司',
         duration: 3000
-      })
+      }) */
     }
     if (mystatus != 1) {
       collection_wlgs(userType, mobile, collectId)
@@ -360,10 +367,11 @@ $('.collection_hz').click(function() {
   var mobile = $.cookie('login_mobile')
   var collectId = aid
   if (!userType || !mobile) {
-    $('.arc_middle').toast({
+    layer.msg('您还未登录，请先登录')
+    /* $('.arc_middle').toast({
       content: '您还未登录，请先登录',
       duration: 3000
-    })
+    }) */
     $('.login_box').css('display', 'block')
   } else {
     var mystatus0 = new Object()
@@ -371,10 +379,11 @@ $('.collection_hz').click(function() {
     var mystatus = mystatus0.collection_status
     console.log('mystatus=' + mystatus)
     if (mystatus == 1) {
-      $('.arc_left_2_2').toast({
+      layer.msg('您已收藏过此货源')
+      /* $('.arc_left_2_2').toast({
         content: '您已收藏过此货源',
         duration: 3000
-      })
+      }) */
     }
     if (mystatus != 1) {
       collection_hz(userType, mobile, collectId)
@@ -396,10 +405,11 @@ $('.collection_cz').click(function() {
   var mobile = $.cookie('login_mobile')
   var collectId = aid
   if (!userType || !mobile) {
-    $('.arc_middle').toast({
+    layer.msg('您还未登录，请先登录')
+    /* $('.arc_middle').toast({
       content: '您还未登录，请先登录',
       duration: 3000
-    })
+    }) */
     $('.login_box').css('display', 'block')
   } else {
     var mystatus0 = new Object()
@@ -407,10 +417,11 @@ $('.collection_cz').click(function() {
     var mystatus = mystatus0.collection_status
     console.log('mystatus=' + mystatus)
     if (mystatus == 1) {
-      $('.arc_middle').toast({
+      layer.msg('您已收藏过此车源')
+      /* $('.arc_middle').toast({
         content: '您已收藏过此车源',
         duration: 3000
-      })
+      }) */
     }
     if (mystatus != 1) {
       collection_cz(userType, mobile, collectId)

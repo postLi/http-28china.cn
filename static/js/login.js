@@ -247,7 +247,7 @@ function Is_login2() {
     $('#_userlogin2_2').css('display', 'block')
 
     $('#login_name2').html(login_name)
-    $('#my_website').attr('href', '/member/' + login_mobile + '.html')
+    // $('#my_website').attr('href', '/member/' + login_mobile + '.html')
   }
 }
 Is_login2()
@@ -270,7 +270,7 @@ function Is_login3() {
     $('#_userlogin3_2').css('display', 'block')
 
     $('#login_name3').html(login_name)
-    $('#my_website').attr('href', '/member/' + login_mobile + '.html')
+    // $('#my_website').attr('href', '/member/' + login_mobile + '.html')
   }
 }
 Is_login3()

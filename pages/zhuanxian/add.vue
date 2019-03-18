@@ -102,22 +102,7 @@
 <script>
 import $axios from 'axios'
 import LllDialog from '../../components/lllDialog'
-async function gateWayList($axios, currentPage, vo = {}) {
-  let parm = vo
-  parm.currentPage = currentPage
-  parm.pageSize = 21
-  let res = await $axios.post('/28-web/logisticsPark/list', parm)
-  console.log(res, 'res')
-  if (res.data.status === 200) {
-    return {
-      list: res.data.data.list,
-      pages: res.data.data.pages,
-      currentPage: res.data.data.pageNum
-    }
-  } else {
-    return { list: [], pages: 0, currentPage: 1 }
-  }
-}
+
 async function getpjLists($axios, currentPage, vo = {}, query, assessLevel) {
   let parm = vo
   parm.currentPage = currentPage
@@ -228,7 +213,7 @@ export default {
           this.$route.query,
           this.assessLevel
         )
-        console.log(obj.list, 'list1')
+        // console.log(obj.list, 'list1')
         // console.log(obj, 'getpjListData')
         this.pages = obj.pages
         this.list = obj.list

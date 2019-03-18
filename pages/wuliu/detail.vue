@@ -104,7 +104,7 @@
                 </dd>
 
 
-                <dt >排序&nbsp;:</dt>
+                <dt >增值服务&nbsp;:</dt>
                 <dd>
                   <a
                     v-for="(item,index) in AF025"
@@ -112,7 +112,7 @@
                     :class="[AF025Name === item.name ? 'now': '']"
                     @click="selectAF025(item)">{{ item.name }}</a>
                 </dd>
-                <dt >其他&nbsp;:</dt>
+                <dt >排序&nbsp;:</dt>
                 <dd>
                   <a
                     v-for="(item,index) in sortList"
@@ -146,22 +146,22 @@
                 v-for="(item,index) in transportRange"
                 :key="index">
                 <a
-                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr01">{{ item.startCity }}{{ item.startArea }}&nbsp;&rarr;&nbsp;{{ item.endCity }}{{ item.endArea }}</span></a>
                 <a
-                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
-                  target="_blank"><span class="nr02" ><font style="color:#f00">{{ item.discountPrice0 ? item.discountPrice0 : item.primeryPrice0 }}</font>元/公斤</span></a>
+                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
+                  target="_blank"><span class="nr02" ><font style="color:#f00">{{ item.weightPrice||0 }}</font>元/公斤</span></a>
                 <a
-                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
-                  target="_blank"><span class="nr03" ><font style="color:#f00">{{ item.primeryPrice1 }}</font>元/方</span> </a>
+                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
+                  target="_blank"><span class="nr03" ><font style="color:#f00">{{ item.lightPrice||0 }}</font>元/方</span> </a>
                 <a
-                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr04">{{ item.transportAging }}{{ item.transportAgingUnit }}</span></a>
                 <a
-                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr05">{{ item.companyName }}</span></a>
                 <a
-                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr06">详情</span></a>
               </li>
             </ul>
@@ -205,8 +205,13 @@
 
                 <dt >其他&nbsp;:</dt>
                 <dd>
-                  <a class="now all">不限</a>
                   <a 
+                    :href="'/wuliu/detail?&id='+ $route.query.id "
+                    class="all"
+                    :class="[$route.query.comAuthStatus?'all':'now']"
+                  >不限</a>
+                  <a 
+                    :class="{now:$route.query.comAuthStatus}"
                     :href="'/wuliu/detail?comAuthStatus=AF0010403&id='+ $route.query.id "
                     class="shiming">认证</a>
                 </dd>
@@ -303,7 +308,7 @@
 
         <div class="zx_sx"><span class="biaozhi"/><span>承运商推荐</span></div>
         <div
-          v-if="companysList==[]||companysList ==null"
+          v-if="companysList.length==0||companysList ==null"
           class="tj_none"
           style="display: block">
           <span>没有相关承运商推荐</span>
@@ -396,7 +401,8 @@ async function getLogisticsCompany(
     parm1 = {
       currentPage: 1,
       pageSize: 100,
-      parkId: query.id
+      parkId: query.id,
+      comAuthStatus: query.comAuthStatus
       // vo
     }
   await $axios.post('/28-web/pointNetwork/findParkNet', parm1).then(res => {
@@ -423,25 +429,24 @@ async function getLogisticsCompany(
 }
 async function getTransportRange($axios, query, vo = {}) {
   let list,
-    parm1 = {
-      currentPage: 1,
-      pageSize: 100,
-      vo
-    }
-  await $axios
-    .post(
-      '/aflc-portal/portalt/aflclogisticspark/v1/Gateway/getTransportRange/' +
-        query.id,
-      parm1
-    )
-    .then(res => {
-      res.data.data.list.forEach(item => {
-        item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
-      })
-      if (res.data.status === 200) {
-        list = res.data.data.list
-      }
+    parm1 = vo
+  // parm1 = {
+  //   currentPage: 1,
+  //   pageSize: 100,
+  //   parkId: query.id
+  // }
+  parm1.currentPage = 1
+  parm1.pageSize = 100
+  parm1.parkId = query.id
+  // console.log(parm1, 'parm1')
+  await $axios.post('/28-web/range/park/list/', parm1).then(res => {
+    res.data.data.list.forEach(item => {
+      item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
     })
+    if (res.data.status === 200) {
+      list = res.data.data.list
+    }
+  })
   return list
 }
 export default {
@@ -463,10 +468,10 @@ export default {
     return {
       AF025Name: '不限',
       sortList: [
-        { name: '默认排序', vo: { defaultSort: 1 } },
-        { name: '交易量', vo: { orderNumber: 1 } },
-        { name: '运输时效', vo: { transportAging: 1 } },
-        { name: '重货价格', vo: { weigthPrice: 1 } }
+        { name: '默认排序', orderBy: 'default' },
+        { name: '交易量', orderBy: 'orderDesc' },
+        { name: '运输时效', orderBy: 'transportAgingAsc' },
+        { name: '重货价格', orderBy: 'weigthPriceAsc' }
       ],
       sortName: '默认排序',
       searchWLGS: '',
@@ -504,13 +509,12 @@ export default {
     })
 
     // console.log(gatewayData.data.data, 'gatewayData.data.data')
-    const transportRange = await getTransportRange($axios, query)
+    let parm2
+    const transportRange = await getTransportRange($axios, query, parm2)
     const logisticsCompany = await getLogisticsCompany($axios, query)
-    let AF025 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
-    )
+    let AF025 = await $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF025')
     AF025.data.data.unshift({ name: '不限', code: '' })
-    console.log(logisticsCompany, 'logisticsCompany')
+    // console.log(transportRange, 'transportRange')
     return {
       gatewayData: gatewayData.data.status === 200 ? gatewayData.data.data : {},
       jwd,
@@ -569,20 +573,20 @@ export default {
       let endp = list2[0]
       let endc = list2[1]
       let enda = list2[2]
-      let vo = {
-        companyName: this.searchWLGS,
-        endArea: enda,
-        endCity: endc,
-        endProvince: endp,
-        startArea: starta,
-        startCity: startc,
-        startProvince: startp
-      }
       this.transportRange = await getTransportRange(
         this.$axios,
         this.$route.query,
-        vo
+        {
+          companyName: this.searchWLGS,
+          endArea: enda,
+          endCity: endc,
+          endProvince: endp,
+          startArea: starta,
+          startCity: startc,
+          startProvince: startp
+        }
       )
+      // console.log(this.transportRange, ' this.transportRange')
     },
     async flush() {
       $('#wlLineFrom input').citypicker('reset')
@@ -599,19 +603,71 @@ export default {
       window.open('/gongsi?&wangdian=' + this.searchWDKey)
     },
     async selectSort(item) {
+      let list1 = [],
+        list2 = []
+      // console.log(item, 'item2')
+      $('#wlLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      let startp = list1[0]
+      let startc = list1[1]
+      let starta = list1[2]
+
+      $('#wlLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      let endp = list2[0]
+      let endc = list2[1]
+      let enda = list2[2]
       this.sortName = item.name
       this.transportRange = await getTransportRange(
         this.$axios,
         this.$route.query,
-        item.vo
+        {
+          companyName: this.searchWLGS,
+          endArea: enda,
+          endCity: endc,
+          endProvince: endp,
+          startArea: starta,
+          startCity: startc,
+          startProvince: startp,
+          orderBy: item.orderBy
+        }
+        // orderBy:item.vo
       )
     },
     async selectAF025(item) {
+      let list1 = [],
+        list2 = []
+      $('#wlLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      let startp = list1[0]
+      let startc = list1[1]
+      let starta = list1[2]
+
+      $('#wlLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      let endp = list2[0]
+      let endc = list2[1]
+      let enda = list2[2]
       this.AF025Name = item.name
+      // console.log(item.code, 'item.code')
       this.transportRange = await getTransportRange(
         this.$axios,
         this.$route.query,
-        { otherServiceCode: item.code }
+        // { otherServiceCode: item.code },
+        {
+          companyName: this.searchWLGS,
+          endArea: enda,
+          endCity: endc,
+          endProvince: endp,
+          startArea: starta,
+          startCity: startc,
+          startProvince: startp,
+          otherServiceCode: item.code
+        }
       )
     },
     map_init() {

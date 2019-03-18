@@ -71,6 +71,7 @@ const _966f3ad6 = () => interopDefault(import('..\\pages\\m\\gongsi\\detail.vue'
 const _b4fd1042 = () => interopDefault(import('..\\pages\\m\\huoyuan\\detail.vue' /* webpackChunkName: "pages_m_huoyuan_detail" */))
 const _557f6d6a = () => interopDefault(import('..\\pages\\m\\utils\\localStorage.js' /* webpackChunkName: "pages_m_utils_localStorage" */))
 const _734244a6 = () => interopDefault(import('..\\pages\\m\\zhuanxian\\detail.vue' /* webpackChunkName: "pages_m_zhuanxian_detail" */))
+const _39a04ca4 = () => interopDefault(import('..\\pages\\m\\zhuanxian\\evaluate.vue' /* webpackChunkName: "pages_m_zhuanxian_evaluate" */))
 const _422dfb7b = () => interopDefault(import('..\\pages\\member\\_id-chajian.vue' /* webpackChunkName: "pages_member__id-chajian" */))
 const _ba53af9e = () => interopDefault(import('..\\pages\\member\\_id-contactus.vue' /* webpackChunkName: "pages_member__id-contactus" */))
 const _776fdedb = () => interopDefault(import('..\\pages\\member\\_id-cpfw.vue' /* webpackChunkName: "pages_member__id-cpfw" */))
@@ -438,6 +439,10 @@ export function createRouter() {
       path: "/m/zhuanxian/detail",
       component: _734244a6,
       name: "m-zhuanxian-detail"
+    }, {
+      path: "/m/zhuanxian/evaluate",
+      component: _39a04ca4,
+      name: "m-zhuanxian-evaluate"
     }, {
       path: "/member/:id-chajian",
       component: _422dfb7b,

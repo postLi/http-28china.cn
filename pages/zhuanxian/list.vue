@@ -545,7 +545,7 @@ import FooterLinks from '../../components/footerLinks'
 import selectMap from './selectMap'
 import HotList from '../../components/hotList'
 export default {
-  name: 'Index',
+  name: 'Zhuanxian',
   components: {
     FooterLinks,
     selectMap,
@@ -649,7 +649,13 @@ export default {
       codeC.data.status == 200
     ) {
       listA.data.data.list.forEach(item => {
-        item.num = Math.ceil(Math.random() * 30)
+        // item.num = Math.ceil(Math.random() * 30)
+        let arr = (item.id || '').split('')
+        let num = 0
+        arr.forEach(el => {
+          num += el.charCodeAt(0) || 0
+        })
+        item.num = num % 30
       })
       // for (var i = 3; i < listD.data.data.length; i--) {
       //   let listD1 = listD.data.data
@@ -816,7 +822,13 @@ export default {
                         let getList =
                           res.data.status == 200 ? res.data.data.list : []
                         getList.forEach(item => {
-                          item.num = Math.ceil(Math.random() * 30)
+                          // 通过item.id计算出一个固定的值
+                          let arr = (item.id || '').split('')
+                          let num = 0
+                          arr.forEach(el => {
+                            num += el.charCodeAt(0) || 0
+                          })
+                          item.num = num % 30
                           // console.log('this.lineList:', item.num)
                         })
                         _this.lineLists = getList

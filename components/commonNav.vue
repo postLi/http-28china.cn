@@ -187,7 +187,7 @@
           style="width: 1400px;">
           <span class="re2"/>
           <span class="xin2"/>
-          <li><a href="/">首页</a></li>
+          <li id="HomePage"><a href="/">首页</a></li>
           <li
             id="wlzx"
             style="margin-left: 20px;"
@@ -459,28 +459,33 @@ export default {
       this.changeNav()
     },
     changeNav() {
-      switch (this.$route.name) {
-        case 'huoyuan':
-          $('#hy').addClass('nav-active')
-          break
-        case 'cheyuan':
-          $('#cy').addClass('nav-active')
-          break
-        case 'shixiao':
-          $('#sx').addClass('nav-active')
-          break
-        case 'wuliu':
-          $('#wlyq').addClass('nav-active')
-          break
-        case 'gongsi':
-          $('#gs').addClass('nav-active')
-          break
-        case 'wangdian':
-          $('#wd').addClass('nav-active')
-          break
-        case 'zixun':
-          $('#news').addClass('nav-active')
-          break
+      let path = this.$route.path
+      if (path === '/') {
+        $('#HomePage').addClass('nav-active')
+      }
+      if (path.indexOf('/huoyuan') === 0) {
+        $('#hy').addClass('nav-active')
+      }
+      if (path.indexOf('/cheyuan') === 0) {
+        $('#cy').addClass('nav-active')
+      }
+      if (path.indexOf('/shixiao') === 0) {
+        $('#sx').addClass('nav-active')
+      }
+      if (path.indexOf('/wuliu') === 0) {
+        $('#wlyq').addClass('nav-active')
+      }
+      if (path.indexOf('/gongsi') === 0) {
+        $('#gs').addClass('nav-active')
+      }
+      if (path.indexOf('/wangdian') === 0) {
+        $('#wd').addClass('nav-active')
+      }
+      if (path.indexOf('/zixun') === 0) {
+        $('#news').addClass('nav-active')
+      }
+      if (path.indexOf('/zhuanxian') === 0) {
+        $('#wlzx').addClass('nav-active')
       }
     }
   }

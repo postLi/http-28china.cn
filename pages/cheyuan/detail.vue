@@ -736,7 +736,14 @@ export default {
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     if (cy1.data.status === 200) {
-      cy1.data.data.num = Math.ceil(Math.random() * 30)
+      // cy1.data.data.num = Math.ceil(Math.random() * 30)
+      let item = cy1.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      cy1.data.data.num = num % 30
       cy1.data.data.startTime1 = parseTime(
         cy1.data.data.startTime,
         '{y}-{m}-{d} {h}:{i}:{s}'

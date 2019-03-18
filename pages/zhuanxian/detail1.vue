@@ -834,10 +834,17 @@ export default {
       // this.linedata = res.data.data
       lineCode = await getCode($axios, res.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, res.data.data.startCity)
-      res.data.data.num = Math.ceil(Math.random() * 30)
+      // res.data.data.num = Math.ceil(Math.random() * 30)
+      let item = res.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      item.num = num % 30
       console.log(res.data.data, 'res.data.data.num')
       return {
-        linedata: res.data.data,
+        linedata: item,
         lineCitys: lineCity.data.data
       }
     }

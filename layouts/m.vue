@@ -9,8 +9,27 @@ const rem =
 
 export default {
   head: {
-    script: [{ innerHTML: rem, type: 'text/javascript', charset: 'utf-8' }],
+    script: [
+      { innerHTML: rem, type: 'text/javascript', charset: 'utf-8' },
+      {
+        src:
+          'https://webapi.amap.com/maps?v=1.4.10&key=e61aa7ddc6349acdb3b57c062080f730'
+      }
+    ],
     __dangerouslyDisableSanitizers: ['script']
+  },
+  beforeMount() {
+    AMap.plugin('AMap.CitySearch', () => {
+      let citySearch = new AMap.CitySearch()
+      citySearch.getLocalCity((status, result) => {
+        if (status === 'complete' && result.info === 'OK') {
+          this.$store.dispatch('m/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName'
+          })
+        }
+      })
+    })
   },
   mounted() {}
 }

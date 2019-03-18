@@ -146,22 +146,22 @@
                 v-for="(item,index) in transportRange"
                 :key="index">
                 <a
-                  :href="'/shixiao/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
                   target="_blank"><span class="nr01">{{ item.startCity }}{{ item.startArea }}&nbsp;&rarr;&nbsp;{{ item.endCity }}{{ item.endArea }}</span></a>
                 <a
-                  :href="'/shixiao/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
                   target="_blank"><span class="nr02" ><font style="color:#f00">{{ item.discountPrice0 ? item.discountPrice0 : item.primeryPrice0 }}</font>元/公斤</span></a>
                 <a
-                  :href="'/shixiao/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
                   target="_blank"><span class="nr03" ><font style="color:#f00">{{ item.primeryPrice1 }}</font>元/方</span> </a>
                 <a
-                  :href="'/shixiao/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
                   target="_blank"><span class="nr04">{{ item.transportAging }}{{ item.transportAgingUnit }}</span></a>
                 <a
-                  :href="'/shixiao/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
                   target="_blank"><span class="nr05">{{ item.companyName }}</span></a>
                 <a
-                  :href="'/shixiao/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.rangeId +'&publishId=' + item.companyId"
                   target="_blank"><span class="nr06">详情</span></a>
               </li>
             </ul>

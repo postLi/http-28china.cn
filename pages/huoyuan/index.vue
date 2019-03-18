@@ -286,7 +286,7 @@
                   <span>{{ item.createTime }}</span>
                 </div>
                 <div class="li_two">
-                  <a>{{ item.goodsTypeName.substring(0,2) }}<span><i>{{ item.goodsWeight }}</i>公斤</span>|<span><i>{{ item.goodsVolume }}</i>方</span>|<span><i>{{ item.goodsNum }}</i>件</span></a>
+                  <a :title="item.goodsTypeName">{{ item.goodsTypeName.substring(0,2) }}<span>:<i>{{ item.goodsWeight }}</i>公斤</span>|<span><i>{{ item.goodsVolume }}</i>方</span>|<span><i>{{ item.goodsNum }}</i>件</span></a>
                   <span><a
                     target="_blank"
                     :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
@@ -303,27 +303,37 @@
           <div class="list-box-r-top">
             <form action="">
               <h2 class="list_help_title">订阅优质货源</h2>
-              <div class="ltl-input">
+              <div 
+                class="from10"
+                id="form1">
                 <input
+                  v-model="checkNotice.startAddres"
                   id="right-bar-form"
                   autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
                   wtmap=""
                   type="text"
                   class="ltl-location"
                   placeholder="请选择出发地">
                 <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
               </div>
-              <div class="ltl-input">
+              <div 
+                class="from10"
+                id="form2">
                 <input
+                  v-model="checkNotice.endAddres"
                   id="right-bar-to"
                   autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
                   wtmap=""
                   type="text"
                   class="ltl-location"
                   placeholder="请选择目到达地">
                 <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
               </div>
-              <div class="ltl-input">
+              <div class="from1">
                 <h4 class="ltl-text">订阅货源，第一时间获得系统消息通知</h4>
                 <h4 class="ltl-text">已有18965人订阅后达成交易</h4>
               </div>
@@ -331,6 +341,7 @@
                 id="check-fee"
                 type="button"
                 value="上新提醒我"
+                @click="sendNotice()"
                 class="right-top-btn">
             </form>
           </div>
@@ -513,9 +524,13 @@
         </ul>
       </div>
     </div>
+    <Add 
+      :is-show-add.sync="isShowAdd" 
+      :data-info="dataInfo"/>
   </div>
 </template>
 <script>
+import Add from './add'
 async function getHyList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -589,6 +604,9 @@ async function getRecommendList($axios, vo) {
 }
 export default {
   name: 'HuoYuan',
+  components: {
+    Add
+  },
   head: {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
@@ -603,6 +621,12 @@ export default {
       pages: 0,
       currentPage: 1,
       recommendList: [],
+      isShowAdd: false,
+      dataInfo: {},
+      checkNotice: {
+        startAddres: '',
+        endAddres: ''
+      },
       orderClassList: [
         { id: '', name: '不限' },
         { id: 'AF0490701', name: '单次急发货源' },
@@ -850,9 +874,67 @@ export default {
       city: this.endCity,
       district: this.endArea
     })
+    // $('#from1 input').citypicker({
+    //   province: this.startProvince,
+    //   city: this.startCity,
+    //   district: this.startArea
+    // })
+    // $('#from2 input').citypicker({
+    //   province: this.endProvince,
+    //   city: this.endCity,
+    //   district: this.endArea
+    // })
     this.pagination()
   },
   methods: {
+    sendNotice() {
+      let _this = this
+      this.sendNot()
+      if (this.checkNotice.startAddres === '') {
+        $('#form1').css('border-color', 'red')
+      } else if (this.checkNotice.startAddres != '') {
+        $('#form1').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.endAddres === '') {
+        $('#form2').css('border-color', 'red')
+      } else if (this.checkNotice.endAddres != '') {
+        $('#form2').css('border-color', '#e5e5e5')
+      }
+      if (
+        this.checkNotice.startAddres != '' &&
+        this.checkNotice.endAddres != ''
+      ) {
+        this.isShowAdd = true
+        this.dataInfo.startProvince = this.startProvince
+        this.dataInfo.startCity = this.startCity
+        this.dataInfo.startArea = this.startArea
+        this.dataInfo.endProvince = this.endProvince
+        this.dataInfo.endCity = this.endCity
+        this.dataInfo.endArea = this.endArea
+      } else {
+        layer.msg('请选择出发地跟到达地')
+      }
+    },
+    sendNot() {
+      let startAds = [],
+        endAds = []
+      $('#form1 .select-item').each(function(i, e) {
+        startAds.push($(this).text())
+      })
+      this.startProvince = startAds[0] ? startAds[0] : ''
+      this.startCity = startAds[1] ? startAds[1] : ''
+      this.startArea = startAds[2] ? startAds[2] : ''
+      this.checkNotice.startAddres =
+        this.startProvince + this.startCity + this.startArea
+      $('#form2 .select-item').each(function(i, e) {
+        endAds.push($(this).text())
+      })
+      this.endProvince = endAds[0] ? endAds[0] : ''
+      this.endCity = endAds[1] ? endAds[1] : ''
+      this.endArea = endAds[2] ? endAds[2] : ''
+      this.checkNotice.endAddres =
+        this.endProvince + this.endCity + this.endArea
+    },
     searchDo() {
       let list1 = [],
         list2 = []
@@ -2024,9 +2106,20 @@ body {
   /* border: 1px solid #ececec; */
   margin-bottom: 10px;
 }
-.ltl-input {
+.from1 {
   position: relative;
   margin: 7px 0 10px 0;
+}
+.from10 {
+  position: relative;
+  margin: 7px 0 10px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: white;
+  font-size: 14px;
+  line-height: 32px;
 }
 .right-top-btn {
   display: block;

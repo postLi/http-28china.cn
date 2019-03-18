@@ -673,19 +673,16 @@ table tr:nth-child(odd){
   color: #333333;
   font-size: 14px;
 }
-.zx_sx_new li span:nth-child(1){
+/* .zx_sx_new li span:nth-child(1){
+  flex: 2;
+} */
+/* .zx_sx_new li a:nth-child(3){
+  flex: 2;
+} */
+.zx_sx_new li a:nth-child(6){
   flex: 2;
 }
-.zx_sx_new li span:nth-child(2){
-  flex: 2;
-}
-.zx_sx_new li span:nth-child(1){
-  flex: 2;
-}
-.zx_sx_new li span:nth-child(6){
-  flex: 2;
-}
-.zx_sx_new li span{
+.zx_sx_new li a{
   flex: 1;
   text-align: center;
 }

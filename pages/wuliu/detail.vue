@@ -206,7 +206,9 @@
                 <dt >其他&nbsp;:</dt>
                 <dd>
                   <a class="now all">不限</a>
-                  <a class="shiming" >认证</a>
+                  <a 
+                    :href="'/wuliu/detail?comAuthStatus=AF0010403&id='+ $route.query.id "
+                    class="shiming">认证</a>
                 </dd>
               </dl>
             </div>
@@ -394,34 +396,29 @@ async function getLogisticsCompany(
     parm1 = {
       currentPage: 1,
       pageSize: 100,
-      vo
+      parkId: query.id
+      // vo
     }
-  await $axios
-    .post(
-      '/aflc-portal/portalt/aflclogisticspark/v1/Gateway/getLogisticsCompany/' +
-        query.id,
-      parm1
-    )
-    .then(res => {
-      res.data.data.list.forEach(item => {
-        if (JSON.parse(item.productService).length > 0) {
-          item.productService1 = `
+  await $axios.post('/28-web/pointNetwork/findParkNet', parm1).then(res => {
+    res.data.data.list.forEach(item => {
+      if (JSON.parse(item.productService).length > 0) {
+        item.productService1 = `
         ${JSON.parse(item.productService)[0]}
         ${JSON.parse(item.productService)[1]}
         ${JSON.parse(item.productService)[2]}`
-        }
-        if (JSON.parse(item.otherService).length > 0) {
-          item.otherService1 = `
+      }
+      if (JSON.parse(item.otherService).length > 0) {
+        item.otherService1 = `
         ${JSON.parse(item.otherService)[0]}
         ${JSON.parse(item.otherService)[1]}
         ${JSON.parse(item.otherService)[2]}`
-        }
-        setCredit(item)
-      })
-      if (res.data.status === 200) {
-        list = res.data.data.list
       }
+      setCredit(item)
     })
+    if (res.data.status === 200) {
+      list = res.data.data.list
+    }
+  })
   return list
 }
 async function getTransportRange($axios, query, vo = {}) {
@@ -506,13 +503,14 @@ export default {
       setCredit(item)
     })
 
-    console.log(gatewayData.data.data, 'gatewayData.data.data')
+    // console.log(gatewayData.data.data, 'gatewayData.data.data')
     const transportRange = await getTransportRange($axios, query)
     const logisticsCompany = await getLogisticsCompany($axios, query)
     let AF025 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
     )
     AF025.data.data.unshift({ name: '不限', code: '' })
+    console.log(logisticsCompany, 'logisticsCompany')
     return {
       gatewayData: gatewayData.data.status === 200 ? gatewayData.data.data : {},
       jwd,

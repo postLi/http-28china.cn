@@ -939,6 +939,7 @@
     <Add
       :show = "isAdd"
       :info="linedataE"
+      :infopj="infopj"
       @close="noaddFn"/>
   </div>
 
@@ -1084,7 +1085,8 @@ export default {
       linedataE,
       linedataF,
       linedataG,
-      linedataH
+      linedataH,
+      infopj
     ] = await Promise.all([
       $axios.get(aurl + `/28-web/range/${query.id}`),
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1113,7 +1115,12 @@ export default {
         endProvince: endp,
         endCity: endc,
         endArea: enda
-      })
+      }),
+      $axios.post(
+        aurl +
+          `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}
+`
+      )
     ])
 
     if (linedataA.data.status === 200) {
@@ -1228,6 +1235,7 @@ export default {
       )
       console.log(linedataE.data.data, 'linedataE')
       return {
+        infopj: infopj.data.status == 200 ? infopj.data.data : [],
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
         lineLists: linedataC.data.status == 200 ? linedataC.data.data.list : [],

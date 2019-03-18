@@ -6,7 +6,13 @@ export default {
   name: 'Hyzx',
   mounted() {
     if (process.client) {
-      location.href = 'member.28china.cn'
+      let url = location.href
+      location.href =
+        url.indexOf('192.168') === -1
+          ? 'http://member.28china.cn'
+          : url.indexOf('192.168.1.157')
+            ? 'http://192.168.1.157:9526'
+            : 'http://192.168.1.188:9524'
     }
   }
 }

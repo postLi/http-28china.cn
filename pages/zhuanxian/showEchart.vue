@@ -21,14 +21,14 @@ export default {
   },
   watch: {
     info(n, o) {
-      console.log(n, 'nnnnnnnn')
+      // console.log(n, 'nnnnnnnn')
     }
   },
   mounted() {
     if (process.server) {
       return
     }
-    console.log(this.info, 'this.info')
+    // console.log(this.info, 'this.info')
     // `cargo_type`  （重货1、轻货0）'
     this.info.forEach((item, index) => {
       if (item.cargoType === '0') {

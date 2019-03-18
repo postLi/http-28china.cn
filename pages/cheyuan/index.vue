@@ -256,7 +256,7 @@
                   <span>{{ item.createTime }}</span>
                 </div>
                 <div class="li_two">
-                  <a><span>长{{ item.carLength }}米</span>|<span>载重{{ item.carLoad }}吨</span>|<span>{{ item.carSourceTypeName }}</span></a>
+                  <a>长<span><i>{{ item.carLength }}</i>米</span>|<span>载重<i>{{ item.carLoad }}</i>吨</span>|<span>{{ item.carSourceTypeName }}</span></a>
                   <span><a
                     target="_blank"
                     :href="'/cheyuan/detail?id=' + item.id"
@@ -1779,6 +1779,11 @@ body {
 }
 .li_two span {
   color: #999999;
+  margin: 0 5px;
+}
+.li_two i {
+  color: red;
+  margin: 0 5px;
 }
 .li_two .li_check {
   border-bottom: 1px solid #3f94ee;

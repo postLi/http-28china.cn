@@ -3,21 +3,38 @@ $('#collection_url').attr(
   'http://192.168.1.157:9526/carrier/collection'
 )
 
+// 获取用户信息
+function getLoginInfobycookie() {
+  //loginId
+  var token = $.cookie('access_token')
+  var type = $.cookie('login_type')
+  var usertoken = $.cookie('login_userToken')
+  var mobile = $.cookie('login_mobile')
+  var id = $.cookie('loginId')
+  return {
+    token: token,
+    type: type,
+    usertoken: usertoken,
+    mobile: mobile,
+    id: id
+  }
+}
+
 //收藏 S
 function collection_zx(userType, mobile, collectId) {
   $.ajax({
     type: 'post',
-    headers: {
+/*     headers: {
       'Content-Type': 'application/json'
-    },
-    url: '/api/aflc-portal/portalt/aflcCollect/v1/collect',
+    }, */
+    url: '/api/28-web/collect/transportRange',
     dataType: 'json',
-    data: JSON.stringify({
-      userType: userType,
-      mobile: mobile,
-      collectType: 4,
-      collectId: collectId
-    }),
+    params: {
+      access_token: userType,
+      user_token: mobile,
+      transportRangeId: 4,
+      handle: 'collect'
+    },
     success: function(res) {
       if (res.status != 40001) {
         $('.collection_zx').css('display', 'block')
@@ -431,19 +448,21 @@ $('.collection_cz').click(function() {
 
 var aid = aid
 
-var zx_num = new Object()
-zx_num = is_collection_zx('', '', aid)
-var my_zx_num = zx_num.collectNum
-$('.my_zx_num').html(my_zx_num)
 
-var hz_num = new Object()
-hz_num = is_collection_hz('', '', aid)
-var my_hz_num = hz_num.collectNum
-$('.my_hz_num').html(my_hz_num)
 
-var cz_num = new Object()
-cz_num = is_collection_cz('', '', aid)
-var my_cz_num = cz_num.collectNum
-$('.my_cz_num').html(my_cz_num)
+/*   var zx_num = new Object()
+  zx_num = is_collection_zx('', '', aid)
+  var my_zx_num = zx_num.collectNum
+  $('.my_zx_num').html(my_zx_num)
+
+  var hz_num = new Object()
+  hz_num = is_collection_hz('', '', aid)
+  var my_hz_num = hz_num.collectNum
+  $('.my_hz_num').html(my_hz_num)
+
+  var cz_num = new Object()
+  cz_num = is_collection_cz('', '', aid)
+  var my_cz_num = cz_num.collectNum
+  $('.my_cz_num').html(my_cz_num) */
 
 //收藏 E

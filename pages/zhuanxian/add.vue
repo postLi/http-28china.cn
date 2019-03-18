@@ -2,12 +2,12 @@
   <LllDialog
     :is-show="showDiv"
     @close="closeDialog"
-    :title="popTitle"
+  
     class="showpj">
 
     <div
       slot="header"
-      style="font-size:20px;color:red;padding:20px 0"><span>江苏大本赢物流有限公司-用户评价</span></div>
+      style="font-size:20px;color:red;padding:20px 0"><span>{{ info.companyName }}-用户评价</span></div>
     <div
       class="dialog_publish_main"
       slot="main">
@@ -17,9 +17,17 @@
             <!-- <p>dfj</p> -->
             <!-- <p>{{ linedataE.evaGoodRate }}%</p> -->
             <p><span
+              :class="indexPl==3?'active':'unActive'"
+              class="unActive"
+              @click="showPingLunFn(3)"/>全部({{ infopj.all || 0 }})</p>
+          </li>
+          <li>
+            <!-- <p>dfj</p> -->
+            <!-- <p>{{ linedataE.evaGoodRate }}%</p> -->
+            <p><span
               :class="indexPl==0?'active':'unActive'"
               class="unActive"
-              @click="showPingLunFn(0)"/>好评(1)</p>
+              @click="showPingLunFn(0)"/>好评({{ infopj.good || 0 }})</p>
           </li>
           <li>
             <!-- <p>fkdf</p> -->
@@ -27,7 +35,7 @@
             <p><span
               :class="indexPl==1?'active':'unActive'"
               class="unActive"
-              @click="showPingLunFn(1)"/>中评(1)</p>
+              @click="showPingLunFn(1)"/>中评({{ infopj.middle || 0 }})</p>
           </li>
           <li>
             <!-- <p>df</p> -->
@@ -35,35 +43,45 @@
             <p><span
               :class="indexPl==2?'active':'unActive'"
               class="unActive"
-              @click="showPingLunFn(2)"/>差评(1)</p>
+              @click="showPingLunFn(2)"/>差评({{ infopj.bad || 0 }})</p>
           </li>
         </ul>
-        <p style="margin-top: 20px;">此用户没有评论</p>
-        <ul
-          v-for="(item,i) in 3"
-          :key="i"
-          class="pjdetail">
-          <li
-          style="padding-top:25px;border-bottom:1px solid #ccc;padding-bottom: 20px;display:inline-block">
-            <div
-              style="float:left;padding:0 70px 0 50px"
-              class="pj_l">
-              <p style="padding-bottom:10px">狄仁杰</p>
-              <p><img
-                v-for="(item,i) in 4"
-                :key="i"
-                src="../../static/line/images/13z.png"
-                alt=""></p>
-            </div>
-            <div
-              style="float:left"
-              class="pj_r">
-              <p style="color:rgb(76,76,76)">希望是真的</p>
-              <p style="padding-top:10px;color:rgb(181,189,205)">2015-2018 20.52</p>
-              <p style="color:rgb(255,197,96);padding:10px;border:1px solid #ccc; padding: 10px;border: 1px solid;width: 505px;margin-top: 20px;"><span>[回复]</span>:dfdfdf</p>
-            </div>
-          </li>
-        </ul>
+        <div v-if="list==[]||list.length==0">
+          <p 
+            style="margin-top: 20px;;color:red"
+          > 此用户没有评论</p>
+        </div>
+        <div
+          v-else
+        >
+
+          <ul
+            v-for="(item,i) in list"
+            :key="i"
+            class="pjdetail">
+            <li
+            style="padding-top:25px;border-bottom:1px solid #ccc;padding-bottom: 20px;display:inline-block">
+              <div
+                style="float:left;padding:0 70px 0 50px"
+                class="pj_l">
+                <p style="padding-bottom:10px">{{ item.evaluationName }}</p>
+                <p><img
+                  v-for="(item,i) in 4"
+                  :key="i"
+                  src="../../static/line/images/13z.png"
+                  alt=""></p>
+              </div>
+              <div
+                style="float:left; width: 560px;"
+                class="pj_r">
+                <p style="color:rgb(76,76,76)">{{ item.evaluationDes }}</p>
+                <p style="padding-top:10px;color:rgb(181,189,205)">{{ item.createTime }}</p>
+                <!-- <p style="color:rgb(255,197,96);padding:10px;border:1px solid #ccc; padding: 10px;border: 1px solid;width: 505px;margin-top: 20px;"><span style="display: inline-block;">[回复]</span>:dfdfdf</p> -->
+                <p style="color:rgb(255,197,96);padding:10px;border:1px solid #ccc; padding: 10px;border: 1px solid;width: 505px;margin-top: 20px;"><span style="display: inline-block;">[回复]：{{ item.replyDes }}</span></p>
+              </div>
+            </li>
+          </ul>
+        </div>
         <!--分页-->
         <div
           class="box"
@@ -72,7 +90,7 @@
             id="pagination1"
             class="page fl"/>
           <div class="info fl">
-          <!--<p>当前页数：<span id="current1">1</span></p>-->
+          <!-- <p>当前页数：<span id="current1">1</span></p> -->
           </div>
         </div>
         <!--分页-->
@@ -89,6 +107,7 @@ async function gateWayList($axios, currentPage, vo = {}) {
   parm.currentPage = currentPage
   parm.pageSize = 21
   let res = await $axios.post('/28-web/logisticsPark/list', parm)
+  console.log(res, 'res')
   if (res.data.status === 200) {
     return {
       list: res.data.data.list,
@@ -98,6 +117,27 @@ async function gateWayList($axios, currentPage, vo = {}) {
   } else {
     return { list: [], pages: 0, currentPage: 1 }
   }
+}
+async function getpjLists($axios, currentPage, vo = {}, query, assessLevel) {
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 3
+  parm.assessLevel = assessLevel
+  parm.transportRangeId = query.id
+  let aurl = ''
+
+  let res = await $axios.post(aurl + '/28-web/rangeEva/range/list', parm)
+
+  if (res.data.status === 200) {
+    return {
+      list: res.data.data.list,
+      pages: res.data.data.pages,
+      currentPage: res.data.data.pageNum
+    }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
+  }
+  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
 }
 export default {
   name: 'Add',
@@ -116,19 +156,34 @@ export default {
     info: {
       type: [Array, Object],
       default: () => {}
+    },
+    infopj: {
+      type: [Array, Object],
+      default: () => {}
+    },
+    infopjs: {
+      type: [Array, Object],
+      default: () => {}
     }
+  },
+  async asyncData({ $axios, app, query, error }) {
+    let vo
+    let getpjListData = await getpjLists($axios, 1, vo)
+
+    // console.log('ressss1')
+    // console.log(getpjListData, 'getpjListData')
   },
   head: {
     link: [
       { rel: 'stylesheet', href: '/line/css/article_wlzx.css' },
       { rel: 'stylesheet', href: '/line/css/price.css' },
-      { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
+      // { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' },
       // { rel: 'stylesheet', href: '/css/index.css' },
       { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
     ],
     script: [
-      { src: '../js/jquery.pagination.min.js' },
+      // { src: '../js/jquery.pagination.min.js' },
       { src: '../js/AFLC_API.js' },
       // { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
@@ -136,9 +191,13 @@ export default {
   },
   data() {
     return {
-      indexPl: 0,
+      assessLevel: '',
+      indexPl: 3,
+      list: [],
+      pages: 0, //总页数
+      currentPage: 1, //当前页
       // isShow: this.show,
-      popTitle: '提货派车单',
+      // popTitle: '提货派车单',
       falseMsg: '',
       form: {
         companyName: '',
@@ -153,31 +212,61 @@ export default {
   },
 
   computed: {
-    showDiv(n, o) {
+    showDiv(n) {
       return this.show
-      console.log(this.show, 'isAdd1')
     }
   },
   watch: {
+    async showDiv(n) {
+      if (n == true) {
+        // console.log(this.assessLevel, 'this.assessLevel')
+        let vo
+        let obj = await getpjLists(
+          this.$axios,
+          1,
+          vo,
+          this.$route.query,
+          this.assessLevel
+        )
+        console.log(obj.list, 'list1')
+        // console.log(obj, 'getpjListData')
+        this.pages = obj.pages
+        this.list = obj.list
+        this.currentPage = obj.currentPage
+        this.loadPagination()
+      }
+    },
     types(n, o) {},
     info(n, o) {
       console.log(n, 'nnn1')
+    },
+    infopj(n, o) {
+      console.log(n, 'infopj')
+    },
+    infopjs(n, o) {
+      // console.log(n, 'infopjs')
     }
   },
-  mounted() {
-    this.loadPagination()
-  },
+  mounted() {},
   methods: {
     loadPagination() {
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
-          $('#current1').text(current)
-          let obj = await gateWayList(this.$axios, current, this.vo)
-          this.getGateWayList = obj.list
+          // $('#current1').text(current)
+          let obj = await getpjLists(
+            this.$axios,
+            current,
+            {},
+            this.$route.query,
+            this.assessLevel
+          )
+          // console.log(obj, 'objobj11')
+          let assessLevel = ''
+          this.pages = obj.pages
+          this.list = obj.list
           this.currentPage = obj.currentPage
-          window.location.href = '#top'
         }
       })
     },
@@ -203,93 +292,27 @@ export default {
         assessLevel = 'AF0360102'
       } else if (index == 2) {
         assessLevel = 'AF0360103'
+      } else if (index == 3) {
+        assessLevel = ''
       }
       this.indexPl = index
-      let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
-      // $axios
-      //   .post(aurl + `/api/28-web/rangeEva/range/list`, {
-      //     currentPage: 1,
-      //     pageSize: 3,
-      //     transportRangeId: this.linedataA.id,
-      //     assessLevel: assessLevel
-      //   })
-      //   .then(res => {
-      //     console.log(res, 'resresres')
-      //     if (res.data.status === 200) {
-      //       this.linedataF = res.data.data.list
-      //     } else {
-      //       layer.msg(res.data.errorInfo ? res.data.errorInfo : res.data.text)
-      //     }
-      //   })
-
-      // this.indexPl
+      this.assessLevel = assessLevel
+      let vo
+      // vo.assessLevel = assessLevel
+      getpjLists(
+        this.$axios,
+        this.currentPage,
+        vo,
+        this.$route.query,
+        assessLevel
+      ).then(res => {
+        let obj = res
+        this.pages = obj.pages
+        this.list = obj.list
+        this.currentPage = obj.currentPage
+        // console.log(this.list, 'this.list')
+      })
     },
-    onTIJ() {
-      let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
-      if (!this.form.companyName.length) {
-        this.ismobile = true
-        this.falseMsg = '请输入公司名称'
-        return false
-      }
-      if (!this.form.contactsName.length) {
-        this.ismobile = true
-        this.falseMsg = '请输入联系人'
-        return false
-      }
-      if (!this.form.mobile.length) {
-        this.ismobile = true
-        this.falseMsg = '请输入电话'
-        return false
-      }
-      if (this.form.mobile) {
-        this.ismobile = false
-        var validReg = window.AFLC_VALID
-        if (!validReg.MOBILE.test(this.form.mobile)) {
-          this.ismobile = true
-          this.form.mobile = ''
-          this.falseMsg = '请输入正确的电话'
-          return false
-        }
-      }
-      if (this.types == 1) {
-        this.form.type = 1
-        this.form.source = 1
-      } else {
-        this.form.type = 2
-        this.form.source = 2
-      }
-      console.log(this.form, 'this.form')
-      $axios
-        .post(
-          // /leavingmsg/
-          // 插入物流公司留言信息表信息
-          aurl + '/xlapi/28-web/leavingmsg/',
-          this.form
-        )
-        .then(res => {
-          console.log(res, 'ressss')
-          if (res.data.status == 200) {
-            layer.msg(
-              '提交成功，客服稍后将会与您联系',
-              {
-                tiem: 3000
-              },
-              () => {}
-            )
-            this.$emit('close')
-            this.form = {}
-          } else {
-            // res.data.status
-          }
-        })
-    },
-    // 留言类型（type  ） 1-入驻 2-推荐
     closeDialog() {
       this.$emit('close')
       this.form = {}
@@ -313,14 +336,15 @@ export default {
 .showpj {
   .dialog-content {
     width: 900px !important;
+    height: 900px !important;
     // top: 30% !important;
     .bot_pj {
-      margin-left: 120px;
+      margin-left: 80px;
       margin-bottom: 50px;
       ul.pjul {
         display: inline-block;
         border: 1px #ccc solid;
-        padding: 0 330px 20px 25px;
+        padding: 0 220px 20px 25px;
         li {
           float: left;
           padding-right: 40px;

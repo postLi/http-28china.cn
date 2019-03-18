@@ -27,7 +27,7 @@ var AFWL_API = {
       c.LINK_MEMBER = 'http://192.168.1.157:9526'
       c.LINK_TMS = 'http://192.168.1.157:9528'
     } else if (lc.indexOf('192.168.1.188') !== -1) {
-      c.LINK_MEMBER = 'http://192.168.1.188:9526'
+      c.LINK_MEMBER = 'http://192.168.1.188:9524'
       c.LINK_TMS = 'http://192.168.1.188:9528'
     } else if (lc.indexOf('192.168.1.170') !== -1) {
       c.LINK_MEMBER = 'http://192.168.1.188:9524'
@@ -95,6 +95,9 @@ var AFWL_API = {
 
     var grant_type = 'password'
     var scope = 'webApp'
+
+    // 因后端调整了用户角色，进行紧急修正
+    // username = username.replace('|aflc-5', '|aflc-2')
 
     var form = new FormData()
     form.append('username', username)
@@ -172,6 +175,9 @@ var AFWL_API = {
   loginByMobile: function(username, code) {
     var defer = $.Deferred()
     var _this = this
+
+    // 因后端调整了用户角色，进行紧急修正
+    // username = username.replace('|aflc-5', '|aflc-2')
 
     var grant_type = 'authorization_code'
     var scope = 'webApp'
@@ -275,6 +281,7 @@ var AFWL_API = {
   getInfoByMobile: function(access_token, mobile, type) {
     if (type === 'aflc-5') {
       // 物流商
+      // return this.getShipperInfo(mobile, access_token)
       return this.getLogisticsCompanyInfo(mobile, access_token)
     } else if (type === 'aflc-2') {
       // 货主

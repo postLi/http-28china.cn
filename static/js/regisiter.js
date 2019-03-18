@@ -388,7 +388,7 @@
           e.preventDefault()
 
           $('[name="gourl"]').val(
-            'http://192.168.1.157:9526/baseInfo/authentication'
+            AFWL_API.constant.LINK_MEMBER + '/baseInfo/authentication'
           )
           login_page.login(
             reg_page.reg_data.mobile,
@@ -490,7 +490,7 @@
       // 获取微信登录信息
       window.addEventListener('message', function(e) {
         var payload = e.data
-        if (e.data && e.data.indexOf('code:') !== -1) {
+        if (e.data && (e.data+'').indexOf('code:') !== -1) {
           var code = e.data.split(':')[1]
           $('body').trigger('wxLoginSuccess', code)
         }
@@ -841,8 +841,8 @@
               domain: domain,
               path: '/'
             })
-            $.cookie('loginId', res.data.id, { expires: 7, path: '/' })
-            $.cookie('loginCompanyName', res.data.companyName, {
+            $.cookie('loginId', res.id, { expires: 7, path: '/' })
+            $.cookie('loginCompanyName', res.companyName, {
               expires: 7,
               path: '/'
             })

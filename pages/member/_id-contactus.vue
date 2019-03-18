@@ -23,7 +23,7 @@
             <p>公司名称：<em id="nr096">{{ company.companyName }}</em></p>
             <p>营业执照：<em id="nr097"/></p>
             <p>法人/负责人：<em id="nr098">{{ company.corporation }}</em></p>
-            <p>公司成立时间：<em id="nr099"/></p>
+            <p>公司成立时间：<em id="nr099">{{ company.foundTime }}</em></p>
             <p>代收货款：<em id="nr0910"/></p>
     		
         </li></ul>

@@ -547,7 +547,7 @@
             <div class="main2_bt1_3">
               <a 
                 target="_blank" 
-                :href="mid +'line'">
+                :href="mid +'-line'">
                 <span>更多&gt;&gt;</span>
               </a>
             </div>

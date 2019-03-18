@@ -400,7 +400,7 @@ export default {
   methods: {
     fetchData(pnum) {
       return this.$store.dispatch('member/GETCOMPANYLINEINFO', {
-        publishId: this.$store.state.member.company.id,
+        publishId: this.$route.params.id,
         pageSize: 10,
         currentPage: pnum,
         ...this.query

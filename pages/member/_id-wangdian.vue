@@ -103,7 +103,7 @@ export default {
           [
             '/index/js/city-picker.js'
             // '/member/js/index.js',
-            // '/index/js/collection.js',
+            // '/js/collection.js',
             // '/member/js/wangdian.js'
           ],
           function() {

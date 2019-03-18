@@ -238,7 +238,7 @@ export default {
         seajs.use(
           [
             '/index/js/city-picker.js',
-            '/index/js/collection.js'
+            '/js/collection.js'
             // '/member/js/huo.js'
           ],
           function() {

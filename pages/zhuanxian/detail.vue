@@ -693,9 +693,9 @@
             >
               <div
                 class="list_none"
-                v-if="lineLists=null||
+                v-if="lineLists===null||
               !lineLists.length"><span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px; font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span> <img
-                src="../../static/images/none_pic.png"
+                src="/images/none_pic.png"
                 style=" float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;"></div>
               <div v-else>
                 <ul
@@ -1162,7 +1162,7 @@ export default {
       arr.forEach(el => {
         num += el.charCodeAt(0) || 0
       })
-      item.num = num % 30
+      item.num = (num % 30) + 1
       linedataC.data.data.list.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
@@ -1170,7 +1170,7 @@ export default {
         arr.forEach(el => {
           num += el.charCodeAt(0) || 0
         })
-        item.num = num % 30
+        item.num = (num % 30) + 1
       })
       linedataB.data.data.companyName =
         linedataB.data.data.companyName.length > 13

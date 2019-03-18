@@ -1098,7 +1098,7 @@
                   :class="index > 2 ? 'avatar2' : ''"
                   class="avatar">
                   <a
-                    :href="'/member/' + item.companyId + ''"
+                    :href="'/member/' + item.id + ''"
                     :title="item.companyName"
                     target="_blank"><span>{{ index + 1 }}</span></a>
                 </div>
@@ -1110,7 +1110,7 @@
                       class="scrollLoading"
                       alt=""></div>
                   <div class="company"><a
-                    :href="'/member/' + item.companyId + ''"
+                    :href="'/member/' + item.id + ''"
                     :title="item.companyName"
                     target="_blank"
                     class="yh">{{ item.companyName }}</a></div>

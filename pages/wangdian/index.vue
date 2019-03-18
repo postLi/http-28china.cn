@@ -276,7 +276,7 @@
         >
           <p class="p1"><a
             id="tj010"
-            :href="'/member/'+ item.companyId"
+            :href="'/member/'+ item.id"
             target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
 
           <p
@@ -304,7 +304,7 @@
           <p class="p6">
             <a
               id="tj_05"
-              :href="'/member/'+ item.companyId"
+              :href="'/member/'+ item.id"
               target="_blank"><span>查看&nbsp;&gt;</span></a>
           </p>
         </div>

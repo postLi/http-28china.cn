@@ -116,7 +116,7 @@ export default {
   },
   layout: 'member',
   mounted() {
-    seajs.use(['/member/js/index.js', '/index/js/collection.js'])
+    seajs.use(['/member/js/index.js', '/js/collection.js'])
   },
   async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)

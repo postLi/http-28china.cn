@@ -2534,8 +2534,12 @@ background-image:none;
 .arank .info {float:left; width:300px;height: 58px; overflow:hidden;}
 .arank .info .company {
   padding-left: 8px;
-  float:left;margin-top:10px;width:200px;overflow:hidden; height:22px; line-height:22px;font-size: 14px;
+  padding-top: 10px;
+  float:left;margin-top:0;width:200px;overflow:hidden; height:22px; line-height:22px;font-size: 14px;vertical-align: middle;
   color: #333;}
+.arank2 .info .company{
+  padding-top: 0;
+}
 .arank .info .company .nums {padding-left:5px; color:#FF0000;}
 .arank .value {float:right; padding-top:22px; width:70px; line-height:18px; color:#999;}
 .arank .num {float:left; margin: 10px 10px 10px 0px; width:25px; height:25px; background:url("../index_files/icon.png") no-repeat; overflow:hidden;}

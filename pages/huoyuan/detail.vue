@@ -46,7 +46,8 @@
         <a
           v-for="(item,index) in zxList"
           v-if="index < 14"
-          :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
+          :key="index"
+        ><span @click="gotoHuoList($event)">{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
         </a>
       </div>
       <div
@@ -189,23 +190,23 @@
         class="arc_right">
         <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
         <p
-          v-if="archival.credit >= 0 && archival.credit <= 150"
+          v-if="archival.isShowA"
           class="arc_right02" ><i>信誉：</i>
           <img
-            v-for="(item1,index1) in hyDetail.starS"
+            v-for="(item1,index1) in archival.startA"
             :key="index1"
             class="xy_zuan"
-            src="/images/article_wlzx/gold.png"
+            src="/gongsi/images/34huanguan.gif"
             style="display: inline">
         </p>
         <p
-          v-if="archival.isEnable >= 151"
+          v-if="archival.isShowB"
           class="arc_right02" ><i>信誉：</i>
           <img
-            v-for="(item1,index1) in hyDetail.starB"
+            v-for="(item1,index1) in archival.startB"
             :key="index1"
             class="xy_zuan"
-            src="/images/article_wlzx/yellowguan.png"
+            src="/gongsi/images/blue.gif"
             style="display: inline">
         </p>
         <p class="arc_right03">
@@ -219,29 +220,38 @@
             v-if="archival.qq"
             :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
             target="_blank"><input value="QQ交谈"></a></span>
-          <span><i>地址：</i><font v-if="archival.consignorAddress">{{ archival.consignorAddress.substring(0, 10) }}</font></span>
+          <span><i>地址：</i><font v-if="archival.address">{{ archival.address.substring(0, 10) }}</font></span>
         </p>
         <p class="arc_right05">
           <a 
-            href="#" 
+            :href="/member/ + archival.companyId" 
             class="website">进入官网</a>
           <input 
+            v-if="isShowCollect"
             class="collection_hz" 
             style="cursor: pointer;" 
             readonly 
+            @click="collected()"
             value="收藏">
+          <input 
+            v-if="isCencelCollect"
+            class="collection_hz" 
+            style="cursor: pointer;" 
+            readonly 
+            @click="cenclecollected()"
+            value="取消收藏">
         </p>
         <p class="arc_right06">
           <span>相关认证</span>
         </p>
         <p class="arc_right07">
           <img
-            v-if="hyDetail.isVip"
+            v-if="archival.isVip != 0"
             src="/images/article_wlzx/11xinyong.png">
           <img
-            v-if="hyDetail.authStatus === 'AF0010403'"
+            v-if="archival.authStatus === 'AF0010403'"
             src="/images/article_wlzx/10shiming.png">
-          <span v-if="hyDetail.authStatus !== 'AF0010403' && (!hyDetail.isVip || hyDetail.isVip === 0)">暂无认证信息</span>
+          <span v-if="archival.authStatus !== 'AF0010403' && (!archival.isVip || archival.isVip === 0)">暂无认证信息</span>
         </p>
 
       </div>
@@ -258,7 +268,9 @@
         <div class="arc_middle">
           <img src="/images/cy/09sj.png">
           <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
-          <p><img src="/images/article_wlzx/10shiming.png"></p>
+          <p><img 
+            v-if="archival.shipperStatus === 'AF0010403'"
+            src="/images/cy/hzsmrz.png"></p>
           <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
         </div>
         <ul class="bottom_ul">
@@ -338,7 +350,7 @@
                 width="120"
                 height="100">
             </div>
-            <div class="name">{{ huoComprehensive.shipperTypeName }}</div>
+            <div class="name">{{ huoComprehensive.companyName }}</div>
             <div class="name">
               <img 
                 v-if="huoComprehensive.accountStatus === 'AF0010403'" 
@@ -667,7 +679,7 @@
             <a
               v-for="(item,index) in hotSearchList"
               :key="index"
-              :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
+              :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
               class="rmsx_list"
               target="_blank">
               {{ item.title }}
@@ -777,7 +789,7 @@
           class="hot-cities-li" >
           <a
             target="_blank"
-            :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
+            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
             class="hot-cities-a">{{ item.title }}</a>
         </li>
       </ul>
@@ -793,7 +805,7 @@
           class="hot-cities-li" >
           <a
             target="_blank"
-            :href="item.targetLinks+'?startp='+ item.startProvince+'&startc='+item.startCity+'&starta='+item.startArea+'&endp='+item.endProvince+'&endc='+item.endCity+'&enda='+item.endArea+'&carSourceType='+item.carSourceType"
+            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
             class="hot-cities-a">{{ item.title }}</a>
         </li>
       </ul>
@@ -875,6 +887,8 @@ export default {
       isShowAdd: false,
       isShowHelp: false,
       isShowOrder: false,
+      isShowCollect: true,
+      isCencelCollect: false,
       zxList: [],
       inTerVar: null,
       inTerVar1: null,
@@ -941,17 +955,27 @@ export default {
         : ''
     }
     let parm1 = {
-      endArea: hyDetails.data.data.endArea,
-      endCity: hyDetails.data.data.endCity,
-      endProvince: hyDetails.data.data.endProvince,
-      startArea: hyDetails.data.data.startArea,
-      startCity: hyDetails.data.data.startCity,
+      endArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
+      endCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
+      endProvince: hyDetails.data.data.endProvince
+        ? hyDetails.data.data.endProvince
+        : '',
+      startArea: hyDetails.data.data.startArea
+        ? hyDetails.data.data.startArea
+        : '',
+      startCity: hyDetails.data.data.startCity
+        ? hyDetails.data.data.startCity
+        : '',
       startProvince: hyDetails.data.data.startProvince
+        ? hyDetails.data.data.startProvince
+        : ''
     }
     let parm1t = {
-      startArea: hyDetails.data.data.endArea,
-      startCity: hyDetails.data.data.endCity,
+      startArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
+      startCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
       startProvince: hyDetails.data.data.startProvince
+        ? hyDetails.data.data.startProvince
+        : ''
     }
     let code = await getCode($axios, hyDetails.data.data.endProvince)
     let zxList = await getCity($axios, code, hyDetails.data.data.startCity)
@@ -961,7 +985,54 @@ export default {
       .catch(err => {
         // console.log('archivals')
       })
-    console.log(archivals, 'archivals.data.data')
+    // console.log(archivals, 'archivals.data.data')
+    if (archivals.data.status === 200) {
+      let credit = archivals.data.data.credit
+      if (credit >= 0 && credit <= 3) {
+        archivals.data.data.startA = 1
+        archivals.data.data.isShowA = true
+        // archivals.data.data
+      }
+      if (credit >= 4 && credit <= 10) {
+        archivals.data.data.startA = 2
+        archivals.data.data.isShowA = true
+      }
+      if (credit >= 11 && credit <= 40) {
+        archivals.data.data.startA = 3
+        archivals.data.data.isShowA = true
+      }
+      if (credit >= 41 && credit <= 90) {
+        archivals.data.data.startA = 4
+        archivals.data.data.isShowA = true
+      }
+      if (credit >= 91 && credit <= 150) {
+        archivals.data.data.startA = 5
+        archivals.data.data.isShowA = true
+      }
+      if (credit >= 151 && credit <= 250) {
+        archivals.data.data.startB = 1
+        archivals.data.data.isShowB = true
+      }
+      if (credit >= 251 && credit <= 500) {
+        archivals.data.data.startB = 2
+        archivals.data.data.isShowB = true
+      }
+      if (credit >= 500 && credit <= 1000) {
+        archivals.data.data.startB = 3
+        archivals.data.data.isShowB = true
+      }
+      if (credit >= 1001 && credit <= 2000) {
+        archivals.data.data.startB = 4
+        archivals.data.data.isShowB = true
+      }
+      if (credit >= 2001) {
+        archivals.data.data.startB = 5
+        archivals.data.data.isShowB = true
+      }
+    } else {
+      error({ statusCode: 500, message: '查找不到货源相关信息' })
+    }
+    console.log(archivals.data.data, 'archivals.data.data')
     //顶部轮播
     let newLists = await $axios
       .get('/28-web/lclOrder/newList')
@@ -1101,6 +1172,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.zxList, 'zxlist')
     if (process.client) {
       console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({})
@@ -1178,6 +1250,87 @@ export default {
       this.dataInfo.endProvince = this.hyDetail.endProvince
       this.dataInfo.endCity = this.hyDetail.endCity
       this.dataInfo.endArea = this.hyDetail.endArea
+    },
+    gotoHuoList(event) {
+      let city = event.target.innerHTML + '市'
+      if (city.length > 4) {
+        city = city.substring(2, 5)
+      }
+      window.open(
+        `/huoyuan?startProvince=${this.hyDetail.startProvince}&startCity=${
+          this.hyDetail.startCity
+        }&endProvince=${this.hyDetail.startProvince}&endCity=${city}`
+      )
+    },
+    collected() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      let companyId = this.archival.companyId
+      this.isCencelCollect = true
+      this.isShowCollect = false
+      if (access_token && user_token) {
+        $axios
+          .post(
+            '/api/28-web/collect/company?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token +
+              '&carInfoId=' +
+              query.id +
+              '&companyId=' +
+              companyId +
+              '&handle=' +
+              'collect'
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('收藏成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        window.location.href = '/login'
+      }
+    },
+    cenclecollected() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      let companyId = this.archival.companyId
+      this.isCencelCollect = false
+      this.isShowCollect = true
+      if (access_token && user_token) {
+        $axios
+          .post(
+            '/api/28-web/collect/company?access_token=' +
+              access_token +
+              '&user_token=' +
+              user_token +
+              '&carInfoId=' +
+              query.id +
+              '&companyId=' +
+              companyId +
+              '&handle=' +
+              'cancelCollect'
+          )
+          .then(res => {
+            if (res.data.status === 200) {
+              layer.msg('取消成功')
+            }
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('提交捕获异常')
+          })
+      } else {
+        return
+      }
     },
     openAdd() {
       let access_token = $.cookie('access_token')

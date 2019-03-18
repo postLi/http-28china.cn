@@ -276,7 +276,7 @@
             <ul 
             class="list_new_ul">
               <li
-                v-for="(item,index) in newestCar"
+                v-for="(item,index) in newwesHuo"
                 :key="index"
                 class="manage_box">
                 <div class="li_one">
@@ -286,10 +286,10 @@
                   <span>{{ item.createTime }}</span>
                 </div>
                 <div class="li_two">
-                  <a><span>长{{ item.carLength }}米</span>|<span>载重{{ item.carLoad }}吨</span>|<span>{{ item.carSourceTypeName }}</span></a>
+                  <a>{{ item.goodsTypeName.substring(0,2) }}<span><i>{{ item.goodsWeight }}</i>公斤</span>|<span><i>{{ item.goodsVolume }}</i>方</span>|<span><i>{{ item.goodsNum }}</i>件</span></a>
                   <span><a
                     target="_blank"
-                    :href="'/cheyuan/detail?id=' + item.id"
+                    :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
                     class="li_check">查看详情</a></span>
                 </div>
               </li>
@@ -721,16 +721,17 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    let newestCarRes = await $axios.post('/28-web/carInfo/newest/recommend', {
+    let newwesHuoRes = await $axios.post('/28-web/lclOrder/shipper/lastList', {
       currentPage: 1,
       pageSize: 20
     }) //最新车源推荐列表
-    // console.log(popularitys.data.data, 'ffffffffffffffffffffff')
+    // console.log(newwesHuoRes.data.data.list, 'ffffffffffffffffffffff')
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],
       popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
-      newestCar: newestCarRes.data.status === 200 ? newestCarRes.data.data : [],
+      newwesHuo:
+        newwesHuoRes.data.status === 200 ? newwesHuoRes.data.data.list : [],
       recommendBy28:
         recommend.data.status === 200
           ? recommend.data.data.recommendBy28.links
@@ -770,7 +771,8 @@ export default {
       endProvince: endProvince,
       startArea: startArea,
       startCity: startCity,
-      startProvince: startProvince
+      startProvince: startProvince,
+      vo
     }
   },
   mounted() {
@@ -779,7 +781,7 @@ export default {
     let roll = $('.list_new_ul')
     roll.append(roll.html())
     let number = 4
-    let l = this.newestCar.length
+    let l = this.newwesHuo.length
     let manage_box_h = $('.manage_box').height()
     let startScroll = () => {
       this.inTerVar = setInterval(() => {
@@ -1042,6 +1044,10 @@ body {
   height: 20px;
   line-height: 20px;
 }
+.li_two i {
+  color: red;
+  margin: 5px;
+}
 .li_one a {
   flex: 1;
   cursor: pointer;
@@ -1064,6 +1070,7 @@ body {
 }
 .li_two span {
   color: #999999;
+  margin: 0 5px;
 }
 .li_two .li_check {
   border-bottom: 1px solid #3f94ee;

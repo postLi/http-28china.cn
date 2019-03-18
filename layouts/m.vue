@@ -281,8 +281,14 @@ body {
 .f-22 {
   font-size: 0.22rem;
 }
+.f-24 {
+  font-size: 0.24rem;
+}
 .f-26 {
   font-size: 0.26rem;
+}
+.f-28 {
+  font-size: 0.28rem;
 }
 .f-29 {
   font-size: 0.29rem;
@@ -295,6 +301,9 @@ body {
 }
 .f-34 {
   font-size: 0.34rem;
+}
+.f-36 {
+  font-size: 0.36rem;
 }
 .f-46 {
   font-size: 0.46rem;
@@ -339,6 +348,12 @@ input::-webkit-input-placeholder {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.b_t {
+  border-top: 0.02rem solid rgba(216, 216, 216, 1);
+}
+.b_b {
+  border-bottom: 0.02rem solid rgba(216, 216, 216, 1);
 }
 a {
   text-decoration: none;

@@ -132,5 +132,18 @@ export const actions = {
           resolve()
         })
     })
+  },
+  // 根据id更新浏览量
+  addBrowserNum({ commit }, payload) {
+    return new Promise(resolve => {
+      this.$axios
+        .put('/28-web/carInfo/updateBrowseNumber/' + payload)
+        .then(res => {
+          resolve()
+        })
+        .catch(err => {
+          resolve()
+        })
+    })
   }
 }

@@ -34,7 +34,7 @@ var AFWL_API = {
     }
   },
   url: '/api',
-  url99: '/api',
+  // 包装器，统一处理逻辑
   _warpper: function(pro) {
     var defer = $.Deferred()
     pro
@@ -253,24 +253,6 @@ var AFWL_API = {
       }
 
       return res
-    })
-  },
-  /**
-   * isphone 是否用access_token登录
-   */
-  phplogin: function(userid, pwd, isphone) {
-    return $.ajax({
-      type: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      url:
-        '/member/index_do.php?fmdo=login&dopost=' +
-        (isphone ? 'login3' : 'login2') +
-        '&gourl=/&userid=' +
-        userid +
-        '&pwd=' +
-        pwd
     })
   },
   // 获取用户信息

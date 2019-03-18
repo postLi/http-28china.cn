@@ -411,7 +411,7 @@ export default {
         [
           '/index/js/gaodemap2.js',
           '/member/js/index.js',
-          '/index/js/collection.js',
+          '/js/collection.js',
           '/member/js/onlineOrder.js'
         ],
         function() {}

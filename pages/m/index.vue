@@ -9,7 +9,7 @@
           <div
             class="flex_1 flex height_100"
             v-for="(item,index) in navList"
-            :class="[(item.id === navId)?'nav_top_selected':'']"
+            :class="[(item.id === $store.state.m.navId)?'nav_top_selected':'']"
             :key="index"
             @click="clickNav(item.id)">{{ item.name }}</div>
         </div>
@@ -20,17 +20,20 @@
           </div>
           <div class="flex_sb width_100">
             <div
-              class="f-46 flex_1"
-              @click="clickStart()">广州</div>
+              class="f-46 flex_1 oneElisp"
+              :class="[($store.state.m.startName[1]==='' && $store.state.m.startName[2]==='')?'c-9':'c-3']"
+              @click="clickStart()">{{ ($store.state.m.startName[1]==='' && $store.state.m.startName[2]==='')? '选那儿送' : $store.state.m.startName[2]===''?$store.state.m.startName[1]:$store.state.m.startName[2] }}</div>
             <div class="flex_1 flex">
               <img
                 src="/m/home/home_wangfan.png"
                 class="change"
-                @click="clickChange()">
+                @click="clickChange($store.state.m.startName,$store.state.m.endName)">
             </div>
             <div
-              class="f-46 c-9 flex_1 flex_ce"
-              @click="clickEnd()">往那儿运</div>
+              class="f-46 flex_1 oneElisp"
+              style="text-align: end"
+              :class="[($store.state.m.endName[1]==='' && $store.state.m.endName[2]==='')?'c-9':'c-3']"
+              @click="clickEnd()">{{ ($store.state.m.endName[1]==='' && $store.state.m.endName[2]==='')? '往那儿运' : $store.state.m.endName[2]===''?$store.state.m.endName[1]:$store.state.m.endName[2] }}</div>
           </div>
 
           <div
@@ -95,15 +98,22 @@
         <div>公告</div>
       </div>
     </footer>
+    <SelectAddress
+      ref="selectStartAddress"
+      @setArea="getStartArea"/>
+    <SelectAddress
+      ref="selectEndAddress"
+      @setArea="getEndArea"/>
   </div>
 
 </template>
 <script>
+import SelectAddress from '../../components/m/selectAddress'
 export default {
+  components: { SelectAddress },
   layout: 'm',
   data() {
     return {
-      navId: 0,
       navList: [
         { id: 0, name: '找专线' },
         { id: 1, name: '找货源' },
@@ -159,6 +169,12 @@ export default {
       ]
     }
   },
+  async fetch({ $axios, app, query, store }) {
+    await store.dispatch('m/GETPROVINCELIST', {
+      data: '',
+      name: 'provinceList'
+    })
+  },
   created() {
     //
   },
@@ -166,23 +182,45 @@ export default {
     //
   },
   methods: {
+    getEndArea(data) {
+      this.$store.dispatch('m/SETDATA', {
+        data: data,
+        name: 'endName'
+      })
+    },
+    getStartArea(data) {
+      this.$store.dispatch('m/SETDATA', {
+        data: data,
+        name: 'startName'
+      })
+    },
     search() {
-      //
+      console.log(this.$store.state.m)
     },
     toClick(name) {
       //
     },
     clickEnd() {
-      //
+      this.$refs.selectEndAddress.showMask = true
     },
     clickStart() {
-      //
+      this.$refs.selectStartAddress.showMask = true
     },
-    clickChange() {
-      //
+    clickChange(startName, endName) {
+      this.$store.dispatch('m/SETDATA', {
+        data: endName,
+        name: 'startName'
+      })
+      this.$store.dispatch('m/SETDATA', {
+        data: startName,
+        name: 'endName'
+      })
     },
     clickNav(id) {
-      this.navId = id
+      this.$store.dispatch('m/SETDATA', {
+        data: id,
+        name: 'navId'
+      })
     }
   }
 }

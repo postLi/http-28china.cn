@@ -23,7 +23,7 @@
             <p>公司名称：<em id="nr096">{{ company.companyName }}</em></p>
             <p>营业执照：<em id="nr097"/></p>
             <p>法人/负责人：<em id="nr098">{{ company.corporation }}</em></p>
-            <p>公司成立时间：<em id="nr099"/></p>
+            <p>公司成立时间：<em id="nr099">{{ company.foundTime }}</em></p>
             <p>代收货款：<em id="nr0910"/></p>
     		
         </li></ul>
@@ -95,7 +95,7 @@ export default {
       [
         'http://api.map.baidu.com/getscript?v=2.0&ak=e0abRWFWOrgmN7emYjQGPj4Z0vyTVTfo&services=&t=20190102133327',
         '/member/js/index.js',
-        '/index/js/collection.js'
+        '/js/collection.js'
       ],
       function() {
         var map = new BMap.Map('allmap')

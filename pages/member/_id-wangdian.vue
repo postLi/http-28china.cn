@@ -51,7 +51,9 @@
             <li class="wd_item05"><span 
               id="nr035" 
               :title="item.address || ''">{{ (item.address || '').replace(item.belongCityName,'') }}</span></li>
-            <li class="wd_item06"><a href="#"><input value="下单"></a></li>
+            <li class="wd_item06"><a href="#"><input 
+              readonly 
+              value="下单"></a></li>
           </ul>    		
         </div>
       </div>
@@ -101,7 +103,7 @@ export default {
           [
             '/index/js/city-picker.js'
             // '/member/js/index.js',
-            // '/index/js/collection.js',
+            // '/js/collection.js',
             // '/member/js/wangdian.js'
           ],
           function() {
@@ -115,7 +117,7 @@ export default {
               callback: function(current) {
                 $('#current1').text(current)
                 _this.$store.dispatch('member/GETCOMPANYPOINTINFO', {
-                  companyId: _this.$store.state.member.company.id,
+                  companyId: _this.$route.params.id,
                   pageSize: 10,
                   currentPage: current
                 })
@@ -176,7 +178,7 @@ export default {
         }
       }),
       store.dispatch('member/GETCOMPANYPOINTINFO', {
-        companyId: store.state.member.company.id,
+        companyId: params.id,
         pageSize: 10,
         currentPage: 1
       })

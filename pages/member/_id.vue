@@ -547,7 +547,7 @@
             <div class="main2_bt1_3">
               <a 
                 target="_blank" 
-                :href="mid +'line'">
+                :href="mid +'-line'">
                 <span>更多&gt;&gt;</span>
               </a>
             </div>
@@ -773,7 +773,7 @@ export default {
           '/index/js/city-picker.js',
           // '/member/js/index.js',
           '/member/js/banner.js',
-          '/index/js/collection.js'
+          '/js/collection.js'
         ],
         function() {
           var productServiceCodeList = _this.company.productServiceCodeList

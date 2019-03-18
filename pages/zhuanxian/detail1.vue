@@ -64,7 +64,7 @@
               :src="linedata.rangeLogo.split(',')[showImg]">
             <img
               v-else
-              :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
+              :src="'/static/images/pic/bg' + linedata.num + '.png'"
               alt="">
           </div>
           <div class="arc_left_2">
@@ -72,20 +72,20 @@
               v-if="linedata.rangeLogo"
               :src="linedata.rangeLogo.split(',')[0]"
               @click="clickImg(0)"><img
-                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
+                :src="'/static/images/pic/bg' + linedata.num + '.png'"
                 @click="clickImg(0)"></a>
             <a href="javascript:void(0)"><img
               v-if="linedata.rangeLogo"
               :src="linedata.rangeLogo.split(',')[1]"
               @click="clickImg(1)"><img
-                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
+                :src="'/static/images/pic/bg' + linedata.num + '.png'"
                 @click="clickImg(1)"></a>
             <a href="javascript:void(0)"><img
               v-if="linedata.rangeLogo"
               :src="linedata.rangeLogo.split(',')[2]"
               @click="clickImg(2)"><img
                 v-else
-                :src="require('../../static/images/pic/bg' + linedata.num + '.png')"
+                :src="'/static/images/pic/bg' + linedata.num + '.png'"
                 @click="clickImg(2)"></a>
           </div>
           <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/line/images/17shoucang.png">&nbsp;<span
@@ -834,10 +834,17 @@ export default {
       // this.linedata = res.data.data
       lineCode = await getCode($axios, res.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, res.data.data.startCity)
-      res.data.data.num = Math.ceil(Math.random() * 30)
+      // res.data.data.num = Math.ceil(Math.random() * 30)
+      let item = res.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      item.num = (num % 30) + 1
       console.log(res.data.data, 'res.data.data.num')
       return {
-        linedata: res.data.data,
+        linedata: item,
         lineCitys: lineCity.data.data
       }
     }

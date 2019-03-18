@@ -211,7 +211,6 @@ color: #2577e3;
   /* width: 100%; */
   background: none !important;
   margin: 0 auto;
-  height: 194px;
   /* min-width: 1400px; */
   margin-bottom: 30px;
 	}
@@ -496,9 +495,8 @@ color:#FFFFFF;
 }
 
 .footer{
-  padding-top: 27px;
   font-family: MicrosoftYaHei;
-  height: 176px;
+  min-height: 176px;
   font-size: 14px;
   text-align: center;
   border-top: 2px solid #ccc;
@@ -510,9 +508,8 @@ width:1200px;
 }
 .footer1 a{
 color:#333;
-padding: 0 20px;
+padding: 0 20px 0 0;
 line-height: 1.2;
-border-right:1px solid #999999;
 }
 .footer1 a:last-child{
   border:none;

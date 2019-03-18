@@ -8,7 +8,7 @@ export default {
   name: 'Help',
   layout: 'subLayout',
   head: {
-    title: '物流资讯',
+    title: '帮助中心',
     meta: [
       {
         hid: 'description',
@@ -26,6 +26,7 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/help/index.css' },
       { rel: 'stylesheet', href: '/help/list_question.css' },
+      { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/help/list_help.css' }
     ],
     script: [

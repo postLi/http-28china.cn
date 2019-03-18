@@ -247,7 +247,7 @@
                   class="nr_a21_img">
                   <img
                     v-if="item.rangeLogo==''"
-                    :src="require('../../static/images/pic/bg' + item.num + '.png')"
+                    :src="'/images/pic/bg' + item.num + '.png'"
                     width="180"
                     height="180">
                   <img
@@ -323,10 +323,10 @@
               <li class="wlzx_list_3">
                 <p class="p1"><i
                   class="zhuo"
-                  style="color: #666">重货：{{ item.weightPrice }}</i><span style="color: #333">元/公斤</span></P>
+                  style="color: #666">重货：{{ item.weightDiscountPrice || item.weightPrice }}</i><span style="color: #333">元/公斤</span></P>
                 <p class="p2"><i
                   class="zhuo"
-                  style="color: #666">轻货：</i>{{ item.lightPrice }}<span style="color: #333">元/m³</span></p>
+                  style="color: #666">轻货：</i>{{ item.lightDiscountPrice || item.lightPrice }}<span style="color: #333">元/m³</span></p>
                 <p class="p3"><i>时效：</i><span>{{ item.transportAging?item.transportAging:'' }}{{ item.transportAging?item.transportAgingUnit:'暂无' }}</span></p>
                 <!--<p class="p3"><i>时效：</i><span id="nr09"/></p>-->
                 <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
@@ -430,6 +430,10 @@
               class="right-top-btn">
           </form>
         </div>
+        <div class="list-box-r-phone">
+          <div class="zx_p_tit">帮我找优质承运商</div>
+          <selectMap/>
+        </div>
         <div class="list-box-r-top">
           <img
             src="/line/images/guangg.jpg"
@@ -486,8 +490,8 @@
               <ul>
                 <li class="tj_left"><i>时效：</i><span>{{ item.transportAging + item.transportAgingUnit.replace("多", "") }}</span></li>
                 <li class="tj_right"><i>最低一票：</i><span id="tj016">{{ item.lowerPrice?item.lowerPrice+'元':'面议' }}</span></li>
-                <li class="tj_left"><i>重货：</i><font id="tj013">{{ parseFloat(item.weightPrice).toFixed(1) }}</font><span>元/公斤</span></li>
-                <li class="tj_right"><i>轻货：</i><font id="tj014">{{ parseFloat(item.lightPrice).toFixed(1) }}</font><span>元/m³</span></li>
+                <li class="tj_left"><i>重货：</i><font id="tj013">{{ parseFloat(item.weightDiscountPrice || item.weightPrice).toFixed(1) }}</font><span>元/公斤</span></li>
+                <li class="tj_right"><i>轻货：</i><font id="tj014">{{ parseFloat(item.lightDiscountPrice || item.lightPrice).toFixed(1) }}</font><span>元/m³</span></li>
               </ul>
 
             </div>
@@ -501,10 +505,10 @@
         </div>
         <HotList :lines="lineHots"/>
 
-        <div class="list-box-r-phone">
-          <div class="zx_p_tit">帮我找优质承运商</div>
-          <selectMap/>
-        </div>
+        <!--<div class="list-box-r-phone">-->
+        <!--<div class="zx_p_tit">帮我找优质承运商</div>-->
+        <!--<selectMap/>-->
+        <!--</div>-->
       </div>
 
     </div>
@@ -541,7 +545,7 @@ import FooterLinks from '../../components/footerLinks'
 import selectMap from './selectMap'
 import HotList from '../../components/hotList'
 export default {
-  name: 'Index',
+  name: 'Zhuanxian',
   components: {
     FooterLinks,
     selectMap,
@@ -645,7 +649,13 @@ export default {
       codeC.data.status == 200
     ) {
       listA.data.data.list.forEach(item => {
-        item.num = Math.ceil(Math.random() * 30)
+        // item.num = Math.ceil(Math.random() * 30)
+        let arr = (item.id || '').split('')
+        let num = 0
+        arr.forEach(el => {
+          num += el.charCodeAt(0) || 0
+        })
+        item.num = (num % 30) + 1
       })
       // for (var i = 3; i < listD.data.data.length; i--) {
       //   let listD1 = listD.data.data
@@ -812,7 +822,13 @@ export default {
                         let getList =
                           res.data.status == 200 ? res.data.data.list : []
                         getList.forEach(item => {
-                          item.num = Math.ceil(Math.random() * 30)
+                          // 通过item.id计算出一个固定的值
+                          let arr = (item.id || '').split('')
+                          let num = 0
+                          arr.forEach(el => {
+                            num += el.charCodeAt(0) || 0
+                          })
+                          item.num = (num % 30) + 1
                           // console.log('this.lineList:', item.num)
                         })
                         _this.lineLists = getList

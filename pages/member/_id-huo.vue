@@ -154,7 +154,9 @@
             <li class="hy_item05"><a 
               id="nr0410"
               :href="'/zhuanxian/detail?id=' + item.id" 
-              target="_blank"><input value="查看"></a></li>
+              target="_blank"><input 
+                readonly 
+                value="查看"></a></li>
           </ul>    		
         </div>
 	
@@ -236,7 +238,7 @@ export default {
         seajs.use(
           [
             '/index/js/city-picker.js',
-            '/index/js/collection.js'
+            '/js/collection.js'
             // '/member/js/huo.js'
           ],
           function() {

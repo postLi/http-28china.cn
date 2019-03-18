@@ -925,7 +925,14 @@ export default {
       '/aflc-portal/portalt/aflcTransportRange/v1/' + query.id
     )
     if (tranDetailRes.data.status === 200) {
-      tranDetailRes.data.data.num = Math.ceil(Math.random() * 30)
+      // tranDetailRes.data.data.num = Math.ceil(Math.random() * 30)
+      let item = tranDetailRes.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      item.num = (num % 30) + 1
       tranDetailRes.data.data.rangePrices1 = tranDetailRes.data.data.rangePrices.filter(
         item => {
           return item.type === '1'

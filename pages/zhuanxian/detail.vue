@@ -303,7 +303,7 @@
             class="arc_middle2">
             <ShowPrice
               :info="linedataA.rangePrices"
-              :browse="linedataE.evaCount"/>
+              :browse="linedataA.assessNumber"/>
           </div>
           <div class="arc_middle3">
             <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
@@ -370,17 +370,7 @@
         <div class="arc_right">
           <p class="arc_right01"><img src="/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
-            <span v-if="linedataB.isEq"> <img
-              v-for="(item, index) in linedataB.eq1"
-              :key="index"
-              class="xy_zuan"
-              src="/gongsi/images/blue.gif"></span>
-
-            <span v-if="linedataB.isHZhuan"> <img
-              v-for="(item, index) in linedataB.hZhuan"
-              :key="index"
-              class="xy_zuan"
-              src="/gongsi/images/34huanguan.gif"></span>
+            <creditIcon :credit="linedataB.credit" />
           </p>
           <p class="arc_right03">
             <span>质量</span><span>时效</span><span>价格</span><br>
@@ -612,9 +602,9 @@
               v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
-              <!--<button-->
-              <!--class="layui-btn layui-btn-primary"-->
-              <!--@click="moreFn()">更多</button>-->
+                <button
+                  class="layui-btn layui-btn-primary"
+                  @click="moreFn()">更多</button>
               </div>
               <ul>
                 <li
@@ -696,15 +686,16 @@
                   value=""></div>
               <div class="more floatr"><a
                 href="/zhuanxian/list"
-                target="_blank">更多&gt;</a></div>
+                target="_blank"
+              >更多&gt;</a></div>
             </div>
             <div
             >
               <div
                 class="list_none"
-                v-if="lineLists=null||
+                v-if="lineLists===null||
               !lineLists.length"><span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px; font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span> <img
-                src="../../static/images/none_pic.png"
+                src="/images/none_pic.png"
                 style=" float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;"></div>
               <div v-else>
                 <ul
@@ -946,14 +937,16 @@
 
     </div>
     <Add
-      :is-show-add.sync="isShowAdd"
-      :data-info="dataInfo"/>
+      :show = "isAdd"
+      :info="linedataE"
+      @close="noaddFn"/>
   </div>
 
 </template>
 
 <script>
-import Add from '../huoyuan/add'
+import creditIcon from '~/components/common/creditIcon'
+import Add from './add'
 import $axios from 'axios'
 import {
   isZXcity,
@@ -981,7 +974,8 @@ export default {
     ShowPrice,
     FooterLinks,
     ShowEchart,
-    Add
+    Add,
+    creditIcon
   },
   head: {
     link: [
@@ -1003,6 +997,7 @@ export default {
   data() {
     return {
       dataInfo: {},
+      isAdd: false,
       isTit: false,
       showMoblie: false,
       isShowWPrice: false,
@@ -1160,9 +1155,22 @@ export default {
         LineeEInfo.data.status == 200 ? LineeEInfo.data.data : ''
       // console.log(LineCAnother.data.data, 'LineChangeAnother')
 
-      linedataA.data.data.num = Math.ceil(Math.random() * 30)
+      // linedataA.data.data.num = Math.ceil(Math.random() * 30)
+      let item = linedataA.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      item.num = (num % 30) + 1
       linedataC.data.data.list.forEach(item => {
-        item.num = Math.ceil(Math.random() * 30)
+        // item.num = Math.ceil(Math.random() * 30)
+        let arr = (item.id || '').split('')
+        let num = 0
+        arr.forEach(el => {
+          num += el.charCodeAt(0) || 0
+        })
+        item.num = (num % 30) + 1
       })
       linedataB.data.data.companyName =
         linedataB.data.data.companyName.length > 13
@@ -1212,53 +1220,13 @@ export default {
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
 
-      if (credit >= 0 && credit <= 3) {
-        linedataB.data.data.eq1 = 1
-        linedataB.data.data.isEq = true
-        // linedataB.data.data
-      }
-      if (credit >= 4 && credit <= 10) {
-        linedataB.data.data.eq1 = 2
-        linedataB.data.data.isEq = true
-      }
-      if (credit >= 11 && credit <= 40) {
-        linedataB.data.data.eq1 = 3
-        linedataB.data.data.isEq = true
-      }
-      if (credit >= 41 && credit <= 90) {
-        linedataB.data.data.eq1 = 4
-        linedataB.data.data.isEq = true
-      }
-      if (credit >= 91 && credit <= 150) {
-        linedataB.data.data.eq1 = 5
-        linedataB.data.data.isZuan = true
-      }
-      if (credit >= 151 && credit <= 250) {
-        linedataB.data.data.hZhuan = 1
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 251 && credit <= 500) {
-        linedataB.data.data.hZhuan = 2
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 500 && credit <= 1000) {
-        linedataB.data.data.hZhuan = 3
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 1001 && credit <= 2000) {
-        linedataB.data.data.hZhuan = 4
-        linedataB.data.data.isHZhuan = true
-      }
-      if (credit >= 2001) {
-        linedataB.data.data.hZhuan = 5
-        linedataB.data.data.isHZhuan = true
-      }
       // console.log(linedataF.data.data.list, 'linedataF')
       console.log(
         aurl + `/28-web/logisticsCompany/${query.publishId}`,
         'res.data.data.linedataA',
         linedataA.data
       )
+      console.log(linedataE.data.data, 'linedataE')
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
@@ -1484,101 +1452,13 @@ export default {
   },
   methods: {
     moreFn() {
-      layer.open({
-        id: 1,
-        type: 1,
-        title: this.linedataB.companyName + '-用户评价',
-        skin: 'layui-layer-rim2',
-        area: ['800px', '700px'],
-        success: (layero, index) => {
-          // $('.layui-btn-danger').onclick(() => {
-          //   console.log($('.layui-input').value, 'vakhhhfd')
-          // })
-          $('.layui-btn-danger').on('click', '')
-        },
-        //   <p>
-        //   <img
-        // v-for="( item, index ) in 4"
-        //   :key="index"
-        // src="/line/images/13z.png"
-        // alt="">
-        //   </p>
-        content:
-          ' <div class="row_find" style="width: 420px;  margin-left:7px; margin-top:10px;">' +
-          '<div class="col-sm-12">' +
-          '<div class="input-group2">' +
-          '<span>全部(0)</span>' +
-          '<span>好评(0)</span>' +
-          '<span>中评(0)</span>' +
-          '<span>差评(0)</span>' +
-          '</div>' +
-          '</div>' +
-          '<div class="col-sm-12">' +
-          '<div class="input-group3">' +
-          '<ul>' +
-          '<li>' +
-          '<div class="pl_left" ' +
-          '<p>eiuriurui</p>' +
-          '<p><img src="/line/images/13z.png" width=50, height=20></p>' +
-          '</div>' +
-          '</li>' +
-          '</ul>' +
-          '</div>' +
-          '</div>' +
-          '<div class="col-sm-12" style="margin-top: 10px">' +
-          '<div class="input-group find_layui-btn">' +
-          '<button class="layui-btn layui-btn-danger">提交</button>' +
-          '</div>' +
-          '</div>' +
-          '</div>'
-      })
-
-      var mobile = $('.layui-input').val()
-      $('.tipPhone').hide()
-      $('.find_layui-btn .layui-btn-danger').click(() => {
-        let validReg = window.AFLC_VALID
-        let form = {}
-        form.mobile = mobile
-        form.companyId = this.LineChangeAnother.companyId
-        mobile = $('.layui-input').val()
-        if (mobile) {
-          $('.tipPhone').hide()
-          if (validReg.MOBILE.test(mobile)) {
-            $('.tipPhone').hide()
-            let aurl = ''
-            if (process.server) {
-              aurl = 'http://localhost:3000'
-            }
-            form.mobile = mobile
-            // console.lo
-            $axios
-              .post(aurl + '/28-web/logisticsCompany/consult/save', form)
-              .then(res => {
-                // console.log(res, 'resresres')
-                if (res.data.status === 200) {
-                  layer.msg(
-                    '提交成功，客服稍后将会与您联系',
-                    {
-                      tiem: 3000
-                    },
-                    () => {}
-                  )
-                  location.reload()
-                } else {
-                  layer.msg(
-                    res.data.errorInfo ? res.data.errorInfo : res.data.text
-                  )
-                }
-              })
-          } else {
-            $('.tipPhone').show()
-            $('.layui-input').val('')
-          }
-        } else {
-          $('.tipPhone').show()
-          $('.layui-input').val('')
-        }
-      })
+      this.addFn()
+    },
+    addFn() {
+      this.isAdd = true
+    },
+    noaddFn() {
+      this.isAdd = false
     },
     showPingLunFn(index) {
       // alert(index, 'index')
@@ -1828,6 +1708,8 @@ export default {
       })
     },
     showfind() {
+      let _this = this
+      clearInterval(_this.stopTimer)
       layer.open({
         type: 1,
         title: ' ',
@@ -1865,11 +1747,11 @@ export default {
           })
           // console.log(this.sendEchart, 'sendEchartsendEchart')
           let seconds = 5
-          let stop = setInterval(() => {
+          _this.stopTimer = setInterval(() => {
             $('#seconds').html(seconds + 'S')
             seconds--
             if (seconds < 0) {
-              clearInterval(stop)
+              clearInterval(_this.stopTimer)
               $('.show1').hide()
               $('.show2').show()
               let myChart2 = echarts.init(document.getElementById('echart2'))

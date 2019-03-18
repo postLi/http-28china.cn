@@ -172,7 +172,7 @@
               style="border:none" >
               <li class="cy_list_1">
                 <p class="p1"><a 
-                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                  :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
                   target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
                 <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
                 <p class="p3"><img 
@@ -216,7 +216,7 @@
                   class="check_btn" 
                   style="background: #2577e3;color: #fff;">下单</a>
                 </p><p class="p2"><a
-                  :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId"
+                  :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
                   target="_blank"
                   class="check_btn">查看</a>
                 </p><p 
@@ -403,7 +403,7 @@
                 style="border:none" >
                 <li class="cy_list_1">
                   <p class="p1"><a 
-                    :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
                     target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
                   <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
                   <p class="p3"><img 
@@ -447,7 +447,7 @@
                     class="check_btn" 
                     style="background: #2577e3;color: #fff;">下单</a>
                   </p><p class="p2"><a
-                    :href="'/shixiao/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
                     target="_blank"
                     class="check_btn">查看</a>
                   </p><p 

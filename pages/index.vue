@@ -198,7 +198,8 @@
             <div
               id="_userlogin2"
               class="userLogin"
-              style="display:block;">
+              v-if="!islogin"
+            >
               <div class="yhimg"><img src="/images/index/19stx.png"></div>
               <div class="userHeader">
                 <div class="img_"/>
@@ -210,12 +211,13 @@
               </div>
             </div>
             <div
+              v-if="islogin"
               id="_userlogin2_2"
               class="userLogin"
-              style="display:none;">
+            >
               <div class="userHeader">
                 <div class="yhimg"><img src="/images/index/19stx.png"></div>
-                <span>您好，<span id="login_name2"/>&nbsp;</span>
+                <span>您好，<span id="login_name2">{{ username }}</span>&nbsp;</span>
                 <span style="cursor: pointer"> <a
                   class="exit_anfa"
                   href="/exit">【安全退出】</a> </span>
@@ -227,7 +229,7 @@
                 <div class="regBtn"> <a
                   id="my_website"
                   target="_blank"
-                  href="">我的网站</a></div>
+                  :href="'/member/' + ''">我的网站</a></div>
               </div>
             </div>
 
@@ -1096,7 +1098,7 @@
                   :class="index > 2 ? 'avatar2' : ''"
                   class="avatar">
                   <a
-                    :href="'/member/' + item.companyId + ''"
+                    :href="'/member/' + item.id + ''"
                     :title="item.companyName"
                     target="_blank"><span>{{ index + 1 }}</span></a>
                 </div>
@@ -1108,7 +1110,7 @@
                       class="scrollLoading"
                       alt=""></div>
                   <div class="company"><a
-                    :href="'/member/' + item.companyId + ''"
+                    :href="'/member/' + item.id + ''"
                     :title="item.companyName"
                     target="_blank"
                     class="yh">{{ item.companyName }}</a></div>
@@ -1506,6 +1508,7 @@
 import NewsList from '@/components/index/newsList.vue'
 
 export default {
+  name: 'HomePage',
   components: {
     NewsList
   },
@@ -1514,7 +1517,9 @@ export default {
     return {
       title: '首页',
       lists: [],
-      ip: ''
+      ip: '',
+      islogin: false,
+      username: ''
     }
   },
   computed: {
@@ -1541,6 +1546,11 @@ export default {
 
     if (!areaData.currentProvince) {
       areaData = store.state.area
+    }
+    let paramArea = {
+      province: areaData.currentProvinceFullName,
+      city: areaData.currentAreaFullName,
+      area: ''
     }
     // console.log('before fetch cookie2222: ', areaData.currentAreaName)
 
@@ -1619,31 +1629,31 @@ export default {
       }),
       // 获取推荐物流公司
       store.dispatch('company/GETRECOMMEND', {
-        data: { pageSize: 8 }
+        data: Object.assign({ pageSize: 8 }, paramArea)
       }),
       // 获取物流公司列表
       store.dispatch('company/GETCOMPANYLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取物流园区列表
       store.dispatch('wuliu/GETLIST', {
-        data: { pageSize: 9 },
+        data: Object.assign({ pageSize: 9 }, paramArea),
         name: 'index_list'
       }),
       // 获取专线列表
       store.dispatch('line/GETLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取货源列表
       store.dispatch('huoyuan/GETLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取车源列表
       store.dispatch('cheyuan/GETLIST', {
-        data: { pageSize: 27 },
+        data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),
       // 获取统计数据
@@ -1655,6 +1665,12 @@ export default {
   },
   mounted() {
     if (process.client) {
+      let cookies = this.$cookies
+      let acct = cookies.get('access_token')
+      if (acct) {
+        this.islogin = true
+        this.username = cookies.get('login_mobile')
+      }
       seajs.use(
         [
           '/index/js/pic_scroll.js',

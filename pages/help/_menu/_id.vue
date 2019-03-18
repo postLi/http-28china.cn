@@ -14,6 +14,7 @@ export default {
       link: [
         { rel: 'stylesheet', href: '/help/index.css' },
         { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
+        { rel: 'stylesheet', href: '/help/arc_question.css' },
         this.cssfile
       ],
       script: [
@@ -29,7 +30,7 @@ export default {
       recommendList: [],
       dataset: [],
       content: '',
-      metatitle: '',
+      metatitle: '帮助中心',
       desc: '',
       keyw: ''
     }

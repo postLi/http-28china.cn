@@ -105,7 +105,7 @@ export default {
         '/index/js/city-picker.data.js',
         '/index/js/city-picker.js',
         '/member/js/index.js',
-        '/index/js/collection.js',
+        '/js/collection.js',
         // 'https://webapi.amap.com/maps?v=1.4.8&key=e61aa7ddc6349acdb3b57c062080f730&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder&callback=loadedGaodeMap',
         // '//webapi.amap.com/ui/1.0/main.js',
         // '/js/domap.js',

@@ -51,7 +51,7 @@
               type="text" 
               value="提交" 
               readonly
-              @click="submitBtn()">
+              @click="submitBtn">
           </li>
         </ul>
         <p>提交成功后平台将会为您智能筛选，实时推荐即时货源</p>
@@ -67,10 +67,6 @@ export default {
     isShowHelp: {
       type: Boolean,
       default: false
-    },
-    dataInfo: {
-      type: [Array, Object],
-      default: () => {}
     }
   },
   head: {
@@ -79,6 +75,7 @@ export default {
   },
   data() {
     return {
+      dataInfo: {},
       isActiveFirst: true,
       dialogKey: 0,
       getMoblie: '',

@@ -144,27 +144,31 @@ export default {
       this.wPrice = Object.assign({}, this.wPrice)
       this.hPrice = Object.assign({}, this.hPrice)
       // pEndVolume
-      this.wEndVolume = this.wPrice[0].endVolume
-        ? '0-' + this.wPrice[0].endVolume + '吨'
-        : this.wPrice[0].startVolume + '吨以上'
-      this.pEndVolume = this.hPrice[0].endVolume
-        ? '0-' + this.hPrice[0].endVolume + '立方'
-        : this.hPrice[0].startVolume + '立方以上'
-      this.wDiscountPrice = this.wPrice[0].discountPrice
-        ? '￥' + parseFloat(this.wPrice[0].discountPrice).toFixed(0)
-        : ''
-      this.hDiscountPrice = this.hPrice[0].discountPrice
-        ? '￥' + parseFloat(this.hPrice[0].discountPrice).toFixed(0)
-        : ''
+      if (this.wPrice[0]) {
+        this.wEndVolume = this.wPrice[0].endVolume
+          ? '0-' + this.wPrice[0].endVolume + '吨'
+          : this.wPrice[0].startVolume + '吨以上'
+        this.wDiscountPrice = this.wPrice[0].discountPrice
+          ? '￥' + parseFloat(this.wPrice[0].discountPrice).toFixed(0)
+          : ''
+        this.wPrimeryPrice =
+          this.wPrice[0].startVolume == 0
+            ? parseFloat(this.wPrice[0].primeryPrice).toFixed(0)
+            : ''
+      }
+      if (this.hPrice[0]) {
+        this.pEndVolume = this.hPrice[0].endVolume
+          ? '0-' + this.hPrice[0].endVolume + '立方'
+          : this.hPrice[0].startVolume + '立方以上'
+        this.hDiscountPrice = this.hPrice[0].discountPrice
+          ? '￥' + parseFloat(this.hPrice[0].discountPrice).toFixed(0)
+          : ''
+        this.hPrimeryPrice =
+          this.hPrice[0].startVolume == 0
+            ? parseFloat(this.hPrice[0].primeryPrice).toFixed(0)
+            : ''
+      }
 
-      this.wPrimeryPrice =
-        this.wPrice[0].startVolume == 0
-          ? parseFloat(this.wPrice[0].primeryPrice).toFixed(0)
-          : ''
-      this.hPrimeryPrice =
-        this.hPrice[0].startVolume == 0
-          ? parseFloat(this.hPrice[0].primeryPrice).toFixed(0)
-          : ''
       // console.log(this.hprices, ' this.endVolume', typeof this.wprices)
       // console.log(this.info, 'info')
     }

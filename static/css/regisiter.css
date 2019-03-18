@@ -255,7 +255,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 
 .login-page .content {
   height: 620px;
-  background: url(/img/login_banner.png) no-repeat center 0;
+  background: url(/img/login_banner.jpg) no-repeat center 0;
 }
 
 .login-page .login_wrap {

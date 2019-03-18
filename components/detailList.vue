@@ -31,7 +31,7 @@
             target="_blank">
             <img
               v-if="item.companyFacadeFile == '' || item.companyFacadeFile == null"
-              :src="require('../static/images/pic/bg' + item.num + '.png')"
+              :src="'/images/pic/bg' + item.num + '.png'"
               class="scrollLoading"
               width="165"
               height="125"

@@ -103,7 +103,7 @@ export default {
           [
             '/index/js/city-picker.js'
             // '/member/js/index.js',
-            // '/index/js/collection.js',
+            // '/js/collection.js',
             // '/member/js/wangdian.js'
           ],
           function() {
@@ -117,7 +117,7 @@ export default {
               callback: function(current) {
                 $('#current1').text(current)
                 _this.$store.dispatch('member/GETCOMPANYPOINTINFO', {
-                  companyId: _this.$store.state.member.company.id,
+                  companyId: _this.$route.params.id,
                   pageSize: 10,
                   currentPage: current
                 })
@@ -178,7 +178,7 @@ export default {
         }
       }),
       store.dispatch('member/GETCOMPANYPOINTINFO', {
-        companyId: store.state.member.company.id,
+        companyId: params.id,
         pageSize: 10,
         currentPage: 1
       })

@@ -598,8 +598,8 @@
           </div>
           <div class="bot_right">
             <p
-              style="margin-top: 20px;color:red"
-              v-if="linedataF==[] || linedataF.length==0">此用户没有评论</p>
+              style="margin-top: 20px;"
+              v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
                 <button
@@ -693,9 +693,9 @@
             >
               <div
                 class="list_none"
-                v-if="lineLists==null||
+                v-if="lineLists===null||
               !lineLists.length"><span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px; font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span> <img
-                src="../../static/images/none_pic.png"
+                src="/images/none_pic.png"
                 style=" float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;"></div>
               <div v-else>
                 <ul
@@ -939,7 +939,7 @@
     <Add
       :show = "isAdd"
       :info="linedataE"
-      :infopj="linedatapj"
+      :infopj="infopj"
       @close="noaddFn"/>
   </div>
 
@@ -1086,7 +1086,7 @@ export default {
       linedataF,
       linedataG,
       linedataH,
-      linedatapj
+      infopj
     ] = await Promise.all([
       $axios.get(aurl + `/28-web/range/${query.id}`),
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1116,11 +1116,12 @@ export default {
         endCity: endc,
         endArea: enda
       }),
-      $axios.get(
-        aurl + `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}`
+      $axios.post(
+        aurl +
+          `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}
+`
       )
     ])
-    // console.log(linedatapjAll, 'linedatapjAll')
 
     if (linedataA.data.status === 200) {
       let vo = {
@@ -1168,7 +1169,7 @@ export default {
       arr.forEach(el => {
         num += el.charCodeAt(0) || 0
       })
-      item.num = num % 30
+      item.num = (num % 30) + 1
       linedataC.data.data.list.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
@@ -1176,7 +1177,7 @@ export default {
         arr.forEach(el => {
           num += el.charCodeAt(0) || 0
         })
-        item.num = num % 30
+        item.num = (num % 30) + 1
       })
       linedataB.data.data.companyName =
         linedataB.data.data.companyName.length > 13
@@ -1227,14 +1228,14 @@ export default {
       }
 
       // console.log(linedataF.data.data.list, 'linedataF')
-      // console.log(
-      //   aurl + `/28-web/logisticsCompany/${query.publishId}`,
-      //   'res.data.data.linedataA',
-      //   linedataA.data
-      // )
-      console.log(linedataF.data.data, 'linedataF')
+      console.log(
+        aurl + `/28-web/logisticsCompany/${query.publishId}`,
+        'res.data.data.linedataA',
+        linedataA.data
+      )
+      console.log(linedataE.data.data, 'linedataE')
       return {
-        linedatapj: linedatapj.data.status == 200 ? linedatapj.data.data : [],
+        infopj: infopj.data.status == 200 ? infopj.data.data : [],
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
         lineLists: linedataC.data.status == 200 ? linedataC.data.data.list : [],

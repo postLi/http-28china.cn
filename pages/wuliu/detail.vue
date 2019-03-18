@@ -399,9 +399,7 @@ async function getLogisticsCompany(
       parkId: query.id
       // vo
     }
-  console.log('/28-web/pointNetwork/findParkNet', parm1, 'asd2')
   await $axios.post('/28-web/pointNetwork/findParkNet', parm1).then(res => {
-    console.log('/28-web/pointNetwork/findParkNet', parm1)
     res.data.data.list.forEach(item => {
       if (JSON.parse(item.productService).length > 0) {
         item.productService1 = `

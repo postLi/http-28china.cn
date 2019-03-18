@@ -666,7 +666,7 @@ export default {
       arr.forEach(el => {
         num += el.charCodeAt(0) || 0
       })
-      item.num = num % 30
+      item.num = (num % 30) + 1
       let authStatus = item.authStatus
       let collateral = item.collateral
       let isVip = item.isVip
@@ -881,7 +881,7 @@ export default {
         arr.forEach(el => {
           num += el.charCodeAt(0) || 0
         })
-        item.num = num % 30
+        item.num = (num % 30) + 1
       })
       console.log(getgsList.list, vo, this.gsList, 'quanxuan')
     })

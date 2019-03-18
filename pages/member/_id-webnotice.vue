@@ -5,7 +5,7 @@
       <MemberSidebar />
       <div class="right main_nr">
         <div class="nr_bt">
-          <div class="nr_bt1"><span>公司动态</span></div>
+          <div class="nr_bt1"><span>公坸动思</span></div>
         </div>	
         <div 
           id="webnotice" 
@@ -29,7 +29,7 @@ export default {
   },
   layout: 'member',
   mounted() {
-    seajs.use(['/member/js/index.js', '/index/js/collection.js'])
+    seajs.use(['/member/js/index.js', '/js/collection.js'])
   },
   async fetch({ store, params, $axios, error }) {
     store.commit('member/setId', params.id)

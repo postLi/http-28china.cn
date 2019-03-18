@@ -743,7 +743,7 @@ export default {
       arr.forEach(el => {
         num += el.charCodeAt(0) || 0
       })
-      cy1.data.data.num = num % 30
+      cy1.data.data.num = (num % 30) + 1
       cy1.data.data.startTime1 = parseTime(
         cy1.data.data.startTime,
         '{y}-{m}-{d} {h}:{i}:{s}'

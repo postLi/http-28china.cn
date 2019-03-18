@@ -247,18 +247,11 @@ export default {
       // console.log(n, 'infopjs')
     }
   },
-  mounted() {
-    // console.log(this.$route.query.id)
-    // console.log(this.info, 'infoinfopj')
-    // console.log(this.infopj, 'infopj')
-    // console.log(this.infopjs, 'infopj')
-    // alert('2')
-    // this.loadPagination()
-  },
+  mounted() {},
   methods: {
     loadPagination() {
       $('#pagination1').pagination({
-        currentPage: 1,
+        currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
           // $('#current1').text(current)
@@ -317,98 +310,9 @@ export default {
         this.pages = obj.pages
         this.list = obj.list
         this.currentPage = obj.currentPage
-        console.log(this.list, 'this.list')
+        // console.log(this.list, 'this.list')
       })
-      // this.pages = obj.pages
-      // this.list = obj.list
-      // this.currentPage = obj.currentPage
-      // this.getPJList($axios, this.currentPage, assessLevel)
-      // let aurl = ''
-      // if (process.server) {
-      //   aurl = 'http://localhost:3000'
-      // }
-      // $axios
-      //   .post(aurl + `/api/28-web/rangeEva/range/list`, {
-      //     currentPage: 1,
-      //     pageSize: 3,
-      //     transportRangeId: this.$route.query.id,
-      //     assessLevel: assessLevel
-      //   })
-      //   .then(res => {
-      //     console.log(res.data.data.list, 'resresres')
-      //     if (res.data.status === 200) {
-      //       let _list = res.data.data.list
-      //       this.infopjs = Object.assign({}, _list)
-      //     } else {
-      //       layer.msg(res.data.errorInfo ? res.data.errorInfo : res.data.text)
-      //     }
-      //   })
-
-      // this.indexPl
     },
-    onTIJ() {
-      let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
-      if (!this.form.companyName.length) {
-        this.ismobile = true
-        this.falseMsg = '请输入公司名称'
-        return false
-      }
-      if (!this.form.contactsName.length) {
-        this.ismobile = true
-        this.falseMsg = '请输入联系人'
-        return false
-      }
-      if (!this.form.mobile.length) {
-        this.ismobile = true
-        this.falseMsg = '请输入电话'
-        return false
-      }
-      if (this.form.mobile) {
-        this.ismobile = false
-        var validReg = window.AFLC_VALID
-        if (!validReg.MOBILE.test(this.form.mobile)) {
-          this.ismobile = true
-          this.form.mobile = ''
-          this.falseMsg = '请输入正确的电话'
-          return false
-        }
-      }
-      if (this.types == 1) {
-        this.form.type = 1
-        this.form.source = 1
-      } else {
-        this.form.type = 2
-        this.form.source = 2
-      }
-      console.log(this.form, 'this.form')
-      $axios
-        .post(
-          // /leavingmsg/
-          // 插入物流公司留言信息表信息
-          aurl + '/xlapi/28-web/leavingmsg/',
-          this.form
-        )
-        .then(res => {
-          console.log(res, 'ressss')
-          if (res.data.status == 200) {
-            layer.msg(
-              '提交成功，客服稍后将会与您联系',
-              {
-                tiem: 3000
-              },
-              () => {}
-            )
-            this.$emit('close')
-            this.form = {}
-          } else {
-            // res.data.status
-          }
-        })
-    },
-    // 留言类型（type  ） 1-入驻 2-推荐
     closeDialog() {
       this.$emit('close')
       this.form = {}

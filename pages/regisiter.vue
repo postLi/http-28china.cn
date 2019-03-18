@@ -133,7 +133,7 @@
           </div>
           <div class="tipinfo">
             <span class="tipicon"/>完善基本信息，有更多惊喜等着您！ <a 
-              href="http://192.168.1.157:9526/baseInfo/authentication" 
+              href="/baseInfo/authentication" 
               target="_blank">立即完善</a>
           </div>
           <div class="introinfo">
@@ -171,7 +171,7 @@
             href="/" 
             class="normal-btn">返回网站首页</a>
           <a 
-            href="http://192.168.1.157:9526/baseInfo/authentication" 
+            href="/baseInfo/authentication" 
             class="last-btn">进入会员中心</a>
           
         </div>

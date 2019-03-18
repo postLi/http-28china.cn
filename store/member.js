@@ -149,10 +149,12 @@ export const actions = {
           console.log('GETCOMPANYINFO:', data)
           if (data.status === 200) {
             let ordata = data.data
-            let ps = ordata.productServiceCode
+            let ps = (ordata.productServiceCode || '')
               .replace(/(\[|\])/g, '')
               .split(',')
-            let os = ordata.otherServiceCode.replace(/(\[|\])/g, '').split(',')
+            let os = (ordata.otherServiceCode || '')
+              .replace(/(\[|\])/g, '')
+              .split(',')
             // console.log('psss:', ps, os)
             ordata.productServiceCode = ps
             ordata.otherServiceCode = os

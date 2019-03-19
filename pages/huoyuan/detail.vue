@@ -859,7 +859,7 @@
 import Add from './add'
 import Lelp from './help'
 import Order from './order'
-import $axios from 'axios'
+
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 export default {
   name: 'Detail',
@@ -1226,8 +1226,8 @@ export default {
           currentPage: 1,
           pageSize: 7 - l
         }
-        $axios
-          .post('/api/28-web/lclOrder/list', obj)
+        this.$axios
+          .post('/28-web/lclOrder/list', obj)
           .then(res => {
             this.dataset = res.data.data.list
             // console.log(res.data.data.list, '999999999999as')
@@ -1295,9 +1295,9 @@ export default {
       this.isCencelCollect = true
       this.isShowCollect = false
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/company?access_token=' +
+            '/28-web/collect/company?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
@@ -1330,9 +1330,9 @@ export default {
       this.isCencelCollect = false
       this.isShowCollect = true
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/company?access_token=' +
+            '/28-web/collect/company?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
@@ -1362,9 +1362,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,
@@ -1390,9 +1390,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,
@@ -1418,9 +1418,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,

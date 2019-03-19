@@ -819,11 +819,8 @@ export default {
     let aurl = '',
       lineCode,
       lineCity
-    if (process.server) {
-      aurl = 'http://localhost:3000'
-    }
 
-    let res = await $axios.get(aurl + `/api/28-web/range/${query.id}`)
+    let res = await $axios.get(aurl + `/28-web/range/${query.id}`)
     console.log(
       `/api/28-web/range/${query.id}`,
       'res',

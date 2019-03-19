@@ -61,7 +61,6 @@
   </div>
 </template>
 <script>
-import $axios from 'axios'
 export default {
   name: 'Add',
   props: {
@@ -111,8 +110,8 @@ export default {
     }
   },
   mounted(val) {
-    $axios
-      .get('/api/28-web/sysDict/getSysDictByCodeGet/AF018')
+    this.$axios
+      .get('/28-web/sysDict/getSysDictByCodeGet/AF018')
       .then(res => {
         console.log(res)
         if (res.data.status === 200) {
@@ -161,8 +160,8 @@ export default {
 
       if (this.mobile && this.carType != '') {
         this.Showtextnum = false
-        $axios
-          .post('/api/28-web/helpFind/carInfo/create', this.dataInfo)
+        this.$axios
+          .post('/28-web/helpFind/carInfo/create', this.dataInfo)
           .then(res => {
             if (res.data.status === 100) {
               layer.msg('操作成功')

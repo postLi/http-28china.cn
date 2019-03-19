@@ -948,7 +948,7 @@
 <script>
 import creditIcon from '~/components/common/creditIcon'
 import Add from './add'
-import $axios from 'axios'
+
 import {
   isZXcity,
   getSEListParams,
@@ -1064,9 +1064,6 @@ export default {
     if (!endc || endc == 'null') {
       endc = ''
     }
-    /*     if (process.server) {
-      aurl = 'http://localhost:3000'
-    } */
 
     // /range/getRangePriceReference/{rangeId}
     // 专线详情_专线价格参考
@@ -1079,15 +1076,22 @@ export default {
     // if (pj_zh == '差评') {
     //   var assessLevel = 'AF0360103'
     // }
+    let linedataA = await $axios.get(aurl + `/28-web/range/${query.id}`)
+    if (linedataA.data.status === 200 && linedataA.data.data) {
+      enda = linedataA.data.data.endArea
+      endc = linedataA.data.data.endCity
+      endp = linedataA.data.data.endProvince
+      starta = linedataA.data.data.startArea
+      startc = linedataA.data.data.startCity
+      startp = linedataA.data.data.startProvince
+    }
     let [
-      linedataA,
       linedataB,
       linedataE,
       linedataF,
       linedataG,
       linedataH
     ] = await Promise.all([
-      $axios.get(aurl + `/28-web/range/${query.id}`),
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
       $axios.post(
         aurl +
@@ -1277,9 +1281,7 @@ export default {
   mounted() {
     // console.log(this.linedataA, 'this.linedataA')
     // let aurl = ''
-    // if (process.server) {
-    //   aurl = 'http://localhost:3000'
-    // }
+
     // let transportRangeId = this.$route.query.id
     // // // 操作：collect收藏；cancelCollect取消收藏
     // let handle = 'check'
@@ -1491,11 +1493,9 @@ export default {
       }
       this.indexPl = index
       let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
-      $axios
-        .post(aurl + `/api/28-web/rangeEva/range/list`, {
+
+      this.$axios
+        .post(aurl + `/28-web/rangeEva/range/list`, {
           currentPage: 1,
           pageSize: 3,
           transportRangeId: this.linedataA.id,
@@ -1581,12 +1581,10 @@ export default {
           if (validReg.MOBILE.test(mobile)) {
             $('.tipPhone').hide()
             let aurl = ''
-            if (process.server) {
-              aurl = 'http://localhost:3000'
-            }
+
             form.mobile = mobile
             // console.lo
-            $axios
+            this.$axios
               .post(aurl + '/28-web/logisticsCompany/consult/save', form)
               .then(res => {
                 // console.log(res, 'resresres')
@@ -1680,11 +1678,9 @@ export default {
           if (validReg.MOBILE.test($('.layui-input').val())) {
             $('.tipPhone').hide()
             let aurl = ''
-            if (process.server) {
-              aurl = 'http://localhost:3000'
-            }
+
             form.msgMobile = msgMobile
-            $axios
+            this.$axios
               .post(aurl + '/28-web/helpFind/range/create', form)
               .then(res => {
                 // console.log(res, 'resresres')
@@ -2160,9 +2156,7 @@ export default {
       // console.log(this.linedataA, 'this.linedataA')
       let aurl = ''
       let _this = this
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
+
       let transportRangeId = this.$route.query.id
       // // 操作：collect收藏；cancelCollect取消收藏
       let handle = 'collect'
@@ -2170,10 +2164,10 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
             aurl +
-              '/api/28-web/collect/company?access_token=' +
+              '/28-web/collect/company?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
@@ -2204,9 +2198,7 @@ export default {
       // alert('2')
       // console.log(this.linedataA, 'this.linedataA311')
       let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
+
       let transportRangeId = this.$route.query.id
       // // 操作：collect收藏；cancelCollect取消收藏
       let handle = 'collect'
@@ -2215,10 +2207,10 @@ export default {
       let _user_token = $.cookie('user_token')
       // console.log(access_token, 'access_token && user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
             aurl +
-              '/api/28-web/collect/company?access_token=' +
+              '/28-web/collect/company?access_token=' +
               _access_token +
               '&user_token=' +
               _user_token +
@@ -2250,9 +2242,7 @@ export default {
       // alert('')
       // console.log(this.linedataA, 'this.linedataA2')
       let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
+
       let transportRangeId = this.$route.query.id
       // // 操作：collect收藏；cancelCollect取消收藏
       let handle = 'collect'
@@ -2265,7 +2255,7 @@ export default {
         if (item == 'detail') {
           ulr =
             aurl +
-            '/api/28-web/collect/company?access_token=' +
+            '/28-web/collect/company?access_token=' +
             access_token +
             '&user_token=' +
             user_token +
@@ -2275,7 +2265,7 @@ export default {
             handle
         } else {
           ulr =
-            '/api/28-web/collect/transportRange?access_token=' +
+            '/28-web/collect/transportRange?access_token=' +
             access_token +
             '&user_token=' +
             user_token +
@@ -2285,7 +2275,7 @@ export default {
             handle
         }
         // detail
-        $axios
+        this.$axios
           .post(ulr)
           .then(res => {
             if (res.data.status === 200) {
@@ -2302,7 +2292,7 @@ export default {
       } else {
         // this.isShowAdd = true
         // this.getCity()
-        window.open('http://127.0.0.1:3000/login')
+        // window.open('http://127.0.0.1:3000/login')
       }
     },
     openCollectNumbererere(item) {
@@ -2310,9 +2300,7 @@ export default {
       // alert('')
       // console.log(this.linedataA, 'this.linedataA2')
       let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
+
       let transportRangeId = this.$route.query.id
       // // 操作：collect收藏；cancelCollect取消收藏
       let handle = 'collect'
@@ -2323,10 +2311,10 @@ export default {
       console.log(access_token, 'access_token && user_token')
       if (access_token && user_token) {
         // detail
-        $axios
+        this.$axios
           .post(
             aurl +
-              '/api/28-web/collect/transportRange?access_token=' +
+              '/28-web/collect/transportRange?access_token=' +
               access_token +
               '&user_token=' +
               user_token +

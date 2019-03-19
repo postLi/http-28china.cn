@@ -659,7 +659,6 @@
 </template>
 
 <script>
-import $axios from 'axios'
 import Add from './add'
 async function gateWayList($axios, currentPage, vo = {}) {
   let parm = vo
@@ -801,14 +800,12 @@ export default {
         var validReg = window.AFLC_VALID
         console.log(validReg)
         let aurl = ''
-        if (process.server) {
-          aurl = 'http://localhost:3000'
-        }
+
         if (validReg.MOBILE.test(this.inputData)) {
           this.addFn()
           alert(this.inputData)
           // $axios
-          //   .post(aurl + '/api/28-web/helpFind/range/create', this.form)
+          //   .post(aurl + '/28-web/helpFind/range/create', this.form)
           //   .then(res => {
           //     // console.log(res.data, 'resresres')
           //     if (res.data.status === 200) {

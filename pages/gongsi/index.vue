@@ -491,7 +491,6 @@
   </div>
 </template>
 <script>
-import $axios from 'axios'
 import DetailList from '../../components/detailList'
 import HotList from '../../components/hotList'
 import selectMap from '../zhuanxian/selectMap'
@@ -503,10 +502,8 @@ async function getGSList($axios, currentPage, vo = {}, companyName) {
   parm.pageSize = 20
   parm.companyName = companyName
   let aurl = ''
-  if (process.server) {
-    aurl = 'http://localhost:3000'
-  }
-  let res = await $axios.post(aurl + '/api/28-web/logisticsCompany/list', parm)
+
+  let res = await $axios.post(aurl + '/28-web/logisticsCompany/list', parm)
   if (res.data.status === 200) {
     return {
       list: res.data.data.list,
@@ -601,7 +598,6 @@ export default {
         : app.$cookies.get('currentProvinceFullName')
     }
     if (process.server) {
-      aurl = 'http://localhost:3000'
     }
     let vo1 = vo
     delete vo1.currentPage
@@ -612,18 +608,15 @@ export default {
     // /logisticsCompany/adviseRecommend
     // 广告推荐物流公司
     let [listA, listC, listD, listE, listF, listG, listH] = await Promise.all([
-      $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
-      $axios.post(
-        aurl + `/api/28-web/logisticsCompany/list/related/links`,
-        vo1
-      ),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/adviseRecommend`),
+      $axios.get(aurl + '/28-web/logisticsCompany/popularity'),
+      $axios.post(aurl + `/28-web/logisticsCompany/list/related/links`, vo1),
+      $axios.get(aurl + `/28-web/logisticsCompany/adviseRecommend`),
       $axios.get(
-        aurl + `/api/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
+        aurl + `/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
       ),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/enter`),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/enterpriseRecommend`),
-      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
+      $axios.get(aurl + `/28-web/logisticsCompany/enter`),
+      $axios.get(aurl + `/28-web/logisticsCompany/enterpriseRecommend`),
+      $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
     if (listD.data.status == 200) {
       listD.data.data.forEach(item => {
@@ -830,7 +823,7 @@ export default {
           decodeURI(GetUrlParam('locationProvince')) == 'null'
             ? ''
             : decodeURI(GetUrlParam('locationProvince'))
-        let getgsList = await getGSList($axios, 1, vo, _this.companyName)
+        let getgsList = await getGSList(_this.$axios, 1, vo, _this.companyName)
         _this.gsLists = getgsList.list
       } else {
       }
@@ -868,7 +861,7 @@ export default {
         decodeURI(GetUrlParam('locationProvince')) == 'null'
           ? ''
           : decodeURI(GetUrlParam('locationProvince'))
-      let getgsList = await getGSList($axios, 1, vo, _this.companyName)
+      let getgsList = await getGSList(_this.$axios, 1, vo, _this.companyName)
       _this.gsList = getgsList.list
       _this.gsList.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
@@ -1016,7 +1009,7 @@ export default {
         decodeURI(GetUrlParam('locationProvince')) == 'null'
           ? ''
           : decodeURI(GetUrlParam('locationProvince'))
-      getGSList($axios, 1, vo, this.companyName).then(res => {
+      getGSList(this.$axios, 1, vo, this.companyName).then(res => {
         this.gsList = res.list
         this.gsList.forEach(item => {
           item.num = (num % 30) + 1
@@ -1038,7 +1031,7 @@ export default {
       })
     },
     getFung(vo) {
-      let gslist = getGSList($axios, 1, vo)
+      let gslist = getGSList(this.$axios, 1, vo)
     },
     findMe() {
       this.addFn()

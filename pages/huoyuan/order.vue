@@ -98,6 +98,7 @@ export default {
   width: 100%;
   text-align: right;
   background: #dddddd;
+  cursor: pointer;
 }
 .closeMe a {
   margin-right: 20px;

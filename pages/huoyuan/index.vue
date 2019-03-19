@@ -2343,7 +2343,7 @@ body {
 }
 .rc_list .right span:nth-child(1) {
   display: inline-block;
-  width: 140px;
+  width: 130px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

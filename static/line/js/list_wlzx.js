@@ -175,8 +175,9 @@ if ((!startp || startp == "null") && (!startc || startc == "null")) {
   vo.startProvince = startp;
   locationProvince = startp;
   locationCity = startc;
-  
+  console.log(locationProvince,locationCity);
 }
+
 if (!starta || starta == "null") {
   starta = "";
   delete vo.startArea;
@@ -528,13 +529,13 @@ $("#search_wlLine").click(
     var parkId = $('#select_wlyq').attr("name");
 
     var list1 = [], list2 = [];
-    $('#wlLineFrom .select-item').each(function (i, e) {
+    $('.select_con #wlLineFrom .select-item').each(function (i, e) {
       list1.push($(this).text())
     });
     var startp = list1[0];
     var startc = list1[1];
     var starta = list1[2];
-    $('#wlLineTo .select-item').each(function (i, e) {
+    $('.select_con #wlLineTo .select-item').each(function (i, e) {
       list2.push($(this).text())
     });
     var endp = list2[0];
@@ -608,7 +609,6 @@ $(".list_wlyq_cx").click(
     // vo1.locationCity = locationCity;
     // vo1.locationArea = locationArea;
     // vo1.parkName = parkName;
-    console.log(locationProvince,locationCity,'locationCity',parkName)
     if (!locationProvince) {
       locationProvince = "";
       delete locationProvince;
@@ -630,7 +630,7 @@ $(".list_wlyq_cx").click(
       // delete vo1.parkName;
     }
     // console.log(parkName,'parkName');
-    belong_wlyq(1,parkName);
+    belong_wlyq(1);
   })
 
 
@@ -1138,8 +1138,8 @@ function process01() {
 
 
 //所属物流园区S
-function belong_wlyq(currentPage,parkName) {
-  console.log(locationProvince,locationCity,locationArea,parkName,'locationArea')
+function belong_wlyq(currentPage) {
+  var parkName = $('#wlyq_name').val()
   $.ajax(
     {
       type: "post",
@@ -1151,7 +1151,7 @@ function belong_wlyq(currentPage,parkName) {
       data: JSON.stringify(
         {
           currentPage: currentPage,
-          pageSize: 20,
+          pageSize: 100,
           //vo:vo		//JSON.stringify({})
           locationProvince: locationProvince,
           locationCity: locationCity,
@@ -1161,7 +1161,6 @@ function belong_wlyq(currentPage,parkName) {
         }
       ),
       success: function (res) {
-        console.log(res.data.list,'res')
         $("#js010 .wlzx_yq_item").not(":eq(0)").remove();
         $("#js010 .wlzx_yq_none").css("display", "none");
         if (!res.data.list || res.data.list == "") {
@@ -1203,7 +1202,7 @@ function belong_wlyq(currentPage,parkName) {
 
 }
 
-belong_wlyq(1,'');
+belong_wlyq(1);
 //所属物流园区 E
 
 //找到通知我

@@ -330,12 +330,12 @@
                   wtmap=""
                   type="text"
                   class="ltl-location"
-                  placeholder="请选择目到达地">
+                  placeholder="请选择到达地">
                 <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
               </div>
               <div class="from1">
                 <h4 class="ltl-text">订阅货源，第一时间获得系统消息通知</h4>
-                <h4 class="ltl-text">已有18965人订阅后达成交易</h4>
+                <h4 class="ltl-text">已有<strong style="color:red">2828</strong>人订阅后达成交易</h4>
               </div>
               <input
                 id="check-fee"
@@ -423,7 +423,7 @@
                 <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
-                <span>{{ item.companyName }}</span>
+                <span><a :title="item.companyName">{{ item.companyName }}</a></span>
                 <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
               </div>
             </a>
@@ -2343,10 +2343,11 @@ body {
 }
 .rc_list .right span:nth-child(1) {
   display: inline-block;
-  width: 120px;
+  width: 140px;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+  font-size: 14px;
 }
 .rc_list .right span:nth-child(2) {
   display: inline-block;

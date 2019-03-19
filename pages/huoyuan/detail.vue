@@ -269,7 +269,7 @@
           <img src="/images/cy/hztx.png">
           <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
           <p><img 
-            v-if="archival.shipperStatus === 'AF0010403'"
+            v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
           <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
         </div>
@@ -298,7 +298,7 @@
           <img src="/images/cy/hztx.png">
           <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
           <p><img 
-            v-if="archival.shipperStatus === 'AF0010403'"
+            v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
           <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
         </div>
@@ -685,7 +685,7 @@
                 <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
-                <span>{{ item.companyName }}</span>
+                <span><a :title="item.companyName">{{ item.companyName }}</a></span>
                 <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
               </div>
             </a>

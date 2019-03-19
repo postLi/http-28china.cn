@@ -220,8 +220,7 @@
 
         <!-- 28为您推荐start -->
         <div
-          class="hot-city-layer" 
-          style="min-width:1036px;float:left">
+        class="hot-city-layer main-width">
           <div class="hot-city-unit">
             <h3 class="news-unit-title">{{ recommendBy28Label }}</h3>
             <ul class="hot-cities">
@@ -236,7 +235,38 @@
           </div>
         </div>
         <!-- 28为您推荐end -->
-         
+        <!-- 全国热门物流专线start -->
+        <div class="hot-city-layer main-width">
+          <div class="hot-city-unit hot_box">
+            <h3 class="news-unit-title">{{ hotRecommendLabel }}</h3>
+            <ul class="hot-cities">
+              <li 
+                v-for="(item,index) in hotRecommend" 
+                :key="index" 
+                class="hot-cities-li"><a
+                  target="_blank"
+                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  class="hot-cities-a">{{ item.title }}</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- 全国热门物流专线end -->
+        <!-- 出发的车源start -->
+        <div class="hot-city-layer main-width">
+          <div class="hot-city-unit hot_box">
+            <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
+            <ul class="hot-cities">
+              <li 
+                v-for="(item,index) in startFromRecommend"
+                :key="index"
+                class="hot-cities-li" ><a
+                  target="_blank"
+                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  class="hot-cities-a">{{ item.title }}</a></li>
+            </ul>
+          </div>
+        </div>
+      <!-- 出发的车源end -->
       </div>
       <div class="che_right_box">
         <!-- 最新车源start -->
@@ -384,7 +414,7 @@
         <!--车主月人气榜start-->
         <div 
           class="list_right"
-          style="margin-top: 20px;background:#fff;">
+          style="background:#fff;">
           <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
           <div 
             v-for="(item, index) in $store.state.cheyuan.list_pop_carowner" 
@@ -403,34 +433,7 @@
       </div>
  
 
-      <!-- 全国热门物流专线start -->
-      <div class="hot-city-layer main-width">
-        <div class="hot-city-unit hot_box">
-          <h3 class="news-unit-title">{{ hotRecommendLabel }}</h3>
-          <ul class="hot-cities">
-            <li 
-              v-for="(item,index) in hotRecommend" 
-              :key="index" 
-              class="hot-cities-li"><a
-                target="_blank"
-                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
-                class="hot-cities-a">{{ item.title }}</a></li>
-          </ul>
-        </div>
-        <div class="hot-city-unit hot_box">
-          <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
-          <ul class="hot-cities">
-            <li 
-              v-for="(item,index) in startFromRecommend"
-              :key="index"
-              class="hot-cities-li" ><a
-                target="_blank"
-                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
-                class="hot-cities-a">{{ item.title }}</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- 全国热门物流专线end -->
+
     </div>
   </div>
 </template>
@@ -875,7 +878,7 @@ body {
   height: 18px;
   background-color: #3f94ee;
   border-radius: 1px;
-  margin: 16px 12px 0px 10px;
+  margin: 21px 12px 0px 10px;
 }
 .list_box {
   width: 1400px;
@@ -1795,7 +1798,6 @@ body {
   margin-left: 20px;
   box-sizing: border-box;
   float: right;
-  margin-top: 20px;
 }
 .list-box-r-top {
   width: 100%;
@@ -1952,15 +1954,19 @@ body {
   margin-right: 3px;
 }
 
-.main-width {
+/* .main-width {
   width: 1400px;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
+} */
+.main-width {
+  max-width: 1036px;
+  float: left;
+  width: 1043px;
+  margin-bottom: 20px;
 }
-.hot_box {
-  border-bottom: 1px dashed #dfdfdf;
-}
+
 .hot-city-unit {
   box-sizing: border-box;
   /* border: 1px solid #ececec; */
@@ -1981,10 +1987,11 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  /* border-bottom: 1px solid #ededed; */
+  border-bottom: 2px solid #589def;
   margin-bottom: 10px;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #589def;
 }
 .hot-cities-li {
   display: inline-block;

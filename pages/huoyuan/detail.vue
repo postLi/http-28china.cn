@@ -111,7 +111,7 @@
               <tr><td class="arc_td1">其他：</td><td
               class="arc_td2">{{ hyDetail.extraName ? hyDetail.extraName : '暂无其他描述' }}</td></tr>
               <tr><td class="arc_td1">备注：</td><td
-              class="arc_td2">{{ hyDetail.remark }}</td></tr>
+              class="arc_td2">{{ hyDetail.remark ? hyDetail.remark : '暂无备注信息' }}</td></tr>
             </table>
             </div>
           </div>
@@ -163,7 +163,7 @@
                     href="javascript:;" 
                     class="button1"
                     @click="openOrder()" 
-                  >立即下单</a>
+                  >立即抢单</a>
                   <a 
                     href="javascript:;" 
                     class="button2" 
@@ -267,11 +267,11 @@
         </div>
         <div class="arc_middle">
           <img src="/images/cy/hztx.png">
-          <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
+          <p style="color:#f8542b">{{ archival.shipperTypeName }}</p>
           <p><img 
             v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
-          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
+          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #f8542b">{{ archival.liveness }}</i></p>
         </div>
         <ul class="bottom_ul">
           <li>联系人：{{ archival.contacts }}</li>
@@ -381,6 +381,9 @@
               <a><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</a>
               <a>{{ item.createTime }}</a>
             </li>
+            <p style="padding:10px;color:#999999">
+              货主货源太少？为您推荐其他<a style="color:#3f94ee;">同线路货源</a>
+            </p>
           </ul>
         </div>
       </div>
@@ -623,6 +626,38 @@
             </li>
           </ul>
         </div>
+        <div class="arc_main4">
+          <div class="zx_sx1">
+            <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
+          </div>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in huoLink" 
+              :key="index" 
+              class="hot-cities-li" >
+              <a
+                target="_blank"
+                :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
+                class="hot-cities-a">{{ item.title }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="arc_main4">
+          <div class="zx_sx1">
+            <span class="biaozhi1"/><span>{{ interesLabel }}</span>
+          </div>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in interestOrder" 
+              :key="index" 
+              class="hot-cities-li" >
+              <a
+                target="_blank"
+                :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
+                class="hot-cities-a">{{ item.title }}</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <!-- 货源列表end -->
       <div class="right4">
@@ -756,41 +791,10 @@
         </div>
 
       </div>
-
+    
     </div>
     
-    <div class="arc_main4">
-      <div class="zx_sx1">
-        <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
-      </div>
-      <ul class="hot-cities">
-        <li 
-          v-for="(item,index) in huoLink" 
-          :key="index" 
-          class="hot-cities-li" >
-          <a
-            target="_blank"
-            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-            class="hot-cities-a">{{ item.title }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="arc_main4">
-      <div class="zx_sx1">
-        <span class="biaozhi1"/><span>{{ interesLabel }}</span>
-      </div>
-      <ul class="hot-cities">
-        <li 
-          v-for="(item,index) in interestOrder" 
-          :key="index" 
-          class="hot-cities-li" >
-          <a
-            target="_blank"
-            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-            class="hot-cities-a">{{ item.title }}</a>
-        </li>
-      </ul>
-    </div>
+   
     <div 
       id="js011" 
       class="arc_bottom"
@@ -954,8 +958,8 @@ export default {
     let parm1t = {
       startArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
       startCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
-      startProvince: hyDetails.data.data.startProvince
-        ? hyDetails.data.data.startProvince
+      startProvince: hyDetails.data.data.endProvince
+        ? hyDetails.data.data.endProvince
         : ''
     }
     let code = await getCode($axios, hyDetails.data.data.endProvince)

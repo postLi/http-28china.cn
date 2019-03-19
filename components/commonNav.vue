@@ -245,9 +245,6 @@ export default {
   head: {
     script: [
       {
-        src: '/js/city-picker.data.js'
-      },
-      {
         src: '/js/city-picker.js'
       }
     ]

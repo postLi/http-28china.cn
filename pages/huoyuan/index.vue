@@ -266,6 +266,97 @@
           </div>
         </div>
         <!-- 28为您推荐end -->
+        <!-- 全国热门物流专线start -->
+        <div class="hot-city-layer line-city-box">
+          <div class="hot-city-unit hot_box ">
+            <h3 class="news-unit-title">{{ hotRecommendLabel }}</h3>
+            <ul class="hot-cities">
+              <li 
+                v-for="(item,index) in hotRecommend" 
+                :key="index" 
+                class="hot-cities-li"><a
+                  target="_blank"
+                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
+                  class="hot-cities-a">{{ item.title }}</a></li>
+            </ul>
+          <!-- <ul class="hot-cities">
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440300.html">深圳找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440100.html">广州找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f441900.html">东莞市到上海市货源</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f140400.html">长治找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440500.html">汕头找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440600.html">佛山找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440700.html">江门找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440800.html">湛江找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440900.html">茂名找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f441200.html">肇庆找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440300.html">深圳找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440100.html">广州找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f441900.html">东莞市到上海市货源</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f140400.html">长治找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440500.html">汕头找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440600.html">佛山找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440700.html">江门找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440800.html">湛江找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f440900.html">茂名找车拉货</a></li>
+            <li class="hot-cities-li"><a
+              class="hot-cities-a"
+              href="/goods/f441200.html">肇庆找车拉货</a></li>
+          </ul> -->
+          </div>
+        </div>
+        <!-- 全国热门物流专线end -->
+        <div class="hot-city-unit line-city-box">
+          <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in startFromRecommend"
+              :key="index"
+              class="hot-cities-li" ><a
+                target="_blank"
+                :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
+                class="hot-cities-a">{{ item.title }}</a></li>
+              
+          </ul>
+        </div>
       </div>
  
       <div class="box_right">
@@ -286,7 +377,7 @@
                   <span>{{ item.createTime }}</span>
                 </div>
                 <div class="li_two">
-                  <a>{{ item.goodsTypeName.substring(0,2) }}<span><i>{{ item.goodsWeight }}</i>公斤</span>|<span><i>{{ item.goodsVolume }}</i>方</span>|<span><i>{{ item.goodsNum }}</i>件</span></a>
+                  <a :title="item.goodsTypeName">{{ item.goodsTypeName.substring(0,2) }}<span>:<i>{{ item.goodsWeight }}</i>公斤</span>|<span><i>{{ item.goodsVolume }}</i>方</span>|<span><i>{{ item.goodsNum }}</i>件</span></a>
                   <span><a
                     target="_blank"
                     :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
@@ -303,34 +394,45 @@
           <div class="list-box-r-top">
             <form action="">
               <h2 class="list_help_title">订阅优质货源</h2>
-              <div class="ltl-input">
+              <div 
+                class="from10"
+                id="form1">
                 <input
+                  v-model="checkNotice.startAddres"
                   id="right-bar-form"
                   autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
                   wtmap=""
                   type="text"
                   class="ltl-location"
                   placeholder="请选择出发地">
                 <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
               </div>
-              <div class="ltl-input">
+              <div 
+                class="from10"
+                id="form2">
                 <input
+                  v-model="checkNotice.endAddres"
                   id="right-bar-to"
                   autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
                   wtmap=""
                   type="text"
                   class="ltl-location"
-                  placeholder="请选择目到达地">
+                  placeholder="请选择到达地">
                 <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
               </div>
-              <div class="ltl-input">
+              <div class="from1">
                 <h4 class="ltl-text">订阅货源，第一时间获得系统消息通知</h4>
-                <h4 class="ltl-text">已有18965人订阅后达成交易</h4>
+                <h4 class="ltl-text">已有<strong style="color:red">2828</strong>人订阅后达成交易</h4>
               </div>
               <input
                 id="check-fee"
                 type="button"
                 value="上新提醒我"
+                @click="sendNotice()"
                 class="right-top-btn">
             </form>
           </div>
@@ -412,7 +514,7 @@
                 <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
-                <span>{{ item.companyName }}</span>
+                <span><a :title="item.companyName">{{ item.companyName }}</a></span>
                 <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
               </div>
             </a>
@@ -421,101 +523,16 @@
 
        
       </div>
-      <!-- 全国热门物流专线start -->
-      <div class="hot-city-layer main-width">
-        <div class="hot-city-unit hot_box ">
-          <h3 class="news-unit-title">{{ hotRecommendLabel }}</h3>
-          <ul class="hot-cities">
-            <li 
-              v-for="(item,index) in hotRecommend" 
-              :key="index" 
-              class="hot-cities-li"><a
-                target="_blank"
-                :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
-                class="hot-cities-a">{{ item.title }}</a></li>
-          </ul>
-          <!-- <ul class="hot-cities">
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440300.html">深圳找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440100.html">广州找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441900.html">东莞市到上海市货源</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f140400.html">长治找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440500.html">汕头找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440600.html">佛山找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440700.html">江门找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440800.html">湛江找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440900.html">茂名找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441200.html">肇庆找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440300.html">深圳找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440100.html">广州找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441900.html">东莞市到上海市货源</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f140400.html">长治找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440500.html">汕头找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440600.html">佛山找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440700.html">江门找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440800.html">湛江找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f440900.html">茂名找车拉货</a></li>
-            <li class="hot-cities-li"><a
-              class="hot-cities-a"
-              href="/goods/f441200.html">肇庆找车拉货</a></li>
-          </ul> -->
-        </div>
-      </div>
-      <!-- 全国热门物流专线end -->
-      <div class="hot-city-unit hot_box">
-        <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
-        <ul class="hot-cities">
-          <li 
-            v-for="(item,index) in startFromRecommend"
-            :key="index"
-            class="hot-cities-li" ><a
-              target="_blank"
-              :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
-              class="hot-cities-a">{{ item.title }}</a></li>
-              
-        </ul>
-      </div>
+     
+      
     </div>
+    <Add 
+      :is-show-add.sync="isShowAdd" 
+      :data-info="dataInfo"/>
   </div>
 </template>
 <script>
+import Add from './add'
 async function getHyList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -589,6 +606,9 @@ async function getRecommendList($axios, vo) {
 }
 export default {
   name: 'HuoYuan',
+  components: {
+    Add
+  },
   head: {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
@@ -603,6 +623,12 @@ export default {
       pages: 0,
       currentPage: 1,
       recommendList: [],
+      isShowAdd: false,
+      dataInfo: {},
+      checkNotice: {
+        startAddres: '',
+        endAddres: ''
+      },
       orderClassList: [
         { id: '', name: '不限' },
         { id: 'AF0490701', name: '单次急发货源' },
@@ -683,13 +709,13 @@ export default {
       startProvince = app.$cookies.get('currentProvinceFullName')
     }
     let AF03801 = await $axios.get(
-      '/28chinaservice/sysDict/getSysDictByCodeGet/AF03801'
+      '/28-web/sysDict/getSysDictByCodeGet/AF03801'
     )
     if (AF03801.data.status === 200) {
       AF03801.data.data.unshift({ id: '', name: '不限' })
     }
     let AF03802 = await $axios.get(
-      '/28chinaservice/sysDict/getSysDictByCodeGet/AF03802'
+      '/28-web/sysDict/getSysDictByCodeGet/AF03802'
     )
     if (AF03802.data.status === 200) {
       AF03802.data.data.unshift({ id: '', name: '不限' })
@@ -850,9 +876,67 @@ export default {
       city: this.endCity,
       district: this.endArea
     })
+    // $('#from1 input').citypicker({
+    //   province: this.startProvince,
+    //   city: this.startCity,
+    //   district: this.startArea
+    // })
+    // $('#from2 input').citypicker({
+    //   province: this.endProvince,
+    //   city: this.endCity,
+    //   district: this.endArea
+    // })
     this.pagination()
   },
   methods: {
+    sendNotice() {
+      let _this = this
+      this.sendNot()
+      if (this.checkNotice.startAddres === '') {
+        $('#form1').css('border-color', 'red')
+      } else if (this.checkNotice.startAddres != '') {
+        $('#form1').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.endAddres === '') {
+        $('#form2').css('border-color', 'red')
+      } else if (this.checkNotice.endAddres != '') {
+        $('#form2').css('border-color', '#e5e5e5')
+      }
+      if (
+        this.checkNotice.startAddres != '' &&
+        this.checkNotice.endAddres != ''
+      ) {
+        this.isShowAdd = true
+        this.dataInfo.startProvince = this.startProvince
+        this.dataInfo.startCity = this.startCity
+        this.dataInfo.startArea = this.startArea
+        this.dataInfo.endProvince = this.endProvince
+        this.dataInfo.endCity = this.endCity
+        this.dataInfo.endArea = this.endArea
+      } else {
+        layer.msg('请选择出发地跟到达地')
+      }
+    },
+    sendNot() {
+      let startAds = [],
+        endAds = []
+      $('#form1 .select-item').each(function(i, e) {
+        startAds.push($(this).text())
+      })
+      this.startProvince = startAds[0] ? startAds[0] : ''
+      this.startCity = startAds[1] ? startAds[1] : ''
+      this.startArea = startAds[2] ? startAds[2] : ''
+      this.checkNotice.startAddres =
+        this.startProvince + this.startCity + this.startArea
+      $('#form2 .select-item').each(function(i, e) {
+        endAds.push($(this).text())
+      })
+      this.endProvince = endAds[0] ? endAds[0] : ''
+      this.endCity = endAds[1] ? endAds[1] : ''
+      this.endArea = endAds[2] ? endAds[2] : ''
+      this.checkNotice.endAddres =
+        this.endProvince + this.endCity + this.endArea
+    },
     searchDo() {
       let list1 = [],
         list2 = []
@@ -2013,7 +2097,6 @@ body {
   margin-left: 20px;
   box-sizing: border-box;
   float: right;
-  margin-top: 20px;
 }
 .list-box-r-top {
   width: 100%;
@@ -2024,9 +2107,20 @@ body {
   /* border: 1px solid #ececec; */
   margin-bottom: 10px;
 }
-.ltl-input {
+.from1 {
   position: relative;
   margin: 7px 0 10px 0;
+}
+.from10 {
+  position: relative;
+  margin: 7px 0 10px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: white;
+  font-size: 14px;
+  line-height: 32px;
 }
 .right-top-btn {
   display: block;
@@ -2133,14 +2227,14 @@ body {
 }
 
 .main-width {
-  width: 1400px;
+  width: 1036px;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
 }
-.hot_box {
+/* .hot_box {
   border-bottom: 1px dashed #dfdfdf;
-}
+} */
 .hot-city-unit {
   box-sizing: border-box;
   /* border: 1px solid #ececec; */
@@ -2161,16 +2255,17 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  /* border-bottom: 1px solid #ededed; */
+  border-bottom: 2px solid #589def;
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 20px;
-  color: #333333;
+  color: #589def;
 }
 .line-city-box {
   max-width: 1036px;
   float: left;
   width: 1043px;
+  margin-bottom: 20px;
 }
 .line-title {
   color: #3f94ee;
@@ -2192,7 +2287,8 @@ body {
 .arc_main4-content {
   background-color: #ffffff;
   float: left;
-  width: 100%;
+  /* width: 100%; */
+  width: 348px;
   margin-bottom: 20px;
   margin-left: 16px;
 }
@@ -2250,10 +2346,11 @@ body {
 }
 .rc_list .right span:nth-child(1) {
   display: inline-block;
-  width: 120px;
+  width: 100px;
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  overflow: hidden;
+  font-size: 14px;
 }
 .rc_list .right span:nth-child(2) {
   display: inline-block;

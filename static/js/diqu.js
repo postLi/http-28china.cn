@@ -117,6 +117,8 @@ function setSelectArea(a, b, c, d) {
     expires: 365,
     path: '/'
   })
+  REGIONSDATA_SELECTED_DATA.cityCode = b
+  REGIONSDATA_SELECTED_DATA.city = a
 
   // 新增完整名称
   var afull = ''
@@ -137,6 +139,8 @@ function setSelectArea(a, b, c, d) {
     expires: 365,
     path: '/'
   })
+  REGIONSDATA_SELECTED_DATA.provinceName = bfull
+  REGIONSDATA_SELECTED_DATA.cityName = afull
 
   $('#index_map').data('rendercode', c)
   $('#index_map').data('renderchina', false)
@@ -398,8 +402,16 @@ function changeStart() {
   var myurl2 = UrlUpdateParams(myurl1, 'startc', '')
   var myurl3 = UrlUpdateParams(myurl2, 'starta', '')
   var myurl4 = UrlUpdateParams(myurl3, 'start', '')
-  var myurl5 = UrlUpdateParams(myurl4, 'startProvince', '')
-  var myurl6 = UrlUpdateParams(myurl5, 'startCity', '')
+  var myurl5 = UrlUpdateParams(
+    myurl4,
+    'startProvince',
+    REGIONSDATA_SELECTED_DATA.provinceName
+  )
+  var myurl6 = UrlUpdateParams(
+    myurl5,
+    'startCity',
+    REGIONSDATA_SELECTED_DATA.cityName
+  )
   var myurl7 = UrlUpdateParams(myurl6, 'locationProvince', '')
   var myurl8 = UrlUpdateParams(myurl7, 'locationCity', '')
   var myurl9 = UrlUpdateParams(myurl8, 'locationArea', '')

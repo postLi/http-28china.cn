@@ -88,6 +88,7 @@ var AFWL_API = {
       domain: domain,
       path: '/'
     })
+    localStorage.setItem('28chinauserinfo', JSON.stringify(data))
   },
   login: function(username, password) {
     var defer = $.Deferred()

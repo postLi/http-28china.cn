@@ -109,9 +109,9 @@
               <tr><td class="arc_td1">有效期：</td><td
               class="arc_td2">{{ hyDetail.orderClass }}</td></tr>
               <tr><td class="arc_td1">其他：</td><td
-              class="arc_td2">{{ hyDetail.extraName }}</td></tr>
+              class="arc_td2">{{ hyDetail.extraName ? hyDetail.extraName : '暂无其他描述' }}</td></tr>
               <tr><td class="arc_td1">备注：</td><td
-              class="arc_td2">{{ hyDetail.remark }}</td></tr>
+              class="arc_td2">{{ hyDetail.remark ? hyDetail.remark : '暂无备注信息' }}</td></tr>
             </table>
             </div>
           </div>
@@ -163,7 +163,7 @@
                     href="javascript:;" 
                     class="button1"
                     @click="openOrder()" 
-                  >立即下单</a>
+                  >立即抢单</a>
                   <a 
                     href="javascript:;" 
                     class="button2" 
@@ -266,12 +266,12 @@
           <img src="/images/cy/gold.png">
         </div>
         <div class="arc_middle">
-          <img src="/images/cy/09sj.png">
-          <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
+          <img src="/images/cy/hztx.png">
+          <p style="color:#f8542b">{{ archival.shipperTypeName }}</p>
           <p><img 
-            v-if="archival.shipperStatus === 'AF0010403'"
+            v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
-          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
+          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #f8542b">{{ archival.liveness }}</i></p>
         </div>
         <ul class="bottom_ul">
           <li>联系人：{{ archival.contacts }}</li>
@@ -290,35 +290,16 @@
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.length === 0">
-        <div class="arc_top_title">
-          <h4>货主档案</h4>
-        </div>
-        <div 
-        class="arc_top_img">
-          <img src="/images/cy/gold.png">
-        </div>
-        <div class="arc_middle">
-          <img src="/images/cy/09sj.png">
-          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">0</i></p>
-        </div>
-        <ul class="bottom_ul">
-          <li>联系人：无</li>
-          <li>手机：无</li>
-          <li>已加入：0天</li>
-          <li>好评数：0</li>
-        </ul>
-      </div>
-      <div 
-        class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010102'">
+        v-if="archival.shipperType === 'AF0010102' || archival.shipperType === 'AF0010103'">
         <div class="arc_top_title">
           <h4>{{ archival.companyName }}</h4>
         </div>
         <div class="arc_middle">
-          <img src="/images/cy/09sj.png">
+          <img src="/images/cy/hztx.png">
           <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
-          <p><img src="/images/article_wlzx/10shiming.png"></p>
+          <p><img 
+            v-if="archival.authStatus === 'AF0010403'"
+            src="/images/cy/hzsmrz.png"></p>
           <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
         </div>
         <ul class="bottom_ul">
@@ -393,13 +374,16 @@
               v-for="(item,index) in newestHuoyuanRe"
               :key="index" 
               class="manage_box" >
-              <span>{{ item.startProvinceCityArea }}</span>
-              <span>{{ item.endProvinceCityArea }}</span>
-              <span>{{ item.goodsTypeName }}</span>
-              <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
-              <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
-              <span>{{ item.createTime }}</span>
+              <a :title="item.startProvinceCityArea">{{ item.startCity + item.startArea }}</a>
+              <a :title="item.endProvinceCityArea">{{ item.endCity + item.endArea }}</a>
+              <a :title="item.goodsTypeName">{{ item.goodsTypeName.substring(0,5) }}</a>
+              <a><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</a>
+              <a><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</a>
+              <a>{{ item.createTime }}</a>
             </li>
+            <p style="padding:10px;color:#999999">
+              货主货源太少？为您推荐其他<a style="color:#3f94ee;">同线路货源</a>
+            </p>
           </ul>
         </div>
       </div>
@@ -642,6 +626,38 @@
             </li>
           </ul>
         </div>
+        <div class="arc_main4">
+          <div class="zx_sx1">
+            <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
+          </div>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in huoLink" 
+              :key="index" 
+              class="hot-cities-li" >
+              <a
+                target="_blank"
+                :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
+                class="hot-cities-a">{{ item.title }}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="arc_main4">
+          <div class="zx_sx1">
+            <span class="biaozhi1"/><span>{{ interesLabel }}</span>
+          </div>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in interestOrder" 
+              :key="index" 
+              class="hot-cities-li" >
+              <a
+                target="_blank"
+                :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
+                class="hot-cities-a">{{ item.title }}</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <!-- 货源列表end -->
       <div class="right4">
@@ -704,7 +720,7 @@
                 <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
-                <span>{{ item.companyName }}</span>
+                <span><a :title="item.companyName">{{ item.companyName }}</a></span>
                 <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
               </div>
             </a>
@@ -775,41 +791,10 @@
         </div>
 
       </div>
-
+    
     </div>
     
-    <div class="arc_main4">
-      <div class="zx_sx1">
-        <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
-      </div>
-      <ul class="hot-cities">
-        <li 
-          v-for="(item,index) in huoLink" 
-          :key="index" 
-          class="hot-cities-li" >
-          <a
-            target="_blank"
-            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-            class="hot-cities-a">{{ item.title }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="arc_main4">
-      <div class="zx_sx1">
-        <span class="biaozhi1"/><span>{{ interesLabel }}</span>
-      </div>
-      <ul class="hot-cities">
-        <li 
-          v-for="(item,index) in interestOrder" 
-          :key="index" 
-          class="hot-cities-li" >
-          <a
-            target="_blank"
-            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-            class="hot-cities-a">{{ item.title }}</a>
-        </li>
-      </ul>
-    </div>
+   
     <div 
       id="js011" 
       class="arc_bottom"
@@ -973,8 +958,8 @@ export default {
     let parm1t = {
       startArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
       startCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
-      startProvince: hyDetails.data.data.startProvince
-        ? hyDetails.data.data.startProvince
+      startProvince: hyDetails.data.data.endProvince
+        ? hyDetails.data.data.endProvince
         : ''
     }
     let code = await getCode($axios, hyDetails.data.data.endProvince)

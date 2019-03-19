@@ -805,22 +805,15 @@ export default {
     // console.log(this.$route.query.companyName, '$route')
     // this.companyName = decodeURI(GetUrlParam('companyName')) || ''
     var newArr = new Array()
+    var _newArr = new Array()
     let _this = this
     var uniqueNames = []
-    var buxuan = []
+    var newArr = []
     $('#buxian').change(async function() {
-      // console.log(this.gsList, 'gsList')
-      // console.log($(this).attr('data-code'), 'data-code')
       if ($(this).prop('checked')) {
         $('input[name=checkbox]').prop('checked', false)
-        buxuan.push($(this).attr('data-code'))
-        // uniqueNames.push($(this).attr('data-code'))
-        // $.each(newArr, function(i, el) {
-        //   if ($.inArray(el, uniqueNames) === -1) {
-        //     uniqueNames.push(el)
-        //   }
-        // })
-        _this.checkboxItem = buxuan
+        newArr = []
+        _this.checkboxItem = newArr
         // console.log(_this.checkboxItem, 'uniqueNames1')
         let vo = {}
         vo.otherServiceCodes = _this.checkboxItem
@@ -832,34 +825,28 @@ export default {
           decodeURI(GetUrlParam('locationProvince')) == 'null'
             ? ''
             : decodeURI(GetUrlParam('locationProvince'))
-
-        // vo.companyName =
-        //   decodeURI(GetUrlParam('companyName')) == 'null'
-        //     ? ''
-        //     : decodeURI(GetUrlParam('companyName'))
         let getgsList = await getGSList($axios, 1, vo, _this.companyName)
         _this.gsLists = getgsList.list
-        // _this.gsList.forEach(item => {
-        //   item.num = Math.ceil(Math.random() * 30)
-        // })
-        console.log(_this.gsList, vo, 'buxuan')
-        // return gsLists
       } else {
       }
     })
 
     $('input[name=checkbox]:checkbox').click(async function() {
+      newArr.length = 0
       $('input[name=checkbox]:checkbox').each(function() {
         if ($(this).prop('checked')) {
           newArr.push($(this).attr('data-code'))
           $('#buxian').prop('checked', false)
+          console.log(newArr, 'newArrnewArr')
+          // newArr = []
         } else {
           console.log($(this).attr('data-code'), '$(this)')
         }
       })
-
+      uniqueNames = []
       $.each(newArr, function(i, el) {
         if ($.inArray(el, uniqueNames) === -1) {
+          // uniqueNames = []
           uniqueNames.push(el)
         }
       })
@@ -876,10 +863,6 @@ export default {
         decodeURI(GetUrlParam('locationProvince')) == 'null'
           ? ''
           : decodeURI(GetUrlParam('locationProvince'))
-      // vo.companyName =
-      //   decodeURI(GetUrlParam('companyName')) == 'null'
-      //     ? ''
-      //     : decodeURI(GetUrlParam('companyName'))
       let getgsList = await getGSList($axios, 1, vo, _this.companyName)
       _this.gsList = getgsList.list
       _this.gsList.forEach(item => {

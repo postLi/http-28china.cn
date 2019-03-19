@@ -1,2 +1,0 @@
-exports.ids=[48],exports.modules={405:function(t,e,r){"use strict";r.r(e);var c={layout:"m",data:()=>({})},n=r(0);var component=Object(n.a)(c,function(){var t=this.$createElement;return(this._self._c||t)("div",[this._ssrNode("\n  zzz\n")])},[],!1,function(t){},"d236c17c","284c72f5");e.default=component.exports}};
-//# sourceMappingURL=41a33cbccaa1430149a0.js.map

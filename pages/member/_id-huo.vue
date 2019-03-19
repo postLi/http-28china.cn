@@ -127,7 +127,7 @@
           <ul 
           >
             <li class="hy_item01"><a 
-              :href="'/zhuanxian/detail?id=' + item.id"
+              :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
               id="nr041" 
               target="_blank" 
             ><span><em 
@@ -153,7 +153,7 @@
             </li>
             <li class="hy_item05"><a 
               id="nr0410"
-              :href="'/zhuanxian/detail?id=' + item.id" 
+              :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId" 
               target="_blank"><input 
                 readonly 
                 value="查看"></a></li>
@@ -360,7 +360,7 @@ export default {
     },
     fetchData(pnum) {
       return this.$store.dispatch('member/getCompanyHuo', {
-        shipperId: this.$route.params.id,
+        companyId: this.$route.params.id,
         pageSize: 10,
         currentPage: pnum,
         ...this.query
@@ -398,7 +398,7 @@ export default {
         name: 'AF04907'
       }),
       store.dispatch('member/getCompanyHuo', {
-        shipperId: params.id,
+        companyId: params.id,
         pageSize: 10,
         currentPage: 1
       })

@@ -1138,6 +1138,7 @@ margin-left: 30px;
   height: 64px;
   cursor: pointer;
   float: left;
+  line-height: 25px;
 }
 
 .wlzx_yq_item:hover {
@@ -1180,7 +1181,7 @@ margin-left: 30px;
   margin: 0 0 0px 14px;
   letter-spacing: 1.1px;
   font-size: 14px;
-  color: #333;
+  color: #666;
 }
 
 #pagination2 .ui-pagination-page-item {

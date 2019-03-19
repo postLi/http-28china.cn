@@ -4,7 +4,7 @@
     @close="closeDialog"
     :title="popTitle">
 
-    <div slot="header">我要申请入驻</div>
+    <div slot="header">{{ title }}</div>
     <div
       class="dialog_publish_main"
       slot="main">
@@ -77,11 +77,20 @@
         style="">
         <button
           class=""
-          style="width: 290px;margin-left: 110px;;padding: 10px 0;background: #0d91e9;border: none"
+          style="width: 290px;margin-left: 110px;;padding: 10px 0;background: #0d91e9;border: none;color:#fff"
           @click="onTIJ">立即申请</button>
         <p
-          style="margin-left: 110px;;height: 30px;
-    line-height: 30px;">您还可以选择在线咨询：<a href=""><img src="../../static/line/images/15qq.gif" >qq交谈</a></p>
+          style="margin:10px 0 30px 110px;;height: 30px;
+    line-height: 30px;">您还可以选择在线咨询：<a 
+    href="http://wpa.qq.com/msgrd?v=3&uin=4009992828
+&site=qq&menu=yes
+              &site=qq&menu=yes&quot;"
+              target="_blank"
+        ><img src="../../static/line/images/15qq.gif" >QQ交谈</a></p>
+        <!-- :href="'http://wpa.qq.com/msgrd?v=3&uin=4009992828
+&site=qq&menu=yes'"
+              &site="qq&menu=yes&quot;"
+        target="_blank" -->
       </div>
 
     </div>
@@ -109,6 +118,7 @@ export default {
   data() {
     return {
       // isShow: this.show,
+      title: '',
       popTitle: '提货派车单',
       falseMsg: '',
       form: {
@@ -130,7 +140,14 @@ export default {
     }
   },
   watch: {
-    types(n, o) {}
+    types(n, o) {
+      if (n == '1') {
+        this.title = '我要申请入驻'
+      } else {
+        this.title = '申请成为推荐企业'
+      }
+      console.log(n, 'kkdlfkldf')
+    }
   },
   methods: {
     onTIJ() {
@@ -170,16 +187,16 @@ export default {
         this.form.type = 2
         this.form.source = 2
       }
-      console.log(this.form, 'this.form')
+      // console.log(this.form, 'this.form')
       $axios
         .post(
           // /leavingmsg/
           // 插入物流公司留言信息表信息
-          aurl + '/xlapi/28-web/leavingmsg/',
+          aurl + '/api/28-web/leavingmsg/',
           this.form
         )
         .then(res => {
-          console.log(res, 'ressss')
+          // console.log(res, 'ressss')
           if (res.data.status == 200) {
             layer.msg(
               '提交成功，客服稍后将会与您联系',

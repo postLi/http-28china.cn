@@ -202,16 +202,14 @@ export default {
         if (validReg.MOBILE.test(this.form.msgMobile)) {
           this.isTit = false
           let aurl = ''
-          if (process.server) {
-            aurl = 'http://localhost:3000'
-          }
+
           $axios
-            .post(aurl + '/api/28-web/helpFind/range/create', this.form)
+            .post(aurl + '/28-web/helpFind/range/create', this.form)
             .then(res => {
               // console.log(res.data, 'resresres')
               if (res.data.status === 200) {
                 layer.msg('提交成功，客服稍后将会与您联系')
-                // this.form.msgMobile = ''
+                this.form.msgMobile = ''
                 this.remForm()
                 console.log(this.form, 'fomr')
               } else {

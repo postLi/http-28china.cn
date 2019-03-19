@@ -12,13 +12,13 @@
         <input
           data-level="district"
           class="arc_input1"
-          wtmap=""
+          wtmap="city"
           placeholder="出发地">
         <span>&rarr;</span>
         <input
           data-level="district"
           class="arc_input2"
-          wtmap=""
+          wtmap="city"
           placeholder="到达地">
       </div>
     </div>
@@ -100,7 +100,7 @@
             </div>
             <div>
               <a href="http://h5.28tms.com/">
-              下载<span>【28快运APP】</span>，您可查看更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
+              下载<span>【28快运APP】</span>，您可查看更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的车源，并可实时接 收28快运为您推荐的精品车源提醒!</a>
             </div>
 
           </div>
@@ -125,7 +125,7 @@
                   class="manage_box"
                   v-for="(item,index) in newList"
                   :key="index"
-                >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>货源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
+                >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>车源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
               </div>
             </div>
           </div>
@@ -270,7 +270,7 @@
               <div class="content-right-row"><img
                 class="img"
                 src="/images/cy/13hot.png">活跃度：<i>{{ cheComprehensive.liveness }}</i></div>
-              <div class="content-right-row">最近三个月发布货源 <i>{{ cheComprehensive.lastThreeMonthPublishNum }}</i> 次</div>
+              <div class="content-right-row">最近三个月发布车源 <i>{{ cheComprehensive.lastThreeMonthPublishNum }}</i> 次</div>
               <div class="content-right-row">共成交 <i>{{ cheComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>28</i> 次</div>
               <div class="content-right-row">大家对他的印象:</div>
               <div 
@@ -314,7 +314,7 @@
             >
               <span 
                 class="biaozhi" 
-              /><span>更多从{{ cy1.startCity }}出发的货源</span>
+              /><span>更多从{{ cy1.startCity }}出发的车源</span>
               <i
                 style="cursor: pointer;float: right;font-size: 14px;"
                 @click="goToCy()">更多></i>
@@ -387,7 +387,7 @@
 
           <div>
             <div class="zx_sx">
-              <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的货源</span>
+              <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的车源</span>
               <i
                 style="cursor: pointer;float: right;font-size: 14px;"
                 @click="goToCy1()">更多></i>
@@ -898,23 +898,37 @@ export default {
     }
   },
   mounted() {
+    seajs.use(['/js/gaodemap2.js'])
     //找专线/货源/车源 S
     // $('.arc_input1, .arc_input2').citypicker()
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')
-      var start = $('.arc_input1').val()
-      var end = $('.arc_input2').val()
+      var start = $('.arc_input1')
+      var end = $('.arc_input2')
+      var query =
+        '?startProvince=' +
+        (start.attr('theprovince') || '') +
+        '&startCity=' +
+        (start.attr('thecity') || '') +
+        '&startc=' +
+        (start.attr('thecity') || '') +
+        '&startp=' +
+        (start.attr('theprovince') || '') +
+        '&endProvince=' +
+        (end.attr('theprovince') || '') +
+        '&endCity=' +
+        (end.attr('thecity') || '')
       console.log(
         '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
       )
       if (search_type == 'zx') {
-        window.open('/zhuanxian/list?start=' + start + '&end=' + end)
+        window.open('/zhuanxian/list' + query)
       }
       if (search_type == 'huo') {
-        window.open('/huoyuan?start=' + start + '&end=' + end)
+        window.open('/huoyuan' + query)
       }
       if (search_type == 'che') {
-        window.open('/cheyuan?start=' + start + '&end=' + end)
+        window.open('/cheyuan' + query)
       }
     })
 

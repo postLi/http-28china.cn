@@ -73,7 +73,7 @@
             class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
-            <img src="../../static/images/none_pic.png">
+            <img src="/images/none_pic.png">
           </div>
 
           <ul
@@ -83,9 +83,9 @@
             <a
               :href="'/wuliu/detail?id=' + item.id"
               target="_blank">
-              <!-- :src="item.parkSignPicture?item.parkSignPicture:'../../static/images/list_wlzx/wlyq_pic.png'" -->
+              <!-- :src="item.parkSignPicture?item.parkSignPicture:'/images/list_wlzx/wlyq_pic.png'" -->
               <li class="wlzx_list_01"><img
-                :src="item.parkSignPicture?item.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
+                :src="item.parkSignPicture?item.parkSignPicture:'/yuanqu/images/wlyq_pic.png'"
                 class="scrollLoading"
                 width="268"
                 height="268"></li>

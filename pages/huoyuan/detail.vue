@@ -939,7 +939,7 @@ export default {
       ]
     }
   },
-  async asyncData({ $axios, app, query }) {
+  async asyncData({ $axios, app, query, error }) {
     let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {

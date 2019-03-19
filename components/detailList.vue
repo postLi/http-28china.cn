@@ -31,12 +31,13 @@
             target="_blank">
             <img
               v-if="item.companyFacadeFile == '' || item.companyFacadeFile == null"
-              :src="'/images/pic/bg' + item.num + '.png'"
+              src="../static/images/pic/bg1.png"
               class="scrollLoading"
               width="165"
               height="125"
             >
             <!--:src="require('../static/images/pic/bg' + item.num + '.png')"-->
+            <!-- :src="'/images/pic/bg1' + item.num + '.png'" -->
             <img
               v-else
               :data-code="item.num"

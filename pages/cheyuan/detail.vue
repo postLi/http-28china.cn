@@ -4,17 +4,19 @@
       <img 
         width="135px" 
         src="/img/logo.png" >
-      <div class="arc_top1_3"><input
+      <div class="arc_top1_3"><a
         class="arc_input3"
-        value="搜全网"> </div>
+      >搜全网</a></div>
       <div class="arc_top1_2">
         <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
         <input
+          data-level="district"
           class="arc_input1"
           wtmap=""
           placeholder="出发地">
         <span>&rarr;</span>
         <input
+          data-level="district"
           class="arc_input2"
           wtmap=""
           placeholder="到达地">
@@ -29,6 +31,8 @@
           <a
             v-for="(item,index) in zxList"
             v-if="index < 14"
+            target="_blank"
+            :href="'/cheyuan?startCity=&startProvince=&endProvince='+cy1.endProvince + '&endCity=' + item.name"
             :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
           </a>
         </div>
@@ -46,6 +50,8 @@
           onmouseout="$('.city_box').css('display', 'none');">
           <a
             v-for="(item,index) in zxList"
+            target="_blank"
+            :href="'/cheyuan?startCity=&startProvince=&endProvince='+cy1.endProvince + '&endCity=' + item.name"
             v-if="index >= 14"
             :key="index"><span>{{ item.name.substring(0, 2) }}</span>
           </a>
@@ -163,7 +169,9 @@
             <div class="arc_m5_1">
               <span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
               <div style="margin-top: 15px">
-                <a href="">快速下单</a>
+                <a 
+                  href="/create/order" 
+                  target="_blank">快速下单</a>
                 <span style="margin-left: 47px">
                   <img src="/images/cy/14fresh.png">
                   <span
@@ -526,22 +534,20 @@
               v-for="(item,index) in popularity" 
               :key="index" 
               class="rc_list">
-              <a :href="'/member/'+item.id">
-                <div class="left">
-                  <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
-                </div>
-                <div 
-                  v-if="index < 3" 
-                  class="img">
-                  <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
-                </div>
-                <div 
-                  class="right"
-                  style="padding-right:18px">
-                  <span>{{ item.driverName + item.carNum }}</span>
-                  <span style="float: right">人气值：<i style="color: red">{{ item.popNum }}</i></span>
-                </div>
-              </a>
+              <div class="left">
+                <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
+              </div>
+              <div 
+                v-if="index < 3" 
+                class="img">
+                <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
+              </div>
+              <div 
+                class="right"
+                style="padding-right:18px">
+                <span>{{ item.driverName +' ' + item.carNum }}</span>
+                <span style="float: right">人气值：<i style="color: red">{{ item.popNum }}</i></span>
+              </div>
             </div>
           </div>
 
@@ -655,7 +661,6 @@ export default {
     script: [
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
@@ -893,6 +898,26 @@ export default {
     }
   },
   mounted() {
+    //找专线/货源/车源 S
+    // $('.arc_input1, .arc_input2').citypicker()
+    $('.arc_input3').click(function() {
+      var search_type = $('#search_type option:selected').attr('name')
+      var start = $('.arc_input1').val()
+      var end = $('.arc_input2').val()
+      console.log(
+        '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
+      )
+      if (search_type == 'zx') {
+        window.open('/zhuanxian/list?start=' + start + '&end=' + end)
+      }
+      if (search_type == 'huo') {
+        window.open('/huoyuan?start=' + start + '&end=' + end)
+      }
+      if (search_type == 'che') {
+        window.open('/cheyuan?start=' + start + '&end=' + end)
+      }
+    })
+
     console.log(this.cy1, 'carInfoId')
     let rollContainer_h = $('.release_box').height()
     let roll = $('.release_scroll')
@@ -1459,4 +1484,7 @@ export default {
 </script>
 
 <style scoped>
+.arc_input3 {
+  display: inline-block;
+}
 </style>

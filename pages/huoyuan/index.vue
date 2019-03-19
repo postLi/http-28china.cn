@@ -2255,11 +2255,11 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  border-bottom: 2px solid #589def;
+  /* border-bottom: 2px solid #589def; */
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 20px;
-  color: #589def;
+  color: #333333;
 }
 .line-city-box {
   max-width: 1036px;

@@ -28,7 +28,7 @@ export default {
     if (process.server) {
       return
     }
-    // console.log(this.info, 'this.info')
+    console.log(this.info, 'this.info')
     // `cargo_type`  （重货1、轻货0）'
     this.info.forEach((item, index) => {
       if (item.cargoType === '0') {
@@ -561,7 +561,7 @@ export default {
               position: 'insideTop',
               formatter: function(params) {
                 // console.log(params)
-                return `{color1|${params.name}}\n{color0|${params.value}公斤}`
+                return `{color1|${params.name}}\n{color0|${params.value}立方}`
               },
               rich: {
                 color0: {
@@ -613,7 +613,7 @@ export default {
               if (params.dataIndex === 4) {
                 return ``
               } else {
-                return `{${c0}|${params.value}公斤}\n{color2|${params.name}}`
+                return `{${c0}|${params.value}立方}\n{color2|${params.name}}`
               }
             },
             rich: {

@@ -9,7 +9,7 @@
         class="closeMe" 
         @click="closeMe()"><a>关闭</a></div>
       <div class="huo_content">
-        <h4>您要订阅的货源：{{ dataInfo.startCity + '至' + dataInfo.endCity + '货源' }}</h4>
+        <h4>您要订阅的货源：<a :title="dataInfo.startCity + '至' + dataInfo.endCity">{{ dataInfo.startCity + '至' + dataInfo.endCity + '货源' }}</a></h4>
         <ul class="cont_ul">
           <li class="cont_ul_li">
             <span 
@@ -235,6 +235,7 @@ export default {
   width: 100%;
   text-align: right;
   background: #dddddd;
+  cursor: pointer;
 }
 .closeMe a {
   margin-right: 20px;

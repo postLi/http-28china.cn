@@ -884,8 +884,12 @@ table tr:nth-child(odd){
   border-radius: 50%;
 }
 .rc_list .right span:nth-child(1) {
- display: inline-block;
- width: 150px;
+  display: inline-block;
+  width: 130px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px
 }
 .rc_list .right span:nth-child(2) {
   display: inline-block;

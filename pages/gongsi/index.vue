@@ -284,7 +284,7 @@
             class="layui-input parkname"
             style="width: 280px"
             v-model="companyName">
-          <a :href="'/gongsi/?companyName='+ companyName"><i
+          <a @click="searchCompanyName"><i
             class="layui-icon layui-icon-search"
             style="font-size: 20px; color: #1E9FFF;display: inherit;vertical-align: middle;position: absolute; top: 3px;right: 10px;cursor: pointer"
           /></a>
@@ -341,6 +341,12 @@
           <div
             id="js007"
             class="">
+            <div class="list-box-r-phone">
+              <div class="zx_p_tit">帮我找优质承运商</div>
+              <div class="list-box-r-top">
+                <selectMap/>
+              </div>
+            </div>
             <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
               <i
                 style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer"
@@ -385,12 +391,12 @@
           <HotList
             :lines="lineHots"
             :gongsi="true"/>
-          <div class="list-box-r-phone">
+          <!-- <div class="list-box-r-phone">
             <div class="zx_p_tit">帮我找优质承运商</div>
             <div class="list-box-r-top">
               <selectMap/>
             </div>
-          </div>
+          </div> -->
           <div class="list-box-r-news">
             <div
               v-if="gongsi_jryw01"
@@ -490,10 +496,11 @@ import HotList from '../../components/hotList'
 import selectMap from '../zhuanxian/selectMap'
 import FooterLinks from '../../components/footerLinks'
 import Add from './add'
-async function getGSList($axios, currentPage, vo = {}) {
+async function getGSList($axios, currentPage, vo = {}, companyName) {
   let parm = vo
   parm.currentPage = currentPage
   parm.pageSize = 20
+  parm.companyName = companyName
   let aurl = ''
   if (process.server) {
     aurl = 'http://localhost:3000'
@@ -578,7 +585,7 @@ export default {
     let vo = {
       currentPage: 1,
       pageSize: 5,
-      companyName: query.companyName ? query.companyName : '',
+      // companyName: query.companyName ? query.companyName : '',
       city: query.locationCity ? query.locationCity : '',
       province: query.locationProvince ? query.locationProvince : '',
       endArea: query.endArea ? query.endArea : '',
@@ -636,9 +643,6 @@ export default {
         item.advService = item.productServiceNameList
           ? item.productServiceNameList
           : item.otherServiceNameList
-        item.isR = Math.ceil(Math.random() * 255)
-        item.isG = Math.ceil(Math.random() * 255)
-        item.iB = Math.ceil(Math.random() * 255)
       })
     }
 
@@ -658,7 +662,7 @@ export default {
     // console.log(listH.data.data, 'listHlistH')
 
     // getGSList
-    let gsList = await getGSList($axios, 1, vo)
+    let gsList = await getGSList($axios, 1, vo, '')
     gsList.list.forEach(item => {
       // item.num = Math.ceil(Math.random() * 30)
       let arr = (item.id || '').split('')
@@ -748,7 +752,7 @@ export default {
       }
     })
 
-    console.log(listG.data.data, 'listGlistG.list')
+    // console.log(listG.data.data, 'listGlistG.list')
     return {
       lineHots: listA.data.status == 200 ? listA.data.data : [],
       lineLinks: listC.data.status == 200 ? listC.data.data : [],
@@ -777,6 +781,10 @@ export default {
     },
     getgsListFn() {
       return this.gsList.slice(0, 10)
+      //       item.num = (num % 30) + 1
+      // return this.gsList.slice(0, 10).forEach(item => {
+      //   item.num = (num % 30) + 1
+      // })
     },
     getgsListsFn() {
       return this.gsList.slice(10)
@@ -792,7 +800,7 @@ export default {
     script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
-    this.companyName = this.$route.query.companyName
+    // this.companyName = this.$route.query.companyName
 
     // console.log(this.$route.query.companyName, '$route')
     // this.companyName = decodeURI(GetUrlParam('companyName')) || ''
@@ -813,7 +821,7 @@ export default {
         //   }
         // })
         _this.checkboxItem = buxuan
-        console.log(_this.checkboxItem, 'uniqueNames1')
+        // console.log(_this.checkboxItem, 'uniqueNames1')
         let vo = {}
         vo.otherServiceCodes = _this.checkboxItem
         vo.locationCity =
@@ -825,11 +833,11 @@ export default {
             ? ''
             : decodeURI(GetUrlParam('locationProvince'))
 
-        vo.companyName =
-          decodeURI(GetUrlParam('companyName')) == 'null'
-            ? ''
-            : decodeURI(GetUrlParam('companyName'))
-        let getgsList = await getGSList($axios, 1, vo)
+        // vo.companyName =
+        //   decodeURI(GetUrlParam('companyName')) == 'null'
+        //     ? ''
+        //     : decodeURI(GetUrlParam('companyName'))
+        let getgsList = await getGSList($axios, 1, vo, _this.companyName)
         _this.gsLists = getgsList.list
         // _this.gsList.forEach(item => {
         //   item.num = Math.ceil(Math.random() * 30)
@@ -868,11 +876,11 @@ export default {
         decodeURI(GetUrlParam('locationProvince')) == 'null'
           ? ''
           : decodeURI(GetUrlParam('locationProvince'))
-      vo.companyName =
-        decodeURI(GetUrlParam('companyName')) == 'null'
-          ? ''
-          : decodeURI(GetUrlParam('companyName'))
-      let getgsList = await getGSList($axios, 1, vo)
+      // vo.companyName =
+      //   decodeURI(GetUrlParam('companyName')) == 'null'
+      //     ? ''
+      //     : decodeURI(GetUrlParam('companyName'))
+      let getgsList = await getGSList($axios, 1, vo, _this.companyName)
       _this.gsList = getgsList.list
       _this.gsList.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
@@ -883,7 +891,7 @@ export default {
         })
         item.num = (num % 30) + 1
       })
-      console.log(getgsList.list, vo, this.gsList, 'quanxuan')
+      // console.log(getgsList.list, vo, this.gsList, 'quanxuan')
     })
     seajs.use(
       [
@@ -936,7 +944,7 @@ export default {
                 var tab1 = $('.echart_scroll_nr1')
                 var tab2 = $('.echart_scroll_nr2')
                 tab2.html(tab1.html())
-                console.log('tab2:' + tab2.html())
+                // console.log('tab2:' + tab2.html())
                 function Marquee() {
                   if (tab2[0].offsetWidth - tab[0].scrollLeft <= 0) {
                     tab[0].scrollLeft -= tab1[0].offsetWidth
@@ -1009,6 +1017,25 @@ export default {
     )
   },
   methods: {
+    searchCompanyName() {
+      console.log(this.companyName, 'this.companyName')
+      let vo = {}
+      vo.locationCity =
+        decodeURI(GetUrlParam('locationCity')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('locationCity'))
+      vo.locationProvince =
+        decodeURI(GetUrlParam('locationProvince')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('locationProvince'))
+      getGSList($axios, 1, vo, this.companyName).then(res => {
+        this.gsList = res.list
+        this.gsList.forEach(item => {
+          item.num = (num % 30) + 1
+        })
+        // console.log(res, 'res', this.gsList)
+      })
+    },
     loadPagination() {
       $('#pagination1').pagination({
         currentPage: this.currentPage,

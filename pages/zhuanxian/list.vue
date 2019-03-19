@@ -416,7 +416,8 @@
         </div>
         <div class="list-box-r-phone">
           <div class="zx_p_tit">帮我找优质承运商</div>
-          <selectMap/>
+          <selectMap 
+          :line="true"/>
         </div>
         <div class="list-box-r-top">
           <img

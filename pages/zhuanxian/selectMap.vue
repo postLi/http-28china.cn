@@ -129,6 +129,12 @@ import $axios from 'axios'
 
 export default {
   name: 'SelectMap',
+  props: {
+    line: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       phoneNum: '',
@@ -138,6 +144,9 @@ export default {
         memo: ''
       }
     }
+  },
+  watch: {
+    line(n, o) {}
   },
   mounted() {
     seajs.use('../js/city-picker.js', function() {
@@ -232,7 +241,12 @@ export default {
       // }
       this.form.msgMobile = ''
       this.form.memo = ''
-      window.location.href = '/zhuanxian/list'
+      if (this.line) {
+        window.location.href = '/zhuanxian/list'
+      } else {
+        window.location.href = '/gongsi'
+      }
+
       // this.form.startProvince = $(
       //   '.form_findme .city-picker-span:eq(0) .select-item:eq(0)'
       // ).text('')
@@ -252,8 +266,8 @@ export default {
       // this.form.endArea = $(
       //   '.form_findme .city-picker-span:eq(1) .select-item:eq(2)'
       // ).text('')
-      // $('#wlLineTo .city-picker-span').text('请输入到达地')
-      // $('#wlLineFrom .city-picker-span').text('请输入出发地')
+      // $('.list-box-r-top #wlLineTo .city-picker-span').text('请输入到达地')
+      // $('.list-box-r-top #wlLineFrom .city-picker-span').text('请输入出发地')
     }
   }
 }

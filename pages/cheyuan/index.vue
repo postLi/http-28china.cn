@@ -222,7 +222,7 @@
         <div
         class="hot-city-layer main-width">
           <div class="hot-city-unit">
-            <h3 class="news-unit-title">{{ recommendBy28Label }}</h3>
+            <h3 class="line-title">{{ recommendBy28Label }}</h3>
             <ul class="hot-cities">
               <li 
                 v-for="(item,index) in recommendBy28"
@@ -425,7 +425,7 @@
             <div 
               v-if="index < 3" 
               class="img"><img :src="'/images/index/wlgs_tj_0'+index+'.png'" ></div>
-            <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
+            <div class="right"><span>{{ item.driverName }} </span><span style="margin-left:10px">{{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
           </div>
         </div>
 
@@ -1987,11 +1987,15 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  border-bottom: 2px solid #589def;
+  /* border-bottom: 2px solid #589def; */
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 20px;
-  color: #589def;
+  color: #333333;
+}
+.line-title {
+  color: #3f94ee;
+  border-bottom: 2px solid #3f94ee;
 }
 .hot-cities-li {
   display: inline-block;

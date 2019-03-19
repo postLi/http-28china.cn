@@ -202,6 +202,9 @@ export default {
               // console.log(res.data, 'resresres')
               if (res.data.status === 200) {
                 layer.msg('提交成功，客服稍后将会与您联系')
+                // this.form.msgMobile = ''
+                this.remForm()
+                console.log(this.form, 'fomr')
               } else {
                 layer.msg(
                   res.data.errorInfo ? res.data.errorInfo : res.data.text
@@ -215,6 +218,42 @@ export default {
       } else {
         this.isTit = true
       }
+    },
+    remForm() {
+      // this.form = {
+      //   msgMobile: '',
+      //   memo: '',
+      //   startProvince: '',
+      //   startCity: '',
+      //   startArea: '',
+      //   endProvince: '',
+      //   endCity: '',
+      //   endArea: ''
+      // }
+      this.form.msgMobile = ''
+      this.form.memo = ''
+      window.location.href = '/zhuanxian/list'
+      // this.form.startProvince = $(
+      //   '.form_findme .city-picker-span:eq(0) .select-item:eq(0)'
+      // ).text('')
+      // this.form.startCity = $(
+      //   '.form_findme .city-picker-span:eq(0) .select-item:eq(1)'
+      // ).text('')
+      // this.form.startArea = $(
+      //   '.form_findme .city-picker-span:eq(0) .select-item:eq(2)'
+      // ).text('')
+
+      // this.form.endProvince = $(
+      //   '.form_findme .city-picker-span:eq(1) .select-item:eq(0)'
+      // ).text('')
+      // this.form.endCity = $(
+      //   '.form_findme .city-picker-span:eq(1) .select-item:eq(1)'
+      // ).text('')
+      // this.form.endArea = $(
+      //   '.form_findme .city-picker-span:eq(1) .select-item:eq(2)'
+      // ).text('')
+      // $('#wlLineTo .city-picker-span').text('请输入到达地')
+      // $('#wlLineFrom .city-picker-span').text('请输入出发地')
     }
   }
 }

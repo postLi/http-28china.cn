@@ -91,7 +91,8 @@
                     readonly=""
                     name="Submit2"
                     value="重置 "
-                    class="list_button">
+                    class="list_button"
+                    @click="reload()">
                 </form>
               </dd>
               <div>
@@ -146,9 +147,8 @@
                   </div>
                 </dd>
               </div>
-              <dt>发车时间&nbsp;:</dt>
+              <!-- <dt>发车时间&nbsp;:</dt>
               <dd id="tjcx_01">
-                <!--lineCodeA-->
                 <span
                   v-for="(item,index) in lineCodeA"
                   :key="index"
@@ -159,10 +159,7 @@
                     :class=" item.name=='不限'? 'now':''"
                     class="all">{{ item.name }}</a>
                 </span>
-                <!--<a-->
-                <!--class="now all"-->
-                <!--href="/zhuanxian/list">不限</a>-->
-              </dd>
+              </dd> -->
               <dt>选择品牌&nbsp;:</dt>
               <dd id="tjcx_02">
                 <span
@@ -847,7 +844,11 @@ export default {
       })
     }
   },
-  methods: {}
+  methods: {
+    reload() {
+      window.location.href = '/zhuanxian/list'
+    }
+  }
 }
 </script>
 

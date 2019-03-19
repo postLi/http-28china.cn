@@ -341,6 +341,15 @@ margin-left: 30px;
   color: #333;
   font-size: 14px;
 }
+.wlzx_list_2 .p4 font{
+display: inline-block;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 24em;
+line-height: 30px;
+vertical-align: middle;
+}
 
 .wlzx_list_2 .p3 i, .wlzx_list_2 .p4 i {
   color: #666;

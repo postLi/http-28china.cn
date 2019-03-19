@@ -302,7 +302,7 @@
                 <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,10):'暂无' }}</font></p>
                 <p class="p4"><i>地址：</i><font
                   id="nr06"
-                  class="">{{ item.address.length>24?item.address.substring(0,24)+'..':item.address }}</font></p>
+                  class="">{{ item.address }}</font></p>
               </li>
               <li class="wlzx_list_3">
                 <p class="p1"><i
@@ -375,7 +375,29 @@
             <FooterLinks :info="lineLinks.otherRecommend.links|| []"/>
           </div>
         </div>
-
+        <div class="lll-line-bot">
+          <div
+          class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>{{ lineLinks.hotRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.hotRecommend.links"/>
+          </div>
+          <div
+          class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
+          </div>
+          <div
+          class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>{{ lineLinks.startFromRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.startFromRecommend.links"/>
+          </div>
+        </div>
       </div>
 
       <div
@@ -496,29 +518,7 @@
       </div>
 
     </div>
-    <div class="lll-line-bot">
-      <div
-      class="lll-recommend clearfix">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>{{ lineLinks.hotRecommend.label }}</span></div>
-        <FooterLinks :info="lineLinks.hotRecommend.links"/>
-      </div>
-      <div
-      class="lll-recommend clearfix">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
-        <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
-      </div>
-      <div
-      class="lll-recommend clearfix">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>{{ lineLinks.startFromRecommend.label }}</span></div>
-        <FooterLinks :info="lineLinks.startFromRecommend.links"/>
-      </div>
-    </div>
+    
 
     <div class="h70"/>
   </div>
@@ -907,9 +907,9 @@ export default {
     }
   }
   .lll-line-bot {
-    width: 1400px;
+    width: 100%;
     height: auto !important;
-    margin: 0 auto;
+    margin: 30px auto;
     overflow: hidden;
     background: #fff;
     margin-top: 20px;

@@ -486,6 +486,7 @@
     </div>
     <Add
       :show = "isAdd"
+      :types="types"
       @close="noaddFn"/>
   </div>
 </template>
@@ -605,6 +606,7 @@ export default {
     let vo1 = vo
     delete vo1.currentPage
     delete vo1.pageSize
+
     // delete vo1.locationProvince
     // delete vo1.locationCity
     // /logisticsCompany/adviseRecommend
@@ -616,7 +618,9 @@ export default {
         vo1
       ),
       $axios.get(aurl + `/api/28-web/logisticsCompany/adviseRecommend`),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/excellent`),
+      $axios.get(
+        aurl + `/api/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
+      ),
       $axios.get(aurl + `/api/28-web/logisticsCompany/enter`),
       $axios.get(aurl + `/api/28-web/logisticsCompany/enterpriseRecommend`),
       $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
@@ -645,6 +649,7 @@ export default {
           : item.otherServiceNameList
       })
     }
+    console.log(listE.data.data, 'listE')
 
     let codeObj = {
       name: '不限',

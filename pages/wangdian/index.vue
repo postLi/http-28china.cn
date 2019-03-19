@@ -82,7 +82,36 @@
                   readonly=""
                   value="重置 "
                   @click="reload()">
+                
               </form>
+                <br>
+                <!-- 出发地
+                <div class="order-line-from clearfix">
+                  <div class="order-form-item">
+                    <div class="order-form-label"><span class="required">*</span>出发地：</div>
+                    <div class="order-form-input" >
+                      <input 
+                        id="start_position" 
+                        wtmap="" 
+                        maxlength="40" 
+                        type="text" 
+                        placeholder="请选择 省-市-县">
+                    </div>
+                  </div>
+                  <div class="order-form-item form-detail">
+                    <div class="order-form-label">街道/门牌号：</div>
+                    <div class="order-form-input">
+                      <input 
+                        wtmapinit="" 
+                        wtmap="{township}{street}{building}" 
+                        maxlength="40" 
+                        type="text" 
+                        placeholder="请填写详细地址">
+                    </div>
+                  </div>
+                </div> -->
+
+
               </dd>
               <dt>公司名称&nbsp;:</dt>
               <dd >
@@ -382,9 +411,11 @@ export default {
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
     script: [
+      { src: '/js/jquery-1.8.3.min.js' },
       { src: '/js/city-picker.data.js' },
       { src: '/js/city-picker.js' },
-      { src: '/js/jquery.pagination.min.js' }
+      { src: '/js/jquery.pagination.min.js' },
+      { src: '/js/gaodemap2.js' }
     ]
   },
   data() {

@@ -541,6 +541,7 @@ export default {
           $('.list_left_wangdian').css('display', 'block')
           $('#checked_wangdian').addClass('active')
         })
+
         //切换内容 E
         var locationProvince = $.cookie('currentProvinceFullName')
         var locationCity = $.cookie('currentAreaFullName')

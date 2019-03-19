@@ -340,8 +340,7 @@ border: solid 1px #e2e2e2;
   color: #2577e3;
   font-size: 18px;
   background-color: #fff;
-  border-bottom: 2px solid #e7e7e7;
-  margin-top: 40px;
+  border-bottom: 2px solid #3f94ee;
   font-weight: bold;
 }
 .zx_sx1 .biaozhi1 {
@@ -966,6 +965,7 @@ table tr:nth-child(odd){
   max-width: 1000px;
   float: left;
   width:1000px;
+  padding-bottom: 30px;
   /*OVERFLOW: hidden;*/
   /* border: 1px solid #eee; */
   /* border-bottom: 0; */

@@ -529,13 +529,13 @@ $("#search_wlLine").click(
     var parkId = $('#select_wlyq').attr("name");
 
     var list1 = [], list2 = [];
-    $('#wlLineFrom .select-item').each(function (i, e) {
+    $('.select_con #wlLineFrom .select-item').each(function (i, e) {
       list1.push($(this).text())
     });
     var startp = list1[0];
     var startc = list1[1];
     var starta = list1[2];
-    $('#wlLineTo .select-item').each(function (i, e) {
+    $('.select_con #wlLineTo .select-item').each(function (i, e) {
       list2.push($(this).text())
     });
     var endp = list2[0];
@@ -1139,6 +1139,7 @@ function process01() {
 
 //所属物流园区S
 function belong_wlyq(currentPage) {
+  var parkName = $('#wlyq_name').val()
   $.ajax(
     {
       type: "post",
@@ -1150,7 +1151,7 @@ function belong_wlyq(currentPage) {
       data: JSON.stringify(
         {
           currentPage: currentPage,
-          pageSize: 20,
+          pageSize: 100,
           //vo:vo		//JSON.stringify({})
           locationProvince: locationProvince,
           locationCity: locationCity,

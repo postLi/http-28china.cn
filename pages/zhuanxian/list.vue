@@ -89,6 +89,7 @@
                   <input
                     id="flush"
                     readonly=""
+                    @click="resetSearch"
                     name="Submit2"
                     value="重置 "
                     class="list_button">
@@ -146,23 +147,6 @@
                   </div>
                 </dd>
               </div>
-              <dt>发车时间&nbsp;:</dt>
-              <dd id="tjcx_01">
-                <!--lineCodeA-->
-                <span
-                  v-for="(item,index) in lineCodeA"
-                  :key="index"
-                  style="margin-right: 10px;">
-                  <a
-                    :href="'/zhuanxian/list?departureTimeCode='+ item.code"
-                    :data-code="item.code"
-                    :class=" item.name=='不限'? 'now':''"
-                    class="all">{{ item.name }}</a>
-                </span>
-                <!--<a-->
-                <!--class="now all"-->
-                <!--href="/zhuanxian/list">不限</a>-->
-              </dd>
               <dt>选择品牌&nbsp;:</dt>
               <dd id="tjcx_02">
                 <span
@@ -648,6 +632,7 @@ export default {
       codeB.data.status == 200 ||
       codeC.data.status == 200
     ) {
+      listA.data.data = listA.data.data || { list: [] }
       listA.data.data.list.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
@@ -749,7 +734,7 @@ export default {
                     callback: function(current) {
                       $('#current1').text(current)
                       // orderBy = ''
-                      currentPage = currentAF025
+                      currentPage = current
                       fetchLineList(currentPage, orderBy)
                       // window.location.href = '#top'
                     }
@@ -847,7 +832,11 @@ export default {
       })
     }
   },
-  methods: {}
+  methods: {
+    resetSearch() {
+      location.href = '/zhuanxian/list'
+    }
+  }
 }
 </script>
 

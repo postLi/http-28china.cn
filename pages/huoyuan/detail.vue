@@ -64,7 +64,7 @@
         <a
           v-for="(item,index) in zxList"
           v-if="index >= 14"
-          :key="index"><span>{{ item.name.substring(0, 2) }}</span>
+          :key="index"><span @click="gotoHuoList($event)">{{ item.name.substring(0, 2) }}</span>
         </a>
       </div>
 
@@ -384,7 +384,9 @@
             <p 
               class="massge"
               v-if="isShowMessge">
-              货主货源太少？为您推荐其他<a style="color:#3f94ee;">同线路货源</a>
+              货主货源太少？为您推荐其他<a 
+                :href="'/huoyuan?startProvince='+ hyDetail.startProvince+'&startCity='+hyDetail.startCity+'&endProvince='+hyDetail.endProvince+'&endCity='+hyDetail.endCity"
+                style="color:#3f94ee;">同线路货源</a>
             </p>
             <li 
               v-for="(i,dex) in dataset" 
@@ -937,7 +939,7 @@ export default {
       ]
     }
   },
-  async asyncData({ $axios, app, query }) {
+  async asyncData({ $axios, app, query, error }) {
     let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {

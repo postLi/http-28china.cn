@@ -553,22 +553,34 @@ export default {
       lineLists: []
     }
   },
-  async asyncData({ $axios, query }) {
+  async asyncData({ $axios, query, app }) {
+    let cookie = app.$cookies
+    let areaData = {
+      currentArea: cookie.get('currentArea'),
+      currentAreaFullName: cookie.get('currentAreaFullName'),
+      currentAreaName: cookie.get('currentAreaName'),
+      currentProvince: cookie.get('currentProvince'),
+      currentProvinceFullName: cookie.get('currentProvinceFullName'),
+      currentProvinceName: cookie.get('currentProvinceName')
+    }
+
+    if (!areaData.currentProvince) {
+      areaData = store.state.area
+    }
+
     let aurl = ''
-    let startp = query.startp
-    let startc = query.startc
+    let startp =
+      query.startp === ''
+        ? ''
+        : query.startp || areaData.currentProvinceFullName
+    let startc =
+      query.startc === '' ? '' : query.startc || areaData.currentAreaFullName
     let starta = query.starta
     let endp = query.endp
     // let starta = query.starta
     let enda = query.enda
     let endc = query.endc
 
-    if (!startp || startp == 'null') {
-      startp = ''
-    }
-    if (!startc || startc == 'null') {
-      startc = ''
-    }
     if (!starta || starta == 'null') {
       starta = ''
     }

@@ -73,15 +73,6 @@
                 </form>
                 </dd>
 
-                <dt>发车时间&nbsp;:</dt>
-                <dd id="tjcx_01">
-                  <SelectType 
-                    v-model="stime"
-                    get-code
-                    :list="AF026" />
-
-                </dd>
-
               </dl>
             </div>
 

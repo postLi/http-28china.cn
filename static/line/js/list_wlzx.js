@@ -300,8 +300,8 @@ $('#select_wlyq').mousedown(function () {
 $("#flush").click(
   function () {
     console.log("清空地址")
-    // window.location.href='/zhuanxian/list';
-    window.location.reload();
+    window.location.href='/zhuanxian/list';
+    // window.location.reload();
   })
 //清空条件
 

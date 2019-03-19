@@ -248,6 +248,7 @@
         </div>
         <!--分页-->
         <div
+          v-if="WangdiangInfoList.length !== 0"
           class="box"
           style="float: right;margin-right: 170px;">
           <div

@@ -42,7 +42,8 @@
             v-for="(item,index) in lineCitys"
             v-if="index<14"
             :key="index"
-            href=""><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
+            :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name"
+            target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
         </div>
         <div
           v-if="lineCitys.length>14"
@@ -568,13 +569,13 @@
                     class="unActive"
                     @click="showPingLunFn(1)"/>中评</p>
                 </li>
-                <li>
+                <!-- <li>
                   <p>{{ linedataE.evaBadCount }}%</p>
                   <p><span
                     :class="indexPl==2?'active':'unActive'"
                     class="unActive"
                     @click="showPingLunFn(2)"/>差评</p>
-                </li>
+                </li> -->
               </ul>
             </div>
             <div class="bot_left_ts">
@@ -939,7 +940,6 @@
     <Add
       :show = "isAdd"
       :info="linedataE"
-      :infopj="infopj"
       @close="noaddFn"/>
   </div>
 
@@ -1085,8 +1085,7 @@ export default {
       linedataE,
       linedataF,
       linedataG,
-      linedataH,
-      infopj
+      linedataH
     ] = await Promise.all([
       $axios.get(aurl + `/28-web/range/${query.id}`),
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1116,12 +1115,7 @@ export default {
         endCity: endc,
         endArea: enda,
         transportRangeId: query.id
-      }),
-      $axios.post(
-        aurl +
-          `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}
-`
-      )
+      })
     ])
 
     if (linedataA.data.status === 200) {
@@ -1234,9 +1228,12 @@ export default {
       //   'res.data.data.linedataA',
       //   linedataA.data
       // )
-      // console.log(linedataE.data.data, 'linedataE')
+      // console.log(
+      //   infopj,
+      //   'infopj11',
+      //   aurl + `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}`
+      // )
       return {
-        infopj: infopj.data.status == 200 ? infopj.data.data : [],
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
         lineLists: linedataC.data.status == 200 ? linedataC.data.data.list : [],

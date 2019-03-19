@@ -519,10 +519,14 @@ export default {
       startArea: query.startArea ? query.startArea : '',
       startCity: query.startCity
         ? query.startCity
-        : areaData.currentAreaFullName,
+        : query.startCity === ''
+          ? ''
+          : areaData.currentAreaFullName,
       startProvince: query.startProvince
         ? query.startProvince
-        : areaData.currentProvinceFullName
+        : query.startProvince === ''
+          ? ''
+          : areaData.currentProvinceFullName
     }
     // 获取物流公司列表
     let vor = Object.assign({ pageSize: 10 }, vo)
@@ -540,6 +544,20 @@ export default {
     })
   },
   async asyncData({ $axios, app, query }) {
+    let cookie = app.$cookies
+    let areaData = {
+      currentArea: cookie.get('currentArea'),
+      currentAreaFullName: cookie.get('currentAreaFullName'),
+      currentAreaName: cookie.get('currentAreaName'),
+      currentProvince: cookie.get('currentProvince'),
+      currentProvinceFullName: cookie.get('currentProvinceFullName'),
+      currentProvinceName: cookie.get('currentProvinceName')
+    }
+
+    if (!areaData.currentProvince) {
+      areaData = store.state.area
+    }
+
     let vo = {
       carType: query.carType ? query.carType : '', //车辆类型
       carSourceType: query.carSourceType ? query.carSourceType : '', //车源类型
@@ -556,10 +574,14 @@ export default {
       startArea: query.startArea ? query.startArea : '',
       startCity: query.startCity
         ? query.startCity
-        : app.$cookies.get('currentAreaFullName'),
+        : query.startCity === ''
+          ? ''
+          : areaData.currentAreaFullName,
       startProvince: query.startProvince
         ? query.startProvince
-        : app.$cookies.get('currentProvinceFullName')
+        : query.startProvince === ''
+          ? ''
+          : areaData.currentProvinceFullName
     }
     let AF018 = await $axios.get(
       '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
@@ -625,7 +647,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.carInfoList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())

@@ -381,9 +381,22 @@
               <a><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</a>
               <a>{{ item.createTime }}</a>
             </li>
-            <p style="padding:10px;color:#999999">
+            <p 
+              class="massge"
+              v-if="isShowMessge">
               货主货源太少？为您推荐其他<a style="color:#3f94ee;">同线路货源</a>
             </p>
+            <li 
+              v-for="(i,dex) in dataset" 
+              :key="dex">
+              <a :title="i.startProvinceCityArea">{{ i.startCity + i.startArea }}</a>
+              <a :title="i.endProvinceCityArea">{{ i.endCity + i.endArea }}</a>
+              <a :title="i.goodsTypeName">{{ i.goodsTypeName.substring(0,5) }}</a>
+              <a><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</a>
+              <a><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</a>
+              <a>{{ i.createTime }}</a>
+            </li>
+            
           </ul>
         </div>
       </div>
@@ -874,7 +887,9 @@ export default {
       isShowOrder: false,
       isShowCollect: true,
       isCencelCollect: false,
+      isShowMessge: false,
       zxList: [],
+      dataset: [],
       inTerVar: null,
       inTerVar1: null,
       otherInfoList: [],
@@ -1197,6 +1212,30 @@ export default {
             startScroll()
           }
         )
+      }
+      if (l < 8) {
+        this.isShowMessge = true
+        // console.log(this.hyDetail.startProvince, l, 'dfasfa')
+        let obj = {
+          startProvince: this.hyDetail.startProvince,
+          startCity: this.hyDetail.startCity,
+          endProvince: this.hyDetail.endProvince,
+          endCity: this.hyDetail.endCity,
+          currentPage: 1,
+          pageSize: 7 - l
+        }
+        $axios
+          .post('/api/28-web/lclOrder/list', obj)
+          .then(res => {
+            this.dataset = res.data.data.list
+            // console.log(res.data.data.list, '999999999999as')
+          })
+          .catch(err => {
+            console.log('huoComprehensives4:', err)
+          })
+      } else {
+        this.isShowMessge = false
+        console.log(this.isShowMessge, l, 'df444asfa')
       }
 
       let top_left_h = $('.top_left').height()

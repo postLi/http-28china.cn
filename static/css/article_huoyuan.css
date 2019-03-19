@@ -343,6 +343,10 @@ border: solid 1px #e2e2e2;
   border-bottom: 2px solid #3f94ee;
   font-weight: bold;
 }
+.massge{
+  padding:10px;color:#999999;
+  /* display:none; */
+}
 .zx_sx1 .biaozhi1 {
   display: block;
   float: left;

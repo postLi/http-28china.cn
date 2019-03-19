@@ -8,5 +8,5 @@ export function formatAnfaTms(str = '') {
 }
 
 export function makeAnfaTmsUrl(path) {
-  return 'http://192.168.1.180/anfacms/' + path.replace('/help', '')
+  return '/anfacms/' + path.replace('/help', '')
 }

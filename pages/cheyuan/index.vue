@@ -222,7 +222,7 @@
         <div
         class="hot-city-layer main-width">
           <div class="hot-city-unit">
-            <h3 class="news-unit-title">{{ recommendBy28Label }}</h3>
+            <h3 class="line-title">{{ recommendBy28Label }}</h3>
             <ul class="hot-cities">
               <li 
                 v-for="(item,index) in recommendBy28"
@@ -425,7 +425,7 @@
             <div 
               v-if="index < 3" 
               class="img"><img :src="'/images/index/wlgs_tj_0'+index+'.png'" ></div>
-            <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
+            <div class="right"><span>{{ item.driverName }} </span><span style="margin-left:10px">{{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
           </div>
         </div>
 
@@ -519,10 +519,14 @@ export default {
       startArea: query.startArea ? query.startArea : '',
       startCity: query.startCity
         ? query.startCity
-        : areaData.currentAreaFullName,
+        : query.startCity === ''
+          ? ''
+          : areaData.currentAreaFullName,
       startProvince: query.startProvince
         ? query.startProvince
-        : areaData.currentProvinceFullName
+        : query.startProvince === ''
+          ? ''
+          : areaData.currentProvinceFullName
     }
     // 获取物流公司列表
     let vor = Object.assign({ pageSize: 10 }, vo)
@@ -540,6 +544,20 @@ export default {
     })
   },
   async asyncData({ $axios, app, query }) {
+    let cookie = app.$cookies
+    let areaData = {
+      currentArea: cookie.get('currentArea'),
+      currentAreaFullName: cookie.get('currentAreaFullName'),
+      currentAreaName: cookie.get('currentAreaName'),
+      currentProvince: cookie.get('currentProvince'),
+      currentProvinceFullName: cookie.get('currentProvinceFullName'),
+      currentProvinceName: cookie.get('currentProvinceName')
+    }
+
+    if (!areaData.currentProvince) {
+      areaData = store.state.area
+    }
+
     let vo = {
       carType: query.carType ? query.carType : '', //车辆类型
       carSourceType: query.carSourceType ? query.carSourceType : '', //车源类型
@@ -556,10 +574,14 @@ export default {
       startArea: query.startArea ? query.startArea : '',
       startCity: query.startCity
         ? query.startCity
-        : app.$cookies.get('currentAreaFullName'),
+        : query.startCity === ''
+          ? ''
+          : areaData.currentAreaFullName,
       startProvince: query.startProvince
         ? query.startProvince
-        : app.$cookies.get('currentProvinceFullName')
+        : query.startProvince === ''
+          ? ''
+          : areaData.currentProvinceFullName
     }
     let AF018 = await $axios.get(
       '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
@@ -625,7 +647,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.carInfoList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())
@@ -1987,11 +2008,15 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  border-bottom: 2px solid #589def;
+  /* border-bottom: 2px solid #589def; */
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 20px;
-  color: #589def;
+  color: #333333;
+}
+.line-title {
+  color: #3f94ee;
+  border-bottom: 2px solid #3f94ee;
 }
 .hot-cities-li {
   display: inline-block;

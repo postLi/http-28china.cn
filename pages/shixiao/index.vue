@@ -776,6 +776,11 @@ img {
   height: 30px;
   line-height: 30px;
   color: #2577e3;
+  width: 164px;
+  overflow: hidden;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .ul_list li span {
   height: 30px;

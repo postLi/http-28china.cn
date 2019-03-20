@@ -222,7 +222,7 @@
         <div
         class="hot-city-layer main-width">
           <div class="hot-city-unit">
-            <h3 class="line-title">{{ recommendBy28Label }}</h3>
+            <h3 class="news-unit-title line-title">{{ recommendBy28Label }}</h3>
             <ul class="hot-cities">
               <li 
                 v-for="(item,index) in recommendBy28"
@@ -2081,6 +2081,7 @@ body {
 .line-title {
   color: #3f94ee;
   border-bottom: 2px solid #3f94ee;
+  font-size: 20px;
 }
 .hot-cities-li {
   display: inline-block;

@@ -42,8 +42,10 @@
         v-if="item.type == 1"
         :key="index"
         class="price_box_item1"
+        
       >
-        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '吨' : item.startVolume + '吨以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/吨' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/吨</em></span>
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/公斤' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ?item.primeryPrice.toFixed(2) :item.primeryPrice }}</em><em style="">元/公斤</em></span>
+        <!-- <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/公斤' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/公斤</em></span> -->
       </div>
     </div>
 
@@ -61,7 +63,7 @@
         :key="index"
         class="price_box_item2"
       >
-        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/立方' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/立方</em></span>
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/立方' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? item.primeryPrice.toFixed(2) : item.primeryPrice }}</em><em style="">元/立方</em></span>
         <!--<span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>-->
       </div>
     </div>
@@ -108,6 +110,7 @@ export default {
     }
   },
   mounted() {
+    // console.log(this.info, 'this.info')
     this.init()
   },
   methods: {
@@ -146,14 +149,14 @@ export default {
       // pEndVolume
       if (this.wPrice[0]) {
         this.wEndVolume = this.wPrice[0].endVolume
-          ? '0-' + this.wPrice[0].endVolume + '吨'
-          : this.wPrice[0].startVolume + '吨以上'
+          ? '0-' + this.wPrice[0].endVolume + '公斤'
+          : this.wPrice[0].startVolume + '公斤以上'
         this.wDiscountPrice = this.wPrice[0].discountPrice
-          ? '￥' + parseFloat(this.wPrice[0].discountPrice).toFixed(0)
+          ? '￥' + this.wPrice[0].discountPrice.toFixed(2)
           : ''
         this.wPrimeryPrice =
           this.wPrice[0].startVolume == 0
-            ? parseFloat(this.wPrice[0].primeryPrice).toFixed(0)
+            ? this.wPrice[0].primeryPrice.toFixed(2)
             : ''
       }
       if (this.hPrice[0]) {
@@ -161,11 +164,11 @@ export default {
           ? '0-' + this.hPrice[0].endVolume + '立方'
           : this.hPrice[0].startVolume + '立方以上'
         this.hDiscountPrice = this.hPrice[0].discountPrice
-          ? '￥' + parseFloat(this.hPrice[0].discountPrice).toFixed(0)
+          ? '￥' + this.hPrice[0].discountPrice.toFixed(2)
           : ''
         this.hPrimeryPrice =
           this.hPrice[0].startVolume == 0
-            ? parseFloat(this.hPrice[0].primeryPrice).toFixed(0)
+            ? this.hPrice[0].primeryPrice.toFixed(2)
             : ''
       }
 

@@ -64,7 +64,7 @@
                   <input
                     name="ddd"
                     style="height: 100%;width:100%;border: none;outline: none;"
-                    wtmap=""
+                    wtmap="detail"
                     type="text"
                     placeholder="请输入详细地址查附近网点" >
                 </div>
@@ -426,6 +426,7 @@ export default {
     }
   },
   async asyncData({ $axios, app, query }) {
+    let pos = query.pos ? query.pos.split(',') : ['', '']
     let vo = {
       startProvince: query.startProvince
         ? query.startProvince
@@ -442,7 +443,9 @@ export default {
       parkName: query.parkName ? query.parkName : '',
       otherServiceCode: query.otherServiceCode ? query.otherServiceCode : '',
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
-      companyName: query.companyName ? query.companyName : ''
+      companyName: query.companyName ? query.companyName : '',
+      latitude: pos[1],
+      longitude: pos[0]
     }
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
@@ -572,15 +575,29 @@ export default {
         $('#list_wlzx_yq').css('display', 'none')
       }
     })
+
+    $('#select_wlyq').val(this.$route.query.parkName || '')
+    $('#select_wlyq').attr('name', this.$route.query.parkId || '')
     $('#addressFrom input').citypicker({
       province: this.vo.startProvince,
       city: this.vo.startCity,
       district: this.vo.startArea
     })
+    $('#addressTo input').on('mouseenter', () => {
+      this.setMap()
+    })
+    $('#addressTo input').val(this.$route.query.address || '')
 
     this.pagination()
   },
   methods: {
+    setMap() {
+      this.searchDo()
+      $('#addressTo input').attr(
+        'wtmapinit',
+        this.startProvince + this.startCity + this.startArea
+      )
+    },
     searchDo() {
       let list1 = [],
         list2 = []
@@ -600,6 +617,8 @@ export default {
     },
     search() {
       this.searchDo()
+      let pos = $('#addressTo input').attr('thepos') || ''
+      let address = $('#addressTo input').val() || ''
       window.location.href = `/wangdian/?&belongBrandCode=${
         this.vo.belongBrandCode
       }&otherServiceCode=${this.vo.otherServiceCode}&companyName=${
@@ -608,7 +627,7 @@ export default {
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
         this.startCity
-      }&startProvince=${this.startProvince}`
+      }&startProvince=${this.startProvince}&pos=${pos}&address=${address}`
     },
     //品牌
     AF029Click(item) {

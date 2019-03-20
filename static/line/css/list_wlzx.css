@@ -460,7 +460,6 @@ vertical-align: middle;
   transform: translate3d(0, -2px, 0);
 }
 
-}
 .tj_list .p {
   height: 28px;
   line-height: 28px;
@@ -469,10 +468,13 @@ vertical-align: middle;
 }
 
 .tj_list .p1 {
-  padding: 0 20px;
+  padding: 0 50px 0 20px;
   height: 50px;
   line-height: 50px;
   position: relative;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .tj_list .p1 #tj_shiming{
   position: absolute;

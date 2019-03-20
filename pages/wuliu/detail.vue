@@ -325,6 +325,7 @@
             <p class="p1">
               <a
                 :href="'/member/'+item.id+''"
+                :title="item.companyName"
                 target="_blank"><span>{{ item.companyName }}</span></a>
 
             </p>

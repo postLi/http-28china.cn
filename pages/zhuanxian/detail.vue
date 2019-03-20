@@ -64,8 +64,9 @@
               v-for="(item,index) in lineCitys"
               v-if="index<14"
               :key="index"
-              :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name"
+              :href="'/zhuanxian/list?startp='+linedataA.startProvince+'&startc='+linedataA.startCity+'&endp='+linedataA.startProvince+'&endc='+item.name"
               target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
+              <!-- :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name" -->
           </div>
           <div
             v-if="lineCitys.length>14"
@@ -513,7 +514,7 @@
                 style="clear: both">
                 <ul>
                   <li>
-      
+
                     <div
 
                     class="content-right-row-left">
@@ -1223,7 +1224,7 @@ export default {
         : ''
       // credit
       // linedataB.data.data
-      console.log(lineCity.data.data.length, 'lineCity.lineCity')
+      console.log(linedataA.data.data, 'linedataA.linedataA')
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip

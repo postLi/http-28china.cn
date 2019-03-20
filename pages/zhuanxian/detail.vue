@@ -487,7 +487,9 @@
         </div>
 
       </div>
-      <div class="arc_main1-1">
+      <div
+        style="    display: inline-block;"
+        class="arc_main1-1">
         想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
       </div>
 

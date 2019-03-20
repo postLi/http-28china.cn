@@ -30,7 +30,7 @@
             href="http://www.28tms.com">28TMS</a>
           <a
             target="_blank"
-            href="http://biz.28kuaiyun.cn">企业货主登录</a>
+            href="http://biz.28china.cn/">企业货主登录</a>
           <a
             target="_blank"
             href="/help/ggp/index.jhtml">帮助中心</a>

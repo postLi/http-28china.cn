@@ -3,32 +3,21 @@
     <div class="bj_1">
       <div class="hy_wrap clearfix">
         <div class="col1">
-          <div class="p_menu">
-            <h4 class="menu_title">热门城市</h4>
-            <div class="menu_list">
-              <span class="item"><a>北京</a></span>
-              <span class="item"><a>宝鸡</a></span>
-              <span class="item"><a>包头</a></span>
-              <span class="item"><a>蚌埠</a></span>
-              <span class="item"><a>亳州</a></span>
-              <span class="item"><a>保定</a></span>
-              <span class="item"><a>滨州</a></span>
-              <span class="item"><a>本溪</a></span>
-              <span class="item"><a>北海</a></span>
-              <span class="item"><a>白城</a></span>
-              <span class="item"><a>白山</a></span>
-              <span class="item"><a>巴中</a></span>
-              <span class="item"><a>白银</a></span>
-              <span class="item"><a>百色</a></span>
-              <span class="item"><a>郑州</a></span>
-              <span class="item"><a>宁明</a></span>    
-            </div>          
+          <div class="p_category_menu">
+            <h4 class="category_menu_title">热门城市</h4>
+            <div class="category_menu_list">
+              <span 
+                class="item"
+                v-for="(item, index) in cityList" 
+                :key="index">
+              <a>{{ item }}</a></span>  
+            </div>         
           </div>
           <!--导航 -->
         </div>
         <div class="col2">
           <div class="ad">
-            <div v-swiper:mySwiper="swiperOption">
+            <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div 
                   class="swiper-slide" 
@@ -36,28 +25,14 @@
                   v-for="(banner, index) in banners">
                   <img :src="banner">
                 </div>
-                <!-- <div lass="swiper-slide" >
-                  <img src="../../static/images/huizong/banner01.jpg">
-                </div>
-                <div lass="swiper-slide" >
-                  <img src="../../static/images/huizong/banner01.jpg">
-                </div>
-                <div lass="swiper-slide" >
-                  <img src="../../static/images/huizong/banner01.jpg">
-                </div> -->
               </div>
-              <div class="swiper-pagination swiper-pagination-bullets"/>
+              <!-- Add Pagination -->
+              <div class="swiper-pagination"/>
+              <!-- Add Arrows -->
+              <div class="swiper-button-next"/>
+              <div class="swiper-button-prev"/>
             </div>
-            <!-- <swiper :options="swiperOption">
-              <swiper-slide class="slide-1">11111111111111</swiper-slide>
-              <swiper-slide class="slide-2">22222222222</swiper-slide>
-              <swiper-slide class="slide-3">3333333333</swiper-slide>
-              <swiper-slide class="slide-4">4444444444444</swiper-slide>
-              <swiper-slide class="slide-5">55555555555</swiper-slide>
-              <div 
-                class="swiper-pagination" 
-                slot="pagination"/>
-            </swiper> -->
+            <!-- 幻灯片 -->
           </div>
           <div class="type clearfix">
             <div class="type_box"><a href=""><img src="../../static/images/huizong/type01.png"></a></div>
@@ -66,7 +41,7 @@
           </div>
         </div>
         <div class="col3">
-          <div class="p_user">
+          <div class="p_user_login">
             <div class="user_pic">头像</div>
             <div class="user_show">
               <p class="user_tip">Hi~欢迎来到28快运！</p>
@@ -194,7 +169,7 @@
       </div>
     </div>
     <!-- 选择我们 -->
-    <div class="hy_info clearfix">
+    <div class="p_hy_info clearfix">
       <div class="col1 fl clearfix">
         <div class="tit_box fl">
           <h3>最新货源信息</h3>
@@ -269,7 +244,7 @@
       </div>
     </div>
     <!-- 最新货源 -->
-    <div class="hy_groom clearfix">
+    <div class="p_hy_groom clearfix">
       <div class="hd clearfix">
         <h3 class="gr_tit">货源推荐</h3>
         <div class="gr_text"><span>180789</span>条货源，为您优选12条优质货源</div>
@@ -301,334 +276,358 @@
         <div class="col1">
           <ul class="p_hy_list">
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
             <li>
-              <div class="hd_box">
-                <span class="label_provider">发布者:</span>
-                <span class="provider">安能物流</span>
-                <span class="sure">认证</span>
-              </div>
-              <div class="md_box">
-                <div class="city">金华市</div>
-                <span class="city-joint">
-                  <span class="joint-line"/>
-                  <span class="joint-label">发往</span>
-                  <span class="joint-line"/>
-                </span>
-                <div class="city">深圳市</div>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">货物:</span>
-                <span class="item">钢材</span>
-              </div>
-              <div class="typpe_box">
-                <span class="mame">规格:</span>
-                <span class="item"><b>31</b>件</span>
-                <span class="item">51公斤</span>
-                <span class="item">21m³</span>
-                <span class="time">2分钟前</span>
-              </div>
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">安能物流</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">金华市</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">深圳市</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span class="item">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
             </li>
           </ul>
         </div>
         <div class="col2">
           <div class="subscribe">
-            <h3 class="tit"><i class="iconfont icondingyue"/>订阅优质支援</h3>
+            <h4 class="tit"><i class="iconfont icondingyue"/>订阅优质支援</h4>
             <div class="city_box clearfix">
               <input 
                 type="text" 
@@ -657,7 +656,7 @@
       </div>
     </div>
     <!-- 货源推荐 -->
-    <div class="release">
+    <div class="p_release">
       <div class="hd"><div class="text_box">
         <h3 class="tit">让承运商主动来找我</h3>
         快速发布货源，让承运商主动联系我，自主挑选合适承运商
@@ -942,13 +941,14 @@
 </template>
 <script>
 import 'swiper/dist/css/swiper.css'
+import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
   head: {
     link: [
       {
         rel: 'stylesheet',
-        href: '//at.alicdn.com/t/font_1076232_oy814mxm79.css'
+        href: '//at.alicdn.com/t/font_1076232_u8m9wtyprje.css'
       }
     ],
     script: [
@@ -959,60 +959,109 @@ export default {
   },
   data() {
     return {
-      swiperOption: {
-        spaceBetween: 30,
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false
-        },
-        effect: 'fade',
-        pagination: {
-          el: '.swiper-pagination',
-          dynamicBullets: true,
-          clickable: true
-        }
-      },
       banners: [
         require('../../static/images/huizong/banner01.jpg'),
         require('../../static/images/huizong/banner02.jpg'),
         require('../../static/images/huizong/banner03.jpg')
-        // '../../static/images/huizong/weixin.png',
-        // '../../static/images/huizong/weixin.png'
+      ],
+      cityList: [
+        '上海',
+        '北京',
+        '深圳',
+        '广州',
+        '重庆',
+        '天津',
+        '苏州',
+        '成都',
+        '武汉',
+        '杭州',
+        '南京',
+        '青岛',
+        '无锡',
+        '长沙',
+        '农博',
+        '郑州',
+        '佛山',
+        '南通',
+        '东莞',
+        '西安',
+        '烟台',
+        '济南',
+        '泉州',
+        '大连',
+        '合肥',
+        '常州',
+        '福州',
+        '唐山',
+        '石家庄',
+        '潍坊',
+        '长春',
+        '沈阳',
+        '哈尔滨',
+        '温州',
+        '盐城',
+        '扬州',
+        '淄博',
+        '绍兴'
       ]
     }
   },
   mounted() {
+    this.intSwiper()
     // this.mySwiper
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       console.log($)
       console.log(layer)
+      /*地点插件 */
       $('#groom_pageinp1').citypicker()
       $('#groom_pageinp2').citypicker()
       $('#sb_pageinp1').citypicker()
       $('#sb_pageinp2').citypicker()
-
-      $('.hy_info .info_user_box').Scroll({
+      /* 文字滚动*/
+      $('.p_hy_info .info_user_box').Scroll({
         line: 1,
         speed: 500,
         timer: 2000
       })
     })
+  },
+  methods: {
+    intSwiper() {
+      this.$nextTick(() => {
+        $('.ad').hover(
+          function() {
+            $(this)
+              .find('.swiper-button-next,.swiper-button-prev')
+              .show()
+          },
+          function() {
+            $(this)
+              .find('.swiper-button-next,.swiper-button-prev')
+              .hide()
+          }
+        )
+        let swiper = new Swiper('.swiper-container', {
+          spaceBetween: 30,
+          effect: 'fade',
+          pagination: {
+            el: '.swiper-pagination',
+            dynamicBullets: true,
+            clickable: true
+          },
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+          }
+        })
+      })
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '~/assets/scss/common.scss';
+@import '~/assets/scss/common_index.scss';
 /*1、货源导航*/
-.bj_1 {
-  box-sizing: border-box;
-  background: $light_Violet;
-}
-.bj_2 {
-  overflow: hidden;
-  background: $white;
-  // height: 440px;
-}
 .hy_wrap {
   // display: flex;
   // justify-content: space-between;
@@ -1029,101 +1078,56 @@ export default {
   }
   .col1 {
     @extend .fl;
-    width: 200px;
+    width: 230px;
   }
   .col2 {
     @extend .fl;
     margin-left: 15px;
-    width: 920px;
+    width: 890px;
     background: none;
   }
   .col3 {
     @extend .fr;
-    width: 290px;
-  }
-}
-/*导航*/
-.p_menu {
-  padding: 10px 0;
-  .menu_title {
-    padding-left: 10px;
-    color: $tit_color;
-  }
-  .menu_list {
-    padding-left: 10px;
-    .item {
-      display: inline-block;
-      margin: 15px 0 0 0;
-      width: 42px;
-      line-height: 1;
-      color: #999;
-      a {
-        cursor: pointer;
-      }
-    }
+    padding: 0 20px;
+    width: 250px;
   }
 }
 /*幻灯片*/
 .ad {
+  overflow: hidden;
   height: 290px;
   background: $white;
   .swiper-container {
     height: 290px;
+    > .swiper-slide {
+      display: none;
+    }
+    .swiper-button-prev,
+    .swiper-button-next {
+      display: none;
+    }
+  }
+  img {
+    width: 100%;
+    height: 100%;
   }
 }
 .type {
   margin-top: 10px;
   height: 125px;
-  background: #ddd;
   .type_box {
     @extend .fl;
     box-sizing: border-box;
-    width: 306px;
+    width: 296px;
     height: 125px;
+    background: $white;
     img {
       width: 100%;
       height: 100%;
     }
   }
 }
-/*用户登录*/
-.p_user {
-  .user_pic {
-    overflow: hidden;
-    margin: 10px auto;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    border-radius: 50%;
-    text-align: center;
-    background: #ddd;
-  }
-  .user_show {
-    .user_tip {
-      overflow: hidden;
-      line-height: 20px;
-      width: 100%;
-      text-align: center;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-    }
-    .user_profit {
-      padding: 10px 0 0 50px;
-      a {
-        display: inline-block;
-        margin: 0 5px;
-        width: 70px;
-        height: 25px;
-        line-height: 25px;
-        text-align: center;
-        color: $blue;
-        border: 1px solid $blue;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-    }
-  }
-}
+
 /*优质货主*/
 .owner {
   margin: 0 auto;
@@ -1131,58 +1135,6 @@ export default {
   font-size: 16px;
   background: $white;
   height: 440px;
-}
-.p_owner_list {
-  li {
-    &:first-child {
-      margin: 0;
-    }
-    @extend .fl;
-    margin-left: 20px;
-    width: 272px;
-    .owner_info {
-      box-sizing: border-box;
-      margin-top: 15px;
-      > p {
-        padding: 3px 0;
-        display: block;
-        overflow: hidden;
-      }
-    }
-  }
-  .owner_pic {
-    overflow: hidden;
-    width: 272px;
-    height: 195px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-  .owner_name {
-    color: $blue;
-    span {
-      .iconfont {
-        padding-right: 5px;
-      }
-      float: right;
-      color: $orange;
-      font-size: $f_14;
-    }
-  }
-  .owner_total {
-    color: $tit_color;
-    span {
-      font-size: 17px;
-      font-weight: bold;
-      color: $orange;
-    }
-  }
-  .owner_info {
-    .owner_num {
-      color: $light_gray;
-    }
-  }
 }
 /*选择我们*/
 .our {
@@ -1204,7 +1156,7 @@ export default {
   .our_tool {
     @extend .fl;
     width: 348px;
-    height: 350px;
+    height: 340px;
     border: $border_color 1px solid;
     background: $white;
     &:nth-child(2) {
@@ -1219,7 +1171,7 @@ export default {
       }
     }
     .link {
-      padding-top: 25px;
+      padding-top: 15px;
       li {
         &:nth-child(1) {
           span:nth-child(1) {
@@ -1281,7 +1233,7 @@ export default {
   }
   .our_ad {
     overflow: hidden;
-    height: 264px;
+    height: 254px;
     img {
       width: 100%;
       height: 100%;
@@ -1300,199 +1252,7 @@ export default {
     background: $green;
   }
 }
-/*最新货源*/
-.hy_info {
-  margin: 35px auto;
-  width: $w_1440;
-  height: 115px;
-  font-size: $f_14;
-  color: $tit_color;
-  background: $white;
-  .col1 {
-    margin: 25px 0 0 25px;
-    width: 830px;
-    height: 62px;
-  }
-  .tit_box {
-    width: 140px;
-    height: 58px;
-    border: 2px solid $orange;
-    > h3 {
-      margin-top: 15px;
-      margin-left: -2px;
-      width: 144px;
-      line-height: 25px;
-      font-size: 20px;
-      color: $orange;
-      text-align: center;
-      background: $white;
-    }
-  }
-  .info_user_box {
-    overflow: hidden;
-    margin-left: 50px;
-    width: 510px;
-    height: 60px;
-    .info_user_list {
-      overflow: hidden;
-      height: 60px;
-      // background-color: #bbb;
-    }
-    .info_user {
-      margin-bottom: 15px;
-      line-height: 22px;
-      .user {
-        margin-right: 40px;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .time {
-        color: $light_gray;
-      }
-    }
-    .info_text {
-      line-height: 22px;
-      > span {
-        padding-right: 10px;
-        b {
-          font-weight: normal;
-          color: $blue;
-        }
-      }
-      .link {
-        font-size: 16px;
-        color: $blue;
-      }
-    }
-  }
-  .col2 {
-    margin-top: 10px;
-    height: 100px;
-  }
-  .hy_info_box {
-    height: 100px;
-    border-left: 1px dashed #ddd;
-  }
-  .hy_info_list {
-    overflow: hidden;
-    height: 60px;
-    > li {
-      @extend .fl;
-      margin-left: 45px;
-      width: 85px;
-      line-height: 30px;
-      > span {
-        display: block;
-        line-height: 30px;
-        text-align: center;
-        .iconfont {
-          color: $light_orange;
-          padding-right: 10px;
-        }
-        &.info_num {
-          font-weight: bold;
-          color: $light_orange;
-        }
-      }
-    }
-  }
-  .info_text_list {
-    margin-left: 45px;
-    overflow: hidden;
-    height: 40px;
-    line-height: 40px;
-    > li {
-      @extend .fl;
-      margin-right: 10px;
-      .iconfont {
-        color: $light_orange;
-      }
-      .num {
-        padding-left: 5px;
-        color: $light_orange;
-      }
-    }
-  }
-}
-/*货源推荐*/
-.hy_groom {
-  margin: 0 auto 30px auto;
-  width: $w_1440;
-  font-size: $f_14;
-  .hd {
-    line-height: 40px;
-  }
-  .gr_tit {
-    @extend .fl;
-    color: $tit_color;
-    font-size: 25px;
-  }
-  .gr_text {
-    @extend .fl;
-    margin-left: 35px;
-    font-size: 16px;
-    color: $light_gray;
-    > span {
-      color: $orange;
-    }
-  }
-  .gr_sch {
-    @extend .fl;
-    margin-left: 115px;
-    width: 510px;
-    height: 38px;
-    line-height: 38px;
-    background: $white;
-    border: 1px solid $green;
-    .city_box,
-    .icon_box,
-    .btn_box {
-      @extend .fl;
-    }
-    .city_box {
-      position: relative;
-      padding-left: 10px;
-      width: 190px;
-      > input {
-        border: 0;
-      }
-    }
-    .icon_box {
-      width: 45px;
-      .iconfont {
-        font-size: 20px;
-      }
-    }
-    .btn_box {
-      width: 65px;
-      color: $white;
-      > a {
-        display: block;
-        width: 65px;
-        color: $white;
-        text-align: center;
-        background: $green;
-        cursor: pointer;
-      }
-    }
-  }
-  .link_hy {
-    @extend .fr;
-    line-height: 40px;
-    .iconfont {
-      padding-left: 5px;
-      font-size: 14px;
-      color: $green;
-    }
-  }
-  .link_type {
-    padding: 20px 0;
-    > a {
-      font-size: 16px;
-      color: $light_gray;
-      padding-right: 35px;
-    }
-  }
+.p_hy_groom {
   .bd {
     .col1 {
       overflow: hidden;
@@ -1539,6 +1299,8 @@ export default {
       }
     }
     .text {
+      overflow: hidden;
+      height: 40px;
       margin-bottom: 10px;
       .num {
         color: $orange;
@@ -1556,9 +1318,11 @@ export default {
     }
   }
   .weixin {
+    overflow: hidden;
     margin-top: 20px;
     padding: 20px 10px;
     background: #fcfac1;
+    // height: 116px;
     .pic {
       overflow: hidden;
       @extend .fl;
@@ -1575,146 +1339,7 @@ export default {
     }
   }
 }
-.p_hy_list {
-  > li {
-    @extend .fl;
-    margin: 0 20px 20px 0;
-    padding: 10px;
-    width: 246px;
-    height: 109px;
-    background-color: #dfecff;
-    background: -webkit-gradient(
-      linear,
-      left top,
-      right top,
-      from(#f3f9ff),
-      to(#dfecff)
-    );
-    background: linear-gradient(90deg, #f3f9ff, #dfecff);
-    border: 1px solid $border_color;
-    cursor: pointer;
-    .hd_box {
-      font-size: 12px;
-      .label_provider {
-        color: $light_gray;
-      }
-      .provider {
-        padding: 0 10px;
-        color: $tit_color;
-      }
-      .sure {
-        padding: 0 5px;
-        color: $white;
-        background: $light_red;
-      }
-    }
-    .md_box {
-      height: 54px;
-      line-height: 54px;
-      white-space: nowrap;
-      > div,
-      span {
-        display: inline-block;
-      }
-      .city {
-        max-width: 80px;
-        color: $tit_color;
-        font-size: 16px;
-        line-height: 18px;
-        vertical-align: middle;
-      }
-      .city-joint {
-        color: $light_gray;
-        font-size: 12px;
-        line-height: 18px;
-        height: 18px;
-      }
-      .joint-line {
-        display: inline-block;
-        background-color: $light_gray;
-        width: 10px;
-        height: 1px;
-        vertical-align: middle;
-      }
-      .joint-label {
-        padding: 0 4px;
-      }
-    }
-    .typpe_box {
-      clear: both;
-      font-size: $f_12;
-      .item {
-        padding-left: 5px;
-        color: $tit_color;
-        b {
-          font-weight: normal;
-          color: $orange;
-        }
-      }
-      .time {
-        @extend .fr;
-        padding: 0 3px;
-        background: $white;
-        border: 1px solid $green;
-      }
-    }
-  }
-}
-/*发布求车信息*/
-.release {
-  margin: 0 auto;
-  padding: 50px 0;
-  width: $w_1440;
-  font-size: $f_14;
-  .hd {
-    overflow: hidden;
-    margin: 0 auto;
-    width: 450px;
-    .text_box {
-      @extend .fl;
-      width: 230px;
-      .tit {
-        font-size: 25px;
-        color: $green;
-      }
-    }
-    .btn_release {
-      @extend .fr;
-      margin-top: 10px;
-      width: 190px;
-      height: 50px;
-      line-height: 50px;
-      font-size: 20px;
-      color: $white;
-      font-weight: bold;
-      text-align: center;
-      background: $green;
-      border-radius: 5px;
-    }
-  }
-  .bd {
-    margin: 30px auto 0 auto;
-    display: table;
-    word-spacing: -1em;
-    width: 450px;
-    font-size: 16px;
-    line-height: 20px;
-    color: $tit_color;
-    > span {
-      display: inline-block;
-      font-size: 18px;
-      font-weight: bold;
-      margin-left: 10px;
-      &.num {
-        padding: 2px 8px;
-        color: $white;
-        background: $red;
-        font-weight: normal;
-        font-size: 20px;
-      }
-    }
-  }
-}
+
 /*货量达人榜*/
 .rank_people {
   margin: 0 auto 20px auto;

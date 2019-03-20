@@ -1768,7 +1768,7 @@ export default {
                     // 不选中'系列2'
                     轻货: false
                   },
-                  bottom: 30,
+                  bottom: 10,
                   left: 'left',
                   selectedMode: 'single',
                   textStyle: {
@@ -1791,8 +1791,8 @@ export default {
                   axisLine: { show: false },
                   axisTick: { show: false },
                   axisLabel: { show: false },
-                  type: 'value',
-                  max: maxY1
+                  type: 'value'
+                  // max: maxY1
                 },
                 series: [
                   {
@@ -1815,7 +1815,7 @@ export default {
                           // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
-                          }公斤}`
+                          }元/公斤}`
                         },
                         rich: {
                           color0: {
@@ -1867,7 +1867,7 @@ export default {
                         if (params.dataIndex === 4) {
                           return ``
                         } else {
-                          return `{${c0}|${params.value}公斤}\n{color2|${
+                          return `{${c0}|${params.value}元/公斤}\n{color2|${
                             params.name
                           }}`
                         }
@@ -1968,7 +1968,7 @@ export default {
                           // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
-                          }公斤}`
+                          }元/公斤}`
                         },
                         rich: {
                           color0: {
@@ -2020,7 +2020,7 @@ export default {
                         if (params.dataIndex === 4) {
                           return ``
                         } else {
-                          return `{${c0}|${params.value}公斤}\n{color2|${
+                          return `{${c0}|${params.value}元/公斤}\n{color2|${
                             params.name
                           }}`
                         }

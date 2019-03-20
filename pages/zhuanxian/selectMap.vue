@@ -237,11 +237,11 @@ export default {
       // }
       this.form.msgMobile = ''
       this.form.memo = ''
-      if (this.line) {
-        window.location.href = '/zhuanxian/list'
-      } else {
-        window.location.href = '/gongsi'
-      }
+      // if (this.line) {
+      //   window.location.href = '/zhuanxian/list'
+      // } else {
+      //   window.location.href = '/gongsi'
+      // }
 
       // this.form.startProvince = $(
       //   '.form_findme .city-picker-span:eq(0) .select-item:eq(0)'
@@ -262,8 +262,8 @@ export default {
       // this.form.endArea = $(
       //   '.form_findme .city-picker-span:eq(1) .select-item:eq(2)'
       // ).text('')
-      // $('.list-box-r-top #wlLineTo .city-picker-span').text('请输入到达地')
-      // $('.list-box-r-top #wlLineFrom .city-picker-span').text('请输入出发地')
+      $('.form_findme #wlLineTo .city-picker-span').text('请输入到达地')
+      $('.form_findme #wlLineFrom .city-picker-span').text('请输入出发地')
     }
   }
 }

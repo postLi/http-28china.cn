@@ -39,7 +39,7 @@ function process02(current) {
       'Content-Type': 'application/json'
     },
     url:
-      'http://www.28china.cn/api/aflc-portal/order/fclOrder/v1/getOtherInfoList',
+      'http://www.28kuaiyun.cn/api/aflc-portal/order/fclOrder/v1/getOtherInfoList',
     dataType: 'json',
     async: false,
     data: JSON.stringify({
@@ -120,7 +120,7 @@ function process03(startCity, endCity) {
       'Content-Type': 'application/json'
     },
     url:
-      'http://www.28china.cn/api/aflc-portal/order/fclOrder/v1/getOtherOrderList',
+      'http://www.28kuaiyun.cn/api/aflc-portal/order/fclOrder/v1/getOtherOrderList',
     dataType: 'json',
     data: JSON.stringify({
       currentPage: 1,

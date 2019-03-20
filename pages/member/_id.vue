@@ -766,11 +766,10 @@ export default {
   },
   mounted() {
     var _this = this
-    seajs.use(['/index/js/city-picker.data.js'], function() {
+    seajs.use(['/js/city-picker.js'], function() {
       seajs.use(
         [
           '/js/gaodemap2.js',
-          '/index/js/city-picker.js',
           // '/member/js/index.js',
           '/member/js/banner.js',
           '/js/collection.js'

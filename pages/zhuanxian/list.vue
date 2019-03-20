@@ -448,7 +448,7 @@
         </div>
         <div class="zx_sx"><span class="biaozhi"/><span>专线信息推荐</span></div>
         <div
-          v-if="!lineRecoms.length||lineRecoms==null"
+          v-if="lineRecoms.length==0||lineRecoms==null"
           class="tj_none">
           <span>没有相关线路推荐</span>
         </div>

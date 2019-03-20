@@ -84,6 +84,7 @@
         </div>
         <!--分页-->
         <div
+          v-if="list.length!=0"
           class="box"
           style="float: right;margin-right: 170px;">
           <div
@@ -125,7 +126,7 @@ async function getpjLists($axios, currentPage, vo = {}, query, assessLevel) {
 }
 async function getpjNum($axios, query) {
   let res = await $axios.get(
-    `/api/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}
+    `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}
 `
   )
 
@@ -167,25 +168,7 @@ export default {
       default: () => {}
     }
   },
-  async asyncData({ $axios, app, query, error }) {
-    let vo
-    //     let res = await $axios.get(
-    //       `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}
-
-    // `
-    //     )
-    //     if (res.data.status == 200) {
-    //       return {
-    //         infopj: res.data.data
-    //       }
-    //     }
-    // console.log(res, 'res')
-    // let infopjnum =
-    // let getpjListData = await getpjLists($axios, 1, vo)
-
-    // console.log('ressss1')
-    // console.log(getpjListData, 'getpjListData')
-  },
+  async asyncData({ $axios, app, query, error }) {},
   head: {
     link: [
       { rel: 'stylesheet', href: '/line/css/article_wlzx.css' },
@@ -236,14 +219,14 @@ export default {
         let vo
         let obj = await getpjLists(
           this.$axios,
-          1,
+          this.currentPage,
           vo,
           this.$route.query,
           this.assessLevel
         )
         // console.log(obj.list, 'list1')
         // console.log(obj, 'getpjListData')
-        console.log('this2')
+        // console.log('this2')
         this.pages = obj.pages
         this.list = obj.list
         this.currentPage = obj.currentPage
@@ -277,7 +260,7 @@ export default {
             this.$route.query,
             this.assessLevel
           )
-          console.log(obj, 'objobj11')
+          // console.log(obj, 'objobj11')
           let assessLevel = ''
           this.pages = obj.pages
           this.list = obj.list

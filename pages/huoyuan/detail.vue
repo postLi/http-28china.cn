@@ -8,6 +8,7 @@
         id="search_huo" 
         target="_blank"><input 
           class="arc_input3" 
+          readonly
           value="搜全网"> </a></div>
       <div class="arc_top1_2">
         <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
@@ -24,19 +25,21 @@
 
     </div>
     <div class="arc_toptitle">
-      <h1>{{ hyDetail.companyName ? hyDetail.companyName : '货源详情' }}</h1>
-      
+      <h1
+        v-if="hyDetail.archivalType === '3'"
+      >{{ hyDetail.companyName }}</h1>
+      <h1 v-else>货源详情</h1>
       <ul 
         class="two_tltle" 
-        v-if="hyDetail.companyName">
+        v-if="hyDetail.archivalType === '3'">
         <li/>
         <li><a 
           style="float:left"
           :href="/member/ + hyDetail.lgCompanyId">公司官网</a><a :href="/member/ + hyDetail.lgCompanyId + '-line'">专线信息</a></li>
         <li><a  
           style="float:left" 
-          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a><a  
-        :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
+          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a>
+        <a :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
         <li/>
       </ul>
     </div>
@@ -111,7 +114,7 @@
               <tr><td class="arc_td1">其他：</td><td
               class="arc_td2">{{ hyDetail.extraName ? hyDetail.extraName : '暂无其他描述' }}</td></tr>
               <tr><td class="arc_td1">备注：</td><td
-              class="arc_td2">{{ hyDetail.remark ? hyDetail.remark : '暂无备注信息' }}</td></tr>
+              class="arc_td2">{{ hyDetail.remark ? hyDetail.remark.substring(0,10) : '暂无备注信息' }}</td></tr>
             </table>
             </div>
           </div>
@@ -191,7 +194,7 @@
 
       </div>
       <div 
-        v-if="archival.shipperType === 'AF00107'" 
+        v-if="archival.archivalType === '3'" 
         class="arc_right">
         <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
         <p
@@ -225,7 +228,9 @@
             v-if="archival.qq"
             :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
             target="_blank"><input value="QQ交谈"></a></span>
-          <span><i>地址：</i><font v-if="archival.address">{{ archival.address.substring(0, 10) }}</font></span>
+          <span><i>地址：</i><a 
+            :title="archival.address"
+            v-if="archival.address">{{ archival.address.substring(0, 8) }}</a></span>
         </p>
         <p class="arc_right05">
           <a 
@@ -261,7 +266,7 @@
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010101'">
+        v-if="archival.archivalType === '1'">
         <div class="arc_top_title">
           <h4>货主档案</h4>
         </div>
@@ -299,7 +304,7 @@
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010102' || archival.shipperType === 'AF0010103'">
+        v-if="archival.archivalType === '2'">
         <div class="arc_top_title">
           <h4>{{ archival.companyName }}</h4>
         </div>
@@ -647,8 +652,7 @@
           </ul>
         </div>
         <div 
-          class="arc_main4" 
-          v-if="huoLink.length != 0">
+        class="arc_main4">
           <div class="zx_sx1">
             <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
           </div>
@@ -847,6 +851,7 @@ export default {
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
+  layout: 'subLayout',
   data() {
     return {
       showMoblie: false,
@@ -1144,7 +1149,37 @@ export default {
   },
 
   mounted() {
-    console.log(this.zxList, 'zxlist')
+    seajs.use(['/js/gaodemap2.js'])
+    $('.arc_input3').click(function() {
+      var search_type = $('#search_type option:selected').attr('name')
+      var start = $('.arc_input1')
+      var end = $('.arc_input2')
+      var query =
+        '?startProvince=' +
+        (start.attr('theprovince') || '') +
+        '&startCity=' +
+        (start.attr('thecity') || '') +
+        '&startc=' +
+        (start.attr('thecity') || '') +
+        '&startp=' +
+        (start.attr('theprovince') || '') +
+        '&endProvince=' +
+        (end.attr('theprovince') || '') +
+        '&endCity=' +
+        (end.attr('thecity') || '')
+      console.log(
+        '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
+      )
+      if (search_type == 'zx') {
+        window.open('/zhuanxian/list' + query)
+      }
+      if (search_type == 'huo') {
+        window.open('/huoyuan' + query)
+      }
+      if (search_type == 'che') {
+        window.open('/cheyuan' + query)
+      }
+    })
     if (process.client) {
       console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({})
@@ -1187,12 +1222,15 @@ export default {
       }
       if (l < 8) {
         this.isShowMessge = true
-        // console.log(this.hyDetail.startProvince, l, 'dfasfa')
         let obj = {
-          startProvince: this.hyDetail.startProvince,
-          startCity: this.hyDetail.startCity,
-          endProvince: this.hyDetail.endProvince,
-          endCity: this.hyDetail.endCity,
+          startProvince: this.hyDetail.startProvince
+            ? this.hyDetail.startProvince
+            : '',
+          startCity: this.hyDetail.startCity ? this.hyDetail.startCity : '',
+          endProvince: this.hyDetail.endProvince
+            ? this.hyDetail.endProvince
+            : '',
+          endCity: this.hyDetail.endCity ? this.hyDetail.endCity : '',
           currentPage: 1,
           pageSize: 7 - l
         }
@@ -1200,7 +1238,6 @@ export default {
           .post('/28-web/lclOrder/list', obj)
           .then(res => {
             this.dataset = res.data.data.list
-            // console.log(res.data.data.list, '999999999999as')
           })
           .catch(err => {
             console.log('huoComprehensives4:', err)
@@ -1234,10 +1271,10 @@ export default {
       }
     }
   },
-  destroyed() {
-    clearInterval(this.inTerVar)
-    this.inTerVar = null
-  },
+  // destroyed() {
+  //   clearInterval(this.inTerVar)
+  //   this.inTerVar = null
+  // },
   methods: {
     showMoblieFn() {
       let access_token = $.cookie('access_token')

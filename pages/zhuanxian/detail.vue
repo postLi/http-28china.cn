@@ -6,8 +6,11 @@
       </div>-->
       <div class="arc_top1">
         <div class="arc_top1_1">
-          <span>{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>
-          <!--<span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>-->
+          <img
+            width="135px"
+            src="/img/logo.png" >
+            <!--<span>{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>-->
+            <!--<span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>-->
         </div>
         <div class="arc_top1_3"><a
           id="search_huo"
@@ -33,31 +36,62 @@
 
 
       </div>
-      <div class="arc_top2">
-        <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
-        <div
-          id="arc_city"
-          class="arc_top2_2">
-          <a
-            v-for="(item,index) in lineCitys"
-            v-if="index<14"
-            :key="index"
-            :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name"
-            target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
-        </div>
-        <div
-          v-if="lineCitys.length>14"
-          class="arc_top2_3"
-        ><a href="javascript:void(0)" ><span>更多+</span></a></div>
+      <div class="arc_toptitle">
+        <h1>{{ linedataB.companyName ? linedataB.companyName : '专线详情' }}</h1>
 
-        <!--更多城市-->
-        <div
-          id="city_box"
-          class="city_box"/>
+        <ul
+          class="two_tltle"
+          v-if="linedataB.companyName">
+          <li/>
+          <li><a
+            style="float:left"
+            :href="/member/ + linedataB.id">公司官网</a><a :href="/member/ + linedataB.id + '-line'">专线信息</a></li>
+          <li><a
+            style="float:left"
+            :href="/member/ + linedataB.id+ '-wangdian'">网点信息</a><a
+          :href="/member/ +linedataB.id + '-huo'">货源信息</a></li>
+          <li/>
+        </ul>
+      </div>
+
+      <div class="arc_main1">
+        <div class="arc_top2">
+          <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
+          <div
+            id="arc_city"
+            class="arc_top2_2">
+            <a
+              v-for="(item,index) in lineCitys"
+              v-if="index<14"
+              :key="index"
+              :href="'/zhuanxian/list?startp='+linedataA.startProvince+'&startc='+linedataA.startCity+'&endp='+linedataA.startProvince+'&endc='+item.name"
+              target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
+              <!-- :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name" -->
+          </div>
+          <div
+            v-if="lineCitys.length>14"
+            class="arc_top2_3"
+            onmouseover="$('.city_box').css('display','block');"
+          ><a href="javascript:void(0)" ><span>更多+</span></a></div>
+          <!--更多城市-->
+          <div
+            id="city_box"
+            class="city_box"
+            onmouseover="$('.city_box').css('display','block');"
+            onmouseout="$('.city_box').css('display','none');">
+            <a
+              v-for="(item,index) in lineCitys"
+              v-if="index >= 14"
+              :key="index"><span @click="gotoHuoList($event)">{{ item.name.substring(0, 2) }}</span>
+            </a>
+          </div>
+          <!--更多城市-->
+          <!--<div-->
+          <!--id="city_box"-->
+          <!--class="city_box"/>-->
           <!-- 点击弹出效果-->
 
-      </div>
-      <div class="arc_main1">
+        </div>
         <div class="arc_left">
           <div class="arc_left_1">
             <img
@@ -285,7 +319,7 @@
               >
                 <!-- v-if="isXin==false" -->
                 <img
-                  v-if="!isXin"
+                  v-if="isXin==false"
                   src="/line/images/03sc.png"
                   alt=""
                   style="vertical-align: middle;"
@@ -414,11 +448,11 @@
                 readonly=""
                 value="进入官网"></a>
             <!--<span>{{ linedataB.id }}</span>-->
-            <a 
+            <a
               style="border:1px solid #ccc;padding:5px 30px"
               @click="openColl('comany')"><span>收藏</span></a>
               <!-- <span style="padding:5px;border:1px solid #ccc">收藏</span> -->
-           
+
               <!-- <a><input
               id="collection_wlgs"
               readonly=""
@@ -454,7 +488,9 @@
         </div>
 
       </div>
-      <div class="arc_main1-1">
+      <div
+        style="    display: inline-block;"
+        class="arc_main1-1">
         想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
       </div>
 
@@ -478,23 +514,19 @@
                 style="clear: both">
                 <ul>
                   <li>
-                    <!--<div class="content-right-row-left"><span>送货上门</span><span>保价运输</span><span>运费到付</span><span>运费到付</span>-->
-                    <!--<span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>
 
-                    <div class="content-right-row-left"><span>送货上门</span><span>保价运输</span><span>运费到付</span><span>运费到付</span>
-                   <span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>-->
-                    <!--allServiceNameList-->
                     <div
 
                     class="content-right-row-left">
                       <span
-                        v-for="(item, index) in linedataB.allServiceNameList"
+                        v-for="(item, index) in linedataB.allServiceNameList.slice(0,8)"
                         :key="index"
-                        @click="showfind">{{ item }}</span>
+                      >{{ item }}</span>
                     </div>
                     <div
                       v-if="linedataB.allServiceNameList.length >8"
-                      class="content-right-row-right">
+                      class="content-right-row-right"
+                      style="float:right;margin-right: 25px;">
                       <a
                         :href="'/member/'+linedataA.publishId+'-cpfw'"
                         target="_blank"
@@ -977,7 +1009,28 @@ async function getDetailColl(
     `/28-web/collect/transportRange?access_token=${access_token}&user_token=${user_token}&transportRangeId=${transportRangeId}&handle=${handle}
 `
   )
-  console.log(res, 'ress-getDetailColl')
+  // console.log(res, 'ress-getDetailColl')
+  if (res.data.status === 200) {
+    return {
+      data: res.data
+    }
+  } else {
+    // return { list: [], pages: 0, currentPage: 1 }
+  }
+  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
+}
+async function getCanyColl(
+  $axios,
+  companyId,
+  access_token,
+  user_token,
+  handle
+) {
+  let res = await $axios.post(
+    `/28-web/collect/company?access_token=${access_token}&user_token=${user_token}&companyId=${companyId}&handle=${handle}
+`
+  )
+  console.log(res, 'ress-getCanyColl')
   if (res.data.status === 200) {
     return {
       data: res.data
@@ -1191,9 +1244,11 @@ export default {
       linedataE.data.data.lowerPriceRate = linedataE.data.data.lowerPriceRate
         ? linedataE.data.data.lowerPriceRate + '%'
         : ''
-      // credit
-      // linedataB.data.data
-      // console.log(linedataG.data.data, 'linedataG.data.data')
+
+      // console.log(
+      //   linedataB.data.data.allServiceNameList.slice(0, 8),
+      //   'linedataA.linedataB.allServiceNameList.slice(0,8)'
+      // )
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip
@@ -1264,7 +1319,8 @@ export default {
     }
   },
   mounted() {
-    this.collnum()
+    this.detailCollnum()
+    this.cananyCollnum()
     if (process.client) {
       seajs.use(['/layer/layer.js'], function() {
         seajs.use(
@@ -1350,17 +1406,6 @@ export default {
                     //  <!-- 阶梯价格浮层弹出效果 E-
 
                     function mousePrice() {
-                      // 更多城市
-                      $('.arc_top2_3').mouseover(function() {
-                        $('.city_box').css('display', 'block')
-                      })
-                      $('.city_box').mouseover(function() {
-                        $('.city_box').css('display', 'block')
-                      })
-                      $('.city_box').mouseover(function() {
-                        $('.city_box').css('display', 'none')
-                      })
-                      // 更多城市
                       //
                       // $('#zh_price').mouseover(function() {
                       //   $('.price_box1').css('display', 'block')
@@ -1421,6 +1466,20 @@ export default {
     }
   },
   methods: {
+    gotoHuoList(event) {
+      // console.log(event, 'event')
+      let city = event.target.innerHTML + '市'
+      if (city.length > 4) {
+        city = city.substring(2, 5)
+      }
+      window.open(
+        `/zhuanxian/list?startProvince=${
+          this.linedataA.startProvince
+        }&startCity=${this.linedataA.startCity}&endProvince=${
+          this.linedataA.startProvince
+        }&endCity=${city}`
+      )
+    },
     moreFn() {
       this.addFn()
     },
@@ -2114,54 +2173,14 @@ export default {
         symbolSize: 20
       }
     },
-    collAxios(item, access_token, user_token, handle) {
-      let aurl = ''
-      let isurl = ''
-      if (item == 'detail') {
-        isurl = '/28-web/collect/transportRange'
-      } else if (item == 'comany') {
-        isurl = '/28-web/collect/company'
-      } else {
-        isurl = '/28-web/collect/company'
-        handle = 'check'
-      }
-      this.$axios
-        .post(
-          aurl +
-            isurl +
-            '?access_token=' +
-            access_token +
-            '&user_token=' +
-            user_token +
-            '&transportRangeId=' +
-            transportRangeId +
-            '&handle=' +
-            handle
-        )
-        .then(res => {
-          if (res.data.status === 200) {
-            layer.msg('订阅成功')
-            if (item == 'detail') {
-              this.isXin = true
-            }
-            // this.isXin = true
-          }
-          if (res.data.errorInfo) {
-            layer.msg(res.data.errorInfo)
-          }
-        })
-        .catch(err => {
-          console.log('提交捕获异常', err)
-        })
-    },
-    collnum() {
+    detailCollnum() {
       let access_token = $.cookie('access_token') || ''
       let user_token = $.cookie('user_token') || ''
       let aurl = ''
       let isurl = ''
       let transportRangeId = this.$route.query.id
       // // 操作：collect收藏；cancelCollect取消收藏
-      console.log(access_token, 'access_token')
+      // console.log(access_token, 'access_token')
       let handle = 'check'
       if (access_token && user_token) {
         getDetailColl(
@@ -2171,12 +2190,39 @@ export default {
           user_token,
           handle
         ).then(res => {
-          console.log(res, 'res方法')
+          if (res.data.data == true) {
+            this.isXin = true
+          }
+          // console.log(res.data.data, 'res方法')
+        })
+      }
+    },
+    cananyCollnum() {
+      let access_token = $.cookie('access_token') || ''
+      let user_token = $.cookie('user_token') || ''
+      let aurl = ''
+      let isurl = ''
+      // let companyId = this.$route.query.publishId
+      // // 操作：collect收藏；cancelCollect取消收藏
+      // console.log(access_token, 'access_token')
+      let handle = 'check'
+      if (access_token && user_token) {
+        getCanyColl(
+          this.$axios,
+          this.$route.query.publishId,
+          access_token,
+          user_token,
+          handle
+        ).then(res => {
+          if (res.data.data == true) {
+            this.isComanyColl = true
+          }
+          console.log(res.data.data, 'res方法2')
         })
       }
     },
     openColl(item) {
-      console.log(item, 'item')
+      // console.log(item, 'item')
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       let aurl = ''
@@ -2188,8 +2234,8 @@ export default {
       if (access_token && user_token) {
         if (item == 'detail') {
           let transportRangeId = this.$route.query.id
-          if (this.isDetailColl == true) {
-            handle = 'cancelCollec'
+          if (this.isXin == true) {
+            handle = 'cancelCollect'
           }
           isurl =
             '/28-web/collect/transportRange?access_token=' +
@@ -2203,14 +2249,14 @@ export default {
         } else {
           let companyId = this.$route.query.publishId
           if (this.isComanyColl == true) {
-            handle = 'cancelCollec'
+            handle = 'cancelCollect'
           }
           isurl =
             '/28-web/collect/company?access_token=' +
             access_token +
             '&user_token=' +
             user_token +
-            '&companyId =' +
+            '&companyId=' +
             companyId +
             '&handle=' +
             handle
@@ -2220,15 +2266,24 @@ export default {
           .then(res => {
             if (res.data.status === 200) {
               console.log(res.data.data, '收藏成功')
-              layer.msg('收藏成功')
+              let isMsg = res.data.data
+              layer.msg(isMsg)
               if (item == 'detail') {
-                this.isXin = true
-                this.isDetailColl = true
+                if (isMsg == '收藏成功！') {
+                  this.isXin = true
+                } else {
+                  this.isXin = false
+                }
+
+                // this.isDetailColl = true
               }
               if (item == 'comany') {
-                this.isComanyColl = true
+                if (isMsg == '收藏成功！') {
+                  this.isComanyColl = true
+                } else {
+                  this.isComanyColl = false
+                }
               }
-              // this.isXin = true
             }
             if (res.data.errorInfo) {
               layer.msg(res.data.errorInfo)
@@ -2267,27 +2322,53 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian-detail {
-  /*弹框*/
-  /*.myLayer_title {*/
-  /*text-align: center;*/
-  /*font-size: 22px;*/
-  /*font-weight: bold;*/
-  /*margin: 20px;*/
-  /*}*/
-  /*.myLayer_content {*/
-  /*margin: 20px;*/
-  /*font-size: 18px;*/
-  /*}*/
-  /*.myLayer_footer #seconds {*/
-  /*border: 1px solid #3333;*/
-  /*width: 50px;*/
-  /*height: 50px;*/
-  /*display: inline-block;*/
-  /*line-height: 50px;*/
-  /*text-align: center;*/
-  /*border-radius: 30px;*/
-  /*}*/
-  /*弹框*/
+  .arc_toptitle {
+    float: left;
+    width: 100%;
+    height: 150px;
+    background: url(/images/cy/01title.png);
+    /* position: relative; */
+    position: absolute;
+    left: 0;
+    margin-top: 25px;
+    h1 {
+      text-align: center;
+      padding: 30px;
+      color: #fff;
+      font-size: 34px;
+      margin-left: -135px;
+    }
+    .arc_top2 {
+      width: 100%;
+      min-height: 40px;
+      overflow: auto;
+      line-height: 40px;
+      margin-top: 163px;
+      /* margin-bottom: 28px; */
+      border-bottom: 2px solid #2577e3;
+      background-color: #fff;
+      padding: 10px 20px;
+      box-sizing: border-box;
+    }
+    .two_tltle {
+      color: #fff;
+      max-width: 1400px;
+      display: flex;
+      background-color: #2c4fc4;
+      margin: 15px 251px;
+      li {
+        float: left;
+        cursor: pointer;
+        flex: 1;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
   .pj_price_box {
     top: 70%;
     z-index: 1;

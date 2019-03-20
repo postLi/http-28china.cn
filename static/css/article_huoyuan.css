@@ -41,6 +41,7 @@ margin-bottom: 12px; margin-top: 10px;
   background-color: #fff;
   padding: 10px 20px;
   box-sizing: border-box;
+  /* position: relative; */
 }
 .arc_top2_1{float: left;width: 80px; }
 .arc_top2_1 span{font-size: 16px;color: #3f94ee;}
@@ -546,7 +547,11 @@ text-align: center;
 .city_box{
             width: 300px;
             min-height: 100px;
-            position:fixed;left: 1330px; top: 175px;
+            /* position:fixed; */
+            position: absolute;
+            left: 1330px;
+             /* top: 354px; */
+             top:416px;
             margin-left: 0px;
            /* border-radius: 6px;*/
             display: none;
@@ -1711,7 +1716,9 @@ table tr:nth-child(odd){
 }
 .arc_toptitle h1{
   text-align: center;
-  padding: 30px;
+  /* padding: 30px; */
+  height: 105px;
+  line-height: 105px;
   color: #fff;
   font-size: 34px;
   margin-left: -135px;

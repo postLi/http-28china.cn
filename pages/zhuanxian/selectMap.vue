@@ -209,7 +209,7 @@ export default {
                 layer.msg('提交成功，客服稍后将会与您联系')
                 this.form.msgMobile = ''
                 this.remForm()
-                console.log(this.form, 'fomr')
+                // console.log(this.form, 'fomr')
               } else {
                 layer.msg(
                   res.data.errorInfo ? res.data.errorInfo : res.data.text

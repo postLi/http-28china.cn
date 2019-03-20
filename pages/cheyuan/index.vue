@@ -308,6 +308,7 @@
                 class="ltl-input0">
                 <input 
                   id="right-bar-form"
+                  v-model="checkNotice.startAddres"
                   data-toggle="city-picker"
                   data-level="district"
                   type="text" 
@@ -320,6 +321,7 @@
                 class="ltl-input0">
                 <input
                   autocomplete="off"
+                  v-model="checkNotice.endAddres"
                   data-toggle="city-picker"
                   data-level="district"
                   type="text" 
@@ -481,8 +483,8 @@ export default {
       ],
       inTerVar: null,
       checkNotice: {
-        start: '',
-        end: '',
+        startAddres: '',
+        endAddres: '',
         selectValue: '请选择车型',
         phone: ''
       },
@@ -513,20 +515,24 @@ export default {
       carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
       carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
       carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
-      endArea: query.endArea ? query.endArea : '',
-      endCity: query.endCity ? query.endCity : '',
-      endProvince: query.endProvince ? query.endProvince : '',
-      startArea: query.startArea ? query.startArea : '',
-      startCity: query.startCity
-        ? query.startCity
-        : query.startCity === ''
-          ? ''
-          : areaData.currentAreaFullName,
-      startProvince: query.startProvince
-        ? query.startProvince
-        : query.startProvince === ''
-          ? ''
-          : areaData.currentProvinceFullName
+      endArea: query.endArea || query.enda ? query.endArea || query.enda : '',
+      endCity: query.endCity || query.endc ? query.endCity || query.endc : '',
+      endProvince:
+        query.endProvince || query.endp ? query.endProvince || query.endp : '',
+      startArea:
+        query.startArea || query.starta ? query.startArea || query.starta : '',
+      startCity:
+        query.startCity || query.startc
+          ? query.startCity || query.startc
+          : query.startCity === ''
+            ? ''
+            : areaData.currentAreaFullName,
+      startProvince:
+        query.startProvince || query.startp
+          ? query.startProvince || query.startp
+          : query.startProvince === ''
+            ? ''
+            : areaData.currentProvinceFullName
     }
     // 获取物流公司列表
     let vor = Object.assign({ pageSize: 10 }, vo)
@@ -568,20 +574,24 @@ export default {
       carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
       carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
       carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
-      endArea: query.endArea ? query.endArea : '',
-      endCity: query.endCity ? query.endCity : '',
-      endProvince: query.endProvince ? query.endProvince : '',
-      startArea: query.startArea ? query.startArea : '',
-      startCity: query.startCity
-        ? query.startCity
-        : query.startCity === ''
-          ? ''
-          : areaData.currentAreaFullName,
-      startProvince: query.startProvince
-        ? query.startProvince
-        : query.startProvince === ''
-          ? ''
-          : areaData.currentProvinceFullName
+      endArea: query.endArea || query.enda ? query.endArea || query.enda : '',
+      endCity: query.endCity || query.endc ? query.endCity || query.endc : '',
+      endProvince:
+        query.endProvince || query.endp ? query.endProvince || query.endp : '',
+      startArea:
+        query.startArea || query.starta ? query.startArea || query.starta : '',
+      startCity:
+        query.startCity || query.startc
+          ? query.startCity || query.startc
+          : query.startCity === ''
+            ? ''
+            : areaData.currentAreaFullName,
+      startProvince:
+        query.startProvince || query.startp
+          ? query.startProvince || query.startp
+          : query.startProvince === ''
+            ? ''
+            : areaData.currentProvinceFullName
     }
     let AF018 = await $axios.get(
       '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
@@ -728,20 +738,31 @@ export default {
   },
   methods: {
     sendNotice() {
-      if (this.checkNotice.start === '') {
+      this.sendNot()
+      let obj = {
+        startProvince: this.startProvince,
+        startCity: this.startCity,
+        startArea: this.startArea,
+        endProvince: this.endProvince,
+        endCity: this.endCity,
+        endArea: this.endArea
+      }
+      console.log(obj)
+      if (this.checkNotice.startAddres === '') {
         $('#form0').css('border-color', 'red')
-      } else {
+      } else if (this.checkNotice.startAddres != '') {
         $('#form0').css('border-color', '#e5e5e5')
       }
-      if (this.checkNotice.end === '') {
+      if (this.checkNotice.endAddres === '') {
         $('#form1').css('border-color', 'red')
-      } else {
+      } else if (this.checkNotice.endAddres != '') {
         $('#form1').css('border-color', '#e5e5e5')
       }
-      if (this.checkNotice.selectValue === '请选择类型') {
+      if (this.checkNotice.selectValue === '请选择车型') {
         $('#form2').css('border-color', 'red')
       } else {
         $('#form2').css('border-color', '#e5e5e5')
+        obj.carType = this.checkNotice.selectValue
       }
       let re = /^1[3|4|5|7|8|9]\d{9}$/
       if (this.checkNotice.phone === '') {
@@ -750,12 +771,53 @@ export default {
       } else {
         if (re.test(this.checkNotice.phone)) {
           $('.ltl-phone').css('border-color', '#e5e5e5')
+          obj.msgMobile = this.checkNotice.phone
         } else {
           $('.ltl-phone').css('border-color', 'red')
           this.checkNotice.phone = ''
           this.phoneHolder = '请输入正确手机号'
         }
       }
+      if (
+        this.checkNotice.startAddres != '' &&
+        this.checkNotice.endAddres != '' &&
+        this.checkNotice.phone != ''
+      ) {
+        this.$axios
+          .post('/28-web/helpFind/carInfo/create', obj)
+          .then(res => {
+            if (res.status) {
+              layer.msg('提交成功，客服稍后将会与您联系')
+            } else {
+              layer.msg(res.errorInfo)
+            }
+          })
+          .catch(err => {
+            console.log('huoComprehensives4:', err.text)
+          })
+      } else {
+        return
+      }
+    },
+    sendNot() {
+      let startAds = [],
+        endAds = []
+      $('#form0 .select-item').each(function(i, e) {
+        startAds.push($(this).text())
+      })
+      this.startProvince = startAds[0] ? startAds[0] : ''
+      this.startCity = startAds[1] ? startAds[1] : ''
+      this.startArea = startAds[2] ? startAds[2] : ''
+      this.checkNotice.startAddres =
+        this.startProvince + this.startCity + this.startArea
+      $('#form1 .select-item').each(function(i, e) {
+        endAds.push($(this).text())
+      })
+      this.endProvince = endAds[0] ? endAds[0] : ''
+      this.endCity = endAds[1] ? endAds[1] : ''
+      this.endArea = endAds[2] ? endAds[2] : ''
+      this.checkNotice.endAddres =
+        this.endProvince + this.endCity + this.endArea
     },
     searchDo() {
       let list1 = [],

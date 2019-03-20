@@ -60,7 +60,6 @@
   </div>
 </template>
 <script>
-import $axios from 'axios'
 export default {
   name: 'Help',
   props: {
@@ -151,8 +150,8 @@ export default {
         return
       }
       if (this.mobile && this.textnum) {
-        $axios
-          .post('/api/28-web/companyLine/subscribe', this.dataInfo)
+        this.$axios
+          .post('/28-web/companyLine/subscribe', this.dataInfo)
           .then(res => {
             if (res.data.status === 200) {
               layer.msg('订阅成功')
@@ -177,8 +176,8 @@ export default {
       if (this.mobile) {
         if (validReg.MOBILE.test(this.mobile)) {
           this.ShowmobileErr = false
-          $axios
-            .post('/api/aflc-common/aflcCommonSms/sendCodeSms/' + _this.mobile)
+          this.$axios
+            .post('/aflc-common/aflcCommonSms/sendCodeSms/' + _this.mobile)
             .then(res => {
               if (res.status === 200) {
                 layer.msg('验证码发送成功')

@@ -319,7 +319,7 @@
               >
                 <!-- v-if="isXin==false" -->
                 <img
-                  v-if="!isXin"
+                  v-if="isXin==false"
                   src="/line/images/03sc.png"
                   alt=""
                   style="vertical-align: middle;"
@@ -519,13 +519,14 @@
 
                     class="content-right-row-left">
                       <span
-                        v-for="(item, index) in linedataB.allServiceNameList"
+                        v-for="(item, index) in linedataB.allServiceNameList.slice(0,8)"
                         :key="index"
-                        @click="showfind">{{ item }}</span>
+                      >{{ item }}</span>
                     </div>
                     <div
                       v-if="linedataB.allServiceNameList.length >8"
-                      class="content-right-row-right">
+                      class="content-right-row-right"
+                      style="float:right;margin-right: 25px;">
                       <a
                         :href="'/member/'+linedataA.publishId+'-cpfw'"
                         target="_blank"
@@ -1018,6 +1019,27 @@ async function getDetailColl(
   }
   // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
 }
+async function getCanyColl(
+  $axios,
+  companyId,
+  access_token,
+  user_token,
+  handle
+) {
+  let res = await $axios.post(
+    `/28-web/collect/company?access_token=${access_token}&user_token=${user_token}&companyId=${companyId}&handle=${handle}
+`
+  )
+  console.log(res, 'ress-getCanyColl')
+  if (res.data.status === 200) {
+    return {
+      data: res.data
+    }
+  } else {
+    // return { list: [], pages: 0, currentPage: 1 }
+  }
+  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
+}
 export default {
   name: 'Index',
   components: {
@@ -1222,9 +1244,11 @@ export default {
       linedataE.data.data.lowerPriceRate = linedataE.data.data.lowerPriceRate
         ? linedataE.data.data.lowerPriceRate + '%'
         : ''
-      // credit
-      // linedataB.data.data
-      console.log(linedataA.data.data, 'linedataA.linedataA')
+
+      // console.log(
+      //   linedataB.data.data.allServiceNameList.slice(0, 8),
+      //   'linedataA.linedataB.allServiceNameList.slice(0,8)'
+      // )
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip
@@ -1295,7 +1319,8 @@ export default {
     }
   },
   mounted() {
-    this.collnum()
+    this.detailCollnum()
+    this.cananyCollnum()
     if (process.client) {
       seajs.use(['/layer/layer.js'], function() {
         seajs.use(
@@ -1442,7 +1467,7 @@ export default {
   },
   methods: {
     gotoHuoList(event) {
-      console.log(event, 'event')
+      // console.log(event, 'event')
       let city = event.target.innerHTML + '市'
       if (city.length > 4) {
         city = city.substring(2, 5)
@@ -2148,54 +2173,14 @@ export default {
         symbolSize: 20
       }
     },
-    collAxios(item, access_token, user_token, handle) {
-      let aurl = ''
-      let isurl = ''
-      if (item == 'detail') {
-        isurl = '/28-web/collect/transportRange'
-      } else if (item == 'comany') {
-        isurl = '/28-web/collect/company'
-      } else {
-        isurl = '/28-web/collect/company'
-        handle = 'check'
-      }
-      this.$axios
-        .post(
-          aurl +
-            isurl +
-            '?access_token=' +
-            access_token +
-            '&user_token=' +
-            user_token +
-            '&transportRangeId=' +
-            transportRangeId +
-            '&handle=' +
-            handle
-        )
-        .then(res => {
-          if (res.data.status === 200) {
-            layer.msg('订阅成功')
-            if (item == 'detail') {
-              this.isXin = true
-            }
-            // this.isXin = true
-          }
-          if (res.data.errorInfo) {
-            layer.msg(res.data.errorInfo)
-          }
-        })
-        .catch(err => {
-          console.log('提交捕获异常', err)
-        })
-    },
-    collnum() {
+    detailCollnum() {
       let access_token = $.cookie('access_token') || ''
       let user_token = $.cookie('user_token') || ''
       let aurl = ''
       let isurl = ''
       let transportRangeId = this.$route.query.id
       // // 操作：collect收藏；cancelCollect取消收藏
-      console.log(access_token, 'access_token')
+      // console.log(access_token, 'access_token')
       let handle = 'check'
       if (access_token && user_token) {
         getDetailColl(
@@ -2205,12 +2190,39 @@ export default {
           user_token,
           handle
         ).then(res => {
-          console.log(res, 'res方法')
+          if (res.data.data == true) {
+            this.isXin = true
+          }
+          // console.log(res.data.data, 'res方法')
+        })
+      }
+    },
+    cananyCollnum() {
+      let access_token = $.cookie('access_token') || ''
+      let user_token = $.cookie('user_token') || ''
+      let aurl = ''
+      let isurl = ''
+      // let companyId = this.$route.query.publishId
+      // // 操作：collect收藏；cancelCollect取消收藏
+      // console.log(access_token, 'access_token')
+      let handle = 'check'
+      if (access_token && user_token) {
+        getCanyColl(
+          this.$axios,
+          this.$route.query.publishId,
+          access_token,
+          user_token,
+          handle
+        ).then(res => {
+          if (res.data.data == true) {
+            this.isComanyColl = true
+          }
+          console.log(res.data.data, 'res方法2')
         })
       }
     },
     openColl(item) {
-      console.log(item, 'item')
+      // console.log(item, 'item')
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       let aurl = ''
@@ -2222,8 +2234,8 @@ export default {
       if (access_token && user_token) {
         if (item == 'detail') {
           let transportRangeId = this.$route.query.id
-          if (this.isDetailColl == true) {
-            handle = 'cancelCollec'
+          if (this.isXin == true) {
+            handle = 'cancelCollect'
           }
           isurl =
             '/28-web/collect/transportRange?access_token=' +
@@ -2237,14 +2249,14 @@ export default {
         } else {
           let companyId = this.$route.query.publishId
           if (this.isComanyColl == true) {
-            handle = 'cancelCollec'
+            handle = 'cancelCollect'
           }
           isurl =
             '/28-web/collect/company?access_token=' +
             access_token +
             '&user_token=' +
             user_token +
-            '&companyId =' +
+            '&companyId=' +
             companyId +
             '&handle=' +
             handle
@@ -2254,15 +2266,24 @@ export default {
           .then(res => {
             if (res.data.status === 200) {
               console.log(res.data.data, '收藏成功')
-              layer.msg('收藏成功')
+              let isMsg = res.data.data
+              layer.msg(isMsg)
               if (item == 'detail') {
-                this.isXin = true
-                this.isDetailColl = true
+                if (isMsg == '收藏成功！') {
+                  this.isXin = true
+                } else {
+                  this.isXin = false
+                }
+
+                // this.isDetailColl = true
               }
               if (item == 'comany') {
-                this.isComanyColl = true
+                if (isMsg == '收藏成功！') {
+                  this.isComanyColl = true
+                } else {
+                  this.isComanyColl = false
+                }
               }
-              // this.isXin = true
             }
             if (res.data.errorInfo) {
               layer.msg(res.data.errorInfo)

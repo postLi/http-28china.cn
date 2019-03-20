@@ -64,7 +64,7 @@
                   <input
                     name="ddd"
                     style="height: 100%;width:100%;border: none;outline: none;"
-                    wtmap="city"
+                    wtmap=""
                     type="text"
                     placeholder="请输入详细地址查附近网点" >
                 </div>

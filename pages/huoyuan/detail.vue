@@ -134,7 +134,12 @@
               <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font>{{ hyDetail.startProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.contacts }}</td></tr>
-              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.mobile }}</td></tr>
+              <tr><td class="arc_td1">联系电话：</td><td 
+                class="arc_td2" 
+                @click="checkobile()">
+                <a 
+                :class="[isMobile ? '' : 'checkMobile']">
+              {{ isMobile ? mobile : '查看电话' }}</a></td></tr>
               <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
               <tr><td class="arc_td1">里程：</td><td class="arc_td2">{{ hyDetail.distance }}</td></tr>
               <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>
@@ -276,13 +281,18 @@
           <li>联系人：{{ archival.contacts }}</li>
           <li>手机：
             <a 
+              @click="showMoblieFn()"
+              :class="[checkMoblie ? '' : 'checkMobile']">
+            {{ checkMoblie ? check : '查看电话' }}</a>
+          <!-- <a 
               v-show="checkMoblie"
               style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
               @click="showMoblieFn(showMoblie)">查看电话</a>
             <a 
               v-show="showMoblie"
               style="color: #333" 
-              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li>
+              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li> -->
+          </li>
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
@@ -305,13 +315,9 @@
           <li>联系人：{{ archival.contacts }}</li>
           <li>手机：
             <a 
-              v-show="checkMoblie"
-              style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
-              @click="showMoblieFn(showMoblie)">查看电话</a>
-            <a 
-              v-show="showMoblie"
-              style="color: #333" 
-              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li>
+              @click="showMoblieFn()"
+              :class="[checkMoblie ? '' : 'checkMobile']">
+          {{ checkMoblie ? check : '查看电话' }}</a></li>
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
@@ -640,7 +646,9 @@
             </li>
           </ul>
         </div>
-        <div class="arc_main4">
+        <div 
+          class="arc_main4" 
+          v-if="huoLink.length != 0">
           <div class="zx_sx1">
             <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
           </div>
@@ -656,7 +664,9 @@
             </li>
           </ul>
         </div>
-        <div class="arc_main4">
+        <div 
+          class="arc_main4"
+          v-if="interestOrder.length != 0">
           <div class="zx_sx1">
             <span class="biaozhi1"/><span>{{ interesLabel }}</span>
           </div>
@@ -806,46 +816,6 @@
       </div>
     
     </div>
-    
-   
-    <div 
-      id="js011" 
-      class="arc_bottom"
-      style="display: none">
-      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/plus/list.php?tid=2"><span class="arc_bottom_more">更多+</span></a></div>
-
-      <div 
-        class="tj_list" 
-        style="display: none;">
-        <p class="p01"><a 
-          id="nr0910" 
-          target="_blank"><span id="nr0911">广东-东莞</span><i>&rarr;</i><span id="nr0912">广东-深圳</span></a></p>
-        <p class="p03">
-          <img src="[field:global.cfg_templets_skin/]/images/04gongsi.png" >&nbsp;<span><a 
-            id="nr0913" 
-            href="/member/index.php?uid=ybyb120">广州明科物流有限公司</a></span>
-        </p>
-        <p class="p03">
-          <i>货物名称：</i><span id="nr0914">电子电器</span>
-        </p>
-        <p class="p02">
-          <span><i>重量：</i><font id="nr0915">15吨</font></span>  <span><i>体积：</i><font id="nr0916">30立方米</font></span>
-        </p>
-        <p class="p04">
-          <i>数量：</i><span id="nr0917"/>
-        </p>
-        <p class="p05">
-          <img src="[field:global.cfg_templets_skin/]/images/11xinyong.png" >
-        </p>
-        <p class="p06">
-          <a 
-            id="nr0918" 
-            href="Javascript:void(0)" 
-            style="cursor: pointer;"><span>查看&nbsp;&gt;</span></a>
-        </p>
-      </div>
-
-    </div>
     <Add 
       :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
@@ -877,17 +847,19 @@ export default {
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
-  layout: 'subLayout',
   data() {
     return {
       showMoblie: false,
-      checkMoblie: true,
+      checkMoblie: false,
       isShowAdd: false,
       isShowHelp: false,
       isShowOrder: false,
       isShowCollect: true,
       isCencelCollect: false,
       isShowMessge: false,
+      isMobile: false,
+      mobile: '',
+      check: '',
       zxList: [],
       dataset: [],
       inTerVar: null,
@@ -1267,6 +1239,32 @@ export default {
     this.inTerVar = null
   },
   methods: {
+    showMoblieFn() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        this.checkMoblie = true
+        this.check = this.hyDetail.mobile
+      } else {
+        this.checkMoblie = false
+        $('.login_box').show()
+        $('.login_box_mask').show()
+      }
+    },
+    checkobile() {
+      // this.isMobile = !this.isMobile
+
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        this.isMobile = true
+        this.mobile = this.hyDetail.mobile
+      } else {
+        this.isMobile = false
+        $('.login_box').show()
+        $('.login_box_mask').show()
+      }
+    },
     getCity() {
       this.dataInfo.startProvince = this.hyDetail.startProvince
       this.dataInfo.startCity = this.hyDetail.startCity
@@ -1440,15 +1438,15 @@ export default {
         this.getCity()
       }
     },
-    showMoblieFn(showMoblieFn) {
-      if (showMoblieFn == false) {
-        this.showMoblie = true
-        this.checkMoblie = false
-      } else {
-        this.checkMoblie = true
-        this.showMoblie = false
-      }
-    },
+    // showMoblieFn(showMoblieFn) {
+    //   if (showMoblieFn == false) {
+    //     this.showMoblie = true
+    //     this.checkMoblie = false
+    //   } else {
+    //     this.checkMoblie = true
+    //     this.showMoblie = false
+    //   }
+    // },
     searchDo() {
       let list1 = [],
         list2 = []

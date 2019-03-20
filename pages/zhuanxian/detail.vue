@@ -2336,8 +2336,8 @@ export default {
             console.log('提交捕获异常')
           })
       } else {
-        this.isShowAdd = true
-        this.getCity()
+        // this.isShowAdd = true
+        // this.getCity()
         // window.open('http://127.0.0.1:3000/login')
       }
     },

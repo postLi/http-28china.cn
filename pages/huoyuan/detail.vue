@@ -8,6 +8,7 @@
         id="search_huo" 
         target="_blank"><input 
           class="arc_input3" 
+          readonly
           value="搜全网"> </a></div>
       <div class="arc_top1_2">
         <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
@@ -1147,7 +1148,37 @@ export default {
   },
 
   mounted() {
-    console.log(this.zxList, 'zxlist')
+    seajs.use(['/js/gaodemap2.js'])
+    $('.arc_input3').click(function() {
+      var search_type = $('#search_type option:selected').attr('name')
+      var start = $('.arc_input1')
+      var end = $('.arc_input2')
+      var query =
+        '?startProvince=' +
+        (start.attr('theprovince') || '') +
+        '&startCity=' +
+        (start.attr('thecity') || '') +
+        '&startc=' +
+        (start.attr('thecity') || '') +
+        '&startp=' +
+        (start.attr('theprovince') || '') +
+        '&endProvince=' +
+        (end.attr('theprovince') || '') +
+        '&endCity=' +
+        (end.attr('thecity') || '')
+      console.log(
+        '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
+      )
+      if (search_type == 'zx') {
+        window.open('/zhuanxian/list' + query)
+      }
+      if (search_type == 'huo') {
+        window.open('/huoyuan' + query)
+      }
+      if (search_type == 'che') {
+        window.open('/cheyuan' + query)
+      }
+    })
     if (process.client) {
       console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({})

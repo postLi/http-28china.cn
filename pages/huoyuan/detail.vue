@@ -253,7 +253,6 @@
             src="/images/article_wlzx/10shiming.png">
           <span v-if="archival.authStatus !== 'AF0010403' && (!archival.isVip || archival.isVip === 0)">暂无认证信息</span>
         </p>
-        
       </div>
       <div 
         class="arc_right1" 
@@ -685,8 +684,7 @@
             :key="index"
             :href="item.url"
             class="gldh_list"
-            target="_blank"
-          >
+            target="_blank">
             <div class="img"><img :src="item.img"></div>
             <div>
               <p>{{ item.title }}</p>

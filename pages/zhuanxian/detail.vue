@@ -1226,7 +1226,7 @@ export default {
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
 
-      // console.log(linedataF.data.data.list, 'linedataF')
+      // console.log(linedataA.data.data, 'linedataA.data.data')
       // console.log(
       //   aurl + `/28-web/logisticsCompany/${query.publishId}`,
       //   'res.data.data.linedataA',

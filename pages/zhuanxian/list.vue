@@ -464,7 +464,7 @@
               <img src="/line/images/04gongsi.png"><span><a
                 id="tj_a011"
                 :href="'/member/'+ item.companyId"
-                target="_blank">{{ item.companyName }}</a></span>
+                target="_blank">{{ item.companyName.length>15?item.companyName.substring(0,15):item.companyName }}</a></span>
               <img
                 id="tj_shiming"
                 src="/line/images/shiming.png">

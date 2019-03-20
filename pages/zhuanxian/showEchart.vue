@@ -48,6 +48,7 @@ export default {
         maxY = el
       }
     })
+    console.log(maxY, 'maxY')
 
     let maxY1 = this.sendEchart1[0]
     this.sendEchart1.forEach(el => {
@@ -695,11 +696,11 @@ export default {
       let price = ''
       if (cargoType.cargoType == 1) {
         price = cargoType.weightDiscountPrice
-        console.log(price, 'price')
+        // console.log(price, 'price')
       }
       if (cargoType.cargoType == 0) {
         price = cargoType.lightDiscountPrice
-        console.log(price, 'price2')
+        // console.log(price, 'price2')
       }
       sendEchart[4] = {
         value: price,

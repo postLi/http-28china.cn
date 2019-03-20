@@ -70,14 +70,14 @@
           <div
             v-if="lineCitys.length>14"
             class="arc_top2_3"
-            onmouseover="$('.city_box1').css('display','block');"
+            onmouseover="$('.city_box').css('display','block');"
           ><a href="javascript:void(0)" ><span>更多+</span></a></div>
           <!--更多城市-->
           <div
-            id="city_box1"
-            class="city_box1"
-            onmouseover="$('.city_box1').css('display','block');"
-            onmouseout="$('.city_box1').css('display','none');">
+            id="city_box"
+            class="city_box"
+            onmouseover="$('.city_box').css('display','block');"
+            onmouseout="$('.city_box').css('display','none');">
             <a
               v-for="(item,index) in lineCitys"
               v-if="index >= 14"
@@ -513,12 +513,7 @@
                 style="clear: both">
                 <ul>
                   <li>
-                    <!--<div class="content-right-row-left"><span>送货上门</span><span>保价运输</span><span>运费到付</span><span>运费到付</span>-->
-                    <!--<span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>
-
-                    <div class="content-right-row-left"><span>送货上门</span><span>保价运输</span><span>运费到付</span><span>运费到付</span>
-                   <span>开发票</span><span>保价运输</span><span>运费到付</span><span>运费到付</span></div>-->
-                    <!--allServiceNameList-->
+      
                     <div
 
                     class="content-right-row-left">
@@ -1385,17 +1380,6 @@ export default {
                     //  <!-- 阶梯价格浮层弹出效果 E-
 
                     function mousePrice() {
-                      // 更多城市
-                      $('.arc_top2_3').mouseover(function() {
-                        $('.city_box').css('display', 'block')
-                      })
-                      $('.city_box').mouseover(function() {
-                        $('.city_box').css('display', 'block')
-                      })
-                      $('.city_box').mouseover(function() {
-                        $('.city_box').css('display', 'none')
-                      })
-                      // 更多城市
                       //
                       // $('#zh_price').mouseover(function() {
                       //   $('.price_box1').css('display', 'block')

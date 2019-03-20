@@ -43,7 +43,7 @@ export default {
         this.comInfo(this.sendEchart1, this.cargoType1)
       }
     })
-    // console.log(this.sendEchart1, 'this.sendEchart1重货')
+    console.log(this.sendEchart1, 'this.sendEchart1重货')
     let maxY = this.sendEchart[0]
     this.sendEchart.forEach(el => {
       if (maxY < el) {

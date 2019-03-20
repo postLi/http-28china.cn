@@ -7,7 +7,6 @@ const _e1b24d74 = () => interopDefault(import('..\\pages\\exit.vue' /* webpackCh
 const _8e0ded7a = () => interopDefault(import('..\\pages\\gongsi\\index.vue' /* webpackChunkName: "pages_gongsi_index" */))
 const _79e66679 = () => interopDefault(import('..\\pages\\help\\index.vue' /* webpackChunkName: "pages_help_index" */))
 const _e79fab62 = () => interopDefault(import('..\\pages\\huoyuan\\index.vue' /* webpackChunkName: "pages_huoyuan_index" */))
-const _18eb5bb7 = () => interopDefault(import('..\\pages\\hyzx.vue' /* webpackChunkName: "pages_hyzx" */))
 const _d4c10700 = () => interopDefault(import('..\\pages\\Insurance\\index.vue' /* webpackChunkName: "pages_Insurance_index" */))
 const _437c2af1 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages_login" */))
 const _548a5626 = () => interopDefault(import('..\\pages\\m\\index.vue' /* webpackChunkName: "pages_m_index" */))
@@ -49,6 +48,7 @@ const _6b83e29c = () => interopDefault(import('..\\pages\\m\\huoyuan\\index.vue'
 const _2248e326 = () => interopDefault(import('..\\pages\\m\\ydcx\\index.vue' /* webpackChunkName: "pages_m_ydcx_index" */))
 const _3a1366f5 = () => interopDefault(import('..\\pages\\m\\zhuanxian\\index.vue' /* webpackChunkName: "pages_m_zhuanxian_index" */))
 const _5fbee06c = () => interopDefault(import('..\\pages\\shixiao\\detail.vue' /* webpackChunkName: "pages_shixiao_detail" */))
+const _0c098bce = () => interopDefault(import('..\\pages\\shixiao\\index - 副本.vue' /* webpackChunkName: "pages_shixiao_index - 副本" */))
 const _8400195a = () => interopDefault(import('..\\pages\\wuliu\\detail.vue' /* webpackChunkName: "pages_wuliu_detail" */))
 const _9e1c03dc = () => interopDefault(import('..\\pages\\wuliu1\\add.vue' /* webpackChunkName: "pages_wuliu1_add" */))
 const _998c7720 = () => interopDefault(import('..\\pages\\wuliu1\\detail.vue' /* webpackChunkName: "pages_wuliu1_detail" */))
@@ -183,10 +183,6 @@ export function createRouter() {
       path: "/huoyuan",
       component: _e79fab62,
       name: "huoyuan"
-    }, {
-      path: "/hyzx",
-      component: _18eb5bb7,
-      name: "hyzx"
     }, {
       path: "/Insurance",
       component: _d4c10700,
@@ -351,6 +347,10 @@ export function createRouter() {
       path: "/shixiao/detail",
       component: _5fbee06c,
       name: "shixiao-detail"
+    }, {
+      path: "/shixiao/index - 副本",
+      component: _0c098bce,
+      name: "shixiao-index - 副本"
     }, {
       path: "/wuliu/detail",
       component: _8400195a,

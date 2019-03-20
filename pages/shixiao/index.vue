@@ -1,11 +1,11 @@
 <template>
   <div>
-    <div class="shixiao_banner">
+    <!-- <div class="shixiao_banner">
       <img src="/member/images/banner_gsjj.png">
-    </div>
+    </div> -->
     <div class="shixiao_box">
-      <div class="shixiao_left">
-        <div class="left_top">
+      <!-- <div class="shixiao_left"> -->
+      <!-- <div class="left_top">
           <ul class="left_top_ul">
             <h1>帮助信息</h1>
             <li>时效查询</li>
@@ -13,17 +13,15 @@
             <li>运单查询</li>
             <li>快速下单</li>
           </ul>
-        </div>
-        <div class="list_kehu">
+        </div> -->
+      <!-- <div class="list_kehu">
           <h2 class="list_help_title">客户服务</h2>
           <div class="kf_num">
-            <!-- <button>客服1</button>
-            <button>客服2</button> -->
             <img src="/images/wzlImg.kf.jpg">
           </div>
-        </div>
-        <!-- 帮我找优质运动start -->
-        <div class="list_help">
+        </div> -->
+      <!-- 帮我找优质运动start -->
+      <!-- <div class="list_help">
           <h2 class="list_help_title">帮我找优质运力</h2>
           <div class="list-box-r-top">
             <form action="">
@@ -69,9 +67,9 @@
               </div>
             </form>
           </div>
-        </div>
-        <!-- 帮我找优质运动end -->
-        <div class="list_ewm">
+        </div> -->
+      <!-- 帮我找优质运动end -->
+      <!-- <div class="list_ewm">
           <h2 class="list_help_title">便捷查询运单</h2>
           <div class="order_content">
             <div class="imgbox">
@@ -85,8 +83,8 @@
               下载【28快运APP】，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a>
             </div>
           </div>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
       <div class="shixiao_right">
         <div class="list_left">
           <div class="list_search">
@@ -154,86 +152,99 @@
             <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
             <img src="/images/none_pic.png">
           </div>
-          <div class="list_tiaoj">
-            <span 
-              v-for="(item,index) in sortList" 
-              :key="index"
-              :class="[sortId === item.id ? 'active' : '']"
-              @click="selectSort(item)">{{ item.name }}</span>
-          </div>
+          <div style="float:left;width:100%">
+            <div 
+              v-if="listRangesAging.length === 0" 
+              class="list_none" 
+              style="display: block">
+              <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
+              <img src="/images/none_pic.png">
+            </div>
+            <div 
+              v-if="listRangesAging != 0" 
+              class="list_tiaoj">
+              <span 
+                v-for="(item,index) in sortList" 
+                :key="index"
+                :class="[sortId === item.id ? 'active' : '']"
+                @click="selectSort(item)">{{ item.name }}</span>
+            </div>
 
           
-          <div 
-            v-for="(item,index) in listRangesAging" 
-            :key="index" 
-            class="wzl_box">
-            <ul 
-              class="wlzx_list" 
-              style="border:none" >
-              <li class="cy_list_1">
-                <p class="p1"><a 
-                  :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
-                  target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
-                <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
-                <p class="p3"><img 
-                  src="/images/wzlImg/2.png"
-                  style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
-                <p class="p4"><img src="/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
-              </li>
-              <li class="cy_list_7">
-                <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
-              </li>
-              <li class="cy_list_2">
-                <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
-                <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
-                <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
+            <div 
+              v-for="(item,index) in listRangesAging" 
+              :key="index" 
+              class="wzl_box">
+              <div 
+                v-if="currentPage === 1"
+                class="wzl_log"><span :class="[index <3 ? 'bgr' : '']">TOP<i>{{ index + 1 }}</i></span></div>
+              <ul 
+                class="wlzx_list" 
+                style="border:none" >
+                <li class="cy_list_1">
+                  <p class="p1"><a 
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                    target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
+                  <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
+                  <p class="p3"><img 
+                    src="/images/wzlImg/2.png"
+                    style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
+                  <p class="p4"><img src="/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
+                </li>
+                <li class="cy_list_7">
+                  <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
+                </li>
+                <li class="cy_list_2">
+                  <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
+                  <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m3': '0' }}</span></p>
+                  <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '天': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
 
-              </li>
-              <li class="cy_list_3">
-                <p class="p1"><img
-                  v-if="item.authStatus === 'AF0010403'"
-                  src="/images/list_wlzx/10shiming.png"></P>
-                <p class="p2"><img
-                  v-if="item.isVip && item.isVip === 1"
-                  src="/images/list_wlzx/11xinyong.png"></P>
-                <p class="p3"><img
-                  v-if="item.collateral && item.collateral !== 0"
-                  src="/images/list_wlzx/12danbao.png"></P>
-              </li>
+                </li>
+                <li class="cy_list_3">
+                  <p class="p1"><img
+                    v-if="item.authStatus === 'AF0010403'"
+                    src="/images/list_wlzx/10shiming.png"></P>
+                  <p class="p2"><img
+                    v-if="item.isVip && item.isVip === 1"
+                    src="/images/list_wlzx/11xinyong.png"></P>
+                  <p class="p3"><img
+                    v-if="item.collateral && item.collateral !== 0"
+                    src="/images/list_wlzx/12danbao.png"></P>
+                </li>
 
-              <li class="cy_list_4">
-                <p><img 
-                  class="numlll" 
-                  src="/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
-                <p><img 
-                  class="numlll" 
-                  src="/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
-              </li>
-              <li class="wlzx_list_6">
-                <p class="p2"><a 
-                  :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
-                  target="_blank" 
-                  class="check_btn" 
-                  style="background: #2577e3;color: #fff;">下单</a>
-                </p><p class="p2"><a
-                  :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
-                  target="_blank"
-                  class="check_btn">查看</a>
-                </p><p 
-                  v-if="item.qq" 
-                  class="p3"><a
-                    :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
-                    target="_blank"><input
-                      readonly="readonly" 
-                      value="QQ交谈"></a>
-              </p></li>
-            </ul>
+                <li class="cy_list_4">
+                  <p><img 
+                    class="numlll" 
+                    src="/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
+                  <p><img 
+                    class="numlll" 
+                    src="/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
+                </li>
+                <li class="wlzx_list_6">
+                  <p class="p2"><a 
+                    :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
+                    target="_blank" 
+                    class="check_btn" 
+                    style="background: #2577e3;color: #fff;">下单</a>
+                  </p><p class="p2"><a
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"
+                    class="check_btn">查看</a>
+                  </p><p 
+                    v-if="item.qq" 
+                    class="p3"><a
+                      :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
+                      target="_blank"><input
+                        readonly="readonly" 
+                        value="QQ交谈"></a>
+                </p></li>
+              </ul>
+            </div>
           </div>
-
-          <div 
+          <!-- <div 
             id="js006" 
-            class="w1130">
-            <div class="zx_sx"><span class="biaozhi"/><span >优质承运商推荐</span></div>
+            class="w1130"> -->
+          <!-- <div class="zx_sx"><span class="biaozhi"/><span >优质承运商推荐</span></div>
             <div class="list_box">
               <ul class="ul_list">
                 <li 
@@ -245,45 +256,9 @@
                     v-for="(i,n) in item.allServiceNameList" 
                     :key="n">{{ i }}</span>
                 </li>
-                <!-- <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li>
-                <li>
-                  <h4>满生货运中心</h4>
-                  <span>零担整车 大件运输</span>
-                </li> -->
               </ul>
-            </div>
-            <!-- <div class="list_tiaoj">
+            </div> -->
+          <!-- <div class="list_tiaoj">
               <span 
                 v-for="(item,index) in sortList" 
                 :key="index"
@@ -291,20 +266,18 @@
                 @click="selectSort(item)">{{ item.name }}</span>
             </div> -->
 
-            <!-- <div 
+          <!-- <div 
               v-if="listRangesAging.length === 0" 
               class="list_none" 
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
               <img src="/images/none_pic.png">
             </div> -->
-            <div class="zx_sx"><span class="biaozhi"/><span >广州出发热门专线</span></div>
+          <!-- <div class="zx_sx"><span class="biaozhi"/><span >广州出发热门专线</span></div>
             <div class="list_box">
               <ul class="ul_host">
                 <li>
                   <p>物流商：薏米滴答 
-                    <!-- <img
-                    src="/wd/images/blue.gif" > -->
                     <img
                     src="/wd/images/34huanguan.gif" >
                     <img
@@ -321,9 +294,9 @@
                   </div>
                 </li>
               </ul>
-            </div>
-            <!-- 全国热门物流专线start -->
-            <div class="hot-city-layer main-width">
+            </div> -->
+          <!-- 全国热门物流专线start -->
+          <!-- <div class="hot-city-layer main-width">
               <div class="hot-city-unit hot_box ">
                 <h3 class="news-unit-title">全国热门物流货运专线</h3>
                 <ul class="hot-cities">
@@ -389,9 +362,9 @@
                     href="/goods/f441200.html">肇庆找车拉货</a></li>
                 </ul>
               </div>
-            </div>
-            <!-- 全国热门物流专线end -->
-            <!-- <div 
+            </div> -->
+          <!-- 全国热门物流专线end -->
+          <!-- <div 
               v-for="(item,index) in listRangesAging" 
               :key="index" 
               class="wzl_box">
@@ -416,7 +389,7 @@
                 </li>
                 <li class="cy_list_2">
                   <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
-                  <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
+                  <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m3': '0' }}</span></p>
                   <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
 
                 </li>
@@ -463,18 +436,18 @@
 
 
 
-          </div>
+          <!-- </div> -->
           <!--分页-->
-          <!-- <div
+          <div
             class="box" 
             style="float: right;margin-right: 370px;">
             <div 
               id="pagination1" 
               class="page fl"/>
             <div class="info fl">
-              <p>当前页数：<span id="current1">1</span></p>
+            <!-- <p>当前页数：<span id="current1">1</span></p> -->
             </div>
-          </div> -->
+          </div>
         </div>
       </div>
       
@@ -646,7 +619,7 @@ export default {
       },
       false
     )
-    // this.loadPagination()
+    this.loadPagination()
   },
   methods: {
     async selectSort(item) {
@@ -676,22 +649,22 @@ export default {
       }&endProvince=${this.vo.endProvince}&startArea=${
         this.vo.startArea
       }&startCity=${this.vo.startCity}&startProvince=${this.vo.startProvince}`
+    },
+    loadPagination() {
+      $('#pagination1').pagination({
+        currentPage: this.currentPage,
+        totalPage: this.totalPage,
+        callback: async current => {
+          $('#current1').text(current)
+          let vo = this.vo
+          vo.filterSign = this.sortId
+          let obj = await getListRangesAging(this.$axios, current, vo)
+          this.listRangesAging = obj.list
+          this.currentPage = obj.currentPage
+          window.location.href = '#top'
+        }
+      })
     }
-    // loadPagination() {
-    //   $('#pagination1').pagination({
-    //     currentPage: this.currentPage,
-    //     totalPage: this.totalPage,
-    //     callback: async current => {
-    //       $('#current1').text(current)
-    //       let vo = this.vo
-    //       vo.filterSign = this.sortId
-    //       let obj = await getListRangesAging(this.$axios, current, vo)
-    //       this.listRangesAging = obj.list
-    //       this.currentPage = obj.currentPage
-    //       window.location.href = '#top'
-    //     }
-    //   })
-    // }
   }
 }
 </script>
@@ -737,7 +710,7 @@ img {
 }
 .shixiao_right {
   float: left;
-  width: 1173px;
+  width: 1400px;
 }
 .list_box {
   float: left;
@@ -776,11 +749,6 @@ img {
   height: 30px;
   line-height: 30px;
   color: #2577e3;
-  width: 164px;
-  overflow: hidden;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 .ul_list li span {
   height: 30px;
@@ -1317,7 +1285,7 @@ img {
 }
 .cy_list_4 {
   width: 100px;
-  margin-left: 50px;
+  margin-left: 106px;
 }
 
 .cy_list_5 {
@@ -1326,7 +1294,7 @@ img {
 }
 .wlzx_list_6 {
   width: 100px;
-  margin-left: 100px;
+  margin-left: 265px;
 }
 .cy_list_7 {
   width: 100px;
@@ -1560,12 +1528,13 @@ img {
 .list_search {
   /* margin: 0 60px; */
   float: left;
+  width: 100%;
 }
 .order-form-item {
   float: left;
   /* width: 470px; */
   /* width: 50%; */
-  margin-left: 50px;
+  margin-left: 104px;
 }
 .order-form-item:first-child .order-form-label {
   padding-left: 10px;

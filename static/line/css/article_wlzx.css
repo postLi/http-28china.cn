@@ -240,7 +240,7 @@ body {
 }
 
 .arc_left_down ul li:nth-of-type(2) {
-  padding: 15px 12px 17px 10px;
+  padding: 15px 10px 17px 5px;
   cursor: pointer;
 }
 

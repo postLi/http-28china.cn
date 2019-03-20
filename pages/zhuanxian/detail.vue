@@ -281,7 +281,7 @@
                 style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
               <li
                 style="padding-left: 26px;cursor:pointer"
-                @click="openCollectNumber('detail')"
+               
               >
                 <!-- v-if="isXin==false" -->
                 <img
@@ -417,7 +417,7 @@
               id="collection_wlgs"
               readonly=""
               value="收藏"
-              @click="openCollectNumber('company')"></a>
+            ></a>
           </p>
           <p class="arc_right06">
             <span>相关认证</span>
@@ -1226,7 +1226,7 @@ export default {
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
 
-      // console.log(linedataF.data.data.list, 'linedataF')
+      // console.log(linedataA.data.data, 'linedataA.data.data')
       // console.log(
       //   aurl + `/28-web/logisticsCompany/${query.publishId}`,
       //   'res.data.data.linedataA',
@@ -1768,7 +1768,7 @@ export default {
                     // 不选中'系列2'
                     轻货: false
                   },
-                  bottom: 30,
+                  bottom: 10,
                   left: 'left',
                   selectedMode: 'single',
                   textStyle: {
@@ -1791,8 +1791,8 @@ export default {
                   axisLine: { show: false },
                   axisTick: { show: false },
                   axisLabel: { show: false },
-                  type: 'value',
-                  max: maxY1
+                  type: 'value'
+                  // max: maxY1
                 },
                 series: [
                   {
@@ -1815,7 +1815,7 @@ export default {
                           // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
-                          }公斤}`
+                          }元/公斤}`
                         },
                         rich: {
                           color0: {
@@ -1867,7 +1867,7 @@ export default {
                         if (params.dataIndex === 4) {
                           return ``
                         } else {
-                          return `{${c0}|${params.value}公斤}\n{color2|${
+                          return `{${c0}|${params.value}元/公斤}\n{color2|${
                             params.name
                           }}`
                         }
@@ -1968,7 +1968,7 @@ export default {
                           // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
-                          }公斤}`
+                          }元/公斤}`
                         },
                         rich: {
                           color0: {
@@ -2020,7 +2020,7 @@ export default {
                         if (params.dataIndex === 4) {
                           return ``
                         } else {
-                          return `{${c0}|${params.value}公斤}\n{color2|${
+                          return `{${c0}|${params.value}元/公斤}\n{color2|${
                             params.name
                           }}`
                         }
@@ -2152,91 +2152,7 @@ export default {
         symbolSize: 20
       }
     },
-    openCollection() {
-      // console.log(this.linedataA, 'this.linedataA')
-      let aurl = ''
-      let _this = this
 
-      let transportRangeId = this.$route.query.id
-      // // 操作：collect收藏；cancelCollect取消收藏
-      let handle = 'collect'
-      // console.log(this.$route.query.id, 'this.$route')
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            aurl +
-              '/28-web/collect/company?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token +
-              '&transportRangeId=' +
-              transportRangeId +
-              '&handle=' +
-              handle
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('订阅成功')
-              // this.isXin = true
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常', err)
-          })
-      } else {
-        _this.isShowAdd = true
-        console.log(_this.isShowAdd, ' _this.isShowAdd')
-        _this.getCity()
-      }
-    },
-    openCollectDetail() {
-      // alert('2')
-      // console.log(this.linedataA, 'this.linedataA311')
-      let aurl = ''
-
-      let transportRangeId = this.$route.query.id
-      // // 操作：collect收藏；cancelCollect取消收藏
-      let handle = 'collect'
-      // console.log(this.$route.query.id, 'this.$route')
-      let _access_token = $.cookie('access_token')
-      let _user_token = $.cookie('user_token')
-      // console.log(access_token, 'access_token && user_token')
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            aurl +
-              '/28-web/collect/company?access_token=' +
-              _access_token +
-              '&user_token=' +
-              _user_token +
-              '&transportRangeId=' +
-              transportRangeId +
-              '&handle=' +
-              handle
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('订阅成功')
-              this.isXin = true
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常', err)
-          })
-      } else {
-        // window.open('http://127.0.0.1:3000/login')
-        this.isShowAdd = true
-        this.getCity()
-      }
-    },
     openCollectNumber(item) {
       console.log(item, 'item')
       // alert('')
@@ -2295,52 +2211,7 @@ export default {
         // window.open('http://127.0.0.1:3000/login')
       }
     },
-    openCollectNumbererere(item) {
-      console.log(item, 'item')
-      // alert('')
-      // console.log(this.linedataA, 'this.linedataA2')
-      let aurl = ''
 
-      let transportRangeId = this.$route.query.id
-      // // 操作：collect收藏；cancelCollect取消收藏
-      let handle = 'collect'
-      // console.log(this.$route.query.id, 'this.$route')
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
-      let ulr = ''
-      console.log(access_token, 'access_token && user_token')
-      if (access_token && user_token) {
-        // detail
-        this.$axios
-          .post(
-            aurl +
-              '/28-web/collect/transportRange?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token +
-              '&transportRangeId=' +
-              transportRangeId +
-              '&handle=' +
-              handle
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('订阅成功')
-              this.isXin = true
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
-      } else {
-        this.isShowAdd = true
-        this.getCity()
-        // window.open('http://127.0.0.1:3000/login')
-      }
-    },
     getCity() {
       this.dataInfo.startProvince = this.linedataA.startProvince
       this.dataInfo.startCity = this.linedataA.startCity

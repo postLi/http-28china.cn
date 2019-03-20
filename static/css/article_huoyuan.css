@@ -91,7 +91,15 @@ float:right;text-align: center;
     padding-right: 10px;
     font-size: 14px;
 }
-.arc_left_2_1_2 .arc_td2{width: 437px;color: #666666;font-size:14px;padding-left: 10px;}
+.checkMobile{
+  color: #3f94ee;border-bottom: 1px solid #3f94ee
+}
+.checkMobile:hover{
+  border-bottom: none;
+}
+.arc_left_2_1_2 .arc_td2{
+  cursor: pointer;
+  width: 437px;color: #666666;font-size:14px;padding-left: 10px;}
 .arc_left_2_1_2 .arc_td2 font{color: #eb434d;}
 .arc_left_2_1_3{height: 25px;width: 430px;padding-left: 20px;padding-top: 30px;position: relative}
 .arc_left_2_1_3 img{width: 25px;height: 25px;position: absolute;top:26px;left: 0px;}

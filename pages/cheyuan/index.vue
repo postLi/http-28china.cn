@@ -462,6 +462,7 @@ export default {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
       { src: './js/city-picker.data.js' },
+      { src: '../vendor/layer/layer.js' },
       { src: './js/city-picker.js' },
       { src: './js/jquery.pagination.min.js' },
       { src: '/js/gaodemap2.js' }
@@ -657,6 +658,7 @@ export default {
   },
 
   mounted() {
+    seajs.use(['/js/gaodemap2.js'])
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())
@@ -786,14 +788,14 @@ export default {
         this.$axios
           .post('/28-web/helpFind/carInfo/create', obj)
           .then(res => {
-            if (res.status) {
+            if (res.status === 200) {
               layer.msg('提交成功，客服稍后将会与您联系')
-            } else {
+            } else if (res.status === 500) {
               layer.msg(res.errorInfo)
             }
           })
           .catch(err => {
-            console.log('huoComprehensives4:', err.text)
+            ayer.msg(res.errorInfo)
           })
       } else {
         return

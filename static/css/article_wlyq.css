@@ -252,6 +252,10 @@ cursor: pointer;
 .tj_list .p1{
 	height: 50px;
 	line-height: 50px;	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-right: 20px;
 }
 .tj_list .p1 span{
 	font-weight: bold;

@@ -253,6 +253,7 @@
             src="/images/article_wlzx/10shiming.png">
           <span v-if="archival.authStatus !== 'AF0010403' && (!archival.isVip || archival.isVip === 0)">暂无认证信息</span>
         </p>
+        
       </div>
       <div 
         class="arc_right1" 

@@ -136,6 +136,13 @@ module.exports = {
         '^/79api': ''
       }
     },
+    '/sendm/': {
+      target: 'http://vote.28china.cn/', // 代理地址
+      changeOrigin: true,
+      pathRewrite: {
+        '^/sendm': ''
+      }
+    },
     '/anfacms/': {
       target: 'http://47.112.196.131:8083', // 代理地址
       changeOrigin: true

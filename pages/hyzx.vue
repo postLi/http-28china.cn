@@ -1,9 +1,10 @@
 <template>
-  <div/>
+  <div>正在跳转至会员中心页面......</div>
 </template>
 <script>
 export default {
   name: 'Hyzx',
+  layout: 'empty',
   mounted() {
     if (process.client) {
       let url = location.href

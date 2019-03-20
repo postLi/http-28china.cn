@@ -102,8 +102,7 @@ export default {
   mounted() {
     seajs.use(
       [
-        '/index/js/city-picker.data.js',
-        '/index/js/city-picker.js',
+        '/js/city-picker.js',
         '/member/js/index.js',
         '/js/collection.js',
         // 'https://webapi.amap.com/maps?v=1.4.8&key=e61aa7ddc6349acdb3b57c062080f730&plugin=AMap.Autocomplete,AMap.PlaceSearch,AMap.Geocoder&callback=loadedGaodeMap',

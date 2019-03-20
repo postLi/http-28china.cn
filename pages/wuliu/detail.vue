@@ -325,6 +325,7 @@
             <p class="p1">
               <a
                 :href="'/member/'+item.id+''"
+                :title="item.companyName"
                 target="_blank"><span>{{ item.companyName }}</span></a>
 
             </p>
@@ -410,16 +411,16 @@ async function getLogisticsCompany(
       // vo
     }
   await $axios.post('/28-web/pointNetwork/findParkNet', parm1).then(res => {
-    res.data.data.list.forEach(item => {
-      if (JSON.parse(item.productService).length > 0) {
-        item.productService1 = (item.productServiceNameList || []).join(' ')
-      }
-      if (JSON.parse(item.otherService).length > 0) {
-        item.otherService1 = (item.otherServiceNameList || []).join(' ')
-      }
-      setCredit(item)
-    })
     if (res.data.status === 200) {
+      res.data.data.list.forEach(item => {
+        if (item.productService) {
+          item.productService1 = (item.productServiceNameList || []).join(' ')
+        }
+        if (item.otherService) {
+          item.otherService1 = (item.otherServiceNameList || []).join(' ')
+        }
+        setCredit(item)
+      })
       list = res.data.data.list
     }
   })
@@ -438,10 +439,10 @@ async function getTransportRange($axios, query, vo = {}) {
   parm1.parkId = query.id
   // console.log(parm1, 'parm1')
   await $axios.post('/28-web/range/park/list/', parm1).then(res => {
-    res.data.data.list.forEach(item => {
-      item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
-    })
     if (res.data.status === 200) {
+      res.data.data.list.forEach(item => {
+        item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
+      })
       list = res.data.data.list
     }
   })
@@ -479,8 +480,13 @@ export default {
   async asyncData({ $axios, query }) {
     let gatewayData = await $axios.get('/28-web/logisticsPark/' + query.id)
     let jwd = ''
-    const longitude = gatewayData.data.data.longitude
-    const latitude = gatewayData.data.data.latitude
+    let longitude = ''
+    let latitude = ''
+    if (gatewayData.data.data) {
+      longitude = gatewayData.data.data.longitude
+      latitude = gatewayData.data.data.latitude
+    }
+
     if (longitude && latitude) {
       jwd = longitude + ',' + latitude
     }
@@ -518,8 +524,8 @@ export default {
       jwd,
       companysList:
         companysList.data.status === 200 ? companysList.data.data : [],
-      transportRange: transportRange,
-      logisticsCompany: logisticsCompany,
+      transportRange: transportRange || [],
+      logisticsCompany: logisticsCompany || [],
       AF025: AF025.data.status === 200 ? AF025.data.data : []
     }
   },
@@ -582,7 +588,9 @@ export default {
           endProvince: endp,
           startArea: starta,
           startCity: startc,
-          startProvince: startp
+          startProvince: startp,
+          otherServiceCode: this.AF025Code,
+          orderBy: this.sortCode
         }
       )
       // console.log(this.transportRange, ' this.transportRange')
@@ -619,6 +627,7 @@ export default {
       let endc = list2[1]
       let enda = list2[2]
       this.sortName = item.name
+      this.sortCode = item.orderBy
       this.transportRange = await getTransportRange(
         this.$axios,
         this.$route.query,
@@ -653,6 +662,7 @@ export default {
       let enda = list2[2]
       this.AF025Name = item.name
       // console.log(item.code, 'item.code')
+      this.AF025Code = item.code
       this.transportRange = await getTransportRange(
         this.$axios,
         this.$route.query,

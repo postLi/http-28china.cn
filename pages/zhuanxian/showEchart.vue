@@ -36,14 +36,14 @@ export default {
         this.comInfo(this.sendEchart, this.cargoType0)
       }
     })
-    console.log(this.sendEchart, 'this.sendEchart轻货')
+    // console.log(this.sendEchart, 'this.sendEchart轻货')
     this.info.forEach((item, index) => {
       if (item.cargoType === '1') {
         this.cargoType1 = item
         this.comInfo(this.sendEchart1, this.cargoType1)
       }
     })
-    console.log(this.sendEchart1, 'this.sendEchart1重货')
+    // console.log(this.sendEchart1, 'this.sendEchart1重货')
     let maxY = this.sendEchart[0]
     this.sendEchart.forEach(el => {
       if (maxY < el) {

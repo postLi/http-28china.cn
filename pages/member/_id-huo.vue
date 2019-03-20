@@ -232,65 +232,63 @@ export default {
 
   mounted() {
     let _this = this
-    seajs.use(
-      ['/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
-      function() {
-        seajs.use(
-          [
-            '/index/js/city-picker.js',
-            '/js/collection.js'
-            // '/member/js/huo.js'
-          ],
-          function() {
-            var startp = $.getParams('startp')
-            var endp = $.getParams('endp')
-            var startc = $.getParams('startc')
-            var endc = $.getParams('endc')
-            var starta = $.getParams('starta')
-            var enda = $.getParams('enda')
-            $('#HuoyuanFrom input').citypicker({
-              province: startp,
-              city: startc,
-              district: starta
+    seajs.use(['/js/jquery.pagination.min.js'], function() {
+      seajs.use(
+        [
+          '/js/city-picker.js',
+          '/js/collection.js'
+          // '/member/js/huo.js'
+        ],
+        function() {
+          var startp = $.getParams('startp')
+          var endp = $.getParams('endp')
+          var startc = $.getParams('startc')
+          var endc = $.getParams('endc')
+          var starta = $.getParams('starta')
+          var enda = $.getParams('enda')
+          $('#HuoyuanFrom input').citypicker({
+            province: startp,
+            city: startc,
+            district: starta
+          })
+          $('#HuoyuanTo input').citypicker({
+            province: endp,
+            city: endc,
+            district: enda
+          })
+          //货源搜索 S
+          $('#search_huoyuan1').click(function() {
+            var list1 = [],
+              list2 = []
+            $('#HuoyuanFrom .select-item').each(function(i, e) {
+              list1.push($(this).text())
             })
-            $('#HuoyuanTo input').citypicker({
-              province: endp,
-              city: endc,
-              district: enda
+            var startp = list1[0] || ''
+            var startc = list1[1] || ''
+            var starta = list1[2] || ''
+
+            $('#HuoyuanTo .select-item').each(function(i, e) {
+              list2.push($(this).text())
             })
-            //货源搜索 S
-            $('#search_huoyuan1').click(function() {
-              var list1 = [],
-                list2 = []
-              $('#HuoyuanFrom .select-item').each(function(i, e) {
-                list1.push($(this).text())
-              })
-              var startp = list1[0] || ''
-              var startc = list1[1] || ''
-              var starta = list1[2] || ''
+            var endp = list2[0] || ''
+            var endc = list2[1] || ''
+            var enda = list2[2] || ''
 
-              $('#HuoyuanTo .select-item').each(function(i, e) {
-                list2.push($(this).text())
-              })
-              var endp = list2[0] || ''
-              var endc = list2[1] || ''
-              var enda = list2[2] || ''
+            _this.query.startProvince = startp
+            _this.query.startCity = startc
+            _this.query.startArea = starta
+            _this.query.endProvince = endp
+            _this.query.endCity = endc
+            _this.query.endArea = enda
+            // 设置参数
+            // 重新请求
+            // 重新设置分页
+            _this.getParam()
+            _this.fetchData(1).then(res => {
+              _this.initPage()
+            })
 
-              _this.query.startProvince = encodeURI(startp)
-              _this.query.startCity = encodeURI(startc)
-              _this.query.startArea = encodeURI(starta)
-              _this.query.endProvince = encodeURI(endp)
-              _this.query.endCity = encodeURI(endc)
-              _this.query.endArea = encodeURI(enda)
-              // 设置参数
-              // 重新请求
-              // 重新设置分页
-              _this.getParam()
-              _this.fetchData(1).then(res => {
-                _this.initPage()
-              })
-
-              /* window.location =
+            /* window.location =
                 uid +
                 '-huo.html?startp=' +
                 startp +
@@ -304,51 +302,50 @@ export default {
                 endc +
                 '&enda=' +
                 enda */
+          })
+          // 搜全站
+          $('#search_huoyuan2').click(function() {
+            var list1 = [],
+              list2 = []
+            $('#HuoyuanFrom .select-item').each(function(i, e) {
+              list1.push($(this).text())
             })
-            // 搜全站
-            $('#search_huoyuan2').click(function() {
-              var list1 = [],
-                list2 = []
-              $('#HuoyuanFrom .select-item').each(function(i, e) {
-                list1.push($(this).text())
-              })
-              var startp = list1[0] || ''
-              var startc = list1[1] || ''
-              var starta = list1[2] || ''
+            var startp = list1[0] || ''
+            var startc = list1[1] || ''
+            var starta = list1[2] || ''
 
-              $('#HuoyuanTo .select-item').each(function(i, e) {
-                list2.push($(this).text())
-              })
-              var endp = list2[0] || ''
-              var endc = list2[1] || ''
-              var enda = list2[2] || ''
-
-              startp = encodeURI(startp)
-              startc = encodeURI(startc)
-              starta = encodeURI(starta)
-              endp = encodeURI(endp)
-              endc = encodeURI(endc)
-              enda = encodeURI(enda)
-              window.open(
-                '/huoyuan?startp=' +
-                  startp +
-                  '&startc=' +
-                  startc +
-                  '&starta=' +
-                  starta +
-                  '&endp=' +
-                  endp +
-                  '&endc=' +
-                  endc +
-                  '&enda=' +
-                  enda
-              )
+            $('#HuoyuanTo .select-item').each(function(i, e) {
+              list2.push($(this).text())
             })
-            _this.initPage()
-          }
-        )
-      }
-    )
+            var endp = list2[0] || ''
+            var endc = list2[1] || ''
+            var enda = list2[2] || ''
+
+            startp = encodeURI(startp)
+            startc = encodeURI(startc)
+            starta = encodeURI(starta)
+            endp = encodeURI(endp)
+            endc = encodeURI(endc)
+            enda = encodeURI(enda)
+            window.open(
+              '/huoyuan?startp=' +
+                startp +
+                '&startc=' +
+                startc +
+                '&starta=' +
+                starta +
+                '&endp=' +
+                endp +
+                '&endc=' +
+                endc +
+                '&enda=' +
+                enda
+            )
+          })
+          _this.initPage()
+        }
+      )
+    })
   },
   methods: {
     getParam() {

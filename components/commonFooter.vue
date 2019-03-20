@@ -37,7 +37,7 @@
           <a href="javascript:void(0)">精选案例</a>
           <a href="/zixun">资讯动态</a>
           <a 
-            href="http://www.anfanet.com/tech-info.html" 
+            href="/help/ggp/index.jhtml" 
             target="_blank">帮助中心</a>
         </div>
         <div class="footer1-1">

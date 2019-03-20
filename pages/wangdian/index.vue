@@ -161,7 +161,9 @@
                   <div
                     id="js010"
                     class="wlzx_yq_nr">
-                    <div class="wlzx_yq_none">
+                    <div 
+                      v-if="logisticsPark.length==0"
+                      class="wlzx_yq_none">
                       <font>暂无园区信息</font>
                     </div>
 
@@ -445,7 +447,8 @@ export default {
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
       companyName: query.companyName ? query.companyName : '',
       latitude: pos[1],
-      longitude: pos[0]
+      longitude: pos[0],
+      parkId: query.parkId || ''
     }
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
@@ -500,7 +503,12 @@ export default {
       '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
     )
 
-    let logisticsPark = await getWdiangSearchList($axios, vo)
+    let logisticsPark = await getWdiangSearchList($axios, {
+      locationArea: vo.startArea,
+      locationCity: vo.startCity,
+      locationProvince: vo.startProvince,
+      ...vo
+    })
     //网点信息列表
     if (AF029.data.status === 200) {
       AF029.data.data.unshift({ code: '', name: '不限' })
@@ -515,10 +523,12 @@ export default {
       WangdiangInfoList: WangdiangInfoList.list,
       pages: WangdiangInfoList.pages,
       recommendList: recommendList,
-      vo: vo
+      vo: vo,
+      companyName: query.companyName || ''
     }
   },
   mounted() {
+    this.companyName = this.$route.query.companyName || ''
     seajs.use(['/js/gaodemap2.js'])
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
@@ -627,7 +637,9 @@ export default {
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
         this.startCity
-      }&startProvince=${this.startProvince}&pos=${pos}&address=${address}`
+      }&startProvince=${
+        this.startProvince
+      }&pos=${pos}&address=${address}&parkId=${this.parkId || ''}`
     },
     //品牌
     AF029Click(item) {
@@ -641,6 +653,7 @@ export default {
     },
     addTitle(item) {
       this.parkName = item.parkName
+      this.parkId = item.id
     },
     //园区
     async seachlist() {
@@ -651,7 +664,13 @@ export default {
       this.vo.startProvince = list1[0] ? list1[0] : ''
       this.vo.startCity = list1[1] ? list1[1] : ''
       this.vo.startArea = list1[2] ? list1[2] : ''
-      this.logisticsPark = await getWdiangSearchList(this.$axios, this.vo)
+      this.logisticsPark = await getWdiangSearchList(this.$axios, {
+        locationArea: this.vo.startArea,
+        locationCity: this.vo.startCity,
+        locationProvince: this.vo.startProvince,
+        ...this.vo
+      })
+      console.log(this.logisticsPark, 'logisticsPark')
     },
     pagination() {
       console.log('this.pages:', this.pages)

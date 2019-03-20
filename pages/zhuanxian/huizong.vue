@@ -1469,7 +1469,13 @@
       </ul>    
     </div>
     <div class="grid_c1 groom_login">
-      adgasdg
+      <div class="groom_submit clearfix">
+        <input 
+          type="text" 
+          placeholder="请输入您的手机号"
+          class="fl">
+        <button class="fl">帮我推荐</button>
+      </div>
     </div>
     <!-- 帮我推荐 -->
   </div>
@@ -1586,6 +1592,25 @@ export default {
 }
 /*帮我推荐提交*/
 @mixin groom_submit() {
+  > input {
+    outline: none;
+    text-indent: 10px;
+    width: 170px;
+    height: 40px;
+    line-height: 40px;
+    font-size: $f_14;
+    border: 1px solid $border_color;
+  }
+  > button {
+    outline: none;
+    width: 78px;
+    height: 42px;
+    line-height: 42px;
+    border: none;
+    color: $white;
+    background: $green;
+    cursor: pointer;
+  }
 }
 .grid_c1 {
   margin: 0 auto;
@@ -1646,25 +1671,7 @@ export default {
       line-height: 20px;
     }
     .groom_submit {
-      > input {
-        outline: none;
-        text-indent: 10px;
-        width: 170px;
-        height: 40px;
-        line-height: 40px;
-        font-size: $f_14;
-        border: 1px solid $border_color;
-      }
-      > button {
-        outline: none;
-        width: 78px;
-        height: 42px;
-        line-height: 42px;
-        border: none;
-        color: $white;
-        background: $green;
-        cursor: pointer;
-      }
+      @include groom_submit;
     }
     .error {
       margin-top: 5px;
@@ -2004,14 +2011,14 @@ export default {
     }
     .type_box {
       overflow: hidden;
-      @include type_box($f_14);
+      @include type_box($f_13);
       .item {
         b {
           font-size: $f_16;
         }
       }
       .color_gray {
-        font-size: $f_13;
+        // font-size: $f_13;
         color: $tit_color;
       }
       .icon_list {

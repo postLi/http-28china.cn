@@ -174,7 +174,7 @@ export default {
         companyId: params.id,
         pageSize: 10,
         currentPage: 1,
-        address: (query.startp || '') + (query.startc || '')
+        belongCityName: (query.startp || '') + (query.startc || '')
       })
     ])
   }

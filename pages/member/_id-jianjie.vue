@@ -5,7 +5,7 @@
       <MemberSidebar />
       <div class="right main_nr">
         <div class="nr_bt">
-          <div class="nr_bt1"><span>公坸简介</span></div>
+          <div class="nr_bt1"><span>公司简介</span></div>
         </div>	
         <div 
           id="nr083" 

@@ -281,20 +281,21 @@
                 style="vertical-align: middle;"><span>发布日期：{{ linedataA.createTime }} </span></li>
               <li
                 style="padding-left: 26px;cursor:pointer"
-               
+                @click="openColl('detail')"
               >
                 <!-- v-if="isXin==false" -->
                 <img
-                
+                  v-if="!isXin"
                   src="/line/images/03sc.png"
                   alt=""
                   style="vertical-align: middle;"
                 >
-                <!-- <img
+                <img
+                  v-else
                   src="../../static/line/images/xin.png"
                   alt=""
                   style="vertical-align: middle;width:20px"
-                > -->
+                >
                 <span>收藏量:{{ linedataA.collectNumber }}</span>
               </li>
             </ul>
@@ -413,11 +414,16 @@
                 readonly=""
                 value="进入官网"></a>
             <!--<span>{{ linedataB.id }}</span>-->
-            <a><input
+            <a 
+              style="border:1px solid #ccc;padding:5px 30px"
+              @click="openColl('comany')"><span>收藏</span></a>
+              <!-- <span style="padding:5px;border:1px solid #ccc">收藏</span> -->
+           
+              <!-- <a><input
               id="collection_wlgs"
               readonly=""
               value="收藏"
-            ></a>
+            ></a> -->
           </p>
           <p class="arc_right06">
             <span>相关认证</span>
@@ -956,19 +962,31 @@ import {
   getCity,
   parseTime
 } from '~/components/commonJs.js'
-// import { AFLC_VALID } from '~/static/js/AFLC_API.js'
-// import { AFLC_VALID } from '/js/AFLC_API'
 import ShowPrice from './showPrice'
 import ShowEchart from './showEchart'
 import FooterLinks from '../../components/footerLinks'
-// async function echartInfo($axios, rangeId) {
-//   let res = await $axios.post('/28-web/range/getRangePriceReference/' + rangeId)
-//   console.log(res, 'res')
-//   // if (res.data.status === 200) {
-//   //   return res.data.data.list
-//   // }
-// }
 
+async function getDetailColl(
+  $axios,
+  transportRangeId,
+  access_token,
+  user_token,
+  handle
+) {
+  let res = await $axios.post(
+    `/28-web/collect/transportRange?access_token=${access_token}&user_token=${user_token}&transportRangeId=${transportRangeId}&handle=${handle}
+`
+  )
+  console.log(res, 'ress-getDetailColl')
+  if (res.data.status === 200) {
+    return {
+      data: res.data
+    }
+  } else {
+    // return { list: [], pages: 0, currentPage: 1 }
+  }
+  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
+}
 export default {
   name: 'Index',
   components: {
@@ -998,6 +1016,8 @@ export default {
   data() {
     return {
       dataInfo: {},
+      isDetailColl: false,
+      isComanyColl: false,
       isAdd: false,
       isTit: false,
       showMoblie: false,
@@ -1085,13 +1105,7 @@ export default {
       startc = linedataA.data.data.startCity
       startp = linedataA.data.data.startProvince
     }
-    let [
-      linedataB,
-      linedataE,
-      linedataF,
-      linedataG,
-      linedataH
-    ] = await Promise.all([
+    let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
       $axios.post(
         aurl +
@@ -1110,15 +1124,6 @@ export default {
         endProvince: endp,
         endCity: endc,
         endArea: enda
-      }),
-      $axios.post(aurl + `/28-web/collect/transportRange`, {
-        startProvince: startp,
-        startCity: startc,
-        startArea: starta,
-        endProvince: endp,
-        endCity: endc,
-        endArea: enda,
-        transportRangeId: query.id
       })
     ])
 
@@ -1153,6 +1158,7 @@ export default {
       LineeEInfo = await $axios.post(
         aurl + '/28-web/range/getRangePriceReference/' + linedataA.data.data.id
       )
+
       // allServiceNameList:   allServiceCodeList    所有服务codes
 
       LineCAnother.data.data =
@@ -1237,6 +1243,7 @@ export default {
       //   'infopj11',
       //   aurl + `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}`
       // )
+
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
@@ -1255,54 +1262,9 @@ export default {
     } else {
       error({ statusCode: 500, message: '查找不到该专线信息' })
     }
-    // let res = await $axios.get(aurl + `/28-web/range/${query.id}`)
-    // // console.log(
-    // //   `/28-web/range/${query.id}`,
-    // //   'res',
-    // //   res.data,
-    // //   res.data.data.endLocation
-    // // )
-    // if (res.data.status === 200) {
-    //   // this.linedata = res.data.data
-    //   lineCode = await getCode($axios, res.data.data.endProvince)
-    //   lineCity = await getCity($axios, lineCode, res.data.data.startCity)
-    //   res.data.data.num = Math.ceil(Math.random() * 30)
-    //   console.log(
-    //     res.data.data,
-    //     'res.data.data.serverQualityScore',
-    //     lineCity.data.data
-    //   )
-    //   return {
-    //     linedata: res.data.data,
-    //     lineCitys: lineCity.data.data
-    //   }
-    // }
   },
   mounted() {
-    // console.log(this.linedataA, 'this.linedataA')
-    // let aurl = ''
-
-    // let transportRangeId = this.$route.query.id
-    // // // 操作：collect收藏；cancelCollect取消收藏
-    // let handle = 'check'
-    // // console.log(this.$route.query.id, 'this.$route')
-    // let access_token = $.cookie('access_token')
-    // let user_token = $.cookie('user_token')
-    // //         let user_token = 'eyJpZCI6IjExMDU0Mzc4MjU3MzU1ODk4ODgiLCJ1c2VybmFtZSI6IjE3NjIwOTI0MjYzIiwidXNlcnR5cGUiOiJhZmxjLTUiLCJjaGFubmFsIjoibW9iaWxlX2xvZ2luIiwiYWNjZXNzVG9rZW4iOiIkMmEkMTAkeFRvcmlCZnhjSmY0OTdSdmF0R2U0Li5aVXNneUlmbGlpbHYwRWtKODlzRDB1eVBrLmpGMWkiLCJuYW1lIjoi5rW36b6f54mp5rWBIiwibGdDb21wYW55SWQiOiIxMTA1NDM3ODI1NzM1NTg5ODg4IiwiY3VycmVudFRpbWUiOjE1NTI1NDc1MzcxNTN9
-    // // '
-    // let colletcNum = $axios.post(
-    //   aurl +
-    //     `/28-web/collect/transportRange?access_token=` +
-    //     access_token +
-    //     '&user_token=' +
-    //     user_token +
-    //     '&transportRangeId=' +
-    //     transportRangeId +
-    //     '&handle=' +
-    //     handle
-    // )
-    // console.log(colletcNum, 'colletcNum')
-    // console.log(this.$route.query.id, 'id')
+    this.collnum()
     if (process.client) {
       seajs.use(['/layer/layer.js'], function() {
         seajs.use(
@@ -2152,26 +2114,22 @@ export default {
         symbolSize: 20
       }
     },
-
-    openCollectNumber(item) {
-      console.log(item, 'item')
-      // alert('')
-      // console.log(this.linedataA, 'this.linedataA2')
+    collAxios(item, access_token, user_token, handle) {
       let aurl = ''
-
-      let transportRangeId = this.$route.query.id
-      // // 操作：collect收藏；cancelCollect取消收藏
-      let handle = 'collect'
-      // console.log(this.$route.query.id, 'this.$route')
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
-      let ulr = ''
-      console.log(access_token, 'access_token && user_token')
-      if (access_token && user_token) {
-        if (item == 'detail') {
-          ulr =
-            aurl +
-            '/28-web/collect/company?access_token=' +
+      let isurl = ''
+      if (item == 'detail') {
+        isurl = '/28-web/collect/transportRange'
+      } else if (item == 'comany') {
+        isurl = '/28-web/collect/company'
+      } else {
+        isurl = '/28-web/collect/company'
+        handle = 'check'
+      }
+      this.$axios
+        .post(
+          aurl +
+            isurl +
+            '?access_token=' +
             access_token +
             '&user_token=' +
             user_token +
@@ -2179,8 +2137,61 @@ export default {
             transportRangeId +
             '&handle=' +
             handle
-        } else {
-          ulr =
+        )
+        .then(res => {
+          if (res.data.status === 200) {
+            layer.msg('订阅成功')
+            if (item == 'detail') {
+              this.isXin = true
+            }
+            // this.isXin = true
+          }
+          if (res.data.errorInfo) {
+            layer.msg(res.data.errorInfo)
+          }
+        })
+        .catch(err => {
+          console.log('提交捕获异常', err)
+        })
+    },
+    collnum() {
+      let access_token = $.cookie('access_token') || ''
+      let user_token = $.cookie('user_token') || ''
+      let aurl = ''
+      let isurl = ''
+      let transportRangeId = this.$route.query.id
+      // // 操作：collect收藏；cancelCollect取消收藏
+      console.log(access_token, 'access_token')
+      let handle = 'check'
+      if (access_token && user_token) {
+        getDetailColl(
+          this.$axios,
+          this.$route.query.id,
+          access_token,
+          user_token,
+          handle
+        ).then(res => {
+          console.log(res, 'res方法')
+        })
+      }
+    },
+    openColl(item) {
+      console.log(item, 'item')
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      let aurl = ''
+      let isurl = ''
+      let transportRangeId = this.$route.query.id
+      // // 操作：collect收藏；cancelCollect取消收藏
+      let handle = 'collect'
+      // console.log(this.$route.query.id, 'this.$route')
+      if (access_token && user_token) {
+        if (item == 'detail') {
+          let transportRangeId = this.$route.query.id
+          if (this.isDetailColl == true) {
+            handle = 'cancelCollec'
+          }
+          isurl =
             '/28-web/collect/transportRange?access_token=' +
             access_token +
             '&user_token=' +
@@ -2189,14 +2200,35 @@ export default {
             transportRangeId +
             '&handle=' +
             handle
+        } else {
+          let companyId = this.$route.query.publishId
+          if (this.isComanyColl == true) {
+            handle = 'cancelCollec'
+          }
+          isurl =
+            '/28-web/collect/company?access_token=' +
+            access_token +
+            '&user_token=' +
+            user_token +
+            '&companyId =' +
+            companyId +
+            '&handle=' +
+            handle
         }
-        // detail
         this.$axios
-          .post(ulr)
+          .post(aurl + isurl)
           .then(res => {
             if (res.data.status === 200) {
-              layer.msg('订阅成功')
-              this.isXin = true
+              console.log(res.data.data, '收藏成功')
+              layer.msg('收藏成功')
+              if (item == 'detail') {
+                this.isXin = true
+                this.isDetailColl = true
+              }
+              if (item == 'comany') {
+                this.isComanyColl = true
+              }
+              // this.isXin = true
             }
             if (res.data.errorInfo) {
               layer.msg(res.data.errorInfo)
@@ -2205,13 +2237,16 @@ export default {
           .catch(err => {
             console.log('提交捕获异常', err)
           })
+        // alert('')
+        //collect/company
+        // this.isMobile = true
+        // this.mobile = this.hyDetail.mobile
       } else {
-        // this.isShowAdd = true
-        // this.getCity()
-        // window.open('http://127.0.0.1:3000/login')
+        // this.isMobile = false
+        $('.login_box').show()
+        $('.login_box_mask').show()
       }
     },
-
     getCity() {
       this.dataInfo.startProvince = this.linedataA.startProvince
       this.dataInfo.startCity = this.linedataA.startCity

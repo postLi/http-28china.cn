@@ -112,7 +112,7 @@
                 style="padding-top: 10px;font-size:16px; padding-left: 10px;">
                 <div><span
                   class="rem_bot_b_title"
-                  style="color:#333">{{ item.companyName.length>10?item.companyName.substring(10)+'..':item.companyName }}</span>
+                  style="color:#333">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
                   <img
                     src="../../static/gongsi/images/04tuijian.png"
                     alt=""></div>

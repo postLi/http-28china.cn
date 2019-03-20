@@ -1716,7 +1716,9 @@ table tr:nth-child(odd){
 }
 .arc_toptitle h1{
   text-align: center;
-  padding: 30px;
+  /* padding: 30px; */
+  height: 105px;
+  line-height: 105px;
   color: #fff;
   font-size: 34px;
   margin-left: -135px;

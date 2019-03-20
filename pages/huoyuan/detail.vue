@@ -38,8 +38,8 @@
           :href="/member/ + hyDetail.lgCompanyId">公司官网</a><a :href="/member/ + hyDetail.lgCompanyId + '-line'">专线信息</a></li>
         <li><a  
           style="float:left" 
-          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a><a  
-        :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
+          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a>
+        <a :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
         <li/>
       </ul>
     </div>
@@ -851,6 +851,7 @@ export default {
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
+  layout: 'subLayout',
   data() {
     return {
       showMoblie: false,
@@ -1221,7 +1222,6 @@ export default {
       }
       if (l < 8) {
         this.isShowMessge = true
-        // console.log(this.hyDetail.startProvince, l, 'dfasfa')
         let obj = {
           startProvince: this.hyDetail.startProvince
             ? this.hyDetail.startProvince
@@ -1238,7 +1238,6 @@ export default {
           .post('/28-web/lclOrder/list', obj)
           .then(res => {
             this.dataset = res.data.data.list
-            // console.log(res.data.data.list, '999999999999as')
           })
           .catch(err => {
             console.log('huoComprehensives4:', err)
@@ -1272,10 +1271,10 @@ export default {
       }
     }
   },
-  destroyed() {
-    clearInterval(this.inTerVar)
-    this.inTerVar = null
-  },
+  // destroyed() {
+  //   clearInterval(this.inTerVar)
+  //   this.inTerVar = null
+  // },
   methods: {
     showMoblieFn() {
       let access_token = $.cookie('access_token')

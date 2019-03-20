@@ -26,12 +26,12 @@
     </div>
     <div class="arc_toptitle">
       <h1
-        v-if="hyDetail.shipperType === 'AF0010102' || hyDetail.shipperType === 'AF0010103'"
+        v-if="hyDetail.archivalType === '3'"
       >{{ hyDetail.companyName }}</h1>
       <h1 v-else>货源详情</h1>
       <ul 
         class="two_tltle" 
-        v-if="hyDetail.companyName">
+        v-if="hyDetail.archivalType === '3'">
         <li/>
         <li><a 
           style="float:left"
@@ -194,7 +194,7 @@
 
       </div>
       <div 
-        v-if="archival.isOpenLgc === '1'" 
+        v-if="archival.archivalType === '3'" 
         class="arc_right">
         <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
         <p
@@ -266,7 +266,7 @@
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010101'">
+        v-if="archival.archivalType === '1'">
         <div class="arc_top_title">
           <h4>货主档案</h4>
         </div>
@@ -304,7 +304,7 @@
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010102' || archival.shipperType === 'AF0010103'">
+        v-if="archival.archivalType === '2'">
         <div class="arc_top_title">
           <h4>{{ archival.companyName }}</h4>
         </div>

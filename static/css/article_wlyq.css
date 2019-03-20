@@ -152,7 +152,7 @@ cursor: pointer;
 	float: left;
 	overflow: hidden;	
 }
-.wlzx_list img{transition: 0.7s;}
+.wlzx_list img{transition: 0.7s;vertical-align: middle;}
 .wlzx_list img:hover{transform: scale(1.05);}
 .wlzx_list_1{
 	width: 150px;
@@ -189,7 +189,14 @@ cursor: pointer;
 .wlzx_list_2 p{height: 26px; line-height: 26px;}
 .wlzx_list_2 .p1{margin-bottom: 3px;}
 .wlzx_list_2 .p1 a{color: #333333;font-size: 16px;font-weight: normal;}
-.wlzx_list_2 .p1  font{color: #333;font-weight:bold;font-size: 14px;}
+.wlzx_list_2 .p1  font{color: #333;font-weight:bold;font-size: 14px;
+display: inline-block;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 25em;
+vertical-align: middle;
+}
 .wlzx_list_2 .p2  font{font-size: 14px;padding-left: 5px;}
 .wlzx_list_2 .p3 font,.wlzx_list_2 .p4  font{color: #333;font-size: 14px;}
 .wlzx_list_2 .p3 i,.wlzx_list_2 .p4  i{color: #666;font-size: 14px;padding-left: 0px;}
@@ -486,8 +493,8 @@ border:0;
 .wlzx_list_2 .p2 a{color: #333;font-size: 14px;}
 .wlzx_list_2 .p2{position: relative;}
 .wlzx_list_2 .p2 img{position: absolute;left: 105px;top: 3px;}
-.wlzx_list_3 p{line-height: 30px;}
-.wlzx_list_3 .p1{margin-top: 35px;}
+.wlzx_list_3 p{line-height: 25px;}
+.wlzx_list_3 .p1{margin-top: 10px;height: auto;}
 .wlzx_list_3 p i{color: #666;}
 .wlzx_list_6 .p1{margin-top: 20px;margin-bottom: 22px;}
 

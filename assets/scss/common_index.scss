@@ -1,0 +1,654 @@
+//公共颜色的变量
+$tit_color: #333; //标题颜色
+$border_color: #ddd; //边框的颜色
+$line_color: #eee; //分割线的颜色
+$gray: #666;
+$light_gray: #999;
+$light_Violet: #c8b6e0; //淡紫色
+$blue: #3399ff; //蓝色
+$yellow:#eeb653;
+$light_blue:#e1edff;
+$orange: #f9552a;
+$light_orange: #f7722a;
+$white: #fff;
+$light_green:#46cf74;
+$green: #3cb46d;
+$deep_green:#3cb46d;
+$red: #ff0000;
+$light_red: #f65050; //浅红色
+$light_violet: #9966cc; //紫色
+/*小图标颜色*/
+$icon_blue:#4494f6;
+$icon_red: #e46167;
+/*公共的背景色*/
+$bj_gray:#f5f5f7; 
+/*公共的变量*/
+$w_1440: 1440px;
+$f_20:20px;
+$f_18:18px;
+$f_16: 16px;
+$f_14: 14px;
+$f_13: 13px;
+$f_12: 12px;
+/*公共函数*/ 
+/*重货，轻货函数*/ 
+@mixin type_box($f){  
+        clear: both;
+      font-size: $f;
+      color: $tit_color;
+      .item {
+        padding-left: 5px;
+        color: $tit_color;
+        b {
+          font-weight: normal;
+          color: $orange;
+        }
+      }
+      .line-through {
+        text-decoration: line-through;
+    }
+    .color_gray{
+      color:$gray;
+    }
+
+}
+/*公共清楚浮动方法*/
+.m_t10{margin-top:10px;}
+.p_10{ padding: 10px;}
+.fl {
+    float: left;
+  }
+.fr {
+    float: right;
+  }
+  .clearfix:after {
+    content: '.';
+    clear: both;
+    height: 0;
+    overflow: hidden;
+    visibility: hidden;
+    display: block;
+  }
+  .clearfix {
+    zoom: 1;
+  }
+  /*背景颜色*/
+  .bj_1 {
+    box-sizing: border-box;
+    background: $light_Violet;
+  }
+  .bj_2 {
+    overflow: hidden;
+    background: $white;
+    // height: 440px;
+  } 
+
+  /**********公共标题****************/
+.p_title {
+    padding: 25px 0;
+    font-size: 25px;
+    color: $tit_color;
+  }
+.p_title_box {
+    overflow: hidden;
+    padding: 25px 0;
+    line-height: 25px;
+    .title {
+      @extend .p_title;
+      @extend .fl;
+      padding: 0;
+    }
+    .text {
+      @extend .fl;
+      padding-left: 25px;
+      font-size: $f_16;
+      color: $light_gray;
+    }
+    .link{
+      .iconfont{
+        padding-left: 5px;
+        color: $green;
+      }
+    }
+  }
+.p_subtitle {
+    margin: 20px;
+    line-height: 25px;
+    font-size: $f_18;
+    color: $tit_color;
+    .iconfont {
+      padding-right: 5px;
+      font-size: $f_20;
+    }
+  } 
+  /*********分类导航***************/
+.p_category_menu {
+  padding: 10px 0;
+  .category_menu_title {
+    padding-left: 20px;
+    color: $tit_color;
+    font-size:$f_16;
+  }
+  .category_menu_list {
+    padding-left: 20px;
+    display: table;
+    word-spacing: -1em;
+    .item {
+      display: inline-block;
+      margin: 15px 0 0 0;
+      width: 50px;
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+}
+/*************登录*****************/
+/*用户登录*/
+.p_user_login {
+  margin: 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $border_color;
+  .user_pic {
+    overflow: hidden;
+    margin: 0 auto;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border-radius: 50%;
+    text-align: center;
+    background: #ddd;
+  }
+  .user_show {
+    .user_tip {
+      overflow: hidden;
+      line-height: 20px;
+      width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .user_profit {
+      padding: 10px 0 0 50px;
+      a {
+        display: inline-block;
+        margin: 0 5px;
+        width: 70px;
+        height: 25px;
+        line-height: 25px;
+        text-align: center;
+        color: $blue;
+        border: 1px solid $blue;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}  
+/****************货主列表**********/ 
+.p_owner_list {
+  li {
+    &:first-child {
+      margin: 0;
+    }
+    @extend .fl;
+    margin-left: 20px;
+    width: 272px;
+    .owner_info {
+      box-sizing: border-box;
+      margin-top: 15px;
+      > p {
+        padding: 3px 0;
+        display: block;
+        overflow: hidden;
+      }
+    }
+  }
+  .owner_pic {
+    overflow: hidden;
+    width: 272px;
+    height: 195px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .owner_name {
+    color: $blue;
+    span {
+      .iconfont {
+        padding-right: 5px;
+      }
+      float: right;
+      color: $orange;
+      font-size: $f_14;
+    }
+  }
+  .owner_total {
+    color: $tit_color;
+    span {
+      font-size: 17px;
+      font-weight: bold;
+      color: $orange;
+    }
+  }
+  .owner_info {
+    .owner_num {
+      color: $light_gray;
+    }
+  }
+}
+/********物流规格列表*************/
+.p_hy_list {
+  > li {
+    overflow: hidden;
+    @extend .fl;
+    margin: 0 20px 20px 0;
+    padding: 10px;
+    width: 246px;
+    height: 109px;
+    background-color: #dfecff;
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right top,
+      from(#f3f9ff),
+      to(#dfecff)
+    );
+    background: linear-gradient(90deg, #f3f9ff, #dfecff);
+    border: 1px solid $border_color;
+    a{
+      .joint-label{color: $light_gray;}
+      .type_box{
+        >span{color: $tit_color;}
+      }
+    }
+    .hd_box {
+      font-size: 12px;
+      .label_provider {
+        color: $light_gray;
+      }
+      .provider {
+        padding: 0 10px;
+        color: $tit_color;
+      }
+      .sure {
+        padding: 0 5px;
+        color: $white;
+        background: $light_red;
+      }
+    }
+    .md_box {
+      height: 54px;
+      line-height: 54px;
+      white-space: nowrap;
+      > div,
+      span {
+        display: inline-block;
+      }
+      .city {
+        max-width: 80px;
+        color: $tit_color;
+        font-size: 16px;
+        line-height: 18px;
+        vertical-align: middle;
+      }
+      .city-joint {
+        color: $light_gray;
+        font-size: 12px;
+        line-height: 18px;
+        height: 18px;
+      }
+      .joint-line {
+        display: inline-block;
+        background-color: $light_gray;
+        width: 10px;
+        height: 1px;
+        vertical-align: middle;
+      }
+      .joint-label {
+        padding: 0 4px;
+      }
+    }
+    .type_box {
+      @include type_box($f_12);
+      .time {
+        @extend .fr;
+        padding: 0 3px;
+        background: $white;
+        border: 1px solid $green;
+      }
+    }
+  }
+}
+/************最新货源************/
+.p_hy_info {
+  margin: 35px auto;
+  width: $w_1440;
+  height: 115px;
+  font-size: $f_14;
+  color: $tit_color;
+  background: $white;
+  .col1 {
+    margin: 25px 0 0 25px;
+    width: 830px;
+    height: 62px;
+  }
+  .tit_box {
+    width: 140px;
+    height: 58px;
+    border: 2px solid $orange;
+    > h3 {
+      margin-top: 15px;
+      margin-left: -2px;
+      width: 144px;
+      line-height: 25px;
+      font-size: 20px;
+      color: $orange;
+      text-align: center;
+      background: $white;
+    }
+  }
+  .info_user_box {
+    overflow: hidden;
+    margin-left: 50px;
+    width: 510px;
+    height: 60px;
+    .info_user_list {
+      overflow: hidden;
+      height: 60px;
+      // background-color: #bbb;
+    }
+    .info_user {
+      margin-bottom: 15px;
+      line-height: 22px;
+      .user {
+        margin-right: 40px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .time {
+        color: $light_gray;
+      }
+    }
+    .info_text {
+      line-height: 22px;
+      > span {
+        padding-right: 10px;
+        b {
+          font-weight: normal;
+          color: $blue;
+        }
+      }
+      .link {
+        font-size: 16px;
+        color: $blue;
+      }
+    }
+  }
+  .col2 {
+    margin-top: 10px;
+    height: 100px;
+  }
+  .hy_info_box {
+    height: 100px;
+    border-left: 1px dashed #ddd;
+  }
+  .hy_info_list {
+    overflow: hidden;
+    height: 60px;
+    > li {
+      @extend .fl;
+      margin-left: 45px;
+      width: 85px;
+      line-height: 30px;
+      > span {
+        display: block;
+        line-height: 30px;
+        text-align: center;
+        .iconfont {
+          color: $light_orange;
+          padding-right: 10px;
+        }
+        &.info_num {
+          font-weight: bold;
+          color: $light_orange;
+        }
+      }
+    }
+  }
+  .info_text_list {
+    margin-left: 45px;
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+    > li {
+      @extend .fl;
+      margin-right: 10px;
+      .iconfont {
+        color: $light_orange;
+      }
+      .num {
+        padding-left: 5px;
+        color: $light_orange;
+      }
+    }
+  }
+}
+/***********货源推荐************/
+.p_hy_groom {
+  margin: 0 auto 30px auto;
+  width: $w_1440;
+  font-size: $f_14;
+  .hd {
+    line-height: 40px;
+  }
+  .gr_tit {
+    @extend .fl;
+    color: $tit_color;
+    font-size: 25px;
+  }
+  .gr_text {
+    @extend .fl;
+    margin-left: 25px;
+    font-size: 16px;
+    color: $light_gray;
+    > span {
+      color: $orange;
+    }
+  }
+  .gr_sch {
+    @extend .fl;
+    margin-left: 115px;
+    width: 510px;
+    height: 38px;
+    line-height: 38px;
+    background: $white;
+    border: 1px solid $green;
+    .city_box,
+    .icon_box,
+    .btn_box {
+      @extend .fl;
+    }
+    .city_box {
+      position: relative;
+      padding-left: 10px;
+      width: 190px;
+      > input {
+        border: 0;
+      }
+    }
+    .icon_box {
+      width: 45px;
+      .iconfont {
+        font-size: 20px;
+      }
+    }
+    .btn_box {
+      width: 65px;
+      color: $white;
+      > a {
+        display: block;
+        width: 65px;
+        color: $white;
+        text-align: center;
+        background: $green;
+        cursor: pointer;
+      }
+    }
+  }
+  .link_hy {
+    @extend .fr;
+    line-height: 40px;
+    .iconfont {
+      padding-left: 5px;
+      font-size: 14px;
+      color: $green;
+    }
+  }
+  .link_type {
+    padding: 20px 0;
+    > a {
+      font-size: 16px;
+      color: $light_gray;
+      padding-right: 35px;
+    }
+  }
+}
+/*********发布求车信息**********/
+.p_release {
+  margin: 0 auto;
+  padding: 50px 0;
+  width: $w_1440;
+  font-size: $f_14;
+  .hd {
+    overflow: hidden;
+    margin: 0 auto;
+    width: 450px;
+    .text_box {
+      @extend .fl;
+      width: 230px;
+      .tit {
+        font-size: 25px;
+        color: $green;
+      }
+    }
+    .btn_release {
+      @extend .fr;
+      margin-top: 10px;
+      width: 190px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 20px;
+      color: $white;
+      font-weight: bold;
+      text-align: center;
+      background: $green;
+      border-radius: 5px;
+    }
+  }
+  .bd {
+    margin: 30px auto 0 auto;
+    display: table;
+    word-spacing: -1em;
+    width: 450px;
+    font-size: 16px;
+    line-height: 20px;
+    color: $tit_color;
+    > span {
+      display: inline-block;
+      font-size: 18px;
+      font-weight: bold;
+      margin-left: 10px;
+      &.num {
+        padding: 2px 8px;
+        color: $white;
+        background: $red;
+        font-weight: normal;
+        font-size: 20px;
+      }
+    }
+  }
+}
+/*********本月优质企业货主******/
+.p_company_owner {
+  margin: 0 auto 40px auto;
+  width: $w_1440;
+  font-size: $f_14;
+}
+.p_co_owner_list {
+  > li {
+    @extend .fl;
+    position: relative;
+    margin-right: 30px;
+    width: 264px;
+    .rank_num {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 75px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      border-radius: 10px;
+      color: $white;
+    }
+    .no1 {
+      background: $orange;
+    }
+    .no2 {
+      background: $blue;
+    }
+    .no3 {
+      background: $green;
+    }
+    .pic {
+      overflow: hidden;
+      width: 264px;
+      height: 175px;
+      margin-bottom: 10px;
+      > img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .tit {
+      overflow: hidden;
+      margin-bottom: 10px;
+      line-height: 20px;
+      font-size: 16px;
+      color: $blue;
+      .icon_tuijian {
+        @extend .fr;
+        padding: 0 4px;
+        font-size: $f_12;
+        color: $white;
+        background: $green;
+      }
+    }
+    .groom {
+      overflow: hidden;
+      margin-bottom: 10px;
+      line-height: 20px;
+      > span {
+        @extend .fl;
+        &.name {
+          padding-right: 20px;
+          color: $gray;
+        }
+        &.star {
+          width: 66px;
+          height: 20px;
+          background: url('../../static/images/huizong/u708.png') no-repeat
+            center;
+        }
+      }
+    }
+    .praise {
+      color: $light_gray;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}

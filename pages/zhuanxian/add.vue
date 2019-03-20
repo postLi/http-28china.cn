@@ -100,7 +100,6 @@
   </LllDialog>
 </template>
 <script>
-import $axios from 'axios'
 import LllDialog from '../../components/lllDialog'
 
 async function getpjLists($axios, currentPage, vo = {}, query, assessLevel) {
@@ -251,7 +250,7 @@ export default {
         this.loadPagination()
 
         //总数
-        let _data = await getpjNum($axios, this.$route.query)
+        let _data = await getpjNum(this.$axios, this.$route.query)
         this.pjNum = _data.data
         console.log(this.pjNum, 'pjnum')
         //

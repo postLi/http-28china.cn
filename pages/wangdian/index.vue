@@ -64,8 +64,7 @@
                   <input
                     name="ddd"
                     style="height: 100%;width:100%;border: none;outline: none;"
-                    data-toggle="city-picker"
-                    data-level="district"
+                    wtmap="city"
                     type="text"
                     placeholder="请输入详细地址查附近网点" >
                 </div>
@@ -277,7 +276,6 @@
         </div>
         <!--分页-->
         <div
-          v-if="WangdiangInfoList.length !== 0"
           class="box"
           style="float: right;margin-right: 170px;">
           <div
@@ -365,13 +363,13 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   let res = await $axios.post('/28-web/pointNetwork/list', parm) //车源信息列表
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
-      if (item.pointName.length > 15) {
+      if (item.pointName && item.pointName.length > 15) {
         item.pointName = item.pointName.substring(0, 15) + '...'
       }
-      if (item.companyName.length > 15) {
+      if (item.companyName && item.companyName.length > 15) {
         item.companyName = item.companyName.substring(0, 15) + '...'
       }
-      if (item.pointAddress.length > 15) {
+      if (item.pointAddress && item.pointAddress.length > 15) {
         item.pointAddress = item.pointAddress.substring(0, 15) + '...'
       }
     })
@@ -410,13 +408,7 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
-    script: [
-      { src: '/js/jquery-1.8.3.min.js' },
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
-      { src: '/js/jquery.pagination.min.js' },
-      { src: '/js/gaodemap2.js' }
-    ]
+    script: [{ src: '/js/jquery.pagination.min.js' }]
   },
   data() {
     return {
@@ -518,11 +510,13 @@ export default {
       AF025: AF025.data.status === 200 ? AF025.data.data : [],
       logisticsPark: logisticsPark,
       WangdiangInfoList: WangdiangInfoList.list,
+      pages: WangdiangInfoList.pages,
       recommendList: recommendList,
       vo: vo
     }
   },
   mounted() {
+    seajs.use(['/js/gaodemap2.js'])
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
@@ -583,11 +577,7 @@ export default {
       city: this.vo.startCity,
       district: this.vo.startArea
     })
-    $('#addressTo input').citypicker({
-      province: this.endProvince,
-      city: this.endCity,
-      district: this.endArea
-    })
+
     this.pagination()
   },
   methods: {
@@ -645,6 +635,7 @@ export default {
       this.logisticsPark = await getWdiangSearchList(this.$axios, this.vo)
     },
     pagination() {
+      console.log('this.pages:', this.pages)
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,

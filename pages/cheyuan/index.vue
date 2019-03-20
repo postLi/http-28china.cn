@@ -441,7 +441,6 @@
 </template>
 
 <script>
-import $axios from 'axios'
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -516,20 +515,24 @@ export default {
       carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
       carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
       carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
-      endArea: query.endArea ? query.endArea : '',
-      endCity: query.endCity ? query.endCity : '',
-      endProvince: query.endProvince ? query.endProvince : '',
-      startArea: query.startArea ? query.startArea : '',
-      startCity: query.startCity
-        ? query.startCity
-        : query.startCity === ''
-          ? ''
-          : areaData.currentAreaFullName,
-      startProvince: query.startProvince
-        ? query.startProvince
-        : query.startProvince === ''
-          ? ''
-          : areaData.currentProvinceFullName
+      endArea: query.endArea || query.enda ? query.endArea || query.enda : '',
+      endCity: query.endCity || query.endc ? query.endCity || query.endc : '',
+      endProvince:
+        query.endProvince || query.endp ? query.endProvince || query.endp : '',
+      startArea:
+        query.startArea || query.starta ? query.startArea || query.starta : '',
+      startCity:
+        query.startCity || query.startc
+          ? query.startCity || query.startc
+          : query.startCity === ''
+            ? ''
+            : areaData.currentAreaFullName,
+      startProvince:
+        query.startProvince || query.startp
+          ? query.startProvince || query.startp
+          : query.startProvince === ''
+            ? ''
+            : areaData.currentProvinceFullName
     }
     // 获取物流公司列表
     let vor = Object.assign({ pageSize: 10 }, vo)
@@ -571,20 +574,24 @@ export default {
       carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
       carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
       carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
-      endArea: query.endArea ? query.endArea : '',
-      endCity: query.endCity ? query.endCity : '',
-      endProvince: query.endProvince ? query.endProvince : '',
-      startArea: query.startArea ? query.startArea : '',
-      startCity: query.startCity
-        ? query.startCity
-        : query.startCity === ''
-          ? ''
-          : areaData.currentAreaFullName,
-      startProvince: query.startProvince
-        ? query.startProvince
-        : query.startProvince === ''
-          ? ''
-          : areaData.currentProvinceFullName
+      endArea: query.endArea || query.enda ? query.endArea || query.enda : '',
+      endCity: query.endCity || query.endc ? query.endCity || query.endc : '',
+      endProvince:
+        query.endProvince || query.endp ? query.endProvince || query.endp : '',
+      startArea:
+        query.startArea || query.starta ? query.startArea || query.starta : '',
+      startCity:
+        query.startCity || query.startc
+          ? query.startCity || query.startc
+          : query.startCity === ''
+            ? ''
+            : areaData.currentAreaFullName,
+      startProvince:
+        query.startProvince || query.startp
+          ? query.startProvince || query.startp
+          : query.startProvince === ''
+            ? ''
+            : areaData.currentProvinceFullName
     }
     let AF018 = await $axios.get(
       '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
@@ -776,8 +783,8 @@ export default {
         this.checkNotice.endAddres != '' &&
         this.checkNotice.phone != ''
       ) {
-        $axios
-          .post('/api/28-web/helpFind/carInfo/create', obj)
+        this.$axios
+          .post('/28-web/helpFind/carInfo/create', obj)
           .then(res => {
             if (res.status) {
               layer.msg('提交成功，客服稍后将会与您联系')

@@ -686,25 +686,25 @@ export default {
     if (query.AF03802Id) {
       AF03802Id = query.AF03802Id
     }
-    if (query.endArea) {
-      endArea = query.endArea
+    if (query.endArea || query.enda) {
+      endArea = query.endArea || query.enda
     }
-    if (query.endCity) {
-      endCity = query.endCity
+    if (query.endCity || query.endc) {
+      endCity = query.endCity || query.endc
     }
-    if (query.endProvince) {
-      endProvince = query.endProvince
+    if (query.endProvince || query.endp) {
+      endProvince = query.endProvince || query.endp
     }
-    if (query.startArea) {
-      startArea = query.startArea
+    if (query.startArea || query.starta) {
+      startArea = query.startArea || query.starta
     }
-    if (query.startCity) {
-      startCity = query.startCity
+    if (query.startCity || query.startc) {
+      startCity = query.startCity || query.startc
     } else {
       startCity = app.$cookies.get('currentAreaFullName')
     }
-    if (query.startProvince) {
-      startProvince = query.startProvince
+    if (query.startProvince || query.startp) {
+      startProvince = query.startProvince || query.startp
     } else {
       startProvince = app.$cookies.get('currentProvinceFullName')
     }

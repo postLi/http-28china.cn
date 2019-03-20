@@ -1389,9 +1389,9 @@ export default {
       this.isCencelCollect = true
       this.isShowCollect = false
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/carInfo?access_token=' +
+            '/28-web/collect/carInfo?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
@@ -1421,9 +1421,9 @@ export default {
       this.isCencelCollect = false
       this.isShowCollect = true
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/carInfo?access_token=' +
+            '/28-web/collect/carInfo?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
@@ -1451,9 +1451,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,

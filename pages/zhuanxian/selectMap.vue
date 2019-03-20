@@ -125,8 +125,6 @@
 </template>
 
 <script>
-import $axios from 'axios'
-
 export default {
   name: 'SelectMap',
   props: {
@@ -203,7 +201,7 @@ export default {
           this.isTit = false
           let aurl = ''
 
-          $axios
+          this.$axios
             .post(aurl + '/28-web/helpFind/range/create', this.form)
             .then(res => {
               // console.log(res.data, 'resresres')

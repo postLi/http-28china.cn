@@ -98,7 +98,6 @@
   </LllDialog>
 </template>
 <script>
-import $axios from 'axios'
 import LllDialog from '../../components/lllDialog'
 export default {
   name: 'Add',
@@ -152,9 +151,7 @@ export default {
   methods: {
     onTIJ() {
       let aurl = ''
-      if (process.server) {
-        aurl = 'http://localhost:3000'
-      }
+
       if (!this.form.companyName.length) {
         this.ismobile = true
         this.falseMsg = '请输入公司名称'
@@ -188,11 +185,11 @@ export default {
         this.form.source = 2
       }
       // console.log(this.form, 'this.form')
-      $axios
+      this.$axios
         .post(
           // /leavingmsg/
           // 插入物流公司留言信息表信息
-          aurl + '/api/28-web/leavingmsg/',
+          aurl + '/28-web/leavingmsg/',
           this.form
         )
         .then(res => {

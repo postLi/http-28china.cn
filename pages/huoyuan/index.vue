@@ -48,8 +48,9 @@
                   style="position:relative;" >
                   <input
                     name="cfd"
-                    style="height: 100%;width:100%;border: none;outline: none;"
-                    wtmap="city"
+                    style="height: 100%;"
+                    data-toggle="city-picker"
+                    data-level="district"
                     type="text"
                     placeholder="请输入出发地" >
                 </div>
@@ -62,8 +63,9 @@
                   style="position:relative" >
                   <input
                     name="ddd"
-                    style="height: 100%;width:100%;border: none;outline: none;"
-                    wtmap="city"
+                    style="height: 100%;"
+                    data-toggle="city-picker"
+                    data-level="district"
                     type="text"
                     placeholder="请输入到达地" >
                 </div>
@@ -608,13 +610,10 @@ export default {
     Add
   },
   head: {
-    link: [
-      { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/WTMap.css' }
-    ],
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
-      // { src: './js/city-picker.data.js' },
-      // { src: './js/city-picker.js' },
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
       { src: './js/jquery.pagination.min.js' }
     ]
   },
@@ -803,7 +802,6 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['/js/gaodemap2.js'])
     console.log('hyList:', this.hyList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
@@ -868,17 +866,16 @@ export default {
           '货源信息'
       )
     }
-    // $('#HuoyuanTo input').attr(thestreet)
-    // $('#HuoyuanFrom input').citypicker({
-    //   province: this.startProvince,
-    //   city: this.startCity,
-    //   district: this.startArea
-    // })
-    // $('#HuoyuanTo input').citypicker({
-    //   province: this.endProvince,
-    //   city: this.endCity,
-    //   district: this.endArea
-    // })
+    $('#HuoyuanFrom input').citypicker({
+      province: this.startProvince,
+      city: this.startCity,
+      district: this.startArea
+    })
+    $('#HuoyuanTo input').citypicker({
+      province: this.endProvince,
+      city: this.endCity,
+      district: this.endArea
+    })
     // $('#from1 input').citypicker({
     //   province: this.startProvince,
     //   city: this.startCity,
@@ -1210,7 +1207,7 @@ body {
 
 .list_input {
   width: 161px;
-  /* height: 32px; */
+  height: 32px;
   border-radius: 2px;
   border: solid 1px #e5e5e5;
   background: none;

@@ -40,7 +40,7 @@
         <div class="groom">
           <h4 class="groom_tit">帮我推荐</h4>
           <div class="groom_explain">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</div>
-          <div class="groom_submit clearfix">
+          <div class="p_groom_submit clearfix">
             <input 
               type="text" 
               placeholder="请输入您的手机号"
@@ -70,36 +70,36 @@
         <div class="pt_groom fl">
           <ul class="hd clearfix active_green">
             <li class="channel1 active"> 
-              <h6 class="tit">担保交易</h6>
-              <div class="explain">
+              <h6 class="pt_groom_tit">担保交易</h6>
+              <div class="pt_groom_explain">
                 平台担保，安全可靠
-                <span class="line"/>
+                <span class="pt_groom_line"/>
               </div>
-              <div class="img"><img src="../../static/images/huizong/banner02.jpg"></div>
+              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
             </li>
             <li class="channel2">
-              <h6 class="tit">超值特惠</h6>
-              <div class="explain">
+              <h6 class="pt_groom_tit">超值特惠</h6>
+              <div class="pt_groom_explain">
                 价格直降，超值独享
-                <span class="line"/>
+                <span class="pt_groom_line"/>
               </div>
-              <div class="img"><img src="../../static/images/huizong/banner02.jpg"></div>
+              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
             </li>
             <li class="channel3">
-              <h6 class="tit">精准时效</h6>
-              <div class="explain">
+              <h6 class="pt_groom_tit">精准时效</h6>
+              <div class="pt_groom_explain">
                 及时、高效、保质量
-                <span class="line"/>
+                <span class="pt_groom_line"/>
               </div>
-              <div class="img"><img src="../../static/images/huizong/banner02.jpg"></div>
+              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
             </li>
             <li class="channel4">
-              <h6 class="tit">28信用</h6>
-              <div class="explain">
+              <h6 class="pt_groom_tit">28信用</h6>
+              <div class="pt_groom_explain">
                 平台认证，推荐专线
-                <span class="line"/>
+                <span class="pt_groom_line"/>
               </div>
-              <div class="img"><img src="../../static/images/huizong/banner02.jpg"></div>
+              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
             </li>
           </ul>
           <div class="bd">
@@ -279,75 +279,76 @@
     </div>
     <!-- 平台推荐 -->
     <div class="p_hy_info clearfix">
-      <div class="col1 fl clearfix">
-        <div class="tit_box fl">
+      <div class="hy_info_col1 fl clearfix">
+        <div class="hy_info_tit fl">
           <h3>最新成交用户</h3>
         </div>
-        <div class="info_user_box fl">
-          <ul class="info_user_list">
+        <div class="hy_info_user_box fl">
+          <ul class="hy_info_user_list">
             <li>
-              <div class="info_user">
-                <span class="user">11用户159****4895 </span>
-                <span class="time">3分钟前</span>
+              <div class="hy_info_user_info">
+                <span class="hy_info_user_info_user">11用户159****4895 </span>
+                <span class="hy_info_user_info_time">3分钟前</span>
               </div>
-              <div class="info_text ">
-                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+              <div class="hy_info_user_text ">
+                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="link fr">查看货源</a>
+                  class="hy_info_user_text_link fr">查看货源</a>
               </div>
             </li>
             <li>
-              <div class="info_user">
-                <span class="user">22用户159****4895 </span>
-                <span class="time">3分钟前</span>
+              <div class="hy_info_user_info">
+                <span class="hy_info_user_info_user">22用户159****4895 </span>
+                <span class="hy_info_user_info_time">3分钟前</span>
               </div>
-              <div class="info_text ">
-                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+              <div class="hy_info_user_text ">
+                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="link fr">查看货源</a>
+                  class="hy_info_user_text_link fr">查看货源</a>
               </div>
             </li>
             <li>
-              <div class="info_user">
-                <span class="user">333用户159****4895 </span>
-                <span class="time">3分钟前</span>
+              <div class="hy_info_user_info">
+                <span class="hy_info_user_info_user">33用户159****4895 </span>
+                <span class="hy_info_user_info_time">3分钟前</span>
               </div>
-              <div class="info_text ">
-                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+              <div class="hy_info_user_text ">
+                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="link fr">查看货源</a>
+                  class="hy_info_user_text_link fr">查看货源</a>
               </div>
             </li>
+   
           </ul>
         </div>
       </div>
-      <div class="col2 fl clearfix">
-        <div class="hy_info_box">
+      <div class="hy_info_col2 fl clearfix">
+        <div class="hy_info_num">
           <ul class="hy_info_list clearfix">
             <li>
-              <span class="info_tit"><i class="iconfont iconhuowu"/>当前货物</span>
-              <span class="info_num">229089</span>
+              <span><i class="iconfont iconhuowu"/>当前货物</span>
+              <span class="hy_info_list_num">229089</span>
             </li>
             <li>
-              <span class="info_tit"><i class="iconfont iconwangfandijia"/>物流专线</span>
-              <span class="info_num">229089</span>
+              <span><i class="iconfont iconwangfandijia"/>物流专线</span>
+              <span class="hy_info_list_num">229089</span>
             </li>
             <li>
-              <span class="info_tit"><i class="iconfont iconwuliu"/>当前货物</span>
-              <span class="info_num">45646</span>
+              <span><i class="iconfont iconwuliu"/>当前货物</span>
+              <span class="hy_info_list_num">45646</span>
             </li>
           </ul>
-          <ul class="info_text_list">
+          <ul class="hy_info_text_list">
             <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
-            <li>货源<span class="num">8951</span></li>
-            <li>专线<span class="num">854</span></li>
-            <li>车源<span class="num">8011</span></li>
+            <li>货源<span class="hy_info_text_num">8951</span></li>
+            <li>专线<span class="hy_info_text_num">854</span></li>
+            <li>车源<span class="hy_info_text_num">8011</span></li>
           </ul>
         </div>
       </div>
@@ -1140,344 +1141,556 @@
       </div>
     </div>
     <!-- 热门专线 -->
-    <div class="p_release">
-      <div class="bd">
-        <span class="text">平台已撮合</span>
-        <span class="num">5</span>
-        <span class="num">3</span>
-        <span class="num">8</span>
-        <span class="num">8</span>
-        <span class="num">2</span>
-        <span class="text">货源达成交易</span>
+    <div class="p_release order_release">
+      <div class="release_total">
+        <span class="release_total_txt">平台已撮合</span>
+        <span class="release_total_num">5</span>
+        <span class="release_total_num">3</span>
+        <span class="release_total_num">8</span>
+        <span class="release_total_num">8</span>
+        <span class="release_total_num">2</span>
+        <span class="release_total_txt">货源达成交易</span>
       </div>
       <div class="btn_box">
-        <a href="">快速下单</a>
+        <a 
+          href=""
+          class="btn_release">快速下单</a>
       </div>
-      <p class="explain">一键下单，运力30秒快速响应</p>
+      <p class="release_total_explain">一键下单，运力30秒快速响应</p>
     </div>
     <!-- 快速下单 -->
-    <div class="grid_c1 drop_groom clearfix">    
-      <div class="p_title_box">
-        <h3 class="title">降价专线推荐</h3>
-        <span class="text">距结束<b>3</b>天15时<b>23</b>分<b>17</b>秒</span>
-        <a 
-          href="" 
-          class="link fr">全部专线<i class="iconfont iconjiantou2"/>
-        </a>         
+    <div class="bj_2">
+      <div class="grid_c1 drop_groom clearfix">    
+        <div class="p_title_box">
+          <h3 class="title">降价专线推荐</h3>
+          <span class="text">距结束<b>3</b>天15时<b>23</b>分<b>17</b>秒</span>
+          <a 
+            href="" 
+            class="link fr">全部专线<i class="iconfont iconjiantou2"/>
+          </a>         
+        </div>
+        <ul class="p_hot_line clearfix">
+          <li>
+            <div class="h_operate">
+              <a 
+                href="" 
+                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+              <a 
+                href=""
+                class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
+            </div>
+            <div class="h_pic">        
+              <img src="../../static/images/huizong/_img01.png">
+            </div>
+            <div class="wl_box">
+              <div class="h_place">
+                <span class="icon icon_start">始</span>
+                <span class="place">广州市天河区</span>
+                <span class="icon icon_end">终</span>
+                <span class="place">上海黄浦区</span>
+              </div>
+              <div class="h_company">
+                <div class="name fl">速递物流公司</div>
+                <div class="icon_box fl">
+                  <span class="icon"/>
+                  <span class="icon"/>
+                  <span class="icon"/>
+                </div>
+                <span class="fr icon_qq"/>
+              </div>
+              <div class="h_praise">
+                <div class="fl"><span>好评</span>158</div>
+                <div class="fl"><span>浏览量</span>586</div>
+              </div>
+              <div class="h_type m_t10">
+                <span class="icon_sale">7.8折</span>
+                <div class="type_box">
+                  <span class="name">货重:</span>
+                  <span class="item"><b>1.37</b></span>
+                  <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
+                </div>
+                <div class="type_box">
+                  <span class="name">轻货:</span>
+                  <span class="item"><b>107</b></span>
+                  <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="h_operate">
+              <a 
+                href="" 
+                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+              <a 
+                href=""
+                class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
+            </div>
+            <div class="h_pic">        
+              <img src="../../static/images/huizong/_img01.png">
+            </div>
+            <div class="wl_box">
+              <div class="h_place">
+                <span class="icon icon_start">始</span>
+                <span class="place">广州市天河区</span>
+                <span class="icon icon_end">终</span>
+                <span class="place">上海黄浦区</span>
+              </div>
+              <div class="h_company">
+                <div class="name fl">速递物流公司</div>
+                <div class="icon_box fl">
+                  <span class="icon"/>
+                  <span class="icon"/>
+                  <span class="icon"/>
+                </div>
+                <span class="fr icon_qq"/>
+              </div>
+              <div class="h_praise">
+                <div class="fl"><span>好评</span>158</div>
+                <div class="fl"><span>浏览量</span>586</div>
+              </div>
+              <div class="h_type m_t10">
+                <span class="icon_sale">7.8折</span>
+                <div class="type_box">
+                  <span class="name">货重:</span>
+                  <span class="item"><b>1.37</b></span>
+                  <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
+                </div>
+                <div class="type_box">
+                  <span class="name">轻货:</span>
+                  <span class="item"><b>107</b></span>
+                  <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="h_operate">
+              <a 
+                href="" 
+                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+              <a 
+                href=""
+                class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
+            </div>
+            <div class="h_pic">        
+              <img src="../../static/images/huizong/_img01.png">
+            </div>
+            <div class="wl_box">
+              <div class="h_place">
+                <span class="icon icon_start">始</span>
+                <span class="place">广州市天河区</span>
+                <span class="icon icon_end">终</span>
+                <span class="place">上海黄浦区</span>
+              </div>
+              <div class="h_company">
+                <div class="name fl">速递物流公司</div>
+                <div class="icon_box fl">
+                  <span class="icon"/>
+                  <span class="icon"/>
+                  <span class="icon"/>
+                </div>
+                <span class="fr icon_qq"/>
+              </div>
+              <div class="h_praise">
+                <div class="fl"><span>好评</span>158</div>
+                <div class="fl"><span>浏览量</span>586</div>
+              </div>
+              <div class="h_type m_t10">
+                <span class="icon_sale">7.8折</span>
+                <div class="type_box">
+                  <span class="name">货重:</span>
+                  <span class="item"><b>1.37</b></span>
+                  <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
+                </div>
+                <div class="type_box">
+                  <span class="name">轻货:</span>
+                  <span class="item"><b>107</b></span>
+                  <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="h_operate">
+              <a 
+                href="" 
+                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+              <a 
+                href=""
+                class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
+            </div>
+            <div class="h_pic">        
+              <img src="../../static/images/huizong/_img01.png">
+            </div>
+            <div class="wl_box">
+              <div class="h_place">
+                <span class="icon icon_start">始</span>
+                <span class="place">广州市天河区</span>
+                <span class="icon icon_end">终</span>
+                <span class="place">上海黄浦区</span>
+              </div>
+              <div class="h_company">
+                <div class="name fl">速递物流公司</div>
+                <div class="icon_box fl">
+                  <span class="icon"/>
+                  <span class="icon"/>
+                  <span class="icon"/>
+                </div>
+                <span class="fr icon_qq"/>
+              </div>
+              <div class="h_praise">
+                <div class="fl"><span>好评</span>158</div>
+                <div class="fl"><span>浏览量</span>586</div>
+              </div>
+              <div class="h_type m_t10">
+                <span class="icon_sale">7.8折</span>
+                <div class="type_box">
+                  <span class="name">货重:</span>
+                  <span class="item"><b>1.37</b></span>
+                  <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
+                </div>
+                <div class="type_box">
+                  <span class="name">轻货:</span>
+                  <span class="item"><b>107</b></span>
+                  <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="h_operate">
+              <a 
+                href="" 
+                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+              <a 
+                href=""
+                class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
+            </div>
+            <div class="h_pic">        
+              <img src="../../static/images/huizong/_img01.png">
+            </div>
+            <div class="wl_box">
+              <div class="h_place">
+                <span class="icon icon_start">始</span>
+                <span class="place">广州市天河区</span>
+                <span class="icon icon_end">终</span>
+                <span class="place">上海黄浦区</span>
+              </div>
+              <div class="h_company">
+                <div class="name fl">速递物流公司</div>
+                <div class="icon_box fl">
+                  <span class="icon"/>
+                  <span class="icon"/>
+                  <span class="icon"/>
+                </div>
+                <span class="fr icon_qq"/>
+              </div>
+              <div class="h_praise">
+                <div class="fl"><span>好评</span>158</div>
+                <div class="fl"><span>浏览量</span>586</div>
+              </div>
+              <div class="h_type m_t10">
+                <span class="icon_sale">7.8折</span>
+                <div class="type_box">
+                  <span class="name">货重:</span>
+                  <span class="item"><b>1.37</b></span>
+                  <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
+                </div>
+                <div class="type_box">
+                  <span class="name">轻货:</span>
+                  <span class="item"><b>107</b></span>
+                  <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
       </div>
-      <ul class="p_hot_line clearfix">
-        <li>
-          <div class="h_operate">
-            <a 
-              href="" 
-              class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            <a 
-              href=""
-              class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-          </div>
-          <div class="h_pic">        
-            <img src="../../static/images/huizong/_img01.png">
-          </div>
-          <div class="wl_box">
-            <div class="h_place">
-              <span class="icon icon_start">始</span>
-              <span class="place">广州市天河区</span>
-              <span class="icon icon_end">终</span>
-              <span class="place">上海黄浦区</span>
-            </div>
-            <div class="h_company">
-              <div class="name fl">速递物流公司</div>
-              <div class="icon_box fl">
-                <span class="icon"/>
-                <span class="icon"/>
-                <span class="icon"/>
-              </div>
-              <span class="fr icon_qq"/>
-            </div>
-            <div class="h_praise">
-              <div class="fl"><span>好评</span>158</div>
-              <div class="fl"><span>浏览量</span>586</div>
-            </div>
-            <div class="h_type m_t10">
-              <span class="icon_sale">7.8折</span>
-              <div class="type_box">
-                <span class="name">货重:</span>
-                <span class="item"><b>1.37</b></span>
-                <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
-              </div>
-              <div class="type_box">
-                <span class="name">轻货:</span>
-                <span class="item"><b>107</b></span>
-                <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="h_operate">
-            <a 
-              href="" 
-              class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            <a 
-              href=""
-              class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-          </div>
-          <div class="h_pic">        
-            <img src="../../static/images/huizong/_img01.png">
-          </div>
-          <div class="wl_box">
-            <div class="h_place">
-              <span class="icon icon_start">始</span>
-              <span class="place">广州市天河区</span>
-              <span class="icon icon_end">终</span>
-              <span class="place">上海黄浦区</span>
-            </div>
-            <div class="h_company">
-              <div class="name fl">速递物流公司</div>
-              <div class="icon_box fl">
-                <span class="icon"/>
-                <span class="icon"/>
-                <span class="icon"/>
-              </div>
-              <span class="fr icon_qq"/>
-            </div>
-            <div class="h_praise">
-              <div class="fl"><span>好评</span>158</div>
-              <div class="fl"><span>浏览量</span>586</div>
-            </div>
-            <div class="h_type m_t10">
-              <span class="icon_sale">7.8折</span>
-              <div class="type_box">
-                <span class="name">货重:</span>
-                <span class="item"><b>1.37</b></span>
-                <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
-              </div>
-              <div class="type_box">
-                <span class="name">轻货:</span>
-                <span class="item"><b>107</b></span>
-                <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="h_operate">
-            <a 
-              href="" 
-              class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            <a 
-              href=""
-              class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-          </div>
-          <div class="h_pic">        
-            <img src="../../static/images/huizong/_img01.png">
-          </div>
-          <div class="wl_box">
-            <div class="h_place">
-              <span class="icon icon_start">始</span>
-              <span class="place">广州市天河区</span>
-              <span class="icon icon_end">终</span>
-              <span class="place">上海黄浦区</span>
-            </div>
-            <div class="h_company">
-              <div class="name fl">速递物流公司</div>
-              <div class="icon_box fl">
-                <span class="icon"/>
-                <span class="icon"/>
-                <span class="icon"/>
-              </div>
-              <span class="fr icon_qq"/>
-            </div>
-            <div class="h_praise">
-              <div class="fl"><span>好评</span>158</div>
-              <div class="fl"><span>浏览量</span>586</div>
-            </div>
-            <div class="h_type m_t10">
-              <span class="icon_sale">7.8折</span>
-              <div class="type_box">
-                <span class="name">货重:</span>
-                <span class="item"><b>1.37</b></span>
-                <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
-              </div>
-              <div class="type_box">
-                <span class="name">轻货:</span>
-                <span class="item"><b>107</b></span>
-                <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="h_operate">
-            <a 
-              href="" 
-              class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            <a 
-              href=""
-              class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-          </div>
-          <div class="h_pic">        
-            <img src="../../static/images/huizong/_img01.png">
-          </div>
-          <div class="wl_box">
-            <div class="h_place">
-              <span class="icon icon_start">始</span>
-              <span class="place">广州市天河区</span>
-              <span class="icon icon_end">终</span>
-              <span class="place">上海黄浦区</span>
-            </div>
-            <div class="h_company">
-              <div class="name fl">速递物流公司</div>
-              <div class="icon_box fl">
-                <span class="icon"/>
-                <span class="icon"/>
-                <span class="icon"/>
-              </div>
-              <span class="fr icon_qq"/>
-            </div>
-            <div class="h_praise">
-              <div class="fl"><span>好评</span>158</div>
-              <div class="fl"><span>浏览量</span>586</div>
-            </div>
-            <div class="h_type m_t10">
-              <span class="icon_sale">7.8折</span>
-              <div class="type_box">
-                <span class="name">货重:</span>
-                <span class="item"><b>1.37</b></span>
-                <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
-              </div>
-              <div class="type_box">
-                <span class="name">轻货:</span>
-                <span class="item"><b>107</b></span>
-                <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
-              </div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="h_operate">
-            <a 
-              href="" 
-              class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            <a 
-              href=""
-              class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-          </div>
-          <div class="h_pic">        
-            <img src="../../static/images/huizong/_img01.png">
-          </div>
-          <div class="wl_box">
-            <div class="h_place">
-              <span class="icon icon_start">始</span>
-              <span class="place">广州市天河区</span>
-              <span class="icon icon_end">终</span>
-              <span class="place">上海黄浦区</span>
-            </div>
-            <div class="h_company">
-              <div class="name fl">速递物流公司</div>
-              <div class="icon_box fl">
-                <span class="icon"/>
-                <span class="icon"/>
-                <span class="icon"/>
-              </div>
-              <span class="fr icon_qq"/>
-            </div>
-            <div class="h_praise">
-              <div class="fl"><span>好评</span>158</div>
-              <div class="fl"><span>浏览量</span>586</div>
-            </div>
-            <div class="h_type m_t10">
-              <span class="icon_sale">7.8折</span>
-              <div class="type_box">
-                <span class="name">货重:</span>
-                <span class="item"><b>1.37</b></span>
-                <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
-              </div>
-              <div class="type_box">
-                <span class="name">轻货:</span>
-                <span class="item"><b>107</b></span>
-                <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
-              </div>
-            </div>
-          </div>
-        </li>
-      </ul>
     </div>
     <!-- 降价专线推荐 -->
-    <div class="p_release drop_release">
-      <div class="hd">
-        <div class="text_box fl">
-          <h3 class="tit">我也要降价发布</h3>
-          更多曝光机会，让更多货主联系您
-        </div>
-        <div class="btn_box fr">
-          <a href="">快速发布专线</a>
+    <div class="bj_2">
+      <div class="p_release drop_release">
+        <div class="release_box">
+          <div class="release_box_txt fl">
+            <h3 class="release_box_txt_tit">我也要降价发布</h3>
+            更多曝光机会，让更多货主联系您
+          </div>
+          <div class="btn_box fr">
+            <a 
+              href=""
+              class="btn_release">快速发布专线</a>
+          </div>
         </div>
       </div>
     </div>
     <!-- 降价发布 -->
+    <div class="bj_2">
+      <div class="p_company_owner">
+        <div class="p_title_box">
+          <h3 class="title">本月优质企业货主</h3>
+          <span class="text">稳定货源，好评率高</span>
+        </div>  
+        <ul class="p_co_owner_list clearfix">
+          <li>
+            <a href="">
+              <div class="rank_num no1">NO.I</div>
+              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
+              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="rank_num no2">NO.2</div>
+              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
+              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="rank_num no3">NO.3</div>
+              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
+              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
+              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="pic"><img src="../../static/images/huizong/_img01.png"></div>
+              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
+              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="praise">好评率98.2%</div>
+            </a>
+          </li>
+        </ul>    
+      </div> 
+    </div>  
     <!-- 本月优质承运 -->
-    <div class="p_company_owner">
-      <div class="p_title_box">
-        <h3 class="title">本月优质企业货主</h3>
-        <span class="text">稳定货源，好评率高</span>
-      </div>  
-      <ul class="p_co_owner_list clearfix">
-        <li>
-          <a href="">
-            <div class="rank_num no1">NO.I</div>
-            <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-            <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-            <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-            <div class="praise">好评率98.2%</div>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <div class="rank_num no2">NO.2</div>
-            <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-            <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-            <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-            <div class="praise">好评率98.2%</div>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <div class="rank_num no3">NO.3</div>
-            <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-            <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-            <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-            <div class="praise">好评率98.2%</div>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-            <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-            <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-            <div class="praise">好评率98.2%</div>
-          </a>
-        </li>
-        <li>
-          <a href="">
-            <div class="pic"><img src="../../static/images/huizong/_img01.png"></div>
-            <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-            <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-            <div class="praise">好评率98.2%</div>
-          </a>
-        </li>
-      </ul>    
-    </div>
     <div class="grid_c1 groom_login">
-      <div class="groom_submit clearfix">
-        <input 
-          type="text" 
-          placeholder="请输入您的手机号"
-          class="fl">
-        <button class="fl">帮我推荐</button>
+      <div class="groom_box">
+        <div class="p_groom_submit clearfix">
+          <input 
+            type="text" 
+            placeholder="请输入您的手机号"
+            class="fl">
+          <button class="fl">帮我推荐</button>
+          <span class="error">请输入正确的手机号</span>
+        </div>
+        <p class="explain">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</p>
       </div>
     </div>
     <!-- 帮我推荐 -->
+    <div class="bj_2">
+      <div class="grid_c1 shipper_say">
+        <h3 class="p_title">3800万用户的共同选择！</h3>
+        <div class="shipper-say_title clearfix">
+          <img 
+            src="../../static/images/zhuanxian/icon_index.png" 
+            class="shipper-say_title-icon" 
+            alt="">
+          <span class="shipper-say_title-word">货主说</span>
+          <img 
+            src="../../static/images/zhuanxian/icon_index.png" 
+            class="shipper-say_title-icon" 
+            alt="">
+          <a 
+            href="" 
+            class="fr btn_small">我有话要说</a>
+        </div>
+        <ul class="shipper_say_content clearfix">
+          <li class="shipper_say_item ">
+            <a href="">
+              <img 
+                src="../../static/images/zhuanxian/_shiper.png" 
+                class="shipper_say_img" 
+                alt="">
+              <div class="shipper_say-word_box js-shipper_say-word_box">
+                <p class="shipper_say_name">货主：意先生</p>
+                <p class="shipper_say_name">马自达6：7.40万元</p> 
+                <p class="shipper_say_des">因为有了娃所以想换一辆B级车，当我看到这台马自达6时，当即感觉就是它！复检时发现这辆车可能调过表，人人车的工作人员帮我核实了4S店保养记录，最终安心入手，真的很给力！</p> 
+                <div class="shipper_say_mask js-shipper_say_mask"/> 
+              </div>
+            </a>
+          </li>
+          <li class="shipper_say_item shipper_say-item_middle">
+            <a href="">
+              <img 
+                src="../../static/images/zhuanxian/_shiper.png" 
+                class="shipper_say_img" 
+                alt="">
+              <div class="shipper_say-word_box js-shipper_say-word_box">
+                <p class="shipper_say_name">货主：意先生</p>
+                <p class="shipper_say_name">马自达6：7.40万元</p> 
+                <p class="shipper_say_des">因为有了娃所以想换一辆B级车，当我看到这台马自达6时，当即感觉就是它！复检时发现这辆车可能调过表，人人车的工作人员帮我核实了4S店保养记录，最终安心入手，真的很给力！</p> 
+                <div class="shipper_say_mask js-shipper_say_mask"/> 
+              </div>
+            </a>
+          </li>
+          <li class="shipper_say_item ">
+            <a href="">
+              <img 
+                src="../../static/images/zhuanxian/_shiper.png" 
+                class="shipper_say_img" 
+                alt="">
+              <div class="shipper_say-word_box js-shipper_say-word_box">
+                <p class="shipper_say_name">买家：意先生</p>
+                <p class="shipper_say_name">马自达6：7.40万元</p> 
+                <p class="shipper_say_des">因为有了娃所以想换一辆B级车，当我看到这台马自达6时，当即感觉就是它！复检时发现这辆车可能调过表，人人车的工作人员帮我核实了4S店保养记录，最终安心入手，真的很给力！</p> 
+                <div class="shipper_say_mask js-shipper_say_mask"/> 
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 货主要说 -->
+    <div class="bj_2">
+      <div class="p_our_virtue">
+        <h3 class="p_title">我们的优势</h3>
+        <ul class="our_virtue_list clearfix">
+          <li>
+            <div class="our_virtue_pic"><img src="../../static/images/huizong/u299.png"></div>
+            <h4 class="our_virtue_tit color_orange">安全保障</h4>
+            <div class="our_virtue_content">流程标准化，降低货损率；完善的理赔保障体系，小额快赔的贴心设计，为成员的每一票货物保驾护航</div>
+          
+          </li>
+          <li>
+            <div class="our_virtue_pic"><img src="../../static/images/huizong/u301.png"></div>
+            <h4 class="our_virtue_tit color_green">降本增效</h4>
+            <div class="our_virtue_content">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
+          </li>
+          <li>
+            <div class="our_virtue_pic"><img src="../../static/images/huizong/u295.png"></div>
+            <h4 class="our_virtue_tit color_blue">信息系统</h4>
+            <div class="our_virtue_content">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 我们的优势 -->
+    <div class="p_release drop_release wl_enter">
+      <div class="release_box">
+        <div class="release_box_txt fl">
+          <h3 class="release_box_txt_tit"> 快速成为承运商获取优质货源</h3>
+          能够以最快的时效最小的成本,了大量优质货源
+        </div>
+        <div class="btn_box fr">
+          <a 
+            href=""
+            class="btn_release">我要入驻</a>
+        </div>
+      </div>
+    </div> 
+    <!-- 入住 -->
+    <div class="bj_2">
+      <div class="p_answers">
+        <div class="p_title_box">
+          <h3 class="title">28问答</h3>
+          <a 
+            href="" 
+            class="answers_link">全部<i class="iconfont iconjiantou2"/>
+          </a>         
+        </div>
+        <ul class="answers_list">
+          <li>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>什么是订阅货源？</p>
+            <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
+          </li>
+          <li>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么在平台接单？</p>
+            <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
+          </li>
+          <li>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么申请成为推荐承运商</p>
+            <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
+          </li>
+          <li>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>承运商入驻需要什么材料？</p>
+            <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
+          </li>
+        </ul>
+        <div class="answers_questions">
+          <div class="answers_questions_btn">
+            <a 
+              href=""
+              class="btn_release">我要提问</a>
+          </div>
+          <p>提交您的疑问，客服将在3分钟内与您联系进行解答</p>
+        </div>
+      </div>
+    </div>
+    <!-- 28问答 -->
+    <div class="MD-home-qa-qa-area MD-home-qa-js-qa-area">
+      <div class="MD-home-qa-left">
+        <a 
+          href="" 
+          class="MD-home-qa-qa-hot qa-hot">
+          <span class="tag hot-tag">热点 &gt;</span>
+          <img 
+            class="MD-home-qa-qa-pic" 
+            src="../../static/images/zhuanxian/_rd01.jpg">
+          <img 
+            src="" 
+            class="MD-home-qa-ad-little-icon">
+          <span class="MD-home-qa-tit">10万整辆复古车，玩的就是情调</span>
+        </a>
+        <div class="MD-home-qa-qa-list">
+          <p><a 
+            href=""
+            class="MD-home-qa-list-txt">新手开车五大省油技巧 老司机带带我！</a></p>
+          <p><a 
+            href="" 
+            class="MD-home-qa-list-txt">二手车过户那些事儿！满满的干货</a></p>
+          <p><a 
+            href="" 
+            class="MD-home-qa-list-txt">重磅！北京拟自7月1日起分步实施国六排放标准</a></p>
+          <p><a 
+            href="" 
+            class="MD-home-qa-list-txt">二手车如何出售才能卖高价？</a></p>
+        </div>
+      </div>
+      <div class="MD-home-qa-right">
+        <a 
+          href="" 
+          class="MD-home-qa-click MD-home-qa-book-click">
+          <span class="tag book-tag">宝典 &gt;</span>
+          <img 
+            class="MD-home-qa-imgs" 
+            src="../../static/images/zhuanxian/_rd02.jpg">
+          <div class="MD-home-qa-right-tit">
+            <span class="MD-home-qa-right-title">十年开不坏 那些足以让修车师傅失业的车</span>
+            <span class="MD-home-qa-right-desc">十年开不坏 那些足以让修车师傅失业的车 “我最近要换车了” “你终于舍得换你那老捷达了” “也该换了，十几年了，买这车的时候，我还在上学，现在我孩子都上学了，这车还在开” “你这车还真够皮实的”</span>
+          </div>
+        </a>
+        <a 
+          href="" 
+          class="MD-home-qa-click MD-home-qa-article-click" >
+          <span class="tag tag art-tag">文章 &gt;</span>
+          <img 
+            class="MD-home-qa-imgs" 
+            src="../../static/images/zhuanxian/_rd02.jpg">
+          <div class="MD-home-qa-right-tit">
+            <span class="MD-home-qa-right-title">找一辆适合胖子开的车就这么难吗？</span>
+            <span class="MD-home-qa-right-desc">找一辆适合胖子开的车就这么难吗？</span>
+          </div>
+        </a>
+      </div>
+      <div class="clear"/>
+    </div>
+    <!-- 热点新闻 -->
   </div>
 </template>
 <script>
@@ -1538,10 +1751,10 @@ export default {
   mounted() {
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
-      $('.p_hy_info .info_user_box').Scroll({
+      $('.p_hy_info .hy_info_user_box').Scroll({
         line: 1,
-        speed: 500,
-        timer: 2000
+        speed: 600,
+        timer: 3000
       })
       // 地点插件
       $('#groom_pageinp1').citypicker()
@@ -1553,6 +1766,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import '~/assets/scss/common_index.scss';
+
 /*本页面公共的函数*/
 @mixin active_color($color) {
   background: $color;
@@ -1560,8 +1774,8 @@ export default {
     border-top: 12px solid $color;
     display: block !important;
   }
-  .tit,
-  .explain {
+  .pt_groom_tit,
+  .pt_groom_explain {
     color: $white !important;
     &:after {
       background: $white !important;
@@ -1580,18 +1794,9 @@ export default {
   height: 16px;
   background: url('../../static/images/zhuanxian/icon_huangguan.gif') no-repeat;
 }
-/*发布按钮函数*/
-@mixin btn_link($up, $w, $font) {
-  display: block;
-  padding: $up 0;
-  font-size: $font;
-  width: 150px;
-  background: $green;
-  color: $white;
-  border-radius: 3px;
-}
+
 /*帮我推荐提交*/
-@mixin groom_submit() {
+.p_groom_submit {
   > input {
     outline: none;
     text-indent: 10px;
@@ -1670,9 +1875,6 @@ export default {
       margin: 15px 0;
       line-height: 20px;
     }
-    .groom_submit {
-      @include groom_submit;
-    }
     .error {
       margin-top: 5px;
       font-size: $f_12;
@@ -1730,11 +1932,11 @@ export default {
         border-right: 12px solid transparent;
         border-top: 12px solid #f5f5f7;
       }
-      .tit {
+      .pt_groom_tit {
         margin-bottom: 5px;
         font-size: 18px;
       }
-      .explain {
+      .pt_groom_explain {
         position: relative;
         margin-bottom: 10px;
         padding-bottom: 10px;
@@ -1749,7 +1951,7 @@ export default {
           background: $green;
         }
       }
-      .img {
+      .pt_groom_img {
         overflow: hidden;
         width: 223px;
         height: 109px;
@@ -1759,35 +1961,35 @@ export default {
         }
       }
       &.channel1 {
-        .tit {
+        .pt_groom_tit {
           color: $green;
         }
       }
       &.channel2 {
-        .tit {
+        .pt_groom_tit {
           color: $blue;
         }
-        .explain {
+        .pt_groom_explain {
           &::after {
             background: $blue;
           }
         }
       }
       &.channel3 {
-        .tit {
+        .pt_groom_tit {
           color: $orange;
         }
-        .explain {
+        .pt_groom_explain {
           &::after {
             background: $orange;
           }
         }
       }
       &.channel4 {
-        .tit {
+        .pt_groom_tit {
           color: $light_violet;
         }
-        .explain {
+        .pt_groom_explain {
           &::after {
             background: $light_violet;
           }
@@ -2056,31 +2258,19 @@ export default {
   }
 }
 /*4、快速下单*/
-.p_release {
-  .bd {
+.order_release {
+  .release_total {
     margin-top: 0;
   }
   .btn_box {
-    margin: 30px 0;
+    margin: 20px 0;
     text-align: center;
     > a {
       margin: 0 auto;
-      @include btn_link(8px, 150px, 18px);
+      // @include btn_link(8px, 150px, 18px);
     }
   }
-  .link_order {
-    margin: 30px auto 20px auto;
-    display: block;
-    width: 130px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    font-size: 18px;
-    background: $green;
-    color: $white;
-    border-radius: 3px;
-  }
-  .explain {
+  .release_total_explain {
     text-align: center;
   }
 }
@@ -2096,13 +2286,276 @@ export default {
     }
   }
 }
-/*降价发布*/
+/*6、降价发布*/
 .drop_release {
   padding: 50px 0;
-  .hd {
+  .release_box {
     width: 400px;
     .btn_box {
       margin: 8px 0 0 0;
+    }
+  }
+}
+/*7、帮我推荐*/
+.groom_login {
+  padding: 50px 0;
+  .groom_box {
+    margin: 0 auto;
+    width: 320px;
+  }
+  .p_groom_submit {
+    position: relative;
+    margin-bottom: 25px;
+    > input {
+      width: 200px;
+      font-size: $f_16;
+    }
+    > button {
+      width: 100px;
+      font-size: $f_18;
+    }
+  }
+  .error {
+    position: absolute;
+    left: 0;
+    bottom: -18px;
+    width: 100%;
+    font-size: $f_12;
+    color: $red;
+    line-height: 15px;
+  }
+}
+/*8、货主说*/
+.shipper_say {
+  margin-bottom: 40px;
+  .p_title {
+    text-align: center;
+  }
+  .shipper-say_title {
+    margin: 0 auto;
+    width: 1032px;
+    text-align: center;
+    .shipper-say_title-icon {
+      display: inline-block;
+      width: 16px;
+      height: 22px;
+      vertical-align: top;
+      margin-top: 7px;
+    }
+    .shipper-say_title-word {
+      display: inline-block;
+      font-size: 22px;
+      color: rgba(0, 0, 0, 0.8);
+      margin: 0 10px 0 15px;
+    }
+    .btn_say {
+      padding: 5px 10px;
+      color: $green;
+      border: 1px solid $green;
+      border-radius: 5px;
+    }
+  }
+  .shipper_say_content {
+    margin: 50px auto 0;
+    width: 1032px;
+  }
+  .shipper_say_item:hover .shipper_say_des {
+    height: auto;
+    line-height: 35px;
+  }
+  .shipper_say_item:hover .shipper_say-word_box {
+    height: 100%;
+  }
+  .shipper_say_item:hover .shipper_say_mask {
+    display: none;
+  }
+  .shipper_say-item_middle {
+    margin: 0 20px;
+  }
+  .shipper_say_item {
+    float: left;
+    width: 330px;
+    height: 375px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.1);
+  }
+  .shipper_say_img {
+    display: block;
+    width: 330px;
+    height: 185px;
+  }
+  .shipper_say-word_box {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 330px;
+    height: 189px;
+    overflow: hidden;
+    padding: 30px 29px 0 26px;
+    transition: 0.5s;
+    background: #fff;
+    text-align: center;
+  }
+  .shipper_say_name {
+    font-size: 16px;
+    line-height: 21px;
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 5px;
+  }
+  .shipper_say_des {
+    margin-top: 35px;
+    font-size: 14px;
+    height: 37px;
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.36);
+    text-align: left;
+  }
+  .shipper_say_mask {
+    position: absolute;
+    top: 130px;
+    left: 0;
+    width: 100%;
+    height: 19px;
+    background-image: linear-gradient(rgba(255, 255, 255, 0.24), #fff);
+  }
+}
+/*9、我们的优势*/
+.p_our_virtue {
+  width: 1075px;
+}
+/*10、我要入驻*/
+.wl_enter {
+  .release_box {
+    width: 520px;
+  }
+}
+//11、28问答*/
+.p_answers {
+  .answers_questions {
+    padding: 40px 0;
+    text-align: center;
+    .answers_questions_btn {
+      margin-bottom: 10px;
+    }
+  }
+}
+//12、热点新闻*/
+.MD-home-qa-qa-area {
+  margin: 20px auto;
+  width: 1210px;
+  height: 490px;
+  font-size: $f_14;
+  .tag {
+    display: block;
+    width: 60px;
+    line-height: 30px;
+    color: #fff;
+    font-size: 16px;
+    position: absolute;
+    top: 10px;
+    left: -15px;
+    z-index: 9;
+    text-align: center;
+    background: #ddd;
+  }
+  .hot-tag {
+    background: #ff5a38;
+  }
+  .book-tag {
+    background: #389fff;
+  }
+  .art-tag {
+    background: #2ecbac;
+  }
+  .MD-home-qa-left {
+    float: left;
+    width: 480px;
+    height: 490px;
+    background: #fff;
+    transition: all 0.2s linear;
+    .MD-home-qa-qa-hot {
+      display: block;
+      width: 480px;
+      height: 320px;
+      position: relative;
+    }
+
+    .MD-home-qa-qa-pic {
+      display: block;
+      width: 100%;
+    }
+    .MD-home-qa-tit {
+      display: block;
+      width: 428px;
+      padding: 0 30px;
+      font-size: 18px;
+      color: #fff;
+      line-height: 60px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+    .MD-home-qa-qa-list {
+      padding: 12px 30px 0;
+      > {
+        p {
+          display: block;
+          padding: 6px 0;
+          line-height: 20px;
+        }
+      }
+    }
+  }
+  .MD-home-qa-right {
+    width: 680px;
+    height: 490px;
+    float: right;
+    .MD-home-qa-article-click {
+      margin-top: 30px;
+    }
+    .MD-home-qa-click {
+      width: 680px;
+      height: 230px;
+      background: #fff;
+      position: relative;
+      display: table;
+    }
+    .MD-home-qa-imgs {
+      display: block;
+      width: 245px;
+      height: 230px;
+    }
+    .MD-home-qa-right-tit {
+      display: table-cell;
+      padding: 0 30px;
+      vertical-align: middle;
+    }
+    .MD-home-qa-right-title {
+      display: block;
+      font-size: 16px;
+      color: #333;
+      margin-bottom: 15px;
+      width: 390px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .MD-home-qa-right-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 30px;
+      white-space: normal;
+      word-break: break-all;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 5;
     }
   }
 }

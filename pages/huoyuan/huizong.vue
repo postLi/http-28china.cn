@@ -170,75 +170,76 @@
     </div>
     <!-- 选择我们 -->
     <div class="p_hy_info clearfix">
-      <div class="col1 fl clearfix">
-        <div class="tit_box fl">
+      <div class="hy_info_col1 fl clearfix">
+        <div class="hy_info_tit fl">
           <h3>最新货源信息</h3>
         </div>
-        <div class="info_user_box fl">
-          <ul class="info_user_list">
+        <div class="hy_info_user_box fl">
+          <ul class="hy_info_user_list">
             <li>
-              <div class="info_user">
-                <span class="user">11用户159****4895 </span>
-                <span class="time">3分钟前</span>
+              <div class="hy_info_user_info">
+                <span class="hy_info_user_info_user">11用户159****4895 </span>
+                <span class="hy_info_user_info_time">3分钟前</span>
               </div>
-              <div class="info_text ">
-                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+              <div class="hy_info_user_text ">
+                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="link fr">查看货源</a>
+                  class="hy_info_user_text_link fr">查看货源</a>
               </div>
             </li>
             <li>
-              <div class="info_user">
-                <span class="user">22用户159****4895 </span>
-                <span class="time">3分钟前</span>
+              <div class="hy_info_user_info">
+                <span class="hy_info_user_info_user">22用户159****4895 </span>
+                <span class="hy_info_user_info_time">3分钟前</span>
               </div>
-              <div class="info_text ">
-                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+              <div class="hy_info_user_text ">
+                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="link fr">查看货源</a>
+                  class="hy_info_user_text_link fr">查看货源</a>
               </div>
             </li>
             <li>
-              <div class="info_user">
-                <span class="user">333用户159****4895 </span>
-                <span class="time">3分钟前</span>
+              <div class="hy_info_user_info">
+                <span class="hy_info_user_info_user">33用户159****4895 </span>
+                <span class="hy_info_user_info_time">3分钟前</span>
               </div>
-              <div class="info_text ">
-                <span class="item">发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span class="item">钢材| 31件|51公斤|体积21方  </span>                   
+              <div class="hy_info_user_text ">
+                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
+                <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="link fr">查看货源</a>
+                  class="hy_info_user_text_link fr">查看货源</a>
               </div>
             </li>
+   
           </ul>
         </div>
       </div>
-      <div class="col2 fl clearfix">
-        <div class="hy_info_box">
+      <div class="hy_info_col2 fl clearfix">
+        <div class="hy_info_num">
           <ul class="hy_info_list clearfix">
             <li>
-              <span class="info_tit"><i class="iconfont iconhuowu"/>当前货物</span>
-              <span class="info_num">229089</span>
+              <span><i class="iconfont iconhuowu"/>当前货物</span>
+              <span class="hy_info_list_num">229089</span>
             </li>
             <li>
-              <span class="info_tit"><i class="iconfont iconwangfandijia"/>物流专线</span>
-              <span class="info_num">229089</span>
+              <span><i class="iconfont iconwangfandijia"/>物流专线</span>
+              <span class="hy_info_list_num">229089</span>
             </li>
             <li>
-              <span class="info_tit"><i class="iconfont iconwuliu"/>当前货物</span>
-              <span class="info_num">45646</span>
+              <span><i class="iconfont iconwuliu"/>当前货物</span>
+              <span class="hy_info_list_num">45646</span>
             </li>
           </ul>
-          <ul class="info_text_list">
+          <ul class="hy_info_text_list">
             <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
-            <li>货源<span class="num">8951</span></li>
-            <li>专线<span class="num">854</span></li>
-            <li>车源<span class="num">8011</span></li>
+            <li>货源<span class="hy_info_text_num">8951</span></li>
+            <li>专线<span class="hy_info_text_num">854</span></li>
+            <li>车源<span class="hy_info_text_num">8011</span></li>
           </ul>
         </div>
       </div>
@@ -657,23 +658,24 @@
     </div>
     <!-- 货源推荐 -->
     <div class="p_release">
-      <div class="hd"><div class="text_box">
-        <h3 class="tit">让承运商主动来找我</h3>
-        快速发布货源，让承运商主动联系我，自主挑选合适承运商
-      </div>
+      <div class="release_box">
+        <div class="release_box_txt fl">
+          <h3 class="release_box_txt_tit">让承运商主动来找我</h3>
+          快速发布货源，让承运商主动联系我，自主挑选合适承运商
+        </div>
         <a
-          class="btn_release" 
+          class="btn_release fr" 
           href=""
         >发布求车信息</a>
       </div>
-      <div class="bd">
-        <span class="text">平台已撮合</span>
-        <span class="num">5</span>
-        <span class="num">3</span>
-        <span class="num">8</span>
-        <span class="num">8</span>
-        <span class="num">2</span>
-        <span class="text">货源达成交易</span>
+      <div class="release_total">
+        <span class="release_total_txt">平台已撮合</span>
+        <span class="release_total_num">5</span>
+        <span class="release_total_num">3</span>
+        <span class="release_total_num">8</span>
+        <span class="release_total_num">8</span>
+        <span class="release_total_num">2</span>
+        <span class="release_total_txt">货源达成交易</span>
       </div>
     </div>
     <!-- 发布信息 -->
@@ -740,7 +742,7 @@
     </div>
     <!-- 货量达人榜 -->
     <div class="bj_2">
-      <div class="company_owner">
+      <div class="p_company_owner">
         <div class="p_title_box">
           <h3 class="title">本月优质企业货主</h3>
           <span class="text">稳定货源，好评率高</span>
@@ -794,29 +796,29 @@
     </div>
     <!-- 本月优质企业货主 -->
     <div class="bj_2">
-      <div class="our_virtue">
-        <h3 class="p_title">选择我们，您可以</h3>
-        <ul class="virtue_list clearfix">
+      <div class="p_our_virtue">
+        <h3 class="p_title">我们的优势</h3>
+        <ul class="our_virtue_list clearfix">
           <li>
-            <div class="pic"><img src="../../static/images/huizong/u295.png"></div>
-            <h4 class="tit">海量货源</h4>
-            <div class="content">专业的项目客户团队，为成员引进更多的线上货源机会</div>
+            <div class="our_virtue_pic"><img src="../../static/images/huizong/u295.png"></div>
+            <h4 class="our_virtue_tit color_orange">海量货源</h4>
+            <div class="our_virtue_content">专业的项目客户团队，为成员引进更多的线上货源机会</div>
           </li>
           <li>
-            <div class="pic"><img src="../../static/images/huizong/u299.png"></div>
-            <h4 class="tit">安全保障</h4>
-            <div class="content">流程标准化，降低货损率；完善的理赔保障体系，小额快赔的贴心设计，为成员的每一票货物保驾护航</div>
+            <div class="our_virtue_pic"><img src="../../static/images/huizong/u299.png"></div>
+            <h4 class="our_virtue_tit color_green">安全保障</h4>
+            <div class="our_virtue_content">流程标准化，降低货损率；完善的理赔保障体系，小额快赔的贴心设计，为成员的每一票货物保驾护航</div>
           
           </li>
           <li>
-            <div class="pic"><img src="../../static/images/huizong/u301.png"></div>
-            <h4 class="tit">降本增效</h4>
-            <div class="content">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
+            <div class="our_virtue_pic"><img src="../../static/images/huizong/u301.png"></div>
+            <h4 class="our_virtue_tit color_blue">降本增效</h4>
+            <div class="our_virtue_content">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
           </li>
           <li>
-            <div class="pic"><img src="../../static/images/huizong/u295.png"></div>
-            <h4 class="tit">信息系统</h4>
-            <div class="content">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
+            <div class="our_virtue_pic"><img src="../../static/images/huizong/u295.png"></div>
+            <h4 class="our_virtue_tit color_violet">信息系统</h4>
+            <div class="our_virtue_content">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
           </li>
         </ul>
       </div>
@@ -897,42 +899,42 @@
     </div>
     <!-- 合作伙伴 -->
     <div class="bj_2">
-      <div class="answers">
+      <div class="p_answers">
         <div class="p_title_box">
           <h3 class="title">28问答</h3>
           <a 
             href="" 
-            class="link_answers">货源大厅<i class="iconfont iconjiantou2"/>
+            class="answers_link">货源大厅<i class="iconfont iconjiantou2"/>
           </a>         
         </div>
         <ul class="answers_list">
           <li>
-            <p class="tit"><i class="iconfont iconinformatiom_"/>什么是订阅货源？</p>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>什么是订阅货源？</p>
             <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="tit"><i class="iconfont iconinformatiom_"/>怎么在平台接单？</p>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么在平台接单？</p>
             <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="tit"><i class="iconfont iconinformatiom_"/>怎么申请成为推荐承运商</p>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么申请成为推荐承运商</p>
             <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="tit"><i class="iconfont iconinformatiom_"/>承运商入驻需要什么材料？</p>
+            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>承运商入驻需要什么材料？</p>
             <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
         </ul>
       </div>
     </div>
     <!-- 28问答 -->
-    <div class="live clearfix">
-      <div class="text_box">
-        <span class="tit">快速成为承运商获取优质货源</span>
-        <span class="phone">免费咨询电话：400-999-2828</span>
+    <div class="p_live clearfix">
+      <div class="live_txt">
+        <span class="live_txt_tit">快速成为承运商获取优质货源</span>
+        <span class="live_txt_phone">免费咨询电话：400-999-2828</span>
       </div>
       <a 
-        class="btn_live"
+        class="live_btn"
         href=""
       >我要入驻</a>
     </div>
@@ -1018,10 +1020,10 @@ export default {
       $('#sb_pageinp1').citypicker()
       $('#sb_pageinp2').citypicker()
       /* 文字滚动*/
-      $('.p_hy_info .info_user_box').Scroll({
+      $('.p_hy_info .hy_info_user_box').Scroll({
         line: 1,
-        speed: 500,
-        timer: 2000
+        speed: 600,
+        timer: 3000
       })
     })
   },
@@ -1339,7 +1341,13 @@ export default {
     }
   }
 }
-
+.p_release {
+  .release_box {
+    .release_box_txt {
+      width: 230px;
+    }
+  }
+}
 /*货量达人榜*/
 .rank_people {
   margin: 0 auto 20px auto;
@@ -1448,142 +1456,7 @@ export default {
     }
   }
 }
-/*本月优质企业货主*/
-.company_owner {
-  margin: 0 auto 40px auto;
-  width: $w_1440;
-  font-size: $f_14;
-}
-.p_co_owner_list {
-  > li {
-    @extend .fl;
-    position: relative;
-    margin-right: 30px;
-    width: 264px;
-    .rank_num {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      width: 75px;
-      height: 30px;
-      line-height: 30px;
-      text-align: center;
-      border-radius: 10px;
-      color: $white;
-    }
-    .no1 {
-      background: $orange;
-    }
-    .no2 {
-      background: $blue;
-    }
-    .no3 {
-      background: $green;
-    }
-    .pic {
-      overflow: hidden;
-      width: 264px;
-      height: 175px;
-      margin-bottom: 10px;
-      > img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .tit {
-      overflow: hidden;
-      margin-bottom: 10px;
-      line-height: 20px;
-      font-size: 16px;
-      color: $blue;
-      .icon_tuijian {
-        @extend .fr;
-        padding: 0 4px;
-        font-size: $f_12;
-        color: $white;
-        background: $green;
-      }
-    }
-    .groom {
-      overflow: hidden;
-      margin-bottom: 10px;
-      line-height: 20px;
-      > span {
-        @extend .fl;
-        &.name {
-          padding-right: 20px;
-          color: $gray;
-        }
-        &.star {
-          width: 66px;
-          height: 20px;
-          background: url('../../static/images/huizong/u708.png') no-repeat
-            center;
-        }
-      }
-    }
-    .praise {
-      color: $light_gray;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-}
-/*我们的优势*/
-.our_virtue {
-  margin: 0 auto 40px auto;
-  width: $w_1440;
-  > .title {
-    text-align: center;
-  }
-  .virtue_list {
-    > li {
-      overflow: hidden;
-      @extend .fl;
-      margin-right: 30px;
-      width: 337px;
-      height: 420px;
-      font-size: 16px;
-      background: $white;
-      border-radius: 10px;
-      &:last-child {
-        margin-right: 0;
-      }
-      &:nth-child(1) {
-        .tit {
-          color: $light_orange;
-        }
-      }
-      &:nth-child(2) {
-        .tit {
-          color: $blue;
-        }
-      }
-      &:nth-child(3) {
-        .tit {
-          color: $green;
-        }
-      }
-      &:nth-child(4) {
-        .tit {
-          color: $light_violet;
-        }
-      }
-      box-shadow: 0 0 8px #bbb;
-      .tit {
-        padding: 20px 0;
-        font-size: 30px;
-        text-align: center;
-      }
-      .content {
-        margin: 0 auto;
-        width: 200px;
-        line-height: 25px;
-      }
-    }
-  }
-}
+
 /*新手步骤*/
 .novice_steps {
   overflow: hidden;
@@ -1713,87 +1586,6 @@ export default {
         margin-top: 30px;
       }
     }
-  }
-}
-/*问答*/
-.answers {
-  margin: 0 auto;
-  width: $w_1440;
-  font-size: $f_14;
-  .p_title_box {
-    position: relative;
-    .title {
-      float: none;
-      text-align: center;
-    }
-    .link_answers {
-      position: absolute;
-      top: 25px;
-      right: 0;
-      line-height: 25px;
-      @extend .fr;
-      .iconfont {
-        padding-left: 5px;
-        font-size: $f_14;
-        color: $green;
-      }
-    }
-  }
-  .answers_list {
-    margin: 0 auto;
-    width: 1180px;
-    > li {
-      @extend .fl;
-      margin: 0 60px 60px 60px;
-      width: 470px;
-      > p {
-        line-height: 25px;
-        color: $tit_color;
-        &.tit {
-          margin-bottom: 15px;
-          line-height: 25px;
-          font-size: 18px;
-          color: $green;
-          .iconfont {
-            padding-right: 10px;
-            font-size: 25px;
-          }
-        }
-      }
-    }
-  }
-}
-/*入住*/
-.live {
-  margin: 0 auto;
-  padding: 20px 0;
-  width: 575px;
-  font-size: $f_14;
-  .text_box {
-    @extend .fl;
-    width: 365px;
-    > span {
-      display: block;
-      text-align: center;
-      &.tit {
-        margin-bottom: 10px;
-        font-size: 25px;
-        color: $green;
-        font-weight: bold;
-      }
-    }
-  }
-  .btn_live {
-    @extend .fr;
-    width: 180px;
-    height: 60px;
-    line-height: 60px;
-    font-size: 18px;
-    text-align: center;
-    font-weight: bold;
-    color: $white;
-    background: $green;
-    border-radius: 5px;
   }
 }
 </style>

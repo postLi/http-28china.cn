@@ -51,7 +51,7 @@
             <li class="wd_item05"><span 
               id="nr035" 
               :title="item.address || ''">{{ (item.address || '').replace(item.belongCityName,'') }}</span></li>
-            <li class="wd_item06"><a href="#"><input 
+            <li class="wd_item06"><a :href="'/member/' + $store.state.member.id + '-order'"><input 
               readonly 
               value="下单"></a></li>
           </ul>    		

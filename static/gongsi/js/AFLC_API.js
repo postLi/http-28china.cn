@@ -26,7 +26,7 @@ $(document).ajaxSend(function(event, jqXHR, ajaxOptions) {
 var AFWL_API = {
   // url: 'http://192.168.1.188:886/api',
   constant:{
-    LINK_MEMBER: 'http://member.28china.cn',
+    LINK_MEMBER: '/hyzx/',
     LINK_TMS: 'http://www.28tms.cn'
   },
   init: function(){
@@ -66,8 +66,8 @@ var AFWL_API = {
   setCookieData: function(data){
     // 获取域名
     var domain = location.hostname;
-    if(domain.indexOf('28china.cn')!==-1){
-      domain = '.28china.cn';
+    if(domain.indexOf('28kuaiyun.cn')!==-1){
+      domain = '.28kuaiyun.cn';
     }
     $.cookie('access_token', data.access_token,{ expires: 7,domain: domain, path: '/' });
     $.cookie('login_mobile', data.mobile,{ expires: 7,domain: domain, path: '/' });
@@ -315,7 +315,7 @@ var AFWL_API = {
     }
 
     return defer.promise(); */
-    //origin=28china&roleType=aflc-1&code=123xxasd123
+    //origin=28kuaiyun&roleType=aflc-1&code=123xxasd123
     return $.get(this.url + '/api-uaa/wx/qr/wxlogincheck',{
       origin: origin || 'AF0030105',
       roleType: userType,

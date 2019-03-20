@@ -6,8 +6,11 @@
       </div>-->
       <div class="arc_top1">
         <div class="arc_top1_1">
-          <span>{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>
-          <!--<span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>-->
+          <img
+            width="135px"
+            src="/img/logo.png" >
+            <!--<span>{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>-->
+            <!--<span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>-->
         </div>
         <div class="arc_top1_3"><a
           id="search_huo"
@@ -33,31 +36,61 @@
 
 
       </div>
-      <div class="arc_top2">
-        <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
-        <div
-          id="arc_city"
-          class="arc_top2_2">
-          <a
-            v-for="(item,index) in lineCitys"
-            v-if="index<14"
-            :key="index"
-            :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name"
-            target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
-        </div>
-        <div
-          v-if="lineCitys.length>14"
-          class="arc_top2_3"
-        ><a href="javascript:void(0)" ><span>更多+</span></a></div>
+      <div class="arc_toptitle">
+        <h1>{{ linedataB.companyName ? linedataB.companyName : '专线详情' }}</h1>
 
-        <!--更多城市-->
-        <div
-          id="city_box"
-          class="city_box"/>
+        <ul
+          class="two_tltle"
+          v-if="linedataB.companyName">
+          <li/>
+          <li><a
+            style="float:left"
+            :href="/member/ + linedataB.id">公司官网</a><a :href="/member/ + linedataB.id + '-line'">专线信息</a></li>
+          <li><a
+            style="float:left"
+            :href="/member/ + linedataB.id+ '-wangdian'">网点信息</a><a
+          :href="/member/ +linedataB.id + '-huo'">货源信息</a></li>
+          <li/>
+        </ul>
+      </div>
+
+      <div class="arc_main1">
+        <div class="arc_top2">
+          <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
+          <div
+            id="arc_city"
+            class="arc_top2_2">
+            <a
+              v-for="(item,index) in lineCitys"
+              v-if="index<14"
+              :key="index"
+              :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name"
+              target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
+          </div>
+          <div
+            v-if="lineCitys.length>14"
+            class="arc_top2_3"
+            onmouseover="$('.city_box1').css('display','block');"
+          ><a href="javascript:void(0)" ><span>更多+</span></a></div>
+          <!--更多城市-->
+          <div
+            id="city_box1"
+            class="city_box1"
+            onmouseover="$('.city_box1').css('display','block');"
+            onmouseout="$('.city_box1').css('display','none');">
+            <a
+              v-for="(item,index) in lineCitys"
+              v-if="index >= 14"
+              :key="index"><span @click="gotoHuoList($event)">{{ item.name.substring(0, 2) }}</span>
+            </a>
+          </div>
+          <!--更多城市-->
+          <!--<div-->
+          <!--id="city_box"-->
+          <!--class="city_box"/>-->
           <!-- 点击弹出效果-->
 
-      </div>
-      <div class="arc_main1">
+        </div>
         <div class="arc_left">
           <div class="arc_left_1">
             <img
@@ -414,11 +447,11 @@
                 readonly=""
                 value="进入官网"></a>
             <!--<span>{{ linedataB.id }}</span>-->
-            <a 
+            <a
               style="border:1px solid #ccc;padding:5px 30px"
               @click="openColl('comany')"><span>收藏</span></a>
               <!-- <span style="padding:5px;border:1px solid #ccc">收藏</span> -->
-           
+
               <!-- <a><input
               id="collection_wlgs"
               readonly=""
@@ -977,7 +1010,7 @@ async function getDetailColl(
     `/28-web/collect/transportRange?access_token=${access_token}&user_token=${user_token}&transportRangeId=${transportRangeId}&handle=${handle}
 `
   )
-  console.log(res, 'ress-getDetailColl')
+  // console.log(res, 'ress-getDetailColl')
   if (res.data.status === 200) {
     return {
       data: res.data
@@ -1193,7 +1226,7 @@ export default {
         : ''
       // credit
       // linedataB.data.data
-      // console.log(linedataG.data.data, 'linedataG.data.data')
+      console.log(lineCity.data.data.length, 'lineCity.lineCity')
       let authStatus = linedataB.data.data.authStatus
       let collateral = linedataB.data.data.collateral
       let isVip = linedataB.data.data.isVip
@@ -1421,6 +1454,20 @@ export default {
     }
   },
   methods: {
+    gotoHuoList(event) {
+      console.log(event, 'event')
+      let city = event.target.innerHTML + '市'
+      if (city.length > 4) {
+        city = city.substring(2, 5)
+      }
+      window.open(
+        `/zhuanxian/list?startProvince=${
+          this.linedataA.startProvince
+        }&startCity=${this.linedataA.startCity}&endProvince=${
+          this.linedataA.startProvince
+        }&endCity=${city}`
+      )
+    },
     moreFn() {
       this.addFn()
     },
@@ -2171,7 +2218,7 @@ export default {
           user_token,
           handle
         ).then(res => {
-          console.log(res, 'res方法')
+          // console.log(res, 'res方法')
         })
       }
     },
@@ -2267,27 +2314,53 @@ export default {
 
 <style lang="scss">
 .lll-zhuangXian-detail {
-  /*弹框*/
-  /*.myLayer_title {*/
-  /*text-align: center;*/
-  /*font-size: 22px;*/
-  /*font-weight: bold;*/
-  /*margin: 20px;*/
-  /*}*/
-  /*.myLayer_content {*/
-  /*margin: 20px;*/
-  /*font-size: 18px;*/
-  /*}*/
-  /*.myLayer_footer #seconds {*/
-  /*border: 1px solid #3333;*/
-  /*width: 50px;*/
-  /*height: 50px;*/
-  /*display: inline-block;*/
-  /*line-height: 50px;*/
-  /*text-align: center;*/
-  /*border-radius: 30px;*/
-  /*}*/
-  /*弹框*/
+  .arc_toptitle {
+    float: left;
+    width: 100%;
+    height: 150px;
+    background: url(/images/cy/01title.png);
+    /* position: relative; */
+    position: absolute;
+    left: 0;
+    margin-top: 25px;
+    h1 {
+      text-align: center;
+      padding: 30px;
+      color: #fff;
+      font-size: 34px;
+      margin-left: -135px;
+    }
+    .arc_top2 {
+      width: 100%;
+      min-height: 40px;
+      overflow: auto;
+      line-height: 40px;
+      margin-top: 163px;
+      /* margin-bottom: 28px; */
+      border-bottom: 2px solid #2577e3;
+      background-color: #fff;
+      padding: 10px 20px;
+      box-sizing: border-box;
+    }
+    .two_tltle {
+      color: #fff;
+      max-width: 1400px;
+      display: flex;
+      background-color: #2c4fc4;
+      margin: 15px 251px;
+      li {
+        float: left;
+        cursor: pointer;
+        flex: 1;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        a {
+          color: #fff;
+        }
+      }
+    }
+  }
   .pj_price_box {
     top: 70%;
     z-index: 1;

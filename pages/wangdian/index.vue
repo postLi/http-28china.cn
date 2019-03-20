@@ -161,7 +161,9 @@
                   <div
                     id="js010"
                     class="wlzx_yq_nr">
-                    <div class="wlzx_yq_none">
+                    <div 
+                      v-if="logisticsPark.length==0"
+                      class="wlzx_yq_none">
                       <font>暂无园区信息</font>
                     </div>
 
@@ -525,6 +527,7 @@ export default {
     }
   },
   mounted() {
+    this.companyName = this.$route.query.companyName || ''
     seajs.use(['/js/gaodemap2.js'])
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
@@ -666,6 +669,7 @@ export default {
         locationProvince: this.vo.startProvince,
         ...this.vo
       })
+      console.log(this.logisticsPark, 'logisticsPark')
     },
     pagination() {
       console.log('this.pages:', this.pages)

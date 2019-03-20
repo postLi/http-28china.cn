@@ -242,8 +242,8 @@ var code_c = myCode(startc);
 
 $("#list_nav_a1").html(startp + "零担物流专线")
 $("#list_nav_a2").html(startc + "零担物流专线")
-$("#list_nav_a1").attr("href", '/templets/default/htm/' + code_c + '.htm');
-$("#list_nav_a2").attr("href", '/templets/default/htm/' + code_c + '/' + code_c + '_1.htm');
+$("#list_nav_a1").attr("href", '/zhuanxian/' + code_c + '.htm');
+$("#list_nav_a2").attr("href", '/zhuanxian/' + code_c + '/' + code_c + '_1.htm');
 $("#list_nav_a3").html(startc + starta + " 到 " + endc + enda + " 零担物流专线")
 if ((!startc && !starta) || (!endc && !enda)) {
   $("#list_nav_a3").html(startc + starta + "  " + endc + enda + " 零担物流专线")

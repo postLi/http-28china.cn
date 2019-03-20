@@ -2205,7 +2205,7 @@ export default {
           user_token,
           handle
         ).then(res => {
-          // console.log(res, 'res方法')
+          console.log(res, 'res方法')
         })
       }
     },

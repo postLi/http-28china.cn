@@ -38,8 +38,12 @@
               </ul>
             </div>
           </div>
-          <div class="left_jianjie_bt"><span class="biaozhi"/><span>园区信息</span></div>
-          <div class="left_jianjie_nr">
+          <div 
+            class="left_jianjie_bt"
+            v-show="false"><span class="biaozhi"/><span>园区信息</span></div>
+          <div 
+            class="left_jianjie_nr"
+            v-show="false">
             <p>{{ gatewayData.parkIntroduce||'暂无园区信息' }}</p>
           </div>
         </div>
@@ -496,7 +500,7 @@ export default {
     // })
     let flag = ''
     let companysList = await $axios.get(
-      '/28-web/logisticsCompany/excellent?flag=' + flag
+      '/28-web/logisticsCompany/excellent?pageSize=5&flag=' + flag
     )
     companysList.data.data.forEach(item => {
       setCredit(item)
@@ -699,4 +703,7 @@ export default {
 </script>
 
 <style scoped>
+.left_main {
+  min-height: 420px;
+}
 </style>

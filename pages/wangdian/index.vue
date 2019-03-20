@@ -523,7 +523,8 @@ export default {
       WangdiangInfoList: WangdiangInfoList.list,
       pages: WangdiangInfoList.pages,
       recommendList: recommendList,
-      vo: vo
+      vo: vo,
+      companyName: query.companyName || ''
     }
   },
   mounted() {

@@ -24,8 +24,10 @@
 
     </div>
     <div class="arc_toptitle">
-      <h1>{{ hyDetail.companyName ? hyDetail.companyName : '货源详情' }}</h1>
-      
+      <h1
+        v-if="hyDetail.shipperType === 'AF0010102' || hyDetail.shipperType === 'AF0010103'"
+      >{{ hyDetail.companyName }}</h1>
+      <h1 v-else>货源详情</h1>
       <ul 
         class="two_tltle" 
         v-if="hyDetail.companyName">
@@ -111,7 +113,7 @@
               <tr><td class="arc_td1">其他：</td><td
               class="arc_td2">{{ hyDetail.extraName ? hyDetail.extraName : '暂无其他描述' }}</td></tr>
               <tr><td class="arc_td1">备注：</td><td
-              class="arc_td2">{{ hyDetail.remark ? hyDetail.remark : '暂无备注信息' }}</td></tr>
+              class="arc_td2">{{ hyDetail.remark ? hyDetail.remark.substring(0,10) : '暂无备注信息' }}</td></tr>
             </table>
             </div>
           </div>
@@ -191,7 +193,7 @@
 
       </div>
       <div 
-        v-if="archival.shipperType === 'AF00107'" 
+        v-if="archival.isOpenLgc === '1'" 
         class="arc_right">
         <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
         <p
@@ -225,7 +227,9 @@
             v-if="archival.qq"
             :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
             target="_blank"><input value="QQ交谈"></a></span>
-          <span><i>地址：</i><font v-if="archival.address">{{ archival.address.substring(0, 10) }}</font></span>
+          <span><i>地址：</i><a 
+            :title="archival.address"
+            v-if="archival.address">{{ archival.address.substring(0, 8) }}</a></span>
         </p>
         <p class="arc_right05">
           <a 
@@ -647,8 +651,7 @@
           </ul>
         </div>
         <div 
-          class="arc_main4" 
-          v-if="huoLink.length != 0">
+        class="arc_main4">
           <div class="zx_sx1">
             <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
           </div>
@@ -1189,10 +1192,14 @@ export default {
         this.isShowMessge = true
         // console.log(this.hyDetail.startProvince, l, 'dfasfa')
         let obj = {
-          startProvince: this.hyDetail.startProvince,
-          startCity: this.hyDetail.startCity,
-          endProvince: this.hyDetail.endProvince,
-          endCity: this.hyDetail.endCity,
+          startProvince: this.hyDetail.startProvince
+            ? this.hyDetail.startProvince
+            : '',
+          startCity: this.hyDetail.startCity ? this.hyDetail.startCity : '',
+          endProvince: this.hyDetail.endProvince
+            ? this.hyDetail.endProvince
+            : '',
+          endCity: this.hyDetail.endCity ? this.hyDetail.endCity : '',
           currentPage: 1,
           pageSize: 7 - l
         }

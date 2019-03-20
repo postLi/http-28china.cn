@@ -23,7 +23,6 @@ const _6bf29cb6 = () => interopDefault(import('..\\pages\\yuanqu\\index.vue' /* 
 const _48a02420 = () => interopDefault(import('..\\pages\\zixun\\index.vue' /* webpackChunkName: "pages_zixun_index" */))
 const _75ecba68 = () => interopDefault(import('..\\pages\\cheyuan\\add.vue' /* webpackChunkName: "pages_cheyuan_add" */))
 const _699ca05a = () => interopDefault(import('..\\pages\\cheyuan\\detail.vue' /* webpackChunkName: "pages_cheyuan_detail" */))
-const _6bff8071 = () => interopDefault(import('..\\pages\\cheyuan\\huizong.vue' /* webpackChunkName: "pages_cheyuan_huizong" */))
 const _5946830d = () => interopDefault(import('..\\pages\\create\\cheyuan.vue' /* webpackChunkName: "pages_create_cheyuan" */))
 const _7425156f = () => interopDefault(import('..\\pages\\create\\huoyuan.vue' /* webpackChunkName: "pages_create_huoyuan" */))
 const _1d5ea800 = () => interopDefault(import('..\\pages\\create\\line.vue' /* webpackChunkName: "pages_create_line" */))
@@ -57,6 +56,7 @@ const _0f22928e = () => interopDefault(import('..\\pages\\yuanqu\\detail.vue' /*
 const _69b9ddc2 = () => interopDefault(import('..\\pages\\zhuanxian\\add.vue' /* webpackChunkName: "pages_zhuanxian_add" */))
 const _afdc8b7a = () => interopDefault(import('..\\pages\\zhuanxian\\detail.vue' /* webpackChunkName: "pages_zhuanxian_detail" */))
 const _5a2f1ffe = () => interopDefault(import('..\\pages\\zhuanxian\\detail1.vue' /* webpackChunkName: "pages_zhuanxian_detail1" */))
+const _07a4b8b0 = () => interopDefault(import('..\\pages\\zhuanxian\\huizong.vue' /* webpackChunkName: "pages_zhuanxian_huizong" */))
 const _35bd9290 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
 const _d876d984 = () => interopDefault(import('..\\pages\\zhuanxian\\selectMap.vue' /* webpackChunkName: "pages_zhuanxian_selectMap" */))
 const _7b862330 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart.vue' /* webpackChunkName: "pages_zhuanxian_showEchart" */))
@@ -248,10 +248,6 @@ export function createRouter() {
       component: _699ca05a,
       name: "cheyuan-detail"
     }, {
-      path: "/cheyuan/huizong",
-      component: _6bff8071,
-      name: "cheyuan-huizong"
-    }, {
       path: "/create/cheyuan",
       component: _5946830d,
       name: "create-cheyuan"
@@ -383,6 +379,10 @@ export function createRouter() {
       path: "/zhuanxian/detail1",
       component: _5a2f1ffe,
       name: "zhuanxian-detail1"
+    }, {
+      path: "/zhuanxian/huizong",
+      component: _07a4b8b0,
+      name: "zhuanxian-huizong"
     }, {
       path: "/zhuanxian/list",
       component: _35bd9290,

@@ -1,1 +1,0 @@
-{"version":3,"file":"0ccea7489262b22d5ed5.js","sources":["webpack:///pages/member/index.vue"],"sourcesContent":["<script>\r\nexport default {\r\n  validate({ context }) {\r\n    // Must be a number\r\n    context.redirect(301, '/')\r\n    // return false\r\n  }\r\n}\r\n</script>\r\n"],"mappings":"AACA","sourceRoot":""}

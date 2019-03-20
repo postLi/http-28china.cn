@@ -64,7 +64,7 @@
               v-for="(item,index) in lineCitys"
               v-if="index<14"
               :key="index"
-              :href="'/zhuanxian/list?startp='+linedataA.startProvince+'&startc='+linedataA.startCity+'&endp='+linedataA.startProvince+'&endc='+item.name"
+              :href="'/zhuanxian/list?startp='+linedataA.startProvince+'&startc='+linedataA.startCity+'&endp='+linedataA.endProvince+'&endc='+item.name"
               target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
               <!-- :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name" -->
           </div>
@@ -1051,7 +1051,7 @@ export default {
   },
   head: {
     link: [
-      { rel: 'stylesheet', href: '/line/css/article_wlzx.css' },
+      { rel: 'stylesheet', href: '/line/css/article_wlzx.css?V2' },
       { rel: 'stylesheet', href: '/line/css/price.css' },
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' },
@@ -1473,11 +1473,9 @@ export default {
         city = city.substring(2, 5)
       }
       window.open(
-        `/zhuanxian/list?startProvince=${
-          this.linedataA.startProvince
-        }&startCity=${this.linedataA.startCity}&endProvince=${
-          this.linedataA.startProvince
-        }&endCity=${city}`
+        `/zhuanxian/list?startp=${this.linedataA.startProvince}&startc=${
+          this.linedataA.startCity
+        }&endp=${this.linedataA.endProvince}&endc=${city}`
       )
     },
     moreFn() {

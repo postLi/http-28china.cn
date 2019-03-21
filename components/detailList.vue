@@ -34,7 +34,7 @@
               src="../static/images/pic/bg1.png"
               class="scrollLoading"
               width="165"
-              height="125"
+              height="140"
             >
             <!--:src="require('../static/images/pic/bg' + item.num + '.png')"-->
             <!-- :src="'/images/pic/bg1' + item.num + '.png'" -->
@@ -53,7 +53,7 @@
                 id="nr02"
                 :href="'/member/'+ item.id"
                 target="_blank"
-              ><span>{{ item.companyName }}</span>
+              ><span style="padding-right:12px;    vertical-align: middle;">{{ item.companyName }}</span>
                 <span v-if="item.isEq">
                   <img
                     v-for="(item, index) in item.eq1"
@@ -109,12 +109,14 @@
               <!--src="../static/gongsi/images/wlgs_danbao.png">-->
 
             </P>
-            <p class="p2"><i>联系人：</i><font id="nr04">{{ item.contactsName }}</font><a
-              style="padding-left: 5px"
-              :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-              target="_blank"><img
-                src="../static/gongsi/images/15qq.gif"
-                alt=""></a></p>
+            <p class="p2"><i>联系人：</i><font 
+              id="nr04"
+              style="dispaly:inline-block;padding-right:10px">{{ item.contactsName }}</font><a
+                style="padding-left: 0px"
+                :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
+                target="_blank"><img
+                  src="../static/gongsi/images/15qq.gif"
+                  alt=""></a></p>
             <p class="p3"><i>电话：</i><font id="nr05">{{ (item.contactsTel?item.contactsTel:'') + (item.mobile?','+item.mobile:'') }}</font></p>
             <p class="p4"><i>地址：</i><font
             class="">{{ item.address.length>18?item.address.substring(0,17)+'..' :item.address }}</font></p>
@@ -209,9 +211,9 @@ export default {
   }
   .wlzx_list {
     border: 0px;
-    width: 1034px;
+    width: 1080px;
     height: 150px;
-    padding-top: 30px;
+    padding-top: 22px;
     overflow: hidden;
     margin-bottom: 1px;
     border-bottom: #e4e4e4 1px solid;
@@ -235,15 +237,6 @@ export default {
       img:hover {
         transform: scale(1.05);
       }
-    }
-    .wlzx_list_2 {
-      margin-left: 30px;
-      width: 295px;
-      margin-left: 20px;
-    }
-    .wlzx_list_3 {
-      width: 310px;
-      margin-left: 15px;
     }
     .wlzx_list_4 {
       width: 90px;
@@ -309,20 +302,18 @@ export default {
     }
   }
   .wlzx_list_2 {
-    p {
-      line-height: 25px;
-    }
+    margin-left: 30px;
+    width: 295px;
+    margin-left: 20px;
+
     .p1 {
-      /*margin-bottom: 10px;*/
+      margin-bottom: 20px;
       a {
         font-weight: bold;
         padding-right: 5px;
       }
       a:hover {
         color: #fa5000;
-      }
-      img {
-        /*display: none;*/
       }
       i {
         color: #666;
@@ -336,34 +327,25 @@ export default {
     }
     .p2 {
       position: relative;
-      img {
-        position: absolute;
-        left: 105px;
-        top: 3px;
-      }
+      padding-bottom: 20px;
+      font-size: 14px;
+    }
+    .p3 {
+      padding-bottom: 20px;
+      font-size: 14px;
     }
   }
-  .wlzx_list_2 p {
-    line-height: 25px;
-  }
-  .wlzx_list_2 .p1 {
-    /*margin-bottom: 10px;*/
-  }
-  .wlzx_list_2 .p1 a {
-    font-weight: bold;
-    padding-right: 5px;
-  }
-  .wlzx_list_2 .p1 a:hover {
-    color: #fa5000;
-  }
-  .wlzx_list_2 .p1 img {
-    /*display: none;*/
-  }
-  .wlzx_list_3 p {
-    line-height: 30px;
-  }
-  .wlzx_list_3 .p1 {
-    /*margin-top: 35px;*/
+
+  .wlzx_list_3 {
+    width: 310px;
+    margin-left: 15px;
+    padding-top: 20px;
+    .p1 {
+      // line-height: 30px;
+    }
+    p.p2 {
+      // line-height: 20px;
+    }
   }
   .wlzx_list_3 p i {
     color: #666;

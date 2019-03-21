@@ -553,7 +553,10 @@ export default {
       preFn: data => {
         // console.log(data, 'datadfdf')
         return data.map((el, index) => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
 
           return el
         })
@@ -570,7 +573,10 @@ export default {
       name: 'gongsi_wlzx',
       preFn: data => {
         return data.map((el, index) => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
 
           return el
         })

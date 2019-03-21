@@ -129,7 +129,10 @@ export default {
       name: 'cjwt',
       preFn: data => {
         return data.map(el => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/help')
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
           return el
         })
       }

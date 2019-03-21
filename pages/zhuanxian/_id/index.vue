@@ -120,7 +120,10 @@ export default {
       name: 'wlzx',
       preFn: data => {
         return data.map(el => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
           return el
         })
       }

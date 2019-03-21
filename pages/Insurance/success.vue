@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="success_go"><a 
-        href="http://member.28china.cn/insurance/manage" 
+        href="/insurance/manage" 
         target="_blank">进入投保管理</a></div>
     </div>
   </div>

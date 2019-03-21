@@ -289,14 +289,6 @@
               @click="showMoblieFn()"
               :class="[checkMoblie ? '' : 'checkMobile']">
             {{ checkMoblie ? check : '查看电话' }}</a>
-          <!-- <a 
-              v-show="checkMoblie"
-              style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
-              @click="showMoblieFn(showMoblie)">查看电话</a>
-            <a 
-              v-show="showMoblie"
-              style="color: #333" 
-              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li> -->
           </li>
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
@@ -831,7 +823,6 @@
 import Add from './add'
 import Lelp from './help'
 import Order from './order'
-
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 export default {
   name: 'Detail',

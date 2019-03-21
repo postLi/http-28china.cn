@@ -12,7 +12,7 @@
           2876人浏览
         </div>
       </div>
-      <div class="item flex_a">
+      <div class="item flex_a margin_t_20">
         <img
           class="left margin_r_20"
           src="" >
@@ -42,7 +42,9 @@
       <div class="title f-28 c-9 flex_a f_w_b">
         专线信息
       </div>
-      <div class="item flex_a">
+      <div
+        class="item flex_a"
+        @click="clockMessage(0)">
         <div class="f-30 c-3">轻货价：</div>
         <div class="right flex_sb flex_1 height_100">
           <div class="f-30 flex_sb flex_1">
@@ -56,7 +58,25 @@
             src="/m/zhuanxian/list_down_grey.png">
         </div>
       </div>
-      <div class="item flex_a">
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @after-leave="afterLeave"
+      >
+        <div
+          class="flex_sb show_item f_f f-30"
+          v-if="showMessage[0]">
+          <div class="flex">0- 10m3</div>
+          <div class="flex">238元/m3</div>
+          <div class="flex">0- 10m3</div>
+        </div>
+      </transition>
+      <div
+        class="item flex_a"
+        @click="clockMessage(1)">
         <div class="f-30 c-3">重货价：</div>
         <div class="right flex_sb flex_1 height_100">
           <div class="f-30 flex_sb flex_1">
@@ -67,6 +87,22 @@
             src="/m/zhuanxian/list_down_grey.png">
         </div>
       </div>
+      <transition
+        @before-enter="beforeEnter"
+        @enter="enter"
+        @after-enter="afterEnter"
+        @before-leave="beforeLeave"
+        @leave="leave"
+        @after-leave="afterLeave"
+      >
+        <div
+          class="flex_sb show_item f_f f-30"
+          v-if="showMessage[1]">
+          <div class="flex">0- 10m3</div>
+          <div class="flex">238元/m3</div>
+          <div class="flex">0- 10m3</div>
+        </div>
+      </transition>
       <div class="footer flex_a f_f">
         <div class="footer_item flex f-24 margin_b_20">最低一票价格：面议</div>
         <div class="footer_item flex f-24 margin_b_20">发车频率：1天1次</div>
@@ -213,10 +249,14 @@ export default {
   layout: 'm',
   data() {
     return {
-      showMask: false
+      showMask: false,
+      showMessage: [false, false]
     }
   },
   methods: {
+    clockMessage(i) {
+      this.$set(this.showMessage, i, !this.showMessage[i])
+    },
     beforeEnter(el) {
       el.style.height = 0
     },
@@ -359,6 +399,17 @@ export default {
       .img_r {
         width: 0.2rem;
       }
+    }
+  }
+  .show_item {
+    transition: height 0.3s;
+    overflow: hidden;
+    background: #f4f4f4;
+    padding: 0.1rem 0.2rem;
+    div {
+      width: 50%;
+      height: 0.5rem;
+      box-sizing: border-box;
     }
   }
   .footer {

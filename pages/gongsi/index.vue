@@ -800,7 +800,7 @@ export default {
     script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
-    this.initList()
+    // this.initList()
 
     var newArr = new Array()
     var _newArr = new Array()

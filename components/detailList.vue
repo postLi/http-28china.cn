@@ -211,7 +211,7 @@ export default {
   }
   .wlzx_list {
     border: 0px;
-    width: 1080px;
+    width: 1030px;
     height: 150px;
     padding-top: 22px;
     overflow: hidden;

@@ -45,6 +45,7 @@ const _a21b7316 = () => interopDefault(import('..\\pages\\m\\act\\index.vue' /* 
 const _a750f184 = () => interopDefault(import('..\\pages\\m\\cheyuan\\index.vue' /* webpackChunkName: "pages_m_cheyuan_index" */))
 const _65569356 = () => interopDefault(import('..\\pages\\m\\gongsi\\index.vue' /* webpackChunkName: "pages_m_gongsi_index" */))
 const _6b83e29c = () => interopDefault(import('..\\pages\\m\\huoyuan\\index.vue' /* webpackChunkName: "pages_m_huoyuan_index" */))
+const _05ec594e = () => interopDefault(import('..\\pages\\m\\pageView\\index.vue' /* webpackChunkName: "pages_m_pageView_index" */))
 const _2248e326 = () => interopDefault(import('..\\pages\\m\\ydcx\\index.vue' /* webpackChunkName: "pages_m_ydcx_index" */))
 const _3a1366f5 = () => interopDefault(import('..\\pages\\m\\zhuanxian\\index.vue' /* webpackChunkName: "pages_m_zhuanxian_index" */))
 const _5fbee06c = () => interopDefault(import('..\\pages\\shixiao\\detail.vue' /* webpackChunkName: "pages_shixiao_detail" */))
@@ -335,6 +336,10 @@ export function createRouter() {
       path: "/m/huoyuan",
       component: _6b83e29c,
       name: "m-huoyuan"
+    }, {
+      path: "/m/pageView",
+      component: _05ec594e,
+      name: "m-pageView"
     }, {
       path: "/m/ydcx",
       component: _2248e326,

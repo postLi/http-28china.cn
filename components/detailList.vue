@@ -156,13 +156,13 @@ export default {
   watch: {
     info: {
       handler(n, o) {
-        console.log(n, 'nnn')
+        // console.log(n, 'nnn')
       },
       deep: true
     }
   },
   mounted() {
-    console.log(this.info, 'infofdf')
+    // console.log(this.info, 'infofdf')
     // this.info.forEach(item => {
     //   // item.num = Math.ceil(Math.random() * 30)
     // })

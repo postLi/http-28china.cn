@@ -305,7 +305,7 @@ $('.arc_pjbt_item input').click(function () {
   var val = $('[name=radio]:checked').attr('value')
   // console.log(val);
   assessLevel = val
-  process04()
+  // process04()
 })
 
 //物流专线详情页 S
@@ -955,7 +955,7 @@ function process04(currentPage) {
   return totalPage
 }
 
-process04(1)
+// process04(1)
 //专线评价列表 E
 
 //专线评价数量  S

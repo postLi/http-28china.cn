@@ -263,11 +263,12 @@
                     id="nr03"
                     :href="'/member/'+item.companyId"
                     target="_blank"><font
-                  class="">{{ item.companyName }}</font></a>
+                  class="">{{ item.companyName||'暂无' }}</font></a>
                   <a
+                    v-if="item.companyName"
                     id="nr11"
                     target="_blank"
-                    href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img
+                    :href="'http://wpa.qq.com/msgrd?v=596803544&uin='+item.qq+'&site=qq&menu=yes'"><img
                       id="qq"
                       src="../../static/gongsi/images/15qq.gif"></a>
                   <img
@@ -343,7 +344,7 @@
 
         <!--分页-->
         <div
-          v-if="lineLists.length || !lineLists==null"
+          v-if="lineLists==[] || !lineLists.length==0"
           class="clearfix">
           <div
             class="box"
@@ -598,7 +599,7 @@ export default {
     let [listA, listB, listC, listD, codeA, codeB, codeC] = await Promise.all([
       $axios.post(aurl + `/28-web/range/list`, {
         currentPage: 1,
-        pageSize: 6,
+        pageSize: 15,
         startProvince: startp,
         startCity: startc,
         startArea: starta,
@@ -638,7 +639,7 @@ export default {
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    // console.log(codeB, 'codeA')
+    console.log(listA.data.data.list, 'listA.data.data.list')
     if (
       listA.data.status == 200 ||
       listB.data.status == 200 ||
@@ -797,14 +798,14 @@ export default {
                     let parkId = _this.$route.query.parkId
                     let companyName = _this.$route.query.companyName
 
-                    console.log(
-                      aurl + `/api/28-web/range/list`,
-                      'aurl + `/api/28-web/range/list`'
-                    )
+                    // console.log(
+                    //   aurl + `/api/28-web/range/list`,
+                    //   'aurl + `/api/28-web/range/list`'
+                    // )
                     $axios
                       .post(aurl + `/28-web/range/list`, {
                         currentPage: currentPage,
-                        pageSize: 6,
+                        pageSize: 15,
                         orderBy: orderBy,
                         startProvince: startp,
                         startCity: startc,

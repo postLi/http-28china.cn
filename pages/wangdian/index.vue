@@ -238,7 +238,7 @@
               <p class="p3"><i>地址：</i><font
                 id="nr03"
                 class="">{{ item.pointAddress }}</font></p>
-              <p class="p4"><i>约</i><em id="nr04">{{ item.distance }}</em><i>公里</i></p>
+              <p class="p4"><i>约</i><em id="nr04">{{ item.distance || 0 }}</em><i>公里</i></p>
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><i>联系人：</i><span id="nr05">{{ item.contactsName }}</span></P>

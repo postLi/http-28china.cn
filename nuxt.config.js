@@ -55,6 +55,9 @@ module.exports = {
     script: [
       {
         src: '/vendor/jquery-1.12.4.min.js'
+      },
+      {
+        src: '/vendor/polyfill.min.js'
       }
     ]
   },

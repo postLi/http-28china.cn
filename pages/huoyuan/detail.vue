@@ -196,7 +196,7 @@
       <div 
         v-if="archival.archivalType === '3'" 
         class="arc_right">
-        <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
+        <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span :title="archival.companyName">{{ archival.companyName ? archival.companyName.substring(0,10) : '' }}</span></p>
         <p
           v-if="archival.isShowA"
           class="arc_right02" ><i>信誉：</i>
@@ -298,7 +298,7 @@
         class="arc_right1" 
         v-if="archival.archivalType === '2'">
         <div class="arc_top_title">
-          <h4>{{ archival.companyName }}</h4>
+          <h4 :title="archival.companyName">{{ archival.companyName ? archival.companyName.substring(0,10) : '' }}</h4>
         </div>
         <div class="arc_middle">
           <img src="/images/cy/hztx.png">
@@ -374,14 +374,17 @@
           <ul class="zx_sx_new">
             <li 
               v-for="(item,index) in newestHuoyuanRe"
-              :key="index" 
-              class="manage_box" >
-              <a :title="item.startProvinceCityArea">{{ item.startCity + item.startArea }}</a>
-              <a :title="item.endProvinceCityArea">{{ item.endCity + item.endArea }}</a>
-              <a :title="item.goodsTypeName">{{ item.goodsTypeName.substring(0,5) }}</a>
-              <a><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</a>
-              <a><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</a>
-              <a>{{ item.createTime }}</a>
+              :key="index"
+              class="manage_box">
+              <a 
+              :href="'/huoyuan?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea +'&endProvince='+item.endProvince+'&endCity='+item.endCity + '&endArea='+item.endArea"> 
+                <span :title="item.startProvinceCityArea">{{ item.startCity + item.startArea }}</span>
+                <span :title="item.endProvinceCityArea">{{ item.endCity + item.endArea }}</span>
+                <span :title="item.goodsTypeName">{{ item.goodsTypeName.substring(0,5) }}</span>
+                <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
+                <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
+                <span>{{ item.createTime }}</span>
+              </a>
             </li>
             <p 
               class="massge"
@@ -393,12 +396,15 @@
             <li 
               v-for="(i,dex) in dataset" 
               :key="dex">
-              <a :title="i.startProvinceCityArea">{{ i.startCity + i.startArea }}</a>
-              <a :title="i.endProvinceCityArea">{{ i.endCity + i.endArea }}</a>
-              <a :title="i.goodsTypeName">{{ i.goodsTypeName.substring(0,5) }}</a>
-              <a><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</a>
-              <a><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</a>
-              <a>{{ i.createTime }}</a>
+              <a 
+              :href="'/huoyuan?startProvince='+ i.startProvince+'&startCity='+i.startCity+'&startArea='+i.startArea +'&endProvince='+i.endProvince+'&endCity='+i.endCity + '&endArea='+i.endArea"> 
+                <span :title="i.startProvinceCityArea">{{ i.startCity + i.startArea }}</span>
+                <span :title="i.endProvinceCityArea">{{ i.endCity + i.endArea }}</span>
+                <span :title="i.goodsTypeName">{{ i.goodsTypeName.substring(0,5) }}</span>
+                <span><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</span>
+                <span><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</span>
+                <span>{{ i.createTime }}</span>
+              </a>
             </li>
             
           </ul>
@@ -957,7 +963,6 @@ export default {
       if (credit >= 0 && credit <= 3) {
         archivals.data.data.startA = 1
         archivals.data.data.isShowA = true
-        // archivals.data.data
       }
       if (credit >= 4 && credit <= 10) {
         archivals.data.data.startA = 2
@@ -998,7 +1003,6 @@ export default {
     } else {
       error({ statusCode: 500, message: '查找不到货源相关信息' })
     }
-    console.log(archivals.data.data, 'archivals.data.data')
     //顶部轮播
     let newLists = await $axios
       .get('/28-web/lclOrder/newList')
@@ -1170,12 +1174,10 @@ export default {
       }
     })
     if (process.client) {
-      console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({})
       $('#wlLineTo input').citypicker({})
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
-
       let l = this.newestHuoyuanRe.length
 
       //  当不足一页的数据时，不需要滚动展示
@@ -1233,7 +1235,6 @@ export default {
           })
       } else {
         this.isShowMessge = false
-        console.log(this.isShowMessge, l, 'df444asfa')
       }
 
       let top_left_h = $('.top_left').height()
@@ -1342,7 +1343,9 @@ export default {
             console.log('提交捕获异常')
           })
       } else {
-        window.location.href = '/login'
+        // window.location.href = '/login'
+        $('.login_box').show()
+        $('.login_box_mask').show()
       }
     },
     cenclecollected() {

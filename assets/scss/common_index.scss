@@ -52,6 +52,18 @@ $f_12: 12px;
     }
 
 }
+/*发布按钮函数*/
+@mixin btn_link($up, $w, $font) {
+  display: inline-block;
+  padding: $up 0;
+  width: 150px;
+  font-size: $font;
+  text-align: center;
+  background: $green;
+  color: $white;
+  border-radius: 3px;
+}
+
 /*公共清楚浮动方法*/
 .m_t10{margin-top:10px;}
 .p_10{ padding: 10px;}
@@ -82,8 +94,23 @@ $f_12: 12px;
     background: $white;
     // height: 440px;
   } 
-
-  /**********公共标题****************/
+  .error {
+    color: $red;
+  }
+/*颜色*/
+.color_orange{
+  color: $orange;
+}
+.color_green{
+  color:$green;
+}
+.color_blue{
+  color: $blue;
+}
+.color_violet{
+  color: $light_violet;
+}
+/**********公共标题****************/
 .p_title {
     padding: 25px 0;
     font-size: 25px;
@@ -121,6 +148,9 @@ $f_12: 12px;
       font-size: $f_20;
     }
   } 
+.btn_release{
+    @include btn_link(8px, 150px, 18px);
+  }
   /*********分类导航***************/
 .p_category_menu {
   padding: 10px 0;
@@ -142,6 +172,12 @@ $f_12: 12px;
       }
     }
   }
+}
+.btn_small {
+  padding: 5px 10px;
+  color: $green;
+  border: 1px solid $green;
+  border-radius: 5px;
 }
 /*************登录*****************/
 /*用户登录*/
@@ -329,12 +365,12 @@ $f_12: 12px;
   font-size: $f_14;
   color: $tit_color;
   background: $white;
-  .col1 {
+  .hy_info_col1 {
     margin: 25px 0 0 25px;
     width: 830px;
     height: 62px;
   }
-  .tit_box {
+  .hy_info_tit {
     width: 140px;
     height: 58px;
     border: 2px solid $orange;
@@ -349,29 +385,29 @@ $f_12: 12px;
       background: $white;
     }
   }
-  .info_user_box {
+  .hy_info_user_box {
     overflow: hidden;
     margin-left: 50px;
     width: 510px;
     height: 60px;
-    .info_user_list {
+    .hy_info_user_list {
       overflow: hidden;
       height: 60px;
       // background-color: #bbb;
     }
-    .info_user {
+    .hy_info_user_info {
       margin-bottom: 15px;
       line-height: 22px;
-      .user {
+      .hy_info_user_info_user {
         margin-right: 40px;
         font-size: 16px;
         font-weight: bold;
       }
-      .time {
+      .hy_info_user_info_time {
         color: $light_gray;
       }
     }
-    .info_text {
+    .hy_info_user_text {
       line-height: 22px;
       > span {
         padding-right: 10px;
@@ -380,17 +416,19 @@ $f_12: 12px;
           color: $blue;
         }
       }
-      .link {
+      .hy_info_user_text_link {
         font-size: 16px;
         color: $blue;
       }
     }
   }
-  .col2 {
+
+
+  .hy_info_col2 {
     margin-top: 10px;
     height: 100px;
   }
-  .hy_info_box {
+  .hy_info_num {
     height: 100px;
     border-left: 1px dashed #ddd;
   }
@@ -410,26 +448,26 @@ $f_12: 12px;
           color: $light_orange;
           padding-right: 10px;
         }
-        &.info_num {
+        &.hy_info_list_num {
           font-weight: bold;
           color: $light_orange;
         }
       }
     }
   }
-  .info_text_list {
+  .hy_info_text_list {
     margin-left: 45px;
     overflow: hidden;
     height: 40px;
     line-height: 40px;
     > li {
       @extend .fl;
-      margin-right: 10px;
+      margin-right: 15px;
       .iconfont {
         color: $light_orange;
       }
-      .num {
-        padding-left: 5px;
+      .hy_info_text_num {
+        padding-left: 10px;
         color: $light_orange;
       }
     }
@@ -510,7 +548,7 @@ $f_12: 12px;
     padding: 20px 0;
     > a {
       font-size: 16px;
-      color: $light_gray;
+      color: $gray;
       padding-right: 35px;
     }
   }
@@ -518,36 +556,23 @@ $f_12: 12px;
 /*********发布求车信息**********/
 .p_release {
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 40px 0;
   width: $w_1440;
   font-size: $f_14;
-  .hd {
+  .release_box {
     overflow: hidden;
     margin: 0 auto;
-    width: 450px;
-    .text_box {
-      @extend .fl;
-      width: 230px;
-      .tit {
+    width: 420px;
+    .release_box_txt {   //text_box
+      // width: 230px;
+      .release_box_txt_tit {   //tit
+        margin-bottom: 5px;
         font-size: 25px;
         color: $green;
       }
     }
-    .btn_release {
-      @extend .fr;
-      margin-top: 10px;
-      width: 190px;
-      height: 50px;
-      line-height: 50px;
-      font-size: 20px;
-      color: $white;
-      font-weight: bold;
-      text-align: center;
-      background: $green;
-      border-radius: 5px;
-    }
   }
-  .bd {
+  .release_total {
     margin: 30px auto 0 auto;
     display: table;
     word-spacing: -1em;
@@ -560,7 +585,7 @@ $f_12: 12px;
       font-size: 18px;
       font-weight: bold;
       margin-left: 10px;
-      &.num {
+      &.release_total_num {
         padding: 2px 8px;
         color: $white;
         background: $red;
@@ -568,6 +593,31 @@ $f_12: 12px;
         font-size: 20px;
       }
     }
+  }
+}
+/*入住*/
+.p_live {
+  margin: 0 auto;
+  padding: 40px 0;
+  width: 550px;
+  font-size: $f_14;
+  .live_txt {
+    @extend .fl;
+    width: 365px;
+    > span {
+      display: block;
+      text-align: center;
+      &.live_txt_tit {
+        margin-bottom: 10px;
+        font-size: 25px;
+        color: $green;
+        font-weight: bold;
+      }
+    }
+  }
+  .live_btn {
+    @extend .fr;
+    @include btn_link(8px, 150px, 18px);
   }
 }
 /*********本月优质企业货主******/
@@ -649,6 +699,91 @@ $f_12: 12px;
     }
     &:last-child {
       margin-right: 0;
+    }
+  }
+}
+/*******我们的优势************/
+.p_our_virtue {
+  margin: 0 auto 40px auto;
+  width: $w_1440;
+  .p_title {
+    text-align: center;
+  }
+  .our_virtue_list {
+    > li {
+      overflow: hidden;
+      @extend .fl;
+      margin-right: 30px;
+      width: 337px;
+      height: 420px;
+      font-size: 16px;
+      background: $white;
+      border-radius: 10px;
+      &:last-child {
+        margin-right: 0;
+      }
+      box-shadow: 0 0 8px #bbb;
+      .our_virtue_pic{
+        height: 190px;
+      }
+      .our_virtue_tit {
+        padding: 20px 0;
+        font-size: 30px;
+        text-align: center;
+      }
+      .our_virtue_content {
+        margin: 0 auto;
+        width: 200px;
+        line-height: 25px;
+      }
+    }
+  }
+}
+/********问答****************/
+.p_answers {
+  margin: 0 auto;
+  width: $w_1440;
+  font-size: $f_14;
+  .p_title_box {
+    position: relative;
+    .title {
+      float: none;
+      text-align: center;
+    }
+    .answers_link {
+      position: absolute;
+      top: 25px;
+      right: 0;
+      line-height: 25px;
+      @extend .fr;
+      .iconfont {
+        padding-left: 5px;
+        font-size: $f_14;
+        color: $green;
+      }
+    }
+  }
+  .answers_list {
+    margin: 0 auto;
+    width: 1180px;
+    > li {
+      @extend .fl;
+      margin: 0 60px 60px 60px;
+      width: 470px;
+      > p {
+        line-height: 25px;
+        color: $tit_color;
+        &.answers_list_tit {
+          margin-bottom: 15px;
+          line-height: 25px;
+          font-size: 18px;
+          color: $green;
+          .iconfont {
+            padding-right: 10px;
+            font-size: 25px;
+          }
+        }
+      }
     }
   }
 }

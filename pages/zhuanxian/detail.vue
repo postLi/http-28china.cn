@@ -117,29 +117,7 @@
             </ul>
           </div>
 
-          <!--<div class="arc_left_2">-->
-          <!--<a href="javascript:void(0)"><img-->
-          <!--v-if="linedataA.rangeLogo"-->
-          <!--:src="linedataA.rangeLogo.split(',')[0]"-->
-          <!--@click="clickImg(0)"><img-->
-          <!--:src="require('/images/pic/bg' + linedataA.num + '.png')"-->
-          <!--@click="clickImg(0)"></a>-->
-          <!--<a href="javascript:void(0)"><img-->
-          <!--v-if="linedataA.rangeLogo"-->
-          <!--:src="linedataA.rangeLogo.split(',')[1]"-->
-          <!--@click="clickImg(1)"><img-->
-          <!--:src="require('/images/pic/bg' + linedataA.num + '.png')"-->
-          <!--@click="clickImg(1)"></a>-->
-          <!--<a href="javascript:void(0)"><img-->
-          <!--v-if="linedataA.rangeLogo"-->
-          <!--:src="linedataA.rangeLogo.split(',')[2]"-->
-          <!--@click="clickImg(2)"><img-->
-          <!--v-else-->
-          <!--:src="require('/images/pic/bg' + linedataA.num + '.png')"-->
-          <!--@click="clickImg(2)"></a>-->
-          <!--</div>-->
-          <!--<div class="arc_left_3"><a href="javascript:void(0)"><img src="/line/images/17shoucang.png">&nbsp;<span-->
-          <!--id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>-->
+      
         </div>
         <div class="arc_middle">
           <div class="collection_zx">
@@ -2190,10 +2168,14 @@ export default {
           user_token,
           handle
         ).then(res => {
-          if (res.data.data == true) {
-            this.isXin = true
+          if (res.data.status == 200) {
+            if (res.data.data == true) {
+              this.isXin = true
+            }
           }
-          // console.log(res.data.data, 'res方法')
+          if (res.data.errorInfo) {
+            layer.msg(res.data.errorInfo)
+          }
         })
       }
     },
@@ -2214,8 +2196,13 @@ export default {
           user_token,
           handle
         ).then(res => {
-          if (res.data.data == true) {
-            this.isComanyColl = true
+          if (res.data.status == 200) {
+            if (res.data.data == true) {
+              this.isComanyColl = true
+            }
+          }
+          if (res.data.errorInfo) {
+            layer.msg(res.data.errorInfo)
           }
           // console.log(res.data.data, 'res方法2')
         })
@@ -2265,7 +2252,7 @@ export default {
           .post(aurl + isurl)
           .then(res => {
             if (res.data.status === 200) {
-              console.log(res.data.data, '收藏成功')
+              // console.log(res.data.data, '收藏成功')
               let isMsg = res.data.data
               layer.msg(isMsg)
               if (item == 'detail') {

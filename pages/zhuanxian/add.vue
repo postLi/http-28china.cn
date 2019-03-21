@@ -84,13 +84,16 @@
         </div>
         <!--分页-->
         <div
-          v-if="list.length!=0"
+          
           class="box"
           style="float: right;margin-right: 170px;">
+          <div v-if="list==[]"/>
           <div
+            v-else
             id="pagination1"
             class="page fl"/>
           <div class="info fl">
+            
           <!-- <p>当前页数：<span id="current1">1</span></p> -->
           </div>
         </div>
@@ -247,12 +250,11 @@ export default {
   mounted() {},
   methods: {
     loadPagination() {
-      // console.log('this1', this.list)
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
-          // $('#current1').text(current)
+          $('#current1').text(current)
           let obj = await getpjLists(
             this.$axios,
             current,
@@ -260,7 +262,6 @@ export default {
             this.$route.query,
             this.assessLevel
           )
-          // console.log(obj, 'objobj11')
           let assessLevel = ''
           this.pages = obj.pages
           this.list = obj.list
@@ -305,9 +306,9 @@ export default {
         assessLevel
       ).then(res => {
         let obj = res
-        this.pages = obj.pages
+        // this.pages = obj.pages
         this.list = obj.list
-        this.currentPage = obj.currentPage
+        // this.currentPage = obj.currentPage
         // console.log(this.list, 'this.list')
       })
     },
@@ -319,13 +320,6 @@ export default {
 
       //把绑定的弹窗数组 设为false即可关闭弹窗
     }
-    // closeMe(done) {
-    //   this.reset()
-    //   this.$emit('update:popVisible', false)
-    //   if (typeof done === 'function') {
-    //     done()
-    //   }
-    // }
   }
 }
 </script>

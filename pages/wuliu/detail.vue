@@ -40,10 +40,10 @@
           </div>
           <div 
             class="left_jianjie_bt"
-            v-show="false"><span class="biaozhi"/><span>园区信息</span></div>
+            v-show="gatewayData.parkIntroduce"><span class="biaozhi"/><span>园区信息</span></div>
           <div 
             class="left_jianjie_nr"
-            v-show="false">
+            v-show="gatewayData.parkIntroduce">
             <p>{{ gatewayData.parkIntroduce||'暂无园区信息' }}</p>
           </div>
         </div>
@@ -454,7 +454,7 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/basic.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/article_wlyq.css' }
+      { rel: 'stylesheet', href: '/css/article_wlyq.css?v2' }
     ],
     script: [
       {

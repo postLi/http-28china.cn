@@ -1623,7 +1623,7 @@ export default {
           return data.map((els, index) => {
             return els.map(el => {
               el.url = el.url.replace(
-                'http://192.168.1.79/anfacms',
+                /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
                 index === 0 ? '/help' : '/zixun'
               )
               // console.log('el typemg', el.typeImg)

@@ -624,8 +624,8 @@ font-size: 28px;
 .left_jianjie_bt span{float: left;display: block;font-size: 18px;color: #2577e3;line-height: 50px;font-weight: bold;}
 .left_jianjie_nr p{padding:30px 27px 0 32px;line-height: 26px;font-size: 14px;text-indent: 2em;}
 .left_nr_2 ul{width: 100%;height: 100%;}
-.list_yq1{text-align: center;height: 20px;margin-top: 60px;font-size: 20px;color: #333;margin-bottom: 18px;}
-.list_yq2{text-align: center;height: 20px;margin-bottom: 42px;font-size: 14px;color: #333;}
+.list_yq1{padding-left: 67px;height: 20px;margin-top: 80px;font-size: 20px;color: #333;margin-bottom: 18px;}
+.list_yq2{padding-left: 67px;height: 20px;margin-bottom: 22px;font-size: 14px;color: #333;}
 .list_yq3,.list_yq4,.list_yq5,.list_yq6{height: 30px;line-height: 30px;padding-left: 67px;}
 .list_yq4 span{padding-right:30px;background: url(../images/article_wlzx/15qq.gif) no-repeat right 0px;}
 .list_yq3 span,.list_yq4 span,.list_yq5 span,.list_yq6 span{font-size: 14px;color: #666;}

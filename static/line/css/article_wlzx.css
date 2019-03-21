@@ -31,6 +31,9 @@ body {
   width: 750px;
   height: 24px;
 }
+.arc_top1_1 img{
+  margin-top: -20px;
+}
 
 .arc_top1_2 {
   float: right;

@@ -43,7 +43,7 @@
         <div class="footer1-1">
           <a href="javascript:void(0)">友情链接：</a>
           <a 
-            href="http://www.28china.cn" 
+            href="http://www.28kuaiyun.cn" 
             target="_blank"> 28快运官网</a>
           <a 
             href="http://www.28tms.com" 

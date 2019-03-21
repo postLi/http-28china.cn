@@ -21,6 +21,7 @@
           v-for="(item, index) in info"
           :key="index"
           class="wlzx_list"
+          :data-isRenZhen="item.isRenZhen"
           style="margin-right: 0px;">
           <li
             class="wlzx_list_1"
@@ -75,6 +76,37 @@
                     class="xy_zuan"
                     src="../static/gongsi/images/34huanguan.gif">
                 </span>
+                <span v-if="item.isRenZhen">
+                  <img
+                    src="../static/gongsi/images/wlgs_shiming.png"
+                    alt="">
+                </span>
+                <span v-if="item.showIsVip">
+                  <img
+                    src="../static/gongsi/images/xinyong.png"
+                    alt="">
+                </span>
+                <span v-if="item.isAuthStatus">
+                  <img
+                    src="../static/gongsi/images/wlgs_danbao.png"
+                    alt="">
+                </span>
+                <!--<p-->
+              <!--v-if="linedataB.isRenZhen"-->
+              <!--class="arc_right07">-->
+              <!--<img-->
+                <!--v-if="linedataB.showIsVip"-->
+                <!--id="right_xinyong"-->
+                <!--src="/line/images/11xinyong.png">-->
+              <!--<img-->
+                <!--v-if="linedataB.isAuthStatus"-->
+                <!--id="right_shiming"-->
+                <!--src="/line/images/10shiming.png">-->
+              <!--<img-->
+                <!--v-if="linedataB.isAuthStatus"-->
+                <!--id="right_baozhengjin"-->
+                <!--src="/line/images/danbao.png"><span id="nr1037">{{ linedataB.collateral }}</span>-->
+                <!--</p>-->
               </a>
               <!--<i style="">信誉:</i>-->
 
@@ -109,7 +141,7 @@
               <!--src="../static/gongsi/images/wlgs_danbao.png">-->
 
             </P>
-            <p class="p2"><i>联系人：</i><font 
+            <p class="p2"><i>联系人：</i><font
               id="nr04"
               style="dispaly:inline-block;padding-right:10px">{{ item.contactsName }}</font><a
                 style="padding-left: 0px"

@@ -238,7 +238,7 @@ export default {
         //总数
         let _data = await getpjNum(this.$axios, this.$route.query)
         this.pjNum = _data.data
-        console.log(this.pjNum, 'pjnum')
+        // console.log(this.pjNum, 'pjnum')
         //
       }
     },
@@ -251,9 +251,10 @@ export default {
   methods: {
     loadPagination() {
       $('#pagination1').pagination({
-        currentPage: this.currentPage,
+        currentPage: 1,
         totalPage: this.pages,
         callback: async current => {
+          this.currentPage = current
           $('#current1').text(current)
           let obj = await getpjLists(
             this.$axios,
@@ -265,7 +266,7 @@ export default {
           let assessLevel = ''
           this.pages = obj.pages
           this.list = obj.list
-          this.currentPage = obj.currentPage
+          // this.currentPage = obj.currentPage
         }
       })
     },
@@ -298,19 +299,16 @@ export default {
       this.assessLevel = assessLevel
       let vo
       // vo.assessLevel = assessLevel
-      getpjLists(
-        this.$axios,
-        this.currentPage,
-        vo,
-        this.$route.query,
-        assessLevel
-      ).then(res => {
-        let obj = res
-        // this.pages = obj.pages
-        this.list = obj.list
-        // this.currentPage = obj.currentPage
-        // console.log(this.list, 'this.list')
-      })
+      getpjLists(this.$axios, 1, vo, this.$route.query, assessLevel).then(
+        res => {
+          let obj = res
+          this.pages = obj.pages
+          this.list = obj.list
+          this.currentPage = obj.currentPage
+          // console.log(res, 'this.res')
+          this.loadPagination()
+        }
+      )
     },
     closeDialog() {
       this.$emit('close')

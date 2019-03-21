@@ -682,7 +682,7 @@ table tr:nth-child(odd){
   flex-direction: column;
   box-sizing: border-box;
 }
-.zx_sx_new li{
+.zx_sx_new li a{
   flex: 1;
   display: flex;
   margin:10px 0;
@@ -695,10 +695,10 @@ table tr:nth-child(odd){
 /* .zx_sx_new li a:nth-child(3){
   flex: 2;
 } */
-.zx_sx_new li a:nth-child(6){
+.zx_sx_new li span:nth-child(6){
   flex: 2;
 }
-.zx_sx_new li a{
+.zx_sx_new li span{
   flex: 1;
   text-align: center;
 }

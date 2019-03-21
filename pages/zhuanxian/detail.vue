@@ -1030,7 +1030,7 @@ async function getCanyColl(
     `/28-web/collect/company?access_token=${access_token}&user_token=${user_token}&companyId=${companyId}&handle=${handle}
 `
   )
-  console.log(res, 'ress-getCanyColl')
+  // console.log(res, 'ress-getCanyColl')
   if (res.data.status === 200) {
     return {
       data: res.data
@@ -2215,7 +2215,7 @@ export default {
           if (res.data.data == true) {
             this.isComanyColl = true
           }
-          console.log(res.data.data, 'res方法2')
+          // console.log(res.data.data, 'res方法2')
         })
       }
     },

@@ -118,8 +118,10 @@ function cx01() {
       for (var i = 0; i < items.length; i++) {
         s2 += `
         <li 
-         style="width: 33%;text-align: center;float: left;cursor: pointer"><a 
-     href="/gongsi?locationCity=${items[i].name}&locationProvince=${locationProvince}"
+         style="width: 33%;text-align: center;float: left;cursor: pointer;padding:2px 0"><a 
+     href="/gongsi?locationCity=${
+       items[i].name
+     }&locationProvince=${locationProvince}"
          class="liclass"
          id="liclass"
          locationCity="${items[i].name}"

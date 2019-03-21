@@ -37,7 +37,7 @@
                   name="name">全国</span>
                   <ul
                     class="index_uls"
-                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 160px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
                     <li
                     style="width: 33%;text-align: center;"><a
                       href="#"
@@ -109,7 +109,7 @@
               <li
                 v-for="(item,i) in listE"
                 :key="i"
-                style="padding-top: 10px;font-size:16px; padding-left: 10px;">
+                style="padding-top: 16px;font-size:16px; padding-left: 10px;">
                 <div><span
                   class="rem_bot_b_title"
                   style="color:#333">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
@@ -168,21 +168,21 @@
           rows="3"
           cols="20"
           placeholder="请输入运单号，例如："
-          style="width: 230px;margin-left: 10px">
+          style="width: 230px;margin-left: 10px;height:40px">
         <input
 
           type="button"
-          style="height: 30px;">
+          style="height: 42px;">
         <div
           class="ydh"
-          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 85px;color:#0d91e9;margin-left: 30px"
+          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer; top: 92px;;color:#0d91e9;margin-left: 30px"
         >
           <span>1809260061</span>
         </div>
         <div><button
           id="yd_cx1"
           class="layui-btn"
-          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top:50px"
+          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top: 25px;"
         >立即查询</button></div>
       </div>
     </div>
@@ -240,7 +240,7 @@
       </div>
       <div
         class="list_checkbox"
-        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px">
+        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px;background:#fff">
 
         <div class="form_class">
 
@@ -347,46 +347,48 @@
                 <selectMap/>
               </div>
             </div>
-            <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
-              <i
-                style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer"
-                @click="findMe">我也想出现在这里</i>
-            </div>
-            <div
-              class="tj_none"
-              v-if="!listG.length || listG==null">
-              <span>没有相关物流公司推荐</span>
-            </div>
-            <ul>
-              <li
-                style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
-                v-for="(item, i) in listG"
-                :key="i"
-                :class="'bg'+i">
-                <a
-                  :href="'/member/'+ item.id"
-                  target="_blank">
-                  <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
-                  <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
-                  <div
-                  style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
-                    <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
-                    <span
-                      style="font-size: 12px;color: #fff;padding-right: 5px"
-                      v-for="(item, i) in item.advService"
-                      :key="i"
+            <div class="remqy">
+              <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
+                <i
+                  style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer"
+                  @click="findMe">我也想出现在这里</i>
+              </div>
+              <div
+                class="tj_none"
+                v-if="listG==[] || listG==null">
+                <span>没有相关物流公司推荐</span>
+              </div>
+              <ul>
+                <li
+                  style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
+                  v-for="(item, i) in listG"
+                  :key="i"
+                  :class="'bg'+i">
+                  <a
+                    :href="'/member/'+ item.id"
+                    target="_blank">
+                    <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
+                    <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
+                    <div
+                    style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
+                      <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
+                      <span
+                        style="font-size: 12px;color: #fff;padding-right: 5px"
+                        v-for="(item, i) in item.advService"
+                        :key="i"
 
-                  >{{ item }}</span></div>
-                  <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
-                    <img
-                      v-if="item.mobile || item.mobile != null"
-                      src="../../static/gongsi/images/phoneico.png"
-                      alt="">
-                    <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
+                    >{{ item }}</span></div>
+                    <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
+                      <img
+                        v-if="item.mobile || item.mobile != null"
+                        src="../../static/gongsi/images/phoneico.png"
+                        alt="">
+                      <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           <HotList
             :lines="lineHots"
@@ -1283,6 +1285,9 @@ export default {
       .bg11 {
         background: rgb(25, 138, 194) !important;
       }
+      a:hover {
+        color: #fff;
+      }
     }
   }
   // 推荐企业
@@ -1291,7 +1296,7 @@ export default {
       ul#index_map1 {
         li.spanclass:hover {
           background: rgb(78, 142, 212);
-          color: #fff;
+          color: #fff !important;
         }
       }
     }

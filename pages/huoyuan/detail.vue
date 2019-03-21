@@ -289,14 +289,6 @@
               @click="showMoblieFn()"
               :class="[checkMoblie ? '' : 'checkMobile']">
             {{ checkMoblie ? check : '查看电话' }}</a>
-          <!-- <a 
-              v-show="checkMoblie"
-              style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
-              @click="showMoblieFn(showMoblie)">查看电话</a>
-            <a 
-              v-show="showMoblie"
-              style="color: #333" 
-              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li> -->
           </li>
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
@@ -831,7 +823,6 @@
 import Add from './add'
 import Lelp from './help'
 import Order from './order'
-
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 export default {
   name: 'Detail',
@@ -920,7 +911,6 @@ export default {
       .catch(err => {
         // console.log('hyDetail:', err)
       })
-    // console.log(hyDetails, 'hyDetails')
     let parm = {
       currentPage: 1,
       pageSize: 10,
@@ -962,7 +952,6 @@ export default {
       .catch(err => {
         // console.log('archivals')
       })
-    // console.log(archivals, 'archivals.data.data')
     if (archivals.data.status === 200) {
       let credit = archivals.data.data.credit
       if (credit >= 0 && credit <= 3) {
@@ -1271,10 +1260,10 @@ export default {
       }
     }
   },
-  // destroyed() {
-  //   clearInterval(this.inTerVar)
-  //   this.inTerVar = null
-  // },
+  destroyed() {
+    clearInterval(this.inTerVar)
+    this.inTerVar = null
+  },
   methods: {
     showMoblieFn() {
       let access_token = $.cookie('access_token')
@@ -1290,7 +1279,6 @@ export default {
     },
     checkobile() {
       // this.isMobile = !this.isMobile
-
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
@@ -1325,6 +1313,7 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       let companyId = this.archival.companyId
+      let id = this.$route.query
       this.isCencelCollect = true
       this.isShowCollect = false
       if (access_token && user_token) {
@@ -1335,7 +1324,7 @@ export default {
               '&user_token=' +
               user_token +
               '&carInfoId=' +
-              query.id +
+              id +
               '&companyId=' +
               companyId +
               '&handle=' +
@@ -1360,6 +1349,7 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       let companyId = this.archival.companyId
+      let id = this.$route.query
       this.isCencelCollect = false
       this.isShowCollect = true
       if (access_token && user_token) {
@@ -1370,7 +1360,7 @@ export default {
               '&user_token=' +
               user_token +
               '&carInfoId=' +
-              query.id +
+              id +
               '&companyId=' +
               companyId +
               '&handle=' +
@@ -1503,7 +1493,6 @@ export default {
     },
     search() {
       this.searchDo()
-      //
       window.location.href = `/huoyuan?endArea=${this.endArea}&endCity=${
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${

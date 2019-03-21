@@ -2,7 +2,7 @@
   <div class="detail_list">
     <div
       id="js002"
-      class="w1036" >
+      class="" >
       <!--
       <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
 
@@ -21,6 +21,7 @@
           v-for="(item, index) in info"
           :key="index"
           class="wlzx_list"
+          :data-isRenZhen="item.isRenZhen"
           style="margin-right: 0px;">
           <li
             class="wlzx_list_1"
@@ -53,7 +54,7 @@
                 id="nr02"
                 :href="'/member/'+ item.id"
                 target="_blank"
-              ><span style="padding-right:12px;    vertical-align: middle;">{{ item.companyName }}</span>
+              ><span style="padding-right:12px; vertical-align: middle;">{{ item.companyName }}</span>
                 <span v-if="item.isEq">
                   <img
                     v-for="(item, index) in item.eq1"
@@ -75,41 +76,27 @@
                     class="xy_zuan"
                     src="../static/gongsi/images/34huanguan.gif">
                 </span>
+                <span v-if="item.isRenZhen">
+                  <img
+                    src="../static/gongsi/images/wlgs_shiming.png"
+                    alt="">
+                </span>
+                <span v-if="item.showIsVip">
+                  <img
+                    src="../static/gongsi/images/xinyong.png"
+                    alt="">
+                </span>
+                <span v-if="item.isAuthStatus">
+                  <img
+                    src="../static/gongsi/images/wlgs_danbao.png"
+                    alt="">
+                </span>
+                
               </a>
-              <!--<i style="">信誉:</i>-->
-
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="require('../static/gongsi/images/blue.gif')">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--v-for="(item,i) in 5"-->
-              <!--:key="i"-->
-              <!--class="xy_guan"-->
-              <!--src="../static/gongsi/images/34huanguan.gif">-->
-              <!--<img-->
-              <!--class="wlgs_shiming"-->
-              <!--src="../static/gongsi/images/wlgs_shiming.png">-->
-              <!--<img-->
-              <!--class="wlgs_xinyong"-->
-              <!--src="../static/gongsi/images/xinyong.png">-->
-              <!--<img-->
-              <!--class="wlgs_danbao"-->
-              <!--src="../static/gongsi/images/wlgs_danbao.png">-->
+            
 
             </P>
-            <p class="p2"><i>联系人：</i><font 
+            <p class="p2"><i>联系人：</i><font
               id="nr04"
               style="dispaly:inline-block;padding-right:10px">{{ item.contactsName }}</font><a
                 style="padding-left: 0px"
@@ -169,7 +156,7 @@ export default {
   watch: {
     info: {
       handler(n, o) {
-        console.log(n, 'nnn')
+        // console.log(n, 'nnn')
       },
       deep: true
     }
@@ -212,14 +199,15 @@ export default {
   .wlzx_list {
     border: 0px;
     width: 1080px;
-    height: 150px;
+    // height: 150px;
     padding-top: 22px;
     overflow: hidden;
-    margin-bottom: 1px;
+    // margin-bottom: 1px;
     border-bottom: #e4e4e4 1px solid;
     transition: all 0.4s;
+    padding-bottom: 20px;
     li {
-      height: 140px;
+      // height: 140px;
       float: left;
       overflow: hidden;
       a {
@@ -304,7 +292,6 @@ export default {
   .wlzx_list_2 {
     margin-left: 30px;
     width: 295px;
-    margin-left: 20px;
 
     .p1 {
       margin-bottom: 20px;
@@ -339,12 +326,12 @@ export default {
   .wlzx_list_3 {
     width: 310px;
     margin-left: 15px;
-    padding-top: 20px;
+    padding-top: 45px;
     .p1 {
       // line-height: 30px;
     }
     p.p2 {
-      // line-height: 20px;
+      padding-top: 22px;
     }
   }
   .wlzx_list_3 p i {

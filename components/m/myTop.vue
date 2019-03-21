@@ -1,5 +1,7 @@
 <template>
-  <div class="component_header flex_a b_b">
+  <div
+    class="component_header flex_a b_c_w"
+    :class="[showLine?'b_b':'']">
     <div class="flex_1 flex_a">
       <img
         class="padding_l_20"
@@ -14,7 +16,13 @@
 
 <script>
 export default {
-  name: 'MyTop'
+  name: 'MyTop',
+  props: {
+    showLine: {
+      type: Boolean,
+      default: true
+    }
+  }
 }
 </script>
 
@@ -24,7 +32,7 @@ export default {
     width: 0.2rem;
     height: 0.38rem;
   }
-  height: 0.88rem;
+  min-height: 0.88rem;
   color: #42474b;
 }
 </style>

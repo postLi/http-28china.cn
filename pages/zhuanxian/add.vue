@@ -227,9 +227,6 @@ export default {
           this.$route.query,
           this.assessLevel
         )
-        // console.log(obj.list, 'list1')
-        // console.log(obj, 'getpjListData')
-        // console.log('this2')
         this.pages = obj.pages
         this.list = obj.list
         this.currentPage = obj.currentPage

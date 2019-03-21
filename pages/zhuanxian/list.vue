@@ -982,6 +982,9 @@ export default {
         font-weight: bold;
         padding-left: 20px;
       }
+      .form_findme {
+        padding-left: 10px;
+      }
     }
   }
 

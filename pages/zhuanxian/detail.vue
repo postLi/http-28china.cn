@@ -107,10 +107,12 @@
               <li><img
                 src="/line/images/04ewm.png"
                 alt=""></li>
-              <li @click="downFn">
+              <li 
+                style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"
+                @click="downFn">
                 <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
                 <p>多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的货源，并可实时接</p>
-                <p>收28快运为您推荐的精品货源提醒!</p>
+                <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">收28快运为您推荐的精品货源提醒!</p>
               </li>
             </ul>
           </div>

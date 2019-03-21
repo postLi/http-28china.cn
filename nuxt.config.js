@@ -1,5 +1,5 @@
 const pkg = require('./package')
-
+var TransformModulesPlugin = require('webpack-transform-modules-plugin')
 module.exports = {
   mode: 'universal',
   modern: true, // 编译为现代 ES Module，并自动分辨浏览器输出
@@ -55,6 +55,9 @@ module.exports = {
     script: [
       {
         src: '/vendor/jquery-1.12.4.min.js'
+      },
+      {
+        src: '/vendor/polyfill.min.js'
       }
     ]
   },
@@ -165,6 +168,7 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
+    plugins: [new TransformModulesPlugin()],
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

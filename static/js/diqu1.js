@@ -64,7 +64,7 @@ function cx01() {
     //初始化
     var s1 = ''
     var s2 = ''
-    // console.log(datas, 'datas')
+    console.log(datas, 'datas')
     // s1 +=
     //   '<span style="width: 33%; text-align: center;display: inline-block;">不限</span>'
     s1 += `
@@ -90,7 +90,7 @@ function cx01() {
                  >${name}</span>
                   <ul
                     class="index_uls"
-                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 150px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;border-radius: 3px">
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 160px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;border-radius: 3px">
                     <li style="width: 33%;"><a href="#"><span>广州</span></a></li>
                   </ul>
                   </li>
@@ -110,16 +110,25 @@ function cx01() {
         items = []
         return item.parent_code == name
       })
-
+      // console.log()
       // herf="gongsi?locationCity=${items[i].name}&locationProvince=${locationProvince}"
       s2 = `
         
       `
       for (var i = 0; i < items.length; i++) {
+        if (items[i].name == locationProvince) {
+          // console.log(
+          //   items[i].name == locationProvince,
+          //   'items[i].name == locationProvince'
+          // )
+          $('.index_uls').hide()
+        }
         s2 += `
         <li 
-         style="width: 33%;text-align: center;float: left;cursor: pointer"><a 
-     href="/gongsi?locationCity=${items[i].name}&locationProvince=${locationProvince}"
+         style="width: 33%;text-align: center;float: left;cursor: pointer;padding:2px 0"><a 
+     href="/gongsi?locationCity=${
+       items[i].name
+     }&locationProvince=${locationProvince}"
          class="liclass"
          id="liclass"
          locationCity="${items[i].name}"

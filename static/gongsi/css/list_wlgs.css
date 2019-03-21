@@ -353,7 +353,7 @@ padding: 0 21px
 /*.header_links*/
 /*.list_left*/
 .list_left{
-  width: 1035px;
+  width: 1080px;
   float: left;
 }
 /*.list_left*/
@@ -361,7 +361,7 @@ padding: 0 21px
 .list_right{
   min-height: 272px;
   height: auto !important;
-  width: 344px;
+  width: 298px;
   padding: 0px 0px 0 20px;
   float: left;
 }

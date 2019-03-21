@@ -28,6 +28,10 @@ export const actions = {
         .then(res => {
           let data = res.data
           if (data.status === 200) {
+            data.data.unshift({
+              code: 0,
+              name: '全国'
+            })
             let ndata = data.data ? data.data || [] : []
             commit('setData', {
               name: obj.name,

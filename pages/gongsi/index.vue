@@ -37,7 +37,7 @@
                   name="name">全国</span>
                   <ul
                     class="index_uls"
-                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 160px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
                     <li
                     style="width: 33%;text-align: center;"><a
                       href="#"
@@ -109,10 +109,10 @@
               <li
                 v-for="(item,i) in listE"
                 :key="i"
-                style="padding-top: 10px;font-size:16px; padding-left: 10px;">
+                style="padding-top: 16px;font-size:16px; padding-left: 10px;">
                 <div><span
                   class="rem_bot_b_title"
-                  style="color:#333">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
+                  style="color:#333;vertical-align: middle;padding-right:10px">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
                   <img
                     src="../../static/gongsi/images/04tuijian.png"
                     alt=""></div>
@@ -168,21 +168,21 @@
           rows="3"
           cols="20"
           placeholder="请输入运单号，例如："
-          style="width: 230px;margin-left: 10px">
+          style="width: 230px;margin-left: 10px;height:40px">
         <input
 
           type="button"
-          style="height: 30px;">
+          style="height: 42px;">
         <div
           class="ydh"
-          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 85px;color:#0d91e9;margin-left: 30px"
+          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer; top: 92px;;color:#0d91e9;margin-left: 30px"
         >
           <span>1809260061</span>
         </div>
         <div><button
           id="yd_cx1"
           class="layui-btn"
-          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top:50px"
+          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top: 25px;"
         >立即查询</button></div>
       </div>
     </div>
@@ -240,7 +240,7 @@
       </div>
       <div
         class="list_checkbox"
-        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px">
+        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px;background:#fff">
 
         <div class="form_class">
 
@@ -277,7 +277,7 @@
             </li>
           </ul>
         </div>
-        <div style="display: inherit;padding-left:55px;position: relative">
+        <div style="display: inherit;padding-left:100px;position: relative">
           <input
             type="text"
             placeholder="公司名称"
@@ -296,7 +296,9 @@
       <div class="list_center">
         <div class="list_left">
 
-          <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
+          <div 
+            class="zx_sx"
+            style="border-bottom:2px solid #2577ff"><span class="biaozhi"/><span>物流公司列表</span></div>
 
 
           <div
@@ -311,12 +313,12 @@
           <img
             src="../../static/gongsi/images/listbg.png"
             alt=""
-            width="1040"
+            width="1080"
           >
           <DetailList :info="getgsListsFn"/>
           <!--分页-->
           <div
-
+            v-if="gsList.length>10 ||gsList !=[]"
             class="box"
             style="float: right;margin-right: 170px;">
             <div
@@ -347,46 +349,48 @@
                 <selectMap/>
               </div>
             </div>
-            <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
-              <i
-                style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer"
-                @click="findMe">我也想出现在这里</i>
-            </div>
-            <div
-              class="tj_none"
-              v-if="!listG.length || listG==null">
-              <span>没有相关物流公司推荐</span>
-            </div>
-            <ul>
-              <li
-                style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
-                v-for="(item, i) in listG"
-                :key="i"
-                :class="'bg'+i">
-                <a
-                  :href="'/member/'+ item.id"
-                  target="_blank">
-                  <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
-                  <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
-                  <div
-                  style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
-                    <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
-                    <span
-                      style="font-size: 12px;color: #fff;padding-right: 5px"
-                      v-for="(item, i) in item.advService"
-                      :key="i"
+            <div class="remqy">
+              <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
+                <i
+                  style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer;padding-right:5px"
+                  @click="findMe">我也想出现在这里</i>
+              </div>
+              <div
+                class="tj_none"
+                v-if="listG==[] || listG==null">
+                <span>没有相关物流公司推荐</span>
+              </div>
+              <ul>
+                <li
+                  style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
+                  v-for="(item, i) in listG"
+                  :key="i"
+                  :class="'bg'+i">
+                  <a
+                    :href="'/member/'+ item.id"
+                    target="_blank">
+                    <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
+                    <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
+                    <div
+                    style="text-align: center;width: 200px;border: 1px solid #ccc;padding:10px;margin:20px 45px 0 32px;">
+                      <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
+                      <span
+                        style="font-size: 12px;color: #fff;padding-right: 5px"
+                        v-for="(item, i) in item.advService"
+                        :key="i"
 
-                  >{{ item }}</span></div>
-                  <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
-                    <img
-                      v-if="item.mobile || item.mobile != null"
-                      src="../../static/gongsi/images/phoneico.png"
-                      alt="">
-                    <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
+                    >{{ item }}</span></div>
+                    <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
+                      <img
+                        v-if="item.mobile || item.mobile != null"
+                        src="../../static/gongsi/images/phoneico.png"
+                        alt="">
+                      <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           <HotList
             :lines="lineHots"
@@ -648,7 +652,7 @@ export default {
           : item.otherServiceNameList
       })
     }
-    console.log(listE.data.data, 'listE')
+    // console.log(listE.data.data, 'listE')
 
     let codeObj = {
       name: '不限',
@@ -661,12 +665,8 @@ export default {
       })
     }
 
-    //checkbox
-
-    // console.log(listH.data.data, 'listHlistH')
-
-    // getGSList
     let gsList = await getGSList($axios, 1, vo, '')
+    // console.log(gsList, 'gsListgsListgsListgsListgsList')
     gsList.list.forEach(item => {
       // item.num = Math.ceil(Math.random() * 30)
       let arr = (item.id || '').split('')
@@ -785,10 +785,6 @@ export default {
     },
     getgsListFn() {
       return this.gsList.slice(0, 10)
-      //       item.num = (num % 30) + 1
-      // return this.gsList.slice(0, 10).forEach(item => {
-      //   item.num = (num % 30) + 1
-      // })
     },
     getgsListsFn() {
       return this.gsList.slice(10)
@@ -804,10 +800,8 @@ export default {
     script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
-    // this.companyName = this.$route.query.companyName
+    // this.initList()
 
-    // console.log(this.$route.query.companyName, '$route')
-    // this.companyName = decodeURI(GetUrlParam('companyName')) || ''
     var newArr = new Array()
     var _newArr = new Array()
     let _this = this
@@ -892,35 +886,6 @@ export default {
           seajs.use(['../gongsi/js/list_wlgs.js'], function() {
             seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
               seajs.use(['../js/gaodemap2.js'], function() {
-                // this.loadPagination()
-                // $('#buxian').change(function() {
-                //   // var item = $('.input_class')
-                //   console.log($(this).attr('data-code'), 'data-code')
-                //   if ($(this).prop('checked')) {
-                //     $('input[name=checkbox]').prop('checked', false)
-                //   } else {
-                //   }
-                // })
-                // var newArr = new Array()
-                // $('input[name=checkbox]:checkbox').click(function() {
-                //   $('input[name=checkbox]:checkbox').each(function() {
-                //     // newArr = []
-                //     if ($(this).prop('checked')) {
-                //       newArr.push($(this).attr('data-code'))
-                //     }
-                //   })
-                //   var uniqueNames = []
-                //   $.each(newArr, function(i, el) {
-                //     if ($.inArray(el, uniqueNames) === -1)
-                //       uniqueNames.push(el)
-                //     this.checkboxItem.push(el)
-                //   })
-                //   // var checkboxItem = []
-                //   // checkboxItem.push(uniqueNames)
-                //   console.log(this.checkboxItem, 'uniqueNames')
-                // })
-
-                //
                 layui.use('form', function() {
                   var form = layui.form
                   form.render()
@@ -987,15 +952,6 @@ export default {
                   }
                   return true
                 }
-                // $('#pagination1').pagination({
-                //   currentPage: 1,
-                //   totalPage: process02(1),
-                //   callback: function(current) {
-                //     $('#current1').text(current)
-                //     process02(current)
-                //     window.location.href = '#top'
-                //   }
-                // })
               })
             })
           })
@@ -1023,14 +979,27 @@ export default {
         // console.log(res, 'res', this.gsList)
       })
     },
+    initList() {
+      getGSList(this.$axios, this.currentPage, this.vo).then(res => {
+        let obj = res
+        this.pages = obj.pages
+        this.gsList = obj.list
+        this.currentPage = obj.currentPage
+        console.log(res, this.vo, this.currentPage, this.pages)
+        this.loadPagination()
+      })
+    },
     loadPagination() {
+      console.log('objo566bjobj')
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
           $('#current1').text(current)
           let obj = await getGSList(this.$axios, current, this.vo)
+          // console.log(obj, 'objobjobj')
           this.gsList = obj.list
+          this.pages = obj.pages
           this.currentPage = obj.currentPage
           window.location.href = '#top'
         }
@@ -1186,8 +1155,22 @@ export default {
       padding: 10px 20px 20px;
       border: 1px solid #ececec;
       margin-bottom: 10px;
+      .form_findme {
+        #wlLineFrom,
+        #wlLineTo {
+          width: 230px;
+          .arrow {
+            top: 70%;
+            right: 0;
+          }
+        }
+        .textare {
+          width: 235px;
+        }
+      }
       .textinput {
-        width: 178px !important;
+        width: 130px !important;
+        margin-right: 3px;
       }
     }
   }
@@ -1283,6 +1266,9 @@ export default {
       .bg11 {
         background: rgb(25, 138, 194) !important;
       }
+      a:hover {
+        color: #fff;
+      }
     }
   }
   // 推荐企业
@@ -1291,7 +1277,7 @@ export default {
       ul#index_map1 {
         li.spanclass:hover {
           background: rgb(78, 142, 212);
-          color: #fff;
+          color: #fff !important;
         }
       }
     }

@@ -84,6 +84,7 @@
     </transition>
     <div
       :class="[showMask?'mask2':'']"
+      :style="{'top':top}"
       @click="closeMask()"/>
   </div>
 </template>
@@ -92,6 +93,12 @@
 import localStorage from '../../pages/m/utils/localStorage'
 export default {
   name: 'SelectAddress',
+  props: {
+    top: {
+      type: String,
+      default: '0'
+    }
+  },
   data() {
     return {
       showMask: false,
@@ -133,23 +140,28 @@ export default {
       }
     },
     selectProvince(item) {
-      this.$axios
-        .get(
-          '/aflc-common/common/aflcCommonPCA/v1/findAflcCommonPCAByCode?code=' +
-            item.code
-        )
-        .then(res => {
-          let data = res.data
-          if (data.status === 200) {
-            this.cityList = data.data ? data.data || [] : []
-            this.showAddr = [
-              { code: item.code, name: item.name, show: false },
-              { code: '', name: '', show: true },
-              { code: '', name: '', show: false }
-            ]
-          }
-        })
-        .catch(err => {})
+      if (item.name === '全国') {
+        this.$emit('setArea', ['', '', ''])
+        this.showMask = false
+      } else {
+        this.$axios
+          .get(
+            '/aflc-common/common/aflcCommonPCA/v1/findAflcCommonPCAByCode?code=' +
+              item.code
+          )
+          .then(res => {
+            let data = res.data
+            if (data.status === 200) {
+              this.cityList = data.data ? data.data || [] : []
+              this.showAddr = [
+                { code: item.code, name: item.name, show: false },
+                { code: '', name: '', show: true },
+                { code: '', name: '', show: false }
+              ]
+            }
+          })
+          .catch(err => {})
+      }
     },
     selectCity(item) {
       this.$axios
@@ -247,6 +259,7 @@ export default {
     },
     closeMask() {
       this.showMask = false
+      this.$emit('setArea', false)
     }
   }
 }
@@ -281,7 +294,6 @@ export default {
 }
 .mask2 {
   position: fixed;
-  top: 0;
   left: 0;
   z-index: 13;
   width: 100%;

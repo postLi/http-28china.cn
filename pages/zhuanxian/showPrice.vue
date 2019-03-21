@@ -181,12 +181,81 @@ export default {
 
 <style lang="scss">
 .showPrice {
-  .p1 {
-    /*.font2:hover {*/
-    /*.price_box1 {*/
-    /*display: block;*/
-    /*}*/
-    /*}*/
+  position: relative;
+  .price_box1 {
+    display: block;
+    width: 400px;
+    height: 180px;
+    min-height: 110px;
+    position: absolute;
+    left: 200px;
+    top: 45px;
+    margin-left: 0px;
+    /* border-radius: 6px;*/
+    /*display: none;*/
+    background-color: #fff7d3;
+    /*box-shadow:0px 0px 20px rgba(0,0,0,0.3);*/
+    padding-left: 15px;
+    padding-top: 10px;
+    border: 1px solid #979797;
+    border-radius: 3px;
+  }
+
+  .price_box2 {
+    width: 400px;
+    height: 180px;
+    min-height: 110px;
+    position: absolute;
+    left: 200px;
+    top: 80px;
+    margin-left: 0px;
+    /*border-radius: 6px;*/
+    /*display: none;*/
+    background-color: #fff;
+    /* box-shadow:0px 0px 20px rgba(0,0,0,0.3);*/
+    padding-left: 15px;
+    padding-top: 10px;
+    background-color: #fff7d3;
+    border: 1px solid #979797;
+  }
+
+  .price_box_bt {
+    float: left;
+    width: 100%;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .price_box_item1,
+  .price_box_item2 {
+    float: left;
+    width: 100%;
+    height: 24px;
+    line-height: 24px;
+  }
+
+  .price_box_item1 span,
+  .price_box_item2 span {
+    float: left;
+    font-size: 12px;
+    color: #333;
+    min-width: 130px;
+    height: 28px;
+  }
+
+  .price_box_item1 font,
+  .price_box_item2 font {
+    text-decoration: line-through;
+    float: left;
+    font-size: 12px;
+    color: #333;
+    width: 47px;
+    height: 28px;
+    margin-left: 3px;
+    text-align: right;
   }
 }
 </style>

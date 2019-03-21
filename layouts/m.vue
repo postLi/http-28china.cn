@@ -18,14 +18,57 @@ export default {
     ],
     __dangerouslyDisableSanitizers: ['script']
   },
+  beforeCreate() {
+    console.log(123132)
+    if (this.$store.state.m.provinceList.length === 0) {
+      this.$store.dispatch('m/GETPROVINCELIST', {
+        data: '',
+        name: 'provinceList'
+      })
+    }
+  },
   beforeMount() {
     AMap.plugin('AMap.CitySearch', () => {
       let citySearch = new AMap.CitySearch()
       citySearch.getLocalCity((status, result) => {
         if (status === 'complete' && result.info === 'OK') {
+          // 首页开始地
           this.$store.dispatch('m/SETDATA', {
             data: [result.province, result.city, ''],
             name: 'startName'
+          })
+          // 专线页开始地
+          this.$store.dispatch('m/zhuanxian/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName'
+          })
+          // 专线列表
+          this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
+            data: {
+              currentPage: this.$store.state.m.zhuanxian.currentPage,
+              pageSize: 20,
+              startProvince: result.province,
+              startCity: result.city,
+              startArea: '',
+              endProvince: '',
+              endCity: '',
+              endArea: ''
+            },
+            name: 'rangeList'
+          })
+          // 货源列表
+          this.$store.dispatch('m/huoyuan/GETRANGELIST', {
+            data: {
+              currentPage: this.$store.state.m.zhuanxian.currentPage,
+              pageSize: 20,
+              startProvince: result.province,
+              startCity: result.city,
+              startArea: '',
+              endProvince: '',
+              endCity: '',
+              endArea: ''
+            },
+            name: 'rangeList'
           })
         }
       })
@@ -35,6 +78,13 @@ export default {
 }
 </script>
 <style>
+.mScroll .cube-pullup-wrapper .before-trigger {
+  padding: 0;
+  display: flex;
+}
+.mScroll .cube-pullup-wrapper .before-trigger span {
+  font-size: 16px;
+}
 html,
 body {
   margin: 0;
@@ -149,6 +199,21 @@ body {
 }
 .flex_3 {
   flex: 3;
+}
+.margin_10 {
+  margin: 0.1rem;
+}
+.margin_l_10 {
+  margin-top: 0.1rem;
+}
+.margin_r_10 {
+  margin-right: 0.1rem;
+}
+.margin_t_10 {
+  margin-top: 0.1rem;
+}
+.margin_b_10 {
+  margin-bottom: 0.1rem;
 }
 .margin_20 {
   margin: 0.2rem;
@@ -271,6 +336,9 @@ body {
 }
 .f_w_b {
   font-weight: bold;
+}
+.t_c {
+  text-align: center;
 }
 .f-16 {
   font-size: 0.16rem;

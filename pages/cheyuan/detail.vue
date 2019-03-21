@@ -32,7 +32,7 @@
             v-for="(item,index) in zxList"
             v-if="index < 14"
             target="_blank"
-            :href="'/cheyuan?startCity=&startProvince=&endProvince='+cy1.endProvince + '&endCity=' + item.name"
+            :href="'/cheyuan?startCity='+cy1.startCity+'&startProvince='+cy1.startProvince+'&endProvince='+cy1.endProvince + '&endCity=' + item.name"
             :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
           </a>
         </div>
@@ -51,7 +51,7 @@
           <a
             v-for="(item,index) in zxList"
             target="_blank"
-            :href="'/cheyuan?startCity=&startProvince=&endProvince='+cy1.endProvince + '&endCity=' + item.name"
+            :href="'/cheyuan?startCity='+cy1.startCity+'&startProvince='+cy1.startProvince+'&endProvince='+cy1.endProvince + '&endCity=' + item.name"
             v-if="index >= 14"
             :key="index"><span>{{ item.name.substring(0, 2) }}</span>
           </a>
@@ -1019,7 +1019,7 @@ export default {
               position: 'insideTop',
               formatter: function(params) {
                 console.log(params)
-                return `{color1|${params.name}}\n{color0|${params.value}万}`
+                return `{color1|${params.name}}\n{color0|${params.value}元}`
               },
               rich: {
                 color0: {
@@ -1071,7 +1071,7 @@ export default {
               if (params.dataIndex === 4) {
                 return ``
               } else {
-                return `{${c0}|${params.value}万}\n{color2|${params.name}}`
+                return `{${c0}|${params.value}元}\n{color2|${params.name}}`
               }
             },
             rich: {
@@ -1227,7 +1227,7 @@ export default {
                           console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
-                          }万}`
+                          }元}`
                         },
                         rich: {
                           color0: {
@@ -1279,7 +1279,7 @@ export default {
                         if (params.dataIndex === 4) {
                           return ``
                         } else {
-                          return `{${c0}|${params.value}万}\n{color2|${
+                          return `{${c0}|${params.value}元}\n{color2|${
                             params.name
                           }}`
                         }

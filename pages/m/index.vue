@@ -21,8 +21,8 @@
           <div class="flex_sb width_100">
             <div
               class="f-46 flex_1 oneElisp"
-              :class="[($store.state.m.startName[1]==='' && $store.state.m.startName[2]==='')?'c-9':'c-3']"
-              @click="clickStart()">{{ ($store.state.m.startName[1]==='' && $store.state.m.startName[2]==='')? '选那儿送' : $store.state.m.startName[2]===''?$store.state.m.startName[1]:$store.state.m.startName[2] }}</div>
+              :class="[($store.state.m.startName[0]!=='' && $store.state.m.startName[1]==='' && $store.state.m.startName[2]==='')?'c-9':'c-3']"
+              @click="clickStart()">{{ $store.state.m.startName[0]===''?'全国': ($store.state.m.startName[1]==='' && $store.state.m.startName[2]==='')? '选那儿送' : $store.state.m.startName[2]===''?$store.state.m.startName[1]:$store.state.m.startName[2] }}</div>
             <div class="flex_1 flex">
               <img
                 src="/m/home/home_wangfan.png"
@@ -32,8 +32,8 @@
             <div
               class="f-46 flex_1 oneElisp"
               style="text-align: end"
-              :class="[($store.state.m.endName[1]==='' && $store.state.m.endName[2]==='')?'c-9':'c-3']"
-              @click="clickEnd()">{{ ($store.state.m.endName[1]==='' && $store.state.m.endName[2]==='')? '往那儿运' : $store.state.m.endName[2]===''?$store.state.m.endName[1]:$store.state.m.endName[2] }}</div>
+              :class="[($store.state.m.endName[0]!=='' && $store.state.m.endName[1]==='' && $store.state.m.endName[2]==='')?'c-9':'c-3']"
+              @click="clickEnd()">{{ $store.state.m.endName[0]===''?'全国': ($store.state.m.endName[1]==='' && $store.state.m.endName[2]==='')? '往那儿运' : $store.state.m.endName[2]===''?$store.state.m.endName[1]:$store.state.m.endName[2] }}</div>
           </div>
 
           <div
@@ -43,10 +43,10 @@
         </div>
       </div>
       <div class="content1 margin_t_20 flex_sb">
-        <nuxt-link
+        <div
           v-for="(item,index) in content1List"
           :key="index"
-          :to="item.to">
+          @click="toList(item,index)">
           <div
             class="content1_circle flex"
             :style="{'background':item.bc}">
@@ -55,7 +55,7 @@
               style="width: 60%">
           </div>
           <div class="c-3 f-26">{{ item.name }}</div>
-        </nuxt-link>
+        </div>
       </div>
       <div class="content2 margin_t_20 flex_as">
         <div class="flex_sb width_100">
@@ -82,7 +82,10 @@
           style="width: 0.46rem">
         <div>首页</div>
       </div>
-      <div class="flex_f flex_a middle">
+      <div
+        class="flex_f flex_a middle"
+        @click="showMask = true"
+      >
         <div class="circle flex">
           <img
             src="/m/home/home_fahuo.png"
@@ -104,6 +107,33 @@
     <SelectAddress
       ref="selectEndAddress"
       @setArea="getEndArea"/>
+
+    <div
+      class="flex"
+      :class="[showMask?'mask2':'']"
+      @click="showMask = false">
+      <div
+        class="down_window flex_f"
+        @click.stop.prevent="">
+        <div class="flex_jfe">
+          <img
+            src="/images/login_close.png"
+            @click="showMask = false">
+        </div>
+        <div class="f-46 t_c f_w">APP下单发货</div>
+        <div class="f-32 t_c f_w">注册立送8200元，名满即止</div>
+        <div class="f-32 t_c f_w">发货贵了，差价双倍返还</div>
+        <img
+          src="/m/home/u23.png"
+          class="width_100">
+        <div
+          class="down f-32 f_w flex"
+          @click="downApp()">前往下载</div>
+        <div
+          class="f-32 t_c f_w margin_t_20"
+          @click="showMask = false">暂不</div>
+      </div>
+    </div>
   </div>
 
 </template>
@@ -114,6 +144,7 @@ export default {
   layout: 'm',
   data() {
     return {
+      showMask: false,
       navList: [
         { id: 0, name: '找专线' },
         { id: 1, name: '找货源' },
@@ -124,32 +155,32 @@ export default {
           name: '专线大厅',
           url: '/m/home/home_zhuanxian.png',
           bc: '#929DFB',
-          to: '/m/zhuanxian'
+          to: '/m/pageView'
         },
         {
           name: '货源大厅',
           url: '/m/home/home_huoyuandt.png',
           bc: '#F77D5E',
-          to: '/m/huoyuan'
+          to: '/m/pageView'
         },
         {
           name: '车源大厅',
           url: '/m/home/home_cheyuandt.png',
           bc: '#F6CB43',
-          to: '/m/cheyuan'
+          to: '/m/pageView'
         },
         {
           name: '物流公司',
           url: '/m/home/home_wuliugs.png',
           bc: '#5592F7',
-          to: '/m/gongsi'
+          to: '/m/pageView'
         }
       ],
       content2List: [
         {
           name: '在线下单',
           url: '/m/home/home_xiadan.png',
-          to: '/m/zhuanxian'
+          to: ''
         },
         {
           name: '运单查询',
@@ -159,7 +190,7 @@ export default {
         {
           name: 'APP下载',
           url: '/m/home/home_app.png',
-          to: '/m/cheyuan'
+          to: ''
         },
         {
           name: '活动中心',
@@ -169,12 +200,7 @@ export default {
       ]
     }
   },
-  async fetch({ $axios, app, query, store }) {
-    await store.dispatch('m/GETPROVINCELIST', {
-      data: '',
-      name: 'provinceList'
-    })
-  },
+  async fetch({ $axios, app, query, store }) {},
   created() {
     //
   },
@@ -183,22 +209,93 @@ export default {
   },
   methods: {
     getEndArea(data) {
-      this.$store.dispatch('m/SETDATA', {
-        data: data,
-        name: 'endName'
-      })
+      if (data) {
+        this.$store.dispatch('m/SETDATA', {
+          data: data,
+          name: 'endName'
+        })
+      }
     },
     getStartArea(data) {
-      this.$store.dispatch('m/SETDATA', {
-        data: data,
-        name: 'startName'
-      })
+      if (data) {
+        this.$store.dispatch('m/SETDATA', {
+          data: data,
+          name: 'startName'
+        })
+      }
     },
     search() {
       console.log(this.$store.state.m)
     },
+    toList(item, i) {
+      this.$router.push(item.to)
+      this.$store.commit('m/pageView/setData', {
+        name: 'footerId',
+        data: i
+      })
+      if (item.name === '专线大厅') {
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'currentPage',
+          data: 1
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'rangeList',
+          data: []
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'scrollTo',
+          data: 0
+        })
+        let parm = {
+          currentPage: this.$store.state.m.zhuanxian.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.zhuanxian.startName[0],
+          startCity: this.$store.state.m.zhuanxian.startName[1],
+          startArea: this.$store.state.m.zhuanxian.startName[2],
+          endProvince: this.$store.state.m.zhuanxian.endName[0],
+          endCity: this.$store.state.m.zhuanxian.endName[1],
+          endArea: this.$store.state.m.zhuanxian.endName[2]
+        }
+        // 专线列表
+        this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
+      if (item.name === '货源大厅') {
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'currentPage',
+          data: 1
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'rangeList',
+          data: []
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'scrollTo',
+          data: 0
+        })
+        let parm = {
+          currentPage: this.$store.state.m.zhuanxian.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.zhuanxian.startName[0],
+          startCity: this.$store.state.m.zhuanxian.startName[1],
+          startArea: this.$store.state.m.zhuanxian.startName[2],
+          endProvince: this.$store.state.m.zhuanxian.endName[0],
+          endCity: this.$store.state.m.zhuanxian.endName[1],
+          endArea: this.$store.state.m.zhuanxian.endName[2]
+        }
+        // 专线列表
+        this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
+    },
     toClick(name) {
-      //
+      if (name === '在线下单' || name === 'APP下载') {
+        this.showMask = true
+      }
     },
     clickEnd() {
       this.$refs.selectEndAddress.showMask = true
@@ -221,6 +318,9 @@ export default {
         data: id,
         name: 'navId'
       })
+    },
+    downApp() {
+      window.location.href = 'http://h5.28tms.com/'
     }
   }
 }
@@ -321,5 +421,27 @@ export default {
   border-top-left-radius: 0.16rem;
   border-top-right-radius: 0.16rem;
   color: #000000;
+}
+.mask2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 13;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.down_window {
+  width: 80%;
+  height: 8.2rem;
+  z-index: 100;
+  background: #ee595a;
+  padding: 0.2rem;
+  .down {
+    margin: 0 auto;
+    width: 4.8rem;
+    height: 0.9rem;
+    background: #ffaa00;
+  }
 }
 </style>

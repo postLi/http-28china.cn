@@ -239,12 +239,16 @@ body {
   display: inline-block;
 }
 
-.arc_left_down ul li {
-  float: left;
+.arc_left_down ul li:first-of-type {
+  display: inline-block;
+  /* float: left; */
 }
 
 .arc_left_down ul li:nth-of-type(2) {
-  padding: 15px 10px 17px 5px;
+  display: inline-block;
+  width: 250px;
+  vertical-align: middle;
+  /* padding: 15px 10px 17px 5px; */
   cursor: pointer;
 }
 

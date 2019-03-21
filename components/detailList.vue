@@ -2,7 +2,7 @@
   <div class="detail_list">
     <div
       id="js002"
-      class="w1036" >
+      class="" >
       <!--
       <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
 
@@ -175,7 +175,7 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.info, 'infofdf')
+    console.log(this.info, 'infofdf')
     // this.info.forEach(item => {
     //   // item.num = Math.ceil(Math.random() * 30)
     // })
@@ -211,15 +211,16 @@ export default {
   }
   .wlzx_list {
     border: 0px;
-    width: 1030px;
-    height: 150px;
+    width: 1080px;
+    // height: 150px;
     padding-top: 22px;
     overflow: hidden;
-    margin-bottom: 1px;
+    // margin-bottom: 1px;
     border-bottom: #e4e4e4 1px solid;
     transition: all 0.4s;
+    padding-bottom: 20px;
     li {
-      height: 140px;
+      // height: 140px;
       float: left;
       overflow: hidden;
       a {
@@ -304,7 +305,6 @@ export default {
   .wlzx_list_2 {
     margin-left: 30px;
     width: 295px;
-    margin-left: 20px;
 
     .p1 {
       margin-bottom: 20px;
@@ -339,12 +339,12 @@ export default {
   .wlzx_list_3 {
     width: 310px;
     margin-left: 15px;
-    padding-top: 20px;
+    padding-top: 45px;
     .p1 {
       // line-height: 30px;
     }
     p.p2 {
-      // line-height: 20px;
+      padding-top: 20px;
     }
   }
   .wlzx_list_3 p i {

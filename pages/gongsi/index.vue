@@ -112,7 +112,7 @@
                 style="padding-top: 16px;font-size:16px; padding-left: 10px;">
                 <div><span
                   class="rem_bot_b_title"
-                  style="color:#333">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
+                  style="color:#333;vertical-align: middle;padding-right:10px">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
                   <img
                     src="../../static/gongsi/images/04tuijian.png"
                     alt=""></div>
@@ -296,7 +296,9 @@
       <div class="list_center">
         <div class="list_left">
 
-          <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
+          <div 
+            class="zx_sx"
+            style="border-bottom:2px solid #2577ff"><span class="biaozhi"/><span>物流公司列表</span></div>
 
 
           <div
@@ -311,7 +313,7 @@
           <img
             src="../../static/gongsi/images/listbg.png"
             alt=""
-            width="1040"
+            width="1080"
           >
           <DetailList :info="getgsListsFn"/>
           <!--分页-->
@@ -350,7 +352,7 @@
             <div class="remqy">
               <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
                 <i
-                  style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer"
+                  style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer;padding-right:5px"
                   @click="findMe">我也想出现在这里</i>
               </div>
               <div
@@ -370,7 +372,7 @@
                     <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
                     <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
                     <div
-                    style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
+                    style="text-align: center;width: 200px;border: 1px solid #ccc;padding:10px;margin:20px 45px 0 32px;">
                       <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
                       <span
                         style="font-size: 12px;color: #fff;padding-right: 5px"
@@ -1188,8 +1190,22 @@ export default {
       padding: 10px 20px 20px;
       border: 1px solid #ececec;
       margin-bottom: 10px;
+      .form_findme {
+        #wlLineFrom,
+        #wlLineTo {
+          width: 230px;
+          .arrow {
+            top: 70%;
+            right: 0;
+          }
+        }
+        .textare {
+          width: 235px;
+        }
+      }
       .textinput {
-        width: 178px !important;
+        width: 130px !important;
+        margin-right: 3px;
       }
     }
   }

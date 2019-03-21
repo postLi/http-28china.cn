@@ -107,7 +107,7 @@ export default {
             payChannel = 'ali'
           }
           var url =
-            '/api/aflc-uc/usercenter/aflcinsurancepolicy/v1/scanPay/' +
+            '/aflc-uc/usercenter/aflcinsurancepolicy/v1/scanPay/' +
             theRequest.id +
             '?access_token=' +
             $.cookie('access_token') +

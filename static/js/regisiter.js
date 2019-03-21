@@ -667,7 +667,7 @@
               appid: data.appid,
               scope: data.scope,
               redirect_uri: encodeURIComponent(
-                'http://www.28china.cn/plus/list.php?tid=78'
+                'http://www.28kuaiyun.cn/plus/list.php?tid=78'
               ),
               state: data.state,
               style: '',
@@ -823,8 +823,8 @@
         .done(function(res) {
           if (res.access_token) {
             var domain = location.hostname
-            if (domain.indexOf('28china.cn') !== -1) {
-              domain = '.28china.cn'
+            if (domain.indexOf('28kuaiyun.cn') !== -1) {
+              domain = '.28kuaiyun.cn'
             }
             $.cookie('access_token', res.access_token, {
               expires: 7,

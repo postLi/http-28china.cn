@@ -19,7 +19,7 @@
             <p><span
               :class="indexPl==3?'active':'unActive'"
               class="unActive"
-              @click="showPingLunFn(3)"/>全部({{ infopj.all || 0 }})</p>
+              @click="showPingLunFn(3)"/>全部({{ pjNum.all || 0 }})</p>
           </li>
           <li>
             <!-- <p>dfj</p> -->
@@ -27,7 +27,7 @@
             <p><span
               :class="indexPl==0?'active':'unActive'"
               class="unActive"
-              @click="showPingLunFn(0)"/>好评({{ infopj.good || 0 }})</p>
+              @click="showPingLunFn(0)"/>好评({{ pjNum.good || 0 }})</p>
           </li>
           <li>
             <!-- <p>fkdf</p> -->
@@ -35,7 +35,7 @@
             <p><span
               :class="indexPl==1?'active':'unActive'"
               class="unActive"
-              @click="showPingLunFn(1)"/>中评({{ infopj.middle || 0 }})</p>
+              @click="showPingLunFn(1)"/>中评({{ pjNum.middle || 0 }})</p>
           </li>
           <li>
             <!-- <p>df</p> -->
@@ -43,7 +43,7 @@
             <p><span
               :class="indexPl==2?'active':'unActive'"
               class="unActive"
-              @click="showPingLunFn(2)"/>差评({{ infopj.bad || 0 }})</p>
+              @click="showPingLunFn(2)"/>差评({{ pjNum.bad || 0 }})</p>
           </li>
         </ul>
         <div v-if="list==[]||list.length==0">
@@ -76,7 +76,7 @@
                 class="pj_r">
                 <p style="color:rgb(76,76,76)">{{ item.evaluationDes }}</p>
                 <p style="padding-top:10px;color:rgb(181,189,205)">{{ item.createTime }}</p>
-                <!-- <p style="color:rgb(255,197,96);padding:10px;border:1px solid #ccc; padding: 10px;border: 1px solid;width: 505px;margin-top: 20px;"><span style="display: inline-block;">[回复]</span>:dfdfdf</p> -->
+      
                 <p style="color:rgb(255,197,96);padding:10px;border:1px solid #ccc; padding: 10px;border: 1px solid;width: 505px;margin-top: 20px;"><span style="display: inline-block;">[回复]：{{ item.replyDes }}</span></p>
               </div>
             </li>
@@ -84,12 +84,16 @@
         </div>
         <!--分页-->
         <div
+          
           class="box"
           style="float: right;margin-right: 170px;">
+          <div v-if="list==[]"/>
           <div
+            v-else
             id="pagination1"
             class="page fl"/>
           <div class="info fl">
+            
           <!-- <p>当前页数：<span id="current1">1</span></p> -->
           </div>
         </div>
@@ -100,7 +104,6 @@
   </LllDialog>
 </template>
 <script>
-import $axios from 'axios'
 import LllDialog from '../../components/lllDialog'
 
 async function getpjLists($axios, currentPage, vo = {}, query, assessLevel) {
@@ -118,6 +121,23 @@ async function getpjLists($axios, currentPage, vo = {}, query, assessLevel) {
       list: res.data.data.list,
       pages: res.data.data.pages,
       currentPage: res.data.data.pageNum
+    }
+  } else {
+    return { list: [], pages: 0, currentPage: 1 }
+  }
+  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
+}
+async function getpjNum($axios, query) {
+  let res = await $axios.get(
+    `/28-web/rangeEva/range/assessLevel/count?rangeId=${query.id}
+`
+  )
+
+  if (res.data.status === 200) {
+    return {
+      data: res.data.data
+      // pages: res.data.data.pages,
+      // currentPage: res.data.data.pageNum
     }
   } else {
     return { list: [], pages: 0, currentPage: 1 }
@@ -151,13 +171,7 @@ export default {
       default: () => {}
     }
   },
-  async asyncData({ $axios, app, query, error }) {
-    let vo
-    let getpjListData = await getpjLists($axios, 1, vo)
-
-    // console.log('ressss1')
-    // console.log(getpjListData, 'getpjListData')
-  },
+  async asyncData({ $axios, app, query, error }) {},
   head: {
     link: [
       { rel: 'stylesheet', href: '/line/css/article_wlzx.css' },
@@ -179,6 +193,7 @@ export default {
       assessLevel: '',
       indexPl: 3,
       list: [],
+      pjNum: {},
       pages: 0, //总页数
       currentPage: 1, //当前页
       // isShow: this.show,
@@ -204,42 +219,43 @@ export default {
   watch: {
     async showDiv(n) {
       if (n == true) {
-        // console.log(this.assessLevel, 'this.assessLevel')
         let vo
         let obj = await getpjLists(
           this.$axios,
-          1,
+          this.currentPage,
           vo,
           this.$route.query,
           this.assessLevel
         )
         // console.log(obj.list, 'list1')
         // console.log(obj, 'getpjListData')
+        // console.log('this2')
         this.pages = obj.pages
         this.list = obj.list
         this.currentPage = obj.currentPage
         this.loadPagination()
+
+        //总数
+        let _data = await getpjNum(this.$axios, this.$route.query)
+        this.pjNum = _data.data
+        // console.log(this.pjNum, 'pjnum')
+        //
       }
     },
     types(n, o) {},
     info(n, o) {
       console.log(n, 'nnn1')
-    },
-    infopj(n, o) {
-      console.log(n, 'infopj')
-    },
-    infopjs(n, o) {
-      // console.log(n, 'infopjs')
     }
   },
   mounted() {},
   methods: {
     loadPagination() {
       $('#pagination1').pagination({
-        currentPage: this.currentPage,
+        currentPage: 1,
         totalPage: this.pages,
         callback: async current => {
-          // $('#current1').text(current)
+          this.currentPage = current
+          $('#current1').text(current)
           let obj = await getpjLists(
             this.$axios,
             current,
@@ -247,11 +263,10 @@ export default {
             this.$route.query,
             this.assessLevel
           )
-          // console.log(obj, 'objobj11')
           let assessLevel = ''
           this.pages = obj.pages
           this.list = obj.list
-          this.currentPage = obj.currentPage
+          // this.currentPage = obj.currentPage
         }
       })
     },
@@ -284,19 +299,16 @@ export default {
       this.assessLevel = assessLevel
       let vo
       // vo.assessLevel = assessLevel
-      getpjLists(
-        this.$axios,
-        this.currentPage,
-        vo,
-        this.$route.query,
-        assessLevel
-      ).then(res => {
-        let obj = res
-        this.pages = obj.pages
-        this.list = obj.list
-        this.currentPage = obj.currentPage
-        // console.log(this.list, 'this.list')
-      })
+      getpjLists(this.$axios, 1, vo, this.$route.query, assessLevel).then(
+        res => {
+          let obj = res
+          this.pages = obj.pages
+          this.list = obj.list
+          this.currentPage = obj.currentPage
+          // console.log(res, 'this.res')
+          this.loadPagination()
+        }
+      )
     },
     closeDialog() {
       this.$emit('close')
@@ -306,13 +318,6 @@ export default {
 
       //把绑定的弹窗数组 设为false即可关闭弹窗
     }
-    // closeMe(done) {
-    //   this.reset()
-    //   this.$emit('update:popVisible', false)
-    //   if (typeof done === 'function') {
-    //     done()
-    //   }
-    // }
   }
 }
 </script>

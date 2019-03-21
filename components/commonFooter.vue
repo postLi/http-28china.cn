@@ -37,13 +37,13 @@
           <a href="javascript:void(0)">精选案例</a>
           <a href="/zixun">资讯动态</a>
           <a 
-            href="http://www.anfanet.com/tech-info.html" 
+            href="/help/ggp/index.jhtml" 
             target="_blank">帮助中心</a>
         </div>
         <div class="footer1-1">
           <a href="javascript:void(0)">友情链接：</a>
           <a 
-            href="http://www.28china.cn" 
+            href="http://www.28kuaiyun.cn" 
             target="_blank"> 28快运官网</a>
           <a 
             href="http://www.28tms.com" 

@@ -149,34 +149,37 @@
             <li class="yd_4">
               <ul>
                 <li class="yd_item">
-                  <img src="/images/yd_huo.png"><span><a 
+                  <img src="/images/yd_huo.png"><a 
                     target="_blank" 
-                    href="/huoyuan">当前货物</a></span>
-                  <i id="data001">{{ dailyData.goodsCount }}</i>
+                    href="/huoyuan"><span>当前货物</span>
+                    <i id="data001">{{ dailyData.goodsCount }}</i>
+                  </a>
                 </li>
                 <li class="yd_item">
-                  <img src="/images/yd_zx.png"><span><a 
+                  <img src="/images/yd_zx.png"><a 
                     target="_blank"
-                    href="/zhuanxian/list">物流专线</a></span>
-                  <i id="data002">{{ dailyData.transportRangeCount }}</i>
+                    href="/zhuanxian/list"><span>物流专线</span>
+                    <i id="data002">{{ dailyData.transportRangeCount }}</i>
+                  </a>
                 </li>
                 <li class="yd_item">
-                  <img src="/images/yd_che.png"><span><a 
+                  <img src="/images/yd_che.png"><a 
                     target="_blank"
-                    href="/cheyuan">车源信息</a></span>
-                  <i id="data003">{{ dailyData.carInfoCount }}</i>
+                    href="/cheyuan"><span>车源信息</span>
+                    <i id="data003">{{ dailyData.carInfoCount }}</i>
+                  </a>
                 </li>
               </ul>
 
             </li>
             <li class="yd_5"><img src="/images/yd_jt.png">
-              <span>今日新增:</span><span><a 
+              <span>今日新增:</span><a 
                 target="_blank" 
-                href="/huoyuan">货源</a></span><i id="data004">{{ dailyData.toDayGoodsCount }}</i><span><a 
+                href="/huoyuan"><span>货源</span><i id="data004">{{ dailyData.toDayGoodsCount }}</i></a><a 
                   target="_blank"
-                  href="/zhuanxian/list">专线</a></span><i id="data005">{{ dailyData.toDayTransportRangeCount }}</i><span><a 
+                  href="/zhuanxian/list"><span>专线</span><i id="data005">{{ dailyData.toDayTransportRangeCount }}</i></a><a 
                     target="_blank"
-                    href="/cheyuan">车源</a></span><i id="data006">{{ dailyData.toDayCarInfoCount }}</i>
+                    href="/cheyuan"><span>车源</span><i id="data006">{{ dailyData.toDayCarInfoCount }}</i></a>
             </li>
 
           </ul>
@@ -226,10 +229,12 @@
                 <div class="loginBtn"><a
                   target="_blank"
                   href="/hyzx">会员中心</a></div>
-                <div class="regBtn"> <a
-                  id="my_website"
-                  target="_blank"
-                  :href="'/member/' + $cookies.get('login_userId')">我的网站</a></div>
+                <div 
+                  v-if="$cookies.get('login_type') === 'aflc-5'"
+                  class="regBtn"> <a
+                    id="my_website"
+                    target="_blank"
+                    :href="'/member/' + $cookies.get('login_userId', {parseJSON: false})">我的网站</a></div>
               </div>
             </div>
 
@@ -1548,9 +1553,9 @@ export default {
       areaData = store.state.area
     }
     let paramArea = {
-      province: areaData.currentProvinceFullName,
-      city: areaData.currentAreaFullName,
-      area: ''
+      startProvince: areaData.currentProvinceFullName,
+      startCity: areaData.currentAreaFullName,
+      startArea: ''
     }
     // console.log('before fetch cookie2222: ', areaData.currentAreaName)
 
@@ -1618,7 +1623,7 @@ export default {
           return data.map((els, index) => {
             return els.map(el => {
               el.url = el.url.replace(
-                'http://192.168.1.79/anfacms',
+                /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
                 index === 0 ? '/help' : '/zixun'
               )
               // console.log('el typemg', el.typeImg)

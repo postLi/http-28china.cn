@@ -64,8 +64,7 @@
                   <input
                     name="ddd"
                     style="height: 100%;width:100%;border: none;outline: none;"
-                    data-toggle="city-picker"
-                    data-level="district"
+                    wtmap="detail"
                     type="text"
                     placeholder="请输入详细地址查附近网点" >
                 </div>
@@ -82,7 +81,36 @@
                   readonly=""
                   value="重置 "
                   @click="reload()">
+                
               </form>
+                <br>
+                <!-- 出发地
+                <div class="order-line-from clearfix">
+                  <div class="order-form-item">
+                    <div class="order-form-label"><span class="required">*</span>出发地：</div>
+                    <div class="order-form-input" >
+                      <input 
+                        id="start_position" 
+                        wtmap="" 
+                        maxlength="40" 
+                        type="text" 
+                        placeholder="请选择 省-市-县">
+                    </div>
+                  </div>
+                  <div class="order-form-item form-detail">
+                    <div class="order-form-label">街道/门牌号：</div>
+                    <div class="order-form-input">
+                      <input 
+                        wtmapinit="" 
+                        wtmap="{township}{street}{building}" 
+                        maxlength="40" 
+                        type="text" 
+                        placeholder="请填写详细地址">
+                    </div>
+                  </div>
+                </div> -->
+
+
               </dd>
               <dt>公司名称&nbsp;:</dt>
               <dd >
@@ -133,7 +161,9 @@
                   <div
                     id="js010"
                     class="wlzx_yq_nr">
-                    <div class="wlzx_yq_none">
+                    <div 
+                      v-if="logisticsPark.length==0"
+                      class="wlzx_yq_none">
                       <font>暂无园区信息</font>
                     </div>
 
@@ -335,13 +365,13 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   let res = await $axios.post('/28-web/pointNetwork/list', parm) //车源信息列表
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
-      if (item.pointName.length > 15) {
+      if (item.pointName && item.pointName.length > 15) {
         item.pointName = item.pointName.substring(0, 15) + '...'
       }
-      if (item.companyName.length > 15) {
+      if (item.companyName && item.companyName.length > 15) {
         item.companyName = item.companyName.substring(0, 15) + '...'
       }
-      if (item.pointAddress.length > 15) {
+      if (item.pointAddress && item.pointAddress.length > 15) {
         item.pointAddress = item.pointAddress.substring(0, 15) + '...'
       }
     })
@@ -380,11 +410,7 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
-    script: [
-      { src: '/js/city-picker.data.js' },
-      { src: '/js/city-picker.js' },
-      { src: '/js/jquery.pagination.min.js' }
-    ]
+    script: [{ src: '/js/jquery.pagination.min.js' }]
   },
   data() {
     return {
@@ -402,6 +428,7 @@ export default {
     }
   },
   async asyncData({ $axios, app, query }) {
+    let pos = query.pos ? query.pos.split(',') : ['', '']
     let vo = {
       startProvince: query.startProvince
         ? query.startProvince
@@ -418,7 +445,10 @@ export default {
       parkName: query.parkName ? query.parkName : '',
       otherServiceCode: query.otherServiceCode ? query.otherServiceCode : '',
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
-      companyName: query.companyName ? query.companyName : ''
+      companyName: query.companyName ? query.companyName : '',
+      latitude: pos[1],
+      longitude: pos[0],
+      parkId: query.parkId || ''
     }
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
@@ -473,7 +503,12 @@ export default {
       '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
     )
 
-    let logisticsPark = await getWdiangSearchList($axios, vo)
+    let logisticsPark = await getWdiangSearchList($axios, {
+      locationArea: vo.startArea,
+      locationCity: vo.startCity,
+      locationProvince: vo.startProvince,
+      ...vo
+    })
     //网点信息列表
     if (AF029.data.status === 200) {
       AF029.data.data.unshift({ code: '', name: '不限' })
@@ -486,11 +521,15 @@ export default {
       AF025: AF025.data.status === 200 ? AF025.data.data : [],
       logisticsPark: logisticsPark,
       WangdiangInfoList: WangdiangInfoList.list,
+      pages: WangdiangInfoList.pages,
       recommendList: recommendList,
-      vo: vo
+      vo: vo,
+      companyName: query.companyName || ''
     }
   },
   mounted() {
+    this.companyName = this.$route.query.companyName || ''
+    seajs.use(['/js/gaodemap2.js'])
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
@@ -546,19 +585,29 @@ export default {
         $('#list_wlzx_yq').css('display', 'none')
       }
     })
+
+    $('#select_wlyq').val(this.$route.query.parkName || '')
+    $('#select_wlyq').attr('name', this.$route.query.parkId || '')
     $('#addressFrom input').citypicker({
       province: this.vo.startProvince,
       city: this.vo.startCity,
       district: this.vo.startArea
     })
-    $('#addressTo input').citypicker({
-      province: this.endProvince,
-      city: this.endCity,
-      district: this.endArea
+    $('#addressTo input').on('mouseenter', () => {
+      this.setMap()
     })
+    $('#addressTo input').val(this.$route.query.address || '')
+
     this.pagination()
   },
   methods: {
+    setMap() {
+      this.searchDo()
+      $('#addressTo input').attr(
+        'wtmapinit',
+        this.startProvince + this.startCity + this.startArea
+      )
+    },
     searchDo() {
       let list1 = [],
         list2 = []
@@ -578,6 +627,8 @@ export default {
     },
     search() {
       this.searchDo()
+      let pos = $('#addressTo input').attr('thepos') || ''
+      let address = $('#addressTo input').val() || ''
       window.location.href = `/wangdian/?&belongBrandCode=${
         this.vo.belongBrandCode
       }&otherServiceCode=${this.vo.otherServiceCode}&companyName=${
@@ -586,7 +637,9 @@ export default {
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
         this.startCity
-      }&startProvince=${this.startProvince}`
+      }&startProvince=${
+        this.startProvince
+      }&pos=${pos}&address=${address}&parkId=${this.parkId || ''}`
     },
     //品牌
     AF029Click(item) {
@@ -600,6 +653,7 @@ export default {
     },
     addTitle(item) {
       this.parkName = item.parkName
+      this.parkId = item.id
     },
     //园区
     async seachlist() {
@@ -610,9 +664,16 @@ export default {
       this.vo.startProvince = list1[0] ? list1[0] : ''
       this.vo.startCity = list1[1] ? list1[1] : ''
       this.vo.startArea = list1[2] ? list1[2] : ''
-      this.logisticsPark = await getWdiangSearchList(this.$axios, this.vo)
+      this.logisticsPark = await getWdiangSearchList(this.$axios, {
+        locationArea: this.vo.startArea,
+        locationCity: this.vo.startCity,
+        locationProvince: this.vo.startProvince,
+        ...this.vo
+      })
+      console.log(this.logisticsPark, 'logisticsPark')
     },
     pagination() {
+      console.log('this.pages:', this.pages)
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,

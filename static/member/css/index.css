@@ -1196,7 +1196,7 @@ clear: both;
     line-height: 38px;
     
 }
-.search_input span{color: #999;vertical-align: middle;line-height: 38px;display: inline-block;}
+.search_input span{color: #999;vertical-align: middle;display: inline-block;}
 .search_input .search_input1, .search_input .search_input2 {
     border: 0px;
     width: 170px;
@@ -1254,7 +1254,7 @@ background-color: #48abee;
 
 .main3{	
 	width: 1400px;
-	min-height: 250px;
+	min-height: 260px;
 	margin-bottom: 26px;}
 .main3_bt1{height: 32px;width:1398px;padding-bottom: 20px;padding-top: 30px;margin-bottom: 20px; border: 1px solid #e2e2e2;}
 .main3_bt1_1{float:left;height: 32px;width: 430px;margin-left: 30px;}
@@ -1291,7 +1291,8 @@ background-color: #48abee;
 
 .main4{	
 	width: 1400px;
-	height: 352px;
+    height: 352px;
+    clear: both;
 	margin-bottom: 80px;}
 .main4_left {
 	width: 688px;
@@ -1942,6 +1943,32 @@ height:138px;
 .city-select-wrap {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
+input[data-toggle="city-picker"], input[data-level="district"]{
+    border: none;
+    background: transparent;
+  }
+  
+  .city-select-tab {
+    border-bottom: 1px solid #ccc;
+    background: #f0f0f0;
+    font-size: 13px;
+    position: relative;
+  }
+  .city-select-reset{
+    position: absolute;
+    top: 3px;
+    right: 3px;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    background: #fff;
+    border: 1px solid #ccc;
+    text-align: center;
+    cursor: pointer;
+  }
+  .city-select-reset:hover{
+    background: #ffe;
+  }
 
 .city-select-tab {
     border-bottom: 1px solid #ccc;

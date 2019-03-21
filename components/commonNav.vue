@@ -213,7 +213,9 @@
 
           <li
             id="jgzs"
-            style="margin-left: 20px;"><a href="#">价格指数</a></li>
+            style="margin-left: 20px;"><a 
+              @click.stop.prevent="showNoneTip" 
+              href="#">价格指数</a></li>
           <li style="margin-left: 20px;"><a
             target="_blank"
             href="/Insurance">保险商城</a></li>
@@ -244,9 +246,6 @@ export default {
   },
   head: {
     script: [
-      {
-        src: '/js/city-picker.data.js'
-      },
       {
         src: '/js/city-picker.js'
       }
@@ -282,6 +281,13 @@ export default {
     }
   },
   methods: {
+    showNoneTip() {
+      if (window.layer) {
+        layer.msg('正在开发中')
+      } else {
+        alert('正在开发中')
+      }
+    },
     click4() {
       var list1 = [],
         list2 = []

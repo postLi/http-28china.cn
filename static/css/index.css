@@ -3570,7 +3570,10 @@ font-size: 14px;
 
 
 /*省市三联动*/
-
+input[data-toggle="city-picker"], input[data-level="district"]{
+  border: none;
+  background: transparent;
+}
 .city-picker-input {
   opacity: 0 !important;
   top: -9999px;
@@ -3659,6 +3662,22 @@ height: 38px;
   border-bottom: 1px solid #ccc;
   background: #f0f0f0;
   font-size: 13px;
+  position: relative;
+}
+.city-select-reset{
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 50px;
+  height: 25px;
+  line-height: 25px;
+  background: #fff;
+  border: 1px solid #ccc;
+  text-align: center;
+  cursor: pointer;
+}
+.city-select-reset:hover{
+  background: #ffe;
 }
 
 .city-select-tab > a {

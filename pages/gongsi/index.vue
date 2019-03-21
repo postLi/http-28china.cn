@@ -37,7 +37,7 @@
                   name="name">全国</span>
                   <ul
                     class="index_uls"
-                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 140px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 160px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;">
                     <li
                     style="width: 33%;text-align: center;"><a
                       href="#"
@@ -109,10 +109,10 @@
               <li
                 v-for="(item,i) in listE"
                 :key="i"
-                style="padding-top: 10px;font-size:16px; padding-left: 10px;">
+                style="padding-top: 16px;font-size:16px; padding-left: 10px;">
                 <div><span
                   class="rem_bot_b_title"
-                  style="color:#333">{{ item.companyName.length>10?item.companyName.substring(10)+'..':item.companyName }}</span>
+                  style="color:#333;vertical-align: middle;padding-right:10px">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
                   <img
                     src="../../static/gongsi/images/04tuijian.png"
                     alt=""></div>
@@ -168,21 +168,21 @@
           rows="3"
           cols="20"
           placeholder="请输入运单号，例如："
-          style="width: 230px;margin-left: 10px">
+          style="width: 230px;margin-left: 10px;height:40px">
         <input
 
           type="button"
-          style="height: 30px;">
+          style="height: 42px;">
         <div
           class="ydh"
-          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer;top: 85px;color:#0d91e9;margin-left: 30px"
+          style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer; top: 92px;;color:#0d91e9;margin-left: 30px"
         >
           <span>1809260061</span>
         </div>
         <div><button
           id="yd_cx1"
           class="layui-btn"
-          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top:50px"
+          style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;margin-top: 25px;"
         >立即查询</button></div>
       </div>
     </div>
@@ -240,7 +240,7 @@
       </div>
       <div
         class="list_checkbox"
-        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px">
+        style="display: flex;line-height: 38px;border: solid 1px #dedede;padding:6px 20px;margin-bottom:20px;background:#fff">
 
         <div class="form_class">
 
@@ -277,14 +277,14 @@
             </li>
           </ul>
         </div>
-        <div style="display: inherit;padding-left:55px;position: relative">
+        <div style="display: inherit;padding-left:100px;position: relative">
           <input
             type="text"
             placeholder="公司名称"
             class="layui-input parkname"
             style="width: 280px"
             v-model="companyName">
-          <a :href="'/gongsi/?companyName='+ companyName"><i
+          <a @click="searchCompanyName"><i
             class="layui-icon layui-icon-search"
             style="font-size: 20px; color: #1E9FFF;display: inherit;vertical-align: middle;position: absolute; top: 3px;right: 10px;cursor: pointer"
           /></a>
@@ -296,7 +296,9 @@
       <div class="list_center">
         <div class="list_left">
 
-          <div class="zx_sx"><span class="biaozhi"/><span>物流公司列表</span></div>
+          <div 
+            class="zx_sx"
+            style="border-bottom:2px solid #2577ff"><span class="biaozhi"/><span>物流公司列表</span></div>
 
 
           <div
@@ -311,7 +313,7 @@
           <img
             src="../../static/gongsi/images/listbg.png"
             alt=""
-            width="1040"
+            width="1080"
           >
           <DetailList :info="getgsListsFn"/>
           <!--分页-->
@@ -341,56 +343,64 @@
           <div
             id="js007"
             class="">
-            <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
-              <i
-                style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer"
-                @click="findMe">我也想出现在这里</i>
+            <div class="list-box-r-phone">
+              <div class="zx_p_tit">帮我找优质承运商</div>
+              <div class="list-box-r-top">
+                <selectMap/>
+              </div>
             </div>
-            <div
-              class="tj_none"
-              v-if="!listG.length || listG==null">
-              <span>没有相关物流公司推荐</span>
-            </div>
-            <ul>
-              <li
-                style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
-                v-for="(item, i) in listG"
-                :key="i"
-                :class="'bg'+i">
-                <a
-                  :href="'/member/'+ item.id"
-                  target="_blank">
-                  <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
-                  <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
-                  <div
-                  style="text-align: center;width: 200px;border: 1px solid #ccc;margin-left: 65px;padding:10px;margin-top: 20px">
-                    <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
-                    <span
-                      style="font-size: 12px;color: #fff;padding-right: 5px"
-                      v-for="(item, i) in item.advService"
-                      :key="i"
+            <div class="remqy">
+              <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
+                <i
+                  style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer;padding-right:5px"
+                  @click="findMe">我也想出现在这里</i>
+              </div>
+              <div
+                class="tj_none"
+                v-if="listG==[] || listG==null">
+                <span>没有相关物流公司推荐</span>
+              </div>
+              <ul>
+                <li
+                  style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
+                  v-for="(item, i) in listG"
+                  :key="i"
+                  :class="'bg'+i">
+                  <a
+                    :href="'/member/'+ item.id"
+                    target="_blank">
+                    <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
+                    <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
+                    <div
+                    style="text-align: center;width: 200px;border: 1px solid #ccc;padding:10px;margin:20px 45px 0 32px;">
+                      <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
+                      <span
+                        style="font-size: 12px;color: #fff;padding-right: 5px"
+                        v-for="(item, i) in item.advService"
+                        :key="i"
 
-                  >{{ item }}</span></div>
-                  <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
-                    <img
-                      v-if="item.mobile || item.mobile != null"
-                      src="../../static/gongsi/images/phoneico.png"
-                      alt="">
-                    <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
-                  </p>
-                </a>
-              </li>
-            </ul>
+                    >{{ item }}</span></div>
+                    <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
+                      <img
+                        v-if="item.mobile || item.mobile != null"
+                        src="../../static/gongsi/images/phoneico.png"
+                        alt="">
+                      <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
+                    </p>
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
           <HotList
             :lines="lineHots"
             :gongsi="true"/>
-          <div class="list-box-r-phone">
+          <!-- <div class="list-box-r-phone">
             <div class="zx_p_tit">帮我找优质承运商</div>
             <div class="list-box-r-top">
               <selectMap/>
             </div>
-          </div>
+          </div> -->
           <div class="list-box-r-news">
             <div
               v-if="gongsi_jryw01"
@@ -480,25 +490,24 @@
     </div>
     <Add
       :show = "isAdd"
+      :types="types"
       @close="noaddFn"/>
   </div>
 </template>
 <script>
-import $axios from 'axios'
 import DetailList from '../../components/detailList'
 import HotList from '../../components/hotList'
 import selectMap from '../zhuanxian/selectMap'
 import FooterLinks from '../../components/footerLinks'
 import Add from './add'
-async function getGSList($axios, currentPage, vo = {}) {
+async function getGSList($axios, currentPage, vo = {}, companyName) {
   let parm = vo
   parm.currentPage = currentPage
   parm.pageSize = 20
+  parm.companyName = companyName
   let aurl = ''
-  if (process.server) {
-    aurl = 'http://localhost:3000'
-  }
-  let res = await $axios.post(aurl + '/api/28-web/logisticsCompany/list', parm)
+
+  let res = await $axios.post(aurl + '/28-web/logisticsCompany/list', parm)
   if (res.data.status === 200) {
     return {
       list: res.data.data.list,
@@ -548,7 +557,10 @@ export default {
       preFn: data => {
         // console.log(data, 'datadfdf')
         return data.map((el, index) => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
 
           return el
         })
@@ -565,7 +577,10 @@ export default {
       name: 'gongsi_wlzx',
       preFn: data => {
         return data.map((el, index) => {
-          el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
 
           return el
         })
@@ -578,7 +593,7 @@ export default {
     let vo = {
       currentPage: 1,
       pageSize: 5,
-      companyName: query.companyName ? query.companyName : '',
+      // companyName: query.companyName ? query.companyName : '',
       city: query.locationCity ? query.locationCity : '',
       province: query.locationProvince ? query.locationProvince : '',
       endArea: query.endArea ? query.endArea : '',
@@ -593,26 +608,25 @@ export default {
         : app.$cookies.get('currentProvinceFullName')
     }
     if (process.server) {
-      aurl = 'http://localhost:3000'
     }
     let vo1 = vo
     delete vo1.currentPage
     delete vo1.pageSize
+
     // delete vo1.locationProvince
     // delete vo1.locationCity
     // /logisticsCompany/adviseRecommend
     // 广告推荐物流公司
     let [listA, listC, listD, listE, listF, listG, listH] = await Promise.all([
-      $axios.get(aurl + '/api/28-web/logisticsCompany/popularity'),
-      $axios.post(
-        aurl + `/api/28-web/logisticsCompany/list/related/links`,
-        vo1
+      $axios.get(aurl + '/28-web/logisticsCompany/popularity'),
+      $axios.post(aurl + `/28-web/logisticsCompany/list/related/links`, vo1),
+      $axios.get(aurl + `/28-web/logisticsCompany/adviseRecommend`),
+      $axios.get(
+        aurl + `/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
       ),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/adviseRecommend`),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/excellent`),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/enter`),
-      $axios.get(aurl + `/api/28-web/logisticsCompany/enterpriseRecommend`),
-      $axios.get(aurl + '/api/28-web/sysDict/getSysDictByCodeGet/AF025')
+      $axios.get(aurl + `/28-web/logisticsCompany/enter`),
+      $axios.get(aurl + `/28-web/logisticsCompany/enterpriseRecommend`),
+      $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
     if (listD.data.status == 200) {
       listD.data.data.forEach(item => {
@@ -636,11 +650,9 @@ export default {
         item.advService = item.productServiceNameList
           ? item.productServiceNameList
           : item.otherServiceNameList
-        item.isR = Math.ceil(Math.random() * 255)
-        item.isG = Math.ceil(Math.random() * 255)
-        item.iB = Math.ceil(Math.random() * 255)
       })
     }
+    console.log(listE.data.data, 'listE')
 
     let codeObj = {
       name: '不限',
@@ -658,7 +670,7 @@ export default {
     // console.log(listH.data.data, 'listHlistH')
 
     // getGSList
-    let gsList = await getGSList($axios, 1, vo)
+    let gsList = await getGSList($axios, 1, vo, '')
     gsList.list.forEach(item => {
       // item.num = Math.ceil(Math.random() * 30)
       let arr = (item.id || '').split('')
@@ -748,7 +760,7 @@ export default {
       }
     })
 
-    console.log(listG.data.data, 'listGlistG.list')
+    // console.log(listG.data.data, 'listGlistG.list')
     return {
       lineHots: listA.data.status == 200 ? listA.data.data : [],
       lineLinks: listC.data.status == 200 ? listC.data.data : [],
@@ -777,6 +789,10 @@ export default {
     },
     getgsListFn() {
       return this.gsList.slice(0, 10)
+      //       item.num = (num % 30) + 1
+      // return this.gsList.slice(0, 10).forEach(item => {
+      //   item.num = (num % 30) + 1
+      // })
     },
     getgsListsFn() {
       return this.gsList.slice(10)
@@ -792,28 +808,21 @@ export default {
     script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
-    this.companyName = this.$route.query.companyName
+    // this.companyName = this.$route.query.companyName
 
     // console.log(this.$route.query.companyName, '$route')
     // this.companyName = decodeURI(GetUrlParam('companyName')) || ''
     var newArr = new Array()
+    var _newArr = new Array()
     let _this = this
     var uniqueNames = []
-    var buxuan = []
+    var newArr = []
     $('#buxian').change(async function() {
-      // console.log(this.gsList, 'gsList')
-      // console.log($(this).attr('data-code'), 'data-code')
       if ($(this).prop('checked')) {
         $('input[name=checkbox]').prop('checked', false)
-        buxuan.push($(this).attr('data-code'))
-        // uniqueNames.push($(this).attr('data-code'))
-        // $.each(newArr, function(i, el) {
-        //   if ($.inArray(el, uniqueNames) === -1) {
-        //     uniqueNames.push(el)
-        //   }
-        // })
-        _this.checkboxItem = buxuan
-        console.log(_this.checkboxItem, 'uniqueNames1')
+        newArr = []
+        _this.checkboxItem = newArr
+        // console.log(_this.checkboxItem, 'uniqueNames1')
         let vo = {}
         vo.otherServiceCodes = _this.checkboxItem
         vo.locationCity =
@@ -824,34 +833,28 @@ export default {
           decodeURI(GetUrlParam('locationProvince')) == 'null'
             ? ''
             : decodeURI(GetUrlParam('locationProvince'))
-
-        vo.companyName =
-          decodeURI(GetUrlParam('companyName')) == 'null'
-            ? ''
-            : decodeURI(GetUrlParam('companyName'))
-        let getgsList = await getGSList($axios, 1, vo)
+        let getgsList = await getGSList(_this.$axios, 1, vo, _this.companyName)
         _this.gsLists = getgsList.list
-        // _this.gsList.forEach(item => {
-        //   item.num = Math.ceil(Math.random() * 30)
-        // })
-        console.log(_this.gsList, vo, 'buxuan')
-        // return gsLists
       } else {
       }
     })
 
     $('input[name=checkbox]:checkbox').click(async function() {
+      newArr.length = 0
       $('input[name=checkbox]:checkbox').each(function() {
         if ($(this).prop('checked')) {
           newArr.push($(this).attr('data-code'))
           $('#buxian').prop('checked', false)
+          console.log(newArr, 'newArrnewArr')
+          // newArr = []
         } else {
           console.log($(this).attr('data-code'), '$(this)')
         }
       })
-
+      uniqueNames = []
       $.each(newArr, function(i, el) {
         if ($.inArray(el, uniqueNames) === -1) {
+          // uniqueNames = []
           uniqueNames.push(el)
         }
       })
@@ -868,11 +871,7 @@ export default {
         decodeURI(GetUrlParam('locationProvince')) == 'null'
           ? ''
           : decodeURI(GetUrlParam('locationProvince'))
-      vo.companyName =
-        decodeURI(GetUrlParam('companyName')) == 'null'
-          ? ''
-          : decodeURI(GetUrlParam('companyName'))
-      let getgsList = await getGSList($axios, 1, vo)
+      let getgsList = await getGSList(_this.$axios, 1, vo, _this.companyName)
       _this.gsList = getgsList.list
       _this.gsList.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
@@ -883,7 +882,7 @@ export default {
         })
         item.num = (num % 30) + 1
       })
-      console.log(getgsList.list, vo, this.gsList, 'quanxuan')
+      // console.log(getgsList.list, vo, this.gsList, 'quanxuan')
     })
     seajs.use(
       [
@@ -936,7 +935,7 @@ export default {
                 var tab1 = $('.echart_scroll_nr1')
                 var tab2 = $('.echart_scroll_nr2')
                 tab2.html(tab1.html())
-                console.log('tab2:' + tab2.html())
+                // console.log('tab2:' + tab2.html())
                 function Marquee() {
                   if (tab2[0].offsetWidth - tab[0].scrollLeft <= 0) {
                     tab[0].scrollLeft -= tab1[0].offsetWidth
@@ -1009,6 +1008,25 @@ export default {
     )
   },
   methods: {
+    searchCompanyName() {
+      console.log(this.companyName, 'this.companyName')
+      let vo = {}
+      vo.locationCity =
+        decodeURI(GetUrlParam('locationCity')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('locationCity'))
+      vo.locationProvince =
+        decodeURI(GetUrlParam('locationProvince')) == 'null'
+          ? ''
+          : decodeURI(GetUrlParam('locationProvince'))
+      getGSList(this.$axios, 1, vo, this.companyName).then(res => {
+        this.gsList = res.list
+        this.gsList.forEach(item => {
+          item.num = (num % 30) + 1
+        })
+        // console.log(res, 'res', this.gsList)
+      })
+    },
     loadPagination() {
       $('#pagination1').pagination({
         currentPage: this.currentPage,
@@ -1023,7 +1041,7 @@ export default {
       })
     },
     getFung(vo) {
-      let gslist = getGSList($axios, 1, vo)
+      let gslist = getGSList(this.$axios, 1, vo)
     },
     findMe() {
       this.addFn()
@@ -1172,8 +1190,22 @@ export default {
       padding: 10px 20px 20px;
       border: 1px solid #ececec;
       margin-bottom: 10px;
+      .form_findme {
+        #wlLineFrom,
+        #wlLineTo {
+          width: 230px;
+          .arrow {
+            top: 70%;
+            right: 0;
+          }
+        }
+        .textare {
+          width: 235px;
+        }
+      }
       .textinput {
-        width: 178px !important;
+        width: 130px !important;
+        margin-right: 3px;
       }
     }
   }
@@ -1269,6 +1301,9 @@ export default {
       .bg11 {
         background: rgb(25, 138, 194) !important;
       }
+      a:hover {
+        color: #fff;
+      }
     }
   }
   // 推荐企业
@@ -1277,7 +1312,7 @@ export default {
       ul#index_map1 {
         li.spanclass:hover {
           background: rgb(78, 142, 212);
-          color: #fff;
+          color: #fff !important;
         }
       }
     }

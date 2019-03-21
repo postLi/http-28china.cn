@@ -89,6 +89,7 @@
                   <input
                     id="flush"
                     readonly=""
+                    @click="resetSearch"
                     name="Submit2"
                     value="重置 "
                     class="list_button">
@@ -146,23 +147,6 @@
                   </div>
                 </dd>
               </div>
-              <dt>发车时间&nbsp;:</dt>
-              <dd id="tjcx_01">
-                <!--lineCodeA-->
-                <span
-                  v-for="(item,index) in lineCodeA"
-                  :key="index"
-                  style="margin-right: 10px;">
-                  <a
-                    :href="'/zhuanxian/list?departureTimeCode='+ item.code"
-                    :data-code="item.code"
-                    :class=" item.name=='不限'? 'now':''"
-                    class="all">{{ item.name }}</a>
-                </span>
-                <!--<a-->
-                <!--class="now all"-->
-                <!--href="/zhuanxian/list">不限</a>-->
-              </dd>
               <dt>选择品牌&nbsp;:</dt>
               <dd id="tjcx_02">
                 <span
@@ -318,7 +302,7 @@
                 <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,10):'暂无' }}</font></p>
                 <p class="p4"><i>地址：</i><font
                   id="nr06"
-                  class="">{{ item.address.length>24?item.address.substring(0,24)+'..':item.address }}</font></p>
+                  class="">{{ item.address }}</font></p>
               </li>
               <li class="wlzx_list_3">
                 <p class="p1"><i
@@ -391,7 +375,29 @@
             <FooterLinks :info="lineLinks.otherRecommend.links|| []"/>
           </div>
         </div>
-
+        <div class="lll-line-bot">
+          <div
+          class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>{{ lineLinks.hotRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.hotRecommend.links"/>
+          </div>
+          <div
+          class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
+          </div>
+          <div
+          class="lll-recommend clearfix">
+            <div
+              class="zx_sx"
+            ><span class="biaozhi"/><span>{{ lineLinks.startFromRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.startFromRecommend.links"/>
+          </div>
+        </div>
       </div>
 
       <div
@@ -432,7 +438,8 @@
         </div>
         <div class="list-box-r-phone">
           <div class="zx_p_tit">帮我找优质承运商</div>
-          <selectMap/>
+          <selectMap 
+          :line="true"/>
         </div>
         <div class="list-box-r-top">
           <img
@@ -441,7 +448,7 @@
         </div>
         <div class="zx_sx"><span class="biaozhi"/><span>专线信息推荐</span></div>
         <div
-          v-if="!lineRecoms.length||lineRecoms==null"
+          v-if="lineRecoms.length==0||lineRecoms==null"
           class="tj_none">
           <span>没有相关线路推荐</span>
         </div>
@@ -457,6 +464,7 @@
               <img src="/line/images/04gongsi.png"><span><a
                 id="tj_a011"
                 :href="'/member/'+ item.companyId"
+                :title="item.companyName"
                 target="_blank">{{ item.companyName }}</a></span>
               <img
                 id="tj_shiming"
@@ -512,29 +520,7 @@
       </div>
 
     </div>
-    <div class="lll-line-bot">
-      <div
-      class="lll-recommend clearfix">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>{{ lineLinks.hotRecommend.label }}</span></div>
-        <FooterLinks :info="lineLinks.hotRecommend.links"/>
-      </div>
-      <div
-      class="lll-recommend clearfix">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>{{ lineLinks.startArriveRecommend.label }}</span></div>
-        <FooterLinks :info="lineLinks.startArriveRecommend.links"/>
-      </div>
-      <div
-      class="lll-recommend clearfix">
-        <div
-          class="zx_sx"
-        ><span class="biaozhi"/><span>{{ lineLinks.startFromRecommend.label }}</span></div>
-        <FooterLinks :info="lineLinks.startFromRecommend.links"/>
-      </div>
-    </div>
+    
 
     <div class="h70"/>
   </div>
@@ -568,22 +554,34 @@ export default {
       lineLists: []
     }
   },
-  async asyncData({ $axios, query }) {
+  async asyncData({ $axios, query, app }) {
+    let cookie = app.$cookies
+    let areaData = {
+      currentArea: cookie.get('currentArea'),
+      currentAreaFullName: cookie.get('currentAreaFullName'),
+      currentAreaName: cookie.get('currentAreaName'),
+      currentProvince: cookie.get('currentProvince'),
+      currentProvinceFullName: cookie.get('currentProvinceFullName'),
+      currentProvinceName: cookie.get('currentProvinceName')
+    }
+
+    if (!areaData.currentProvince) {
+      areaData = store.state.area
+    }
+
     let aurl = ''
-    let startp = query.startp
-    let startc = query.startc
+    let startp =
+      query.startp === ''
+        ? ''
+        : query.startp || areaData.currentProvinceFullName
+    let startc =
+      query.startc === '' ? '' : query.startc || areaData.currentAreaFullName
     let starta = query.starta
     let endp = query.endp
     // let starta = query.starta
     let enda = query.enda
     let endc = query.endc
 
-    if (!startp || startp == 'null') {
-      startp = ''
-    }
-    if (!startc || startc == 'null') {
-      startc = ''
-    }
     if (!starta || starta == 'null') {
       starta = ''
     }
@@ -648,6 +646,7 @@ export default {
       codeB.data.status == 200 ||
       codeC.data.status == 200
     ) {
+      listA.data.data = listA.data.data || { list: [] }
       listA.data.data.list.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
@@ -749,7 +748,7 @@ export default {
                     callback: function(current) {
                       $('#current1').text(current)
                       // orderBy = ''
-                      currentPage = currentAF025
+                      currentPage = current
                       fetchLineList(currentPage, orderBy)
                       // window.location.href = '#top'
                     }
@@ -847,7 +846,11 @@ export default {
       })
     }
   },
-  methods: {}
+  methods: {
+    resetSearch() {
+      location.href = '/zhuanxian/list'
+    }
+  }
 }
 </script>
 
@@ -918,9 +921,9 @@ export default {
     }
   }
   .lll-line-bot {
-    width: 1400px;
+    width: 100%;
     height: auto !important;
-    margin: 0 auto;
+    margin: 30px auto;
     overflow: hidden;
     background: #fff;
     margin-top: 20px;
@@ -978,6 +981,9 @@ export default {
         font-size: 18px;
         font-weight: bold;
         padding-left: 20px;
+      }
+      .form_findme {
+        padding-left: 10px;
       }
     }
   }

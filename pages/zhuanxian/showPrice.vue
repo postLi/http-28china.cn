@@ -42,8 +42,10 @@
         v-if="item.type == 1"
         :key="index"
         class="price_box_item1"
+        
       >
-        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '吨' : item.startVolume + '吨以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/吨' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/吨</em></span>
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/公斤' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ?item.primeryPrice.toFixed(2) :item.primeryPrice }}</em><em style="">元/公斤</em></span>
+        <!-- <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/公斤' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/公斤</em></span> -->
       </div>
     </div>
 
@@ -61,7 +63,7 @@
         :key="index"
         class="price_box_item2"
       >
-        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/立方' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/立方</em></span>
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/立方' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? item.primeryPrice.toFixed(2) : item.primeryPrice }}</em><em style="">元/立方</em></span>
         <!--<span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>-->
       </div>
     </div>
@@ -108,6 +110,7 @@ export default {
     }
   },
   mounted() {
+    // console.log(this.info, 'this.info')
     this.init()
   },
   methods: {
@@ -146,14 +149,14 @@ export default {
       // pEndVolume
       if (this.wPrice[0]) {
         this.wEndVolume = this.wPrice[0].endVolume
-          ? '0-' + this.wPrice[0].endVolume + '吨'
-          : this.wPrice[0].startVolume + '吨以上'
+          ? '0-' + this.wPrice[0].endVolume + '公斤'
+          : this.wPrice[0].startVolume + '公斤以上'
         this.wDiscountPrice = this.wPrice[0].discountPrice
-          ? '￥' + parseFloat(this.wPrice[0].discountPrice).toFixed(0)
+          ? '￥' + this.wPrice[0].discountPrice.toFixed(2)
           : ''
         this.wPrimeryPrice =
           this.wPrice[0].startVolume == 0
-            ? parseFloat(this.wPrice[0].primeryPrice).toFixed(0)
+            ? this.wPrice[0].primeryPrice.toFixed(2)
             : ''
       }
       if (this.hPrice[0]) {
@@ -161,11 +164,11 @@ export default {
           ? '0-' + this.hPrice[0].endVolume + '立方'
           : this.hPrice[0].startVolume + '立方以上'
         this.hDiscountPrice = this.hPrice[0].discountPrice
-          ? '￥' + parseFloat(this.hPrice[0].discountPrice).toFixed(0)
+          ? '￥' + this.hPrice[0].discountPrice.toFixed(2)
           : ''
         this.hPrimeryPrice =
           this.hPrice[0].startVolume == 0
-            ? parseFloat(this.hPrice[0].primeryPrice).toFixed(0)
+            ? this.hPrice[0].primeryPrice.toFixed(2)
             : ''
       }
 
@@ -178,12 +181,81 @@ export default {
 
 <style lang="scss">
 .showPrice {
-  .p1 {
-    /*.font2:hover {*/
-    /*.price_box1 {*/
-    /*display: block;*/
-    /*}*/
-    /*}*/
+  position: relative;
+  .price_box1 {
+    display: block;
+    width: 400px;
+    height: 180px;
+    min-height: 110px;
+    position: absolute;
+    left: 200px;
+    top: 45px;
+    margin-left: 0px;
+    /* border-radius: 6px;*/
+    /*display: none;*/
+    background-color: #fff7d3;
+    /*box-shadow:0px 0px 20px rgba(0,0,0,0.3);*/
+    padding-left: 15px;
+    padding-top: 10px;
+    border: 1px solid #979797;
+    border-radius: 3px;
+  }
+
+  .price_box2 {
+    width: 400px;
+    height: 180px;
+    min-height: 110px;
+    position: absolute;
+    left: 200px;
+    top: 80px;
+    margin-left: 0px;
+    /*border-radius: 6px;*/
+    /*display: none;*/
+    background-color: #fff;
+    /* box-shadow:0px 0px 20px rgba(0,0,0,0.3);*/
+    padding-left: 15px;
+    padding-top: 10px;
+    background-color: #fff7d3;
+    border: 1px solid #979797;
+  }
+
+  .price_box_bt {
+    float: left;
+    width: 100%;
+    color: #333;
+    font-size: 14px;
+    font-weight: bold;
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .price_box_item1,
+  .price_box_item2 {
+    float: left;
+    width: 100%;
+    height: 24px;
+    line-height: 24px;
+  }
+
+  .price_box_item1 span,
+  .price_box_item2 span {
+    float: left;
+    font-size: 12px;
+    color: #333;
+    min-width: 130px;
+    height: 28px;
+  }
+
+  .price_box_item1 font,
+  .price_box_item2 font {
+    text-decoration: line-through;
+    float: left;
+    font-size: 12px;
+    color: #333;
+    width: 47px;
+    height: 28px;
+    margin-left: 3px;
+    text-align: right;
   }
 }
 </style>

@@ -36,12 +36,14 @@ export default {
         this.comInfo(this.sendEchart, this.cargoType0)
       }
     })
+    // console.log(this.sendEchart, 'this.sendEchart轻货')
     this.info.forEach((item, index) => {
       if (item.cargoType === '1') {
         this.cargoType1 = item
         this.comInfo(this.sendEchart1, this.cargoType1)
       }
     })
+    // console.log(this.sendEchart1, 'this.sendEchart1重货')
     let maxY = this.sendEchart[0]
     this.sendEchart.forEach(el => {
       if (maxY < el) {
@@ -369,6 +371,7 @@ export default {
         }
       ]
     }
+
     let option = {
       title: { text: '', subtext: '' },
       tooltip: { trigger: 'axis' },
@@ -403,8 +406,8 @@ export default {
         axisLine: { show: false },
         axisTick: { show: false },
         axisLabel: { show: false },
-        type: 'value',
-        max: maxY1
+        type: 'value'
+        // max: maxY1
       },
       series: [
         {
@@ -425,7 +428,9 @@ export default {
               position: 'insideTop',
               formatter: function(params) {
                 // console.log(params)
-                return `{color1|${params.name}}\n{color0|${params.value}公斤}`
+                return `{color1|${params.name}}\n{color0|${
+                  params.value
+                }元/公斤}`
               },
               rich: {
                 color0: {
@@ -477,7 +482,7 @@ export default {
               if (params.dataIndex === 4) {
                 return ``
               } else {
-                return `{${c0}|${params.value}公斤}\n{color2|${params.name}}`
+                return `{${c0}|${params.value}元/公斤}\n{color2|${params.name}}`
               }
             },
             rich: {
@@ -561,7 +566,9 @@ export default {
               position: 'insideTop',
               formatter: function(params) {
                 // console.log(params)
-                return `{color1|${params.name}}\n{color0|${params.value}公斤}`
+                return `{color1|${params.name}}\n{color0|${
+                  params.value
+                }元/立方}`
               },
               rich: {
                 color0: {
@@ -613,7 +620,7 @@ export default {
               if (params.dataIndex === 4) {
                 return ``
               } else {
-                return `{${c0}|${params.value}公斤}\n{color2|${params.name}}`
+                return `{${c0}|${params.value}元/立方}\n{color2|${params.name}}`
               }
             },
             rich: {
@@ -681,6 +688,7 @@ export default {
         }
       ]
     }
+    // console.log('option:', option)
     myChart.setOption(option)
   },
   methods: {
@@ -695,11 +703,11 @@ export default {
       let price = ''
       if (cargoType.cargoType == 1) {
         price = cargoType.weightDiscountPrice
-        console.log(price, 'price')
+        // console.log(price, 'price')
       }
       if (cargoType.cargoType == 0) {
         price = cargoType.lightDiscountPrice
-        console.log(price, 'price2')
+        // console.log(price, 'price2')
       }
       sendEchart[4] = {
         value: price,

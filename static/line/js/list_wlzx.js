@@ -242,8 +242,8 @@ var code_c = myCode(startc);
 
 $("#list_nav_a1").html(startp + "零担物流专线")
 $("#list_nav_a2").html(startc + "零担物流专线")
-$("#list_nav_a1").attr("href", '/templets/default/htm/' + code_c + '.htm');
-$("#list_nav_a2").attr("href", '/templets/default/htm/' + code_c + '/' + code_c + '_1.htm');
+$("#list_nav_a1").attr("href", '/zhuanxian/' + code_c + '.htm');
+$("#list_nav_a2").attr("href", '/zhuanxian/' + code_c + '/' + code_c + '_1.htm');
 $("#list_nav_a3").html(startc + starta + " 到 " + endc + enda + " 零担物流专线")
 if ((!startc && !starta) || (!endc && !enda)) {
   $("#list_nav_a3").html(startc + starta + "  " + endc + enda + " 零担物流专线")
@@ -300,8 +300,8 @@ $('#select_wlyq').mousedown(function () {
 $("#flush").click(
   function () {
     console.log("清空地址")
-    // window.location.href='/zhuanxian/list';
-    window.location.reload();
+    window.location.href='/zhuanxian/list';
+    // window.location.reload();
   })
 //清空条件
 
@@ -529,13 +529,13 @@ $("#search_wlLine").click(
     var parkId = $('#select_wlyq').attr("name");
 
     var list1 = [], list2 = [];
-    $('#wlLineFrom .select-item').each(function (i, e) {
+    $('.select_con #wlLineFrom .select-item').each(function (i, e) {
       list1.push($(this).text())
     });
     var startp = list1[0];
     var startc = list1[1];
     var starta = list1[2];
-    $('#wlLineTo .select-item').each(function (i, e) {
+    $('.select_con #wlLineTo .select-item').each(function (i, e) {
       list2.push($(this).text())
     });
     var endp = list2[0];
@@ -1139,6 +1139,7 @@ function process01() {
 
 //所属物流园区S
 function belong_wlyq(currentPage) {
+  var parkName = $('#wlyq_name').val()
   $.ajax(
     {
       type: "post",
@@ -1150,7 +1151,7 @@ function belong_wlyq(currentPage) {
       data: JSON.stringify(
         {
           currentPage: currentPage,
-          pageSize: 20,
+          pageSize: 100,
           //vo:vo		//JSON.stringify({})
           locationProvince: locationProvince,
           locationCity: locationCity,

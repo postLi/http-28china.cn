@@ -8,6 +8,7 @@
         id="search_huo" 
         target="_blank"><input 
           class="arc_input3" 
+          readonly
           value="搜全网"> </a></div>
       <div class="arc_top1_2">
         <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
@@ -24,19 +25,21 @@
 
     </div>
     <div class="arc_toptitle">
-      <h1>{{ hyDetail.companyName ? hyDetail.companyName : '货源详情' }}</h1>
-      
+      <h1
+        v-if="hyDetail.archivalType === '3'"
+      >{{ hyDetail.companyName }}</h1>
+      <h1 v-else>货源详情</h1>
       <ul 
         class="two_tltle" 
-        v-if="hyDetail.companyName">
+        v-if="hyDetail.archivalType === '3'">
         <li/>
         <li><a 
           style="float:left"
           :href="/member/ + hyDetail.lgCompanyId">公司官网</a><a :href="/member/ + hyDetail.lgCompanyId + '-line'">专线信息</a></li>
         <li><a  
           style="float:left" 
-          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a><a  
-        :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
+          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a>
+        <a :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
         <li/>
       </ul>
     </div>
@@ -64,7 +67,7 @@
         <a
           v-for="(item,index) in zxList"
           v-if="index >= 14"
-          :key="index"><span>{{ item.name.substring(0, 2) }}</span>
+          :key="index"><span @click="gotoHuoList($event)">{{ item.name.substring(0, 2) }}</span>
         </a>
       </div>
 
@@ -111,7 +114,7 @@
               <tr><td class="arc_td1">其他：</td><td
               class="arc_td2">{{ hyDetail.extraName ? hyDetail.extraName : '暂无其他描述' }}</td></tr>
               <tr><td class="arc_td1">备注：</td><td
-              class="arc_td2">{{ hyDetail.remark }}</td></tr>
+              class="arc_td2">{{ hyDetail.remark ? hyDetail.remark.substring(0,10) : '暂无备注信息' }}</td></tr>
             </table>
             </div>
           </div>
@@ -134,7 +137,12 @@
               <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font>{{ hyDetail.startProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.contacts }}</td></tr>
-              <tr><td class="arc_td1">联系电话：</td><td class="arc_td2">{{ hyDetail.mobile }}</td></tr>
+              <tr><td class="arc_td1">联系电话：</td><td 
+                class="arc_td2" 
+                @click="checkobile()">
+                <a 
+                :class="[isMobile ? '' : 'checkMobile']">
+              {{ isMobile ? mobile : '查看电话' }}</a></td></tr>
               <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
               <tr><td class="arc_td1">里程：</td><td class="arc_td2">{{ hyDetail.distance }}</td></tr>
               <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>
@@ -163,7 +171,7 @@
                     href="javascript:;" 
                     class="button1"
                     @click="openOrder()" 
-                  >立即下单</a>
+                  >立即抢单</a>
                   <a 
                     href="javascript:;" 
                     class="button2" 
@@ -186,7 +194,7 @@
 
       </div>
       <div 
-        v-if="archival.shipperType === 'AF00107'" 
+        v-if="archival.archivalType === '3'" 
         class="arc_right">
         <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>{{ archival.companyName }}</span></p>
         <p
@@ -220,7 +228,9 @@
             v-if="archival.qq"
             :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
             target="_blank"><input value="QQ交谈"></a></span>
-          <span><i>地址：</i><font v-if="archival.address">{{ archival.address.substring(0, 10) }}</font></span>
+          <span><i>地址：</i><a 
+            :title="archival.address"
+            v-if="archival.address">{{ archival.address.substring(0, 8) }}</a></span>
         </p>
         <p class="arc_right05">
           <a 
@@ -253,11 +263,10 @@
             src="/images/article_wlzx/10shiming.png">
           <span v-if="archival.authStatus !== 'AF0010403' && (!archival.isVip || archival.isVip === 0)">暂无认证信息</span>
         </p>
-
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010101'">
+        v-if="archival.archivalType === '1'">
         <div class="arc_top_title">
           <h4>货主档案</h4>
         </div>
@@ -267,30 +276,27 @@
         </div>
         <div class="arc_middle">
           <img src="/images/cy/hztx.png">
-          <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
+          <p style="color:#f8542b">{{ archival.shipperTypeName }}</p>
           <p><img 
             v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
-          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
+          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #f8542b">{{ archival.liveness }}</i></p>
         </div>
         <ul class="bottom_ul">
           <li>联系人：{{ archival.contacts }}</li>
           <li>手机：
             <a 
-              v-show="checkMoblie"
-              style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
-              @click="showMoblieFn(showMoblie)">查看电话</a>
-            <a 
-              v-show="showMoblie"
-              style="color: #333" 
-              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li>
+              @click="showMoblieFn()"
+              :class="[checkMoblie ? '' : 'checkMobile']">
+            {{ checkMoblie ? check : '查看电话' }}</a>
+          </li>
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
       </div>
       <div 
         class="arc_right1" 
-        v-if="archival.shipperType === 'AF0010102' || archival.shipperType === 'AF0010103'">
+        v-if="archival.archivalType === '2'">
         <div class="arc_top_title">
           <h4>{{ archival.companyName }}</h4>
         </div>
@@ -306,13 +312,9 @@
           <li>联系人：{{ archival.contacts }}</li>
           <li>手机：
             <a 
-              v-show="checkMoblie"
-              style="color: #3f94ee;border-bottom: 1px solid #3f94ee" 
-              @click="showMoblieFn(showMoblie)">查看电话</a>
-            <a 
-              v-show="showMoblie"
-              style="color: #333" 
-              @click="showMoblieFn(showMoblie)">{{ archival.mobile }}</a></li>
+              @click="showMoblieFn()"
+              :class="[checkMoblie ? '' : 'checkMobile']">
+          {{ checkMoblie ? check : '查看电话' }}</a></li>
           <li>已加入：{{ archival.registerDays }}天</li>
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
@@ -381,6 +383,24 @@
               <a><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</a>
               <a>{{ item.createTime }}</a>
             </li>
+            <p 
+              class="massge"
+              v-if="isShowMessge">
+              货主货源太少？为您推荐其他<a 
+                :href="'/huoyuan?startProvince='+ hyDetail.startProvince+'&startCity='+hyDetail.startCity+'&endProvince='+hyDetail.endProvince+'&endCity='+hyDetail.endCity"
+                style="color:#3f94ee;">同线路货源</a>
+            </p>
+            <li 
+              v-for="(i,dex) in dataset" 
+              :key="dex">
+              <a :title="i.startProvinceCityArea">{{ i.startCity + i.startArea }}</a>
+              <a :title="i.endProvinceCityArea">{{ i.endCity + i.endArea }}</a>
+              <a :title="i.goodsTypeName">{{ i.goodsTypeName.substring(0,5) }}</a>
+              <a><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</a>
+              <a><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</a>
+              <a>{{ i.createTime }}</a>
+            </li>
+            
           </ul>
         </div>
       </div>
@@ -623,6 +643,41 @@
             </li>
           </ul>
         </div>
+        <div 
+        class="arc_main4">
+          <div class="zx_sx1">
+            <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
+          </div>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in huoLink" 
+              :key="index" 
+              class="hot-cities-li" >
+              <a
+                target="_blank"
+                :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
+                class="hot-cities-a">{{ item.title }}</a>
+            </li>
+          </ul>
+        </div>
+        <div 
+          class="arc_main4"
+          v-if="interestOrder.length != 0">
+          <div class="zx_sx1">
+            <span class="biaozhi1"/><span>{{ interesLabel }}</span>
+          </div>
+          <ul class="hot-cities">
+            <li 
+              v-for="(item,index) in interestOrder" 
+              :key="index" 
+              class="hot-cities-li" >
+              <a
+                target="_blank"
+                :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
+                class="hot-cities-a">{{ item.title }}</a>
+            </li>
+          </ul>
+        </div>
       </div>
       <!-- 货源列表end -->
       <div class="right4">
@@ -635,8 +690,7 @@
             :key="index"
             :href="item.url"
             class="gldh_list"
-            target="_blank"
-          >
+            target="_blank">
             <div class="img"><img :src="item.img"></div>
             <div>
               <p>{{ item.title }}</p>
@@ -756,78 +810,7 @@
         </div>
 
       </div>
-
-    </div>
     
-    <div class="arc_main4">
-      <div class="zx_sx1">
-        <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
-      </div>
-      <ul class="hot-cities">
-        <li 
-          v-for="(item,index) in huoLink" 
-          :key="index" 
-          class="hot-cities-li" >
-          <a
-            target="_blank"
-            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-            class="hot-cities-a">{{ item.title }}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="arc_main4">
-      <div class="zx_sx1">
-        <span class="biaozhi1"/><span>{{ interesLabel }}</span>
-      </div>
-      <ul class="hot-cities">
-        <li 
-          v-for="(item,index) in interestOrder" 
-          :key="index" 
-          class="hot-cities-li" >
-          <a
-            target="_blank"
-            :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-            class="hot-cities-a">{{ item.title }}</a>
-        </li>
-      </ul>
-    </div>
-    <div 
-      id="js011" 
-      class="arc_bottom"
-      style="display: none">
-      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他货源</span><a href="/plus/list.php?tid=2"><span class="arc_bottom_more">更多+</span></a></div>
-
-      <div 
-        class="tj_list" 
-        style="display: none;">
-        <p class="p01"><a 
-          id="nr0910" 
-          target="_blank"><span id="nr0911">广东-东莞</span><i>&rarr;</i><span id="nr0912">广东-深圳</span></a></p>
-        <p class="p03">
-          <img src="[field:global.cfg_templets_skin/]/images/04gongsi.png" >&nbsp;<span><a 
-            id="nr0913" 
-            href="/member/index.php?uid=ybyb120">广州明科物流有限公司</a></span>
-        </p>
-        <p class="p03">
-          <i>货物名称：</i><span id="nr0914">电子电器</span>
-        </p>
-        <p class="p02">
-          <span><i>重量：</i><font id="nr0915">15吨</font></span>  <span><i>体积：</i><font id="nr0916">30立方米</font></span>
-        </p>
-        <p class="p04">
-          <i>数量：</i><span id="nr0917"/>
-        </p>
-        <p class="p05">
-          <img src="[field:global.cfg_templets_skin/]/images/11xinyong.png" >
-        </p>
-        <p class="p06">
-          <a 
-            id="nr0918" 
-            href="Javascript:void(0)" 
-            style="cursor: pointer;"><span>查看&nbsp;&gt;</span></a>
-        </p>
-      </div>
-
     </div>
     <Add 
       :is-show-add.sync="isShowAdd" 
@@ -840,7 +823,6 @@
 import Add from './add'
 import Lelp from './help'
 import Order from './order'
-import $axios from 'axios'
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 export default {
   name: 'Detail',
@@ -864,13 +846,18 @@ export default {
   data() {
     return {
       showMoblie: false,
-      checkMoblie: true,
+      checkMoblie: false,
       isShowAdd: false,
       isShowHelp: false,
       isShowOrder: false,
       isShowCollect: true,
       isCencelCollect: false,
+      isShowMessge: false,
+      isMobile: false,
+      mobile: '',
+      check: '',
       zxList: [],
+      dataset: [],
       inTerVar: null,
       inTerVar1: null,
       otherInfoList: [],
@@ -918,13 +905,12 @@ export default {
       ]
     }
   },
-  async asyncData({ $axios, app, query }) {
+  async asyncData({ $axios, app, query, error }) {
     let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {
         // console.log('hyDetail:', err)
       })
-    // console.log(hyDetails, 'hyDetails')
     let parm = {
       currentPage: 1,
       pageSize: 10,
@@ -954,8 +940,8 @@ export default {
     let parm1t = {
       startArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
       startCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
-      startProvince: hyDetails.data.data.startProvince
-        ? hyDetails.data.data.startProvince
+      startProvince: hyDetails.data.data.endProvince
+        ? hyDetails.data.data.endProvince
         : ''
     }
     let code = await getCode($axios, hyDetails.data.data.endProvince)
@@ -966,7 +952,6 @@ export default {
       .catch(err => {
         // console.log('archivals')
       })
-    // console.log(archivals, 'archivals.data.data')
     if (archivals.data.status === 200) {
       let credit = archivals.data.data.credit
       if (credit >= 0 && credit <= 3) {
@@ -1153,7 +1138,37 @@ export default {
   },
 
   mounted() {
-    console.log(this.zxList, 'zxlist')
+    seajs.use(['/js/gaodemap2.js'])
+    $('.arc_input3').click(function() {
+      var search_type = $('#search_type option:selected').attr('name')
+      var start = $('.arc_input1')
+      var end = $('.arc_input2')
+      var query =
+        '?startProvince=' +
+        (start.attr('theprovince') || '') +
+        '&startCity=' +
+        (start.attr('thecity') || '') +
+        '&startc=' +
+        (start.attr('thecity') || '') +
+        '&startp=' +
+        (start.attr('theprovince') || '') +
+        '&endProvince=' +
+        (end.attr('theprovince') || '') +
+        '&endCity=' +
+        (end.attr('thecity') || '')
+      console.log(
+        '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
+      )
+      if (search_type == 'zx') {
+        window.open('/zhuanxian/list' + query)
+      }
+      if (search_type == 'huo') {
+        window.open('/huoyuan' + query)
+      }
+      if (search_type == 'che') {
+        window.open('/cheyuan' + query)
+      }
+    })
     if (process.client) {
       console.log(this.huoLink)
       $('#wlLineFrom input').citypicker({})
@@ -1194,6 +1209,32 @@ export default {
           }
         )
       }
+      if (l < 8) {
+        this.isShowMessge = true
+        let obj = {
+          startProvince: this.hyDetail.startProvince
+            ? this.hyDetail.startProvince
+            : '',
+          startCity: this.hyDetail.startCity ? this.hyDetail.startCity : '',
+          endProvince: this.hyDetail.endProvince
+            ? this.hyDetail.endProvince
+            : '',
+          endCity: this.hyDetail.endCity ? this.hyDetail.endCity : '',
+          currentPage: 1,
+          pageSize: 7 - l
+        }
+        this.$axios
+          .post('/28-web/lclOrder/list', obj)
+          .then(res => {
+            this.dataset = res.data.data.list
+          })
+          .catch(err => {
+            console.log('huoComprehensives4:', err)
+          })
+      } else {
+        this.isShowMessge = false
+        console.log(this.isShowMessge, l, 'df444asfa')
+      }
 
       let top_left_h = $('.top_left').height()
       let roll_ul_h = $('.top_left_ul')
@@ -1224,6 +1265,31 @@ export default {
     this.inTerVar = null
   },
   methods: {
+    showMoblieFn() {
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        this.checkMoblie = true
+        this.check = this.hyDetail.mobile
+      } else {
+        this.checkMoblie = false
+        $('.login_box').show()
+        $('.login_box_mask').show()
+      }
+    },
+    checkobile() {
+      // this.isMobile = !this.isMobile
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('user_token')
+      if (access_token && user_token) {
+        this.isMobile = true
+        this.mobile = this.hyDetail.mobile
+      } else {
+        this.isMobile = false
+        $('.login_box').show()
+        $('.login_box_mask').show()
+      }
+    },
     getCity() {
       this.dataInfo.startProvince = this.hyDetail.startProvince
       this.dataInfo.startCity = this.hyDetail.startCity
@@ -1247,17 +1313,18 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       let companyId = this.archival.companyId
+      let id = this.$route.query
       this.isCencelCollect = true
       this.isShowCollect = false
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/company?access_token=' +
+            '/28-web/collect/company?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
               '&carInfoId=' +
-              query.id +
+              id +
               '&companyId=' +
               companyId +
               '&handle=' +
@@ -1282,17 +1349,18 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       let companyId = this.archival.companyId
+      let id = this.$route.query
       this.isCencelCollect = false
       this.isShowCollect = true
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/company?access_token=' +
+            '/28-web/collect/company?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
               '&carInfoId=' +
-              query.id +
+              id +
               '&companyId=' +
               companyId +
               '&handle=' +
@@ -1317,9 +1385,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,
@@ -1345,9 +1413,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,
@@ -1373,9 +1441,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,
@@ -1397,15 +1465,15 @@ export default {
         this.getCity()
       }
     },
-    showMoblieFn(showMoblieFn) {
-      if (showMoblieFn == false) {
-        this.showMoblie = true
-        this.checkMoblie = false
-      } else {
-        this.checkMoblie = true
-        this.showMoblie = false
-      }
-    },
+    // showMoblieFn(showMoblieFn) {
+    //   if (showMoblieFn == false) {
+    //     this.showMoblie = true
+    //     this.checkMoblie = false
+    //   } else {
+    //     this.checkMoblie = true
+    //     this.showMoblie = false
+    //   }
+    // },
     searchDo() {
       let list1 = [],
         list2 = []
@@ -1425,7 +1493,6 @@ export default {
     },
     search() {
       this.searchDo()
-      //
       window.location.href = `/huoyuan?endArea=${this.endArea}&endCity=${
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${

@@ -152,7 +152,7 @@ cursor: pointer;
 	float: left;
 	overflow: hidden;	
 }
-.wlzx_list img{transition: 0.7s;}
+.wlzx_list img{transition: 0.7s;vertical-align: middle;}
 .wlzx_list img:hover{transform: scale(1.05);}
 .wlzx_list_1{
 	width: 150px;
@@ -189,7 +189,14 @@ cursor: pointer;
 .wlzx_list_2 p{height: 26px; line-height: 26px;}
 .wlzx_list_2 .p1{margin-bottom: 3px;}
 .wlzx_list_2 .p1 a{color: #333333;font-size: 16px;font-weight: normal;}
-.wlzx_list_2 .p1  font{color: #333;font-weight:bold;font-size: 14px;}
+.wlzx_list_2 .p1  font{color: #333;font-weight:bold;font-size: 14px;
+display: inline-block;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+max-width: 25em;
+vertical-align: middle;
+}
 .wlzx_list_2 .p2  font{font-size: 14px;padding-left: 5px;}
 .wlzx_list_2 .p3 font,.wlzx_list_2 .p4  font{color: #333;font-size: 14px;}
 .wlzx_list_2 .p3 i,.wlzx_list_2 .p4  i{color: #666;font-size: 14px;padding-left: 0px;}
@@ -252,6 +259,10 @@ cursor: pointer;
 .tj_list .p1{
 	height: 50px;
 	line-height: 50px;	
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-right: 20px;
 }
 .tj_list .p1 span{
 	font-weight: bold;
@@ -482,8 +493,8 @@ border:0;
 .wlzx_list_2 .p2 a{color: #333;font-size: 14px;}
 .wlzx_list_2 .p2{position: relative;}
 .wlzx_list_2 .p2 img{position: absolute;left: 105px;top: 3px;}
-.wlzx_list_3 p{line-height: 30px;}
-.wlzx_list_3 .p1{margin-top: 35px;}
+.wlzx_list_3 p{line-height: 25px;}
+.wlzx_list_3 .p1{margin-top: 10px;height: auto;}
 .wlzx_list_3 p i{color: #666;}
 .wlzx_list_6 .p1{margin-top: 20px;margin-bottom: 22px;}
 
@@ -613,8 +624,8 @@ font-size: 28px;
 .left_jianjie_bt span{float: left;display: block;font-size: 18px;color: #2577e3;line-height: 50px;font-weight: bold;}
 .left_jianjie_nr p{padding:30px 27px 0 32px;line-height: 26px;font-size: 14px;text-indent: 2em;}
 .left_nr_2 ul{width: 100%;height: 100%;}
-.list_yq1{text-align: center;height: 20px;margin-top: 60px;font-size: 20px;color: #333;margin-bottom: 18px;}
-.list_yq2{text-align: center;height: 20px;margin-bottom: 42px;font-size: 14px;color: #333;}
+.list_yq1{padding-left: 67px;height: 20px;margin-top: 80px;font-size: 20px;color: #333;margin-bottom: 18px;}
+.list_yq2{padding-left: 67px;height: 20px;margin-bottom: 22px;font-size: 14px;color: #333;}
 .list_yq3,.list_yq4,.list_yq5,.list_yq6{height: 30px;line-height: 30px;padding-left: 67px;}
 .list_yq4 span{padding-right:30px;background: url(../images/article_wlzx/15qq.gif) no-repeat right 0px;}
 .list_yq3 span,.list_yq4 span,.list_yq5 span,.list_yq6 span{font-size: 14px;color: #666;}

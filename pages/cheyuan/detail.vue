@@ -4,19 +4,21 @@
       <img 
         width="135px" 
         src="/img/logo.png" >
-      <div class="arc_top1_3"><input
+      <div class="arc_top1_3"><a
         class="arc_input3"
-        value="搜全网"> </div>
+      >搜全网</a></div>
       <div class="arc_top1_2">
         <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
         <input
+          data-level="district"
           class="arc_input1"
-          wtmap=""
+          wtmap="city"
           placeholder="出发地">
         <span>&rarr;</span>
         <input
+          data-level="district"
           class="arc_input2"
-          wtmap=""
+          wtmap="city"
           placeholder="到达地">
       </div>
     </div>
@@ -29,6 +31,8 @@
           <a
             v-for="(item,index) in zxList"
             v-if="index < 14"
+            target="_blank"
+            :href="'/cheyuan?startCity=&startProvince=&endProvince='+cy1.endProvince + '&endCity=' + item.name"
             :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
           </a>
         </div>
@@ -46,6 +50,8 @@
           onmouseout="$('.city_box').css('display', 'none');">
           <a
             v-for="(item,index) in zxList"
+            target="_blank"
+            :href="'/cheyuan?startCity=&startProvince=&endProvince='+cy1.endProvince + '&endCity=' + item.name"
             v-if="index >= 14"
             :key="index"><span>{{ item.name.substring(0, 2) }}</span>
           </a>
@@ -94,7 +100,7 @@
             </div>
             <div>
               <a href="http://h5.28tms.com/">
-              下载<span>【28快运APP】</span>，您可查看更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
+              下载<span>【28快运APP】</span>，您可查看更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的车源，并可实时接 收28快运为您推荐的精品车源提醒!</a>
             </div>
 
           </div>
@@ -119,7 +125,7 @@
                   class="manage_box"
                   v-for="(item,index) in newList"
                   :key="index"
-                >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>货源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
+                >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>车源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
               </div>
             </div>
           </div>
@@ -163,7 +169,9 @@
             <div class="arc_m5_1">
               <span>联系我时，请说明是从28快运上看到此信息，谢谢！</span>
               <div style="margin-top: 15px">
-                <a href="">快速下单</a>
+                <a 
+                  href="/create/order" 
+                  target="_blank">快速下单</a>
                 <span style="margin-left: 47px">
                   <img src="/images/cy/14fresh.png">
                   <span
@@ -262,7 +270,7 @@
               <div class="content-right-row"><img
                 class="img"
                 src="/images/cy/13hot.png">活跃度：<i>{{ cheComprehensive.liveness }}</i></div>
-              <div class="content-right-row">最近三个月发布货源 <i>{{ cheComprehensive.lastThreeMonthPublishNum }}</i> 次</div>
+              <div class="content-right-row">最近三个月发布车源 <i>{{ cheComprehensive.lastThreeMonthPublishNum }}</i> 次</div>
               <div class="content-right-row">共成交 <i>{{ cheComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>28</i> 次</div>
               <div class="content-right-row">大家对他的印象:</div>
               <div 
@@ -306,7 +314,7 @@
             >
               <span 
                 class="biaozhi" 
-              /><span>更多从{{ cy1.startCity }}出发的货源</span>
+              /><span>更多从{{ cy1.startCity }}出发的车源</span>
               <i
                 style="cursor: pointer;float: right;font-size: 14px;"
                 @click="goToCy()">更多></i>
@@ -379,7 +387,7 @@
 
           <div>
             <div class="zx_sx">
-              <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的货源</span>
+              <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的车源</span>
               <i
                 style="cursor: pointer;float: right;font-size: 14px;"
                 @click="goToCy1()">更多></i>
@@ -526,22 +534,20 @@
               v-for="(item,index) in popularity" 
               :key="index" 
               class="rc_list">
-              <a :href="'/member/'+item.id">
-                <div class="left">
-                  <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
-                </div>
-                <div 
-                  v-if="index < 3" 
-                  class="img">
-                  <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
-                </div>
-                <div 
-                  class="right"
-                  style="padding-right:18px">
-                  <span>{{ item.driverName + item.carNum }}</span>
-                  <span style="float: right">人气值：<i style="color: red">{{ item.popNum }}</i></span>
-                </div>
-              </a>
+              <div class="left">
+                <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
+              </div>
+              <div 
+                v-if="index < 3" 
+                class="img">
+                <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
+              </div>
+              <div 
+                class="right"
+                style="padding-right:18px">
+                <span>{{ item.driverName +' ' + item.carNum }}</span>
+                <span style="float: right">人气值：<i style="color: red">{{ item.popNum }}</i></span>
+              </div>
             </div>
           </div>
 
@@ -655,7 +661,6 @@ export default {
     script: [
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
@@ -722,7 +727,10 @@ export default {
         name: 'cheyuan_ccyps',
         preFn: data => {
           return data.map((el, index) => {
-            el.url = el.url.replace('http://192.168.1.79/anfacms', '/zixun')
+            el.url = el.url.replace(
+              /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+              '/zixun'
+            )
 
             return el
           })
@@ -893,6 +901,40 @@ export default {
     }
   },
   mounted() {
+    seajs.use(['/js/gaodemap2.js'])
+    //找专线/货源/车源 S
+    // $('.arc_input1, .arc_input2').citypicker()
+    $('.arc_input3').click(function() {
+      var search_type = $('#search_type option:selected').attr('name')
+      var start = $('.arc_input1')
+      var end = $('.arc_input2')
+      var query =
+        '?startProvince=' +
+        (start.attr('theprovince') || '') +
+        '&startCity=' +
+        (start.attr('thecity') || '') +
+        '&startc=' +
+        (start.attr('thecity') || '') +
+        '&startp=' +
+        (start.attr('theprovince') || '') +
+        '&endProvince=' +
+        (end.attr('theprovince') || '') +
+        '&endCity=' +
+        (end.attr('thecity') || '')
+      console.log(
+        '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
+      )
+      if (search_type == 'zx') {
+        window.open('/zhuanxian/list' + query)
+      }
+      if (search_type == 'huo') {
+        window.open('/huoyuan' + query)
+      }
+      if (search_type == 'che') {
+        window.open('/cheyuan' + query)
+      }
+    })
+
     console.log(this.cy1, 'carInfoId')
     let rollContainer_h = $('.release_box').height()
     let roll = $('.release_scroll')
@@ -1350,9 +1392,9 @@ export default {
       this.isCencelCollect = true
       this.isShowCollect = false
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/carInfo?access_token=' +
+            '/28-web/collect/carInfo?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
@@ -1382,9 +1424,9 @@ export default {
       this.isCencelCollect = false
       this.isShowCollect = true
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/collect/carInfo?access_token=' +
+            '/28-web/collect/carInfo?access_token=' +
               access_token +
               '&user_token=' +
               user_token +
@@ -1412,9 +1454,9 @@ export default {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       if (access_token && user_token) {
-        $axios
+        this.$axios
           .post(
-            '/api/28-web/companyLine/subscribe?access_token=' +
+            '/28-web/companyLine/subscribe?access_token=' +
               access_token +
               '&user_token=' +
               user_token,
@@ -1459,4 +1501,7 @@ export default {
 </script>
 
 <style scoped>
+.arc_input3 {
+  display: inline-block;
+}
 </style>

@@ -125,10 +125,14 @@
 </template>
 
 <script>
-import $axios from 'axios'
-
 export default {
   name: 'SelectMap',
+  props: {
+    line: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
       phoneNum: '',
@@ -138,6 +142,9 @@ export default {
         memo: ''
       }
     }
+  },
+  watch: {
+    line(n, o) {}
   },
   mounted() {
     seajs.use('../js/city-picker.js', function() {
@@ -193,15 +200,16 @@ export default {
         if (validReg.MOBILE.test(this.form.msgMobile)) {
           this.isTit = false
           let aurl = ''
-          if (process.server) {
-            aurl = 'http://localhost:3000'
-          }
-          $axios
-            .post(aurl + '/api/28-web/helpFind/range/create', this.form)
+
+          this.$axios
+            .post(aurl + '/28-web/helpFind/range/create', this.form)
             .then(res => {
               // console.log(res.data, 'resresres')
               if (res.data.status === 200) {
                 layer.msg('提交成功，客服稍后将会与您联系')
+                this.form.msgMobile = ''
+                this.remForm()
+                // console.log(this.form, 'fomr')
               } else {
                 layer.msg(
                   res.data.errorInfo ? res.data.errorInfo : res.data.text
@@ -215,6 +223,47 @@ export default {
       } else {
         this.isTit = true
       }
+    },
+    remForm() {
+      // this.form = {
+      //   msgMobile: '',
+      //   memo: '',
+      //   startProvince: '',
+      //   startCity: '',
+      //   startArea: '',
+      //   endProvince: '',
+      //   endCity: '',
+      //   endArea: ''
+      // }
+      this.form.msgMobile = ''
+      this.form.memo = ''
+      // if (this.line) {
+      //   window.location.href = '/zhuanxian/list'
+      // } else {
+      //   window.location.href = '/gongsi'
+      // }
+
+      // this.form.startProvince = $(
+      //   '.form_findme .city-picker-span:eq(0) .select-item:eq(0)'
+      // ).text('')
+      // this.form.startCity = $(
+      //   '.form_findme .city-picker-span:eq(0) .select-item:eq(1)'
+      // ).text('')
+      // this.form.startArea = $(
+      //   '.form_findme .city-picker-span:eq(0) .select-item:eq(2)'
+      // ).text('')
+
+      // this.form.endProvince = $(
+      //   '.form_findme .city-picker-span:eq(1) .select-item:eq(0)'
+      // ).text('')
+      // this.form.endCity = $(
+      //   '.form_findme .city-picker-span:eq(1) .select-item:eq(1)'
+      // ).text('')
+      // this.form.endArea = $(
+      //   '.form_findme .city-picker-span:eq(1) .select-item:eq(2)'
+      // ).text('')
+      $('.form_findme #wlLineTo .city-picker-span').text('请输入到达地')
+      $('.form_findme #wlLineFrom .city-picker-span').text('请输入出发地')
     }
   }
 }

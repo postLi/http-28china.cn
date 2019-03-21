@@ -102,7 +102,7 @@ export default {
   },
   mounted() {
     this.lineHots = this.lines
-    console.log(this.lineHots, 'this.lineHots ')
+    // console.log(this.lineHots, 'this.lineHots ')
   },
   methods: {}
 }

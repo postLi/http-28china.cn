@@ -13,10 +13,10 @@
             <div class="left_nr_1">
 
               <img
-                :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
+                :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'/yuanqu/images/wlyq_pic.png'"
                 alt="">
                 <!-- <img
-            :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'../../static/images/article_wlzx/wlyq_pic.png'"> -->
+            :src="gatewayData.parkSignPicture?gatewayData.parkSignPicture:'/images/article_wlzx/wlyq_pic.png'"> -->
             </div>
             <div class="left_nr_2">
               <div
@@ -24,8 +24,8 @@
                 onmouseout="$('#allmap').css('display', 'none')"
                 onmouseover="$('#allmap').css('display', 'block')" />
               <ul>
-                <li class="list_yq1"><img src="../../static/images/article_wlzx/peple.png"><span>{{ gatewayData.parkContact || '暂无' }}</span></li>
-                <li class="list_yq2"><img src="../../static/images/article_wlzx/phone-ico.png"><span>{{ gatewayData.parkMobile|| '暂无' }}</span></li>
+                <li class="list_yq1"><img src="/images/article_wlzx/peple.png"><span>{{ gatewayData.parkContact || '暂无' }}</span></li>
+                <li class="list_yq2"><img src="/images/article_wlzx/phone-ico.png"><span>{{ gatewayData.parkMobile|| '暂无' }}</span></li>
                 <li class="list_yq3"><span>电话：<em>{{ gatewayData.parkNum || '暂无' }}</em></span></li>
                 <li class="list_yq4"><a
                   v-if="gatewayData.contactQq"
@@ -38,8 +38,12 @@
               </ul>
             </div>
           </div>
-          <div class="left_jianjie_bt"><span class="biaozhi"/><span>园区信息</span></div>
-          <div class="left_jianjie_nr">
+          <div 
+            class="left_jianjie_bt"
+            v-show="gatewayData.parkIntroduce"><span class="biaozhi"/><span>园区信息</span></div>
+          <div 
+            class="left_jianjie_nr"
+            v-show="gatewayData.parkIntroduce">
             <p>{{ gatewayData.parkIntroduce||'暂无园区信息' }}</p>
           </div>
         </div>
@@ -69,7 +73,7 @@
                   </div>
                   <img
                     class="fl list_img"
-                    src="../../static/images/02jiantou.png">
+                    src="/images/02jiantou.png">
                   <div
                     id="wlLineTo"
                     class="fl list_input"
@@ -140,7 +144,7 @@
                 class="list_none"
                 style="display: block;">
                 <span>暂时没有找到您要查询的信息，可以看看其他物流园区哦</span>
-                <img src="../../static/images/none_pic.png">
+                <img src="/images/none_pic.png">
               </div>
               <li
                 v-for="(item,index) in transportRange"
@@ -224,7 +228,7 @@
               class="list_none"
               style="display: block;">
               <span>暂时没有找到您要查询的信息，可以看看其他物流园区哦</span>
-              <img src="../../static/images/none_pic.png">
+              <img src="/images/none_pic.png">
             </div>
             <ul
               v-for="(item,index) in logisticsCompany"
@@ -235,7 +239,7 @@
                   <font>{{ item.pointName }}</font><a
                     v-if="item.qq"
                     :href="'http://wpa.qq.com/msgrd?v='+ item.qq +'&uin=&site=qq&menu=yes'"
-                    target="_blank"><img src="../../static/images/article_wlzx/15qq.gif"></a>
+                    target="_blank"><img src="/images/article_wlzx/15qq.gif"></a>
                 </P>
 
                 <p class="p2"><a href="#">{{ item.companyName }}</a></p>
@@ -246,7 +250,7 @@
                     v-for="(item1,index1) in item.starS"
                     :key="index1"
                     class="xy_zuan"
-                    src="../../static/images/article_wlzx/blue.gif"
+                    src="/images/article_wlzx/blue.gif"
                     style="display: inline">
                 </p>
                 <p
@@ -256,11 +260,11 @@
                     v-for="(item1,index1) in item.starB"
                     :key="index1"
                     class="xy_zuan"
-                    src="../../static/images/article_wlzx/34huanguan.gif"
+                    src="/images/article_wlzx/34huanguan.gif"
                     style="display: inline">
                 </p>
                 <p class="p4"><i>联系人：</i><font>{{ item.contactsName }}</font></p>
-                <p class="p5"><i>电话：</i><font>{{ item.contactsTel }}{{ item.mobile }}</font></p>
+                <p class="p5"><i>电话：</i><font>{{ item.contactsTel }} {{ item.mobile }}</font></p>
               </li>
               <li class="wlzx_list_3">
                 <p class="p1"><i>经营范围：</i><span>{{ item.productService1 }}</span></P>
@@ -269,13 +273,13 @@
               <li class="wlzx_list_4">
                 <p
                   v-if="item.authStatus === 'AF0010403'"
-                  class="p1"><img src="../../static/images/10shiming.png"></P>
+                  class="p1"><img src="/images/10shiming.png"></P>
                 <p
                   v-if="item.isVip === 1"
-                  class="p2"><img src="../../static/images/11xinyong.png"></p>
+                  class="p2"><img src="/images/11xinyong.png"></p>
                 <p
                   v-if="item.collateral > 0"
-                  class="p3"><img src="../../static/images/12danbao.png"></p>
+                  class="p3"><img src="/images/12danbao.png"></p>
               </li>
               <li class="wlzx_list_6">
                 <p class="p1"><a
@@ -321,6 +325,7 @@
             <p class="p1">
               <a
                 :href="'/member/'+item.id+''"
+                :title="item.companyName"
                 target="_blank"><span>{{ item.companyName }}</span></a>
 
             </p>
@@ -331,7 +336,7 @@
                 v-for="(item1,index1) in item.starS"
                 :key="index1"
                 class="xy_zuan"
-                src="../../static/images/article_wlzx/blue.gif"
+                src="/images/article_wlzx/blue.gif"
                 style="display: inline">
             </p>
             <p
@@ -341,7 +346,7 @@
                 v-for="(item1,index1) in item.starB"
                 :key="index1"
                 class="xy_zuan"
-                src="../../static/images/article_wlzx/34huanguan.gif"
+                src="/images/article_wlzx/34huanguan.gif"
                 style="display: inline">
             </p>
             <p class="p3"><i data-v-63732202="">联系人：</i><font>{{ item.contactsName || '暂无' }}</font></p>
@@ -406,22 +411,16 @@ async function getLogisticsCompany(
       // vo
     }
   await $axios.post('/28-web/pointNetwork/findParkNet', parm1).then(res => {
-    res.data.data.list.forEach(item => {
-      if (JSON.parse(item.productService).length > 0) {
-        item.productService1 = `
-        ${JSON.parse(item.productService)[0]}
-        ${JSON.parse(item.productService)[1]}
-        ${JSON.parse(item.productService)[2]}`
-      }
-      if (JSON.parse(item.otherService).length > 0) {
-        item.otherService1 = `
-        ${JSON.parse(item.otherService)[0]}
-        ${JSON.parse(item.otherService)[1]}
-        ${JSON.parse(item.otherService)[2]}`
-      }
-      setCredit(item)
-    })
     if (res.data.status === 200) {
+      res.data.data.list.forEach(item => {
+        if (item.productService) {
+          item.productService1 = (item.productServiceNameList || []).join(' ')
+        }
+        if (item.otherService) {
+          item.otherService1 = (item.otherServiceNameList || []).join(' ')
+        }
+        setCredit(item)
+      })
       list = res.data.data.list
     }
   })
@@ -440,10 +439,10 @@ async function getTransportRange($axios, query, vo = {}) {
   parm1.parkId = query.id
   // console.log(parm1, 'parm1')
   await $axios.post('/28-web/range/park/list/', parm1).then(res => {
-    res.data.data.list.forEach(item => {
-      item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
-    })
     if (res.data.status === 200) {
+      res.data.data.list.forEach(item => {
+        item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
+      })
       list = res.data.data.list
     }
   })
@@ -455,7 +454,7 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/basic.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/article_wlyq.css' }
+      { rel: 'stylesheet', href: '/css/article_wlyq.css?v2' }
     ],
     script: [
       {
@@ -481,8 +480,13 @@ export default {
   async asyncData({ $axios, query }) {
     let gatewayData = await $axios.get('/28-web/logisticsPark/' + query.id)
     let jwd = ''
-    const longitude = gatewayData.data.data.longitude
-    const latitude = gatewayData.data.data.latitude
+    let longitude = ''
+    let latitude = ''
+    if (gatewayData.data.data) {
+      longitude = gatewayData.data.data.longitude
+      latitude = gatewayData.data.data.latitude
+    }
+
     if (longitude && latitude) {
       jwd = longitude + ',' + latitude
     }
@@ -502,7 +506,7 @@ export default {
     // })
     let flag = ''
     let companysList = await $axios.get(
-      '/28-web/logisticsCompany/excellent?flag=' + flag
+      '/28-web/logisticsCompany/excellent?pageSize=5&flag=' + flag
     )
     companysList.data.data.forEach(item => {
       setCredit(item)
@@ -520,8 +524,8 @@ export default {
       jwd,
       companysList:
         companysList.data.status === 200 ? companysList.data.data : [],
-      transportRange: transportRange,
-      logisticsCompany: logisticsCompany,
+      transportRange: transportRange || [],
+      logisticsCompany: logisticsCompany || [],
       AF025: AF025.data.status === 200 ? AF025.data.data : []
     }
   },
@@ -584,7 +588,9 @@ export default {
           endProvince: endp,
           startArea: starta,
           startCity: startc,
-          startProvince: startp
+          startProvince: startp,
+          otherServiceCode: this.AF025Code,
+          orderBy: this.sortCode
         }
       )
       // console.log(this.transportRange, ' this.transportRange')
@@ -621,6 +627,7 @@ export default {
       let endc = list2[1]
       let enda = list2[2]
       this.sortName = item.name
+      this.sortCode = item.orderBy
       this.transportRange = await getTransportRange(
         this.$axios,
         this.$route.query,
@@ -655,6 +662,7 @@ export default {
       let enda = list2[2]
       this.AF025Name = item.name
       // console.log(item.code, 'item.code')
+      this.AF025Code = item.code
       this.transportRange = await getTransportRange(
         this.$axios,
         this.$route.query,
@@ -705,4 +713,7 @@ export default {
 </script>
 
 <style scoped>
+.left_main {
+  min-height: 420px;
+}
 </style>

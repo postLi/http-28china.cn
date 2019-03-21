@@ -41,6 +41,7 @@ margin-bottom: 12px; margin-top: 10px;
   background-color: #fff;
   padding: 10px 20px;
   box-sizing: border-box;
+  /* position: relative; */
 }
 .arc_top2_1{float: left;width: 80px; }
 .arc_top2_1 span{font-size: 16px;color: #3f94ee;}
@@ -91,7 +92,15 @@ float:right;text-align: center;
     padding-right: 10px;
     font-size: 14px;
 }
-.arc_left_2_1_2 .arc_td2{width: 437px;color: #666666;font-size:14px;padding-left: 10px;}
+.checkMobile{
+  color: #3f94ee;border-bottom: 1px solid #3f94ee
+}
+.checkMobile:hover{
+  border-bottom: none;
+}
+.arc_left_2_1_2 .arc_td2{
+  cursor: pointer;
+  width: 437px;color: #666666;font-size:14px;padding-left: 10px;}
 .arc_left_2_1_2 .arc_td2 font{color: #eb434d;}
 .arc_left_2_1_3{height: 25px;width: 430px;padding-left: 20px;padding-top: 30px;position: relative}
 .arc_left_2_1_3 img{width: 25px;height: 25px;position: absolute;top:26px;left: 0px;}
@@ -340,9 +349,12 @@ border: solid 1px #e2e2e2;
   color: #2577e3;
   font-size: 18px;
   background-color: #fff;
-  border-bottom: 2px solid #e7e7e7;
-  margin-top: 40px;
+  border-bottom: 2px solid #3f94ee;
   font-weight: bold;
+}
+.massge{
+  padding:10px;color:#999999;
+  /* display:none; */
 }
 .zx_sx1 .biaozhi1 {
   display: block;
@@ -535,7 +547,11 @@ text-align: center;
 .city_box{
             width: 300px;
             min-height: 100px;
-            position:fixed;left: 1330px; top: 175px;
+            /* position:fixed; */
+            position: absolute;
+            left: 1330px;
+             /* top: 354px; */
+             top:252px;
             margin-left: 0px;
            /* border-radius: 6px;*/
             display: none;
@@ -966,6 +982,7 @@ table tr:nth-child(odd){
   max-width: 1000px;
   float: left;
   width:1000px;
+  padding-bottom: 30px;
   /*OVERFLOW: hidden;*/
   /* border: 1px solid #eee; */
   /* border-bottom: 0; */
@@ -1699,7 +1716,9 @@ table tr:nth-child(odd){
 }
 .arc_toptitle h1{
   text-align: center;
-  padding: 30px;
+  /* padding: 30px; */
+  height: 105px;
+  line-height: 105px;
   color: #fff;
   font-size: 34px;
   margin-left: -135px;

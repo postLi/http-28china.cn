@@ -220,10 +220,9 @@
 
         <!-- 28为您推荐start -->
         <div
-          class="hot-city-layer" 
-          style="min-width:1036px;float:left">
+        class="hot-city-layer main-width">
           <div class="hot-city-unit">
-            <h3 class="news-unit-title">{{ recommendBy28Label }}</h3>
+            <h3 class="news-unit-title line-title">{{ recommendBy28Label }}</h3>
             <ul class="hot-cities">
               <li 
                 v-for="(item,index) in recommendBy28"
@@ -236,7 +235,38 @@
           </div>
         </div>
         <!-- 28为您推荐end -->
-         
+        <!-- 全国热门物流专线start -->
+        <div class="hot-city-layer main-width">
+          <div class="hot-city-unit hot_box">
+            <h3 class="news-unit-title">{{ hotRecommendLabel }}</h3>
+            <ul class="hot-cities">
+              <li 
+                v-for="(item,index) in hotRecommend" 
+                :key="index" 
+                class="hot-cities-li"><a
+                  target="_blank"
+                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  class="hot-cities-a">{{ item.title }}</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- 全国热门物流专线end -->
+        <!-- 出发的车源start -->
+        <div class="hot-city-layer main-width">
+          <div class="hot-city-unit hot_box">
+            <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
+            <ul class="hot-cities">
+              <li 
+                v-for="(item,index) in startFromRecommend"
+                :key="index"
+                class="hot-cities-li" ><a
+                  target="_blank"
+                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  class="hot-cities-a">{{ item.title }}</a></li>
+            </ul>
+          </div>
+        </div>
+      <!-- 出发的车源end -->
       </div>
       <div class="che_right_box">
         <!-- 最新车源start -->
@@ -278,6 +308,7 @@
                 class="ltl-input0">
                 <input 
                   id="right-bar-form"
+                  v-model="checkNotice.startAddres"
                   data-toggle="city-picker"
                   data-level="district"
                   type="text" 
@@ -290,6 +321,7 @@
                 class="ltl-input0">
                 <input
                   autocomplete="off"
+                  v-model="checkNotice.endAddres"
                   data-toggle="city-picker"
                   data-level="district"
                   type="text" 
@@ -384,7 +416,7 @@
         <!--车主月人气榜start-->
         <div 
           class="list_right"
-          style="margin-top: 20px;background:#fff;">
+          style="background:#fff;">
           <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
           <div 
             v-for="(item, index) in $store.state.cheyuan.list_pop_carowner" 
@@ -395,7 +427,7 @@
             <div 
               v-if="index < 3" 
               class="img"><img :src="'/images/index/wlgs_tj_0'+index+'.png'" ></div>
-            <div class="right"><span>{{ item.driverName }} {{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
+            <div class="right"><span>{{ item.driverName }} </span><span style="margin-left:10px">{{ item.carNum }}</span><span style="float: right">人气值：<i style="color: red;margin-right:15px">{{ item.popNum }}</i></span></div>
           </div>
         </div>
 
@@ -403,34 +435,7 @@
       </div>
  
 
-      <!-- 全国热门物流专线start -->
-      <div class="hot-city-layer main-width">
-        <div class="hot-city-unit hot_box">
-          <h3 class="news-unit-title">{{ hotRecommendLabel }}</h3>
-          <ul class="hot-cities">
-            <li 
-              v-for="(item,index) in hotRecommend" 
-              :key="index" 
-              class="hot-cities-li"><a
-                target="_blank"
-                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
-                class="hot-cities-a">{{ item.title }}</a></li>
-          </ul>
-        </div>
-        <div class="hot-city-unit hot_box">
-          <h3 class="news-unit-title">{{ startFromRecommendLabel }}</h3>
-          <ul class="hot-cities">
-            <li 
-              v-for="(item,index) in startFromRecommend"
-              :key="index"
-              class="hot-cities-li" ><a
-                target="_blank"
-                :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
-                class="hot-cities-a">{{ item.title }}</a></li>
-          </ul>
-        </div>
-      </div>
-      <!-- 全国热门物流专线end -->
+
     </div>
   </div>
 </template>
@@ -457,6 +462,7 @@ export default {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
       { src: './js/city-picker.data.js' },
+      { src: '../vendor/layer/layer.js' },
       { src: './js/city-picker.js' },
       { src: './js/jquery.pagination.min.js' },
       { src: '/js/gaodemap2.js' }
@@ -478,8 +484,8 @@ export default {
       ],
       inTerVar: null,
       checkNotice: {
-        start: '',
-        end: '',
+        startAddres: '',
+        endAddres: '',
         selectValue: '请选择车型',
         phone: ''
       },
@@ -510,16 +516,24 @@ export default {
       carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
       carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
       carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
-      endArea: query.endArea ? query.endArea : '',
-      endCity: query.endCity ? query.endCity : '',
-      endProvince: query.endProvince ? query.endProvince : '',
-      startArea: query.startArea ? query.startArea : '',
-      startCity: query.startCity
-        ? query.startCity
-        : areaData.currentAreaFullName,
-      startProvince: query.startProvince
-        ? query.startProvince
-        : areaData.currentProvinceFullName
+      endArea: query.endArea || query.enda ? query.endArea || query.enda : '',
+      endCity: query.endCity || query.endc ? query.endCity || query.endc : '',
+      endProvince:
+        query.endProvince || query.endp ? query.endProvince || query.endp : '',
+      startArea:
+        query.startArea || query.starta ? query.startArea || query.starta : '',
+      startCity:
+        query.startCity || query.startc
+          ? query.startCity || query.startc
+          : query.startCity === ''
+            ? ''
+            : areaData.currentAreaFullName,
+      startProvince:
+        query.startProvince || query.startp
+          ? query.startProvince || query.startp
+          : query.startProvince === ''
+            ? ''
+            : areaData.currentProvinceFullName
     }
     // 获取物流公司列表
     let vor = Object.assign({ pageSize: 10 }, vo)
@@ -537,6 +551,20 @@ export default {
     })
   },
   async asyncData({ $axios, app, query }) {
+    let cookie = app.$cookies
+    let areaData = {
+      currentArea: cookie.get('currentArea'),
+      currentAreaFullName: cookie.get('currentAreaFullName'),
+      currentAreaName: cookie.get('currentAreaName'),
+      currentProvince: cookie.get('currentProvince'),
+      currentProvinceFullName: cookie.get('currentProvinceFullName'),
+      currentProvinceName: cookie.get('currentProvinceName')
+    }
+
+    if (!areaData.currentProvince) {
+      areaData = store.state.area
+    }
+
     let vo = {
       carType: query.carType ? query.carType : '', //车辆类型
       carSourceType: query.carSourceType ? query.carSourceType : '', //车源类型
@@ -547,16 +575,24 @@ export default {
       carLengthUpper: query.carLengthUpper ? query.carLengthUpper : '', //车厢长度
       carLoadLower: query.carLoadLower ? query.carLoadLower : '', //载重
       carLoadUpper: query.carLoadUpper ? query.carLoadUpper : '', //载重
-      endArea: query.endArea ? query.endArea : '',
-      endCity: query.endCity ? query.endCity : '',
-      endProvince: query.endProvince ? query.endProvince : '',
-      startArea: query.startArea ? query.startArea : '',
-      startCity: query.startCity
-        ? query.startCity
-        : app.$cookies.get('currentAreaFullName'),
-      startProvince: query.startProvince
-        ? query.startProvince
-        : app.$cookies.get('currentProvinceFullName')
+      endArea: query.endArea || query.enda ? query.endArea || query.enda : '',
+      endCity: query.endCity || query.endc ? query.endCity || query.endc : '',
+      endProvince:
+        query.endProvince || query.endp ? query.endProvince || query.endp : '',
+      startArea:
+        query.startArea || query.starta ? query.startArea || query.starta : '',
+      startCity:
+        query.startCity || query.startc
+          ? query.startCity || query.startc
+          : query.startCity === ''
+            ? ''
+            : areaData.currentAreaFullName,
+      startProvince:
+        query.startProvince || query.startp
+          ? query.startProvince || query.startp
+          : query.startProvince === ''
+            ? ''
+            : areaData.currentProvinceFullName
     }
     let AF018 = await $axios.get(
       '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
@@ -622,7 +658,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.carInfoList)
+    seajs.use(['/js/gaodemap2.js'])
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())
@@ -704,20 +740,31 @@ export default {
   },
   methods: {
     sendNotice() {
-      if (this.checkNotice.start === '') {
+      this.sendNot()
+      let obj = {
+        startProvince: this.startProvince,
+        startCity: this.startCity,
+        startArea: this.startArea,
+        endProvince: this.endProvince,
+        endCity: this.endCity,
+        endArea: this.endArea
+      }
+      console.log(obj)
+      if (this.checkNotice.startAddres === '') {
         $('#form0').css('border-color', 'red')
-      } else {
+      } else if (this.checkNotice.startAddres != '') {
         $('#form0').css('border-color', '#e5e5e5')
       }
-      if (this.checkNotice.end === '') {
+      if (this.checkNotice.endAddres === '') {
         $('#form1').css('border-color', 'red')
-      } else {
+      } else if (this.checkNotice.endAddres != '') {
         $('#form1').css('border-color', '#e5e5e5')
       }
-      if (this.checkNotice.selectValue === '请选择类型') {
+      if (this.checkNotice.selectValue === '请选择车型') {
         $('#form2').css('border-color', 'red')
       } else {
         $('#form2').css('border-color', '#e5e5e5')
+        obj.carType = this.checkNotice.selectValue
       }
       let re = /^1[3|4|5|7|8|9]\d{9}$/
       if (this.checkNotice.phone === '') {
@@ -726,12 +773,53 @@ export default {
       } else {
         if (re.test(this.checkNotice.phone)) {
           $('.ltl-phone').css('border-color', '#e5e5e5')
+          obj.msgMobile = this.checkNotice.phone
         } else {
           $('.ltl-phone').css('border-color', 'red')
           this.checkNotice.phone = ''
           this.phoneHolder = '请输入正确手机号'
         }
       }
+      if (
+        this.checkNotice.startAddres != '' &&
+        this.checkNotice.endAddres != '' &&
+        this.checkNotice.phone != ''
+      ) {
+        this.$axios
+          .post('/28-web/helpFind/carInfo/create', obj)
+          .then(res => {
+            if (res.status === 200) {
+              layer.msg('提交成功，客服稍后将会与您联系')
+            } else if (res.status === 500) {
+              layer.msg(res.errorInfo)
+            }
+          })
+          .catch(err => {
+            ayer.msg(res.errorInfo)
+          })
+      } else {
+        return
+      }
+    },
+    sendNot() {
+      let startAds = [],
+        endAds = []
+      $('#form0 .select-item').each(function(i, e) {
+        startAds.push($(this).text())
+      })
+      this.startProvince = startAds[0] ? startAds[0] : ''
+      this.startCity = startAds[1] ? startAds[1] : ''
+      this.startArea = startAds[2] ? startAds[2] : ''
+      this.checkNotice.startAddres =
+        this.startProvince + this.startCity + this.startArea
+      $('#form1 .select-item').each(function(i, e) {
+        endAds.push($(this).text())
+      })
+      this.endProvince = endAds[0] ? endAds[0] : ''
+      this.endCity = endAds[1] ? endAds[1] : ''
+      this.endArea = endAds[2] ? endAds[2] : ''
+      this.checkNotice.endAddres =
+        this.endProvince + this.endCity + this.endArea
     },
     searchDo() {
       let list1 = [],
@@ -875,7 +963,7 @@ body {
   height: 18px;
   background-color: #3f94ee;
   border-radius: 1px;
-  margin: 16px 12px 0px 10px;
+  margin: 21px 12px 0px 10px;
 }
 .list_box {
   width: 1400px;
@@ -1795,7 +1883,6 @@ body {
   margin-left: 20px;
   box-sizing: border-box;
   float: right;
-  margin-top: 20px;
 }
 .list-box-r-top {
   width: 100%;
@@ -1952,15 +2039,19 @@ body {
   margin-right: 3px;
 }
 
-.main-width {
+/* .main-width {
   width: 1400px;
   position: relative;
   margin: 0 auto;
   overflow: hidden;
+} */
+.main-width {
+  max-width: 1036px;
+  float: left;
+  width: 1043px;
+  margin-bottom: 20px;
 }
-.hot_box {
-  border-bottom: 1px dashed #dfdfdf;
-}
+
 .hot-city-unit {
   box-sizing: border-box;
   /* border: 1px solid #ececec; */
@@ -1981,10 +2072,16 @@ body {
   height: 32px;
   line-height: 32px;
   padding-left: 15px;
-  /* border-bottom: 1px solid #ededed; */
+  /* border-bottom: 2px solid #589def; */
   margin-bottom: 10px;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333333;
+}
+.line-title {
+  color: #3f94ee;
+  border-bottom: 2px solid #3f94ee;
+  font-size: 20px;
 }
 .hot-cities-li {
   display: inline-block;

@@ -51,7 +51,7 @@
             <li class="wd_item05"><span 
               id="nr035" 
               :title="item.address || ''">{{ (item.address || '').replace(item.belongCityName,'') }}</span></li>
-            <li class="wd_item06"><a href="#"><input 
+            <li class="wd_item06"><a :href="'/member/' + $store.state.member.id + '-order'"><input 
               readonly 
               value="下单"></a></li>
           </ul>    		
@@ -96,78 +96,71 @@ export default {
   mounted() {
     let uid = this.$store.state.member.id
     let _this = this
-    seajs.use(
-      ['/member/js/jquery.pagination.min.js', '/index/js/city-picker.data.js'],
-      function() {
-        seajs.use(
-          [
-            '/index/js/city-picker.js'
-            // '/member/js/index.js',
-            // '/js/collection.js',
-            // '/member/js/wangdian.js'
-          ],
-          function() {
-            console.log(
-              '_this.$store.state.member.pointTotal:',
-              _this.$store.state.member.pointTotal
-            )
-            $('#pagination1').pagination({
-              currentPage: 1,
-              totalPage: _this.$store.state.member.pointTotal,
-              callback: function(current) {
-                $('#current1').text(current)
-                _this.$store.dispatch('member/GETCOMPANYPOINTINFO', {
-                  companyId: _this.$route.params.id,
-                  pageSize: 10,
-                  currentPage: current
-                })
-                // process1(current)
-                window.location.href = '#top'
-              }
-            })
-            var startp = $.getParams('startp')
-            var startc = $.getParams('startc')
-            var starta = $.getParams('starta')
-            $('.search_input3 input').citypicker({
-              province: startp,
-              city: startc,
-              district: starta
-            })
-            //网点搜索 S
-
-            $('.search_search').click(function() {
-              var list1 = []
-              $('.search_input3 .select-item').each(function(i, e) {
-                list1.push($(this).text())
+    seajs.use(['/member/js/jquery.pagination.min.js'], function() {
+      seajs.use(
+        [
+          '/js/city-picker.js'
+          // '/member/js/index.js',
+          // '/js/collection.js',
+          // '/member/js/wangdian.js'
+        ],
+        function() {
+          $('#pagination1').pagination({
+            currentPage: 1,
+            totalPage: _this.$store.state.member.pointTotal,
+            callback: function(current) {
+              $('#current1').text(current)
+              _this.$store.dispatch('member/GETCOMPANYPOINTINFO', {
+                companyId: _this.$route.params.id,
+                pageSize: 10,
+                currentPage: current
               })
-              var startp = list1[0]
-              var startc = list1[1]
-              var starta = list1[2]
-              if (!startp) {
-                startp = ''
-              }
-              if (!startc) {
-                startc = ''
-              }
-              if (!starta) {
-                starta = ''
-              }
-              var pca =
-                '&startp=' + startp + '&startc=' + startc + '&starta=' + starta
-              var address = startp + startc + starta
-              var address = '&address=' + address
-              if (!address) {
-                address = ''
-              }
-              address = encodeURI(address)
-              window.location = '/member/' + uid + '-wangdian?' + address + pca
+              // process1(current)
+              window.location.href = '#top'
+            }
+          })
+          var startp = $.getParams('startp')
+          var startc = $.getParams('startc')
+          var starta = $.getParams('starta')
+          $('.search_input3 input').citypicker({
+            province: startp,
+            city: startc,
+            district: starta
+          })
+          //网点搜索 S
+
+          $('.search_search').click(function() {
+            var list1 = []
+            $('.search_input3 .select-item').each(function(i, e) {
+              list1.push($(this).text())
             })
-          }
-        )
-      }
-    )
+            var startp = list1[0]
+            var startc = list1[1]
+            var starta = list1[2]
+            if (!startp) {
+              startp = ''
+            }
+            if (!startc) {
+              startc = ''
+            }
+            if (!starta) {
+              starta = ''
+            }
+            var pca =
+              '&startp=' + startp + '&startc=' + startc + '&starta=' + starta
+            var address = startp + startc + starta
+            var address = '&address=' + address
+            if (!address) {
+              address = ''
+            }
+            address = encodeURI(address)
+            window.location = '/member/' + uid + '-wangdian?' + address + pca
+          })
+        }
+      )
+    })
   },
-  async fetch({ store, params, $axios, error }) {
+  async fetch({ store, params, $axios, error, query }) {
     store.commit('member/setId', params.id)
     await Promise.all([
       store.dispatch('member/GETCOMPANYINFO', params.id).catch(err => {
@@ -180,7 +173,8 @@ export default {
       store.dispatch('member/GETCOMPANYPOINTINFO', {
         companyId: params.id,
         pageSize: 10,
-        currentPage: 1
+        currentPage: 1,
+        belongCityName: (query.startp || '') + (query.startc || '')
       })
     ])
   }

@@ -54,7 +54,7 @@
                 id="nr02"
                 :href="'/member/'+ item.id"
                 target="_blank"
-              ><span style="padding-right:12px;    vertical-align: middle;">{{ item.companyName }}</span>
+              ><span style="padding-right:12px; vertical-align: middle;">{{ item.companyName }}</span>
                 <span v-if="item.isEq">
                   <img
                     v-for="(item, index) in item.eq1"
@@ -91,54 +91,9 @@
                     src="../static/gongsi/images/wlgs_danbao.png"
                     alt="">
                 </span>
-                <!--<p-->
-              <!--v-if="linedataB.isRenZhen"-->
-              <!--class="arc_right07">-->
-              <!--<img-->
-                <!--v-if="linedataB.showIsVip"-->
-                <!--id="right_xinyong"-->
-                <!--src="/line/images/11xinyong.png">-->
-              <!--<img-->
-                <!--v-if="linedataB.isAuthStatus"-->
-                <!--id="right_shiming"-->
-                <!--src="/line/images/10shiming.png">-->
-              <!--<img-->
-                <!--v-if="linedataB.isAuthStatus"-->
-                <!--id="right_baozhengjin"-->
-                <!--src="/line/images/danbao.png"><span id="nr1037">{{ linedataB.collateral }}</span>-->
-                <!--</p>-->
+                
               </a>
-              <!--<i style="">信誉:</i>-->
-
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="require('../static/gongsi/images/blue.gif')">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--class="xy_zuan"-->
-              <!--src="../../static/gongsi/images/blue.gif">-->
-              <!--<img-->
-              <!--v-for="(item,i) in 5"-->
-              <!--:key="i"-->
-              <!--class="xy_guan"-->
-              <!--src="../static/gongsi/images/34huanguan.gif">-->
-              <!--<img-->
-              <!--class="wlgs_shiming"-->
-              <!--src="../static/gongsi/images/wlgs_shiming.png">-->
-              <!--<img-->
-              <!--class="wlgs_xinyong"-->
-              <!--src="../static/gongsi/images/xinyong.png">-->
-              <!--<img-->
-              <!--class="wlgs_danbao"-->
-              <!--src="../static/gongsi/images/wlgs_danbao.png">-->
+            
 
             </P>
             <p class="p2"><i>联系人：</i><font
@@ -376,7 +331,7 @@ export default {
       // line-height: 30px;
     }
     p.p2 {
-      padding-top: 20px;
+      padding-top: 22px;
     }
   }
   .wlzx_list_3 p i {

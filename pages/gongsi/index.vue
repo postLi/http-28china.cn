@@ -277,7 +277,7 @@
             </li>
           </ul>
         </div>
-        <div style="display: inherit;padding-left:55px;position: relative">
+        <div style="display: inherit;padding-left:100px;position: relative">
           <input
             type="text"
             placeholder="公司名称"

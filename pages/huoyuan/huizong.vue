@@ -247,31 +247,34 @@
     <!-- 最新货源 -->
     <div class="p_hy_groom clearfix">
       <div class="hd clearfix">
-        <h3 class="gr_tit">货源推荐</h3>
-        <div class="gr_text"><span>180789</span>条货源，为您优选12条优质货源</div>
+        <h3 class="gr_title">热门专线</h3>
+        <div class="gr_txt"><span>180789</span>条专线，为您优选12条热门优质专线</div>
         <div class="gr_sch">
-          <div class="city_box">
+          <div class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入出发地" 
               id="groom_pageinp1">
           </div>
-          <div class="icon_box"><i class="iconfont iconjiantou_xiangyou_o"/></div>
-          <div class="city_box">
+          <div class="gr_sch_icon"><i class="iconfont iconjiantou_xiangyou_o"/></div>
+          <div class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入到达地" 
               id="groom_pageinp2">
           </div>
-          <div class="btn_box"><a href="">搜索</a></div>
+          <div class="gr_sch_btn"><a href="">搜索</a></div>
         </div>
         <a 
           href="" 
-          class="link_hy">货源大厅<i class="iconfont iconjiantou2"/></a>
+          class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
       </div>
-      <div class="link_type">
-        <a href="">最新货源</a>
-        <a href="">长期稳定货源</a>      
+      <div class="p_type_nav">
+        <a href="">信誉最高</a>
+        <a href="">交易量</a>
+        <a href="">运输时效</a> 
+        <a href="">重货价格最低</a> 
+        <a href="">轻货价格最低</a>       
       </div>
       <div class="bd clearfix">
         <div class="col1">
@@ -683,7 +686,7 @@
       <div class="rank_people clearfix">
         <div class="p_title_box">
           <h3 class="title">货量达人榜</h3>
-          <span class="text">近3个月发布货源最多的货主</span>
+          <span class="title_txt">近3个月发布货源最多的货主</span>
         </div>
         <div class="col1">
           <div class="rank_box">
@@ -745,7 +748,7 @@
       <div class="p_company_owner">
         <div class="p_title_box">
           <h3 class="title">本月优质企业货主</h3>
-          <span class="text">稳定货源，好评率高</span>
+          <span class="title_txt">稳定货源，好评率高</span>
         </div>  
         <ul class="p_co_owner_list clearfix">
           <li>
@@ -950,7 +953,7 @@ export default {
     link: [
       {
         rel: 'stylesheet',
-        href: '//at.alicdn.com/t/font_1076232_u8m9wtyprje.css'
+        href: '//at.alicdn.com/t/font_1076232_r843rdhd1s.css'
       }
     ],
     script: [
@@ -1043,8 +1046,13 @@ export default {
           }
         )
         let swiper = new Swiper('.swiper-container', {
-          spaceBetween: 30,
           effect: 'fade',
+          spaceBetween: 30,
+          centeredSlides: true,
+          autoplay: {
+            delay: 3000,
+            disableOnInteraction: false
+          },
           pagination: {
             el: '.swiper-pagination',
             dynamicBullets: true,
@@ -1566,7 +1574,7 @@ export default {
   margin: 0 auto;
   padding: 20px 0;
   width: $w_1440;
-  .title {
+  .p_title {
     text-align: center;
   }
   .partner_list {

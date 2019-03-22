@@ -144,20 +144,6 @@ function cx01() {
       $(this)
         .children('.index_uls')
         .show()
-      var name = $(this).attr('name')
-      var locationProvince = $(this).attr('locationProvince')
-      var items = []
-      items = childDatas.filter(function(item) {
-        items = []
-        return item.parent_code == name
-      })
-
-      for (var i = 0; i < items.length; i++) {
-        if (items[i].name == locationProvince) {
-          // $(this).css('cursor', 'default')
-          // $('.index_uls').hide()
-        }
-      }
     })
     $('#index_map1').on('mouseleave', '.spanclass', function(e) {
       e.preventDefault()

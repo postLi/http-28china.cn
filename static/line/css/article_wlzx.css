@@ -399,7 +399,7 @@ body {
 
 .arc_middle4 .arc_m4_1 div, .arc_middle4 .arc_m4_2 div {
   float: left;
-  /* width: 200px; */
+  width: 200px;
   margin-left: 23px;
   height: 36px;
   line-height: 36px;
@@ -681,7 +681,10 @@ body {
 #arc_right05_1:hover {
   color: rgb(246, 102, 24);
 }
-
+.arc_right05 .arc_right05_2:hover {
+  border-color: rgb(246, 102, 24);
+  color: rgb(246, 102, 24) !important;
+}
 .arc_right .arc_right06 {
   width: 280px;
   height: 32px;

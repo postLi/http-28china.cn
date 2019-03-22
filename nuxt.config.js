@@ -1,5 +1,9 @@
 const pkg = require('./package')
 var TransformModulesPlugin = require('webpack-transform-modules-plugin')
+let apiurl = 'http://120.78.235.91:7010'
+if (process.env.DEVBUILD) {
+  apiurl = 'http://192.168.1.157:7010'
+}
 module.exports = {
   mode: 'universal',
   modern: true, // 编译为现代 ES Module，并自动分辨浏览器输出
@@ -126,7 +130,7 @@ module.exports = {
   proxy: {
     '/api/': {
       // target: 'http://192.168.1.233:7010', // 代理地址
-      target: 'http://120.78.235.91:7010', // 代理地址
+      target: apiurl, // 代理地址
       changeOrigin: true,
       pathRewrite: {
         '^/api': ''

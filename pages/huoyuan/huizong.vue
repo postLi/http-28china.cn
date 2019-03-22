@@ -949,19 +949,7 @@ import 'swiper/dist/css/swiper.css'
 import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
-  head: {
-    link: [
-      {
-        rel: 'stylesheet',
-        href: '//at.alicdn.com/t/font_1076232_r843rdhd1s.css'
-      }
-    ],
-    script: [
-      // {
-      //   src: '/js/jq_scroll.js'
-      // }
-    ]
-  },
+  head: {},
   data() {
     return {
       banners: [
@@ -1273,12 +1261,12 @@ export default {
       @extend .fr;
       padding: 20px 10px;
       width: 265px;
-      height: 392px;
+      height: 423px;
       background: $green;
     }
   }
   .subscribe {
-    padding: 10px 20px;
+    padding: 20px;
     background: #efeff0;
     .tit {
       margin-bottom: 10px;
@@ -1311,7 +1299,7 @@ export default {
     .text {
       overflow: hidden;
       height: 40px;
-      margin-bottom: 10px;
+      margin: 10px 0;
       .num {
         color: $orange;
       }

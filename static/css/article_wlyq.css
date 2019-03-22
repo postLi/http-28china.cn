@@ -102,7 +102,7 @@ cursor: pointer;
 	background-color: #f1f1f1;
 	border: solid 1px #e6e6e6;
 	margin-bottom: 14px;
-	background: no-repeat url(../images/list_wlzx/.png) #f1f1f1 0px 16px;
+	/* background: no-repeat url(../images/list_wlzx/xiajt.png) #f1f1f1 0px 16px; */
 	position: relative;
 }
 .list_tiaoj span {
@@ -274,10 +274,12 @@ vertical-align: middle;
     font-size: 16px;	
     padding:0 3px 0 3px;
 }
+.tj_list .p2{
+	padding-left: 26px;
+}
 .tj_list .p2 span{
 padding:0 0 0 5px;
 }
-.tj_list .p2 img{display: none;}
 
 .tj_list .p3 i,.tj_list .p3 em,.tj_list .p4 i{
 	font-size: 14px;
@@ -487,7 +489,6 @@ border:0;
 .wlzx_list_2 p{line-height: 30px;}
 .wlzx_list_2 .p1{margin-bottom: 10px;}
 .wlzx_list_2 .p1 a{font-weight: bold;padding-right: 10px;}
-.wlzx_list_2 .p3 img{display: none;}
 .wlzx_list_2  i{color: #666;padding-left: 0px;font-size: 14px;}
 .wlzx_list_2  font{color: #333;font-size: 14px;}
 .wlzx_list_2 .p2 a{color: #333;font-size: 14px;}

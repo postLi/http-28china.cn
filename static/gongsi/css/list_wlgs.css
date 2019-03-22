@@ -306,12 +306,12 @@ width: 342px;
 }
 .header_list ul.first_ul li.sec_li{
   float: left;
-  width: 790px;
+  width: 832px;
   /* border: 1px solid #ccc; */
   height: 420px
 }
 .header_list ul.first_ul .sec_li .bot a:nth-last-of-type(2){
-padding: 0 21px
+padding: 0 26px
 }
 .header_list ul.first_ul li.last_li{
   float: left;
@@ -344,7 +344,7 @@ padding: 0 21px
 }
 
 .header_links_l{
-  width: 1040px;
+  width: 1080px;
   height: 200px;
 }
 .header_links_r{

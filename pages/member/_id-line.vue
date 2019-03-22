@@ -270,14 +270,14 @@ export default {
         $('#tj_price2').click(function() {
           $('#tj_price').css('display', 'none')
           //orderBy: "weigthPrice"
-          _this.query.orderBy = 'weigthPrice'
+          _this.query.orderBy = 'weigthPriceAsc'
           _this.fetchData(1)
           _this.setPagination()
         })
         $('#tj_price1').click(function() {
           $('#tj_price').css('display', 'none')
           //orderBy: "lightPrice"
-          _this.query.orderBy = 'lightPrice'
+          _this.query.orderBy = 'lightPriceAsc'
           _this.fetchData(1)
           _this.setPagination()
         })

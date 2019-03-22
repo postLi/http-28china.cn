@@ -409,7 +409,7 @@ export default {
     seajs.use(['/js/AFLC_API.js', 'layer'], function() {
       seajs.use(
         [
-          '/index/js/gaodemap2.js',
+          '/js/gaodemap2.js',
           '/member/js/index.js',
           '/js/collection.js',
           '/member/js/onlineOrder.js'

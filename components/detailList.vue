@@ -32,7 +32,7 @@
             target="_blank">
             <img
               v-if="item.companyFacadeFile == '' || item.companyFacadeFile == null"
-              src="../static/images/pic/bg1.png"
+              src="../static/gongsi/images/moren.png"
               class="scrollLoading"
               width="165"
               height="140"

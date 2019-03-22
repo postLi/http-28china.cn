@@ -741,6 +741,7 @@ export default {
       })
   },
   async asyncData({ $axios, app, query }) {
+    console.log(app, 'app')
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     if (cy1.data.status === 200) {
@@ -807,7 +808,7 @@ export default {
       .catch(err => {
         console.log('popularitys')
       })
-    console.log(popularitys.data.data, 'popularitys')
+    // console.log(popularitys.data.data, 'popularitys')
     let footLink = item => {
       switch (item.startProvince) {
         case null:

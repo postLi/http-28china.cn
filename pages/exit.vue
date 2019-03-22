@@ -7,12 +7,16 @@ export default {
   layout: 'empty',
   mounted() {
     let cookies = this.$cookies
+    cookies.remove('access_token')
+    cookies.remove('login_mobile')
+    cookies.remove('login_type')
+    cookies.remove('loginId')
+    cookies.remove('loginCompanyName')
+    cookies.remove('login_userId')
+    cookies.remove('login_userToken')
+    cookies.remove('login_userName')
+
     if (process.client) {
-      cookies.remove('access_token')
-      cookies.remove('login_mobile')
-      cookies.remove('login_type')
-      cookies.remove('loginId')
-      cookies.remove('loginCompanyName')
       location.href = '/'
     }
   }

@@ -4,6 +4,7 @@ let apiurl = 'http://120.78.235.91:7010'
 if (process.env.DEVBUILD) {
   apiurl = 'http://192.168.1.157:7010'
 }
+console.log('apiurl:', apiurl)
 module.exports = {
   mode: 'universal',
   modern: true, // 编译为现代 ES Module，并自动分辨浏览器输出

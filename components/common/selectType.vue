@@ -6,7 +6,7 @@
       :class="current === '' ? 'now' : ''" 
       href="#">不限</a>
     <a 
-      v-for="(item, index) in list"
+      v-for="(item, index) in datas"
       :key="index"
       :class="current === index ? 'now' : ''" 
       @click.stop.prevent="setVal(item.code, item.name, index)"
@@ -15,6 +15,12 @@
   </span>
 </template>
 <script>
+/**
+ * 从父组件传name值则直接从后台拿数据
+ * 当list有数据时，取list数据
+ * code值为初始化显示选中的第几个
+ * getCode表示返回的值是要取编码值，还是拿区间段的名称
+ */
 export default {
   props: {
     list: {
@@ -24,14 +30,56 @@ export default {
     getCode: {
       type: Boolean,
       default: false
+    },
+    code: {
+      type: String,
+      default: ''
+    },
+    name: {
+      type: String,
+      default: ''
     }
   },
   data() {
     return {
-      current: ''
+      current: '',
+      datas: []
+    }
+  },
+  mounted() {
+    // 先判断是否有list值
+    if (this.list.length) {
+      this.datas = this.list
+      this.initCurrent()
+    } else if (this.name) {
+      this.fetchData(this.name).then(res => {
+        this.datas = res.data
+        this.initCurrent()
+      })
+    } else {
+      // 为空怎么展示？
     }
   },
   methods: {
+    // 获取字典数据
+    fetchData(name) {
+      return this.$store.dispatch('getDictList', {
+        name: this.name
+      })
+    },
+    initCurrent() {
+      if (this.code) {
+        let index = ''
+        this.datas.forEach((el, inx) => {
+          if (el.code === this.code) {
+            index = inx
+          }
+        })
+        this.current = index
+      } else {
+        this.current = ''
+      }
+    },
     setVal(code, name, index) {
       this.current = index
       let val = name.replace(/>(.*)/, '$1-').split('-')

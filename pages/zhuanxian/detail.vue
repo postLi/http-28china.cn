@@ -56,7 +56,9 @@
 
       <div class="arc_main1">
         <div class="arc_top2">
-          <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
+          <div 
+            style="padding-left:30px"
+            class="arc_top2_1"><a href="/"><span>首页</span></a></div>
           <div
             id="arc_city"
             class="arc_top2_2">
@@ -71,6 +73,7 @@
           <div
             v-if="lineCitys.length>14"
             class="arc_top2_3"
+            style="padding-right:30px"
             onmouseover="$('.city_box').css('display','block');"
           ><a href="javascript:void(0)" ><span>更多+</span></a></div>
           <!--更多城市-->

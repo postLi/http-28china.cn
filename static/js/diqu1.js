@@ -64,7 +64,7 @@ function cx01() {
     //初始化
     var s1 = ''
     var s2 = ''
-    console.log(datas, 'datas')
+    // console.log(datas, 'datas')
     // s1 +=
     //   '<span style="width: 33%; text-align: center;display: inline-block;">不限</span>'
     s1 += `
@@ -103,26 +103,19 @@ function cx01() {
       $(this)
         .children('.index_uls')
         .html()
-      var name = $(this).attr('name')
       var locationProvince = $(this).attr('locationProvince')
+      var name = $(this).attr('name')
+
       var items = []
       items = childDatas.filter(function(item) {
         items = []
         return item.parent_code == name
       })
-      // console.log()
-      // herf="gongsi?locationCity=${items[i].name}&locationProvince=${locationProvince}"
+
       s2 = `
         
       `
       for (var i = 0; i < items.length; i++) {
-        if (items[i].name == locationProvince) {
-          // console.log(
-          //   items[i].name == locationProvince,
-          //   'items[i].name == locationProvince'
-          // )
-          $('.index_uls').hide()
-        }
         s2 += `
         <li 
          style="width: 33%;text-align: center;float: left;cursor: pointer;padding:2px 0"><a 
@@ -151,6 +144,20 @@ function cx01() {
       $(this)
         .children('.index_uls')
         .show()
+      var name = $(this).attr('name')
+      var locationProvince = $(this).attr('locationProvince')
+      var items = []
+      items = childDatas.filter(function(item) {
+        items = []
+        return item.parent_code == name
+      })
+
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].name == locationProvince) {
+          // $(this).css('cursor', 'default')
+          // $('.index_uls').hide()
+        }
+      }
     })
     $('#index_map1').on('mouseleave', '.spanclass', function(e) {
       e.preventDefault()

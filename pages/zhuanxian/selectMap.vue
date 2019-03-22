@@ -41,8 +41,7 @@
     <textarea
       v-model="form.memo"
       maxlength="100"
-      placeholder="备注信息，如：期望发货时间、货物体积重量
-等信息..."
+      placeholder="备注信息，如：期望发货时间、货物体积重量等信息..."
       class="textare"/>
     <input
       v-model="form.msgMobile"

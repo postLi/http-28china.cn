@@ -195,7 +195,7 @@ body {
 .arc_middle {
   position: relative;
   float: left;
-  width: 726px;
+  width: 722px;
   height: 100%;
   margin-right: 18px;
   font-size: 14px;
@@ -203,7 +203,7 @@ body {
 
 .arc_middle1 {
   /*height: 36px;*/
-  width: 726px;
+  width: 700px;
 }
 
 .arc_middle1 span {
@@ -259,7 +259,7 @@ body {
 
 .arc_middle2 {
   height: 86px;
-  width: 726px;
+  width: 700x;
   background-color: #fff2e9;
 }
 
@@ -381,7 +381,7 @@ body {
 
 .arc_middle4 {
   height: 111px;
-  width: 726px;
+  width: 722px;
   background-color: #fef9f5;
   border-top: dashed 1px #e2e2e2;
   border-bottom: dashed 1px #e2e2e2;
@@ -389,7 +389,7 @@ body {
 
 .arc_middle4 .arc_m4_1, .arc_middle4 .arc_m4_2 {
   float: left;
-  width: 362px;
+  width: 45%;
   height: 111px;
 }
 
@@ -399,7 +399,7 @@ body {
 
 .arc_middle4 .arc_m4_1 div, .arc_middle4 .arc_m4_2 div {
   float: left;
-  width: 200px;
+  /* width: 200px; */
   margin-left: 23px;
   height: 36px;
   line-height: 36px;

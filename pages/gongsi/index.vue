@@ -72,8 +72,6 @@
             <a
               v-for="(item, index) in 3"
               :key="index"
-              href="#"
-
             >
               <img
                 src="../../static/gongsi/images/03shuju.png"
@@ -328,7 +326,10 @@
             </div>
           </div>
           <!--分页-->
-          <div class="lll-line--othet">
+          <div 
+          
+           
+          class="lll-line--othet">
             <div class="lll-recommend clearfix">
               <div
                 class="zx_sx1"
@@ -368,7 +369,7 @@
                   <a
                     :href="'/member/'+ item.id"
                     target="_blank">
-                    <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
+                    <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName.length>10?item.companyName.substring(0,10) +'..':item.companyName }}</p>
                     <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
                     <div
                     style="text-align: center;width: 200px;border: 1px solid #ccc;padding:10px;margin:20px 45px 0 32px;">
@@ -666,7 +667,7 @@ export default {
     }
 
     let gsList = await getGSList($axios, 1, vo, '')
-    // console.log(gsList, 'gsListgsListgsListgsListgsList')
+    console.log(listC.data.data, 'listC.data.data')
     gsList.list.forEach(item => {
       // item.num = Math.ceil(Math.random() * 30)
       let arr = (item.id || '').split('')

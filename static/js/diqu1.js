@@ -90,7 +90,7 @@ function cx01() {
                  >${name}</span>
                   <ul
                     class="index_uls"
-                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 160px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;border-radius: 3px">
+                    style="position: absolute;left: -1%;top: 98%;display: none;width: 320px;height: 180px;background-color: #ffffff;border: solid 1px #cccccc;box-shadow: 0px 0px 20px rgba(0,0,0,0.3); z-index: 999;padding: 10px 0 10px 10px;border-radius: 3px">
                     <li style="width: 33%;"><a href="#"><span>广州</span></a></li>
                   </ul>
                   </li>

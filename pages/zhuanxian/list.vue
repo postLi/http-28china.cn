@@ -609,7 +609,8 @@ export default {
         belongBrandCode: query.belongBrandCode,
         departureTimeCode: query.departureTimeCode,
         otherServiceCode: query.otherServiceCode,
-        parkId: query.parkId
+        parkId: query.parkId,
+        companyName: query.companyName || ''
       }),
       $axios.post(aurl + `/28-web/range/recommend`, {
         currentPage: 1,
@@ -776,13 +777,13 @@ export default {
                     $('#tj_price2').click(function() {
                       $('#tj_price').css('display', 'none')
                       // console.log('weigthPrice排序')
-                      orderBy = 'weigthPrice'
+                      orderBy = 'weigthPriceAsc'
                       fetchLineList(currentPage, orderBy)
                     })
                     $('#tj_price1').click(function() {
                       $('#tj_price').css('display', 'none')
                       // console.log('lightPrice排序')
-                      orderBy = 'lightPrice'
+                      orderBy = 'lightPriceAsc'
                       fetchLineList(currentPage, orderBy)
                     })
                   }

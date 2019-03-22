@@ -555,7 +555,7 @@ export default {
       lineLists: []
     }
   },
-  async asyncData({ $axios, query, app }) {
+  async asyncData({ $axios, query, app, error }) {
     let cookie = app.$cookies
     let areaData = {
       currentArea: cookie.get('currentArea'),
@@ -639,7 +639,7 @@ export default {
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    console.log(listA.data.data.list, 'listA.data.data.list')
+    // console.log(listA, 'listA.data.data.list')
     if (
       listA.data.status == 200 ||
       listB.data.status == 200 ||
@@ -679,6 +679,8 @@ export default {
         lineCodeB: codeB.data.status == 200 ? codeB.data.data : [],
         lineCodeC: codeC.data.status ? codeC.data.data : []
       }
+    } else {
+      error({ statusCode: 500, message: '查找不到该专线列表' })
     }
   },
   computed: {

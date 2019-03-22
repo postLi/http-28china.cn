@@ -355,6 +355,8 @@ async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
   if (res.data.status === 200) {
     return res.data.data.list
+  } else {
+    return { list: [] }
   }
 }
 
@@ -429,7 +431,7 @@ export default {
       companyName: ''
     }
   },
-  async asyncData({ $axios, app, query }) {
+  async asyncData({ $axios, app, query, error }) {
     let pos = query.pos ? query.pos.split(',') : ['', '']
     let vo = {
       startProvince: query.startProvince
@@ -458,7 +460,7 @@ export default {
     //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
-    console.log(recommendList, 'recommendList')
+    // console.log(recommendList, 'recommendList')
     recommendList.forEach(item => {
       if (item.credit >= 0 && item.credit <= 3) {
         item.showcreadimg = true
@@ -521,15 +523,19 @@ export default {
     if (AF025.data.status === 200) {
       AF025.data.data.unshift({ code: '', name: '不限' })
     }
-    return {
-      AF029: AF029.data.status === 200 ? AF029.data.data : [],
-      AF025: AF025.data.status === 200 ? AF025.data.data : [],
-      logisticsPark: logisticsPark,
-      WangdiangInfoList: WangdiangInfoList.list,
-      pages: WangdiangInfoList.pages,
-      recommendList: recommendList,
-      vo: vo,
-      companyName: query.companyName || ''
+    if (AF029.data.status === 200 || AF025.data.status === 200) {
+      return {
+        AF029: AF029.data.status === 200 ? AF029.data.data : [],
+        AF025: AF025.data.status === 200 ? AF025.data.data : [],
+        logisticsPark: logisticsPark,
+        WangdiangInfoList: WangdiangInfoList.list,
+        pages: WangdiangInfoList.pages,
+        recommendList: recommendList,
+        vo: vo,
+        companyName: query.companyName || ''
+      }
+    } else {
+      error({ statusCode: 500, message: '查找不到该物流网点' })
     }
   },
   mounted() {

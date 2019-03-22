@@ -56,7 +56,9 @@
 
       <div class="arc_main1">
         <div class="arc_top2">
-          <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
+          <div 
+            style="padding-left:30px"
+            class="arc_top2_1"><a href="/"><span>首页</span></a></div>
           <div
             id="arc_city"
             class="arc_top2_2">
@@ -71,6 +73,7 @@
           <div
             v-if="lineCitys.length>14"
             class="arc_top2_3"
+            style="padding-right:30px"
             onmouseover="$('.city_box').css('display','block');"
           ><a href="javascript:void(0)" ><span>更多+</span></a></div>
           <!--更多城市-->
@@ -108,12 +111,18 @@
                 src="/line/images/04ewm.png"
                 alt=""></li>
               <li 
+              @click="downFn">
+                下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的专线，并可实时接收28快运为您推荐的精品货源提醒!
+               
+                <!-- <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"></p> -->
+              </li>
+              <!-- <li 
                 style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"
                 @click="downFn">
                 <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
                 <p>多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的货源，并可实时接</p>
                 <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">收28快运为您推荐的精品货源提醒!</p>
-              </li>
+              </li> -->
             </ul>
           </div>
 
@@ -406,6 +415,7 @@
               <!--id="nr1022"-->
               <!--style="color: #333"-->
               <!--@click="showMoblieFn(showMoblie)">{{ linedataB.mobile }}</font>-->
+              <!--  -->
               <font
                 id="nr1022"
                 style="color: #333">{{ linedataB.mobile }}</font>
@@ -427,17 +437,17 @@
                 id="arc_right05_1"
                 readonly=""
                 value="进入官网"></a>
-            <!--<span>{{ linedataB.id }}</span>-->
             <a
-              style="border:1px solid #ccc;padding:5px 30px"
-              @click="openColl('comany')"><span>收藏</span></a>
-              <!-- <span style="padding:5px;border:1px solid #ccc">收藏</span> -->
-
-              <!-- <a><input
-              id="collection_wlgs"
+              
+            @click="openColl('comany')"><input
+              class="arc_right05_2"
               readonly=""
-              value="收藏"
-            ></a> -->
+              value="收藏"></a>
+              <!-- <a
+              class="arc_right05_2"
+              style="border:1px solid #ccc;padding:5px 30px"
+              @click="openColl('comany')"><span>收藏</span></a> -->
+          
           </p>
           <p class="arc_right06">
             <span>相关认证</span>
@@ -469,7 +479,7 @@
 
       </div>
       <div
-        style="    display: inline-block;"
+        style="display: inline-block;width: 1360px; margin-top: 30px;"
         class="arc_main1-1">
         想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
       </div>
@@ -617,7 +627,7 @@
           </div>
           <div class="bot_right">
             <p
-              style="margin-top: 20px;"
+              style="margin-top: 20px;color:red;font-size:16px"
               v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
@@ -1016,10 +1026,13 @@ async function getCanyColl(
       data: res.data
     }
   } else {
-    // return { list: [], pages: 0, currentPage: 1 }
+    return { data: false }
   }
-  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
 }
+// async function getLineList($axios, id) {
+//   let res = await $axios.get(`/28-web/range/${id}`)
+//   console.log(res, '服务端')
+// }
 export default {
   name: 'Index',
   components: {
@@ -1118,17 +1131,6 @@ export default {
       endc = ''
     }
 
-    // /range/getRangePriceReference/{rangeId}
-    // 专线详情_专线价格参考
-    // if (pj_zh == '好评') {
-    //   var assessLevel = 'AF0360101'
-    // }
-    // if (pj_zh == '中评') {
-    //   var assessLevel = 'AF0360102'
-    // }
-    // if (pj_zh == '差评') {
-    //   var assessLevel = 'AF0360103'
-    // }
     let linedataA = await $axios.get(aurl + `/28-web/range/${query.id}`)
     if (linedataA.data.status === 200 && linedataA.data.data) {
       enda = linedataA.data.data.endArea

@@ -4,6 +4,7 @@
 /*公共的变量*/
 /*公共函数*/
 /*重货，轻货函数*/
+/*发布按钮函数*/
 /*公共清楚浮动方法*/
 .m_t10 {
   margin-top: 10px;
@@ -13,13 +14,13 @@
   padding: 10px;
 }
 
-.fl, .p_title_box .title, .p_title_box .text, .p_owner_list li, .p_hy_list > li, .p_hy_info .hy_info_list > li, .p_hy_info .info_text_list > li, .p_hy_groom .gr_tit, .p_hy_groom .gr_text, .p_hy_groom .gr_sch, .p_hy_groom .gr_sch .city_box,
+.fl, .p_title_box .title, .p_title_box .text, .p_owner_list li, .p_hy_list > li, .p_hy_info .hy_info_list > li, .p_hy_info .hy_info_text_list > li, .p_hy_groom .gr_tit, .p_hy_groom .gr_text, .p_hy_groom .gr_sch, .p_hy_groom .gr_sch .city_box,
 .p_hy_groom .gr_sch .icon_box,
-.p_hy_groom .gr_sch .btn_box, .p_release .hd .text_box, .p_co_owner_list > li, .p_co_owner_list > li .groom > span {
+.p_hy_groom .gr_sch .btn_box, .p_live .live_txt, .p_co_owner_list > li, .p_co_owner_list > li .groom > span, .p_our_virtue .our_virtue_list > li, .p_answers .answers_list > li {
   float: left;
 }
 
-.fr, .p_hy_list > li .type_box .time, .p_hy_groom .link_hy, .p_release .hd .btn_release, .p_co_owner_list > li .tit .icon_tuijian {
+.fr, .p_hy_list > li .type_box .time, .p_hy_groom .link_hy, .p_live .live_btn, .p_co_owner_list > li .tit .icon_tuijian, .p_answers .p_title_box .answers_link {
   float: right;
 }
 
@@ -45,6 +46,27 @@
 .bj_2 {
   overflow: hidden;
   background: #fff;
+}
+
+.error {
+  color: #ff0000;
+}
+
+/*颜色*/
+.color_orange {
+  color: #f9552a;
+}
+
+.color_green {
+  color: #3cb46d;
+}
+
+.color_blue {
+  color: #3399ff;
+}
+
+.color_violet {
+  color: #9966cc;
 }
 
 /**********公共标题****************/
@@ -87,6 +109,17 @@
   font-size: 20px;
 }
 
+.btn_release {
+  display: inline-block;
+  padding: 8px 0;
+  width: 150px;
+  font-size: 18px;
+  text-align: center;
+  background: #3cb46d;
+  color: #fff;
+  border-radius: 3px;
+}
+
 /*********分类导航***************/
 .p_category_menu {
   padding: 10px 0;
@@ -112,6 +145,13 @@
 
 .p_category_menu .category_menu_list .item a {
   cursor: pointer;
+}
+
+.btn_small {
+  padding: 5px 10px;
+  color: #3cb46d;
+  border: 1px solid #3cb46d;
+  border-radius: 5px;
 }
 
 /*************登录*****************/
@@ -337,19 +377,19 @@
   background: #fff;
 }
 
-.p_hy_info .col1 {
+.p_hy_info .hy_info_col1 {
   margin: 25px 0 0 25px;
   width: 830px;
   height: 62px;
 }
 
-.p_hy_info .tit_box {
+.p_hy_info .hy_info_tit {
   width: 140px;
   height: 58px;
   border: 2px solid #f9552a;
 }
 
-.p_hy_info .tit_box > h3 {
+.p_hy_info .hy_info_tit > h3 {
   margin-top: 15px;
   margin-left: -2px;
   width: 144px;
@@ -360,57 +400,57 @@
   background: #fff;
 }
 
-.p_hy_info .info_user_box {
+.p_hy_info .hy_info_user_box {
   overflow: hidden;
   margin-left: 50px;
   width: 510px;
   height: 60px;
 }
 
-.p_hy_info .info_user_box .info_user_list {
+.p_hy_info .hy_info_user_box .hy_info_user_list {
   overflow: hidden;
   height: 60px;
 }
 
-.p_hy_info .info_user_box .info_user {
+.p_hy_info .hy_info_user_box .hy_info_user_info {
   margin-bottom: 15px;
   line-height: 22px;
 }
 
-.p_hy_info .info_user_box .info_user .user {
+.p_hy_info .hy_info_user_box .hy_info_user_info .hy_info_user_info_user {
   margin-right: 40px;
   font-size: 16px;
   font-weight: bold;
 }
 
-.p_hy_info .info_user_box .info_user .time {
+.p_hy_info .hy_info_user_box .hy_info_user_info .hy_info_user_info_time {
   color: #999;
 }
 
-.p_hy_info .info_user_box .info_text {
+.p_hy_info .hy_info_user_box .hy_info_user_text {
   line-height: 22px;
 }
 
-.p_hy_info .info_user_box .info_text > span {
+.p_hy_info .hy_info_user_box .hy_info_user_text > span {
   padding-right: 10px;
 }
 
-.p_hy_info .info_user_box .info_text > span b {
+.p_hy_info .hy_info_user_box .hy_info_user_text > span b {
   font-weight: normal;
   color: #3399ff;
 }
 
-.p_hy_info .info_user_box .info_text .link {
+.p_hy_info .hy_info_user_box .hy_info_user_text .hy_info_user_text_link {
   font-size: 16px;
   color: #3399ff;
 }
 
-.p_hy_info .col2 {
+.p_hy_info .hy_info_col2 {
   margin-top: 10px;
   height: 100px;
 }
 
-.p_hy_info .hy_info_box {
+.p_hy_info .hy_info_num {
   height: 100px;
   border-left: 1px dashed #ddd;
 }
@@ -437,28 +477,28 @@
   padding-right: 10px;
 }
 
-.p_hy_info .hy_info_list > li > span.info_num {
+.p_hy_info .hy_info_list > li > span.hy_info_list_num {
   font-weight: bold;
   color: #f7722a;
 }
 
-.p_hy_info .info_text_list {
+.p_hy_info .hy_info_text_list {
   margin-left: 45px;
   overflow: hidden;
   height: 40px;
   line-height: 40px;
 }
 
-.p_hy_info .info_text_list > li {
-  margin-right: 10px;
+.p_hy_info .hy_info_text_list > li {
+  margin-right: 15px;
 }
 
-.p_hy_info .info_text_list > li .iconfont {
+.p_hy_info .hy_info_text_list > li .iconfont {
   color: #f7722a;
 }
 
-.p_hy_info .info_text_list > li .num {
-  padding-left: 5px;
+.p_hy_info .hy_info_text_list > li .hy_info_text_num {
+  padding-left: 10px;
   color: #f7722a;
 }
 
@@ -545,47 +585,31 @@
 
 .p_hy_groom .link_type > a {
   font-size: 16px;
-  color: #999;
+  color: #666;
   padding-right: 35px;
 }
 
 /*********发布求车信息**********/
 .p_release {
   margin: 0 auto;
-  padding: 50px 0;
+  padding: 40px 0;
   width: 1440px;
   font-size: 14px;
 }
 
-.p_release .hd {
+.p_release .release_box {
   overflow: hidden;
   margin: 0 auto;
-  width: 450px;
+  width: 420px;
 }
 
-.p_release .hd .text_box {
-  width: 230px;
-}
-
-.p_release .hd .text_box .tit {
+.p_release .release_box .release_box_txt .release_box_txt_tit {
+  margin-bottom: 5px;
   font-size: 25px;
   color: #3cb46d;
 }
 
-.p_release .hd .btn_release {
-  margin-top: 10px;
-  width: 190px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 20px;
-  color: #fff;
-  font-weight: bold;
-  text-align: center;
-  background: #3cb46d;
-  border-radius: 5px;
-}
-
-.p_release .bd {
+.p_release .release_total {
   margin: 30px auto 0 auto;
   display: table;
   word-spacing: -1em;
@@ -595,19 +619,54 @@
   color: #333;
 }
 
-.p_release .bd > span {
+.p_release .release_total > span {
   display: inline-block;
   font-size: 18px;
   font-weight: bold;
   margin-left: 10px;
 }
 
-.p_release .bd > span.num {
+.p_release .release_total > span.release_total_num {
   padding: 2px 8px;
   color: #fff;
   background: #ff0000;
   font-weight: normal;
   font-size: 20px;
+}
+
+/*入住*/
+.p_live {
+  margin: 0 auto;
+  padding: 40px 0;
+  width: 550px;
+  font-size: 14px;
+}
+
+.p_live .live_txt {
+  width: 365px;
+}
+
+.p_live .live_txt > span {
+  display: block;
+  text-align: center;
+}
+
+.p_live .live_txt > span.live_txt_tit {
+  margin-bottom: 10px;
+  font-size: 25px;
+  color: #3cb46d;
+  font-weight: bold;
+}
+
+.p_live .live_btn {
+  display: inline-block;
+  padding: 8px 0;
+  width: 150px;
+  font-size: 18px;
+  text-align: center;
+  background: #3cb46d;
+  color: #fff;
+  border-radius: 3px;
 }
 
 /*********本月优质企业货主******/
@@ -697,4 +756,101 @@
 
 .p_co_owner_list > li:last-child {
   margin-right: 0;
+}
+
+/*******我们的优势************/
+.p_our_virtue {
+  margin: 0 auto 40px auto;
+  width: 1440px;
+}
+
+.p_our_virtue .p_title, .p_our_virtue .p_title_box .title, .p_title_box .p_our_virtue .title {
+  text-align: center;
+}
+
+.p_our_virtue .our_virtue_list > li {
+  overflow: hidden;
+  margin-right: 30px;
+  width: 337px;
+  height: 420px;
+  font-size: 16px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 8px #bbb;
+}
+
+.p_our_virtue .our_virtue_list > li:last-child {
+  margin-right: 0;
+}
+
+.p_our_virtue .our_virtue_list > li .our_virtue_pic {
+  height: 190px;
+}
+
+.p_our_virtue .our_virtue_list > li .our_virtue_tit {
+  padding: 20px 0;
+  font-size: 30px;
+  text-align: center;
+}
+
+.p_our_virtue .our_virtue_list > li .our_virtue_content {
+  margin: 0 auto;
+  width: 200px;
+  line-height: 25px;
+}
+
+/********问答****************/
+.p_answers {
+  margin: 0 auto;
+  width: 1440px;
+  font-size: 14px;
+}
+
+.p_answers .p_title_box {
+  position: relative;
+}
+
+.p_answers .p_title_box .title {
+  float: none;
+  text-align: center;
+}
+
+.p_answers .p_title_box .answers_link {
+  position: absolute;
+  top: 25px;
+  right: 0;
+  line-height: 25px;
+}
+
+.p_answers .p_title_box .answers_link .iconfont {
+  padding-left: 5px;
+  font-size: 14px;
+  color: #3cb46d;
+}
+
+.p_answers .answers_list {
+  margin: 0 auto;
+  width: 1180px;
+}
+
+.p_answers .answers_list > li {
+  margin: 0 60px 60px 60px;
+  width: 470px;
+}
+
+.p_answers .answers_list > li > p {
+  line-height: 25px;
+  color: #333;
+}
+
+.p_answers .answers_list > li > p.answers_list_tit {
+  margin-bottom: 15px;
+  line-height: 25px;
+  font-size: 18px;
+  color: #3cb46d;
+}
+
+.p_answers .answers_list > li > p.answers_list_tit .iconfont {
+  padding-right: 10px;
+  font-size: 25px;
 }

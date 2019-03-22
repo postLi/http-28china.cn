@@ -154,10 +154,10 @@
                   target="_blank"><span class="nr01">{{ item.startCity }}{{ item.startArea }}&nbsp;&rarr;&nbsp;{{ item.endCity }}{{ item.endArea }}</span></a>
                 <a
                   :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
-                  target="_blank"><span class="nr02" ><font style="color:#f00">{{ item.weightPrice||0 }}</font>元/公斤</span></a>
+                  target="_blank"><span class="nr02" ><font style="color:#f00">{{ item.weightDiscountPrice || item.weightPrice }}</font>元/公斤</span></a>
                 <a
                   :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
-                  target="_blank"><span class="nr03" ><font style="color:#f00">{{ item.lightPrice||0 }}</font>元/方</span> </a>
+                  target="_blank"><span class="nr03" ><font style="color:#f00">{{ item.lightDiscountPrice || item.lightPrice }}</font>元/方</span> </a>
                 <a
                   :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr04">{{ item.transportAging }}{{ item.transportAgingUnit }}</span></a>
@@ -243,25 +243,8 @@
                 </P>
 
                 <p class="p2"><a href="#">{{ item.companyName }}</a></p>
-                <p
-                  v-if="item.credit >= 0 && item.credit <= 150"
-                  class="p3"><i>信誉：</i>
-                  <img
-                    v-for="(item1,index1) in item.starS"
-                    :key="index1"
-                    class="xy_zuan"
-                    src="/images/article_wlzx/blue.gif"
-                    style="display: inline">
-                </p>
-                <p
-                  v-if="item.credit >= 151"
-                  class="p3"><i>信誉：</i>
-                  <img
-                    v-for="(item1,index1) in item.starB"
-                    :key="index1"
-                    class="xy_zuan"
-                    src="/images/article_wlzx/34huanguan.gif"
-                    style="display: inline">
+                <p class="p3">
+                  <creditIcon :credit="item.credit" />
                 </p>
                 <p class="p4"><i>联系人：</i><font>{{ item.contactsName }}</font></p>
                 <p class="p5"><i>电话：</i><font>{{ item.contactsTel }} {{ item.mobile }}</font></p>
@@ -329,26 +312,9 @@
                 target="_blank"><span>{{ item.companyName }}</span></a>
 
             </p>
-            <p
-              v-if="item.credit >= 0 && item.credit <= 150"
-              class="p2">
-              <img
-                v-for="(item1,index1) in item.starS"
-                :key="index1"
-                class="xy_zuan"
-                src="/images/article_wlzx/blue.gif"
-                style="display: inline">
-            </p>
-            <p
-              v-if="item.credit >= 151"
-              class="p2">
-              <img
-                v-for="(item1,index1) in item.starB"
-                :key="index1"
-                class="xy_zuan"
-                src="/images/article_wlzx/34huanguan.gif"
-                style="display: inline">
-            </p>
+            <div class="p2">
+              <creditIcon :credit="item.credit" />
+            </div>
             <p class="p3"><i data-v-63732202="">联系人：</i><font>{{ item.contactsName || '暂无' }}</font></p>
             <p class="p4"><i>电话：</i><font> {{ item.mobile || '暂无' }}</font></p>
             <p class="p5"><i data-v-63732202="">地址：</i><font>{{ item.address|| '暂无' }}</font></p>
@@ -365,6 +331,8 @@
 </template>
 
 <script>
+import creditIcon from '~/components/common/creditIcon'
+
 function setCredit(item) {
   if (item.credit >= 0 && item.credit <= 3) {
     item.starS = new Array(1)
@@ -450,6 +418,9 @@ async function getTransportRange($axios, query, vo = {}) {
 }
 export default {
   name: 'WuLiu',
+  components: {
+    creditIcon
+  },
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/basic.css' },
@@ -506,7 +477,10 @@ export default {
     // })
     let flag = ''
     let companysList = await $axios.get(
-      '/28-web/logisticsCompany/excellent?pageSize=5&flag=' + flag
+      '/28-web/logisticsCompany/excellent?pageSize=5&id=' +
+        query.id +
+        '&flag=' +
+        flag
     )
     companysList.data.data.forEach(item => {
       setCredit(item)
@@ -715,5 +689,8 @@ export default {
 <style scoped>
 .left_main {
   min-height: 420px;
+}
+.wlzx_list_2 .p3 img {
+  display: inline !important;
 }
 </style>

@@ -48,7 +48,7 @@
         </ul>
         <div v-if="list==[]||list.length==0">
           <p 
-            style="margin-top: 20px;;color:red"
+            style="margin-top: 20px;;color:red;font-size:16px"
           > 此用户没有评论</p>
         </div>
         <div

@@ -609,7 +609,8 @@ export default {
         belongBrandCode: query.belongBrandCode,
         departureTimeCode: query.departureTimeCode,
         otherServiceCode: query.otherServiceCode,
-        parkId: query.parkId
+        parkId: query.parkId,
+        companyName: query.companyName || ''
       }),
       $axios.post(aurl + `/28-web/range/recommend`, {
         currentPage: 1,

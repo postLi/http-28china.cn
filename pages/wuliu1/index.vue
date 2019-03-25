@@ -151,7 +151,7 @@
         <div class="tuijian">
           <div
             class="tuijian_title"
-            style=" height: 50px; line-height: 50px;">
+            style=" height: 50px; line-height: 50px;padding-top: 10px;">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">推荐园区</h5>
             <a 
               href="/wuliu"
@@ -170,10 +170,10 @@
                     src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
                     width="260"
                     height="165"
-                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);    padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName }}</span>
+                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName.length>15?item.parkName.substring(0,15):item.parkName }}</span>
                   <span
                     v-if="item.isInvestment==true"
-                    style="position:absolute;bottom:50px;left:1px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 10px 20px;">招商中</span>
+                    style="position:absolute;bottom:61px;left:0px;background:rgba(194,0,13,1);color:rgb(255,255,255);padding: 5px 20px;">招商中</span>
                 </a>
                 <!-- ourRatings -->
                 <p style="width: 260px;text-align: center;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
@@ -223,7 +223,7 @@
                   target="_blank">
                   <img
                     src="../../static/yuanqu/images/jiantou.png"
-                    alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item. parkName }}
+                    alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item.parkName.length>6?item.parkName.substring(0,6):item.parkName }}
                   </span><span
               style="width: 320px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress.length > 13?item.parkAddress+'...':item.parkAddress }}</span></a></li>
             </ul>
@@ -303,10 +303,10 @@
                 <div>
                   <!-- <label class="layui-form-label">短输入框</label> -->
                   <div
-                    class="layui-input-inline "
-                    style="margin: 30px 20px 10px 20px;    float: left;">
+                    class="layui-input-inline"
+                    style="margin: 30px 20px 10px 20px;float: left;">
                     <input
-                      style=" height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
+                      style="height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
                       type="text"
                       maxlength="11"
                       placeholder="输入您的手机号"
@@ -654,7 +654,8 @@
     </div>
     <Add
       :show = "isAdd"
-      @close="noaddFn"/>
+      @close="noaddFn"
+      :info="inputData"/>
   </div>
 </template>
 
@@ -692,6 +693,7 @@ export default {
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
       { src: '/js/AFLC_API.js' },
+      { src: '/layer/layer.js' },
       { src: './js/jquery.pagination.min.js' }
     ]
   },
@@ -803,7 +805,7 @@ export default {
 
         if (validReg.MOBILE.test(this.inputData)) {
           this.addFn()
-          alert(this.inputData)
+          // alert(this.inputData)
           // $axios
           //   .post(aurl + '/28-web/helpFind/range/create', this.form)
           //   .then(res => {
@@ -820,6 +822,8 @@ export default {
           this.isMobile = true
           this.inputData = ''
         }
+      } else {
+        layer.msg('输入您的手机号')
       }
       // inputData
     },

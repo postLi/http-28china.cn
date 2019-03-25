@@ -54,7 +54,7 @@
                 id="nr02"
                 :href="'/member/'+ item.id"
                 target="_blank"
-              ><span style="padding-right:12px; vertical-align: middle;">{{ item.companyName }}</span>
+              ><span style="padding-right:12px; vertical-align: middle;">{{ item.companyName.length>11?item.companyName.substring(0,11)+'..':item.companyName }}</span>
                 <span v-if="item.isEq">
                   <img
                     v-for="(item, index) in item.eq1"

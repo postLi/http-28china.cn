@@ -414,7 +414,6 @@
           <div class="main3_1_1">
             <div class="floatl">
               <b class="b_title">更多从{{ hyDetail.startCity }}出发的货源</b>
-        
               <div class="index_search floatl">
                 <div 
                   id="wlLineFrom" 
@@ -445,7 +444,6 @@
                     placeholder="请选择到达地" 
                     readonly="">
                 </div>                               
-                       
               </div>               
               <input 
                 id="search_wlLine" 
@@ -524,7 +522,6 @@
             </li>
           </ul>
         </div>
-        
         <div class="middle-ad">
           <img
             src="/images/cy/10banner.png"

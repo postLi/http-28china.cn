@@ -10,7 +10,7 @@
         class="flex_a"
         style="height: 0.62rem;">
         <div
-          class="flex flex_1 p_r"
+          class="flex flex_1 p_r height_100"
           v-for="(item,index) in footerList"
           @click="footerNav(item)"
           :key="index">
@@ -23,8 +23,8 @@
           </div>
           <img
             v-else
-            :src="item.img"
-            style="width: 0.46rem"
+            :src="item.id === $store.state.m.pageView.footerId ? item.img_selected: item.img"
+            style="height: 90%"
           >
         </div>
 
@@ -32,7 +32,7 @@
       <div class="flex_a">
         <div
           class="flex flex_1"
-          :class="[item.id === $store.state.m.pageView.footerId ? 'f_g': 'c-9']"
+          :class="[item.id === $store.state.m.pageView.footerId ? 'f_b': 'c-9']"
           v-for="(item, index) in footerList"
           :key="index">{{ item.name }}</div>
       </div>
@@ -49,11 +49,31 @@ export default {
   data() {
     return {
       footerList: [
-        { id: 0, name: '专线大厅', img: '/m/home/lobby_icon_activity.png' },
-        { id: 1, name: '货源大厅', img: '/m/home/lobby_icon_activity.png' },
+        {
+          id: 0,
+          name: '专线大厅',
+          img: '/m/home/lobby_icon_cargo_h.png',
+          img_selected: '/m/home/lobby_icon_cargo_l.png'
+        },
+        {
+          id: 1,
+          name: '货源大厅',
+          img: '/m/home/lobby_icon_zhuanxian_h.png',
+          img_selected: '/m/home/lobby_icon_zhuanxian_l.png'
+        },
         { id: 2, name: '发货', img: '' },
-        { id: 3, name: '车源大厅', img: '/m/home/lobby_icon_activity.png' },
-        { id: 4, name: '物流公司', img: '/m/home/lobby_icon_activity.png' }
+        {
+          id: 3,
+          name: '车源大厅',
+          img: '/m/home/lobby_icon_car_h.png',
+          img_selected: '/m/home/lobby_icon_car_l.png'
+        },
+        {
+          id: 4,
+          name: '物流公司',
+          img: '/m/home/lobby_icon_activity_h.png',
+          img_selected: '/m/home/lobby_icon_activity_l.png'
+        }
       ]
     }
   },
@@ -79,7 +99,7 @@ footer {
   min-height: 1rem;
   .circle {
     position: absolute;
-    top: -0.74rem;
+    top: -70%;
     width: 0.9rem;
     height: 0.9rem;
     border-radius: 0.9rem;

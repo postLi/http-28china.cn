@@ -151,7 +151,7 @@
         <div class="tuijian">
           <div
             class="tuijian_title"
-            style=" height: 50px; line-height: 50px;">
+            style=" height: 50px; line-height: 50px;padding-top: 10px;">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">推荐园区</h5>
             <a 
               href="/wuliu"
@@ -170,10 +170,10 @@
                     src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
                     width="260"
                     height="165"
-                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);    padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName }}</span>
+                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName.length>15?item.parkName.substring(0,15):item.parkName }}</span>
                   <span
                     v-if="item.isInvestment==true"
-                    style="position:absolute;bottom:50px;left:1px;background:rgba(194,0,13,1);color:rgb(255,255,255);    padding: 10px 20px;">招商中</span>
+                    style="position:absolute;bottom:61px;left:0px;background:rgba(194,0,13,1);color:rgb(255,255,255);padding: 5px 20px;">招商中</span>
                 </a>
                 <!-- ourRatings -->
                 <p style="width: 260px;text-align: center;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
@@ -223,14 +223,14 @@
                   target="_blank">
                   <img
                     src="../../static/yuanqu/images/jiantou.png"
-                    alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item. parkName }}
+                    alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item.parkName.length>6?item.parkName.substring(0,6)+'..':item.parkName }}
                   </span><span
-              style="width: 320px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress.length > 13?item.parkAddress+'...':item.parkAddress }}</span></a></li>
+              style="width: 320px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress.length > 19?item.parkAddress.substring(0,19)+'..':item.parkAddress }}</span></a></li>
             </ul>
           </div>
           <div
             class="zizhu"
-            style="width: 670px;float: left;margin-left:40px">
+            style="width: 710px;float: left;margin-left:50px">
             <div
               class="zizhu_title"
               style="padding:30px 0 25px">
@@ -303,10 +303,10 @@
                 <div>
                   <!-- <label class="layui-form-label">短输入框</label> -->
                   <div
-                    class="layui-input-inline "
-                    style="margin: 30px 20px 10px 20px;    float: left;">
+                    class="layui-input-inline"
+                    style="margin: 30px 20px 10px 20px;float: left;">
                     <input
-                      style=" height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
+                      style="height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
                       type="text"
                       maxlength="11"
                       placeholder="输入您的手机号"
@@ -352,7 +352,7 @@
           </div>
           <div
             class="select_con"
-            style="width: 900px;    width: 900px;border: 1px solid #eee;border-left: 0;border-right: 0;border-bottom: none;padding: 15px 0;margin: 0;">
+            style="width: 900px; width: 900px;border: 1px solid #eee;border-left: 0;border-right: 0;border-bottom: none;padding: 15px 0;margin: 0;">
 
             <dl>
               <!-- <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt> -->
@@ -391,7 +391,7 @@
                     class="list_input"
                     placeholder="请输入园区名称" > -->
                   <input
-                    id="search_wlyq"
+                    id="search_wlyq1"
                     value=" 搜索园区 "
                     readonly=""
                     class="list_button"
@@ -405,7 +405,9 @@
           </div>
 
         </div>
-        <div class=" list_wlyq">
+        <div 
+          style="margin-top: 20px;"
+          class=" list_wlyq">
           <div
             v-if="getHottList.length === 0 || getHottList.list ==null "
             class="list_none"
@@ -431,7 +433,7 @@
                   class="scrollLoading"
                   width="240"
                   height="210"></li>
-              <li class="wlzx_list_02"><span>{{ item.parkName }}</span></li>
+              <li class="wlzx_list_02"><span>{{ item.parkName.length>12?item.parkName.substring(0,12):item.parkName }}</span></li>
               <li class="wlzx_list_03">
                 <span>
                   <font style="padding-left: 0px;">{{ item.transportNumber?item.transportNumber: 0 }}</font><i>条</i><span style="padding-left: 2px;">优质专线</span>
@@ -442,7 +444,7 @@
               </li>
               <li 
                 style="margin-bottom:0"
-                class="wlzx_list_04"><span>{{ item.parkAddress }}</span></li>
+                class="wlzx_list_04"><span>{{ item.parkAddress.length>13?item.parkAddress.substring(0,13)+'..':item.parkAddress }}</span></li>
               <li class="wlzx_list_05">
                 <img 
                   style="width:20px;height:20"
@@ -516,7 +518,7 @@
                     :class="'noclass'+i"
                     class="NOclass"
                     style="position:absolute;bottom:40px;left:5px;color:rgb(255,255,255);    padding: 5px 20px;border-radius:5px">NO{{ i+1 }}</span></a>
-                <p style="width: 260px;padding-top:10px;color: rgb(51,153,255);font-size:16px">{{ item.companyName }}</p>
+                <p style="width: 260px;padding-top:10px;color: rgb(51,153,255);font-size:16px">{{ item.companyName.length>16?item.companyName.substring(0,16)+'..':item.companyName }}</p>
                 <p style="width: 260px;padding-top:10px"><span style="padding-right:10px">推荐指数{{ i+1 }}</span><img
                   v-for="(item,i) in 4"
                   :key="i"
@@ -525,7 +527,7 @@
                 >
 
                 </p>
-                <p style="width: 260px;padding-top:10px">好评率{{ item.excellentRate }}%
+                <p style="width: 260px;padding:10px 0">好评率{{ item.excellentRate }}%
 
               </p></li>
             </ul>
@@ -654,7 +656,10 @@
     </div>
     <Add
       :show = "isAdd"
-      @close="noaddFn"/>
+      @close="noaddFn"
+      :info="inputData"
+      @fromAdd="fromAdd"
+    />
   </div>
 </template>
 
@@ -691,7 +696,9 @@ export default {
     script: [
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
+      { src: '../js/gaodemap2.js' },
       { src: '/js/AFLC_API.js' },
+      { src: '/layer/layer.js' },
       { src: './js/jquery.pagination.min.js' }
     ]
   },
@@ -789,6 +796,11 @@ export default {
     this.loadPagination()
   },
   methods: {
+    fromAdd(data) {
+      this.inputData = data
+      // this.isMobile = true
+      console.log(data, 'data', this.inputData)
+    },
     addFn() {
       this.isAdd = true
     },
@@ -798,28 +810,17 @@ export default {
     openYuanqu() {
       if (this.inputData) {
         var validReg = window.AFLC_VALID
-        console.log(validReg)
+        // console.log(validReg)
         let aurl = ''
 
         if (validReg.MOBILE.test(this.inputData)) {
           this.addFn()
-          alert(this.inputData)
-          // $axios
-          //   .post(aurl + '/28-web/helpFind/range/create', this.form)
-          //   .then(res => {
-          //     // console.log(res.data, 'resresres')
-          //     if (res.data.status === 200) {
-          //       layer.msg('提交成功，客服稍后将会与您联系')
-          //     } else {
-          //       layer.msg(
-          //         res.data.errorInfo ? res.data.errorInfo : res.data.text
-          //       )
-          //     }
-          //   })
         } else {
           this.isMobile = true
           this.inputData = ''
         }
+      } else {
+        this.isMobile = true
       }
       // inputData
     },

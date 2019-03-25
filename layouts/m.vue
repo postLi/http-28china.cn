@@ -172,6 +172,10 @@ body {
   align-items: center;
   justify-content: space-around;
 }
+.flex_saf {
+  display: flex;
+  justify-content: space-around;
+}
 .flex_ec {
   display: flex;
   align-items: flex-end;
@@ -204,7 +208,7 @@ body {
   margin: 0.1rem;
 }
 .margin_l_10 {
-  margin-top: 0.1rem;
+  margin-left: 0.1rem;
 }
 .margin_r_10 {
   margin-right: 0.1rem;
@@ -372,6 +376,9 @@ body {
 }
 .f-36 {
   font-size: 0.36rem;
+}
+.f-42 {
+  font-size: 0.42rem;
 }
 .f-46 {
   font-size: 0.46rem;

@@ -56,16 +56,17 @@ export const actions = {
             // console.log('1payload-getDictList', data.data)
             let ndata = data.data || []
             ndata = payload.preFn ? payload.preFn(ndata) : ndata
-            commit('setDictInfo', {
+            let obj = {
               name: payload.name,
               data: ndata
-            })
+            }
+            commit('setDictInfo', obj)
           }
-          resolve()
+          resolve(obj)
         })
         .catch(err => {
           console.log('payload-getDictList', payload, err)
-          resolve()
+          resolve({ name: payload.name, data: [] })
         })
     })
   },

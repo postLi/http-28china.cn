@@ -333,38 +333,6 @@
 <script>
 import creditIcon from '~/components/common/creditIcon'
 
-function setCredit(item) {
-  if (item.credit >= 0 && item.credit <= 3) {
-    item.starS = new Array(1)
-  }
-  if (item.credit >= 4 && item.credit <= 10) {
-    item.starS = new Array(2)
-  }
-  if (item.credit >= 11 && item.credit <= 40) {
-    item.starS = new Array(3)
-  }
-  if (item.credit >= 41 && item.credit <= 90) {
-    item.starS = new Array(4)
-  }
-  if (item.credit >= 91 && item.credit <= 150) {
-    item.starS = new Array(5)
-  }
-  if (item.credit >= 151 && item.credit <= 250) {
-    item.starB = new Array(1)
-  }
-  if (item.credit >= 251 && item.credit <= 500) {
-    item.starB = new Array(2)
-  }
-  if (item.credit >= 501 && item.credit <= 1000) {
-    item.starB = new Array(3)
-  }
-  if (item.credit >= 1001 && item.credit <= 2000) {
-    item.starB = new Array(4)
-  }
-  if (item.credit >= 2001) {
-    item.starB = new Array(5)
-  }
-}
 async function getLogisticsCompany(
   $axios,
   query,
@@ -387,7 +355,6 @@ async function getLogisticsCompany(
         if (item.otherService) {
           item.otherService1 = (item.otherServiceNameList || []).join(' ')
         }
-        setCredit(item)
       })
       list = res.data.data.list
     }
@@ -473,18 +440,14 @@ export default {
     //   parm
     // )
     // companysList.data.data.list.forEach(item => {
-    //   setCredit(item)
     // })
     let flag = ''
     let companysList = await $axios.get(
-      '/28-web/logisticsCompany/excellent?pageSize=5&id=' +
+      '/28-web/logisticsCompany/excellent?pageSize=8&id=' +
         query.id +
         '&flag=' +
         flag
     )
-    companysList.data.data.forEach(item => {
-      setCredit(item)
-    })
 
     // console.log(gatewayData.data.data, 'gatewayData.data.data')
     let parm2
@@ -504,36 +467,37 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['../js/city-picker.data.js'], function() {
-      seajs.use(['../js/city-picker.js'], function() {
-        //切换内容 S
-        $('#checked_zx').click(function() {
-          $('.list_left_zx').css('display', 'block')
-          $('#checked_zx').addClass('active')
-          $('.list_left_wangdian').css('display', 'none')
-          $('#checked_wangdian').removeClass('active')
-        })
-        $('#checked_wangdian').click(function() {
-          $('.list_left_zx').css('display', 'none')
-          $('#checked_zx').removeClass('active')
-          $('.list_left_wangdian').css('display', 'block')
-          $('#checked_wangdian').addClass('active')
-        })
-
-        //切换内容 E
-        var locationProvince = $.cookie('currentProvinceFullName')
-        var locationCity = $.cookie('currentAreaFullName')
-        $('#arc_nav_a1').attr(
-          'href',
-          '/wuliu?tid=1' +
-            '&locationProvince=' +
-            locationProvince +
-            '&locationCity=' +
-            locationCity
-        )
-        $('#arc_nav_a1').html(locationCity + '物流园区')
+    if (process.client) {
+      this.$store.dispatch('getDictList', {
+        name: 'AF025'
       })
-    })
+      //切换内容 S
+      $('#checked_zx').click(function() {
+        $('.list_left_zx').css('display', 'block')
+        $('#checked_zx').addClass('active')
+        $('.list_left_wangdian').css('display', 'none')
+        $('#checked_wangdian').removeClass('active')
+      })
+      $('#checked_wangdian').click(function() {
+        $('.list_left_zx').css('display', 'none')
+        $('#checked_zx').removeClass('active')
+        $('.list_left_wangdian').css('display', 'block')
+        $('#checked_wangdian').addClass('active')
+      })
+
+      //切换内容 E
+      var locationProvince = $.cookie('currentProvinceFullName')
+      var locationCity = $.cookie('currentAreaFullName')
+      $('#arc_nav_a1').attr(
+        'href',
+        '/wuliu?tid=1' +
+          '&locationProvince=' +
+          locationProvince +
+          '&locationCity=' +
+          locationCity
+      )
+      $('#arc_nav_a1').html(locationCity + '物流园区')
+    }
   },
   methods: {
     async searchWlLine() {

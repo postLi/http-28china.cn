@@ -32,7 +32,7 @@
                 style="margin-left:81px;">{{ Showtextnum ? '*' + numErr : '' }}</p>
             </div>
           </div>
-          <li class="cont_ul_li" >
+          <li class="cont_ul_li">
             <input 
               v-model="mobile"
               name="title" 

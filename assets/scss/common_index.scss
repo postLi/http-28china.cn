@@ -63,10 +63,24 @@ $f_12: 12px;
   color: $white;
   border-radius: 3px;
 }
+/*icon热门专线文字*/
+@mixin hot_icon($color) {
+  color: $color;
+  border-color: $color;
+  margin-right: 10px;
+}
+/*icon皇冠*/ 
+@mixin icon_huangGuan() {
+  margin-right: 5px;
+  width: 16px;
+  height: 16px;
+  background: url('../../static/images/zhuanxian/icon_huangguan.gif') no-repeat;
+}
 
 /*公共清楚浮动方法*/
 .m_t10{margin-top:10px;}
 .p_10{ padding: 10px;}
+
 .fl {
     float: left;
   }
@@ -83,6 +97,14 @@ $f_12: 12px;
   }
   .clearfix {
     zoom: 1;
+  }
+  .pr{position: relative;}
+  .pa{position: absolute;}
+  /*公共宽度居中*/ 
+  .grid_c1 {
+    margin: 0 auto;
+    width: $w_1440;
+    font-size: $f_14;
   }
   /*背景颜色*/
   .bj_1 {
@@ -110,6 +132,17 @@ $f_12: 12px;
 .color_violet{
   color: $light_violet;
 }
+/*按钮*/
+.btn_small {
+  padding: 5px 10px;
+  color: $green;
+  border: 1px solid $green;
+  border-radius: 5px;
+}
+/*发布按钮*/  
+.btn_release{
+  @include btn_link(8px, 150px, 18px);
+}
 /**********公共标题****************/
 .p_title {
     padding: 25px 0;
@@ -120,18 +153,18 @@ $f_12: 12px;
     overflow: hidden;
     padding: 25px 0;
     line-height: 25px;
-    .title {
+    >.title {
       @extend .p_title;
       @extend .fl;
       padding: 0;
     }
-    .text {
+    .title_txt {
       @extend .fl;
       padding-left: 25px;
       font-size: $f_16;
       color: $light_gray;
     }
-    .link{
+    .title_link{
       .iconfont{
         padding-left: 5px;
         color: $green;
@@ -148,10 +181,15 @@ $f_12: 12px;
       font-size: $f_20;
     }
   } 
-.btn_release{
-    @include btn_link(8px, 150px, 18px);
-  }
   /*********分类导航***************/
+  .p_type_nav {
+    padding: 20px 0;
+    > a {
+      font-size: 16px;
+      color: $gray;
+      padding-right: 35px;
+    }
+  }
 .p_category_menu {
   padding: 10px 0;
   .category_menu_title {
@@ -172,12 +210,6 @@ $f_12: 12px;
       }
     }
   }
-}
-.btn_small {
-  padding: 5px 10px;
-  color: $green;
-  border: 1px solid $green;
-  border-radius: 5px;
 }
 /*************登录*****************/
 /*用户登录*/
@@ -481,12 +513,12 @@ $f_12: 12px;
   .hd {
     line-height: 40px;
   }
-  .gr_tit {
+  .gr_title {
     @extend .fl;
     color: $tit_color;
     font-size: 25px;
   }
-  .gr_text {
+  .gr_txt {
     @extend .fl;
     margin-left: 25px;
     font-size: 16px;
@@ -503,12 +535,12 @@ $f_12: 12px;
     line-height: 38px;
     background: $white;
     border: 1px solid $green;
-    .city_box,
-    .icon_box,
-    .btn_box {
+    .gr_sch_city,
+    .gr_sch_icon,
+    .gr_sch_btn {
       @extend .fl;
     }
-    .city_box {
+    .gr_sch_city {
       position: relative;
       padding-left: 10px;
       width: 190px;
@@ -516,13 +548,13 @@ $f_12: 12px;
         border: 0;
       }
     }
-    .icon_box {
+    .gr_sch_icon {
       width: 45px;
       .iconfont {
         font-size: 20px;
       }
     }
-    .btn_box {
+    .gr_sch_btn {
       width: 65px;
       color: $white;
       > a {
@@ -535,21 +567,13 @@ $f_12: 12px;
       }
     }
   }
-  .link_hy {
+  .gr_link {
     @extend .fr;
     line-height: 40px;
     .iconfont {
       padding-left: 5px;
       font-size: 14px;
       color: $green;
-    }
-  }
-  .link_type {
-    padding: 20px 0;
-    > a {
-      font-size: 16px;
-      color: $gray;
-      padding-right: 35px;
     }
   }
 }
@@ -576,7 +600,7 @@ $f_12: 12px;
     margin: 30px auto 0 auto;
     display: table;
     word-spacing: -1em;
-    width: 450px;
+    width: 430px;
     font-size: 16px;
     line-height: 20px;
     color: $tit_color;
@@ -783,6 +807,257 @@ $f_12: 12px;
             font-size: 25px;
           }
         }
+      }
+    }
+  }
+}
+/*******帮我推荐提交******/
+.p_groom_submit {
+  > input {
+    outline: none;
+    text-indent: 10px;
+    width: 170px;
+    height: 40px;
+    line-height: 40px;
+    font-size: $f_14;
+    border: 1px solid $border_color;
+  }
+  > button {
+    outline: none;
+    width: 78px;
+    height: 42px;
+    line-height: 42px;
+    border: none;
+    color: $white;
+    background: $green;
+    cursor: pointer;
+  }
+}
+/******帮我推荐***********/
+.p_me_groom {
+  // margin-bottom: 10px;
+  .gr_text {
+    height: 160px;
+    .gr_text_title {
+      font-size: $f_16;
+      color: $tit_color;
+    }
+    .gr_text_txt {
+      margin: 15px 0;
+      line-height: 20px;
+    }
+    .error {
+      margin-top: 5px;
+      font-size: $f_12;
+    }
+  }
+
+  .gr_operate {
+    overflow: hidden;
+    margin-bottom: 15px;
+    > a {
+      @extend .fl;
+      width: 118px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 5px;
+      text-align: center;
+      color: $green;
+      border: 1px solid $green;
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+  }
+  .gr_oder_num {
+    color: $tit_color;
+    > b {
+      font-size: 16px;
+      color: $orange;
+    }
+  }
+}
+/***更多热门专线列表*****/ 
+.p_hot_line {
+  > li {
+    @extend .fl;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 272px;
+    min-height: 368px;
+    background: $white;
+    &:nth-child(5n){
+      margin-right:0px;
+    }
+    &:hover {         
+      .hot_line_box{
+        position: absolute;
+        z-index: 99;
+        box-shadow: 0px 0px 10px #888888;
+      }
+      .h_operate {
+        margin: 10px 0;
+        display: block !important;
+      }
+    }
+    .hot_line_box{
+      background: $white;
+      transition: 0.2s;
+    }
+    .wl_box {
+      margin: 15px 10px 0 10px;
+    }
+    .h_operate {
+      overflow: hidden;
+      display: none;
+      width: 100%;
+      background-color: $white;
+  
+      > a {
+        @extend .fl;
+       margin-left: 20px;
+        width: 90px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border: 1px solid $deep_green;
+        color: $green;
+        border-radius: 3px;
+        .iconfont {
+          padding-right: 5px;
+          color: $light_green;
+        }
+        &.link_collect {
+          color: $light_red;
+          border-color: $light_red;
+          .iconfont {
+            color: $yellow;
+          }
+        }
+      }
+    }
+    .h_pic {
+      overflow: hidden;
+      margin-bottom: 10px;
+      width: 272px;
+      height: 195px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .h_place {
+      overflow: hidden;
+      margin-bottom: 10px;
+      > span {
+        @extend .fl;
+        line-height: 20px;
+        &.icon {
+          margin-top: 2px;
+          padding: 1px;
+          line-height: 13px;
+          text-align: center;
+          font-size: $f_12;
+          border: 1px solid #000;
+          border-radius: 2px;
+        }
+        &.icon_start {
+          @include hot_icon($green);
+        }
+        &.icon_end {
+          @include hot_icon($yellow);
+          margin-left: 10px;
+        }
+        &.place {
+          font-size: $f_16;
+          color: $tit_color;
+        }
+      }
+    }
+    .h_company {
+      overflow: hidden;
+      margin-bottom: 2px;
+      line-height: 22px;
+      color: $blue;
+      .icon_box {
+        margin: 3px 0 0 10px;
+        .icon {
+          @extend .fl;
+          @include icon_huangGuan;
+        }
+      }
+      .icon_qq {
+        width: 22px;
+        height: 20px;
+        background: url('../../static/images/zhuanxian/icon_qq.gif') no-repeat;
+      }
+    }
+    .h_praise {
+      overflow: hidden;
+      margin-top: 5px;
+      color: $light_gray;
+      .fl {
+        margin-right: 10px;
+        > span {
+          padding-right: 5px;
+        }
+      }
+    }
+    .type_box {
+      overflow: hidden;
+      @include type_box($f_13);
+      .item {
+        b {
+          font-size: $f_16;
+        }
+      }
+      .color_gray {
+        // font-size: $f_13;
+        color: $tit_color;
+      }
+      .icon_list {
+        .item_icon {
+          @extend .fl;
+          margin-left: 5px;
+          padding: 2px;
+          line-height: 14px;
+          color: $white;
+          background: $icon_blue;
+        }
+        .icon_red {
+          background: $icon_red;
+        }
+        .icon_green {
+          background: $green;
+        }
+      }
+    }
+    .h_type {
+      position: relative;
+      .icon_sale {
+        position: absolute;
+        right: 0;
+        bottom: 5px;
+        width: 50px;
+        height: 25px;
+        text-align: center;
+        line-height: 25px;
+        color: $white;
+        background: $icon_red;
+        border-radius: 3px;
+      }
+    }
+    .h_market {
+      overflow: hidden;
+      margin-top: 5px;
+      .h_market_price {
+        color: $tit_color;
+      }
+      .h_market_num {
+        color: $deep_green;
+      }
+      .h_market_order {
+        color: $light_gray;
       }
     }
   }

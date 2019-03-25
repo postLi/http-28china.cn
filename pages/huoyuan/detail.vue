@@ -49,8 +49,9 @@
         <a
           v-for="(item,index) in zxList"
           v-if="index < 14"
-          :key="index"
-        ><span @click="gotoHuoList($event)">{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
+          target="_blank"
+          :href="'/cheyuan?startCity='+hyDetail.startCity+'&startProvince='+hyDetail.startProvince+'&endProvince='+hyDetail.endProvince + '&endCity=' + item.name"
+          :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
         </a>
       </div>
       <div
@@ -66,8 +67,10 @@
         onmouseout="$('.city_box').css('display','none');">
         <a
           v-for="(item,index) in zxList"
+          target="_blank"
+          :href="'/cheyuan?startCity='+hyDetail.startCity+'&startProvince='+hyDetail.startProvince+'&endProvince='+hyDetail.endProvince + '&endCity=' + item.name"
           v-if="index >= 14"
-          :key="index"><span @click="gotoHuoList($event)">{{ item.name.substring(0, 2) }}</span>
+          :key="index"><span>{{ item.name.substring(0, 2) }}</span>
         </a>
       </div>
 
@@ -237,19 +240,11 @@
             :href="/member/ + archival.companyId" 
             class="website">进入官网</a>
           <input 
-            v-if="isShowCollect"
             class="collection_hz" 
             style="cursor: pointer;" 
             readonly 
             @click="collected()"
-            value="收藏">
-          <input 
-            v-if="isCencelCollect"
-            class="collection_hz" 
-            style="cursor: pointer;" 
-            readonly 
-            @click="cenclecollected()"
-            value="取消收藏">
+            :value="isShowCollect ? '收藏' : '取消收藏'">
         </p>
         <p class="arc_right06">
           <span>相关认证</span>
@@ -472,7 +467,7 @@
           <ul 
             v-for="(item,index) in huoInfoList"
             :key="index"
-            class="wlzx_list">
+            class="wlzx_list"> 
             <li id="wlzx_list_0">
               <a
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
@@ -830,6 +825,23 @@ import Add from './add'
 import Lelp from './help'
 import Order from './order'
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+async function getCanyColl(
+  $axios,
+  companyId,
+  access_token,
+  user_token,
+  handle
+) {
+  let res = await $axios.post(
+    `/28-web/collect/company?access_token=${access_token}&user_token=${user_token}&companyId=${companyId}&handle=${handle}
+`
+  )
+  if (res.data.status === 200) {
+    layer.msg(res.data.data)
+  } else {
+    layer.msg(res.data.errorInfo)
+  }
+}
 export default {
   name: 'Detail',
   components: {
@@ -857,11 +869,11 @@ export default {
       isShowHelp: false,
       isShowOrder: false,
       isShowCollect: true,
-      isCencelCollect: false,
       isShowMessge: false,
       isMobile: false,
       mobile: '',
       check: '',
+      handle: '',
       zxList: [],
       dataset: [],
       inTerVar: null,
@@ -1291,7 +1303,7 @@ export default {
         $('.login_box_mask').show()
       }
     },
-    getCity() {
+    getAddress() {
       this.dataInfo.startProvince = this.hyDetail.startProvince
       this.dataInfo.startCity = this.hyDetail.startCity
       this.dataInfo.startArea = this.hyDetail.startArea
@@ -1299,94 +1311,33 @@ export default {
       this.dataInfo.endCity = this.hyDetail.endCity
       this.dataInfo.endArea = this.hyDetail.endArea
     },
-    gotoHuoList(event) {
-      let city = event.target.innerHTML + '市'
-      if (city.length > 4) {
-        city = city.substring(2, 5)
-      }
-      window.open(
-        `/huoyuan?startProvince=${this.hyDetail.startProvince}&startCity=${
-          this.hyDetail.startCity
-        }&endProvince=${this.hyDetail.startProvince}&endCity=${city}`
-      )
-    },
     collected() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
-      let companyId = this.archival.companyId
-      let id = this.$route.query
-      this.isCencelCollect = true
-      this.isShowCollect = false
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            '/28-web/collect/company?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token +
-              '&carInfoId=' +
-              id +
-              '&companyId=' +
-              companyId +
-              '&handle=' +
-              'collect'
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('收藏成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
+      this.isShowCollect = !this.isShowCollect
+      if (!this.isShowCollect) {
+        this.handle = 'collect'
       } else {
-        // window.location.href = '/login'
+        this.handle = 'cancelCollect'
+      }
+      if (access_token && user_token) {
+        getCanyColl(
+          this.$axios,
+          this.archival.companyId,
+          access_token,
+          user_token,
+          this.handle
+        )
+      } else {
+        this.isShowCollect = true
         $('.login_box').show()
         $('.login_box_mask').show()
-      }
-    },
-    cenclecollected() {
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
-      let companyId = this.archival.companyId
-      let id = this.$route.query
-      this.isCencelCollect = false
-      this.isShowCollect = true
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            '/28-web/collect/company?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token +
-              '&carInfoId=' +
-              id +
-              '&companyId=' +
-              companyId +
-              '&handle=' +
-              'cancelCollect'
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('取消成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
-      } else {
-        return
       }
     },
     openAdd() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
+      this.getAddress()
       if (access_token && user_token) {
         this.$axios
           .post(
@@ -1409,12 +1360,13 @@ export default {
           })
       } else {
         this.isShowAdd = true
-        this.getCity()
+        this.getAddress()
       }
     },
     openHelp() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
+      this.getAddress()
       if (access_token && user_token) {
         this.$axios
           .post(
@@ -1437,46 +1389,12 @@ export default {
           })
       } else {
         this.isShowHelp = true
-        this.getCity()
+        this.getAddress()
       }
     },
     openOrder() {
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            '/28-web/companyLine/subscribe?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token,
-            this.dataInfo
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('订阅成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
-      } else {
-        this.isShowOrder = true
-        this.getCity()
-      }
+      this.isShowOrder = true
     },
-    // showMoblieFn(showMoblieFn) {
-    //   if (showMoblieFn == false) {
-    //     this.showMoblie = true
-    //     this.checkMoblie = false
-    //   } else {
-    //     this.checkMoblie = true
-    //     this.showMoblie = false
-    //   }
-    // },
     searchDo() {
       let list1 = [],
         list2 = []

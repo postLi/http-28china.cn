@@ -72,13 +72,11 @@
             <a
               v-for="(item, index) in 3"
               :key="index"
-              href="#"
-
             >
               <img
                 src="../../static/gongsi/images/03shuju.png"
                 alt=""
-                style="width: 248px;height: 135px;"
+                style="width: 260px;height: 135px;"
               >
             </a>
           </div>
@@ -109,7 +107,7 @@
               <li
                 v-for="(item,i) in listE"
                 :key="i"
-                style="padding-top: 16px;font-size:16px; padding-left: 10px;">
+                style="padding-top: 16px;font-size:14px; padding-left: 10px;">
                 <div><span
                   class="rem_bot_b_title"
                   style="color:#333;vertical-align: middle;padding-right:10px">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
@@ -140,10 +138,10 @@
           <li
             v-for="(item, index) in lineAdviseRecommend.slice(0,8)"
             :key="index"
-            style="float:left;width: 248px;height:95px;text-align: center;border: solid 1px #e0e0e0;"><a
+            style="float:left;width: 260px;height:95px;text-align: center;border: solid 1px #e0e0e0;"><a
               target="_blank"
               :href="'/member/'+ item.id">
-              <p style="font-size: 16px;color: #2577e3;padding-top: 20px;">{{ item.companyName?item.companyName:'' }}</p>
+              <p style="font-size: 16px;color: #2577e3;padding-top: 20px;">{{ item.companyName.length>12?item.companyName.substring(0,12)+'..':item.companyName }}</p>
 
               <p
                 v-if="item.advService.length"
@@ -168,11 +166,10 @@
           rows="3"
           cols="20"
           placeholder="请输入运单号，例如："
-          style="width: 230px;margin-left: 10px;height:40px">
+          style="width: 230px;margin-left: 10px;height:40px;">
         <input
-
           type="button"
-          style="height: 42px;">
+          style="height: 42px;border-right:none;">
         <div
           class="ydh"
           style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer; top: 92px;;color:#0d91e9;margin-left: 30px"
@@ -329,7 +326,10 @@
             </div>
           </div>
           <!--分页-->
-          <div class="lll-line--othet">
+          <div 
+          
+           
+          class="lll-line--othet">
             <div class="lll-recommend clearfix">
               <div
                 class="zx_sx1"
@@ -369,7 +369,7 @@
                   <a
                     :href="'/member/'+ item.id"
                     target="_blank">
-                    <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName }}</p>
+                    <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName.length>10?item.companyName.substring(0,10) +'..':item.companyName }}</p>
                     <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
                     <div
                     style="text-align: center;width: 200px;border: 1px solid #ccc;padding:10px;margin:20px 45px 0 32px;">
@@ -404,6 +404,7 @@
           <div class="list-box-r-news">
             <div
               v-if="gongsi_jryw01"
+              style="margin-top: 10px;"
               class="today_news"><div
                 class="zx_sx"
                 style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a
@@ -587,7 +588,7 @@ export default {
       }
     })
   },
-  async asyncData({ $axios, app, query }) {
+  async asyncData({ $axios, app, query, error }) {
     // console.log(query, 'queryquery')
     let aurl = ''
     let vo = {
@@ -666,7 +667,7 @@ export default {
     }
 
     let gsList = await getGSList($axios, 1, vo, '')
-    // console.log(gsList, 'gsListgsListgsListgsListgsList')
+    console.log(listC.data.data, 'listC.data.data')
     gsList.list.forEach(item => {
       // item.num = Math.ceil(Math.random() * 30)
       let arr = (item.id || '').split('')
@@ -755,20 +756,32 @@ export default {
         item.isHZhuan = true
       }
     })
+    if (
+      listA.data.status == 200 ||
+      listC.data.status == 200 ||
+      listD.data.status == 200 ||
+      listE.data.status == 200 ||
+      listF.data.status == 200 ||
+      listG.data.status == 200 ||
+      listH.data.status == 200
+    ) {
+      return {
+        lineHots: listA.data.status == 200 ? listA.data.data : [],
+        lineLinks: listC.data.status == 200 ? listC.data.data : [],
+        lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : [],
+        listE: listE.data.status == 200 ? listE.data.data : [],
+        gsList: gsList.list,
+        // listF: listF.data.data == [] ? '' : '',
+        listF: listF.data.status == 200 ? listF.data.data : [],
+        listG: listG.data.status == 200 ? listG.data.data : [],
+        listH: listH.data.status == 200 ? listH.data.data : [],
+        vo: vo
+      }
+    } else {
+      error({ statusCode: 500, message: '查找不到该物流公司栏目' })
+    }
 
     // console.log(listG.data.data, 'listGlistG.list')
-    return {
-      lineHots: listA.data.status == 200 ? listA.data.data : [],
-      lineLinks: listC.data.status == 200 ? listC.data.data : [],
-      lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : [],
-      listE: listE.data.status == 200 ? listE.data.data : [],
-      gsList: gsList.list,
-      // listF: listF.data.data == [] ? '' : '',
-      listF: listF.data.status == 200 ? listF.data.data : [],
-      listG: listG.data.status == 200 ? listG.data.data : [],
-      listH: listH.data.status == 200 ? listH.data.data : [],
-      vo: vo
-    }
   },
   computed: {
     gongsi_jryw() {
@@ -961,7 +974,7 @@ export default {
   },
   methods: {
     searchCompanyName() {
-      console.log(this.companyName, 'this.companyName')
+      // console.log(this.companyName, 'this.companyName')
       let vo = {}
       vo.locationCity =
         decodeURI(GetUrlParam('locationCity')) == 'null'
@@ -985,12 +998,12 @@ export default {
         this.pages = obj.pages
         this.gsList = obj.list
         this.currentPage = obj.currentPage
-        console.log(res, this.vo, this.currentPage, this.pages)
+        // console.log(res, this.vo, this.currentPage, this.pages)
         this.loadPagination()
       })
     },
     loadPagination() {
-      console.log('objo566bjobj')
+      // console.log('objo566bjobj')
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,

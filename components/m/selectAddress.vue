@@ -277,19 +277,19 @@ export default {
   }
 }
 .code_item_selected {
-  border: 0.01rem solid #2fb301;
+  border: 1px solid #2fb301;
   color: #2fb301;
   background-color: rgba(47, 179, 1, 0.5);
 }
 .code_item_no_selected {
-  border: 0.01rem solid #999999;
+  border: 1px solid #999999;
 }
 .heightTran {
   transition: all 0.2s;
   position: absolute;
   top: 0;
   width: 100%;
-  height: 9.3rem;
+  height: 8.3rem;
   z-index: 100;
 }
 .mask2 {

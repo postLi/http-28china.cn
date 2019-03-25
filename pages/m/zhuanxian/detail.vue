@@ -109,13 +109,11 @@
         <div class="footer_item flex f-24 margin_b_20">时效：1天</div>
       </div>
     </div>
-
+    <div class="divide"/>
     <div class="content3">
-      <div class="item1 flex_ae">
-        <div class="cell width_100 padding_l_20 flex_a">
-          <div class="left flex f_w f-28">竞争力</div>
-          <div class="margin_l_20 c-3 f-26 f_b">此专线物流公司诚信值超过<span>77.9%</span>的同行</div>
-        </div>
+      <div class="cell padding_l_20 flex_a">
+        <div class="left flex f_w f-28">竞争力</div>
+        <div class="margin_l_20 f-26 f_b">此专线物流公司诚信值超过<span>77.9%</span>的同行</div>
       </div>
       <div class="item2 flex_a">
         <div class="f-28">资质认证： <span class="c-3 f-26">4项经营资质认证，12项平台物流服务标准监督</span></div>
@@ -153,18 +151,16 @@
           @click="showMask = true">
       </div>
     </div>
-
+    <div class="divide"/>
     <div class="content4">
-      <div class="item1 flex_ae b_b">
-        <div class="cell width_100 flex_sb f-28">
-          <div>
-            <span class="c-3 margin_r_20">专线评价(269)</span>
-            <span class="c-9">好评率99%</span>
-          </div>
-          <div @click="toEvaluate()">
-            <span class="margin_r_20 c-9">查看全部</span>
-            <img src="/m/zhuanxian/list_right_grey.png">
-          </div>
+      <div class="cell flex_sb f-28 b_b">
+        <div>
+          <span class="c-3 margin_r_20">专线评价(269)</span>
+          <span class="c-9">好评率99%</span>
+        </div>
+        <div @click="toEvaluate()">
+          <span class="margin_r_20 c-9">查看全部</span>
+          <img src="/m/zhuanxian/list_right_grey.png">
         </div>
       </div>
       <div class="f-28 item2">
@@ -197,13 +193,11 @@
       </div>
 
     </div>
-
+    <div class="divide"/>
     <div class="content5">
-      <div class="item flex_ae">
-        <div class="b_t cell width_100 flex_ce f-28">
-          <div class="flex button1 margin_r_20">联系专线</div>
-          <div class="flex button2">收 藏</div>
-        </div>
+      <div class="b_t cell flex_ce f-28">
+        <div class="flex button1 margin_r_20">联系专线</div>
+        <div class="flex button2">收 藏</div>
       </div>
     </div>
 
@@ -292,42 +286,34 @@ export default {
 </script>
 <style scoped lang="scss">
 .content5 {
-  .item {
-    height: 1.16rem;
-    background: #f4f4f4;
-    .cell {
-      height: 0.96rem;
-      background: white;
-      padding: 0 0.3rem;
-      .button1 {
-        width: 1.72rem;
-        height: 0.6rem;
-        border-radius: 0.3rem;
-        color: #54a7ff;
-        border: 0.02rem solid rgba(84, 167, 255, 1);
-      }
-      .button2 {
-        width: 1.72rem;
-        height: 0.6rem;
-        border-radius: 0.3rem;
-        color: #ff4400;
-        border: 0.02rem solid #ff4400;
-      }
+  .cell {
+    height: 0.96rem;
+    background: white;
+    padding: 0 0.3rem;
+    .button1 {
+      width: 1.72rem;
+      height: 0.6rem;
+      border-radius: 0.3rem;
+      color: #54a7ff;
+      border: 0.02rem solid rgba(84, 167, 255, 1);
+    }
+    .button2 {
+      width: 1.72rem;
+      height: 0.6rem;
+      border-radius: 0.3rem;
+      color: #ff4400;
+      border: 0.02rem solid #ff4400;
     }
   }
 }
 .content4 {
-  .item1 {
-    height: 0.98rem;
-    background: #f4f4f4;
-    .cell {
-      height: 0.8rem;
-      background: white;
-      padding: 0 0.3rem;
-    }
-    img {
-      height: 0.2rem;
-    }
+  .cell {
+    height: 0.8rem;
+    background: white;
+    padding: 0 0.3rem;
+  }
+  img {
+    height: 0.2rem;
   }
   .item2 {
     padding: 0.3rem;
@@ -344,21 +330,17 @@ export default {
   }
 }
 .content3 {
-  .item1 {
-    height: 1.03rem;
-    background: #f4f4f4;
-    .cell {
-      height: 0.88rem;
-      background: white;
-      .left {
-        width: 1.05rem;
-        height: 0.54rem;
-        background: rgba(17, 186, 0, 1);
-        border-radius: 0.04rem;
-      }
-      span {
-        color: #ff4400;
-      }
+  .cell {
+    height: 0.88rem;
+    background: white;
+    .left {
+      width: 1.05rem;
+      height: 0.54rem;
+      background: rgba(17, 186, 0, 1);
+      border-radius: 0.04rem;
+    }
+    span {
+      color: #ff4400;
     }
   }
   .item2 {
@@ -497,5 +479,9 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+}
+.divide {
+  height: 0.2rem;
+  background: #f5f5f5;
 }
 </style>

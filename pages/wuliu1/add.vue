@@ -4,7 +4,7 @@
     @close="closeDialog"
     :title="popTitle">
 
-    <div slot="header">我要申请入驻</div>
+    <div slot="header">园区免费入驻</div>
     <div
       class="dialog_publish_main"
       slot="main">
@@ -12,41 +12,30 @@
         class="layui-form"
         action=""
         style="width: 400px;">
-        <div class="layui-form-item">
-          <label class="layui-form-label"><i style="color: red">*</i>公司名称:</label>
+        <div 
+          style="margin-bottom:30px"
+          class="layui-form-item">
+          <label class="layui-form-label"><i style="color: red">*</i>园区名称:</label>
           <div class="layui-input-block">
             <input
               maxlength="30"
               type="text"
-              placeholder="请输入公司名称"
+              placeholder="请输入园区名称"
               class="layui-input"
               v-model="form.companyName">
           </div>
           <!--<p-->
-          <!--v-if="isCompanyName"-->
+          <!--v-if="isCompanyName" 说我压力抗不住啊，-->
           <!--style="color: red;text-align: center">请输入公司名称</p>-->
         </div>
-
-        <div class="layui-form-item">
-          <label class="layui-form-label"><i style="color: red">*</i>联系人:</label>
-          <div class="layui-input-block">
-            <input
-              maxlength="20"
-              type="text"
-              placeholder="请输入联系人"
-              class="layui-input"
-              v-model="form.contactsName">
-          </div>
-          <!--<p-->
-          <!--v-if="isContactsName"-->
-          <!--style="color: red;text-align: center">请输入联系人</p>-->
-        </div>
-        <div class="layui-form-item">
-          <label class="layui-form-label"><i style="color: red">*</i>电话:</label>
+        <div 
+          style="margin-bottom:30px"
+          class="layui-form-item">
+          <label class="layui-form-label"><i style="color: red">*</i>园区地址:</label>
           <div class="layui-input-block">
             <input
               type="text"
-              placeholder="请输入电话"
+              placeholder="请输入园区地址"
               class="layui-input"
               maxlength="11"
               v-model="form.mobile">
@@ -55,33 +44,36 @@
           <!--v-if="ismobile"-->
           <!--style="color: red;text-align: center">请输入电话</p>-->
         </div>
-
-        <div class="layui-form-item layui-form-text">
-          <label class="layui-form-label">给我留言:</label>
+        <div 
+          style="margin-bottom:30px"
+          class="layui-form-item">
+          <label class="layui-form-label"><i style="color: red">*</i>联系人:</label>
           <div class="layui-input-block">
-            <textarea
-              maxlength="100"
-              placeholder="请输入留言"
-              class="layui-textarea"
-              v-model="form.msg"/>
+            <input
+              maxlength="20"
+              type="text"
+              placeholder="请输入联系人姓名"
+              class="layui-input"
+              v-model="form.contactsName">
+            <p
+              v-if="ismobile"
+              style="color: red;text-align: center;padding-top:10px">{{ falseMsg }}</p>
           </div>
-          <p
-            v-if="ismobile"
-            style="color: red;text-align: center">{{ falseMsg }}</p>
-        </div>
-
-
-      </form>
+  
+      </div></form>
       <div
         class=""
         style="">
         <button
           class=""
-          style="width: 290px;margin-left: 110px;;padding: 10px 0;background: #0d91e9;border: none"
-          @click="onTIJ">立即申请</button>
+          style="width: 290px;margin-left: 110px;;padding: 10px 0;background: rgb(50,170,86);border: none;color:#fff"
+          @click="onTIJ">提交</button>
         <p
           style="margin-left: 110px;;height: 30px;
-    line-height: 30px;">您还可以选择在线咨询：<a href=""><img src="../../static/line/images/15qq.gif" >qq交谈</a></p>
+    line-height: 30px;font-size:16px;padding-top:25px">提交成功后客服将在一个工作日内与您取得联系</p>
+        <p style="margin-left: 110px;;height: 30px;line-height: 30px;font-size:20px;color:rgb(50,170,86);padding:20px 0 20px 20px">免费咨询  400-999-2828
+
+        </p>
       </div>
 
     </div>
@@ -103,6 +95,10 @@ export default {
     types: {
       type: Number,
       default: 1
+    },
+    info: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -125,12 +121,22 @@ export default {
   computed: {
     showDiv(n, o) {
       return this.show
-      console.log(this.show, 'isAdd1')
+      // console.log(this.show, 'isAdd1')
     }
   },
   watch: {
-    types(n, o) {}
+    types(n, o) {},
+    info(n, o) {},
+    showDiv(n, o) {
+      if (n == true) {
+        // console.log(this.info, 'info')
+      } else {
+        this.info == ''
+      }
+      // console.log(n, 'showDivshowDiv')
+    }
   },
+  mounted() {},
   methods: {
     onTIJ() {
       let aurl = ''

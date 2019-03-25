@@ -42,8 +42,9 @@
 
         </div>
       </div>
-      <div class="content1 margin_t_20 flex_sb">
+      <div class="content1 margin_t_20 flex_saf">
         <div
+          class="flex_f flex"
           v-for="(item,index) in content1List"
           :key="index"
           @click="toList(item,index)">
@@ -57,10 +58,10 @@
           <div class="c-3 f-26">{{ item.name }}</div>
         </div>
       </div>
-      <div class="content2 margin_t_20 flex_as">
-        <div class="flex_sb width_100">
+      <div class="content2 flex_as">
+        <div class="flex_saf width_100">
           <div
-            class=""
+            class="flex_f flex"
             v-for="(item,index) in content2List"
             :key="index">
             <div
@@ -75,7 +76,16 @@
         </div>
       </div>
     </div>
-    <footer class="flex_sb f-16">
+    <footer class="flex_sb f-16 p_r">
+      <div
+        class="circle_out flex"
+        @click="showMask = true">
+        <div class="circle_in flex">
+          <img
+            src="/m/home/home_fahuo.png"
+            style="width: 50%">
+        </div>
+      </div>
       <div class="flex_f flex_a">
         <img
           src="/m/home/home_home.png"
@@ -83,13 +93,11 @@
         <div>首页</div>
       </div>
       <div
-        class="flex_f flex_a middle"
+        class="flex_f flex_a"
         @click="showMask = true"
       >
         <div class="circle flex">
-          <img
-            src="/m/home/home_fahuo.png"
-            style="width: 0.76rem">
+          <div class="circle"/>
         </div>
         <div>发货</div>
       </div>
@@ -111,6 +119,7 @@
     <div
       class="flex"
       :class="[showMask?'mask2':'']"
+      v-if="showMask"
       @click="showMask = false">
       <div
         class="down_window flex_f"
@@ -375,8 +384,10 @@ export default {
     }
     .content1 {
       height: 1.88rem;
+      width: 90%;
       background-color: white;
-      padding: 0 0.59rem;
+      margin: 0.2rem auto 0;
+      border-radius: 0.16rem;
       .content1_circle {
         width: 1rem;
         height: 1rem;
@@ -386,8 +397,11 @@ export default {
     }
     .content2 {
       background-color: white;
-      padding: 0 0.59rem;
       height: 4.27rem;
+      width: 90%;
+      border-radius: 0.16rem;
+      margin: 0.2rem auto 0;
+
       img {
         margin: 0.3rem 0 0.1rem 0;
       }
@@ -409,10 +423,25 @@ export default {
       top: -0.34rem;
     }
     .circle {
-      width: 1.16rem;
-      height: 1.16rem;
-      border-radius: 1.16rem;
-      background-color: #3f94ee;
+      width: 0.46rem;
+      height: 0.46rem;
+    }
+    .circle_out {
+      width: 1rem;
+      height: 1rem;
+      background-color: white;
+      position: absolute;
+      top: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0.5rem;
+      box-shadow: 0px -2px 2px 0px rgba(158, 158, 158, 0.5);
+      .circle_in {
+        width: 85%;
+        height: 85%;
+        border-radius: 1.16rem;
+        background-color: #3f94ee;
+      }
     }
   }
 }

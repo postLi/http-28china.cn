@@ -191,6 +191,11 @@ module.exports = {
   cache: {
     max: 1000,
     maxAge: 5 * 60 * 1000 // 毫秒单位
+  },
+  server: {
+    timing: {
+      total: true
+    }
   }
   // https://ssr.vuejs.org/zh/api/#clientmanifest
   /* render: {

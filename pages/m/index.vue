@@ -42,8 +42,9 @@
 
         </div>
       </div>
-      <div class="content1 margin_t_20 flex_sb">
+      <div class="content1 margin_t_20 flex_saf">
         <div
+          class="flex_f flex"
           v-for="(item,index) in content1List"
           :key="index"
           @click="toList(item,index)">
@@ -57,10 +58,10 @@
           <div class="c-3 f-26">{{ item.name }}</div>
         </div>
       </div>
-      <div class="content2 margin_t_20 flex_as">
-        <div class="flex_sb width_100">
+      <div class="content2 flex_as">
+        <div class="flex_saf width_100">
           <div
-            class=""
+            class="flex_f flex"
             v-for="(item,index) in content2List"
             :key="index">
             <div
@@ -111,6 +112,7 @@
     <div
       class="flex"
       :class="[showMask?'mask2':'']"
+      v-if="showMask"
       @click="showMask = false">
       <div
         class="down_window flex_f"
@@ -375,8 +377,10 @@ export default {
     }
     .content1 {
       height: 1.88rem;
+      width: 90%;
       background-color: white;
-      padding: 0 0.59rem;
+      margin: 0.2rem auto 0;
+      border-radius: 0.16rem;
       .content1_circle {
         width: 1rem;
         height: 1rem;
@@ -386,8 +390,11 @@ export default {
     }
     .content2 {
       background-color: white;
-      padding: 0 0.59rem;
       height: 4.27rem;
+      width: 90%;
+      border-radius: 0.16rem;
+      margin: 0.2rem auto 0;
+
       img {
         margin: 0.3rem 0 0.1rem 0;
       }

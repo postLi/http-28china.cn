@@ -1,1013 +1,1858 @@
 <template>
   <div>
-    <div class="arc_main">
-      <!--<div class="arc_nav">-->
-      <!--<a href="/">物流首页</a>&gt;<a -->
-      <!--id="arc_nav_a1" -->
-      <!--href="">零担物流专线</a>&gt;<a -->
-      <!--id="arc_nav_a2" -->
-      <!--href="">零担物流专线</a>&gt;<a -->
-      <!--id="arc_nav_a3" -->
-      <!--href="">零担物流专线</a>-->
-      <!--</div>-->
-      <div class="arc_top1">
-        <div class="arc_top1_1">
-          <span><i v-if="tranDetail.startLocation && tranDetail.endLocation">{{ tranDetail.startLocation.substring(0, 15) }}</i>&nbsp;&rarr;&nbsp;<i>{{ tranDetail.endLocation.substring(0, 15) }}</i></span>
-        </div>
-        <div class="arc_top1_3"><a 
-          id="search_huo" 
-          target="_blank"><input 
-            class="arc_input3" 
-            value="搜全网"> </a></div>
-        <div class="arc_top1_2">
-          <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
-          <input 
-            class="arc_input1" 
-            wtmap="" 
-            placeholder="出发地">
-          <span>&rarr;</span>
-          <input 
-            class="arc_input2" 
-            wtmap="" 
-            placeholder="到达地">
-        </div>
-
-
-
-      </div>
-      <div class="arc_top2">
-        <div class="arc_top2_1"><a href="/"><span>首页</span></a></div>
-        <div class="arc_top2_2">
-          <a
-            v-for="(item,index) in zxList"
-            v-if="index < 14"
-            :key="index"><span>{{ index === 0 ? '直达' + item.name.substring(0, 2) : item.name.substring(0, 2) }}</span>
-          </a>
-        </div>
-        <div 
-          v-if="zxList.length >14" 
-          class="arc_top2_3"
-          style="display: block"
-          onmouseover="$('.city_box').css('display', 'block')" ><a href="javascript:void(0)"><span>更多+</span></a></div>
-
-        <!--更多城市-->
-        <div 
-          id="city_box" 
-          class="city_box" 
-          onmouseover="$('.city_box').css('display', 'block');"
-          onmouseout="$('.city_box').css('display', 'none');" >
-          <a
-            v-for="(item,index) in zxList"
-            v-if="index >= 14"
-            :key="index"><span>{{ item.name.substring(0, 2) }}</span>
-          </a>
-        </div>
-
-      </div>
-      <div class="arc_main1">
-        <div class="arc_left">
-          <div class="arc_left_1">
-            <img 
-              v-if="tranDetail.rangeLogo" 
-              :src="tranDetail.rangeLogo.split(',')[showImg]">
-            <img 
-              v-else 
-              :src="'../../images/pic/bg' + tranDetail.num + '.png'" >
-          </div>
-          <div class="arc_left_2">
-            <a 
-              href="javascript:void(0)" 
-              @click="clickImg(0)"><img
-                v-if="tranDetail.rangeLogo" 
-                :src="tranDetail.rangeLogo.split(',')[0]" >
-              <img
-                v-else
-                :src="'../../images/pic/bg' + tranDetail.num + '.png'" >
-            </a>
-            <a 
-              href="javascript:void(0)" 
-              @click="clickImg(1)"><img
-                v-if="tranDetail.rangeLogo && tranDetail.rangeLogo.split(',')[1]"
-                :src="tranDetail.rangeLogo.split(',')[1]" ></a>
-            <a 
-              href="javascript:void(0)" 
-              @click="clickImg(2)"><img
-                v-if="tranDetail.rangeLogo && tranDetail.rangeLogo.split(',')[2]"
-                :src="tranDetail.rangeLogo.split(',')[2]" ></a>
-          </div>
-          <div class="arc_left_3"><a href="javascript:void(0)"><img src="../../static/images/article_wlzx/17shoucang.png">&nbsp;<span id="collection_zx">收藏专线</span><i>&nbsp;(&nbsp;<em class="my_zx_num"/>人气&nbsp;)</i></a></div>
-        </div>
-        <div class="arc_middle">
-          <div class="collection_zx">
-            <div 
-              class="bt_close" 
-              onclick="$('.collection_zx').hide()" ><img src="../../static/images/article_wlzx/xxx.png"></div>
-            <div class="collection_zx_nr">
-              <img src="../../static/images/article_wlzx/yes.png">
-              <span>成功加入</span><a 
-                id="collection_url" 
-                target="_blank" 
-                href="#">收藏夹</a>
-            </div>
-          </div>
-          <div class="pj_price_box">
-            <div class="pj_price_box1"><div 
-              class="bt_close" 
-              onclick="$('.pj_price_box').hide()" ><img src="../../static/images/article_wlzx/xxx.png"></div></div>
-            <div class="pj_price_box2">试算价格</div>
-            <div class="item-form plr20">
-              <h2 class="form-tit">货物重量/体积计算</h2>
-              <div class="item-cell">
-                <label><span class="r-point">*</span>总重量：</label>
-                <div class="item-primary w190">
-                  <input 
-                    id="goodsweight" 
-                    class="item-input" 
-                    type="text" 
-                    placeholder="">
-                </div>
-                <span class="unit">千克</span>
-              </div>
-              <div class="item-cell">
-                <label><span class="r-point">*</span>总体积：</label>
-                <div class="item-primary w190">
-                  <input 
-                    id="goodsvolume" 
-                    class="item-input" 
-                    type="text" 
-                    placeholder="">
-                </div>
-                <span class="unit">立方米</span>
-              </div>
-              <div class="item-cell c-red calculator">
-                辅助计算器
-                <i class="icon i-down"/>
-              </div>
-              <p class="txt mb20 pl20 c-red">注：我们的工作人员会在接货时重新称重，此估算仅供参考。</p>
-              <!-- 辅助计算器 -->
-              <div 
-                id="_cal_div" 
-                class="cal-all cl" 
-                style="display: none;">
-                <div class="cal-box">
-                  <div class="cal-panel">
-                    <ul class="cal-head">
-                      <li>
-                        <label>重量：</label>
-                        <div class="cal-primary">
-                          <span 
-                            id="_cal_weight" 
-                            class="num" 
-                            name="_cal_weight"/>kg
-                        </div>
-                      </li>
-                      <li>
-                        <label>体积：</label>
-                        <div class="cal-primary">
-                          <span 
-                            id="_cal_volume" 
-                            class="num" 
-                            name="_cal_volume"/>m3
-                        </div>
-                      </li>
-                      <li>
-                        <label>件数：</label>
-                        <div class="cal-primary">
-                          <span 
-                            id="_cal_package" 
-                            class="num" 
-                            name="_cal_package"/>
-                        </div>
-                      </li>
-                    </ul>
-                    <div class="cal-hs fr">
-                      <a 
-                        href="javascript:;" 
-                        class="calstop">收起</a>
-                      <a 
-                        href="javascript:;" 
-                        class="caldel">删除</a>
-                    </div>
-                    <div class="cal-body">
-                      <div class="cal-cell">
-                        <label>单位重量</label>
-                        <div class="cal-primary">
-                          <input 
-                            id="_unit_weight" 
-                            type="text">
-                          <span>kg</span>
-                        </div>
-                      </div>
-                      <div class="cal-cell">
-                        <label>单位体积</label>
-                        <div 
-                          id="_volume" 
-                          class="cal-primary">
-                          <input 
-                            id="_unit_length" 
-                            type="text" 
-                            onkeyup="Calculator._volume_cal(this)" 
-                            placeholder="长(m)">
-                          <span>x</span>
-                          <input 
-                            id="_unit_width" 
-                            type="text" 
-                            onkeyup="Calculator._volume_cal(this)" 
-                            placeholder="宽(m)">
-                          <span>x</span>
-                          <input 
-                            id="_unit_higth" 
-                            type="text" 
-                            onkeyup="Calculator._volume_cal(this)" 
-                            placeholder="高(m)">
-                          <span>=</span>
-                          <span 
-                            id="_unit_volume" 
-                            class="cal-bulk"/>
-                          <span>立方米</span>
-                        </div>
-                      </div>
-                      <div class="cal-cell">
-                        <label>件数</label>
-                        <div class="cal-primary">
-                          <input 
-                            id="_total_package" 
-                            type="text">
-                          <a 
-                            href="javascript:;" 
-                            class="btn btn-orange btn-cal" 
-                            onclick="Calculator._confirm_cal(this)">确认</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="caladd-box fr">
-                  <a 
-                    class="btn btn-orange caladd" 
-                    href="javascript:;">添加</a>
-                </div>
-              </div>
-              <h2 class="form-tit">费用合计</h2>
-              <div class="item-cell item-block">
-                <label><span class="r-point">*</span>预计费用：</label>
-                <div id="_totalFee_div">
-                  <p class="loose-txt"><span 
-                    id="_totalFee" 
-                    class="price-big mr10">0.00</span><span class="c-red">元</span></p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div class="arc_middle1"><span>{{ tranDetail.startLocation.substring(0, 15) }}&nbsp;&rarr;&nbsp;{{ tranDetail.endLocation.substring(0, 15) }}</span></div>
-          <div class="arc_middle2">
-            <div class="arc_middle2_1">
-              <p class="p1"><i>重货价：</i><span v-if="tranDetail.rangePrices1[0]">{{ tranDetail.rangePrices1[0].startVolume }} - {{ tranDetail.rangePrices1[0].endVolume }}公斤</span>
-                <font 
-                  v-if="tranDetail.rangePrices1[0] && tranDetail.rangePrices1[0].discountPrice"
-                  class="font1">&yen;&nbsp;{{ tranDetail.rangePrices1[0].discountPrice.toFixed(0) }}</font>
-                <span 
-                  v-if="tranDetail.rangePrices1[0] && tranDetail.rangePrices1[0].primeryPrice"
-                  class="span2">&yen;&nbsp;{{ tranDetail.rangePrices1[0].primeryPrice.toFixed(0) }}</span><font
-                    v-if="tranDetail.rangePrices1.length >=2"
-                    onmouseover="$('.price_box1').css('display', 'block');"
-                    onmouseout="$('.price_box1').css('display', 'none');"
-                    class="font2">[阶梯价]</font></p>
-              <p class="p2"><i>轻货价：</i><span v-if="tranDetail.rangePrices0[0]">{{ tranDetail.rangePrices0[0].startVolume }} - {{ tranDetail.rangePrices0[0].endVolume }}公斤</span>
-                <font 
-                  v-if="tranDetail.rangePrices0[0] && tranDetail.rangePrices0[0].discountPrice"
-                  class="font1">&yen;&nbsp;{{ tranDetail.rangePrices0[0].discountPrice.toFixed(0) }}</font>
-                <span 
-                  v-if="tranDetail.rangePrices0[0] && tranDetail.rangePrices0[0].primeryPrice"
-                  class="span2">&yen;&nbsp;{{ tranDetail.rangePrices0[0].primeryPrice.toFixed(0) }}</span><font
-                    v-if="tranDetail.rangePrices0.length >=2"
-                    onmouseover="$('.price_box2').css('display', 'block');"
-                    onmouseout="$('.price_box2').css('display', 'none');"
-                    class="font2">[阶梯价]</font></p>
-            </div>
-            <div class="arc_middle2_2">
-              <div class="num1"><span>{{ tranDetail.orderNumber }}</span></div><div class="num2"><a href="javascript:void(0)"><span>{{ tranDetail.assessNumber }}</span></a></div>
-              <div class="num3"><span>下单量</span></div><div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
-            </div>
-            <!--阶梯价格 S-->
-            <div
-              class="price_box1" 
-              onmouseover="$('.price_box1').css('display', 'block');"
-              onmouseout="$('.price_box1').css('display', 'none');">
-              <div class="price_box_bt">阶梯价（重货）</div>
-              <div 
-                v-for="(item,index) in tranDetail.rangePrices1" 
-                :key="index"
-                class="price_box_item1">
-                <span>{{ item.startVolume }} - {{ item.endVolume }}公斤</span>
-                <i>&nbsp;&nbsp;{{ item.discountPrice ? item.discountPrice.toFixed(0) : '0' }}元/公斤</i>
-              <font>{{ item.primeryPrice.toFixed(0) }}</font><em id="nr07210">元/公斤</em></div>
-            </div>
-
-            <div
-              class="price_box2" 
-              onmouseover="$('.price_box2').css('display', 'block');"
-              onmouseout="$('.price_box2').css('display', 'none')();">
-              <div class="price_box_bt">阶梯价（轻货）</div>
-              <div
-                v-for="(item,index) in tranDetail.rangePrices0"
-                :key="index"
-                class="price_box_item2">
-                <span>{{ item.startVolume }} - {{ item.endVolume }}立方</span>
-                <i>&nbsp;&nbsp;{{ item.discountPrice ? item.discountPrice.toFixed(0) : '0' }}元/立方</i>
-              <font>{{ item.primeryPrice.toFixed(0) }}</font><em id="nr07310">元/立方</em></div>
-            </div>
-            <!--阶梯价格 E-->
-
-
-          </div>
-          <div class="arc_middle3">
-            <div class="arc_m3"><i>运输时效：</i><span>{{ tranDetail.transportAging }}{{ tranDetail.transportAgingUnit }}</span></div>
-            <div class="arc_m3"><i>发货频次：</i><span>{{ tranDetail.departureHzData }}天{{ tranDetail.departureHzTime }}次</span></div>
-            <div class="arc_m3"><i>最低一票价格：</i><span>{{ tranDetail.lowerPrice ? '&yen;&nbsp;' + tranDetail.lowerPrice + '元' : '面议' }}</span></div>
-          </div>
-          <div class="arc_middle4">
-            <div class="arc_m4_1">
-              <div ><span>出发地</span></div>
-              <div ><i>联系人：</i><span>{{ tranDetail.startLocationContacts }}</span></div>
-              <div ><i>手机：</i><span>{{ tranDetail.startLocationContactsMobile }}</span></div>
-            </div>
-            <div class="arc_m4_2">
-              <div ><span>到达地</span></div>
-              <div ><i>联系人：</i><span>{{ tranDetail.endLocationContacts }}</span></div>
-              <div ><i>手机：</i><span>{{ tranDetail.endLocationContactsMobile }}</span></div>
-            </div>
-          </div>
-          <div class="arc_middle5">
-            <div class="arc_m5_1"><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span></div>
-            <div class="arc_m5_2" >
-              <div 
-                id="order_price" 
-                class="arc_m5_2_1" 
-                onclick="$('.pj_price_box').show()"><a href="javascript:void(0)"><span>试算价格</span></a></div>
-              <div 
-                id="order_arc" 
-                class="arc_m5_2_2"><a 
-                  id="nr_order" 
-                  target="_blank" 
-                  href="javascript:void(0)"><span >快速下单</span></a></div>
-            </div>
-          </div>
-          <div class="arc_middle6">
-            <div class="arc_m6_1"><i>增值服务：</i></div>
-            <div class="arc_m6_2">
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02501')"
-                class="item_zzfw1"><img src="../../static/images/pic/item_zzfw1.png"><span>送货上门</span></div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02502')"
-                class="item_zzfw2"><img src="../../static/images/pic/item_zzfw2.png"><span>保价运输</span></div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02503')"
-                class="item_zzfw3"><img src="../../static/images/pic/item_zzfw3.png"><span>运费到付</span></div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02504')"
-                class="item_zzfw4"><img src="../../static/images/pic/item_zzfw4.png"><span>代收货款</span></div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02505')"
-                class="item_zzfw5"><img src="../../static/images/pic/item_zzfw5.png"><span>上门提货</span></div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02506')"
-                class="item_zzfw6"><img src="../../static/images/pic/item_zzfw6.png"><span>开发票</span></div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02507')"
-                class="item_zzfw7"><img src="../../static/images/pic/item_zzfw7.png"><span>签单回收</span></div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02508')"
-                class="item_zzfw8"><img src="../../static/images/pic/item_zzfw8.png"><span>时效保障</span></div>
-            </div>
-          </div>
-
-        </div>
-        <div class="arc_right">
-          <p class="arc_right01"><img src="../../static/images/article_wlzx/04gongsi.png"><span>{{ oneCompany.companyName }}</span></p>
-          <p 
-            v-if="oneCompany.credit >= 0 && oneCompany.credit <= 150" 
-            class="arc_right02"><i>信誉：</i>
-            <img
-              v-for="(item1,index1) in oneCompany.starS"
-              :key="index1"
-              class="xy_zuan" 
-              src="../../static/images/article_wlzx/blue.gif"
-              style="display: inline">
-          </p>
-          <p
-            v-if="oneCompany.credit >= 151"
-            class="arc_right02"><i>信誉：</i>
-            <img
-              v-for="(item1,index1) in oneCompany.starB"
-              :key="index1"
-              class="xy_zuan"
-              src="../../static/images/article_wlzx/34huanguan.gif"
-              style="display: inline">
-          </p>
-          <p class="arc_right03">
-            <span>质量</span><span>时效</span><span>价格</span><br >
-            <font>{{ oneCompany.serverQualityScore }}</font><font>{{ oneCompany.transportAgingScore }}</font><font>{{ oneCompany.serverPriceScore }}</font>
-          </p>
-          <p class="arc_right04">
-            <span class="arc_right04_1"><i>联系人：</i><font>{{ oneCompany.contactsName }}</font></span>
-            <span><i>手机：</i><font>{{ oneCompany.mobile }}</font></span>
-            <span><i>Q&nbsp;Q：</i><a
-              v-if="oneCompany.qq"
-              :href="'http://wpa.qq.com/msgrd?v=3&uin=' + oneCompany.qq + '&site=qq&menu=yes'" 
-              target="_blank"><input
-            value="QQ交谈"></a></span>
-            <span><i>地址：</i><font>{{ oneCompany.address }}</font></span>
-          </p>
-          <p class="arc_right05">
-            <a 
-              :href=" '/member/' + oneCompany.companyId + ''"
-              target="_blank"><input
-                readonly="" 
-                value="进入官网"></a>
-            <a ><input 
-              id="collection_wlgs" 
-              readonly="" 
-              value="收藏"></a>
-          </p>
-          <p class="arc_right06">
-            <span>相关认证</span>
-          </p>
-          <p class="arc_right07">
-            <img 
-              v-if="oneCompany.isVip && oneCompany.isVip ===1"
-              src="../../static/images/list_wlzx/11xinyong.png">
-            <img
-              v-if="oneCompany.authStatus ==='AF0010403'"
-              src="../../static/images/list_wlzx/10shiming.png">
-            <img
-              v-if="oneCompany.collateral && oneCompany.collateral !==0"
-              src="../../static/images/list_wlzx/danbao.png"><span v-if="oneCompany.collateral && oneCompany.collateral !==0">{{ oneCompany.collateral + '元' }}</span>
-            <span 
-              v-if="oneCompany.authStatus != 'AF0010403' &&
-                (!oneCompany.isVip || oneCompany.isVip == 0) &&
-            (!oneCompany.collateral || oneCompany.collateral == 0)">暂无认证信息</span>
-          </p>
-
-        </div>
-
-      </div>
-      <div class="arc_main2">
-        <div class="arc_left2">
-          <div class="arc_left2_bt" >
-            <span>公司网点分布</span><i><a 
-              :href="'/member/' + oneCompany.companyId + '-wangdian'"
-              target="_blank" >更多</a></i>
-          </div>
-          <div class="arc_left2_nr">
-            <div
-              v-for="(item,index) in listDetailPointNetwork" 
-              :key="index"
-              class="tjwd_list">
-              <p class="p01"><span>{{ item.pointName.substring(0, 12) + '..' }}</span></p>
-              <p class="p02"><img src="../../static/images/04gongsi.png" >&nbsp;<span><a
-                :href="'/member/' + item.companyId + ''"
-                target="_blank">{{ item.companyName.substring(0, 16) + '..' }}</a></span></p>
-              <p class="p03">
-                <i>联系人：</i><span >{{ item.name }}</span> &nbsp; <i>手机号：</i><font>{{ item.mobile }}</font>
-
-              </p>
-              <p class="p04">
-                <i>所在地：</i><span>{{ item.belongCityName }}</span>
-              </p>
-              <p class="p05">
-                <img src="../../static/images/06dingwei.png" >&nbsp;<span>{{ item.address.substring(0, 17) + '..' }}</span>
-              </p>
-            </div>
-            <div 
-              v-if="listDetailPointNetwork.length === 0" 
-              class="tjwd_list"
-              style="text-align: center;line-height: 180px;">暂无网点内容！</div>
-          </div>
-        </div>
-        <div class="arc_right2">
-          <div class="arc_right2_bt">
-            <span 
-              v-for="(item,index) in nav4List" 
-              :key="index"
-              :class="[nav4Id === item.id ? 'arc_active' : '']"
-              class="arc_span"
-              @click="click4(item)">{{ item.name }}&nbsp;<font
-                v-if="index === 2"
-                style="color: #eb434d;">{{ rangeEvaluationCount.count }}</font></span>
-          </div>
-          <div 
-            :class="[nav4Id === 0 ? '':'arc_nr_none']"
-            class="arc_nr">
-            <div class="arc_nr1">
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02501')"
-                class="arc_fw item_fw1">
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_1.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>送货上门</span></p>
-                  <p class="fw_nr2"><i>收取客户货物后，将货物送到指定收件对象的服务。</i></p>
-                </div>
-              </div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02502')"
-                class="arc_fw item_fw2">
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_2.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>保价运输</span></p>
-                  <p class="fw_nr2"><i>保价运输是我司与您共同确定的以托运人申明货物价值为基础的一种特殊运输方式，您向我司声明其托运货物的实际价值，按保价运输的货物，托运人除缴纳运输费用外，按照规定缴纳一定的保价费用，若货物在运输过程中出险，我司将按照托运人的声明价值赔偿一定损失。</i></p>
-                </div>
-              </div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02503')"
-                class="arc_fw item_fw3" >
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_3.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>运费到付</span></p>
-                  <p class="fw_nr2"><i>为您提供派送末端支付运费服务，当货物到达收货人时由收货人支付运费。</i></p>
-                </div>
-              </div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02504')"
-                class="arc_fw item_fw4">
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_4.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>代收货款</span></p>
-                  <p class="fw_nr2"><i>按照寄件方（卖家）与收件方（买家）达成交易协议的要求，为寄件方提供承运、寄递物品的同时，并代寄件方向收件方收取货款，同时按照约定时间将货款返还给寄件方的服务。</i></p>
-                </div>
-              </div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02505')"
-                class="arc_fw item_fw5">
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_5.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>上门提货</span></p>
-                  <p class="fw_nr2"><i>按照客户指令到指定地点收取货物的服务。</i></p>
-                </div>
-              </div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02506')"
-                class="arc_fw item_fw6">
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_6.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>开发票</span></p>
-                  <p class="fw_nr2"><i>客户可向物流公司申请开具货物运输发票。</i></p>
-                </div>
-              </div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02507')"
-                class="arc_fw item_fw7">
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_7.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>签单回收</span></p>
-                  <p class="fw_nr2"><i>在货物正常签收后，将寄件客户提供的需收件客户签名的收条或收货单等单据返还寄件客户的服务。</i></p>
-                </div>
-              </div>
-              <div 
-                v-if="tranDetail.otherServiceCode && tranDetail.otherServiceCode.includes('AF02508')"
-                class="arc_fw item_fw8">
-                <div class="fw_img"><img src="../../static/images/article_wlzx/fw_8.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>时效保障</span></p>
-                  <p class="fw_nr2"><i>承诺在规定时间内送达的时效保障服务。</i></p>
-                </div>
-              </div>
-            </div>
-
-          </div>
-          <div
-            :class="[nav4Id === 1 ? '':'arc_nr_none']"
-            class="arc_nr">
-            <div 
-              v-if="tranDetail.transportRemark" 
-              class="arc_nr2">
-              {{ tranDetail.transportRemark.substring(0,500) }}
-            </div>
-            <div 
-              v-else 
-              class="arc_nr2">暂无专线说明。点击为您推荐<a
-                target="_blank" 
-                href="/zhuanxian/list?amp;start=深圳市&amp;end=北京市">更多专线</a></div>
-          </div>
-          <div
-            :class="[nav4Id === 2 ? '':'arc_nr_none']"
-            class="arc_nr" >
-            <div class="arc_pjnr_bt">
-              <div class="arc_pjnr_bt1">
-                <div class="arc_pjbt_item"><input 
-                  type="radio" 
-                  name="radio"
-                  value=""
-                  @click="radioClick('')"><span>全部</span><i>({{ rangeEvaluationCount.count }})</i></div>
-                <div class="arc_pjbt_item"><input 
-                  type="radio" 
-                  name="radio"
-                  value="AF0360101"
-                  @click="radioClick('AF0360101')"><span>好评</span><i>({{ rangeEvaluationCount.good }})</i></div>
-                <div class="arc_pjbt_item"><input 
-                  type="radio" 
-                  name="radio"
-                  value="AF0360102"
-                  @click="radioClick('AF0360102')"><span>中评</span><i>({{ rangeEvaluationCount.medium }})</i></div>
-                <div class="arc_pjbt_item"><input 
-                  type="radio" 
-                  name="radio"
-                  value="AF0360103"
-                  @click="radioClick('AF0360103')"><span>差评</span><i>({{ rangeEvaluationCount.bad }})</i></div>
-              </div>
-
-              <div class="arc_pjnr_bt2">
-                <input 
-                  value="我要评价" 
-                  onclick="$('.pj_box').show()">
-                <div class="pj_box" >
-                  <div class="pj_box1"><div 
-                    class="bt_close" 
-                    onclick="$('.pj_box').hide()" ><img src="../../static/images/article_wlzx/xxx.png"></div></div>
-                  <div class="pj_box2">
-                    <div class="pj_box2_1"><img src="../../static/images/article_wlzx/pj.png"></div>
-                    <div class="pj_box2_2">
-                      <p class="pj_box2_2_p1">物流公司需要您的建议哦！</p>
-                      <P class="pj_box2_2_p2">认真填写评价平台会给你推荐最优质的物流专线</P>
-                    </div>
-                  </div>
-                  <div class="pj_box3">
-                    <div class="pj_box3_left">服务价格：</div><div 
-                      id="pj_box_item1" 
-                      class="pj_box3_right"><img 
-                        id="pjxx1_1" 
-                        src="../../static/images/article_wlzx/stars01.png"><img 
-                          id="pjxx1_2" 
-                          src="../../static/images/article_wlzx/stars01.png"><img 
-                            id="pjxx1_3" 
-                            src="../../static/images/article_wlzx/stars01.png"><img 
-                              id="pjxx1_4" 
-                              src="../../static/images/article_wlzx/stars01.png"><img 
-                                id="pjxx1_5" 
-                                src="../../static/images/article_wlzx/stars01.png"><span id="pj_f1"/></div>
-                  </div>
-                  <div class="pj_box3">
-                    <div class="pj_box3_left">服务质量：</div><div 
-                      id="pj_box_item2" 
-                      class="pj_box3_right"><img 
-                        id="pjxx2_1" 
-                        src="../../static/images/article_wlzx/stars01.png"><img 
-                          id="pjxx2_2" 
-                          src="../../static/images/article_wlzx/stars01.png"><img 
-                            id="pjxx2_3" 
-                            src="../../static/images/article_wlzx/stars01.png"><img 
-                              id="pjxx2_4" 
-                              src="../../static/images/article_wlzx/stars01.png"><img 
-                                id="pjxx2_5" 
-                                src="../../static/images/article_wlzx/stars01.png"><span id="pj_f2"/></div>
-                  </div>
-                  <div class="pj_box3">
-                    <div class="pj_box3_left">运输时效：</div><div 
-                      id="pj_box_item3" 
-                      class="pj_box3_right"><img 
-                        id="pjxx3_1" 
-                        src="../../static/images/article_wlzx/stars01.png"><img 
-                          id="pjxx3_2" 
-                          src="../../static/images/article_wlzx/stars01.png"><img 
-                            id="pjxx3_3" 
-                            src="../../static/images/article_wlzx/stars01.png"><img 
-                              id="pjxx3_4" 
-                              src="../../static/images/article_wlzx/stars01.png"><img 
-                                id="pjxx3_5" 
-                                src="../../static/images/article_wlzx/stars01.png"><span id="pj_f3"/></div>
-                  </div>
-                  <div class="pj_box3 " >
-                    <div class="pj_box3_left"><font>综合评价</font>：</div><div class="pj_box3_right" ><i id="pj_box_zh"/></div>
-                  </div>
-                  <div class="pj_box4"> <div class="pj_box4_left">评价说明：</div><div class="pj_box4_right"><textarea 
-                    id="pj_nr" 
-                    maxlength="400" 
-                    rows="3" 
-                    cols="30" /></div></div>
-                  <div class="pj_box5"><span>还可输入<i id="pj_limit">400</i>字</span></div>
-                  <div class="pj_box6"><input 
-                    id="pj_submit" 
-                    class="pj_input2" 
-                    value="提交评价"><input 
-                      class="pj_input1" 
-                      onclick="$('.pj_box').hide()" 
-                      value="取消" ></div>
-                  <div class="pj_box7">打分和评价都将是其他用户的参考依据，并影响该承运商信誉值。
-                  请发布真实、客观的本人消费体验评价。如您受到威逼、利诱如优惠等干扰而发布的评价或并非本人体验的虚假/恶意评价，则点评视为违规，同时影响您的信誉度。更多请见 <span>这里的说明</span>。
-                  </div>
-                </div>
-
-
-
-              </div>
-
-            </div>
-            <div 
-              v-for="(item,index) in rangeEvaluationlist" 
-              :key="index"
-              class="arc_pjnr_nr">
-              <div class="arc_pjnr_item">
-                <div class="arc_pjnr_item_left">
-                  <p class="item_p1"><font>{{ item.evaluationName }}</font></p>
-                  <p class="item_p2">
-                  <img src="../../static/images/article_wlzx/pingfen.png"></p>
-
-                </div>
-                <div class="arc_pjnr_item_right">
-                  <p class="item_p3"><span>{{ item.evaluationDes ? item.evaluationDes : '此用户没有评论' }}</span></p>
-                  <p class="item_p4"><i>{{ item.createTime }}</i></p>
-                  <p class="item_p5"><font>[回复]：</font><font>{{ item.replyDes }}</font></p>
-
-                </div>
-              </div>
-
-
-            </div>
-            <!--分页-->
-            <div 
-              class="box" 
-              style="float: right;margin-right: 70px;">
-              <div 
-                id="pagination1" 
-                class="page fl"/>
-              <div class="info fl">
-              <!--<p>当前页数：<span id="current1">1</span></p>-->
-              </div>
-            </div>
-            <!--分页-->
-
-
-          </div>
-          <div
-            :class="[nav4Id === 3 ? '':'arc_nr_none']"
-            class="arc_nr" >
-            <div
-              v-if="oneCompany.collateral !== 0"
-              class="arc_nr1">
-              <div class="arc_fw_bt" >
-                <img src="../../static/images/pic/xiexian.png">
-              </div>
-              <div class="arc_fw arc_fw2">
-                <div class="fw_img"><img src="../../static/images/pic/baozhengjin.png" ></div>
-                <div class="fw_nr">
-                  <p class="fw_nr1"><span>物流运输保障服务</span></p>
-                  <p class="fw_nr2"><i>此承运商已交</i><i id="nr1036"/><i>元诚信保证金</i></p>
-                  <p class="fw_nr3"><span>如果您采用平台的担保交易，您与承运商洽谈好价格后，要平台上生成标准托运单，并把运费托管在平台上，如果承运商未能良好履约，您有权要求退回所有的运费。并根据托运单规定的规则条款，您有权对承运商要求相应的补偿。</span></p>
-                  <p class="fw_nr4"><span>如果您线下私自与承运商进行交易，平台不承担任何协助您向承运商要求兑现承诺的义务。</span></p>
-                </div>
-              </div>
-
-            </div>
-            <div
-              v-if="oneCompany.collateral === 0"
-              id="none_bzj"
-              class="arc_nr1">
-              <img src="../../static/images/pic/gantanhao.png" >
-              <span>暂未开通此项服务</span>
-
-            </div>
-
-          </div>
-        </div>
-      </div>
+    <div class="shixiao_banner">
+      <img src="/member/images/banner_gsjj.png">
     </div>
-
-    <div 
-      id="js017" 
-      class="arc_bottom"
-      style="display: none">
-      <div class="zx_sx"><span class="biaozhi"/><span>此路线其他专线</span><a 
-        id="arc_bottom_more" 
-        href="#"><span class="arc_bottom_more">更多+</span></a></div>
-      <div 
-        class="tj_list" 
-        style="display: none;">
-        <div class="p p02"><img src="../../static/images/04gongsi.png" ><span><a id="tj023" /></span>
-          <img 
-            id="tj_shiming" 
-            src="../../static/images/list_wlzx/shiming.png" >
-          <img 
-            id="tj_xinyong" 
-            src="../../static/images/list_wlzx/xinyong.png" >
-          <img 
-            id="tj_danbao" 
-            src="../../static/images/list_wlzx/danbao.png" >
-
-        </div>
-        <div class="p p01"><a 
-          id="tj020" 
-          target="_blank"><span id="tj021"/><i>&rarr;</i><span id="tj022"/></a></div>
-        <div class="p p03">
-          <ul>
-            <li class="tj_left"><i>时效：</i><span id="tj026"/></li>
-            <li class="tj_right"><i>最低一票：</i><span id="tj027"/></li>
-            <li class="tj_left"><i>重货：</i><font id="tj024"/><span>元/公斤</span></li>
-            <li class="tj_right"><i>轻货：</i><font id="tj025"/><span>元/方</span></li>
-
-
+    <div class="shixiao_box">
+      <div class="shixiao_left">
+        <div class="left_top">
+          <ul class="left_top_ul">
+            <h1>帮助信息</h1>
+            <li>时效查询</li>
+            <li>网点查询</li>
+            <li>运单查询</li>
+            <li>快速下单</li>
           </ul>
         </div>
-
-        <div class="p p05"/>
-        <div class="p p06">
-          <a 
-            id="tj028" 
-            target="_blank"><span>查看&gt;</span></a>
+        <div class="list_kehu">
+          <h2 class="list_help_title">客户服务</h2>
+          <div class="kf_num">
+            <!-- <button>客服1</button>
+            <button>客服2</button> -->
+            <img src="/images/wzlImg.kf.jpg">
+          </div>
+        </div>
+        <!-- 帮我找优质运动start -->
+        <div class="list_help">
+          <h2 class="list_help_title">帮我找优质运力</h2>
+          <div class="list-box-r-top">
+            <form action="">
+              <div 
+                id="form0" 
+                class="ltl-input0">
+                <input 
+                  id="right-bar-form"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择出发地">
+                <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+              </div>
+              <div 
+                id="form1" 
+                class="ltl-input0">
+                <input
+                  autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择目到达地">
+                <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+              </div>
+              <textarea
+                maxlength="100"
+                style="padding:16px;height:80px;"
+                placeholder="备注信息，如：期望发货时间、货物体积重量等信息..."
+                class="textare"/>
+              <div class="ltl-input">
+                <input 
+                  placeholder="请输入手机号" 
+                  type="text"
+                  class="ltl-phone"
+                  maxlength="11"
+                >
+                <span 
+                  class="ltl-button" 
+                  @click="sendNotice()">找到通知我</span>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- 帮我找优质运动end -->
+        <div class="list_ewm">
+          <h2 class="list_help_title">便捷查询运单</h2>
+          <div class="order_content">
+            <div class="imgbox">
+              <img 
+                src="/images/28fast_download.png" 
+                width="100" 
+                height="100">
+            </div>
+            <div class="textbox">
+              <a href="http://h5.28tms.com/">
+              下载【28快运APP】，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a>
+            </div>
+          </div>
         </div>
       </div>
+      <div class="shixiao_right">
+        <div class="list_left">
+          <div class="list_search">
+            <div class="zx_sx">
+              <span class="biaozhi"/><span >时效查询</span>
+              <div class="list_nav">
+                <a href="/">物流首页</a>&gt;<a 
+                  id="list_nav_a" 
+                  href="">专线时效</a>
+              </div>
+            </div>
+            <!-- 出发地 -->
+            <div class="order-line-from clearfix">
+              <div class="order-form-item">
+                <div class="order-form-label"/>
+                <div 
+                  id="carLineFrom" 
+                  class="order-form-input shixiao-input">
+                  <input 
+                    style="height: 100%;border: none;outline: none;"
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    maxlength="40" 
+                    placeholder="请选择出发地" 
+                    type="text">
+                  <img 
+                    src="/images/wzlImg/qidian.png"
+                    class="qd">
+                </div>
+              </div>
+
+              <div class="order-form-item">
+                <img 
+                  src="/images/wzlImg/refresh.png"
+                  class="qiehuan">
+              </div>
+              <div class="order-form-item form-detail">
+                <div class="order-form-label"/>
+                <div 
+                  id="carLineTo" 
+                  class="order-form-input shixiao-input">
+                  <input 
+                    style="height: 100%;border: none;outline: none;"
+                    data-toggle="city-picker" 
+                    data-level="district" 
+                    placeholder="请选择到达地" 
+                    wtmap="" 
+                    maxlength="40" 
+                    type="text">
+                  <img 
+                    src="/images/wzlImg/zhongdian.png"
+                    class="wzl">
+                </div>
+              </div>
+              <div class="order-form-item">
+                <span 
+                  class="search" 
+                  @click="search(1)">查询</span>
+              </div>
+            </div>
+          </div>
+          <div 
+            class="list_none" 
+            v-if="listRangesAging.length === 0">
+            <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
+            <img src="/images/none_pic.png">
+          </div>
+          <div class="list_tiaoj">
+            <span 
+              v-for="(item,index) in sortList" 
+              :key="index"
+              :class="[sortId === item.id ? 'active' : '']"
+              @click="selectSort(item)">{{ item.name }}</span>
+          </div>
+
+          
+          <div 
+            v-for="(item,index) in listRangesAging" 
+            :key="index" 
+            class="wzl_box">
+            <ul 
+              class="wlzx_list" 
+              style="border:none" >
+              <li class="cy_list_1">
+                <p class="p1"><a 
+                  :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                  target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
+                <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
+                <p class="p3"><img 
+                  src="/images/wzlImg/2.png"
+                  style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
+                <p class="p4"><img src="/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
+              </li>
+              <li class="cy_list_7">
+                <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
+              </li>
+              <li class="cy_list_2">
+                <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
+                <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
+                <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
+
+              </li>
+              <li class="cy_list_3">
+                <p class="p1"><img
+                  v-if="item.authStatus === 'AF0010403'"
+                  src="/images/list_wlzx/10shiming.png"></P>
+                <p class="p2"><img
+                  v-if="item.isVip && item.isVip === 1"
+                  src="/images/list_wlzx/11xinyong.png"></P>
+                <p class="p3"><img
+                  v-if="item.collateral && item.collateral !== 0"
+                  src="/images/list_wlzx/12danbao.png"></P>
+              </li>
+
+              <li class="cy_list_4">
+                <p><img 
+                  class="numlll" 
+                  src="/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
+                <p><img 
+                  class="numlll" 
+                  src="/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
+              </li>
+              <li class="wlzx_list_6">
+                <p class="p2"><a 
+                  :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
+                  target="_blank" 
+                  class="check_btn" 
+                  style="background: #2577e3;color: #fff;">下单</a>
+                </p><p class="p2"><a
+                  :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                  target="_blank"
+                  class="check_btn">查看</a>
+                </p><p 
+                  v-if="item.qq" 
+                  class="p3"><a
+                    :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
+                    target="_blank"><input
+                      readonly="readonly" 
+                      value="QQ交谈"></a>
+              </p></li>
+            </ul>
+          </div>
+
+          <div 
+            id="js006" 
+            class="w1130">
+            <div class="zx_sx"><span class="biaozhi"/><span >优质承运商推荐</span></div>
+            <div class="list_box">
+              <ul class="ul_list">
+                <li 
+                  v-for="(item,index) in excellent" 
+                  :key="index"
+                >
+                  <h4>{{ item.companyName }}</h4>
+                  <span 
+                    v-for="(i,n) in item.allServiceNameList" 
+                    :key="n">{{ i }}</span>
+                </li>
+                <!-- <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li>
+                <li>
+                  <h4>满生货运中心</h4>
+                  <span>零担整车 大件运输</span>
+                </li> -->
+              </ul>
+            </div>
+            <!-- <div class="list_tiaoj">
+              <span 
+                v-for="(item,index) in sortList" 
+                :key="index"
+                :class="[sortId === item.id ? 'active' : '']"
+                @click="selectSort(item)">{{ item.name }}</span>
+            </div> -->
+
+            <!-- <div 
+              v-if="listRangesAging.length === 0" 
+              class="list_none" 
+              style="display: block">
+              <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
+              <img src="/images/none_pic.png">
+            </div> -->
+            <div class="zx_sx"><span class="biaozhi"/><span >广州出发热门专线</span></div>
+            <div class="list_box">
+              <ul class="ul_host">
+                <li>
+                  <p>物流商：薏米滴答 
+                    <!-- <img
+                    src="/wd/images/blue.gif" > -->
+                    <img
+                    src="/wd/images/34huanguan.gif" >
+                    <img
+                    src="/wd/images/34huanguan.gif" >
+                  </p>
+                  <h4>河源市->深圳市</h4>
+                  <p style="font-size:12px;">重货：<span class="num_color">23.4</span>元/公斤</p>
+                  <p style="font-size:12px;">轻货：<span class="num_color">455.4</span>元/公斤</p>
+                  <p>累计成交：<span class="num_color">53452</span>单</p>
+                  <div class="titles">
+                    <span>担保交易</span>
+                    <span>234人说好</span>
+                    <span>立即下单</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <!-- 全国热门物流专线start -->
+            <div class="hot-city-layer main-width">
+              <div class="hot-city-unit hot_box ">
+                <h3 class="news-unit-title">全国热门物流货运专线</h3>
+                <ul class="hot-cities">
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440300.html">深圳找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440100.html">广州找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441900.html">东莞市到上海市货源</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f140400.html">长治找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440500.html">汕头找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440600.html">佛山找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440700.html">江门找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440800.html">湛江找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440900.html">茂名找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441200.html">肇庆找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440300.html">深圳找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440100.html">广州找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441900.html">东莞市到上海市货源</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f140400.html">长治找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440500.html">汕头找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440600.html">佛山找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440700.html">江门找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440800.html">湛江找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f440900.html">茂名找车拉货</a></li>
+                  <li class="hot-cities-li"><a 
+                    class="hot-cities-a" 
+                    href="/goods/f441200.html">肇庆找车拉货</a></li>
+                </ul>
+              </div>
+            </div>
+            <!-- 全国热门物流专线end -->
+            <!-- <div 
+              v-for="(item,index) in listRangesAging" 
+              :key="index" 
+              class="wzl_box">
+              <div 
+                v-if="currentPage === 1"
+                class="wzl_log"><span :class="[index <3 ? 'bgr' : '']">TOP<i>{{ index + 1 }}</i></span></div>
+              <ul 
+                class="wlzx_list" 
+                style="border:none" >
+                <li class="cy_list_1">
+                  <p class="p1"><a 
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId" 
+                    target="_blank"><span>{{ item.startCity }}{{ item.startArea }}</span> <span>&rarr;</span><span>{{ item.endCity }}{{ item.endArea }}</span></a></p>
+                  <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font></p>
+                  <p class="p3"><img 
+                    src="/images/wzlImg/2.png"
+                    style="float: left;margin-top: 7px;"><i style="float: left;">线路说明：</i><font class="nr056">{{ item.transportRemark ? item.transportRemark : '无' }}</font></p>
+                  <p class="p4"><img src="/images/wzlImg/3.png"><i>地址：</i><font>{{ item.address ? item.address : '无' }}</font></p>
+                </li>
+                <li class="cy_list_7">
+                  <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
+                </li>
+                <li class="cy_list_2">
+                  <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
+                  <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m³': '0' }}</span></p>
+                  <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '元': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
+
+                </li>
+                <li class="cy_list_3">
+                  <p class="p1"><img
+                    v-if="item.authStatus === 'AF0010403'"
+                    src="/images/list_wlzx/10shiming.png"></P>
+                  <p class="p2"><img
+                    v-if="item.isVip && item.isVip === 1"
+                    src="/images/list_wlzx/11xinyong.png"></P>
+                  <p class="p3"><img
+                    v-if="item.collateral && item.collateral !== 0"
+                    src="/images/list_wlzx/12danbao.png"></P>
+                </li>
+
+                <li class="cy_list_4">
+                  <p><img 
+                    class="numlll" 
+                    src="/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
+                  <p><img 
+                    class="numlll" 
+                    src="/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
+                </li>
+                <li class="wlzx_list_6">
+                  <p class="p2"><a 
+                    :href="'/create/order?&uid=' + item.account + '&id=' + item.id + '&publishId=' +item.companyId"
+                    target="_blank" 
+                    class="check_btn" 
+                    style="background: #2577e3;color: #fff;">下单</a>
+                  </p><p class="p2"><a
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"
+                    class="check_btn">查看</a>
+                  </p><p 
+                    v-if="item.qq" 
+                    class="p3"><a
+                      :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
+                      target="_blank"><input
+                        readonly="readonly" 
+                        value="QQ交谈"></a>
+                </p></li>
+              </ul>
+            </div> -->
 
 
+
+          </div>
+          <!--分页-->
+          <!-- <div
+            class="box" 
+            style="float: right;margin-right: 370px;">
+            <div 
+              id="pagination1" 
+              class="page fl"/>
+            <div class="info fl">
+              <p>当前页数：<span id="current1">1</span></p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+      
 
     </div>
+
   </div>
 </template>
 
 <script>
-import { getCode, getCity } from '~/components/commonJs.js'
-async function getRangeEvaluationlist($axios, currentPage, vo = {}) {
+async function getListRangesAging($axios, currentPage, vo = {}) {
+  let list, totalPage
   let parm = {
     currentPage: currentPage,
-    pageSize: 10,
-    vo: vo
+    pageSize: 20,
+    vo
   }
-  return await $axios.post(
-    '/aflc-portal/portal/aflcTransportEvaluation/v1/rangeEvaluationlist',
-    parm
-  )
-}
-function setCredit(item) {
-  if (item.credit >= 0 && item.credit <= 3) {
-    item.starS = new Array(1)
-  }
-  if (item.credit >= 4 && item.credit <= 10) {
-    item.starS = new Array(2)
-  }
-  if (item.credit >= 11 && item.credit <= 40) {
-    item.starS = new Array(3)
-  }
-  if (item.credit >= 41 && item.credit <= 90) {
-    item.starS = new Array(4)
-  }
-  if (item.credit >= 91 && item.credit <= 150) {
-    item.starS = new Array(5)
-  }
-  if (item.credit >= 151 && item.credit <= 250) {
-    item.starB = new Array(1)
-  }
-  if (item.credit >= 251 && item.credit <= 500) {
-    item.starB = new Array(2)
-  }
-  if (item.credit >= 501 && item.credit <= 1000) {
-    item.starB = new Array(3)
-  }
-  if (item.credit >= 1001 && item.credit <= 2000) {
-    item.starB = new Array(4)
-  }
-  if (item.credit >= 2001) {
-    item.starB = new Array(5)
-  }
+  await $axios
+    .post('/aflc-portal/portalt/aflcTransportRange/v1/listRangesAging', parm)
+    .then(res => {
+      if (res.data.status === 200) {
+        list = res.data.data.list
+        totalPage = res.data.data.totalPage
+      }
+    })
+  return { list, totalPage, currentPage }
 }
 export default {
-  name: 'Detail',
-  layout: 'subLayout',
+  name: 'ShiXiao',
   head: {
-    link: [
-      { rel: 'stylesheet', href: '/css/article_wlzx.css' },
-      { rel: 'stylesheet', href: '/css/price.css' },
-      { rel: 'stylesheet', href: '/css/WTMap.css' }
-    ],
+    link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
-      { src: '../js/jquery.pagination.min.js' },
-      { src: '../js/WTMap.min.js' }
+      { src: './js/city-picker.data.js' },
+      { src: './js/city-picker.js' },
+      { src: './js/jquery.pagination.min.js' }
     ]
   },
   data() {
     return {
-      nav4List: [
-        { id: 0, name: '增值服务' },
-        { id: 1, name: '专线介绍' },
-        { id: 2, name: '累计评价' },
-        { id: 3, name: '专享服务' }
-      ],
-      nav4Id: 0,
-      showImg: 0
+      listRangesAging: [],
+      totalPage: 0,
+      currentPage: 1,
+      sortList: [{ id: 1, name: '综合排序' }, { id: 2, name: '运输时效' }],
+      sortId: 1
     }
   },
   async asyncData({ $axios, app, query }) {
-    let zxList
-    const oneCompanyRes = await $axios.get(
-      '/aflc-portal/portalt/aflcLogisticsCompany/v1/' + query.publishId
-    )
-    if (oneCompanyRes.data.status === 200) {
-      setCredit(oneCompanyRes.data.data)
+    let vo = {
+      filterSign: 1,
+      endArea: query.endArea ? query.endArea : '',
+      endCity: query.endCity ? query.endCity : '',
+      endProvince: query.endProvince ? query.endProvince : '',
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
     }
-    let parm = {
+    let parmes = {
       currentPage: 1,
-      pageSize: 6,
-      vo: {
-        companyId: query.publishId
+      pageSize: 8,
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
+    }
+    let listRangesAgingData = await getListRangesAging($axios, 1, vo).catch(
+      err => {
+        console.log(err)
       }
-    }
-    const listDetailPointNetworkRes = await $axios.post(
-      '/aflc-portal/portalt/aflcPointNetwork/v1/listDetailPointNetwork',
-      parm
     )
-    if (listDetailPointNetworkRes.data.status === 200) {
-      listDetailPointNetworkRes.data.data.list.forEach(item => {
-        if (item.address.indexOf(item.belongCityName !== -1)) {
-          item.address = item.address.replace(item.belongCityName, '')
-        }
+    //优质承运商推荐
+    let excellents = await $axios
+      .get('/28-web/logisticsCompany/excellent')
+      .catch(err => {
+        console.log(err)
       })
-    }
-    const tranDetailRes = await $axios.get(
-      '/aflc-portal/portalt/aflcTransportRange/v1/' + query.id
-    )
-    if (tranDetailRes.data.status === 200) {
-      // tranDetailRes.data.data.num = Math.ceil(Math.random() * 30)
-      let item = tranDetailRes.data.data
-      let arr = (item.id || '').split('')
-      let num = 0
-      arr.forEach(el => {
-        num += el.charCodeAt(0) || 0
-      })
-      item.num = (num % 30) + 1
-      tranDetailRes.data.data.rangePrices1 = tranDetailRes.data.data.rangePrices.filter(
-        item => {
-          return item.type === '1'
-        }
-      )
-      tranDetailRes.data.data.rangePrices0 = tranDetailRes.data.data.rangePrices.filter(
-        item => {
-          return item.type === '0'
-        }
-      )
-      let code = await getCode($axios, tranDetailRes.data.data.endProvince)
-      zxList = await getCity($axios, code, tranDetailRes.data.data.startCity)
-    }
-    let rangeEvaluationlistRes = await getRangeEvaluationlist($axios, 1, {
-      transportRangeId: query.id
+    //推荐专线/range/hot/list热门专线
+    let hotLines = await $axios.post('/28-web/hot/list', parmes).catch(err => {
+      console.log(err)
     })
-    let rangeEvaluationCountRes = await $axios.get(
-      '/aflc-portal/portal/aflcTransportEvaluation/v1/rangeEvaluationCount/' +
-        query.id
-    )
+    console.log(hotLines, 'hotLines')
     return {
-      oneCompany:
-        oneCompanyRes.data.status === 200 ? oneCompanyRes.data.data : {},
-      listDetailPointNetwork:
-        listDetailPointNetworkRes.data.status === 200
-          ? listDetailPointNetworkRes.data.data.list
-          : [],
-      tranDetail:
-        tranDetailRes.data.status === 200 ? tranDetailRes.data.data : {},
-      zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
-      rangeEvaluationlist:
-        rangeEvaluationlistRes.data.status === 200
-          ? rangeEvaluationlistRes.data.data.list
-          : [],
-      rangeEvaluationCount:
-        rangeEvaluationCountRes.data.status === 200
-          ? rangeEvaluationCountRes.data.data
-          : {}
+      listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
+      totalPage: listRangesAgingData.totalPage
+        ? listRangesAgingData.totalPage
+        : 0,
+      currentPage: listRangesAgingData.currentPage,
+      vo: vo,
+      excellent: excellents.status === 200 ? excellents.data.data : []
     }
   },
   mounted() {
-    seajs.use(['../js/city.js'], function() {
-      seajs.use(['../js/arc_wlzx.js'], function() {
-        seajs.use(['../js/collection.js'], function() {
-          seajs.use(['../js/calculator.js'], function() {
-            seajs.use(['../js/gaodemap2.js'], function() {})
-          })
-        })
+    $('#list_nav_a').html(
+      this.vo.startCity +
+        this.vo.startArea +
+        ' 到 ' +
+        this.vo.endCity +
+        this.vo.endArea +
+        ' 专线时效'
+    )
+    if (
+      (!this.vo.startCity && !this.vo.startArea) ||
+      (!this.vo.endCity && !this.vo.endArea)
+    ) {
+      $('#list_nav_a').html(
+        this.vo.startCity +
+          this.vo.startArea +
+          '  ' +
+          this.vo.endCity +
+          this.vo.endArea +
+          '专线时效'
+      )
+    }
+
+    $('#carLineFrom input').citypicker({
+      province: this.vo.startProvince,
+      city: this.vo.startCity,
+      district: this.vo.startArea
+    })
+    $('#carLineTo input').citypicker({
+      province: this.vo.endProvince,
+      city: this.vo.endCity,
+      district: this.vo.endArea
+    })
+
+    $('.qiehuan').click(function() {
+      $(this)
+        .css('transition', '0.3s')
+        .css('transform', 'rotate(180deg)')
+      let list1 = [],
+        list2 = []
+      $('#carLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      let startp = list1[0]
+      let startc = list1[1]
+      let starta = list1[2]
+      $('#carLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      let endp = list2[0]
+      let endc = list2[1]
+      let enda = list2[2]
+      $('#carLineFrom input').pickerReload({
+        province: endp,
+        city: endc,
+        district: enda
+      })
+      $('#carLineTo input').pickerReload({
+        province: startp,
+        city: startc,
+        district: starta
       })
     })
+    let qiehuan = document.querySelector('.qiehuan')
+    qiehuan.addEventListener(
+      'transitionend',
+      () => {
+        console.log(1)
+        $('.qiehuan')
+          .css('transition', '')
+          .css('transform', '')
+      },
+      false
+    )
+    // this.loadPagination()
   },
   methods: {
-    clickImg(int) {
-      this.showImg = int
+    async selectSort(item) {
+      this.sortId = item.id
+      let vo = this.vo
+      vo.filterSign = this.sortId
+      let obj = await getListRangesAging(this.$axios, this.currentPage, vo)
+      this.listRangesAging = obj.list
     },
-    click4(item) {
-      this.nav4Id = item.id
-    },
-    async radioClick(data) {
-      let rangeEvaluationlistRes = await getRangeEvaluationlist(
-        this.$axios,
-        1,
-        {
-          transportRangeId: this.$route.query.id,
-          assessLevel: data
-        }
-      )
-      this.rangeEvaluationlist =
-        rangeEvaluationlistRes.data.status === 200
-          ? rangeEvaluationlistRes.data.data.list
-          : []
+    async search() {
+      let list1 = [],
+        list2 = []
+      $('#carLineFrom .select-item').each(function(i, e) {
+        list1.push($(this).text())
+      })
+      this.vo.startProvince = list1[0] ? list1[0] : ''
+      this.vo.startCity = list1[1] ? list1[1] : ''
+      this.vo.startArea = list1[2] ? list1[2] : ''
+      $('#carLineTo .select-item').each(function(i, e) {
+        list2.push($(this).text())
+      })
+      this.vo.endProvince = list2[0] ? list2[0] : ''
+      this.vo.endCity = list2[1] ? list2[1] : ''
+      this.vo.endArea = list2[2] ? list2[2] : ''
+      window.location.href = `/shixiao?endArea=${this.vo.endArea}&endCity=${
+        this.vo.endCity
+      }&endProvince=${this.vo.endProvince}&startArea=${
+        this.vo.startArea
+      }&startCity=${this.vo.startCity}&startProvince=${this.vo.startProvince}`
     }
+    // loadPagination() {
+    //   $('#pagination1').pagination({
+    //     currentPage: this.currentPage,
+    //     totalPage: this.totalPage,
+    //     callback: async current => {
+    //       $('#current1').text(current)
+    //       let vo = this.vo
+    //       vo.filterSign = this.sortId
+    //       let obj = await getListRangesAging(this.$axios, current, vo)
+    //       this.listRangesAging = obj.list
+    //       this.currentPage = obj.currentPage
+    //       window.location.href = '#top'
+    //     }
+    //   })
+    // }
   }
 }
 </script>
 
 <style scoped>
+/*物流专线 S */
+body {
+  background-color: #f9f9f9;
+}
+img {
+  vertical-align: middle;
+}
+.shixiao_box {
+  width: 1400px;
+  height: auto !important;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.shixiao_left {
+  float: left;
+  width: 220px;
+  background: #ffffff;
+  margin-right: 7px;
+}
+.left_top {
+  /* float: left; */
+}
+.left_top_ul {
+  text-align: center;
+}
+.left_top_ul h1 {
+  line-height: 40px;
+  font-size: 22px;
+  padding: 40px 0;
+  background: red;
+  color: #fff;
+}
+.left_top_ul li {
+  height: 40px;
+  line-height: 40px;
+  font-size: 22px;
+  padding: 20px 0;
+}
+.shixiao_right {
+  float: left;
+  width: 1173px;
+}
+.list_box {
+  float: left;
+  width: 100%;
+  background: #fff;
+}
+.ul_list {
+  width: 1052px;
+  border: 1px solid #cccccc;
+  float: left;
+  margin: 30px;
+  padding: 30px;
+}
+.num_color {
+  color: red;
+}
+.ul_list li {
+  margin-bottom: 30px;
+  text-align: center;
+  width: 210px;
+  box-sizing: border-box;
+  float: left;
+  border-left: 1px solid #cccc;
+  padding: 0 10px;
+  height: 150px;
+  overflow: hidden;
+}
+.ul_list li:nth-child(1) {
+  border: none;
+}
+.ul_list li:nth-child(6) {
+  border: none;
+}
+.ul_list li h4 {
+  font-size: 18px;
+  height: 30px;
+  line-height: 30px;
+  color: #2577e3;
+}
+.ul_list li span {
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  width: 50px;
+  overflow: hidden;
+  float: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+  margin: 0 5px;
+}
+.ul_host {
+  width: 1052px;
+  float: left;
+  padding: 30px;
+}
+.ul_host li {
+  width: 270px;
+  background: #e4efff;
+  position: relative;
+  padding-bottom: 40px;
+}
+.ul_host li .titles {
+  bottom: 0%;
+  left: 0%;
+  position: absolute;
+  background: #2e2e2e;
+  color: #fff;
+  height: 28px;
+  line-height: 28px;
+  width: 99%;
+  padding: 5px 0 5px 1%;
+  text-align: left;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
+  display: flex;
+}
+.ul_host li .titles span {
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+}
+.ul_host li p {
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+  margin-left: 20px;
+  color: #666666;
+}
+.ul_host li h4 {
+  font-size: 18px;
+  margin-left: 20px;
+  cursor: pointer;
+}
+.main-width {
+  width: 1173px;
+  position: relative;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.hot_box {
+  border-bottom: 1px dashed #dfdfdf;
+}
+.hot-city-unit {
+  box-sizing: border-box;
+  /* border: 1px solid #ececec; */
+  background: #fff;
+  padding: 10px;
+}
+.news-unit-title:after {
+  position: absolute;
+  content: '';
+  height: 15px;
+  width: 3px;
+  left: 0;
+  top: 8px;
+  background: #589def;
+}
+.news-unit-title {
+  position: relative;
+  height: 32px;
+  line-height: 32px;
+  padding-left: 15px;
+  /* border-bottom: 1px solid #ededed; */
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-size: 20px;
+  color: #333333;
+}
+.line-city-box {
+  max-width: 1036px;
+  float: left;
+}
+.line-title {
+  color: #3f94ee;
+  border-bottom: 2px solid #3f94ee;
+}
+.hot-cities-li {
+  display: inline-block;
+  padding: 10px;
+}
+.hot-cities-a {
+  font-size: 14px;
+  /* color: #333; */
+}
+
+/*时效end*/
+.list_nav {
+  height: 52px;
+  line-height: 52px;
+  float: left;
+  font-size: 14px;
+  color: #666666;
+  font-weight: normal;
+}
+.zx_sx {
+  overflow: hidden;
+  line-height: 50px;
+  height: 50px;
+  color: #585858;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #fff;
+  border-bottom: 2px solid #2577e3;
+  float: left;
+  width: 100%;
+}
+.zx_sx span {
+  float: left;
+  display: block;
+  color: #2577e3;
+}
+.zx_sx .biaozhi {
+  width: 3px;
+  height: 18px;
+  background-color: #2577e3;
+  border-radius: 1px;
+  margin: 16px 12px 0 10px;
+}
+
+.list_left {
+  width: 100%;
+  float: left;
+}
+.w1130 {
+  width: 100%;
+  float: left;
+  min-height: 400px;
+}
+.search:hover {
+  opacity: 0.8;
+}
+#nr_a521:hover {
+  opacity: 0.8;
+}
+#nr_a522:hover {
+  background: #2577e3;
+  color: #fff;
+}
+#nr_a522:hover a {
+  color: #fff;
+}
+.tywlist {
+  width: 1130px;
+}
+.tyxboxWrap {
+  float: left;
+  width: 100%;
+  position: relative;
+}
+.list_right {
+  min-height: 200px;
+  height: auto !important;
+  width: 260px;
+  padding: 0px 0px 0 10px;
+  float: left;
+}
+
+.list_hy_page2 {
+  width: 1400px;
+}
+.w260 {
+  width: 260px;
+}
+.tylist {
+  width: 240px;
+}
+.select_con {
+  width: 1128px;
+  border-color: #e2e2e2;
+}
+.select_con dl dt {
+  font-size: 13px;
+  height: 39px;
+  line-height: 39px;
+  padding: 3px 0 0 20px;
+}
+
+.list_input {
+  width: 161px;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: none;
+  color: #999;
+  font-size: 14px;
+  padding-left: 9px;
+}
+.list_button {
+  width: 72px;
+  height: 28px;
+  border-radius: 2px;
+  border: solid 1px #eb434d;
+  background-color: #fff;
+  color: #eb434d;
+  font-size: 15px;
+  background: no-repeat url(/images/01search.png) 45px 6px;
+  text-align: left;
+  margin-left: 8px;
+  cursor: pointer;
+}
+#flush {
+  background: no-repeat url(/images/flush.png) 10px 6px;
+  padding-left: 30px;
+  width: 50px;
+  border: solid 1px #e3e3e3;
+  color: #999;
+  margin-left: 30px;
+}
+
+.list_img {
+  position: relative;
+  top: 3px;
+  left: 5px;
+  margin-right: 5px;
+}
+.select_con dl dd a:hover,
+.select_con dl dd a.now {
+  background: #eb434d;
+  color: #fff;
+}
+.ck_input {
+  width: 14px;
+  height: 14px;
+  border: solid 1px #ccc;
+  position: relative;
+  top: -2px;
+  right: 3px;
+  cursor: pointer;
+}
+.list_tiaoj {
+  width: 100%;
+  height: 39px;
+  background-color: #f1f1f1;
+  position: relative;
+  float: left;
+}
+.list_tiaoj span {
+  display: block;
+  text-align: center;
+  line-height: 39px;
+  float: left;
+  width: 94px;
+  height: 39px;
+  cursor: pointer;
+  font-size: 13px;
+}
+.list_tiaoj .active {
+  background-color: #ffffff;
+  color: #eb434d;
+}
+#tj_price {
+  width: 140px;
+  height: 100px;
+  position: absolute;
+  left: 300px;
+  top: 40px;
+  margin-left: 0px;
+  display: none;
+  background-color: #fff;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+  padding-top: 15px;
+}
+#tj_price1,
+#tj_price2 {
+  color: #ff6633;
+  width: 140px;
+  padding-bottom: 5px;
+}
+#tj_price1:hover,
+#tj_price2:hover {
+  color: #f00;
+}
+
+.wlzx_list {
+  width: 100%;
+  padding-top: 20px;
+  margin-top: -1px;
+  background-color: #fff;
+  float: left;
+  transition: all 0.4s;
+}
+.wzl_box {
+  float: left;
+  width: 1400px;
+  border-bottom: 1px solid #ddd;
+}
+.wlzx_list:hover {
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+  transform: translate3d(0, -2px, 0);
+}
+.cy_list_1 img {
+  vertical-align: middle;
+  float: left;
+  margin-top: 6px;
+}
+.wlzx_list li {
+  height: 140px;
+  float: left;
+  /* overflow: hidden;	 */
+}
+.cy_list_1 .wlzx_list img {
+  transition: 0.7s;
+}
+.wlzx_list img:hover {
+  transform: scale(1.05);
+}
+
+.wlzx_list_2 p {
+  height: 26px;
+  line-height: 26px;
+}
+.wlzx_list_2 .p1 {
+  margin-bottom: 3px;
+}
+.wlzx_list_2 .p1 a {
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+}
+.wlzx_list_2 .p1 font {
+  color: #666666;
+  font-size: 12px;
+  padding-left: 5px;
+}
+.wlzx_list_2 .p2 font {
+  color: #2577e3;
+  font-size: 13px;
+  padding-left: 5px;
+}
+.wlzx_list_2 .p3 font,
+.wlzx_list_2 .p4 font {
+  color: #333;
+  font-size: 13px;
+}
+.wlzx_list_2 .p3 i,
+.wlzx_list_2 .p4 i {
+  color: #666;
+  font-size: 13px;
+  padding-left: 5px;
+}
+
+.wlzx_list_3 p {
+  height: 27px;
+  line-height: 27px;
+  font-size: 13px;
+}
+.wlzx_list_3 p i {
+  color: #999;
+}
+.wlzx_list_3 p font {
+  color: #fb5000;
+}
+.wlzx_list_3 p span {
+  color: #333;
+}
+.wlzx_list_4 p {
+  height: 27px;
+  line-height: 27px;
+  font-size: 13px;
+}
+.wlzx_list_4 img {
+  margin-top: 5px;
+}
+.wlzx_list_5 p {
+  height: 27px;
+  line-height: 27px;
+  font-size: 12px;
+}
+.wlzx_list_5 p i {
+  color: #999;
+}
+
+.wlzx_list_6 p input {
+  display: block;
+  width: 102px;
+  height: 26px;
+  line-height: 26px;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 13px;
+  cursor: pointer;
+  border: solid 1px #dedede;
+}
+.wlzx_list_6 .p1,
+.wlzx_list_6 .p2 {
+  margin-bottom: 12px;
+}
+/* .wlzx_list_6 .p2 a input {margin-bottom: 12px;background-color: #2577e3;} */
+.wlzx_list_6 .p1 input {
+  background-color: #eb434d;
+  color: #fff;
+  border: 0px;
+  height: 28px;
+}
+.wlzx_list_6 .p1 input:hover {
+  background-color: #ff0000;
+}
+
+.wlzx_list_6 .p3 input {
+  background: no-repeat url(/images/article_wlzx/15qq.gif) 12px 3px;
+
+  padding-left: 15px;
+  width: 87px;
+}
+.tj_list {
+  background-color: #fff;
+  margin-top: -1px;
+  border: 1px solid #dedede;
+  width: 258px;
+  font-size: 14px;
+}
+.tj_list:hover {
+  background-color: #f9f9f9;
+}
+.tj_list p {
+  height: 28px;
+  line-height: 28px;
+  padding-left: 10px;
+  padding-right: 0px;
+}
+
+.tj_list .p1 {
+  height: 50px;
+  line-height: 50px;
+}
+.tj_list .p1 span {
+  font-size: 16px;
+  color: #666;
+}
+.tj_list .p1 i {
+  color: #c5c5c5;
+  font-size: 16px;
+  padding: 0 3px 0 3px;
+}
+.tj_list .p2 span {
+  padding: 0 0 0 5px;
+}
+
+.tj_list .p3 i,
+.tj_list .p3 em,
+.tj_list .p4 i {
+  font-size: 13px;
+  color: #999;
+}
+.tj_list .p3 font,
+.tj_list .p4 font {
+  font-size: 13px;
+  color: #eb434d;
+}
+.tj_list .p3 span,
+.tj_list .p3 font,
+.tj_list .p4 span {
+  font-size: 13px;
+  color: #666;
+}
+.tj_list .p3 i {
+  float: left;
+  width: 65px;
+  height: 28px;
+}
+.tj_list .p3 em {
+  float: left;
+  width: 45px;
+  height: 28px;
+}
+.tj_list .p3 span {
+  float: left;
+  width: 50px;
+  height: 28px;
+}
+.tj_list .p3 font {
+  float: left;
+  width: 60px;
+  height: 28px;
+}
+.tj_list .p5 img {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-right: 8px;
+}
+.tj_list img {
+  transition: 0.7s;
+}
+.tj_list img:hover {
+  transform: scale(1.05);
+}
+.tj_list .p6 {
+  border-top: solid 1px #cde0ff;
+  text-align: center;
+}
+.tj_list .p6 span {
+  color: #2577e3;
+  font-size: 13px;
+}
+/*物流专线 E */
+
+/*时效查询 S */
+.cy_list_1 {
+  width: 300px;
+  margin-left: 20px;
+}
+.cy_list_2 {
+  width: 150px;
+  margin-left: 40px;
+}
+.cy_list_3 {
+  width: 100px;
+  margin-left: 40px;
+}
+.cy_list_4 {
+  width: 100px;
+  margin-left: 50px;
+}
+
+.cy_list_5 {
+  width: 100px;
+  margin-left: 100px;
+}
+.wlzx_list_6 {
+  width: 100px;
+  margin-left: 100px;
+}
+.cy_list_7 {
+  width: 100px;
+  margin-left: 20px;
+}
+.cy_list_1 .p1 {
+  margin-bottom: 3px;
+  font-size: 16px;
+}
+.cy_list_1 .p1 a span {
+  color: #333333;
+  font-size: 16px;
+  font-weight: bold;
+}
+.cy_list_1 .p1:hover a span {
+  color: #ff5833;
+  cursor: pointer;
+}
+.cy_list_1 p {
+  height: 26px;
+  line-height: 26px;
+  font-size: 14px;
+}
+.cy_list_1 p a {
+  color: #eb434d;
+  font-size: 16px;
+}
+.cy_list_1 p i {
+  font-size: 13px;
+  color: #666;
+  float: left;
+}
+.cy_list_1 .p4 font {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  height: 30px;
+  width: 220px;
+  display: block;
+  float: left;
+}
+
+.cy_list_1 p span {
+  font-size: 14px;
+  color: #666;
+  padding: 0 2px 0 2px;
+}
+.cy_list_1 p font {
+  font-size: 14px;
+  color: #333;
+}
+
+.cy_list_2 p {
+  height: 27px;
+  line-height: 27px;
+  font-size: 14px;
+}
+
+.cy_list_2 p span {
+  color: #fb5000 !important;
+  font-size: 14px;
+}
+.cy_list_2 p i {
+  font-size: 14px;
+}
+.cy_list_4 p {
+  height: 26px;
+  margin: 0 0 5px 0;
+}
+.cy_list_7 p {
+  color: #fb5000;
+  font-size: 14px;
+}
+.wlzx_list_6 .p2 input {
+  background-color: #eb434d;
+  color: #fff;
+  border: 0;
+}
+/*车源信息 E */
+
+/*货源信息 S */
+/* .cy_list_1{
+      width: 351px;
+      margin-left: 14px;
+
+
+  }
+  .cy_list_2{
+      width: 182px;
+      margin-left: 100px;
+
+  }
+  .cy_list_3{
+      width: 75px;
+      margin-left: 80px;
+
+
+  }
+  .cy_list_4{
+      width: 80px;
+      margin-left: 50px;
+
+  }
+  .cy_list_5{
+      width: 102px;
+      margin-left: 60px;
+
+  } */
+.cy_list_1 .p1 {
+  margin-bottom: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cy_list_1 p {
+  height: 26px;
+  line-height: 26px;
+}
+.cy_list_1 p a {
+  color: #eb434d;
+  font-size: 16px;
+}
+.cy_list_1 p i {
+  font-size: 13px;
+  color: #666;
+}
+.cy_list_1 p span {
+  color: #eb434d;
+  font-size: 13px;
+}
+.cy_list_1 p font {
+  font-size: 13px;
+  color: #333;
+}
+
+.cy_list_2 p {
+  height: 27px;
+  line-height: 27px;
+}
+
+.cy_list_2 p span {
+  color: #666;
+  font-size: 13px;
+}
+.cy_list_2 p i {
+  font-size: 13px;
+}
+.cy_list_2 p font {
+  color: #333;
+}
+.cy_list_3 p {
+  height: 27px;
+  line-height: 27px;
+}
+.wlzx_list_6 .p2 .check_btn {
+  /* background-color: #eb434d; */
+  /* background-color: #2577e3; */
+  width: 104px;
+  height: 28px;
+  line-height: 28px;
+  text-align: center;
+  cursor: pointer;
+  display: block;
+  /* color: #2577e3; */
+  border-radius: 3px;
+  border: solid 1px #8dadd8;
+  /* background-color: #2577e3; */
+  color: #2577e3;
+}
+/* .active{
+    background-color: #2577e3;
+    color: #fff;
+  } */
+.check_btn:active {
+  opacity: 0.5;
+}
+#wlzx_list_view:hover {
+  background-color: #f1f1f1;
+}
+#wlzx_list_view {
+  border: solid 1px #dedede;
+  background-color: #f9f9f9;
+  font-size: 13px;
+  color: #333;
+}
+/*货源信息 E */
+
+.list_none {
+  display: none;
+}
+.list_none span {
+  float: left;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  font-size: 16px;
+  margin-top: 40px;
+  margin-left: -140px;
+}
+.list_none img {
+  float: left;
+  width: 300px;
+  height: 160px;
+  margin: 20px 0 20px 400px;
+}
+
+.tj_none {
+  display: none;
+  background-color: #fff;
+  width: 100%;
+  height: 220px;
+}
+.tj_none span {
+  float: left;
+  width: 100%;
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+  font-size: 14px;
+  margin-top: 0px;
+}
+.hy_tj_none {
+  height: 186px;
+}
+.cy_tj_none {
+  height: 290px;
+}
+
+/* 出发地到达地 */
+.list_search {
+  /* margin: 0 60px; */
+  float: left;
+}
+.order-form-item {
+  float: left;
+  /* width: 470px; */
+  /* width: 50%; */
+  margin-left: 50px;
+}
+.order-form-item:first-child .order-form-label {
+  padding-left: 10px;
+}
+.order-form-label,
+.order-form-input {
+  float: left;
+  line-height: 40px;
+  position: relative;
+}
+.order-form-label {
+  text-align: right;
+}
+.shixiao-input {
+  width: 340px;
+  height: 45px;
+  border-radius: 2px;
+  border: solid 1px #d2d2d2;
+  padding-left: 20px;
+}
+.order-line-from {
+  /* margin-bottom: 20px; */
+  background: #fff;
+  padding: 20px 0px;
+  float: left;
+  width: 100%;
+}
+.order-line-from .qd {
+  position: absolute;
+  right: 13px;
+  top: 7px;
+}
+.boxx {
+  float: left;
+}
+.nr056 {
+  width: 190px;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.order-line-from .wzl {
+  position: absolute;
+  right: 13px;
+  top: 7px;
+}
+.search {
+  display: block;
+  width: 100px;
+  height: 47px;
+  line-height: 47px;
+  background-image: linear-gradient(#79b3ff, #79b3ff),
+    linear-gradient(#2577e3, #2577e3);
+  background-blend-mode: normal, normal;
+  border-radius: 3px;
+  text-align: center;
+  color: #fff;
+  cursor: pointer;
+}
+.cy_list_1 .bgr {
+  float: left;
+}
+.cy_list_1 .p1 span {
+  float: left;
+}
+.cy_list_1 #startLocation,
+#endLocation {
+  width: 114px;
+  float: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+/* 为您推荐下面的列表 */
+.wzl_box {
+  background: #fff;
+}
+.numlll {
+  width: 20px;
+  height: 20px;
+  display: block;
+  float: left;
+  margin: -2px 5px;
+  vertical-align: middle;
+}
+.wzl_log span {
+  display: block;
+  width: 128px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  text-align: center;
+  background: url(/images/wzlImg/bule.png) no-repeat;
+}
+.wzl_log .bgr {
+  display: block;
+  width: 128px;
+  height: 30px;
+  line-height: 30px;
+  color: #fff;
+  text-align: center;
+  background: url(/images/wzlImg/red.png) no-repeat;
+}
+.qiehuan {
+  cursor: pointer;
+}
+.rotate {
+  cursor: pointer;
+  transition-duration: 1s;
+  transform: rotate(180deg);
+  -ms-transform: rotate(180deg); /* IE 9 */
+  -webkit-transform: rotate(180deg); /* Safari and Chrome */
+  -o-transform: rotate(180deg); /* Opera */
+  -moz-transform: rotate(180deg); /* Firefox */
+}
+.list_kehu {
+  float: left;
+  width: 100%;
+}
+.list_help {
+  width: 220px;
+  box-sizing: border-box;
+  float: left;
+  margin-top: 20px;
+}
+.list_help_title {
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  background: red;
+  color: #fff;
+}
+.list_ewm {
+  float: left;
+  width: 100%;
+}
+.imgbox {
+  text-align: center;
+  margin: 10px;
+}
+.order_content {
+  padding: 10px;
+}
+.list-box-r-top {
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding: 15px 15px;
+  margin-bottom: 10px;
+}
+.ltl-input0 {
+  position: relative;
+  margin: 7px 0 10px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: white;
+  font-size: 14px;
+  line-height: 32px;
+}
+.ltl-select {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  border: none;
+  outline: none;
+}
+.ltl-select option {
+  color: #333333;
+}
+.ltl-input {
+  position: relative;
+  margin: 7px 0 10px 0;
+}
+.right-top-btn {
+  display: block;
+  height: 40px;
+  width: 300px;
+  background: #3f94ee;
+  border: 0;
+  outline: 0;
+  border-radius: 4px;
+  margin-top: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+.ltl-ico-start {
+  background-position: 0px 8px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  /* right: 5px; */
+  top: 8px;
+}
+.ss56-common-sprite1 {
+  background-image: url(/images/list_wlzx/select_icon.png);
+  background-repeat: no-repeat;
+}
+.ltl-ico-end {
+  background-position: 0px 8px;
+}
+.ltl-icons {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  right: 5px;
+  top: 8px;
+}
+.ss56-common-sprite2 {
+  background-image: url(/images/list_wlzx/select_icon.png);
+  background-repeat: no-repeat;
+}
+/* .list_help_title {
+  color: #3f94ee;
+} */
+.ltl-location {
+  width: 100%;
+  border: 1px solid #ccc;
+  height: 35px;
+  line-height: 35px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  /* border-radius: 4px; */
+  padding-right: 50px;
+  outline: 0;
+}
+.ltl-phone {
+  width: 115px;
+  border: 1px solid #ccc;
+  height: 35px;
+  line-height: 35px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  outline: 0;
+  float: left;
+}
+.ltl-button {
+  display: block;
+  width: 75px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #589def;
+  color: #fff;
+  border: 1px solid #589def;
+  cursor: pointer;
+  float: left;
+}
+.lines-sprite-icons {
+  background: url(/images/list_wlzx/ss56-lines-sprite.png) no-repeat;
+}
+.list-title-a {
+  color: #333;
+  font-size: 16px;
+}
+.list-title {
+  font-weight: 300;
+  font-size: 18px;
+  color: #333;
+}
+.icon-through {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  background-position: -6px -62px;
+  position: relative;
+  top: 3px;
+  margin: 0 10px;
+}
+.icon-end {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -6px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
+.icon-start {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-position: -6px -34px;
+  position: relative;
+  top: 2px;
+  margin-right: 3px;
+}
 </style>

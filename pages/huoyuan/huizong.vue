@@ -16,7 +16,9 @@
           <!--导航 -->
         </div>
         <div class="col2">
-          <div class="ad">
+          <div 
+            id="ad"
+            class="ad">
             <div class="swiper-container">
               <div class="swiper-wrapper">
                 <div 
@@ -56,60 +58,38 @@
     </div>
     <!--货源-->
     <div class="bj_2">
-      <div class="owner">
+      <div 
+        id="owner_swiper"
+        class="owner">
         <h3 class="p_title">优质货主</h3>
-        <ul class="p_owner_list clearfix">
-          <li>
-            <a href="">
-              <div class="owner_pic"><img src="../../static/images/huizong/_img01.png"></div>
-              <div class="owner_info">
-                <p class="owner_name">速递物流公司<span><i class="iconfont iconhuo"/>89</span></p>
-                <p class="owner_total">累计发货<span>1446</span>，收到好评<span>250</span></p>
-                <p class="owner_num">今日发货3次</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="owner_pic"><img src="../../static/images/huizong/_img01.png"></div>
-              <div class="owner_info">
-                <p class="owner_name">速递物流公司<span><i class="iconfont iconhuo"/>89</span></p>
-                <p class="owner_total">累计发货<span>1446</span>，收到好评<span>250</span></p>
-                <p class="owner_num">今日发货3次</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="owner_pic"><img src="../../static/images/huizong/_img01.png"></div>
-              <div class="owner_info">
-                <p class="owner_name">速递物流公司<span><i class="iconfont iconhuo"/>89</span></p>
-                <p class="owner_total">累计发货<span>1446</span>，收到好评<span>250</span></p>
-                <p class="owner_num">今日发货3次</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="owner_pic"><img src="../../static/images/huizong/_img01.png"></div>
-              <div class="owner_info">
-                <p class="owner_name">速递物流公司<span><i class="iconfont iconhuo"/>89</span></p>
-                <p class="owner_total">累计发货<span>1446</span>，收到好评<span>250</span></p>
-                <p class="owner_num">今日发货3次</p>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="owner_pic"><img src="../../static/images/huizong/_img01.png"></div>
-              <div class="owner_info">
-                <p class="owner_name">速递物流公司<span><i class="iconfont iconhuo"/>89</span></p>
-                <p class="owner_total">累计发货<span>1446</span>，收到好评<span>250</span></p>
-                <p class="owner_num">今日发货3次</p>
-              </div>
-            </a>
-          </li>
-        </ul>
+        <div 
+          class="swiper-container" 
+          v-if="shipperData.length > 0">
+          <ul class="swiper-wrapper p_owner_list clearfix">
+            <li 
+              class="swiper-slide"                
+              v-for="(item, index) in shipperData" 
+              :key="index">
+              <a href="">
+                <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
+                <div class="owner_info">
+                  <p class="owner_name">{{ item.companyName }}<span><i class="iconfont iconhuo"/>{{ item.liveness }}</span></p>
+                  <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
+                  <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
+                </div>
+              </a>
+            </li>
+          </ul>
+          <div class="swiper-pagination"/>
+          <!-- Add Arrows -->
+          <div class="swiper-button-next"/>
+          <div class="swiper-button-prev"/>
+        </div>
+        <div 
+          class="error" 
+          v-else>
+          没有数据
+        </div>
       </div>
     </div>
     <!-- 优质货主 -->
@@ -247,7 +227,7 @@
     <!-- 最新货源 -->
     <div class="p_hy_groom clearfix">
       <div class="hd clearfix">
-        <h3 class="gr_title">热门专线</h3>
+        <h3 class="gr_title">货源推荐</h3>
         <div class="gr_txt"><span>180789</span>条专线，为您优选12条热门优质专线</div>
         <div class="gr_sch">
           <div class="gr_sch_city">
@@ -276,10 +256,44 @@
         <a href="">重货价格最低</a> 
         <a href="">轻货价格最低</a>       
       </div>
-      <div class="bd clearfix">
+      <div class="bd">
         <div class="col1">
-          <ul class="p_hy_list">
-            <li>
+          <ul class="p_hy_list clearfix">
+            <li               
+              v-for="(item, index) in recommendListData" 
+              :key="index">
+              <a href="">
+                <div class="hd_box">
+                  <span class="label_provider">发布者:</span>
+                  <span class="provider">{{ item.createrName }}张小丽</span>
+                  <span class="sure">认证</span>
+                </div>
+                <div class="md_box">
+                  <div class="city">{{ item.startCity }}</div>
+                  <span class="city-joint">
+                    <span class="joint-line"/>
+                    <span class="joint-label">发往</span>
+                    <span class="joint-line"/>
+                  </span>
+                  <div class="city">{{ item.endCity }}</div>
+                </div>
+                <div class="type_box">
+                  <span class="">货物:</span>
+                  <span 
+                    class="item"
+                    v-for="(items, index) in item.goodsList" 
+                    :key="index">钢材</span>
+                </div>
+                <div class="type_box">
+                  <span class="">规格:</span>
+                  <span class="item"><b>31</b>件</span>
+                  <span class="item">51公斤</span>
+                  <span class="item">21m³</span>
+                  <span class="time">2分钟前</span>
+                </div>
+              </a>
+            </li>
+            <!-- <li>
               <a href="">
                 <div class="hd_box">
                   <span class="label_provider">发布者:</span>
@@ -597,36 +611,7 @@
                   <span class="time">2分钟前</span>
                 </div>
               </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
+            </li> -->
           </ul>
         </div>
         <div class="col2">
@@ -750,51 +735,40 @@
           <h3 class="title">本月优质企业货主</h3>
           <span class="title_txt">稳定货源，好评率高</span>
         </div>  
-        <ul class="p_co_owner_list clearfix">
-          <li>
+        <ul 
+          class="p_co_owner_list clearfix"
+          v-if="monthShipperData.length > 0">
+          <li 
+            v-for="(item, index) in monthShipperData" 
+            :key="index">
             <a href="">
-              <div class="rank_num no1">NO.I</div>
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
+              <div 
+                class="rank_num no1" 
+                v-if="index === 0">
+                NO.1
+              </div>
+              <div 
+                class="rank_num no2" 
+                v-if="index === 1">
+                NO.2
+              </div>
+              <div 
+                class="rank_num no3" 
+                v-if="index === 2">
+                NO.3
+              </div>
+              <div class="pic"><img :src="item.companyFacadeFile" ></div>
+              <div class="tit">{{ item.companyName }} <span class="icon_tuijian">推</span></div>
               <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
+              <div class="praise">好评率{{ item.recommendedNumber }}%</div>
             </a>
           </li>
-          <li>
-            <a href="">
-              <div class="rank_num no2">NO.2</div>
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="rank_num no3">NO.3</div>
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="pic"><img src="../../static/images/huizong/_img01.png"></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
-            </a>
-          </li>
-        </ul>    
+        </ul>  
+        <div
+          class="error"
+          v-else>
+          没有数据
+        </div>  
       </div>
     </div>
     <!-- 本月优质企业货主 -->
@@ -999,9 +973,45 @@ export default {
       ]
     }
   },
+  async asyncData({ $axios, query, app, error }) {
+    // 优质货主
+    let [shipperData, monthShipperData, recommendListData] = await Promise.all([
+      $axios.post('/28-web/shipper/excellent', {
+        currentPage: 1,
+        pageSize: 10
+      }),
+      //本月优质货主
+      $axios.post('/28-web/shipper/month/excellent', {
+        currentPage: 1,
+        pageSize: 5
+      }),
+      // 货源推荐
+      $axios.post('/28-web/lclOrder/orderSummary/recommendList', {
+        currentPage: 1,
+        pageSize: 12
+      })
+    ])
+
+    if (
+      shipperData.status === 200 ||
+      monthShipperData.status === 200 ||
+      recommendListData.status === 200
+    ) {
+      return {
+        shipperData: shipperData.data ? shipperData.data.data.list : [],
+        monthShipperData: monthShipperData.data
+          ? monthShipperData.data.data.list
+          : [],
+        recommendListData: recommendListData.data
+          ? recommendListData.data.data.list
+          : []
+      }
+    } else {
+      error({ statusCode: 500, message: '查找不到该专线列表' })
+    }
+  },
   mounted() {
     this.intSwiper()
-    // this.mySwiper
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       console.log($)
       console.log(layer)
@@ -1017,11 +1027,17 @@ export default {
         timer: 3000
       })
     })
+    this.$nextTick(() => {
+      console.log('优质货主', this.shipperData)
+      console.log('本月货主', this.monthShipperData)
+      console.log('货源推荐', this.recommendListData)
+    })
   },
   methods: {
     intSwiper() {
       this.$nextTick(() => {
-        $('.ad').hover(
+        // 幻灯片
+        $('#ad').hover(
           function() {
             $(this)
               .find('.swiper-button-next,.swiper-button-prev')
@@ -1033,7 +1049,7 @@ export default {
               .hide()
           }
         )
-        let swiper = new Swiper('.swiper-container', {
+        let swiper = new Swiper('#ad .swiper-container', {
           effect: 'fade',
           spaceBetween: 30,
           centeredSlides: true,
@@ -1042,7 +1058,7 @@ export default {
             disableOnInteraction: false
           },
           pagination: {
-            el: '.swiper-pagination',
+            el: '#ad .swiper-pagination',
             dynamicBullets: true,
             clickable: true
           },
@@ -1051,6 +1067,20 @@ export default {
             prevEl: '.swiper-button-prev'
           }
         })
+      })
+      // 货主
+      let swiper = new Swiper('#owner_swiper .swiper-container', {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        freeMode: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
       })
     }
   }
@@ -1133,6 +1163,17 @@ export default {
   font-size: 16px;
   background: $white;
   height: 440px;
+  > .swiper-container {
+    height: 350px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    top: 75px !important;
+    margin-top: 0 !important;
+  }
+  > .error {
+    font-size: $f_14;
+  }
 }
 /*选择我们*/
 .our {

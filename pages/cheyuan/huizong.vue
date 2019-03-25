@@ -748,8 +748,12 @@
     <!-- 推荐车源 -->
     <div class="user_discuss  grid_c1">
       <h3 class="p_title">用户点评</h3>
-      <div class="discuss_item">11</div>
-      <div class="discuss_item">22</div>
+      <div class="discuss-list-content">
+        <div class="discuss_item">11</div>
+        <div class="discuss_item">22</div>
+        <div class="discuss_item">33</div>
+        <div class="discuss_item">44</div>
+      </div>
     </div>
     <!-- 用户评价 -->
   </div>
@@ -1073,13 +1077,33 @@ export default {
 }
 /*用户点评*/
 .user_discuss {
+  .discuss-list-content {
+  }
   .discuss_item {
+    &:first-child {
+      margin-left: 0;
+    }
     position: relative;
-    margin-right: 10px;
-    width: 290px;
+    @extend .fl;
+    margin-left: 20px;
+    width: 345px;
     height: 430px;
     overflow: hidden;
     background: $white;
+    .discuss-banner-hd {
+      height: 175px;
+      background: #bbb;
+    }
+    .discuss-score-tabs {
+      > .tabs {
+        > li {
+          display: inline-block;
+          vertical-align: middle;
+          width: 25%;
+          text-align: center;
+        }
+      }
+    }
   }
 }
 </style>

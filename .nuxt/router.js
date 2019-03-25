@@ -22,6 +22,7 @@ const _6ae0abe6 = () => interopDefault(import('..\\pages\\yuanqu\\index.vue' /* 
 const _40627eb8 = () => interopDefault(import('..\\pages\\zixun\\index.vue' /* webpackChunkName: "pages_zixun_index" */))
 const _6daf1500 = () => interopDefault(import('..\\pages\\cheyuan\\add.vue' /* webpackChunkName: "pages_cheyuan_add" */))
 const _6bc91ec2 = () => interopDefault(import('..\\pages\\cheyuan\\detail.vue' /* webpackChunkName: "pages_cheyuan_detail" */))
+const _a13a61ee = () => interopDefault(import('..\\pages\\cheyuan\\huizong.vue' /* webpackChunkName: "pages_cheyuan_huizong" */))
 const _5b730175 = () => interopDefault(import('..\\pages\\create\\cheyuan.vue' /* webpackChunkName: "pages_create_cheyuan" */))
 const _765193d7 = () => interopDefault(import('..\\pages\\create\\huoyuan.vue' /* webpackChunkName: "pages_create_huoyuan" */))
 const _2dd9f2d0 = () => interopDefault(import('..\\pages\\create\\line.vue' /* webpackChunkName: "pages_create_line" */))
@@ -244,6 +245,10 @@ export function createRouter() {
       path: "/cheyuan/detail",
       component: _6bc91ec2,
       name: "cheyuan-detail"
+    }, {
+      path: "/cheyuan/huizong",
+      component: _a13a61ee,
+      name: "cheyuan-huizong"
     }, {
       path: "/create/cheyuan",
       component: _5b730175,

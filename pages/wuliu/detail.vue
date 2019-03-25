@@ -88,7 +88,7 @@
                   </div>
 
                   <input
-                    v-model="searchWLGS"
+                    v-model="vo1.companyName"
                     type="text"
                     class="list_input"
                     placeholder="请输入公司名称">
@@ -110,19 +110,29 @@
 
                 <dt >增值服务&nbsp;:</dt>
                 <dd>
-                  <a
+                  <selectType 
+                    v-model="vo1.otherServiceCode" 
+                    name="AF025"
+                    @change="searchWlLine" />
+                    <!-- <a
                     v-for="(item,index) in AF025"
                     :key="index"
                     :class="[AF025Name === item.name ? 'now': '']"
-                    @click="selectAF025(item)">{{ item.name }}</a>
+                    @click="selectAF025(item)">{{ item.name }}</a> -->
                 </dd>
                 <dt >排序&nbsp;:</dt>
                 <dd>
-                  <a
+                  <selectType 
+                    v-model="vo1.orderBy" 
+                    :list="sortList"
+                    :code="sortList[0].code"
+                    :show-default="false"
+                    @change="searchWlLine" />
+                    <!--  <a
                     v-for="(item,index) in sortList"
                     :key="index"
                     :class="[sortName === item.name ? 'now': '']"
-                    @click="selectSort(item)">{{ item.name }}</a>
+                    @click="selectSort(item)">{{ item.name }}</a> -->
                 </dd>
               </dl>
             </div>
@@ -195,7 +205,7 @@
               <dl>
                 <dd style="margin-left: -80px;">
                   <input
-                    v-model="searchWDKey"
+                    v-model="vo2.companyName"
                     type="text"
                     class="list_input"
                     placeholder="请输入网点名称" >
@@ -203,21 +213,21 @@
                     value=" 搜索 "
                     readonly=""
                     class="list_button"
-                    @click="searchWD()">
+                    @click="searchWD">
 
                 </dd>
 
                 <dt >其他&nbsp;:</dt>
                 <dd>
-                  <a 
-                    :href="'/wuliu/detail?&id='+ $route.query.id "
-                    class="all"
-                    :class="[$route.query.comAuthStatus?'all':'now']"
-                  >不限</a>
-                  <a 
-                    :class="{now:$route.query.comAuthStatus}"
-                    :href="'/wuliu/detail?comAuthStatus=AF0010403&id='+ $route.query.id "
-                    class="shiming">认证</a>
+                  <selectType 
+                    v-model="vo2.comAuthStatus"
+                    :list="[{
+                      code: 'AF0010403',
+                      name: '认证'
+                    }]"
+                    @change="searchWD()"
+                  />
+
                 </dd>
               </dl>
             </div>
@@ -332,145 +342,169 @@
 
 <script>
 import creditIcon from '~/components/common/creditIcon'
+import selectType from '~/components/common/selectType'
 
-async function getLogisticsCompany(
-  $axios,
-  query,
-  vo = { parkId: 1, defaultSort: 1 }
-) {
-  let list,
+async function getLogisticsCompany($axios, query) {
+  let data = {
+      list: [],
+      total: 0
+    },
     parm1 = {
-      currentPage: 1,
-      pageSize: 100,
+      currentPage: query.currentPage || 1,
+      pageSize: query.pageSize || 10,
       parkId: query.id,
-      comAuthStatus: query.comAuthStatus
+      comAuthStatus: query.comAuthStatus,
+      companyName: query.companyName
       // vo
     }
   await $axios.post('/28-web/pointNetwork/findParkNet', parm1).then(res => {
     if (res.data.status === 200) {
-      res.data.data.list.forEach(item => {
-        if (item.productService) {
-          item.productService1 = (item.productServiceNameList || []).join(' ')
-        }
-        if (item.otherService) {
-          item.otherService1 = (item.otherServiceNameList || []).join(' ')
-        }
-      })
-      list = res.data.data.list
+      data.list = res.data.data.list
+      data.total = res.data.data.pages
     }
   })
-  return list
+  return data
 }
 async function getTransportRange($axios, query, vo = {}) {
-  let list,
-    parm1 = vo
-  // parm1 = {
-  //   currentPage: 1,
-  //   pageSize: 100,
-  //   parkId: query.id
-  // }
-  parm1.currentPage = 1
-  parm1.pageSize = 100
+  let data = {
+      list: [],
+      total: 0
+    },
+    parm1 = query
+
   parm1.parkId = query.id
   // console.log(parm1, 'parm1')
-  await $axios.post('/28-web/range/park/list/', parm1).then(res => {
+  await $axios.post('/28-web/range/park/list', parm1).then(res => {
     if (res.data.status === 200) {
       res.data.data.list.forEach(item => {
         item.transportAgingUnit = item.transportAgingUnit.replace('多', '')
       })
-      list = res.data.data.list
+      data.list = res.data.data.list
+      data.total = res.data.data.pages
     }
   })
-  return list
+  return data
 }
 export default {
   name: 'WuLiu',
   components: {
-    creditIcon
+    creditIcon,
+    selectType
   },
-  head: {
-    link: [
-      { rel: 'stylesheet', href: '/css/basic.css' },
-      { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/article_wlyq.css?v2' }
-    ],
-    script: [
-      {
-        src:
-          'http://api.map.baidu.com/api?v=2.0&ak=e0abRWFWOrgmN7emYjQGPj4Z0vyTVTfo'
-      }
-    ]
+  head() {
+    return {
+      title: this.title,
+      link: [
+        { rel: 'stylesheet', href: '/css/basic.css' },
+        { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
+        { rel: 'stylesheet', href: '/css/article_wlyq.css?v2' }
+      ],
+      script: [
+        {
+          src:
+            'http://api.map.baidu.com/api?v=2.0&ak=e0abRWFWOrgmN7emYjQGPj4Z0vyTVTfo'
+        }
+      ]
+    }
   },
+
   data() {
     return {
       AF025Name: '不限',
       sortList: [
-        { name: '默认排序', orderBy: 'default' },
-        { name: '交易量', orderBy: 'orderDesc' },
-        { name: '运输时效', orderBy: 'transportAgingAsc' },
-        { name: '重货价格', orderBy: 'weigthPriceAsc' }
+        { name: '默认排序', code: 'default' },
+        { name: '交易量', code: 'orderDesc' },
+        { name: '运输时效', code: 'transportAgingAsc' },
+        { name: '重货价格', code: 'weigthPriceAsc' }
       ],
       sortName: '默认排序',
       searchWLGS: '',
-      searchWDKey: ''
+      searchWDKey: '',
+      transportRange: [],
+      logisticsCompany: [],
+      companysList: [],
+      title: '',
+      vo1Total: 0,
+      vo2Total: 0,
+      // 专线搜索参数
+      vo1: {
+        pageSize: 10,
+        currentPage: 1,
+        otherServiceCode: '',
+        orderBy: '',
+        companyName: ''
+      },
+      // 网点搜索参数
+      vo2: {
+        pageSize: 10,
+        currentPage: 1,
+        comAuthStatus: '',
+        companyName: ''
+      }
     }
   },
   async asyncData({ $axios, query }) {
-    let gatewayData = await $axios.get('/28-web/logisticsPark/' + query.id)
+    let gatewayData = await $axios
+      .get('/28-web/logisticsPark/' + query.id)
+      .catch(err => {})
     let jwd = ''
     let longitude = ''
     let latitude = ''
-    if (gatewayData.data.data) {
-      longitude = gatewayData.data.data.longitude
-      latitude = gatewayData.data.data.latitude
+    let data = {}
+    let title = ''
+    if (gatewayData.data.data && gatewayData.data.status === 200) {
+      data = gatewayData.data.data
+      longitude = data.longitude
+      latitude = data.latitude
+      title =
+        data.parkName +
+        ' ' +
+        ((data.locationProvince ? data.locationProvince + '物流园区' : '') +
+          (data.locationCity ? ' ' + data.locationCity + '物流园区' : ''))
     }
 
     if (longitude && latitude) {
       jwd = longitude + ',' + latitude
     }
-    let parm = {
-      currentPage: 1,
-      pageSize: 100,
-      vo: {
-        parkId: query.id
-      }
-    }
-    // let companysList = await $axios.post(
-    //   '/aflc-portal/portalt/aflcLogisticsCompany/v1/recommendCompanys',
-    //   parm
-    // )
-    // companysList.data.data.list.forEach(item => {
-    // })
-    let flag = ''
-    let companysList = await $axios.get(
-      '/28-web/logisticsCompany/excellent?pageSize=8&id=' +
-        query.id +
-        '&flag=' +
-        flag
-    )
 
-    // console.log(gatewayData.data.data, 'gatewayData.data.data')
-    let parm2
-    const transportRange = await getTransportRange($axios, query, parm2)
-    const logisticsCompany = await getLogisticsCompany($axios, query)
-    let AF025 = await $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF025')
-    AF025.data.data.unshift({ name: '不限', code: '' })
-    // console.log(transportRange, 'transportRange')
     return {
-      gatewayData: gatewayData.data.status === 200 ? gatewayData.data.data : {},
+      gatewayData: data,
       jwd,
-      companysList:
-        companysList.data.status === 200 ? companysList.data.data : [],
-      transportRange: transportRange || [],
-      logisticsCompany: logisticsCompany || [],
-      AF025: AF025.data.status === 200 ? AF025.data.data : []
+      title: title
     }
   },
-  mounted() {
+  async mounted() {
     if (process.client) {
-      this.$store.dispatch('getDictList', {
-        name: 'AF025'
+      let query = this.$route.query
+      let $axios = this.$axios
+      this.vo1.id = query.id
+      this.vo2.id = query.id
+      // 请求专线
+      const transportRange = await getTransportRange($axios, this.vo1)
+      this.transportRange = transportRange.list
+      this.vo1Total = transportRange.total
+
+      // 请求网点
+      const logisticsCompany = await getLogisticsCompany($axios, this.vo2)
+      this.logisticsCompany = logisticsCompany.list
+      this.vo2Total = logisticsCompany.total
+
+      seajs.use(['/js/jquery.pagination.min.js'], () => {
+        this.initPage()
+        this.initPage2()
       })
+
+      // 请求推荐公司
+      let flag = ''
+      let companysList = await $axios.get(
+        '/28-web/logisticsCompany/excellent?pageSize=8&id=' +
+          query.id +
+          '&flag=' +
+          flag
+      )
+      this.companysList =
+        companysList.data.status === 200 ? companysList.data.data : []
+
       //切换内容 S
       $('#checked_zx').click(function() {
         $('.list_left_zx').css('display', 'block')
@@ -516,106 +550,23 @@ export default {
       let endp = list2[0]
       let endc = list2[1]
       let enda = list2[2]
-      this.transportRange = await getTransportRange(
-        this.$axios,
-        this.$route.query,
-        {
-          companyName: this.searchWLGS,
-          endArea: enda,
-          endCity: endc,
-          endProvince: endp,
-          startArea: starta,
-          startCity: startc,
-          startProvince: startp,
-          otherServiceCode: this.AF025Code,
-          orderBy: this.sortCode
-        }
-      )
+      this.vo1 = Object.assign(this.vo1, {
+        endArea: enda,
+        endCity: endc,
+        endProvince: endp,
+        startArea: starta,
+        startCity: startc,
+        startProvince: startp
+      })
+      this.fetchData(true)
+
       // console.log(this.transportRange, ' this.transportRange')
     },
     async flush() {
-      $('#wlLineFrom input').citypicker('reset')
-      $('#wlLineTo input').citypicker('reset')
-      this.AF025Name = '不限'
-      this.sortName = '默认排序'
-      this.searchWLGS = ''
-      this.transportRange = await getTransportRange(
-        this.$axios,
-        this.$route.query
-      )
+      location.reload()
     },
     searchWD() {
-      window.open('/gongsi?&wangdian=' + this.searchWDKey)
-    },
-    async selectSort(item) {
-      let list1 = [],
-        list2 = []
-      // console.log(item, 'item2')
-      $('#wlLineFrom .select-item').each(function(i, e) {
-        list1.push($(this).text())
-      })
-      let startp = list1[0]
-      let startc = list1[1]
-      let starta = list1[2]
-
-      $('#wlLineTo .select-item').each(function(i, e) {
-        list2.push($(this).text())
-      })
-      let endp = list2[0]
-      let endc = list2[1]
-      let enda = list2[2]
-      this.sortName = item.name
-      this.sortCode = item.orderBy
-      this.transportRange = await getTransportRange(
-        this.$axios,
-        this.$route.query,
-        {
-          companyName: this.searchWLGS,
-          endArea: enda,
-          endCity: endc,
-          endProvince: endp,
-          startArea: starta,
-          startCity: startc,
-          startProvince: startp,
-          orderBy: item.orderBy
-        }
-        // orderBy:item.vo
-      )
-    },
-    async selectAF025(item) {
-      let list1 = [],
-        list2 = []
-      $('#wlLineFrom .select-item').each(function(i, e) {
-        list1.push($(this).text())
-      })
-      let startp = list1[0]
-      let startc = list1[1]
-      let starta = list1[2]
-
-      $('#wlLineTo .select-item').each(function(i, e) {
-        list2.push($(this).text())
-      })
-      let endp = list2[0]
-      let endc = list2[1]
-      let enda = list2[2]
-      this.AF025Name = item.name
-      // console.log(item.code, 'item.code')
-      this.AF025Code = item.code
-      this.transportRange = await getTransportRange(
-        this.$axios,
-        this.$route.query,
-        // { otherServiceCode: item.code },
-        {
-          companyName: this.searchWLGS,
-          endArea: enda,
-          endCity: endc,
-          endProvince: endp,
-          startArea: starta,
-          startCity: startc,
-          startProvince: startp,
-          otherServiceCode: item.code
-        }
-      )
+      this.fetchData2(true)
     },
     map_init() {
       let map = new BMap.Map('allmap')
@@ -645,6 +596,50 @@ export default {
     seeMap() {
       this.map_block()
       this.map_init()
+    },
+    async fetchData(updatepage) {
+      // 请求专线
+      const transportRange = await getTransportRange(this.$axios, this.vo1)
+      this.transportRange = transportRange.list
+      this.vo1Total = transportRange.total
+      if (updatepage) {
+        this.initPage()
+      }
+    },
+    initPage() {
+      let _this = this
+      $('#pagination1').pagination({
+        currentPage: 1,
+        totalPage: _this.vo1Total,
+        callback: function(current) {
+          // $('#current1').text(current)
+          _this.vo1.currentPage = current
+          _this.fetchData()
+        }
+      })
+    },
+    async fetchData2(updatepage) {
+      // 请求网点
+      const logisticsCompany = await getLogisticsCompany(this.$axios, this.vo2)
+      this.logisticsCompany = logisticsCompany.list
+      this.vo2Total = logisticsCompany.total
+      if (updatepage) {
+        this.initPage2()
+      }
+    },
+    initPage2() {
+      let _this = this
+      console.log('_this.vo2Total:', _this.vo2Total)
+      $('#pagination2').pagination({
+        currentPage: 1,
+        count: 10,
+        totalPage: _this.vo2Total,
+        callback: function(current) {
+          // $('#current1').text(current)
+          _this.vo2.currentPage = current
+          _this.fetchData2()
+        }
+      })
     }
   }
 }

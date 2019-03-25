@@ -3,8 +3,10 @@ a:hover span{color: #666;}
 a:hover .wlzx_list_02 span{color:#FA5000}
 
 body{background-color: #F9F9F9;}
-img:hover{transform: scale(1.02);
-transition:0.7s}
+/* img:hover{transform: scale(1.02);
+transition:0.7s}  */
+.tuijian img:hover,.wlzx_list img:hover,.youzhi_content img:hover{transform: scale(1.02);
+	transition:0.7s} 
 .zx_sx{
 OVERFLOW: hidden; LINE-HEIGHT: 50px;HEIGHT: 50px;  color:#585858; font-size:16px; font-weight:bold;
 background-color: #fff;

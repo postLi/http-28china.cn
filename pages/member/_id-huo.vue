@@ -79,12 +79,14 @@
                 <dt>重量区间&nbsp;:</dt>
                 <dd id="tjcx_01">
                   <SelectType 
+                    :get-code="false"
                     v-model="weight"
                     :list="AF03801" />
                 </dd>
                 <dt>体积区间&nbsp;:</dt>
                 <dd id="tjcx_02">
                   <SelectType 
+                    :get-code="false"
                     v-model="volumn"
                     :list="AF03802" />
                 </dd>
@@ -95,7 +97,7 @@
                   <SelectType 
                     :list="AF04907" 
                     v-model="orderClass"
-                    get-code />
+                  />
                 </dd>
               </dl>
             </div>

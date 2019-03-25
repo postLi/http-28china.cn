@@ -1280,7 +1280,7 @@ export default {
         background: rgb(25, 138, 194) !important;
       }
       a:hover {
-        color: #fff;
+        // color: #fff;
       }
     }
   }

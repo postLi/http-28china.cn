@@ -1,6 +1,7 @@
 <template>
   <span>
     <a 
+      v-if="showDefault"
       @click.stop.prevent="setVal('','', '')"
       class="all"
       :class="current === '' ? 'now' : ''" 
@@ -23,13 +24,17 @@
  */
 export default {
   props: {
+    showDefault: {
+      type: Boolean,
+      default: true
+    },
     list: {
       type: Array,
       default: () => []
     },
     getCode: {
       type: Boolean,
-      default: false
+      default: true
     },
     code: {
       type: String,
@@ -48,16 +53,19 @@ export default {
   },
   mounted() {
     // 先判断是否有list值
-    if (this.list.length) {
-      this.datas = this.list
-      this.initCurrent()
-    } else if (this.name) {
-      this.fetchData(this.name).then(res => {
-        this.datas = res.data
+    if (process.client) {
+      if (this.list.length) {
+        this.datas = this.list
         this.initCurrent()
-      })
-    } else {
-      // 为空怎么展示？
+      } else if (this.name) {
+        this.fetchData(this.name).then(res => {
+          console.log('res:::', res)
+          this.datas = res.data
+          this.initCurrent()
+        })
+      } else {
+        // 为空怎么展示？
+      }
     }
   },
   methods: {
@@ -88,6 +96,7 @@ export default {
         val = code
       }
       this.$emit('input', val)
+      this.$emit('change', val)
     }
   }
 }

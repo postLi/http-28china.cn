@@ -52,14 +52,15 @@ export const actions = {
         .get('/28-web/sysDict/getSysDictByCodeGet/' + payload.name)
         .then(res => {
           let data = res.data
+          let obj = {
+            name: payload.name,
+            data: []
+          }
           if (data.status === 200) {
             // console.log('1payload-getDictList', data.data)
             let ndata = data.data || []
             ndata = payload.preFn ? payload.preFn(ndata) : ndata
-            let obj = {
-              name: payload.name,
-              data: ndata
-            }
+            obj.data = ndata
             commit('setDictInfo', obj)
           }
           resolve(obj)

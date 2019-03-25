@@ -76,30 +76,37 @@
         </div>
       </div>
     </div>
-    <footer class="flex_sb f-16">
-      <div class="flex_f flex_a">
+    <footer class="flex_sb f-16 p_r">
+      <div
+        class="circle_out flex"
+        @click="showMask = true">
+        <div class="circle_in flex">
+          <img
+            src="/m/home/home_fahuo.png"
+            style="width: 50%">
+        </div>
+      </div>
+      <div class="h flex_sb flex_f">
         <img
           src="/m/home/home_home.png"
           style="width: 0.46rem">
-        <div>首页</div>
+        <div class="f-16">首页</div>
       </div>
       <div
-        class="flex_f flex_a middle"
+        class="h flex_sb flex_f"
         @click="showMask = true"
       >
         <div class="circle flex">
-          <img
-            src="/m/home/home_fahuo.png"
-            style="width: 0.76rem">
+          <div class="circle"/>
         </div>
-        <div>发货</div>
+        <div class="f-16">发货</div>
       </div>
-      <div class="flex_f flex_a">
+      <div class="h flex_sb flex_f">
         <img
           src="/m/home/lobby_icon_activity.png"
           style="width: 0.46rem"
         >
-        <div>公告</div>
+        <div class="f-16">公告</div>
       </div>
     </footer>
     <SelectAddress
@@ -411,15 +418,33 @@ export default {
       0 0 0.06rem 0 rgba(20, 20, 20, 0.05);
     color: #42474b;
     box-sizing: border-box;
+    .h {
+      height: 0.8rem;
+    }
     .middle {
       position: relative;
       top: -0.34rem;
     }
     .circle {
-      width: 1.16rem;
-      height: 1.16rem;
-      border-radius: 1.16rem;
-      background-color: #3f94ee;
+      width: 0.46rem;
+      height: 0.46rem;
+    }
+    .circle_out {
+      width: 1rem;
+      height: 1rem;
+      background-color: white;
+      position: absolute;
+      top: -0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 0.5rem;
+      box-shadow: 0px -2px 2px 0px rgba(158, 158, 158, 0.5);
+      .circle_in {
+        width: 85%;
+        height: 85%;
+        border-radius: 1.16rem;
+        background-color: #3f94ee;
+      }
     }
   }
 }

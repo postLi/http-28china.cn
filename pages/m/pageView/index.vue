@@ -65,8 +65,8 @@ export default {
         {
           id: 3,
           name: '车源大厅',
-          img: '/m/home/lobby_icon_order_h.png',
-          img_selected: '/m/home/lobby_icon_order_l.png'
+          img: '/m/home/lobby_icon_car_h.png',
+          img_selected: '/m/home/lobby_icon_car_l.png'
         },
         {
           id: 4,

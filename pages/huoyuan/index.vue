@@ -142,10 +142,10 @@
                 <div class="position">
 
                   <span class="list-icon lines-sprite-icons icon-start"/>
-                  <em>{{ item.start }}</em>
+                  <em :title="item.startProvince">{{ item.startCity + item.startArea }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
-                  <em>{{ item.end }}</em>
+                  <em :title="item.endProvince + item.endCity + item.endArea">{{ item.endCity + item.endArea }}</em>
 
                 </div>
               </a>
@@ -470,10 +470,10 @@
                   class="list-title-a"
                   target="_blank" >
                   <span class="list-icon lines-sprite-icons icon-start"/>
-                  <em>{{ item.start }}</em>
+                  <em :title="item.startProvince + item.startCity + item.startArea">{{ item.startCity + item.startArea }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
-                  <em>{{ item.end }}</em>
+                  <em :title="item.endProvince + item.endCity + item.endArea">{{ item.endCity + item.endArea }}</em>
                 </a>
               </div>
 
@@ -539,28 +539,28 @@ async function getHyList($axios, currentPage, vo = {}) {
   parm.pageSize = 20
   let res = await $axios.post('/28-web/lclOrder/list', parm)
   if (res.data.status === 200) {
-    res.data.data.list.forEach(item => {
-      for (let i in item) {
-        item[i] = item[i] === null ? '' : item[i]
-      }
-      if (item.companyName && item.companyName > 8) {
-        item.companyName = item.companyName.substring(0, 8) + '..'
-      }
-      if (!item.companyName) {
-        item.companyName = '普通货主'
-      }
-      item.start = item.startCity + item.startArea
-      item.end = item.endCity + item.endArea
-      if (item.start) {
-        item.start = item.start.substring(0, 6) + '..'
-      }
-      if (item.end) {
-        item.end = item.end.substring(0, 6) + '..'
-      }
-      if (item.goodsTypeName) {
-        item.goodsTypeName = item.goodsTypeName.substring(0, 14) + '..'
-      }
-    })
+    // res.data.data.list.forEach(item => {
+    //   for (let i in item) {
+    //     item[i] = item[i] === null ? '' : item[i]
+    //   }
+    //   if (item.companyName && item.companyName > 8) {
+    //     item.companyName = item.companyName.substring(0, 8) + '..'
+    //   }
+    //   if (!item.companyName) {
+    //     item.companyName = '普通货主'
+    //   }
+    //   item.start = item.startCity + item.startArea
+    //   item.end = item.endCity + item.endArea
+    //   if (item.start) {
+    //     item.start = item.start.substring(0, 6) + '..'
+    //   }
+    //   if (item.end) {
+    //     item.end = item.end.substring(0, 6) + '..'
+    //   }
+    //   if (item.goodsTypeName) {
+    //     item.goodsTypeName = item.goodsTypeName.substring(0, 14) + '..'
+    //   }
+    // })
     return {
       list: res.data.data.list,
       pages: res.data.data.pages,
@@ -576,28 +576,28 @@ async function getRecommendList($axios, vo) {
   parm.pageSize = 10
   let res = await $axios.post('/28-web/lclOrder/recommendList', parm)
   if (res.data.status === 200) {
-    res.data.data.list.forEach(item => {
-      for (let i in item) {
-        item[i] = item[i] === null ? '' : item[i]
-      }
-      if (item.companyName && item.companyName > 12) {
-        item.companyName = item.companyName.substring(0, 12) + '..'
-      }
-      if (!item.companyName) {
-        item.companyName = '普通货主'
-      }
-      item.start = item.startCity + item.startArea
-      item.end = item.endCity + item.endArea
-      if (item.start) {
-        item.start = item.start.substring(0, 6) + '..'
-      }
-      if (item.end) {
-        item.end = item.end.substring(0, 6) + '..'
-      }
-      if (item.goodsTypeName) {
-        item.goodsTypeName = item.goodsTypeName.substring(0, 6) + '..'
-      }
-    })
+    // res.data.data.list.forEach(item => {
+    //   for (let i in item) {
+    //     item[i] = item[i] === null ? '' : item[i]
+    //   }
+    //   if (item.companyName && item.companyName > 12) {
+    //     item.companyName = item.companyName.substring(0, 12) + '..'
+    //   }
+    //   if (!item.companyName) {
+    //     item.companyName = '普通货主'
+    //   }
+    //   item.start = item.startCity + item.startArea
+    //   item.end = item.endCity + item.endArea
+    //   if (item.start) {
+    //     item.start = item.start.substring(0, 6) + '..'
+    //   }
+    //   if (item.end) {
+    //     item.end = item.end.substring(0, 6) + '..'
+    //   }
+    //   if (item.goodsTypeName) {
+    //     item.goodsTypeName = item.goodsTypeName.substring(0, 6) + '..'
+    //   }
+    // })
 
     return res.data.data.list
   } else {

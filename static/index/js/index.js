@@ -202,7 +202,7 @@ $('#order_03').click(function() {
 //零担下单 E
 //运单查询 S
 $('.ydh').click(function() {
-  $('#yd_nr').val('1809260061')
+  $('#yd_nr').val('001380')
   $('.ydh').css('display', 'none')
 })
 

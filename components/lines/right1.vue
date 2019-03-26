@@ -92,7 +92,7 @@
               <div class="advice-unit-details">
                 <span class="number_linst">重货：<em 
                   id="tj04" 
-                  class="number">645</em>元/方</span>
+                  class="number">645</em>元/吨</span>
                 <span>轻货：<em 
                   id="tj05" 
                   class="number">645</em>元/方</span>

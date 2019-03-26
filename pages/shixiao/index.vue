@@ -155,7 +155,7 @@
           </div>
           <div 
             class="list_none" 
-            v-if="listRangesAging.length === 0">
+            v-if="showLinst && listRangesAging.length === 0">
             <span>暂时没有找到您要查询的信息，可以看看其他信息哦</span>
             <img src="/images/none_pic.png">
           </div>
@@ -172,7 +172,7 @@
             <p>让承运商主动联系我</p>
           </div>
           <div 
-            v-if="showLinst"
+            v-if="showLinst && listRangesAging.length != 0"
             class="list_line">
             <div class="zx_sx"><span class="biaozhi"/><span >为您精选20条优质专线</span><div class="more floatr"><a 
               href="/huoyuan" 
@@ -775,6 +775,11 @@ export default {
       this.vo.endProvince = list2[0] ? list2[0] : ''
       this.vo.endCity = list2[1] ? list2[1] : ''
       this.vo.endArea = list2[2] ? list2[2] : ''
+      // this.sortId = item.id
+      let vo = this.vo
+      // vo.filterSign = this.sortId
+      let obj = await getListRangesAging(this.$axios, this.currentPage, vo)
+      this.listRangesAging = obj.list
       // window.location.href = `/shixiao?endArea=${this.vo.endArea}&endCity=${
       //   this.vo.endCity
       // }&endProvince=${this.vo.endProvince}&startArea=${
@@ -1694,7 +1699,7 @@ img {
 /*货源信息 E */
 
 .list_none {
-  display: none;
+  /* display: none; */
 }
 .list_none span {
   float: left;

@@ -50,6 +50,11 @@ module.exports = {
         rel: 'icon',
         type: 'image/x-icon',
         href: '/favicon.ico'
+      },
+      {
+        rel: 'stylesheet',
+        type: 'text/css',
+        href: '//at.alicdn.com/t/font_1076232_v5kqpp2rkri.css'
       }
     ],
     script: [

@@ -914,7 +914,7 @@
       </div>
     </div>
     <!-- 热门专线 -->
-    <div class="p_release order_release">
+    <div class="p_release p_order_release">
       <div class="release_total">
         <span class="release_total_txt">平台已撮合</span>
         <span class="release_total_num">5</span>
@@ -1517,14 +1517,7 @@
 <script>
 export default {
   name: 'HuiZong',
-  head: {
-    link: [
-      {
-        rel: 'stylesheet',
-        href: '//at.alicdn.com/t/font_1076232_r843rdhd1s.css'
-      }
-    ]
-  },
+  head: {},
   data() {
     return {
       cityList: [
@@ -1831,8 +1824,8 @@ export default {
 .pt_discount {
   overflow: hidden;
   width: 285px;
-  height: 452px;
-  background: $bj_gray;
+  height: 460px;
+  background: $icon_red_bj;
 }
 /*3、热门专线*/
 .p_hy_groom {
@@ -1841,22 +1834,7 @@ export default {
   // }
 }
 /*4、快速下单*/
-.order_release {
-  .release_total {
-    margin-top: 0;
-  }
-  .btn_box {
-    margin: 20px 0;
-    text-align: center;
-    > a {
-      margin: 0 auto;
-      // @include btn_link(8px, 150px, 18px);
-    }
-  }
-  .release_total_explain {
-    text-align: center;
-  }
-}
+
 /*5、降价专线*/
 .drop_groom {
   .p_title_box {

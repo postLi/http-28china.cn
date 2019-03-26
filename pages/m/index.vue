@@ -86,27 +86,27 @@
             style="width: 50%">
         </div>
       </div>
-      <div class="flex_f flex_a">
+      <div class="h flex_sb flex_f">
         <img
           src="/m/home/home_home.png"
           style="width: 0.46rem">
-        <div>首页</div>
+        <div class="f-16">首页</div>
       </div>
       <div
-        class="flex_f flex_a"
+        class="h flex_sb flex_f"
         @click="showMask = true"
       >
         <div class="circle flex">
           <div class="circle"/>
         </div>
-        <div>发货</div>
+        <div class="f-16">发货</div>
       </div>
-      <div class="flex_f flex_a">
+      <div class="h flex_sb flex_f">
         <img
           src="/m/home/lobby_icon_activity.png"
           style="width: 0.46rem"
         >
-        <div>公告</div>
+        <div class="f-16">公告</div>
       </div>
     </footer>
     <SelectAddress
@@ -418,6 +418,9 @@ export default {
       0 0 0.06rem 0 rgba(20, 20, 20, 0.05);
     color: #42474b;
     box-sizing: border-box;
+    .h {
+      height: 0.8rem;
+    }
     .middle {
       position: relative;
       top: -0.34rem;

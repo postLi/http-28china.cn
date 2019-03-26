@@ -1218,44 +1218,46 @@
           <li>
             <a href="">
               <div class="rank_num no1">NO.I</div>
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
             </a>
           </li>
           <li>
             <a href="">
-              <div class="rank_num no2">NO.2</div>
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
             </a>
           </li>
           <li>
             <a href="">
-              <div class="rank_num no3">NO.3</div>
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
             </a>
           </li>
           <li>
             <a href="">
-              <div class="pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
             </a>
           </li>
           <li>
             <a href="">
-              <div class="pic"><img src="../../static/images/huizong/_img01.png"></div>
-              <div class="tit">递速物流有限公司 <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率98.2%</div>
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
             </a>
           </li>
         </ul>    
@@ -1828,11 +1830,11 @@ export default {
   background: $icon_red_bj;
 }
 /*3、热门专线*/
-.p_hy_groom {
-  // > .bd {
-  //   overflow: hidden;
-  // }
-}
+// .p_hy_groom {
+//   // > .bd {
+//   //   overflow: hidden;
+//   // }
+// }
 /*4、快速下单*/
 
 /*5、降价专线*/

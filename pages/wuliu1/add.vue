@@ -204,52 +204,67 @@ export default {
     },
     onTIJ() {
       let aurl = ''
-
-      if (this.form.name === 0) {
+      let isFalse = false
+      if (this.form.name === '') {
         this.ismobile = true
         this.falseMsg = '请输入园区名称'
+        isFalse = false
+        // alert('this.form.name', this.form.name)
         return false
+      } else {
+        isFalse = true
       }
       this.form.address = $('.address').attr('thepcd')
-      if (this.form.address === 0) {
+      if (this.form.address === '') {
         this.ismobile = true
         this.falseMsg = '请输入园区地址'
-        return false
-      }
-      this.form.mobile = this.info
-      let thepos = []
-      thepos = $('.address')
-        .attr('thepos')
-        .split(',')
-      this.form.longitude = thepos[0]
-      this.form.latitude = thepos[1]
 
-      this.form.province = $('.address').attr('theprovince')
-      this.form.city = $('.address').attr('thecity')
-      this.form.area = $('.address').attr('thearea')
-      if (this.form.province === '北京市') {
-        this.form.city = '北京市'
-        // console.log(this.form.city, 'this.this.form.city')
-      } else if (this.form.province === '天津市') {
-        this.form.city = '天津市'
-      } else if (this.form.province === '上海市') {
-        this.form.city = '上海市'
-      }
-      console.log(this.form, 'this.form')
-      this.$axios
-        .post(aurl + '/28-web/logisticsPark/entering/apply/', this.form)
-        .then(res => {
-          // console.log(res, 'ressss')
-          if (res.data.status == 200) {
-            layer.msg('提交成功')
-            this.$emit('close')
-            this.form = {}
-            this.info = ''
-            this.$emit('fromAdd', this.info)
-          } else {
-            layer.msg(res.data.errorInfo ? res.data.errorInfo : res.data.text)
+        // alert('this.form.address', this.form.address)
+        return false
+      } else {
+        isFalse = true
+        if ($('.address').attr('thepos')) {
+          let thepos = []
+          thepos = $('.address')
+            .attr('thepos')
+            .split(',')
+          this.form.longitude = thepos[0]
+          this.form.latitude = thepos[1]
+
+          this.form.province = $('.address').attr('theprovince')
+          this.form.city = $('.address').attr('thecity')
+          this.form.area = $('.address').attr('thearea')
+          if (this.form.province === '北京市') {
+            this.form.city = '北京市'
+            // console.log(this.form.city, 'this.this.form.city')
+          } else if (this.form.province === '天津市') {
+            this.form.city = '天津市'
+          } else if (this.form.province === '上海市') {
+            this.form.city = '上海市'
           }
-        })
+        }
+      }
+
+      // console.log(this.form, 'this.form')
+      if ((isFalse = true)) {
+        // console.log(this.form, 'this.form2 ')
+        this.form.mobile = this.info
+
+        this.$axios
+          .post(aurl + '/28-web/logisticsPark/entering/apply/', this.form)
+          .then(res => {
+            // console.log(res, 'ressss')
+            if (res.data.status == 200) {
+              layer.msg('提交成功')
+              this.$emit('close')
+              this.form = {}
+              this.info = ''
+              this.$emit('fromAdd', this.info)
+            } else {
+              layer.msg(res.data.errorInfo ? res.data.errorInfo : res.data.text)
+            }
+          })
+      }
     },
     // 留言类型（type  ） 1-入驻 2-推荐
     closeDialog() {

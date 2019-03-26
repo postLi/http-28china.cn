@@ -814,7 +814,7 @@ export default {
   },
   mounted() {
     // this.initList()
-
+    $('#buxian').prop('checked', true)
     var newArr = new Array()
     var _newArr = new Array()
     let _this = this
@@ -848,10 +848,10 @@ export default {
         if ($(this).prop('checked')) {
           newArr.push($(this).attr('data-code'))
           $('#buxian').prop('checked', false)
-          console.log(newArr, 'newArrnewArr')
+          // console.log(newArr, 'newArrnewArr')
           // newArr = []
         } else {
-          console.log($(this).attr('data-code'), '$(this)')
+          // console.log($(this).attr('data-code'), '$(this)')
         }
       })
       uniqueNames = []

@@ -78,7 +78,6 @@
  *
  * Date: @DATE
  */
-
 ;(function(factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as anonymous module.
@@ -179,7 +178,7 @@
           this['$' + type] = $select.filter('.' + type + '')
         }, this)
       )
-
+      // console.log(this.dems, 'this.dems')
       this.refresh()
     },
 
@@ -389,10 +388,10 @@
         .on('mousedown', function() {
           $this.needBlur = false
         })
-        this.$dropdown.on('click', '.city-select-reset', function(){
-          $this.reset()
-          return false
-        })
+      this.$dropdown.on('click', '.city-select-reset', function() {
+        $this.reset()
+        return false
+      })
       if (this.$province) {
         this.$province.on(
           EVENT_CHANGE,

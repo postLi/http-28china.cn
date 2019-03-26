@@ -143,7 +143,7 @@
                 id="yd_cx"
                 type="button">
               <div class="ydh">
-                <span>1809260061</span>
+                <span>001380</span>
               </div>
             </li>
             <li class="yd_4">
@@ -1680,7 +1680,7 @@ export default {
         [
           '/index/js/pic_scroll.js',
           '/js/gaodemap2.js',
-          '/index/js/index.js',
+          '/index/js/index.js?v2',
           '/index/js/floatBar.min.js',
           '/index/js/map/echarts.min.js'
         ],

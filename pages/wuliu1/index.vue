@@ -1,24 +1,28 @@
 <template>
   <div class="yuanqu">
+    <div class="header">
+      <a
+        href="/wuliu/detail?id=1"
+        target="_blank">
+        <img
+          src="../../static/yuanqu/images/hearder.png"
+          alt=""
+          width="1900">
+      </a>
+    </div>
     <div class="list_box">
-      <div class="header">
-        <a
-          href="/wuliu/detail?id=1"
-          target="_blank">
-          <img
-            src="../../static/yuanqu/images/hearder.png"
-            alt="">
-        </a>
-      </div>
-      <div
-        class="list_nav"
+    
+      <!--<div-->
+      <!--class="list_nav"-->
+      <!--style="padding-top:20px"-->
+      <!--&gt;-->
+      <!--<a href="/">物流首页</a>&gt;<a-->
+      <!--id="list_nav_a"-->
+      <!--href="">物流园区</a>-->
+      <!--</div>-->
+      <div 
         style="padding-top:20px"
-      >
-        <a href="/">物流首页</a>&gt;<a
-          id="list_nav_a"
-          href="">物流园区</a>
-      </div>
-      <div class="list_left">
+        class="list_left">
         <div
           class=""
           style=" background-color: #fff;">
@@ -153,7 +157,7 @@
             class="tuijian_title"
             style=" height: 50px; line-height: 50px;padding-top: 10px;">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">推荐园区</h5>
-            <a 
+            <a
               href="/wuliu"
               target="_blank"><span style="float:right"> 更多></span></a>
           </div>
@@ -162,7 +166,7 @@
               <li
                 v-for="(item,i) in getRecommendList"
                 :key="i"
-                style="float:left;padding-right:20px">
+                style="float:left;padding-right:25px">
                 <a
                   :href="'/wuliu/detail?id=' + item.id"
                   target="_blank"
@@ -194,8 +198,14 @@
             class="new_title"
             style="padding:30px 0 25px">
             <h5 style="color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
+            <div style="float: left;font-size: 12px;height: 16px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"><ul>
+              <li 
+                v-for="(item,i) in newslist"
+                :key="i">{{ item.list }}</li>
+            </ul></div>
             <!--<a href=""><span style="float:right"> 更多></span></a>-->
           </div>
+         
 
 
         </div>
@@ -217,8 +227,8 @@
               <li
                 v-for="(item,i) in getNewestList"
                 :key="i"
-                style="padding-top: 20px"><a 
-                
+                style="padding-top: 20px"><a
+
                   :href="'/wuliu/detail?id=' + item.id"
                   target="_blank">
                   <img
@@ -234,62 +244,70 @@
             <div
               class="zizhu_title"
               style="padding:30px 0 25px">
-              <h5 style="color:rgb(196,69,76);font-size:18px">自助服务
+              <h5 style="color:rgb(196,0,13);font-size:18px">自助服务
               </h5>
-              <!-- <a href=""><span style="float:right"> 更多></span></a> -->
+              <!--<a href=""><span style="float:right">更多></span></a> -->
             </div>
-            <div class="zizhu_content">
+            <div
+              style="margin-left: 10px;"
+              class="zizhu_content">
               <div>
                 <ul>
                   <li
-                  style="float:left;padding-right:20px;padding-top:10px"><a
-                    href=""
-                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                  style="float:left;padding-right:30px;padding-top:10px"><a
+                    href="/create/line"
+                    target="_blank"
+                    style="width: 185px;padding-left:15px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: left;line-height: 60px;font-size: 18px;"><img
                       src="../../static/yuanqu/images/xiadan.png"
                       alt=""
                       width="40"
                       style="padding-right:20px"
                   >快速下单</a></li>
                   <li
-                  style="float:left;padding-right:20px;padding-top:10px"><a
+                  style="float:left;padding-right:30px;padding-top:10px"><a
                     href="/create/line"
-                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                    target="_blank"
+                    style="width: 185px;padding-left:15px;text-align: left;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;line-height: 60px;font-size: 18px;"><img
                       src="../../static/yuanqu/images/line.png"
                       alt=""
                       width="40"
                       style="padding-right:20px"
                   >发布专线</a></li>
                   <li
-                  style="float:left;padding-right:20px;padding-top:10px"><a
+                  style="float:left;padding-right:0px;padding-top:10px"><a
                     href="/create/cheyuan"
-                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                    target="_blank"
+                    style="width: 185px;padding-left:15px;text-align: left;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;line-height: 60px;font-size: 18px;"><img
                       src="../../static/yuanqu/images/cheyuan.png"
                       alt=""
                       width="40"
                       style="padding-right:20px"
                   >发布车源</a></li>
                   <li
-                  style="float:left;padding-right:20px;padding-top:10px"><a
-                    href=""
-                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                  style="float:left;padding-right:30px;padding-top:10px"><a
+                    href="/ydcx"
+                    target="_blank"
+                    style="width: 185px;padding-left:15px;text-align: left;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;line-height: 60px;font-size: 18px;"><img
                       src="../../static/yuanqu/images/check.png"
                       alt=""
                       width="40"
                       style="padding-right:20px"
                   >运单查询</a></li>
                   <li
-                  style="float:left;padding-right:20px;padding-top:10px"><a
-                    href=""
-                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                  style="float:left;padding-right:30px;padding-top:10px"><a
+                    href="/shixiao"
+                    target="_blank"
+                    style="width: 185px;padding-left:15px;text-align: left;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;line-height: 60px;font-size: 18px;"><img
                       src="../../static/yuanqu/images/shixiao.png"
                       alt=""
                       width="40"
                       style="padding-right:20px"
                   >时效查询</a></li>
                   <li
-                  style="float:left;padding-right:20px;padding-top:10px;margin-bottom:10px"><a
-                    href=""
-                    style="width: 200px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: center;line-height: 60px;font-size: 18px;"><img
+                  style="float:left;padding-right:0px;padding-top:10px;margin-bottom:20px"><a
+                    href="/wangdian/"
+                    target="_blank"
+                    style="width: 185px;padding-left:15px;text-align: left;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;line-height: 60px;font-size: 18px;"><img
                       src="../../static/yuanqu/images/wangdian.png"
                       alt=""
                       width="40"
@@ -299,9 +317,9 @@
               </div>
               <div
                 class="zizhu_bot"
-                style="border:1px solid #ccc;width:660px;height:150px;clear: both;margin-top:20px">
+                style="border:1px solid #ccc;width:660px;height:150px;clear: both;">
                 <div>
-                  <!-- <label class="layui-form-label">短输入框</label> -->
+                  <!--<label class="layui-form-label">短输入框</label> -->
                   <div
                     class="layui-input-inline"
                     style="margin: 30px 20px 10px 20px;float: left;">
@@ -314,14 +332,14 @@
                     <span
                       style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: rgb(51,153,255) ;display: inline-block;color:#fff"
                       @click="openYuanqu">园区入驻</span>
-                    <p 
+                    <p
                       style="color:red;padding-top:5px"
                       v-if="isMobile">请输入正确手机号</p>
                     <p style="padding-top: 10px">入驻免费提供发布信息，园区宣传</p>
                     <!--<label class="layui-form-label">园区入驻1</label>-->
                   </div>
                   <div
-                    style="display: inline-block;margin:20px;background:rgb(242,242,242)"
+                    style="display: inline-block;margin:20px;background:rgb(242,242,242);padding: 10px;"
                     class="zizhu_bot_r">
                     <img
                       src="../../static/gongsi/images/u1075.png"
@@ -346,13 +364,13 @@
             style="padding:30px 0 25px 0">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">热门园区</h5>
             <span style="padding-left:30px;"><i style="color:rgb(249,155,42)">1365</i>个园区，为您优选10个热门园区</span>
-            <a 
+            <a
               href="/wuliu"
               target="_blank"><span style="float:right"> 更多></span></a>
           </div>
           <div
             class="select_con"
-            style="width: 900px; width: 900px;border: 1px solid #eee;border-left: 0;border-right: 0;border-bottom: none;padding: 15px 0;margin: 0;">
+          >
 
             <dl>
               <!-- <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt> -->
@@ -374,9 +392,9 @@
                     name="dopost"
                     value="search" >
                   <div
-                    id="parkAddress"
+                    id="parkAddress1"
                     class="fl list_input"
-                    style="position:relative;" >
+                    style="position:relative;width:300px" >
                     <input
                       style="height: 100%;border: none;outline: none;"
                       data-toggle="city-picker"
@@ -395,7 +413,7 @@
                     value=" 搜索园区 "
                     readonly=""
                     class="list_button"
-                    style="width:100px"
+                    style="width:100px;background: #2577e3;color: #fff;text-align:center"
                     @click="search1()">
                 </form>
               </dd>
@@ -405,9 +423,9 @@
           </div>
 
         </div>
-        <div 
+        <div
           style="margin-top: 20px;"
-          class=" list_wlyq">
+          class="list_wlyq ">
           <div
             v-if="getHottList.length === 0 || getHottList.list ==null "
             class="list_none"
@@ -420,16 +438,16 @@
             v-for="(item,index) in getHottList.list"
             :key="index"
             class="wlzx_list"
-            style="margin-right: 0px;width:260px;height:360px;margin-top: 0px;">
+            style="margin-right: 20px;width:260px;height:360px;margin-top: 0px;">
             <a
               :href="'/wuliu/detail?id=' + item.id"
               target="_blank">
               <!-- require('../static/images/pic/bg' + item.num + '.png') -->
-              <li 
+              <li
                 style="height: 200px;"
                 class="wlzx_list_01"><img
                   :src="item.parkSignPicture?item.parkSignPicture:require('../../static/yuanqu/images/wlyq_pic.png')"
-                  
+
                   class="scrollLoading"
                   width="240"
                   height="210"></li>
@@ -442,13 +460,13 @@
                   <font style="padding-left: 0px;">{{ item.netWorkNumber?item.netWorkNumber: 0 }}</font><i/><span style="padding-left: 2px;">家物流网点</span>
                 </span>
               </li>
-              <li 
+              <li
                 style="margin-bottom:0"
                 class="wlzx_list_04"><span>{{ item.parkAddress.length>13?item.parkAddress.substring(0,13)+'..':item.parkAddress }}</span></li>
               <li class="wlzx_list_05">
-                <img 
+                <img
                   style="width:20px;height:20"
-                  src="../../static/yuanqu/images/weibo.png" 
+                  src="../../static/yuanqu/images/weibo.png"
                   alt="">
               <span style="vertical-align:middle;pading-left:5px">{{ item.browseNumber }}</span></li>
             </a>
@@ -484,7 +502,7 @@
         <!--</ul>-->
 
         <!--</div>-->
-        <img 
+        <img
           style="margin-top:20px"
           src="../../static/gongsi/images/listbg.png">
         <div
@@ -495,7 +513,7 @@
             style="padding:30px 0 25px 0">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">本月优质承运</h5>
             <span style="padding-left:30px;">货主说好才是真的好</span>
-            <a 
+            <a
               href="/gongsi"
               target="_blank"><span style="float:right"> 所有物流企业></span></a>
           </div>
@@ -514,12 +532,12 @@
                     height="165"
                     alt="">
                   <!-- <span style="display: inline-block;width: 255px;position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.5);color:rgb(255,255,255);padding: 10px 0px;text-align: center;">{{ item.companyName }}</span> -->
-                  <span 
+                  <span
                     :class="'noclass'+i"
                     class="NOclass"
                     style="position:absolute;bottom:40px;left:5px;color:rgb(255,255,255);    padding: 5px 20px;border-radius:5px">NO{{ i+1 }}</span></a>
                 <p style="width: 260px;padding-top:10px;color: rgb(51,153,255);font-size:16px">{{ item.companyName.length>16?item.companyName.substring(0,16)+'..':item.companyName }}</p>
-                <p style="width: 260px;padding-top:10px"><span style="padding-right:10px">推荐指数{{ i+1 }}</span><img
+                <p style="width: 260px;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
                   v-for="(item,i) in 4"
                   :key="i"
                   src="../../static/gongsi/images/danbao.png"
@@ -543,24 +561,30 @@
               style="padding:30px 0 25px;margin-bottom:10px">
               <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">行业资讯
               </h5>
-              <a 
-                href="/zixun"
+              <a
+                href="/zixun/xyzx/index.jhtml"
                 target="_blank"><span style="float:right"> 更多>></span></a>
             </div>
             <div
               class="zixun_content"
               style="position:relative">
-              <a
-                href="/zixun"
-                target="_blank"
-              > <img
+              <img
                 src="../../static/gongsi/images/u1075.png"
-                style="width:280px;height:170px;float:left"><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
+                style="width:280px;height:170px;float:left">
+              <a
+                href="/zixun/ccyps/205.jhtml"
+                target="_blank"
+              >
+              <span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
               <ul style="float:left">
                 <li
                   v-for="(item,i) in 5"
                   :key="i"
-                  style="padding-top:15px"><p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></li>
+                  style="padding-top:15px">
+                  <a
+                    href="/zixun/ccyps/205.jhtml"
+                    target="_blank">
+                <p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></a></li>
               </ul>
             </div>
 
@@ -571,23 +595,29 @@
             <div
               class="zixun_title"
               style="padding:30px 0 25px;margin-bottom:10px">
-              <h5 style="color:rgb(196,69,76);font-size:18px;    float: left;">仓储与配送
+              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">仓储与配送
               </h5>
-              <a href=""><span style="float:right"> 更多>></span></a>
+              <a
+                href="/zixun/ccyps/index.jhtml"
+                target="_blank"><span style="float:right"> 更多>></span></a>
             </div>
             <div
               class="zixun_content"
               style="position:relative">
-              <a
-                href=""
-              > <img
+              <img
                 src="../../static/gongsi/images/u1075.png"
-                style="width:280px;height:170px;float:left"><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
+                style="width:280px;height:170px;float:left"><a
+                  href="/zixun/ccyps/205.jhtml"
+                ><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
               <ul style="float:left">
                 <li
                   v-for="(item,i) in 5"
                   :key="i"
-                  style="padding-top:15px"><p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></li>
+                  style="padding-top:15px">
+                  <a
+                    href="/zixun/ccyps/205.jhtml"
+                    target="_blank">
+                <p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></a></li>
               </ul>
             </div>
           </div>
@@ -600,6 +630,7 @@
             href="/regisiter"
             target="_blank"><buttom style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</buttom></a>
         </div>
+        <!-- -->
         <!--&lt;!&ndash;分页&ndash;&gt;-->
         <!--<div-->
         <!--class="box"-->
@@ -708,7 +739,11 @@ export default {
       inputData: '',
       isMobile: false,
       pages: 0, //总页数
-      currentPage: 1 //当前页
+      currentPage: 1, //当前页
+      newslist: [
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多2' }
+      ]
     }
   },
   async asyncData({ $axios, app, query }) {
@@ -759,7 +794,7 @@ export default {
     )
     // /logisticsPark/hot/list
     console.log(getExcellentList.data.data, 'getExcellentList')
-
+    let vo1 = vo
     return {
       getExcellentList:
         getExcellentList.data.status === 200 ? getExcellentList.data.data : [],
@@ -781,7 +816,8 @@ export default {
         recommendParkList.data.status === 200
           ? recommendParkList.data.data.list
           : [],
-      vo: vo
+      vo: vo,
+      vo1: vo1
     }
   },
   mounted() {
@@ -789,6 +825,11 @@ export default {
       province: this.vo.locationProvince,
       city: this.vo.locationCity,
       district: this.vo.locationArea
+    })
+    $('#parkAddress1 input').citypicker({
+      province: this.vo1.locationProvince,
+      city: this.vo1.locationCity,
+      district: this.vo1.locationArea
     })
     $('#list_nav_a').html(
       this.vo.locationCity + this.vo.locationArea + '物流园区'
@@ -826,7 +867,7 @@ export default {
     },
     async search1() {
       let list1 = []
-      $('#parkAddress .select-item').each(function(i, e) {
+      $('#parkAddress1 .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
       this.vo.locationProvince = list1[0] ? list1[0] : ''
@@ -901,6 +942,23 @@ export default {
       }
       .NOclass {
         display: none;
+      }
+    }
+  }
+  .tuijian {
+    .tuijian_content {
+      li:last-of-type {
+        padding-right: 0 !important;
+      }
+    }
+  }
+  .hot {
+    .list_wlyq {
+      .wlzx_list:last-of-type {
+        margin-right: 0px;
+      }
+      .wlzx_list:nth-of-type(5) {
+        margin-right: 0px;
       }
     }
   }

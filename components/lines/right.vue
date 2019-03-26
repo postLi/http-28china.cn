@@ -103,7 +103,7 @@
                   class="number">645</em>元/吨</span>
                 <span>轻货：<em 
                   id="tj05" 
-                  class="number">645</em>元/吨</span>
+                  class="number">645</em>元/立方</span>
               </div>
               <div class="advice-unit-details">
                 <span class="number_linst">时效：<em 
@@ -111,7 +111,7 @@
                   class="number">4天</em></span>
                 <span>最低一票：<em 
                   id="tj07" 
-                  class="number">645</em>元</span>
+                  class="number">645</em></span>
               </div>
               <div class="advice-unit-details">
                 <span class="number_linst"><img 

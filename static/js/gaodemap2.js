@@ -238,6 +238,7 @@
       }
     },
     setData: function(pos, addr, obj) {
+      console
       this.thepos = pos
       this.thename = addr
       this.theobj = obj

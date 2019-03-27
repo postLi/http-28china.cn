@@ -157,7 +157,7 @@
 
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font :title="item.goodsTypeName">{{ item.goodsTypeName ? item.goodsTypeName.substring(0,4) : '' }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum ? item.goodsNum : 0 }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
@@ -481,7 +481,7 @@
                 <ul>
                   <li class="tj_left"><i>货物：</i><span
                     :title="item.goodsTypeName"
-                    v-if="item.goodsTypeName">{{ item.goodsTypeName }}</span></li>
+                    v-if="item.goodsTypeName">{{ item.goodsTypeName.substring(0,4) }}</span></li>
                   <li class="tj_right"><i>数量：</i><span v-if="item.goodsNum">{{ item.goodsNum ? item.goodsNum : 0 }}件</span></li>
                   <li class="tj_left"><i >重量：</i><font v-if="item.goodsWeight">{{ item.goodsWeight }}</font><em>公斤</em></li>
                   <li class="tj_right"><i >体积：</i><font v-if="item.goodsVolume">{{ item.goodsVolume }}</font><em>立方米</em></li>

@@ -1,26 +1,26 @@
 <template>
   <div class="flex_f flex_1">
     <div>
-      <div class="flex_a f-26 b_b top b_c_w">
+      <div class="flex_a f-26 b_b page_view_top b_c_w">
         <div
           class="flex_1 flex"
           :class="[isShowMask[0]?'f_g':'c-3']"
           @click="clickStart()">
           <span class="margin_r_10">{{ $store.state.m.huoyuan.startName[0]===''?'全国': $store.state.m.huoyuan.startName[2]===''?$store.state.m.huoyuan.startName[1]:$store.state.m.huoyuan.startName[2] }}</span>
-          <div :class="[isShowMask[0]?'triangle-down-g':'triangle-down-9']"/>
+          <div :class="[isShowMask[0]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
         <div
           class="flex_1 flex"
           :class="[isShowMask[1] === true?'f_g':'c-3']"
           @click="clickEnd()">
           <span class="margin_r_10">{{ $store.state.m.huoyuan.endName[0]===''?'全国': $store.state.m.huoyuan.endName[2]===''?$store.state.m.huoyuan.endName[1]:$store.state.m.huoyuan.endName[2] }}</span>
-          <div :class="[isShowMask[1]?'triangle-down-g':'triangle-down-9']"/>
+          <div :class="[isShowMask[1]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
         <div
           class="flex_1 flex"
           @click="clickReputation()">
           <span class="margin_r_10">信誉最高</span>
-          <div :class="[isShowMask[2]?'triangle-down-g':'triangle-down-9']"/>
+          <div :class="[isShowMask[2]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
       </div>
       <div class="p_r">
@@ -201,9 +201,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.top {
-  height: 0.55rem;
-}
 .item {
   margin-top: 0.1rem;
   height: 2.6rem;
@@ -219,19 +216,5 @@ export default {
   .time {
     margin-top: 0.1rem;
   }
-}
-.triangle-down-g {
-  width: 0;
-  height: 0;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-top: 5px solid #2fb301;
-}
-.triangle-down-9 {
-  width: 0;
-  height: 0;
-  border-left: 3px solid transparent;
-  border-right: 3px solid transparent;
-  border-top: 5px solid #999999;
 }
 </style>

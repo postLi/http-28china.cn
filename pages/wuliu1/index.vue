@@ -197,13 +197,37 @@
           <div
             class="new_title"
             style="padding:30px 0 25px">
-            <h5 style="color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
-            <div style="float: left;font-size: 12px;height: 16px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"><ul>
-              <li 
-                v-for="(item,i) in newslist"
-                :key="i">{{ item.list }}</li>
-            </ul></div>
-            <!--<a href=""><span style="float:right"> 更多></span></a>-->
+            <h5 
+            
+            style="display: inline-block;color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
+            <div class="newContainer">
+              <div class="li-box">
+                <ul>
+                  <li 
+                    style="line-height:1.8; color:#666; "
+                    v-for="(item,i) in newslist"
+                    :key="i">{{ item.list+i }}</li>
+                </ul>
+              </div>
+            </div>
+            <!-- <div 
+              id="newBox"
+              style="display: inline-block;font-size: 12px;height: 20px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"><ul 
+                style="width:280px;display:block;"
+                id="newlist1"
+                class="newlist1">
+                <li 
+                  style="height:15px;line-height:15px;display:block;"
+                  v-for="(item,i) in newslist"
+                  :key="i">{{ item.list }}</li>
+              </ul>
+            
+              <ul 
+                style="width:280px;display:block;"
+                id="newlist2"
+                class="newlist2"/>
+            </div> -->
+            <!--<a  href=""><span style="float:right"> 更多></span></a>-->
           </div>
          
 
@@ -742,6 +766,14 @@ export default {
       currentPage: 1, //当前页
       newslist: [
         { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
         { list: '【2019-2-25】深圳物流业增加值10年增加4倍多2' }
       ]
     }
@@ -772,7 +804,6 @@ export default {
       parm1
     )
     let getGateWayListData = await gateWayList($axios, 1, vo)
-    // LLl
     let parm2 = vo
     parm2.currentPage = 1
     parm2.pageSize = 5
@@ -793,7 +824,7 @@ export default {
       '/28-web/logisticsCompany/excellent?flag=' + flag
     )
     // /logisticsPark/hot/list
-    console.log(getExcellentList.data.data, 'getExcellentList')
+    // console.log(getExcellentList.data.data, 'getExcellentList')
     let vo1 = vo
     return {
       getExcellentList:
@@ -835,6 +866,28 @@ export default {
       this.vo.locationCity + this.vo.locationArea + '物流园区'
     )
     this.loadPagination()
+    // var newBox = document.getElementById('newBox')
+    // var newlist1 = document.getElementById('newlist1')
+    // var newlist2 = document.getElementById('newlist2')
+    // newlist2.innerHTML = newlist1.innerHTML
+    // function scrollUp() {
+    //   if (newBox.scrollTop >= newlist1.offsetHeight) {
+    //     newBox.scrollTop = 0
+    //   } else {
+    //     newBox.scrollTop++
+    //   }
+    // }
+
+    // var time = 800
+    // var mytime = setInterval(scrollUp, time)
+    // newBox.onmouseover = function() {
+    //   mytimer = clearInterval(mytimer)
+    //   // clearInterval(mytimer)
+    //   // console.log('tuij', clearInterval(mytimer))
+    // }
+    // newBox.onmouseout = function() {
+    //   mytimer = setInterval(scrollUp, time)
+    // }
   },
   methods: {
     fromAdd(data) {
@@ -959,6 +1012,63 @@ export default {
       }
       .wlzx_list:nth-of-type(5) {
         margin-right: 0px;
+      }
+    }
+  }
+  .new {
+    .newContainer {
+      display: inline-block;
+      background: #efefef;
+      padding: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Microsoft YaHei';
+      .li-box {
+        height: 28px;
+        overflow: hidden;
+        ul {
+          position: relative;
+          animation: moveUp 10s 0.5s infinite;
+          -webkit-animation: moveUp 10s 0.5s infinite;
+          &:hover {
+            // animation: moveUp 110s 0.5s infinite;
+          }
+        }
+      }
+    }
+
+    // .newContainer ul:hover {
+    //   animation: moveUp steps(11) 0.6s forwards;
+    // }
+    @keyframes moveUp {
+      0% {
+        top: 0px;
+      }
+      18% {
+        top: 0px;
+      }
+      20% {
+        top: -28px;
+      }
+      38% {
+        top: -38px;
+      }
+      40% {
+        top: -48px;
+      }
+      58% {
+        top: -58px;
+      }
+      60% {
+        top: -68px;
+      }
+      78% {
+        top: -78px;
+      }
+      80% {
+        top: -86px;
+      }
+      98% {
+        top: -96px;
       }
     }
   }

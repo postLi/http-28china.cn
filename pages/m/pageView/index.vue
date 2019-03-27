@@ -5,6 +5,7 @@
     </MyTop>
     <pageZhuanXian v-if="$store.state.m.pageView.footerId === 0"/>
     <pageHuoYuan v-if="$store.state.m.pageView.footerId === 1"/>
+    <pageGongSi v-if="$store.state.m.pageView.footerId === 3"/>
     <footer class="f-20">
       <div
         class="flex_a"
@@ -16,7 +17,7 @@
           :key="index">
           <div
             class="circle flex"
-            v-if="item.id === 2">
+            v-if="item.id === 4">
             <img
               src="/m/home/home_fahuo.png"
               style="width: 0.76rem">
@@ -43,8 +44,9 @@
 import MyTop from '../../../components/m/myTop'
 import pageZhuanXian from '../zhuanxian'
 import pageHuoYuan from '../huoyuan'
+import pageGongSi from '../gongsi'
 export default {
-  components: { MyTop, pageZhuanXian, pageHuoYuan },
+  components: { MyTop, pageZhuanXian, pageHuoYuan, pageGongSi },
   layout: 'm',
   data() {
     return {
@@ -61,15 +63,15 @@ export default {
           img: '/m/home/lobby_icon_zhuanxian_h.png',
           img_selected: '/m/home/lobby_icon_zhuanxian_l.png'
         },
-        { id: 2, name: '发货', img: '' },
+        { id: 4, name: '发货', img: '' },
         {
-          id: 3,
+          id: 2,
           name: '车源大厅',
           img: '/m/home/lobby_icon_car_h.png',
           img_selected: '/m/home/lobby_icon_car_l.png'
         },
         {
-          id: 4,
+          id: 3,
           name: '物流公司',
           img: '/m/home/lobby_icon_activity_h.png',
           img_selected: '/m/home/lobby_icon_activity_l.png'
@@ -79,7 +81,7 @@ export default {
   },
   methods: {
     footerNav(item) {
-      if (item.id === 2) {
+      if (item.id === 4) {
         return
       }
       this.$store.commit('m/pageView/setData', {
@@ -106,5 +108,24 @@ footer {
     background-color: #0d79ff;
     z-index: 10;
   }
+}
+</style>
+<style>
+.page_view_top {
+  height: 0.55rem;
+}
+.page_view_triangle-down-g {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 5px solid #2fb301;
+}
+.page_view_triangle-down-9 {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 5px solid #999999;
 }
 </style>

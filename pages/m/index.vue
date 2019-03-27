@@ -300,6 +300,35 @@ export default {
           name: 'rangeList'
         })
       }
+      if (item.name === '物流公司') {
+        this.$store.commit('m/gongsi/setData', {
+          name: 'currentPage',
+          data: 1
+        })
+        this.$store.commit('m/gongsi/setData', {
+          name: 'rangeList',
+          data: []
+        })
+        this.$store.commit('m/gongsi/setData', {
+          name: 'scrollTo',
+          data: 0
+        })
+        let parm = {
+          currentPage: this.$store.state.m.gongsi.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.gongsi.startName[0],
+          startCity: this.$store.state.m.gongsi.startName[1],
+          startArea: this.$store.state.m.gongsi.startName[2],
+          endProvince: this.$store.state.m.gongsi.endName[0],
+          endCity: this.$store.state.m.gongsi.endName[1],
+          endArea: this.$store.state.m.gongsi.endName[2]
+        }
+        // 专线列表
+        this.$store.dispatch('m/gongsi/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
     },
     toClick(name) {
       if (name === '在线下单' || name === 'APP下载') {

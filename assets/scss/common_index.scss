@@ -124,6 +124,9 @@ $f_12: 12px;
   position: absolute;
 }
 
+.ellipsis{
+  text-overflow:ellipsis;overflow:hidden;white-space:nowrap;
+}
 /*公共宽度居中*/
 .grid_c1 {
   margin: 0 auto;
@@ -382,16 +385,22 @@ $f_12: 12px;
   }
 
   .owner_name {
+    height: 20px;
+    line-height: 20px; 
     color: $blue;
-
     span {
+      &.owner_name_companyName{
+        width: 230px;
+        @extend .ellipsis;
+      }
+      &.owner_name_liveness{
       .iconfont {
         padding-right: 5px;
       }
-
-      float: right;
       color: $orange;
       font-size: $f_14;
+      }
+
     }
   }
 
@@ -422,36 +431,36 @@ $f_12: 12px;
     width: 246px;
     height: 109px;
     background: $light_blue;
-    // background-color: #dfecff;
-    // background: -webkit-gradient(linear,
-    //   left top,
-    //   right top,
-    //   from(#f3f9ff),
-    //   to(#dfecff));
-    // background: linear-gradient(90deg, #f3f9ff, #dfecff);
     border: 1px solid $border_color;
 
-    a {
-      .joint-label {
-        color: $light_gray;
-      }
-
-      .type_box {
-        >span {
-          color: $tit_color;
+    a,a:hover{
+      color: $tit_color;
+      span{
+        color:$tit_color; 
+        &.joint-label {
+          color: $light_gray;
         }
       }
+      
+    
     }
 
     .hd_box {
+      overflow: hidden;
       font-size:$f_13;
-
+      >span{
+        height: 20px;
+        line-height: 20px;
+       @extend .fl;
+      }
       .label_provider {
         color: $light_gray;
       }
 
       .provider {
-        padding: 0 10px;
+        overflow: hidden;
+        margin: 0 10px;
+        min-width:75px;
         color: $tit_color;
       }
 
@@ -459,6 +468,7 @@ $f_12: 12px;
         padding: 0 5px;
         color: $white;
         background: $light_red;
+        border-radius: 3px;
       }
     }
 
@@ -516,7 +526,7 @@ $f_12: 12px;
   .hy_info_user_box {
     overflow: hidden;
     margin-left: 50px;
-    width: 510px;
+    width: 600px;
     height: 60px;
 
     .hy_info_user_list {
@@ -542,10 +552,13 @@ $f_12: 12px;
 
     .hy_info_user_text {
       line-height: 22px;
-
+      overflow: hidden;
       >span {
         padding-right: 10px;
-
+        &.info_user_text_goods{
+          max-width: 380px; 
+          @extend .ellipsis;
+        }
         b {
           font-weight: normal;
           color: $blue;
@@ -567,6 +580,7 @@ $f_12: 12px;
   .hy_info_num {
     height: 100px;
     border-left: 1px dashed #ddd;
+    .iconfont{font-weight: bold;}
   }
 
   .hy_info_list {
@@ -576,14 +590,13 @@ $f_12: 12px;
     >li {
       @extend .fl;
       margin-left: 45px;
-      width: 85px;
+      width: 90px;
       line-height: 30px;
 
       >span {
         display: block;
         line-height: 30px;
         text-align: center;
-
         .iconfont {
           color: $light_orange;
           padding-right: 10px;
@@ -605,7 +618,7 @@ $f_12: 12px;
 
     >li {
       @extend .fl;
-      margin-right: 15px;
+      margin-right: 20px;
 
       .iconfont {
         color: $light_orange;
@@ -840,7 +853,7 @@ $f_12: 12px;
       background: $green;
     }
 
-    .pic {
+    .rank_pic {
       overflow: hidden;
       width: 264px;
       height: 175px;
@@ -852,14 +865,18 @@ $f_12: 12px;
       }
     }
 
-    .tit {
+    .rank_tit {
       overflow: hidden;
       margin-bottom: 10px;
       line-height: 20px;
       font-size: 16px;
       color: $blue;
-
-      .icon_tuijian {
+      .rank_tit_name{
+        @extend .fl;
+        width: 230px;
+        @extend .ellipsis;
+      }
+      .rank_tit_icon_tuijian {
         @extend .fr;
         padding: 0 4px;
         font-size: $f_12;
@@ -868,7 +885,7 @@ $f_12: 12px;
       }
     }
 
-    .groom {
+    .rank_groom {
       overflow: hidden;
       margin-bottom: 10px;
       line-height: 20px;
@@ -889,7 +906,7 @@ $f_12: 12px;
       }
     }
 
-    .praise {
+    .rank_praise {
       color: $light_gray;
     }
 

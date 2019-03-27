@@ -32,7 +32,11 @@
                   class="swiper-slide" 
                   :key="index"
                   v-for="(banner, index) in banners">
-                  <img :src="banner">
+                  <a 
+                    target="_blank"
+                    href="/create/order">
+                    <img :src="banner">
+                  </a>
                 </div>
               </div>
               <!-- Add Pagination -->
@@ -44,9 +48,21 @@
             <!-- 幻灯片 -->
           </div>
           <div class="type clearfix">
-            <div class="type_box"><a href=""><img src="../../static/images/huizong/type01.png"></a></div>
-            <div class="type_box"><a href=""><img src="../../static/images/huizong/type02.png"></a></div>
-            <div class="type_box"><a href=""><img src="../../static/images/huizong/type03.png"></a></div>
+            <div class="type_box">
+              <a 
+                target="_blank"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'"
+              ><img src="../../static/images/huizong/type01.png"></a>
+            </div>
+            <div class="type_box">
+              <a
+                target="_blank"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea"><img src="../../static/images/huizong/type02.png"></a>
+            </div>
+            <div class="type_box">
+              <a 
+                target="_blank"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&userAuth=AF0010403'"><img src="../../static/images/huizong/type03.png"></a></div>
           </div>
         </div>
         <div class="col3">
@@ -55,8 +71,8 @@
             <div class="user_show">
               <p class="user_tip">Hi~欢迎来到28快运！</p>
               <p class="user_profit">
-                <a>登录</a>
-                <a>注册</a>
+                <a href="/login">登录</a>
+                <a href="/regisiter">注册</a>
               </p>
             </div>
           </div>
@@ -115,11 +131,19 @@
           <ul class="link link2 clearfix">
             <li>
               <span><i class="iconfont iconfuwu"/></span>
-              <span><a class="btn_order">在线下单</a></span>
+              <span>
+                <a 
+                  class="btn_order" 
+                  target="_blank"
+                  href="/create/order">在线下单</a>
+              </span>
             </li>
             <li>
               <span><i class="iconfont iconicon"/></span>
-              <span><a class="btn_send">发布货源</a></span>
+              <span><a 
+                class="btn_send"
+                target="_blank"
+                href="/create/huoyuan">发布货源</a></span>
             </li>
             <div class="num">今日已有<b>2368</b>人在线下单获得优惠</div>
           </ul>
@@ -129,7 +153,11 @@
           <ul class="link clearfix">
             <li>
               <span><i class="iconfont iconfuwu"/></span>
-              <span><a href="">运单查询</a></span>
+              <span>
+                <a 
+                  target="_blank"
+                  href="/ydcx">运单查询</a>
+              </span>
             </li>
             <li>
               <span><i class="iconfont iconicon"/></span>
@@ -142,11 +170,19 @@
           <ul class="link clearfix">
             <li>
               <span><i class="iconfont iconfuwu"/></span>
-              <span><a href="">司机加入</a></span>
+              <span>
+                <a 
+                  target="_blank"
+                  href="/regisiter">司机加入</a>
+              </span>
             </li>
             <li>
               <span><i class="iconfont iconicon"/></span>
-              <span><a href="">专线加盟</a></span>
+              <span>
+                <a
+                  target="_blank"
+                  href="/regisiter">专线加盟</a>
+              </span>
             </li>
           </ul>
         </div>
@@ -157,8 +193,8 @@
         </div>
         <a 
           class="link_hy" 
-          href="">进入货源大厅</a>
-      
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">进入货源大厅</a>   
           <!-- 新增货源 -->
       </div>
     </div>
@@ -180,11 +216,12 @@
                 <span class="hy_info_user_info_time">{{ item.time }}</span>
               </div>
               <div class="hy_info_user_text ">
-                <span>发布<b>{{ item.startCity }}</b>到<b>{{ item.endCity }}</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
+                <span class="fl">发布<b>{{ item.startCity }}</b>到<b>{{ item.endCity }}</b></span>
+                <span class="info_user_text_goods fl">{{ item.goodsTypeName }}|{{ item.goodsNum }}件|{{ item.goodsWeight |kilogram }}公斤|体积{{ item.goodsVolume }}方  </span>                   
                 <a 
-                  href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
+                  class="hy_info_user_text_link fr"
+                  target="_blank"
+                  :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">查看货源</a>
               </div>
             </li>
           </ul>
@@ -197,23 +234,56 @@
         <div class="hy_info_num">
           <ul class="hy_info_list clearfix">
             <li>
-              <span><i class="iconfont iconhuowu"/>当前货物</span>
+              <span>
+                <i class="iconfont iconhuowu"/>
+                <a
+                  target="_blank" 
+                  href="/huoyuan">当前货物</a>
+              </span>
               <span class="hy_info_list_num">{{ statisticsData.goodsCount }}</span>
             </li>
             <li>
-              <span><i class="iconfont iconwangfandijia"/>物流专线</span>
+              <span>
+                <i class="iconfont iconwangfandijia"/>
+                <a
+                  target="_blank" 
+                  href="/zhuanxian/list">物流专线</a>
+              </span>
               <span class="hy_info_list_num">{{ statisticsData.transportRangeCount }}</span>
             </li>
             <li>
-              <span><i class="iconfont iconwuliu"/>当前货物</span>
+              <span>
+                <i class="iconfont iconwuliu"/>
+                <a
+                  target="_blank" 
+                  href="/cheyuan">当前车源</a>
+              </span>
               <span class="hy_info_list_num">{{ statisticsData.carInfoCount }}</span>
             </li>
           </ul>
           <ul class="hy_info_text_list">
             <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
-            <li>货源<span class="hy_info_text_num">{{ statisticsData.toDayGoodsCount }}</span></li>
-            <li>专线<span class="hy_info_text_num">{{ statisticsData.toDayTransportRangeCount }}</span></li>
-            <li>车源<span class="hy_info_text_num">{{ statisticsData.toDayCarInfoCount }}</span></li>
+            <li>
+              <a
+                target="_blank" 
+                href="/huoyuan">
+                货源<span class="hy_info_text_num">{{ statisticsData.toDayGoodsCount }}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank" 
+                href="/zhuanxian/list">
+                专线<span class="hy_info_text_num">{{ statisticsData.toDayTransportRangeCount }}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank" 
+                href="/cheyuan">
+                车源<span class="hy_info_text_num">{{ statisticsData.toDayCarInfoCount }}</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -224,31 +294,39 @@
         <h3 class="gr_title">货源推荐</h3>
         <div class="gr_txt"><span>180789</span>条专线，为您优选12条热门优质专线</div>
         <div class="gr_sch">
-          <div class="gr_sch_city">
+          <div 
+            id="huoyuan_from1"
+            class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入出发地" 
-              id="groom_pageinp1">
+              id="huoyuan_pageinp1">
           </div>
           <div class="gr_sch_icon"><i class="iconfont iconjiantou_xiangyou_o"/></div>
-          <div class="gr_sch_city">
+          <div 
+            id="huoyuan_from2"
+            class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入到达地" 
-              id="groom_pageinp2">
+              id="huoyuan_pageinp2">
           </div>
-          <div class="gr_sch_btn"><a href="">搜索</a></div>
+          <div class="gr_sch_btn"><a 
+          @click="groomSearch()">搜索</a></div>
         </div>
         <a 
-          href="" 
-          class="gr_link">货源大厅<i class="iconfont iconjiantou2"/></a>
+          class="gr_link"
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">
+        货源大厅<i class="iconfont iconjiantou2"/></a>
       </div>
       <div class="p_type_nav">
-        <a href="">信誉最高</a>
-        <a href="">交易量</a>
-        <a href="">运输时效</a> 
-        <a href="">重货价格最低</a> 
-        <a href="">轻货价格最低</a>       
+        <a 
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
+        <a 
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
       </div>
       <div class="bd">
         <div class="col1">
@@ -258,7 +336,9 @@
             <li               
               v-for="(item, index) in recommendData.list" 
               :key="index">
-              <a href="">
+              <a 
+                target="_blank"
+                :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
                   <span class="label_provider">发布者:</span>
                   <span class="provider">{{ item.createrName }}</span>
@@ -273,20 +353,18 @@
                   </span>
                   <div class="city">{{ item.endCity }}</div>
                 </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span 
-                    class="item"
-                    v-for="(items, index) in item.goodsList" 
-                    :key="index">钢材</span>
+                <div class="type_box hy_list_goods">
+                  <span class="type_box hy_list_name">货物:</span>
+                  <span class="type_box hy_list_goods">{{ item.goodsTypeName }}</span>
                 </div>
                 <div class="type_box">
                   <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">{{ item.time }}</span>
+                  <span class="item"><b>{{ item.goodsNum }}</b>件</span>
+                  <span class="item">{{ item.goodsWeight |kilogram }}公斤</span>
+                  <span class="item">{{ item.goodsVolume }}m³</span>
+                  <!-- <span class="time">{{ item.time }}</span> -->
                 </div>
+                <div class="hy_list_time">时间：{{ item.time }}</div>
               </a>
             </li>
           </ul>
@@ -321,7 +399,10 @@
           </div>
           <div class="weixin">
             <div class="pic"><img src="../../static/images/huizong/weixin.png"></div>
-            下载<a href="#">【28快运APP】</a>，您可查看更多货源，并可实时接收28快运为您推荐的精品货源提醒
+            下载
+            <a
+              target="_blank" 
+              href="http://h5.28tms.com/">【28快运APP】</a>，您可查看更多货源，并可实时接收28快运为您推荐的精品货源提醒
           </div>
         </div>
       </div>
@@ -335,8 +416,9 @@
         </div>
         <a
           class="btn_release fr" 
-          href=""
-        >发布求车信息</a>
+          target="_blank"
+          href="/create/huoyuan"
+        >发布车源信息</a>
       </div>
       <div class="release_total">
         <span class="release_total_txt">平台已撮合</span>
@@ -406,7 +488,11 @@
           </div>
         </div>
         <div class="col2">
-          <img src="../../static/images/huizong/rank_ad.jpg">
+          <a
+            target="_blank"
+            href="/create/huoyuan">
+            <img src="../../static/images/huizong/rank_ad.jpg">
+          </a>
         </div>
       </div>
     </div>
@@ -423,7 +509,10 @@
           <li 
             v-for="(item, index) in monthShipperData.list" 
             :key="index">
-            <a href="">
+            <a 
+              target="_blank"
+              :href="'/member/' + item.companyId"
+            >
               <div 
                 class="rank_num no1" 
                 v-if="index === 0">
@@ -567,7 +656,8 @@
         <div class="p_title_box">
           <h3 class="title">28问答</h3>
           <a 
-            href="" 
+            target="_blank"
+            href="/help/ggp/index.jhtml" 
             class="answers_link">全部<i class="iconfont iconjiantou2"/>
           </a>         
         </div>
@@ -599,7 +689,8 @@
       </div>
       <a 
         class="live_btn"
-        href=""
+        target="_blank"
+        href="/regisiter"
       >我要入驻</a>
     </div>
     <!-- 入住 -->
@@ -611,13 +702,27 @@ import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
   head: {},
+  filters: {
+    kilogram(value) {
+      return value * 1000
+    }
+  },
   data() {
     return {
       banners: [
         require('../../static/images/huizong/banner01.jpg'),
         require('../../static/images/huizong/banner02.jpg'),
         require('../../static/images/huizong/banner03.jpg')
-      ]
+      ],
+      currentArea: '',
+      currentProvince: '',
+      // 地点插件
+      hyStartProvince: '',
+      hyStartCity: '',
+      hyStartArea: '',
+      hyEndProvince: '',
+      hyEndCity: '',
+      hyEndArea: ''
     }
   },
   async asyncData({ $axios, query, app, error }) {
@@ -679,21 +784,6 @@ export default {
   },
   mounted() {
     this.intSwiper()
-    seajs.use(['layer', '/js/jq_scroll.js'], function() {
-      console.log($)
-      console.log(layer)
-      /*地点插件 */
-      $('#groom_pageinp1').citypicker()
-      $('#groom_pageinp2').citypicker()
-      $('#sb_pageinp1').citypicker()
-      $('#sb_pageinp2').citypicker()
-      /* 文字滚动*/
-      $('.p_hy_info .hy_info_user_box').Scroll({
-        line: 1,
-        speed: 600,
-        timer: 3000
-      })
-    })
     this.$nextTick(() => {
       console.log('优质货主', this.shipperData)
       console.log('本月货主', this.monthShipperData)
@@ -702,6 +792,25 @@ export default {
       console.log('货量达人', this.darenData)
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
+
+      this.currentArea = this.getCookie('currentAreaFullName')
+      this.currentProvince = this.getCookie('currentProvinceFullName')
+      console.log('省市', this.currentArea, this.currentProvince)
+      console.log(decodeURIComponent(document.cookie))
+    })
+    seajs.use(['layer', '/js/jq_scroll.js'], function() {
+      /*地点插件 */
+      $('#huoyuan_pageinp1').citypicker()
+      $('#huoyuan_pageinp2').citypicker()
+      $('#sb_pageinp1').citypicker()
+      $('#sb_pageinp2').citypicker()
+
+      /* 文字滚动*/
+      $('.p_hy_info .hy_info_user_box').Scroll({
+        line: 1,
+        speed: 600,
+        timer: 3000
+      })
     })
   },
   methods: {
@@ -754,6 +863,47 @@ export default {
           disabledClass: 'my-button-disabled'
         }
       })
+    },
+    //搜索货源
+    groomSearch() {
+      this.getPlace(
+        '#huoyuan_from1',
+        'hyStartProvince',
+        'hyStartCity',
+        'hyStartArea'
+      )
+      this.getPlace('#huoyuan_from2', 'hyEndProvince', 'hyEndCity', 'hyEndArea')
+      // 跳转
+      let huoyuanUrl = `/huoyuan?startProvince=${
+        this.hyStartProvince
+      }&startCity=${this.hyStartCity}&startArea=${
+        this.hyStartArea
+      }&endProvince=${this.hyEndProvince}&endCity${this.hyEndCity}&endArea${
+        this.hyEndArea
+      }`
+      window.location.href = huoyuanUrl
+    },
+    //表单获取数据封装
+    getPlace(el, province, city, area) {
+      let arr = []
+      $(el + ' .select-item').each(function(i, e) {
+        arr.push($(this).text())
+      })
+      this[province] = arr[0] ? arr[0] : ''
+      this[city] = arr[0] ? arr[0] : ''
+      this[area] = arr[0] ? arr[0] : ''
+    },
+    //获取cookies的值
+    getCookie(cookieName) {
+      var strCookie = document.cookie
+      var arrCookie = strCookie.split('; ')
+      for (var i = 0; i < arrCookie.length; i++) {
+        var arr = arrCookie[i].split('=')
+        if (cookieName == arr[0]) {
+          return decodeURIComponent(arr[1])
+        }
+      }
+      return ''
     }
   }
 }
@@ -963,6 +1113,7 @@ export default {
     background: $green;
   }
 }
+/*货源推荐*/
 .p_hy_groom {
   .bd {
     .col1 {
@@ -974,7 +1125,7 @@ export default {
       @extend .fr;
       padding: 20px 10px;
       width: 265px;
-      height: 423px;
+      height: 507px;
       background: $green;
     }
   }
@@ -1055,6 +1206,11 @@ export default {
     .release_box_txt {
       width: 230px;
     }
+  }
+}
+.p_hy_list {
+  > li {
+    height: auto;
   }
 }
 /*货量达人榜*/

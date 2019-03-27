@@ -174,7 +174,7 @@ export default {
       //   this.$refs.rightbarorm.getAttribute('thepcd'),
       //   '12455rightbarorm'
       // )
-      var validReg = window.AFLC_VALID
+      var validReg = window.Lll_AFLC_VALID
       // this.phoneNum = this.$refs.phoneNum.value
       this.form.startProvince = $(
         '.form_findme .city-picker-span:eq(0) .select-item:eq(0)'

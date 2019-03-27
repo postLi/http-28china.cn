@@ -697,7 +697,7 @@ export default {
       // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
       seajs.use(['layer'], function() {
         seajs.use(
-          ['/js/jquery.pagination.min.js', '/js/AFLC_API.js'],
+          ['/js/jquery.pagination.min.js', '/js/LLL-AFLC_API.js'],
           function() {
             seajs.use(['/line/js/list_wlzx.js'], function() {
               seajs.use(['/js/collection.js'], function() {

@@ -8,10 +8,26 @@
         <div class="left_top">
           <ul class="left_top_ul">
             <h2 class="list_help_title">帮助信息</h2>
-            <li><a :href="'/shixiao'">时效查询</a></li>
-            <li><a :href="'/wangdian'">网点查询</a></li>
-            <li><a :href="'/ydcx'">运单查询</a></li>
-            <li><a :href="'/create/order'">快速下单</a></li>
+            <li
+              :class="[isBg == 'one' ? 'list_ul_one' : '']"
+              @click="getShixiao('one')">
+              <a>时效查询</a>
+            </li>
+            <li
+              :class="[isBg == 'two' ? 'list_ul_one' : '']"
+              @click="getShixiao('two')"><a 
+                target="_blank" 
+                :href="'/wangdian'">网点查询</a></li>
+            <li
+              :class="[isBg == 'thirty' ? 'list_ul_one' : '']"
+              @click="getShixiao('thirty')"><a 
+                target="_blank" 
+                :href="'/ydcx'">运单查询</a></li>
+            <li
+              :class="[isBg == 'four' ? 'list_ul_one' : '']"
+              @click="getShixiao('four')"><a 
+                target="_blank" 
+                :href="'/create/order'">快速下单</a></li>
           </ul>
         </div>
         <div class="list_kehu">
@@ -19,8 +35,6 @@
           <div class="kf_num">
             <p style="text-align: center;">
               <img src="/images/wzlImg/07kfj.png">
-              <img src="/images/wzlImg/08qq.png">
-              <img src="/images/wzlImg/08qq.png">
               <img src="/images/wzlImg/08qq.png">
               <img src="/images/wzlImg/08qq.png">
             </p>
@@ -36,6 +50,7 @@
                 id="form0" 
                 class="ltl-input0">
                 <input 
+                  v-model="checkNotice.startAddres"
                   id="right-bar-form"
                   data-toggle="city-picker"
                   data-level="district"
@@ -48,6 +63,7 @@
                 id="form1" 
                 class="ltl-input0">
                 <input
+                  v-model="checkNotice.endAddres"
                   autocomplete="off"
                   data-toggle="city-picker"
                   data-level="district"
@@ -57,13 +73,18 @@
                 <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
               </div>
               <textarea
+                id="form2"
+                v-model="checkNotice.select"
                 maxlength="100"
                 style="padding:18px;height:80px;"
                 placeholder="备注信息，如：期望发货时间、货物体积重量等信息..."
                 class="textare"/>
-              <div class="ltl-input">
+              <div 
+                id="form3" 
+                class="ltl-input">
                 <input 
-                  placeholder="请输入手机号" 
+                  v-model="checkNotice.phone"
+                  :placeholder="phoneHolder"
                   type="text"
                   class="ltl-phone"
                   maxlength="11"
@@ -185,7 +206,7 @@
                 @click="selectSort(item)">{{ item.name }}</span>
             </div>
             <div 
-              v-for="(item,index) in listRangesAging" 
+              v-for="(item,index) in listRangesAging.slice(0,20)" 
               :key="index" 
               class="wzl_box">
               <ul 
@@ -304,8 +325,8 @@
                   <a 
                     style="width:100%;float:left"
                     :href="'/member/'+item.id">
-                    <h4 :title="item.companyName">{{ item.companyName.substring(1,6) }}</h4>
-                    <p style="margin-left:48px;float:left;">
+                    <h4 :title="item.companyName">{{ item.companyName.substring(1,8) }}</h4>
+                    <p>
                       <span 
                         v-for="(i,n) in item.allServiceNameList.slice(0,2)" 
                         :key="n">{{ i }}</span>
@@ -358,11 +379,15 @@
                     <p>已有<span class="num_color">{{ item.orderNumber }}</span>人下单</p>
                   </a>
                   <div class="titles">
-                    <span v-if="item.isVip != null && item.isVip === 1">28信用</span>
-                    <span v-if="item.collateral != null && item.collateral>0">担保交易</span>
-                    <span v-if="item.authStatus === 'AF0010403'">实名认证</span>
+                    <span v-if="item.hotRangeShowTag === '1'">担保交易</span>
+                    <span v-if="item.hotRangeShowTag === '2'">28信用</span>
+                    <span v-if="item.hotRangeShowTag === '3'">实名认证</span>
+                    <span v-if="item.hotRangeShowTag === '4'">热门专线</span>
                     <span class="child2">
-                      <a>平台推荐</a>
+                      <a v-if="item.hotRangeShowTag === '1'">时效保障</a>
+                      <a v-if="item.hotRangeShowTag === '2'">平台推荐</a>
+                      <a v-if="item.hotRangeShowTag === '3'">资质保障</a>
+                      <a v-if="item.hotRangeShowTag === '4'">HOT</a>
                       <a>{{ item.goodEvaCount }}人说好</a>
                     </span>
                     <span><a
@@ -450,6 +475,7 @@ export default {
   head: {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
+      { src: '/layer/layer.js' },
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
       { src: './js/jquery.pagination.min.js' }
@@ -457,9 +483,17 @@ export default {
   },
   data() {
     return {
+      checkNotice: {
+        startAddres: '',
+        endAddres: '',
+        select: '',
+        phone: ''
+      },
+      phoneHolder: '请输入正确手机号',
       listRangesAging: [],
       showLinst: false,
       totalPage: 0,
+      isBg: '0',
       currentPage: 1,
       recommendBy28: '',
       recommendBy28Label: '',
@@ -648,6 +682,112 @@ export default {
     this.footLink()
   },
   methods: {
+    getShixiao(type) {
+      switch (type) {
+        case 'one':
+          this.isBg = 'one'
+          layer.msg('当前是时效查询页面')
+          break
+        case 'two':
+          this.isBg = 'two'
+          break
+        case 'thirty':
+          this.isBg = 'thirty'
+          break
+        case 'four':
+          this.isBg = 'four'
+        default:
+          break
+      }
+    },
+    sendNotice() {
+      this.sendNot()
+      let obj = {
+        startProvince: this.startProvince,
+        startCity: this.startCity,
+        startArea: this.startArea,
+        endProvince: this.endProvince,
+        endCity: this.endCity,
+        endArea: this.endArea
+      }
+      if (this.checkNotice.startAddres === '') {
+        $('#form0').css('border-color', 'red')
+      } else if (this.checkNotice.startAddres != '') {
+        $('#form0').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.endAddres === '') {
+        $('#form1').css('border-color', 'red')
+      } else if (this.checkNotice.endAddres != '') {
+        $('#form1').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.select === '') {
+        $('#form2').css('border-color', 'red')
+      } else {
+        $('#form2').css('border-color', '#e5e5e5')
+        obj.memo = this.checkNotice.select
+      }
+      let re = /^1[3|4|5|7|8|9]\d{9}$/
+      if (this.checkNotice.phone === '') {
+        $('.ltl-phone').css('border-color', 'red')
+        this.phoneHolder = '请输入正确手机号'
+      } else {
+        if (re.test(this.checkNotice.phone)) {
+          $('.ltl-phone').css('border-color', '#e5e5e5')
+          obj.msgMobile = this.checkNotice.phone
+        } else {
+          $('.ltl-phone').css('border-color', 'red')
+          this.checkNotice.phone = ''
+          this.phoneHolder = '请输入正确手机号'
+        }
+      }
+      if (
+        this.checkNotice.startAddres != '' &&
+        this.checkNotice.endAddres != '' &&
+        this.checkNotice.select != '' &&
+        this.checkNotice.phone != ''
+      ) {
+        this.$axios
+          .post('/28-web/helpFind/range/create', obj)
+          .then(res => {
+            this.reset()
+            if (res.data.status === 200) {
+              layer.msg('提交成功，客服稍后将会与您联系')
+            } else {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            layer.msg(res.data.errorInfo)
+          })
+      } else {
+        return
+      }
+    },
+    reset() {
+      setTimeout(function() {
+        window.location.reload()
+      }, 3000)
+    },
+    sendNot() {
+      let startAds = [],
+        endAds = []
+      $('#form0 .select-item').each(function(i, e) {
+        startAds.push($(this).text())
+      })
+      this.startProvince = startAds[0] ? startAds[0] : ''
+      this.startCity = startAds[1] ? startAds[1] : ''
+      this.startArea = startAds[2] ? startAds[2] : ''
+      this.checkNotice.startAddres =
+        this.startProvince + this.startCity + this.startArea
+      $('#form1 .select-item').each(function(i, e) {
+        endAds.push($(this).text())
+      })
+      this.endProvince = endAds[0] ? endAds[0] : ''
+      this.endCity = endAds[1] ? endAds[1] : ''
+      this.endArea = endAds[2] ? endAds[2] : ''
+      this.checkNotice.endAddres =
+        this.endProvince + this.endCity + this.endArea
+    },
     async selectSort(item) {
       this.sortId = item.id
       let vo = this.vo
@@ -699,6 +839,10 @@ export default {
         .post('/28-web/range/aging/list/related/links', serchForm)
         .then(res => {
           if (res.data.status === 200) {
+            res.data.data.recommendBy28.links.forEach(this.hrefLink)
+            Object.assign({}, this.recommendBy28)
+            res.data.data.otherRecommend.links.forEach(this.hrefLink)
+            Object.assign({}, this.otherRecommend)
             ;(this.recommendBy28 = res.data.data.recommendBy28.links),
               (this.recommendBy28Label = res.data.data.recommendBy28.label),
               (this.otherRecommend = res.data.data.otherRecommend.links),
@@ -708,59 +852,57 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    },
+    hrefLink: item => {
+      switch (item.startProvince) {
+        case null:
+          item.startProvince = ''
+      }
+      switch (item.startCity) {
+        case null:
+          item.startCity = ''
+      }
+      switch (item.startArea) {
+        case null:
+          item.startArea = ''
+      }
+      switch (item.endProvince) {
+        case null:
+          item.endProvince = ''
+      }
+      switch (item.endCity) {
+        case null:
+          item.endCity = ''
+      }
+      switch (item.endArea) {
+        case null:
+          item.endArea = ''
+      }
+      item.carSourceType = ''
+      item.targetLinks = ''
+      if (item.type == '1000') {
+        item.targetLinks = '/gongsi/'
+      }
+      if (item.type == '2000') {
+        item.targetLinks = '/zhuanxian/list'
+      }
+      if (item.type == '2001') {
+        item.targetLinks = '/member/' + item.companyId + '-line'
+      }
+      if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
+        item.targetLinks = '/cheyuan'
+      }
+      if (item.type == '3001') {
+        item.targetLinks = '/cheyuan'
+        item.carSourceType = 'AF01801'
+      }
+      if (item.type == '4000') {
+        item.targetLinks = '/huoyuan'
+      }
+      if (item.type == '4001') {
+        item.targetLinks = '/member/' + item.companyId + '-huo'
+      }
     }
-    // hrefLink() {
-    //   let Link = item => {
-    //     switch (item.startProvince) {
-    //       case null:
-    //         item.startProvince = ''
-    //     }
-    //     switch (item.startCity) {
-    //       case null:
-    //         item.startCity = ''
-    //     }
-    //     switch (item.startArea) {
-    //       case null:
-    //         item.startArea = ''
-    //     }
-    //     switch (item.endProvince) {
-    //       case null:
-    //         item.endProvince = ''
-    //     }
-    //     switch (item.endCity) {
-    //       case null:
-    //         item.endCity = ''
-    //     }
-    //     switch (item.endArea) {
-    //       case null:
-    //         item.endArea = ''
-    //     }
-    //     item.carSourceType = ''
-    //     item.targetLinks = ''
-    //     if (item.type == '1000') {
-    //       item.targetLinks = '/gongsi/'
-    //     }
-    //     if (item.type == '2000') {
-    //       item.targetLinks = '/zhuanxian/list'
-    //     }
-    //     if (item.type == '2001') {
-    //       item.targetLinks = '/member/' + item.companyId + '-line'
-    //     }
-    //     if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
-    //       item.targetLinks = '/cheyuan'
-    //     }
-    //     if (item.type == '3001') {
-    //       item.targetLinks = '/cheyuan'
-    //       item.carSourceType = 'AF01801'
-    //     }
-    //     if (item.type == '4000') {
-    //       item.targetLinks = '/huoyuan'
-    //     }
-    //     if (item.type == '4001') {
-    //       item.targetLinks = '/member/' + item.companyId + '-huo'
-    //     }
-    //   }
-    // }
     // loadPagination() {
     //   $('#pagination1').pagination({
     //     currentPage: this.currentPage,
@@ -820,6 +962,9 @@ img {
   cursor: pointer;
   background: url(/images/wzlImg/15dw.png) no-repeat 20px;
 }
+.list_ul_one {
+  background: url(/images/wzlImg/06sjx.png) no-repeat 166px 24px;
+}
 .list_line {
   float: left;
 }
@@ -846,8 +991,8 @@ img {
 } */
 
 .left_top_ul li {
-  height: 40px;
-  line-height: 40px;
+  height: 20px;
+  line-height: 20px;
   font-size: 14px;
   padding: 20px 0;
   color: #333333;
@@ -882,20 +1027,13 @@ img {
   /* border: 1px solid rgba(204, 204, 204, 0.8); */
   background: url('/images/wzlImg/05bg.png');
   overflow: hidden;
-  padding: 19px;
+  padding: 19px 45px;
   margin: 9px;
   box-sizing: border-box;
 }
-/* .ul_list li:nth-child(1) {
-  border: none;
+.ul_list li p {
+  display: flex;
 }
-.ul_list li:nth-child(6) {
-  border: none;
-} */
-/* .ul_list li:hover {
-  border: 1px solid #2577e3;
-  box-sizing: border-box;
-} */
 .ul_list li h4 {
   font-size: 18px;
   height: 30px;
@@ -909,14 +1047,7 @@ img {
 .ul_list li span {
   height: 30px;
   line-height: 30px;
-  display: block;
-  width: 60px;
-  overflow: hidden;
-  float: left;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  text-align: center;
-  /* margin-left: 13px; */
+  flex: 1;
 }
 .ul_host {
   width: 100%;
@@ -937,7 +1068,7 @@ img {
   bottom: 0%;
   left: 0%;
   position: absolute;
-  background: #2e2e2e;
+  /* background: #2e2e2e; */
   color: #fff;
   height: 40px;
   line-height: 40px;
@@ -986,6 +1117,10 @@ img {
   background-color: #ffed20;
   color: #db4c26;
 }
+/* .ul_host li .titles span:nth-child(4) {
+  background-color: #ffed20;
+  color: #db4c26;
+} */
 .ul_host li p {
   height: 30px;
   line-height: 30px;

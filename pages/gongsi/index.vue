@@ -667,7 +667,7 @@ export default {
     }
 
     let gsList = await getGSList($axios, 1, vo, '')
-    console.log(listC.data.data, 'listC.data.data')
+    // console.log(listC.data.data, 'listC.data.data')
     gsList.list.forEach(item => {
       // item.num = Math.ceil(Math.random() * 30)
       let arr = (item.id || '').split('')
@@ -892,10 +892,10 @@ export default {
         '../js/city.js',
         '/layer/layer.js',
         '/layer/dist/layui.js',
-        '/js/AFLC_API.js'
+        '/js/LLL-AFLC_API.js'
       ],
       function() {
-        seajs.use(['../js/city-picker.js', '/js/AFLC_API.js'], function() {
+        seajs.use(['../js/city-picker.js', '/js/LLL-AFLC_API.js'], function() {
           seajs.use(['../gongsi/js/list_wlgs.js'], function() {
             seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
               seajs.use(['../js/gaodemap2.js'], function() {

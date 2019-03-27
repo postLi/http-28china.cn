@@ -183,7 +183,7 @@ export default {
     ],
     script: [
       // { src: '../js/jquery.pagination.min.js' },
-      { src: '../js/AFLC_API.js' },
+
       // { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]

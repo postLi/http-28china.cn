@@ -56,7 +56,7 @@
 
       <div class="arc_main1">
         <div class="arc_top2">
-          <div 
+          <div
             style="padding-left:30px"
             class="arc_top2_1"><a href="/"><span>首页</span></a></div>
           <div
@@ -110,13 +110,13 @@
               <li><img
                 src="/line/images/04ewm.png"
                 alt=""></li>
-              <li 
+              <li
               @click="downFn">
                 下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的专线，并可实时接收28快运为您推荐的精品货源提醒!
-               
+
                 <!-- <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"></p> -->
               </li>
-              <!-- <li 
+              <!-- <li
                 style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"
                 @click="downFn">
                 <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
@@ -126,7 +126,7 @@
             </ul>
           </div>
 
-      
+
         </div>
         <div class="arc_middle">
           <div class="collection_zx">
@@ -438,7 +438,7 @@
                 readonly=""
                 value="进入官网"></a>
             <a
-              
+
             @click="openColl('comany')"><input
               class="arc_right05_2"
               readonly=""
@@ -447,7 +447,7 @@
               class="arc_right05_2"
               style="border:1px solid #ccc;padding:5px 30px"
               @click="openColl('comany')"><span>收藏</span></a> -->
-          
+
           </p>
           <p class="arc_right06">
             <span>相关认证</span>
@@ -1053,7 +1053,7 @@ export default {
     ],
     script: [
       { src: '../js/jquery.pagination.min.js' },
-      { src: '../js/AFLC_API.js' },
+      { src: '/js/LLL-AFLC_API.js' },
       // { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
@@ -1255,7 +1255,7 @@ export default {
 
           // linedataB.data.data.renZhen = '暂无认证信息'
         }
-        console.log(collateral, 'collateral')
+        // console.log(collateral, 'collateral')
         if (collateral > 0) {
           linedataB.data.data.collateral = linedataB.data.data.collateral + '元'
           linedataB.data.data.isCollateral = true
@@ -1566,7 +1566,7 @@ export default {
       var mobile = $('.layui-input').val()
       $('.tipPhone').hide()
       $('.find_layui-btn .layui-btn-danger').click(() => {
-        let validReg = window.AFLC_VALID
+        let validReg = window.Lll_AFLC_VALID
         let form = {}
         form.mobile = mobile
         form.companyId = this.LineChangeAnother.companyId
@@ -1658,7 +1658,7 @@ export default {
       var msgMobile = $('.layui-input').val()
       $('.tipPhone').hide()
       $('.find_layui-btn .layui-btn-danger').click(() => {
-        let validReg = window.AFLC_VALID
+        let validReg = window.Lll_AFLC_VALID
         let form = {}
         form.msgMobile = msgMobile
         form.startProvince = this.linedataA.startProvince

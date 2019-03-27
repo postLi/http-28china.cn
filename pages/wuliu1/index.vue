@@ -11,7 +11,7 @@
       </a>
     </div>
     <div class="list_box">
-    
+
       <!--<div-->
       <!--class="list_nav"-->
       <!--style="padding-top:20px"-->
@@ -20,7 +20,7 @@
       <!--id="list_nav_a"-->
       <!--href="">物流园区</a>-->
       <!--</div>-->
-      <div 
+      <div
         style="padding-top:20px"
         class="list_left">
         <div
@@ -87,6 +87,7 @@
             </dl>
 
           </div>
+
           <div><a
             href="/regisiter"
             target="_blank"><button
@@ -155,8 +156,8 @@
         <div class="tuijian">
           <div
             class="tuijian_title"
-            style=" height: 50px; line-height: 50px;padding-top: 10px;">
-            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">推荐园区</h5>
+            style=" height: 50px; line-height: 50px;padding-top: 20px;">
+            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">推荐园区</h5>
             <a
               href="/wuliu"
               target="_blank"><span style="float:right"> 更多></span></a>
@@ -171,7 +172,7 @@
                   :href="'/wuliu/detail?id=' + item.id"
                   target="_blank"
                   style="position:relative"><img
-                    src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
+                    :src="item.parkSignPicture?item.parkSignPicture:'http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg'"
                     width="260"
                     height="165"
                     alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName.length>15?item.parkName.substring(0,15):item.parkName }}</span>
@@ -180,8 +181,10 @@
                     style="position:absolute;bottom:61px;left:0px;background:rgba(194,0,13,1);color:rgb(255,255,255);padding: 5px 20px;">招商中</span>
                 </a>
                 <!-- ourRatings -->
-                <p style="width: 260px;text-align: center;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
-                  v-for="(item,i) in 1"
+                <p style="width: 260px;text-align: center;padding-top:10px"><span
+                style="padding-right:10px">推荐指数</span><img
+
+                  v-for="(item,i) in item.ourRatings"
                   :key="i"
                   src="../../static/yuanqu/images/zhishu.png"
                   alt=""
@@ -197,39 +200,27 @@
           <div
             class="new_title"
             style="padding:30px 0 25px">
-            <h5 
-            
+            <h5
+
             style="display: inline-block;color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
-            <div class="newContainer">
-              <div class="li-box">
-                <ul>
-                  <li 
-                    style="line-height:1.8; color:#666; "
-                    v-for="(item,i) in newslist"
-                    :key="i">{{ item.list+i }}</li>
-                </ul>
-              </div>
-            </div>
-            <!-- <div 
-              id="newBox"
-              style="display: inline-block;font-size: 12px;height: 20px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"><ul 
-                style="width:280px;display:block;"
-                id="newlist1"
-                class="newlist1">
-                <li 
-                  style="height:15px;line-height:15px;display:block;"
-                  v-for="(item,i) in newslist"
-                  :key="i">{{ item.list }}</li>
+            <div
+              style="display: inline-block;font-size: 12px;height: 16px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"
+              class="top_left">
+              <ul
+                style="position:relative"
+                class="top_left_ul" >
+                <li
+                  v-for="(item,index) in newslist"
+                  :key="index"
+                  class="top_left_ul_li" >
+                  <span> {{ item.list+index }}</span>
+              
+                </li>
               </ul>
-            
-              <ul 
-                style="width:280px;display:block;"
-                id="newlist2"
-                class="newlist2"/>
-            </div> -->
-            <!--<a  href=""><span style="float:right"> 更多></span></a>-->
+            </div>
+           
           </div>
-         
+
 
 
         </div>
@@ -240,7 +231,7 @@
             <div
               class="ruzhu_title"
               style="padding:30px 0 25px">
-              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">新入驻园区
+              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">新入驻园区
 
               </h5>
               <a href=""><span style="float:right"> 更多></span></a>
@@ -268,7 +259,7 @@
             <div
               class="zizhu_title"
               style="padding:30px 0 25px">
-              <h5 style="color:rgb(196,0,13);font-size:18px">自助服务
+              <h5 style="color:rgb(196,0,13);font-size:18px;font-weight: bold;">自助服务
               </h5>
               <!--<a href=""><span style="float:right">更多></span></a> -->
             </div>
@@ -386,13 +377,14 @@
           <div
             class="hot_title"
             style="padding:30px 0 25px 0">
-            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">热门园区</h5>
+            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">热门园区</h5>
             <span style="padding-left:30px;"><i style="color:rgb(249,155,42)">1365</i>个园区，为您优选10个热门园区</span>
             <a
               href="/wuliu"
               target="_blank"><span style="float:right"> 更多></span></a>
           </div>
           <div
+            style="border-top:none"
             class="select_con"
           >
 
@@ -448,7 +440,7 @@
 
         </div>
         <div
-          style="margin-top: 20px;"
+          style="margin-top: 30px;"
           class="list_wlyq ">
           <div
             v-if="getHottList.length === 0 || getHottList.list ==null "
@@ -497,35 +489,7 @@
           </ul>
 
         </div>
-        <!--<div class=" list_wlyq">-->
-        <!--<div-->
-        <!--v-if="getGateWayList.length === 0"-->
-        <!--class="list_none"-->
-        <!--style="display: block">-->
-        <!--<span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>-->
-        <!--<img src="../../static/images/none_pic.png">-->
-        <!--</div>-->
 
-        <!--<ul-->
-        <!--v-for="(item,index) in getGateWayList"-->
-        <!--:key="index"-->
-        <!--class="wlzx_list">-->
-        <!--<a-->
-        <!--:href="'/wuliu/detail?id=' + item.id"-->
-        <!--target="_blank">-->
-        <!--<li class="wlzx_list_01"><img-->
-        <!--:src="item.parkSignPicture?item.parkSignPicture:'../../static/images/list_wlzx/wlyq_pic.png'"-->
-        <!--class="scrollLoading"-->
-        <!--width="268"-->
-        <!--height="268"></li>-->
-        <!--<li class="wlzx_list_02"><span>{{ item.parkName }}</span></li>-->
-        <!--<li class="wlzx_list_03"><font>{{ item.transportNumber?item.transportNumber: 0 }}</font><i>条</i><span>优质专线</span></li>-->
-        <!--<li class="wlzx_list_04"><span>{{ item.parkAddress }}</span></li>-->
-        <!--<li class="wlzx_list_05"><span>{{ item.browseNumber }}</span></li>-->
-        <!--</a>-->
-        <!--</ul>-->
-
-        <!--</div>-->
         <img
           style="margin-top:20px"
           src="../../static/gongsi/images/listbg.png">
@@ -534,9 +498,9 @@
           style="clear: both;">
           <div
             class="youzhi_title"
-            style="padding:30px 0 25px 0">
-            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">本月优质承运</h5>
-            <span style="padding-left:30px;">货主说好才是真的好</span>
+            style="padding:40px 0 25px 0">
+            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">本月优质承运</h5>
+            <span style="padding-left:30px;font-size:16px">货主说好才是真的好</span>
             <a
               href="/gongsi"
               target="_blank"><span style="float:right"> 所有物流企业></span></a>
@@ -544,32 +508,36 @@
           <div class="youzhi_content">
             <ul>
               <li
-                v-for="(item,i) in getExcellentList"
+                v-for="(item,i) in getExcellentList.slice(0,6)"
                 :key="i"
-                style="float:left;padding-right:20px">
+                style="float:left;padding-right:33px">
                 <a
-                  :href="'/gongsi?id=' + item.id"
+                  :href="'/member/' + item.id"
                   target="_blank"
                   style="position:relative"><img
-                    src="http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg"
-                    width="260"
-                    height="165"
+                    :src="item.personalImageFile?personalImageFile:'http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg'"
+                    width="205"
+                    height="160"
                     alt="">
                   <!-- <span style="display: inline-block;width: 255px;position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.5);color:rgb(255,255,255);padding: 10px 0px;text-align: center;">{{ item.companyName }}</span> -->
                   <span
                     :class="'noclass'+i"
                     class="NOclass"
                     style="position:absolute;bottom:40px;left:5px;color:rgb(255,255,255);    padding: 5px 20px;border-radius:5px">NO{{ i+1 }}</span></a>
-                <p style="width: 260px;padding-top:10px;color: rgb(51,153,255);font-size:16px">{{ item.companyName.length>16?item.companyName.substring(0,16)+'..':item.companyName }}</p>
-                <p style="width: 260px;padding-top:10px"><span style="padding-right:10px">推荐指数</span><img
+                <div style="padding-top:5px;">
+                  <a
+                    target="_blank"
+                    :href="'/member/' + item.id"> <span style="padding-top:10px;color: rgb(51,153,255);font-size:16px">{{ item.companyName.length>12?item.companyName.substring(0,12)+'..':item.companyName }}</span></a>
+                </div>
+                <p style="padding-top:10px"><span>推荐指数{{ item.ourRatings }}</span><img
                   v-for="(item,i) in 4"
                   :key="i"
-                  src="../../static/gongsi/images/danbao.png"
+                  src="../../static/yuanqu/images/zhishu.png"
                   alt=""
                 >
 
                 </p>
-                <p style="width: 260px;padding:10px 0">好评率{{ item.excellentRate }}%
+                <p style="padding:10px 0">好评率{{ item.excellentRate }}%
 
               </p></li>
             </ul>
@@ -582,8 +550,8 @@
             style="width: 670px;float: left">
             <div
               class="zixuntitle"
-              style="padding:30px 0 25px;margin-bottom:10px">
-              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">行业资讯
+              style="padding:60px 0 25px;margin-bottom:10px">
+              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">行业资讯
               </h5>
               <a
                 href="/zixun/xyzx/index.jhtml"
@@ -618,8 +586,8 @@
             style="width: 670px;float: left;margin-left:40px">
             <div
               class="zixun_title"
-              style="padding:30px 0 25px;margin-bottom:10px">
-              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;">仓储与配送
+              style="padding:60px 0 25px;margin-bottom:10px">
+              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">仓储与配送
               </h5>
               <a
                 href="/zixun/ccyps/index.jhtml"
@@ -654,60 +622,11 @@
             href="/regisiter"
             target="_blank"><buttom style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</buttom></a>
         </div>
-        <!-- -->
-        <!--&lt;!&ndash;分页&ndash;&gt;-->
-        <!--<div-->
-        <!--class="box"-->
-        <!--style="float: right;margin-right: 170px;">-->
-        <!--<div-->
-        <!--id="pagination1"-->
-        <!--class="page fl"/>-->
-        <!--<div class="info fl">-->
-        <!--&lt;!&ndash;<p>当前页数：<span id="current1">1</span></p>&ndash;&gt;-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--&lt;!&ndash;分页&ndash;&gt;-->
-
-        <!--<div class="bottom_wlyq" >-->
-        <!--<div class="bottom_wlyq_bt">您可能对这些感兴趣</div>-->
-        <!--<div class="bottom_wlyq_nr">-->
-        <!--<div-->
-        <!--v-for="(item,index) in getLogisticsPark"-->
-        <!--:key="index"-->
-        <!--class="bottom_wlyq_item"><a-->
-        <!--:href="'/wuliu/detail?id=' + item.id"-->
-        <!--target="_blank">{{ item.parkName }}</a></div>-->
-        <!--</div>-->
-        <!--</div>-->
+    
 
       </div>
 
-      <!-- <div class="list_right">
-        <div class="zx_sx"><span class="biaozhi"/><span>园区推荐</span></div>
-        <div class="tj_none hy_tj_none">
-          <span>暂无相关园区推荐</span>
-        </div>
-        <div
-          v-for="(item,index) in recommendParkList"
-          :key="index"
-          class="tj_list">
-          <a
-            :href="'/wuliu/detail?id=' + item.id"
-            target="_blank">
-            <div class="p p1"><span>{{ item.parkName }}</span></div>
-            <div class="p p3">
-              <ul>
-                <li class="tj_left tj_left1"><font >{{ item.transportNumber }}条</font></li>
-                <li class="tj_right"><span >优质专线</span></li>
-                <li class="tj_left tj_left2"><font>{{ item.netWorkNumber }}<em>家</em></font></li>
-                <li class="tj_right"><span >优质物流公司</span></li>
-              </ul>
-            </div>
-            <div class="p p4"><span>{{ item.parkAddress }}</span></div>
-            <div class="p p5"><span>{{ item.browseNumber }}</span></div>
-          </a>
-        </div>
-      </div> -->
+  
     </div>
     <Add
       :show = "isAdd"
@@ -752,7 +671,7 @@ export default {
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
       { src: '../js/gaodemap2.js' },
-      { src: '/js/AFLC_API.js' },
+
       { src: '/layer/layer.js' },
       { src: './js/jquery.pagination.min.js' }
     ]
@@ -823,8 +742,9 @@ export default {
     let getExcellentList = await $axios.get(
       '/28-web/logisticsCompany/excellent?flag=' + flag
     )
+
     // /logisticsPark/hot/list
-    // console.log(getExcellentList.data.data, 'getExcellentList')
+    console.log(getExcellentList.data.data, 'getExcellentList')
     let vo1 = vo
     return {
       getExcellentList:
@@ -851,7 +771,13 @@ export default {
       vo1: vo1
     }
   },
+  computed: {
+    getExcellentList() {
+      return this.getExcellentList.slice(0, 6)
+    }
+  },
   mounted() {
+    seajs.use(['/js/LLL-AFLC_API.js'])
     $('#parkAddress input').citypicker({
       province: this.vo.locationProvince,
       city: this.vo.locationCity,
@@ -866,34 +792,43 @@ export default {
       this.vo.locationCity + this.vo.locationArea + '物流园区'
     )
     this.loadPagination()
-    // var newBox = document.getElementById('newBox')
-    // var newlist1 = document.getElementById('newlist1')
-    // var newlist2 = document.getElementById('newlist2')
-    // newlist2.innerHTML = newlist1.innerHTML
-    // function scrollUp() {
-    //   if (newBox.scrollTop >= newlist1.offsetHeight) {
-    //     newBox.scrollTop = 0
-    //   } else {
-    //     newBox.scrollTop++
-    //   }
-    // }
 
-    // var time = 800
-    // var mytime = setInterval(scrollUp, time)
-    // newBox.onmouseover = function() {
-    //   mytimer = clearInterval(mytimer)
-    //   // clearInterval(mytimer)
-    //   // console.log('tuij', clearInterval(mytimer))
-    // }
-    // newBox.onmouseout = function() {
-    //   mytimer = setInterval(scrollUp, time)
-    // }
+    let top_left_h = $('.top_left').height()
+
+    let roll_ul_h = $('.top_left_ul')
+    roll_ul_h.append(roll_ul_h.html())
+    // console.log(roll_ul_h, 'roll_ul_h')
+    let num = 1
+    let newList_l = this.newslist.length
+    let left_ul_li = $('.top_left_ul_li').height()
+    let startScroll_top = () => {
+      this.inTerVar1 = setInterval(() => {
+        roll_ul_h
+          .stop()
+          .animate({ top: `${num * -left_ul_li}px` }, 2000, () => {
+            if (num > newList_l) {
+              num = 1
+              roll_ul_h.css('top', '0px')
+            }
+          })
+        num = num + 1
+      }, 5000)
+    }
+    if (left_ul_li * newList_l > top_left_h) {
+      startScroll_top()
+    }
   },
+  //  comp
+  // cumputed: {
+  //   getExcellentList() {
+  //     return this.getExcellentList.slice(0, 6)
+  //   }
+  // },
   methods: {
     fromAdd(data) {
       this.inputData = data
       // this.isMobile = true
-      console.log(data, 'data', this.inputData)
+      // console.log(data, 'data', this.inputData)
     },
     addFn() {
       this.isAdd = true
@@ -903,7 +838,7 @@ export default {
     },
     openYuanqu() {
       if (this.inputData) {
-        var validReg = window.AFLC_VALID
+        var validReg = window.Lll_AFLC_VALID
         // console.log(validReg)
         let aurl = ''
 
@@ -934,6 +869,8 @@ export default {
     },
     async search() {
       let list1 = []
+      // this.vo.parkName = this.vo.parkName ? this.vo.parkName : ''
+      // console.log(this.vo.parkName, 'this.vo.parkName')
       $('#parkAddress .select-item').each(function(i, e) {
         list1.push($(this).text())
       })
@@ -943,7 +880,9 @@ export default {
       window.open(
         `/wuliu?locationProvince=${this.vo.locationProvince}&locationCity=${
           this.vo.locationCity
-        }&locationArea=${this.vo.locationArea}&parkName=${this.vo.parkName}`
+        }&locationArea=${this.vo.locationArea}&parkName=${
+          this.vo.parkName ? this.vo.parkName : ''
+        }`
       )
     },
     reload() {
@@ -1015,60 +954,12 @@ export default {
       }
     }
   }
-  .new {
-    .newContainer {
-      display: inline-block;
-      background: #efefef;
-      padding: 10px;
-      border: 1px solid #ccc;
-      font-family: 'Microsoft YaHei';
-      .li-box {
-        height: 28px;
-        overflow: hidden;
-        ul {
-          position: relative;
-          animation: moveUp 10s 0.5s infinite;
-          -webkit-animation: moveUp 10s 0.5s infinite;
-          &:hover {
-            // animation: moveUp 110s 0.5s infinite;
-          }
+  .youzhi {
+    .youzhi_content {
+      ul {
+        li:last-of-type {
+          padding-right: 0px !important;
         }
-      }
-    }
-
-    // .newContainer ul:hover {
-    //   animation: moveUp steps(11) 0.6s forwards;
-    // }
-    @keyframes moveUp {
-      0% {
-        top: 0px;
-      }
-      18% {
-        top: 0px;
-      }
-      20% {
-        top: -28px;
-      }
-      38% {
-        top: -38px;
-      }
-      40% {
-        top: -48px;
-      }
-      58% {
-        top: -58px;
-      }
-      60% {
-        top: -68px;
-      }
-      78% {
-        top: -78px;
-      }
-      80% {
-        top: -86px;
-      }
-      98% {
-        top: -96px;
       }
     }
   }

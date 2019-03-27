@@ -1211,7 +1211,7 @@ function call_me() {
     var validReg = window.AFLC_VALID;
     var phoneVal = $('.phone-val').val();
     var phoneReg = /^[1][3-8]\d{9}$/;
-    console.log(phoneReg);
+    // console.log(phoneReg);
     if(phoneReg.test(phoneVal)){
       layer.alert('请求出错了，请尝试刷新页面')
     }else{

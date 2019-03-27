@@ -461,11 +461,11 @@ export default {
   head: {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
     script: [
-      { src: './js/city-picker.data.js' },
-      { src: '../vendor/layer/layer.js' },
-      { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' },
-      { src: '/js/gaodemap2.js' }
+      { src: '/js/city-picker.data.js' },
+      { src: '/vendor/layer/layer.js' },
+      { src: '/js/city-picker.js' },
+      { src: '/js/jquery.pagination.min.js' }
+      // { src: '/js/gaodemap2.js' }
     ]
   },
   data() {

@@ -70,7 +70,7 @@ export default {
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/layer3/css/layui.css' }],
-    script: [{ src: '/layer/layer.js' }, { src: '/js/AFLC_API.js' }]
+    script: [{ src: '/layer/layer.js' }, { src: '/js/LLL-AFLC_VALID.js' }]
   },
   data() {
     return {
@@ -129,8 +129,7 @@ export default {
     },
     submitBtn() {
       let _this = this
-      var validReg = window.AFLC_VALID
-      var AFLC_VALID = window.AFLC_VALID
+      var validReg = window.Lll_AFLC_VALID
       this.dataInfo.mobile = _this.mobile
       this.dataInfo.textnum = _this.textnum
       this.dataInfo.userType = _this.userType
@@ -171,8 +170,7 @@ export default {
     },
     phoneText() {
       let _this = this
-      var validReg = window.AFLC_VALID
-      var AFLC_VALID = window.AFLC_VALID
+      var validReg = window.Lll_AFLC_VALID
       if (this.mobile) {
         if (validReg.MOBILE.test(this.mobile)) {
           this.ShowmobileErr = false

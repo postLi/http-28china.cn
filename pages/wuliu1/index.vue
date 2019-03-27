@@ -197,8 +197,8 @@
           <div
             class="new_title"
             style="padding:30px 0 25px">
-            <h5 style="color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
-            <div style="float: left;font-size: 12px;height: 16px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"><ul>
+            <h5 style="display: inline-block;color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
+            <div style="display: inline-block;font-size: 12px;height: 16px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"><ul>
               <li 
                 v-for="(item,i) in newslist"
                 :key="i">{{ item.list }}</li>
@@ -741,6 +741,14 @@ export default {
       pages: 0, //总页数
       currentPage: 1, //当前页
       newslist: [
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
+        { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
         { list: '【2019-2-25】深圳物流业增加值10年增加4倍多' },
         { list: '【2019-2-25】深圳物流业增加值10年增加4倍多2' }
       ]

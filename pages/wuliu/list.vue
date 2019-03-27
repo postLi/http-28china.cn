@@ -32,7 +32,7 @@
             style="float:left;width: 900px;">
 
             <dl>
-              <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt>
+              <!-- <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt> -->
               <dd>
                 <form
                   name="zxaddform"
@@ -59,14 +59,15 @@
                       data-toggle="city-picker"
                       data-level="district"
                       type="text"
-                      placeholder="请选择省-市-区" >
+                      placeholder="请选择园区所在地" >
                   </div>
-                  <span>&nbsp;园区名称&nbsp;：</span>
+                  <!-- <span>&nbsp;园区名称&nbsp;：</span> -->
                   <input
+                    style="height:45px;width:270px;"
                     v-model="vo.parkName"
                     type="text"
                     class="list_input"
-                    placeholder="请输入园区名称" >
+                    placeholder="请选择园区名称" >
                   <input
                     id="search_wlyq"
                     value=" 搜索园区 "

@@ -326,7 +326,7 @@
                   data-level="district"
                   type="text" 
                   class="ltl-location" 
-                  placeholder="请选择目到达地">
+                  placeholder="请选择到达地">
                 <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
               </div>
               <div 

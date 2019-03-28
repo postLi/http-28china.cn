@@ -1047,7 +1047,7 @@ export default {
             endArea: this.endArea,
             queryType: 2,
             orderClass: this.orderClass,
-            userAuth: thisuserAuth,
+            userAuth: this.userAuth,
             AF03801Id: this.AF03801Id,
             AF03802Id: this.AF03802Id,
             goodsVolumeLower: this.goodsVolumeLower,
@@ -1055,6 +1055,7 @@ export default {
             goodsWeightLower: this.goodsWeightLower,
             goodsWeightUpper: this.goodsWeightUpper
           })
+          console.log(hyList.list, 'hyList.list')
           this.hyList = hyList.list
           this.pages = hyList.pages
           this.current = hyList.current

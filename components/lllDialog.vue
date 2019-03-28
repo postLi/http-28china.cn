@@ -27,11 +27,7 @@
               <i
                 class="layui-icon layui-icon-close"
                 style="font-size: 30px; color: #1E9FFF;"/>
-                <!--<img-->
-                <!--src="../static/gongsi/images/close.png"-->
-                <!--alt=""-->
-                <!--width="30"-->
-                <!--&gt;-->
+              
             </button>
           </div>
         </div>
@@ -51,7 +47,6 @@
 export default {
   props: {
     isShow: {
-      //弹窗组件是否显示 默认不显示
       type: Boolean,
       default: false,
       required: true //必须
@@ -60,10 +55,7 @@ export default {
       type: String,
       default: '标题'
     },
-    //下面这些属性会绑定到div上面 详情参照上面的html结构
-    // 如： :style="{top:topDistance+'%',width:widNum+'%'}"
     widNum: {
-      //内容宽度
       type: Number,
       default: 86.5
     },
@@ -92,14 +84,11 @@ export default {
   methods: {
     closeMyself() {
       this.$emit('close')
-      //如果需要传参的话，可以在"on-close"后面再加参数，然后在父组件的函数里接收就可以了。
     }
   }
 }
 </script>
-<!--<dialogComponent :is-show="status.isShowPublish" :top-distance="status.topNum">-->
 <style lang="scss">
-// 最外层 设置position定位
 .dialog {
   position: relative;
   color: #2e2c2d;

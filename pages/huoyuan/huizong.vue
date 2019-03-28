@@ -5,13 +5,20 @@
         <div class="col1">
           <div class="p_category_menu">
             <h4 class="category_menu_title">热门城市</h4>
-            <div class="category_menu_list">
+            <div 
+              class="category_menu_list"
+              v-if="hotCityData!== undefined && hotCityData!== null &&hotCityData.length>0">
               <span 
                 class="item"
-                v-for="(item, index) in cityList" 
+                v-for="(item, index) in hotCityData" 
                 :key="index">
-              <a>{{ item }}</a></span>  
-            </div>         
+                <a
+                  target="_blank"
+                  :href="'/zhuanxian/list?startp=' + item.provinceName + '&startc=' + item.cityName">{{ item.cityShortName }}</a></span>  
+            </div> 
+            <div
+              class="error" 
+              v-else>没有数据</div>        
           </div>
           <!--导航 -->
         </div>
@@ -25,7 +32,11 @@
                   class="swiper-slide" 
                   :key="index"
                   v-for="(banner, index) in banners">
-                  <img :src="banner">
+                  <a 
+                    target="_blank"
+                    href="/create/order">
+                    <img :src="banner">
+                  </a>
                 </div>
               </div>
               <!-- Add Pagination -->
@@ -37,9 +48,21 @@
             <!-- 幻灯片 -->
           </div>
           <div class="type clearfix">
-            <div class="type_box"><a href=""><img src="../../static/images/huizong/type01.png"></a></div>
-            <div class="type_box"><a href=""><img src="../../static/images/huizong/type02.png"></a></div>
-            <div class="type_box"><a href=""><img src="../../static/images/huizong/type03.png"></a></div>
+            <div class="type_box">
+              <a 
+                target="_blank"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'"
+              ><img src="../../static/images/huizong/type01.png"></a>
+            </div>
+            <div class="type_box">
+              <a
+                target="_blank"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea"><img src="../../static/images/huizong/type02.png"></a>
+            </div>
+            <div class="type_box">
+              <a 
+                target="_blank"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&userAuth=AF0010403'"><img src="../../static/images/huizong/type03.png"></a></div>
           </div>
         </div>
         <div class="col3">
@@ -48,8 +71,8 @@
             <div class="user_show">
               <p class="user_tip">Hi~欢迎来到28快运！</p>
               <p class="user_profit">
-                <a>登录</a>
-                <a>注册</a>
+                <a href="/login">登录</a>
+                <a href="/regisiter">注册</a>
               </p>
             </div>
           </div>
@@ -64,16 +87,23 @@
         <h3 class="p_title">优质货主</h3>
         <div 
           class="swiper-container" 
-          v-if="shipperData.length > 0">
+          v-if="shipperData.list!== undefined&&shipperData.list!== null&&shipperData.list.length > 0">
           <ul class="swiper-wrapper p_owner_list clearfix">
             <li 
               class="swiper-slide"                
-              v-for="(item, index) in shipperData" 
+              v-for="(item, index) in shipperData.list" 
               :key="index">
-              <a href="">
+              <a 
+                target="_blank"
+                :href="'/member/' + item.companyId">
                 <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
                 <div class="owner_info">
-                  <p class="owner_name">{{ item.companyName }}<span><i class="iconfont iconhuo"/>{{ item.liveness }}</span></p>
+                  <p class="owner_name">
+                    <span 
+                      class="owner_name_companyName fl" 
+                      :title="item.companyName">{{ item.companyName }}</span>
+                    <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                  </p>
                   <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
                   <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
                 </div>
@@ -101,11 +131,19 @@
           <ul class="link link2 clearfix">
             <li>
               <span><i class="iconfont iconfuwu"/></span>
-              <span><a class="btn_order">在线下单</a></span>
+              <span>
+                <a 
+                  class="btn_order" 
+                  target="_blank"
+                  href="/create/order">在线下单</a>
+              </span>
             </li>
             <li>
               <span><i class="iconfont iconicon"/></span>
-              <span><a class="btn_send">发布货源</a></span>
+              <span><a 
+                class="btn_send"
+                target="_blank"
+                href="/create/huoyuan">发布货源</a></span>
             </li>
             <div class="num">今日已有<b>2368</b>人在线下单获得优惠</div>
           </ul>
@@ -115,7 +153,11 @@
           <ul class="link clearfix">
             <li>
               <span><i class="iconfont iconfuwu"/></span>
-              <span><a href="">运单查询</a></span>
+              <span>
+                <a 
+                  target="_blank"
+                  href="/ydcx">运单查询</a>
+              </span>
             </li>
             <li>
               <span><i class="iconfont iconicon"/></span>
@@ -128,11 +170,19 @@
           <ul class="link clearfix">
             <li>
               <span><i class="iconfont iconfuwu"/></span>
-              <span><a href="">企业合作</a></span>
+              <span>
+                <a 
+                  target="_blank"
+                  href="/regisiter">司机加入</a>
+              </span>
             </li>
             <li>
               <span><i class="iconfont iconicon"/></span>
-              <span><a href="">专线加盟</a></span>
+              <span>
+                <a
+                  target="_blank"
+                  href="/regisiter">专线加盟</a>
+              </span>
             </li>
           </ul>
         </div>
@@ -143,8 +193,8 @@
         </div>
         <a 
           class="link_hy" 
-          href="">进入货源大厅</a>
-      
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">进入货源大厅</a>   
           <!-- 新增货源 -->
       </div>
     </div>
@@ -155,71 +205,85 @@
           <h3>最新货源信息</h3>
         </div>
         <div class="hy_info_user_box fl">
-          <ul class="hy_info_user_list">
-            <li>
+          <ul 
+            class="hy_info_user_list"
+            v-if="newListData!== undefined && newListData!== null &&newListData.length>0">
+            <li
+              v-for="(item, index) in newListData" 
+              :key="index">
               <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">11用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
+                <span class="hy_info_user_info_user">用户 {{ item.creater }} </span>
+                <span class="hy_info_user_info_time">{{ item.time }}</span>
               </div>
               <div class="hy_info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
+                <span class="fl">发布<b>{{ item.startCity }}</b>到<b>{{ item.endCity }}</b></span>
+                <span class="info_user_text_goods fl">{{ item.goodsTypeName }}|{{ item.goodsNum }}件|{{ item.goodsWeight |kilogram }}公斤|体积{{ item.goodsVolume }}方  </span>                   
                 <a 
-                  href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
+                  class="hy_info_user_text_link fr"
+                  target="_blank"
+                  :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">查看货源</a>
               </div>
             </li>
-            <li>
-              <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">22用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
-              </div>
-              <div class="hy_info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
-                <a 
-                  href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
-              </div>
-            </li>
-            <li>
-              <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">33用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
-              </div>
-              <div class="hy_info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
-                <a 
-                  href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
-              </div>
-            </li>
-   
           </ul>
+          <div 
+            class="error"
+            v-else>没有数据</div>
         </div>
       </div>
       <div class="hy_info_col2 fl clearfix">
         <div class="hy_info_num">
           <ul class="hy_info_list clearfix">
             <li>
-              <span><i class="iconfont iconhuowu"/>当前货物</span>
-              <span class="hy_info_list_num">229089</span>
+              <span>
+                <i class="iconfont iconhuowu"/>
+                <a
+                  target="_blank" 
+                  href="/huoyuan">当前货物</a>
+              </span>
+              <span class="hy_info_list_num">{{ statisticsData.goodsCount }}</span>
             </li>
             <li>
-              <span><i class="iconfont iconwangfandijia"/>物流专线</span>
-              <span class="hy_info_list_num">229089</span>
+              <span>
+                <i class="iconfont iconwangfandijia"/>
+                <a
+                  target="_blank" 
+                  href="/zhuanxian/list">物流专线</a>
+              </span>
+              <span class="hy_info_list_num">{{ statisticsData.transportRangeCount }}</span>
             </li>
             <li>
-              <span><i class="iconfont iconwuliu"/>当前货物</span>
-              <span class="hy_info_list_num">45646</span>
+              <span>
+                <i class="iconfont iconwuliu"/>
+                <a
+                  target="_blank" 
+                  href="/cheyuan">当前车源</a>
+              </span>
+              <span class="hy_info_list_num">{{ statisticsData.carInfoCount }}</span>
             </li>
           </ul>
           <ul class="hy_info_text_list">
             <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
-            <li>货源<span class="hy_info_text_num">8951</span></li>
-            <li>专线<span class="hy_info_text_num">854</span></li>
-            <li>车源<span class="hy_info_text_num">8011</span></li>
+            <li>
+              <a
+                target="_blank" 
+                href="/huoyuan">
+                货源<span class="hy_info_text_num">{{ statisticsData.toDayGoodsCount }}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank" 
+                href="/zhuanxian/list">
+                专线<span class="hy_info_text_num">{{ statisticsData.toDayTransportRangeCount }}</span>
+              </a>
+            </li>
+            <li>
+              <a
+                target="_blank" 
+                href="/cheyuan">
+                车源<span class="hy_info_text_num">{{ statisticsData.toDayCarInfoCount }}</span>
+              </a>
+            </li>
           </ul>
         </div>
       </div>
@@ -230,42 +294,54 @@
         <h3 class="gr_title">货源推荐</h3>
         <div class="gr_txt"><span>180789</span>条专线，为您优选12条热门优质专线</div>
         <div class="gr_sch">
-          <div class="gr_sch_city">
+          <div 
+            id="huoyuan_from1"
+            class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入出发地" 
-              id="groom_pageinp1">
+              id="huoyuan_pageinp1">
           </div>
           <div class="gr_sch_icon"><i class="iconfont iconjiantou_xiangyou_o"/></div>
-          <div class="gr_sch_city">
+          <div 
+            id="huoyuan_from2"
+            class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入到达地" 
-              id="groom_pageinp2">
+              id="huoyuan_pageinp2">
           </div>
-          <div class="gr_sch_btn"><a href="">搜索</a></div>
+          <div class="gr_sch_btn"><a 
+          @click="groomSearch()">搜索</a></div>
         </div>
         <a 
-          href="" 
-          class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
+          class="gr_link"
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">
+        货源大厅<i class="iconfont iconjiantou2"/></a>
       </div>
       <div class="p_type_nav">
-        <a href="">信誉最高</a>
-        <a href="">交易量</a>
-        <a href="">运输时效</a> 
-        <a href="">重货价格最低</a> 
-        <a href="">轻货价格最低</a>       
+        <a 
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
+        <a 
+          target="_blank"
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
       </div>
       <div class="bd">
         <div class="col1">
-          <ul class="p_hy_list clearfix">
+          <ul 
+            class="p_hy_list clearfix"
+            v-if="recommendData.list!==undefined &&recommendData.lis!==null&&recommendData.list.length>0">
             <li               
-              v-for="(item, index) in recommendListData" 
+              v-for="(item, index) in recommendData.list" 
               :key="index">
-              <a href="">
+              <a 
+                target="_blank"
+                :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
                   <span class="label_provider">发布者:</span>
-                  <span class="provider">{{ item.createrName }}张小丽</span>
+                  <span class="provider">{{ item.createrName }}</span>
                   <span class="sure">认证</span>
                 </div>
                 <div class="md_box">
@@ -277,342 +353,26 @@
                   </span>
                   <div class="city">{{ item.endCity }}</div>
                 </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span 
-                    class="item"
-                    v-for="(items, index) in item.goodsList" 
-                    :key="index">钢材</span>
+                <div class="type_box hy_list_goods">
+                  <span class="type_box hy_list_name">货物:</span>
+                  <span class="type_box hy_list_goods">{{ item.goodsTypeName }}</span>
                 </div>
                 <div class="type_box">
                   <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
+                  <span class="item"><b>{{ item.goodsNum }}</b>件</span>
+                  <span class="item">{{ item.goodsWeight |kilogram }}公斤</span>
+                  <span class="item">{{ item.goodsVolume }}m³</span>
+                  <!-- <span class="time">{{ item.time }}</span> -->
                 </div>
+                <div class="hy_list_time">时间：{{ item.time }}</div>
               </a>
             </li>
-            <!-- <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">安能物流</span>
-                  <span class="sure">认证</span>
-                </div>
-                <div class="md_box">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="type_box">
-                  <span class="">货物:</span>
-                  <span class="item">钢材</span>
-                </div>
-                <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>31</b>件</span>
-                  <span class="item">51公斤</span>
-                  <span class="item">21m³</span>
-                  <span class="time">2分钟前</span>
-                </div>
-              </a>
-            </li> -->
           </ul>
+          <div 
+            class="error" 
+            v-else>
+            没有数据
+          </div>
         </div>
         <div class="col2">
           <div class="subscribe">
@@ -639,7 +399,10 @@
           </div>
           <div class="weixin">
             <div class="pic"><img src="../../static/images/huizong/weixin.png"></div>
-            下载<a href="#">【28快运APP】</a>，您可查看更多货源，并可实时接收28快运为您推荐的精品货源提醒
+            下载
+            <a
+              target="_blank" 
+              href="http://h5.28tms.com/">【28快运APP】</a>，您可查看更多货源，并可实时接收28快运为您推荐的精品货源提醒
           </div>
         </div>
       </div>
@@ -653,8 +416,9 @@
         </div>
         <a
           class="btn_release fr" 
-          href=""
-        >发布求车信息</a>
+          target="_blank"
+          href="/create/huoyuan"
+        >发布车源信息</a>
       </div>
       <div class="release_total">
         <span class="release_total_txt">平台已撮合</span>
@@ -674,57 +438,61 @@
           <span class="title_txt">近3个月发布货源最多的货主</span>
         </div>
         <div class="col1">
-          <div class="rank_box">
-            <ul class="ranking_info clearfix">
-              <li class="rank_num no1">NO.I</li>
-              <li class="phone">159****4589</li>
-              <li class="sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
-            </ul>
-            <div class="bd">
-              <div class="col1"><img src="../../static/images/huizong/u2377.png" ></div>
-              <div class="col2">
-                <p>最近三个月发布货源<b>455</b>次</p>
-                <p>累计成交<b>146</b>笔订单，收到好评<b>28</b>次</p>
-                <p>使用现金券省<b class="money">2389</b>元</p>
-                <p class="prize"><span class="tit">奖：</span>平台额外奖励2799元现金</p>
+          <div 
+            class="clearfix" 
+            v-if="darenData!== undefined && darenData!== null &&darenData.length>0">
+            <div 
+              class="rank_box"
+              v-for="(item, index) in darenData" 
+              :key="index">
+              <ul class="ranking_info clearfix">
+
+                <li 
+                  class="rank_num no1"
+                  v-if="index === 0">NO.I</li>
+                <li 
+                  class="rank_num no2"
+                  v-else-if="index === 1">NO.2</li>
+                <li
+                  class="rank_num no3"
+                  v-else-if="index === 2">NO.3</li>                                   
+                
+                <li class="rank_name">{{ item.companyName }}</li>
+                <li class="rank_sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
+              </ul>
+              <div class="bd">
+                <div class="col1">
+                  <img 
+                    v-if="index === 0"
+                    src="../../static/images/huizong/daren_01.png" >
+                  <img 
+                    v-else-if="index === 1"
+                    src="../../static/images/huizong/daren_02.png" >
+                  <img 
+                    v-else-if="index === 2"
+                    src="../../static/images/huizong/daren_03.png" >
+                </div>
+                <div class="col2">
+                  <p>最近三个月发布货源<b>{{ item.lastThreeMonthSupplyNum }}</b>次</p>
+                  <p>累计成交<b>{{ item.orderNumber }}</b>笔订单，收到好评<b>{{ item.evaGoodCount }}</b>次</p>
+                  <p>使用现金券省<b class="money">{{ item.usedCoupon }}</b>元</p>
+                  <p class="rank_prize"><span class="rank_prize_tit">奖：</span>平台额外奖励{{ item.evaGoodCount }}元现金</p>
+                </div>
               </div>
             </div>
           </div>
-          <div class="rank_box">
-            <ul class="ranking_info clearfix">
-              <li class="rank_num no2">NO.I</li>
-              <li class="phone">159****4589</li>
-              <li class="sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
-            </ul>
-            <div class="bd">
-              <div class="col1"><img src="../../static/images/huizong/u2418.png" ></div>
-              <div class="col2">
-                <p>最近三个月发布货源<b>455</b>次</p>
-                <p>累计成交<b>146</b>笔订单，收到好评<b>28</b>次</p>
-                <p>使用现金券省<b class="money">2389</b>元</p>
-                <p class="prize"><span class="tit">奖：</span>平台额外奖励2799元现金</p>
-              </div>
-            </div>
-          </div>
-          <div class="rank_box">
-            <ul class="ranking_info clearfix">
-              <li class="rank_num no3">NO.3</li>
-              <li class="phone">159****4589</li>
-              <li class="sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
-            </ul>
-            <div class="bd">
-              <div class="col1"><img src="../../static/images/huizong/u2441.png" ></div>
-              <div class="col2">
-                <p>最近三个月发布货源<b>455</b>次</p>
-                <p>累计成交<b>146</b>笔订单，收到好评<b>28</b>次</p>
-                <p>使用现金券省<b class="money">2389</b>元</p>
-                <p class="prize"><span class="tit">奖：</span>平台额外奖励2799元现金</p>
-              </div>
-            </div>
+          <div 
+            class="error"
+            v-else>
+            没有数据
           </div>
         </div>
         <div class="col2">
-          <img src="../../static/images/huizong/rank_ad.jpg">
+          <a
+            target="_blank"
+            href="/create/huoyuan">
+            <img src="../../static/images/huizong/rank_ad.jpg">
+          </a>
         </div>
       </div>
     </div>
@@ -737,11 +505,14 @@
         </div>  
         <ul 
           class="p_co_owner_list clearfix"
-          v-if="monthShipperData.length > 0">
+          v-if="monthShipperData.list!==undefined&&monthShipperData.list!==null&&monthShipperData.list.length > 0">
           <li 
-            v-for="(item, index) in monthShipperData" 
+            v-for="(item, index) in monthShipperData.list" 
             :key="index">
-            <a href="">
+            <a 
+              target="_blank"
+              :href="'/member/' + item.companyId"
+            >
               <div 
                 class="rank_num no1" 
                 v-if="index === 0">
@@ -749,18 +520,23 @@
               </div>
               <div 
                 class="rank_num no2" 
-                v-if="index === 1">
+                v-else-if="index === 1">
                 NO.2
               </div>
               <div 
                 class="rank_num no3" 
-                v-if="index === 2">
+                v-else-if="index === 2">
                 NO.3
               </div>
-              <div class="pic"><img :src="item.companyFacadeFile" ></div>
-              <div class="tit">{{ item.companyName }} <span class="icon_tuijian">推</span></div>
-              <div class="groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="praise">好评率{{ item.recommendedNumber }}%</div>
+              <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
+              <div class="rank_tit">
+                <span 
+                  class="rank_tit_name" 
+                  :title="item.companyName ">{{ item.companyName }} </span>
+                <span class="rank_tit_icon_tuijian">推</span>
+              </div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率{{ item.recommendedNumber }}%</div>
             </a>
           </li>
         </ul>  
@@ -880,8 +656,9 @@
         <div class="p_title_box">
           <h3 class="title">28问答</h3>
           <a 
-            href="" 
-            class="answers_link">货源大厅<i class="iconfont iconjiantou2"/>
+            target="_blank"
+            href="/help/ggp/index.jhtml" 
+            class="answers_link">全部<i class="iconfont iconjiantou2"/>
           </a>         
         </div>
         <ul class="answers_list">
@@ -912,7 +689,8 @@
       </div>
       <a 
         class="live_btn"
-        href=""
+        target="_blank"
+        href="/regisiter"
       >我要入驻</a>
     </div>
     <!-- 入住 -->
@@ -924,6 +702,11 @@ import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
   head: {},
+  filters: {
+    kilogram(value) {
+      return value * 1000
+    }
+  },
   data() {
     return {
       banners: [
@@ -931,51 +714,30 @@ export default {
         require('../../static/images/huizong/banner02.jpg'),
         require('../../static/images/huizong/banner03.jpg')
       ],
-      cityList: [
-        '上海',
-        '北京',
-        '深圳',
-        '广州',
-        '重庆',
-        '天津',
-        '苏州',
-        '成都',
-        '武汉',
-        '杭州',
-        '南京',
-        '青岛',
-        '无锡',
-        '长沙',
-        '农博',
-        '郑州',
-        '佛山',
-        '南通',
-        '东莞',
-        '西安',
-        '烟台',
-        '济南',
-        '泉州',
-        '大连',
-        '合肥',
-        '常州',
-        '福州',
-        '唐山',
-        '石家庄',
-        '潍坊',
-        '长春',
-        '沈阳',
-        '哈尔滨',
-        '温州',
-        '盐城',
-        '扬州',
-        '淄博',
-        '绍兴'
-      ]
+      currentArea: '',
+      currentProvince: '',
+      // 地点插件
+      hyStartProvince: '',
+      hyStartCity: '',
+      hyStartArea: '',
+      hyEndProvince: '',
+      hyEndCity: '',
+      hyEndArea: ''
     }
   },
   async asyncData({ $axios, query, app, error }) {
-    // 优质货主
-    let [shipperData, monthShipperData, recommendListData] = await Promise.all([
+    let [
+      hotCityData,
+      shipperData,
+      monthShipperData,
+      recommendData,
+      darenData,
+      newListData,
+      statisticsData
+    ] = await Promise.all([
+      //热门城市
+      $axios.get('/28-web/city/hot'),
+      // 优质货主
       $axios.post('/28-web/shipper/excellent', {
         currentPage: 1,
         pageSize: 10
@@ -989,22 +751,32 @@ export default {
       $axios.post('/28-web/lclOrder/orderSummary/recommendList', {
         currentPage: 1,
         pageSize: 12
-      })
+      }),
+      // 榜单达人
+      $axios.post('/28-web/lclOrder/orderSummary/findOrderDaren'),
+      //获取最新24小时内10条货源信息列表
+      $axios.get('/28-web/lclOrder/newList'),
+      //查询首页车源、货源、专线数量
+      $axios.get('/28-web//index/today/statistics')
     ])
 
     if (
+      hotCityData.status === 200 ||
       shipperData.status === 200 ||
       monthShipperData.status === 200 ||
-      recommendListData.status === 200
+      recommendData.status === 200 ||
+      darenData.status === 200 ||
+      newListData.status === 200 ||
+      statisticsData.status === 200
     ) {
       return {
-        shipperData: shipperData.data ? shipperData.data.data.list : [],
-        monthShipperData: monthShipperData.data
-          ? monthShipperData.data.data.list
-          : [],
-        recommendListData: recommendListData.data
-          ? recommendListData.data.data.list
-          : []
+        hotCityData: hotCityData.data ? hotCityData.data.data : [],
+        shipperData: shipperData.data ? shipperData.data.data : [],
+        monthShipperData: monthShipperData ? monthShipperData.data.data : [],
+        recommendData: recommendData.data ? recommendData.data.data : [],
+        darenData: darenData.data ? darenData.data.data : [],
+        newListData: newListData.data ? newListData.data.data : [],
+        statisticsData: statisticsData.data ? statisticsData.data.data : []
       }
     } else {
       error({ statusCode: 500, message: '查找不到该专线列表' })
@@ -1012,25 +784,33 @@ export default {
   },
   mounted() {
     this.intSwiper()
+    this.$nextTick(() => {
+      console.log('优质货主', this.shipperData)
+      console.log('本月货主', this.monthShipperData)
+      console.log('货源推荐', this.recommendData)
+      console.log('热门城市', this.hotCityData)
+      console.log('货量达人', this.darenData)
+      console.log('24小时在线新闻', this.newListData)
+      console.log('统计数据', this.statisticsData)
+
+      this.currentArea = this.getCookie('currentAreaFullName')
+      this.currentProvince = this.getCookie('currentProvinceFullName')
+      console.log('省市', this.currentArea, this.currentProvince)
+      console.log(decodeURIComponent(document.cookie))
+    })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
-      console.log($)
-      console.log(layer)
       /*地点插件 */
-      $('#groom_pageinp1').citypicker()
-      $('#groom_pageinp2').citypicker()
+      $('#huoyuan_pageinp1').citypicker()
+      $('#huoyuan_pageinp2').citypicker()
       $('#sb_pageinp1').citypicker()
       $('#sb_pageinp2').citypicker()
+
       /* 文字滚动*/
       $('.p_hy_info .hy_info_user_box').Scroll({
         line: 1,
         speed: 600,
         timer: 3000
       })
-    })
-    this.$nextTick(() => {
-      console.log('优质货主', this.shipperData)
-      console.log('本月货主', this.monthShipperData)
-      console.log('货源推荐', this.recommendListData)
     })
   },
   methods: {
@@ -1071,7 +851,7 @@ export default {
       // 货主
       let swiper = new Swiper('#owner_swiper .swiper-container', {
         slidesPerView: 5,
-        spaceBetween: 30,
+        spaceBetween: 20,
         freeMode: true,
         pagination: {
           el: '.swiper-pagination',
@@ -1079,9 +859,51 @@ export default {
         },
         navigation: {
           nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev'
+          prevEl: '.swiper-button-prev',
+          disabledClass: 'my-button-disabled'
         }
       })
+    },
+    //搜索货源
+    groomSearch() {
+      this.getPlace(
+        '#huoyuan_from1',
+        'hyStartProvince',
+        'hyStartCity',
+        'hyStartArea'
+      )
+      this.getPlace('#huoyuan_from2', 'hyEndProvince', 'hyEndCity', 'hyEndArea')
+      // 跳转
+      let huoyuanUrl = `/huoyuan?startProvince=${
+        this.hyStartProvince
+      }&startCity=${this.hyStartCity}&startArea=${
+        this.hyStartArea
+      }&endProvince=${this.hyEndProvince}&endCity${this.hyEndCity}&endArea${
+        this.hyEndArea
+      }`
+      window.location.href = huoyuanUrl
+    },
+    //表单获取数据封装
+    getPlace(el, province, city, area) {
+      let arr = []
+      $(el + ' .select-item').each(function(i, e) {
+        arr.push($(this).text())
+      })
+      this[province] = arr[0] ? arr[0] : ''
+      this[city] = arr[0] ? arr[0] : ''
+      this[area] = arr[0] ? arr[0] : ''
+    },
+    //获取cookies的值
+    getCookie(cookieName) {
+      var strCookie = document.cookie
+      var arrCookie = strCookie.split('; ')
+      for (var i = 0; i < arrCookie.length; i++) {
+        var arr = arrCookie[i].split('=')
+        if (cookieName == arr[0]) {
+          return decodeURIComponent(arr[1])
+        }
+      }
+      return ''
     }
   }
 }
@@ -1291,6 +1113,7 @@ export default {
     background: $green;
   }
 }
+/*货源推荐*/
 .p_hy_groom {
   .bd {
     .col1 {
@@ -1302,7 +1125,7 @@ export default {
       @extend .fr;
       padding: 20px 10px;
       width: 265px;
-      height: 423px;
+      height: 507px;
       background: $green;
     }
   }
@@ -1385,6 +1208,11 @@ export default {
     }
   }
 }
+.p_hy_list {
+  > li {
+    height: auto;
+  }
+}
 /*货量达人榜*/
 .rank_people {
   margin: 0 auto 20px auto;
@@ -1409,8 +1237,8 @@ export default {
     overflow: hidden;
     display: inline-block;
     margin-right: 25px;
-    padding: 20px;
-    width: 336px;
+    padding: 15px;
+    width: 346px;
     height: 160px;
     background: $white;
     border: 1px solid $border_color;
@@ -1423,7 +1251,7 @@ export default {
       > li {
         @extend .fl;
         &.rank_num {
-          width: 80px;
+          width: 75px;
           font-size: 20px;
           font-weight: bold;
         }
@@ -1436,11 +1264,11 @@ export default {
         &.no3 {
           color: $green;
         }
-        &.phone {
-          width: 125px;
+        &.rank_name {
+          margin-right: 15px;
           font-weight: bold;
         }
-        &.sure {
+        &.rank_sure {
           display: table;
           word-spacing: -1em;
           border: 1px solid $light_orange;
@@ -1467,11 +1295,11 @@ export default {
       overflow: hidden;
       .col1 {
         @extend .fl;
-        width: 80px;
+        width: 70px;
       }
       .col2 {
         @extend .fr;
-        width: 256px;
+        width: 275px;
         > p {
           margin-bottom: 8px;
           b {
@@ -1481,9 +1309,9 @@ export default {
               font-weight: normal;
             }
           }
-          &.prize {
+          &.rank_prize {
             font-weight: bold;
-            .tit {
+            .rank_prize_tit {
               font-size: 18px;
               color: $light_orange;
             }

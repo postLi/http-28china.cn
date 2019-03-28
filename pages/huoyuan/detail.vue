@@ -110,7 +110,7 @@
               <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsTypeName ? hyDetail.goodsTypeName : '' }}</font></td></tr>
               <tr><td class="arc_td1">数量：</td><td class="arc_td2">{{ hyDetail.goodsNum ? hyDetail.goodsNum + '件': '' }}</td></tr>
               <tr><td class="arc_td1">重量：</td><td
-              class="arc_td2">{{ hyDetail.goodsWeight }}吨</td></tr>
+              class="arc_td2">{{ hyDetail.goodsWeight }}公斤</td></tr>
               <tr><td class="arc_td1">体积：</td><td class="arc_td2">{{ hyDetail.goodsVolume }}立方米</td></tr>
               <tr><td class="arc_td1">有效期：</td><td
               class="arc_td2">{{ hyDetail.orderClass }}</td></tr>

@@ -675,6 +675,7 @@ export default {
       window.onscroll = function() {
         //滚动条滚动的高度
         let _height = $(document).scrollTop()
+        console.log(_height)
         if (_height >= 500) {
           _nav.css({ position: 'fixed', top: '0' })
         } else {

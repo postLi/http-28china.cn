@@ -359,7 +359,7 @@
                   </p>
                   <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                     <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
-                  <font>{{ item.creater?item.creater:'' }}</font></p>
+                  <font>{{ item.driverName?item.driverName:'' }}</font></p>
                   <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
                 </li>
                 <li class="cy_list_3">
@@ -438,7 +438,7 @@
                   </p>
                   <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
                     <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
-                  <font>{{ item.createrName?item.createrName:'' }}</font></p>
+                  <font>{{ item.driverName?item.driverName:'' }}</font></p>
                   <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
                 </li>
                 <li class="cy_list_3">
@@ -1489,14 +1489,16 @@ export default {
       }
     },
     goToCy() {
-      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.cy1.startCity
-      }&startProvince=${this.cy1.startProvince}`
+      window.open(
+        `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=
+        ${this.cy1.startCity}&startProvince=${this.cy1.startProvince}`
+      )
     },
     goToCy1() {
-      window.location.href = `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.cy1.endCity
-      }&startProvince=${this.cy1.endProvince}`
+      window.open(
+        `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=
+        ${this.cy1.endCity}&startProvince=${this.cy1.endProvince}`
+      )
     },
     clickImg(int) {
       this.showImg = int

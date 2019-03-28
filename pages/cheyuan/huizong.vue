@@ -748,14 +748,199 @@
     <!-- 推荐车源 -->
     <div class="user_discuss  grid_c1">
       <h3 class="p_title">用户点评</h3>
-      <div class="discuss-list-content">
-        <div class="discuss_item">11</div>
-        <div class="discuss_item">22</div>
-        <div class="discuss_item">33</div>
-        <div class="discuss_item">44</div>
+      <div class="discuss-list-content clearfix">
+        <div class="discuss_item">
+          <div class="discuss_ad_hd">
+            <img 
+              class="ad_hd_img"  
+              src="//imgcdn50.zuzuche.com/assets/book/desktop/book/images/reviews_banner_text-305b1b2dc9c12ac66aedb8620f257c02.png">
+          </div>
+          <ul class="usr_discuss_tab">
+            <li class="user_discuss_active">洛杉矶</li>
+            <li>墨尔本</li>
+            <li>伦敦</li>
+            <li>曼谷</li>
+          </ul>
+          <div class="user_discuss_tab_content">
+            <div class="tab_item">
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v4/enterprise_100x50.png" 
+                  class="logo">
+                <span>8.4</span>分
+              </div>
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/sixt_id_32/100x50.png" 
+                  class="logo">
+                <span>8.3</span>分
+              </div>
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/world/dealer/logo/Hertz_dealer_pic_big_799c968e294.jpg"
+                  class="logo">
+                <span>8.3</span>分
+              </div>
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/europcar_id_44/100x50.png"
+                  class="logo">
+                <span>8.2</span>分
+              </div>
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/alamo_id_29/100x50.png" 
+                  class="logo">
+                <span>8.2</span>分
+              </div>
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/interrent_id_79/100x50.png" 
+                  class="logo">
+                <span>8.2</span>分
+              </div>
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/avis_id_30/100x50.png" 
+                  class="logo">
+                <span>8.1</span>分
+              </div>
+              <div class="car-dealers">
+                <img 
+                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/national_id_34/100x50.png" 
+                  class="logo">
+                <span>8.1</span>分
+              </div>
+            </div>
+            <div 
+              class="tab_item"
+              style="display: none;">2222</div>
+            <div 
+              class="tab_item"
+              style="display: none;">3333</div>
+            <div 
+              class="tab_item"
+              style="display: none;">44444</div>
+          </div>      
+        </div>
+        <div class="discuss_item">
+          <div 
+            class="discuss_item_pic" 
+            style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/41/2302afa856b62e5f33be9e1a80656da2_1000x.jpg) ">
+            <div
+              class="item_pic_user"
+              style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
+          </div>
+          <div class="discuss_item_content">
+            <div class="content-tit">来自于彭**的评价</div>
+            <div class="content-score">非常满意 10 分</div>
+            <div class="content-text">很满意，过程中有问必答 回复也很及时</div>
+            <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+          </div>
+        </div>
+        <div class="discuss_item">
+          <div 
+            class="discuss_item_pic" 
+            style="background-image:url(//imgcdn50.zuzuche.com/world/survey/view/22/462cac03b2935ed4d3ab75f424f1deb0_1000x.jpg);">
+            <div
+              class="item_pic_user"
+              style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
+          </div>
+          <div class="discuss_item_content">
+            <div class="content-tit">来自于彭**的评价</div>
+            <div class="content-score">非常满意 10 分</div>
+            <div class="content-text">在租租车上预定非常方便，没有后顾之忧，同时给你行程规划的导航载入。很方便</div>
+            <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+          </div>
+        </div>
+        <div class="discuss_item">
+          <div 
+            class="discuss_item_pic" 
+            style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
+            <div
+              class="item_pic_user"
+              style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
+          </div>
+          <div class="discuss_item_content">
+            <div class="content-tit">来自于彭**的评价</div>
+            <div class="content-score">非常满意 10 分</div>
+            <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
+            <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+          </div>
+        </div>
       </div>
     </div>
     <!-- 用户评价 -->
+    <div class="p_release release_car">
+      <div class="release_box">
+        <div class="release_box_txt fl">
+          <h3 class="release_box_txt_tit">让承运商主动来找我</h3>
+          快速发布货源，让承运商主动联系我，自主挑选合适承运商
+        </div>
+        <div class="btn_box fr">
+          <a 
+            href=""
+            class="btn_release">快速求车信息</a>
+        </div>
+      </div>
+    </div>
+    <!-- 发布求车信息 -->
+    <div class="bj_2">
+      <div class="p_company_owner">
+        <div class="p_title_box">
+          <h3 class="title">本月优质企业货主</h3>
+          <span class="title_txt">稳定货源，好评率高</span>
+        </div>  
+        <ul class="p_co_owner_list clearfix">
+          <li>
+            <a href="">
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
+            </a>
+          </li>
+          <li>
+            <a href="">
+              <div class="rank_num no1">NO.I</div>
+              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
+              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
+              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_praise">好评率98.2%</div>
+            </a>
+          </li>
+        </ul>    
+      </div> 
+    </div>  
+    <!-- 本月明星 -->
   </div>
 </template>
 <script>
@@ -884,9 +1069,8 @@ export default {
   }
   .CY_list_txt,
   .CY_list_price {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     color: $tit_color;
-    // margin-bottom: 5px;
     .CY_list_price_num {
       color: $orange;
       font-size: $f_16;
@@ -894,8 +1078,7 @@ export default {
   }
   .CY_list_praise {
     overflow: hidden;
-    margin-bottom: 5px;
-    color: $light_gray;
+    margin-bottom: 10px;
     .CY_list_praise_list {
       > li {
         @extend .fl;
@@ -971,7 +1154,7 @@ export default {
   .gr_cy_info {
     > p {
       line-height: 25px;
-      color: $gray;
+      color: $tit_color;
       b {
         color: $orange;
       }
@@ -1077,8 +1260,10 @@ export default {
 }
 /*用户点评*/
 .user_discuss {
-  .discuss-list-content {
+  .p_title {
+    text-align: center;
   }
+  margin-bottom: 50px;
   .discuss_item {
     &:first-child {
       margin-left: 0;
@@ -1090,20 +1275,139 @@ export default {
     height: 430px;
     overflow: hidden;
     background: $white;
-    .discuss-banner-hd {
-      height: 175px;
-      background: #bbb;
+    .discuss_ad_hd {
+      padding: 34px 0;
+      height: 108px;
+      text-align: center;
+      background: #325bcc;
+      .ad_hd_img {
+        height: 100%;
+        display: inline-block;
+      }
     }
-    .discuss-score-tabs {
-      > .tabs {
-        > li {
-          display: inline-block;
-          vertical-align: middle;
-          width: 25%;
-          text-align: center;
+    .usr_discuss_tab {
+      height: 40px;
+      color: rgba(51, 51, 51, 0.8);
+      line-height: 40px;
+      box-shadow: 0 1px 0 0 hsla(0, 0%, 93%, 0.5);
+      font-size: 0;
+      > li {
+        display: inline-block;
+        vertical-align: middle;
+        width: 25%;
+        text-align: center;
+        font-size: $f_14;
+        &.user_discuss_active {
+          color: $blue;
+          font-size: 16px;
+          position: relative;
+          &:after {
+            position: absolute;
+            left: 22px;
+            bottom: 0;
+            content: ' ';
+            display: inline-block;
+            width: 40px;
+            height: 2px;
+            background: $blue;
+          }
         }
       }
     }
+    .user_discuss_tab_content {
+      padding: 16px;
+      font-size: 0;
+      > .tab_item {
+        .car-dealers {
+          display: inline-block;
+          vertical-align: text-top;
+          padding-bottom: 13px;
+          margin-bottom: 1px;
+          color: $blue;
+          font-size: $f_12;
+          border-right: 1px dashed #e7e7e7;
+          width: 155px;
+          &:nth-child(2n) {
+            border-right: 0;
+            .logo {
+              margin-left: 25px;
+            }
+          }
+          .logo {
+            width: 60px;
+            height: 30px;
+            margin-right: 9px;
+            display: inline-block;
+            vertical-align: middle;
+          }
+          > span {
+            font-size: $f_18;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+    .discuss_item_pic {
+      position: relative;
+      height: 175px;
+      background-size: cover;
+      background-position: 50%;
+      .item_pic_user {
+        position: absolute;
+        left: 138px;
+        bottom: -22px;
+        border: 3px solid #fff;
+        width: 58px;
+        height: 58px;
+        box-shadow: 0 4px 10px 2px hsla(0, 0%, 85%, 0.4);
+        border-radius: 50%;
+        background-position: 50%;
+        background-size: cover;
+      }
+    }
+    .discuss_item_content {
+      padding: 0 20px;
+      .content-tit {
+        padding-top: 28px;
+        line-height: 1;
+        color: $gray;
+        text-align: center;
+      }
+      .content-score {
+        text-align: center;
+        padding-top: 6px;
+        color: #508ef0;
+        line-height: 1;
+      }
+      .content-text {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
+        padding-top: 20px;
+        height: 88px;
+        text-align: left;
+        line-height: 22px;
+        color: $tit_color;
+      }
+      .content-address {
+        position: absolute;
+        bottom: 25px;
+        font-size: 12px;
+        line-height: 18px;
+        text-align: left;
+        color: $gray;
+        .iconfont {
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+}
+/*求车信息*/
+.release_car {
+  .release_box_txt {
+    width: 250px;
   }
 }
 </style>

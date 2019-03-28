@@ -288,8 +288,6 @@ $f_12: 12px;
   .category_menu_list {
     padding-left: 20px;
     display: table;
-    word-spacing: -1em;
-
     .item {
       display: inline-block;
       margin: 15px 0 0 0;
@@ -488,6 +486,14 @@ $f_12: 12px;
         border: 1px solid $green;
       }
     }
+    .hy_list_goods{
+      line-height: 20px;
+      >span{
+        display: inline-block;
+        max-width: 200px;
+        @extend .ellipsis;
+      }
+    }
   }
 }
 
@@ -582,17 +588,14 @@ $f_12: 12px;
     border-left: 1px dashed #ddd;
     .iconfont{font-weight: bold;}
   }
-
   .hy_info_list {
     overflow: hidden;
     height: 60px;
-
     >li {
       @extend .fl;
       margin-left: 45px;
       width: 90px;
       line-height: 30px;
-
       >span {
         display: block;
         line-height: 30px;
@@ -601,7 +604,6 @@ $f_12: 12px;
           color: $light_orange;
           padding-right: 10px;
         }
-
         &.hy_info_list_num {
           font-weight: bold;
           color: $light_orange;
@@ -747,7 +749,6 @@ $f_12: 12px;
   .release_total {
     margin: 30px auto 0 auto;
     display: table;
-    word-spacing: -1em;
     width: 430px;
     font-size: 16px;
     line-height: 20px;
@@ -1057,8 +1058,9 @@ $f_12: 12px;
     }
 
     .gr_text_txt {
-      margin: 15px 0;
+      margin: 10px 0;
       line-height: 20px;
+      font-size: $f_12;
     }
 
     .error {
@@ -1175,8 +1177,7 @@ $f_12: 12px;
       height: 195px;
 
       img {
-        width: 100%;
-        height: 100%;
+        max-width: 272px;
       }
     }
 

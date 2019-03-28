@@ -161,7 +161,19 @@
             </li>
             <li>
               <span><i class="iconfont iconicon"/></span>
-              <span><a href="">客服服务</a></span>
+              <span>
+                <a
+                  target="_blank"
+                  href="http://wpa.qq.com/msgrd?v=3&uin=1075930808&site=qq&menu=yes">
+                  客服服务
+                  <img 
+                    style=" display: none"
+                    border="0" 
+                    src="http://wpa.qq.com/pa?p=2:2708444167:51" 
+                    alt="点击这里给我发消息"
+                    title="点击这里给我发消息">
+                </a>
+              </span>
             </li>
           </ul>
         </div>
@@ -292,7 +304,7 @@
     <div class="p_hy_groom clearfix">
       <div class="hd clearfix">
         <h3 class="gr_title">货源推荐</h3>
-        <div class="gr_txt"><span>180789</span>条专线，为您优选12条热门优质专线</div>
+        <div class="gr_txt"><span>{{ statisticsData.goodsCount }}</span>条专线，为您优选12条热门优质专线</div>
         <div class="gr_sch">
           <div 
             id="huoyuan_from1"
@@ -694,8 +706,8 @@
       >我要入驻</a>
     </div>
     <!-- 入住 -->
-  </div>
-</template>
+
+</div></template>
 <script>
 import 'swiper/dist/css/swiper.css'
 import Swiper from 'Swiper'
@@ -792,11 +804,10 @@ export default {
       console.log('货量达人', this.darenData)
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
+      console.log('cookies', decodeURIComponent(document.cookie))
 
       this.currentArea = this.getCookie('currentAreaFullName')
       this.currentProvince = this.getCookie('currentProvinceFullName')
-      console.log('省市', this.currentArea, this.currentProvince)
-      console.log(decodeURIComponent(document.cookie))
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -821,15 +832,15 @@ export default {
           function() {
             $(this)
               .find('.swiper-button-next,.swiper-button-prev')
-              .show()
+              .removeClass('hide')
           },
           function() {
             $(this)
               .find('.swiper-button-next,.swiper-button-prev')
-              .hide()
+              .addClass('hide')
           }
         )
-        let swiper = new Swiper('#ad .swiper-container', {
+        let adSwiper = new Swiper('#ad .swiper-container', {
           effect: 'fade',
           spaceBetween: 30,
           centeredSlides: true,
@@ -844,7 +855,8 @@ export default {
           },
           navigation: {
             nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
+            prevEl: '.swiper-button-prev',
+            disabledClass: 'my-button-disabled'
           }
         })
       })
@@ -881,7 +893,8 @@ export default {
       }&endProvince=${this.hyEndProvince}&endCity${this.hyEndCity}&endArea${
         this.hyEndArea
       }`
-      window.location.href = huoyuanUrl
+      // window.location.href = huoyuanUrl
+      window.open(huoyuanUrl, '_blank')
     },
     //表单获取数据封装
     getPlace(el, province, city, area) {
@@ -950,10 +963,6 @@ export default {
   .swiper-container {
     height: 290px;
     > .swiper-slide {
-      display: none;
-    }
-    .swiper-button-prev,
-    .swiper-button-next {
       display: none;
     }
   }
@@ -1452,5 +1461,13 @@ export default {
       }
     }
   }
+}
+/*幻灯片箭头显示隐藏*/
+.swiper-container .hide {
+  opacity: 0;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  transition: opacity 0.5s;
 }
 </style>

@@ -1830,11 +1830,7 @@ export default {
   background: $icon_red_bj;
 }
 /*3、热门专线*/
-// .p_hy_groom {
-//   // > .bd {
-//   //   overflow: hidden;
-//   // }
-// }
+
 /*4、快速下单*/
 
 /*5、降价专线*/
@@ -1964,7 +1960,7 @@ export default {
   .shipper_say_name {
     font-size: 16px;
     line-height: 21px;
-    color: rgba(0, 0, 0, 0.8);
+    color: $tit_color;
     margin-bottom: 5px;
   }
   .shipper_say_des {
@@ -1972,7 +1968,7 @@ export default {
     font-size: 14px;
     height: 37px;
     overflow: hidden;
-    color: rgba(0, 0, 0, 0.36);
+    color: $gray;
     text-align: left;
   }
   .shipper_say_mask {

@@ -358,7 +358,7 @@
                     style="display: inline-block;margin:20px;background:rgb(242,242,242);padding: 10px;"
                     class="zizhu_bot_r">
                     <img
-                      src="../../static/gongsi/images/u1075.png"
+                      src="../../static/yuanqu/images/down.png"
                       alt=""
                       style="width: 90px;height: 80px;float:left">
                     <p style="width: 150px;float:left;padding-left: 10px"><a

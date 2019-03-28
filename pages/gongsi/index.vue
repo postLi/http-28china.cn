@@ -1180,6 +1180,9 @@ export default {
         .textare {
           width: 235px;
         }
+        .city-picker-dropdown {
+          left: -45px !important;
+        }
       }
       .textinput {
         width: 130px !important;

@@ -398,8 +398,16 @@ function UrlUpdateParams(url, name, value) {
 }
 function changeStart() {
   var myurl0 = UrlUpdateParams(window.location.href, 'address', '')
-  var myurl1 = UrlUpdateParams(myurl0, 'startp', '')
-  var myurl2 = UrlUpdateParams(myurl1, 'startc', '')
+  var myurl1 = UrlUpdateParams(
+    myurl0,
+    'startp',
+    REGIONSDATA_SELECTED_DATA.provinceName
+  )
+  var myurl2 = UrlUpdateParams(
+    myurl1,
+    'startc',
+    REGIONSDATA_SELECTED_DATA.cityName
+  )
   var myurl3 = UrlUpdateParams(myurl2, 'starta', '')
   var myurl4 = UrlUpdateParams(myurl3, 'start', '')
   var myurl5 = UrlUpdateParams(

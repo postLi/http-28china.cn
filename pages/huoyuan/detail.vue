@@ -148,7 +148,7 @@
               {{ isMobile ? mobile : '查看电话' }}</a></td></tr>
               <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
               <tr><td class="arc_td1">里程：</td><td class="arc_td2">{{ hyDetail.distance }}</td></tr>
-              <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.totalAmount }}</td></tr>
+              <tr><td class="arc_td1">期望运价：</td><td class="arc_td2">{{ hyDetail.forecastPrice? hyDetail.forecastPrice : '电话沟通' }}</td></tr>
             </table>
             </div>
           </div>
@@ -896,7 +896,7 @@ export default {
         {
           title: '快速下单',
           subTitle: '下单立即响应，甄选优质运力，发货有保障',
-          url: '/',
+          url: '/create/order?',
           img: '/images/cy/05xd.png'
         },
         {

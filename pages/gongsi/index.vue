@@ -667,7 +667,7 @@ export default {
     }
 
     let gsList = await getGSList($axios, 1, vo, '')
-    console.log(listC.data.data, 'listC.data.data')
+    // console.log(listC.data.data, 'listC.data.data')
     gsList.list.forEach(item => {
       // item.num = Math.ceil(Math.random() * 30)
       let arr = (item.id || '').split('')
@@ -814,7 +814,7 @@ export default {
   },
   mounted() {
     // this.initList()
-
+    $('#buxian').prop('checked', true)
     var newArr = new Array()
     var _newArr = new Array()
     let _this = this
@@ -848,10 +848,10 @@ export default {
         if ($(this).prop('checked')) {
           newArr.push($(this).attr('data-code'))
           $('#buxian').prop('checked', false)
-          console.log(newArr, 'newArrnewArr')
+          // console.log(newArr, 'newArrnewArr')
           // newArr = []
         } else {
-          console.log($(this).attr('data-code'), '$(this)')
+          // console.log($(this).attr('data-code'), '$(this)')
         }
       })
       uniqueNames = []
@@ -892,10 +892,10 @@ export default {
         '../js/city.js',
         '/layer/layer.js',
         '/layer/dist/layui.js',
-        '/js/AFLC_API.js'
+        '/js/LLL-AFLC_API.js'
       ],
       function() {
-        seajs.use(['../js/city-picker.js', '/js/AFLC_API.js'], function() {
+        seajs.use(['../js/city-picker.js', '/js/LLL-AFLC_API.js'], function() {
           seajs.use(['../gongsi/js/list_wlgs.js'], function() {
             seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
               seajs.use(['../js/gaodemap2.js'], function() {

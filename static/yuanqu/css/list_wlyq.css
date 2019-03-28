@@ -108,7 +108,8 @@ margin-left: 10px;
 .select_con dl dd{border: 0;padding:0}
 .select_con dl dd a{min-width: 65px;text-align: center;}
 .select_con dl dd a:hover, .select_con dl dd a.now { background:#3371ff; color: #fff;}
-.select_con .city-picker-span{line-height: 46px !important;}
+.select_con #parkAddress .city-picker-span{line-height: 46px !important;}
+.select_con #parkAddress1 .city-picker-span{line-height: 32px !important;}
 .ck_input{
 	width: 14px;
 	height: 14px;
@@ -489,7 +490,7 @@ border: 1px solid #eee;
 	content: '';
 	top: 12px;
 	left: 118px;
-	width: 550px;
+	width: 611px;
 	height: 1px;
 	background: #ccc;
 }

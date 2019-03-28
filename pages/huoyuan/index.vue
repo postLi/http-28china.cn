@@ -116,6 +116,15 @@
                   href="javascript:"
                   @click="orderClassClick(item)">{{ item.name }}</a>
               </dd>
+              <dt>实名认证&nbsp;:</dt>
+              <dd>
+                <a
+                  v-for="(item,index) in userAuthList"
+                  :class="[item.id === userAuth ? 'now':'']"
+                  :key="index"
+                  href="javascript:"
+                  @click="userAuthClick(item)">{{ item.name }}</a>
+              </dd>
             </dl>
           </div>
         </div>
@@ -157,7 +166,7 @@
 
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font :title="item.goodsTypeName">{{ item.goodsTypeName ? item.goodsTypeName.substring(0,4) : '' }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum ? item.goodsNum : 0 }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
@@ -178,7 +187,7 @@
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><img
-                v-if="item.authStatus === 'AF0010403'"
+                v-if="item.userAuth === 'AF0010403'"
                 src="/images/list_wlzx/10shiming.png"></P>
               <p class="p2"><img
                 v-if="item.isVip && item.isVip === '1'"
@@ -228,7 +237,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&userAuth='+userAuth+'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
             <!-- <ul class="hot-cities">
@@ -276,7 +285,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
+                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper+'&userAuth='+userAuth +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           <!-- <ul class="hot-cities">
@@ -352,7 +361,7 @@
               :key="index"
               class="hot-cities-li" ><a
                 target="_blank"
-                :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
+                :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper+'&userAuth='+userAuth +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
               
           </ul>
@@ -455,7 +464,7 @@
               target="_blank" >{{ item.companyName }}</a></span>
                 <span class="img_icon">
                   <img
-                    v-if="item.authStatus === 'AF0010403'"
+                    v-if="item.userAuth === 'AF0010403'"
                     src="/images/list_wlzx/shiming.png" >
                   <img
                     v-if="item.isVip && item.isVip === '1'"
@@ -481,7 +490,7 @@
                 <ul>
                   <li class="tj_left"><i>货物：</i><span
                     :title="item.goodsTypeName"
-                    v-if="item.goodsTypeName">{{ item.goodsTypeName }}</span></li>
+                    v-if="item.goodsTypeName">{{ item.goodsTypeName.substring(0,4) }}</span></li>
                   <li class="tj_right"><i>数量：</i><span v-if="item.goodsNum">{{ item.goodsNum ? item.goodsNum : 0 }}件</span></li>
                   <li class="tj_left"><i >重量：</i><font v-if="item.goodsWeight">{{ item.goodsWeight }}</font><em>公斤</em></li>
                   <li class="tj_right"><i >体积：</i><font v-if="item.goodsVolume">{{ item.goodsVolume }}</font><em>立方米</em></li>
@@ -634,7 +643,12 @@ export default {
         { id: 'AF0490701', name: '单次急发货源' },
         { id: 'AF0490702', name: '长期稳定货源' }
       ],
+      userAuthList: [
+        { id: '', name: '不限' },
+        { id: 'AF0010403', name: '实名认证' }
+      ],
       orderClass: '', //货源类型
+      userAuth: '', //实名认证
       AF03802: [],
       AF03802Id: '',
       goodsVolumeLower: '', //体积区间
@@ -657,6 +671,7 @@ export default {
       goodsWeightLower = '',
       goodsWeightUpper = '',
       orderClass = '',
+      userAuth = '',
       AF03801Id = '',
       AF03802Id = '',
       endArea = '',
@@ -679,6 +694,9 @@ export default {
     }
     if (query.orderClass) {
       orderClass = query.orderClass
+    }
+    if (query.userAuth) {
+      userAuth = query.userAuth
     }
     if (query.AF03801Id) {
       AF03801Id = query.AF03801Id
@@ -729,6 +747,7 @@ export default {
       endArea: endArea,
       queryType: 2,
       orderClass: orderClass,
+      userAuth: userAuth,
       AF03801Id: AF03801Id,
       AF03802Id: AF03802Id,
       goodsVolumeLower: goodsVolumeLower,
@@ -790,6 +809,7 @@ export default {
       goodsWeightLower: goodsWeightLower,
       goodsWeightUpper: goodsWeightUpper,
       orderClass: orderClass,
+      userAuth: userAuth,
       AF03801Id: AF03801Id,
       AF03802Id: AF03802Id,
       endArea: endArea,
@@ -964,14 +984,18 @@ export default {
         this.goodsWeightLower
       }&goodsWeightUpper=${this.goodsWeightUpper}&orderClass=${
         this.orderClass
-      }&endArea=${this.endArea}&endCity=${this.endCity}&endProvince=${
-        this.endProvince
-      }&startArea=${this.startArea}&startCity=${this.startCity}&startProvince=${
-        this.startProvince
-      }`
+      }&userAuth=${this.userAuth}&endArea=${this.endArea}&endCity=${
+        this.endCity
+      }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
+        this.startCity
+      }&startProvince=${this.startProvince}`
     },
     orderClassClick(item) {
       this.orderClass = item.id
+      this.search()
+    },
+    userAuthClick(item) {
+      this.userAuth = item.id
       this.search()
     },
     AF03801Click(item) {
@@ -1023,6 +1047,7 @@ export default {
             endArea: this.endArea,
             queryType: 2,
             orderClass: this.orderClass,
+            userAuth: thisuserAuth,
             AF03801Id: this.AF03801Id,
             AF03802Id: this.AF03802Id,
             goodsVolumeLower: this.goodsVolumeLower,
@@ -1112,7 +1137,7 @@ body {
   /*flex: 1;*/
   /*display: flex;*/
   /*flex-direction: column;*/
-  margin-bottom: 5px;
+  /* margin-bottom: 5px; */
 }
 .li_one {
   display: flex;

@@ -392,6 +392,7 @@
                     </span>
                     <span><a
                       style="color: #db4c26;"
+                      target="_blank"
                       :href="'/create/order?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea">立即下单</a></span>
                   </div>
                 </li>
@@ -531,11 +532,6 @@ export default {
         console.log(err)
       }
     )
-    //时效底部推荐
-    // let recommend = await $axios.post(
-    //   '/28-web/range/aging/list/related/links',
-    //   vo
-    // )
     //优质承运商推荐
     let excellents = await $axios
       .get('/28-web/logisticsCompany/excellent?pageSize=8')
@@ -965,6 +961,9 @@ img {
 .list_ul_one {
   background: url(/images/wzlImg/06sjx.png) no-repeat 166px 24px;
 }
+.list_ul_one a {
+  color: #3f94ee;
+}
 .list_line {
   float: left;
 }
@@ -1013,6 +1012,9 @@ img {
 .ul_list {
   float: left;
   margin: 23px;
+}
+.ul_list li {
+  cursor: pointer;
 }
 .num_color {
   color: #e02121;
@@ -1063,6 +1065,7 @@ img {
   float: left;
 }
 .ul_host li:hover {
+  box-shadow: 10px 10px 5px #888888;
 }
 .ul_host li .titles {
   bottom: 0%;

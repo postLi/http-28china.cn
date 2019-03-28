@@ -531,6 +531,20 @@
 import FooterLinks from '../../components/footerLinks'
 import selectMap from './selectMap'
 import HotList from '../../components/hotList'
+async function lineList($axios, currentPage, vo = {}) {
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 15
+  let res = await $axios.post('/28-web/range/list', parm)
+  console.log(res, 'resssss')
+  if (res.data.status == 200) {
+    return {
+      list: res.data.data.list,
+      page: res.data.data.pages,
+      currentPage: res.data.data.pageNum
+    }
+  }
+}
 export default {
   name: 'Zhuanxian',
   components: {
@@ -595,7 +609,24 @@ export default {
     if (!endc || endc == 'null') {
       endc = ''
     }
+    let vo = {
+      currentPage: 1,
+      pageSize: 15,
+      startProvince: startp,
+      startCity: startc,
+      startArea: starta,
+      endProvince: endp,
+      endCity: endc,
+      endArea: enda,
+      belongBrandCode: query.belongBrandCode,
+      departureTimeCode: query.departureTimeCode,
+      otherServiceCode: query.otherServiceCode,
+      parkId: query.parkId,
+      companyName: query.companyName || ''
+    }
 
+    let vo1 = vo
+    vo1.pageSize = 5
     let [listA, listB, listC, listD, codeA, codeB, codeC] = await Promise.all([
       $axios.post(aurl + `/28-web/range/list`, {
         currentPage: 1,
@@ -612,21 +643,7 @@ export default {
         parkId: query.parkId,
         companyName: query.companyName || ''
       }),
-      $axios.post(aurl + `/28-web/range/recommend`, {
-        currentPage: 1,
-        pageSize: 5,
-        startProvince: startp,
-        startCity: startc,
-        startArea: starta,
-        endProvince: endp,
-        endCity: endc,
-        endArea: enda,
-        belongBrandCode: query.belongBrandCode,
-        departureTimeCode: query.departureTimeCode,
-        otherServiceCode: query.otherServiceCode,
-        parkId: query.parkId,
-        companyName: query.companyName
-      }),
+      $axios.post(aurl + `/28-web/range/recommend`, vo1),
       $axios.post(aurl + `/28-web/range/related/links`, {
         startProvince: startp,
         startCity: startc,
@@ -640,7 +657,8 @@ export default {
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    // console.log(listA, 'listA.data.data.list')
+    // let getLineList = await lineList($axios, 1, vo)
+    // console.log(getLineList, 'getLineList.data.data.list')
     if (
       listA.data.status == 200 ||
       listB.data.status == 200 ||
@@ -648,7 +666,7 @@ export default {
       codeB.data.status == 200 ||
       codeC.data.status == 200
     ) {
-      listA.data.data = listA.data.data || { list: [] }
+      // listA.data.data = listA.data.data || { list: [] }
       listA.data.data.list.forEach(item => {
         // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
@@ -658,9 +676,15 @@ export default {
         })
         item.num = (num % 30) + 1
       })
+
       // for (var i = 3; i < listD.data.data.length; i--) {
       //   let listD1 = listD.data.data
-      //   console.log(listD1.length, 'listD1')
+      // console.log(
+      //   listA.data.data,
+      //   'listA.data.data ',
+      //   vo,
+      //   listA.data.data.list.length
+      // )
       // }
       let codeObj = {
         name: '不限',
@@ -670,9 +694,8 @@ export default {
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
       return {
-        lineListsTotalPage:
-          listA.data.status == 200 ? listA.data.data.pages : [],
-        lineLists: listA.data.status == 200 ? listA.data.data.list : [],
+        lineListsTotalPage: listA.data.data.page,
+        lineLists: listA.data.data.list,
         lineRecoms: listB.data.status == 200 ? listB.data.data : [],
         lineLinks: listC.data.status == 200 ? listC.data.data : [],
         lineHots: listD.data.status == 200 ? listD.data.data : [],
@@ -789,57 +812,46 @@ export default {
                   }
                   function fetchLineList(currentPage, orderBy) {
                     let aurl = ''
-                    let startp = _this.$route.query.startp
-                    let startc = _this.$route.query.startc
-                    let starta = _this.$route.query.starta
-                    let endp = _this.$route.query.endp
-                    let enda = _this.$route.query.enda
-                    let endc = _this.$route.query.endc
-                    let belongBrandCode = _this.$route.query.belongBrandCode
-                    let departureTimeCode = _this.$route.query.departureTimeCode
-                    let otherServiceCode = _this.$route.query.otherServiceCode
-                    let parkId = _this.$route.query.parkId
-                    let companyName = _this.$route.query.companyName
 
+                    let vo = {
+                      startProvince: _this.$route.query.startp,
+                      startCity: _this.$route.query.startc,
+                      startArea: _this.$route.query.starta,
+                      endProvince: _this.$route.query.endp,
+                      endArea: _this.$route.query.enda,
+                      endCity: _this.$route.query.endc,
+                      belongBrandCode: _this.$route.query.belongBrandCode,
+                      departureTimeCode: _this.$route.query.departureTimeCode,
+                      otherServiceCode: _this.$route.query.otherServiceCode,
+                      parkId: _this.$route.query.parkId,
+                      companyName: _this.$route.query.companyName,
+                      pageSize: 15,
+                      currentPage: currentPage,
+                      orderBy: orderBy
+                    }
                     // console.log(
                     //   aurl + `/api/28-web/range/list`,
                     //   'aurl + `/api/28-web/range/list`'
                     // )
-                    $axios
-                      .post(aurl + `/28-web/range/list`, {
-                        currentPage: currentPage,
-                        pageSize: 15,
-                        orderBy: orderBy,
-                        startProvince: startp,
-                        startCity: startc,
-                        startArea: starta,
-                        endProvince: endp,
-                        endCity: endc,
-                        endArea: enda,
-                        belongBrandCode: belongBrandCode,
-                        departureTimeCode: departureTimeCode,
-                        otherServiceCode: otherServiceCode,
-                        parkId: parkId
-                      })
-                      .then(res => {
-                        let getList =
-                          res.data.status == 200 ? res.data.data.list : []
-                        getList.forEach(item => {
-                          // 通过item.id计算出一个固定的值
-                          let arr = (item.id || '').split('')
-                          let num = 0
-                          arr.forEach(el => {
-                            num += el.charCodeAt(0) || 0
-                          })
-                          item.num = (num % 30) + 1
-                          // console.log('this.lineList:', item.num)
+                    $axios.post(aurl + `/28-web/range/list`, vo).then(res => {
+                      let getList =
+                        res.data.status == 200 ? res.data.data.list : []
+                      getList.forEach(item => {
+                        // 通过item.id计算出一个固定的值
+                        let arr = (item.id || '').split('')
+                        let num = 0
+                        arr.forEach(el => {
+                          num += el.charCodeAt(0) || 0
                         })
-                        _this.lineLists = getList
-
-                        // return {
-                        //   lineList: res.data.data.list
-                        // }
+                        item.num = (num % 30) + 1
+                        // console.log('this.lineList:', item.num)
                       })
+                      _this.lineLists = getList
+
+                      // return {
+                      //   lineList: res.data.data.list
+                      // }
+                    })
                   }
                   clickPrice()
                 })

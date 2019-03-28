@@ -1103,7 +1103,8 @@ export default {
       LineCAnother,
       linedataC,
       linedataD,
-      LineeEInfo
+      LineeEInfo,
+      linePrice
     let startp = query.startp
     let startc = query.startc
     let starta = query.starta
@@ -1193,7 +1194,10 @@ export default {
       LineeEInfo = await $axios.post(
         aurl + '/28-web/range/getRangePriceReference/' + linedataA.data.data.id
       )
-      console.log(linedataB.data.data.collateral, 'collateral')
+      linePrice = await $axios.post(
+        aurl + '/28-web/range/reference/price/' + linedataA.data.data.id
+      )
+      console.log(linePrice.data.data, 'linePricelinePricelinePrice')
       if (
         linedataA.data.status == 200 ||
         linedataB.data.status == 200 ||
@@ -1282,6 +1286,8 @@ export default {
           linedataF:
             linedataF.data.status == 200 ? linedataF.data.data.list : [],
           linedataG: linedataG.data.status == 200 ? linedataG.data.data : [],
+          // linePrice
+          linePrice: LineeEInfo.data.status == 200 ? LineeEInfo.data.data : [],
           LineeEchartInfo:
             LineeEInfo.data.status == 200 ? LineeEInfo.data.data : [],
           lineCitys: lineCity.data.status == 200 ? lineCity.data.data : [],
@@ -1704,6 +1710,7 @@ export default {
         }
       })
     },
+
     showfind() {
       let _this = this
       clearInterval(_this.stopTimer)

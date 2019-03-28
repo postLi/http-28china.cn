@@ -4,111 +4,113 @@
       <img src="/images/wzlImg/01banner.png">
     </div>
     <div class="shixiao_box">
-      <div class="shixiao_left">
-        <div class="left_top">
-          <ul class="left_top_ul">
-            <h2 class="list_help_title">帮助信息</h2>
-            <li
-              :class="[isBg == 'one' ? 'list_ul_one' : '']"
-              @click="getShixiao('one')">
-              <a>时效查询</a>
-            </li>
-            <li
-              :class="[isBg == 'two' ? 'list_ul_one' : '']"
-              @click="getShixiao('two')"><a 
-                target="_blank" 
-                :href="'/wangdian'">网点查询</a></li>
-            <li
-              :class="[isBg == 'thirty' ? 'list_ul_one' : '']"
-              @click="getShixiao('thirty')"><a 
-                target="_blank" 
-                :href="'/ydcx'">运单查询</a></li>
-            <li
-              :class="[isBg == 'four' ? 'list_ul_one' : '']"
-              @click="getShixiao('four')"><a 
-                target="_blank" 
-                :href="'/create/order'">快速下单</a></li>
-          </ul>
-        </div>
-        <div class="list_kehu">
-          <h2 class="list_help_title">客户服务</h2>
-          <div class="kf_num">
-            <p style="text-align: center;">
-              <img src="/images/wzlImg/07kfj.png">
-              <img src="/images/wzlImg/08qq.png">
-              <img src="/images/wzlImg/08qq.png">
-            </p>
-            <p style="text-align: center;"><img src="/images/wzlImg/09400.png"></p>
+      <div class="fix_box">
+        <div class="shixiao_left">
+          <div class="left_top">
+            <ul class="left_top_ul">
+              <h2 class="list_help_title">帮助信息</h2>
+              <li
+                :class="[isBg == 'one' ? 'list_ul_one' : '']"
+                @click="getShixiao('one')">
+                <a>时效查询</a>
+              </li>
+              <li
+                :class="[isBg == 'two' ? 'list_ul_one' : '']"
+                @click="getShixiao('two')"><a 
+                  target="_blank" 
+                  :href="'/wangdian'">网点查询</a></li>
+              <li
+                :class="[isBg == 'thirty' ? 'list_ul_one' : '']"
+                @click="getShixiao('thirty')"><a 
+                  target="_blank" 
+                  :href="'/ydcx'">运单查询</a></li>
+              <li
+                :class="[isBg == 'four' ? 'list_ul_one' : '']"
+                @click="getShixiao('four')"><a 
+                  target="_blank" 
+                  :href="'/create/order'">快速下单</a></li>
+            </ul>
           </div>
-        </div>
-        <!-- 帮我找优质运动start -->
-        <div class="list_help">
-          <h2 class="list_help_title">帮我找优质承运商</h2>
-          <div class="list-box-r-top">
-            <form action="">
-              <div 
-                id="form0" 
-                class="ltl-input0">
-                <input 
-                  v-model="checkNotice.startAddres"
-                  id="right-bar-form"
-                  data-toggle="city-picker"
-                  data-level="district"
-                  type="text" 
-                  class="ltl-location" 
-                  placeholder="请选择出发地">
-                <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
-              </div>
-              <div 
-                id="form1" 
-                class="ltl-input0">
-                <input
-                  v-model="checkNotice.endAddres"
-                  autocomplete="off"
-                  data-toggle="city-picker"
-                  data-level="district"
-                  type="text" 
-                  class="ltl-location" 
-                  placeholder="请选择目到达地">
-                <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
-              </div>
-              <textarea
-                id="form2"
-                v-model="checkNotice.select"
-                maxlength="100"
-                style="padding:18px;height:80px;"
-                placeholder="备注信息，如：期望发货时间、货物体积重量等信息..."
-                class="textare"/>
-              <div 
-                id="form3" 
-                class="ltl-input">
-                <input 
-                  v-model="checkNotice.phone"
-                  :placeholder="phoneHolder"
-                  type="text"
-                  class="ltl-phone"
-                  maxlength="11"
-                >
-                <span 
-                  class="ltl-button" 
-                  @click="sendNotice()">找到通知我</span>
-              </div>
-            </form>
-          </div>
-        </div>
-        <!-- 帮我找优质运动end -->
-        <div class="list_ewm">
-          <h2 class="list_help_title">便捷查询运单</h2>
-          <div class="order_content">
-            <div class="imgbox">
-              <img 
-                src="/images/28fast_download.png" 
-                width="100" 
-                height="100">
+          <div class="list_kehu">
+            <h2 class="list_help_title">客户服务</h2>
+            <div class="kf_num">
+              <p style="text-align: center;">
+                <img src="/images/wzlImg/07kfj.png">
+                <img src="/images/wzlImg/08qq.png">
+                <img src="/images/wzlImg/08qq.png">
+              </p>
+              <p style="text-align: center;"><img src="/images/wzlImg/09400.png"></p>
             </div>
-            <div class="textbox">
-              <a href="http://h5.28tms.com/">
-              下载【28快运APP】，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a>
+          </div>
+          <!-- 帮我找优质运动start -->
+          <div class="list_help">
+            <h2 class="list_help_title">帮我找优质承运商</h2>
+            <div class="list-box-r-top">
+              <form action="">
+                <div 
+                  id="form0" 
+                  class="ltl-input0">
+                  <input 
+                    v-model="checkNotice.startAddres"
+                    id="right-bar-form"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text" 
+                    class="ltl-location" 
+                    placeholder="请选择出发地">
+                  <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+                </div>
+                <div 
+                  id="form1" 
+                  class="ltl-input0">
+                  <input
+                    v-model="checkNotice.endAddres"
+                    autocomplete="off"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text" 
+                    class="ltl-location" 
+                    placeholder="请选择目到达地">
+                  <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+                </div>
+                <textarea
+                  id="form2"
+                  v-model="checkNotice.select"
+                  maxlength="100"
+                  style="padding:18px;height:80px;"
+                  placeholder="备注信息，如：期望发货时间、货物体积重量等信息..."
+                  class="textare"/>
+                <div 
+                  id="form3" 
+                  class="ltl-input">
+                  <input 
+                    v-model="checkNotice.phone"
+                    :placeholder="phoneHolder"
+                    type="text"
+                    class="ltl-phone"
+                    maxlength="11"
+                  >
+                  <span 
+                    class="ltl-button" 
+                    @click="sendNotice()">找到通知我</span>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- 帮我找优质运动end -->
+          <div class="list_ewm">
+            <h2 class="list_help_title">便捷查询运单</h2>
+            <div class="order_content">
+              <div class="imgbox">
+                <img 
+                  src="/images/28fast_download.png" 
+                  width="100" 
+                  height="100">
+              </div>
+              <div class="textbox">
+                <a href="http://h5.28tms.com/">
+                下载【28快运APP】，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a>
+              </div>
             </div>
           </div>
         </div>
@@ -196,8 +198,8 @@
             v-if="showLinst && listRangesAging.length != 0"
             class="list_line">
             <div class="zx_sx"><span class="biaozhi"/><span >为您精选20条优质专线</span><div class="more floatr"><a 
-              href="/huoyuan" 
-              target="_blank">更多&gt;</a></div></div>
+              :href="'/zhuanxian/list?startp='+ vo.startProvince+'&startc='+vo.startCity" 
+              target="_blank">更多专线&gt;</a></div></div>
             <div class="list_tiaoj">
               <span 
                 v-for="(item,index) in sortList" 
@@ -210,7 +212,7 @@
               :key="index" 
               class="wzl_box">
               <ul 
-                class="wlzx_list" 
+                class="wlzx_list1" 
                 style="border:none" >
                 <li class="cy_list_12">
                   <p class="p1">
@@ -231,14 +233,14 @@
                   </p>
                   <p>
                     <img
-                      v-if="item.authStatus === 'AF0010403'"
-                      src="/images/list_wlzx/10shiming.png">
+                      v-if="item.collateral && item.collateral !== 0"
+                      src="/images/list_wlzx/12danbao.png">
                     <img
                       v-if="item.isVip && item.isVip === 1"
                       src="/images/list_wlzx/11xinyong.png">
                     <img
-                      v-if="item.collateral && item.collateral !== 0"
-                      src="/images/list_wlzx/12danbao.png">
+                      v-if="item.authStatus === 'AF0010403'"
+                      src="/images/list_wlzx/10shiming.png">
                   </p>
                   <p :title="item.transportRemark"><img 
                   src="/images/wzlImg/2.png">线路说明：{{ item.transportRemark ? item.transportRemark.substring(0,14) : '无' }}</p>
@@ -248,31 +250,10 @@
                   <p>时效：<span>{{ item.transportAging ? item.transportAging : '0' }}{{ item.transportAgingUnit ? item.transportAgingUnit : '' }}</span></p>
                 </li>
                 <li class="cy_list_2">
-                  <p>重货：<span>{{ item.zhPrice ? item.zhPrice + '元/公斤': '0' }}</span></p>
-                  <p>轻货：<span>{{ item.qhPrice ? item.qhPrice + '元/m3': '0' }}</span></p>
+                  <p>重货：<span>{{ item.lightPrice ? item.lightPrice + '元/公斤': '0' }}</span></p>
+                  <p>轻货：<span>{{ item.lightPrice ? item.lightPrice + '元/m3': '0' }}</span></p>
                   <p>频率：<span>{{ item.departureHzData ? item.departureHzData + '天': '' }}{{ item.departureHzTime ? item.departureHzTime + '次': '' }}</span></p>
-
                 </li>
-                <!-- <li class="cy_list_3">
-                  <p class="p1"><img
-                    v-if="item.authStatus === 'AF0010403'"
-                    src="/images/list_wlzx/10shiming.png"></P>
-                  <p class="p2"><img
-                    v-if="item.isVip && item.isVip === 1"
-                    src="/images/list_wlzx/11xinyong.png"></P>
-                  <p class="p3"><img
-                    v-if="item.collateral && item.collateral !== 0"
-                    src="/images/list_wlzx/12danbao.png"></P>
-                </li> -->
-
-                <!-- <li class="cy_list_4">
-                  <p><img 
-                    class="numlll" 
-                    src="/images/wzlImg/lll.png">浏览量：<span>{{ item.browseNumber ? item.browseNumber : '无' }}</span></p>
-                  <p><img 
-                    class="numlll" 
-                    src="/images/wzlImg/pj.png">评价：<span>{{ item.assessNumber ? item.assessNumber + '条': '无' }}</span></p>
-                </li> -->
                 <li class="wlzx_list_6">
                   <p class="p1"><span style="float:left"><img 
                     class="numlll" 
@@ -292,14 +273,6 @@
                     target="_blank"
                     class="check_btn">查看</a>
                   </p>
-                  <!-- <p 
-                    v-if="item.qq" 
-                    class="p3"><a
-                      :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq + '&site=qq&menu=yes'" 
-                      target="_blank"><input
-                        readonly="readonly" 
-                        value="QQ交谈"></a>
-                </p> -->
                 </li>
               </ul>
             </div>
@@ -335,7 +308,7 @@
               </ul>
             </div>
             <div class="zx_sx"><span class="biaozhi"/><span >{{ vo.startCity }}出发热门专线</span><div class="more floatr"><a 
-              href="/huoyuan" 
+              :href="'/zhuanxian/list?startp='+ vo.startProvince+'&startc='+vo.startCity" 
               target="_blank">更多&gt;</a></div></div>
             <div 
               class="list_none" 
@@ -471,6 +444,60 @@ async function getListRangesAging($axios, currentPage, vo = {}) {
   })
   return { list, totalPage, currentPage }
 }
+async function getHotLines($axios, currentPage, vo = {}) {
+  let list
+  let parm = vo
+  parm.currentPage = currentPage
+  parm.pageSize = 8
+  await $axios.post('/28-web/range/hot/list', parm).then(res => {
+    if (res.data.status === 200) {
+      res.data.data.list.forEach(item => {
+        if (item.credit >= 0 && item.credit <= 3) {
+          item.showcreadimg = true
+          item.creditImg = 1
+        }
+        if (item.credit >= 4 && item.credit <= 10) {
+          item.showcreadimg = true
+          item.creditImg = 2
+        }
+        if (item.credit >= 11 && item.credit <= 40) {
+          item.showcreadimg = true
+          item.creditImg = 3
+        }
+        if (item.credit >= 41 && item.credit <= 90) {
+          item.showcreadimg = true
+          item.creditImg = 4
+        }
+        if (item.credit >= 91 && item.credit <= 150) {
+          item.showcreadimg = true
+          item.creditImg = 5
+        }
+        if (item.credit >= 151 && item.credit <= 250) {
+          item.showcreadeng = true
+          item.creditdeng = 1
+        }
+        if (item.credit >= 251 && item.credit <= 500) {
+          item.showcreadeng = true
+          item.creditdeng = 2
+        }
+        if (item.credit >= 500 && item.credit <= 1000) {
+          item.showcreadeng = true
+          item.creditdeng = 3
+        }
+        if (item.credit >= 1001 && item.credit <= 2000) {
+          item.showcreadeng = true
+          item.creditdeng = 4
+        }
+        if (item.credit >= 2001) {
+          item.showcreadeng = true
+          item.creditdeng = 5
+        }
+      })
+      list = res.data.data.list
+    }
+  })
+  return { list }
+}
 export default {
   name: 'ShiXiao',
   head: {
@@ -518,15 +545,6 @@ export default {
         ? query.startProvince
         : app.$cookies.get('currentProvinceFullName')
     }
-    let parhort = {
-      startArea: query.startArea ? query.startArea : '',
-      startCity: query.startCity
-        ? query.startCity
-        : app.$cookies.get('currentAreaFullName'),
-      startProvince: query.startProvince
-        ? query.startProvince
-        : app.$cookies.get('currentProvinceFullName')
-    }
     let listRangesAgingData = await getListRangesAging($axios, 1, vo).catch(
       err => {
         console.log(err)
@@ -538,59 +556,13 @@ export default {
       .catch(err => {
         console.log(err)
       })
-    //推荐专线/range/hot/list热门专线
-    let hotLines = await $axios
-      .post('/28-web/range/hot/list', parhort)
-      .catch(err => {
-        console.log(err)
-      })
-    if (hotLines.data.status === 200) {
-      hotLines.data.data.list.forEach(item => {
-        if (item.credit >= 0 && item.credit <= 3) {
-          item.showcreadimg = true
-          item.creditImg = 1
-        }
-        if (item.credit >= 4 && item.credit <= 10) {
-          item.showcreadimg = true
-          item.creditImg = 2
-        }
-        if (item.credit >= 11 && item.credit <= 40) {
-          item.showcreadimg = true
-          item.creditImg = 3
-        }
-        if (item.credit >= 41 && item.credit <= 90) {
-          item.showcreadimg = true
-          item.creditImg = 4
-        }
-        if (item.credit >= 91 && item.credit <= 150) {
-          item.showcreadimg = true
-          item.creditImg = 5
-        }
-        if (item.credit >= 151 && item.credit <= 250) {
-          item.showcreadeng = true
-          item.creditdeng = 1
-        }
-        if (item.credit >= 251 && item.credit <= 500) {
-          item.showcreadeng = true
-          item.creditdeng = 2
-        }
-        if (item.credit >= 500 && item.credit <= 1000) {
-          item.showcreadeng = true
-          item.creditdeng = 3
-        }
-        if (item.credit >= 1001 && item.credit <= 2000) {
-          item.showcreadeng = true
-          item.creditdeng = 4
-        }
-        if (item.credit >= 2001) {
-          item.showcreadeng = true
-          item.creditdeng = 5
-        }
-      })
-    }
+    let parhort = vo
+    delete vo.filterSign
+    //推荐专线热门专线
+    let hotLines = await getHotLines($axios, 1, parhort)
     return {
       listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
-      hotLine: hotLines.data.status === 200 ? hotLines.data.data.list : [],
+      hotLine: hotLines.list ? hotLines.list : [],
       totalPage: listRangesAgingData.totalPage
         ? listRangesAgingData.totalPage
         : 0,
@@ -676,6 +648,7 @@ export default {
     )
     // this.loadPagination()
     this.footLink()
+    // this.scrollmenue()
   },
   methods: {
     getShixiao(type) {
@@ -694,6 +667,19 @@ export default {
           this.isBg = 'four'
         default:
           break
+      }
+    },
+    scrollmenue() {
+      var _nav = $('.shixiao_left')
+      //滚动条事件
+      window.onscroll = function() {
+        //滚动条滚动的高度
+        let _height = $(document).scrollTop()
+        if (_height >= 500) {
+          _nav.css({ position: 'fixed', top: '0' })
+        } else {
+          _nav.css({ position: 'relative' })
+        }
       }
     },
     sendNotice() {
@@ -802,12 +788,14 @@ export default {
       } else {
         this.listRangesAging = []
       }
-      // console.log(obj)
-      // window.location.href = `/shixiao?endArea=${this.vo.endArea}&endCity=${
-      //   this.vo.endCity
-      // }&endProvince=${this.vo.endProvince}&startArea=${
-      //   this.vo.startArea
-      // }&startCity=${this.vo.startCity}&startProvince=${this.vo.startProvince}`
+      let parhort = this.vo
+      delete this.vo.filterSign
+      let hotLines = await getHotLines(this.$axios, 1, parhort)
+      if (hotLines.list) {
+        this.hotLine = hotLines.list
+      } else {
+        this.hotLines = []
+      }
     },
     getSearchForm() {
       let list1 = [],
@@ -967,6 +955,11 @@ img {
 .list_line {
   float: left;
 }
+.fix_box {
+  width: 240px;
+  height: 1500px;
+  float: left;
+}
 .shixiao_left {
   float: left;
   width: 220px;
@@ -981,14 +974,6 @@ img {
 .left_top_ul {
   text-align: center;
 }
-/* .left_top_ul h1 {
-  line-height: 40px;
-  font-size: 22px;
-  padding: 40px 0;
-  background: #3f94ee;
-  color: #fff;
-} */
-
 .left_top_ul li {
   height: 20px;
   line-height: 20px;
@@ -997,9 +982,6 @@ img {
   color: #333333;
   cursor: pointer;
 }
-/* .left_top_ul li:nth-child(1) {
-  background: url(/images/wzlImg/06sjx.png) no-repeat 0px 0;
-} */
 .shixiao_right {
   float: left;
   width: 1160px;
@@ -1026,7 +1008,6 @@ img {
   width: 260px;
   box-sizing: border-box;
   float: left;
-  /* border: 1px solid rgba(204, 204, 204, 0.8); */
   background: url('/images/wzlImg/05bg.png');
   overflow: hidden;
   padding: 19px 45px;
@@ -1065,6 +1046,14 @@ img {
   float: left;
 }
 .ul_host li:hover {
+  box-shadow: 10px 10px 5px #888888;
+}
+.ul_list li:hover {
+  background: #f7f9fb;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  -khtml-opacity: 0.8;
+  opacity: 0.8;
   box-shadow: 10px 10px 5px #888888;
 }
 .ul_host li .titles {
@@ -1120,10 +1109,6 @@ img {
   background-color: #ffed20;
   color: #db4c26;
 }
-/* .ul_host li .titles span:nth-child(4) {
-  background-color: #ffed20;
-  color: #db4c26;
-} */
 .ul_host li p {
   height: 30px;
   line-height: 30px;
@@ -1142,12 +1127,8 @@ img {
   margin: 0 auto;
   overflow: hidden;
 }
-.hot_box {
-  /* border-bottom: 1px dashed #dfdfdf; */
-}
 .hot-city-unit {
   box-sizing: border-box;
-  /* border: 1px solid #ececec; */
   background: #fff;
   padding: 10px;
 }
@@ -1170,7 +1151,6 @@ img {
   margin-bottom: 10px;
   font-weight: bold;
   font-size: 20px;
-  /* color: #333333; */
 }
 .line-city-box {
   max-width: 1036px;
@@ -1229,7 +1209,7 @@ img {
 
 .list_left {
   width: 100%;
-  float: left;
+  float: right;
 }
 .w1130 {
   width: 100%;
@@ -1381,14 +1361,6 @@ img {
   color: #f00;
 }
 
-.wlzx_list {
-  width: 100%;
-  padding-top: 20px;
-  margin-top: -1px;
-  background-color: #fff;
-  float: left;
-  transition: all 0.4s;
-}
 .cy_list_12 {
   width: 484px;
   padding-left: 20px;
@@ -1407,7 +1379,15 @@ img {
   width: 100%;
   border-bottom: 1px solid #ddd;
 }
-.wlzx_list:hover {
+.wlzx_list1 {
+  width: 100%;
+  padding-top: 20px;
+  /* margin-top: -1px; */
+  background-color: #fff;
+  float: left;
+  transition: all 0.4s;
+}
+.wlzx_list1:hover {
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
   transform: translate3d(0, -2px, 0);
 }
@@ -1416,15 +1396,15 @@ img {
   float: left;
   margin-top: 6px;
 }
-.wlzx_list li {
+.wlzx_list1 li {
   /* height: 140px; */
   float: left;
   /* overflow: hidden;	 */
 }
-.cy_list_1 .wlzx_list img {
+.cy_list_1 .wlzx_list1 img {
   transition: 0.7s;
 }
-.wlzx_list img:hover {
+.wlzx_list1 img:hover {
   transform: scale(1.05);
 }
 
@@ -1517,11 +1497,6 @@ img {
   margin-left: 40px;
   margin-bottom: 20px;
 }
-/* .wlzx_list_6 .p1,
-.wlzx_list_6 .p2 {
-  margin-bottom: 12px;
-} */
-/* .wlzx_list_6 .p2 a input {margin-bottom: 12px;background-color: #2577e3;} */
 .wlzx_list_6 .p1 input {
   background-color: #eb434d;
   color: #fff;
@@ -1732,36 +1707,6 @@ img {
   color: #fff;
   border: 0;
 }
-/*车源信息 E */
-
-/*货源信息 S */
-/* .cy_list_1{
-      width: 351px;
-      margin-left: 14px;
-
-
-  }
-  .cy_list_2{
-      width: 182px;
-      margin-left: 100px;
-
-  }
-  .cy_list_3{
-      width: 75px;
-      margin-left: 80px;
-
-
-  }
-  .cy_list_4{
-      width: 80px;
-      margin-left: 50px;
-
-  }
-  .cy_list_5{
-      width: 102px;
-      margin-left: 60px;
-
-  } */
 .cy_list_1 .p1 {
   margin-bottom: 3px;
   overflow: hidden;
@@ -1809,24 +1754,16 @@ img {
   line-height: 27px;
 }
 .wlzx_list_6 .p2 .check_btn {
-  /* background-color: #eb434d; */
-  /* background-color: #2577e3; */
   width: 104px;
   height: 28px;
   line-height: 28px;
   text-align: center;
   cursor: pointer;
   display: block;
-  /* color: #2577e3; */
   border-radius: 3px;
   border: solid 1px #8dadd8;
-  /* background-color: #2577e3; */
   color: #2577e3;
 }
-/* .active{
-    background-color: #2577e3;
-    color: #fff;
-  } */
 .check_btn:active {
   opacity: 0.5;
 }
@@ -1854,7 +1791,6 @@ img {
   line-height: 40px;
   font-size: 16px;
   margin-top: 40px;
-  /* margin-left: -140px; */
 }
 .list_none img {
   float: left;
@@ -1887,13 +1823,10 @@ img {
 
 /* 出发地到达地 */
 .list_search {
-  /* margin: 0 60px; */
   float: left;
 }
 .order-form-item {
   float: left;
-  /* width: 470px; */
-  /* width: 50%; */
   margin-left: 50px;
 }
 .order-form-item:first-child .order-form-label {
@@ -1916,7 +1849,6 @@ img {
   padding-left: 20px;
 }
 .order-line-from {
-  /* margin-bottom: 20px; */
   background: #fff;
   padding: 20px 0px;
   float: left;
@@ -1972,7 +1904,7 @@ img {
 }
 /* 为您推荐下面的列表 */
 .wzl_box {
-  background: #fff;
+  /* background: #fff; */
 }
 .numlll {
   width: 20px;
@@ -2113,9 +2045,6 @@ img {
   background-image: url(/images/list_wlzx/select_icon.png);
   background-repeat: no-repeat;
 }
-/* .list_help_title {
-  color: #3f94ee;
-} */
 .ltl-location {
   width: 100%;
   border: 1px solid #ccc;
@@ -2123,7 +2052,6 @@ img {
   line-height: 35px;
   box-sizing: border-box;
   padding-left: 8px;
-  /* border-radius: 4px; */
   padding-right: 50px;
   outline: 0;
 }

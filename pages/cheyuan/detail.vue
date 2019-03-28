@@ -921,6 +921,10 @@ export default {
         '&endProvince=' +
         (end.attr('theprovince') || '') +
         '&endCity=' +
+        (end.attr('thecity') || '') +
+        '&endp=' +
+        (end.attr('theprovince') || '') +
+        '&endc=' +
         (end.attr('thecity') || '')
       console.log(
         '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end

@@ -9,7 +9,7 @@
         class="closeMe" 
         @click="closeMe()"><a>关闭</a></div>
       <div class="order_content">
-        <h3>扫码下载App进行抢单</h3>
+        <h3>{{ Title }}</h3>
         <div class="imgbox">
           <img 
             src="/images/28fast_download.png" 
@@ -39,6 +39,10 @@ export default {
     dataInfo: {
       type: [Array, Object],
       default: () => {}
+    },
+    orderTitle: {
+      type: String,
+      default: () => {}
     }
   },
   head: {
@@ -47,7 +51,8 @@ export default {
   },
   data() {
     return {
-      dialogKey: 0
+      dialogKey: 0,
+      Title: ''
     }
   },
   async asyncData() {},
@@ -57,10 +62,10 @@ export default {
     }
   },
   watch: {
-    info() {},
     isShowOrder: {
       handler(cval, oval) {
         if (cval) {
+          this.Title = this.orderTitle
         }
       },
       deep: true

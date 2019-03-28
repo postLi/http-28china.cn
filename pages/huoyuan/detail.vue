@@ -110,7 +110,7 @@
               <tr><td class="arc_td1">名称：</td><td class="arc_td2"><font>{{ hyDetail.goodsTypeName ? hyDetail.goodsTypeName : '' }}</font></td></tr>
               <tr><td class="arc_td1">数量：</td><td class="arc_td2">{{ hyDetail.goodsNum ? hyDetail.goodsNum + '件': '' }}</td></tr>
               <tr><td class="arc_td1">重量：</td><td
-              class="arc_td2">{{ hyDetail.goodsWeight }}公斤</td></tr>
+              class="arc_td2">{{ hyDetail.goodsWeight }}吨</td></tr>
               <tr><td class="arc_td1">体积：</td><td class="arc_td2">{{ hyDetail.goodsVolume }}立方米</td></tr>
               <tr><td class="arc_td1">有效期：</td><td
               class="arc_td2">{{ hyDetail.orderClass }}</td></tr>
@@ -164,7 +164,9 @@
                 <a href="http://h5.28tms.com/">
                 下载<span>【28快运APP】</span>，您可查看更多<span>{{ hyDetail.startCity }}</span>到<span>{{ hyDetail.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
               </div>
-
+              <p style="margin:20px;">便捷<span 
+                @click="openOrder('check')"
+                style="color:#f8542b;cursor:pointer">查询我的运力</span>撮合情况</p>
             </div>
             <div class="arc_middle5">
               <div class="arc_m5_1">
@@ -173,7 +175,7 @@
                   <a 
                     href="javascript:;" 
                     class="button1"
-                    @click="openOrder()" 
+                    @click="openOrder('order')" 
                   >立即抢单</a>
                   <a 
                     href="javascript:;" 
@@ -355,7 +357,7 @@
               <a
                 href="javascript:;"
                 class="button2"
-                @click="openHelp()"><img src="/images/cy/03u41008 2.gif">帮我选择优质货源</a>
+                @click="openHelp()"><img src="/images/cy/03u41008 2.gif">此货主货源上新提醒我</a>
             </div>
           </div>
         </div>
@@ -527,7 +529,9 @@
             src="/images/cy/10banner.png"
             alt="广告">
         </div>
-        <div class="listInfo2">
+        <div
+          v-if="hyDetail.startCity != hyDetail.endCity"
+          class="listInfo2">
           <div class="main3_1_1">
             <div class="floatl">
               <b class="b_title">更多从{{ hyDetail.endCity }}出发的货源</b>
@@ -670,9 +674,10 @@
               :key="index" 
               class="hot-cities-li" >
               <a
+                :title="item.startCity + '到' + item.endCity"
                 target="_blank"
                 :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-                class="hot-cities-a">{{ item.title }}</a>
+                class="hot-cities-a">{{ item.startCity + '到' + item.endCity }}</a>
             </li>
           </ul>
         </div>
@@ -814,7 +819,9 @@
       :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
     <Lelp :is-show-help.sync="isShowHelp" />
-    <Order :is-show-order.sync="isShowOrder"/>
+    <Order 
+      :is-show-order.sync="isShowOrder" 
+      :order-title="orderTitle"/>
   </div>
 </template>
 <script>
@@ -868,6 +875,7 @@ export default {
       isShowCollect: true,
       isShowMessge: false,
       isMobile: false,
+      orderTitle: '',
       mobile: '',
       check: '',
       handle: '',
@@ -1168,6 +1176,10 @@ export default {
         '&endProvince=' +
         (end.attr('theprovince') || '') +
         '&endCity=' +
+        (end.attr('thecity') || '') +
+        '&endp=' +
+        (end.attr('theprovince') || '') +
+        '&endc=' +
         (end.attr('thecity') || '')
       console.log(
         '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
@@ -1389,8 +1401,17 @@ export default {
         this.getAddress()
       }
     },
-    openOrder() {
+    openOrder(type) {
       this.isShowOrder = true
+      switch (type) {
+        case 'check':
+          this.orderTitle = '扫码下载App随时查看运力撮合情况'
+          break
+        case 'order':
+          this.orderTitle = '扫码下载App进行立即抢单'
+        default:
+          break
+      }
     },
     searchDo() {
       let list1 = [],

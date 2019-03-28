@@ -6,10 +6,10 @@
           <div class="nr_bt1"><span>在线下单</span></div>
         </div>	 -->
         <!-- 下单部分 -->
-        <!-- <img src="../../static/images/wzlImg/wz.png"> -->
+        <!-- <img src="/images/wzlImg/wz.png"> -->
         <div class="nr order-create-main">
           <div class="order-step"><img 
-            src="../../static/images/wzlImg/dp.png" 
+            src="/images/wzlImg/dp.png" 
             class="dp">发布货源信息，让物流企业和运输车辆主动联系您，价比三家，省时省力</div>
           <div class="order-line-info order-input-tab">
             <div class="order-title">线路信息 <span>（提示：待*为必填）</span></div>
@@ -22,7 +22,7 @@
                     wtmap="" 
                     maxlength="40" 
                     type="text"><img 
-                      src="../../static/images/wzlImg/qd.png" 
+                      src="/images/wzlImg/qd.png" 
                       class="qd">
                 </div>
               </div>
@@ -34,7 +34,7 @@
                     wtmap="{township}{street}{building}" 
                     maxlength="40" 
                     type="text"><img 
-                      src="../../static/images/wzlImg/wz.png" 
+                      src="/images/wzlImg/wz.png" 
                       class="wz1">
                 </div>
               </div>
@@ -48,7 +48,7 @@
                     wtmap="" 
                     maxlength="40" 
                     type="text" ><img 
-                      src="../../static/images/wzlImg/zd.png" 
+                      src="/images/wzlImg/zd.png" 
                       class="zd">
                 </div>
               </div>
@@ -60,7 +60,7 @@
                     wtmap="{township}{street}{building}" 
                     maxlength="40" 
                     type="text"><img 
-                      src="../../static/images/wzlImg/wz.png" 
+                      src="/images/wzlImg/wz.png" 
                       class="wz2">
                 </div>
               </div>
@@ -292,11 +292,11 @@ export default {
   },
 
   mounted() {
-    seajs.use(['/layer/layer.js'], function() {
+    seajs.use(['/layer/layer.js', 'api'], function() {
       seajs.use(['/js/gaodemap2.js'], function() {
-        seajs.use(['/js/huo_order.js'], function() {
-          // seajs.use(['/js/onlineOrder.js'], function() {})
-        })
+        // seajs.use(['/js/huo_order.js'], function() {
+        seajs.use(['/js/huoOrder.js'], function() {})
+        // })
       })
     })
   }

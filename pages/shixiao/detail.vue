@@ -751,6 +751,9 @@ img {
   margin: 30px;
   padding: 30px;
 }
+.ul_list li {
+  cursor: pointer;
+}
 .num_color {
   color: red;
 }

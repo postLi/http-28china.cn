@@ -24,7 +24,7 @@
                 <img :src="banner">
               </div>
             </div>
-            <!-- Add Pagination -->
+            <!-- Add Paginat ion -->
             <div class="swiper-pagination"/>
             <!-- Add Arrows -->
             <div class="swiper-button-next"/>

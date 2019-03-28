@@ -185,9 +185,9 @@
                 <font>载重<b>{{ item.carLoad }}</b>吨</font>
                 <font>{{ item.carSourceTypeName }}</font>
               </p>
-              <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
+              <p class="p3"><i>常驻地：</i><font :title="item.usualPlace">{{ item.usualPlace ? item.usualPlace.substring(0,6) : '' }}</font>&nbsp;&nbsp;<i>运价：</i>
                 <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
-              <font>{{ item.creater }}</font></p>
+              <font>{{ item.driverName }}</font></p>
               <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
             </li>
             <li class="cy_list_3">
@@ -326,7 +326,7 @@
                   data-level="district"
                   type="text" 
                   class="ltl-location" 
-                  placeholder="请选择目到达地">
+                  placeholder="请选择到达地">
                 <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
               </div>
               <div 
@@ -444,7 +444,7 @@
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
-  parm.pageSize = 10
+  parm.pageSize = 20
   let res = await $axios.post('/28-web/carInfo/list', parm) //车源信息列表
   if (res.data.status === 200) {
     return {
@@ -537,7 +537,6 @@ export default {
     }
     // 获取物流公司列表
     let vor = Object.assign({ pageSize: 10 }, vo)
-    // console.log('vor:', vor)
     await store.dispatch('cheyuan/GETRECOMMEND', {
       data: {
         startProvince: vo.startProvince,
@@ -613,7 +612,6 @@ export default {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
     let carInfoLists = await getCarInfoList($axios, 1, vo)
-    console.log(vo, 'carInfoLists4444444')
 
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
@@ -749,7 +747,6 @@ export default {
         endCity: this.endCity,
         endArea: this.endArea
       }
-      console.log(obj)
       if (this.checkNotice.startAddres === '') {
         $('#form0').css('border-color', 'red')
       } else if (this.checkNotice.startAddres != '') {

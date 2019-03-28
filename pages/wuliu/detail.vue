@@ -467,9 +467,46 @@ export default {
       jwd = longitude + ',' + latitude
     }
 
+    let vo1 = {
+      pageSize: 10,
+      currentPage: 1,
+      otherServiceCode: '',
+      orderBy: '',
+      companyName: ''
+    }
+    let vo2 = {
+      pageSize: 10,
+      currentPage: 1,
+      comAuthStatus: '',
+      companyName: ''
+    }
+    vo1.id = query.id
+    vo2.id = query.id
+    // 请求专线
+    const transportRange = await getTransportRange($axios, vo1)
+    // 请求网点
+    const logisticsCompany = await getLogisticsCompany($axios, vo2)
+
+    // 请求推荐公司
+    let flag = ''
+    let companysList = await $axios.get(
+      '/28-web/logisticsCompany/excellent?pageSize=8&parkId=' +
+        query.id +
+        '&flag=' +
+        flag
+    )
+
     return {
       gatewayData: data,
       jwd,
+      vo1,
+      vo2,
+      transportRange: transportRange.list,
+      vo1Total: transportRange.total,
+      logisticsCompany: logisticsCompany.list,
+      vo2Total: logisticsCompany.total,
+      companysList:
+        companysList.data.status === 200 ? companysList.data.data : [],
       title: title
     }
   },
@@ -479,31 +516,11 @@ export default {
       let $axios = this.$axios
       this.vo1.id = query.id
       this.vo2.id = query.id
-      // 请求专线
-      const transportRange = await getTransportRange($axios, this.vo1)
-      this.transportRange = transportRange.list
-      this.vo1Total = transportRange.total
-
-      // 请求网点
-      const logisticsCompany = await getLogisticsCompany($axios, this.vo2)
-      this.logisticsCompany = logisticsCompany.list
-      this.vo2Total = logisticsCompany.total
 
       seajs.use(['/js/jquery.pagination.min.js'], () => {
         this.initPage()
         this.initPage2()
       })
-
-      // 请求推荐公司
-      let flag = ''
-      let companysList = await $axios.get(
-        '/28-web/logisticsCompany/excellent?pageSize=8&id=' +
-          query.id +
-          '&flag=' +
-          flag
-      )
-      this.companysList =
-        companysList.data.status === 200 ? companysList.data.data : []
 
       //切换内容 S
       $('#checked_zx').click(function() {

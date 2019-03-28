@@ -825,18 +825,5 @@ var AFLC_VALID = {
   NUM_POINT: /^(([1-9][0-9])|(([0].\d{0,2}|[1-9][0-9].\d{0,2})))$/,
   // 支持百分比
   NUM_PERCENTAGE: /^([1-9]{1}[0-9]{0,1}|0|100)(.\d{1,2}){0,1}%$/,
-  /**
-   * 获取字符长度
-   */
-  strlen: function(str) {
-    var s = 0
-    for (var i = 0; i < str.length; i++) {
-      if (str.charAt(i).match(/[\u0391-\uFFE5]/)) {
-        s += 2
-      } else {
-        s++
-      }
-    }
-    return s
-  }
+
 }

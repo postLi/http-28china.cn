@@ -28,7 +28,7 @@ const _2dd9f2d0 = () => interopDefault(import('..\\pages\\create\\line.vue' /* w
 const _e0b6334c = () => interopDefault(import('..\\pages\\create\\order.vue' /* webpackChunkName: "pages_create_order" */))
 const _be4734bc = () => interopDefault(import('..\\pages\\create\\orderbak.vue' /* webpackChunkName: "pages_create_orderbak" */))
 const _481a885c = () => interopDefault(import('..\\pages\\gongsi\\add.vue' /* webpackChunkName: "pages_gongsi_add" */))
-const _532b59ec = () => interopDefault(import('..\\pages\\gongsi\\onlineOrder.vue' /* webpackChunkName: "pages_gongsi_onlineOrder" */))
+const _26babe47 = () => interopDefault(import('..\\pages\\gongsi\\orderSearch.vue' /* webpackChunkName: "pages_gongsi_orderSearch" */))
 const _18469db7 = () => interopDefault(import('..\\pages\\help\\utils.js' /* webpackChunkName: "pages_help_utils" */))
 const _3856afde = () => interopDefault(import('..\\pages\\huoyuan\\add.vue' /* webpackChunkName: "pages_huoyuan_add" */))
 const _dbafa1b8 = () => interopDefault(import('..\\pages\\huoyuan\\detail.vue' /* webpackChunkName: "pages_huoyuan_detail" */))
@@ -61,6 +61,7 @@ const _1810a780 = () => interopDefault(import('..\\pages\\zhuanxian\\huizong.vue
 const _37ea10f8 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
 const _7da25454 = () => interopDefault(import('..\\pages\\zhuanxian\\selectMap.vue' /* webpackChunkName: "pages_zhuanxian_selectMap" */))
 const _421afed0 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart.vue' /* webpackChunkName: "pages_zhuanxian_showEchart" */))
+const _014e6d11 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart1.vue' /* webpackChunkName: "pages_zhuanxian_showEchart1" */))
 const _9faddca0 = () => interopDefault(import('..\\pages\\zhuanxian\\showFind.vue' /* webpackChunkName: "pages_zhuanxian_showFind" */))
 const _817b353c = () => interopDefault(import('..\\pages\\zhuanxian\\showPrice.vue' /* webpackChunkName: "pages_zhuanxian_showPrice" */))
 const _7851fcd0 = () => interopDefault(import('..\\pages\\zixun\\utils.js' /* webpackChunkName: "pages_zixun_utils" */))
@@ -269,9 +270,9 @@ export function createRouter() {
       component: _481a885c,
       name: "gongsi-add"
     }, {
-      path: "/gongsi/onlineOrder",
-      component: _532b59ec,
-      name: "gongsi-onlineOrder"
+      path: "/gongsi/orderSearch",
+      component: _26babe47,
+      name: "gongsi-orderSearch"
     }, {
       path: "/help/utils",
       component: _18469db7,
@@ -400,6 +401,10 @@ export function createRouter() {
       path: "/zhuanxian/showEchart",
       component: _421afed0,
       name: "zhuanxian-showEchart"
+    }, {
+      path: "/zhuanxian/showEchart1",
+      component: _014e6d11,
+      name: "zhuanxian-showEchart1"
     }, {
       path: "/zhuanxian/showFind",
       component: _9faddca0,

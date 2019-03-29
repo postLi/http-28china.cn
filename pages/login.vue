@@ -25,7 +25,7 @@
               data-type="password"
               class="active">密码登录</span><span data-type="smscode">短信登录</span>
           </div>
-          <div class="inputbox userTypeinput"><span data-type="aflc-1">车主</span><span data-type="aflc-2">货主</span><span data-type="aflc-5">物流公司</span>
+          <div class="inputbox userTypeinput"><span data-type="aflc-1">车主</span><span data-type="aflc-2">货主/物流公司</span><!-- <span data-type="aflc-5">物流公司</span> -->
           </div>
           <div class="inputbox">
             <span class="icon icon-mobile"/>
@@ -67,13 +67,13 @@
             <span class="getsmscode">获取验证码</span>
           </div>
 
-          <div class="login-btn">登录</div>
+          <div class="login-btn">登 录</div>
           <div class="other-btn">
             <a
-              href="regisiter?fmdo=user&dopost=regnew"
+              href="/regisiter?fmdo=user&dopost=regnew"
               target="_blank">免费注册<i/></a>
             <a
-              href="resetpassword?"
+              href="/resetpassword?"
               target="_blank">忘记密码?</a>
           </div>
           <div class="login-other">其他方式登入</div>
@@ -98,11 +98,9 @@ export default {
     // return store.dispatch('login/SETREG', isReg)
   },
   mounted() {
-    if (process.client) {
-      window.seajs.use(['layer', 'api'], function() {
-        seajs.use(['./js/regisiter.js'])
-      })
-    }
+    window.seajs.use(['layer', 'api'], function() {
+      seajs.use(['./js/regisiter.js'])
+    })
   }
 }
 </script>

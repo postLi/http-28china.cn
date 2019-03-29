@@ -13,6 +13,7 @@ config.dev = !(app.env === 'production')
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)
+  await nuxt.ready()
 
   // Build in development
   if (config.dev) {
@@ -27,7 +28,6 @@ async function start() {
       ctx.res.on('close', resolve)
       ctx.res.on('finish', resolve)
       nuxt.render(ctx.req, ctx.res, promise => {
-        
         // nuxt.render passes a rejected promise into callback on error.
         promise.then(resolve).catch(reject)
       })

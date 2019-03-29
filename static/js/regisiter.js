@@ -1,12 +1,13 @@
 ;(function($) {
   if (!$) {
-    console.log('init error, need JQ~')
+    throw 'init error, need JQ~'
     return false
   }
 
   var validReg = window.AFLC_VALID
   var AFLC_VALID = window.AFLC_VALID
 
+  // 注册页面
   var reg_page = {
     memberType: '',
     reg_data: {
@@ -411,6 +412,7 @@
       })
     }
   }
+  // 登录页面
   var login_page = {
     login_data: {},
     loginType: 'password',
@@ -423,6 +425,10 @@
       } else {
         $('.smscodeinput').show()
       }
+    },
+    changeVcode: function() {
+      $('#vdimgck').attr('src', AFWL_API.vcode() + '&rn=' + Math.random())
+      $('#uservcode').val('')
     },
     init: function() {
       var _this = this
@@ -451,7 +457,7 @@
       // 设置验证码
       $('#vdimgck').attr('src', AFWL_API.vcode())
       $('.changeVcode').on('click', function() {
-        $('#vdimgck').attr('src', AFWL_API.vcode() + '&rn=' + Math.random())
+        _this.changeVcode()
         return false
       })
       // 切换登录方式
@@ -490,7 +496,7 @@
       // 获取微信登录信息
       window.addEventListener('message', function(e) {
         var payload = e.data
-        if (e.data && (e.data+'').indexOf('code:') !== -1) {
+        if (e.data && (e.data + '').indexOf('code:') !== -1) {
           var code = e.data.split(':')[1]
           $('body').trigger('wxLoginSuccess', code)
         }
@@ -505,7 +511,7 @@
           skin: 'layui-layer-rim', //加上边框
           area: ['200px', '240px'], //宽高
           content:
-            '<div class="userTypeSelect"> <span data-type="aflc-1">车主</span> <span data-type="aflc-2">货主</span> <span data-type="aflc-5">物流公司</span> </div>'
+            '<div class="userTypeSelect"> <span data-type="aflc-1">车主</span> <span data-type="aflc-2">货主</span>  </div>'
         })
       })
       // 选择角色信息
@@ -615,10 +621,10 @@
           var data = res.data
           layer.closeAll()
           if (res.access_token) {
-            _this.loginPhpByToken(res.access_token, type, '/')
+            // _this.loginPhpByToken(res.access_token, type, '/')
             // layer.msg('登录成功。');
             // 已经绑定，跳转到会员中心
-            // location.href = AFWL_API.constant.LINK_MEMBER
+            location.href = AFWL_API.constant.LINK_MEMBER
           } else {
             layer.msg('您的微信号尚未绑定该角色。')
             _this.wxid = data.message.match(/openid:([^,]*),?/)[1]
@@ -793,7 +799,7 @@
         .done(function(res) {
           if (res.access_token) {
             // $('#form1').submit();
-            _this.loginPhpByToken(res.access_token, usertype, '/')
+            location.href = url
           } else {
             layer.alert(
               '登录失败：' +
@@ -803,6 +809,7 @@
                   JSON.stringify(res) ||
                   '未知错误')
             )
+            _this.changeVcode()
           }
           return res
         })
@@ -813,12 +820,14 @@
           } else {
             layer.alert('登录失败，请检查您的手机号跟验证码。')
           }
+          _this.changeVcode()
           // layer.alert(JSON.stringify(err));
         })
     },
     login: function(username, pwd, usertype, url) {
       // 先登录157拿token
       // 将token保存到cookie后再进行最后的php登录
+      var _this = this
       return AFWL_API.login(username + '|' + usertype, pwd)
         .done(function(res) {
           if (res.access_token) {
@@ -849,6 +858,7 @@
             // 登录成功
             location.href = url || '/'
           } else {
+            _this.changeVcode()
             layer.alert(
               '登录失败：' +
                 (res.errorInfo ||
@@ -861,6 +871,7 @@
         })
         .fail(function(err, status, let2) {
           console.log(err, status, let2)
+          _this.changeVcode()
           if (err.status) {
             layer.alert('登录失败，账号或密码错误。')
           } else {
@@ -871,6 +882,7 @@
     }
   }
   //mobile=2&imageCode=3&smsCode=4&password=5&passwordSure=6
+  // 找回密码页面
   var find_page = {
     memberType: '',
     find_data: {
@@ -1240,10 +1252,15 @@
     }
   }
 
-  login_page.init()
+  //初始化登录页面
+  if ($('.login-page').length) {
+    login_page.init()
+  }
+  // 初始化注册页面
   if ($('.registiter-page').length) {
     reg_page.init()
   }
+  // 初始化找回密码页面
   if ($('.password-page').length) {
     find_page.init()
   }
@@ -1255,445 +1272,4 @@
   $(".prev-btn").on("click", function(){
     reg_page.showStep(--current_reg_step)
   }); */
-
-  /**　＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝城市控件＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝ ＊*/
-
-  function initCitySelect(cityData) {
-    var iplocation = {}
-    // 缓存请求的数据
-    var provinceCityJson = {}
-    var cName = 'ipLocation'
-    var currentLocation = ''
-    var currentProvinceId = 1
-
-    function getNameById(provinceId) {
-      var name = '北京'
-      provinceId = parseInt(provinceId, 10)
-
-      $.each(cityData, function(el, index) {
-        if (index.code === provinceId) {
-          name = index.name
-          return false
-        }
-      })
-
-      return name
-    }
-
-    function checkCityInfo() {
-      $('#store-selector').removeClass('hover')
-      reg_page.checkCity()
-    }
-
-    $('li .close').on('click', function() {
-      checkCityInfo()
-    })
-
-    var cityLiTag = ''
-
-    $.each(cityData, function(el, index) {
-      cityLiTag += '<li><a href="#none" data-value="{code}">{name}</a></li>'
-        .replace('{code}', index.code)
-        .replace('{name}', index.name)
-    })
-    var isUseServiceLoc = true
-    var provinceHtml =
-      '<div class="content"><div data-widget="tabs" class="m JD-stock" id="JD-stock">' +
-      '<div class="mt">' +
-      '    <ul class="tab">' +
-      '        <li data-index="0" data-widget="tab-item" class="curr"><a href="#none" class="hover"><em>请选择</em><i></i></a></li>' +
-      '        <li data-index="1" data-widget="tab-item" style="display:none;"><a href="#none" class=""><em>请选择</em><i></i></a></li>' +
-      '        <li data-index="2" data-widget="tab-item" style="display:none;"><a href="#none" class=""><em>请选择</em><i></i></a></li>' +
-      '        <li data-index="3" data-widget="tab-item" style="display:none;"><a href="#none" class=""><em>请选择</em><i></i></a></li>' +
-      '    </ul>' +
-      '    <div class="stock-line"></div>' +
-      '</div>' +
-      '<div class="mc" data-area="0" data-widget="tab-content" id="stock_province_item">' +
-      '    <ul class="area-list">' +
-      cityLiTag +
-      '    </ul>' +
-      '</div>' +
-      '<div class="mc" data-area="1" data-widget="tab-content" id="stock_city_item"></div>' +
-      '<div class="mc" data-area="2" data-widget="tab-content" id="stock_area_item"></div>' +
-      '<div class="mc" data-area="3" data-widget="tab-content" id="stock_town_item"></div>' +
-      '</div></div>'
-
-    function getAreaList(result) {
-      var html = ["<ul class='area-list'>"]
-      var longhtml = []
-      var longerhtml = []
-      if (result && result.length > 0) {
-        for (var i = 0, j = result.length; i < j; i++) {
-          result[i].name = result[i].name.replace(' ', '')
-          if (result[i].name.length > 12) {
-            longerhtml.push(
-              "<li class='longer-area'><a href='#none' data-value='" +
-                result[i].code +
-                "'>" +
-                result[i].name +
-                '</a></li>'
-            )
-          } else if (result[i].name.length > 5) {
-            longhtml.push(
-              "<li class='long-area'><a href='#none' data-value='" +
-                result[i].code +
-                "'>" +
-                result[i].name +
-                '</a></li>'
-            )
-          } else {
-            html.push(
-              "<li><a href='#none' data-value='" +
-                result[i].code +
-                "'>" +
-                result[i].name +
-                '</a></li>'
-            )
-          }
-        }
-      } else {
-        html.push(
-          "<li><a href='#none' data-value='" +
-            currentAreaInfo.currentFid +
-            "'> </a></li>"
-        )
-      }
-      html.push(longhtml.join(''))
-      html.push(longerhtml.join(''))
-      html.push('</ul>')
-      return html.join('')
-    }
-
-    function cleanKuohao(str) {
-      if (str && str.indexOf('(') > 0) {
-        str = str.substring(0, str.indexOf('('))
-      }
-      if (str && str.indexOf('（') > 0) {
-        str = str.substring(0, str.indexOf('（'))
-      }
-      return str
-    }
-    // 最后的赋值函数
-    function getStockOpt(id, name) {
-      if (currentAreaInfo.currentLevel == 3) {
-        currentAreaInfo.currentAreaId = id
-        currentAreaInfo.currentAreaName = name
-        if (!page_load) {
-          currentAreaInfo.currentTownId = 0
-          currentAreaInfo.currentTownName = ''
-        }
-      } else if (currentAreaInfo.currentLevel == 4) {
-        currentAreaInfo.currentTownId = id
-        currentAreaInfo.currentTownName = name
-      }
-      checkCityInfo()
-      if (page_load) {
-        page_load = false
-      }
-      var address = $.trim(
-        currentAreaInfo.currentProvinceName +
-          currentAreaInfo.currentCityName +
-          currentAreaInfo.currentAreaName +
-          currentAreaInfo.currentTownName
-      )
-      var address2 = $.trim(
-        currentAreaInfo.currentProvinceName +
-          cleanKuohao(currentAreaInfo.currentCityName) +
-          cleanKuohao(currentAreaInfo.currentAreaName) +
-          cleanKuohao(currentAreaInfo.currentTownName)
-      )
-      var repeatREG = /^(.*)\1\1$/
-      address = address.replace(repeatREG, '$1')
-      address2 = address2.replace(repeatREG, '$1')
-      $('#store-selector .text div')
-        .html(address2)
-        .attr('title', address)
-        .attr('data-id', id)
-        .attr('data-province', currentAreaInfo.currentProvinceId)
-        .attr('data-city', currentAreaInfo.currentCityId)
-        .attr('data-area', currentAreaInfo.currentAreaId)
-    }
-
-    function getAreaListcallback(r) {
-      currentDom.html(getAreaList(r))
-      if (currentAreaInfo.currentLevel >= 2) {
-        currentDom.find('a').click(function() {
-          if (page_load) {
-            page_load = false
-          }
-          if (currentDom.attr('id') == 'stock_area_item') {
-            currentAreaInfo.currentLevel = 3
-          } else if (currentDom.attr('id') == 'stock_town_item') {
-            currentAreaInfo.currentLevel = 4
-          }
-          getStockOpt($(this).attr('data-value'), $(this).html())
-        })
-        // 刚进入页面时的初始化工作
-        if (page_load) {
-          currentAreaInfo.currentLevel =
-            currentAreaInfo.currentLevel == 2 ? 3 : 4
-          if (
-            currentAreaInfo.currentAreaId &&
-            new Number(currentAreaInfo.currentAreaId) > 0
-          ) {
-            getStockOpt(
-              currentAreaInfo.currentAreaId,
-              currentDom
-                .find("a[data-value='" + currentAreaInfo.currentAreaId + "']")
-                .html()
-            )
-          } else {
-            getStockOpt(
-              currentDom
-                .find('a')
-                .eq(0)
-                .attr('data-value'),
-              currentDom
-                .find('a')
-                .eq(0)
-                .html()
-            )
-          }
-        }
-      }
-    }
-
-    function chooseProvince(provinceId) {
-      provinceContainer.hide()
-      currentAreaInfo.currentLevel = 1
-      currentAreaInfo.currentProvinceId = provinceId
-      currentAreaInfo.currentProvinceName = getNameById(provinceId)
-      if (!page_load) {
-        currentAreaInfo.currentCityId = 0
-        currentAreaInfo.currentCityName = ''
-        currentAreaInfo.currentAreaId = 0
-        currentAreaInfo.currentAreaName = ''
-        currentAreaInfo.currentTownId = 0
-        currentAreaInfo.currentTownName = ''
-      }
-      areaTabContainer
-        .eq(0)
-        .removeClass('curr')
-        .find('em')
-        .html(currentAreaInfo.currentProvinceName)
-      areaTabContainer
-        .eq(1)
-        .addClass('curr')
-        .show()
-        .find('em')
-        .html('请选择')
-      areaTabContainer.eq(2).hide()
-      areaTabContainer.eq(3).hide()
-      cityContainer.show()
-      areaContainer.hide()
-      townaContainer.hide()
-      var callback = function() {
-        cityContainer.html(getAreaList(provinceCityJson['' + provinceId]))
-        cityContainer.find('a').click(function() {
-          if (page_load) {
-            page_load = false
-          }
-          $('#store-selector').unbind('mouseout')
-          chooseCity($(this).attr('data-value'), $(this).html())
-        })
-        // 进行初始化工作
-        if (page_load) {
-          if (
-            currentAreaInfo.currentCityId &&
-            new Number(currentAreaInfo.currentCityId) > 0
-          ) {
-            chooseCity(
-              currentAreaInfo.currentCityId,
-              cityContainer
-                .find("a[data-value='" + currentAreaInfo.currentCityId + "']")
-                .html()
-            )
-          } else {
-            chooseCity(
-              cityContainer
-                .find('a')
-                .eq(0)
-                .attr('data-value'),
-              cityContainer
-                .find('a')
-                .eq(0)
-                .html()
-            )
-          }
-        }
-      }
-      if (provinceCityJson['' + provinceId]) {
-        callback()
-      } else {
-        AFWL_API.getCityInfo(provinceId).done(function(res) {
-          //if(res.status !== 200){
-          provinceCityJson['' + provinceId] = res.data || [
-            {
-              code: provinceId,
-              name: currentAreaInfo.currentProvinceName,
-              parentCode: provinceId
-            }
-          ]
-          callback()
-          //  }
-        })
-      }
-    }
-
-    function chooseCity(cityId, cityName) {
-      provinceContainer.hide()
-      cityContainer.hide()
-      currentAreaInfo.currentLevel = 2
-      currentAreaInfo.currentCityId = cityId
-      currentAreaInfo.currentCityName = cityName
-      if (!page_load) {
-        currentAreaInfo.currentAreaId = 0
-        currentAreaInfo.currentAreaName = ''
-        currentAreaInfo.currentTownId = 0
-        currentAreaInfo.currentTownName = ''
-      }
-      areaTabContainer
-        .eq(1)
-        .removeClass('curr')
-        .find('em')
-        .html(cityName)
-      areaTabContainer
-        .eq(2)
-        .addClass('curr')
-        .show()
-        .find('em')
-        .html('请选择')
-      areaTabContainer.eq(3).hide()
-      areaContainer
-        .show()
-        .html("<div class='iloading'>正在加载中，请稍候...</div>")
-      townaContainer.hide()
-      currentDom = areaContainer
-      AFWL_API.getCityInfo(cityId).done(function(res) {
-        getAreaListcallback(
-          res.data || [
-            {
-              code: currentAreaInfo.currentCityId,
-              name: currentAreaInfo.currentCityName,
-              parentCode: currentAreaInfo.currentCityId
-            }
-          ]
-        )
-      })
-    }
-
-    $('#store-selector .text').after(provinceHtml)
-    var areaTabContainer = $('#JD-stock .tab li')
-    var provinceContainer = $('#stock_province_item')
-    var cityContainer = $('#stock_city_item')
-    var areaContainer = $('#stock_area_item')
-    var townaContainer = $('#stock_town_item')
-    var currentDom = provinceContainer
-    var currentAreaInfo
-
-    function CurrentAreaInfoInit() {
-      currentAreaInfo = {
-        currentLevel: 1,
-        // "currentProvinceId": cityData[0].code,
-        // "currentProvinceName": cityData[0].name,
-        currentProvinceId: '',
-        currentProvinceName: '',
-        currentCityId: 0,
-        currentCityName: '',
-        currentAreaId: 0,
-        currentAreaName: '',
-        currentTownId: 0,
-        currentTownName: ''
-      }
-    }
-    var page_load = true
-    ;(function() {
-      var timer
-      $('#list1').on({
-        mouseout: function(parms) {
-          clearTimeout(timer)
-          timer = setTimeout(function() {
-            checkCityInfo()
-          }, 2000)
-        },
-        mouseenter: function(parms) {
-          clearTimeout(timer)
-        }
-      })
-      $('#store-selector')
-        .unbind('mouseover')
-        .bind('mouseover', function() {
-          $('#store-selector').addClass('hover')
-          $('#store-selector .content,#JD-stock').show()
-        })
-        .find('dl')
-        .remove()
-      CurrentAreaInfoInit()
-      areaTabContainer
-        .eq(0)
-        .find('a')
-        .click(function() {
-          areaTabContainer.removeClass('curr')
-          areaTabContainer
-            .eq(0)
-            .addClass('curr')
-            .show()
-          provinceContainer.show()
-          cityContainer.hide()
-          areaContainer.hide()
-          townaContainer.hide()
-          areaTabContainer.eq(1).hide()
-          areaTabContainer.eq(2).hide()
-          areaTabContainer.eq(3).hide()
-        })
-      areaTabContainer
-        .eq(1)
-        .find('a')
-        .click(function() {
-          areaTabContainer.removeClass('curr')
-          areaTabContainer
-            .eq(1)
-            .addClass('curr')
-            .show()
-          provinceContainer.hide()
-          cityContainer.show()
-          areaContainer.hide()
-          townaContainer.hide()
-          areaTabContainer.eq(2).hide()
-          areaTabContainer.eq(3).hide()
-        })
-      areaTabContainer
-        .eq(2)
-        .find('a')
-        .click(function() {
-          areaTabContainer.removeClass('curr')
-          areaTabContainer
-            .eq(2)
-            .addClass('curr')
-            .show()
-          provinceContainer.hide()
-          cityContainer.hide()
-          areaContainer.show()
-          townaContainer.hide()
-          areaTabContainer.eq(3).hide()
-        })
-      provinceContainer
-        .find('a')
-        .click(function() {
-          if (page_load) {
-            page_load = false
-          }
-          $('#store-selector').unbind('mouseout')
-          chooseProvince($(this).attr('data-value'))
-        })
-        .end()
-      // chooseProvince(currentAreaInfo.currentProvinceId);
-    })()
-  }
-  // 当需要选择框时才初始化
-  if ($('#store-selector').length) {
-    AFWL_API.getCityInfo('').done(function(res) {
-      initCitySelect(res.data || [])
-    })
-  }
 })(window.jQuery)

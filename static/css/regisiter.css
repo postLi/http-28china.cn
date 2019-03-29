@@ -337,7 +337,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .inputbox input{
   background-color: #f8f8f8;
   border-radius: 5px; 
-  border:none !important;
+  /* border:none !important; */
   /* color:#ddd !important; */
 }
 .login-page .inputbox .icon {
@@ -370,7 +370,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   text-align: center;
   color: #666;
   cursor: pointer;
-  width: 88px;
+  width: 139px;
   margin-left: 10px;
   float: left;
   border: 1px solid #ccc;
@@ -423,7 +423,7 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
   line-height: 40px;
   background-color: #f8f8f8;
   border-radius: 5px;
-  border:none;
+  /* border:none; */
 }
 
 .login-page .vcodeinput .vcode {

@@ -561,7 +561,6 @@ input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill {
 .inputbox input {
   background-color: #f8f8f8;
   border-radius: 5px;
-  border: none !important;
 }
 
 .login-page .inputbox input, .login-page .inputbox select {

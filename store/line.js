@@ -15,15 +15,15 @@ export const actions = {
     // console.log('payload-GETLIST', payload)
     return new Promise(resolve => {
       this.$axios
-        .post('/28-web/logisticsPark/list', payload.data)
+        .post('/28-web/range/home/recommend', payload.data)
         .then(res => {
           let data = res.data
           if (data.status === 200) {
             // console.log('1payload-GETRECOMMEND', data.data)
-            let ndata = data.data ? data.data.list || [] : []
+            let ndata = data.data || []
             ndata = payload.preFn ? payload.preFn(ndata) : ndata
             commit('setInfo', {
-              name: 'recommend',
+              name: payload.name,
               data: ndata
             })
           }

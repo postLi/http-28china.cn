@@ -1531,10 +1531,12 @@ border-radius: 3px;
   height: 390px;
   background-color: #ffffff;
 }
-
+.left #echart div{
+  width: 576px !important;
+}
 .arc_main3 .right {
   float: right;
-  width: 820px;
+  width: 800px;
   height: 390px;
   background-color: #ffffff;
 }

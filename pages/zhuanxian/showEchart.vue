@@ -28,7 +28,7 @@ export default {
     if (process.server) {
       return
     }
-    // console.log(this.info, 'this.info')
+    console.log(this.info, 'this.info')
     // `cargo_type`  （重货1、轻货0）'
     this.info.forEach((item, index) => {
       if (item.cargoType === '0') {
@@ -36,7 +36,7 @@ export default {
         this.comInfo(this.sendEchart, this.cargoType0)
       }
     })
-    // console.log(this.sendEchart, 'this.sendEchart轻货')
+    console.log(this.sendEchart, 'this.sendEchart轻货')
     this.info.forEach((item, index) => {
       if (item.cargoType === '1') {
         this.cargoType1 = item
@@ -394,13 +394,7 @@ export default {
         show: false,
         type: 'category',
         boundaryGap: false,
-        data: [
-          '大品牌报价',
-          '优质专线报价',
-          '行业均价（高点）',
-          '行业均价（低点）',
-          '本供应商价'
-        ]
+        data: ['最高价', '行业最高', '本专线价', '行业最低', '最低价']
       },
       yAxis: {
         axisLine: { show: false },
@@ -486,8 +480,8 @@ export default {
               }
             },
             rich: {
-              color0: { fontSize: 18, align: 'center', color: '#FF7836' },
-              color1: { fontSize: 18, align: 'center', color: '#6F6F6F' },
+              color0: { fontSize: 16, align: 'center', color: '#FF7836' },
+              color1: { fontSize: 16, align: 'center', color: '#6F6F6F' },
               color2: {
                 color: '#413A43',
                 align: 'center',
@@ -1009,20 +1003,26 @@ export default {
   },
   methods: {
     comInfo(sendEchart, cargoType) {
-      // console.log(cargoType, 'cargoType')
-      sendEchart[0] = cargoType.famousBrandPrice
+      // 最高价 行业最高 本专线价 行业最低 最低价
+      //        轻重货（1重货，0轻货）：cargoType
+      // 最高价： highestPrice": 0.77,
+      //  最低价：lowestPrice": 0.3,
+      // 行业最高 ：highAveragePrice": 0.56,
+      // 行业最低： lowAveragePrice": 0.39,
+      // 本专线价： thisRangePrice": 0.43
+      sendEchart[0] = cargoType.highestPrice
       sendEchart[1] = cargoType.highAveragePrice
-      sendEchart[2] = cargoType.highQualityPrice
+      sendEchart[2] = cargoType.thisRangePrice
       sendEchart[3] = cargoType.lowAveragePrice
 
       // lightDiscountPrice 轻货价的承运商价
       let price = ''
       if (cargoType.cargoType == 1) {
-        price = cargoType.weightDiscountPrice
+        price = cargoType.lowestPrice
         // console.log(price, 'price')
       }
       if (cargoType.cargoType == 0) {
-        price = cargoType.lightDiscountPrice
+        price = cargoType.lowestPrice
         // console.log(price, 'price2')
       }
       sendEchart[4] = {

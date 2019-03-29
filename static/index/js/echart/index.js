@@ -140,7 +140,7 @@ $(function() {
     api
       .getInfo(start, end)
       .done(function(res) {
-        var data = res.data[0] || []
+        var data = res.data || []
         var zhong = []
         var qing = []
         var week = []
@@ -244,21 +244,33 @@ $(function() {
   var end = $('.current')
     .find('.lineend')
     .text()
-  $('.current').append($('.echartbox2'))
-  showSmallEchart(start, end)
+  /*  $('.current').append($('.echartbox2'))
+  showSmallEchart(start, end) */
   var lis2 = $('.line-list-ul2 li')
-  lis2.on('mouseenter', function() {
-    lis2.removeClass('current')
-    $(this).addClass('current')
-    var start = $(this)
-      .find('.linestart')
-      .text()
-    var end = $(this)
-      .find('.lineend')
-      .text()
-    $(this).append($('.echartbox2'))
-    showSmallEchart(start, end)
-  })
+  lis2
+    .on('mouseenter', function() {
+      lis2.removeClass('current')
+      $(this).addClass('current')
+      var start = $(this)
+        .find('.linestart')
+        .text()
+      var end = $(this)
+        .find('.lineend')
+        .text()
+      $(this).append($('.echartbox2'))
+      var ebox = $('.echartbox2')
+      var $t = $(this)
+      ebox.find('.zhong-info-price i').text($t.find('.linezhong').text())
+      ebox.find('.zhong-info-tong').text($t.find('.linezhong-percent').text())
+      ebox.find('.zhong-info-huan').text()
+
+      ebox.find('.qing-info-price i').text($t.find('.lineqing').text())
+      ebox.find('.qing-info-tong').text($t.find('.lineqing-percent').text())
+      ebox.find('.qing-info-huan').text()
+      showSmallEchart(start, end)
+    })
+    .eq(0)
+    .trigger('mouseenter')
 
   var mysmallchart
   function showSmallEchart(start, end) {
@@ -269,12 +281,12 @@ $(function() {
     api
       .getInfo(start, end)
       .done(function(res) {
-        var data = res.data[0] || []
+        var data = res.data || []
         var zhong = []
         var qing = []
         var week = []
 
-        data.reverse()
+        data.reverse && data.reverse()
         $.each(data, function(index, ele) {
           zhong.push(ele.heavyCargo)
           qing.push(ele.lightGoods)

@@ -1135,7 +1135,7 @@ function process06(evaluationDes,evaluationId,evaluationName,serverPriceStarLeve
 			content:'您还未登录，请先登录',
 			duration:3000
 		});
-        $('.login_box').css("display","block");
+		$('body').trigger('login.show')
         	
 
       //window.location='/login';

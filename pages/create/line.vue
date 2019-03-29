@@ -685,8 +685,7 @@ export default {
                     $('#test1').click(function() {
                       console.log('fdsafas', $.cookie('access_token'))
                       if (!$.cookie('access_token')) {
-                        $('.login_box').show()
-                        $('.login_box_mask').show()
+                        $('body').trigger('login.show')
                       }
                     })
                     $(document).on('click', '.login-btn', function(event) {

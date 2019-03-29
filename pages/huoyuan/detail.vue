@@ -1295,8 +1295,7 @@ export default {
         this.check = this.hyDetail.mobile
       } else {
         this.checkMoblie = false
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     checkobile() {
@@ -1308,8 +1307,7 @@ export default {
         this.mobile = this.hyDetail.mobile
       } else {
         this.isMobile = false
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     getAddress() {
@@ -1339,8 +1337,7 @@ export default {
         )
       } else {
         this.isShowCollect = true
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     openAdd() {

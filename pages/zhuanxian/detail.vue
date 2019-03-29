@@ -2740,8 +2740,7 @@ export default {
         // this.mobile = this.hyDetail.mobile
       } else {
         // this.isMobile = false
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     getCity() {

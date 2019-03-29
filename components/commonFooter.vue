@@ -323,33 +323,6 @@ export default {
 
     /*判断是否登录 S*/
 
-    function getCookie(cookieName) {
-      var cookieValue = ''
-      if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';')
-        for (var i = 0; i < cookies.length; i++) {
-          var cookie = cookies[i]
-          if (
-            cookie.substring(0, cookieName.length + 2).trim() ==
-            cookieName.trim() + '='
-          ) {
-            cookieValue = cookie.substring(cookieName.length + 2, cookie.length)
-            break
-          }
-        }
-      }
-      return cookieValue
-    }
-    function setCookie(c_name, value, expiredays) {
-      var exdate = new Date()
-      exdate.setDate(exdate.getDate() + expiredays)
-      document.cookie =
-        c_name +
-        '=' +
-        escape(value) +
-        (expiredays == null ? '' : ';expires=' + exdate.toGMTString())
-    }
-
     //手机号获取用户昵称（物流公司）
     function wuliu(account, access_token) {
       var name = ''
@@ -364,7 +337,7 @@ export default {
           '/api/aflc-common/common/aflcMemberCenter/v1/getLogisticsCompanyInfoByMobile/?mobile=' +
           account +
           '&access_token=' +
-          getCookie('access_token'),
+          $.cookie('access_token'),
         // url:"/api/aflc-portal/portalt/aflcLogisticsCompany/v1/findByAccount/"+account,
 
         success: function(res) {
@@ -463,9 +436,9 @@ export default {
     }
 
     function Is_login1() {
-      var login_mobile = getCookie('login_mobile')
-      var login_type = getCookie('login_type')
-      var access_token = getCookie('access_token')
+      var login_mobile = $.cookie('login_mobile')
+      var login_type = $.cookie('login_type')
+      var access_token = $.cookie('access_token')
       console.log('ok' + login_mobile + ':' + access_token + ':' + login_type)
       if (login_mobile && login_type && access_token) {
         if (login_type == 'aflc-1') {
@@ -477,84 +450,11 @@ export default {
         if (login_type == 'aflc-5') {
           var login_name = wuliu(login_mobile, access_token)
         }
-        $('#_userlogin1').css('display', 'none')
-        $('#_userlogin1_1').css('display', 'block')
-
-        $('#login_name1').html(login_name)
       }
     }
-    Is_login1()
-
-    function Is_login2() {
-      var login_mobile = getCookie('login_mobile')
-      var login_type = getCookie('login_type')
-      var access_token = getCookie('access_token')
-      if (login_mobile && login_type && access_token) {
-        if (login_type == 'aflc-1') {
-          var login_name = che(login_mobile, access_token)
-        }
-        if (login_type == 'aflc-2') {
-          var login_name = huo(login_mobile, access_token)
-        }
-        if (login_type == 'aflc-5') {
-          var login_name = wuliu(login_mobile, access_token)
-        }
-        $('#_userlogin2').css('display', 'none')
-        $('#_userlogin2_2').css('display', 'block')
-
-        $('#login_name2').html(login_name)
-        // $('#my_website').attr('href', '/member/' + login_mobile + '.html')
-      }
-    }
-    Is_login2()
-
-    function Is_login3() {
-      var login_mobile = getCookie('login_mobile')
-      var login_type = getCookie('login_type')
-      var access_token = getCookie('access_token')
-      if (login_mobile && login_type && access_token) {
-        if (login_type == 'aflc-1') {
-          var login_name = che(login_mobile, access_token)
-        }
-        if (login_type == 'aflc-2') {
-          var login_name = huo(login_mobile, access_token)
-        }
-        if (login_type == 'aflc-5') {
-          var login_name = wuliu(login_mobile, access_token)
-        }
-        $('#_userlogin3').css('display', 'none')
-        $('#_userlogin3_2').css('display', 'block')
-
-        $('#login_name3').html(login_name)
-        // $('#my_website').attr('href', '/member/' + login_mobile + '.html')
-      }
-    }
-    Is_login3()
+    //Is_login1()
 
     /*判断是否登录 E*/
-
-    function phplogin(userid, pwd) {
-      $.ajax({
-        type: 'post',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        url:
-          '/member/index_do.php?fmdo=login&dopost=login2&gourl=/&userid=' +
-          userid +
-          '&pwd=' +
-          pwd,
-
-        success: function(res) {
-          console.log(res)
-        },
-        error: function(err) {
-          //alert("error");
-          console.log(err.responseText)
-        }
-      })
-    }
-
     ;(function($) {
       if (!$) {
         console.log('init error, need JQ~')

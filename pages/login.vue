@@ -25,7 +25,7 @@
               data-type="password"
               class="active">密码登录</span><span data-type="smscode">短信登录</span>
           </div>
-          <div class="inputbox userTypeinput"><span data-type="aflc-1">车主</span><span data-type="aflc-2">货主</span><!-- <span data-type="aflc-5">物流公司</span> -->
+          <div class="inputbox userTypeinput"><span data-type="aflc-1">车主</span><span data-type="aflc-2">货主/物流公司</span><!-- <span data-type="aflc-5">物流公司</span> -->
           </div>
           <div class="inputbox">
             <span class="icon icon-mobile"/>

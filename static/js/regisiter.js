@@ -388,14 +388,12 @@
         function(e) {
           e.preventDefault()
 
-          $('[name="gourl"]').val(
-            AFWL_API.constant.LINK_MEMBER + '/baseInfo/authentication'
-          )
+          $('[name="gourl"]').val('/hyzx/baseInfo/authentication')
           login_page.login(
             reg_page.reg_data.mobile,
             reg_page.reg_data.password,
             reg_page.memberType,
-            AFWL_API.constant.LINK_MEMBER + '/baseInfo/authentication'
+            '/hyzx/baseInfo/authentication'
           )
           return false
         }

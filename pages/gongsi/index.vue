@@ -191,6 +191,7 @@
           target="_blank"
           style="color: #2577e3"
       >下载<span style="color: rgb(255,116,23)">【28快运APP】</span>，实时接收推荐的精品车货源与合作信息，在线下单推荐优质承运商，便捷查询运单。</a></div>
+      <!-- <OrderSerch/> -->
       <div class="banner h62">
         <div class="echart_scroll">
           <div
@@ -293,7 +294,7 @@
       <div class="list_center">
         <div class="list_left">
 
-          <div 
+          <div
             class="zx_sx"
             style="border-bottom:2px solid #2577ff"><span class="biaozhi"/><span>物流公司列表</span></div>
 
@@ -326,9 +327,9 @@
             </div>
           </div>
           <!--分页-->
-          <div 
-          
-           
+          <div
+
+
           class="lll-line--othet">
             <div class="lll-recommend clearfix">
               <div
@@ -395,12 +396,7 @@
           <HotList
             :lines="lineHots"
             :gongsi="true"/>
-          <!-- <div class="list-box-r-phone">
-            <div class="zx_p_tit">帮我找优质承运商</div>
-            <div class="list-box-r-top">
-              <selectMap/>
-            </div>
-          </div> -->
+
           <div class="list-box-r-news">
             <div
               v-if="gongsi_jryw01"
@@ -501,6 +497,7 @@ import HotList from '../../components/hotList'
 import selectMap from '../zhuanxian/selectMap'
 import FooterLinks from '../../components/footerLinks'
 import Add from './add'
+// import OrderSerch from './orderSearch'
 async function getGSList($axios, currentPage, vo = {}, companyName) {
   let parm = vo
   parm.currentPage = currentPage
@@ -526,6 +523,7 @@ export default {
     selectMap,
     FooterLinks,
     Add,
+    // OrderSerch,
     HotList
   },
   data() {
@@ -614,10 +612,6 @@ export default {
     delete vo1.currentPage
     delete vo1.pageSize
 
-    // delete vo1.locationProvince
-    // delete vo1.locationCity
-    // /logisticsCompany/adviseRecommend
-    // 广告推荐物流公司
     let [listA, listC, listD, listE, listF, listG, listH] = await Promise.all([
       $axios.get(aurl + '/28-web/logisticsCompany/popularity'),
       $axios.post(aurl + `/28-web/logisticsCompany/list/related/links`, vo1),
@@ -813,7 +807,6 @@ export default {
     script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
-    // this.initList()
     $('#buxian').prop('checked', true)
     var newArr = new Array()
     var _newArr = new Array()
@@ -825,7 +818,6 @@ export default {
         $('input[name=checkbox]').prop('checked', false)
         newArr = []
         _this.checkboxItem = newArr
-        // console.log(_this.checkboxItem, 'uniqueNames1')
         let vo = {}
         vo.otherServiceCodes = _this.checkboxItem
         vo.locationCity =
@@ -848,10 +840,7 @@ export default {
         if ($(this).prop('checked')) {
           newArr.push($(this).attr('data-code'))
           $('#buxian').prop('checked', false)
-          // console.log(newArr, 'newArrnewArr')
-          // newArr = []
         } else {
-          // console.log($(this).attr('data-code'), '$(this)')
         }
       })
       uniqueNames = []
@@ -900,6 +889,39 @@ export default {
             seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
               seajs.use(['../js/gaodemap2.js'], function() {
                 layui.use('form', function() {
+                  //运单查询 S
+                  $('.ydh').click(function() {
+                    $('#yd_nr').val('1809260061')
+                    $('.ydh').css('display', 'none')
+                  })
+                  $('#yd_nr').keyup(function() {
+                    if ($('#yd_nr').val()) {
+                      console.log('nr')
+                      $('#yd_cx1').css('background-color', '#eb434d')
+                      $('#yd_cx1').css('color', '#f9f9f9')
+                      $('.ydh').css('display', 'none')
+                    }
+                    if (!$('#yd_nr').val()) {
+                      console.log('nr')
+                      $('#yd_cx1').css('background-color', '#fff')
+                      $('#yd_cx1').css('color', '#f66618')
+                      $('.ydh').css('display', 'block')
+                    }
+                  })
+
+                  $('#yd_cx1').click(function() {
+                    console.log($('#yd_nr').val())
+                    var num = $('#yd_nr').val()
+                    if (num) {
+                      window.open('/ydcx?num=' + num)
+                    }
+                    if (!num) {
+                      alert('请先输入运单号查询！')
+                    }
+                  })
+
+                  //运单查询 E
+                  //
                   var form = layui.form
                   form.render()
                 })
@@ -909,14 +931,11 @@ export default {
                 var tab1 = $('.echart_scroll_nr1')
                 var tab2 = $('.echart_scroll_nr2')
                 tab2.html(tab1.html())
-                // console.log('tab2:' + tab2.html())
                 function Marquee() {
                   if (tab2[0].offsetWidth - tab[0].scrollLeft <= 0) {
                     tab[0].scrollLeft -= tab1[0].offsetWidth
-                    //console.log('tab1[0].offsetWidth:'+tab1[0].offsetWidth)
                   } else {
                     tab[0].scrollLeft++
-                    //console.log('tab[0].scrollLeft:'+tab1[0].scrollLeft)
                   }
                 }
                 var MyMar = setInterval(Marquee, speed)
@@ -928,12 +947,10 @@ export default {
                 })
                 layui.use('carousel', function() {
                   var carousel = layui.carousel
-                  //建造实例
                   carousel.render({
                     elem: '#test1',
-                    width: '100%', //设置容器宽度
-                    arrow: 'always' //始终显示箭头
-                    //,anim: 'updown' //切换动画方式
+                    width: '100%',
+                    arrow: 'always'
                   })
                 })
                 $('.list_tiaoj span').click(function() {
@@ -1035,12 +1052,6 @@ export default {
     },
     noaddFn() {
       this.isAdd = false
-    },
-    btbs() {
-      layer.open({
-        type: 1,
-        content: '传入任意的文本或html' //这里content是一个普通的String
-      })
     }
   }
 }
@@ -1179,6 +1190,9 @@ export default {
         }
         .textare {
           width: 235px;
+        }
+        .city-picker-dropdown {
+          left: -45px !important;
         }
       }
       .textinput {

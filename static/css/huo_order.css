@@ -76,7 +76,7 @@
   position: relative;
   color:#009ee9ed;
   /* background: url(/templets/default/images/wzlImg/gou.png) no-repeat; */
-  background: url(../../static/images/wzlImg/gou.png) no-repeat;
+  background: url(/images/wzlImg/gou.png) no-repeat;
   background-position: right bottom;
 }
 .order-submit-btn:active{
@@ -239,14 +239,14 @@
   width: 80px;
   height: 40px;
   top: 32px;
-  background: url(../images/order/reset.png) no-repeat 0 0 #fff;
+  background: url(/images/order/reset.png) no-repeat 0 0 #fff;
   z-index: 2;
 }
 .add-cargo-list{
   left: 830px;
   width: 40px;
   height: 40px;
-  background: url(../images/order/add.png) no-repeat 0 0;
+  background: url(/images/order/add.png) no-repeat 0 0;
 }
 .deletecargo{
   cursor: pointer;

@@ -47,7 +47,7 @@
   position: absolute;
 }
 
-.ellipsis, .p_owner_list .owner_name span.owner_name_companyName, .p_hy_info .hy_info_user_box .hy_info_user_text > span.info_user_text_goods, .p_co_owner_list > li .rank_tit .rank_tit_name {
+.ellipsis, .p_owner_list .owner_name span.owner_name_companyName, .p_hy_list > li .hy_list_goods > span, .p_hy_info .hy_info_user_box .hy_info_user_text > span.info_user_text_goods, .p_co_owner_list > li .rank_tit .rank_tit_name {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -219,7 +219,6 @@
 .p_category_menu .category_menu_list {
   padding-left: 20px;
   display: table;
-  word-spacing: -1em;
 }
 
 .p_category_menu .category_menu_list .item {
@@ -423,6 +422,15 @@
   color: #3cb46d;
   background: #f2f2f2;
   border: 1px solid #3cb46d;
+}
+
+.p_hy_list > li .hy_list_goods {
+  line-height: 20px;
+}
+
+.p_hy_list > li .hy_list_goods > span {
+  display: inline-block;
+  max-width: 200px;
 }
 
 /************最新货源************/
@@ -669,7 +677,6 @@
 .p_release .release_total {
   margin: 30px auto 0 auto;
   display: table;
-  word-spacing: -1em;
   width: 430px;
   font-size: 16px;
   line-height: 20px;
@@ -966,8 +973,9 @@
 }
 
 .p_me_groom .gr_text .gr_text_txt {
-  margin: 15px 0;
+  margin: 10px 0;
   line-height: 20px;
+  font-size: 12px;
 }
 
 .p_me_groom .gr_text .error {
@@ -1077,8 +1085,7 @@
 }
 
 .p_hot_line > li .h_pic img {
-  width: 100%;
-  height: 100%;
+  max-width: 272px;
 }
 
 .p_hot_line > li .h_place {

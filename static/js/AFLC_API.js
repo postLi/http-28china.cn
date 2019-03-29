@@ -87,6 +87,11 @@ var AFWL_API = {
       domain: domain,
       path: '/'
     })
+    $.cookie('loginId', data.id, { expires: 7, path: '/' })
+    $.cookie('loginCompanyName', data.companyName || '', {
+      expires: 7,
+      path: '/'
+    })
     localStorage.setItem('28kuaiyunuserinfo', JSON.stringify(data))
   },
   login: function(username, password) {
@@ -435,10 +440,28 @@ var AFWL_API = {
   /**
    * 统一的注册接口
    * @param {*} data 提交的参数
-   * {
+   * 
+旧版
+{
   "areaCode": "string",
   "cityCode": "string",
   "memberType": "string",
+  "mobile": "string",
+  "password": "string",
+  "provinceCode": "string",
+  "registerOrigin": "string",
+  "registerType": "string",
+  "smsCode": "string"
+}
+新版
+{
+  "areaCode": "string",
+  "belongSalesman": "string", 所属业务员id
+  "belongSalesmanMobile": "string", 所属业务员手机号码
+  "belongSalesmanName": "string", 所属业务员姓名
+  "cityCode": "string",
+  "imei": "string", 手机识别码
+  "memberType": "string", 会员类型(货主:AF00101,车主:AF00102)
   "mobile": "string",
   "password": "string",
   "provinceCode": "string",
@@ -476,7 +499,7 @@ var AFWL_API = {
     return this._warpper(
       $.ajax({
         type: 'POST',
-        url: this.url + '/aflc-common/common/aflcMemberCenter/v1/register',
+        url: this.url + '/aflc-common/common/aflcMemberCenter/v1/userRegister',
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(data),
         dataType: 'json'
@@ -825,18 +848,5 @@ var AFLC_VALID = {
   NUM_POINT: /^(([1-9][0-9])|(([0].\d{0,2}|[1-9][0-9].\d{0,2})))$/,
   // 支持百分比
   NUM_PERCENTAGE: /^([1-9]{1}[0-9]{0,1}|0|100)(.\d{1,2}){0,1}%$/,
-  /**
-   * 获取字符长度
-   */
-  strlen: function(str) {
-    var s = 0
-    for (var i = 0; i < str.length; i++) {
-      if (str.charAt(i).match(/[\u0391-\uFFE5]/)) {
-        s += 2
-      } else {
-        s++
-      }
-    }
-    return s
-  }
+
 }

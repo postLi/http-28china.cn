@@ -145,7 +145,7 @@ $(function() {
         var qing = []
         var week = []
 
-        data.reverse()
+        data.reverse && data.reverse()
         $.each(data, function(index, ele) {
           zhong.push(ele.heavyCargo)
           qing.push(ele.lightGoods)

@@ -132,7 +132,7 @@
   margin-bottom: 20px;
 }
 .form-detail input{
-  background: url(../images/order/addr.png) no-repeat 330px center;
+  background: url(/images/order/addr.png) no-repeat 330px center;
 }
 /* 货物信息 */
 .order-cargo-info{
@@ -247,14 +247,14 @@
   width: 80px;
   height: 40px;
   top: 32px;
-  background: url(../images/order/reset.png) no-repeat 0 0 #fff;
+  background: url(/images/order/reset.png) no-repeat 0 0 #fff;
   z-index: 2;
 }
 .add-cargo-list{
   left: 830px;
   width: 40px;
   height: 40px;
-  background: url(../images/order/add.png) no-repeat 0 0;
+  background: url(/images/order/add.png) no-repeat 0 0;
 }
 .deletecargo{
   cursor: pointer;

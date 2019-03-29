@@ -6,12 +6,13 @@
       <div class="header_r">
         <div
           id="_userlogin1"
+          v-if="!islogin"
           class="header_r1">您好，欢迎来到28快运!&nbsp;&nbsp; <a href="/login">登录</a> <a href="/regisiter">注册</a></div>
         <div
+          v-if="islogin"
           id="_userlogin1_1"
-          class="header_r1"
-          style="display: none;">
-          <span class="chgoEm">您好，<span id="login_name1"/>&nbsp;已登录</span>
+          class="header_r1">
+          <span class="chgoEm">您好，<span id="login_name1">{{ username }}</span>&nbsp;已登录</span>
           <a
             target="_blank"
             href="/hyzx" >会员中心</a>
@@ -43,7 +44,21 @@
 
 <script>
 export default {
-  name: 'Top'
+  name: 'Top',
+  data() {
+    return {
+      islogin: false,
+      username: ''
+    }
+  },
+  mounted() {
+    let cookies = this.$cookies
+    let acct = cookies.get('access_token')
+    if (acct) {
+      this.islogin = true
+      this.username = cookies.get('login_mobile')
+    }
+  }
 }
 </script>
 

@@ -297,19 +297,19 @@
               <ul class="echart_scroll_nr1">
                 <li><a
                   href="javascript:void(0)"
-                  target="_blank"><span>广州发武汉</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+                  target="_blank"><span>广州发武汉</span><i>重货：</i><font>320</font><i>元/吨&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>100</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
                 <li><a
                   href="javascript:void(0)"
-                  target="_blank"><span>广州发合肥</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+                  target="_blank"><span>广州发合肥</span><i>重货：</i><font>350</font><i>元/吨&nbsp;&nbsp;</i><font>+4%</font><span>轻货：</span><font>120</font><i>元/方&nbsp;&nbsp;</i><em>-1%</em></a></li>
                 <li><a
                   href="javascript:void(0)"
-                  target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+                  target="_blank"><span>广州发重庆</span><i>重货：</i><font>550</font><i>元/吨&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>130</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
                 <li><a
                   href="javascript:void(0)"
-                  target="_blank"><span>广州发南昌</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+                  target="_blank"><span>广州发南昌</span><i>重货：</i><font>300</font><i>元/吨&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>80</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
                 <li><a
                   href="javascript:void(0)"
-                  target="_blank"><span>广州发郑州</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
+                  target="_blank"><span>广州发郑州</span><i>重货：</i><font>400</font><i>元/吨&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>140</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>
               </ul>
               <ul class="echart_scroll_nr2"/>
             </div>
@@ -469,27 +469,27 @@
               <ul>
                 <li>
                   <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">武汉</span></p>
-                  <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
+                  <p class="line_bt2">重货：<span><i class="linezhong">320</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">100</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
                 </li>
                 <li>
                   <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">重庆</span></p>
-                  <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
+                  <p class="line_bt2">重货：<span><i class="linezhong">550</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">130</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
                 </li>
                 <li>
                   <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">南昌</span></p>
-                  <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
+                  <p class="line_bt2">重货：<span><i class="linezhong">300</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">80</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
                 </li>
                 <li>
                   <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">长沙</span></p>
-                  <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
+                  <p class="line_bt2">重货：<span><i class="linezhong">240</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">126</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
                 </li>
                 <li>
                   <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">郑州</span></p>
-                  <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
+                  <p class="line_bt2">重货：<span><i class="linezhong">400</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">140</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
                 </li>
                 <li>
                   <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">合肥</span></p>
-                  <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
+                  <p class="line_bt2">重货：<span><i class="linezhong">350</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">120</i>元/方<span><em class="lineqing-percent">↓6%</em></span></p>
                 </li>
 
               </ul>
@@ -815,31 +815,31 @@
             <ul>
               <li class="current">
                 <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">武汉</span></p>
-                <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
+                <p class="line_bt2">重货：<span><i class="linezhong">320</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">100</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
               </li>
               <li class="">
                 <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">南昌</span></p>
-                <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
+                <p class="line_bt2">重货：<span><i class="linezhong">300</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">80</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
               </li>
               <li class="">
                 <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">重庆</span></p>
-                <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
+                <p class="line_bt2">重货：<span><i class="linezhong">550</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">130</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
               </li>
               <li class="">
                 <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">长沙</span></p>
-                <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
+                <p class="line_bt2">重货：<span><i class="linezhong">240</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">126</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
               </li>
               <li class="">
                 <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">郑州</span></p>
-                <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
+                <p class="line_bt2">重货：<span><i class="linezhong">400</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">140</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
               </li>
               <li class="">
                 <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">合肥</span></p>
-                <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
+                <p class="line_bt2">重货：<span><i class="linezhong">350</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">120</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
               </li>
               <li class="">
                 <p class="line_bt1"><span class="linestart">广州</span>发<span class="lineend">贵阳</span></p>
-                <p class="line_bt2">重货：<span><i class="linezhong">0.45</i>元/公斤</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">160</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
+                <p class="line_bt2">重货：<span><i class="linezhong">350</i>元/吨</span><span><i class="linezhong-percent">↑5%</i></span> 轻货：<i class="lineqing">95</i>元/方,<span><em class="lineqing-percent">↓6%</em></span></p>
               </li>
 
 
@@ -1647,7 +1647,7 @@ export default {
         name: 'index_list'
       }),
       // 获取专线列表
-      store.dispatch('line/GETLIST', {
+      store.dispatch('line/GETRECOMMEND', {
         data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
       }),

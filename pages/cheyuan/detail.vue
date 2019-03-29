@@ -155,7 +155,7 @@
             <div class="arc_m3_2"><i>发车时间：&nbsp;</i><span>{{ cy1.startTime ? cy1.startTime : '随时发车' }}</span></div>
           </div>
           <div class="arc_middle4">
-            <div class="arc_m3"><i>联系人：</i><span>{{ cy1.belongDriver }}</span></div>
+            <div class="arc_m3"><i>联系人：</i><span>{{ cy1.driverName }}</span></div>
             <div class="arc_m3"><i>手机：</i>
               <span>
                 <font 
@@ -204,20 +204,12 @@
           </p>
           <p style="clear: both;"/>
           <p class="arc_right05" >
-            <input
-              v-if="isShowCollect"
-              class="collection_cz"
-              style="cursor: pointer;"
-              readonly
+            <input 
+              class="collection_hz" 
+              style="cursor: pointer;" 
+              readonly 
               @click="collected()"
-              value="收藏">
-            <input
-              v-if="isCencelCollect"
-              class="collection_cz"
-              style="cursor: pointer;"
-              readonly
-              @click="cenclecollected()"
-              value="取消收藏">
+              :value="isShowCollect ? '收藏' : '取消收藏'">
           </p>
           <p class="arc_right06" >
             <span>相关认证</span>
@@ -235,7 +227,7 @@
       </div>
       <div class="arc_main1-1">
         想要更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的车源信息，您可以<a
-          href="/create/cheyuan" 
+          :href="'/create/cheyuan?startProvince='+cy1.startProvince+'&startCity='+cy1.startCity+'&startArea='+cy1.startArea+'&endProvince='+cy1.endProvince+'&endCity='+cy1.endCity+'&endArea='+cy1.endArea" 
           style="color: #75b3ff;">发布车源</a>，让车主主动来联系您，达成交易
       </div>
 
@@ -271,7 +263,7 @@
                 class="img"
                 src="/images/cy/13hot.png">活跃度：<i>{{ cheComprehensive.liveness }}</i></div>
               <div class="content-right-row">最近三个月发布车源 <i>{{ cheComprehensive.lastThreeMonthPublishNum }}</i> 次</div>
-              <div class="content-right-row">共成交 <i>{{ cheComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>28</i> 次</div>
+              <div class="content-right-row">共成交 <i>{{ cheComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ cheComprehensive.evaGoodCount }}</i> 次</div>
               <div class="content-right-row">大家对他的印象:</div>
               <div 
               class="content-right-row">
@@ -646,7 +638,23 @@ async function getOtherCarInfoList($axios, currentPage, vo) {
     return { list: [], pages: 0, currentPage: 1 }
   }
 }
-//
+async function getCanyColl(
+  $axios,
+  carInfoId,
+  access_token,
+  user_token,
+  handle
+) {
+  let res = await $axios.post(
+    `/28-web/collect/carInfo??access_token=${access_token}&user_token=${user_token}&carInfoId=${carInfoId}&handle=${handle}
+`
+  )
+  if (res.data.status === 200) {
+    layer.msg(res.data.data)
+  } else {
+    layer.msg(res.data.errorInfo)
+  }
+}
 export default {
   name: 'Detail',
   components: {
@@ -985,7 +993,7 @@ export default {
           '优质专线报价',
           '行业均价（高点）',
           '行业均价（低点）',
-          '本供应商价'
+          '本车主整车价'
         ]
       },
       yAxis: {
@@ -1191,7 +1199,7 @@ export default {
                     '优质专线报价',
                     '行业均价（高点）',
                     '行业均价（低点）',
-                    '本供应商价'
+                    '本车主整车价'
                   ]
                 },
                 yAxis: {
@@ -1374,9 +1382,16 @@ export default {
           '</span>全网优质车源的最新报价</div><div class="myLayer_footer"><span id="seconds">5S</span></div></div>' +
           '<div class="show2">' +
           '<div class="myLayer_title2"><span></span> <span>价格参考</span><span>大数据智能模型精准定价，28智能平台指导定价</span></div>' +
-          '<div class="myLayer_content2">广州→深圳17.5米整车</div>' +
+          '<div class="myLayer_content2">' +
+          this.cy1.startCity +
+          '->' +
+          this.cy1.endCity +
+          this.cy1.carLength +
+          '米</div>' +
           '<div id="echart2"></div>' +
-          '<div class="myLayer_content2">车主李先平的报价<span>低于</span><i>92.6%的车主</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          '<div class="myLayer_content2">车主' +
+          this.cy1.driverName +
+          '的报价<span>低于</span><i>92.6%的车主</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
           '</div>'
       })
     },
@@ -1394,70 +1409,33 @@ export default {
     collected() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
-      this.isCencelCollect = true
-      this.isShowCollect = false
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            '/28-web/collect/carInfo?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token +
-              '&carInfoId=' +
-              query.id +
-              '&handle=' +
-              'collect'
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('收藏成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
+      this.isShowCollect = !this.isShowCollect
+      if (!this.isShowCollect) {
+        this.handle = 'collect'
       } else {
-        window.location.href = '/login'
+        this.handle = 'cancelCollect'
       }
-    },
-    cenclecollected() {
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
-      this.isCencelCollect = false
-      this.isShowCollect = true
+      if (access_token != 'aflc-1') {
+        this.isShowCollect = true
+      }
       if (access_token && user_token) {
-        this.$axios
-          .post(
-            '/28-web/collect/carInfo?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token +
-              '&carInfoId=' +
-              query.id +
-              '&handle=' +
-              'cancelCollect'
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('取消成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
+        getCanyColl(
+          this.$axios,
+          this.cy1.carInfoId,
+          access_token,
+          user_token,
+          this.handle
+        )
       } else {
-        return
+        this.isShowCollect = true
+        $('.login_box').show()
+        $('.login_box_mask').show()
       }
     },
     openAdd() {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
+      this.getAddress()
       if (access_token && user_token) {
         this.$axios
           .post(
@@ -1480,13 +1458,16 @@ export default {
           })
       } else {
         this.isShowAdd = true
-        this.dataInfo.startProvince = this.cy1.startProvince
-        this.dataInfo.startCity = this.cy1.startCity
-        this.dataInfo.startArea = this.cy1.startArea
-        this.dataInfo.endProvince = this.cy1.endProvince
-        this.dataInfo.endCity = this.cy1.endCity
-        this.dataInfo.endArea = this.cy1.endArea
+        this.getAddress()
       }
+    },
+    getAddress() {
+      this.dataInfo.startProvince = this.cy1.startProvince
+      this.dataInfo.startCity = this.cy1.startCity
+      this.dataInfo.startArea = this.cy1.startArea
+      this.dataInfo.endProvince = this.cy1.endProvince
+      this.dataInfo.endCity = this.cy1.endCity
+      this.dataInfo.endArea = this.cy1.endArea
     },
     goToCy() {
       window.open(

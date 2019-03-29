@@ -30,11 +30,11 @@
 .main_nr .nr_bt1 span{
   border-bottom: none;
   padding-left: 36px;
-  /* background: url(../images/order/order-title.png) no-repeat 0 center; */
-  background: url(../images/order/order-title.png) no-repeat 0 center;
+  /* background: url(../css/images/order/order-title.png) no-repeat 0 center; */
+  background: url(/css/images/order/order-title.png) no-repeat 0 center;
 }
 .order-step{
-  /* background: url(../images/order/step.png) no-repeat center center; */
+  /* background: url(../css/images/order/step.png) no-repeat center center; */
   height: 45px;
   line-height: 45px;
   /* background: navajowhite; */
@@ -49,7 +49,7 @@
   top:8px;
 }
 .order-create-main{
-  /* background: url('../images/order2.png') no-repeat 0 0 #fff; */
+  /* background: url('../css/images/order2.png') no-repeat 0 0 #fff; */
   background: #fff;
   min-height: 1100px;
   font-size: 14px;
@@ -75,12 +75,18 @@
   border:1px solid #009ee9ed;
   position: relative;
   color:#009ee9ed;
-  /* background: url(/templets/default/images/wzlImg/gou.png) no-repeat; */
-  background: url(/images/wzlImg/gou.png) no-repeat;
+  /* background: url(/templets/default/css/images/wzlImg/gou.png) no-repeat; */
+  /* background: url(/images/wzlImg/gou.png) no-repeat; */
   background-position: right bottom;
 }
 .order-submit-btn:active{
   opacity: 0.5;
+}
+.userType{
+  margin-bottom: 10px;
+}
+.userType2{
+  margin-bottom: 10px;
 }
 /* .order_check{
   float: left;
@@ -103,7 +109,7 @@
 
 /* .order_check .checked {
   border-color: #2577e3;
-  background: url(../images/login_bg_on.png) no-repeat;
+  background: url(../css/images/login_bg_on.png) no-repeat;
   background-position: right bottom;
 } */
 .order-title{
@@ -136,7 +142,7 @@
 	height: 40px;
 	border-radius: 2px;
   border: solid 1px #d2d2d2;
-  padding: 0;
+  padding-left:20px;
 }
 .order-line-from{
   margin-bottom: 20px;
@@ -166,7 +172,7 @@
   top: 2px;
 }
 .form-detail input{
-  background: url(../images/order/addr.png) no-repeat 330px center;
+  background: url(/css/images/order/addr.png) no-repeat 330px center;
 }
 /* 货物信息 */
 .order-cargo-info{
@@ -235,18 +241,18 @@
   cursor: pointer;
 }
 .reset-cargo-list{
-  left: 740px;
+  left: 843px;
   width: 80px;
   height: 40px;
-  top: 32px;
-  background: url(/images/order/reset.png) no-repeat 0 0 #fff;
+  /* top: 32px; */
+  background: url(/css/images/order/reset.png) no-repeat 0 0 #fff;
   z-index: 2;
 }
 .add-cargo-list{
-  left: 830px;
+  left: 926px;
   width: 40px;
   height: 40px;
-  background: url(/images/order/add.png) no-repeat 0 0;
+  background: url(/css/images/order/add.png) no-repeat 0 0;
 }
 .deletecargo{
   cursor: pointer;
@@ -370,7 +376,7 @@
 .order-success-txt{
   font-size: 20px;
   color: #01b30c;
-  background: url(../images/order/xdcg.png) no-repeat 255px center;
+  background: url(../css/images/order/xdcg.png) no-repeat 255px center;
   line-height: 50px;
   text-indent: 326px;
 }
@@ -384,7 +390,7 @@
 }
 .order-success-tip .order-tip{
   padding-left: 30px;
-  background: url(../images/order/xdts.png) no-repeat 0 center;
+  background: url(../css/images/order/xdts.png) no-repeat 0 center;
 }
 .order-success-tab{
   margin-bottom: 10px;

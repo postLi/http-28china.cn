@@ -37,7 +37,8 @@
           </div>
         </div>
         <!-- 用户登录 -->
-        <div class="p_me_groom">
+        <div 
+        class="p_me_groom">
           <div class="gr_text">
             <h4 class="gr_text_title">帮我推荐</h4>
             <div class="gr_text_txt">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</div>
@@ -60,7 +61,9 @@
       </div>
     </div>
     <!-- 物流专线hd -->
-    <div class="bj_2">
+    <div 
+      class="bj_2"
+      style="height:550px">
       <div class="grid_c1 clearfix">    
         <div class="p_title_box">
           <h3 class="title">平台推荐</h3>
@@ -71,8 +74,12 @@
           </a>         
         </div>
         <div class="pt_groom fl">
-          <ul class="hd clearfix active_green">
-            <li class="channel1 active"> 
+          <ul 
+            :class="['hd','clearfix',groomClass]" 
+          >
+            <li 
+              :class="[{'active':groomIndex==1},'channel1']" 
+              @mouseover="groomTab(1)" > 
               <h6 class="pt_groom_tit">担保交易</h6>
               <div class="pt_groom_txt">
                 平台担保，安全可靠
@@ -80,7 +87,9 @@
               </div>
               <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
             </li>
-            <li class="channel2">
+            <li
+              :class="[{'active':groomIndex===2},'channel2']" 
+              @mouseover="groomTab(2)">
               <h6 class="pt_groom_tit">超值特惠</h6>
               <div class="pt_groom_txt">
                 价格直降，超值独享
@@ -88,7 +97,9 @@
               </div>
               <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
             </li>
-            <li class="channel3">
+            <li 
+              :class="[{'active':groomIndex===3},'channel3']" 
+              @mouseover="groomTab(3)">
               <h6 class="pt_groom_tit">精准时效</h6>
               <div class="pt_groom_txt">
                 及时、高效、保质量
@@ -96,7 +107,9 @@
               </div>
               <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
             </li>
-            <li class="channel4">
+            <li
+              :class="[{'active':groomIndex===4},'channel4']" 
+              @mouseover="groomTab(4)">
               <h6 class="pt_groom_tit">28信用</h6>
               <div class="pt_groom_txt">
                 平台认证，推荐专线
@@ -106,7 +119,7 @@
             </li>
           </ul>
           <div class="bd">
-            <div>
+            <div v-show="groomIndex===1">
               <ul class="p_hy_list p_wl_list clearfix">
                 <li>
                   <div class="p_10">
@@ -267,9 +280,9 @@
                
               </ul>
             </div>
-            <div style="display: none">22</div>
-            <div style="display: none">33</div>
-            <div style="display: none">44</div>
+            <div v-show="groomIndex===2">22</div>
+            <div v-show="groomIndex===3">33</div>
+            <div v-show="groomIndex===4">44</div>
           </div>
         </div>
         <div class="pt_discount fr">
@@ -1283,12 +1296,12 @@
         <h3 class="p_title">3800万用户的共同选择！</h3>
         <div class="shipper-say_title clearfix">
           <img 
-            src="../../static/images/zhuanxian/icon_index.png" 
+            src="../../static/images/huizong/icon_index.png" 
             class="shipper-say_title-icon" 
             alt="">
           <span class="shipper-say_title-word">货主说</span>
           <img 
-            src="../../static/images/zhuanxian/icon_index.png" 
+            src="../../static/images/huizong/icon_index.png" 
             class="shipper-say_title-icon" 
             alt="">
           <a 
@@ -1299,7 +1312,7 @@
           <li class="shipper_say_item ">
             <a href="">
               <img 
-                src="../../static/images/zhuanxian/_shiper.png" 
+                src="../../static/images/huizong/_shiper.png" 
                 class="shipper_say_img" 
                 alt="">
               <div class="shipper_say-word_box js-shipper_say-word_box">
@@ -1313,7 +1326,7 @@
           <li class="shipper_say_item shipper_say-item_middle">
             <a href="">
               <img 
-                src="../../static/images/zhuanxian/_shiper.png" 
+                src="../../static/images/huizong/_shiper.png" 
                 class="shipper_say_img" 
                 alt="">
               <div class="shipper_say-word_box js-shipper_say-word_box">
@@ -1327,7 +1340,7 @@
           <li class="shipper_say_item ">
             <a href="">
               <img 
-                src="../../static/images/zhuanxian/_shiper.png" 
+                src="../../static/images/huizong/_shiper.png" 
                 class="shipper_say_img" 
                 alt="">
               <div class="shipper_say-word_box js-shipper_say-word_box">
@@ -1464,7 +1477,7 @@
           <span class="tag hot-tag">热点 &gt;</span>
           <img 
             class="MD-home-qa-qa-pic" 
-            src="../../static/images/zhuanxian/_rd01.jpg">
+            src="../../static/images/huizong/_rd01.jpg">
           <img 
             src="" 
             class="MD-home-qa-ad-little-icon">
@@ -1492,7 +1505,7 @@
           <span class="tag book-tag">宝典 &gt;</span>
           <img 
             class="MD-home-qa-imgs" 
-            src="../../static/images/zhuanxian/_rd02.jpg">
+            src="../../static/images/huizong/_rd02.jpg">
           <div class="MD-home-qa-right-tit">
             <span class="MD-home-qa-right-title">十年开不坏 那些足以让修车师傅失业的车</span>
             <span class="MD-home-qa-right-desc">十年开不坏 那些足以让修车师傅失业的车 “我最近要换车了” “你终于舍得换你那老捷达了” “也该换了，十几年了，买这车的时候，我还在上学，现在我孩子都上学了，这车还在开” “你这车还真够皮实的”</span>
@@ -1504,7 +1517,7 @@
           <span class="tag tag art-tag">文章 &gt;</span>
           <img 
             class="MD-home-qa-imgs" 
-            src="../../static/images/zhuanxian/_rd02.jpg">
+            src="../../static/images/huizong/_rd02.jpg">
           <div class="MD-home-qa-right-tit">
             <span class="MD-home-qa-right-title">找一辆适合胖子开的车就这么难吗？</span>
             <span class="MD-home-qa-right-desc">找一辆适合胖子开的车就这么难吗？</span>
@@ -1561,7 +1574,9 @@ export default {
         '扬州',
         '淄博',
         '绍兴'
-      ]
+      ],
+      groomIndex: 1,
+      groomClass: 'active_green'
     }
   },
   mounted() {
@@ -1577,12 +1592,29 @@ export default {
       $('#groom_pageinp2').citypicker()
     })
   },
-  methods: {}
+  methods: {
+    groomTab(index) {
+      this.groomIndex = index
+      switch (index) {
+        case 1:
+          this.groomClass = 'active_green'
+          break
+        case 2:
+          this.groomClass = 'active_blue'
+          break
+        case 3:
+          this.groomClass = 'active_orange'
+          break
+        case 4:
+          this.groomClass = 'active_violet'
+          break
+      }
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 @import '~/assets/scss/common_index.scss';
-
 /*本页面公共的函数*/
 @mixin active_color($color) {
   background: $color;
@@ -1655,6 +1687,7 @@ export default {
       padding: 20px 0 0 30px;
       width: 253px;
       height: 205px;
+      cursor: default;
       &:after {
         content: '';
         position: absolute;
@@ -1807,7 +1840,7 @@ export default {
         .link_oder {
           width: 80px;
           text-align: center;
-          background: url('../../static/images/zhuanxian/wl_bj_1.png') no-repeat;
+          background: url('../../static/images/huizong/wl_bj_1.png') no-repeat;
           > a {
             display: block;
             color: $light_red;
@@ -2123,8 +2156,8 @@ export default {
   width: 100%;
   height: 430px;
   color: $tit_color;
-  background: url('../../static/images/zhuanxian/_oder_bj.jpg') right center
-    no-repeat;
+  background: url('../../static/images/huizong/_zhuanxin_oder_bj.jpg') right
+    center no-repeat;
   .step_box {
     margin: 90px auto 0;
     width: 1075px;

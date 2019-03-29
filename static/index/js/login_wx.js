@@ -37,7 +37,7 @@ var AFLC_VALID = {
   ONLY_NUMBER_AND_PUNCTUATION: /^[0-9~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$/,
   // 同时包含字母数字和符号
   LETTER_AND_NUMBER_AND_PUNCTUATION: /^[a-zA-Z0-9~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$/,
-//       LETTER_AND_NUMBER_AND_PUNCTUATION : /(^[a-zA-Z]+$)&(^[0-9]+$)(^[~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$)/,
+  //       LETTER_AND_NUMBER_AND_PUNCTUATION : /(^[a-zA-Z]+$)&(^[0-9]+$)(^[~\!@#\$%\^\&\*\(\)_\+\{\}\|\:\"<>\?`\-\=\[\]\\;\',\.\/]+$)/,
   // 纯数字从1开始
   ONLY_NUMBER_GT: /^[1-9]\d*$/,
   // 不可以为空格
@@ -66,11 +66,11 @@ var AFLC_VALID = {
     }
     return s
   }
-};
+}
 // 接口相关 S
 var AFWL_API = {
   url: '/api',
-  getWxInfo: function(){
+  getWxInfo: function() {
     return $.get(this.url + '/api-uaa/wx/qr/wxinit')
   },
   /**
@@ -80,13 +80,23 @@ var AFWL_API = {
    * @param {*} type 用户角色类型
    * @param {*} origin 来源
    */
-  bindWxUser: function(username,openid,type,origin){
-    return $.get(this.url + '/api-common/common/user/v1/wx/regAndbinding/'+username+'/'+openid+'/'+(origin || '56LINES')+'/' + type)
+  bindWxUser: function(username, openid, type, origin) {
+    return $.get(
+      this.url +
+        '/api-common/common/user/v1/wx/regAndbinding/' +
+        username +
+        '/' +
+        openid +
+        '/' +
+        (origin || '56LINES') +
+        '/' +
+        type
+    )
   },
   /**
    * 获取绑定的信息
    */
-  getBindInfo: function(code, userType, origin){
+  getBindInfo: function(code, userType, origin) {
     /* var defer = $.Deferred();
     if(Math.random()>0.5){
       defer.resolve({data:{}});
@@ -96,13 +106,13 @@ var AFWL_API = {
 
     return defer.promise(); */
     //origin=56LINES&roleType=aflc-1&code=123xxasd123
-    return $.get(this.url + '/api-uaa/wx/qr/wxlogincheck',{
+    return $.get(this.url + '/api-uaa/wx/qr/wxlogincheck', {
       origin: origin || '56LINES',
       roleType: userType,
       code: code
-    });
+    })
   },
-  getBindedInfo: function(code, roleType, origin){
+  getBindedInfo: function(code, roleType, origin) {
     var grant_type = 'authorization_code'
     var scope = 'webApp'
     var form = new FormData()
@@ -110,70 +120,80 @@ var AFWL_API = {
     form.append('code', code)
     form.append('origin', origin || '56LINES')
     form.append('grant_type', grant_type)
- 
+
     return $.ajax({
       url: this.url + '/api-uaa/qrwechat/token',
       type: 'POST',
       // 如果用jq，必须设置以下三项，避免jq 的中间处理
-      processData:false,
+      processData: false,
       cache: false,
       contentType: false,
 
       headers: {
         // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
         //'Content-Type': 'multipart/form-data',
-        'authorization': 'Basic d2ViQXBwOndlYkFwcA=='
+        authorization: 'Basic d2ViQXBwOndlYkFwcA=='
       },
       data: form
     })
   },
-    _warpper: function(pro){
-    var defer = $.Deferred();
-    pro.done(function(res){
-      if(res.status === 200 || res.access_token){
-        defer.resolve(res);
-      } else {
-        defer.reject(res);
-      }
-    }).fail(function(){
-      defer.reject({
-        text: '网络错误！',
-        status: 100
-      });
-    });
+  _warpper: function(pro) {
+    var defer = $.Deferred()
+    pro
+      .done(function(res) {
+        if (res.status === 200 || res.access_token) {
+          defer.resolve(res)
+        } else {
+          defer.reject(res)
+        }
+      })
+      .fail(function() {
+        defer.reject({
+          text: '网络错误！',
+          status: 100
+        })
+      })
 
-    return defer.promise();
-  }, 
+    return defer.promise()
+  },
   /**
    * 返回数据包含 userName memberPwd
    */
-  loginByToken: function(access_token){
+  loginByToken: function(access_token) {
     access_token = access_token || ''
-    return this._warpper($.get(this.url + '/aflc-uc/usercenter/aflcLogisticsCompanyAccout/v1/getAccoutInfo?access_token=' + access_token))
+    return this._warpper(
+      $.get(
+        this.url +
+          '/aflc-uc/usercenter/aflcLogisticsCompanyAccout/v1/getAccoutInfo?access_token=' +
+          access_token
+      )
+    )
   },
-   getMobileCode: function(phone){
-    return this._warpper($.post(this.url + '/aflc-common/aflcCommonSms/sendCodeSms/' + phone));
+  getMobileCode: function(phone) {
+    return this._warpper(
+      $.post(this.url + '/aflc-common/aflcCommonSms/sendCodeSms/' + phone)
+    )
   },
-    loginByMobile: function(username, code){
+  loginByMobile: function(username, code) {
     var grant_type = 'authorization_code'
     var scope = 'webApp'
     var form = new FormData()
     form.append('mobile', username)
     form.append('code', code)
     form.append('grant_type', grant_type)
- 
+
     return $.ajax({
       url: this.url + '/api-uaa/mobile/token',
       type: 'POST',
       // 如果用jq，必须设置以下三项，避免jq 的中间处理
-      processData:false,
+      processData: false,
       cache: false,
       contentType: false,
 
       headers: {
         // 主动设置Content-Type为multipart/form-data时，会丢掉boundary值，导致后台无法解析数据。
         //'Content-Type': 'multipart/form-data',
-        'authorization': 'Basic d2ViQXBwOndlYkFwcA=='
+        authorization: 'Basic d2ViQXBwOndlYkFwcA=='
       },
       data: form
     })
@@ -182,249 +202,312 @@ var AFWL_API = {
 //接口相关 E
 
 //函数方法 S
-  function phplogin3(userid,pwd){
-    return $.ajax({
-        type:"post",
-        headers:{
-          'Content-Type': 'application/json'
-        },
-        url:"/member/index_do.php?fmdo=login&dopost=login3&gourl=/&userid="+userid+"&pwd="+pwd
-      });
-  }
-   // 打开二维码弹窗
-    function openWxPop(){
-     return AFWL_API.getWxInfo().done(function(res){
-        layer.open({
-          type: 1,
-          title:"登录",
-          skin: 'layui-layer-rim', //加上边框
-          area: ['300px', '460px'], //宽高
-          content: '<div id="wxtwocodebox"></div>'
-        });
-        var data = res.data;
-      
-          var obj = new WxLogin({
-            self_redirect:true,
-            id:"wxtwocodebox", 
-            appid: data.appid, 
-            scope: data.scope, 
-            redirect_uri: encodeURIComponent("http://www.56lines.cn/plus/list.php?tid=78"),
-            state: data.state,
-            style: "",
-            href: ""
-          });
-
-      }).fail(function(){
-        layer.msg('请求微信授权失败。');
-      });
-    }
-    //绑定微信
-    function bindWx(username,openid,type){
-      return AFWL_API.bindWxUser(username,openid,type).done(function(res){
-        if(res.status === 200){
-          // 绑定成功
-          
-          layer.closeAll();
-          setTimeout(function() {layer.msg("绑定成功");}, 1000);      
-          $('.login-box2').css("display","none")
-          // location.href='/';
-        } else {
-          // 绑定失败
-          layer.alert('失败：'+(res.errorInfo || res.message || res.text || JSON.stringify(res) || '未知错误'));
-        }
-        return res;
-      }).fail(function(res){
-        layer.alert('失败：'+(res.errorInfo || res.message || res.text || JSON.stringify(res) || '未知错误'));
-      });
-    }
-    
-     // 通过微信code值获取token
-    function loginByWx(code,type){
-      var _this = this;
-      return AFWL_API.getBindedInfo(code, type).done(function(res){
-        var data = res.data;
-        layer.closeAll();
-        if(res.access_token){
-          loginPhpByToken(res.access_token, type, '#');
-          layer.msg('登录成功');
-          // 已经绑定，跳转到会员中心
-          // location.href = AFWL_API.constant.LINK_MEMBER
-        } else {
-        	
-          layer.msg('您的微信号尚未绑定该角色。');
-          wxid = res.message.match(/openid:(.*)$/)[1];
-          openBindPop();
-          // 跳转到绑定页面
-          // location.href = ''
-        }
-      }).fail(function(res,err){ 
-       var  data =  JSON.parse(res.responseText);
-
-        if(data.status && data.message.indexOf('openid:')!==-1){
-
-          layer.msg('您的微信号尚未绑定该角色。');
-          wxid = data.message.match(/openid:(.*)$/)[1];
-          openBindPop();
-        } else {
-          layer.closeAll();
-          layer.alert('失败：'+(data.errorInfo || data.message || data.text || JSON.stringify(data) || '未知错误'));
-        }
-        
-      });
-    }
-        // 打开绑定弹窗
-    function  openBindPop(){
+function phplogin3(userid, pwd) {
+  return $.ajax({
+    type: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    url:
+      '/member/index_do.php?fmdo=login&dopost=login3&gourl=/&userid=' +
+      userid +
+      '&pwd=' +
+      pwd
+  })
+}
+// 打开二维码弹窗
+function openWxPop() {
+  return AFWL_API.getWxInfo()
+    .done(function(res) {
       layer.open({
         type: 1,
-        skin: 'layui-layer-rim',
-        area: ['360px', '300px'],
-        cancel: function(){
-          layer.closeAll();
-        },
-        title: '绑定微信号', //不显示标题
-        content: '<div class="login-box2"> <h4>您的微信号未绑定，请输入手机号进行绑定</h4> <div class="inputbox"> <span class="icon icon-mobile"></span> <input type="text" maxlength="11" name="userid2" id="usermobile3" placeholder="请输入您的手机号"> </div> <div class="inputbox smscodeinput"> <span class="icon icon-password"></span> <input type="text" maxlength="10" name="smscode2" id="usersmscode2" placeholder="请输入短信验证码"> <span class="getsmscode2">获取验证码</span> </div> <div class="login-btn2">绑 定</div> </div>'
-        
-      });
+        title: '登录',
+        skin: 'layui-layer-rim', //加上边框
+        area: ['300px', '460px'], //宽高
+        content: '<div id="wxtwocodebox"></div>'
+      })
+      var data = res.data
+
+      var obj = new WxLogin({
+        self_redirect: true,
+        id: 'wxtwocodebox',
+        appid: data.appid,
+        scope: data.scope,
+        redirect_uri: encodeURIComponent(
+          'http://www.56lines.cn/plus/list.php?tid=78'
+        ),
+        state: data.state,
+        style: '',
+        href: ''
+      })
+    })
+    .fail(function() {
+      layer.msg('请求微信授权失败。')
+    })
+}
+//绑定微信
+function bindWx(username, openid, type) {
+  return AFWL_API.bindWxUser(username, openid, type)
+    .done(function(res) {
+      if (res.status === 200) {
+        // 绑定成功
+
+        layer.closeAll()
+        setTimeout(function() {
+          layer.msg('绑定成功')
+        }, 1000)
+        $('.login-box2').css('display', 'none')
+        // location.href='/';
+      } else {
+        // 绑定失败
+        layer.alert(
+          '失败：' +
+            (res.errorInfo ||
+              res.message ||
+              res.text ||
+              JSON.stringify(res) ||
+              '未知错误')
+        )
+      }
+      return res
+    })
+    .fail(function(res) {
+      layer.alert(
+        '失败：' +
+          (res.errorInfo ||
+            res.message ||
+            res.text ||
+            JSON.stringify(res) ||
+            '未知错误')
+      )
+    })
+}
+
+// 通过微信code值获取token
+function loginByWx(code, type) {
+  var _this = this
+  return AFWL_API.getBindedInfo(code, type)
+    .done(function(res) {
+      var data = res.data
+      layer.closeAll()
+      if (res.access_token) {
+        loginPhpByToken(res.access_token, type, '#')
+        layer.msg('登录成功')
+        // 已经绑定，跳转到会员中心
+        // location.href = AFWL_API.constant.LINK_MEMBER
+      } else {
+        layer.msg('您的微信号尚未绑定该角色。')
+        wxid = res.message.match(/openid:(.*)$/)[1]
+        openBindPop()
+        // 跳转到绑定页面
+        // location.href = ''
+      }
+    })
+    .fail(function(res, err) {
+      var data = JSON.parse(res.responseText)
+
+      if (data.status && data.message.indexOf('openid:') !== -1) {
+        layer.msg('您的微信号尚未绑定该角色。')
+        wxid = data.message.match(/openid:(.*)$/)[1]
+        openBindPop()
+      } else {
+        layer.closeAll()
+        layer.alert(
+          '失败：' +
+            (data.errorInfo ||
+              data.message ||
+              data.text ||
+              JSON.stringify(data) ||
+              '未知错误')
+        )
+      }
+    })
+}
+// 打开绑定弹窗
+function openBindPop() {
+  layer.open({
+    type: 1,
+    skin: 'layui-layer-rim',
+    area: ['360px', '300px'],
+    cancel: function() {
+      layer.closeAll()
+    },
+    title: '绑定微信号', //不显示标题
+    content:
+      '<div class="login-box2"> <h4>您的微信号未绑定，请输入手机号进行绑定</h4> <div class="inputbox"> <span class="icon icon-mobile"></span> <input type="text" maxlength="11" name="userid2" id="usermobile3" placeholder="请输入您的手机号"> </div> <div class="inputbox smscodeinput"> <span class="icon icon-password"></span> <input type="text" maxlength="10" name="smscode2" id="usersmscode2" placeholder="请输入短信验证码"> <span class="getsmscode2">获取验证码</span> </div> <div class="login-btn2">绑 定</div> </div>'
+  })
+}
+
+function loginByMobile(username, pwd, usertype) {
+  var _this = this
+  // 先登录157拿token
+  // 将token保存到cookie后再进行最后的php登录
+  return AFWL_API.loginByMobile(username + '|' + usertype, pwd)
+    .done(function(res) {
+      if (res.access_token) {
+        // $('#form1').submit();
+        loginPhpByToken(res.access_token, usertype, '#')
+      } else {
+        layer.alert(
+          '登录失败：' +
+            (res.errorInfo ||
+              res.message ||
+              res.text ||
+              JSON.stringify(res) ||
+              '未知错误')
+        )
+      }
+      return res
+    })
+    .fail(function(err, status, let2) {
+      console.log(err, status, let2)
+      if (err.status) {
+        layer.alert('登录失败，服务器返回：' + err.status)
+      } else {
+        layer.alert('登录失败，请检查您的账号密码。')
+      }
+      // layer.alert(JSON.stringify(err));
+    })
+}
+
+// 发送短信
+function sendSms(phone, ele) {
+  return AFWL_API.getMobileCode(phone)
+    .done(function() {
+      layer.msg('已发送验证码，请注意查收。')
+      startSms(ele)
+    })
+    .fail(function(res) {
+      layer.alert(
+        '失败：' +
+          (res.errorInfo ||
+            res.message ||
+            res.text ||
+            JSON.stringify(res) ||
+            '未知错误')
+      )
+    })
+}
+// sms倒计时
+function startSms(ele) {
+  var i = 60
+  var smstimer = setInterval(function() {
+    if (--i >= 0) {
+      ele.text('获取验证码(' + i + 's)')
+    } else {
+      clearInterval(smstimer)
+      ele.text('获取验证码')
+      ele.removeClass('disabled')
     }
-    
-        function loginByMobile(username, pwd, usertype){
-      var _this = this;
-      // 先登录157拿token
-      // 将token保存到cookie后再进行最后的php登录
-      return AFWL_API.loginByMobile(username +'|' + usertype, pwd).done(function(res){
-        if(res.access_token){
-          
-          // $('#form1').submit();
-          loginPhpByToken(res.access_token, usertype, '#');
-        } else{
-          layer.alert('登录失败：'+(res.errorInfo || res.message || res.text || JSON.stringify(res) || '未知错误'));
-        }
-        return res
-      }).fail(function(err,status,let2){
-        console.log(err,status,let2)
-        if(err.status){
-          layer.alert('登录失败，服务器返回：'+err.status);
-        } else {
-          layer.alert('登录失败，请检查您的账号密码。');
-        }
-        // layer.alert(JSON.stringify(err));
-        
-      });
-    }
-        
-            // 发送短信
-   function  sendSms(phone,ele){
-      return AFWL_API.getMobileCode(phone).done(function(){
-        layer.msg('已发送验证码，请注意查收。');
-        startSms(ele);
-      }).fail(function(res){
-        layer.alert('失败：'+(res.errorInfo || res.message || res.text || JSON.stringify(res) || '未知错误'));
-      });
-    }
-    // sms倒计时
-    function startSms(ele){
-      var  i = 60;
-      var smstimer = setInterval(function(){
-        if(--i>=0){
-          ele.text('获取验证码('+i+'s)')
-        } else {
-          clearInterval(smstimer);
-          ele.text('获取验证码');
-          ele.removeClass('disabled');
-        }
-      }, 1000);
-    }
-      function    loginPhpByToken(access_token, usertype, url){
-      return AFWL_API.loginByToken(access_token).done(function(res){
-        if(res.data){
-        	console.log("phplogin"+res.data.userName+res.data.memberPwd);
-          return phplogin3(res.data.userName,res.data.memberPwd).done(function(){
-            $.cookie('access_token', access_token,{ expires: 7, path: '/' });
-            $.cookie('login_mobile', res.data.userName,{ expires: 7, path: '/' });
-            $.cookie('login_type', usertype,{ expires: 7, path: '/' });
+  }, 1000)
+}
+function loginPhpByToken(access_token, usertype, url) {
+  return AFWL_API.loginByToken(access_token)
+    .done(function(res) {
+      if (res.data) {
+        console.log('phplogin' + res.data.userName + res.data.memberPwd)
+        return phplogin3(res.data.userName, res.data.memberPwd)
+          .done(function() {
+            $.cookie('access_token', access_token, { expires: 7, path: '/' })
+            $.cookie('login_mobile', res.data.userName, {
+              expires: 7,
+              path: '/'
+            })
+            $.cookie('login_type', usertype, { expires: 7, path: '/' })
             // 登录成功
-            if(url){
+            if (url) {
               //location.href = url;
-            Is_login1();
-            Is_login2();
-            $('.login_box').css("display","none");
+              Is_login1()
+              Is_login2()
+              $('body').trigger('login.hide')
             }
-            
-          }).fail(function(res){
-            layer.alert('登录失败：'+(res.errorInfo || res.message || res.text || JSON.stringify(res) || '未知错误'));
-          });
-        }
-      }).fail(function(res){
-        layer.alert('登录失败：'+(res.errorInfo || res.message || res.text || JSON.stringify(res) || '未知错误'));
-      });
-    }
+          })
+          .fail(function(res) {
+            layer.alert(
+              '登录失败：' +
+                (res.errorInfo ||
+                  res.message ||
+                  res.text ||
+                  JSON.stringify(res) ||
+                  '未知错误')
+            )
+          })
+      }
+    })
+    .fail(function(res) {
+      layer.alert(
+        '登录失败：' +
+          (res.errorInfo ||
+            res.message ||
+            res.text ||
+            JSON.stringify(res) ||
+            '未知错误')
+      )
+    })
+}
 //函数方法 E
 
+var wxcode
+var wxtype
+var wxid
 
-  	var wxcode;
-  	var wxtype;
-  	var wxid;
-  	
-  	
 // 二维码登录
-      $(".login-weixin").on("click", function(){
-        openWxPop();
-      });
+$('.login-weixin').on('click', function() {
+  openWxPop()
+})
 // 获取微信登录信息
-      window.addEventListener('message', function(e){
-        var payload = e.data
-        if(e.data.indexOf('code:')!==-1){
-          var code = e.data.split(':')[1];
-          $('body').trigger('wxLoginSuccess', code);
-        }
-      });
-      $('body').on('wxLoginSuccess', function(e, code){
-        layer.closeAll();
-        wxcode = code;
-        // layer.msg('')
-        layer.open({
-          type: 1,
-          title:"选择角色",
-          skin: 'layui-layer-rim', //加上边框
-          area: ['200px', '240px'], //宽高
-          content: '<div class="userTypeSelect"> <span data-type="aflc-1">车主</span> <span data-type="aflc-2">货主</span> <span data-type="aflc-5">物流公司</span> </div>'
-        });
-      });
- // 选择角色信息
-      $('body').on('click', '.userTypeSelect span', function(){
-        $('.userTypeSelect span').removeClass('active');
-        $(this).addClass('active');
-        layer.closeAll();
-        var index = layer.load(1, {
-          title: '正在登录中...',
-          shade: [0.3,'#fff'] //0.1透明度的白色背景
-        });
-        wxtype = $(this).data('type');
-        loginByWx(wxcode,wxtype);
-      });
+window.addEventListener('message', function(e) {
+  var payload = e.data
+  if (e.data.indexOf('code:') !== -1) {
+    var code = e.data.split(':')[1]
+    $('body').trigger('wxLoginSuccess', code)
+  }
+})
+$('body').on('wxLoginSuccess', function(e, code) {
+  layer.closeAll()
+  wxcode = code
+  // layer.msg('')
+  layer.open({
+    type: 1,
+    title: '选择角色',
+    skin: 'layui-layer-rim', //加上边框
+    area: ['200px', '240px'], //宽高
+    content:
+      '<div class="userTypeSelect"> <span data-type="aflc-1">车主</span> <span data-type="aflc-2">货主</span> <span data-type="aflc-5">物流公司</span> </div>'
+  })
+})
+// 选择角色信息
+$('body').on('click', '.userTypeSelect span', function() {
+  $('.userTypeSelect span').removeClass('active')
+  $(this).addClass('active')
+  layer.closeAll()
+  var index = layer.load(1, {
+    title: '正在登录中...',
+    shade: [0.3, '#fff'] //0.1透明度的白色背景
+  })
+  wxtype = $(this).data('type')
+  loginByWx(wxcode, wxtype)
+})
 // 绑定
-      $('body').on('click', '.login-btn2', function() {
-        var phone = $('#usermobile3').val();
-        var smscode = $.trim($('#usersmscode2').val());
-        if(AFLC_VALID.MOBILE.test(phone) && smscode){
-          loginByMobile(phone, smscode,wxtype).done(function(res){
-            bindWx(phone,wxid,wxtype);
-          });
-        }
-      });
+$('body').on('click', '.login-btn2', function() {
+  var phone = $('#usermobile3').val()
+  var smscode = $.trim($('#usersmscode2').val())
+  if (AFLC_VALID.MOBILE.test(phone) && smscode) {
+    loginByMobile(phone, smscode, wxtype).done(function(res) {
+      bindWx(phone, wxid, wxtype)
+    })
+  }
+})
 // 绑定 - 获取验证码
-      $('body').on('click', '.getsmscode2', function() {
-        if($(this).hasClass('disabled') === false){
-          // 先判断是否有手机号
-          var phone = $('#usermobile3').val();
-          if(AFLC_VALID.MOBILE.test(phone)){
-            $(this).addClass('disabled');
-            sendSms(phone, $('.getsmscode2'));
-            
-          } else {
-            layer.msg('请输入您的手机号');
-          }
-          
-        }
-      });
-      
+$('body').on('click', '.getsmscode2', function() {
+  if ($(this).hasClass('disabled') === false) {
+    // 先判断是否有手机号
+    var phone = $('#usermobile3').val()
+    if (AFLC_VALID.MOBILE.test(phone)) {
+      $(this).addClass('disabled')
+      sendSms(phone, $('.getsmscode2'))
+    } else {
+      layer.msg('请输入您的手机号')
+    }
+  }
+})

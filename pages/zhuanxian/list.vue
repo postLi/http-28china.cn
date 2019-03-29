@@ -154,11 +154,12 @@
                   :key="index"
                   style="margin-right: 10px;">
                   <a
-                    :href="'/zhuanxian/list?belongBrandCode='+ item.code"
+                    :href="'/zhuanxian/list?startp=' + vo.startProvince + '&startc=' + vo.startCity + '&starta=' + vo.startArea + '&endp=' + vo.endProvince + '&endc=' + vo.endCity + '&enda=' + vo.endArea + '&companyName=' + vo.companyName + '&parkId=' + vo.parkId + '&parkName=' + vo.parkName+ '&belongBrandCode=' + item.code+ '&otherServiceCode=' + vo.otherServiceCode"
                     :data-code="item.code"
                     :class=" item.name=='不限'? 'now':''"
                     class="all">{{ item.name }}</a>
                 </span>
+                <!-- :href="'/zhuanxian/list?belongBrandCode='+ item.code" -->
                 <!--<a-->
                 <!--class="now all"-->
                 <!--href="/zhuanxian/list"-->
@@ -171,11 +172,12 @@
                   :key="index"
                   style="margin-right: 10px;">
                   <a
-                    :href="'/zhuanxian/list?otherServiceCode='+ item.code"
+                    :href="'/zhuanxian/list?startp=' + vo.startProvince + '&startc=' + vo.startCity + '&starta=' + vo.startArea + '&endp=' + vo.endProvince + '&endc=' + vo.endCity + '&enda=' + vo.endArea + '&companyName=' + vo.companyName + '&parkId=' + vo.parkId + '&parkName=' + vo.parkName+ '&belongBrandCode=' + vo.belongBrandCode+ '&otherServiceCode=' + item.code"
                     :data-code="item.code"
                     :class=" item.name=='不限'? 'now':''"
                     class="all">{{ item.name }}</a>
                 </span>
+                <!-- :href="'/zhuanxian/list?otherServiceCode='+ item.code" -->
                 <!--<a-->
                 <!--class="now all"-->
                 <!--href="/zhuanxian/list">不限</a>-->
@@ -566,7 +568,8 @@ export default {
       pages: 0,
       currentPage: 1,
       lineList: [],
-      lineLists: []
+      lineLists: [],
+      vo: {}
     }
   },
   async asyncData({ $axios, query, app, error }) {
@@ -622,7 +625,8 @@ export default {
       departureTimeCode: query.departureTimeCode,
       otherServiceCode: query.otherServiceCode,
       parkId: query.parkId,
-      companyName: query.companyName || ''
+      companyName: query.companyName || '',
+      parkName: query.parkName || ''
     }
 
     let vo1 = vo
@@ -658,7 +662,7 @@ export default {
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
     // let getLineList = await lineList($axios, 1, vo)
-    // console.log(getLineList, 'getLineList.data.data.list')
+    // console.log(listA.data.data.list, 'getLineList.data.data.list')
     if (
       listA.data.status == 200 ||
       listB.data.status == 200 ||
@@ -701,7 +705,8 @@ export default {
         lineHots: listD.data.status == 200 ? listD.data.data : [],
         lineCodeA: codeA.data.status == 200 ? codeA.data.data : [],
         lineCodeB: codeB.data.status == 200 ? codeB.data.data : [],
-        lineCodeC: codeC.data.status ? codeC.data.data : []
+        lineCodeC: codeC.data.status ? codeC.data.data : [],
+        vo
       }
     } else {
       error({ statusCode: 500, message: '查找不到该专线列表' })

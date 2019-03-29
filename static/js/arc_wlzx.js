@@ -364,8 +364,7 @@ function process08(startProvince, startCity, endProvince, endCity, rangeIds) {
         var isVip = datas[i].isVip
         var authStatus = datas[i].authStatus
         var collateral = datas[i].collateral
-        var arcurl =
-          '/zhuanxian/detail?id=' + id + '&publishId=' + publishId
+        var arcurl = '/zhuanxian/detail?id=' + id + '&publishId=' + publishId
         $('#tj023').attr('href', '/member/' + companyId + '')
         $('#tj023').html(publishName)
         $('#tj021').html(start)
@@ -574,7 +573,7 @@ $('#pj_submit').click(function() {
         content: '您还未登录，请先登录',
         duration: 3000
       })
-      $('.login_box').css('display', 'block')
+      $('body').trigger('login.show')
 
       //window.location='/login';
       return false

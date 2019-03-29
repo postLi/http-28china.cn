@@ -53,6 +53,13 @@
   white-space: nowrap;
 }
 
+.scale_img, .p_owner_list .owner_pic > img, .p_co_owner_list > li .rank_pic > img, .p_hot_line > li .h_pic img {
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
 /*公共宽度居中*/
 .grid_c1 {
   margin: 0 auto;
@@ -301,11 +308,7 @@
   overflow: hidden;
   width: 272px;
   height: 195px;
-}
-
-.p_owner_list .owner_pic img {
-  width: 100%;
-  height: 100%;
+  text-align: center;
 }
 
 .p_owner_list .owner_name {
@@ -792,11 +795,7 @@
   width: 264px;
   height: 175px;
   margin-bottom: 10px;
-}
-
-.p_co_owner_list > li .rank_pic > img {
-  width: 100%;
-  height: 100%;
+  text-align: center;
 }
 
 .p_co_owner_list > li .rank_tit {
@@ -1082,10 +1081,7 @@
   margin-bottom: 10px;
   width: 272px;
   height: 195px;
-}
-
-.p_hot_line > li .h_pic img {
-  max-width: 272px;
+  text-align: center;
 }
 
 .p_hot_line > li .h_place {
@@ -1140,13 +1136,13 @@
   margin-right: 5px;
   width: 16px;
   height: 16px;
-  background: url("../../static/images/zhuanxian/icon_huangguan.gif") no-repeat;
+  background: url("../../static/images/huizong/icon_huangguan.gif") no-repeat;
 }
 
 .p_hot_line > li .h_company .icon_qq {
   width: 22px;
   height: 20px;
-  background: url("../../static/images/zhuanxian/icon_qq.gif") no-repeat;
+  background: url("../../static/images/huizong/icon_qq.gif") no-repeat;
 }
 
 .p_hot_line > li .h_praise {

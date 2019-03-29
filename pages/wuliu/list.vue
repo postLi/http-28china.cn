@@ -164,7 +164,16 @@
               target="_blank"><span style="float:right"> 更多></span></a>
           </div>
           <div class="tuijian_content">
-            <ul>
+            <div
+              v-if="getRecommendList.length==0|| getRecommendList.list==[] "
+              class="list_none"
+              style="display: block">
+              <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
+              <img 
+                style="margin: 20px 0 20px 545px;"
+                src="../../static/images/none_pic.png">
+            </div>
+            <ul v-else>
               <li
                 v-for="(item,i) in getRecommendList"
                 :key="i"
@@ -237,11 +246,13 @@
               <a href=""><span style="float:right"> 更多></span></a>
             </div>
             <div
-              v-if="getNewestList || getNewestList.list !=[] "
+              v-if="getNewestList.length==0 || getNewestList.list ==[] "
               class="list_none"
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
-              <img src="../../static/images/none_pic.png">
+              <img 
+                style="margin: 20px 0 20px 150px;"
+                src="../../static/images/none_pic.png">
             </div>
             <ul v-else>
               <!-- :href="'/wuliu/detail?id=' + item.id"
@@ -466,7 +477,17 @@
               target="_blank"><span style="float:right"> 所有物流企业></span></a>
           </div>
           <div class="youzhi_content">
-            <ul>
+            <!-- v-if="getRecommendList.length==0|| getRecommendList.list==[] " -->
+            <div
+              v-if="getExcellentList.length==0|| getExcellentList.list==[] "
+              class="list_none"
+              style="display: block">
+              <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
+              <img 
+                style="margin: 20px 0 20px 545px;"
+                src="../../static/images/none_pic.png">
+            </div>
+            <ul v-else>
               <li
                 v-for="(item,i) in getExcellentList.slice(0,6)"
                 :key="i"

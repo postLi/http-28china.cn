@@ -72,7 +72,7 @@
     },
     tpl: {
       cargo:
-        '<li> <div class="input"> <input class="cargoname" maxlength="40" type="text"> </div> <div class="input"> <input maxlength="12" type="text"> <span class="append">件</span> </div> <div class="input"> <input class="caroweight" maxlength="12" type="text"> <span class="append">公斤</span> </div> <div class="input"> <input class="cargovolume" maxlength="12" type="text"> <span class="append">立方</span> </div> <span class="deletecargo">[删除]</span> </li>'
+        '<li> <div class="input"><span><span class="required">*</span>货物名称</span> <input class="cargoname" maxlength="40" type="text"> </div> <div class="input"><span><span class="required">*</span>总件数</span> <input maxlength="12" type="text"> <span class="append">件</span> </div> <div class="input"><span><span class="required">*</span>预估重量</span> <input class="caroweight" maxlength="12" type="text"> <span class="append">公斤</span> </div> <div class="input"><span><span class="required">*</span>预估体积</span> <input class="cargovolume" maxlength="12" type="text"> <span class="append">立方</span> </div> <span class="deletecargo">[删除]</span> </li>'
     },
     logininfo: {},
     initCargo: function(list) {
@@ -293,6 +293,15 @@
       $('.order-cargo-list').on('blur', 'input:text', function(e) {
         _this.calcTotalFee()
       })
+
+      // //即时/长期
+      $('.minbox').click(function(event) {
+        event.stopPropagation()
+        $('.minbox').removeClass('checked')
+        $(this).addClass('checked')
+        var type = $(this).attr('type')
+        _this.data.orderClass = type
+      })
       // 点击货物名称
       _this.$caroList.on('click', 'li', function() {
         _this.$caroList.data('input').val($(this).text())
@@ -316,7 +325,6 @@
         _this.hideCargoList($(this))
       })
       _this.$caroList.on('keydown', 'input:text', function(e) {
-        console.log('eee:', e)
         if (e.keyCode === 13) {
           _this.$caroList.find('span').trigger('click')
         }
@@ -770,7 +778,8 @@
           .val()
       )
       layer.msg('您还未登录，请先登录')
-      $('.login_box').show()
+      $('body').trigger('login.show')
+      $('.login_box_mask').show()
     },
     showContactPop: function(type) {
       // =======需要登录=========
@@ -918,7 +927,8 @@
           flag = 'huoyuan'
         }
       }
-
+      let re = /^1[3|4|5|7|8|9]\d{9}$/
+      // if (re.test(this.checkNotice.phone))
       // 检查发货人信息
       data.aflcOrderAddressWebDtoList[0].contacts = $(
         '.order-contact-from input'
@@ -933,7 +943,6 @@
       data.aflcOrderAddressWebDtoList[0].isSave = $('.order-contact-from input')
         .eq(2)
         .prop('checked')
-
       if (
         !data.aflcOrderAddressWebDtoList[0].contacts ||
         !data.aflcOrderAddressWebDtoList[0].contactsPhone
@@ -960,6 +969,18 @@
         return false;
       }
  */
+      if (
+        !AFLC_VALID.MOBILE.test(
+          data.aflcOrderAddressWebDtoList[1].contactsPhone
+        )
+      ) {
+        layer.msg('收货人手机号不正确')
+        return false
+      }
+      console.log(
+        re.test(data.aflcOrderAddressWebDtoList[1].contactsPhone),
+        '收货人手机号'
+      )
       if ($('#agree').prop('checked') === false) {
         layer.msg('请确认已阅读服务协议。')
         return false

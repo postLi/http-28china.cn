@@ -4,11 +4,14 @@ $(document).ajaxSend(function(event, jqXHR, ajaxOptions) {
   // console.log('ajaxOptions:',ajaxOptions)
   if (access_token && ajaxOptions.url.indexOf('access_token=') === -1) {
     // ajaxOptions.
-    ajaxOptions.url =
-      ajaxOptions.url +
-      (ajaxOptions.url.indexOf('?') !== -1 ? '&' : '?') +
-      'access_token=' +
-      access_token
+    // 获取字典的接口不加token请求
+    if (ajaxOptions.url.indexOf('/sysDict/') === -1) {
+      ajaxOptions.url =
+        ajaxOptions.url +
+        (ajaxOptions.url.indexOf('?') !== -1 ? '&' : '?') +
+        'access_token=' +
+        access_token
+    }
   }
 })
 
@@ -23,13 +26,10 @@ var AFWL_API = {
     var lc = location.host
     var c = this.constant
     if (lc.indexOf('192.168.1.157') !== -1) {
-      c.LINK_MEMBER = 'http://192.168.1.157:9526'
       c.LINK_TMS = 'http://192.168.1.157:9528'
     } else if (lc.indexOf('192.168.1.188') !== -1) {
-      c.LINK_MEMBER = 'http://192.168.1.188:9524'
       c.LINK_TMS = 'http://192.168.1.188:9528'
     } else if (lc.indexOf('192.168.1.170') !== -1) {
-      c.LINK_MEMBER = 'http://192.168.1.188:9524'
       c.LINK_TMS = 'http://192.168.1.157:9528'
     }
   },
@@ -847,6 +847,5 @@ var AFLC_VALID = {
   // 保留两位小数点
   NUM_POINT: /^(([1-9][0-9])|(([0].\d{0,2}|[1-9][0-9].\d{0,2})))$/,
   // 支持百分比
-  NUM_PERCENTAGE: /^([1-9]{1}[0-9]{0,1}|0|100)(.\d{1,2}){0,1}%$/,
-
+  NUM_PERCENTAGE: /^([1-9]{1}[0-9]{0,1}|0|100)(.\d{1,2}){0,1}%$/
 }

@@ -488,7 +488,7 @@
           
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font :title="item.goodsTypeName">{{ item.goodsTypeName ? item.goodsTypeName.substring(0,6) : '' }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum ? item.goodsNum : '' }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font>公斤&nbsp;|&nbsp;</font></span>
@@ -609,7 +609,7 @@
           
             <li class="wlzx_list_1">
               <p class="p1"/>
-              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font>{{ item.goodsTypeName }} </font></p>
+              <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font :title="item.goodsTypeName">{{ item.goodsTypeName ? item.goodsTypeName.substring(0,6) : '' }} </font></p>
               <p class="p3"><img src="/images/list_wlzx/hy_item2.png"><i>规格：</i>
                 <span>{{ item.goodsNum }}<font id="nr0420" >件&nbsp;|&nbsp;</font></span>
                 <span>{{ item.goodsWeight }}<font >公斤&nbsp;|&nbsp;</font></span>
@@ -677,7 +677,7 @@
                 :title="item.startCity + '到' + item.endCity"
                 target="_blank"
                 :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-                class="hot-cities-a">{{ item.startCity + '到' + item.endCity }}</a>
+                class="hot-cities-a">{{ title }}</a>
             </li>
           </ul>
         </div>
@@ -1295,8 +1295,7 @@ export default {
         this.check = this.hyDetail.mobile
       } else {
         this.checkMoblie = false
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     checkobile() {
@@ -1308,8 +1307,7 @@ export default {
         this.mobile = this.hyDetail.mobile
       } else {
         this.isMobile = false
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     getAddress() {
@@ -1339,8 +1337,7 @@ export default {
         )
       } else {
         this.isShowCollect = true
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     openAdd() {

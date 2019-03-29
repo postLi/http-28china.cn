@@ -1531,10 +1531,12 @@ border-radius: 3px;
   height: 390px;
   background-color: #ffffff;
 }
-
+.left #echart div{
+  width: 576px !important;
+}
 .arc_main3 .right {
   float: right;
-  width: 820px;
+  width: 800px;
   height: 390px;
   background-color: #ffffff;
 }
@@ -2468,7 +2470,10 @@ border-radius: 3px;
   text-decoration: underline;
 }
 #echart,#echart2{
-  width: 556px;height:340px;
+  width: 576px;height:340px;
+}
+#echart2{
+  padding-left: 10px;
 }
 /*找我*/
 .input-group-addon{

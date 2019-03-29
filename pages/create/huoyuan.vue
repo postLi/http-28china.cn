@@ -108,11 +108,11 @@
                       type="text">
                     <span class="append">立方</span>
                   </div>
-                  <span class="btn_c">重置</span>
-                  <span class="btn_c">+</span>
+                  <!-- <span class="btn_c">重置</span> -->
+                  <!-- <span class="btn_c">+</span> -->
                 </li>
               </ul>
-              <!-- <div class="reset-cargo-list"></div> -->
+              <!-- <div class="reset-cargo-list"/> -->
               <div class="add-cargo-list"/>
             </div>
           </div>
@@ -121,8 +121,12 @@
             <div class="order-title">货源类型</div>
             <div class="order_check order_top">
               选择类型：
-              <span class="minbox checked">单次急发货源</span>
-              <span class="minbox">长期稳定货源</span>
+              <span 
+                class="minbox checked" 
+                type="0">单次急发货源</span>
+              <span 
+                class="minbox" 
+                type="1">长期稳定货源</span>
             </div>
                 
           </div>

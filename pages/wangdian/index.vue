@@ -370,13 +370,13 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
       if (item.pointName && item.pointName.length > 15) {
-        item.pointName = item.pointName.substring(0, 15) + '...'
+        item.pointName = item.pointName.substring(0, 15) + '..'
       }
       if (item.companyName && item.companyName.length > 15) {
-        item.companyName = item.companyName.substring(0, 15) + '...'
+        item.companyName = item.companyName.substring(0, 15) + '..'
       }
       if (item.pointAddress && item.pointAddress.length > 15) {
-        item.pointAddress = item.pointAddress.substring(0, 15) + '...'
+        item.pointAddress = item.pointAddress.substring(0, 15) + '..'
       }
     })
     return {

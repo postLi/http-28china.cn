@@ -927,8 +927,6 @@
           flag = 'huoyuan'
         }
       }
-      let re = /^1[3|4|5|7|8|9]\d{9}$/
-      // if (re.test(this.checkNotice.phone))
       // 检查发货人信息
       data.aflcOrderAddressWebDtoList[0].contacts = $(
         '.order-contact-from input'
@@ -950,7 +948,13 @@
         layer.msg('请填写发货人信息。')
         return false
       }
-
+      if (
+        !AFLC_VALID.MOBILE.test(
+          data.aflcOrderAddressWebDtoList[0].contactsPhone
+        )
+      ) {
+        layer.msg('发货人手机号不正确')
+      }
       // 检查收货人信息
       data.aflcOrderAddressWebDtoList[1].contacts = $('.order-contact-to input')
         .eq(0)
@@ -969,18 +973,18 @@
         return false;
       }
  */
-      if (
-        !AFLC_VALID.MOBILE.test(
-          data.aflcOrderAddressWebDtoList[1].contactsPhone
-        )
-      ) {
-        layer.msg('收货人手机号不正确')
-        return false
-      }
-      console.log(
-        re.test(data.aflcOrderAddressWebDtoList[1].contactsPhone),
-        '收货人手机号'
-      )
+      // if (
+      //   !AFLC_VALID.MOBILE.test(
+      //     data.aflcOrderAddressWebDtoList[1].contactsPhone
+      //   )
+      // ) {
+      //   layer.msg('收货人手机号不正确')
+      //   return false
+      // }
+      // console.log(
+      //   re.test(data.aflcOrderAddressWebDtoList[1].contactsPhone),
+      //   '收货人手机号'
+      // )
       if ($('#agree').prop('checked') === false) {
         layer.msg('请确认已阅读服务协议。')
         return false

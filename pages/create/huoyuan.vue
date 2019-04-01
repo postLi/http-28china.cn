@@ -249,22 +249,6 @@
               </div>
             </div>
           </div>
-          <!-- 发布成功 -->
-          <!-- <div 
-            id="order_success" 
-            class="order_usual_contacts_wrapper2">
-            <div class="order_usual_contacts_bg"/>
-            <div class="order_usual_contacts_pop2">
-              <div class="el-dialog__header2">
-                <span class="close">X</span> <span class="inner_title">发布货源</span>
-              </div>
-              <div class="el-dialog-content">
-                <p>恭喜您发布成功，28快运平台正在努力为您推送！</p>
-                <span class="addNewContact ">添加常用发货人</span>
-                <span class="addNewContact ">添加常用发货人</span>
-              </div>
-            </div>
-          </div> -->
           <!-- 提交按钮 -->
           <div class="order-agree-info">
             <label for="agree">

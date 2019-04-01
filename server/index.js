@@ -3,6 +3,7 @@ const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
 const app = new Koa()
+//  '0.0.0.0' 允许外网访问
 const host = process.env.HOST || '127.0.0.1'
 const port = process.env.PORT || 3000
 
@@ -13,6 +14,7 @@ config.dev = !(app.env === 'production')
 async function start() {
   // Instantiate nuxt.js
   const nuxt = new Nuxt(config)
+  // 版本更新到2.5后需执行这条语句
   await nuxt.ready()
 
   // Build in development

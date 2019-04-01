@@ -239,7 +239,7 @@ export default {
   mounted() {
     if (process.client) {
       window.seajs.use(['layer', 'api'], function() {
-        seajs.use(['./js/regisiter.js'])
+        seajs.use(['./js/regisiter.js?v2'])
       })
     }
   }

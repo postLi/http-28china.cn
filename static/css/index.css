@@ -3001,7 +3001,7 @@ input::-ms-clear,textarea::-ms-clear { display: none; }
 .pwd_login .userType input{	
 	cursor: pointer;
 	text-align: center;
-	width: 90px;
+	width: 138px;
 	height: 38px;
 	background-color: #ffffff;
 	border-radius: 6px;
@@ -3120,7 +3120,7 @@ font-size: 12px;
 .yzm_login .userType2 input{	
 	cursor: pointer;
 	text-align: center;
-	width: 90px;
+	width: 138px;
 	height: 38px;
 	background-color: #ffffff;
 	border-radius: 6px;

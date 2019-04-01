@@ -108,6 +108,39 @@ var api = {
       })
     )
   },
+  postAdd: function(url, data) {
+    var defer = $.Deferred()
+    return this._warpper(
+      $.ajax({
+        url: this.url + url,
+        type: 'POST',
+        dataType: 'json',
+        // 如果用jq，必须设置以下三项，避免jq 的中间处理
+        processData: false,
+        cache: false,
+        contentType: false,
+        headers: {
+          'Content-Type': 'application/json',
+          user_token: $.cookie('user_token')
+        },
+        data: JSON.stringify(data),
+        error: function(err) {
+          // console.log(err, 'insurance')
+          if (err.responseJSON.error == 'invalid_token') {
+            defer.reject({
+              text: '您还未登录，请先登录',
+              status: 100
+            })
+            // $('body').toast({
+            //   content: '您还未登录，请先登录',
+            //   duration: 3000
+            // })
+            $('body').trigger('login.show')
+          }
+        }
+      })
+    )
+  },
   getInfo: function(url) {
     return this._warpper(
       $.ajax({

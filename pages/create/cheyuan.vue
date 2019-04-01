@@ -140,6 +140,16 @@
   </div>
 </template>
 <script>
+async function sendAdd($axios, vo = {}, access_token, user_token) {
+  let parm = vo
+  let res = $axios.post(
+    '/28-web/carInfo/home/createCar?access_token=' +
+      access_token +
+      '&user_token=' +
+      user_token
+  )
+  console.log(res, 'resresres1')
+}
 export default {
   name: 'CheOrder',
   head: {
@@ -149,6 +159,7 @@ export default {
     ]
   },
   mounted() {
+    // '/js/insurance.js'
     seajs.use(['/js/insurance.js', '/js/LLL-AFLC_API.js'], function() {
       seajs.use(['/js/laydate.js'], function() {
         seajs.use(['/js/gaodemap2.js'], function() {
@@ -263,7 +274,7 @@ export default {
                   obj.endAddress = $('.end').val()
                   obj.endAddressCoordinate = $('.end').attr('thepos')
                   obj.endProvince = $('.end').attr('theprovince')
-                  obj.endCity = $('.end').attr('thecity')
+                  // obj.endCity = $('.end').attr('thecity')
                   obj.endAddressName = $('.end').attr('thecity')
                   obj.endArea = $('.end').attr('thearea')
                   if (obj.endProvince == '北京市') {
@@ -273,7 +284,7 @@ export default {
                   } else if (obj.endProvince == '重庆市') {
                     obj.endCity = '重庆市'
                   } else {
-                    obj.endCity = $('.start').attr('thecity')
+                    obj.endCity = $('.thecity').attr('thecity')
                   }
                 } else {
                   checkinfo.done = false
@@ -397,6 +408,50 @@ export default {
                   if ($.cookie('access_token') && $.cookie('user_token')) {
                     var options = $.extend(obj, theRequest)
                     api
+                      .postAdd(url, options)
+                      .done(function(res) {
+                        console.log(res, '发布成功，请完善司机车辆信息！')
+                        // window.location.href='/Insurance/pay.htm?id=' + res.data
+                        if (res.status === 200) {
+                          layer.msg('发布成功', { time: 3000 }, function(
+                            params
+                          ) {
+                            window.location.href = '/cheyuan'
+                          })
+                        } else {
+                          layer.msg(
+                            '发布失败：' + (err.text || err.error || '未知错误')
+                          )
+                          // window.location.href = '/cheyuan'
+                        }
+                      })
+                      .fail(function(err) {
+                        layer.msg(
+                          '发布失败：' + (err.text || err.error || '未知错误')
+                        )
+                      })
+                  } else {
+                    $('.login_box').show()
+                  }
+                } else {
+                  // layer.alert(check.err)
+                  return false
+                }
+              }
+              function next1() {
+                var check = validate()
+                var url =
+                  '/28-web/carInfo/home/createCar?access_token=' +
+                  $.cookie('access_token') +
+                  '&user_token=' +
+                  $.cookie('user_token')
+                if (check) {
+                  var options = $.extend(obj, theRequest)
+                  // console.log(options, options)
+
+                  if ($.cookie('access_token') && $.cookie('user_token')) {
+                    var options = $.extend(obj, theRequest)
+                    api
                       .postInfo(url, options)
                       .done(function(res) {
                         // console.log(res, '发布成功，请完善司机车辆信息！')
@@ -420,7 +475,7 @@ export default {
                         )
                       })
                   } else {
-                    $('body').trigger('login.show')
+                    $('.login_box').show()
                   }
                 } else {
                   // layer.alert(check.err)
@@ -428,36 +483,36 @@ export default {
                 }
               }
               //获取备注信息
-              function remark() {
-                var url =
-                  '/aflccommonservice/sysDict/getSysDictByCodeGet/AF042?access_token=' +
-                  $.cookie('access_token') +
-                  '&user_token=' +
-                  $.cookie('user_token')
-                if ($.cookie('access_token') && $.cookie('user_token')) {
-                  var options = $.extend(theRequest)
-                  api
-                    .getInfo(url, options)
-                    .done(function(res) {
-                      console.log(res.data)
-                      $.each(res.data, function(index, item) {
-                        // console.log(this.name,this.code)
-                        $('.remark').append(
-                          '<span code="' +
-                            item.code +
-                            '">' +
-                            item.name +
-                            '</span>'
-                        )
-                      })
-                    })
-                    .fail(function(err) {
-                      layer.msg(err.errorInfo || err.text || '未知错误')
-                    })
-                } else {
-                  $('body').trigger('login.show')
-                }
-              }
+              // function remark() {
+              //   var url =
+              //     '/aflccommonservice/sysDict/getSysDictByCodeGet/AF042?access_token=' +
+              //     $.cookie('access_token') +
+              //     '&user_token=' +
+              //     $.cookie('user_token')
+              //   if ($.cookie('access_token') && $.cookie('user_token')) {
+              //     var options = $.extend(theRequest)
+              //     api
+              //       .getInfo(url, options)
+              //       .done(function(res) {
+              //         console.log(res.data)
+              //         $.each(res.data, function(index, item) {
+              //           // console.log(this.name,this.code)
+              //           $('.remark').append(
+              //             '<span code="' +
+              //               item.code +
+              //               '">' +
+              //               item.name +
+              //               '</span>'
+              //           )
+              //         })
+              //       })
+              //       .fail(function(err) {
+              //         layer.msg(err.errorInfo || err.text || '未知错误')
+              //       })
+              //   } else {
+              //     $('.login_box').show()
+              //   }
+              // }
 
               initEvent()
             })

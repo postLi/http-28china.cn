@@ -61,37 +61,19 @@ var AFWL_API = {
     if (domain.indexOf('28kuaiyun.cn') !== -1) {
       domain = '.28kuaiyun.cn'
     }
-    $.cookie('access_token', data.access_token, {
+    var opt = {
       expires: 7,
       domain: domain,
       path: '/'
-    })
-    $.cookie('login_mobile', data.mobile, {
-      expires: 7,
-      domain: domain,
-      path: '/'
-    })
-    $.cookie('login_userName', data.userName, {
-      expires: 7,
-      domain: domain,
-      path: '/'
-    })
-    $.cookie('login_userId', data.id, { expires: 7, domain: domain, path: '/' })
-    $.cookie('login_userToken', data.userToken, {
-      expires: 7,
-      domain: domain,
-      path: '/'
-    })
-    $.cookie('login_type', data.login_type, {
-      expires: 7,
-      domain: domain,
-      path: '/'
-    })
-    $.cookie('loginId', data.id, { expires: 7, path: '/' })
-    $.cookie('loginCompanyName', data.companyName || '', {
-      expires: 7,
-      path: '/'
-    })
+    }
+    $.cookie('access_token', data.access_token, opt)
+    $.cookie('login_mobile', data.mobile, opt)
+    $.cookie('login_userName', data.userName, opt)
+    $.cookie('login_userId', data.id, opt)
+    $.cookie('login_userToken', data.userToken, opt)
+    $.cookie('login_type', data.login_type, opt)
+    $.cookie('loginId', data.id, opt)
+    $.cookie('loginCompanyName', data.companyName || '', opt)
     localStorage.setItem('28kuaiyunuserinfo', JSON.stringify(data))
   },
   login: function(username, password) {

@@ -24,6 +24,7 @@ const _6daf1500 = () => interopDefault(import('..\\pages\\cheyuan\\add.vue' /* w
 const _6bc91ec2 = () => interopDefault(import('..\\pages\\cheyuan\\detail.vue' /* webpackChunkName: "pages_cheyuan_detail" */))
 const _a13a61ee = () => interopDefault(import('..\\pages\\cheyuan\\huizong.vue' /* webpackChunkName: "pages_cheyuan_huizong" */))
 const _5b730175 = () => interopDefault(import('..\\pages\\create\\cheyuan.vue' /* webpackChunkName: "pages_create_cheyuan" */))
+const _fece8f8e = () => interopDefault(import('..\\pages\\create\\cySuccess.vue' /* webpackChunkName: "pages_create_cySuccess" */))
 const _765193d7 = () => interopDefault(import('..\\pages\\create\\huoyuan.vue' /* webpackChunkName: "pages_create_huoyuan" */))
 const _2dd9f2d0 = () => interopDefault(import('..\\pages\\create\\line.vue' /* webpackChunkName: "pages_create_line" */))
 const _e0b6334c = () => interopDefault(import('..\\pages\\create\\order.vue' /* webpackChunkName: "pages_create_order" */))
@@ -62,7 +63,6 @@ const _1810a780 = () => interopDefault(import('..\\pages\\zhuanxian\\huizong.vue
 const _37ea10f8 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
 const _7da25454 = () => interopDefault(import('..\\pages\\zhuanxian\\selectMap.vue' /* webpackChunkName: "pages_zhuanxian_selectMap" */))
 const _421afed0 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart.vue' /* webpackChunkName: "pages_zhuanxian_showEchart" */))
-const _014e6d11 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart1.vue' /* webpackChunkName: "pages_zhuanxian_showEchart1" */))
 const _9faddca0 = () => interopDefault(import('..\\pages\\zhuanxian\\showFind.vue' /* webpackChunkName: "pages_zhuanxian_showFind" */))
 const _817b353c = () => interopDefault(import('..\\pages\\zhuanxian\\showPrice.vue' /* webpackChunkName: "pages_zhuanxian_showPrice" */))
 const _7851fcd0 = () => interopDefault(import('..\\pages\\zixun\\utils.js' /* webpackChunkName: "pages_zixun_utils" */))
@@ -255,6 +255,10 @@ export function createRouter() {
       component: _5b730175,
       name: "create-cheyuan"
     }, {
+      path: "/create/cySuccess",
+      component: _fece8f8e,
+      name: "create-cySuccess"
+    }, {
       path: "/create/huoyuan",
       component: _765193d7,
       name: "create-huoyuan"
@@ -406,10 +410,6 @@ export function createRouter() {
       path: "/zhuanxian/showEchart",
       component: _421afed0,
       name: "zhuanxian-showEchart"
-    }, {
-      path: "/zhuanxian/showEchart1",
-      component: _014e6d11,
-      name: "zhuanxian-showEchart1"
     }, {
       path: "/zhuanxian/showFind",
       component: _9faddca0,

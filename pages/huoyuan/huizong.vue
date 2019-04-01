@@ -344,7 +344,7 @@
         <div class="col1">
           <ul 
             class="p_hy_list clearfix"
-            v-if="recommendData.list.length>0">
+            v-if="recommendData.list!== undefined && recommendData.list!== null&&recommendData.list.length>0">
             <li               
               v-for="(item, index) in recommendData.list" 
               :key="index">
@@ -1146,7 +1146,7 @@ export default {
       @extend .fr;
       padding: 20px 10px;
       width: 265px;
-      height: 507px;
+      height: 555px;
       background: $green;
     }
   }

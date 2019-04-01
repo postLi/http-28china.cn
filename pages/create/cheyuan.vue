@@ -250,7 +250,7 @@ export default {
                   obj.strartAddressCoordinate = $('.start').attr('thepos')
                   obj.startProvince = $('.start').attr('theprovince')
 
-                  obj.strartAddressName = $('.start').attr('thecity')
+                  obj.strartAddressName = $('.start').val()
 
                   obj.startArea = $('.start').attr('thearea')
                   // comCity(obj.startProvince, obj.startCity)
@@ -261,6 +261,8 @@ export default {
                     obj.startCity = '上海市'
                   } else if (obj.startProvince == '重庆市') {
                     obj.startCity = '重庆市'
+                  } else if (obj.startProvince === '天津市') {
+                    obj.startCity = '天津市'
                   } else {
                     obj.startCity = $('.start').attr('thecity')
                   }
@@ -275,7 +277,7 @@ export default {
                   obj.endAddressCoordinate = $('.end').attr('thepos')
                   obj.endProvince = $('.end').attr('theprovince')
                   // obj.endCity = $('.end').attr('thecity')
-                  obj.endAddressName = $('.end').attr('thecity')
+                  obj.endAddressName = $('.end').val()
                   obj.endArea = $('.end').attr('thearea')
                   if (obj.endProvince == '北京市') {
                     obj.endCity = '北京市'
@@ -283,8 +285,10 @@ export default {
                     obj.endCity = '上海市'
                   } else if (obj.endProvince == '重庆市') {
                     obj.endCity = '重庆市'
+                  } else if (obj.endProvince === '天津市') {
+                    obj.endCity = '天津市'
                   } else {
-                    obj.endCity = $('.thecity').attr('thecity')
+                    obj.endCity = $('.end').attr('thecity')
                   }
                 } else {
                   checkinfo.done = false
@@ -293,7 +297,7 @@ export default {
                 }
                 if ($('.midile').val()) {
                   obj.viaAddress = $('.midile').val()
-                  obj.viaAddressName = $('.midile').attr('thecity')
+                  obj.viaAddressName = $('.midile').val()
                   obj.viaAddressCoordinate = $('.midile').attr('thepos')
                 } else {
                   checkinfo.done = false
@@ -322,6 +326,7 @@ export default {
                     // console.log(expectPrice, 'expectPrice2')
                   }
                 }
+                obj.remark = $('#textarea').val() ? $('#textarea').val() : ''
                 // if ($('#textarea').val()) {
                 //   obj.remark = $('#textarea').val()
                 // } else {
@@ -356,6 +361,8 @@ export default {
                   startCity = '上海市'
                 } else if (obj === '重庆市') {
                   startCity = '重庆市'
+                } else if (obj === '天津市') {
+                  startCity = '天津市'
                 } else {
                   startCity = $('.start').attr('thecity')
                 }
@@ -416,7 +423,10 @@ export default {
                           layer.msg('发布成功', { time: 3000 }, function(
                             params
                           ) {
-                            window.location.href = '/cheyuan'
+                            window.location.href =
+                              '/create/cySuccess?driverId=' +
+                              res.data +
+                              '&text=车源'
                           })
                         } else {
                           layer.msg(
@@ -438,50 +448,7 @@ export default {
                   return false
                 }
               }
-              function next1() {
-                var check = validate()
-                var url =
-                  '/28-web/carInfo/home/createCar?access_token=' +
-                  $.cookie('access_token') +
-                  '&user_token=' +
-                  $.cookie('user_token')
-                if (check) {
-                  var options = $.extend(obj, theRequest)
-                  // console.log(options, options)
 
-                  if ($.cookie('access_token') && $.cookie('user_token')) {
-                    var options = $.extend(obj, theRequest)
-                    api
-                      .postInfo(url, options)
-                      .done(function(res) {
-                        // console.log(res, '发布成功，请完善司机车辆信息！')
-                        // window.location.href='/Insurance/pay.htm?id=' + res.data
-                        if (res.status === 200) {
-                          layer.msg('发布成功', { time: 3000 }, function(
-                            params
-                          ) {
-                            window.location.href = '/cheyuan'
-                          })
-                        } else {
-                          layer.msg(
-                            '发布失败：' + (err.text || err.error || '未知错误')
-                          )
-                          // window.location.href = '/cheyuan'
-                        }
-                      })
-                      .fail(function(err) {
-                        layer.msg(
-                          '发布失败：' + (err.text || err.error || '未知错误')
-                        )
-                      })
-                  } else {
-                    $('.login_box').show()
-                  }
-                } else {
-                  // layer.alert(check.err)
-                  return false
-                }
-              }
               //获取备注信息
               // function remark() {
               //   var url =

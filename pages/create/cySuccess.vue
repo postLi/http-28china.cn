@@ -1,0 +1,201 @@
+<template>
+  <div class="cy">
+    <div class="main">
+      <div class="right main_nr">
+        <!-- <div class="nr_bt">
+          <div class="nr_bt1"><span>在线下单</span></div>
+        </div>	 -->
+        <!-- 下单部分 -->
+        <div class="nr order-create-main">
+          <div class="order-line-info order-input-tab">
+            <div class="order-success"><img
+              src="/templets/default/images/wzlImg/dagou (1).png"
+              id="gou"><h3>恭喜发布成功！</h3></div>
+            <!-- <div class="order-metal">
+            <h4>您的会员信息完善度过低，发货客户很难找到您！</h4>
+            <h6>完善<a id="authentication">实名认证</a>信息，获得更多免费推广！<span id="more_che_line">获得更多推广</span></h6>
+          </div> -->
+            <div class="order-content">
+              <h4><img src="/templets/default/images/wzlImg/dengpao.png">物流课堂小秘笈</h4>
+              <ul class="content-list">
+                <li>
+                  <img
+                    src="/templets/default/images/wzlImg/xh1.png"
+                    class="li_imgbox">
+                  <h3>更多曝光机会</h3>
+                  <p>专线内容完善度越高，展示及推荐的次数越多！</p>
+                </li>
+                <li>
+                  <img
+                    src="/templets/default/images/wzlImg/xh2.png"
+                    class="li_imgbox">
+                  <h3>获取更多商机</h3>
+                  <p>准确、完整的填写您的企业信息，有利于获得客户的信任，赢得更多商机！</p>
+                </li>
+                <li>
+                  <img
+                    src="/templets/default/images/wzlImg/xh3.png"
+                    class="li_imgbox">
+                  <h3>更多曝光机会</h3>
+                  <p>及时反馈用户留言能够提升客户满意度！</p>
+                </li>
+                <li>
+                  <img
+                    src="/templets/default/images/wzlImg/xh4.png"
+                    class="li_imgbox">
+                  <h3>更多曝光机会</h3>
+                  <p>定期发布及更新信息享受线上推广，获得更多的展示，让更多用户找到你！</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- 提交按钮 -->
+          <div class="btn_bottom">
+          <!-- <div class="order-submit-btn" id="continue">继续发布车源</div>
+          <div class="order-submit-btn" id="check">查看车源详情</div>
+          <div class="order-submit-btn" id="management">管理我的车源</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'CySuccess',
+  head: {
+    link: [{ rel: 'stylesheet', href: '/css/create/cySuccess.css' }]
+  },
+  data() {
+    return {}
+  },
+  mounted() {
+    var buttonText = this.$route.query.text
+    var id = this.$route.query.id
+    var publishId = this.$route.query.publishId
+    var driverId = this.$route.query.driverId
+    var lineOrder = '/zhuanxian/detail?id=' + id + '&publishId=' + publishId //查看详情
+    var cheOrder = '/cheyuan/detail?id=' + driverId
+    var hyOrder = '/huoyuan/detail?id=' + id + '&publishId=' + publishId
+    $('.btn_bottom').append(
+      '<div class="order-submit-btn" id="continue">继续发布' +
+        buttonText +
+        '</div><div class="order-submit-btn" id="check">查看' +
+        buttonText +
+        '详情</div><div class="order-submit-btn" id="management">管理我的' +
+        buttonText +
+        '</div>'
+    )
+
+    $('#continue').click(function() {
+      if (buttonText === '车源') {
+        window.location.href = '/create/cheyuan'
+      } else if (buttonText === '货源') {
+        window.location.href = '/create/huoyuan'
+      } else {
+        window.location.href = '/create/line'
+      }
+    })
+    $('#check').click(function() {
+      if (buttonText === '车源') {
+        window.open(cheOrder)
+      } else if (buttonText === '货源') {
+        window.open(hyOrder)
+      } else {
+        window.open(lineOrder)
+      }
+    })
+    $('#management').click(function() {
+      if (location.href.indexOf('192.168.1.') !== 0) {
+        if (buttonText === '车源') {
+          window.location.href = 'http://192.168.1.157:9526/carinfo/manage'
+        } else if (buttonText === '货源') {
+          window.location.href = 'http://192.168.1.157:9526/carinfo/manage'
+        } else {
+          window.location.href = 'http://192.168.1.157:9526/logistics/manage'
+        }
+      }
+    })
+
+    function intEvent() {
+      var status = GetUrlParam('status')
+      var text = GetUrlParam('text')
+      var buttonText = decodeURI(text)
+      var id = GetUrlParam('id')
+      var publishId = GetUrlParam('publishId')
+      var driverId = GetUrlParam('driverId')
+      var lineOrder =
+        '/wlzx/2018/0509/7.html?id=' + id + '&publishId=' + publishId //查看详情
+      var cheOrder = '/cyxx/2018/0508/5.html?id=' + id + '&driverId=' + driverId
+      $('.btn_bottom').append(
+        '<div class="order-submit-btn" id="continue">继续发布' +
+          buttonText +
+          '</div><div class="order-submit-btn" id="check">查看' +
+          buttonText +
+          '详情</div><div class="order-submit-btn" id="management">管理我的' +
+          buttonText +
+          '</div>'
+      )
+      if (status === '0' || status === '201') {
+        $('.order-content').before(
+          '<div class="order-metal"><h4>您的会员信息完善度过低，发货客户很难找到您！</h4><h6>完善<a id="authentication">实名认证</a>信息，获得更多免费推广！<span id="more_che_line">获得更多推广</span></h6></div>'
+        )
+        $('#authentication').click(function() {
+          // if(location.href.indexOf('28china.com')!== 0){
+          //   window.location.href = 'http://member.28china.com/carinfo/authcreate';
+          // }
+          if (location.href.indexOf('192.168.1.') !== 0) {
+            // window.location.href = 'http://192.168.1.158:9526/carinfo/authcreate';
+            window.location.href =
+              'http://192.168.1.157:9526/baseInfo/authentication'
+          }
+        })
+
+        $('#more_che_line').click(function(event) {
+          event.stopPropagation()
+          // if(location.href.indexOf('28china.com')!==-1){
+          //   window.location.href = 'http://member.28china.com/carinfo/authcreate';
+          // }
+          if (location.href.indexOf('192.168.1.') !== 0) {
+            // window.location.href = 'http://192.168.1.158:9526/carinfo/authcreate';
+            window.location.href =
+              'http://192.168.1.157:9526/baseInfo/authentication'
+          }
+        })
+      }
+      $('#continue').click(function() {
+        if (buttonText === '专线') {
+          window.location.href = '/plus/list.php?tid=85'
+        } else {
+          window.location.href = '/plus/list.php?tid=84'
+        }
+      })
+      $('#check').click(function() {
+        if (buttonText === '专线') {
+          window.open(lineOrder)
+        } else {
+          window.open(cheOrder)
+        }
+      })
+      $('#management').click(function() {
+        if (location.href.indexOf('192.168.1.') !== 0) {
+          // window.location.href = 'http://192.168.1.158:9526/carinfo/manage';
+          if (buttonText === '专线') {
+            window.location.href = 'http://192.168.1.157:9526/logistics/manage'
+          } else {
+            window.location.href = 'http://192.168.1.157:9526/carinfo/manage'
+          }
+        }
+      })
+    }
+
+    // intEvent1()
+    // intEvent()
+  }
+}
+</script>
+
+<style scoped>
+</style>

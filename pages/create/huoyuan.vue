@@ -147,7 +147,6 @@
                 <div class="order-form-label"><span class="required">*</span>发货人手机：</div>
                 <div class="order-form-input">
                   <input 
-                    readonly
                     maxlength="11" 
                     type="text" >
                 </div>
@@ -299,7 +298,7 @@ export default {
   mounted() {
     seajs.use(['/layer/layer.js', 'api'], function() {
       seajs.use(['/js/gaodemap2.js'], function() {
-        seajs.use(['/js/huoOrder.js'], function() {})
+        seajs.use(['/js/huoOrder.1.js'], function() {})
       })
     })
   }

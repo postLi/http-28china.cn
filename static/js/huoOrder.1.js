@@ -174,48 +174,48 @@
       this.$inputcargo.append(this.tpl.cargo)
       $('.add-cargo-list').show()
     },
-    getCompanyInfo: function(id, cb) {
-      var _this = this
-      if (this.req['net' + id]) {
-        this.renderNetInfo(this.req['net' + id])
-        cb && cb()
-      } else {
-        var start = this.data.lclOrderAddressList[0]
-        var end = this.data.lclOrderAddressList[1]
-        var pos0 = start.viaAddressCoordinate.split(',')
-        var pos1 = end.viaAddressCoordinate.split(',')
-        this.netQuery = {
-          endLatitude: pos1[1], // 到达地上传坐标纬度
-          endLocation: start.provinceCityArea, // 目的地
-          endLongitude: pos1[0], // 到达地上传坐标经度
-          startLatitude: pos0[1], // 出发地上传坐标纬度
-          startLocation: end.provinceCityArea, // 出发地
-          startLongitude: pos0[0], // 出发地上传坐标经度
-          startProvince: end.province,
-          startCity: end.city,
-          startArea: end.area,
-          endProvince: start.province,
-          endCity: start.city,
-          endArea: start.area
-        }
-        // 如果没数据，则提示去获取数据
-        if (!this.netQuery.endLatitude || !this.netQuery.startLatitude) {
-          layer.msg('请填写出发地跟到达地的详细地址。')
-          return false
-        }
-        AFWL_API.getBestNet(id, this.netQuery)
-          .done(function(res) {
-            _this.req['net' + id] = res.data
-            _this.renderNetInfo(res.data)
-            cb && cb()
-          })
-          .fail(function(err) {
-            layer.alert(
-              '获取网点数据失败：' + (err.errorInfo || err.text || '未知错误')
-            )
-          })
-      }
-    },
+    // getCompanyInfo: function(id, cb) {
+    //   var _this = this
+    //   if (this.req['net' + id]) {
+    //     this.renderNetInfo(this.req['net' + id])
+    //     cb && cb()
+    //   } else {
+    //     var start = this.data.lclOrderAddressList[0]
+    //     var end = this.data.lclOrderAddressList[1]
+    //     var pos0 = start.viaAddressCoordinate.split(',')
+    //     var pos1 = end.viaAddressCoordinate.split(',')
+    //     this.netQuery = {
+    //       endLatitude: pos1[1], // 到达地上传坐标纬度
+    //       endLocation: start.provinceCityArea, // 目的地
+    //       endLongitude: pos1[0], // 到达地上传坐标经度
+    //       startLatitude: pos0[1], // 出发地上传坐标纬度
+    //       startLocation: end.provinceCityArea, // 出发地
+    //       startLongitude: pos0[0], // 出发地上传坐标经度
+    //       startProvince: end.province,
+    //       startCity: end.city,
+    //       startArea: end.area,
+    //       endProvince: start.province,
+    //       endCity: start.city,
+    //       endArea: start.area
+    //     }
+    //     // 如果没数据，则提示去获取数据
+    //     if (!this.netQuery.endLatitude || !this.netQuery.startLatitude) {
+    //       layer.msg('请填写出发地跟到达地的详细地址。')
+    //       return false
+    //     }
+    //     AFWL_API.getBestNet(id, this.netQuery)
+    //       .done(function(res) {
+    //         _this.req['net' + id] = res.data
+    //         _this.renderNetInfo(res.data)
+    //         cb && cb()
+    //       })
+    //       .fail(function(err) {
+    //         layer.alert(
+    //           '获取网点数据失败：' + (err.errorInfo || err.text || '未知错误')
+    //         )
+    //       })
+    //   }
+    // },
     renderNetInfo: function(data) {
       var p = $('.wlname-info')
         .find('li')
@@ -259,10 +259,10 @@
       })
       this.$popcompany.data('input', inputEle)
       this.currentcid = inputEle.attr('rel')
-      this.getCompanyInfo(this.currentcid, function() {
-        _this.$popcompany.show()
-        _this.calcTotalFee()
-      })
+      // this.getCompanyInfo(this.currentcid, function() {
+      //   _this.$popcompany.show()
+      //   _this.calcTotalFee()
+      // })
     },
     hideComany: function() {
       var _this = this
@@ -270,16 +270,16 @@
         _this.$popcompany.hide()
       }, 200)
     },
-    showSelectNet: function() {
-      $('.netListContent-wraper').show()
-      AFWL_API.getAllNet(this.currentcid, this.netQuery)
-        .done(function(res) {})
-        .fail(function(err) {
-          layer.alert(
-            '获取网点列表失败：' + (err.errorInfo || err.text || '未知错误')
-          )
-        })
-    },
+    // showSelectNet: function() {
+    //   $('.netListContent-wraper').show()
+    //   AFWL_API.getAllNet(this.currentcid, this.netQuery)
+    //     .done(function(res) {})
+    //     .fail(function(err) {
+    //       layer.alert(
+    //         '获取网点列表失败：' + (err.errorInfo || err.text || '未知错误')
+    //       )
+    //     })
+    // },
     initEvent: function() {
       var _this = this
       // 点击货物框，弹出货物列表
@@ -410,9 +410,9 @@
         }
       })
       // 展示重新选择的网点
-      $('.select-other-net').on('click', function() {
-        _this.showSelectNet()
-      })
+      // $('.select-other-net').on('click', function() {
+      //   _this.showSelectNet()
+      // })
       _this.$selectcompany
         .find('.close,.cancel-net-select')
         .on('click', function() {
@@ -445,7 +445,7 @@
           _this.setAddrInfo(0, thename, thepos, theobj)
           if (theobj.township || theobj.street) {
             inp.val(theobj.township + theobj.street + theobj.building)
-            _this.getCompany()
+            // _this.getCompany()
           } else {
             // 清空列表
             $('.order-company-list tbody').hide()
@@ -464,7 +464,7 @@
           _this.setAddrInfo(1, thename, thepos, theobj)
           if (theobj.township || theobj.street) {
             inp.val(theobj.township + theobj.street + theobj.building)
-            _this.getCompany()
+            // _this.getCompany()
           } else {
             // 清空列表
             $('.order-company-list tbody').hide()
@@ -483,7 +483,7 @@
           inp.val(str)
           inp.attr('wtmapinit', str)
           _this.setAddrInfo(1, thename, thepos, obj)
-          _this.getCompany()
+          // _this.getCompany()
         })
       $('.order-line-from')
         .find('input')
@@ -497,7 +497,7 @@
           inp.val(str)
           inp.attr('wtmapinit', str)
           _this.setAddrInfo(0, thename, thepos, obj)
-          _this.getCompany()
+          // _this.getCompany()
         })
       // 选择发货人
       $('.order-contact-from .order-usual-button').on('click', function() {
@@ -668,45 +668,51 @@
       // 提交订单
       $('.order-submit-btn').on('click', function() {
         var res = _this.checkForm()
+        console.log(55555555)
         if (res) {
+          console.log(666666)
           var cb = function() {
             if (_this.islogin) {
+              console.log(11111111111111)
               AFWL_API.postCreateOrder(_this.data, {
                 access_token: _this.logininfo.access_token,
                 user_token: _this.userinfo.userToken
               })
                 .done(function(res) {
                   // 订单id，用来跟踪
-                  _this.data.id = res.data.id
-                  _this.data.orderSerial = res.data.orderSerial
+                  // _this.data.id = res.data.id
+                  // _this.data.orderSerial = res.data.orderSerial
 
-                  _this.setSuccessPage(res.data)
+                  // _this.setSuccessPage(res.data)
+                  console.log(777777)
                 })
                 .fail(function(err) {
+                  console.log(8888888)
                   layer.alert(
                     '创建失败：' + (err.errorInfo || err.text || '未知错误')
                   )
                 })
             } else {
               _this.showLoginForm()
+              console.log(99999999)
             }
           }
-          if (res === 'huoyuan') {
-            // 判断是否需要提交货源
-            layer.confirm(
-              '<span class="center tipcontent">未选择任何承运商无法下单<br>您还可以选择发布货源让更多承运商主动联系您！</span>',
-              {
-                title: '提示',
-                btn: ['发布货源', '取消'] //按钮
-              },
-              function() {
-                cb()
-              },
-              function() {}
-            )
-          } else {
-            cb()
-          }
+          // if (res === 'huoyuan') {
+          //   // 判断是否需要提交货源
+          //   layer.confirm(
+          //     '<span class="center tipcontent">未选择任何承运商无法下单<br>您还可以选择发布货源让更多承运商主动联系您！</span>',
+          //     {
+          //       title: '提示',
+          //       btn: ['发布货源', '取消'] //按钮
+          //     },
+          //     function() {
+          //       cb()
+          //     },
+          //     function() {}
+          //   )
+          // } else {
+          //   cb()
+          // }
         }
       })
 
@@ -953,24 +959,6 @@
       data.lclOrderAddressList[1].isSave = $('.order-contact-to input')
         .eq(2)
         .prop('checked')
-
-      /* if(!data.lclOrderAddressList[1].contacts || !data.lclOrderAddressList[1].contactsPhone){
-        layer.msg('请填写收货人信息。');
-        return false;
-      }
- */
-      // if (
-      //   !AFLC_VALID.MOBILE.test(
-      //     data.lclOrderAddressList[1].contactsPhone
-      //   )
-      // ) {
-      //   layer.msg('收货人手机号不正确')
-      //   return false
-      // }
-      // console.log(
-      //   re.test(data.lclOrderAddressList[1].contactsPhone),
-      //   '收货人手机号'
-      // )
       if ($('#agree').prop('checked') === false) {
         layer.msg('请确认已阅读服务协议。')
         return false
@@ -1002,98 +990,98 @@
 
       return obj
     },
-    getCompany: function(_vo) {
-      var start = $('.order-line-from').find('input')
-      var end = $('.order-line-to').find('input')
-      var vo = _vo
-      if (vo) {
-        vo = {
-          currentPage: 1,
-          pageSize: 100,
-          vo: _vo
-        }
-      } else {
-        // 指定专线则不请求
-        if (this.pageinfo.isid) {
-          return false
-        }
-        start = this.data.lclOrderAddressList[0]
-        end = this.data.lclOrderAddressList[1]
-        var startcode = this.getCityCode(start.code)
-        var endcode = this.getCityCode(end.code)
+    // getCompany: function(_vo) {
+    //   var start = $('.order-line-from').find('input')
+    //   var end = $('.order-line-to').find('input')
+    //   var vo = _vo
+    //   if (vo) {
+    //     vo = {
+    //       currentPage: 1,
+    //       pageSize: 100,
+    //       vo: _vo
+    //     }
+    //   } else {
+    //     // 指定专线则不请求
+    //     if (this.pageinfo.isid) {
+    //       return false
+    //     }
+    //     start = this.data.lclOrderAddressList[0]
+    //     end = this.data.lclOrderAddressList[1]
+    //     var startcode = this.getCityCode(start.code)
+    //     var endcode = this.getCityCode(end.code)
 
-        vo = {
-          currentPage: 1,
-          pageSize: 100,
-          vo: {
-            //'startLocation': start,
-            //'endLocation': this.netQuery.endLocation,
-            startProvince: start.province,
-            startCity: start.city,
-            startArea: start.area,
-            endProvince: end.province,
-            endCity: end.city,
-            endArea: end.area,
-            // 补上code值字段
-            startProvinceCode: startcode.province,
-            startCityCode: startcode.city,
-            startAreaCode: startcode.area,
-            endProvinceCode: endcode.province,
-            endCityCode: endcode.city,
-            endAreaCode: endcode.area
-          }
-        }
-        // 指定了公司，则添加对应的comapnyId
-        if (this.pageinfo.iscom) {
-          vo.vo.companyId = this.pageinfo.comid
-        }
+    //     vo = {
+    //       currentPage: 1,
+    //       pageSize: 100,
+    //       vo: {
+    //         //'startLocation': start,
+    //         //'endLocation': this.netQuery.endLocation,
+    //         startProvince: start.province,
+    //         startCity: start.city,
+    //         startArea: start.area,
+    //         endProvince: end.province,
+    //         endCity: end.city,
+    //         endArea: end.area,
+    //         // 补上code值字段
+    //         startProvinceCode: startcode.province,
+    //         startCityCode: startcode.city,
+    //         startAreaCode: startcode.area,
+    //         endProvinceCode: endcode.province,
+    //         endCityCode: endcode.city,
+    //         endAreaCode: endcode.area
+    //       }
+    //     }
+    //     // 指定了公司，则添加对应的comapnyId
+    //     if (this.pageinfo.iscom) {
+    //       vo.vo.companyId = this.pageinfo.comid
+    //     }
 
-        // 只有填了出发地跟目的地时才去请求
-        if (!start.province || !end.province) {
-          return false
-        }
-      }
+    //     // 只有填了出发地跟目的地时才去请求
+    //     if (!start.province || !end.province) {
+    //       return false
+    //     }
+    //   }
 
-      var index = layer.load()
-      var _this = this
-      AFWL_API.getCompany(vo)
-        .done(function(res) {
-          var data = res.data.list
-          $('.order-company-list tbody').hide()
-          if (data.length) {
-            _this.setCompanyList(data)
-            _this.req.company = data
-            $('.lineinfo').show()
-            // 如果是专线，则默认选中第一条
-            if (_this.pageinfo.isid) {
-              $('.lineinfo input[type="checkbox"]')
-                .eq(0)
-                .prop('checked', true)
+    //   var index = layer.load()
+    //   var _this = this
+    //   AFWL_API.getCompany(vo)
+    //     .done(function(res) {
+    //       var data = res.data.list
+    //       $('.order-company-list tbody').hide()
+    //       if (data.length) {
+    //         _this.setCompanyList(data)
+    //         _this.req.company = data
+    //         $('.lineinfo').show()
+    //         // 如果是专线，则默认选中第一条
+    //         if (_this.pageinfo.isid) {
+    //           $('.lineinfo input[type="checkbox"]')
+    //             .eq(0)
+    //             .prop('checked', true)
 
-              // 如果只有一条，那就改为禁止操作
-              if (data.length === 1) {
-                $('.lineinfo input[type="checkbox"]')
-                  .eq(0)
-                  .prop('disabled', true)
-              }
-            }
-          } else {
-            if (_this.pageinfo.iscom) {
-              $('.noline').show()
-            } else {
-              $('.findnone').show()
-            }
-          }
-        })
-        .fail(function(err) {
-          layer.alert(
-            '获取专线失败：' + (err.errorInfo || err.text || '未知错误')
-          )
-        })
-        .always(function() {
-          layer.close(index)
-        })
-    },
+    //           // 如果只有一条，那就改为禁止操作
+    //           if (data.length === 1) {
+    //             $('.lineinfo input[type="checkbox"]')
+    //               .eq(0)
+    //               .prop('disabled', true)
+    //           }
+    //         }
+    //       } else {
+    //         if (_this.pageinfo.iscom) {
+    //           $('.noline').show()
+    //         } else {
+    //           $('.findnone').show()
+    //         }
+    //       }
+    //     })
+    //     .fail(function(err) {
+    //       layer.alert(
+    //         '获取专线失败：' + (err.errorInfo || err.text || '未知错误')
+    //       )
+    //     })
+    //     .always(function() {
+    //       layer.close(index)
+    //     })
+    // },
     findLowestPrice: function(list, type) {
       var arr = []
       $.each(list, function(inx, ele) {
@@ -1342,36 +1330,36 @@
       return true
     },
     // 获取专线详情
-    initZx: function() {
-      this.getCompany({
-        id: this.pageinfo.id
-      })
-      return AFWL_API.getLineInfo(this.pageinfo.id)
-        .done(function(res) {
-          var data = res.data
-          var finp = $('.order-line-from input')
-          var tinp = $('.order-line-to input')
-          var reg = /(北京|天津|重庆|上海)市\1市/
-          var start = (data.startLocation || '').replace(reg, '$1市')
-          var end = (data.endLocation || '').replace(reg, '$1市')
-          finp.eq(0).val(start)
-          tinp.eq(0).val(end)
-          finp.eq(0).prop('disabled', true)
-          tinp.eq(0).prop('disabled', true)
+    // initZx: function() {
+    //   this.getCompany({
+    //     id: this.pageinfo.id
+    //   })
+    //   return AFWL_API.getLineInfo(this.pageinfo.id)
+    //     .done(function(res) {
+    //       var data = res.data
+    //       var finp = $('.order-line-from input')
+    //       var tinp = $('.order-line-to input')
+    //       var reg = /(北京|天津|重庆|上海)市\1市/
+    //       var start = (data.startLocation || '').replace(reg, '$1市')
+    //       var end = (data.endLocation || '').replace(reg, '$1市')
+    //       finp.eq(0).val(start)
+    //       tinp.eq(0).val(end)
+    //       finp.eq(0).prop('disabled', true)
+    //       tinp.eq(0).prop('disabled', true)
 
-          finp.eq(1).attr('wtmapinit', start)
-          tinp.eq(1).attr('wtmapinit', end)
-          finp.eq(1).attr('wtmapnochange', true)
-          tinp.eq(1).attr('wtmapnochange', true)
-          finp.eq(1).attr('wtmapcode', data.startLocationCode || '')
-          tinp.eq(1).attr('wtmapcode', data.endLcationCode || '')
-        })
-        .fail(function(err) {
-          layer.alert(
-            '加载专线信息失败：' + (err.errorInfo || err.text || '未知错误')
-          )
-        })
-    },
+    //       finp.eq(1).attr('wtmapinit', start)
+    //       tinp.eq(1).attr('wtmapinit', end)
+    //       finp.eq(1).attr('wtmapnochange', true)
+    //       tinp.eq(1).attr('wtmapnochange', true)
+    //       finp.eq(1).attr('wtmapcode', data.startLocationCode || '')
+    //       tinp.eq(1).attr('wtmapcode', data.endLcationCode || '')
+    //     })
+    //     .fail(function(err) {
+    //       layer.alert(
+    //         '加载专线信息失败：' + (err.errorInfo || err.text || '未知错误')
+    //       )
+    //     })
+    // },
     initSY: function() {
       // start=广东省惠州市博罗县&end=海南省海口市美兰区&startstreet=&endstreet=&startj=&startw=undefined&endj=&endw=undefined&startp=广东省&startc=惠州市&starta=博罗县&endp=海南省&endc=海口市&enda=美兰区
       var data = {

@@ -140,6 +140,16 @@
   </div>
 </template>
 <script>
+async function sendAdd($axios, vo = {}, access_token, user_token) {
+  let parm = vo
+  let res = $axios.post(
+    '/28-web/carInfo/home/createCar?access_token=' +
+      access_token +
+      '&user_token=' +
+      user_token
+  )
+  console.log(res, 'resresres1')
+}
 export default {
   name: 'CheOrder',
   head: {
@@ -263,7 +273,7 @@ export default {
                   obj.endAddress = $('.end').val()
                   obj.endAddressCoordinate = $('.end').attr('thepos')
                   obj.endProvince = $('.end').attr('theprovince')
-                  obj.endCity = $('.end').attr('thecity')
+                  // obj.endCity = $('.end').attr('thecity')
                   obj.endAddressName = $('.end').attr('thecity')
                   obj.endArea = $('.end').attr('thearea')
                   if (obj.endProvince == '北京市') {
@@ -273,7 +283,7 @@ export default {
                   } else if (obj.endProvince == '重庆市') {
                     obj.endCity = '重庆市'
                   } else {
-                    obj.endCity = $('.start').attr('thecity')
+                    obj.endCity = $('.thecity').attr('thecity')
                   }
                 } else {
                   checkinfo.done = false
@@ -420,44 +430,45 @@ export default {
                         )
                       })
                   } else {
-                    $('body').trigger('login.show')
+                    $('.login_box').show()
                   }
                 } else {
                   // layer.alert(check.err)
                   return false
                 }
               }
+
               //获取备注信息
-              function remark() {
-                var url =
-                  '/aflccommonservice/sysDict/getSysDictByCodeGet/AF042?access_token=' +
-                  $.cookie('access_token') +
-                  '&user_token=' +
-                  $.cookie('user_token')
-                if ($.cookie('access_token') && $.cookie('user_token')) {
-                  var options = $.extend(theRequest)
-                  api
-                    .getInfo(url, options)
-                    .done(function(res) {
-                      console.log(res.data)
-                      $.each(res.data, function(index, item) {
-                        // console.log(this.name,this.code)
-                        $('.remark').append(
-                          '<span code="' +
-                            item.code +
-                            '">' +
-                            item.name +
-                            '</span>'
-                        )
-                      })
-                    })
-                    .fail(function(err) {
-                      layer.msg(err.errorInfo || err.text || '未知错误')
-                    })
-                } else {
-                  $('body').trigger('login.show')
-                }
-              }
+              // function remark() {
+              //   var url =
+              //     '/aflccommonservice/sysDict/getSysDictByCodeGet/AF042?access_token=' +
+              //     $.cookie('access_token') +
+              //     '&user_token=' +
+              //     $.cookie('user_token')
+              //   if ($.cookie('access_token') && $.cookie('user_token')) {
+              //     var options = $.extend(theRequest)
+              //     api
+              //       .getInfo(url, options)
+              //       .done(function(res) {
+              //         console.log(res.data)
+              //         $.each(res.data, function(index, item) {
+              //           // console.log(this.name,this.code)
+              //           $('.remark').append(
+              //             '<span code="' +
+              //               item.code +
+              //               '">' +
+              //               item.name +
+              //               '</span>'
+              //           )
+              //         })
+              //       })
+              //       .fail(function(err) {
+              //         layer.msg(err.errorInfo || err.text || '未知错误')
+              //       })
+              //   } else {
+              //     $('.login_box').show()
+              //   }
+              // }
 
               initEvent()
             })

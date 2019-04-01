@@ -1142,10 +1142,11 @@ export default {
       startp = linedataA.data.data.startProvince
     }
     let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
-      $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
+      $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId || ''}`),
       $axios.post(
         aurl +
-          `/28-web/logisticsCompany/comprehensive?companyId=${query.publishId}`
+          `/28-web/logisticsCompany/comprehensive?companyId=${query.publishId ||
+            ''}`
       ),
       $axios.post(aurl + `/28-web/rangeEva/range/list`, {
         currentPage: 1,
@@ -1162,8 +1163,20 @@ export default {
         endArea: enda
       })
     ])
-
-    if (linedataA.data.status === 200) {
+    // console.log(linedataB.data, 'linedataB.data')
+    if (
+      linedataA.data.status == 200 &&
+      linedataB.data.status == 200 &&
+      linedataC.data.status == 200 &&
+      linedataD.data.status == 200 &&
+      linedataE.data.status == 200 &&
+      linedataF.data.status == 200 &&
+      linedataG.data.status == 200 &&
+      LineeEInfo.data.status == 200 &&
+      lineCity.data.status == 200 &&
+      LineCAnother.data.status == 200
+    ) {
+      // console.log(linedataB.data, '  linedataB.data')
       let vo = {
         endArea: linedataA.data.data.endArea,
         endCity: linedataA.data.data.endCity,
@@ -1191,111 +1204,95 @@ export default {
         startCity: queryCitys.startCity
       })
       LineCAnother = await $axios.post(aurl + '/28-web/range/changeAnother', vo)
-      // LineeEInfo = await $axios.post(
-      //   aurl + '/28-web/range/getRangePriceReference/' + linedataA.data.data.id
-      // )
       LineeEInfo = await $axios.post(
         aurl + '/28-web/range/reference/price/' + linedataA.data.data.id
       )
-      // console.log(linePrice.data.data, 'linePricelinePricelinePrice')
-      if (
-        linedataA.data.status == 200 ||
-        linedataB.data.status == 200 ||
-        linedataC.data.status == 200 ||
-        linedataD.data.status == 200 ||
-        linedataE.data.status == 200 ||
-        linedataF.data.status == 200 ||
-        linedataG.data.status == 200 ||
-        LineeEInfo.data.status == 200 ||
-        lineCity.data.status == 200 ||
-        LineCAnother.data.status == 200
-      ) {
-        LineCAnother.data.data =
-          LineCAnother.data.status == 200 ? LineCAnother.data.data : ''
-        LineeEInfo.data.data =
-          LineeEInfo.data.status == 200 ? LineeEInfo.data.data : ''
-        let item = linedataA.data.data
+      LineCAnother.data.data =
+        LineCAnother.data.status == 200 ? LineCAnother.data.data : ''
+      LineeEInfo.data.data =
+        LineeEInfo.data.status == 200 ? LineeEInfo.data.data : ''
+      let item = linedataA.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      item.num = (num % 30) + 1
+      linedataC.data.data.list.forEach(item => {
+        // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
         let num = 0
         arr.forEach(el => {
           num += el.charCodeAt(0) || 0
         })
         item.num = (num % 30) + 1
-        linedataC.data.data.list.forEach(item => {
-          // item.num = Math.ceil(Math.random() * 30)
-          let arr = (item.id || '').split('')
-          let num = 0
-          arr.forEach(el => {
-            num += el.charCodeAt(0) || 0
-          })
-          item.num = (num % 30) + 1
-        })
+      })
 
-        linedataB.data.data.companyName =
-          linedataB.data.data.companyName.length > 13
-            ? linedataB.data.data.companyName.substring(0, 13) + '..'
-            : linedataB.data.data.companyName
-        linedataE.data.data.lowerPriceRate = linedataE.data.data.lowerPriceRate
-          ? linedataE.data.data.lowerPriceRate + '%'
-          : ''
+      // linedataB.data.data.companyName =
+      //   linedataB.data.data.companyName.length > 13
+      //     ? linedataB.data.data.companyName.substring(0, 13) + '..'
+      //     : linedataB.data.data.companyName
+      // linedataE.data.data.lowerPriceRate = linedataE.data.data.lowerPriceRate
+      //   ? linedataE.data.data.lowerPriceRate + '%'
+      //   : ''
 
-        let authStatus = linedataB.data.data.authStatus
-        let collateral = linedataB.data.data.collateral
-        let isVip = linedataB.data.data.isVip
-        let credit = linedataB.data.data.credit
+      let authStatus =
+        linedataB.data.status == 200 ? linedataB.data.data.authStatus : ''
+      let collateral =
+        linedataB.data.status == 200 ? linedataB.data.data.collateral : ''
+      let isVip = linedataB.data.status == 200 ? linedataB.data.data.isVip : ''
+      let credit =
+        linedataB.data.status == 200 ? linedataB.data.data.credit : ''
 
-        if (!isVip || isVip == 0) {
-          linedataB.data.data.showIsVip = false
-        }
-        if (authStatus == 'AF0010403') {
-          linedataB.data.data.isAuthStatus = true
-          linedataB.data.data.isRenZhen = true
-
-          // linedataB.data.data.renZhen = '暂无认证信息'
-        }
-        if (authStatus != 'AF0010403') {
-          linedataB.data.data.isAuthStatus = false
-          linedataB.data.data.isRenZhen = false
-
-          // linedataB.data.data.renZhen = '暂无认证信息'
-        }
-        // console.log(collateral, 'collateral')
-        if (collateral > 0) {
-          linedataB.data.data.collateral = linedataB.data.data.collateral + '元'
-          linedataB.data.data.isCollateral = true
-        }
-        if (collateral <= 0) {
-          linedataB.data.data.collateral = ''
-          linedataB.data.data.isCollateral = false
-        }
-        if (
-          authStatus != 'AF0010403' &&
-          (!isVip || isVip == 0) &&
-          (!collateral || collateral == 0)
-        ) {
-          // linedataB.data.data.isRenZhen = true
-          // $('.arc_right07').html('<br/>暂无认证信息')
-        }
-        return {
-          linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
-          linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
-          lineLists:
-            linedataC.data.status == 200 ? linedataC.data.data.list : [],
-          lineRecoms: linedataD.data.status == 200 ? linedataD.data.data : [],
-          linedataE: linedataE.data.status == 200 ? linedataE.data.data : [],
-          linedataF:
-            linedataF.data.status == 200 ? linedataF.data.data.list : [],
-          linedataG: linedataG.data.status == 200 ? linedataG.data.data : [],
-          LineeEchartInfo:
-            LineeEInfo.data.status == 200 ? LineeEInfo.data.data : [],
-          lineCitys: lineCity.data.status == 200 ? lineCity.data.data : [],
-          LineChangeAnother:
-            LineCAnother.data.status == 200 ? LineCAnother.data.data : [],
-          queryCitys
-        }
-      } else {
-        error({ statusCode: 500, message: '查找不到该专线信息' })
+      if (!isVip || isVip == 0) {
+        // linedataB.data.data.showIsVip
+        linedataB.data.data.showIsVip = linedataB.data.status == 200 ? fase : ''
       }
+      if (authStatus == 'AF0010403') {
+        linedataB.data.data.isAuthStatus = true
+        linedataB.data.data.isRenZhen = true
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+      if (authStatus != 'AF0010403') {
+        linedataB.data.data.isAuthStatus = false
+        linedataB.data.data.isRenZhen = false
+
+        // linedataB.data.data.renZhen = '暂无认证信息'
+      }
+      if (collateral > 0) {
+        linedataB.data.data.collateral = linedataB.data.data.collateral + '元'
+        linedataB.data.data.isCollateral = true
+      }
+      if (collateral <= 0) {
+        linedataB.data.data.collateral = ''
+        linedataB.data.data.isCollateral = false
+      }
+      if (
+        authStatus != 'AF0010403' &&
+        (!isVip || isVip == 0) &&
+        (!collateral || collateral == 0)
+      ) {
+        // linedataB.data.data.isRenZhen = true
+        // $('.arc_right07').html('<br/>暂无认证信息')
+      }
+      return {
+        linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
+        linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
+        lineLists: linedataC.data.status == 200 ? linedataC.data.data.list : [],
+        lineRecoms: linedataD.data.status == 200 ? linedataD.data.data : [],
+        linedataE: linedataE.data.status == 200 ? linedataE.data.data : [],
+        linedataF: linedataF.data.status == 200 ? linedataF.data.data.list : [],
+        linedataG: linedataG.data.status == 200 ? linedataG.data.data : [],
+        LineeEchartInfo:
+          LineeEInfo.data.status == 200 ? LineeEInfo.data.data : [],
+        lineCitys: lineCity.data.status == 200 ? lineCity.data.data : [],
+        LineChangeAnother:
+          LineCAnother.data.status == 200 ? LineCAnother.data.data : [],
+        queryCitys
+      }
+    } else {
+      error({ statusCode: 500, message: '查找不到该专线信息' })
     }
   },
   mounted() {

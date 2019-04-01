@@ -159,6 +159,7 @@ export default {
     ]
   },
   mounted() {
+    // '/js/insurance.js'
     seajs.use(['/js/insurance.js', '/js/LLL-AFLC_API.js'], function() {
       seajs.use(['/js/laydate.js'], function() {
         seajs.use(['/js/gaodemap2.js'], function() {
@@ -407,6 +408,50 @@ export default {
                   if ($.cookie('access_token') && $.cookie('user_token')) {
                     var options = $.extend(obj, theRequest)
                     api
+                      .postAdd(url, options)
+                      .done(function(res) {
+                        console.log(res, '发布成功，请完善司机车辆信息！')
+                        // window.location.href='/Insurance/pay.htm?id=' + res.data
+                        if (res.status === 200) {
+                          layer.msg('发布成功', { time: 3000 }, function(
+                            params
+                          ) {
+                            window.location.href = '/cheyuan'
+                          })
+                        } else {
+                          layer.msg(
+                            '发布失败：' + (err.text || err.error || '未知错误')
+                          )
+                          // window.location.href = '/cheyuan'
+                        }
+                      })
+                      .fail(function(err) {
+                        layer.msg(
+                          '发布失败：' + (err.text || err.error || '未知错误')
+                        )
+                      })
+                  } else {
+                    $('.login_box').show()
+                  }
+                } else {
+                  // layer.alert(check.err)
+                  return false
+                }
+              }
+              function next1() {
+                var check = validate()
+                var url =
+                  '/28-web/carInfo/home/createCar?access_token=' +
+                  $.cookie('access_token') +
+                  '&user_token=' +
+                  $.cookie('user_token')
+                if (check) {
+                  var options = $.extend(obj, theRequest)
+                  // console.log(options, options)
+
+                  if ($.cookie('access_token') && $.cookie('user_token')) {
+                    var options = $.extend(obj, theRequest)
+                    api
                       .postInfo(url, options)
                       .done(function(res) {
                         // console.log(res, '发布成功，请完善司机车辆信息！')
@@ -437,7 +482,6 @@ export default {
                   return false
                 }
               }
-
               //获取备注信息
               // function remark() {
               //   var url =

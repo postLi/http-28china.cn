@@ -399,7 +399,7 @@ export default {
                     api
                       .postInfo(url, options)
                       .done(function(res) {
-                        console.log(res, '发布成功，请完善司机车辆信息！')
+                        // console.log(res, '发布成功，请完善司机车辆信息！')
                         // window.location.href='/Insurance/pay.htm?id=' + res.data
                         if (res.status === 200) {
                           layer.msg('发布成功', { time: 3000 }, function(

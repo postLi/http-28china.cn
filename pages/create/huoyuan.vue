@@ -250,7 +250,7 @@
             </div>
           </div>
           <!-- 发布成功 -->
-          <div 
+          <!-- <div 
             id="order_success" 
             class="order_usual_contacts_wrapper2">
             <div class="order_usual_contacts_bg"/>
@@ -258,26 +258,13 @@
               <div class="el-dialog__header2">
                 <span class="close">X</span> <span class="inner_title">发布货源</span>
               </div>
-              <!-- <div 
-              style="margin:35px 18px 20px 18px;background: url(/templets/default/images/yes.png) no-repeat;    background-position: 0 -32px;    width: 64px; height: 64px;float: left;"/>
-              <div style="float: left;margin:35px 18px 20px 18px;height: 64px;width: 360px;font-size: 14px;line-height: 28px;">
-                <span style="float: left;">恭喜您发布成功，28快运平台正在努力为您推送！<p/>
-                  <i style="float: left;"><a 
-                    style="color: #2577e3;" 
-                    href="http://www.28kuaiyun.cn">点击此处</a>可查看更多信息</i>
-                </span>
-                <div class="order-submit-btn">确定</div>
-              </div>
-    
-       
-              <div/> -->
               <div class="el-dialog-content">
                 <p>恭喜您发布成功，28快运平台正在努力为您推送！</p>
                 <span class="addNewContact ">添加常用发货人</span>
                 <span class="addNewContact ">添加常用发货人</span>
               </div>
             </div>
-          </div>
+          </div> -->
           <!-- 提交按钮 -->
           <div class="order-agree-info">
             <label for="agree">

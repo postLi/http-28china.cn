@@ -9,39 +9,39 @@
         <div class="nr order-create-main">
           <div class="order-line-info order-input-tab">
             <div class="order-success"><img
-              src="/templets/default/images/wzlImg/dagou (1).png"
+              src="/images/wzlImg/dagou (1).png"
               id="gou"><h3>恭喜发布成功！</h3></div>
             <!-- <div class="order-metal">
             <h4>您的会员信息完善度过低，发货客户很难找到您！</h4>
             <h6>完善<a id="authentication">实名认证</a>信息，获得更多免费推广！<span id="more_che_line">获得更多推广</span></h6>
           </div> -->
             <div class="order-content">
-              <h4><img src="/templets/default/images/wzlImg/dengpao.png">物流课堂小秘笈</h4>
+              <h4><img src="/images/wzlImg/dengpao.png">物流课堂小秘笈</h4>
               <ul class="content-list">
                 <li>
                   <img
-                    src="/templets/default/images/wzlImg/xh1.png"
+                    src="/images/wzlImg/xh1.png"
                     class="li_imgbox">
                   <h3>更多曝光机会</h3>
                   <p>专线内容完善度越高，展示及推荐的次数越多！</p>
                 </li>
                 <li>
                   <img
-                    src="/templets/default/images/wzlImg/xh2.png"
+                    src="/images/wzlImg/xh2.png"
                     class="li_imgbox">
                   <h3>获取更多商机</h3>
                   <p>准确、完整的填写您的企业信息，有利于获得客户的信任，赢得更多商机！</p>
                 </li>
                 <li>
                   <img
-                    src="/templets/default/images/wzlImg/xh3.png"
+                    src="/images/wzlImg/xh3.png"
                     class="li_imgbox">
                   <h3>更多曝光机会</h3>
                   <p>及时反馈用户留言能够提升客户满意度！</p>
                 </li>
                 <li>
                   <img
-                    src="/templets/default/images/wzlImg/xh4.png"
+                    src="/images/wzlImg/xh4.png"
                     class="li_imgbox">
                   <h3>更多曝光机会</h3>
                   <p>定期发布及更新信息享受线上推广，获得更多的展示，让更多用户找到你！</p>
@@ -75,10 +75,11 @@ export default {
     var buttonText = this.$route.query.text
     var id = this.$route.query.id
     var publishId = this.$route.query.publishId
+    var shipperId = this.$route.query.shipperId
     var driverId = this.$route.query.driverId
     var lineOrder = '/zhuanxian/detail?id=' + id + '&publishId=' + publishId //查看详情
     var cheOrder = '/cheyuan/detail?id=' + driverId
-    var hyOrder = '/huoyuan/detail?id=' + id + '&publishId=' + publishId
+    var hyOrder = '/huoyuan/detail?id=' + id + '&shipperId=' + shipperId
     $('.btn_bottom').append(
       '<div class="order-submit-btn" id="continue">继续发布' +
         buttonText +
@@ -124,11 +125,13 @@ export default {
       var text = GetUrlParam('text')
       var buttonText = decodeURI(text)
       var id = GetUrlParam('id')
-      var publishId = GetUrlParam('publishId')
+      // var publishId = GetUrlParam('publishId')
       var driverId = GetUrlParam('driverId')
+      var shipperId = GetUrlParam('shipperId')
+      var cheOrder = `/cyxx/2018/0508/5.html?id=${id}&shipperId=${shipperId}`
       var lineOrder =
         '/wlzx/2018/0509/7.html?id=' + id + '&publishId=' + publishId //查看详情
-      var cheOrder = '/cyxx/2018/0508/5.html?id=' + id + '&driverId=' + driverId
+      // var cheOrder = '/cyxx/2018/0508/5.html?id=' + id + '&driverId=' + driverId
       $('.btn_bottom').append(
         '<div class="order-submit-btn" id="continue">继续发布' +
           buttonText +

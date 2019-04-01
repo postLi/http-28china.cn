@@ -687,7 +687,14 @@
                   // console.log(res)
                   if (res.status === 200) {
                     // $('.order_list_contacts_pop').show()
-                    $('#order_success').show()
+                    // $('#order_success').show()
+                    // console.log(res)
+                    window.location.href =
+                      '/create/cySuccess?id=' +
+                      res.data.id +
+                      '&shipperId=' +
+                      res.data.shipperId +
+                      '&text=货源'
                   } else {
                     layer.msg(res.errorInfo)
                   }

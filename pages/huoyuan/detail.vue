@@ -397,7 +397,7 @@
               :href="'/huoyuan?startProvince='+ i.startProvince+'&startCity='+i.startCity+'&startArea='+i.startArea +'&endProvince='+i.endProvince+'&endCity='+i.endCity + '&endArea='+i.endArea"> 
                 <span :title="i.startProvinceCityArea">{{ i.startCity + i.startArea }}</span>
                 <span :title="i.endProvinceCityArea">{{ i.endCity + i.endArea }}</span>
-                <span :title="i.goodsTypeName">{{ item.goodsTypeName ?i.goodsTypeName.substring(0,5) : '' }}</span>
+                <span :title="i.goodsTypeName">{{ i.goodsTypeName ?i.goodsTypeName.substring(0,5) : '' }}</span>
                 <span><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</span>
                 <span><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</span>
                 <span>{{ i.createTime }}</span>

@@ -396,54 +396,55 @@
                 class="hy_nr "
                 style="margin-top: 0px;">
 
-                <template v-for="(item, index) in $store.state.line.index_list" >
 
-                  <li :key="index">
-                    <a
-                      id="nr_a01"
-                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
-                      target="_blank"><span
-                        id="nr001"
-                        class="t001">{{ item.startCity + item.startArea }}</span></a>
-                    <a
-                      id="nr_a01"
-                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
-                      target="_blank"><span
-                        id="nr001_2"
-                        class="t002">{{ item.endCity + item.endArea }}</span></a>
-                    <a
-                      id="nr_a02"
-                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
-                      target="_blank"
-                    ><span class="t003"><font
-                      id="nr002"
-                      style="color:#f00">{{ item.weightDiscountPrice || item.weightPrice }}</font>元/公斤</span></a>
-                    <a
-                      id="nr_a03"
-                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
-                      target="_blank"><span class="t004"><font
-                        id="nr003"
-                        style="color:#f00">{{ item.lightDiscountPrice || item.lightPrice }}</font>元/方</span> </a>
-                    <a
-                      id="nr_a04"
-                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
-                      target="_blank"><span
-                        id="nr004"
-                        class="t005">{{ item.transportAging + (item.transportAgingUnit || '').replace('多', '') }}</span></a>
-                    <a
-                      id="nr005"
-                      :href="'/member/' + item.companyId"
-                      target="_blank"><span
-                        id="nr006"
-                        class="t006">{{ item.companyName }}</span></a>
-                    <a
-                      id="nr_a05"
-                      :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.publishId"
-                      target="_blank"><span
-                        id="t006"
-                        class="t007">详情</span></a>
-                  </li>
-                </template>
+                <li 
+                  v-for="(item, index) in $store.state.line.index_list" 
+                  :key="index"
+                >
+                  <a
+                    id="nr_a01"
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"><span
+                      id="nr001"
+                      class="t001">{{ item.startCity + item.startArea }}</span></a>
+                  <a
+                    id="nr_a01"
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"><span
+                      id="nr001_2"
+                      class="t002">{{ item.endCity + item.endArea }}</span></a>
+                  <a
+                    id="nr_a02"
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"
+                  ><span class="t003"><font
+                    id="nr002"
+                    style="color:#f00">{{ item.weightDiscountPrice || item.weightPrice }}</font>元/公斤</span></a>
+                  <a
+                    id="nr_a03"
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"><span class="t004"><font
+                      id="nr003"
+                      style="color:#f00">{{ item.lightDiscountPrice || item.lightPrice }}</font>元/方</span> </a>
+                  <a
+                    id="nr_a04"
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"><span
+                      id="nr004"
+                      class="t005">{{ item.transportAging + (item.transportAgingUnit || '').replace('多', '') }}</span></a>
+                  <a
+                    id="nr005"
+                    :href="'/member/' + item.companyId"
+                    target="_blank"><span
+                      id="nr006"
+                      class="t006">{{ item.companyName }}</span></a>
+                  <a
+                    id="nr_a05"
+                    :href="'/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId"
+                    target="_blank"><span
+                      id="t006"
+                      class="t007">详情</span></a>
+                </li>
 
 
               </ul>
@@ -1660,9 +1661,7 @@ export default {
       store.dispatch('cheyuan/GETLIST', {
         data: Object.assign({ pageSize: 27 }, paramArea),
         name: 'index_list'
-      }),
-      // 获取统计数据
-      store.dispatch('getDailydata', {})
+      })
     ])
   },
   head: {
@@ -1670,6 +1669,12 @@ export default {
   },
   mounted() {
     if (process.client) {
+      console.log(
+        '$store.state.line.index_list',
+        this.$store.state.line.index_list
+      )
+      // 获取统计数据
+      this.$store.dispatch('getDailydata', {})
       let cookies = this.$cookies
       let acct = cookies.get('access_token')
       if (acct) {

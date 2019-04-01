@@ -673,7 +673,7 @@
               appid: data.appid,
               scope: data.scope,
               redirect_uri: encodeURIComponent(
-                'http://www.28kuaiyun.cn/plus/list.php?tid=78'
+                'http://www.28kuaiyun.cn/loginsuccess'
               ),
               state: data.state,
               style: '',
@@ -799,7 +799,7 @@
         .done(function(res) {
           if (res.access_token) {
             // $('#form1').submit();
-            location.href = url
+            location.href = '/'
           } else {
             layer.alert(
               '登录失败：' +

@@ -1048,13 +1048,11 @@ export default {
       { rel: 'stylesheet', href: '/line/css/price.css' },
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' },
-      // { rel: 'stylesheet', href: '/css/index.css' },
       { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
     ],
     script: [
       { src: '../js/jquery.pagination.min.js' },
       { src: '/js/LLL-AFLC_API.js' },
-      // { src: '../js/WTMap.min.js' },
       { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },

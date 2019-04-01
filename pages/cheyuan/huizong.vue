@@ -462,23 +462,23 @@
         <h3 class="p_title">我们的优势</h3>
         <ul class="our_advantage_list clearfix">
           <li>
-            <div class="our_advantage_pic"><img src="../../static/images/zhuanxian/advantage01.png"></div>
+            <div class="our_advantage_pic"><img src="../../static/images/huizong/advantage01.png"></div>
             <p class="our_advantage_name">车型丰富</p>
             <p class="our_advantage_txt">4.2米-17米各种车型，智能搭配</p>
           </li>
           <li>
-            <div class="our_advantage_pic"><img src="../../static/images/zhuanxian/advantage02.png"></div>
+            <div class="our_advantage_pic"><img src="../../static/images/huizong/advantage02.png"></div>
             <p class="our_advantage_name">智能高效</p>
             <p class="our_advantage_txt">承运车辆严格审核备案
             完善的理赔保障体系</p>
           </li>
           <li>
-            <div class="our_advantage_pic"><img src="../../static/images/zhuanxian/advantage02.png"></div>
+            <div class="our_advantage_pic"><img src="../../static/images/huizong/advantage02.png"></div>
             <p class="our_advantage_name">车货双赢</p>
             <p class="our_advantage_txt">货主省钱，司机赚钱</p>
           </li>
           <li>
-            <div class="our_advantage_pic"><img src="../../static/images/zhuanxian/advantage03.png"></div>
+            <div class="our_advantage_pic"><img src="../../static/images/huizong/advantage03.png"></div>
             <p class="our_advantage_name">车型丰富</p>
             <p class="our_advantage_txt">4.2米-17米各种车型，智能搭配</p>
           </li>
@@ -941,6 +941,104 @@
       </div> 
     </div>  
     <!-- 本月明星 -->
+    <div class="join_our grid_c1">
+      <h3 class="p_title">加入我们</h3>
+      <ul class="join_our_list">
+        <li class="jion_our_item1">
+          <p class="join_our_tit">海量货源</p>
+          <p class="join_our_txt"> 专业的项目团队，为成员引进更多的货源机会</p>
+        </li>
+        <li class="jion_our_item2">
+          <p class="join_our_tit">海量车源</p>
+          <p class="join_our_txt"> 车辆到哪都有货，运费增加还剩下油费</p>
+        </li>
+        <li class="jion_our_item3">
+          <p class="join_our_tit">收入大幅增加</p>
+          <p class="join_our_txt">每月平均多跑3趟，收入增加5000元</p>
+        </li>
+      </ul>
+    </div>
+    <!-- 加入我们 -->
+    <div style="background-color:#fac382">
+      <div class="join_step grid_c1">
+        <h3 class="p_title">加入流程</h3>
+        <img src="../../static/images/huizong/step_jion.jpg">
+      </div>
+    </div>
+    <!-- 加入流程 -->
+    <div class="ournews grid_c1">
+      <div class="ournews_tit clearfix">
+        <span class="tab_head_title">公司新闻</span>
+        <span class="tab_head_line"/>
+        <ul class="tab_head_lists">
+          <li 
+            :class="{'selected':newsIndex===1}" 
+            @mouseover="newsIndex=1">媒体报道</li>
+          <li
+            :class="{'selected':newsIndex===2}" 
+            @mouseover="newsIndex=2">新闻中心</li>
+        </ul>
+      </div>
+      <div class="ournews_content">
+        <div v-show="newsIndex===1"> 
+          <ul class="ournews_content_lists ">
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+          </ul>
+        </div>
+        <div v-show="newsIndex===2">
+          <ul class="ournews_content_lists ">
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+            <li class="ournews_content_li">
+              <span class="ournews_content_pointe"/>
+              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- 公司新闻 -->
   </div>
 </template>
 <script>
@@ -995,7 +1093,8 @@ export default {
         '扬州',
         '淄博',
         '绍兴'
-      ]
+      ],
+      newsIndex: 1
     }
   },
   mounted() {
@@ -1088,8 +1187,8 @@ export default {
         }
       }
     }
-    .CY_list_praise_num {
-    }
+    // .CY_list_praise_num {
+    // }
   }
   .CY_list_time {
     color: $light_gray;
@@ -1408,6 +1507,129 @@ export default {
 .release_car {
   .release_box_txt {
     width: 250px;
+  }
+}
+/*加入我们*/
+.join_our {
+  margin-bottom: 40px;
+  .p_title {
+    text-align: center;
+  }
+  .join_our_list {
+    font-size: 0;
+    > li {
+      display: inline-block;
+      margin-right: 20px;
+      padding: 35px 0 0 40px;
+      width: 426px;
+      height: 105px;
+      font-size: $f_14;
+      .join_our_tit {
+        margin-bottom: 20px;
+        font-size: 25px;
+      }
+      &.jion_our_item1 {
+        background-image: url('https://img1.rrcimg.com//pc/guide/tongqintongqin.png');
+        background-size: cover;
+        .join_our_tit {
+          color: #5b5d71;
+        }
+      }
+      &.jion_our_item2 {
+        background-image: url('https://img1.rrcimg.com//pc/guide/jiameng/jiameng.png');
+        background-size: cover;
+        .join_our_tit {
+          color: #c07d34;
+        }
+      }
+      &.jion_our_item3 {
+        margin-right: 0;
+        background-image: url('https://img1.rrcimg.com//pc/guide/liaomeiliaomei.png');
+        background-size: cover;
+        .join_our_tit {
+          color: #863429;
+        }
+      }
+    }
+  }
+}
+/*加入流程*/
+.join_step {
+  padding: 20px 0;
+  text-align: center;
+  .p_title {
+    text-align: center;
+  }
+  > img {
+    width: 50%;
+  }
+}
+/*公司新闻*/
+.ournews {
+  padding: 40px 0 60px 0;
+  .ournews_tit {
+    .tab_head_title {
+      float: left;
+      font-size: 22px;
+      color: rgba(0, 0, 0, 0.8);
+      margin-right: 20px;
+    }
+    .tab_head_line {
+      float: left;
+      width: 2px;
+      height: 20px;
+      background: rgba(0, 0, 0, 0.07);
+      border-radius: 1px;
+      margin-top: 5px;
+    }
+    .tab_head_lists {
+      float: left;
+      margin-left: 32px;
+      padding-top: 5px;
+      > li {
+        &.selected {
+          border-bottom: 3px solid #ff6b23;
+          color: #ff6b23;
+          cursor: default;
+        }
+        float: left;
+        font-size: 16px;
+        padding-bottom: 11px;
+        color: rgba(0, 0, 0, 0.6);
+        margin-right: 30px;
+        border-bottom: 3px solid transparent;
+      }
+    }
+  }
+  .ournews_content {
+    margin: 34px 0 8px;
+    .ournews_content_li {
+      float: left;
+      width: 33%;
+      margin-bottom: 23px;
+      font-size: 0;
+      .ournews_content_pointe {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 4px;
+        background: rgba(0, 0, 0, 0.14);
+        vertical-align: middle;
+      }
+      .ournews_content_li_item {
+        display: inline-block;
+        margin-left: 5px;
+        width: 374px;
+        height: 19px;
+        font-size: 14px;
+        line-height: 19px;
+        color: rgba(0, 0, 0, 0.8);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        vertical-align: middle;
+      }
+    }
   }
 }
 </style>

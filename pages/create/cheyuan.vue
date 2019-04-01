@@ -420,7 +420,7 @@ export default {
                         )
                       })
                   } else {
-                    $('.login_box').show()
+                    $('body').trigger('login.show')
                   }
                 } else {
                   // layer.alert(check.err)
@@ -428,36 +428,36 @@ export default {
                 }
               }
               //获取备注信息
-              // function remark() {
-              //   var url =
-              //     '/aflccommonservice/sysDict/getSysDictByCodeGet/AF042?access_token=' +
-              //     $.cookie('access_token') +
-              //     '&user_token=' +
-              //     $.cookie('user_token')
-              //   if ($.cookie('access_token') && $.cookie('user_token')) {
-              //     var options = $.extend(theRequest)
-              //     api
-              //       .getInfo(url, options)
-              //       .done(function(res) {
-              //         console.log(res.data)
-              //         $.each(res.data, function(index, item) {
-              //           // console.log(this.name,this.code)
-              //           $('.remark').append(
-              //             '<span code="' +
-              //               item.code +
-              //               '">' +
-              //               item.name +
-              //               '</span>'
-              //           )
-              //         })
-              //       })
-              //       .fail(function(err) {
-              //         layer.msg(err.errorInfo || err.text || '未知错误')
-              //       })
-              //   } else {
-              //     $('.login_box').show()
-              //   }
-              // }
+              function remark() {
+                var url =
+                  '/aflccommonservice/sysDict/getSysDictByCodeGet/AF042?access_token=' +
+                  $.cookie('access_token') +
+                  '&user_token=' +
+                  $.cookie('user_token')
+                if ($.cookie('access_token') && $.cookie('user_token')) {
+                  var options = $.extend(theRequest)
+                  api
+                    .getInfo(url, options)
+                    .done(function(res) {
+                      console.log(res.data)
+                      $.each(res.data, function(index, item) {
+                        // console.log(this.name,this.code)
+                        $('.remark').append(
+                          '<span code="' +
+                            item.code +
+                            '">' +
+                            item.name +
+                            '</span>'
+                        )
+                      })
+                    })
+                    .fail(function(err) {
+                      layer.msg(err.errorInfo || err.text || '未知错误')
+                    })
+                } else {
+                  $('body').trigger('login.show')
+                }
+              }
 
               initEvent()
             })

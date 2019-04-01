@@ -83,7 +83,7 @@ $f_12: 12px;
   margin-right: 5px;
   width: 16px;
   height: 16px;
-  background: url('../../static/images/zhuanxian/icon_huangguan.gif') no-repeat;
+  background: url('../../static/images/huizong/icon_huangguan.gif') no-repeat;
 }
 
 /*公共清楚浮动方法*/
@@ -126,6 +126,12 @@ $f_12: 12px;
 
 .ellipsis{
   text-overflow:ellipsis;overflow:hidden;white-space:nowrap;
+}
+.scale_img{
+  width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 100%;
 }
 /*公共宽度居中*/
 .grid_c1 {
@@ -375,10 +381,9 @@ $f_12: 12px;
     overflow: hidden;
     width: 272px;
     height: 195px;
-
-    img {
-      width: 100%;
-      height: 100%;
+    text-align: center;
+    >img {
+      @extend .scale_img
     }
   }
 
@@ -859,10 +864,9 @@ $f_12: 12px;
       width: 264px;
       height: 175px;
       margin-bottom: 10px;
-
+      text-align: center;
       >img {
-        width: 100%;
-        height: 100%;
+        @extend .scale_img
       }
     }
 
@@ -1175,9 +1179,9 @@ $f_12: 12px;
       margin-bottom: 10px;
       width: 272px;
       height: 195px;
-
+      text-align: center;
       img {
-        max-width: 272px;
+       @extend .scale_img
       }
     }
 
@@ -1233,7 +1237,7 @@ $f_12: 12px;
       .icon_qq {
         width: 22px;
         height: 20px;
-        background: url('../../static/images/zhuanxian/icon_qq.gif') no-repeat;
+        background: url('../../static/images/huizong/icon_qq.gif') no-repeat;
       }
     }
 

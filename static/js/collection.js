@@ -24,7 +24,7 @@ function getLoginInfobycookie() {
 function collection_zx(userType, mobile, collectId) {
   $.ajax({
     type: 'post',
-/*     headers: {
+    /*     headers: {
       'Content-Type': 'application/json'
     }, */
     url: '/api/28-web/collect/transportRange',
@@ -269,7 +269,7 @@ $('#collection_zx').click(function() {
       content: '您还未登录，请先登录',
       duration: 3000
     }) */
-    $('.login_box').css('display', 'block')
+    $('body').trigger('login.show')
   } else {
     var mystatus0 = new Object()
     mystatus0 = is_collection_zx(userType, mobile, collectId)
@@ -308,7 +308,7 @@ $('#collection_wlgs').click(function() {
       content: '您还未登录，请先登录',
       duration: 3000
     }) */
-    $('.login_box').css('display', 'block')
+    $('body').trigger('login.show')
   } else {
     var mystatus0 = new Object()
     mystatus0 = is_collection_wlgs(userType, mobile, collectId)
@@ -350,7 +350,7 @@ $('#collection_website').click(function() {
       content: '您还未登录，请先登录',
       duration: 3000
     }) */
-    $('.login_box').css('display', 'block')
+    $('body').trigger('login.show')
   } else {
     var mystatus0 = new Object()
     mystatus0 = is_collection_wlgs(userType, mobile, collectId)
@@ -389,7 +389,7 @@ $('.collection_hz').click(function() {
       content: '您还未登录，请先登录',
       duration: 3000
     }) */
-    $('.login_box').css('display', 'block')
+    $('body').trigger('login.show')
   } else {
     var mystatus0 = new Object()
     mystatus0 = is_collection_hz(userType, mobile, collectId)
@@ -427,7 +427,7 @@ $('.collection_cz').click(function() {
       content: '您还未登录，请先登录',
       duration: 3000
     }) */
-    $('.login_box').css('display', 'block')
+    $('body').trigger('login.show')
   } else {
     var mystatus0 = new Object()
     mystatus0 = is_collection_cz(userType, mobile, collectId)
@@ -447,8 +447,6 @@ $('.collection_cz').click(function() {
 })
 
 var aid = aid
-
-
 
 /*   var zx_num = new Object()
   zx_num = is_collection_zx('', '', aid)

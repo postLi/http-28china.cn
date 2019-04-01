@@ -706,7 +706,7 @@
       >我要入驻</a>
     </div>
     <!-- 入住 -->
-
+   
 </div></template>
 <script>
 import 'swiper/dist/css/swiper.css'
@@ -795,7 +795,6 @@ export default {
     }
   },
   mounted() {
-    this.intSwiper()
     this.$nextTick(() => {
       console.log('优质货主', this.shipperData)
       console.log('本月货主', this.monthShipperData)
@@ -808,6 +807,9 @@ export default {
 
       this.currentArea = this.getCookie('currentAreaFullName')
       this.currentProvince = this.getCookie('currentProvinceFullName')
+
+      this.intSwiper1()
+      this.intSwiper2()
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -825,7 +827,7 @@ export default {
     })
   },
   methods: {
-    intSwiper() {
+    intSwiper1() {
       this.$nextTick(() => {
         // 幻灯片
         $('#ad').hover(
@@ -854,26 +856,30 @@ export default {
             clickable: true
           },
           navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-            disabledClass: 'my-button-disabled'
+            nextEl: '#ad .swiper-button-next',
+            prevEl: '#ad .swiper-button-prev',
+            disabledClass: '#ad my-button-disabled'
           }
         })
       })
-      // 货主
-      let swiper = new Swiper('#owner_swiper .swiper-container', {
-        slidesPerView: 5,
-        spaceBetween: 20,
-        freeMode: true,
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true
-        },
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-          disabledClass: 'my-button-disabled'
-        }
+    },
+    intSwiper2() {
+      this.$nextTick(() => {
+        // 货主
+        let hahaswiper = new Swiper('#owner_swiper .swiper-container', {
+          slidesPerView: 5,
+          spaceBetween: 20,
+          freeMode: true,
+          pagination: {
+            el: '#owner_swiper .swiper-pagination',
+            clickable: true
+          },
+          navigation: {
+            nextEl: '#owner_swiper .swiper-button-next',
+            prevEl: '#owner_swiper .swiper-button-prev',
+            disabledClass: '#owner_swiper .my-button-disabled'
+          }
+        })
       })
     },
     //搜索货源
@@ -1463,11 +1469,15 @@ export default {
   }
 }
 /*幻灯片箭头显示隐藏*/
-.swiper-container .hide {
-  opacity: 0;
-}
-.swiper-button-next,
-.swiper-button-prev {
-  transition: opacity 0.5s;
+
+.swiper-container {
+  .hide {
+    opacity: 0;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    transition: opacity 0.5s;
+  }
 }
 </style>

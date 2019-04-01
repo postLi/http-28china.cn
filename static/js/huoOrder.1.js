@@ -58,7 +58,7 @@
       clientIp: '', // 终端ip
       memberType: '', // 会员类型(货主:AF00101,车主:AF00102,物流公司:AF00107)
       shipperId: '', // 货主id 用户id
-      orderClass: '0', // 货源类型(0单次急发货源1长期稳定货源)
+      orderClass: 'AF0490701', // 货源类型(0单次急发货源1长期稳定货源)
       title: '', // 标题
       totalAmount: 0, // 总价格
       transportRangePublishId: '',
@@ -297,8 +297,8 @@
       // //即时/长期
       $('.minbox').click(function(event) {
         event.stopPropagation()
-        $('.minbox').removeClass('checked')
-        $(this).addClass('checked')
+        $('.minbox').removeClass('checktype')
+        $(this).addClass('checktype')
         var type = $(this).attr('type')
         _this.data.orderClass = type
       })
@@ -508,8 +508,9 @@
         _this.showContactPop(1)
       })
       // 关闭弹窗
-      $('.order_list_contacts_pop .close').on('click', function() {
+      $('.close').on('click', function() {
         $('.order_usual_contacts_wrapper').hide()
+        $('.order_usual_contacts_wrapper2').hide()
         // 展示回默认的列表框
         $('.order_usual_contacts_pop').hide()
         $('.order_list_contacts_pop').show()
@@ -613,7 +614,7 @@
                 .text()
             )
         }
-        $('.order_list_contacts_pop .close').trigger('click')
+        $('.close').trigger('click')
         return false
       })
       // 提交联系人信息
@@ -670,7 +671,6 @@
         var res = _this.checkForm()
         console.log(55555555)
         if (res) {
-          console.log(666666)
           var cb = function() {
             if (_this.islogin) {
               console.log(11111111111111)
@@ -684,7 +684,20 @@
                   // _this.data.orderSerial = res.data.orderSerial
 
                   // _this.setSuccessPage(res.data)
-                  console.log(777777)
+                  // console.log(res)
+                  if (res.status === 200) {
+                    // $('.order_list_contacts_pop').show()
+                    // $('#order_success').show()
+                    // console.log(res)
+                    window.location.href =
+                      '/create/cySuccess?id=' +
+                      res.data.id +
+                      '&shipperId=' +
+                      res.data.shipperId +
+                      '&text=货源'
+                  } else {
+                    layer.msg(res.errorInfo)
+                  }
                 })
                 .fail(function(err) {
                   console.log(8888888)
@@ -697,6 +710,7 @@
               console.log(99999999)
             }
           }
+          cb()
           // if (res === 'huoyuan') {
           //   // 判断是否需要提交货源
           //   layer.confirm(
@@ -803,9 +817,7 @@
           {
             currentPage: 1,
             pageSize: 100,
-            vo: {
-              type: type
-            }
+            type: type
           },
           {
             access_token: this.logininfo.access_token,

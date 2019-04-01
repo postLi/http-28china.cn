@@ -1527,7 +1527,7 @@ border-radius: 3px;
 
 .arc_main3 .left {
   float: left;
-  width: 556px;
+  width: 576px;
   height: 390px;
   background-color: #ffffff;
 }
@@ -1547,7 +1547,7 @@ border-radius: 3px;
 }
 
 .arc_main3 .right .content .content-right {
-  width: 840px;
+  width: 800px;
   height: inherit;
   font-size: 14px;
   padding-top: 26px;

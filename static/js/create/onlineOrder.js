@@ -500,7 +500,7 @@
         _this.showContactPop(1)
       })
       // 关闭弹窗
-      $('.order_list_contacts_pop .close').on('click', function() {
+      $('.close').on('click', function() {
         $('.order_usual_contacts_wrapper').hide()
         $('.order_usual_contacts_wrapper2').hide()
         // 展示回默认的列表框
@@ -606,7 +606,7 @@
                 .text()
             )
         }
-        $('.order_list_contacts_pop .close').trigger('click')
+        $('.close').trigger('click')
         return false
       })
       // 提交联系人信息

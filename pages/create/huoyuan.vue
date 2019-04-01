@@ -112,7 +112,7 @@
                   <!-- <span class="btn_c">+</span> -->
                 </li>
               </ul>
-              <!-- <div class="reset-cargo-list"/> -->
+              <div class="reset-cargo-list"/>
               <div class="add-cargo-list"/>
             </div>
           </div>
@@ -122,11 +122,11 @@
             <div class="order_check order_top">
               选择类型：
               <span 
-                class="minbox checked" 
-                type="0">单次急发货源</span>
+                class="minbox checktype" 
+                type="AF0490701">单次急发货源</span>
               <span 
                 class="minbox" 
-                type="1">长期稳定货源</span>
+                type="AF0490702">长期稳定货源</span>
             </div>
                 
           </div>
@@ -189,6 +189,63 @@
                     name="">
                   保存到常用收货人
                 </label>
+              </div>
+            </div>
+          </div>
+          <!-- 常用收发货人 -->
+          <div class="order_usual_contacts_wrapper">
+            <div class="order_usual_contacts_bg"/>
+            <div class="order_usual_contacts_pop order_list_contacts_pop">
+              <div class="el-dialog__header">
+                <span class="close">X</span> <span class="inner_title">常用联系人</span>
+              </div>
+              <div class="el-dialog__body">
+                <span class="search-input"><input 
+                  type="text" 
+                  autocomplete="off" 
+                  placeholder="请输入姓名、手机号或地址搜索" 
+                  class="el-input__inner"><span>搜索</span></span>
+                <span class="addNewContact ">添加常用发货人</span> 
+              </div>
+              <ul class="contactPopList">
+                <li class="clearfix"><span class="contactName">王泽熙</span> <span class="contactMobile">135656565</span> <span class="contactAddres">广东省广州市海珠区凤阳街道粤汇餐厅马岗顶工业区</span> <span class="contactManage">修改</span></li>
+              </ul>
+            </div>
+            <div class="order_add_contacts_pop order_usual_contacts_pop">
+              <div class="el-dialog__header">
+                <span class="close">X</span> <span class="inner_title">添加常用发货人</span>
+              </div>
+              <table>
+                <tbody><tr>
+                  <th>姓名：</th>
+                  <td><input 
+                    maxlength="15" 
+                    type="text"></td>
+                </tr>
+                  <tr>
+                    <th>电话：</th>
+                    <td><input 
+                      type="text" 
+                      maxlength="11"></td>
+                  </tr>
+                  <tr>
+                    <th>地址：</th>
+                    <td><input 
+                      wtmap="detail" 
+                      maxlength="30" 
+                      type="text"></td>
+                  </tr>
+                  <tr>
+                    <th/>
+                    <td><label><input 
+                      type="checkbox" 
+                      name="setdefault" 
+                      id="setdefault">设置为默认地址</label></td>
+                  </tr>
+              </tbody></table>
+              <div class="contact-btns">
+                <span class="add-cancel">取消</span>
+                <span class="add-submit">保存</span>
               </div>
             </div>
           </div>

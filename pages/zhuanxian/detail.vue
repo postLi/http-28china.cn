@@ -999,7 +999,6 @@ async function getDetailColl(
     `/28-web/collect/transportRange?access_token=${access_token}&user_token=${user_token}&transportRangeId=${transportRangeId}&handle=${handle}
 `
   )
-  // console.log(res, 'ress-getDetailColl')
   if (res.data.status === 200) {
     return {
       data: res.data
@@ -1007,7 +1006,6 @@ async function getDetailColl(
   } else {
     // return { list: [], pages: 0, currentPage: 1 }
   }
-  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
 }
 async function getCanyColl(
   $axios,
@@ -1029,10 +1027,7 @@ async function getCanyColl(
     return { data: false }
   }
 }
-// async function getLineList($axios, id) {
-//   let res = await $axios.get(`/28-web/range/${id}`)
-//   console.log(res, '服务端')
-// }
+
 export default {
   name: 'Index',
   components: {
@@ -1140,11 +1135,10 @@ export default {
       startp = linedataA.data.data.startProvince
     }
     let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
-      $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId || ''}`),
+      $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
       $axios.post(
         aurl +
-          `/28-web/logisticsCompany/comprehensive?companyId=${query.publishId ||
-            ''}`
+          `/28-web/logisticsCompany/comprehensive?companyId=${query.publishId}`
       ),
       $axios.post(aurl + `/28-web/rangeEva/range/list`, {
         currentPage: 1,
@@ -1161,7 +1155,7 @@ export default {
         endArea: enda
       })
     ])
-    console.log(linedataB, 'linedataB.data')
+    // console.log(linedataA.data.data.startLocationContacts, 'linedataA.data')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
@@ -1220,14 +1214,6 @@ export default {
         })
         item.num = (num % 30) + 1
       })
-
-      // linedataB.data.data.companyName =
-      //   linedataB.data.data.companyName.length > 13
-      //     ? linedataB.data.data.companyName.substring(0, 13) + '..'
-      //     : linedataB.data.data.companyName
-      // linedataE.data.data.lowerPriceRate = linedataE.data.data.lowerPriceRate
-      //   ? linedataE.data.data.lowerPriceRate + '%'
-      //   : ''
 
       let authStatus =
         linedataB.data.status == 200 ? linedataB.data.data.authStatus : ''

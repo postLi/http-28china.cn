@@ -24,103 +24,201 @@
 .required{
   color: #ef0000;
 }
+
+/* 提交按钮 */
+.btn_bottom{
+  float: left;
+    width: 100%;
+    text-align: center;
+    padding: 3% 26%;
+    min-width: 1400px;
+    box-sizing: border-box;
+}
+.order-submit-btn{
+  width: 170px;
+  height: 40px;
+  float: left;
+  margin:0 20px;
+  /* background-color: #0e91e9; */
+  border:1px solid #ddd;
+	border-radius: 8px;
+  /* margin: 0 auto; */
+  font-size: 16px;
+  /* color: #fff; */
+  text-align: center;
+  line-height: 40px;
+  cursor: pointer;
+  background: rgb(25,155,212);
+  color:#fff;
+}
+.click{
+  background: rgb(53,162,245);
+  color:#fff;
+}
 .main_nr{
   position: relative;
+  min-width: 1400px;
 }
 .main_nr .nr_bt1 span{
   border-bottom: none;
   padding-left: 36px;
-  /* background: url(../css/images/order/order-title.png) no-repeat 0 center; */
-  background: url(/css/images/order/order-title.png) no-repeat 0 center;
+  background: url(../images/order/order-title.png) no-repeat 0 center;
 }
 .order-step{
-  /* background: url(../css/images/order/step.png) no-repeat center center; */
-  height: 45px;
-  line-height: 45px;
-  /* background: navajowhite; */
-  background: rgb(254,234,214);
-  margin-bottom: 10px;
-  position: relative;
-  padding-left:3%;
-}
-.order-step .dp{
-  position: absolute;
-  left:12px;
-  top:8px;
+  background: url(../images/order/step.png) no-repeat center center;
+  height: 110px;
 }
 .order-create-main{
-  /* background: url('../css/images/order2.png') no-repeat 0 0 #fff; */
+  /* background: url('../images/order2.png') no-repeat 0 0 #fff; */
   background: #fff;
-  min-height: 1100px;
+  min-height: 941px;
   font-size: 14px;
   display: block;
+  padding-top:10px;
 }
 /* ================创建订单 */
 .order-input-tab{
-  border: solid 1px #e2e2e2;
-  padding: 16px 10px;
+  width:1200px;
+  margin:0 auto;
+  border: solid 2px rgb(251,230,203);
+  /* padding: 16px 10px; */
   margin-bottom: 13px;
-  padding-left:25px;
+  /* background: rgb(251,230,203); */
 }
-.order_check{
-  padding-left:20px;
-}
-.minbox{
-  border:1px solid #ccc;
-  padding:8px 35px;
-  margin-right:20px;
-  cursor: pointer;
-}
-.checktype{
-  border:1px solid #009ee9ed;
-  position: relative;
-  color:#009ee9ed;
-  /* background: url(/templets/default/css/images/wzlImg/gou.png) no-repeat; */
-  background: url(/images/wzlImg/gou.png) no-repeat;
-  background-position: right bottom;
-}
-.order-submit-btn:active{
-  opacity: 0.5;
-}
-.userType{
-  margin-bottom: 10px;
-}
-.userType2{
-  margin-bottom: 10px;
-}
-/* .order_check{
+.box1{
   float: left;
-  height: 42px;
-  line-height: 42px;
+  width:100%;
+  height: 50px;
+  background: rgb(25,155,212);
 }
-.order_check .minbox{
-  display: block;
-  float: left;
-  cursor: pointer;
-  text-align: center;
-  width: 90px;
-  height: 36px;
-  background-color: #ffffff;
-  border-radius: 6px;
-  border: solid 1px #ccc;
-  margin-right: 10px;
-  color: #333;
-}  */
-
-/* .order_check .checked {
-  border-color: #2577e3;
-  background: url(../css/images/login_bg_on.png) no-repeat;
-  background-position: right bottom;
-} */
 .order-title{
+  height: 50px;
   color: #333333;
   font-size: 16px;
   margin-bottom: 20px;
   font-weight: bold;
+  background: rgb(53,162,245);
 }
 .order-title span{
   font-size: 13px;
   color: #eb434d;
+}
+.order-success{
+  text-align: center;
+  color: #3acc06;
+  font-size: 25px;
+  height: 140px;
+  line-height: 140px;
+  position: relative;
+}
+.order-success img{
+  width: 100px;
+  height: 80px;
+  width:0px;
+  height: 0px;
+  position: absolute;
+  left: 340px;
+  top: 25px;
+  /* display: none; */
+}
+.order-success h3{
+  font-size: 40px;
+}
+.order-metal{
+  /* min-height: 88px; */
+  padding: 20px;
+  background: rgb(255,251,245);
+  max-width:1000px;
+  border: solid 2px rgb(251,230,203);
+  margin:0 auto;
+  box-sizing: border-box;
+}
+.order-metal h4{
+  font-size: 16px;
+  height: 30px;
+  line-height: 30px;
+  color:black;
+}
+.order-metal h6{
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  columns: #666666;
+  color:black;
+}
+.order-metal h6 a{
+  color: rgba(251, 153, 7, 0.89);
+  cursor: pointer;
+}
+.order-metal h6 span{
+  width: 100px;
+  padding: 10px;
+  margin-left: 132px;
+  border-radius: 8px;
+  border: 1px solid  rgba(251, 153, 7, 0.89);
+  color: rgba(251, 153, 7, 0.89);
+  cursor: pointer;
+}
+.order-content{
+  /* border-top: 1px solid #ddd; */
+  /* padding-top: 20px 20px; */
+  /* padding: 40px 11px; */
+  margin:0 auto;
+  width:1000px;
+  box-sizing: border-box;
+  padding:30px 0;
+}
+#more_che_line:hover{
+  border:1px solid #0d91e9;
+  color: #0d91e9;
+}
+#authentication:hover{
+  color: #0d91e9;
+}
+/* .order-create-main */
+.order-content h4{
+  height: 30px;
+  line-height: 30px;
+  color: rgba(241, 89, 22);
+  font-size: 16px;
+  position: relative;
+  margin-left: 27px;
+  color:black;
+}
+.order-content li{
+  margin:20px;
+ 
+}
+.order-content h4 img{
+  position: absolute;
+  top: -1px;
+  left: -30px;
+  width: 30px;
+  height: 30px;
+}
+.content-list h3{
+  height: 30px;
+  line-height: 30px;
+  font-size: 16px;
+  color:black;
+}
+.content-list p{
+  height: 30px;
+  line-height: 30px;
+  font-size: 14px;
+}
+.content-list li{
+  position: relative;
+}
+.li_imgbox{
+  display: block;
+    float: left;
+    vertical-align: middle;
+    position: absolute;
+    left: -21px;
+    top: 6px;
+    width: 18px;
+    height: 18px;
 }
 .order-form-item{
   float: left;
@@ -142,37 +240,13 @@
 	height: 40px;
 	border-radius: 2px;
   border: solid 1px #d2d2d2;
-  padding-left:20px;
+  padding: 0;
 }
 .order-line-from{
   margin-bottom: 20px;
-  position: relative;
-}
-.order-line-from .qd{
-  position: absolute;
-  left: 389px;
-  top: 3px;
-}
-.order-line-from .wz1{
-  position: absolute;
-  /* right: 137px; */
-  top: 2px;
-}
-.order-line-to{
-  position: relative;
-}
-.order-line-to .zd{
-  position: absolute;
-  left: 383px;
-  top: 3px;
-}
-.order-line-to .wz2{
-  position: absolute;
-  /* right: 137px; */
-  top: 2px;
 }
 .form-detail input{
-  background: url(/css/images/order/addr.png) no-repeat 330px center;
+  background: url(../images/order/addr.png) no-repeat 330px center;
 }
 /* 货物信息 */
 .order-cargo-info{
@@ -189,7 +263,7 @@
 }
 .order-cargo-list .input{
   float: left;
-  margin-right: 15px;
+  margin-right: 50px;
   position: relative;
   
 }
@@ -227,32 +301,23 @@
   bottom: 2px;
   cursor: pointer;
 }
-.btn_c{
-  width: 50px;
-  height: 40px;
+.deletecargo{
   line-height: 40px;
-  color: #fff;
-  background: #0e91e9;
-  border-radius: 8px;
-  display: block;
-  float: left;
-  text-align: center;
-  margin-right: 3px;
-  cursor: pointer;
+  margin-left: 0;
 }
 .reset-cargo-list{
-  left: 843px;
+  left: 740px;
   width: 80px;
   height: 40px;
-  top: 0px;
-  background: url(/css/images/order/reset.png) no-repeat 0 0 #fff;
+  top: 32px;
+  background: url(../images/order/reset.png) no-repeat 0 0 #fff;
   z-index: 2;
 }
 .add-cargo-list{
-  left: 926px;
+  left: 830px;
   width: 40px;
   height: 40px;
-  background: url(/css/images/order/add.png) no-repeat 0 0;
+  background: url(../images/order/add.png) no-repeat 0 0;
 }
 .deletecargo{
   cursor: pointer;
@@ -352,7 +417,10 @@
 .order-agree-info a{
   color: #2682ea;
 }
-.order-submit-btn{
+.order-submit-btn:hover{
+  opacity: 0.7;
+}
+/* .order-submit-btn{
   width: 140px;
 	height: 40px;
 	background-color: #0e91e9;
@@ -363,7 +431,7 @@
   text-align: center;
   line-height: 40px;
   cursor: pointer;
-}
+} */
 
 /* ============================成功面板 */
 .main_nr .order-success-main{
@@ -376,7 +444,7 @@
 .order-success-txt{
   font-size: 20px;
   color: #01b30c;
-  background: url(../css/images/order/xdcg.png) no-repeat 255px center;
+  background: url(../images/order/xdcg.png) no-repeat 255px center;
   line-height: 50px;
   text-indent: 326px;
 }
@@ -390,7 +458,7 @@
 }
 .order-success-tip .order-tip{
   padding-left: 30px;
-  background: url(../css/images/order/xdts.png) no-repeat 0 center;
+  background: url(../images/order/xdts.png) no-repeat 0 center;
 }
 .order-success-tab{
   margin-bottom: 10px;
@@ -650,6 +718,11 @@
   font-size: 16px;
   cursor: pointer;
 }
+
+.netListContent .el-dialog__body{
+  padding: 5px 0;
+  font-size: 12px;
+}
 .netListContent .popnet-title{
   text-align: center;
   margin: 10px 0 20px;
@@ -762,7 +835,7 @@ color: #fff;
   cursor: pointer;
 }
 .order_usual_contacts_pop .el-dialog__body{
-  padding: 25px 25px;
+  padding: 4px 8px;
 }
 .search-input{
   border-radius: 4px;
@@ -773,7 +846,6 @@ color: #fff;
 	background-color: #f2f2f2;
   border: none;
   vertical-align: middle;
-  padding-left: 15px;
 }
 .search-input span{
   display: inline-block;
@@ -802,165 +874,10 @@ color: #fff;
 .contactPopList{
   max-height: 300px;
   overflow: auto;
-  padding: 20px;
-  font-size: 12px;
-}
-.contactPopList li{
-  clear: both;
-  border-bottom: dashed 1px #cccccc;
-  padding: 10px 0;
-  cursor: pointer;
-}
-.contactPopList li:hover{
-  background: rgba(0,0,0,.05);
-}
-.contactPopList span{
-  float: left;
-  width: 25%;
-  min-height: 28px;
-}
-.contactPopList .contactManage{
-  color: #ef0000;
-  text-align: center;
-  cursor: pointer;
-}
-.order_add_contacts_pop{
-  display: none;
-}
-.contactName{
-  text-indent: 10px;
-}
-.order_add_contacts_pop td,.order_add_contacts_pop th{
-  padding-bottom: 5px;
-  padding-top: 5px;
-}
-.order_add_contacts_pop th{
-  width: 100px;
-  text-align: right;
-  font-weight: normal;
-}
-.order_add_contacts_pop input[type="text"]{
-  width: 300px;
-	height: 28px;
-	background-color: #ffffff;
-	border-radius: 2px;
-	border: solid 1px #cccccc;
-}
-.contact-btns span{
-  width: 62px;
-  height: 28px;
-  line-height: 28px;
-	border-radius: 4px;
-  text-align: center;
-  display: inline-block;
-  margin-left: 50px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  cursor: pointer;
-}
-.add-cancel{
-  background-image: linear-gradient(180deg, 
-		#ededed 0%, 
-    #d7d7d7 100%);
-    border: solid 1px #cccccc;
-    color: #333;
-}
-.add-submit{
-	background-color: #0d91e9;
-  border: solid 1px #0192bf;
-  color: #fff;
-}
-
-.tipcontent{
-  text-align: center;
-  display: block;
-  font-size: 12px;
-  color: #666;
-}
-/* 常用收发货人 */
-.order_usual_contacts_wrapper,.order_usual_contacts_wrapper2{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 33;
-  display: none;
-}
-.order_usual_contacts_bg,.order_usual_contacts_bg2{
-  background: #000;
-  filter: alpha(opacity=80);
-  background: rgba(0,0,0,.5);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-.order_usual_contacts_pop,.order_usual_contacts_pop2{
-  width: 500px;
-  position: absolute;
-  background: #fff;
-  left: 50%;
-  margin-left: -250px;
-  top: 20%;
-  padding-bottom: 10px;
-}
-.order_usual_contacts_pop .el-dialog__header,.order_usual_contacts_pop2 .el-dialog__header2{
-  height: 40px;
-  line-height: 40px;
-  padding: 0 23px;
-  background-image: linear-gradient(180deg, 
-#0d91e9 0%, 
-#22c3f5 100%);
-  font-size: 12px;
-  color: #fff;
-}
-.order_usual_contacts_pop .close,.order_usual_contacts_pop2 .close{
-  float: right;
-  cursor: pointer;
-}
-.search-input{
-  border-radius: 4px;
-}
-.search-input input{
-  width: 216px;
-	height: 35px;
-	background-color: #f2f2f2;
-  border: none;
-  vertical-align: middle;
-}
-.search-input span{
-  display: inline-block;
-  vertical-align: middle;
-  color: #fff;
-  text-align: center;
-  line-height: 35px;
-  cursor: pointer;
-  width: 50px;
-	height: 35px;
-	background-color: #1aadef;
-}
-.addNewContact{
-  width: 105px;
-  height: 35px;
-  background-color: #23c3f5;
-  border-radius: 4px;
-  color: #fff;
-  display: inline-block;
-  font-size: 12px;
-  text-align: center;
-  line-height: 35px;
-  float: right;
-  cursor: pointer;
-}
-/* .contactPopList{
-  max-height: 300px;
-  overflow: auto;
   margin-top: 5px;
   font-size: 12px;
   padding-bottom: 1px;
-} */
+}
 .contactPopList li{
   clear: both;
   border-bottom: dashed 1px #cccccc;
@@ -1032,8 +949,4 @@ color: #fff;
   display: block;
   font-size: 12px;
   color: #666;
-}
-.el-dialog-content{
-  padding:20px;
-  text-align: center;
 }

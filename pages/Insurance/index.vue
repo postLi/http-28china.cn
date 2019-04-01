@@ -312,7 +312,7 @@ export default {
                 content: '您还未登录，请先登录',
                 duration: 3000
               })
-              $('.login_box').show()
+              $('body').trigger('login.show')
             }
           }
         })

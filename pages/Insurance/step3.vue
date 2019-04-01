@@ -300,8 +300,7 @@ export default {
                         })
                         .fail(function(err) {})
                     } else {
-                      $('.login_box').show()
-                      $('.login_box_mask').show()
+                      $('body').trigger('login.show')
                     }
                   }
                 }

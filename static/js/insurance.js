@@ -102,8 +102,7 @@ var api = {
               content: '您还未登录，请先登录',
               duration: 3000
             })
-            $('.login_box').show()
-            $('.login_box_mask').show()
+            $('body').trigger('login.show')
           }
         }
       })
@@ -128,8 +127,7 @@ var api = {
               content: '您还未登录，请先登录',
               duration: 3000
             })
-            $('.login_box').show()
-            $('.login_box_mask').show()
+            $('body').trigger('login.show')
           }
         }
       })

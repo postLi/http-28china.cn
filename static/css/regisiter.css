@@ -802,6 +802,11 @@ input:-webkit-autofill {
 
 .registiter-page .step_1 > ul > li {
   margin-bottom: 44px;
+  
+}
+.registiter-page .step_1 > ul > li:hover{
+  background: #fff;
+  cursor: pointer;
 }
 
 .registiter-page .step_1 > ul > li h4 {

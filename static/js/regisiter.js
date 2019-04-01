@@ -300,12 +300,14 @@
     init: function() {
       var $this = this
       // 选取会员类型
-      $('.step_1 h4').on('click', function() {
+      $('.step_1 li').on('click', function() {
         $('.step_1 h4').removeClass('check')
-        $(this).toggleClass('check')
-        if ($(this).hasClass('check')) {
-          reg_page.reg_data.memberType = $(this).attr('rel2')
-          reg_page.memberType = $(this).attr('rel')
+        var h4 = $(this).find('h4')
+        h4.toggleClass('check')
+        if (h4.hasClass('check')) {
+          reg_page.reg_data.memberType = h4.attr('rel2')
+          reg_page.memberType = h4.attr('rel')
+          $('.registiter-page .step-next1 .next-btn').trigger('click')
         }
       })
       // 验证

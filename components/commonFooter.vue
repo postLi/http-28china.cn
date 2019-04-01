@@ -14,14 +14,14 @@
             </div>
             <div class="box-qr">
               <img 
-                src="../static/images/28fast_download.png" 
+                src="/images/28fast_download.png" 
                 width="112" 
                 height="112">
               <div>28快运 货主端</div>
             </div>
             <div class="box-qr">
               <img
-                src="../static/images/28fast_download.png"
+                src="/images/28fast_download.png"
                 width="112"
                 height="112">
               <div>28快运 车主端</div>
@@ -91,14 +91,11 @@
         
             <li class="userType" ><input 
               type="button" 
-              name="aflc-5" 
-              value="物流公司"><input 
+              name="aflc-2" 
+              value="货主"><input 
                 type="button" 
-                name="aflc-2" 
-                value="货主"><input 
-                  type="button" 
-                  name="aflc-1" 
-                  value="车主"></li>
+                name="aflc-1" 
+                value="车主"></li>
             <div class="inputbox">
               <span class="icon icon-mobile"/>
               <input 
@@ -251,9 +248,28 @@
 export default {
   name: 'CommonFooter',
   mounted() {
+    //更换图形验证码 S
+    var src =
+      '/api/aflc-common/common/aflcMemberCenter/v1/getImageCodeAndUID?imageWidth=90&imageHeight=25'
+
+    // 唤起登录弹框、隐藏登录弹框
+    // $('body').trigger('login.show')
+    // $('body').trigger('login.hide')
+    $('body').on({
+      'login.show': function() {
+        $('.login_box').show()
+        $('.login_box_mask').show()
+        $('#Vcode2').attr('src', src)
+        $('#Vcode').attr('src', src)
+      },
+      'login.hide': function() {
+        $('.login_box').hide()
+        $('.login_box_mask').hide()
+      }
+    })
+
     $('.login_close').click(function() {
-      $('.login_box').css('display', 'none')
-      $('.login_box_mask').hide()
+      $('body').trigger('login.hide')
     })
     $('.login_bt1').css({
       color: '#2577e3',
@@ -293,10 +309,6 @@ export default {
 
     $("input[name='gourl']").val(myurl)
 
-    //更换图形验证码 S
-    var src =
-      '/api/aflc-common/common/aflcMemberCenter/v1/getImageCodeAndUID?imageWidth=90&imageHeight=25'
-    $('#Vcode').attr('src', src)
     //alert(1);
     $('#Vcode').click(function() {
       $('#Vcode').attr('src', src)
@@ -308,9 +320,7 @@ export default {
     //更换图形验证码 E
 
     //更换图形验证码2 S
-    var src =
-      '/api/aflc-common/common/aflcMemberCenter/v1/getImageCodeAndUID?imageWidth=90&imageHeight=25'
-    $('#Vcode2').attr('src', src)
+
     //alert(1);
     $('#Vcode2').click(function() {
       $('#Vcode2').attr('src', src)
@@ -348,12 +358,7 @@ export default {
           if (datas) {
             name = datas.contactsName
           }
-          $.cookie('user_token', res.data.userToken, { expires: 7, path: '/' })
-          $.cookie('loginId', res.data.id, { expires: 7, path: '/' })
-          $.cookie('loginCompanyName', res.data.companyName, {
-            expires: 7,
-            path: '/'
-          })
+
           // huo(account,getCookie("access_token"))
           if (!name) {
             name = account
@@ -707,18 +712,10 @@ export default {
                 console.log(res.access_token)
                 console.log(username)
                 console.log(usertype)
-                $.cookie('access_token', res.access_token, {
-                  expires: 7,
-                  path: '/'
-                })
-                $.cookie('login_mobile', username, { expires: 7, path: '/' })
-                $.cookie('login_type', usertype, { expires: 7, path: '/' })
-                Is_login1()
-                Is_login2()
+
                 // phplogin(username, pwd)
                 //layer.alert('登录成功');
-                $('.login_box').css('display', 'none')
-                $('.login_box_mask').hide()
+                $('body').trigger('login.hide')
                 $('body').toast({
                   content: '登录成功',
                   duration: 3000
@@ -778,7 +775,7 @@ export default {
       left: 0;
       width: 205px;
       height: 140px;
-      background: url(../static/images/foot_logo_bg.png) no-repeat center;
+      background: url(/images/foot_logo_bg.png) no-repeat center;
     }
     .title {
       height: 100px;

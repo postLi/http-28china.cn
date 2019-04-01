@@ -344,7 +344,7 @@
         <div class="col1">
           <ul 
             class="p_hy_list clearfix"
-            v-if="recommendData.list!==undefined &&recommendData.lis!==null&&recommendData.list.length>0">
+            v-if="recommendData.list.length>0">
             <li               
               v-for="(item, index) in recommendData.list" 
               :key="index">
@@ -517,7 +517,7 @@
         </div>  
         <ul 
           class="p_co_owner_list clearfix"
-          v-if="monthShipperData.list!==undefined&&monthShipperData.list!==null&&monthShipperData.list.length > 0">
+          v-if="monthShipperData.list.length > 0">
           <li 
             v-for="(item, index) in monthShipperData.list" 
             :key="index">
@@ -709,7 +709,6 @@
    
 </div></template>
 <script>
-import 'swiper/dist/css/swiper.css'
 import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
@@ -804,6 +803,13 @@ export default {
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
       console.log('cookies', decodeURIComponent(document.cookie))
+
+      this.monthShipperData.list = this.monthShipperData.list
+        ? this.monthShipperData.list
+        : []
+      this.recommendData.list = this.recommendData.list
+        ? this.recommendData.list
+        : []
 
       this.currentArea = this.getCookie('currentAreaFullName')
       this.currentProvince = this.getCookie('currentProvinceFullName')

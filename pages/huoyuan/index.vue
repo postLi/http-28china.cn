@@ -177,7 +177,7 @@
               <p class="p3"/>
               <p
                 class="p1"
-                :title="item.companyName"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName }}</i></P>
+                :title="item.companyName"><img src="/images/list_wlzx/hy_item3.png"><span>发布者：</span><i>{{ item.companyName ? item.companyName : '普通货主' }}</i></P>
               <p class="p2"><img src="/images/list_wlzx/hy_item4.png"><span>联系人：</span><i>{{ item.contacts }}</i></P>
             </li>
             <li class="wlzx_list_4">

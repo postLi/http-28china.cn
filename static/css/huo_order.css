@@ -71,12 +71,12 @@
   margin-right:20px;
   cursor: pointer;
 }
-.checked{
+.checktype{
   border:1px solid #009ee9ed;
   position: relative;
   color:#009ee9ed;
   /* background: url(/templets/default/css/images/wzlImg/gou.png) no-repeat; */
-  /* background: url(/images/wzlImg/gou.png) no-repeat; */
+  background: url(/images/wzlImg/gou.png) no-repeat;
   background-position: right bottom;
 }
 .order-submit-btn:active{
@@ -244,7 +244,7 @@
   left: 843px;
   width: 80px;
   height: 40px;
-  /* top: 32px; */
+  top: 0px;
   background: url(/css/images/order/reset.png) no-repeat 0 0 #fff;
   z-index: 2;
 }
@@ -650,11 +650,6 @@
   font-size: 16px;
   cursor: pointer;
 }
-
-.netListContent .el-dialog__body{
-  padding: 5px 0;
-  font-size: 12px;
-}
 .netListContent .popnet-title{
   text-align: center;
   margin: 10px 0 20px;
@@ -767,7 +762,7 @@ color: #fff;
   cursor: pointer;
 }
 .order_usual_contacts_pop .el-dialog__body{
-  padding: 4px 8px;
+  padding: 25px 25px;
 }
 .search-input{
   border-radius: 4px;
@@ -778,6 +773,7 @@ color: #fff;
 	background-color: #f2f2f2;
   border: none;
   vertical-align: middle;
+  padding-left: 15px;
 }
 .search-input span{
   display: inline-block;
@@ -806,9 +802,8 @@ color: #fff;
 .contactPopList{
   max-height: 300px;
   overflow: auto;
-  margin-top: 5px;
+  padding: 20px;
   font-size: 12px;
-  padding-bottom: 1px;
 }
 .contactPopList li{
   clear: both;
@@ -881,4 +876,164 @@ color: #fff;
   display: block;
   font-size: 12px;
   color: #666;
+}
+/* 常用收发货人 */
+.order_usual_contacts_wrapper,.order_usual_contacts_wrapper2{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 33;
+  display: none;
+}
+.order_usual_contacts_bg,.order_usual_contacts_bg2{
+  background: #000;
+  filter: alpha(opacity=80);
+  background: rgba(0,0,0,.5);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+.order_usual_contacts_pop,.order_usual_contacts_pop2{
+  width: 500px;
+  position: absolute;
+  background: #fff;
+  left: 50%;
+  margin-left: -250px;
+  top: 20%;
+  padding-bottom: 10px;
+}
+.order_usual_contacts_pop .el-dialog__header,.order_usual_contacts_pop2 .el-dialog__header2{
+  height: 40px;
+  line-height: 40px;
+  padding: 0 23px;
+  background-image: linear-gradient(180deg, 
+#0d91e9 0%, 
+#22c3f5 100%);
+  font-size: 12px;
+  color: #fff;
+}
+.order_usual_contacts_pop .close,.order_usual_contacts_pop2 .close{
+  float: right;
+  cursor: pointer;
+}
+.search-input{
+  border-radius: 4px;
+}
+.search-input input{
+  width: 216px;
+	height: 35px;
+	background-color: #f2f2f2;
+  border: none;
+  vertical-align: middle;
+}
+.search-input span{
+  display: inline-block;
+  vertical-align: middle;
+  color: #fff;
+  text-align: center;
+  line-height: 35px;
+  cursor: pointer;
+  width: 50px;
+	height: 35px;
+	background-color: #1aadef;
+}
+.addNewContact{
+  width: 105px;
+  height: 35px;
+  background-color: #23c3f5;
+  border-radius: 4px;
+  color: #fff;
+  display: inline-block;
+  font-size: 12px;
+  text-align: center;
+  line-height: 35px;
+  float: right;
+  cursor: pointer;
+}
+/* .contactPopList{
+  max-height: 300px;
+  overflow: auto;
+  margin-top: 5px;
+  font-size: 12px;
+  padding-bottom: 1px;
+} */
+.contactPopList li{
+  clear: both;
+  border-bottom: dashed 1px #cccccc;
+  padding: 10px 0;
+  cursor: pointer;
+}
+.contactPopList li:hover{
+  background: rgba(0,0,0,.05);
+}
+.contactPopList span{
+  float: left;
+  width: 25%;
+  min-height: 28px;
+}
+.contactPopList .contactManage{
+  color: #ef0000;
+  text-align: center;
+  cursor: pointer;
+}
+.order_add_contacts_pop{
+  display: none;
+}
+.contactName{
+  text-indent: 10px;
+}
+.order_add_contacts_pop td,.order_add_contacts_pop th{
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+.order_add_contacts_pop th{
+  width: 100px;
+  text-align: right;
+  font-weight: normal;
+}
+.order_add_contacts_pop input[type="text"]{
+  width: 300px;
+	height: 28px;
+	background-color: #ffffff;
+	border-radius: 2px;
+	border: solid 1px #cccccc;
+}
+.contact-btns span{
+  width: 62px;
+  height: 28px;
+  line-height: 28px;
+	border-radius: 4px;
+  text-align: center;
+  display: inline-block;
+  margin-left: 50px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  cursor: pointer;
+}
+.add-cancel{
+  background-image: linear-gradient(180deg, 
+		#ededed 0%, 
+    #d7d7d7 100%);
+    border: solid 1px #cccccc;
+    color: #333;
+}
+.add-submit{
+	background-color: #0d91e9;
+  border: solid 1px #0192bf;
+  color: #fff;
+}
+
+.tipcontent{
+  text-align: center;
+  display: block;
+  font-size: 12px;
+  color: #666;
+}
+.el-dialog-content{
+  padding:20px;
+  text-align: center;
 }

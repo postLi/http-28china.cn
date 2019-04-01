@@ -15,7 +15,9 @@
       </div>
       <div class="cg_col2 fl">
         <div class="cy_banner">
-          <div class="swiper-container">
+          <div 
+            class="swiper-container"
+            v-swiper:mySwiper="swiperOption1">
             <div class="swiper-wrapper">
               <div 
                 class="swiper-slide" 
@@ -748,126 +750,176 @@
     <!-- 推荐车源 -->
     <div class="user_discuss  grid_c1">
       <h3 class="p_title">用户点评</h3>
-      <div class="discuss-list-content clearfix">
-        <div class="discuss_item">
-          <div class="discuss_ad_hd">
-            <img 
-              class="ad_hd_img"  
-              src="//imgcdn50.zuzuche.com/assets/book/desktop/book/images/reviews_banner_text-305b1b2dc9c12ac66aedb8620f257c02.png">
+      <div 
+        class="swiper-container"
+        v-swiper:mySwiper="swiperOption2">
+        <div class="swiper-wrapper discuss-list-content clearfix">
+          <div class="swiper-slide">
+            <div class="discuss_item">
+              <div class="discuss_ad_hd">
+                <img 
+                  class="ad_hd_img"  
+                  src="//imgcdn50.zuzuche.com/assets/book/desktop/book/images/reviews_banner_text-305b1b2dc9c12ac66aedb8620f257c02.png">
+              </div>
+              <ul class="usr_discuss_tab">
+                <li class="user_discuss_active">洛杉矶</li>
+                <li>墨尔本</li>
+                <li>伦敦</li>
+                <li>曼谷</li>
+              </ul>
+              <div class="user_discuss_tab_content">
+                <div class="tab_item">
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v4/enterprise_100x50.png" 
+                      class="logo">
+                    <span>8.4</span>分
+                  </div>
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/sixt_id_32/100x50.png" 
+                      class="logo">
+                    <span>8.3</span>分
+                  </div>
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/world/dealer/logo/Hertz_dealer_pic_big_799c968e294.jpg"
+                      class="logo">
+                    <span>8.3</span>分
+                  </div>
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/europcar_id_44/100x50.png"
+                      class="logo">
+                    <span>8.2</span>分
+                  </div>
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/alamo_id_29/100x50.png" 
+                      class="logo">
+                    <span>8.2</span>分
+                  </div>
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/interrent_id_79/100x50.png" 
+                      class="logo">
+                    <span>8.2</span>分
+                  </div>
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/avis_id_30/100x50.png" 
+                      class="logo">
+                    <span>8.1</span>分
+                  </div>
+                  <div class="car-dealers">
+                    <img 
+                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/national_id_34/100x50.png" 
+                      class="logo">
+                    <span>8.1</span>分
+                  </div>
+                </div>
+                <div 
+                  class="tab_item"
+                  style="display: none;">2222</div>
+                <div 
+                  class="tab_item"
+                  style="display: none;">3333</div>
+                <div 
+                  class="tab_item"
+                  style="display: none;">44444</div>
+              </div>      
+            </div>
           </div>
-          <ul class="usr_discuss_tab">
-            <li class="user_discuss_active">洛杉矶</li>
-            <li>墨尔本</li>
-            <li>伦敦</li>
-            <li>曼谷</li>
-          </ul>
-          <div class="user_discuss_tab_content">
-            <div class="tab_item">
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v4/enterprise_100x50.png" 
-                  class="logo">
-                <span>8.4</span>分
+          <div class="swiper-slide">
+            <div class="discuss_item">
+              <div 
+                class="discuss_item_pic" 
+                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/41/2302afa856b62e5f33be9e1a80656da2_1000x.jpg) ">
+                <div
+                  class="item_pic_user"
+                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
               </div>
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/sixt_id_32/100x50.png" 
-                  class="logo">
-                <span>8.3</span>分
-              </div>
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/world/dealer/logo/Hertz_dealer_pic_big_799c968e294.jpg"
-                  class="logo">
-                <span>8.3</span>分
-              </div>
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/europcar_id_44/100x50.png"
-                  class="logo">
-                <span>8.2</span>分
-              </div>
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/alamo_id_29/100x50.png" 
-                  class="logo">
-                <span>8.2</span>分
-              </div>
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/interrent_id_79/100x50.png" 
-                  class="logo">
-                <span>8.2</span>分
-              </div>
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/avis_id_30/100x50.png" 
-                  class="logo">
-                <span>8.1</span>分
-              </div>
-              <div class="car-dealers">
-                <img 
-                  src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/national_id_34/100x50.png" 
-                  class="logo">
-                <span>8.1</span>分
+              <div class="discuss_item_content">
+                <div class="content-tit">来自于彭**的评价</div>
+                <div class="content-score">非常满意 10 分</div>
+                <div class="content-text">很满意，过程中有问必答 回复也很及时</div>
+                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
               </div>
             </div>
-            <div 
-              class="tab_item"
-              style="display: none;">2222</div>
-            <div 
-              class="tab_item"
-              style="display: none;">3333</div>
-            <div 
-              class="tab_item"
-              style="display: none;">44444</div>
-          </div>      
+          </div>
+          <div class="swiper-slide">
+            <div class="discuss_item">
+              <div 
+                class="discuss_item_pic" 
+                style="background-image:url(//imgcdn50.zuzuche.com/world/survey/view/22/462cac03b2935ed4d3ab75f424f1deb0_1000x.jpg);">
+                <div
+                  class="item_pic_user"
+                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
+              </div>
+              <div class="discuss_item_content">
+                <div class="content-tit">来自于彭**的评价</div>
+                <div class="content-score">非常满意 10 分</div>
+                <div class="content-text">在租租车上预定非常方便，没有后顾之忧，同时给你行程规划的导航载入。很方便</div>
+                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="discuss_item">
+              <div 
+                class="discuss_item_pic" 
+                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
+                <div
+                  class="item_pic_user"
+                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
+              </div>
+              <div class="discuss_item_content">
+                <div class="content-tit">来自于彭**的评价</div>
+                <div class="content-score">非常满意 10 分</div>
+                <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
+                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="discuss_item">
+              <div 
+                class="discuss_item_pic" 
+                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
+                <div
+                  class="item_pic_user"
+                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
+              </div>
+              <div class="discuss_item_content">
+                <div class="content-tit">来自于彭**的评价</div>
+                <div class="content-score">非常满意 10 分</div>
+                <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
+                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="discuss_item">
+              <div 
+                class="discuss_item_pic" 
+                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
+                <div
+                  class="item_pic_user"
+                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
+              </div>
+              <div class="discuss_item_content">
+                <div class="content-tit">来自于彭**的评价</div>
+                <div class="content-score">非常满意 10 分</div>
+                <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
+                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="discuss_item">
-          <div 
-            class="discuss_item_pic" 
-            style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/41/2302afa856b62e5f33be9e1a80656da2_1000x.jpg) ">
-            <div
-              class="item_pic_user"
-              style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
-          </div>
-          <div class="discuss_item_content">
-            <div class="content-tit">来自于彭**的评价</div>
-            <div class="content-score">非常满意 10 分</div>
-            <div class="content-text">很满意，过程中有问必答 回复也很及时</div>
-            <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
-          </div>
-        </div>
-        <div class="discuss_item">
-          <div 
-            class="discuss_item_pic" 
-            style="background-image:url(//imgcdn50.zuzuche.com/world/survey/view/22/462cac03b2935ed4d3ab75f424f1deb0_1000x.jpg);">
-            <div
-              class="item_pic_user"
-              style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
-          </div>
-          <div class="discuss_item_content">
-            <div class="content-tit">来自于彭**的评价</div>
-            <div class="content-score">非常满意 10 分</div>
-            <div class="content-text">在租租车上预定非常方便，没有后顾之忧，同时给你行程规划的导航载入。很方便</div>
-            <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
-          </div>
-        </div>
-        <div class="discuss_item">
-          <div 
-            class="discuss_item_pic" 
-            style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
-            <div
-              class="item_pic_user"
-              style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
-          </div>
-          <div class="discuss_item_content">
-            <div class="content-tit">来自于彭**的评价</div>
-            <div class="content-score">非常满意 10 分</div>
-            <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
-            <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
-          </div>
-        </div>
+        <div class="swiper-pagination"/>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"/>
+        <div class="swiper-button-prev"/>
       </div>
     </div>
     <!-- 用户评价 -->
@@ -1054,6 +1106,38 @@ export default {
         require('../../static/images/huizong/banner02.jpg'),
         require('../../static/images/huizong/banner03.jpg')
       ],
+      swiperOption1: {
+        effect: 'fade',
+        spaceBetween: 30,
+        centeredSlides: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          dynamicBullets: true,
+          clickable: true
+        },
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev'
+        }
+      },
+      swiperOption2: {
+        slidesPerView: 4,
+        spaceBetween: 20,
+        freeMode: true,
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true
+        },
+        navigation: {
+          nextEl: ' .swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          disabledClass: '.my-button-disabled'
+        }
+      },
       cityList: [
         '上海',
         '北京',
@@ -1098,7 +1182,8 @@ export default {
     }
   },
   mounted() {
-    this.intSwiper()
+    // this.intSwiper1()
+    this.intSwiper2()
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
       $('.p_hy_info .hy_info_user_box').Scroll({
@@ -1112,36 +1197,55 @@ export default {
     })
   },
   methods: {
-    intSwiper() {
+    // intSwiper1() {
+    //   this.$nextTick(() => {
+    //     $('.cy_banner').hover(
+    //       function() {
+    //         $(this)
+    //           .find('.swiper-button-next,.swiper-button-prev')
+    //           .show()
+    //       },
+    //       function() {
+    //         $(this)
+    //           .find('.swiper-button-next,.swiper-button-prev')
+    //           .hide()
+    //       }
+    //     )
+    //     let swiper = new Swiper('.cy_banner .swiper-container', {
+    //       effect: 'fade',
+    //       spaceBetween: 30,
+    //       centeredSlides: true,
+    //       autoplay: {
+    //         delay: 3000,
+    //         disableOnInteraction: false
+    //       },
+    //       pagination: {
+    //         el: '.cy_banner .swiper-pagination',
+    //         dynamicBullets: true,
+    //         clickable: true
+    //       },
+    //       navigation: {
+    //         nextEl: '.cy_banner .swiper-button-next',
+    //         prevEl: '.cy_banner .swiper-button-prev'
+    //       }
+    //     })
+    //   })
+    // },
+    intSwiper2() {
       this.$nextTick(() => {
-        $('.cy_banner').hover(
-          function() {
-            $(this)
-              .find('.swiper-button-next,.swiper-button-prev')
-              .show()
-          },
-          function() {
-            $(this)
-              .find('.swiper-button-next,.swiper-button-prev')
-              .hide()
-          }
-        )
-        let swiper = new Swiper('.swiper-container', {
-          effect: 'fade',
-          spaceBetween: 30,
-          centeredSlides: true,
-          autoplay: {
-            delay: 3000,
-            disableOnInteraction: false
-          },
+        // 货主
+        let hahaswiper = new Swiper('.user_discuss   .swiper-container', {
+          slidesPerView: 4,
+          spaceBetween: 20,
+          freeMode: true,
           pagination: {
             el: '.swiper-pagination',
-            dynamicBullets: true,
             clickable: true
           },
           navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev'
+            nextEl: ' .swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            disabledClass: '.my-button-disabled'
           }
         })
       })
@@ -1235,10 +1339,10 @@ export default {
     > .swiper-slide {
       display: none;
     }
-    .swiper-button-prev,
-    .swiper-button-next {
-      display: none;
-    }
+    // .swiper-button-prev,
+    // .swiper-button-next {
+    //   display: none;
+    // }
   }
   img {
     width: 100%;
@@ -1363,6 +1467,10 @@ export default {
     text-align: center;
   }
   margin-bottom: 50px;
+  .swiper-container {
+    width: 1440px;
+    height: 480px;
+  }
   .discuss_item {
     &:first-child {
       margin-left: 0;

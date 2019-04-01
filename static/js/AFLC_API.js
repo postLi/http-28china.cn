@@ -593,7 +593,7 @@ var AFWL_API = {
     return this._warpper(
       $.ajax({
         type: 'POST',
-        url: this.url + '/28-web/lclOrder/creatOrder' + str,
+        url: this.url + '/28-web/lclOrder/create' + str,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(data),
         dataType: 'json'
@@ -635,7 +635,7 @@ var AFWL_API = {
     return this._warpper(
       $.ajax({
         type: 'POST',
-        url: this.url + '/aflc-uc/usercenter/aflcShipperContacts/v1/list' + str,
+        url: this.url + '/28-web/aflcShipperContacts/list' + str,
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(data),
         dataType: 'json'

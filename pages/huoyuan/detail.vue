@@ -26,20 +26,20 @@
     </div>
     <div class="arc_toptitle">
       <h1
-        v-if="hyDetail.archivalType === '3'"
-      >{{ hyDetail.companyName }}</h1>
+        v-if="archival.archivalType === '3'"
+      >{{ archival.companyName }}</h1>
       <h1 v-else>货源详情</h1>
       <ul 
         class="two_tltle" 
-        v-if="hyDetail.archivalType === '3'">
+        v-if="archival.archivalType === '3'">
         <li/>
         <li><a 
           style="float:left"
-          :href="/member/ + hyDetail.lgCompanyId">公司官网</a><a :href="/member/ + hyDetail.lgCompanyId + '-line'">专线信息</a></li>
+          :href="/member/ + archival.companyId">公司官网</a><a :href="/member/ + archival.companyId + '-line'">专线信息</a></li>
         <li><a  
           style="float:left" 
-          :href="/member/ + hyDetail.lgCompanyId + '-wangdian'">网点信息</a>
-        <a :href="/member/ + hyDetail.lgCompanyId + '-huo'">货源信息</a></li>
+          :href="/member/ + archival.companyId + '-wangdian'">网点信息</a>
+        <a :href="/member/ + archival.companyId + '-huo'">货源信息</a></li>
         <li/>
       </ul>
     </div>
@@ -377,7 +377,7 @@
               :href="'/huoyuan?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea +'&endProvince='+item.endProvince+'&endCity='+item.endCity + '&endArea='+item.endArea"> 
                 <span :title="item.startProvinceCityArea">{{ item.startCity + item.startArea }}</span>
                 <span :title="item.endProvinceCityArea">{{ item.endCity + item.endArea }}</span>
-                <span :title="item.goodsTypeName">{{ item.goodsTypeName.substring(0,5) }}</span>
+                <span :title="item.goodsTypeName">{{ item.goodsTypeName ?item.goodsTypeName.substring(0,5) : '' }}</span>
                 <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
                 <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
                 <span>{{ item.createTime }}</span>
@@ -397,7 +397,7 @@
               :href="'/huoyuan?startProvince='+ i.startProvince+'&startCity='+i.startCity+'&startArea='+i.startArea +'&endProvince='+i.endProvince+'&endCity='+i.endCity + '&endArea='+i.endArea"> 
                 <span :title="i.startProvinceCityArea">{{ i.startCity + i.startArea }}</span>
                 <span :title="i.endProvinceCityArea">{{ i.endCity + i.endArea }}</span>
-                <span :title="i.goodsTypeName">{{ i.goodsTypeName.substring(0,5) }}</span>
+                <span :title="i.goodsTypeName">{{ i.goodsTypeName ?i.goodsTypeName.substring(0,5) : '' }}</span>
                 <span><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</span>
                 <span><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</span>
                 <span>{{ i.createTime }}</span>
@@ -503,7 +503,7 @@
             <li class="wlzx_list_4">
               <p class="p3"/>
               <p class="p1"><img src="/images/list_wlzx/hy_item5.png"><span>货源类型：</span><i>{{ item.orderClass === 0 ? '单次急发货源' : '长期稳定货源' }}</i></P>
-              <p class="p2"><img src="/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime.substring(0, 16) }}</i></P>
+              <p class="p2"><img src="/images/list_wlzx/hy_item6.png"><span>发布时间：</span><i>{{ item.createTime ?item.createTime.substring(0, 16) : '' }}</i></P>
             </li>
             <li class="wlzx_list_3">
               <p class="p1"><img
@@ -677,7 +677,7 @@
                 :title="item.startCity + '到' + item.endCity"
                 target="_blank"
                 :href="item.targetLinks+'?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea+'&endProvince='+item.endProvince+'&endCity='+item.endCity+'&endArea='+item.endArea+'&carSourceType='+item.carSourceType"
-                class="hot-cities-a">{{ title }}</a>
+                class="hot-cities-a">{{ item.title }}</a>
             </li>
           </ul>
         </div>
@@ -1069,6 +1069,7 @@ export default {
       .catch(err => {
         // console.log('huoLinks')
       })
+    // console.log(huoLinks)
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -1159,6 +1160,7 @@ export default {
   },
 
   mounted() {
+    console.log(this.interestOrder)
     seajs.use(['/js/gaodemap2.js'])
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')

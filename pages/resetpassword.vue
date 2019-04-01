@@ -30,7 +30,7 @@
                   id="memeberType" 
                   name="memeberType">
                   <option value="">选择会员类型</option>
-                  <option value="aflc-5|AF00107">物流公司</option>
+                  <!-- <option value="aflc-5|AF00107">物流公司</option> -->
                   <option value="aflc-2|AF00101">货主</option>
                   <option value="aflc-1|AF00102">车主</option>
                 </select>

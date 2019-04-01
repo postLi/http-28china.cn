@@ -1161,18 +1161,13 @@ export default {
         endArea: enda
       })
     ])
-    // console.log(linedataB.data, 'linedataB.data')
+    console.log(linedataB, 'linedataB.data')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
-      linedataC.data.status == 200 &&
-      linedataD.data.status == 200 &&
       linedataE.data.status == 200 &&
       linedataF.data.status == 200 &&
-      linedataG.data.status == 200 &&
-      LineeEInfo.data.status == 200 &&
-      lineCity.data.status == 200 &&
-      LineCAnother.data.status == 200
+      linedataG.data.status == 200
     ) {
       // console.log(linedataB.data, '  linedataB.data')
       let vo = {
@@ -1244,7 +1239,7 @@ export default {
 
       if (!isVip || isVip == 0) {
         // linedataB.data.data.showIsVip
-        linedataB.data.data.showIsVip = linedataB.data.status == 200 ? fase : ''
+        linedataB.data.data.showIsVip = false
       }
       if (authStatus == 'AF0010403') {
         linedataB.data.data.isAuthStatus = true

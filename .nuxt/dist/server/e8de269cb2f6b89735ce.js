@@ -1,0 +1,2 @@
+exports.ids=[89],exports.modules={150:function(r,n,e){"use strict";function t(r=""){return(r+="").replace(/href="http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?/gim,'href="').replace(/href="\/anfacms/gim,'href="/zixun').replace(/src="\/zixun\//gim,'src="/anfacms/').replace(/http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,"/zixun")}function c(path){return"/anfacms/"+path.replace("/zixun","")}e.r(n),e.d(n,"formatAnfaTms",function(){return t}),e.d(n,"makeAnfaTmsUrl",function(){return c})}};
+//# sourceMappingURL=e8de269cb2f6b89735ce.js.map

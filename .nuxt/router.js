@@ -9,6 +9,7 @@ const _79e66679 = () => interopDefault(import('..\\pages\\help\\index.vue' /* we
 const _e79fab62 = () => interopDefault(import('..\\pages\\huoyuan\\index.vue' /* webpackChunkName: "pages_huoyuan_index" */))
 const _d4c10700 = () => interopDefault(import('..\\pages\\Insurance\\index.vue' /* webpackChunkName: "pages_Insurance_index" */))
 const _437c2af1 = () => interopDefault(import('..\\pages\\login.vue' /* webpackChunkName: "pages_login" */))
+const _6fa25aa2 = () => interopDefault(import('..\\pages\\loginsuccess.vue' /* webpackChunkName: "pages_loginsuccess" */))
 const _548a5626 = () => interopDefault(import('..\\pages\\m\\index.vue' /* webpackChunkName: "pages_m_index" */))
 const _4425ad80 = () => interopDefault(import('..\\pages\\member\\index.vue' /* webpackChunkName: "pages_member_index" */))
 const _1eac61de = () => interopDefault(import('..\\pages\\regisiter.vue' /* webpackChunkName: "pages_regisiter" */))
@@ -193,6 +194,10 @@ export function createRouter() {
       path: "/login",
       component: _437c2af1,
       name: "login"
+    }, {
+      path: "/loginsuccess",
+      component: _6fa25aa2,
+      name: "loginsuccess"
     }, {
       path: "/m",
       component: _548a5626,

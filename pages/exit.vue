@@ -16,9 +16,25 @@ export default {
     cookies.remove('login_userToken')
     cookies.remove('login_userName')
 
-    if (process.client) {
-      location.href = '/'
+    // 获取域名
+    var domain = location.hostname
+    if (domain.indexOf('28kuaiyun.cn') !== -1) {
+      domain = '.28kuaiyun.cn'
     }
+    var opt = {
+      domain: domain
+    }
+
+    $.cookie('access_token', null, opt)
+    $.cookie('login_mobile', null, opt)
+    $.cookie('login_type', null, opt)
+    $.cookie('loginId', null, opt)
+    $.cookie('loginCompanyName', null, opt)
+    $.cookie('login_userId', null, opt)
+    $.cookie('login_userToken', null, opt)
+    $.cookie('login_userName', null, opt)
+
+    location.href = '/'
   }
 }
 </script>

@@ -304,7 +304,9 @@
               <p style="margin-left: 70px">对您的线路进行补充说明，尽量使用市场上或物流行业内的常用词。</p>
             </div>
             <!-- 专线照片 -->
-            <div class="order-line-from clearfix">
+            <div 
+              class="order-line-from clearfix"
+              style="display: none;">
               <div class="order-form-label">专线照片：</div>
               <p style="padding-top: 10px">建议传</p>
                 
@@ -356,12 +358,39 @@ export default {
             // seajs.use(['/layer3/lay/modules/layer.js'], function() {
             seajs.use(['/layer3/layui.js'], function() {
               $(function() {
-                // var theRequest = getRequest()
+                var theRequest = getRequest()
+                // var obj = {
+                //   startLocationCoordinate: '',
+                //   endLocationCoordinate: '',
+                //   startLocation: '',
+                //   endLocation: '',
+                //   startProvince: '',
+                //   startCity: '',
+                //   startArea: '',
+                //   endProvince: '',
+                //   endCity: '',
+                //   endArea: '',
+                //   startLocationContacts: '',
+                //   startLocationContactsMobile: '',
+                //   endLocationContacts: '',
+                //   endLocationContactsMobile: '',
+                //   transportAging: '',
+                //   transportAgingUnit: '', //运输时效单位
+                //   departureHzData: '', //天
+                //   departureHzTime: '', //次
+                //   lowerPrice: '', //最低一票价格
+                //   departureTime: '', //发车时间
+                //   transportRemark: '', //发车备注
+                //   rangeLogo: '', //专线照片
+                //   publishId: '', //公司id
+                //   publishName: '', //物流公司名称
+                //   rangePrices: []
+                // }
                 var obj = {
                   startLocationCoordinate: '',
                   endLocationCoordinate: '',
-                  startLocation: '',
-                  endLocation: '',
+                  // startLocation: '',
+                  // endLocation: '',
                   startProvince: '',
                   startCity: '',
                   startArea: '',
@@ -377,11 +406,11 @@ export default {
                   departureHzData: '', //天
                   departureHzTime: '', //次
                   lowerPrice: '', //最低一票价格
-                  departureTime: '', //发车时间
+                  departureTimeCode: '', //发车时间
                   transportRemark: '', //发车备注
                   rangeLogo: '', //专线照片
-                  publishId: '', //公司id
-                  publishName: '', //物流公司名称
+                  // publishId: '', //公司id
+                  // publishName: '', //物流公司名称
                   rangePrices: []
                 }
                 var tpl = {
@@ -646,7 +675,9 @@ export default {
                 }
                 //获取运输时效和发车时间
                 function getValue() {
-                  obj.departureTime = $('#order_buttom .checked').attr('type')
+                  obj.departureTimeCode = $('#order_buttom .checked').attr(
+                    'type'
+                  )
                   obj.transportAgingUnit = $('#order_top .checked').text()
                 }
                 //初始化页面，一进来就执行
@@ -818,7 +849,7 @@ export default {
                     err: ''
                   }
                   if ($('.start').val()) {
-                    obj.startLocation = $('.start').attr('thepcd')
+                    // obj.startLocation = $('.start').attr('thepcd')
                     obj.startLocationCoordinate = $('.start').attr('thepos')
                     obj.startProvince = $('.start').attr('theprovince')
                     obj.startCity = $('.start').attr('thecity')
@@ -829,7 +860,7 @@ export default {
                     return
                   }
                   if ($('.end').val()) {
-                    obj.endLocation = $('.end').attr('thepcd')
+                    // obj.endLocation = $('.end').attr('thepcd')
                     obj.endLocationCoordinate = $('.end').attr('thepos')
                     obj.endProvince = $('.end').attr('theprovince')
                     obj.endCity = $('.end').attr('thecity')
@@ -908,16 +939,16 @@ export default {
                   if ($('#once').val()) {
                     obj.departureHzTime = $('#once').val()
                   }
-                  if ($('.img_box img').length === 0) {
-                    layer.msg('请上传图片')
-                    return
-                  } else {
-                    $('.img_box img').each(function(index, item) {
-                      obj.rangeLogo = obj.rangeLogo + $(this).attr('src') + ','
-                    })
-                    var length = obj.rangeLogo.length
-                    obj.rangeLogo = obj.rangeLogo.substring(0, length - 1)
-                  }
+                  // if ($('.img_box img').length === 0) {
+                  //   layer.msg('请上传图片')
+                  //   return
+                  // } else {
+                  //   $('.img_box img').each(function(index, item) {
+                  //     obj.rangeLogo = obj.rangeLogo + $(this).attr('src') + ','
+                  //   })
+                  //   var length = obj.rangeLogo.length
+                  //   obj.rangeLogo = obj.rangeLogo.substring(0, length - 1)
+                  // }
                   getForm()
                   return checkinfo
                 }
@@ -939,13 +970,16 @@ export default {
                 function next() {
                   var check = validate()
                   var url =
-                    '/aflc-uc/usercenter/aflcTransportRange/v1/add?access_token=' +
-                    $.cookie('access_token')
+                    '/range/create?access_token=' +
+                    $.cookie('access_token') +
+                    '&&user_token=' +
+                    $.cookie('login_userToken')
+                  console.log('user', $.cookie('login_userToken'))
                   console.log($.cookie('access_token'))
                   if (check) {
-                    if ($.cookie('login_type') === 'aflc-5') {
-                      obj.publishId = $.cookie('loginId')
-                      obj.publishName = $.cookie('loginCompanyName')
+                    if ($.cookie('login_type') === 'aflc-2') {
+                      // obj.publishId = $.cookie('loginId')
+                      // obj.publishName = $.cookie('loginCompanyName')
                       var options = $.extend(obj, theRequest)
                       api
                         .postInfo1(url, options)
@@ -972,11 +1006,8 @@ export default {
                               (err.errorInfo || err.text || '未知错误')
                           )
                         })
-                    } else if (
-                      $.cookie('login_type') === 'aflc-1' ||
-                      $.cookie('login_type') === 'aflc-2'
-                    ) {
-                      layer.msg('当前账号不是物流公司，不能发布专线')
+                    } else {
+                      layer.msg('当前账号，不能发布专线')
                     }
                   } else {
                     return false

@@ -483,7 +483,7 @@
         class="arc_main1-1">
         想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<a 
           :href="'/create/line?startProvince='+linedataA.startProvince+'&startCity='+linedataA.startCity+'&startArea='+linedataA.startArea+'&endProvince='+linedataA.endProvince+'&endCity='+linedataA.endCity+'&endArea='+linedataA.endArea"
-          target="_blank"><i style="border-bottom:1px solid #ccc; cursor: pointer;">发布专线</i></a>，让车主主动来联系您，达成交易
+        ><i style="border-bottom:1px solid #ccc; cursor: pointer;">发布专线</i></a>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -989,7 +989,7 @@
 <script>
 import creditIcon from '~/components/common/creditIcon'
 import Add from './add'
-import BzAdd from './bzAdd'
+// import BzAdd from './bzAdd'
 
 import {
   isZXcity,
@@ -1049,7 +1049,7 @@ export default {
     FooterLinks,
     ShowEchart,
     Add,
-    BzAdd,
+    // BzAdd,
     creditIcon
   },
   head: {
@@ -1171,7 +1171,7 @@ export default {
         endArea: enda
       })
     ])
-    console.log(linedataA.data.data, 'linedataA.data2')
+    // console.log(linedataA.data.data, 'linedataA.data2')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
@@ -2781,7 +2781,24 @@ export default {
 //   : this.linedataB.companyName +
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.arc_top1 {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 20px 0;
+  img {
+    margin-top: 0;
+  }
+}
+.arc_top1_2,
+.arc_top1_3 {
+  margin-top: 22px;
+}
+.lll-zhuangXian-detail .arc_toptitle {
+  margin-top: 0 !important;
+}
 .lll-zhuangXian-detail {
   .arc_toptitle {
     float: left;

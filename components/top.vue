@@ -63,6 +63,9 @@ export default {
 </script>
 
 <style scoped>
+* {
+  letter-spacing: normal;
+}
 .header_top {
   height: 30px;
   line-height: 30px;

@@ -41,10 +41,10 @@ export default {
       if (item.cargoType === '1') {
         this.cargoType1 = item
         this.comInfo(this.sendEchart1, this.cargoType1)
-        console.log(this.cargoType1, 'this.cargoType1重货')
+        // console.log(this.cargoType1, 'this.cargoType1重货')
       }
     })
-    console.log(this.sendEchart1, 'this.sendEchart1重货')
+    // console.log(this.sendEchart1, 'this.sendEchart1重货')
     let copyobj = Object.assign(this.sendEchart1[2])
     let copyobj2 = Object.assign(this.sendEchart[2])
     let maxY = this.sendEchart[0]
@@ -1036,29 +1036,33 @@ export default {
       // 本专线价： thisRangePrice": 0.43
       // 最高价 行业最高 本专线价 行业最低 最低价
       // console.log(cargoType, 'cargoType')
-      sendEchart[0] = cargoType.highestPrice
-      sendEchart[1] = cargoType.highAveragePrice
+      sendEchart[0] =
+        cargoType.highestPrice > 100
+          ? Math.floor(cargoType.highestPrice)
+          : cargoType.highestPrice
+      sendEchart[1] =
+        cargoType.highAveragePrice > 100
+          ? Math.floor(cargoType.highAveragePrice)
+          : cargoType.highAveragePrice
       sendEchart[2] = {
-        value: cargoType.thisRangePrice,
+        value:
+          cargoType.thisRangePrice > 100
+            ? Math.floor(cargoType.thisRangePrice)
+            : cargoType.thisRangePrice,
         // value: cargoType.lowAveragePrice,
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }
-      sendEchart[3] = cargoType.lowAveragePrice
+      sendEchart[3] =
+        cargoType.lowAveragePrice > 100
+          ? Math.floor(cargoType.lowAveragePrice)
+          : cargoType.lowAveragePrice
 
-      // lightDiscountPrice 轻货价的承运商价
-      let price = ''
-      if (cargoType.cargoType == 1) {
-        price = cargoType.lowestPrice
-        // console.log(price, 'price')
-      }
-      if (cargoType.cargoType == 0) {
-        price = cargoType.lowestPrice
-        // console.log(price, 'price2')
-      }
-
-      sendEchart[4] = price
-      // console.log(sendEchart[3], sendEchart[4].value)
+      sendEchart[4] =
+        cargoType.lowestPrice > 100
+          ? Math.floor(cargoType.lowestPrice)
+          : cargoType.lowestPrice
+      console.log(typeof sendEchart[3], sendEchart[4])
     }
   }
 }

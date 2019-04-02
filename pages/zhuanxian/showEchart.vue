@@ -44,7 +44,9 @@ export default {
         console.log(this.cargoType1, 'this.cargoType1重货')
       }
     })
-    // console.log(this.sendEchart1, 'this.sendEchart1重货')
+    console.log(this.sendEchart1, 'this.sendEchart1重货')
+    let copyobj = Object.assign(this.sendEchart1[4])
+    let copyobj2 = Object.assign(this.sendEchart[4])
     let maxY = this.sendEchart[0]
     this.sendEchart.forEach(el => {
       if (maxY < el) {
@@ -108,7 +110,7 @@ export default {
             label: {
               position: 'insideTop',
               formatter: function(params) {
-                console.log(params)
+                console.log('markPoint:', params)
                 return `{color1|${params.name}}\n{color0|${
                   params.value
                 }元/公斤}`
@@ -133,7 +135,9 @@ export default {
             data: [
               {
                 name: '',
-                type: 'min'
+                coord: [4, copyobj.value],
+                value: copyobj.value
+                // type: 'max'
               }
             ]
           },
@@ -276,7 +280,10 @@ export default {
             data: [
               {
                 name: '',
-                type: 'min'
+                // 4表示索引位置，第二个值为具体的值
+                coord: [4, copyobj2.value],
+                value: copyobj2.value
+                // type: 'min'
               }
             ]
           },
@@ -720,6 +727,7 @@ export default {
       }
       sendEchart[4] = {
         value: price,
+        // value: cargoType.lowAveragePrice,
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }

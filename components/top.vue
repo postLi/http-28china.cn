@@ -66,7 +66,7 @@ export default {
 .header_top {
   height: 30px;
   line-height: 30px;
-
+  font-size: 12px;
   background-color: #eeeeee;
 }
 .header_top_top {

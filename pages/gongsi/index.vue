@@ -889,6 +889,7 @@ export default {
             seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
               seajs.use(['../js/gaodemap2.js'], function() {
                 layui.use('form', function() {
+                  console.log('layui', layui)
                   //运单查询 S
                   $('.ydh').click(function() {
                     $('#yd_nr').val('1809260061')

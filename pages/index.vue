@@ -646,7 +646,7 @@
                       :href="'/cheyuan/detail?id='+item.id"
                       target="_blank"><span class="t7"><font
                         id="nr026"
-                        style="color: #f00;">{{ item.expectPrice }}</font></span></a>
+                        style="color: #f00;">{{ item.expectPrice === null ? '面议' : item.expectPrice }}</font></span></a>
                     <a
                       id="nr_a17"
                       :href="'/cheyuan/detail?id='+item.id"

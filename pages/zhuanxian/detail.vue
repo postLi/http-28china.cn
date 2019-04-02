@@ -483,7 +483,7 @@
         class="arc_main1-1">
         想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<a 
           :href="'/create/line?startProvince='+linedataA.startProvince+'&startCity='+linedataA.startCity+'&startArea='+linedataA.startArea+'&endProvince='+linedataA.endProvince+'&endCity='+linedataA.endCity+'&endArea='+linedataA.endArea"
-          target="_blank"><i style="border-bottom:1px solid #ccc; cursor: pointer;">发布专线</i></a>，让车主主动来联系您，达成交易
+        ><i style="border-bottom:1px solid #ccc; cursor: pointer;">发布专线</i></a>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -1171,7 +1171,7 @@ export default {
         endArea: enda
       })
     ])
-    console.log(linedataA.data.data, 'linedataA.data2')
+    // console.log(linedataA.data.data, 'linedataA.data2')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&

@@ -126,5 +126,21 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss">
+.cy {
+  .order-content {
+    .content-list {
+      li {
+        h3,
+        p {
+          padding-left: 5px;
+        }
+        h4 {
+          img {
+          }
+        }
+      }
+    }
+  }
+}
 </style>

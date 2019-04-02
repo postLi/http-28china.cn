@@ -988,13 +988,7 @@ export default {
         show: false,
         type: 'category',
         boundaryGap: false,
-        data: [
-          '大品牌报价',
-          '优质专线报价',
-          '行业均价（高点）',
-          '行业均价（低点）',
-          '本车主整车价'
-        ]
+        data: ['最高', '本车', '行情价（高）', '行情价（低）', '最低']
       },
       yAxis: {
         axisLine: { show: false },
@@ -1139,14 +1133,8 @@ export default {
               }
             },
             data: [
-              [
-                { coord: ['行业均价（高点）', 8] },
-                { coord: ['行业均价（高点）', 15] }
-              ],
-              [
-                { coord: ['行业均价（低点）', 6] },
-                { coord: ['行业均价（低点）', 15] }
-              ]
+              [{ coord: ['行情价（高）', 8] }, { coord: ['行情价（高）', 15] }],
+              [{ coord: ['行情价（低）', 6] }, { coord: ['行情价（低）', 15] }]
             ]
           }
         }
@@ -1194,13 +1182,7 @@ export default {
                   show: false,
                   type: 'category',
                   boundaryGap: false,
-                  data: [
-                    '大品牌报价',
-                    '优质专线报价',
-                    '行业均价（高点）',
-                    '行业均价（低点）',
-                    '本车主整车价'
-                  ]
+                  data: ['最高', '本车', '行情价（高）', '行情价（低）', '最低']
                 },
                 yAxis: {
                   axisLine: { show: false },
@@ -1358,12 +1340,12 @@ export default {
                       },
                       data: [
                         [
-                          { coord: ['行业均价（高点）', 8] },
-                          { coord: ['行业均价（高点）', 15] }
+                          { coord: ['行情价（高）', 8] },
+                          { coord: ['行情价（高）', 15] }
                         ],
                         [
-                          { coord: ['行业均价（低点）', 6] },
-                          { coord: ['行业均价（低点）', 15] }
+                          { coord: ['行情价（低）', 6] },
+                          { coord: ['行情价（低）', 15] }
                         ]
                       ]
                     }

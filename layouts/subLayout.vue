@@ -46,6 +46,6 @@ export default {
 </script>
 <style scoped>
 .header {
-  margin: 0 auto 30px;
+  margin: 0 auto 0;
 }
 </style>

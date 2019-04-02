@@ -2304,7 +2304,7 @@ body {
 .hot-cities-a {
   font-size: 14px;
   display: block;
-  width: 133px;
+  width: 148px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

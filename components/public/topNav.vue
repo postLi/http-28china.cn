@@ -52,3 +52,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.arc_top1 {
+  height: 80px !important;
+  padding: 20px !important;
+}
+</style>

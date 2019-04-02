@@ -505,7 +505,7 @@ export default {
   margin-bottom: 30px;
 }
 .header_middle {
-  height: 120px;
+  height: 120px !important;
   background-color: #fff;
 }
 .header_m {

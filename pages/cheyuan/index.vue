@@ -2088,7 +2088,7 @@ body {
   font-size: 14px;
   /* color: #333; */
   display: block;
-  width: 133px;
+  width: 148px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

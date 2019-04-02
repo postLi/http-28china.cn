@@ -2778,7 +2778,20 @@ export default {
 //   : this.linedataB.companyName +
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.arc_top1 {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 20px 0;
+  img {
+    margin-top: 0;
+  }
+}
+.lll-zhuangXian-detail .arc_toptitle {
+  margin-top: 0 !important;
+}
 .lll-zhuangXian-detail {
   .arc_toptitle {
     float: left;

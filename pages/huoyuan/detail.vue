@@ -1478,4 +1478,12 @@ export default {
 }
 </script>
 <style scoped>
+.arc_top1 {
+  /* height: 32px; */
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  padding: 20px 0;
+  width: 1400px;
+  height: 80px;
+}
 </style>

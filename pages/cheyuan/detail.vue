@@ -1470,6 +1470,12 @@ export default {
 </script>
 
 <style scoped>
+.arc_top1 {
+  margin: 0px auto;
+  padding: 20px 0;
+  width: 1400px;
+  height: 80px;
+}
 .arc_input3 {
   display: inline-block;
 }

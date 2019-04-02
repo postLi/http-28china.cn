@@ -148,7 +148,7 @@ float:right;text-align: center;
   line-height: 30px;
 }
 .arc_right{float:left;width: 304px; height: 507px;box-shadow:0px 0px 1.7px rgba(0,0,0,0.3); font-size: 14px;}
-.arc_right p{margin: 0;padding: 0;padding-left: 24px;}
+.arc_right p{margin: 0;padding: 0;padding-left: 15px;}
 .arc_right .arc_right01{height: 46px;line-height:46px;background: url(../images/article_wlzx/35bg.png) no-repeat;}
 .arc_right01 img{padding-right:9px;}
 .arc_right01 span{color: #666;}
@@ -156,16 +156,16 @@ float:right;text-align: center;
 .arc_right .arc_right02 img{display:none;}
 .arc_right02 i{color: #999;}
 .arc_right .arc_right03{height: 76px;width: 280px;border-top:dashed 1px #e2e2e2;border-bottom:dashed  1px #e2e2e2;}
-.arc_right03 span{    text-align: center;color: #666;padding-right: 30px;margin-top: 17px; width:46px;display: block;float: left;}
+.arc_right03 span{    text-align: center;color: #666;padding-right: 30px;margin-top: 17px; width:63px;display: block;float: left;}
 .arc_right03 font{    color: #eb434d;
   padding-right: 30px;
   margin-top: 10px;
-  width: 46px;
+  width: 63px;
   display: block;
   float: left;
   text-align: center;}
-.arc_right .arc_right04{height: 130px;width: 228px;}
-.arc_right04 span{float: left;display: block;height: 32px;line-height: 32px;width: 100%;}
+.arc_right .arc_right04{height: 130px}
+.arc_right04 span{float: left;display: block;height: 32px;line-height: 32px;width: 100%;overflow: hidden;}
 .arc_right04_1{margin-top: 10px;}
 .arc_right04 i{color: #999;padding-right: 10px;}
 .arc_right04 font{color: #333;}
@@ -177,7 +177,7 @@ float:right;text-align: center;
 	border-radius: 2px;
 	border: solid 1px #7ec4e8;text-align: right;padding-right:10px;
 	background: url(../images/article_wlzx/15qq.gif)  no-repeat #A8E1FF ; background-position: 6px 2px;}
-.arc_right .arc_right05{height: 30px; width: 228px;margin-bottom: 18px;margin-top: 20px;}
+.arc_right .arc_right05{height: 30px; width: 228px;margin-left:15px;margin-bottom: 18px;margin-top: 20px;}
 .arc_right05 input{
 	width: 96px;
 	height: 28px;

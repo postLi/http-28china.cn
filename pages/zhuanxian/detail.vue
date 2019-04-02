@@ -2792,6 +2792,10 @@ export default {
     margin-top: 0;
   }
 }
+.arc_top1_2,
+.arc_top1_3 {
+  margin-top: 22px;
+}
 .lll-zhuangXian-detail .arc_toptitle {
   margin-top: 0 !important;
 }

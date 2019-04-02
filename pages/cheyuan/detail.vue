@@ -1425,6 +1425,11 @@ export default {
   width: 1400px;
   height: 80px;
 }
+.arc_top1_1,
+.arc_top1_2,
+.arc_top1_3 {
+  margin-top: 22px;
+}
 .arc_input3 {
   display: inline-block;
 }

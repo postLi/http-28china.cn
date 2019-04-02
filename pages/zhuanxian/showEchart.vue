@@ -83,7 +83,7 @@ export default {
         show: false,
         type: 'category',
         boundaryGap: false,
-        data: ['最高', '行情价高', '本专线', '行情价低', '最低']
+        data: ['最高', '行情价(高)', '本专线', '行情价(低)', '最低']
       },
       yAxis: {
         axisLine: { show: false },

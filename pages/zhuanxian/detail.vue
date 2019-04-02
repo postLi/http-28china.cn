@@ -481,7 +481,9 @@
       <div
         style="display: inline-block;width: 1360px; margin-top: 30px;"
         class="arc_main1-1">
-        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
+        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<a 
+          :href="'/create/line?startProvince='+linedataA.startProvince+'&startCity='+linedataA.startCity+'&startArea='+linedataA.startArea+'&endProvince='+linedataA.endProvince+'&endCity='+linedataA.endCity+'&endArea='+linedataA.endArea"
+          target="_blank"><i style="border-bottom:1px solid #ccc; cursor: pointer;">发布专线</i></a>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -490,6 +492,7 @@
             <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
           </div>
           <ShowEchart :info="LineeEchartInfo"/>
+          
           <!--<div id="echart"/>-->
         </div>
         <div class="right">
@@ -974,11 +977,11 @@
       :show = "isAdd"
       :info="linedataE"
       @close="noaddFn"/>
-    <BzAdd
+      <!-- <BzAdd
       :show = "isBzAdd"
       :info="LineeEchartInfo"
       @close="nobzAddFn"
-    />
+    /> -->
   </div>
 
 </template>
@@ -1168,7 +1171,7 @@ export default {
         endArea: enda
       })
     ])
-    // console.log(linedataA.data.data.startLocationContacts, 'linedataA.data')
+    console.log(linedataA.data.data, 'linedataA.data2')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
@@ -1291,7 +1294,7 @@ export default {
     this.detailCollnum()
     this.cananyCollnum()
     if (process.client) {
-      seajs.use(['/layer/layer.js'], function() {
+      seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
         seajs.use(
           ['../js/city.js', '../js/city-picker.data.js', '../js/calculator.js'],
           function() {

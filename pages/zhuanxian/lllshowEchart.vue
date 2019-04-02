@@ -1,7 +1,8 @@
 <template>
   <div 
     style="width: 576px;height: 340px;"
-    id="echart"/>
+    class="lllEchart"
+    id="lllEchart"/>
 </template>
 
 <script>
@@ -62,7 +63,7 @@ export default {
         maxY1 = el
       }
     })
-    let myChart = echarts.init(document.getElementById('echart'))
+    let myChart = echarts.init(document.getElementById('lllEchart'))
     let option = {
       title: { text: '', subtext: '' },
       tooltip: { trigger: 'axis' },

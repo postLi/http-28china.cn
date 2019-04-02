@@ -108,7 +108,9 @@
                   height="100">
               </div>
               <div class="textbox">
-                <a href="http://h5.28tms.com/">
+                <a 
+                  target="_blank" 
+                  href="http://h5.28tms.com/">
                 下载【28快运APP】，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a>
               </div>
             </div>
@@ -298,7 +300,7 @@
                   <a 
                     style="width:100%;float:left"
                     :href="'/member/'+item.id">
-                    <h4 :title="item.companyName">{{ item.companyName.substring(1,8) }}</h4>
+                    <h4 :title="item.companyName">{{ item.companyName }}</h4>
                     <p>
                       <span 
                         v-for="(i,n) in item.allServiceNameList.slice(0,2)" 
@@ -979,7 +981,7 @@ img {
   height: 20px;
   line-height: 20px;
   font-size: 14px;
-  padding: 20px 0;
+  padding: 12px 0;
   color: #333333;
   cursor: pointer;
 }
@@ -1011,12 +1013,13 @@ img {
   float: left;
   background: url('/images/wzlImg/05bg.png');
   overflow: hidden;
-  padding: 19px 45px;
+  /* padding: 19px 45px; */
+  padding: 19px 0;
   margin: 9px;
   box-sizing: border-box;
 }
 .ul_list li p {
-  display: flex;
+  /* display: flex; */
 }
 .ul_list li h4 {
   font-size: 18px;
@@ -1031,7 +1034,8 @@ img {
 .ul_list li span {
   height: 30px;
   line-height: 30px;
-  flex: 1;
+  /* flex: 1; */
+  margin: 8px;
 }
 .ul_host {
   width: 100%;
@@ -1904,9 +1908,6 @@ img {
   text-align: center;
 }
 /* 为您推荐下面的列表 */
-.wzl_box {
-  /* background: #fff; */
-}
 .numlll {
   width: 20px;
   height: 20px;
@@ -1977,7 +1978,7 @@ img {
   width: 100%;
   float: left;
   box-sizing: border-box;
-  padding: 15px 12px;
+  padding: 0px 12px;
 }
 .ltl-input0 {
   position: relative;

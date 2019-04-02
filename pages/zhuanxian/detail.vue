@@ -481,7 +481,9 @@
       <div
         style="display: inline-block;width: 1360px; margin-top: 30px;"
         class="arc_main1-1">
-        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<i>发布专线</i>，让车主主动来联系您，达成交易
+        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<a 
+          :href="'/create/line?startProvince='+linedataA.startProvince+'&startCity='+linedataA.startCity+'&startArea='+linedataA.startArea+'&endProvince='+linedataA.endProvince+'&endCity='+linedataA.endCity+'&endArea='+linedataA.endArea"
+          target="_blank"><i style="border-bottom:1px solid #ccc; cursor: pointer;">发布专线</i></a>，让车主主动来联系您，达成交易
       </div>
 
       <div class="arc_main3">
@@ -490,6 +492,7 @@
             <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
           </div>
           <ShowEchart :info="LineeEchartInfo"/>
+          
           <!--<div id="echart"/>-->
         </div>
         <div class="right">
@@ -534,7 +537,12 @@
                 </ul>
 
                 <div style="padding-left: 65px;display: inline-block">
-
+                  <!-- <a
+                    href="javascript:;"
+                    class="button1"
+                    @click="showEchart()">标准价</a> -->
+                  
+                                    
                   <a
                     href="javascript:;"
                     class="button1"
@@ -969,6 +977,11 @@
       :show = "isAdd"
       :info="linedataE"
       @close="noaddFn"/>
+      <!-- <BzAdd
+      :show = "isBzAdd"
+      :info="LineeEchartInfo"
+      @close="nobzAddFn"
+    /> -->
   </div>
 
 </template>
@@ -976,6 +989,7 @@
 <script>
 import creditIcon from '~/components/common/creditIcon'
 import Add from './add'
+import BzAdd from './bzAdd'
 
 import {
   isZXcity,
@@ -1035,6 +1049,7 @@ export default {
     FooterLinks,
     ShowEchart,
     Add,
+    BzAdd,
     creditIcon
   },
   head: {
@@ -1065,6 +1080,7 @@ export default {
       checkMoblie: true,
       isShowAdd: false,
       isXin: false,
+      isBzAdd: false,
       showImg: 0,
       pages: 0,
       currentPage: 1,
@@ -1155,7 +1171,7 @@ export default {
         endArea: enda
       })
     ])
-    // console.log(linedataA.data.data.startLocationContacts, 'linedataA.data')
+    console.log(linedataA.data.data, 'linedataA.data2')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
@@ -1278,7 +1294,7 @@ export default {
     this.detailCollnum()
     this.cananyCollnum()
     if (process.client) {
-      seajs.use(['/layer/layer.js'], function() {
+      seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
         seajs.use(
           ['../js/city.js', '../js/city-picker.data.js', '../js/calculator.js'],
           function() {
@@ -1422,6 +1438,9 @@ export default {
     }
   },
   methods: {
+    showEchart() {
+      this.bzAddFn()
+    },
     gotoHuoList(event) {
       // console.log(event, 'event')
       let city = event.target.innerHTML + '市'
@@ -1442,6 +1461,12 @@ export default {
     },
     noaddFn() {
       this.isAdd = false
+    },
+    bzAddFn() {
+      this.isBzAdd = true
+    },
+    nobzAddFn() {
+      this.isBzAdd = false
     },
     showPingLunFn(index) {
       // alert(index, 'index')
@@ -1709,6 +1734,8 @@ export default {
               this.comInfo(this.sendEchart1, this.cargoType1)
             }
           })
+          let copyobj = Object.assign(this.sendEchart1[2])
+          let copyobj2 = Object.assign(this.sendEchart[2])
           let maxY = this.sendEchart[0]
           this.sendEchart.forEach(el => {
             if (maxY < el) {
@@ -1732,7 +1759,7 @@ export default {
               $('.show1').hide()
               $('.show2').show()
               let myChart2 = echarts.init(document.getElementById('echart2'))
-              let option2 = {
+              let option = {
                 title: { text: '', subtext: '' },
                 tooltip: { trigger: 'axis' },
                 legend: {
@@ -1743,7 +1770,7 @@ export default {
                     // 不选中'系列2'
                     轻货: false
                   },
-                  bottom: 10,
+                  bottom: 30,
                   left: 'left',
                   selectedMode: 'single',
                   textStyle: {
@@ -1754,7 +1781,7 @@ export default {
                   show: false,
                   type: 'category',
                   boundaryGap: false,
-                  data: ['最高价', '行业最高', '本专线价', '行业最低', '最低价']
+                  data: ['最高', '行情价(高)', '本专线', '行情价(低)', '最低']
                 },
                 yAxis: {
                   axisLine: { show: false },
@@ -1781,7 +1808,7 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log(params)
+                          // console.log('markPoint:', params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/公斤}`
@@ -1792,21 +1819,23 @@ export default {
                             align: 'center',
                             fontWeight: 'normal',
                             color: '#FF7836',
-                            padding: [0, 0, 6, 0]
+                            padding: [0, 0, 10, 0]
                           },
                           color1: {
                             fontSize: 12,
                             align: 'center',
                             fontWeight: 'normal',
                             color: '#6F6F6F',
-                            padding: [0, 0, 6, 0]
+                            padding: [0, 0, 10, 0]
                           }
                         }
                       },
                       data: [
                         {
                           name: '',
-                          type: 'min'
+                          coord: [2, copyobj.value],
+                          value: copyobj.value
+                          // type: 'max'
                         }
                       ]
                     },
@@ -1833,7 +1862,7 @@ export default {
                         } else {
                           c0 = 'color0'
                         }
-                        if (params.dataIndex === 4) {
+                        if (params.dataIndex === 2) {
                           return ``
                         } else {
                           return `{${c0}|${params.value}元/公斤}\n{color2|${
@@ -1873,7 +1902,7 @@ export default {
                     },
                     data: [
                       null,
-                      null,
+                      this.sendEchart1[1],
                       this.sendEchart1[2],
                       this.sendEchart1[3]
                     ],
@@ -1900,14 +1929,14 @@ export default {
                         rich: {
                           style: {
                             fontSize: 15,
-                            padding: [0, 110, 0, 0],
+                            padding: [0, 150, 0, 0],
                             color: '#FF7836'
                           }
                         }
                       },
                       data: [
                         [
-                          { coord: ['行业均价（高点）', this.sendEchart1[2]] },
+                          { coord: ['行业均价（高点）', this.sendEchart1[1]] },
                           { coord: ['行业均价（高点）', maxY1] }
                         ],
                         [
@@ -1937,7 +1966,7 @@ export default {
                           // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
-                          }元/公斤}`
+                          }元/立方}`
                         },
                         rich: {
                           color0: {
@@ -1959,7 +1988,10 @@ export default {
                       data: [
                         {
                           name: '',
-                          type: 'min'
+                          // 4表示索引位置，第二个值为具体的值
+                          coord: [2, copyobj2.value],
+                          value: copyobj2.value
+                          // type: 'min'
                         }
                       ]
                     },
@@ -1986,10 +2018,10 @@ export default {
                         } else {
                           c0 = 'color0'
                         }
-                        if (params.dataIndex === 4) {
+                        if (params.dataIndex === 2) {
                           return ``
                         } else {
-                          return `{${c0}|${params.value}元/公斤}\n{color2|${
+                          return `{${c0}|${params.value}元/立方}\n{color2|${
                             params.name
                           }}`
                         }
@@ -2024,7 +2056,12 @@ export default {
                     areaStyle: {
                       normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
                     },
-                    data: [null, null, this.sendEchart[2], this.sendEchart[3]],
+                    data: [
+                      null,
+                      this.sendEchart[1],
+                      this.sendEchart[2],
+                      this.sendEchart[3]
+                    ],
                     tooltip: { show: false }
                   },
                   {
@@ -2067,7 +2104,7 @@ export default {
                   }
                 ]
               }
-              myChart2.setOption(option2)
+              myChart2.setOption(option)
             }
           }, 1000)
         },
@@ -2118,26 +2155,33 @@ export default {
       // 本专线价： thisRangePrice": 0.43
       // 最高价 行业最高 本专线价 行业最低 最低价
       // console.log(cargoType, 'cargoType')
-      sendEchart[0] = cargoType.highestPrice
-      sendEchart[1] = cargoType.highAveragePrice
-      sendEchart[2] = cargoType.thisRangePrice
-      sendEchart[3] = cargoType.lowAveragePrice
-
-      // lightDiscountPrice 轻货价的承运商价
-      let price = ''
-      if (cargoType.cargoType == 1) {
-        price = cargoType.lowestPrice
-        // console.log(price, 'price')
-      }
-      if (cargoType.cargoType == 0) {
-        price = cargoType.lowestPrice
-        // console.log(price, 'price2')
-      }
-      sendEchart[4] = {
-        value: price,
+      sendEchart[0] =
+        cargoType.highestPrice > 100
+          ? Math.floor(cargoType.highestPrice)
+          : cargoType.highestPrice
+      sendEchart[1] =
+        cargoType.highAveragePrice > 100
+          ? Math.floor(cargoType.highAveragePrice)
+          : cargoType.highAveragePrice
+      sendEchart[2] = {
+        value:
+          cargoType.thisRangePrice > 100
+            ? Math.floor(cargoType.thisRangePrice)
+            : cargoType.thisRangePrice,
+        // value: cargoType.lowAveragePrice,
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }
+      sendEchart[3] =
+        cargoType.lowAveragePrice > 100
+          ? Math.floor(cargoType.lowAveragePrice)
+          : cargoType.lowAveragePrice
+
+      sendEchart[4] =
+        cargoType.lowestPrice > 100
+          ? Math.floor(cargoType.lowestPrice)
+          : cargoType.lowestPrice
+      console.log(typeof sendEchart[3], sendEchart[4])
     },
     showfind1() {
       let _this = this

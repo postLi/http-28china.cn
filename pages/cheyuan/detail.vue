@@ -187,7 +187,9 @@
           <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span>车辆档案</span></p>
           <p class="arc_right04">
             <span class="arc_right04_1"><i>车牌号：</i><font v-if="cy1.carNum">{{ cy1.carNum.substring(0, 2) + '***' + cy1.carNum.substring(6, 10) }}</font></span>
-            <span><i>常驻地：</i><font v-if="cy1.usualPlace">{{ cy1.usualPlace.substring(0, 10) }}</font></span>
+            <span><i>常驻地：</i><font 
+              v-if="cy1.usualPlace" 
+              :title="cy1.usualPlace">{{ cy1.usualPlace.substring(0, 10) }}</font></span>
             <span><i>车长：</i><font>{{ cy1.carLength }}米</font></span>
             <span><i>类型：</i><font>{{ cy1.carTypeName }}</font></span>
             <span><i>载重：</i><font>{{ cy1.carLoad }}吨</font></span>
@@ -349,10 +351,10 @@
                     <font>载重<b>{{ item.carLoad }}</b>吨</font>
                     <font>{{ item.carSourceTypeName }}</font>
                   </p>
-                  <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
+                  <p class="p3"><i>常驻地：</i><font :title="item.usualPlace">{{ item.usualPlace ? item.usualPlace.substring(0, 10) : '' }}</font>&nbsp;&nbsp;<i>运价：</i>
                     <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
                   <font>{{ item.driverName?item.driverName:'' }}</font></p>
-                  <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
+                  <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark.substring(0,10) : '暂无说明' }}</font></p>
                 </li>
                 <li class="cy_list_3">
                   <p class="p1"><img
@@ -428,10 +430,10 @@
                     <font>载重<b>{{ item.carLoad }}</b>吨</font>
                     <font>{{ item.carSourceTypeName }}</font>
                   </p>
-                  <p class="p3"><i>常驻地：</i><font>{{ item.usualPlace }}</font>&nbsp;&nbsp;<i>运价：</i>
+                  <p class="p3"><i>常驻地：</i><font :title="item.usualPlace">{{ item.usualPlace ? item.usualPlace.substring(0, 10) : '' }}</font>&nbsp;&nbsp;<i>运价：</i>
                     <font>{{ item.expectPrice?item.expectPrice + '元':'面议' }}</font>&nbsp;&nbsp;<i>发布者：</i>
                   <font>{{ item.driverName?item.driverName:'' }}</font></p>
-                  <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark : '暂无说明' }}</font></p>
+                  <p class="p4"><i>说明：</i><font>{{ item.remark ? item.remark.substring(0,10) : '暂无说明' }}</font></p>
                 </li>
                 <li class="cy_list_3">
                   <p class="p1"><img
@@ -988,7 +990,7 @@ export default {
         show: false,
         type: 'category',
         boundaryGap: false,
-        data: ['最高', '本车', '行情价（高）', '行情价（低）', '最低']
+        data: ['最高', '行情价(高)', '本车', '行情价(低)', '最低']
       },
       yAxis: {
         axisLine: { show: false },
@@ -1133,8 +1135,8 @@ export default {
               }
             },
             data: [
-              [{ coord: ['行情价（高）', 8] }, { coord: ['行情价（高）', 15] }],
-              [{ coord: ['行情价（低）', 6] }, { coord: ['行情价（低）', 15] }]
+              [{ coord: ['本车', 8] }, { coord: ['本车', 15] }],
+              [{ coord: ['行情价(低)', 6] }, { coord: ['行情价(低)', 15] }]
             ]
           }
         }
@@ -1182,7 +1184,7 @@ export default {
                   show: false,
                   type: 'category',
                   boundaryGap: false,
-                  data: ['最高', '本车', '行情价（高）', '行情价（低）', '最低']
+                  data: ['最高', '行情价(高)', '本车', '行情价(低)', '最低']
                 },
                 yAxis: {
                   axisLine: { show: false },
@@ -1339,13 +1341,10 @@ export default {
                         }
                       },
                       data: [
+                        [{ coord: ['本车', 8] }, { coord: ['本车', 15] }],
                         [
-                          { coord: ['行情价（高）', 8] },
-                          { coord: ['行情价（高）', 15] }
-                        ],
-                        [
-                          { coord: ['行情价（低）', 6] },
-                          { coord: ['行情价（低）', 15] }
+                          { coord: ['行情价(低)', 6] },
+                          { coord: ['行情价(低)', 15] }
                         ]
                       ]
                     }

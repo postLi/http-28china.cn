@@ -395,8 +395,11 @@
                 <p class="p3">
                   <i>车源类型：</i><span>{{ item.carSourceTypeName }}</span><em>车辆类型：</em><font>{{ item.carTypeName }}</font>
                 </p>
-                <p class="p4">
-                  <i>常驻地：&nbsp;&nbsp;&nbsp;</i><span>{{ item.usualPlace }}</span>
+                <p 
+                class="p4">
+                  <i style="float:left;">常驻地：&nbsp;&nbsp;&nbsp;</i><span 
+                    style="float:left;width:200px;white-space: nowrap;text-overflow: ellipsis;overflow: hidden;" 
+                    :title="item.usualPlace">{{ item.usualPlace }}</span>
                 </p>
               </div>
               <div class="p5">
@@ -787,6 +790,7 @@ export default {
           .then(res => {
             if (res.status === 200) {
               layer.msg('提交成功，客服稍后将会与您联系')
+              this.reset()
             } else if (res.status === 500) {
               layer.msg(res.errorInfo)
             }
@@ -797,6 +801,11 @@ export default {
       } else {
         return
       }
+    },
+    reset() {
+      setTimeout(function() {
+        window.location.reload()
+      }, 3000)
     },
     sendNot() {
       let startAds = [],

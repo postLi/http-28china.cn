@@ -201,7 +201,7 @@
       <div 
         v-if="archival.archivalType === '3'" 
         class="arc_right">
-        <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span :title="archival.companyName">{{ archival.companyName ? archival.companyName.substring(0,10) : '' }}</span></p>
+        <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span :title="archival.companyName">{{ archival.companyName ? archival.companyName.substring(0,18) : '' }}</span></p>
         <p
           v-if="archival.isShowA"
           class="arc_right02" ><i>信誉：</i>
@@ -233,9 +233,15 @@
             v-if="archival.qq"
             :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
             target="_blank"><input value="QQ交谈"></a></span>
-          <span><i>地址：</i><a 
+          <span><i style="float:left">地址：</i><a 
+            style="overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 226px;
+            display: block;
+            float: left;"
             :title="archival.address"
-            v-if="archival.address">{{ archival.address.substring(0, 8) }}</a></span>
+            v-if="archival.address">{{ archival.address }}</a></span>
         </p>
         <p class="arc_right05">
           <a 
@@ -375,9 +381,9 @@
               class="manage_box">
               <a 
               :href="'/huoyuan?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea +'&endProvince='+item.endProvince+'&endCity='+item.endCity + '&endArea='+item.endArea"> 
-                <span :title="item.startProvinceCityArea">{{ item.startCity + item.startArea }}</span>
-                <span :title="item.endProvinceCityArea">{{ item.endCity + item.endArea }}</span>
-                <span :title="item.goodsTypeName">{{ item.goodsTypeName ?item.goodsTypeName.substring(0,5) : '' }}</span>
+                <span :title="item.startProvinceCityArea">{{ item.startProvinceCityArea ? item.startProvinceCityArea.substring(0,6) : '' }}</span>
+                <span :title="item.endProvinceCityArea">{{ item.endProvinceCityArea ? item.endProvinceCityArea.substring(0,6) : '' }}</span>
+                <span :title="item.goodsTypeName">{{ item.goodsTypeName ?item.goodsTypeName.substring(0,5) : '无' }}</span>
                 <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
                 <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
                 <span>{{ item.createTime }}</span>

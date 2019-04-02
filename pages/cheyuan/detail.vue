@@ -891,7 +891,7 @@ export default {
       cheComprehensive:
         cheComprehensives.data.status === 200
           ? cheComprehensives.data.data
-          : [],
+          : {},
       otherCarSourceList:
         otherCarSourceList && otherCarSourceList.data.status === 200
           ? otherCarSourceList.data.data
@@ -983,166 +983,40 @@ export default {
       }
     )
     let myChart = echarts.init(document.getElementById('echart'))
-    let option = {
-      title: { text: '', subtext: '' },
-      tooltip: { trigger: 'axis' },
-      xAxis: {
-        show: false,
-        type: 'category',
-        boundaryGap: false,
-        data: ['最高', '行情价(高)', '本车', '行情价(低)', '最低']
-      },
-      yAxis: {
-        axisLine: { show: false },
-        axisTick: { show: false },
-        axisLabel: { show: false },
-        type: 'value',
-        max: 15
-      },
-      series: [
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 0.5)' }
-          },
-          data: [
-            11,
-            10,
-            8,
-            6,
-            {
-              value: 5,
-              symbol: 'image:///images/cy/12d.png',
-              symbolSize: 20
-            }
-          ],
-          markPoint: {
-            symbol: 'image:///images/cy/11wk.png',
-            symbolOffset: [0, '-70%'],
-            symbolSize: [82, 62],
-            itemStyle: {
-              color: 'white' //需要把原本的样式变成白色，字体才能正常显示
-            },
-            label: {
-              position: 'insideTop',
-              formatter: function(params) {
-                console.log(params)
-                return `{color1|${params.name}}\n{color0|${params.value}元}`
-              },
-              rich: {
-                color0: {
-                  fontSize: 14,
-                  align: 'center',
-                  fontWeight: 'normal',
-                  color: '#FF7836',
-                  padding: [0, 0, 6, 0]
-                },
-                color1: {
-                  fontSize: 12,
-                  align: 'center',
-                  fontWeight: 'normal',
-                  color: '#6F6F6F',
-                  padding: [0, 0, 6, 0]
-                }
-              }
-            },
-            data: [
-              {
-                name: '',
-                type: 'min'
-              }
-            ]
-          },
-          itemStyle: {
-            normal: {
-              color: '#6F6F6F',
-              opacity: 1
-            },
-            emphasis: {
-              color: '#6F6F6F'
-            }
-          },
-          symbolSize: 6,
-          hoverAnimation: false, //拐点不要动画
-          symbol: 'circle',
-          label: {
-            show: true,
-            position: 'bottom',
-            textStyle: { color: '#6F6F6F' },
-            formatter: function(params) {
-              let c0
-              if (params.dataIndex <= 1) {
-                c0 = 'color1'
-              } else {
-                c0 = 'color0'
-              }
-              if (params.dataIndex === 4) {
-                return ``
-              } else {
-                return `{${c0}|${params.value}元}\n{color2|${params.name}}`
-              }
-            },
-            rich: {
-              color0: { fontSize: 18, align: 'center', color: '#FF7836' },
-              color1: { fontSize: 18, align: 'center', color: '#6F6F6F' },
-              color2: {
-                color: '#413A43',
-                align: 'center',
-                fontSize: 14,
-                padding: [5, 5, 5, 5]
+
+    this.getChartData(this.$route.query.id)
+      .then(res => {
+        let data = res.data
+        let odata = []
+
+        if (data) {
+          data = data.data
+
+          for (let i in data) {
+            if (i.indexOf('rice') !== -1) {
+              if (data[i] > 100) {
+                data[i] = Math.floor(data[i])
               }
             }
-          },
-          tooltip: { show: false }
-        },
-        {
-          name: '',
-          type: 'line',
-          lineStyle: {
-            normal: { color: 'rgba(255,173,101, 1)' }
-          },
-          areaStyle: {
-            normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
-          },
-          data: [null, null, 8, 6],
-          tooltip: { show: false }
-        },
-        {
-          name: '平行于y轴的趋势线',
-          type: 'line',
-          markLine: {
-            name: 'xfdsvffds',
-            symbol: ['circle', 'none'],
-            symbolSize: 6,
-            lineStyle: {
-              normal: { color: 'rgba(255,173,101, 1)' }
-            },
-            label: {
-              show: true,
-              position: 'end',
-              formatter: function(params) {
-                if (params.dataIndex === 1) {
-                  return `{style|建议价格区间}`
-                }
-              },
-              rich: {
-                style: {
-                  fontSize: 15,
-                  padding: [0, 110, 0, 0],
-                  color: '#FF7836'
-                }
-              }
-            },
-            data: [
-              [{ coord: ['本车', 8] }, { coord: ['本车', 15] }],
-              [{ coord: ['行情价(低)', 6] }, { coord: ['行情价(低)', 15] }]
-            ]
           }
+
+          odata = [
+            data.famousBrandPrice,
+            data.highQualityPrice,
+            data.highAveragePrice,
+            data.lowAveragePrice
+          ]
         }
-      ]
-    }
-    myChart.setOption(option)
+        this.echarData = data
+        return { data: odata, thisCarPrice: data.thisCarPrice }
+      })
+      .then(data => {
+        return this.getChartOption(data)
+      })
+      .then(option => {
+        myChart.setOption(option)
+      })
+
     $('#pagination1').pagination({
       currentPage: this.currentPage,
       totalPage: this.pages,
@@ -1160,7 +1034,248 @@ export default {
     })
   },
   methods: {
+    //价格参考
+    getChartData(id) {
+      return this.$axios.get('/28-web/carInfo/priceReference/' + id)
+    },
+    getChartOption(obj) {
+      let find = 4
+      let data = obj.data
+      let theCar = {
+        value: obj.thisCarPrice === null ? 0 : obj.thisCarPrice,
+        ovalue: 0, // 将最低价给它，方便它定位到最后
+        symbol: 'image:///images/cy/12d.png',
+        symbolSize: 20
+      }
+      if (obj.thisCarPrice === null) {
+        data.push(theCar)
+      } else {
+        // 判断本车价的位置
+        data.forEach((el, inx) => {
+          if (el < theCar.value) {
+            find = inx
+          }
+        })
+        data.splice(find, 0, theCar)
+      }
+      obj.find = find
+      let maxY = obj.find === 0 ? data[0].value : data[0] // 数据正常的情况下，第一个就是最高价
+      let label = ['最高', '行情价(高)', '行情价(低)', '最低']
+      label.splice(obj.find, 0, '本车')
+      let hqh // 行情价高
+      let hql // 行情价低
+      let theorangearea = [null, data[1], data[2]]
+      if (obj.find === 2) {
+        hqh = data[1]
+        hql = data[3]
+        theorangearea = [null, data[1], null, data[3]]
+      } else if (obj.find > 2) {
+        hqh = data[1]
+        hql = data[2]
+      } else {
+        hqh = data[2]
+        hql = data[3]
+        theorangearea = [null, null, data[2], data[3]]
+      }
+      console.log('echart 数据：', data, label, hqh, hql, maxY)
+      return {
+        title: { text: '', subtext: '' },
+        tooltip: { trigger: 'axis' },
+        xAxis: {
+          show: false,
+          type: 'category',
+          boundaryGap: false,
+          data: label
+        },
+        yAxis: {
+          axisLine: { show: false },
+          axisTick: { show: false },
+          axisLabel: { show: false },
+          type: 'value'
+          // max: maxY
+        },
+        series: [
+          {
+            name: '',
+            type: 'line',
+            lineStyle: {
+              normal: { color: 'rgba(255,173,101, 0.5)' }
+            },
+            data: data,
+            markPoint: {
+              symbol: 'image:///images/cy/11wk.png',
+              symbolOffset: [0, '-70%'],
+              symbolSize: [82, 62],
+              itemStyle: {
+                color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+              },
+              label: {
+                position: 'insideTop',
+                formatter: function(params) {
+                  console.log(params)
+                  if (params.value === 0) {
+                    return `{color1|${params.name}}\n{color0|面议}`
+                  } else {
+                    return `{color1|${params.name}}\n{color0|${params.value}元}`
+                  }
+                },
+                rich: {
+                  color0: {
+                    fontSize: 14,
+                    align: 'center',
+                    fontWeight: 'normal',
+                    color: '#FF7836',
+                    padding: [0, 0, 6, 0]
+                  },
+                  color1: {
+                    fontSize: 12,
+                    align: 'center',
+                    fontWeight: 'normal',
+                    color: '#6F6F6F',
+                    padding: [0, 0, 6, 0]
+                  }
+                }
+              },
+              data: [
+                {
+                  name: '',
+                  // type: 'min'
+                  coord: [
+                    obj.find,
+                    data[obj.find].value === '面议'
+                      ? data[obj.find].ovalue
+                      : data[obj.find].value
+                  ],
+                  value: data[obj.find].value
+                }
+              ]
+            },
+            itemStyle: {
+              normal: {
+                color: '#6F6F6F',
+                opacity: 1
+              },
+              emphasis: {
+                color: '#6F6F6F'
+              }
+            },
+            symbolSize: 6,
+            hoverAnimation: false, //拐点不要动画
+            symbol: 'rect',
+            // symbol: 'circle',
+            label: {
+              show: true,
+              position: 'bottom',
+              textStyle: { color: '#6F6F6F' },
+              formatter: function(params) {
+                let c0
+                if (params.dataIndex <= 1) {
+                  c0 = 'color1'
+                } else {
+                  c0 = 'color0'
+                }
+                if (params.dataIndex === obj.find) {
+                  return ``
+                } else {
+                  return `{${c0}|${params.value}元}\n{color2|${params.name}}`
+                }
+              },
+              rich: {
+                color0: { fontSize: 14, align: 'center', color: '#FF7836' },
+                color1: { fontSize: 14, align: 'center', color: '#6F6F6F' },
+                color2: {
+                  color: '#413A43',
+                  align: 'center',
+                  fontSize: 14,
+                  padding: [5, 5, 5, 5]
+                }
+              }
+            },
+            tooltip: { show: false }
+          },
+          // 控制橙色覆盖区间
+          {
+            name: '',
+            type: 'line',
+            lineStyle: {
+              normal: { color: 'rgba(255,173,101, 1)' }
+            },
+            areaStyle: {
+              normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
+            },
+            data: theorangearea,
+            tooltip: { show: false }
+          },
+          {
+            name: '平行于y轴的趋势线',
+            type: 'line',
+            markLine: {
+              name: 'xfdsvffds',
+              symbol: ['circle', 'none'],
+              symbolSize: 6,
+              lineStyle: {
+                normal: { color: 'rgba(255,173,101, 1)' }
+              },
+              label: {
+                show: true,
+                position: 'end',
+                formatter: function(params) {
+                  if (params.dataIndex === 1) {
+                    return `{style|建议价格区间}`
+                  }
+                },
+                rich: {
+                  style: {
+                    fontSize: 15,
+                    padding: [0, 110, 0, 0],
+                    color: '#FF7836'
+                  }
+                }
+              },
+              data: [
+                [
+                  { coord: ['行情价(高)', hqh] },
+                  { coord: ['行情价(高)', maxY] }
+                ],
+                [
+                  { coord: ['行情价(低)', hql] },
+                  { coord: ['行情价(低)', maxY] }
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    },
     showPrice() {
+      let tipstr =
+        '<div class="myLayer_content2">此数据源于平台用户提报的历史数据统计，仅供参考！</div>'
+      if (this.echarData.thisCarPrice !== null) {
+        if (
+          this.echarData.thisCarPrice > this.echarData.standardHighQualityPrice
+        ) {
+          // 高于
+          tipstr =
+            '<div class="myLayer_content2">车主' +
+            this.cy1.driverName +
+            '的承运价格<span>高于</span>行业均价高点</div>'
+        } else if (
+          this.echarData.thisCarPrice < this.echarData.standardHighAveragePrice
+        ) {
+          // 低于
+          tipstr =
+            '<div class="myLayer_content2">车主' +
+            this.cy1.driverName +
+            '的报价<span>低于</span><i>' +
+            this.cheComprehensive.lowerPriceRate +
+            '%的车主</i>，承运价格<span>低于</span>行业均价低点</div>'
+        } else {
+          tipstr =
+            '<div class="myLayer_content2">车主' +
+            this.cy1.driverName +
+            '的承运价格处于行业均价内</div>'
+        }
+      }
       layer.open({
         type: 1,
         title: ' ',
@@ -1177,180 +1292,16 @@ export default {
               $('.show1').hide()
               $('.show2').show()
               let myChart2 = echarts.init(document.getElementById('echart2'))
-              let option2 = {
-                title: { text: '', subtext: '' },
-                tooltip: { trigger: 'axis' },
-                xAxis: {
-                  show: false,
-                  type: 'category',
-                  boundaryGap: false,
-                  data: ['最高', '行情价(高)', '本车', '行情价(低)', '最低']
-                },
-                yAxis: {
-                  axisLine: { show: false },
-                  axisTick: { show: false },
-                  axisLabel: { show: false },
-                  type: 'value',
-                  max: 15
-                },
-                series: [
-                  {
-                    name: '',
-                    type: 'line',
-                    lineStyle: {
-                      normal: { color: 'rgba(255,173,101, 0.5)' }
-                    },
-                    data: [
-                      11,
-                      10,
-                      8,
-                      6,
-                      {
-                        value: 5,
-                        symbol: 'image:///images/cy/12d.png',
-                        symbolSize: 20
-                      }
-                    ],
-                    markPoint: {
-                      symbol: 'image:///images/cy/11wk.png',
-                      symbolOffset: [0, '-70%'],
-                      symbolSize: [82, 62],
-                      itemStyle: {
-                        color: 'white' //需要把原本的样式变成白色，字体才能正常显示
-                      },
-                      label: {
-                        position: 'insideTop',
-                        formatter: function(params) {
-                          console.log(params)
-                          return `{color1|${params.name}}\n{color0|${
-                            params.value
-                          }元}`
-                        },
-                        rich: {
-                          color0: {
-                            fontSize: 14,
-                            align: 'center',
-                            fontWeight: 'normal',
-                            color: '#FF7836',
-                            padding: [0, 0, 6, 0]
-                          },
-                          color1: {
-                            fontSize: 12,
-                            align: 'center',
-                            fontWeight: 'normal',
-                            color: '#6F6F6F',
-                            padding: [0, 0, 6, 0]
-                          }
-                        }
-                      },
-                      data: [
-                        {
-                          name: '',
-                          type: 'min'
-                        }
-                      ]
-                    },
-                    itemStyle: {
-                      normal: {
-                        color: '#6F6F6F',
-                        opacity: 1
-                      },
-                      emphasis: {
-                        color: '#6F6F6F'
-                      }
-                    },
-                    symbolSize: 6,
-                    hoverAnimation: false,
-                    symbol: 'circle',
-                    label: {
-                      show: true,
-                      position: 'bottom',
-                      textStyle: { color: '#6F6F6F' },
-                      formatter: function(params) {
-                        let c0
-                        if (params.dataIndex <= 1) {
-                          c0 = 'color1'
-                        } else {
-                          c0 = 'color0'
-                        }
-                        if (params.dataIndex === 4) {
-                          return ``
-                        } else {
-                          return `{${c0}|${params.value}元}\n{color2|${
-                            params.name
-                          }}`
-                        }
-                      },
-                      rich: {
-                        color0: {
-                          fontSize: 18,
-                          align: 'center',
-                          color: '#FF7836'
-                        },
-                        color1: {
-                          fontSize: 18,
-                          align: 'center',
-                          color: '#6F6F6F'
-                        },
-                        color2: {
-                          color: '#413A43',
-                          align: 'center',
-                          fontSize: 14,
-                          padding: [5, 5, 5, 5]
-                        }
-                      }
-                    },
-                    tooltip: { show: false }
-                  },
-                  {
-                    name: '',
-                    type: 'line',
-                    lineStyle: {
-                      normal: { color: 'rgba(255,173,101, 1)' }
-                    },
-                    areaStyle: {
-                      normal: { origin: 'end', color: 'rgba(255,161,77, 0.5)' }
-                    },
-                    data: [null, null, 8, 6],
-                    tooltip: { show: false }
-                  },
-                  {
-                    name: '平行于y轴的趋势线',
-                    type: 'line',
-                    markLine: {
-                      name: 'xfdsvffds',
-                      symbol: ['circle', 'none'],
-                      symbolSize: 6,
-                      lineStyle: {
-                        normal: { color: 'rgba(255,173,101, 1)' }
-                      },
-                      label: {
-                        show: true,
-                        position: 'end',
-                        formatter: function(params) {
-                          if (params.dataIndex === 1) {
-                            return `{style|建议价格区间}`
-                          }
-                        },
-                        rich: {
-                          style: {
-                            fontSize: 15,
-                            padding: [0, 110, 0, 0],
-                            color: '#FF7836'
-                          }
-                        }
-                      },
-                      data: [
-                        [{ coord: ['本车', 8] }, { coord: ['本车', 15] }],
-                        [
-                          { coord: ['行情价(低)', 6] },
-                          { coord: ['行情价(低)', 15] }
-                        ]
-                      ]
-                    }
-                  }
-                ]
-              }
+              let tdata = this.echarData
+              let option2 = this.getChartOption({
+                data: [
+                  tdata.standardFamousBrandPrice,
+                  tdata.standardHighQualityPrice,
+                  tdata.standardHighAveragePrice,
+                  tdata.standardLowAveragePrice
+                ],
+                thisCarPrice: tdata.thisCarPrice
+              })
               myChart2.setOption(option2)
             }
           }, 1000)
@@ -1370,9 +1321,7 @@ export default {
           this.cy1.carLength +
           '米</div>' +
           '<div id="echart2"></div>' +
-          '<div class="myLayer_content2">车主' +
-          this.cy1.driverName +
-          '的报价<span>低于</span><i>92.6%的车主</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          tipstr +
           '</div>'
       })
     },

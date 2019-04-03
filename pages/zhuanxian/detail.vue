@@ -2696,8 +2696,8 @@ export default {
             // console.log(res.data.data, 'res方法2')
           })
           .catch(err => {
-            layer.msg('收藏失败2')
-            console.log('收藏失败', err)
+            // layer.msg('收藏失败2')
+            // console.log('收藏失败', err)
           })
       }
     },

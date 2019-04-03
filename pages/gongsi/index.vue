@@ -55,16 +55,31 @@
           class="sec_li"
           style="margin:0 20px;">
           <div class="top">
+            <div 
+              class="layui-carousel" 
+              id="test1"
+              style="width: 100%; height: 250px;">
+              <div carousel-item>
+                <div 
+                  v-for="(item,i) in 2"
+                  :key="i"><img 
+                    src="../../static/gongsi/images/02banner.jpg" 
+                    alt=""></div>
+          
+              </div>
+            </div>
+
+            <!--             
             <div
               id="test1"
               class="layui-carousel"
               style="width: 100%; height: 250px;">
               <div carousel-item>
                 <div
-                  v-for="(item, i) in 3"
-                  :key="i"><img src="../../static/gongsi/images/02banner.png"></div>
+                  v-for="(item, i) in 2"
+                  :key="i"><img src="../../static/gongsi/images/02banner.jpg"></div>
               </div>
-            </div>
+            </div> -->
           </div>
           <div
             class="bot"
@@ -889,7 +904,7 @@ export default {
             seajs.use(['../js/collection.js', '../js/diqu1.js'], function() {
               seajs.use(['../js/gaodemap2.js'], function() {
                 layui.use('form', function() {
-                  console.log('layui', layui)
+                  // console.log('layui', layui)
                   //运单查询 S
                   $('.ydh').click(function() {
                     $('#yd_nr').val('1809260061')

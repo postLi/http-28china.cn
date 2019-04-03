@@ -219,6 +219,7 @@ export default {
     async showDiv(n) {
       if (n == true) {
         // let vo
+        // this.indexPl = 3
         let obj = await getpjLists(
           this.$axios,
           1,

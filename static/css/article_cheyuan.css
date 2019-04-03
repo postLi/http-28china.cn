@@ -73,6 +73,14 @@ body{background-color: #F9F9F9;}
   width: 556px;
   height: 390px;
   background-color: #ffffff;
+  position: relative;
+}
+.echart_tip{
+  position: absolute;
+  top: 55px;
+  left: 20px;
+  color: #FF8547;
+  font-size: 16px;
 }
 .arc_main3 .right{
   float: right;
@@ -830,6 +838,7 @@ padding-right: 12px;
   line-height: 28px;
   letter-spacing: 1.1px;
   color: #333333;
+  
 }
 .hot-cities{
   background-color: #fff

@@ -919,7 +919,6 @@ table tr:nth-child(odd){
 }
 
 .ps-list li {
-  list-style: square;
   font-size: 14px;
   font-weight: normal;
   font-stretch: normal;
@@ -928,6 +927,9 @@ table tr:nth-child(odd){
   color: #333333;
   list-style: none;
   margin-bottom: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .list_none span {
   float: left;

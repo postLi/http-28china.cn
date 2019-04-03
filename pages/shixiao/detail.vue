@@ -81,7 +81,9 @@
                 height="100">
             </div>
             <div class="textbox">
-              <a href="http://h5.28tms.com/">
+              <a 
+                target="_blank"
+                href="http://h5.28tms.com/">
               下载【28快运APP】，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a>
             </div>
           </div>

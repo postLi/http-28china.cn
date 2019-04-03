@@ -247,6 +247,10 @@
           <div class="zx_sx">
             <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
           </div>
+          <div class="echart_tip">{{ cy1.startCity +
+            '->' +
+            cy1.endCity +
+          cy1.carLength }}米整车</div>
           <div id="echart"/>
         </div>
         <div class="right">
@@ -685,7 +689,7 @@ export default {
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/article_cheyuan.css' },
+      { rel: 'stylesheet', href: '/css/article_cheyuan.css?v2' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
     script: [
@@ -750,7 +754,7 @@ export default {
       .dispatch('news/GETNEWSINFO', {
         params: {
           channelIds: '101',
-          count: 8,
+          count: 10,
           orderBy: 9,
           channelOption: 0
         },

@@ -70,7 +70,7 @@ export default {
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/layer3/css/layui.css' }],
-    script: [{ src: '/layer/layer.js' }, { src: '/js/LLL-AFLC_VALID.js' }]
+    script: [{ src: '/layer/layer.js' }, { src: '/js/LLL-AFLC_API.js' }]
   },
   data() {
     return {

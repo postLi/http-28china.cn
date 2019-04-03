@@ -621,10 +621,10 @@ export default {
       endProvince: endp,
       endCity: endc,
       endArea: enda,
-      belongBrandCode: query.belongBrandCode,
-      departureTimeCode: query.departureTimeCode,
-      otherServiceCode: query.otherServiceCode,
-      parkId: query.parkId,
+      belongBrandCode: query.belongBrandCode || '',
+      departureTimeCode: query.departureTimeCode || '',
+      otherServiceCode: query.otherServiceCode || '',
+      parkId: query.parkId || '',
       companyName: query.companyName || '',
       parkName: query.parkName || ''
     }
@@ -697,8 +697,9 @@ export default {
       codeA.data.data.unshift(codeObj)
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
+      // console.log(listA.data.data, '_this.lineListsTotalPage22')
       return {
-        lineListsTotalPage: listA.data.data.page,
+        lineListsTotalPage: listA.data.data.pages,
         lineLists: listA.data.data.list,
         lineRecoms: listB.data.status == 200 ? listB.data.data : [],
         lineLinks: listC.data.status == 200 ? listC.data.data : [],
@@ -774,6 +775,10 @@ export default {
                   //   }
                   // })
                   // onCheckPage()
+                  console.log(
+                    _this.lineListsTotalPage,
+                    '_this.lineListsTotalPage'
+                  )
                   $('#pagination1').pagination({
                     currentPage: 1,
                     totalPage: _this.lineListsTotalPage,

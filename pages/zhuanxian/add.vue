@@ -205,7 +205,8 @@ export default {
       },
       isCompanyName: false,
       isContactsName: false,
-      ismobile: false
+      ismobile: false,
+      vo: {}
     }
   },
 
@@ -217,11 +218,11 @@ export default {
   watch: {
     async showDiv(n) {
       if (n == true) {
-        let vo
+        // let vo
         let obj = await getpjLists(
           this.$axios,
-          this.currentPage,
-          vo,
+          1,
+          this.vo,
           this.$route.query,
           this.assessLevel
         )
@@ -233,7 +234,6 @@ export default {
         //总数
         let _data = await getpjNum(this.$axios, this.$route.query)
         this.pjNum = _data.data
-        // console.log(this.pjNum, 'pjnum')
         //
       }
     },
@@ -261,6 +261,7 @@ export default {
           let assessLevel = ''
           this.pages = obj.pages
           this.list = obj.list
+          console.log(this.list, 'listjfjjfjff')
           // this.currentPage = obj.currentPage
         }
       })
@@ -292,9 +293,10 @@ export default {
       }
       this.indexPl = index
       this.assessLevel = assessLevel
-      let vo
+      // let vo
+
       // vo.assessLevel = assessLevel
-      getpjLists(this.$axios, 1, vo, this.$route.query, assessLevel).then(
+      getpjLists(this.$axios, 1, this.vo, this.$route.query, assessLevel).then(
         res => {
           let obj = res
           this.pages = obj.pages
@@ -306,9 +308,10 @@ export default {
       )
     },
     closeDialog() {
+      this.vo = {}
       this.$emit('close')
-      this.form = {}
-      this.ismobile = false
+
+      // this.ismobile = false
       // this.$emit('update:show', false)
 
       //把绑定的弹窗数组 设为false即可关闭弹窗

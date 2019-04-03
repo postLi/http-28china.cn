@@ -62,10 +62,8 @@ const _5dcf82aa = () => interopDefault(import('..\\pages\\zhuanxian\\detail.vue'
 const _51f92896 = () => interopDefault(import('..\\pages\\zhuanxian\\detail1.vue' /* webpackChunkName: "pages_zhuanxian_detail1" */))
 const _1810a780 = () => interopDefault(import('..\\pages\\zhuanxian\\huizong.vue' /* webpackChunkName: "pages_zhuanxian_huizong" */))
 const _37ea10f8 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
-const _6e040ef8 = () => interopDefault(import('..\\pages\\zhuanxian\\lllshowEchart.vue' /* webpackChunkName: "pages_zhuanxian_lllshowEchart" */))
 const _7da25454 = () => interopDefault(import('..\\pages\\zhuanxian\\selectMap.vue' /* webpackChunkName: "pages_zhuanxian_selectMap" */))
 const _421afed0 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart.vue' /* webpackChunkName: "pages_zhuanxian_showEchart" */))
-const _9faddca0 = () => interopDefault(import('..\\pages\\zhuanxian\\showFind.vue' /* webpackChunkName: "pages_zhuanxian_showFind" */))
 const _817b353c = () => interopDefault(import('..\\pages\\zhuanxian\\showPrice.vue' /* webpackChunkName: "pages_zhuanxian_showPrice" */))
 const _7851fcd0 = () => interopDefault(import('..\\pages\\zixun\\utils.js' /* webpackChunkName: "pages_zixun_utils" */))
 const _0bfcb3a3 = () => interopDefault(import('..\\pages\\act\\2019\\springDay\\index.vue' /* webpackChunkName: "pages_act_2019_springDay_index" */))
@@ -84,6 +82,7 @@ const _c0abab62 = () => interopDefault(import('..\\pages\\member\\_id-cpfw2.vue'
 const _a7dbe1c6 = () => interopDefault(import('..\\pages\\member\\_id-huo.vue' /* webpackChunkName: "pages_member__id-huo" */))
 const _2bc23a75 = () => interopDefault(import('..\\pages\\member\\_id-jianjie.vue' /* webpackChunkName: "pages_member__id-jianjie" */))
 const _07c97f2e = () => interopDefault(import('..\\pages\\member\\_id-line.vue' /* webpackChunkName: "pages_member__id-line" */))
+const _086593c8 = () => interopDefault(import('..\\pages\\member\\_id-news.vue' /* webpackChunkName: "pages_member__id-news" */))
 const _44b832ae = () => interopDefault(import('..\\pages\\member\\_id-order.vue' /* webpackChunkName: "pages_member__id-order" */))
 const _1ee9552c = () => interopDefault(import('..\\pages\\member\\_id-wangdian.vue' /* webpackChunkName: "pages_member__id-wangdian" */))
 const _5fe03a07 = () => interopDefault(import('..\\pages\\member\\_id-webnotice.vue' /* webpackChunkName: "pages_member__id-webnotice" */))
@@ -409,10 +408,6 @@ export function createRouter() {
       component: _37ea10f8,
       name: "zhuanxian-list"
     }, {
-      path: "/zhuanxian/lllshowEchart",
-      component: _6e040ef8,
-      name: "zhuanxian-lllshowEchart"
-    }, {
       path: "/zhuanxian/selectMap",
       component: _7da25454,
       name: "zhuanxian-selectMap"
@@ -420,10 +415,6 @@ export function createRouter() {
       path: "/zhuanxian/showEchart",
       component: _421afed0,
       name: "zhuanxian-showEchart"
-    }, {
-      path: "/zhuanxian/showFind",
-      component: _9faddca0,
-      name: "zhuanxian-showFind"
     }, {
       path: "/zhuanxian/showPrice",
       component: _817b353c,
@@ -496,6 +487,10 @@ export function createRouter() {
       path: "/member/:id-line",
       component: _07c97f2e,
       name: "member-id-line"
+    }, {
+      path: "/member/:id-news",
+      component: _086593c8,
+      name: "member-id-news"
     }, {
       path: "/member/:id-order",
       component: _44b832ae,

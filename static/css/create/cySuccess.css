@@ -71,10 +71,10 @@
 .order-create-main{
   /* background: url('../images/order2.png') no-repeat 0 0 #fff; */
   background: #fff;
-  min-height: 941px;
+  /* min-height: 941px; */
   font-size: 14px;
   display: block;
-  padding-top:10px;
+  padding:10px 0;
 }
 /* ================创建订单 */
 .order-input-tab{

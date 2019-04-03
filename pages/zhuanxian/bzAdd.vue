@@ -45,7 +45,7 @@
         <div class="showEchart">
           <span>价格参考</span><span>大数据智能模型精准定价，28智能平台指导定价</span>
           <p>广州→深圳专线</p>
-          <ShowEchart :info="LineeEchartInfo"/>
+          <!-- <ShowEchart :info="LineeEchartInfo"/> -->
           <p>江苏大本赢物流有限公司的报价低于92.6%的承运商，承运价格低于行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</p>
         </div>
       </div>
@@ -55,12 +55,12 @@
 </template>
 <script>
 import LllDialog from '../../components/lllDialog'
-import ShowEchart from './lllshowEchart'
+// import ShowEchart from './lllshowEchart'
 export default {
   name: 'Add',
   components: {
-    LllDialog,
-    ShowEchart
+    LllDialog
+    // ShowEchart
   },
   props: {
     show: {

@@ -160,6 +160,28 @@ export default {
   },
   mounted() {
     // '/js/insurance.js'
+    if (this.$route.query.startProvince) {
+      let strartAddress =
+        this.$route.query.startProvince +
+        this.$route.query.startCity +
+        this.$route.query.startArea
+
+      // console.log(strartAddress, 'strartAddress')
+      $('.start').val(strartAddress)
+      $('.start').attr('theprovince', this.$route.query.startProvince)
+      $('.start').attr('thearea', this.$route.query.startArea)
+      $('.start').attr('thecity', this.$route.query.startCity)
+      let endAddress =
+        this.$route.query.endProvince +
+        this.$route.query.endCity +
+        this.$route.query.endArea
+      $('.end').val(endAddress)
+      $('.end').attr('theprovince', this.$route.query.endProvince)
+      $('.end').attr('thearea', this.$route.query.endArea)
+      $('.end').attr('thecity', this.$route.query.endCity)
+    }
+    console.log(this.$route, 'routtsdes')
+
     seajs.use(['/js/insurance.js', '/js/LLL-AFLC_API.js'], function() {
       seajs.use(['/js/laydate.js'], function() {
         seajs.use(['/js/gaodemap2.js'], function() {
@@ -418,7 +440,6 @@ export default {
                       .postAdd(url, options)
                       .done(function(res) {
                         console.log(res, '发布成功，请完善司机车辆信息！')
-                        // window.location.href='/Insurance/pay.htm?id=' + res.data
                         if (res.status === 200) {
                           layer.msg('发布成功', { time: 3000 }, function(
                             params

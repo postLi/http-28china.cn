@@ -93,19 +93,19 @@ function sjtj() {
 $('#order_01').click(function() {
   var start = $('#zhidaFrom').val()
   var end = $('#zhidaTo').val()
-  var startjw = $('#zhidaFrom').attr('thepos')
-  var startpcd = $('#zhidaFrom').attr('thepcd')
-  var startstreet = $('#zhidaFrom').attr('thestreet')
-  var endpcd = $('#zhidaTo').attr('thepcd')
-  var endstreet = $('#zhidaTo').attr('thestreet')
+  var startjw = $('#zhidaFrom').attr('thepos') || ''
+  var startpcd = $('#zhidaFrom').attr('thepcd') || ''
+  var startstreet = $('#zhidaFrom').attr('thestreet') || ''
+  var endpcd = $('#zhidaTo').attr('thepcd') || ''
+  var endstreet = $('#zhidaTo').attr('thestreet') || ''
 
-  var startp = $('#zhidaFrom').attr('theprovince')
-  var startc = $('#zhidaFrom').attr('thecity')
-  var starta = $('#zhidaFrom').attr('thearea')
+  var startp = $('#zhidaFrom').attr('theprovince') || ''
+  var startc = $('#zhidaFrom').attr('thecity') || ''
+  var starta = $('#zhidaFrom').attr('thearea') || ''
 
-  var endp = $('#zhidaTo').attr('theprovince')
-  var endc = $('#zhidaTo').attr('thecity')
-  var enda = $('#zhidaTo').attr('thearea')
+  var endp = $('#zhidaTo').attr('theprovince') || ''
+  var endc = $('#zhidaTo').attr('thecity') || ''
+  var enda = $('#zhidaTo').attr('thearea') || ''
 
   if (startjw) {
     var startj = startjw.split(',', 2)[0]

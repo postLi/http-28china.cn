@@ -252,7 +252,8 @@
                     target="_blank"><img src="/images/article_wlzx/15qq.gif"></a>
                 </P>
 
-                <p class="p2"><a href="#">{{ item.companyName }}</a></p>
+                <p class="p2"><a 
+                :href="'/member/' + item.companyId">{{ item.companyName }}</a></p>
                 <p class="p3">
                   <creditIcon :credit="item.credit" />
                 </p>

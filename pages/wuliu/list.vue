@@ -602,7 +602,7 @@
           <span>快速成为承运商获取优质货源</span>
           <a
             href="/regisiter"
-            target="_blank"><buttom style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</buttom></a>
+            target="_blank"><button style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</button></a>
         </div>
     
 

@@ -85,8 +85,12 @@
                 :key="index" 
                 class="top_left_ul_li" >
                 <span>用户<em style="color: #2577e3;">{{ item.creater }}</em></span>
-                <span><em style="color: #2577e3;">{{ item.startCity }}</em>到</span>
-                <span><em style="color: #2577e3;">{{ item.endCity }}</em>货源</span>
+                <span><em 
+                  :title="item.startCity"
+                  style="color: #2577e3;">{{ item.startCity ? item.startCity.substring(0,3) : '' }}</em>到</span>
+                <span><em 
+                  :title="item.endCity"
+                  style="color: #2577e3;">{{ item.endCity ? item.endCity.substring(0,3) :'' }}</em>货源</span>
                 <span>{{ item.time }}前</span>
               </li>
             </ul>
@@ -161,7 +165,9 @@
                   height="72">
               </div>
               <div>
-                <a href="http://h5.28tms.com/">
+                <a 
+                  target="_black"
+                  href="http://h5.28tms.com/">
                 下载<span>【28快运APP】</span>，您可查看更多<span>{{ hyDetail.startCity }}</span>到<span>{{ hyDetail.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
               </div>
               <p style="margin:20px;">便捷<span 
@@ -229,10 +235,18 @@
         <p class="arc_right04">
           <span class="arc_right04_1"><i>联系人：</i><font>{{ archival.contactsName }}</font></span>
           <span><i>手机：</i><font>{{ archival.mobile }}</font></span>
-          <span><i>Q&nbsp;Q：</i><a
-            v-if="archival.qq"
-            :href="'http://wpa.qq.com/msgrd?v=3&uin=' + archival.qq + '&site=qq&menu=yes'" 
-            target="_blank"><input value="QQ交谈"></a></span>
+          <span><i>Q&nbsp;Q：</i>
+            <a
+              id="nr1023"
+              :href="'http://wpa.qq.com/msgrd?v=3&uin='+ archival.qq+'&site=qq&menu=yes'"
+              target="_blank">
+              <input
+                v-if="archival.qq != '' && archival.qq != null"
+                readonly
+                id="qq"
+                value="QQ交谈">
+            </a>
+          </span>
           <span><i style="float:left">地址：</i><a 
             style="overflow: hidden;
             text-overflow: ellipsis;
@@ -273,8 +287,7 @@
         <div class="arc_top_title">
           <h4>货主档案</h4>
         </div>
-        <div 
-        class="arc_top_img">
+        <div class="arc_top_img">
           <img src="/images/cy/gold.png">
         </div>
         <div class="arc_middle">
@@ -283,7 +296,9 @@
           <p><img 
             v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
-          <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #f8542b">{{ archival.liveness }}</i></p>
+          <p>
+            <img src="/images/cy/13hot.png">活跃度：<i style="color: #f8542b">{{ archival.liveness }}</i>
+          </p>
         </div>
         <ul class="bottom_ul">
           <li>联系人：{{ archival.contacts }}</li>
@@ -302,6 +317,9 @@
         v-if="archival.archivalType === '2'">
         <div class="arc_top_title">
           <h4 :title="archival.companyName">{{ archival.companyName ? archival.companyName.substring(0,10) : '' }}</h4>
+        </div>
+        <div class="arc_top_img">
+          <img src="/images/cy/gold.png">
         </div>
         <div class="arc_middle">
           <img src="/images/cy/hztx.png">
@@ -346,6 +364,7 @@
           <div class="content-right">
             <img src="/images/cy/gold.png">
             <div class="content-right-row"><img
+              v-if="huoComprehensive.liveness >= 50"
               class="img"
               src="/images/cy/13hot.png">活跃度：<i>{{ huoComprehensive.liveness }}</i></div>
             <div class="content-right-row">最近三个月发布货源 <i>{{ huoComprehensive.lastThreeMonthSupplyNum }}</i> 次</div>
@@ -401,8 +420,8 @@
               :key="dex">
               <a 
               :href="'/huoyuan?startProvince='+ i.startProvince+'&startCity='+i.startCity+'&startArea='+i.startArea +'&endProvince='+i.endProvince+'&endCity='+i.endCity + '&endArea='+i.endArea"> 
-                <span :title="i.startProvinceCityArea">{{ i.startCity + i.startArea }}</span>
-                <span :title="i.endProvinceCityArea">{{ i.endCity + i.endArea }}</span>
+                <span :title="i.startProvinceCityArea">{{ i.startProvince + i.startCity }}</span>
+                <span :title="i.endProvinceCityArea">{{ i.endProvince + i.endCity }}</span>
                 <span :title="i.goodsTypeName">{{ i.goodsTypeName ?i.goodsTypeName.substring(0,5) : '' }}</span>
                 <span><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</span>
                 <span><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</span>
@@ -458,7 +477,8 @@
                 type="button" 
                 class="search_hy" 
                 value="" 
-                @click="search()"></div>                        
+                @click="search()">
+            </div>                        
             <div class="more floatr"><a 
               :href="'/huoyuan?startProvince='+hyDetail.startProvince+'&startCity='+hyDetail.startCity" 
               target="_blank">更多&gt;</a></div>		 
@@ -748,7 +768,7 @@
                 <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
-                <span><a :title="item.companyName">{{ item.companyName }}</a></span>
+                <span>{{ item.companyName }}</span>
                 <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
               </div>
             </a>
@@ -1023,8 +1043,6 @@ export default {
         archivals.data.data.startB = 5
         archivals.data.data.isShowB = true
       }
-    } else {
-      error({ statusCode: 500, message: '查找不到货源相关信息' })
     }
     //顶部轮播
     let newLists = await $axios
@@ -1166,7 +1184,7 @@ export default {
   },
 
   mounted() {
-    console.log(this.interestOrder)
+    // console.log(this.dataset, 'this.dataset')
     seajs.use(['/js/gaodemap2.js'])
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')
@@ -1436,6 +1454,7 @@ export default {
       this.endArea = list2[2] ? list2[2] : ''
     },
     search() {
+      // console.log(999999)
       this.searchDo()
       window.location.href = `/huoyuan?endArea=${this.endArea}&endCity=${
         this.endCity

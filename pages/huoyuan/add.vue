@@ -3,6 +3,7 @@
     v-show="isShow" 
     class="wzlAdd">
     <div 
+      ref="ruleForm"
       :key="dialogKey" 
       class="add1_content">
       <div 
@@ -88,7 +89,8 @@ export default {
       textnum: '',
       userType: '',
       times: 60,
-      mobileErr: ''
+      mobileErr: '',
+      stop: ''
     }
   },
   async asyncData() {},
@@ -122,11 +124,14 @@ export default {
     closeMe() {
       this.$emit('update:isShowAdd', false)
       this.reset()
+      clearInterval(this.stop)
+      this.getMoblie = false
       // this.$emit('close')
     },
     reset() {
       this.mobile = ''
       this.textnum = ''
+      // window.location.reload()
     },
     submitBtn() {
       let _this = this
@@ -181,7 +186,7 @@ export default {
               if (res.status === 200) {
                 layer.msg('验证码发送成功')
                 this.getMoblie = true
-                _this.startCount()
+                this.stop = _this.startCount()
               }
             })
         } else {
@@ -202,6 +207,7 @@ export default {
           this.times = 60
         }
       }, 1000)
+      return stop
     }
   }
 }

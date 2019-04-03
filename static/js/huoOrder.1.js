@@ -798,8 +798,7 @@
           .val()
       )
       layer.msg('您还未登录，请先登录')
-      $('.login_box').show()
-      $('.login_box_mask').show()
+      $('body').trigger('login.show')
     },
     showContactPop: function(type) {
       // =======需要登录=========

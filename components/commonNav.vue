@@ -209,7 +209,7 @@
             style="margin-left: 20px;"><a href="/shixiao">时效查询</a></li>
           <li
             id="wlyq"
-            style="margin-left: 20px;"><a href="/wuliu">物流园区</a></li>
+            style="margin-left: 20px;"><a href="/wuliu/list">物流园区</a></li>
 
           <li
             id="jgzs"

@@ -460,7 +460,7 @@
                 value="" 
                 @click="search()"></div>                        
             <div class="more floatr"><a 
-              href="/huoyuan" 
+              :href="'/huoyuan?startProvince='+hyDetail.startProvince+'&startCity='+hyDetail.startCity" 
               target="_blank">更多&gt;</a></div>		 
           </div>
           <div 
@@ -581,7 +581,7 @@
                 value="" 
                 @click="search()"></div>                        
             <div class="more floatr"><a 
-              href="/huoyuan" 
+              :href="'/cheyuan?startProvince='+hyDetail.endProvince+'&startCity='+hyDetail.endCity"  
               target="_blank">更多&gt;</a></div>		 
           </div>
           <div 

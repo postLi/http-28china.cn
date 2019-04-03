@@ -409,26 +409,10 @@
                 </ul>
               </div>
             </div>
-
-
           </div>
-          <!--分页-->
-          <!-- <div
-            class="box" 
-            style="float: right;margin-right: 370px;">
-            <div 
-              id="pagination1" 
-              class="page fl"/>
-            <div class="info fl">
-              <p>当前页数：<span id="current1">1</span></p>
-            </div>
-          </div> -->
         </div>
       </div>
-      
-
     </div>
-
   </div>
 </template>
 
@@ -648,7 +632,6 @@ export default {
       },
       false
     )
-    // this.loadPagination()
     this.footLink()
     // this.scrollmenue()
   },
@@ -890,21 +873,6 @@ export default {
         item.targetLinks = '/member/' + item.companyId + '-huo'
       }
     }
-    // loadPagination() {
-    //   $('#pagination1').pagination({
-    //     currentPage: this.currentPage,
-    //     totalPage: this.totalPage,
-    //     callback: async current => {
-    //       $('#current1').text(current)
-    //       let vo = this.vo
-    //       vo.filterSign = this.sortId
-    //       let obj = await getListRangesAging(this.$axios, current, vo)
-    //       this.listRangesAging = obj.list
-    //       this.currentPage = obj.currentPage
-    //       window.location.href = '#top'
-    //     }
-    //   })
-    // }
   }
 }
 </script>

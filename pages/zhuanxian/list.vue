@@ -641,10 +641,10 @@ export default {
         endProvince: endp,
         endCity: endc,
         endArea: enda,
-        belongBrandCode: query.belongBrandCode,
-        departureTimeCode: query.departureTimeCode,
-        otherServiceCode: query.otherServiceCode,
-        parkId: query.parkId,
+        belongBrandCode: query.belongBrandCode || '',
+        departureTimeCode: query.departureTimeCode || '',
+        otherServiceCode: query.otherServiceCode || '',
+        parkId: query.parkId || '',
         companyName: query.companyName || ''
       }),
       $axios.post(aurl + `/28-web/range/recommend`, vo1),
@@ -681,15 +681,6 @@ export default {
         item.num = (num % 30) + 1
       })
 
-      // for (var i = 3; i < listD.data.data.length; i--) {
-      //   let listD1 = listD.data.data
-      // console.log(
-      //   listA.data.data,
-      //   'listA.data.data ',
-      //   vo,
-      //   listA.data.data.list.length
-      // )
-      // }
       let codeObj = {
         name: '不限',
         code: ''
@@ -697,7 +688,27 @@ export default {
       codeA.data.data.unshift(codeObj)
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
-      // console.log(listA.data.data, '_this.lineListsTotalPage22')
+      // console.log(
+      //   listA.data.data.page,
+      //   ' listA.data.data.page',
+      //   listA.data.data.pages,
+      //   (aurl + `/28-web/range/list`,
+      //   {
+      //     currentPage: 1,
+      //     pageSize: 15,
+      //     startProvince: startp,
+      //     startCity: startc,
+      //     startArea: starta,
+      //     endProvince: endp,
+      //     endCity: endc,
+      //     endArea: enda,
+      //     belongBrandCode: query.belongBrandCode,
+      //     departureTimeCode: query.departureTimeCode,
+      //     otherServiceCode: query.otherServiceCode,
+      //     parkId: query.parkId,
+      //     companyName: query.companyName || ''
+      //   })
+      // )
       return {
         lineListsTotalPage: listA.data.data.pages,
         lineLists: listA.data.data.list,
@@ -722,8 +733,6 @@ export default {
     if (process.client) {
       let _this = this
       let $axios = this.$axios
-      // console.log(_this.$router, _this.$route.params.current.query, 'this.$route')
-      // console.log(_this.$route.query.belongBrandCode, 'belongBrandCode')
       seajs.use(['layer'], function() {
         seajs.use(
           ['/js/jquery.pagination.min.js', '/js/LLL-AFLC_API.js'],
@@ -734,7 +743,6 @@ export default {
                   let orderBy = 'default'
                   let currentPage = 1
                   $('.list_tiaoj span').click(function() {
-                    //alert("1");
                     $('.list_tiaoj span').removeClass('active')
                     $(this).toggleClass('active')
                   })
@@ -764,21 +772,6 @@ export default {
                     return true
                   }
 
-                  // $('#pagination1').pagination({
-                  //   currentPage: 1,
-                  //   totalPage: process02(1),
-                  //   callback: function(current) {
-                  //     console.log(current, 'current')
-                  //     $('#current1').text(current)
-                  //     process02(current)
-                  //     window.location.href = '#top'
-                  //   }
-                  // })
-                  // onCheckPage()
-                  console.log(
-                    _this.lineListsTotalPage,
-                    '_this.lineListsTotalPage'
-                  )
                   $('#pagination1').pagination({
                     currentPage: 1,
                     totalPage: _this.lineListsTotalPage,
@@ -793,17 +786,17 @@ export default {
                   //切换专线信息
                   function clickPrice() {
                     $('#seq0').click(function() {
-                      console.log('clear排序')
+                      // console.log('clear排序')
                       orderBy = 'default'
                       fetchLineList(currentPage, orderBy)
                     })
                     $('#seq1').click(function() {
-                      console.log('orderNumber排序')
+                      // console.log('orderNumber排序')
                       orderBy = 'orderDesc'
                       fetchLineList(currentPage, orderBy)
                     })
                     $('#seq2').click(function() {
-                      console.log('transportAging排序')
+                      // console.log('transportAging排序')
                       orderBy = 'transportAgingAsc'
                       fetchLineList(currentPage, orderBy)
                     })
@@ -854,10 +847,8 @@ export default {
                           num += el.charCodeAt(0) || 0
                         })
                         item.num = (num % 30) + 1
-                        // console.log('this.lineList:', item.num)
                       })
                       _this.lineLists = getList
-
                       // return {
                       //   lineList: res.data.data.list
                       // }

@@ -230,7 +230,8 @@ export default {
         this.pages = obj.pages
         this.list = obj.list
         this.currentPage = obj.currentPage
-        this.loadPagination()
+        // this.showPingLunFn('3')
+        this.loadPaginatiosn()
 
         //总数
         let _data = await getpjNum(this.$axios, this.$route.query)
@@ -239,9 +240,7 @@ export default {
       }
     },
     types(n, o) {},
-    info(n, o) {
-      console.log(n, 'nnn1')
-    }
+    info(n, o) {}
   },
   mounted() {},
   methods: {
@@ -262,24 +261,10 @@ export default {
           let assessLevel = ''
           this.pages = obj.pages
           this.list = obj.list
-          console.log(this.list, 'listjfjjfjff')
-          // this.currentPage = obj.currentPage
         }
       })
     },
     showPingLunFn(index) {
-      // alert(index, 'index')
-      // /range/getRangePriceReference/{rangeId}
-      // 专线详情_专线价格参考
-      // if (pj_zh == '好评') {
-      //   var assessLevel = 'AF0360101'
-      // }
-      // if (pj_zh == '中评') {
-      //   var assessLevel = 'AF0360102'
-      // }
-      // if (pj_zh == '差评') {
-      //   var assessLevel = 'AF0360103'
-      // }
       let assessLevel = ''
 
       // console.log(index, 'index')
@@ -309,7 +294,7 @@ export default {
       )
     },
     closeDialog() {
-      this.vo = {}
+      // this.vo = {}
       this.$emit('close')
 
       // this.ismobile = false

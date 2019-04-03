@@ -977,13 +977,13 @@
       :show = "isAdd"
       :info="linedataE"
       @close="noaddFn"/>
-    <BzAdd
+      <!-- <BzAdd
       :show = "isBzAdd"
       :info="LineeEchartInfo"
       :linedata-a="linedataA"
       :line-company="lineBzAdd"
       @close="nobzAddFn"
-    />
+    /> -->
   </div>
 
 </template>
@@ -991,7 +991,7 @@
 <script>
 import creditIcon from '~/components/common/creditIcon'
 import Add from './add'
-import BzAdd from './bzAdd'
+// import BzAdd from './bzAdd'
 
 import {
   isZXcity,
@@ -1051,7 +1051,7 @@ export default {
     FooterLinks,
     ShowEchart,
     Add,
-    BzAdd,
+    // BzAdd,
     creditIcon
   },
   head: {
@@ -1103,7 +1103,8 @@ export default {
       indexPl: 0,
       kongxin: '/line/images/03sc.png',
 
-      lineBzAdd: {}
+      lineBzAdd: {},
+      showEchartData: {}
       // xin: '/line/images/xin.png'
     }
   },
@@ -1276,6 +1277,7 @@ export default {
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
       console.log(lineCity.data.data, 'lineCitys')
+
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
@@ -1725,6 +1727,7 @@ export default {
     showfind() {
       let _this = this
       clearInterval(_this.stopTimer)
+
       layer.open({
         type: 1,
         title: ' ',
@@ -1735,15 +1738,22 @@ export default {
           if (process.server) {
             return
           }
+          let lllTitle = false
+
           this.LineeEchartInfo.forEach((item, index) => {
+            // item.lllTitle = lllTitle
             if (item.cargoType === '0') {
               this.cargoType0 = item
+
               this.comInfo(this.sendEchart, this.cargoType0)
+              this.showEchartData = this.cargoType0
+              // console.log(this.LineeEchartInfo, ' this.LineeEchartInfo')
             }
           })
           this.LineeEchartInfo.forEach((item, index) => {
             if (item.cargoType === '1') {
               this.cargoType1 = item
+              this.showEchartData = this.cargoType1
               this.comInfo(this.sendEchart1, this.cargoType1)
             }
           })
@@ -2122,8 +2132,8 @@ export default {
           }, 1000)
         },
         content:
-          '<div class="show1" style="text-align: center"><div class="myLayer_title">稍等。。。</div><div class="myLayer_content">28平台智能运输大数据中心正在为您核算' +
-          '<p >从' +
+          '<div class="show1" style="text-align: center;"><div class="myLayer_title" style="padding-bottom:10px">稍等。。。</div><div class="myLayer_content" style="padding-bottom:10px">28平台智能运输大数据中心正在为您核算' +
+          '<p style="padding:10px 0">从' +
           '<span>' +
           this.linedataA.startCity.substring(
             0,
@@ -2151,11 +2161,9 @@ export default {
           ) +
           '专线</div>' +
           '<div id="echart2"></div>' +
-          '<div class="myLayer_content2">' +
+          '<div class="myLayer_content2"><span>' +
           this.linedataB.companyName +
-          '的报价<span>低于</span><i>' +
-          this.linedataE.lowerPriceRate +
-          '的承运商</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          '的承运价格<span>处于</span>行业均价内，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
           '</div>'
       })
     },
@@ -2194,7 +2202,7 @@ export default {
         cargoType.lowestPrice > 100
           ? Math.floor(cargoType.lowestPrice)
           : cargoType.lowestPrice
-      console.log(typeof sendEchart[3], sendEchart[4])
+      console.log(sendEchart, 'sendEchart')
     },
     showfind1() {
       let _this = this

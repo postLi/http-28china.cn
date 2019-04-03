@@ -970,7 +970,7 @@ export default {
                 function next() {
                   var check = validate()
                   var url =
-                    '/range/create?access_token=' +
+                    '/28-web/range/create?access_token=' +
                     $.cookie('access_token') +
                     '&&user_token=' +
                     $.cookie('login_userToken')

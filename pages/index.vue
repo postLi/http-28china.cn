@@ -987,10 +987,9 @@
             <b>找物流园区</b>
           </div>
           <div class="more2 floatr"><a
-            href="/wuliu?"
+            href="/wuliu/list?"
             target="_blank"><span>更多&gt;</span></a></div>
         </div>
-        <div class="h10"/>
         <div class="hy clear">
           <dl class="wlyq_d">
             <dd class="d01">物流园名称</dd>
@@ -1684,8 +1683,8 @@ export default {
       seajs.use(
         [
           '/index/js/pic_scroll.js',
-          '/js/gaodemap2.js',
-          '/index/js/index.js?v2',
+          '/js/gaodemap2.js?V2',
+          '/index/js/index.js?v3',
           '/index/js/floatBar.min.js',
           '/index/js/map/echarts.min.js'
         ],

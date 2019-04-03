@@ -205,7 +205,8 @@ export default {
       },
       isCompanyName: false,
       isContactsName: false,
-      ismobile: false
+      ismobile: false,
+      vo: {}
     }
   },
 
@@ -217,30 +218,29 @@ export default {
   watch: {
     async showDiv(n) {
       if (n == true) {
-        let vo
+        // let vo
+        // this.indexPl = 3
         let obj = await getpjLists(
           this.$axios,
-          this.currentPage,
-          vo,
+          1,
+          this.vo,
           this.$route.query,
           this.assessLevel
         )
         this.pages = obj.pages
         this.list = obj.list
         this.currentPage = obj.currentPage
-        this.loadPagination()
+        // this.showPingLunFn('3')
+        this.loadPaginatiosn()
 
         //总数
         let _data = await getpjNum(this.$axios, this.$route.query)
         this.pjNum = _data.data
-        // console.log(this.pjNum, 'pjnum')
         //
       }
     },
     types(n, o) {},
-    info(n, o) {
-      console.log(n, 'nnn1')
-    }
+    info(n, o) {}
   },
   mounted() {},
   methods: {
@@ -261,23 +261,10 @@ export default {
           let assessLevel = ''
           this.pages = obj.pages
           this.list = obj.list
-          // this.currentPage = obj.currentPage
         }
       })
     },
     showPingLunFn(index) {
-      // alert(index, 'index')
-      // /range/getRangePriceReference/{rangeId}
-      // 专线详情_专线价格参考
-      // if (pj_zh == '好评') {
-      //   var assessLevel = 'AF0360101'
-      // }
-      // if (pj_zh == '中评') {
-      //   var assessLevel = 'AF0360102'
-      // }
-      // if (pj_zh == '差评') {
-      //   var assessLevel = 'AF0360103'
-      // }
       let assessLevel = ''
 
       // console.log(index, 'index')
@@ -292,9 +279,10 @@ export default {
       }
       this.indexPl = index
       this.assessLevel = assessLevel
-      let vo
+      // let vo
+
       // vo.assessLevel = assessLevel
-      getpjLists(this.$axios, 1, vo, this.$route.query, assessLevel).then(
+      getpjLists(this.$axios, 1, this.vo, this.$route.query, assessLevel).then(
         res => {
           let obj = res
           this.pages = obj.pages
@@ -306,9 +294,10 @@ export default {
       )
     },
     closeDialog() {
+      // this.vo = {}
       this.$emit('close')
-      this.form = {}
-      this.ismobile = false
+
+      // this.ismobile = false
       // this.$emit('update:show', false)
 
       //把绑定的弹窗数组 设为false即可关闭弹窗

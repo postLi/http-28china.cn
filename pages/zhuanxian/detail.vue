@@ -573,7 +573,7 @@
             alt="">
           <ul class="top_tit">
             <li>此专线物流公司诚信值超过<span style="color: #f88700;border-bottom: 1px solid #f88700">{{ linedataE.greaterCreditRate }}%</span>的同行</li>
-            <li>{{ linedataE.qualificationNum }}项经营资质认证，{{ linedataE.serviceNum }}项平台物流服务标准监督，{{ linedataE.evaCount }}人评价反馈</li>
+            <li>{{ linedataE.qualificationNum }}项经营资质认证，{{ linedataE.serviceNum }}项平台物流服务标准监督<span v-if="linedataE.evaCount!=0">，{{ linedataE.evaCount }}人评价反馈</span></li>
           </ul>
           <!--<div class="top_tit"><p>此专线物流公司诚信值超过<span style="color: #f88700;">92.3%</span>的同行</p>-->
           <!--<p>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</p></div>-->
@@ -980,6 +980,8 @@
       <!-- <BzAdd
       :show = "isBzAdd"
       :info="LineeEchartInfo"
+      :linedata-a="linedataA"
+      :line-company="lineBzAdd"
       @close="nobzAddFn"
     /> -->
   </div>
@@ -1099,7 +1101,10 @@ export default {
       lineCitys: [],
       msgMobile: '',
       indexPl: 0,
-      kongxin: '/line/images/03sc.png'
+      kongxin: '/line/images/03sc.png',
+
+      lineBzAdd: {},
+      showEchartData: {}
       // xin: '/line/images/xin.png'
     }
   },
@@ -1271,6 +1276,8 @@ export default {
         // linedataB.data.data.isRenZhen = true
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
+      console.log(lineCity.data.data, 'lineCitys')
+
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
@@ -1291,8 +1298,7 @@ export default {
     }
   },
   mounted() {
-    this.detailCollnum()
-    this.cananyCollnum()
+    let _this = this
     if (process.client) {
       seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
         seajs.use(
@@ -1303,6 +1309,8 @@ export default {
               seajs.use(['/line/js/arc_wlzx.js'], function() {
                 seajs.use(['../js/collection.js'], function() {
                   seajs.use(['../js/gaodemap2.js'], function() {
+                    _this.detailCollnum()
+                    _this.cananyCollnum()
                     //header货源搜索 S
                     $('#search_huoyuan').click(function() {
                       var list1 = [],
@@ -1444,8 +1452,10 @@ export default {
     gotoHuoList(event) {
       // console.log(event, 'event')
       let city = event.target.innerHTML + '市'
+      // console.log(city, 'city')
       if (city.length > 4) {
         city = city.substring(2, 5)
+        // console.log(city, 'city')
       }
       window.open(
         `/zhuanxian/list?startp=${this.linedataA.startProvince}&startc=${
@@ -1464,6 +1474,11 @@ export default {
     },
     bzAddFn() {
       this.isBzAdd = true
+
+      this.lineBzAdd = {
+        companyName: this.linedataB.companyName,
+        lowerPriceRate: this.linedataE.lowerPriceRate
+      }
     },
     nobzAddFn() {
       this.isBzAdd = false
@@ -1712,6 +1727,7 @@ export default {
     showfind() {
       let _this = this
       clearInterval(_this.stopTimer)
+
       layer.open({
         type: 1,
         title: ' ',
@@ -1722,15 +1738,22 @@ export default {
           if (process.server) {
             return
           }
+          let lllTitle = false
+
           this.LineeEchartInfo.forEach((item, index) => {
+            // item.lllTitle = lllTitle
             if (item.cargoType === '0') {
               this.cargoType0 = item
+
               this.comInfo(this.sendEchart, this.cargoType0)
+              this.showEchartData = this.cargoType0
+              // console.log(this.LineeEchartInfo, ' this.LineeEchartInfo')
             }
           })
           this.LineeEchartInfo.forEach((item, index) => {
             if (item.cargoType === '1') {
               this.cargoType1 = item
+              this.showEchartData = this.cargoType1
               this.comInfo(this.sendEchart1, this.cargoType1)
             }
           })
@@ -2109,8 +2132,8 @@ export default {
           }, 1000)
         },
         content:
-          '<div class="show1" style="text-align: center"><div class="myLayer_title">稍等。。。</div><div class="myLayer_content">28平台智能运输大数据中心正在为您核算' +
-          '<p >从' +
+          '<div class="show1" style="text-align: center;"><div class="myLayer_title" style="padding-bottom:10px">稍等。。。</div><div class="myLayer_content" style="padding-bottom:10px">28平台智能运输大数据中心正在为您核算' +
+          '<p style="padding:10px 0">从' +
           '<span>' +
           this.linedataA.startCity.substring(
             0,
@@ -2138,11 +2161,9 @@ export default {
           ) +
           '专线</div>' +
           '<div id="echart2"></div>' +
-          '<div class="myLayer_content2">' +
+          '<div class="myLayer_content2"><span>' +
           this.linedataB.companyName +
-          '的报价<span>低于</span><i>' +
-          this.linedataE.lowerPriceRate +
-          '的承运商</i>，承运价格<span>低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          '的承运价格<span>处于</span>行业均价内，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
           '</div>'
       })
     },
@@ -2181,7 +2202,7 @@ export default {
         cargoType.lowestPrice > 100
           ? Math.floor(cargoType.lowestPrice)
           : cargoType.lowestPrice
-      console.log(typeof sendEchart[3], sendEchart[4])
+      console.log(sendEchart, 'sendEchart')
     },
     showfind1() {
       let _this = this
@@ -2670,17 +2691,22 @@ export default {
           access_token,
           user_token,
           handle
-        ).then(res => {
-          if (res.data.status == 200) {
-            if (res.data.data == true) {
-              this.isComanyColl = true
+        )
+          .then(res => {
+            if (res.data.status == 200) {
+              if (res.data.data == true) {
+                this.isComanyColl = true
+              }
             }
-          }
-          if (res.data.errorInfo) {
-            layer.msg(res.data.errorInfo)
-          }
-          // console.log(res.data.data, 'res方法2')
-        })
+            if (res.data.errorInfo) {
+              layer.msg(res.data.errorInfo)
+            }
+            // console.log(res.data.data, 'res方法2')
+          })
+          .catch(err => {
+            // layer.msg('收藏失败2')
+            // console.log('收藏失败', err)
+          })
       }
     },
     openColl(item) {
@@ -2726,8 +2752,9 @@ export default {
         this.$axios
           .post(aurl + isurl)
           .then(res => {
+            console.log(res, '收藏成功')
             if (res.data.status === 200) {
-              // console.log(res.data.data, '收藏成功')
+              // console.log(res, '收藏成功')
               let isMsg = res.data.data
               layer.msg(isMsg)
               if (item == 'detail') {
@@ -2747,12 +2774,13 @@ export default {
                 }
               }
             }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
+            if (res.data.error) {
+              layer.msg(res.data.error)
             }
           })
           .catch(err => {
-            console.log('提交捕获异常', err)
+            layer.msg('收藏失败')
+            console.log('收藏失败', err)
           })
         // alert('')
         //collect/company

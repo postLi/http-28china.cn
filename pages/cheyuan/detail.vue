@@ -1010,14 +1010,14 @@ export default {
           }
 
           odata = [
-            data.famousBrandPrice,
-            data.highQualityPrice,
+            data.highestPrice,
             data.highAveragePrice,
-            data.lowAveragePrice
+            data.lowAveragePrice,
+            data.lowestPrice
           ]
         }
         this.echarData = data
-        return { data: odata, thisCarPrice: data.thisCarPrice }
+        return { data: odata, thisPrice: data.thisPrice }
       })
       .then(data => {
         return this.getChartOption(data)
@@ -1050,20 +1050,22 @@ export default {
       let find = 4
       let data = obj.data
       let theCar = {
-        value: obj.thisCarPrice === null ? 0 : obj.thisCarPrice,
+        value: obj.thisPrice === null ? 0 : obj.thisPrice,
         ovalue: 0, // 将最低价给它，方便它定位到最后
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }
-      if (obj.thisCarPrice === null) {
+      if (obj.thisPrice === null) {
         data.push(theCar)
       } else {
         // 判断本车价的位置
-        data.forEach((el, inx) => {
-          if (el < theCar.value) {
-            find = inx
+        for (let i = 0; i < 4; i++) {
+          if (data[i] < theCar.value) {
+            find = i
+            break
           }
-        })
+        }
+
         data.splice(find, 0, theCar)
       }
       obj.find = find
@@ -1076,7 +1078,7 @@ export default {
       if (obj.find === 2) {
         hqh = data[1]
         hql = data[3]
-        theorangearea = [null, data[1], null, data[3]]
+        theorangearea = [null, data[1], obj.thisPrice, data[3]]
       } else if (obj.find > 2) {
         hqh = data[1]
         hql = data[2]
@@ -1085,7 +1087,7 @@ export default {
         hql = data[3]
         theorangearea = [null, null, data[2], data[3]]
       }
-      console.log('echart 数据：', data, label, hqh, hql, maxY)
+      console.log('echart 数据：', find, data, label, hqh, hql, maxY)
       return {
         title: { text: '', subtext: '' },
         tooltip: { trigger: 'axis' },
@@ -1257,18 +1259,14 @@ export default {
     showPrice() {
       let tipstr =
         '<div class="myLayer_content2">此数据源于平台用户提报的历史数据统计，仅供参考！</div>'
-      if (this.echarData.thisCarPrice !== null) {
-        if (
-          this.echarData.thisCarPrice > this.echarData.standardHighQualityPrice
-        ) {
+      if (this.echarData.thisPrice !== null) {
+        if (this.echarData.thisPrice > this.echarData.highAveragePrice) {
           // 高于
           tipstr =
             '<div class="myLayer_content2">车主' +
             this.cy1.driverName +
             '的承运价格<span>高于</span>行业均价高点</div>'
-        } else if (
-          this.echarData.thisCarPrice < this.echarData.standardHighAveragePrice
-        ) {
+        } else if (this.echarData.thisPrice < this.echarData.lowestPrice) {
           // 低于
           tipstr =
             '<div class="myLayer_content2">车主' +
@@ -1302,12 +1300,12 @@ export default {
               let tdata = this.echarData
               let option2 = this.getChartOption({
                 data: [
-                  tdata.standardFamousBrandPrice,
-                  tdata.standardHighQualityPrice,
-                  tdata.standardHighAveragePrice,
-                  tdata.standardLowAveragePrice
+                  tdata.highestPrice,
+                  tdata.highAveragePrice,
+                  tdata.lowAveragePrice,
+                  tdata.lowestPrice
                 ],
-                thisCarPrice: tdata.thisCarPrice
+                thisPrice: tdata.thisPrice
               })
               myChart2.setOption(option2)
             }

@@ -882,7 +882,6 @@ export default {
   }
 }
 </script>
-
 <style scoped>
 /*物流专线 S */
 body {

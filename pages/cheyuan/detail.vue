@@ -309,9 +309,10 @@
               <span 
                 class="biaozhi" 
               /><span>更多从{{ cy1.startCity }}出发的车源</span>
-              <i
-                style="cursor: pointer;float: right;font-size: 14px;"
-                @click="goToCy()">更多></i>
+              <div class="morelink"><a 
+                :href="'/cheyuan?startProvince='+cy1.startProvince+'&startCity='+cy1.startCity" 
+                target="_blank">更多&gt;</a>
+              </div>	
             </div>
             <div class="arc_main4-content">
               <div
@@ -382,9 +383,10 @@
           <div>
             <div class="zx_sx">
               <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的车源</span>
-              <i
-                style="cursor: pointer;float: right;font-size: 14px;"
-                @click="goToCy1()">更多></i>
+              <div class="morelink"><a 
+                :href="'/cheyuan?startProvince='+cy1.endProvince+'&startCity='+cy1.endCity" 
+                target="_blank">更多&gt;</a>
+              </div>	
             </div>
             <div class="arc_main4-content">
               <div
@@ -746,12 +748,9 @@ export default {
           })
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => {})
   },
   async asyncData({ $axios, app, query }) {
-    console.log(app, 'app')
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     if (cy1.data.status === 200) {
@@ -796,16 +795,12 @@ export default {
     //最新货源信息
     let newLists = await $axios
       .post('/28-web/carInfo/newest/publish')
-      .catch(err => {
-        // console.log('newestHuoyuanRes:', err)
-      })
+      .catch(err => {})
     let driverId = cy1.data.data.driverId
     //综合力评估
     let cheComprehensives = await $axios
       .get('/28-web/driver/comprehensive?driverId=' + driverId)
-      .catch(err => {
-        // console.log('huoComprehensives:', err)
-      })
+      .catch(err => {})
     //货源热门搜索
     let hotSearchs = await $axios.get('/28-web/hotSearch/carInfo/detail/links')
     //底部推荐
@@ -815,10 +810,7 @@ export default {
     //企业人气榜
     let popularitys = await $axios
       .get('/28-web/driver/driverPopularityList')
-      .catch(err => {
-        console.log('popularitys')
-      })
-    // console.log(popularitys.data.data, 'popularitys')
+      .catch(err => {})
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -950,7 +942,6 @@ export default {
       }
     })
 
-    console.log(this.cy1, 'carInfoId')
     let rollContainer_h = $('.release_box').height()
     let roll = $('.release_scroll')
     roll.append(roll.html())
@@ -1022,7 +1013,6 @@ export default {
       totalPage: this.pages,
       callback: async current => {
         $('#current1').text(current)
-        console.log(current)
         let obj = await getOtherCarInfoList(this.$axios, current, {
           id: this.$route.query.id
         })
@@ -1112,7 +1102,6 @@ export default {
               label: {
                 position: 'insideTop',
                 formatter: function(params) {
-                  console.log(params)
                   if (params.value === 0) {
                     return `{color1|${params.name}}\n{color0|面议}`
                   } else {
@@ -1383,9 +1372,7 @@ export default {
               layer.msg(res.data.errorInfo)
             }
           })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
+          .catch(err => {})
       } else {
         this.isShowAdd = true
         this.getAddress()

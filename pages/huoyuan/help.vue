@@ -70,7 +70,7 @@ export default {
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/layer3/css/layui.css' }],
-    script: [{ src: '/layer/layer.js' }, { src: '/js/LLL-AFLC_VALID.js' }]
+    script: [{ src: '/layer/layer.js' }, { src: '/js/LLL-AFLC_API.js' }]
   },
   data() {
     return {
@@ -85,7 +85,8 @@ export default {
       textnum: '',
       userType: '',
       times: 60,
-      mobileErr: ''
+      mobileErr: '',
+      stop: ''
     }
   },
   async asyncData() {},
@@ -119,6 +120,8 @@ export default {
     closeMe() {
       this.$emit('update:isShowHelp', false)
       this.reset()
+      clearInterval(this.stop)
+      this.getMoblie = false
     },
     reset() {
       this.mobile = ''
@@ -201,6 +204,7 @@ export default {
           this.times = 60
         }
       }, 1000)
+      return stop
     }
   }
 }

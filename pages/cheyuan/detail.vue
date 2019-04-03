@@ -99,7 +99,9 @@
                 height="72">
             </div>
             <div>
-              <a href="http://h5.28tms.com/">
+              <a 
+                target="_black"
+                href="http://h5.28tms.com/">
               下载<span>【28快运APP】</span>，您可查看更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的车源，并可实时接 收28快运为您推荐的精品车源提醒!</a>
             </div>
 
@@ -125,7 +127,7 @@
                   class="manage_box"
                   v-for="(item,index) in newList"
                   :key="index"
-                >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>车源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
+                >用户{{ item.creater }}发布<i :title="item.startCity">{{ item.startCity ? item.startCity.substring(0,3) : '' }}</i>到<i :title="item.endCity">{{ item.endCity ? item.endCity.substring(0,3) :'' }}</i>车源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
               </div>
             </div>
           </div>
@@ -198,11 +200,18 @@
               <font 
               style="color: #333" >{{ cy1.phone }}</font>
             </span>
-            <span><a
-              :href="'http://wpa.qq.com/msgrd?v=3&uin=' + cy1.qq + '&site=qq&menu=yes'"
-              target="_blank"><i>Q&nbsp;Q：</i><input
-                v-if="cy1.qq"
-                value="QQ交谈" ></a></span>
+            <span><i>Q&nbsp;Q：</i>
+              <a
+                id="nr1023"
+                :href="'http://wpa.qq.com/msgrd?v=3&uin='+ cy1.qq+'&site=qq&menu=yes'"
+                target="_blank">
+                <input
+                  v-if="cy1.qq != '' && cy1.qq != null"
+                  readonly
+                  id="qq"
+                  value="QQ交谈">
+              </a>
+            </span>
           </p>
           <p style="clear: both;"/>
           <p class="arc_right05" >
@@ -238,6 +247,10 @@
           <div class="zx_sx">
             <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
           </div>
+          <div class="echart_tip">{{ cy1.startCity +
+            '->' +
+            cy1.endCity +
+          cy1.carLength }}米整车</div>
           <div id="echart"/>
         </div>
         <div class="right">
@@ -260,10 +273,19 @@
               </div>
             </div>
             <div class="content-right">
-              <img src="/images/cy/02gold.png">
-              <div class="content-right-row"><img
-                class="img"
-                src="/images/cy/13hot.png">活跃度：<i>{{ cheComprehensive.liveness }}</i></div>
+              <img 
+                v-if="cheComprehensive.liveness >= 70"
+                src="/images/cy/02gold.png">
+              <img 
+                v-if="cheComprehensive.liveness >= 30 && cheComprehensive.liveness < 70"
+                src="/images/cy/silver.png">
+              <img 
+                v-if="cheComprehensive.liveness <30"
+                src="/images/cy/bronze.png">
+              <div class="content-right-row">
+                <img
+                  class="img"
+                  src="/images/cy/13hot.png">活跃度：<i>{{ cheComprehensive.liveness }}</i></div>
               <div class="content-right-row">最近三个月发布车源 <i>{{ cheComprehensive.lastThreeMonthPublishNum }}</i> 次</div>
               <div class="content-right-row">共成交 <i>{{ cheComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ cheComprehensive.evaGoodCount }}</i> 次</div>
               <div class="content-right-row">大家对他的印象:</div>
@@ -292,7 +314,7 @@
                   href="javascript:;"
                   class="button2"
                   @click="openAdd()"
-                ><img src="/images/cy/03u41008 2.gif">帮我选择优质车源</a>
+                ><img src="/images/cy/03u410082.gif">帮我选择优质车源</a>
               </div>
             </div>
           </div>
@@ -667,7 +689,7 @@ export default {
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/article_cheyuan.css' },
+      { rel: 'stylesheet', href: '/css/article_cheyuan.css?v2' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
     script: [
@@ -732,7 +754,7 @@ export default {
       .dispatch('news/GETNEWSINFO', {
         params: {
           channelIds: '101',
-          count: 8,
+          count: 10,
           orderBy: 9,
           channelOption: 0
         },
@@ -1345,8 +1367,7 @@ export default {
         )
       } else {
         this.isShowCollect = true
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     openAdd() {

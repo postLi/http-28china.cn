@@ -3734,7 +3734,8 @@ font-size: 14px;
     min-width: 190px ;
     width: auto !important;
     height: 38px;
-    line-height: 38px;
+		line-height: 38px;
+		white-space: nowrap;
 }
 
 .city-picker-span > .placeholder {

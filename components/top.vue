@@ -28,7 +28,7 @@
             href="http://www.anfanet.com/download.html">APP下载</a>
           <a
             target="_blank"
-            href="http://www.28tms.com">28TMS</a>
+            href="http://www.28tms.cn">28TMS</a>
           <a
             target="_blank"
             href="http://biz.28china.cn/">企业货主登录</a>

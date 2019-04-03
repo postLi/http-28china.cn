@@ -523,7 +523,7 @@
                 <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
               <div class="right">
-                <span><a :title="item.companyName">{{ item.companyName }}</a></span>
+                <span>{{ item.companyName }}</span>
                 <span style="float: right">人气值：<i style="color: red">{{ item.popularity }}</i></span>
               </div>
             </a>
@@ -2278,7 +2278,11 @@ body {
 }
 .rc_list {
   padding: 10px;
+  float: left;
   /* box-sizing: border-box; */
+}
+.re_list a {
+  float: left;
 }
 .rc_list div {
   display: table-cell;

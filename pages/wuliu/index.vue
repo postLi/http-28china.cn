@@ -209,7 +209,7 @@ export default {
     parm.currentPage = 1
     parm.pageSize = 16
     // let getLogisticsPark = await $axios.post(
-    //   '/28-web/logisticsPark/interestedList',
+    //   '/28-web/logisticsPark/interested/list',
     //   parm
     // )
     let getLogisticsPark = await $axios.post(
@@ -220,7 +220,7 @@ export default {
     parm1.currentPage = 1
     parm1.pageSize = 14
     // let recommendParkList = await $axios.post(
-    //   '/28-web/logisticsPark/recommendList',
+    //   '/28-web/logisticsPark/recommend/list',
     //   parm1
     // )
     let recommendParkList = await $axios.post(

@@ -669,26 +669,15 @@
       // 提交订单
       $('.order-submit-btn').on('click', function() {
         var res = _this.checkForm()
-        console.log(55555555)
         if (res) {
           var cb = function() {
             if (_this.islogin) {
-              console.log(11111111111111)
               AFWL_API.postCreateOrder(_this.data, {
                 access_token: _this.logininfo.access_token,
                 user_token: _this.userinfo.userToken
               })
                 .done(function(res) {
-                  // 订单id，用来跟踪
-                  // _this.data.id = res.data.id
-                  // _this.data.orderSerial = res.data.orderSerial
-
-                  // _this.setSuccessPage(res.data)
-                  // console.log(res)
                   if (res.status === 200) {
-                    // $('.order_list_contacts_pop').show()
-                    // $('#order_success').show()
-                    // console.log(res)
                     window.location.href =
                       '/create/cySuccess?id=' +
                       res.data.id +
@@ -700,14 +689,12 @@
                   }
                 })
                 .fail(function(err) {
-                  console.log(8888888)
                   layer.alert(
                     '创建失败：' + (err.errorInfo || err.text || '未知错误')
                   )
                 })
             } else {
               _this.showLoginForm()
-              console.log(99999999)
             }
           }
           cb()

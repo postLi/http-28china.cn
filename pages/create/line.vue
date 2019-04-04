@@ -177,7 +177,8 @@
                             maxlength="40" 
                             type="number" 
                             class="volumeEnd" 
-                            value=""><label>元/公斤</label>
+                            value=""
+                            @change="tableChange('.table1 tbody  tr')">><label>元/公斤</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -197,7 +198,14 @@
                         </div>
                       </td>
                     </tr>
-                    <span class="addbox add1">+</span>
+                    <tr 
+                      class="box1_list"
+                      v-for="(item,index) in heavyList" 
+                      :key="index" 
+                      v-html="item"/>
+                    <span 
+                      class="addbox add1"
+                      @click="cargoAdd(1)">+</span>
                     <span class="delete">-</span>
                   </tbody>
                 </table>
@@ -233,7 +241,8 @@
                           <input 
                             maxlength="40" 
                             class="volumeEnd" 
-                            type="number"><label>元/公斤</label>
+                            type="number"
+                            @change="(tableChange('.table2 tbody  tr'))"><label>元/公斤</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -254,7 +263,14 @@
                         </div>
                       </td>
                     </tr>
-                    <span class="addbox add1">+</span>
+                    <tr 
+                      class="box1_list"
+                      v-for="(item,index) in lightList" 
+                      :key="index" 
+                      v-html="item"/>
+                    <span 
+                      class="addbox add1"
+                      @click="cargoAdd(0)">+</span>
                     <span class="delete">-</span>
                   </tbody>
                       
@@ -305,12 +321,19 @@
             </div>
             <!-- 专线照片 -->
             <div 
-              class="order-line-from clearfix"
-              style="display: none;">
+            class="order-line-from clearfix">
               <div class="order-form-label">专线照片：</div>
               <p style="padding-top: 10px">建议传</p>
+              <div>
+                <upload
+                  :title="'本地上传'" 
+                  :show-file-list="true" 
+                  :limit="6" 
+                  listtype="picture" 
+                />
+              </div>
                 
-              <ul class="img_box">
+              <!-- <ul class="img_box">
                 <div class="button_img">
                   <button 
                     id="test1" 
@@ -322,7 +345,7 @@
                     data-v-5d7a9fe6="" 
                     class="upload__tip">（必须为jpg/png并且小于5M）</div>
                 </div>
-              </ul>
+              </ul> -->
             </div>
           </div>
         
@@ -341,6 +364,7 @@
   </div>
 </template>
 <script>
+import Upload from '~/components/uploadImg/singleImage2'
 export default {
   name: 'Linerder',
   head: {
@@ -350,13 +374,42 @@ export default {
       { rel: 'stylesheet', href: '/fancybox/jquery.fancybox.min.css' }
     ]
   },
+  components: {
+    Upload
+  },
+  data() {
+    return {
+      tableHtml: `<tr class="box1_list">
+                          <td colspan="2">
+                            <div class="inputbox">
+                              <input maxlength="40" type="number" class="volume" disabled="disabled"><label>------</label>
+                              <input maxlength="40" type="number" class="volumeEnd"  /><label>元/公斤</label>
+                            </div>
+                            
+                          </td>
+                          <td colspan="2">
+                            <div class="inputbox">
+                              <input maxlength="40" type="number" class="origina"><label>元/公斤</label>
+                            </div>
+                          </td>
+                          <td colspan="2">
+                            <div class="inputbox">
+                              <input maxlength="40" type="number" class="discount"><label>元/公斤</label>
+                            </div>
+                          </td>
+                        </tr>`,
+      heavyList: [],
+      lightList: []
+    }
+  },
   mounted() {
     seajs.use(['/js/insurance.js'], function() {
-      seajs.use(['/js/laydate.js'], function() {
-        seajs.use(['/js/gaodemap2.js'], function() {
-          seajs.use(['/fancybox/jquery.fancybox.min.js'], function() {
-            // seajs.use(['/layer3/lay/modules/layer.js'], function() {
+      // seajs.use(['/js/laydate.js'], function() {
+      seajs.use(['/js/gaodemap2.js'], function() {
+        seajs.use(['/fancybox/jquery.fancybox.min.js'], function() {
+          seajs.use(['layer'], function() {
             seajs.use(['/layer3/layui.js'], function() {
+              console.log(layer)
               $(function() {
                 var theRequest = getRequest()
                 // var obj = {
@@ -386,6 +439,7 @@ export default {
                 //   publishName: '', //物流公司名称
                 //   rangePrices: []
                 // }
+
                 var obj = {
                   startLocationCoordinate: '',
                   endLocationCoordinate: '',
@@ -413,8 +467,9 @@ export default {
                   // publishName: '', //物流公司名称
                   rangePrices: []
                 }
+
                 var tpl = {
-                  cargo: `<tr class="box1_list">
+                  cargo: `
                           <td colspan="2">
                             <div class="inputbox">
                               <input maxlength="40" type="number" class="volume"><label>------</label>
@@ -432,7 +487,7 @@ export default {
                               <input maxlength="40" type="number" class="discount"><label>元/公斤</label>
                             </div>
                           </td>
-                        </tr>`
+                        `
                 }
                 //随机日期
                 function parseTime(time, cFormat) {
@@ -619,7 +674,7 @@ export default {
                               .val()
                           } else {
                             isVad = false
-                            layer.msg('请补充重货运量')
+                            layer.msg('请补运量结束数值')
                             return false
                           }
                           if (
@@ -635,9 +690,28 @@ export default {
                             layer.msg('请补充重货原报价')
                             return false
                           }
+                          //折后价
+                          if (
+                            $(this)
+                              .find('.discount')
+                              .val()
+                          ) {
+                            p.discountPrice = $(this)
+                              .find('.discount')
+                              .val()
+                          } else {
+                            isVad = false
+                            layer.msg('请补充重货折后报价')
+                            return false
+                          }
                           p.startVolume = $(this)
-                            .find('.discount')
+                            .find('.volume')
                             .val()
+                            ? $(this)
+                                .find('.volume')
+                                .val()
+                            : '0'
+                          console.log('运量1', p.startVolume)
                         } else {
                           if (
                             $(this)
@@ -649,7 +723,7 @@ export default {
                               .val()
                           } else {
                             isVad = false
-                            layer.msg('请补充轻货运量')
+
                             return false
                           }
                           if (
@@ -665,9 +739,28 @@ export default {
                             layer.msg('请补充轻货原报价')
                             return false
                           }
+
+                          //折后价
+                          if (
+                            $(this)
+                              .find('.discount')
+                              .val()
+                          ) {
+                            p.discountPrice = $(this)
+                              .find('.discount')
+                              .val()
+                          } else {
+                            isVad = false
+                            layer.msg('请补充轻货折后报价')
+                            return false
+                          }
                           p.startVolume = $(this)
-                            .find('.discount')
+                            .find('.volume')
                             .val()
+                            ? $(this)
+                                .find('.volume')
+                                .val()
+                            : '0'
                         }
                         obj.rangePrices.push(p)
                       })
@@ -731,13 +824,13 @@ export default {
                     return false
                   })
                   //添加第一个
-                  $('.add1').on('click', function(event) {
-                    event.stopPropagation()
-                    var table = $(this)
-                      .parent('.todoTable')
-                      .find('table')
-                    addCaroList(table)
-                  })
+                  // $('.add1').on('click', function(event) {
+                  //   event.stopPropagation()
+                  //   var table = $(this)
+                  //     .parent('.todoTable')
+                  //     .find('table')
+                  //   addCaroList(table)
+                  // })
                   //切换颜色
                   $('.order-submit-btn').click(function(event) {
                     event.stopPropagation()
@@ -807,49 +900,52 @@ export default {
                   return flag
                 }
                 //点击增加按钮
-                function addCaroList($table) {
-                  var _this = this
-                  var flag = checkCargoList($table)
-                  var $add1 = $table.parent('.todoTable').find('.add1')
-                  var $delete = $table.parent('.todoTable').find('.delete')
-                  if (flag) {
-                    var $inputcargo = $table.find('.nocompany')
-                    var volume = $inputcargo.find('.volume')
-                    var volumeEnd = $inputcargo.find('.volumeEnd')
-                    let orgvalue = ''
-                    // let orgindex = ''
-                    $.each(volumeEnd, function(index, ele) {
-                      ele = $(ele)
-                      var val = $.trim(ele.val())
-                      orgvalue = val
-                    })
-                    var tmp = $(this.tpl.cargo)
-                    tmp.find('.volume').val(orgvalue)
+                // function addCaroList($table) {
+                //   var _this = this
+                //   var flag = checkCargoList($table)
+                //   var $add1 = $table.parent('.todoTable').find('.add1')
+                //   var $delete = $table.parent('.todoTable').find('.delete')
+                //   if (flag) {
+                //     var $inputcargo = $table.find('.nocompany')
+                //     var volume = $inputcargo.find('.volume')
+                //     var volumeEnd = $inputcargo.find('.volumeEnd')
+                //     let orgvalue = ''
+                //     // let orgindex = ''
+                //     $.each(volumeEnd, function(index, ele) {
+                //       ele = $(ele)
+                //       var val = $.trim(ele.val())
+                //       orgvalue = val
+                //     })
+                //     console.log(tpl, 'tpl')
+                //     // $inputcargo.append(tpl.cargo)
+                //     var tmp = $(tpl.ca)
+                //     tmp.find('.volume').val(orgvalue)
 
-                    $inputcargo.append(tmp)
-                    $('.volume').attr('disabled', 'disabled')
-                    var listLen = $inputcargo.find('tr').length
-                    if (listLen >= 1) {
-                      $delete.show()
-                    } else {
-                      console.log(listLen)
-                      $delete.hide()
-                    }
-                    if (listLen > 4) {
-                      $add1.hide()
-                    } else {
-                      $add1.show()
-                    }
-                  }
-                }
+                //     $inputcargo.append(tmp)
+                //     $('.volume').attr('disabled', 'disabled')
+                //     var listLen = $inputcargo.find('tr').length
+                //     if (listLen >= 1) {
+                //       $delete.show()
+                //     } else {
+                //       console.log(listLen)
+                //       $delete.hide()
+                //     }
+                //     if (listLen > 4) {
+                //       $add1.hide()
+                //     } else {
+                //       $add1.show()
+                //     }
+                //   }
+                // }
                 //验证必填信息
                 function validate() {
                   var checkinfo = {
                     done: true,
                     err: ''
                   }
+                  console.log('地方-----------', $('.start').val())
                   if ($('.start').val()) {
-                    // obj.startLocation = $('.start').attr('thepcd')
+                    // obj.startLocationCoordinate = $('.start').attr('thepcd')
                     obj.startLocationCoordinate = $('.start').attr('thepos')
                     obj.startProvince = $('.start').attr('theprovince')
                     obj.startCity = $('.start').attr('thecity')
@@ -860,7 +956,7 @@ export default {
                     return
                   }
                   if ($('.end').val()) {
-                    // obj.endLocation = $('.end').attr('thepcd')
+                    // obj.endLocationCoordinate = $('.end').attr('thepcd')
                     obj.endLocationCoordinate = $('.end').attr('thepos')
                     obj.endProvince = $('.end').attr('theprovince')
                     obj.endCity = $('.end').attr('thecity')
@@ -877,10 +973,11 @@ export default {
                     layer.msg('出发地联系人不能为空')
                     return
                   }
-                  if (AFLC_VALID.MOBILE.test($('.startPhone').val())) {
-                    obj.endLocationContactsMobile = $('.startPhone').val()
+                  let startPhone = parseInt($('.startPhone').val())
+                  if (AFLC_VALID.MOBILE.test(startPhone)) {
+                    obj.startLocationContactsMobile = $('.startPhone').val()
                   } else {
-                    if (!$('.startPhone').val()) {
+                    if (!startPhone) {
                       checkinfo.done = false
                       layer.msg('出发地联系人电话不能为空')
                       return
@@ -896,11 +993,13 @@ export default {
                     layer.msg('到达地联系人不能为空')
                     return
                   }
-
-                  if (AFLC_VALID.MOBILE.test($('.endPhone').val())) {
+                  let endPhone = parseInt($('.endPhone').val())
+                  console.log(endPhone)
+                  if (AFLC_VALID.MOBILE.test(endPhone)) {
                     obj.endLocationContactsMobile = $('.endPhone').val()
+                    console.log('电话号码', obj.endLocationContactsMobile)
                   } else {
-                    if (!$('.endPhone').val()) {
+                    if (!endPhone) {
                       checkinfo.done = false
                       layer.msg('到达地联系人电话不能为空')
                       return
@@ -969,6 +1068,12 @@ export default {
                 //发布专线请求接口
                 function next() {
                   var check = validate()
+                  console.log('到达电话', obj.startLocationContactsMobile)
+                  console.log('到达电话', obj.endLocationContactsMobile)
+                  console.log('到达区', obj.endArea)
+                  console.log('到达区', obj.Area)
+                  //缺少参数
+
                   var url =
                     '/28-web/range/create?access_token=' +
                     $.cookie('access_token') +
@@ -984,6 +1089,7 @@ export default {
                       api
                         .postInfo1(url, options)
                         .done(function(res) {
+                          console.log('请求返回数', 'res')
                           var id = res.data
                           var publishId = $.cookie('loginId')
                           if (res.status === '201') {
@@ -1021,6 +1127,56 @@ export default {
       })
     })
     // })
+  },
+  methods: {
+    cargoAdd(type = 1) {
+      if (type === 1) {
+        this.tableAdd('.table1 tbody tr')
+      } else {
+        this.tableAdd('.table2 tbody tr')
+      }
+    },
+    tableAdd(el) {
+      let $el = $(el)
+      let tr = $el,
+        len = $el.length,
+        num = len - 1,
+        volumeEnd = tr
+          .eq(num)
+          .find('.volumeEnd')
+          .val(),
+        origina = tr
+          .eq(num)
+          .find('.origina')
+          .val(),
+        discount = tr
+          .eq(num)
+          .find('.discount')
+          .val()
+      if (!volumeEnd && !origina && !discount) {
+        layer.msg('数据没填满,不可以添加！')
+        return false
+      }
+      this.heavyList.push(this.tableHtml)
+      this.$nextTick(() => {
+        var _tr = $(el)
+        var _len = _tr.length
+        var _num = _len - 1
+        console.log(_tr)
+        _tr
+          .eq(_num)
+          .find('.volume')
+          .val(volumeEnd)
+      })
+    },
+    tableChange(el) {
+      this.$nextTick(() => {
+        let len = $(el).length
+        if (len > 1) {
+          $(el).remove()
+        }
+      })
+    }
   }
 }
 </script>

@@ -5,7 +5,7 @@
         href="/wuliu/detail?id=1"
         target="_blank">
         <img
-          src="../../static/yuanqu/images/hearder.png"
+          src="../../static/yuanqu/images/hearder.jpg"
           alt=""
           width="1900">
       </a>

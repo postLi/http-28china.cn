@@ -3,9 +3,10 @@
     <div class="list_nav">
       <a href="/">物流首页</a>&gt;<a 
         id="list_nav_a1" 
-        href="">零担物流专线</a>&gt;<a 
+        href="">零担物流专线</a>
+        <!-- &gt;<a 
           id="list_nav_a2" 
-          href="">零担物流专线</a>
+          href="">零担物流专线</a> -->
     </div>
     <TopSearch />
     <div class="list-box">

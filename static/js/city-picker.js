@@ -440,8 +440,42 @@
     },
     //关闭下拉
     close: function(blur) {
-      this.$dropdown.hide()
-      this.$textspan.removeClass('open')
+      if (this.$textspan.hasClass('open')) {
+        // 判断值，如果为省级则清空
+        // 先判断是否只有第一层
+        // 再判断这第一层是否为非直辖市、特别行政区
+        // 判断是否选择到市
+        var cityspan = this.$textspan.find('.select-item')
+        var citynanme = cityspan.text()
+        if (
+          cityspan.length === 1 &&
+          /(北京|重庆|天津|上海|香港|澳门)/.test(citynanme) === false
+        ) {
+          var msg = '请选择到省'
+          console.log('qingxuansdfasf', citynanme, cityspan)
+          if (window.layer) {
+            layer.msg(msg)
+          } else {
+            alert(msg)
+          }
+          // 重置选择框
+          // 需要延时调用，以避免持续触发change事件回调close方法造成死循环
+          this.$dropdown.hide()
+          this.$textspan.removeClass('open')
+          var _this = this
+          // debugger
+          setTimeout(function() {
+            _this.reset()
+          }, 200)
+        } else {
+          this.$dropdown.hide()
+          this.$textspan.removeClass('open')
+        }
+      } else {
+        this.$dropdown.hide()
+        this.$textspan.removeClass('open')
+      }
+
       if (blur) {
         this.$textspan.removeClass('focus')
       }

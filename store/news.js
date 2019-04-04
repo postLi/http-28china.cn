@@ -21,7 +21,9 @@ export const state = () => ({
   cheyuan_ccyps: [],
   // 公司列表页
   gongsi_jryw: [],
-  gongsi_wlzx: []
+  gongsi_wlzx: [],
+  // 货源详情
+  huoyuan_wlzx: []
 })
 
 export const mutations = {

@@ -807,33 +807,17 @@
           <ul
             class="ps-list"
             style="padding-left: 30px;list-style: square">
-            <li>
+            <li 
+              v-for="(item, index) in $store.state.news.huoyuan_wlzx"
+              :key="index">
               <div class="btn_span">
                 <span>代理</span>
                 <span>其他</span>
               </div>
-              <a href="">货运全国，一站式服务！</a>
-            </li>
-            <li>
-              <div class="btn_span">
-                <span>供应</span>
-                <span>报关行</span>
-              </div>
-              <a href="">长期供应香港进出口拖车报关！</a>
-            </li>
-            <li>
-              <div class="btn_span">
-                <span>合作</span>
-                <span>其他</span>
-              </div>
-              <a href="">货运全国，一站式服务！</a>
-            </li>
-            <li>
-              <div class="btn_span">
-                <span>代理</span>
-                <span>其他</span>
-              </div>
-              <a href="">货运全国，一站式服务！</a>
+              <a 
+                target="_blank"
+                :title="item.title"
+                :href="item.url">{{ item.title }}</a>
             </li>
           </ul>
         </div>
@@ -953,6 +937,28 @@ export default {
         }
       ]
     }
+  },
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: '119',
+        count: '4',
+        // checked: 'true',
+        // recommend: '1',
+        orderBy: '9',
+        channelOption: '0'
+      },
+      name: 'huoyuan_wlzx',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
+          return el
+        })
+      }
+    })
   },
   async asyncData({ $axios, app, query, error }) {
     let hyDetails = await $axios

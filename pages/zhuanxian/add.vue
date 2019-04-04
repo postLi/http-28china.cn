@@ -230,8 +230,7 @@ export default {
         this.pages = obj.pages
         this.list = obj.list
         this.currentPage = obj.currentPage
-        // this.showPingLunFn('3')
-        this.loadPaginatiosn()
+        this.loadPagination()
 
         //总数
         let _data = await getpjNum(this.$axios, this.$route.query)
@@ -240,7 +239,9 @@ export default {
       }
     },
     types(n, o) {},
-    info(n, o) {}
+    info(n, o) {
+      console.log(n, 'nnn1')
+    }
   },
   mounted() {},
   methods: {

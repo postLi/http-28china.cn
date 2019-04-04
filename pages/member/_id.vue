@@ -719,26 +719,26 @@
             <em>
               <a 
                 target="_blank" 
-                :href="mid+'-webnotice'">更多&gt;&gt;</a>
+                :href="mid+'-news'">更多&gt;&gt;</a>
             </em>
           </div>
 
           <div class="news_item news_item0">
             <a 
-              href="javacript:void(0)" 
+              :href="mid+'-jianjie'" 
               target="_blank">
-              <img src="/member/images/news_demo.png">
-              <span>818刚打响 苏宁卖出第15亿台家电</span>
-              <i>2018-8-31</i>
+              <img src="/member/images/news/1.jpg">
+              <span>{{ company.companyName || '本司' }}真诚期待与您的合作！</span>
+              <!-- <i>2018-8-31</i> -->
             </a>
           </div>
           <div class="news_item news_item0">
             <a 
-              href="javacript:void(0)" 
+              :href="mid+'-news'" 
               target="_blank">
-              <img src="/member/images/news_demo.png">
-              <span>16周年庆典，今夜充满爱和感恩</span>
-              <i>2018-9-8</i>
+              <img src="/member/images/news/2.jpg">
+              <span>{{ company.companyName || '本司' }}竭诚为您服务！</span>
+              <!-- <i>2018-9-8</i> -->
             </a>
           </div>
         </div>

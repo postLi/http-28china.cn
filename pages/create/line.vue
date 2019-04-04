@@ -325,11 +325,8 @@
               <div class="order-form-label">专线照片：</div>
               <p style="padding-top: 10px">建议传</p>
               <div>
-                <upload
-                  :title="'本地上传'" 
-                  :show-file-list="true" 
-                  :limit="6" 
-                  listtype="picture" 
+                <upload 
+                  @imgData="imgListDataFn"
                 />
               </div>
                 
@@ -348,7 +345,6 @@
               </ul> -->
             </div>
           </div>
-        
           <!-- 提交按钮 -->
           <div class="btn_bottom">
             <div 
@@ -379,6 +375,7 @@ export default {
   },
   data() {
     return {
+      imgList: [],
       tableHtml: `<tr class="box1_list">
                           <td colspan="2">
                             <div class="inputbox">
@@ -403,6 +400,7 @@ export default {
     }
   },
   mounted() {
+    let that = this
     seajs.use(['/js/insurance.js'], function() {
       // seajs.use(['/js/laydate.js'], function() {
       seajs.use(['/js/gaodemap2.js'], function() {
@@ -410,6 +408,7 @@ export default {
           seajs.use(['layer'], function() {
             seajs.use(['/layer3/layui.js'], function() {
               console.log(layer)
+
               $(function() {
                 var theRequest = getRequest()
                 // var obj = {
@@ -1038,16 +1037,12 @@ export default {
                   if ($('#once').val()) {
                     obj.departureHzTime = $('#once').val()
                   }
-                  // if ($('.img_box img').length === 0) {
-                  //   layer.msg('请上传图片')
-                  //   return
-                  // } else {
-                  //   $('.img_box img').each(function(index, item) {
-                  //     obj.rangeLogo = obj.rangeLogo + $(this).attr('src') + ','
-                  //   })
-                  //   var length = obj.rangeLogo.length
-                  //   obj.rangeLogo = obj.rangeLogo.substring(0, length - 1)
-                  // }
+                  if (that.imgList) {
+                    console.log('图片数据提交', that.imgList)
+                    obj.rangeLogo = that.imgList.join(',')
+                  } else {
+                    layer.msg('上传图片不能为空')
+                  }
                   getForm()
                   return checkinfo
                 }
@@ -1073,7 +1068,10 @@ export default {
                   console.log('到达区', obj.endArea)
                   console.log('到达区', obj.Area)
                   //缺少参数
-
+                  console.log(
+                    111111111111111111111111111111111111111111111111111111
+                  )
+                  return false
                   var url =
                     '/28-web/range/create?access_token=' +
                     $.cookie('access_token') +
@@ -1089,22 +1087,23 @@ export default {
                       api
                         .postInfo1(url, options)
                         .done(function(res) {
-                          console.log('请求返回数', 'res')
-                          var id = res.data
-                          var publishId = $.cookie('loginId')
-                          if (res.status === '201') {
-                            window.location.href =
-                              '/plus/list.php?tid=86&status=201&text=专线&id=' +
-                              id +
-                              '&publishId=' +
-                              publishId
-                          } else {
-                            window.location.href =
-                              '/plus/list.php?tid=86&status=200&text=专线&id=' +
-                              id +
-                              '&publishId=' +
-                              publishId
-                          }
+                          // console.log('请求返回数', 'res')
+                          // var id = res.data
+                          // var publishId = $.cookie('loginId')
+                          // if (res.status === '201') {
+                          //   window.location.href =
+                          //     '/plus/list.php?tid=86&status=201&text=专线&id=' +
+                          //     id +
+                          //     '&publishId=' +
+                          //     publishId
+                          // } else {
+                          //   window.location.href =
+                          //     '/plus/list.php?tid=86&status=200&text=专线&id=' +
+                          //     id +
+                          //     '&publishId=' +
+                          //     publishId
+                          // }
+                          console.log('请求返回的数据', res)
                         })
                         .fail(function(err) {
                           layer.msg(
@@ -1176,6 +1175,10 @@ export default {
           $(el).remove()
         }
       })
+    },
+    //获取子组件的值
+    imgListDataFn(val) {
+      this.imgList = val
     }
   }
 }
@@ -1190,5 +1193,12 @@ export default {
 }
 .box2_list {
   border: 1px solid #ddd;
+}
+.inputbox input {
+  width: 100px;
+  padding-left: 20px;
+  height: 40px;
+  border-radius: 2px;
+  border: solid 1px #d2d2d2;
 }
 </style>

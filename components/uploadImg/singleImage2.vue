@@ -1,111 +1,30 @@
 <template>
-  <div 
-    class="box_container_2" 
-    :class="{'hideuploadbtn': (filelist.length >= limit) || disabled}">
+  <div class="upload_img" >
     <input 
       type="file"
-      @change="beforeUpload" >
-   
-  <!-- <el-dialog 
-      custom-class="singleimage2" 
-      :visible.sync="dialogVisible"
-      :append-to-body="true">
-      <img 
-        width="100%" 
-        :src="dialogImageUrl" 
-        alt="">
-    </el-dialog> -->
+      multiple="multiple"
+      @change="beforeUpload" 
+    >
+    <div class="upload_img_list">
+      <ul>
+        <li 
+          v-for="(item,index) in imgUrlList2" 
+          :key="index">
+          {{ item }}
+          <a @click="deleteImg(index)">删除图片</a>
+          <img :src="item">>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
-// 上传接口
-// import fetch from '@/utils/fetch'
-var api = {
-  url: '/api',
-  _warpper: function(pro) {
-    var defer = $.Deferred()
-    pro
-      .done(function(res) {
-        if (res.status === 200) {
-          defer.resolve(res)
-        } else {
-          defer.reject(res)
-        }
-      })
-      .fail(function() {
-        defer.reject({
-          text: '网络出错了。',
-          status: 100
-        })
-      })
-
-    return defer.promise()
-  },
-  postInfo: function(url, data) {
-    return this._warpper(
+let api = {
+  postInfo: function(url) {
+    let p = new Promise(function(resolve, reject) {
       $.ajax({
-        url: this.url + url,
-        type: 'POST',
-        dataType: 'json',
-        // 如果用jq，必须设置以下三项，避免jq 的中间处理
-        processData: false,
-        cache: false,
-        contentType: false,
-        headers: {
-          'Content-Type': 'application/json',
-          user_token: $.cookie('user_token')
-        },
-        data: JSON.stringify(data),
-        error: function(err) {
-          if (JSON.parse(err.responseText).error === 'invalid_token') {
-            $('body').toast({
-              content: '您还未登录，请先登录',
-              duration: 3000
-            })
-            $('body').trigger('login.show')
-          }
-        }
-      })
-    )
-  },
-  postAdd: function(url, data) {
-    var defer = $.Deferred()
-    return this._warpper(
-      $.ajax({
-        url: this.url + url,
-        type: 'POST',
-        dataType: 'json',
-        // 如果用jq，必须设置以下三项，避免jq 的中间处理
-        processData: false,
-        cache: false,
-        contentType: false,
-        headers: {
-          'Content-Type': 'application/json',
-          user_token: $.cookie('user_token')
-        },
-        data: JSON.stringify(data),
-        error: function(err) {
-          // console.log(err, 'insurance')
-          if (err.responseJSON.error == 'invalid_token') {
-            defer.reject({
-              text: '您还未登录，请先登录',
-              status: 100
-            })
-            // $('body').toast({
-            //   content: '您还未登录，请先登录',
-            //   duration: 3000
-            // })
-            $('body').trigger('login.show')
-          }
-        }
-      })
-    )
-  },
-  getInfo: function(url) {
-    return this._warpper(
-      $.ajax({
-        url: this.url + url,
+        url: '/api' + url,
         type: 'GET',
         dataType: 'json',
         // 如果用jq，必须设置以下三项，避免jq 的中间处理
@@ -115,210 +34,132 @@ var api = {
         headers: {
           'Content-Type': 'application/json'
         },
+        success: function(res) {
+          resolve(res)
+        },
         error: function(err) {
-          if (JSON.parse(err.responseText).error === 'invalid_token') {
-            $('body').toast({
-              content: '您还未登录，请先登录',
-              duration: 3000
-            })
-            $('body').trigger('login.show')
-          }
+          reject(err)
         }
       })
-    )
+    })
+    return p
   },
-  getInfo1: function(url) {
-    return this._warpper(
+  uploadImg: function(url, form) {
+    let p = new Promise(function(resolve, reject) {
       $.ajax({
-        url: this.url + url,
-        type: 'GET',
-        dataType: 'json',
-        // 如果用jq，必须设置以下三项，避免jq 的中间处理
-        processData: false,
-        cache: false,
-        contentType: false,
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        error: function(err) {}
-      })
-    )
-  },
-  postInfo1: function(url, data) {
-    return this._warpper(
-      $.ajax({
-        url: this.url + url,
+        url: url,
         type: 'POST',
-        dataType: 'json',
+        // dataType: 'json',
         // 如果用jq，必须设置以下三项，避免jq 的中间处理
         processData: false,
         cache: false,
         contentType: false,
-        headers: {
-          'Content-Type': 'application/json',
-          user_token: $.cookie('user_token')
+        // headers: { 'Content-Type': 'multipart/form-data' },
+        data: form,
+        success: function(res) {
+          // var url = $(res)
+          //   .find('Location')
+          //   .text()
+          // console.log('图片url:', url)
+          resolve(res)
         },
-        data: JSON.stringify(data),
-        error: function(err) {}
+        error: function(err) {
+          reject(err)
+          console.log()
+        }
       })
-    )
+    })
+    return p
   }
-} //api
+}
 
 export default {
   name: 'SingleImageUpload',
-  props: {
-    value: {
-      type: [String, Array],
-      default: () => []
-    },
-    title: {
-      type: String,
-      default: ''
-    },
-    tip: {
-      type: String,
-      default: '（jpg/png。小于5M）'
-    },
-    size: {
-      type: String,
-      default: 'mini'
-    },
-    showFileList: {
-      type: Boolean,
-      default: false
-    },
-    limit: {
-      type: Number,
-      default: 10
-    },
-    listtype: {
-      type: String,
-      default: 'picture',
-      enum: ['text', 'picture', 'picture-card']
-    },
-    disabled: {
-      type: Boolean,
-      default: false
-    },
-    // 隐藏文字
-    hidBut: {
-      type: Boolean,
-      default: false
-    },
-    showBut: {
-      type: Boolean,
-      default: false
-    }
-  },
+  props: {},
   data() {
     return {
-      dialogImageUrl: '',
-      dialogVisible: false,
-      tempUrl: '',
-      dataObj: { token: '', key: '' },
-      // 上传参数文档
-      // https://help.aliyun.com/document_detail/31988.html
-      upload: {
-        key: '', // 文件名称
-        policy: '',
-        OSSAccessKeyId: '',
-        success_action_status: '201', // 让服务端返回200,不然，默认会返回204;201会返回xml格式
-        // 'callback': 'callbackbody',
-        signature: ''
-      },
-      uploadUrl: '',
       dir: '',
-      filelist: []
-    }
-  },
-  computed: {
-    imageUrl() {
-      return this.value
+      policy: '',
+      OSSAccessKeyId: '',
+      signature: '',
+      success_action_status: '',
+      url: '',
+      filelist: [],
+      imgUrlList: [],
+      imgUrlList2: []
     }
   },
   watch: {
-    value: {
-      handler(newVal) {
-        if (this.showFileList) {
-          let arr = Array.isArray(newVal)
-            ? newVal
-            : newVal
-              ? newVal.split(',')
-              : []
-          arr = arr.filter(el => el)
-          this.filelist = arr.map(el => {
-            const obj = {}
-            obj.url = el
-            return obj
-          })
-        }
-      },
-      immediate: true
-    },
-    hidBut() {},
-    disabled() {}
+    imgUrlList: function(newVal, oldVal) {
+      this.imgUrlList2 = newVal
+    }
   },
-  mounted() {
-    seajs.use(['/js/insurance.js'], function() {})
-  },
+  mounted() {},
   methods: {
     init() {
-      // 从后台获取policy
-      console.log('1111111')
+      var _this = this
+
       var url =
         '/anfacommonservice/common/oss/v1/policy?access_token=' +
         $.cookie('access_token')
-      return api
-        .getInfo1(url)()
-        .done(data => {
-          this.upload.OSSAccessKeyId = data.accessid
-          this.upload.policy = data.policy
-          this.upload.signature = data.signature
-          this.uploadUrl = data.host
-          this.dir = data.dir
-          // this.upload.key = data.dir + this.random_string() + type
-        })
-        .fail(err => {
-          this._handlerCatchMsg(err)
-        })
-    },
-    rmImage() {
-      this.emitInput('')
-    },
-    // 超出上传数量
-    onexceed(file, filelist) {
-      this.$message.error(`最多上传 ${this.limit} 张!`)
-    },
-    // 删除列表
-    handleRemove(file, fileList) {
-      console.log('handleRemove:', file, fileList)
-      this.filelist = fileList
-      this.emitInput()
+      return api.postInfo(url).then(
+        function(res) {
+          _this.dir = res.data.dir
+          _this.policy = res.data.policy
+          _this.OSSAccessKeyId = res.data.accessid
+          _this.signature = res.data.signature
+          _this.success_action_status = '201'
+          _this.url = res.data.host
+          console.log('1', res)
+          console.log('zid', _this.dir)
+          console.log('----------')
+          console.log('_this.handleUpload', _this.handleUpload)
+          _this.handleUpload(_this.fileList)
+        },
+        function() {
+          layer.msg('请求失败!')
+          return false
+        }
+      )
     },
     // 保存上传
-    handleUpload(options) {
+    handleUpload(file) {
+      let _this = this
       return new Promise((resolve, reject) => {
         // options.file
         // 只处理jpg图片
 
-        var name = options.file.name
+        var name = file.name
         name = !name ? Math.random() + '.jpg' : name
         // 表单域 file 必须为最后一个表单域；
         var type = name.match(/([^\.]+)$/)
         type = type ? '.' + type[1] : ''
 
-        let fn = file => {
+        console.log('haha')
+
+        let fn = files => {
           const form = new FormData()
-          const url = this.uploadUrl
+          const url = _this.url
 
-          form.append('key', this.upload.key)
+          let strsss =
+            _this.dir +
+            'uploadfile/' +
+            (/(jpe?g|png|bmp|gif)/i.test(type) ? +new Date() + type : name)
+          form.append('key', strsss)
+          // form.append('key', _this.key)
           form.append('success_action_status', '201')
-          form.append('OSSAccessKeyId', this.upload.OSSAccessKeyId)
-          form.append('policy', this.upload.policy)
-          form.append('signature', this.upload.signature)
-          form.append('file', file)
+          form.append('OSSAccessKeyId', _this.OSSAccessKeyId)
+          form.append('policy', _this.policy)
+          form.append('signature', _this.signature)
+          form.append('file', files)
 
+          console.log('key1', _this.key, _this.dir)
+          console.log('OSSAccessKeyId2', _this.OSSAccessKeyId)
+          console.log('policy3', _this.policy)
+          console.log('signature4', _this.signature)
+          console.log('file5', files)
+          console.log('form', form)
+          // return false
           // fetch
           //   .post(url, form, {
           //     headers: { 'Content-Type': 'multipart/form-data' }
@@ -330,6 +171,8 @@ export default {
           //     reject(err)
           //     this._handlerCatchMsg(err, '上传失败:')
           //   })
+          console.log('上传图片')
+          _this.postUploadImg(form)
         }
 
         if (/\.jpe?g/.test(type)) {
@@ -337,61 +180,59 @@ export default {
             width: 1024
           })
             .then(rst => {
+              console.log('rst', rst)
               fn(rst.file)
             })
             .catch(err => {
               reject(err)
-              this._handlerCatchMsg(err, '上传失败：')
+              // this._handlerCatchMsg(err, '上传失败：')
             })
         } else {
-          fn(options.file)
+          fn(file)
         }
       })
     },
-    // 设置随机的文件名
-    random_string(len) {
-      len = len || 32
-      var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
-      var maxPos = chars.length
-      var pwd = ''
-      for (var i = 0; i < len; i++) {
-        pwd += chars.charAt(Math.floor(Math.random() * maxPos))
-      }
-      return pwd
-    },
-    emitInput(val) {
-      if (val) {
-        this.filelist.push({
-          url: val
-        })
-      }
-
-      this.$emit(
-        'input',
-        this.showFileList
-          ? this.filelist
-              .map(el => {
-                return el.url
-              })
-              .join(',')
-          : val
+    postUploadImg(form) {
+      let _this = this
+      console.log('提交表单', form)
+      // 上传接口
+      console.log('阿里云地址1')
+      console.log('URL', this.url)
+      api.uploadImg(this.url, form).then(
+        res => {
+          console.log('阿里云图片的地址', res)
+          let url = $(res)
+            .find('Location')
+            .text()
+          console.log('打印图片url:', url)
+          _this.imgUrlList.push(url)
+          this.$emit('imgData', _this.imgUrlList2)
+        },
+        err => {
+          layer.msg('上传图片失败！')
+        }
       )
     },
-    handleImageScucess(xml) {
-      let url = ''
-      if (xml.indexOf('Location') !== -1) {
-        url = xml.match(/<Location>([^<]+)<\/Location>/m)
-        url = url ? url[1] : ''
-      }
-      this.emitInput(url)
-      // this.imageUrl = url
-    },
-    handleError(err) {
-      this.$emit('error', err)
-    },
+
     beforeUpload(_file) {
-      console.log('file', _file, _file.target.files || _file.dataTransfer.files)
-      let file = _file.target.files[0] || _file.dataTransfer.files[0]
+      let _this = this
+      //上传图片之前
+
+      let options = _file.target.files || _file.dataTransfer.files
+      let len = options.length
+      if (options.length > 3) {
+        layer.msg('不能上传超过三张图片！')
+        return false
+      }
+      for (let i = 0; i < len; i++) {
+        console.log(_this)
+        _this.filesFn(options[i])
+      }
+    },
+    //处理压缩图片
+    filesFn(files) {
+      let _this = this
+      let file = files
       // if (!files.length) return
       console.log('file', file.name, file)
 
@@ -410,139 +251,30 @@ export default {
           reject(false)
         } else {
           // 上传前统一取一下凭证
+          _this.fileList = file
           this.init()
             .then(res => {
               // 设置文件名
-              this.upload.key =
-                this.dir + new Date() + '/' + this.random_string() + type
+
               // setTimeout(() => {
               resolve(true)
               // }, 10 * 1000)
             })
             .catch(err => {
-              this._handlerCatchMsg(err)
+              // this._handlerCatchMsg(err)
               resolve(false)
             })
         }
       })
     },
-    handlePictureCardPreview(file) {
-      this.dialogImageUrl = file.url
-      this.dialogVisible = true
+    //删除图片
+    deleteImg(i) {
+      this.imgUrlList.splice(i, 1)
+      this.$emit('imgData', this.imgUrlList2)
+      console.log(this.imgUrlList)
     }
   }
 }
 </script>
 <style lang="scss">
-.uploadlist {
-  display: inline-block;
-  width: auto !important;
-  height: auto;
-
-  .el-upload {
-    width: auto;
-
-    .el-button {
-      margin-top: 20px;
-    }
-  }
-}
-.hideuploadbtn {
-  .el-upload.el-upload--picture-card {
-    // display: none;
-  }
-}
-</style>
-
-<style lang="scss">
-// @import 'src/styles/mixin.scss';
-.singleimage2 {
-  margin-top: 10vh !important;
-  width: 40% !important;
-}
-.box_container_2 {
-  width: 100%;
-  position: relative;
-  // @include clearfix;
-
-  .el-upload-list__item {
-    transition: none;
-  }
-
-  .el-upload .el-upload-dragger {
-    height: 132px;
-  }
-  .image-uploader {
-    width: 100%;
-    height: 100%;
-  }
-  .image-preview {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    background-color: #fff;
-    top: 0;
-    left: 0;
-    .image-preview-wrapper {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .image-preview-action {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      left: 0;
-      top: 0;
-      cursor: default;
-      text-align: center;
-      color: #fff;
-      opacity: 0;
-      font-size: 20px;
-      background-color: rgba(0, 0, 0, 0.5);
-      transition: opacity 0.3s;
-      cursor: pointer;
-      text-align: center;
-      line-height: 200px;
-      .el-icon-delete {
-        font-size: 36px;
-      }
-    }
-    &:hover {
-      .image-preview-action {
-        opacity: 1;
-      }
-    }
-  }
-  .el-button {
-    margin-top: 24px;
-    // float:left;
-  }
-  .el-upload__text {
-    margin-top: 10px;
-    margin-bottom: 5px;
-    font-size: 12px;
-    line-height: 30px;
-  }
-  .upload__tip {
-    font-size: 12px;
-    line-height: 30px;
-    color: #999;
-  }
-  .upload__title {
-    font-size: 13px;
-    color: #666;
-    margin-top: 14px;
-  }
-  .el-upload--picture-card {
-    line-height: 43px;
-  }
-  // .upload__tip{
-  //   line-height:43px;
-  // }
-}
 </style>

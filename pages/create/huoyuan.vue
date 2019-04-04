@@ -219,18 +219,21 @@
                 <tbody><tr>
                   <th>姓名：</th>
                   <td><input 
+                    placeholder="请输入联系人"
                     maxlength="15" 
                     type="text"></td>
                 </tr>
                   <tr>
                     <th>电话：</th>
                     <td><input 
+                      placeholder="请输入联系人电话号码"
                       type="text" 
                       maxlength="11"></td>
                   </tr>
                   <tr>
                     <th>地址：</th>
                     <td><input 
+                      placeholder="请选择地址"
                       wtmap="detail" 
                       maxlength="30" 
                       type="text"></td>

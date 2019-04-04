@@ -3910,7 +3910,8 @@ font-size: 14px;
     width: auto !important;
     height: 38px;
     line-height: 38px;
-    overflow: hidden;
+		overflow: hidden;
+		white-space: nowrap;
 }
 .hq-news-from .city-picker-span{min-width: 90px ;}
 .index_search .city-picker-span{line-height: 32px;padding-left: 0px;}

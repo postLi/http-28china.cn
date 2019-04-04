@@ -7,6 +7,7 @@ function logReqInfos(app, res, isError) {
       headers: cfg.headers,
       method: cfg.method,
       timeout: cfg.timeout,
+      params: cfg.params,
       url: cfg.url,
       withCredentials: cfg.withCredentials,
       xsrfCookieName: cfg.xsrfCookieName,

@@ -337,7 +337,7 @@
 
         var wtmap = this.el.attr('wtmap')
 
-        var name = obj.province + obj.city + obj.district
+        var name = obj.province + (obj.city || '') + (obj.district || '')
 
         // province
         // city
@@ -368,10 +368,16 @@
         this.el.attr('theprovince', obj.province)
         this.el.attr('thecity', obj.city)
         this.el.attr('thearea', obj.district)
-        this.el.attr('thepcd', obj.province + '' + obj.city + '' + obj.district)
+        this.el.attr(
+          'thepcd',
+          obj.province + '' + (obj.city || '') + '' + (obj.district || '')
+        )
         this.el.attr(
           'thestreet',
-          obj.township + obj.street + obj.streetNumber + obj.building
+          (obj.township || '') +
+            (obj.street || '') +
+            (obj.streetNumber || '') +
+            (obj.building || '')
         )
       } else {
         this.tipCity()

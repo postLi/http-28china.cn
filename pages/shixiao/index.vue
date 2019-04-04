@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="shixiao_banner">
-      <img src="/images/wzlImg/01banner.png">
+      <img src="/images/wzlImg/sxbanner.png">
+      <a 
+        target="_black"
+        href="http://h5.28tms.com/"
+        class="baner_btn"/>
     </div>
     <div class="shixiao_box">
       <div class="fix_box">
@@ -36,8 +40,8 @@
             <div class="kf_num">
               <p style="text-align: center;">
                 <img src="/images/wzlImg/07kfj.png">
-                <img src="/images/wzlImg/08qq.png">
-                <img src="/images/wzlImg/08qq.png">
+                <img src="/images/article_wlzx/15qq.gif">
+                <img src="/images/article_wlzx/15qq.gif">
               </p>
               <p style="text-align: center;"><img src="/images/wzlImg/09400.png"></p>
             </div>
@@ -229,9 +233,11 @@
                     </a>
                   </p>
                   <p class="p2"><img src="/images/wzlImg/1.png"><font style="color: #2577e3;">{{ item.companyName ? item.companyName : '无' }}</font>
-                    <span 
+                    <a
+                      target="_black"
                       style="margin-left:10px;" 
-                      v-if="item.qq"> <img src="/images/wzlImg/08qq.png"></span>
+                      :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq+'&site=qq&menu=yes'"
+                      v-if="item.qq"> <img src="/images/article_wlzx/15qq.gif"></a>
                   </p>
                   <p>
                     <img
@@ -409,26 +415,10 @@
                 </ul>
               </div>
             </div>
-
-
           </div>
-          <!--分页-->
-          <!-- <div
-            class="box" 
-            style="float: right;margin-right: 370px;">
-            <div 
-              id="pagination1" 
-              class="page fl"/>
-            <div class="info fl">
-              <p>当前页数：<span id="current1">1</span></p>
-            </div>
-          </div> -->
         </div>
       </div>
-      
-
     </div>
-
   </div>
 </template>
 
@@ -648,7 +638,6 @@ export default {
       },
       false
     )
-    // this.loadPagination()
     this.footLink()
     // this.scrollmenue()
   },
@@ -890,25 +879,9 @@ export default {
         item.targetLinks = '/member/' + item.companyId + '-huo'
       }
     }
-    // loadPagination() {
-    //   $('#pagination1').pagination({
-    //     currentPage: this.currentPage,
-    //     totalPage: this.totalPage,
-    //     callback: async current => {
-    //       $('#current1').text(current)
-    //       let vo = this.vo
-    //       vo.filterSign = this.sortId
-    //       let obj = await getListRangesAging(this.$axios, current, vo)
-    //       this.listRangesAging = obj.list
-    //       this.currentPage = obj.currentPage
-    //       window.location.href = '#top'
-    //     }
-    //   })
-    // }
   }
 }
 </script>
-
 <style scoped>
 /*物流专线 S */
 body {
@@ -923,9 +896,19 @@ img {
   margin: 0 auto;
   overflow: hidden;
 }
+.shixiao_banner {
+  position: relative;
+}
 .shixiao_banner img {
   width: 100%;
   margin-bottom: 20px;
+}
+.baner_btn {
+  position: absolute;
+  width: 180px;
+  height: 50px;
+  left: 514px;
+  bottom: 55px;
 }
 .shixiao_fabu {
   float: left;

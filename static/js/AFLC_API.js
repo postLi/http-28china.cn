@@ -14,6 +14,18 @@ $(document).ajaxSend(function(event, jqXHR, ajaxOptions) {
     }
   }
 })
+$(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError){
+  console.log('ajax ajaxError', event,' :: ', jqXHR,' :: ', ajaxSettings,' :: ', thrownError)
+  // 如果是401，提示退出了
+  if(jqXHR.status === 401){
+    if(window.layer){
+      layer.msg('账号已过期，请重新登录！')
+    }else {
+      alert('账号已过期，请重新登录！')
+    }
+    AFWL_API.clearCookieData()
+  }
+})
 
 // 接口相关
 var AFWL_API = {
@@ -53,6 +65,28 @@ var AFWL_API = {
       })
 
     return defer.promise()
+  },
+  // 清空登录后的信息
+  clearCookieData: function(){
+    // 获取域名
+    var domain = location.hostname
+    if (domain.indexOf('28kuaiyun.cn') !== -1) {
+      domain = '.28kuaiyun.cn'
+    }
+    var opt = {
+      // expires: 7,
+      domain: domain,
+      path: '/'
+    }
+    $.cookie('access_token', null, opt)
+    $.cookie('login_mobile', null, opt)
+    $.cookie('login_userName', null, opt)
+    $.cookie('login_userId', null, opt)
+    $.cookie('login_userToken', null, opt)
+    $.cookie('login_type', null, opt)
+    $.cookie('loginId', null, opt)
+    $.cookie('loginCompanyName', null, opt)
+    localStorage.setItem('28kuaiyunuserinfo', '')
   },
   // 保存登陆后的信息
   setCookieData: function(data) {

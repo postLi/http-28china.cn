@@ -18,7 +18,7 @@
         <p style="font-size:30px;margin-bottom:30px">稍等。。。</p>
         <div style="font-size:18px">
           <p>28平台智能运输大数据中心正在为您核算</p>
-          <p>从<span style="color:red">广州</span>至<span style="color:red">深圳</span></p>
+          <p>从<span style="color:red">{{ linedata.startCity }}</span>至<span style="color:red">{{ linedata.endCity }}</span></p>
           <p>全网优质承运商的最新报价</p>
         </div>
    
@@ -42,11 +42,15 @@
       <div
         v-else
       >
-        <div class="showEchart">
-          <span>价格参考</span><span>大数据智能模型精准定价，28智能平台指导定价</span>
-          <p>广州→深圳专线</p>
+        <div 
+          style="padding: 0 50px;"
+          class="myEchart">
+          <span class="prck">价格参考</span><span style="color:rgb(255,110,15);font-size:15px;padding-right:5px">大数据智能模型精准定价，28智能平台指导定价</span>
+          <p style="padding-top:20px;color:rgb(255,110,15);font-size:16px">{{ linedata.startCity }}→{{ linedata.endCity }}专线</p>
           <!-- <ShowEchart :info="LineeEchartInfo"/> -->
-          <p>江苏大本赢物流有限公司的报价低于92.6%的承运商，承运价格低于行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</p>
+          <div style="color:rgb(255,110,15);font-size:18px">
+            <p><span style="border-bottom:1px solid rgb(255,110,15)">{{ company.companyName }}</span>的报价低于<span style="color:red">{{ company.lowerPriceRate }}%</span>的承运商，承运价格<span style="border-bottom:1px solid rgb(255,110,15)">低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</p>
+          </div>
         </div>
       </div>
     </div>
@@ -75,11 +79,11 @@ export default {
       type: [Array, Object],
       default: () => {}
     },
-    infopj: {
+    linedataA: {
       type: [Array, Object],
       default: () => {}
     },
-    infopjs: {
+    lineCompany: {
       type: [Array, Object],
       default: () => {}
     }
@@ -105,7 +109,10 @@ export default {
       seconds: 5,
       stopTimer: '',
       LineeEchartInfo: [],
-      showEchartDiv: false
+      showEchartDiv: false,
+      linedata: {},
+      company: '',
+      lowerPrice: 0
     }
   },
 
@@ -155,13 +162,19 @@ export default {
         })
         this.seconds = 5
         this.LineeEchartInfo = this.info
-        console.log(this.LineeEchartInfo, 'LineeEchartInfo')
+        // console.log(this.LineeEchartInfo, 'LineeEchartInfo')
         clearInterval(this.stopTimer)
         this.stopTimer = setInterval(() => {
           this.seconds--
           if (this.seconds < 1) {
             clearInterval(this.stopTimer)
             this.showEchartDiv = true
+            this.linedata = this.linedataA
+            this.company = this.lineCompany
+            // this.lowerPrice = this.lowerPriceRate
+            // console.log(this.linedataA, 'linedataA')
+            // console.log(this.companyName, 'companyName')
+            // console.log(this.lowerPriceRate, 'lowerPriceRate')
           }
         }, 1000)
       }
@@ -170,7 +183,19 @@ export default {
     info(n, o) {
       this.LineeEchartInfo = n
       console.log(n, 'nnn1')
+    },
+    linedataA(n, o) {
+      this.linedata = n
+      console.log(n, 'linedataA2')
+    },
+    lineCompany(n, o) {
+      this.company = n
+      console.log(n, 'companyName2')
     }
+    // lowerPriceRate(n, o) {
+    //   this.lowerPrice = n
+    //   console.log(n, 'lowerPriceRate2')
+    // }
   },
   mounted() {},
   methods: {
@@ -191,7 +216,24 @@ export default {
   .dialog-content {
     width: 800px !important;
     height: 600px !important;
-    // top: 30% !important;
+    // top: 30% !important ;
+    .myEchart {
+      .prck {
+        position: relative;
+        padding-left: 10px;
+        font-size: 16px;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 1px;
+          top: 4px;
+          width: 3px;
+          height: 16px;
+          background: rgb(255, 107, 35);
+        }
+      }
+    }
   }
 }
 </style>

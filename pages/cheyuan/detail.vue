@@ -99,7 +99,9 @@
                 height="72">
             </div>
             <div>
-              <a href="http://h5.28tms.com/">
+              <a 
+                target="_black"
+                href="http://h5.28tms.com/">
               下载<span>【28快运APP】</span>，您可查看更多<span>{{ cy1.startCity }}</span>到<span>{{ cy1.endCity }}</span>的车源，并可实时接 收28快运为您推荐的精品车源提醒!</a>
             </div>
 
@@ -125,7 +127,7 @@
                   class="manage_box"
                   v-for="(item,index) in newList"
                   :key="index"
-                >用户{{ item.creater }}发布<i>{{ item.startCity }}</i>到<i>{{ item.endCity }}</i>车源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
+                >用户{{ item.creater }}发布<i :title="item.startCity">{{ item.startCity ? item.startCity.substring(0,3) : '' }}</i>到<i :title="item.endCity">{{ item.endCity ? item.endCity.substring(0,3) :'' }}</i>车源&nbsp;&nbsp;&nbsp;{{ item.gapTime }}</div>
               </div>
             </div>
           </div>
@@ -198,11 +200,18 @@
               <font 
               style="color: #333" >{{ cy1.phone }}</font>
             </span>
-            <span><a
-              :href="'http://wpa.qq.com/msgrd?v=3&uin=' + cy1.qq + '&site=qq&menu=yes'"
-              target="_blank"><i>Q&nbsp;Q：</i><input
-                v-if="cy1.qq"
-                value="QQ交谈" ></a></span>
+            <span><i>Q&nbsp;Q：</i>
+              <a
+                id="nr1023"
+                :href="'http://wpa.qq.com/msgrd?v=3&uin='+ cy1.qq+'&site=qq&menu=yes'"
+                target="_blank">
+                <input
+                  v-if="cy1.qq != '' && cy1.qq != null"
+                  readonly
+                  id="qq"
+                  value="QQ交谈">
+              </a>
+            </span>
           </p>
           <p style="clear: both;"/>
           <p class="arc_right05" >
@@ -238,6 +247,10 @@
           <div class="zx_sx">
             <span class="biaozhi"/><span>价格参考</span><i style="margin-left: 12px;color: #333333">大数据智能模型精准定价，28智能平台指导定价</i>
           </div>
+          <div class="echart_tip">{{ cy1.startCity +
+            '->' +
+            cy1.endCity +
+          cy1.carLength }}米整车</div>
           <div id="echart"/>
         </div>
         <div class="right">
@@ -260,10 +273,19 @@
               </div>
             </div>
             <div class="content-right">
-              <img src="/images/cy/02gold.png">
-              <div class="content-right-row"><img
-                class="img"
-                src="/images/cy/13hot.png">活跃度：<i>{{ cheComprehensive.liveness }}</i></div>
+              <img 
+                v-if="cheComprehensive.liveness >= 70"
+                src="/images/cy/02gold.png">
+              <img 
+                v-if="cheComprehensive.liveness >= 30 && cheComprehensive.liveness < 70"
+                src="/images/cy/silver.png">
+              <img 
+                v-if="cheComprehensive.liveness <30"
+                src="/images/cy/bronze.png">
+              <div class="content-right-row">
+                <img
+                  class="img"
+                  src="/images/cy/13hot.png">活跃度：<i>{{ cheComprehensive.liveness }}</i></div>
               <div class="content-right-row">最近三个月发布车源 <i>{{ cheComprehensive.lastThreeMonthPublishNum }}</i> 次</div>
               <div class="content-right-row">共成交 <i>{{ cheComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ cheComprehensive.evaGoodCount }}</i> 次</div>
               <div class="content-right-row">大家对他的印象:</div>
@@ -292,7 +314,7 @@
                   href="javascript:;"
                   class="button2"
                   @click="openAdd()"
-                ><img src="/images/cy/03u41008 2.gif">帮我选择优质车源</a>
+                ><img src="/images/cy/03u410082.gif">帮我选择优质车源</a>
               </div>
             </div>
           </div>
@@ -309,9 +331,10 @@
               <span 
                 class="biaozhi" 
               /><span>更多从{{ cy1.startCity }}出发的车源</span>
-              <i
-                style="cursor: pointer;float: right;font-size: 14px;"
-                @click="goToCy()">更多></i>
+              <div class="morelink"><a 
+                :href="'/cheyuan?startProvince='+cy1.startProvince+'&startCity='+cy1.startCity" 
+                target="_blank">更多&gt;</a>
+              </div>	
             </div>
             <div class="arc_main4-content">
               <div
@@ -382,9 +405,10 @@
           <div>
             <div class="zx_sx">
               <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的车源</span>
-              <i
-                style="cursor: pointer;float: right;font-size: 14px;"
-                @click="goToCy1()">更多></i>
+              <div class="morelink"><a 
+                :href="'/cheyuan?startProvince='+cy1.endProvince+'&startCity='+cy1.endCity" 
+                target="_blank">更多&gt;</a>
+              </div>	
             </div>
             <div class="arc_main4-content">
               <div
@@ -665,7 +689,7 @@ export default {
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/article_cheyuan.css' },
+      { rel: 'stylesheet', href: '/css/article_cheyuan.css?v2' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
     script: [
@@ -730,7 +754,7 @@ export default {
       .dispatch('news/GETNEWSINFO', {
         params: {
           channelIds: '101',
-          count: 8,
+          count: 10,
           orderBy: 9,
           channelOption: 0
         },
@@ -746,12 +770,9 @@ export default {
           })
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => {})
   },
   async asyncData({ $axios, app, query }) {
-    console.log(app, 'app')
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     if (cy1.data.status === 200) {
@@ -796,16 +817,12 @@ export default {
     //最新货源信息
     let newLists = await $axios
       .post('/28-web/carInfo/newest/publish')
-      .catch(err => {
-        // console.log('newestHuoyuanRes:', err)
-      })
+      .catch(err => {})
     let driverId = cy1.data.data.driverId
     //综合力评估
     let cheComprehensives = await $axios
       .get('/28-web/driver/comprehensive?driverId=' + driverId)
-      .catch(err => {
-        // console.log('huoComprehensives:', err)
-      })
+      .catch(err => {})
     //货源热门搜索
     let hotSearchs = await $axios.get('/28-web/hotSearch/carInfo/detail/links')
     //底部推荐
@@ -815,10 +832,7 @@ export default {
     //企业人气榜
     let popularitys = await $axios
       .get('/28-web/driver/driverPopularityList')
-      .catch(err => {
-        console.log('popularitys')
-      })
-    // console.log(popularitys.data.data, 'popularitys')
+      .catch(err => {})
     let footLink = item => {
       switch (item.startProvince) {
         case null:
@@ -950,7 +964,6 @@ export default {
       }
     })
 
-    console.log(this.cy1, 'carInfoId')
     let rollContainer_h = $('.release_box').height()
     let roll = $('.release_scroll')
     roll.append(roll.html())
@@ -1001,14 +1014,14 @@ export default {
           }
 
           odata = [
-            data.famousBrandPrice,
-            data.highQualityPrice,
+            data.highestPrice,
             data.highAveragePrice,
-            data.lowAveragePrice
+            data.lowAveragePrice,
+            data.lowestPrice
           ]
         }
         this.echarData = data
-        return { data: odata, thisCarPrice: data.thisCarPrice }
+        return { data: odata, thisPrice: data.thisPrice }
       })
       .then(data => {
         return this.getChartOption(data)
@@ -1022,7 +1035,6 @@ export default {
       totalPage: this.pages,
       callback: async current => {
         $('#current1').text(current)
-        console.log(current)
         let obj = await getOtherCarInfoList(this.$axios, current, {
           id: this.$route.query.id
         })
@@ -1042,20 +1054,22 @@ export default {
       let find = 4
       let data = obj.data
       let theCar = {
-        value: obj.thisCarPrice === null ? 0 : obj.thisCarPrice,
+        value: obj.thisPrice === null ? 0 : obj.thisPrice,
         ovalue: 0, // 将最低价给它，方便它定位到最后
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }
-      if (obj.thisCarPrice === null) {
+      if (obj.thisPrice === null) {
         data.push(theCar)
       } else {
         // 判断本车价的位置
-        data.forEach((el, inx) => {
-          if (el < theCar.value) {
-            find = inx
+        for (let i = 0; i < 4; i++) {
+          if (data[i] < theCar.value) {
+            find = i
+            break
           }
-        })
+        }
+
         data.splice(find, 0, theCar)
       }
       obj.find = find
@@ -1068,7 +1082,7 @@ export default {
       if (obj.find === 2) {
         hqh = data[1]
         hql = data[3]
-        theorangearea = [null, data[1], null, data[3]]
+        theorangearea = [null, data[1], obj.thisPrice, data[3]]
       } else if (obj.find > 2) {
         hqh = data[1]
         hql = data[2]
@@ -1077,7 +1091,7 @@ export default {
         hql = data[3]
         theorangearea = [null, null, data[2], data[3]]
       }
-      console.log('echart 数据：', data, label, hqh, hql, maxY)
+      console.log('echart 数据：', find, data, label, hqh, hql, maxY)
       return {
         title: { text: '', subtext: '' },
         tooltip: { trigger: 'axis' },
@@ -1112,7 +1126,6 @@ export default {
               label: {
                 position: 'insideTop',
                 formatter: function(params) {
-                  console.log(params)
                   if (params.value === 0) {
                     return `{color1|${params.name}}\n{color0|面议}`
                   } else {
@@ -1250,18 +1263,14 @@ export default {
     showPrice() {
       let tipstr =
         '<div class="myLayer_content2">此数据源于平台用户提报的历史数据统计，仅供参考！</div>'
-      if (this.echarData.thisCarPrice !== null) {
-        if (
-          this.echarData.thisCarPrice > this.echarData.standardHighQualityPrice
-        ) {
+      if (this.echarData.thisPrice !== null) {
+        if (this.echarData.thisPrice > this.echarData.highAveragePrice) {
           // 高于
           tipstr =
             '<div class="myLayer_content2">车主' +
             this.cy1.driverName +
             '的承运价格<span>高于</span>行业均价高点</div>'
-        } else if (
-          this.echarData.thisCarPrice < this.echarData.standardHighAveragePrice
-        ) {
+        } else if (this.echarData.thisPrice < this.echarData.lowestPrice) {
           // 低于
           tipstr =
             '<div class="myLayer_content2">车主' +
@@ -1295,12 +1304,12 @@ export default {
               let tdata = this.echarData
               let option2 = this.getChartOption({
                 data: [
-                  tdata.standardFamousBrandPrice,
-                  tdata.standardHighQualityPrice,
-                  tdata.standardHighAveragePrice,
-                  tdata.standardLowAveragePrice
+                  tdata.highestPrice,
+                  tdata.highAveragePrice,
+                  tdata.lowAveragePrice,
+                  tdata.lowestPrice
                 ],
-                thisCarPrice: tdata.thisCarPrice
+                thisPrice: tdata.thisPrice
               })
               myChart2.setOption(option2)
             }
@@ -1358,8 +1367,7 @@ export default {
         )
       } else {
         this.isShowCollect = true
-        $('.login_box').show()
-        $('.login_box_mask').show()
+        $('body').trigger('login.show')
       }
     },
     openAdd() {
@@ -1383,9 +1391,7 @@ export default {
               layer.msg(res.data.errorInfo)
             }
           })
-          .catch(err => {
-            console.log('提交捕获异常')
-          })
+          .catch(err => {})
       } else {
         this.isShowAdd = true
         this.getAddress()

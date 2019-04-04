@@ -307,21 +307,8 @@
             :href="'/member/'+ item.id"
             target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
 
-          <p
-            v-if="item.showcreadimg"
-            class="p7" >
-            <img
-              v-for="(i,index) in item.creditImg"
-              :key="index"
-              src="/wd/images/blue.gif" >
-          </p>
-          <p
-            v-if="item.showcreadeng"
-            class="p7" >
-            <img
-              v-for="(i,index) in item.creditdeng"
-              :key="index"
-              src="/wd/images/34huanguan.gif" >
+          <p class="p7">
+            <creditIcon :credit="item.credit" />
           </p>
 
           <p class="p3"><i>联系人：</i><font id="tj_02">{{ item.contactsName }}</font></p>

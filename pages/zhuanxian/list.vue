@@ -159,11 +159,7 @@
                     :class=" item.name=='不限'? 'now':''"
                     class="all">{{ item.name }}</a>
                 </span>
-                <!-- :href="'/zhuanxian/list?belongBrandCode='+ item.code" -->
-                <!--<a-->
-                <!--class="now all"-->
-                <!--href="/zhuanxian/list"-->
-                <!--&gt;不限</a>-->
+               
               </dd>
               <dt>其他&nbsp;:</dt>
               <dd id="tjcx_03">
@@ -177,11 +173,7 @@
                     :class=" item.name=='不限'? 'now':''"
                     class="all">{{ item.name }}</a>
                 </span>
-                <!-- :href="'/zhuanxian/list?otherServiceCode='+ item.code" -->
-                <!--<a-->
-                <!--class="now all"-->
-                <!--href="/zhuanxian/list">不限</a>-->
-                <!--<a class="shiming">实名认证</a>-->
+              
               </dd>
             </dl>
           </div>
@@ -212,8 +204,7 @@
             <span>暂时没有找到您要查询的信息，可以看看其他线路哦</span>
             <img src="/line/images/none_pic.png">
           </div>
-          <!--lineList-->
-          <!--<span>{{lineLists.length}}</span>-->
+         
           <div
           v-else >
             <ul
@@ -252,11 +243,11 @@
                     target="_blank">
                     <span class="list-icon lines-sprite-icons icon-start"/>
                     <em>{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
-                    <!--<em >{{ item.startCity }}</em><em>{{ item.startArea }}</em>-->
+                 
                     <span class="list-icon lines-sprite-icons icon-through"/>
                     <span class="list-icon lines-sprite-icons icon-end"/>
                     <em>{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
-                    <!--<em>{{ item.endCity.length>7?item.endCity.substring(0,7)+'..': item.endCity }}</em><em >{{ item.endArea.length>7?item.endArea.substring(0,7)+'..': item.endArea }}</em>-->
+                  
                   </a>
                 </P>
                 <p class="p2">
@@ -277,17 +268,7 @@
                     id="tj_icon_1"
                     src="/line/images/wtjzx.gif">
                 </p>
-                <!--<p class="p5">-->
-                <!--<img-->
-                <!--id="list_shiming"-->
-                <!--src="/line/images/10shiming.png">-->
-                <!--<img-->
-                <!--id="list_xinyong"-->
-                <!--src="/line/images/11xinyong.png">-->
-                <!--<img-->
-                <!--id="list_danbao"-->
-                <!--src="/line/images/12danbao.png">-->
-                <!--</p>-->
+               
                 <p
                   class="p21"
                   style="padding-top: 15px;">
@@ -315,9 +296,7 @@
                   class="zhuo"
                   style="color: #666">轻货：</i>{{ item.lightDiscountPrice || item.lightPrice }}<span style="color: #333">元/m³</span></p>
                 <p class="p3"><i>时效：</i><span>{{ item.transportAging?item.transportAging:'' }}{{ item.transportAging?item.transportAgingUnit:'暂无' }}</span></p>
-                <!--<p class="p3"><i>时效：</i><span id="nr09"/></p>-->
                 <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
-                <!--<p class="p4"><i>频率：</i><span id="nr10"/></p>-->
               </li>
               <li class="wlzx_list_6">
                 <p class="p1"><a
@@ -329,8 +308,7 @@
 
                 ></a>
                 </p>
-                <!--/:href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"-->
-                <!--onclick="'/create/line?id='+ item.id+'?uid='+ item.account+'&publishId='+item.publishId'"-->
+              
                 <p class="p2"><a
                   id="nr_a22"
                   :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
@@ -344,7 +322,6 @@
 
         </div>
 
-        <!--分页-->
         <div
           v-if="lineLists==[] || !lineLists.length==0"
           class="clearfix">
@@ -354,13 +331,9 @@
             <div
               id="pagination1"
               class="page fl"/>
-            <div class="info fl">
-            <!--<p>当前页数：<span id="current1">1</span></p>-->
-            </div>
+            <div class="info fl"/>
           </div>
         </div>
-        <!--分页-->
-
 
         <div class="lll-line--othet">
           <div class="lll-recommend clearfix">
@@ -472,14 +445,7 @@
               <img
                 id="tj_shiming"
                 src="/line/images/shiming.png">
-                <!--<img-->
-                <!--id="tj_xinyong"-->
-                <!--src="/line/images/xinyong.png" >-->
-
-
-                <!--<img-->
-                <!--id="tj_icon_2"-->
-                <!--src="/line/images/wtjzx.gif">-->
+              
             </div>
             <div class="p p2">
 
@@ -489,7 +455,7 @@
                 class="list-title-a"
                 target="_blank">
                 <span class="list-icon lines-sprite-icons icon-start"/>
-                <!--<em id="tj011"></em>-->
+              
                 <em id="tj011">{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
                 <span class="list-icon lines-sprite-icons icon-through"/>
                 <span class="list-icon lines-sprite-icons icon-end"/>
@@ -516,10 +482,6 @@
         </div>
         <HotList :lines="lineHots"/>
 
-        <!--<div class="list-box-r-phone">-->
-        <!--<div class="zx_p_tit">帮我找优质承运商</div>-->
-        <!--<selectMap/>-->
-        <!--</div>-->
       </div>
 
     </div>
@@ -538,7 +500,6 @@ async function lineList($axios, currentPage, vo = {}) {
   parm.currentPage = currentPage
   parm.pageSize = 15
   let res = await $axios.post('/28-web/range/list', parm)
-  console.log(res, 'resssss')
   if (res.data.status == 200) {
     return {
       list: res.data.data.list,
@@ -596,7 +557,6 @@ export default {
       query.startc === '' ? '' : query.startc || areaData.currentAreaFullName
     let starta = query.starta
     let endp = query.endp
-    // let starta = query.starta
     let enda = query.enda
     let endc = query.endc
 
@@ -661,8 +621,6 @@ export default {
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF029'),
       $axios.get(aurl + '/28-web/sysDict/getSysDictByCodeGet/AF025')
     ])
-    // let getLineList = await lineList($axios, 1, vo)
-    // console.log(listA.data.data.list, 'getLineList.data.data.list')
     if (
       listA.data.status == 200 ||
       listB.data.status == 200 ||
@@ -670,9 +628,7 @@ export default {
       codeB.data.status == 200 ||
       codeC.data.status == 200
     ) {
-      // listA.data.data = listA.data.data || { list: [] }
       listA.data.data.list.forEach(item => {
-        // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
         let num = 0
         arr.forEach(el => {
@@ -688,27 +644,7 @@ export default {
       codeA.data.data.unshift(codeObj)
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
-      // console.log(
-      //   listA.data.data.page,
-      //   ' listA.data.data.page',
-      //   listA.data.data.pages,
-      //   (aurl + `/28-web/range/list`,
-      //   {
-      //     currentPage: 1,
-      //     pageSize: 15,
-      //     startProvince: startp,
-      //     startCity: startc,
-      //     startArea: starta,
-      //     endProvince: endp,
-      //     endCity: endc,
-      //     endArea: enda,
-      //     belongBrandCode: query.belongBrandCode,
-      //     departureTimeCode: query.departureTimeCode,
-      //     otherServiceCode: query.otherServiceCode,
-      //     parkId: query.parkId,
-      //     companyName: query.companyName || ''
-      //   })
-      // )
+
       return {
         lineListsTotalPage: listA.data.data.pages,
         lineLists: listA.data.data.list,
@@ -724,11 +660,7 @@ export default {
       error({ statusCode: 500, message: '查找不到该专线列表' })
     }
   },
-  computed: {
-    // filteredItems() {
-    //   // return lineHots.slice(0, 3)
-    // }
-  },
+  computed: {},
   mounted() {
     if (process.client) {
       let _this = this
@@ -752,7 +684,6 @@ export default {
                       document.beginPagefrm.beginPage.value
                     )
                     if (isNaN(beginPage)) {
-                      alert('请输入数字！')
                       return false
                     }
                     if (beginPage <= 0) {
@@ -777,38 +708,30 @@ export default {
                     totalPage: _this.lineListsTotalPage,
                     callback: function(current) {
                       $('#current1').text(current)
-                      // orderBy = ''
                       currentPage = current
                       fetchLineList(currentPage, orderBy)
-                      // window.location.href = '#top'
                     }
                   })
-                  //切换专线信息
                   function clickPrice() {
                     $('#seq0').click(function() {
-                      // console.log('clear排序')
                       orderBy = 'default'
                       fetchLineList(currentPage, orderBy)
                     })
                     $('#seq1').click(function() {
-                      // console.log('orderNumber排序')
                       orderBy = 'orderDesc'
                       fetchLineList(currentPage, orderBy)
                     })
                     $('#seq2').click(function() {
-                      // console.log('transportAging排序')
                       orderBy = 'transportAgingAsc'
                       fetchLineList(currentPage, orderBy)
                     })
                     $('#tj_price2').click(function() {
                       $('#tj_price').css('display', 'none')
-                      // console.log('weigthPrice排序')
                       orderBy = 'weigthPrice'
                       fetchLineList(currentPage, orderBy)
                     })
                     $('#tj_price1').click(function() {
                       $('#tj_price').css('display', 'none')
-                      // console.log('lightPrice排序')
                       orderBy = 'lightPrice'
                       fetchLineList(currentPage, orderBy)
                     })
@@ -832,15 +755,11 @@ export default {
                       currentPage: currentPage,
                       orderBy: orderBy
                     }
-                    // console.log(
-                    //   aurl + `/api/28-web/range/list`,
-                    //   'aurl + `/api/28-web/range/list`'
-                    // )
+
                     $axios.post(aurl + `/28-web/range/list`, vo).then(res => {
                       let getList =
                         res.data.status == 200 ? res.data.data.list : []
                       getList.forEach(item => {
-                        // 通过item.id计算出一个固定的值
                         let arr = (item.id || '').split('')
                         let num = 0
                         arr.forEach(el => {
@@ -849,9 +768,6 @@ export default {
                         item.num = (num % 30) + 1
                       })
                       _this.lineLists = getList
-                      // return {
-                      //   lineList: res.data.data.list
-                      // }
                     })
                   }
                   clickPrice()
@@ -918,7 +834,6 @@ export default {
       ul.footerLinks {
         li {
           width: 16.67%;
-          /* text-align: center; */
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -929,7 +844,6 @@ export default {
       ul.footerLinks {
         li {
           width: 14.63%;
-          /* text-align: center; */
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -950,7 +864,6 @@ export default {
       ul.footerLinks {
         li {
           width: 17.5%;
-          /* text-align: center; */
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
@@ -982,11 +895,6 @@ export default {
       }
     }
     .list-box-r-phone {
-      /*min-height: 246px;*/
-      /*height: auto !important;*/
-      /*width: 344px;*/
-      /*margin: 20px 0px 0 16px;*/
-      /*float: left;*/
       margin-top: 20px;
       background: url('/line/images/helpbg.png');
 
@@ -1014,7 +922,6 @@ export default {
     }
   }
 
-  /*显示隐藏S */
   .toggle-btn {
     float: right;
     margin: 12px 15px 0 4px;

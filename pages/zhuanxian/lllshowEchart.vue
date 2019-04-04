@@ -1,7 +1,7 @@
 <template>
   <div 
     style="width: 576px;height: 340px;"
-    id="echart"/>
+    id="lllechart"/>
 </template>
 
 <script>
@@ -23,6 +23,7 @@ export default {
   },
   watch: {
     info(n, o) {}
+    //
   },
   mounted() {
     if (process.server) {
@@ -40,8 +41,16 @@ export default {
         this.comInfo(this.sendEchart1, this.cargoType1)
       }
     })
+
     let copyobj = Object.assign(this.sendEchart1[2])
     let copyobj2 = Object.assign(this.sendEchart[2])
+    let sendBz = {
+      sendEchart1: this.sendEchart1,
+      sendEchart: this.sendEchart
+    }
+    this.$emit('lllechart', sendBz)
+    let isPrice = false
+
     let maxY = this.sendEchart[0]
     this.sendEchart.forEach(el => {
       if (maxY < el) {
@@ -55,7 +64,8 @@ export default {
         maxY1 = el
       }
     })
-    let myChart = echarts.init(document.getElementById('echart'))
+
+    let myChart = echarts.init(document.getElementById('lllechart'))
     let option = {
       title: { text: '', subtext: '' },
       tooltip: { trigger: 'axis' },

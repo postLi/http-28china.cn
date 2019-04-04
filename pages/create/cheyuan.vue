@@ -2,17 +2,14 @@
   <div class="che_box">
     <div class="main">
       <div class="right main_nr">
-        <!-- <div class="nr_bt">
-          <div class="nr_bt1"><span>在线下单</span></div>
-        </div>	 -->
-        <!-- 下单部分 -->
+
         <div class="nr order-create-main">
           <div class="order-step"><img 
             src="/templets/default/images/wzlImg/dp.png" 
             class="dp">发布车源信息，享受免费线上推广，越容易被发货客户找到您</div>
           <div class="order-line-info order-input-tab">
             <div class="order-title">基本信息 <span>（提示：带*为必填）</span></div>
-            <!-- 出发地 -->
+          
             <div class="order-line-from clearfix">
               <div class="order-form-item">
                 <div class="order-form-label"><span class="required">*</span>出发地：</div>
@@ -39,7 +36,7 @@
                 </div>
               </div>
             </div>
-            <!-- 目的地 -->
+         
             <div class="order-line-to clearfix">
               <div class="order-form-item form-detail">
                 <div class="order-form-label"><span class="required">*</span>途径地：</div>
@@ -64,7 +61,6 @@
                 </div>
               </div>
             </div>
-            <!-- 期望运价 -->
             <div class="order-line-to clearfix">
               <div class="order-cargo-list">
                 <div class="input">
@@ -77,7 +73,7 @@
                 </div>
                 <p style="color:red;margin-left:70px;position: absolute;top:280px;">填写运价，车源线路将排名优先，让车源线路更有竞争力！</p>
               </div>
-              <!-- 选择类型 -->
+          
               <div class="order-cargo-list">
                 <div class="order_check check1">
                   选择类型：
@@ -90,7 +86,6 @@
 
                 </div>
               </div>
-              <!-- 选择类型 -->
               <div 
                 class="order-cargo-list"
                 style="margin-top:10px">
@@ -108,10 +103,8 @@
               </div>
             </div>
           </div>
-          <!--备注信息 -->
           <div class="order-input-tab order-cargo-info">
             <div class="order-title">备注信息</div>
-            <!-- <div class="title">备注：</div> -->
             <div class="order_minlist">
               <label>备注：</label>
               <div 
@@ -125,7 +118,6 @@
             </div>
           </div>
           
-          <!-- 提交按钮 -->
           <div class="btn_bottom">
             <div 
               id="reset" 
@@ -140,16 +132,6 @@
   </div>
 </template>
 <script>
-async function sendAdd($axios, vo = {}, access_token, user_token) {
-  let parm = vo
-  let res = $axios.post(
-    '/28-web/carInfo/home/createCar?access_token=' +
-      access_token +
-      '&user_token=' +
-      user_token
-  )
-  console.log(res, 'resresres1')
-}
 export default {
   name: 'CheOrder',
   head: {
@@ -159,14 +141,11 @@ export default {
     ]
   },
   mounted() {
-    // '/js/insurance.js'
     if (this.$route.query.startProvince) {
       let strartAddress =
         this.$route.query.startProvince +
         this.$route.query.startCity +
         this.$route.query.startArea
-
-      // console.log(strartAddress, 'strartAddress')
       $('.start').val(strartAddress)
       $('.start').attr('theprovince', this.$route.query.startProvince)
       $('.start').attr('thearea', this.$route.query.startArea)
@@ -180,7 +159,6 @@ export default {
       $('.end').attr('thearea', this.$route.query.endArea)
       $('.end').attr('thecity', this.$route.query.endCity)
     }
-    console.log(this.$route, 'routtsdes')
 
     seajs.use(['/js/insurance.js', '/js/LLL-AFLC_API.js'], function() {
       seajs.use(['/js/laydate.js'], function() {
@@ -201,53 +179,40 @@ export default {
                 endCity: '',
                 endArea: '',
                 viaAddress: '',
-                expectPrice: '', //期望运价
-                carSourceType: 'AF0560102', //车源类型
-                isLongCar: 'AF0560201', //即时/长期车源(0:长期车源，1：短期车源)
+                expectPrice: '',
+                carSourceType: 'AF0560102',
+                isLongCar: 'AF0560201',
                 remark: ''
-                // carTag: '',
-                // carTagName: '',
-                // title: ''
               }
-              //调用layer
               laydate.render({ elem: '#data3', type: 'datetime' })
-              //初始化页面，一进来就执行
+
               function initEvent() {
                 var _this = this
-                // remark()
-                //选择类型
                 $('.check1 .minbox').click(function(event) {
                   event.stopPropagation()
                   $('.check1 .minbox').removeClass('checked')
                   $(this).addClass('checked')
                   var type = $(this).attr('type')
                   obj.carSourceType = type
-                  // console.log(obj.carSourceType, 'obj.carSourceType')
                 })
-                //即时/长期
                 $('.check2 .minbox').click(function(event) {
                   event.stopPropagation()
                   $('.check2 .minbox').removeClass('checked')
                   $(this).addClass('checked')
                   var type = $(this).attr('type')
                   obj.isLongCar = type
-                  // console.log(obj.isLongCar, 'obj.isLongCar')
                 })
-                //切换
                 $('.order-submit-btn').click(function(event) {
                   event.stopPropagation()
                   $('.order-submit-btn').removeClass('click')
                   $(this).addClass('click')
                 })
-                //重置
                 $('#reset').click(function() {
                   resetForm()
                 })
-                //发布
                 $('#next').click(function() {
                   next()
                 })
-                //点击选择remark
                 $(document).on('click', '.remark span', function(event) {
                   event.stopPropagation()
                   var cls = $(this).attr('class')
@@ -259,12 +224,10 @@ export default {
                   return false
                 })
               }
-              //验证必填信息
               function validate() {
                 var checkinfo = {
                   done: true,
                   err: ''
-                  // atransferAddressList:[]
                 }
 
                 if ($('.start').val()) {
@@ -275,8 +238,6 @@ export default {
                   obj.strartAddressName = $('.start').val()
 
                   obj.startArea = $('.start').attr('thearea')
-                  // comCity(obj.startProvince, obj.startCity)
-                  // console.log(obj.startCity, ' obj.startCity')
                   if (obj.startProvince == '北京市') {
                     obj.startCity = '北京市'
                   } else if (obj.startProvince == '上海市') {
@@ -292,13 +253,11 @@ export default {
                   checkinfo.done = false
                   layer.msg('出发地不能为空')
                   return
-                  // checkinfo.err += '<br>出发地不能为空';
                 }
                 if ($('.end').val()) {
                   obj.endAddress = $('.end').val()
                   obj.endAddressCoordinate = $('.end').attr('thepos')
                   obj.endProvince = $('.end').attr('theprovince')
-                  // obj.endCity = $('.end').attr('thecity')
                   obj.endAddressName = $('.end').val()
                   obj.endArea = $('.end').attr('thearea')
                   if (obj.endProvince == '北京市') {
@@ -339,13 +298,11 @@ export default {
                   let expectPrice = $('.cargoname').val()
                   if (reg.ONLY_NUMBER.test(expectPrice)) {
                     obj.expectPrice = expectPrice
-                    // console.log(expectPrice, 'expectPrice')
                   } else {
                     $('.cargoname').val('')
                     layer.msg('期望运价请输入数字')
                     checkinfo.done = false
                     return
-                    // console.log(expectPrice, 'expectPrice2')
                   }
                 }
                 obj.remark = $('#textarea').val() ? $('#textarea').val() : ''
@@ -375,10 +332,7 @@ export default {
               }
               function comCity(obj, startCity) {
                 if (obj === '北京市') {
-                  // startCity = '北京市'
                   startCity = Object.assign({}, obj.startCity, '北京市')
-                  // this.$set(obj, 'startCity', '北京市')
-                  console.log(startCity, obj, 'obj')
                 } else if (obj === '上海市') {
                   startCity = '上海市'
                 } else if (obj === '重庆市') {
@@ -389,7 +343,6 @@ export default {
                   startCity = $('.start').attr('thecity')
                 }
               }
-              //重置清空输入框
               function resetForm() {
                 $('.start').val('')
                 $('.end').val('')
@@ -422,7 +375,6 @@ export default {
                     .addClass('checked')
                 }
               }
-              //发布车源请求接口
               function next() {
                 var check = validate()
                 var url =
@@ -432,14 +384,12 @@ export default {
                   $.cookie('user_token')
                 if (check) {
                   var options = $.extend(obj, theRequest)
-                  // console.log(options, options)
 
                   if ($.cookie('access_token') && $.cookie('user_token')) {
                     var options = $.extend(obj, theRequest)
                     api
                       .postAdd(url, options)
                       .done(function(res) {
-                        console.log(res, '发布成功，请完善司机车辆信息！')
                         if (res.status === 200) {
                           layer.msg('发布成功', { time: 3000 }, function(
                             params
@@ -453,7 +403,6 @@ export default {
                           layer.msg(
                             '发布失败：' + (err.text || err.error || '未知错误')
                           )
-                          // window.location.href = '/cheyuan'
                         }
                       })
                       .fail(function(err) {
@@ -465,7 +414,6 @@ export default {
                     $('.login_box').show()
                   }
                 } else {
-                  // layer.alert(check.err)
                   return false
                 }
               }

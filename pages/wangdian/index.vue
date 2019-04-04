@@ -278,18 +278,14 @@
             </p></li>
           </ul>
         </div>
-        <!--分页-->
         <div
           class="box"
           style="float: right;margin-right: 170px;">
           <div
             id="pagination1"
             class="page fl"/>
-          <div class="info fl">
-          <!--<p>当前页数：<span id="current1">1</span></p>-->
-          </div>
+          <div class="info fl"/>
         </div>
-      <!--分页-->
       </div>
       <div
         id="js007"
@@ -366,7 +362,7 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   parm.pageSize = 10
   let prefix = ''
 
-  let res = await $axios.post('/28-web/pointNetwork/list', parm) //车源信息列表
+  let res = await $axios.post('/28-web/pointNetwork/list', parm)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
       if (item.pointName && item.pointName.length > 15) {
@@ -418,7 +414,7 @@ export default {
   },
   data() {
     return {
-      wangdianInfoList: [], //网点信息列表
+      wangdianInfoList: [],
       totalPage: 1,
       currentPage: 1,
       parkName: '',
@@ -457,10 +453,8 @@ export default {
     vo.province = vo.startProvince
     vo.city = vo.startCity
     vo.area = vo.startArea
-    //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
-    // console.log(recommendList, 'recommendList')
     recommendList.forEach(item => {
       if (item.credit >= 0 && item.credit <= 3) {
         item.showcreadimg = true
@@ -504,7 +498,7 @@ export default {
       }
     })
     let AF029 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF029' //品牌
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF029'
     )
     let AF025 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
@@ -516,7 +510,6 @@ export default {
       locationProvince: vo.startProvince,
       ...vo
     })
-    //网点信息列表
     if (AF029.data.status === 200) {
       AF029.data.data.unshift({ code: '', name: '不限' })
     }
@@ -555,7 +548,6 @@ export default {
     $('#select_wlyq').mousedown(function() {
       $('#list_wlzx_yq').css('display', 'block')
     })
-    //排序点击 S
     $('#seq1').click(async function() {
       $('#seq2').removeClass('active')
       $(this).addClass('active')
@@ -589,9 +581,8 @@ export default {
       )
       _this.WangdiangInfoList = WangdiangInfoList.list
     })
-    //排序点击 E
     $('body').click(function(e) {
-      var _con = $('.js_yq') // 设置目标区域(排除此元素)
+      var _con = $('.js_yq')
       if (!_con.is(e.target) && _con.has(e.target).length === 0) {
         $('#list_wlzx_yq').css('display', 'none')
       }
@@ -652,12 +643,10 @@ export default {
         this.startProvince
       }&pos=${pos}&address=${address}&parkId=${this.parkId || ''}`
     },
-    //品牌
     AF029Click(item) {
       this.vo.belongBrandCode = item.code
       this.search()
     },
-    //其他
     AF025Click(item) {
       this.vo.otherServiceCode = item.code
       this.search()
@@ -666,7 +655,6 @@ export default {
       this.parkName = item.parkName
       this.parkId = item.id
     },
-    //园区
     async seachlist() {
       let list1 = []
       $('#wlyq_pos .select-item').each(function(i, e) {
@@ -681,17 +669,14 @@ export default {
         locationProvince: this.vo.startProvince,
         ...this.vo
       })
-      console.log(this.logisticsPark, 'logisticsPark')
     },
     pagination() {
-      console.log('this.pages:', this.pages)
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
           $('#current1').text(current)
           let hyList = await getWangdiangInfoList(this.$axios, current, this.vo)
-          console.log(hyList, 'hyList')
           this.totalPage = hyList.pages
           this.current = hyList.current
           this.WangdiangInfoList = hyList.list
@@ -723,7 +708,6 @@ export default {
     cursor: pointer;
     border: none;
   }
-  /*显示隐藏S */
   .toggle-btn {
     float: right;
     margin: 12px 15px 0 4px;
@@ -781,6 +765,5 @@ export default {
     background: #3371ff;
     color: #fff;
   }
-  /*显示隐藏E */
 }
 </style>

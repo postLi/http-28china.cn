@@ -22,9 +22,7 @@
               class="layui-input"
               v-model="form.companyName">
           </div>
-          <!--<p-->
-          <!--v-if="isCompanyName"-->
-          <!--style="color: red;text-align: center">请输入公司名称</p>-->
+         
         </div>
 
         <div class="layui-form-item">
@@ -37,9 +35,7 @@
               class="layui-input"
               v-model="form.contactsName">
           </div>
-          <!--<p-->
-          <!--v-if="isContactsName"-->
-          <!--style="color: red;text-align: center">请输入联系人</p>-->
+         
         </div>
         <div class="layui-form-item">
           <label class="layui-form-label"><i style="color: red">*</i>电话:</label>
@@ -51,9 +47,7 @@
               maxlength="11"
               v-model="form.mobile">
           </div>
-          <!--<p-->
-          <!--v-if="ismobile"-->
-          <!--style="color: red;text-align: center">请输入电话</p>-->
+         
         </div>
 
         <div class="layui-form-item layui-form-text">
@@ -87,10 +81,7 @@
               &site=qq&menu=yes&quot;"
               target="_blank"
         ><img src="../../static/line/images/15qq.gif" >QQ交谈</a></p>
-        <!-- :href="'http://wpa.qq.com/msgrd?v=3&uin=4009992828
-&site=qq&menu=yes'"
-              &site="qq&menu=yes&quot;"
-        target="_blank" -->
+       
       </div>
 
     </div>
@@ -116,9 +107,8 @@ export default {
   },
   data() {
     return {
-      // isShow: this.show,
       title: '',
-      popTitle: '提货派车单',
+      popTitle: '单',
       falseMsg: '',
       form: {
         companyName: '',
@@ -135,7 +125,6 @@ export default {
   computed: {
     showDiv(n, o) {
       return this.show
-      console.log(this.show, 'isAdd1')
     }
   },
   watch: {
@@ -145,7 +134,6 @@ export default {
       } else {
         this.title = '申请成为推荐企业'
       }
-      console.log(n, 'kkdlfkldf')
     }
   },
   methods: {
@@ -184,47 +172,27 @@ export default {
         this.form.type = 2
         this.form.source = 2
       }
-      // console.log(this.form, 'this.form')
-      this.$axios
-        .post(
-          // /leavingmsg/
-          // 插入物流公司留言信息表信息
-          aurl + '/28-web/leavingmsg/',
-          this.form
-        )
-        .then(res => {
-          // console.log(res, 'ressss')
-          if (res.data.status == 200) {
-            layer.msg(
-              '提交成功，客服稍后将会与您联系',
-              {
-                tiem: 3000
-              },
-              () => {}
-            )
-            this.$emit('close')
-            this.form = {}
-          } else {
-            // res.data.status
-          }
-        })
+      this.$axios.post(aurl + '/28-web/leavingmsg/', this.form).then(res => {
+        if (res.data.status == 200) {
+          layer.msg(
+            '提交成功，客服稍后将会与您联系',
+            {
+              tiem: 3000
+            },
+            () => {}
+          )
+          this.$emit('close')
+          this.form = {}
+        } else {
+          // res.data.status
+        }
+      })
     },
-    // 留言类型（type  ） 1-入驻 2-推荐
     closeDialog() {
       this.$emit('close')
       this.form = {}
       this.ismobile = false
-      // this.$emit('update:show', false)
-
-      //把绑定的弹窗数组 设为false即可关闭弹窗
     }
-    // closeMe(done) {
-    //   this.reset()
-    //   this.$emit('update:popVisible', false)
-    //   if (typeof done === 'function') {
-    //     done()
-    //   }
-    // }
   }
 }
 </script>

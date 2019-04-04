@@ -1,16 +1,13 @@
 <template>
   <div class="lll-zhuangXian-detail">
     <div class="arc_main">
-      <!--<div class="arc_nav">
-          <a href="/">物流首页</a>&gt;<a href="" id="arc_nav_a1">零担物流专线</a>&gt;<a href="" id="arc_nav_a2">零担物流专线</a>&gt;<a href="" id="arc_nav_a3">零担物流专线</a>
-      </div>-->
+    
       <div class="arc_top1">
         <div class="arc_top1_1">
           <img
             width="135px"
             src="/img/logo.png" >
-            <!--<span>{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>-->
-            <!--<span id="nr071"><i id="nr071_1"/>&nbsp;&rarr;&nbsp;<i id="nr071_2"/></span>-->
+           
         </div>
         <div class="arc_top1_3"><a
           id="search_huo"
@@ -68,7 +65,7 @@
               :key="index"
               :href="'/zhuanxian/list?startp='+linedataA.startProvince+'&startc='+linedataA.startCity+'&endp='+linedataA.endProvince+'&endc='+item.name"
               target="_blank"><span>{{ index === 0?'直达'+item.name.substring(0,2):item.name.substring(0,2) }}</span></a>
-              <!-- :href="'/zhuanxian/list?startc='+linedataA.startCity+'&endc='+item.name" -->
+            
           </div>
           <div
             v-if="lineCitys.length>14"
@@ -76,7 +73,7 @@
             style="padding-right:30px"
             onmouseover="$('.city_box').css('display','block');"
           ><a href="javascript:void(0)" ><span>更多+</span></a></div>
-          <!--更多城市-->
+         
           <div
             id="city_box"
             class="city_box"
@@ -88,11 +85,7 @@
               :key="index"><span @click="gotoHuoList($event)">{{ item.name.substring(0, 2) }}</span>
             </a>
           </div>
-          <!--更多城市-->
-          <!--<div-->
-          <!--id="city_box"-->
-          <!--class="city_box"/>-->
-          <!-- 点击弹出效果-->
+         
 
         </div>
         <div class="arc_left">
@@ -114,15 +107,8 @@
               @click="downFn">
                 下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的专线，并可实时接收28快运为您推荐的精品货源提醒!
 
-                <!-- <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"></p> -->
               </li>
-              <!-- <li
-                style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;"
-                @click="downFn">
-                <p>下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更</p>
-                <p>多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的货源，并可实时接</p>
-                <p style="overflow: hidden;text-overflow:ellipsis;white-space: nowrap;">收28快运为您推荐的精品货源提醒!</p>
-              </li> -->
+             
             </ul>
           </div>
 
@@ -177,7 +163,6 @@
                 <i class="icon i-down"/>
               </div>
               <p class="txt mb20 pl20 c-red">注：我们的工作人员会在接货时重新称重，此估算仅供参考。</p>
-              <!-- 辅助计算器 -->
               <div
                 id="_cal_div"
                 class="cal-all cl"
@@ -296,7 +281,7 @@
           <div
             class="arc_middle1"
             style="padding-left: 20px"><span id="nr072">{{ linedataA.startLocation+ '&nbsp;&rarr;&nbsp;' +linedataA.endLocation }}</span>
-            <!--<span style="float: right;font-size: 12px;padding-right: 15px"> 用户159***5898发布<span style="color: #2577e3;font-size: 12px;">广州</span>到<span style="color: #2577e3;font-size: 12px;">长沙</span>货源  3分钟前</span>-->
+         
             <ul>
               <li><img
                 src="/line/images/02sj.png"
@@ -306,7 +291,6 @@
                 style="padding-left: 26px;cursor:pointer"
                 @click="openColl('detail')"
               >
-                <!-- v-if="isXin==false" -->
                 <img
                   v-if="isXin==false"
                   src="/line/images/03sc.png"
@@ -334,10 +318,10 @@
             <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
             <div class="arc_m3"><i>发货频次：</i>
               <span>{{ (linedataA.departureHzData?linedataA.departureHzData:'')+'天'+(linedataA.departureHzTime?linedataA.departureHzTime:'') +'次' }}</span>
-              <!--<span>{{ linedataA.departureHzData?linedataA.departureHzData:''+'天'+linedataA.departureHzTime?linedataA.departureHzTime:'' +'次' }}</span>-->
+             
             </div>
             <div class="arc_m3"><i>最低一票价格：</i><span id="nr079"/>{{ linedataA.lowerPrice?'￥'+linedataA.lowerPrice+'元':'面议' }}</div>
-            <!--<div class="arc_m31"><i style="color: #999">途径:</i> <span>广州天河，深圳罗湖</span></div>-->
+          
           </div>
           <div class="arc_middle4">
             <div class="arc_m4_1">
@@ -354,10 +338,7 @@
           <div class="arc_middle5">
             <div class="arc_m5_1"><span>联系我时，请说明是从28快运上看到此信息，谢谢！</span></div>
             <div class="arc_m5_2">
-              <!--<div-->
-              <!--id="order_price"-->
-              <!--class="arc_m5_2_1"-->
-              <!--onclick="$('.pj_price_box').show()"><a href="javascript:void(0)"><span>试算价格</span></a></div>-->
+           
               <div
                 id="order_arc"
                 class="arc_m5_2_2"><a
@@ -365,32 +346,14 @@
                   :href="'/create/line?uid='+ linedataB.account+'&publishId='+linedataA.publishId+'&id='+linedataA.id"
                   target="_blank"><span>快速下单</span></a></div>
               <div class="arc_m5_2_3">
-                <!--<img-->
-                <!--src="/line/images/05fresh.png"-->
-                <!--alt="">-->
-                <!--<span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&companyId='+LineChangeAnother.companyId"><span>换一个</span></a></span>-->
+              
                 <span><a :href="'/zhuanxian/detail?id='+ LineChangeAnother.rangeId+'&publishId='+LineChangeAnother.companyId"> <img
                   src="/line/images/05fresh.png"
                   alt=""><span style="padding-left: 5px">换一个</span></a></span>
               </div>
             </div>
           </div>
-          <!--<div class="arc_middle6">-->
-          <!--<div class="arc_m6_1"><i>增值服务：</i></div>-->
-          <!--<div class="arc_m6_2">-->
-          <!--<div class="item_zzfw1"><img src="/line/images/item_zzfw1.png"><span>送货上门</span></div>-->
-          <!--<div class="item_zzfw2"><img src="/line/images/item_zzfw2.png"><span>保价运输</span></div>-->
-          <!--<div class="item_zzfw3"><img src="/line/images/item_zzfw3.png"><span>运费到付</span></div>-->
-          <!--<div class="item_zzfw4"><img src="/line/images/item_zzfw4.png"><span>代收货款</span></div>-->
-          <!--<div class="item_zzfw5"><img src="/line/images/item_zzfw5.png"><span>上门提货</span></div>-->
-          <!--<div class="item_zzfw6"><img src="/line/images/item_zzfw6.png"><span>开发票</span></div>-->
-          <!--<div class="item_zzfw7"><img src="/line/images/item_zzfw7.png"><span>签单回收</span></div>-->
-          <!--<div class="item_zzfw8"><img src="/line/images/item_zzfw8.png"><span>时效保障</span></div>-->
-
-          <!--&lt;!&ndash;<img src="/templets/default/images/article_wlzx/18zengzhifw.png"/>&ndash;&gt;-->
-
-          <!--</div>-->
-          <!--</div>-->
+        
         </div>
         <div class="arc_right">
           <p class="arc_right01"><img src="/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
@@ -406,16 +369,7 @@
               id="nr1021"
               style="color: #333">{{ linedataB.contactsName }}</font></span>
             <span><i>手机：</i>
-              <!--<font-->
-              <!--v-show="checkMoblie"-->
-              <!--style="color: #3f94ee;border-bottom: 1px solid #3f94ee"-->
-              <!--@click="showMoblieFn(showMoblie)">查看电话</font>-->
-              <!--<font-->
-              <!--v-show="showMoblie"-->
-              <!--id="nr1022"-->
-              <!--style="color: #333"-->
-              <!--@click="showMoblieFn(showMoblie)">{{ linedataB.mobile }}</font>-->
-              <!--  -->
+             
               <font
                 id="nr1022"
                 style="color: #333">{{ linedataB.mobile }}</font>
@@ -443,10 +397,7 @@
               class="arc_right05_2"
               readonly=""
               value="收藏"></a>
-              <!-- <a
-              class="arc_right05_2"
-              style="border:1px solid #ccc;padding:5px 30px"
-              @click="openColl('comany')"><span>收藏</span></a> -->
+           
 
           </p>
           <p class="arc_right06">
@@ -493,7 +444,6 @@
           </div>
           <ShowEchart :info="LineeEchartInfo"/>
           
-          <!--<div id="echart"/>-->
         </div>
         <div class="right">
           <div class="zx_sx">
@@ -541,8 +491,6 @@
                     href="javascript:;"
                     class="button1"
                     @click="showEchart()">标准价</a> -->
-                  
-                                    
                   <a
                     href="javascript:;"
                     class="button1"
@@ -575,8 +523,7 @@
             <li>此专线物流公司诚信值超过<span style="color: #f88700;border-bottom: 1px solid #f88700">{{ linedataE.greaterCreditRate }}%</span>的同行</li>
             <li>{{ linedataE.qualificationNum }}项经营资质认证，{{ linedataE.serviceNum }}项平台物流服务标准监督<span v-if="linedataE.evaCount!=0">，{{ linedataE.evaCount }}人评价反馈</span></li>
           </ul>
-          <!--<div class="top_tit"><p>此专线物流公司诚信值超过<span style="color: #f88700;">92.3%</span>的同行</p>-->
-          <!--<p>8项经营资质认证，14项平台物流服务标准监督，135人评价反馈</p></div>-->
+         
           <img
             src="/line/images/08gold.png"
             alt="">
@@ -605,13 +552,7 @@
                     class="unActive"
                     @click="showPingLunFn(1)"/>中评</p>
                 </li>
-                <!-- <li>
-                  <p>{{ linedataE.evaBadCount }}%</p>
-                  <p><span
-                    :class="indexPl==2?'active':'unActive'"
-                    class="unActive"
-                    @click="showPingLunFn(2)"/>差评</p>
-                </li> -->
+            
               </ul>
             </div>
             <div class="bot_left_ts">
@@ -623,7 +564,6 @@
             <div
               style="width: 288px; margin: 0;"
               class="bot_left_btn">
-              <!-- layui 2.2.5 新增 -->
               <button
                 class="layui-btn layui-btn-fluid"
                 @click="showgongsiFn()">免费咨询公司情况</button>
@@ -683,7 +623,6 @@
             <div class="main3_1_1">
               <div class="xt_left"/>
               <div class="floatl">
-                <!--{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) -->
                 <b>更多从{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}出发的专线</b>
                 <div class="index_search floatl">
                   <div
@@ -739,11 +678,7 @@
                   v-for="(item , index) in lineLists"
                   :key="index"
                   class="wlzx_list">
-                  <li id="wlzx_list_0">
-                  <!--<div class="sc_num"><img src="/line/images/ll_num.png"><span><i><em id="nr1001"/>{{ item.browseNumber?item.browseNumber:'0' }}人浏览</i></span></div>-->
-
-                  <!--<div class="view_num"><img src="/line/images/pj_num.png"><span><i><em id="nr1002"/>{{ item.assessNumber?item.assessNumber:'0' }}条评论</i></span></div>-->
-                  </li>
+                  <li id="wlzx_list_0"/>
                   <li class="wlzx_list_1">
                     <a
                       id="nr_a21"
@@ -771,15 +706,14 @@
                         target="_blank">
                         <span class="list-icon lines-sprite-icons icon-start"/>
                         <em>{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
-                        <!--<em >{{ item.startCity }}</em><em>{{ item.startArea }}</em>-->
+                      
                         <span class="list-icon lines-sprite-icons icon-through"/>
                         <span class="list-icon lines-sprite-icons icon-end"/>
                         <em>{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
-                      <!--<em>{{ item.endCity.length>7?item.endCity.substring(0,7)+'..': item.endCity }}</em><em >{{ item.endArea.length>7?item.endArea.substring(0,7)+'..': item.endArea }}</em>-->
+                   
                       </a>
                     </P>
                     <p class="p2">
-                      <!--<img src="/line/images/04gongsi.png">-->
                       <a
                         id="nr03"
                         :href="'/member/'+item.publishId"
@@ -791,21 +725,9 @@
                         href="http://wpa.qq.com/msgrd?v=596803544&uin=&site=qq&menu=yes"><img
                           id="qq"
                           src="/gongsi/images/15qq.gif"></a>
-                          <!--<img-->
-                          <!--id="tj_icon_1"-->
-                          <!--src="/line/images/wtjzx.gif">-->
+                        
                     </p>
-                    <!--<p class="p5">-->
-                    <!--<img-->
-                    <!--id="list_shiming"-->
-                    <!--src="/line/images/10shiming.png">-->
-                    <!--<img-->
-                    <!--id="list_xinyong"-->
-                    <!--src="/line/images/11xinyong.png">-->
-                    <!--<img-->
-                    <!--id="list_danbao"-->
-                    <!--src="/line/images/12danbao.png">-->
-                    <!--</p>-->
+                   
                     <p
                       class="p21"
                       style="padding-top: 5px;">
@@ -820,7 +742,7 @@
                         src="/line/images/danbao.png">
                     </p>
                     <p class="p3">
-                    <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,10):'暂无' }}</font></p>
+                    <i>说明：</i><font>{{ item.transportRemark }}</font></p>
                     <p class="p4"><i>地址：</i><font
                       id="nr06"
                       class="">{{ item.address.length>20?item.address.substring(0,20)+'..':item.address }}</font></p>
@@ -838,7 +760,7 @@
                     <p class="p2"><i
                       class="zhuo"
                       style="color: #666">轻货：</i><span style="color: #ff4747">{{ parseFloat(item.lightPrice).toFixed(1) }}</span><span style="color: #333">元/m³</span></p>
-                    <p class="p3"><i>时效：</i><span>{{ item.transportAging?item.transportAging:'' }}{{ item.transportAging?item.transportAgingUnit:'暂无' }}</span></p>
+                    <p class="p3"><i>时效：</i><span>{{ item.transportAging }}{{ item.transportAging }}</span></p>
                     <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
                   </li>
                   <li class="wlzx_list_6">
@@ -851,8 +773,7 @@
 
                     ></a>
                     </p>
-                    <!--/:href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"-->
-                    <!--onclick="'/create/line?id='+ item.id+'?uid='+ item.account+'&publishId='+item.publishId'"-->
+                  
                     <p class="p2"><a
                       id="nr_a22"
                       :href="'/zhuanxian/detail?id='+ item.id+'&publishId='+item.publishId"
@@ -891,14 +812,7 @@
                 <img
                   id="tj_shiming"
                   src="/line/images/shiming.png">
-                  <!--<img-->
-                  <!--id="tj_xinyong"-->
-                  <!--src="/line/images/xinyong.png" >-->
-
-
-                  <!--<img-->
-                  <!--id="tj_icon_2"-->
-                  <!--src="/line/images/wtjzx.gif">-->
+             
               </div>
               <div class="p p2">
 
@@ -908,7 +822,6 @@
                   class="list-title-a"
                   target="_blank">
                   <span class="list-icon lines-sprite-icons icon-start"/>
-                  <!--<em id="tj011"></em>-->
                   <em id="tj011">{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
@@ -922,7 +835,7 @@
                   <li class="tj_right"><i>最低一票：</i><span id="tj016">{{ item.lowerPrice?item.lowerPrice+'元':'面议' }}</span></li>
                   <li class="tj_left tj_left1"><i>重货：</i><font id="tj013">{{ parseFloat(item.weightPrice).toFixed(1) }}</font><span>元/公斤</span></li>
                   <li class="tj_right tj_right1">轻货：<span style="color: #ff4747">{{ parseFloat(item.lightPrice).toFixed(1) }}</span>元/m³</li>
-                  <!--<li class="tj_right"><i>轻货：</i><font id="tj014">{{ parseFloat(item.lightPrice).toFixed(1) }}</font>元/m³</li>-->
+                 
                 </ul>
 
               </div>
@@ -942,7 +855,6 @@
             <div
               class="zx_sx"
             ><span class="biaozhi"/><span>{{ linedataG.brandRecommend.label }}</span></div>
-            <!--<FootList/>-->
             <FooterLinks :info="linedataG.brandRecommend.links"/>
           </div>
         </div>
@@ -955,8 +867,6 @@
               style="border-color: #e7e7e7"
             ><span class="biaozhi"/><span>{{ linedataG.interestedRecommend.label }}</span></div>
             <FooterLinks :info="linedataG.interestedRecommend.links"/>
-            <!--linedataG    brandRecommend:-->
-            <!--<FootList/>-->
           </div>
         </div>
         <div class="arc_main8_2">
@@ -977,13 +887,13 @@
       :show = "isAdd"
       :info="linedataE"
       @close="noaddFn"/>
-      <!-- <BzAdd
+    <BzAdd
       :show = "isBzAdd"
       :info="LineeEchartInfo"
       :linedata-a="linedataA"
       :line-company="lineBzAdd"
       @close="nobzAddFn"
-    /> -->
+    />
   </div>
 
 </template>
@@ -991,7 +901,7 @@
 <script>
 import creditIcon from '~/components/common/creditIcon'
 import Add from './add'
-// import BzAdd from './bzAdd'
+import BzAdd from './bzAdd'
 
 import {
   isZXcity,
@@ -1019,8 +929,6 @@ async function getDetailColl(
     return {
       data: res.data
     }
-  } else {
-    // return { list: [], pages: 0, currentPage: 1 }
   }
 }
 async function getCanyColl(
@@ -1034,7 +942,6 @@ async function getCanyColl(
     `/28-web/collect/company?access_token=${access_token}&user_token=${user_token}&companyId=${companyId}&handle=${handle}
 `
   )
-  // console.log(res, 'ress-getCanyColl')
   if (res.data.status === 200) {
     return {
       data: res.data
@@ -1051,7 +958,7 @@ export default {
     FooterLinks,
     ShowEchart,
     Add,
-    // BzAdd,
+    BzAdd,
     creditIcon
   },
   head: {
@@ -1101,15 +1008,11 @@ export default {
       lineCitys: [],
       msgMobile: '',
       indexPl: 0,
-      kongxin: '/line/images/03sc.png',
 
       lineBzAdd: {},
       showEchartData: {}
-      // xin: '/line/images/xin.png'
     }
   },
-  // /range/detail/related/links
-  // 专线详情推荐链接
   async asyncData({ $axios, app, query, error }) {
     let aurl = '',
       lineCode,
@@ -1123,7 +1026,6 @@ export default {
     let startc = query.startc
     let starta = query.starta
     let endp = query.endp
-    // let starta = query.starta
     let enda = query.enda
     let endc = query.endc
 
@@ -1176,7 +1078,6 @@ export default {
         endArea: enda
       })
     ])
-    // console.log(linedataA.data.data, 'linedataA.data2')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
@@ -1184,7 +1085,6 @@ export default {
       linedataF.data.status == 200 &&
       linedataG.data.status == 200
     ) {
-      // console.log(linedataB.data, '  linedataB.data')
       let vo = {
         endArea: linedataA.data.data.endArea,
         endCity: linedataA.data.data.endCity,
@@ -1196,7 +1096,6 @@ export default {
       lineCode = await getCode($axios, linedataA.data.data.endProvince)
       lineCity = await getCity($axios, lineCode, linedataA.data.data.startCity)
       let queryCitys = getSEListParams(linedataA.data.data)
-      // 从目的地出发的专线
       linedataD = await $axios.post(aurl + '/28-web/range/recommend', {
         currentPage: 1,
         pageSize: 5,
@@ -1204,7 +1103,6 @@ export default {
         startCity: queryCitys.endCity
       })
 
-      // 从出发地出发的专线
       linedataC = await $axios.post(aurl + '/28-web/range/list', {
         currentPage: 1,
         pageSize: 6,
@@ -1227,7 +1125,6 @@ export default {
       })
       item.num = (num % 30) + 1
       linedataC.data.data.list.forEach(item => {
-        // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
         let num = 0
         arr.forEach(el => {
@@ -1245,20 +1142,15 @@ export default {
         linedataB.data.status == 200 ? linedataB.data.data.credit : ''
 
       if (!isVip || isVip == 0) {
-        // linedataB.data.data.showIsVip
         linedataB.data.data.showIsVip = false
       }
       if (authStatus == 'AF0010403') {
         linedataB.data.data.isAuthStatus = true
         linedataB.data.data.isRenZhen = true
-
-        // linedataB.data.data.renZhen = '暂无认证信息'
       }
       if (authStatus != 'AF0010403') {
         linedataB.data.data.isAuthStatus = false
         linedataB.data.data.isRenZhen = false
-
-        // linedataB.data.data.renZhen = '暂无认证信息'
       }
       if (collateral > 0) {
         linedataB.data.data.collateral = linedataB.data.data.collateral + '元'
@@ -1276,7 +1168,6 @@ export default {
         // linedataB.data.data.isRenZhen = true
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
-      console.log(lineCity.data.data, 'lineCitys')
 
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
@@ -1305,13 +1196,11 @@ export default {
           ['../js/city.js', '../js/city-picker.data.js', '../js/calculator.js'],
           function() {
             seajs.use(['../js/city-picker.js'], function() {
-              // $('#wlLineFrom input').citypicker()
               seajs.use(['/line/js/arc_wlzx.js'], function() {
                 seajs.use(['../js/collection.js'], function() {
                   seajs.use(['../js/gaodemap2.js'], function() {
                     _this.detailCollnum()
                     _this.cananyCollnum()
-                    //header货源搜索 S
                     $('#search_huoyuan').click(function() {
                       var list1 = [],
                         list2 = []
@@ -1367,40 +1256,9 @@ export default {
                           '&enda=' +
                           enda
                       )
-
-                      // window.location =
-                      //   '/zhuanxian/list?startp=' +
-                      //   startp +
-                      //   '&startc=' +
-                      //   startc +
-                      //   '&starta=' +
-                      //   starta +
-                      //   '&endp=' +
-                      //   endp +
-                      //   '&endc=' +
-                      //   endc +
-                      //   '&enda=' +
-                      //   enda
                     })
-                    //header货源搜索 E
-                    //  <!-- 阶梯价格浮层弹出效果 E-
 
                     function mousePrice() {
-                      //
-                      // $('#zh_price').mouseover(function() {
-                      //   $('.price_box1').css('display', 'block')
-                      // })
-                      // $('#zh_price').mouseout(function() {
-                      //   $('.price_box1').css('display', 'none')
-                      // })
-                      // $('#qh_price').mouseover(function() {
-                      //   $('.price_box2').css('display', 'block')
-                      // })
-                      // $('#qh_price').mouseout(function() {
-                      //   $('.price_box2').css('display', 'none')
-                      // })
-
-                      //  增值服务切换
                       $('#arc_bt1').click(function() {
                         //alert("1");
                         $('.arc_span').removeClass('arc_active')
@@ -1431,11 +1289,9 @@ export default {
                         $('.arc_nr').addClass('arc_nr_none')
                         $('#arc_nr4').removeClass('arc_nr_none')
                       })
-                      //  增值服务切换
                     }
 
                     mousePrice()
-                    //  <!-- 阶梯价格浮层弹出效果 E-
                   })
                 })
               })
@@ -1450,12 +1306,9 @@ export default {
       this.bzAddFn()
     },
     gotoHuoList(event) {
-      // console.log(event, 'event')
       let city = event.target.innerHTML + '市'
-      // console.log(city, 'city')
       if (city.length > 4) {
         city = city.substring(2, 5)
-        // console.log(city, 'city')
       }
       window.open(
         `/zhuanxian/list?startp=${this.linedataA.startProvince}&startc=${
@@ -1484,21 +1337,8 @@ export default {
       this.isBzAdd = false
     },
     showPingLunFn(index) {
-      // alert(index, 'index')
-      // /range/getRangePriceReference/{rangeId}
-      // 专线详情_专线价格参考
-      // if (pj_zh == '好评') {
-      //   var assessLevel = 'AF0360101'
-      // }
-      // if (pj_zh == '中评') {
-      //   var assessLevel = 'AF0360102'
-      // }
-      // if (pj_zh == '差评') {
-      //   var assessLevel = 'AF0360103'
-      // }
       let assessLevel = ''
 
-      // console.log(index, 'index')
       if (index == 0) {
         assessLevel = 'AF0360101'
       } else if (index == 1) {
@@ -1517,14 +1357,12 @@ export default {
           assessLevel: assessLevel
         })
         .then(res => {
-          console.log(res, 'resresres')
           if (res.data.status === 200) {
             this.linedataF = res.data.data.list
           } else {
             layer.msg(res.data.errorInfo ? res.data.errorInfo : res.data.text)
           }
         })
-      // this.indexPl
     },
     showMoblieFn(showMoblieFn) {
       if (showMoblieFn == false) {
@@ -1534,10 +1372,6 @@ export default {
         this.checkMoblie = true
         this.showMoblie = false
       }
-      // this.showMoblie = !showMoblieFn
-
-      // console.log(showMoblieFn, 'showMoblieFn')
-      // this.showMoblie = false
     },
     clickImg(int) {
       this.showImg = int
@@ -1553,9 +1387,6 @@ export default {
         skin: 'layui-layer-rim1',
         area: ['500px', '300px'],
         success: (layero, index) => {
-          // $('.layui-btn-danger').onclick(() => {
-          //   console.log($('.layui-input').value, 'vakhhhfd')
-          // })
           $('.layui-btn-danger').on('click', '')
         },
         content:
@@ -1597,12 +1428,10 @@ export default {
             $('.tipPhone').hide()
             let aurl = ''
 
-            form.mobile = mobile
-            // console.lo
+            form.mobile = msgMobile
             this.$axios
               .post(aurl + '/28-web/logisticsCompany/consult/save', form)
               .then(res => {
-                // console.log(res, 'resresres')
                 if (res.data.status === 200) {
                   layer.msg(
                     '提交成功，客服稍后将会与您联系',
@@ -1741,13 +1570,11 @@ export default {
           let lllTitle = false
 
           this.LineeEchartInfo.forEach((item, index) => {
-            // item.lllTitle = lllTitle
             if (item.cargoType === '0') {
               this.cargoType0 = item
 
               this.comInfo(this.sendEchart, this.cargoType0)
               this.showEchartData = this.cargoType0
-              // console.log(this.LineeEchartInfo, ' this.LineeEchartInfo')
             }
           })
           this.LineeEchartInfo.forEach((item, index) => {
@@ -1772,7 +1599,6 @@ export default {
               maxY1 = el
             }
           })
-          // console.log(this.sendEchart, 'sendEchartsendEchart')
           let seconds = 5
           _this.stopTimer = setInterval(() => {
             $('#seconds').html(seconds + 'S')
@@ -1788,16 +1614,14 @@ export default {
                 legend: {
                   data: ['重货', '轻货'],
                   selected: {
-                    // 选中'系列1'
                     重货: true,
-                    // 不选中'系列2'
                     轻货: false
                   },
                   bottom: 30,
                   left: 'left',
                   selectedMode: 'single',
                   textStyle: {
-                    color: '#FFA657' // 值域文字颜色
+                    color: '#FFA657'
                   }
                 },
                 xAxis: {
@@ -1872,7 +1696,7 @@ export default {
                       }
                     },
                     symbolSize: 6,
-                    hoverAnimation: false, //拐点不要动画
+                    hoverAnimation: false,
                     symbol: 'rect',
                     label: {
                       show: true,
@@ -2161,21 +1985,13 @@ export default {
           ) +
           '专线</div>' +
           '<div id="echart2"></div>' +
-          '<div class="myLayer_content2"><span>' +
+          '<div class="myLayer_content2"><i style="color:#f66618;text-decoration:underline">' +
           this.linedataB.companyName +
-          '的承运价格<span>处于</span>行业均价内，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
+          '</i>的承运价格<span>处于</span>行业均价内，此数据源于平台用户提报的历史数据统计，仅供参考！</div>' +
           '</div>'
       })
     },
     comInfo(sendEchart, cargoType) {
-      //        轻重货（1重货，0轻货）：cargoType
-      // 最高价： highestPrice": 0.77,
-      //  最低价：lowestPrice": 0.3,
-      // 行业最高 ：highAveragePrice": 0.56,
-      // 行业最低： lowAveragePrice": 0.39,
-      // 本专线价： thisRangePrice": 0.43
-      // 最高价 行业最高 本专线价 行业最低 最低价
-      // console.log(cargoType, 'cargoType')
       sendEchart[0] =
         cargoType.highestPrice > 100
           ? Math.floor(cargoType.highestPrice)
@@ -2189,7 +2005,6 @@ export default {
           cargoType.thisRangePrice > 100
             ? Math.floor(cargoType.thisRangePrice)
             : cargoType.thisRangePrice,
-        // value: cargoType.lowAveragePrice,
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }
@@ -2202,7 +2017,6 @@ export default {
         cargoType.lowestPrice > 100
           ? Math.floor(cargoType.lowestPrice)
           : cargoType.lowestPrice
-      console.log(sendEchart, 'sendEchart')
     },
     showfind1() {
       let _this = this
@@ -2242,7 +2056,6 @@ export default {
               maxY1 = el
             }
           })
-          // console.log(this.sendEchart, 'sendEchartsendEchart')
           let seconds = 5
           _this.stopTimer = setInterval(() => {
             $('#seconds').html(seconds + 'S')
@@ -2653,8 +2466,6 @@ export default {
       let aurl = ''
       let isurl = ''
       let transportRangeId = this.$route.query.id
-      // // 操作：collect收藏；cancelCollect取消收藏
-      // console.log(access_token, 'access_token')
       let handle = 'check'
       if (access_token && user_token) {
         getDetailColl(
@@ -2680,9 +2491,6 @@ export default {
       let user_token = $.cookie('user_token') || ''
       let aurl = ''
       let isurl = ''
-      // let companyId = this.$route.query.publishId
-      // // 操作：collect收藏；cancelCollect取消收藏
-      // console.log(access_token, 'access_token')
       let handle = 'check'
       if (access_token && user_token) {
         getCanyColl(
@@ -2701,24 +2509,17 @@ export default {
             if (res.data.errorInfo) {
               layer.msg(res.data.errorInfo)
             }
-            // console.log(res.data.data, 'res方法2')
           })
-          .catch(err => {
-            // layer.msg('收藏失败2')
-            // console.log('收藏失败', err)
-          })
+          .catch(err => {})
       }
     },
     openColl(item) {
-      // console.log(item, 'item')
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('user_token')
       let aurl = ''
       let isurl = ''
       let transportRangeId = this.$route.query.id
-      // // 操作：collect收藏；cancelCollect取消收藏
       let handle = 'collect'
-      // console.log(this.$route.query.id, 'this.$route')
       if (access_token && user_token) {
         if (item == 'detail') {
           let transportRangeId = this.$route.query.id
@@ -2752,9 +2553,7 @@ export default {
         this.$axios
           .post(aurl + isurl)
           .then(res => {
-            console.log(res, '收藏成功')
             if (res.data.status === 200) {
-              // console.log(res, '收藏成功')
               let isMsg = res.data.data
               layer.msg(isMsg)
               if (item == 'detail') {
@@ -2763,8 +2562,6 @@ export default {
                 } else {
                   this.isXin = false
                 }
-
-                // this.isDetailColl = true
               }
               if (item == 'comany') {
                 if (isMsg == '收藏成功！') {
@@ -2780,14 +2577,8 @@ export default {
           })
           .catch(err => {
             layer.msg('收藏失败')
-            console.log('收藏失败', err)
           })
-        // alert('')
-        //collect/company
-        // this.isMobile = true
-        // this.mobile = this.hyDetail.mobile
       } else {
-        // this.isMobile = false
         $('body').trigger('login.show')
       }
     },
@@ -2801,12 +2592,6 @@ export default {
     }
   }
 }
-//
-// +
-// this.linedataB.companyName.length >
-// 13
-//   ? this.linedataB.companyName.substring(0, 13) + '..'
-//   : this.linedataB.companyName +
 </script>
 
 <style lang="scss" scoped>

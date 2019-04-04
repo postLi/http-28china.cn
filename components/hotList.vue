@@ -15,6 +15,7 @@
       >
         <li><a
           :href="'/member/'+lineHots[0].id"
+          target="_blank"
           style="display: flex;"><span class="hot-num">1</span><img
             src="/line/images/touxiang1.png"
             alt=""
@@ -26,6 +27,7 @@
             class="hot-peonum">人气值:<i>{{ lineHots[0].popularity }}</i></span></a></li>
         <li><a
           :href="'/member/'+lineHots[1].id"
+          target="_blank"
           style="display: flex;"><span class="hot-num">2</span><img
             src="/line/images/touxiang2.png"
             alt=""
@@ -36,6 +38,7 @@
             class="hot-peonum">人气值:<i>{{ lineHots[1].popularity }}</i></span></a></li>
         <li><a
           :href="'/member/'+lineHots[2].id"
+          
           style="display: flex;"
           target="_blank"><span class="hot-num">3</span><img
             src="/line/images/touxiang3.png"
@@ -93,16 +96,11 @@ export default {
     }
   },
   watch: {
-    lines(n, o) {
-      console.log(n, 'nnnnnnnn')
-    },
-    gongsi(n, o) {
-      console.log(n, 'gongsi')
-    }
+    lines(n, o) {},
+    gongsi(n, o) {}
   },
   mounted() {
     this.lineHots = this.lines
-    // console.log(this.lineHots, 'this.lineHots ')
   },
   methods: {}
 }
@@ -110,11 +108,6 @@ export default {
 
 <style lang="scss">
 .list-box-r-hot {
-  /*min-height: 246px;*/
-  /*height: auto !important;*/
-  /*width: 344px;*/
-  /*margin: 0px 0px 0 16px;*/
-  /*float: left;*/
   margin-top: 20px;
   background: #fff;
   padding-bottom: 10px;

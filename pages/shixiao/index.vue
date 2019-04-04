@@ -905,10 +905,10 @@ img {
 }
 .baner_btn {
   position: absolute;
-  width: 180px;
+  width: 12%;
   height: 50px;
-  left: 514px;
-  bottom: 55px;
+  left: 35%;
+  bottom: 25%;
 }
 .shixiao_fabu {
   float: left;

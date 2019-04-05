@@ -182,6 +182,10 @@
               <dt>品牌&nbsp;:</dt>
 
               <dd id="tjcx_02" >
+                <selectType
+                  name="AF029"
+                  :code="vo.belongBrandCode" />
+                <br>
                 <a
                   v-for="(item,index) in AF029"
                   :class="[item.code === vo.belongBrandCode ? 'now':'all']"
@@ -191,6 +195,10 @@
               </dd>
               <dt >其他&nbsp;:</dt>
               <dd id="tjcx_03">
+                <selectType
+                  name="AF025"
+                  :code="vo.otherServiceCode" />
+                <br>
                 <a
                   v-for="(item,index) in AF025"
                   :class="[item.code === vo.otherServiceCode ? 'now':'all']"
@@ -679,6 +687,10 @@ export default {
 </script>
 
 <style lang="scss">
+#tjcx_02 span > a,
+#tjcx_03 span > a {
+  margin-right: 10px;
+}
 .lll-wangdian {
   .list_button {
     width: 42px;

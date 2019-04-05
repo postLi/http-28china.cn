@@ -24,22 +24,27 @@
  */
 export default {
   props: {
+    // 是否显示默认的 不限
     showDefault: {
       type: Boolean,
       default: true
     },
+    // 外部传入的数据，方便一些前端自定义字段显示
     list: {
       type: Array,
       default: () => []
     },
+    // 是否获取code值
     getCode: {
       type: Boolean,
       default: true
     },
+    // 初始的code值
     code: {
       type: String,
       default: ''
     },
+    // 要获取的字典名
     name: {
       type: String,
       default: ''

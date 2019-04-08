@@ -1,18 +1,24 @@
 <template>
   <span>
-    <a 
-      v-if="showDefault"
-      @click.stop.prevent="setVal('','', '')"
-      class="all"
-      :class="current === '' ? 'now' : ''" 
-      href="#">不限</a>
-    <a 
-      v-for="(item, index) in datas"
-      :key="index"
-      :class="current === index ? 'now' : ''" 
-      @click.stop.prevent="setVal(item.code, item.name, index)"
-      :rel="item.code"
-      href="#">{{ item.name }}</a>
+    <template v-if="type === 'single'">
+      <a 
+        v-if="showDefault"
+        @click.stop.prevent="setVal('','', '')"
+        class="all"
+        :class="current === '' ? 'now' : ''" 
+        href="#">不限</a>
+      <a 
+        v-for="(item, index) in datas"
+        :key="index"
+        :class="current === index ? 'now' : ''" 
+        @click.stop.prevent="setVal(item.code, item.name, index)"
+        :rel="item.code"
+        href="#">{{ item.name }}</a>
+    </template>
+    <template v-else>
+      1111
+    </template>
+    
   </span>
 </template>
 <script>
@@ -48,6 +54,12 @@ export default {
     name: {
       type: String,
       default: ''
+    },
+    // 单个 single
+    // 多个 multiple
+    type: {
+      type: String,
+      default: 'single'
     }
   },
   data() {

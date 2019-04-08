@@ -182,10 +182,10 @@
               <dt>品牌&nbsp;:</dt>
 
               <dd id="tjcx_02" >
-                <selectType
+                <!-- <selectType
                   name="AF029"
                   :code="vo.belongBrandCode" />
-                <br>
+                <br> -->
                 <a
                   v-for="(item,index) in AF029"
                   :class="[item.code === vo.belongBrandCode ? 'now':'all']"
@@ -195,10 +195,10 @@
               </dd>
               <dt >其他&nbsp;:</dt>
               <dd id="tjcx_03">
-                <selectType
+                <!-- <selectType
                   name="AF025"
                   :code="vo.otherServiceCode" />
-                <br>
+                <br> -->
                 <a
                   v-for="(item,index) in AF025"
                   :class="[item.code === vo.otherServiceCode ? 'now':'all']"

@@ -1,18 +1,24 @@
 <template>
   <span>
-    <a 
-      v-if="showDefault"
-      @click.stop.prevent="setVal('','', '')"
-      class="all"
-      :class="current === '' ? 'now' : ''" 
-      href="#">不限</a>
-    <a 
-      v-for="(item, index) in datas"
-      :key="index"
-      :class="current === index ? 'now' : ''" 
-      @click.stop.prevent="setVal(item.code, item.name, index)"
-      :rel="item.code"
-      href="#">{{ item.name }}</a>
+    <template v-if="type === 'single'">
+      <a 
+        v-if="showDefault"
+        @click.stop.prevent="setVal('','', '')"
+        class="all"
+        :class="current === '' ? 'now' : ''" 
+        href="#">不限</a>
+      <a 
+        v-for="(item, index) in datas"
+        :key="index"
+        :class="current === index ? 'now' : ''" 
+        @click.stop.prevent="setVal(item.code, item.name, index)"
+        :rel="item.code"
+        href="#">{{ item.name }}</a>
+    </template>
+    <template v-else>
+      1111
+    </template>
+    
   </span>
 </template>
 <script>
@@ -24,25 +30,36 @@
  */
 export default {
   props: {
+    // 是否显示默认的 不限
     showDefault: {
       type: Boolean,
       default: true
     },
+    // 外部传入的数据，方便一些前端自定义字段显示
     list: {
       type: Array,
       default: () => []
     },
+    // 是否获取code值
     getCode: {
       type: Boolean,
       default: true
     },
+    // 初始的code值
     code: {
       type: String,
       default: ''
     },
+    // 要获取的字典名
     name: {
       type: String,
       default: ''
+    },
+    // 单个 single
+    // 多个 multiple
+    type: {
+      type: String,
+      default: 'single'
     }
   },
   data() {

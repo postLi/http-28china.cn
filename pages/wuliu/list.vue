@@ -5,7 +5,7 @@
         href="/wuliu/detail?id=1"
         target="_blank">
         <img
-          src="../../static/yuanqu/images/hearder.png"
+          src="../../static/yuanqu/images/hearder.jpg"
           alt=""
           width="1900">
       </a>
@@ -220,10 +220,13 @@
                 style="position:relative"
                 class="top_left_ul" >
                 <li
-                  v-for="(item,index) in newslist"
+                  v-for="(item,index) in wuliu_newest"
                   :key="index"
                   class="top_left_ul_li" >
-                  <span> {{ item.list+index }}</span>
+                  <a 
+                    :href="item.url"
+                    :title="item.title"
+                    target="_blank"><span>【{{ (item.releaseDate || '').split(' ')[0] }}】 {{ item.title }}</span></a>
               
                 </li>
               </ul>
@@ -545,19 +548,22 @@
                 src="../../static/gongsi/images/u1075.png"
                 style="width:280px;height:170px;float:left">
               <a
-                href="/zixun/ccyps/205.jhtml"
+                :href="wuliu_hyzx_show.url"
                 target="_blank"
               >
-              <span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
+              <span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">{{ wuliu_hyzx_show.title }}</span></a>
               <ul style="float:left">
                 <li
-                  v-for="(item,i) in 5"
+                  v-for="(item,i) in wuliu_hyzx"
                   :key="i"
-                  style="padding-top:15px">
+                  style="padding-top:10px">
                   <a
-                    href="/zixun/ccyps/205.jhtml"
+                    :href="item.url"
+                    :title="item.title"
                     target="_blank">
-                <p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></a></li>
+                    <p><span 
+                      class="news_title"
+                      style="padding-left:20px">{{ item.title }}</span><span style="padding-left:30px">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
               </ul>
             </div>
 
@@ -580,18 +586,21 @@
               <img
                 src="../../static/yuanqu/images/zixun.png"
                 style="width:280px;height:170px;float:left"><a
-                  href="/zixun/ccyps/205.jhtml"
+                  :href="wuliu_ccyps_show.url"
                   target="_blank"
-                ><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">瑞幸融资估值翻倍，背后是同城物流的...</span></a>
+                ><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;">{{ wuliu_ccyps_show.title }}</span></a>
               <ul style="float:left">
                 <li
-                  v-for="(item,i) in 5"
+                  v-for="(item,i) in wuliu_ccyps"
                   :key="i"
-                  style="padding-top:15px">
+                  style="padding-top:10px">
                   <a
-                    href="/zixun/ccyps/205.jhtml"
+                    :href="item.url"
+                    :title="item.title"
                     target="_blank">
-                <p><span style="padding-left:20px">瑞幸融资估值翻倍，背后是同城物流的...</span><span style="padding-left:30px">2019-02-19</span></p></a></li>
+                    <p><span 
+                      class="news_title" 
+                      style="padding-left:20px">{{ item.title }}</span><span style="padding-left:30px">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
               </ul>
             </div>
           </div>
@@ -712,6 +721,64 @@ export default {
       ]
     }
   },
+  computed: {
+    wuliu_newest() {
+      return this.$store.state.news.wuliu_newest
+    },
+    wuliu_hyzx() {
+      return this.$store.state.news.wuliu_hyzx.slice(1, 6)
+    },
+    wuliu_hyzx_show() {
+      return this.$store.state.news.wuliu_hyzx[0] || {}
+    },
+    wuliu_ccyps() {
+      return this.$store.state.news.wuliu_ccyps.slice(1, 6)
+    },
+    wuliu_ccyps_show() {
+      return this.$store.state.news.wuliu_ccyps[0] || {}
+    }
+  },
+  async fetch({ store, params, $axios, error, app, query }) {
+    // 多个栏目的参数配置
+    let paramsObj = {
+      wuliu_newest: {
+        channelIds: '94',
+        count: 10,
+        orderBy: 9,
+        channelOption: 0
+      },
+      wuliu_hyzx: {
+        channelIds: '100',
+        count: 6,
+        orderBy: 9,
+        channelOption: 0
+      },
+      wuliu_ccyps: {
+        channelIds: '101',
+        count: 6,
+        orderBy: 9,
+        channelOption: 0
+      }
+    }
+    let theparams = Object.values(paramsObj).map(el => JSON.stringify(el))
+    let names = Object.keys(paramsObj)
+    return store.dispatch('news/GETMULTYNEWSINFO', {
+      params: '{' + theparams.join(';') + '}',
+      names: names,
+      preFn: data => {
+        return data.map((els, index) => {
+          return els.map(el => {
+            el.url = el.url.replace(
+              /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+              '/zixun'
+            )
+            // console.log('el typemg', el.typeImg)
+            return el
+          })
+        })
+      }
+    })
+  },
   async asyncData({ $axios, app, query, error }) {
     let vo = {
       parkName: query.parkName ? query.parkName : '',
@@ -727,14 +794,14 @@ export default {
     parm.currentPage = 1
     parm.pageSize = 16
     let getLogisticsPark = await $axios.post(
-      '/28-web/logisticsPark/interestedList',
+      '/28-web/logisticsPark/interested/list',
       parm
     )
     let parm1 = vo
     parm1.currentPage = 1
     parm1.pageSize = 14
     let recommendParkList = await $axios.post(
-      '/28-web/logisticsPark/recommendList',
+      '/28-web/logisticsPark/recommend/list',
       parm1
     )
     let getGateWayListData = await gateWayList($axios, 1, vo)
@@ -926,6 +993,20 @@ export default {
 </script>
 
 <style lang="scss">
+.news_title {
+  width: 17em;
+  overflow: hidden;
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.top_left_ul {
+  li {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
 .yuanqu {
   .clearfix:after {
     content: ' ';

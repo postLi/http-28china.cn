@@ -17,13 +17,6 @@ body {
   border: 1px solid #eee;
 }
 
-.list_right .zx_sx {
-  border: 1px solid #eee;
-  border-bottom: 2px solid #2577e3;
-  margin-bottom: 1px;
-
-}
-
 .zx_sx span {
   float: left;
   display: block;
@@ -47,7 +40,7 @@ body {
 }
 
 .list_left {
-  width: 1130px;
+  width: 1080px;
   float: left;
 }
 
@@ -71,16 +64,37 @@ body {
 .list_right {
   min-height: 200px;
   height: auto !important;
-  width: 260px;
-  padding: 0px 0px 0 10px;
+  width: 300px;
+  margin-left:20px;
   float: left;
+}
+.list_right .last_li{
+  float: left;
+  width:100%;
+  height: 420px;
 
 }
-
+.rem_bot{
+  background: #fff;
+}
+.list_right .last_li .rem_bot_b_title{
+  position: relative;
+}
+.list_right .last_li .rem_bot_b_title::before{
+  position: absolute;
+  content: '';
+  top: 4px;
+  left: -11px;
+  height: 14px;
+  width: 3px;
+  background:#ffb65f;
+}
 .list_hy_page2 {
   width: 1400px;
 }
-
+img{
+  vertical-align: middle;
+}
 .w260 {
   width: 260px;
 }
@@ -91,14 +105,15 @@ body {
 
 .select_con {
   width: 1128px;
-  border-color: #eee;
 }
 
 .select_con dl dt {
   font-size: 14px;
   height: 39px;
   line-height: 39px;
-  padding: 3px 0 0 20px;
+  width:80px;
+  text-align: right;
+  /* padding: 3px 0 0 20px; */
 }
 
 .list_input {
@@ -154,12 +169,13 @@ body {
 }
 
 .list_tiaoj {
-  width: 1034px;
+  width: 1080px;
+  box-sizing: border-box;
   height: 39px;
   background-color: #f1f1f1;
   border: solid 1px #e6e6e6;
-  border-top: 2px solid #2577E3;
-  margin-bottom: 14px;
+  /* border-top: 2px solid #2577E3; */
+  /* margin-bottom: 14px; */
   /*background: no-repeat url(../images/list_wlzx/xiajt.png) #f1f1f1 363px 16px;*/
   position: relative;
 }
@@ -175,7 +191,27 @@ body {
   font-size: 14px;
 
 }
-
+.wzlwad {
+  float: right;
+}
+.wzlwad .city {
+  width: 300px;
+  float: left;
+}
+.wzlwad strong {
+  color: #ff5907;
+}
+.wzlwad .icon{
+  width:40px;
+  display: block;
+}
+.wzlwad .icon:nth-child(1){
+  border-left:1px solid #ddd;
+}
+.wzlwad .icon:nth-child(2){
+  border-left:1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
 .list_tiaoj .active {
   background-color: #ffffff;
   color: #eb434d;
@@ -206,7 +242,8 @@ body {
 }
 
 .wlzx_list {
-  width: 1128px;
+  width: 1080px;
+  box-sizing: border-box;
   height: 120px;
   padding-top: 20px;
   border: solid 1px #dfdfdf;
@@ -779,11 +816,13 @@ body {
 }
 
 .list_left {
-  width: 1036px;
+  width: 1080px;
 }
 
 .w1036 {
-  width: 1036px;
+  width: 1080px;
+  float: left;
+  box-sizing: border-box;
 }
 
 .w1036:nth-child(1) {
@@ -792,7 +831,7 @@ body {
 
 .wlzx_list {
   border: 0px;
-  width: 1034px;
+  /* width: 1034px; */
   height: 150px;
   padding-top: 30px;
   overflow: hidden;
@@ -801,7 +840,8 @@ body {
 }
 
 .select_con {
-  width: 1034px;
+  width: 1080px;
+  box-sizing: border-box;
 }
 
 .wlzx_list_1 {
@@ -813,13 +853,6 @@ body {
   margin-left: 30px;
 }
 
-.list_right {
-  min-height: 272px;
-  height: auto !important;
-  width: 344px;
-  padding: 0px 0px 0 20px;
-  float: left;
-}
 
 .tj_list {
   width: 342px;
@@ -1037,5 +1070,117 @@ body {
   font-size: 14px;
   color: #333;
 }
-
+/* 帮我找优质承运商 */
+.list_help {
+  width: 100%;
+  box-sizing: border-box;
+  float: left;
+  margin-top: 10px;
+  background: url('/images/list_wlzx/che_background.png');
+}
+.list_help_title {
+  text-align: center;
+  line-height: 40px;
+  height: 40px;
+  /* background: #3f94ee; */
+  color: #3f94ee;
+}
+.list_ewm {
+  float: left;
+  width: 100%;
+}
+.imgbox {
+  text-align: center;
+  margin: 10px;
+}
+.order_content {
+  padding: 10px;
+}
+.list-box-r-top {
+  width: 100%;
+  float: left;
+  box-sizing: border-box;
+  padding: 12px 12px;
+}
+.ltl-input0 {
+  position: relative;
+  margin: 7px 0 10px 0;
+  width: 100%;
+  height: 32px;
+  border-radius: 2px;
+  border: solid 1px #e5e5e5;
+  background: white;
+  font-size: 14px;
+  line-height: 32px;
+}
+.ltl-select {
+  appearance: none;
+  width: 100%;
+  height: 100%;
+  padding-left: 10px;
+  border: none;
+  outline: none;
+}
+.ltl-select option {
+  color: #333333;
+}
+.ltl-input {
+  position: relative;
+  margin: 7px 0 10px 0;
+  float: left;
+}
+.ltl-phone {
+  width: 166px;
+  border: 1px solid #ccc;
+  height: 35px;
+  line-height: 35px;
+  box-sizing: border-box;
+  padding-left: 8px;
+  outline: 0;
+  float: left;
+}
+.ltl-button {
+  display: block;
+  width: 110px;
+  height: 35px;
+  line-height: 35px;
+  text-align: center;
+  box-sizing: border-box;
+  background-color: #3f94ee;
+  color: #fff;
+  border: 1px solid #3f94ee;
+  cursor: pointer;
+  float: left;
+}
+.header_links_r .header_links_r_search::before{
+  position: absolute;
+  top: 18px;
+  left: 0px;
+  content:'';
+height: 20px;
+width: 3px;
+background: #2577e3;
+  }
+  .zx_sx {
+    OVERFLOW: hidden;
+    LINE-HEIGHT: 50px;
+    HEIGHT: 50px;
+    color: #585858;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: #fff;
+  }
+  .zx_sx span{ float: left;display: block;color: #2577e3;}
+  .zx_sx .biaozhi {
+    width: 3px;
+    height: 18px;
+    background-color: #3f94ee;
+    border-radius: 1px;
+    margin: 16px 12px 0px 10px;
+  
+  }
+  .remqy{
+    float: left;
+    width:100%;
+  }
 /*所属园区 E*/

@@ -22,31 +22,24 @@ export default {
     }
   },
   watch: {
-    info(n, o) {
-      // console.log(n, 'nnnnnnnn')
-    }
+    info(n, o) {}
   },
   mounted() {
     if (process.server) {
       return
     }
-    // console.log(this.info, 'this.info')
-    // `cargo_type`  （重货1、轻货0）'
     this.info.forEach((item, index) => {
       if (item.cargoType === '0') {
         this.cargoType0 = item
         this.comInfo(this.sendEchart, this.cargoType0)
       }
     })
-    // console.log(this.sendEchart, 'this.sendEchart轻货')
     this.info.forEach((item, index) => {
       if (item.cargoType === '1') {
         this.cargoType1 = item
         this.comInfo(this.sendEchart1, this.cargoType1)
-        // console.log(this.cargoType1, 'this.cargoType1重货')
       }
     })
-    // console.log(this.sendEchart1, 'this.sendEchart1重货')
     let copyobj = Object.assign(this.sendEchart1[2])
     let copyobj2 = Object.assign(this.sendEchart[2])
     let maxY = this.sendEchart[0]
@@ -1025,7 +1018,6 @@ export default {
         }
       ]
     }
-    // console.log('option:', option)
     myChart.setOption(option)
   },
   methods: {
@@ -1051,7 +1043,6 @@ export default {
           cargoType.thisRangePrice > 100
             ? Math.floor(cargoType.thisRangePrice)
             : cargoType.thisRangePrice,
-        // value: cargoType.lowAveragePrice,
         symbol: 'image:///images/cy/12d.png',
         symbolSize: 20
       }
@@ -1064,7 +1055,6 @@ export default {
         cargoType.lowestPrice > 100
           ? Math.floor(cargoType.lowestPrice)
           : cargoType.lowestPrice
-      console.log(typeof sendEchart[3], sendEchart[4])
     }
   }
 }

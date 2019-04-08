@@ -68,6 +68,9 @@ module.exports = {
       },
       {
         src: '/vendor/polyfill.min.js'
+      },
+      {
+        src: '/vendor/lrz.all.bundle.js'
       }
     ]
   },

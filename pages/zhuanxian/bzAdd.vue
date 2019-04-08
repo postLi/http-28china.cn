@@ -22,7 +22,7 @@
           <p>全网优质承运商的最新报价</p>
         </div>
    
-        <div style="margin-top: 15px; width:300px">
+        <div style="margin-top: 15px; width:300px;padding-left: 20px;">
           <div class="layui-progress">
             <div 
               class="layui-progress-bar" 
@@ -37,7 +37,6 @@
         <div style="text-align: center;">
           <span style="border: 1px solid #3333;width: 50px;height: 50px;display: inline-block;line-height: 50px;text-align: center;border-radius: 30px;margin-top:20px">{{ seconds }}s</span>
         </div>
-        <!-- <ShowEchart :info="LineeEchartInfo"/> -->
       </div>
       <div
         v-else
@@ -47,9 +46,13 @@
           class="myEchart">
           <span class="prck">价格参考</span><span style="color:rgb(255,110,15);font-size:15px;padding-right:5px">大数据智能模型精准定价，28智能平台指导定价</span>
           <p style="padding-top:20px;color:rgb(255,110,15);font-size:16px">{{ linedata.startCity }}→{{ linedata.endCity }}专线</p>
-          <!-- <ShowEchart :info="LineeEchartInfo"/> -->
+          <ShowEchart 
+            @lllechart="lllechart"
+            :info="LineeEchartInfo" 
+          />
           <div style="color:rgb(255,110,15);font-size:18px">
             <p><span style="border-bottom:1px solid rgb(255,110,15)">{{ company.companyName }}</span>的报价低于<span style="color:red">{{ company.lowerPriceRate }}%</span>的承运商，承运价格<span style="border-bottom:1px solid rgb(255,110,15)">低于</span>行业均价低点，此数据源于平台用户提报的历史数据统计，仅供参考！</p>
+            <!-- <div class="tests"/> -->
           </div>
         </div>
       </div>
@@ -59,12 +62,12 @@
 </template>
 <script>
 import LllDialog from '../../components/lllDialog'
-// import ShowEchart from './lllshowEchart'
+import ShowEchart from './lllshowEchart'
 export default {
   name: 'Add',
   components: {
-    LllDialog
-    // ShowEchart
+    LllDialog,
+    ShowEchart
   },
   props: {
     show: {
@@ -112,6 +115,11 @@ export default {
       showEchartDiv: false,
       linedata: {},
       company: '',
+      isHEchart: false,
+      isLEchart: false,
+      hEchart: {},
+      lEchart: {},
+      test: '',
       lowerPrice: 0
     }
   },
@@ -161,7 +169,7 @@ export default {
           })
         })
         this.seconds = 5
-        this.LineeEchartInfo = this.info
+
         // console.log(this.LineeEchartInfo, 'LineeEchartInfo')
         clearInterval(this.stopTimer)
         this.stopTimer = setInterval(() => {
@@ -171,8 +179,9 @@ export default {
             this.showEchartDiv = true
             this.linedata = this.linedataA
             this.company = this.lineCompany
+            this.LineeEchartInfo = this.info
             // this.lowerPrice = this.lowerPriceRate
-            // console.log(this.linedataA, 'linedataA')
+            console.log(this.LineeEchartInfo, 'LineeEchartInfo')
             // console.log(this.companyName, 'companyName')
             // console.log(this.lowerPriceRate, 'lowerPriceRate')
           }
@@ -199,6 +208,30 @@ export default {
   },
   mounted() {},
   methods: {
+    lllechart(item) {
+      this.hEchart = item.sendEchart1
+      this.lEchart = item.sendEchart
+
+      if (this.hEchart[1] > this.hEchart[3]) {
+        this.isHEchart = true
+        this.test = '<div>ieoriwoewioeirewr</div>'
+        let str = ''
+        str += '<div>这是撤诉的的的的防守打法</div>'
+        $('.tests').append(str)
+      } else if (this.hEchart[1] < this.hEchart[3]) {
+        this.isHEchart = true
+      } else {
+        this.isHEchart = true
+      }
+      if (this.lEchart[1] > this.lEchart[3]) {
+        this.isLEchart = true
+      } else if (this.lEchart[1] < this.lEchart[3]) {
+        this.isLEchart = true
+      } else {
+        this.isLEchart = true
+      }
+      // console.log(item, 'item')
+    },
     closeDialog() {
       this.$emit('close')
       clearInterval(this.stopTimer)

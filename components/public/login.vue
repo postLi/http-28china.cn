@@ -1106,7 +1106,7 @@ input:-webkit-autofill {
 
 .yzm_login .inputbox,
 .pwd_login .inputbox {
-  width: 290px;
+  width: 291px;
 }
 .yzm_login .useryzm input {
   width: 157px;
@@ -1309,7 +1309,7 @@ input:-webkit-autofill {
   height: 40px;
   line-height: 40px;
   position: relative;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
 }
 .login-yzm {
   border: none;

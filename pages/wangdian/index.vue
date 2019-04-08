@@ -1,5 +1,5 @@
 <template>
-  <div class="lll-wangdian">
+  <div class="wzlwangdian">
     <div class="list_box" >
       <div class="list_nav">
         <a href="/">物流首页</a>&gt;<a
@@ -10,7 +10,7 @@
         <div
           class="w1036"
           style=" background-color: #fff;margin-bottom: 20px;">
-          <div
+          <!-- <div
             class="zx_sx"
             style="border-bottom: 2px solid #2577e3"><span class="biaozhi"/><span>网点筛选</span>
             <a
@@ -23,10 +23,10 @@
                 <span>收起筛选</span><span class="arrow icon-btn-arrow-up-2"/>
               </span>
             </a>
-          </div>
+          </div> -->
           <div class="select_con">
             <dl>
-              <dt>所在地&nbsp;：</dt>
+              <dt>所在地：</dt>
               <dd><form
                 name="zxaddform"
                 method="post"
@@ -68,7 +68,29 @@
                     type="text"
                     placeholder="请输入详细地址查附近网点" >
                 </div>
-                <input
+                <div 
+                  
+                style="float:left;position:relative;font-size:14px;" >
+                  关键字：
+                  <input
+                    id="companyName"
+                    v-model="companyName"
+                    name="cfd"
+                    type="text"
+                    class="list_input"
+                    placeholder="公司/网点名称/地址/电话" >
+                </div>
+                <!-- <dt>关键词&nbsp;:</dt>
+                <dd >
+                  <input
+                    id="companyName"
+                    v-model="companyName"
+                    name="cfd"
+                    type="text"
+                    class="list_input"
+                    placeholder="公司/网点名称/地址/电话" >
+                </dd> -->
+                <!-- <input
                   id="search_wangdian"
                   name="Submit2"
                   readonly=""
@@ -80,7 +102,7 @@
                   name="Submit2"
                   readonly=""
                   value="重置 "
-                  @click="reload()">
+                  @click="reload()"> -->
                 
               </form>
                 <br>
@@ -179,24 +201,50 @@
                   </div>
                 </div>
               </dd>
-              <dt>品牌&nbsp;:</dt>
-
-              <dd id="tjcx_02" >
+              <div class="showbox">
+                <dt>品牌&nbsp;:</dt>
+                <dd id="tjcx_02" >
+                  <a
+                    v-for="(item,index) in AF029"
+                    :class="[item.code === vo.belongBrandCode ? 'now':'all']"
+                    :key="index"
+                    href="javascript:"
+                    @click="AF029Click(item)">{{ item.name }}</a>
+                </dd>
+                <dt >其他&nbsp;:</dt>
+                <dd id="tjcx_03">
+                  <a
+                    v-for="(item,index) in AF025"
+                    :class="[item.code === vo.otherServiceCode ? 'now':'all']"
+                    :key="index"
+                    href="javascript:"
+                    @click="AF025Click(item)">{{ item.name }}</a>
+                </dd>
+              </div>
+              <dd id="tjcx_04">
+                <input
+                  id="search_wangdian"
+                  name="Submit2"
+                  readonly=""
+                  value=" 搜索 "
+                  class="list_button"
+                  @click="search()">
+                <input
+                  id="flush"
+                  name="Submit2"
+                  readonly=""
+                  value="重置 "
+                  @click="reload()">
                 <a
-                  v-for="(item,index) in AF029"
-                  :class="[item.code === vo.belongBrandCode ? 'now':'all']"
-                  :key="index"
-                  href="javascript:"
-                  @click="AF029Click(item)">{{ item.name }}</a>
-              </dd>
-              <dt >其他&nbsp;:</dt>
-              <dd id="tjcx_03">
-                <a
-                  v-for="(item,index) in AF025"
-                  :class="[item.code === vo.otherServiceCode ? 'now':'all']"
-                  :key="index"
-                  href="javascript:"
-                  @click="AF025Click(item)">{{ item.name }}</a>
+                  class="toggle-btn show-collapse"
+                  href="#">
+                  <span class="expand">
+                    <span>显示筛选</span><span class="arrow icon-btn-arrow-down-2"/>
+                  </span>
+                  <span class="collapse">
+                    <span>收起筛选</span><span class="arrow icon-btn-arrow-up-2"/>
+                  </span>
+                </a>
               </dd>
             </dl>
           </div>
@@ -204,13 +252,27 @@
         <div
           id="js002"
           class="w1036" >
-          <div class="zx_sx"><span class="biaozhi"/><span id="wangdian_list">网点列表</span></div>
-          <div class="list_tiaoj"><span
-            id="seq1"
-            class="active">综合排序</span>
+          <!-- <div class="zx_sx"><span class="biaozhi"/><span id="wangdian_list">网点列表</span></div> -->
+          <div class="list_tiaoj">
+            <span
+              id="seq1"
+              class="active">综合排序</span>
             <span
               id="seq2"
               title="距离从近到远">距离最近</span>
+            <div class="wzlwad">
+              <span class="icon active">
+                <img 
+                  style="width:25px;float:left;margin:8px;" 
+                  src="wd/images/mue.png">
+              </span>
+              <span class="icon">
+                <img 
+                  style="width:25px;float:left;margin:8px;"
+                  src="wd/images/map.png">
+              </span>
+              <span class="city">在{{ vo.startProvince + '-' + vo.startCity }}共找到<strong>{{ total }}</strong>个网点</span>
+            </div>
           </div>
 
           <div
@@ -278,20 +340,16 @@
             </p></li>
           </ul>
         </div>
-        <!--分页-->
         <div
           class="box"
           style="float: right;margin-right: 170px;">
           <div
             id="pagination1"
             class="page fl"/>
-          <div class="info fl">
-          <!--<p>当前页数：<span id="current1">1</span></p>-->
-          </div>
+          <div class="info fl"/>
         </div>
-      <!--分页-->
       </div>
-      <div
+      <!-- <div
         id="js007"
         class="list_right">
 
@@ -311,21 +369,8 @@
             :href="'/member/'+ item.id"
             target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
 
-          <p
-            v-if="item.showcreadimg"
-            class="p7" >
-            <img
-              v-for="(i,index) in item.creditImg"
-              :key="index"
-              src="/wd/images/blue.gif" >
-          </p>
-          <p
-            v-if="item.showcreadeng"
-            class="p7" >
-            <img
-              v-for="(i,index) in item.creditdeng"
-              :key="index"
-              src="/wd/images/34huanguan.gif" >
+          <p class="p7">
+            <creditIcon :credit="item.credit" />
           </p>
 
           <p class="p3"><i>联系人：</i><font id="tj_02">{{ item.contactsName }}</font></p>
@@ -341,8 +386,185 @@
           </p>
         </div>
 
-      </div>
+      </div> -->
+      <div class="list_right">
+        <div class="last_li">
+          <div class="btn_top">
+            <button
+              class="layui-btn"
+              @click="callme"
+              style="width: 298px;background: #3f94ee;height:48px;color:#fff;border:none">实力承运商入驻</button></div>
+          <div
+            class="rem_bot"
+            style="margin-top: 10px"
+          >
+            <div class="rem_bot_t">
+              <div
+                class="rem_bot_titp"
+                style="text-align: center;color: #ffffff;padding-top: 10px; ">
+                <img
+                  src="/gongsi/images/06tj.png"
+                  style=""
+                  alt=""><span style="font-size: 20px;text-align: center;vertical-align: middle;padding-left:10px">优质承运商推荐</span>
+              <p style="text-align: center;">优质承运商推荐，钱力心</p></div>
 
+            </div>
+
+            <ul
+              class="rem_bot_b"
+              style="padding: 10px 15px 15px">
+              <li
+                v-for="(item,i) in listE"
+                :key="i"
+                style="padding-top: 16px;font-size:14px; padding-left: 10px;">
+                <div><span
+                  class="rem_bot_b_title"
+                  style="color:#333;vertical-align: middle;padding-right:10px">{{ item.companyName.length>10?item.companyName.substring(0,10)+'..':item.companyName }}</span>
+                  <img
+                    src="../../static/gongsi/images/04tuijian.png"
+                    alt=""></div>
+                <p style="padding-top:2px">
+
+                  <span
+                    style="padding-right: 16px;color: #666;font-size:14px"
+                    v-for="(item, i) in (item.advService.length>3?item.advService.slice(0,3):item.advService)"
+                    :key="i">{{ item }}</span>
+                </p>
+                <p>
+                  <a
+                    :href="'/member/'+item.id"
+                    target="_blank"
+                    style="cursor: pointer;color:#2577e3;font-size:14px;padding-top:5px" >进入官网</a></p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- 帮我找优质运动start -->
+        <div class="list_help">
+          <div class="list-box-r-top">
+            <h2 class="list_help_title">帮我找优质承运商</h2>
+            <form action="">
+              <div 
+                id="form0" 
+                class="ltl-input0">
+                <input 
+                  v-model="checkNotice.startAddres"
+                  id="right-bar-form"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择出发地">
+                <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+              </div>
+              <div 
+                id="form1" 
+                class="ltl-input0">
+                <input
+                  v-model="checkNotice.endAddres"
+                  autocomplete="off"
+                  data-toggle="city-picker"
+                  data-level="district"
+                  type="text" 
+                  class="ltl-location" 
+                  placeholder="请选择目到达地">
+                <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+              </div>
+              <textarea
+                id="form2"
+                v-model="checkNotice.select"
+                maxlength="100"
+                style="padding:18px;height:80px;width:238px;"
+                placeholder="备注信息，如：期望发货时间、货物体积重量等信息..."
+                class="textare"/>
+              <div 
+                id="form3" 
+                class="ltl-input">
+                <input 
+                  v-model="checkNotice.phone"
+                  :placeholder="phoneHolder"
+                  type="text"
+                  class="ltl-phone"
+                  maxlength="11"
+                >
+                <span 
+                  class="ltl-button" 
+                  @click="sendNotice()">找到通知我</span>
+              </div>
+            </form>
+          </div>
+        </div>
+        <!-- 帮我找优质运动end -->
+        <div
+          class="header_links_r"
+          style="margin:20px 0;float:left;width:100%;position: relative;background: #fff;float:left;">
+          <p
+            style="font-size: 18px;color: #0d91e9;height:55px;line-height:55px;margin-left:20px;font-weight: bold "
+            class="header_links_r_search">运单查询</p>
+          <input
+            id="yd_nr"
+            rows="3"
+            cols="20"
+            placeholder="请输入运单号，例如："
+            style="width: 262px;margin-left: 10px;height:40px;">
+          <input
+            type="button"
+            style="height: 42px;border-right:none;">
+          <div
+            class="ydh"
+            style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer; top: 70px;;color:#0d91e9;margin-left: 30px"
+          >
+            <span>1809260061</span>
+          </div>
+          <div><button
+            id="yd_cx1"
+            class="layui-btn"
+            style="width: 277px;height:40px;line-height:40px;border-radius: 4px;border:none;border-radius: 3px;margin:20px 10px;background:#3f94ee;color:#fff;"
+          >立即查询</button></div>
+        </div>
+        <div class="remqy">
+          <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
+            <i
+              style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer;padding-right:5px"
+              @click="findMe">我也想出现在这里</i>
+          </div>
+          <div
+            class="tj_none"
+            v-if="listG==[] || listG==null">
+            <span>没有相关物流公司推荐</span>
+          </div>
+          <ul>
+            <li
+              style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
+              v-for="(item, i) in listG"
+              :key="i"
+              :class="'bg'+i">
+              <a
+                :href="'/member/'+ item.id"
+                target="_blank">
+                <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName.length>10?item.companyName.substring(0,10) +'..':item.companyName }}</p>
+                 
+                <div
+                style="text-align: center;width: 200px;border: 1px solid #ccc;padding:10px;margin:20px 45px 0 32px;">
+                  <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
+                  <span
+                    style="font-size: 12px;color: #fff;padding-right: 5px"
+                    v-for="(item, i) in item.advService"
+                    :key="i"
+
+                >{{ item }}</span></div>
+                <p style="font-size: 20px;color: #fff;margin-top: 20px;text-align: center">
+                  <img
+                    v-if="item.mobile || item.mobile != null"
+                    src="../../static/gongsi/images/phoneico.png"
+                    alt="">
+                  <span style="vertical-align: middle;padding-left: 5px">{{ item.mobile }}</span>
+                </p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
 
 
@@ -366,7 +588,7 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   parm.pageSize = 10
   let prefix = ''
 
-  let res = await $axios.post('/28-web/pointNetwork/list', parm) //车源信息列表
+  let res = await $axios.post('/28-web/pointNetwork/list', parm)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
       if (item.pointName && item.pointName.length > 15) {
@@ -379,10 +601,12 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
         item.pointAddress = item.pointAddress.substring(0, 15) + '..'
       }
     })
+    // console.log(res.data.data, 'res.data.data.total')
     return {
       list: res.data.data.list,
       pages: res.data.data.pages,
-      currentPage: res.data.data.pageNum
+      currentPage: res.data.data.pageNum,
+      total: res.data.data.total
     }
   } else {
     return { list: [], pages: 0, currentPage: 1 }
@@ -414,11 +638,18 @@ export default {
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
-    script: [{ src: '/js/jquery.pagination.min.js' }]
+    script: [{ src: '/js/jquery.pagination.min.js' }, { src: 'layer/layer.js' }]
   },
   data() {
     return {
-      wangdianInfoList: [], //网点信息列表
+      checkNotice: {
+        startAddres: '',
+        endAddres: '',
+        select: '',
+        phone: ''
+      },
+      phoneHolder: '请输入正确手机号',
+      wangdianInfoList: [],
       totalPage: 1,
       currentPage: 1,
       parkName: '',
@@ -457,10 +688,27 @@ export default {
     vo.province = vo.startProvince
     vo.city = vo.startCity
     vo.area = vo.startArea
-    //网点列表
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
-    // console.log(recommendList, 'recommendList')
+    let listE = await $axios.get(
+      `/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
+    )
+    if (listE.data.status == 200) {
+      listE.data.data.forEach(item => {
+        item.advService = item.productServiceNameList
+          ? item.productServiceNameList
+          : item.otherServiceNameList
+        // console.log(item.advService.slice(3), 'bbbb')
+      })
+    }
+    let listG = await $axios.get(`/28-web/logisticsCompany/enterpriseRecommend`)
+    if (listG.data.status == 200) {
+      listG.data.data.forEach(item => {
+        item.advService = item.productServiceNameList
+          ? item.productServiceNameList
+          : item.otherServiceNameList
+      })
+    }
     recommendList.forEach(item => {
       if (item.credit >= 0 && item.credit <= 3) {
         item.showcreadimg = true
@@ -504,7 +752,7 @@ export default {
       }
     })
     let AF029 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF029' //品牌
+      '/aflc-common/sysDict/getSysDictByCodeGet/AF029'
     )
     let AF025 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
@@ -516,7 +764,6 @@ export default {
       locationProvince: vo.startProvince,
       ...vo
     })
-    //网点信息列表
     if (AF029.data.status === 200) {
       AF029.data.data.unshift({ code: '', name: '不限' })
     }
@@ -527,8 +774,11 @@ export default {
       return {
         AF029: AF029.data.status === 200 ? AF029.data.data : [],
         AF025: AF025.data.status === 200 ? AF025.data.data : [],
+        listE: listE.data.status == 200 ? listE.data.data : [],
+        listG: listG.data.status == 200 ? listG.data.data : [],
         logisticsPark: logisticsPark,
         WangdiangInfoList: WangdiangInfoList.list,
+        total: WangdiangInfoList.total,
         pages: WangdiangInfoList.pages,
         recommendList: recommendList,
         vo: vo,
@@ -539,23 +789,60 @@ export default {
     }
   },
   mounted() {
+    seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
+      layui.use('form', function() {
+        $('.ydh').click(function() {
+          $('#yd_nr').val('1809260061')
+          $('.ydh').css('display', 'none')
+        })
+        $('#yd_nr').keyup(function() {
+          if ($('#yd_nr').val()) {
+            $('#yd_cx1').css('background-color', '#eb434d')
+            $('#yd_cx1').css('color', '#f9f9f9')
+            $('.ydh').css('display', 'none')
+          }
+          if (!$('#yd_nr').val()) {
+            $('#yd_cx1').css('background-color', '#3f94ee')
+            $('#yd_cx1').css('color', '#red')
+            $('.ydh').css('display', 'block')
+          }
+        })
+
+        $('#yd_cx1').click(function() {
+          var num = $('#yd_nr').val()
+          if (num) {
+            window.open('/ydcx?num=' + num)
+          }
+          if (!num) {
+            alert('请先输入运单号查询！')
+          }
+        })
+
+        var form = layui.form
+        form.render()
+      })
+    })
+
     this.companyName = this.$route.query.companyName || ''
     seajs.use(['/js/gaodemap2.js'])
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
-      $('.select_con').css('display', 'none')
+      $('.showbox').hide()
     })
     $('.expand').click(function() {
       $('.collapse').css('display', 'inline-block')
       $('.expand').css('display', 'none')
-      $('.select_con').css('display', 'block')
+      $('.showbox').show()
     })
     let _this = this
     $('#select_wlyq').mousedown(function() {
       $('#list_wlzx_yq').css('display', 'block')
     })
-    //排序点击 S
+    $('.icon').click(function() {
+      $('.icon').removeClass('active')
+      $(this).addClass('active')
+    })
     $('#seq1').click(async function() {
       $('#seq2').removeClass('active')
       $(this).addClass('active')
@@ -589,9 +876,8 @@ export default {
       )
       _this.WangdiangInfoList = WangdiangInfoList.list
     })
-    //排序点击 E
     $('body').click(function(e) {
-      var _con = $('.js_yq') // 设置目标区域(排除此元素)
+      var _con = $('.js_yq')
       if (!_con.is(e.target) && _con.has(e.target).length === 0) {
         $('#list_wlzx_yq').css('display', 'none')
       }
@@ -612,12 +898,95 @@ export default {
     this.pagination()
   },
   methods: {
+    sendNotice() {
+      this.sendNot()
+      let obj = {
+        startProvince: this.startProvince,
+        startCity: this.startCity,
+        startArea: this.startArea,
+        endProvince: this.endProvince,
+        endCity: this.endCity,
+        endArea: this.endArea
+      }
+      if (this.checkNotice.startAddres === '') {
+        $('#form0').css('border-color', 'red')
+      } else if (this.checkNotice.startAddres != '') {
+        $('#form0').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.endAddres === '') {
+        $('#form1').css('border-color', 'red')
+      } else if (this.checkNotice.endAddres != '') {
+        $('#form1').css('border-color', '#e5e5e5')
+      }
+      if (this.checkNotice.select === '') {
+        $('#form2').css('border-color', 'red')
+      } else {
+        $('#form2').css('border-color', '#e5e5e5')
+        obj.memo = this.checkNotice.select
+      }
+      let re = /^1[3|4|5|7|8|9]\d{9}$/
+      if (this.checkNotice.phone === '') {
+        $('.ltl-phone').css('border-color', 'red')
+        this.phoneHolder = '请输入正确手机号'
+      } else {
+        if (re.test(this.checkNotice.phone)) {
+          $('.ltl-phone').css('border-color', '#e5e5e5')
+          obj.msgMobile = this.checkNotice.phone
+        } else {
+          $('.ltl-phone').css('border-color', 'red')
+          this.checkNotice.phone = ''
+          this.phoneHolder = '请输入正确手机号'
+        }
+      }
+      if (
+        this.checkNotice.startAddres != '' &&
+        this.checkNotice.endAddres != '' &&
+        this.checkNotice.select != '' &&
+        this.checkNotice.phone != ''
+      ) {
+        this.$axios
+          .post('/28-web/helpFind/range/create', obj)
+          .then(res => {
+            this.reset()
+            if (res.data.status === 200) {
+              layer.msg('提交成功，客服稍后将会与您联系')
+            } else {
+              layer.msg(res.data.errorInfo)
+            }
+          })
+          .catch(err => {
+            layer.msg(res.data.errorInfo)
+          })
+      } else {
+        return
+      }
+    },
     setMap() {
       this.searchDo()
       $('#addressTo input').attr(
         'wtmapinit',
         this.startProvince + this.startCity + this.startArea
       )
+    },
+    sendNot() {
+      let startAds = [],
+        endAds = []
+      $('#form0 .select-item').each(function(i, e) {
+        startAds.push($(this).text())
+      })
+      this.startProvince = startAds[0] ? startAds[0] : ''
+      this.startCity = startAds[1] ? startAds[1] : ''
+      this.startArea = startAds[2] ? startAds[2] : ''
+      this.checkNotice.startAddres =
+        this.startProvince + this.startCity + this.startArea
+      $('#form1 .select-item').each(function(i, e) {
+        endAds.push($(this).text())
+      })
+      this.endProvince = endAds[0] ? endAds[0] : ''
+      this.endCity = endAds[1] ? endAds[1] : ''
+      this.endArea = endAds[2] ? endAds[2] : ''
+      this.checkNotice.endAddres =
+        this.endProvince + this.endCity + this.endArea
     },
     searchDo() {
       let list1 = [],
@@ -628,13 +997,16 @@ export default {
       this.startProvince = list1[0] ? list1[0] : ''
       this.startCity = list1[1] ? list1[1] : ''
       this.startArea = list1[2] ? list1[2] : ''
-
+      this.checkNotice.startAddres =
+        this.startProvince + this.startCity + this.startArea
       $('#addressTo .select-item').each(function(i, e) {
         list2.push($(this).text())
       })
       this.endProvince = list2[0] ? list2[0] : ''
       this.endCity = list2[1] ? list2[1] : ''
       this.endArea = list2[2] ? list2[2] : ''
+      this.checkNotice.endAddres =
+        this.endProvince + this.endCity + this.endArea
     },
     search() {
       this.searchDo()
@@ -652,12 +1024,10 @@ export default {
         this.startProvince
       }&pos=${pos}&address=${address}&parkId=${this.parkId || ''}`
     },
-    //品牌
     AF029Click(item) {
       this.vo.belongBrandCode = item.code
       this.search()
     },
-    //其他
     AF025Click(item) {
       this.vo.otherServiceCode = item.code
       this.search()
@@ -666,7 +1036,6 @@ export default {
       this.parkName = item.parkName
       this.parkId = item.id
     },
-    //园区
     async seachlist() {
       let list1 = []
       $('#wlyq_pos .select-item').each(function(i, e) {
@@ -681,17 +1050,31 @@ export default {
         locationProvince: this.vo.startProvince,
         ...this.vo
       })
-      console.log(this.logisticsPark, 'logisticsPark')
+    },
+    getFung(vo) {
+      let gslist = getGSList(this.$axios, 1, vo)
+    },
+    findMe() {
+      this.addFn()
+      this.types = 2
+    },
+    callme() {
+      this.addFn()
+      this.types = 1
+    },
+    addFn() {
+      this.isAdd = true
+    },
+    noaddFn() {
+      this.isAdd = false
     },
     pagination() {
-      console.log('this.pages:', this.pages)
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
           $('#current1').text(current)
           let hyList = await getWangdiangInfoList(this.$axios, current, this.vo)
-          console.log(hyList, 'hyList')
           this.totalPage = hyList.pages
           this.current = hyList.current
           this.WangdiangInfoList = hyList.list
@@ -707,7 +1090,24 @@ export default {
 </script>
 
 <style lang="scss">
-.lll-wangdian {
+#tjcx_02 span > a,
+#tjcx_03 span > a {
+  margin-right: 10px;
+}
+#tjcx_04 {
+  text-align: center;
+}
+.showbox {
+  float: left;
+}
+#tjcx_04:hover a {
+  background: none !important;
+}
+.rem_bot_t {
+  background: url('/gongsi/images/tj.png') no-repeat;
+  height: 95px;
+}
+.wzlwangdian {
   .list_button {
     width: 42px;
     height: 28px;
@@ -723,13 +1123,14 @@ export default {
     cursor: pointer;
     border: none;
   }
-  /*显示隐藏S */
   .toggle-btn {
-    float: right;
-    margin: 12px 15px 0 4px;
+    // float: right;
+    margin: 12px 150px 0 4px;
     height: 24px;
     line-height: 24px;
-    border: solid 1px #e8e8e8;
+    // border: solid 1px #e8e8e8;
+    font-size: 14px;
+
     padding: 0 9px;
     background: #fff;
     color: #6b6b6b;
@@ -737,7 +1138,9 @@ export default {
     text-decoration: none;
     font: 12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
   }
-
+  .toggle-btn span {
+    font-weight: bold;
+  }
   .show-collapse .expand {
     display: none;
     margin-top: 2px;
@@ -781,6 +1184,5 @@ export default {
     background: #3371ff;
     color: #fff;
   }
-  /*显示隐藏E */
 }
 </style>

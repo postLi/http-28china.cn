@@ -3,7 +3,6 @@
     <div class="arc_middle2_1">
       <p class="p1"><i>重货价：</i>
         <span>{{ wEndVolume }}</span>
-        <!--<span>{{ '0'+ '-' + wPrice[0].endVolume + '吨' }}</span>-->
         <font
         class="font1">{{ wDiscountPrice }}</font>
         <span
@@ -26,10 +25,8 @@
     <div class="arc_middle2_2">
       <div class="num1"><span id="nr0746"/></div>
       <div class="num2"><a href="javascript:void(0)"><span id="nr0745">{{ browse }}</span></a></div>
-      <!--<div class="num3"><span>下单量</span></div>-->
       <div class="num4"><a href="javascript:void(0)"><span>累计评价</span></a></div>
     </div>
-    <!--阶梯价格 S-->
     <div
       v-if="showPrice_box1"
       id="js018"
@@ -45,7 +42,7 @@
         
       >
         <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/公斤' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ?item.primeryPrice.toFixed(2) :item.primeryPrice }}</em><em style="">元/公斤</em></span>
-        <!-- <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? parseFloat(item.discountPrice).toFixed(0)+ '元/公斤' : '' }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? parseFloat(item.primeryPrice).toFixed(0) : '' }}</em><em style="">元/公斤</em></span> -->
+      
       </div>
     </div>
 
@@ -54,8 +51,6 @@
       id="js019"
       class="price_box2"
     >
-      <!--onmouseover="price_block2();"-->
-      <!--onmouseout="price_none2();"-->
       <div class="price_box_bt">阶梯价（轻货）</div>
       <div
         v-for="(item, index) in info"
@@ -64,7 +59,7 @@
         class="price_box_item2"
       >
         <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/立方' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? item.primeryPrice.toFixed(2) : item.primeryPrice }}</em><em style="">元/立方</em></span>
-        <!--<span id="nr0744"/><i id="nr0730"/><font id="nr0731"/><em id="nr07310">元/立方</em>-->
+      
       </div>
     </div>
   </div>
@@ -102,15 +97,10 @@ export default {
     }
   },
   watch: {
-    info(n, o) {
-      // console.log(n, 'nnnnnnnn')
-    },
-    browse(n, o) {
-      // console.log(n, 'browse')
-    }
+    info(n, o) {},
+    browse(n, o) {}
   },
   mounted() {
-    // console.log(this.info, 'this.info')
     this.init()
   },
   methods: {
@@ -128,13 +118,8 @@ export default {
     },
     init() {
       this.browse = this.browse ? this.browse : '0'
-      // console.log(this.info, 'info', this.browse)
-      // this.wPrice = []
-      // this.hPrice = []
-      // this.infodata = Object.assign({}, this.info)
+
       let _this = this
-      // this.info = this.info != [] || this.info
-      // console.log(this.info, 'this.info')
       this.info.forEach((item, index) => {
         if (item.type == 0) {
           this.hPrice.push(item)
@@ -142,11 +127,9 @@ export default {
         if (item.type == 1) {
           this.wPrice.push(item)
         }
-        // console.log(this.wPrice, 'this.wPrice')
       })
       this.wPrice = Object.assign({}, this.wPrice)
       this.hPrice = Object.assign({}, this.hPrice)
-      // pEndVolume
       if (this.wPrice[0]) {
         this.wEndVolume = this.wPrice[0].endVolume
           ? '0-' + this.wPrice[0].endVolume + '公斤'
@@ -171,9 +154,6 @@ export default {
             ? this.hPrice[0].primeryPrice.toFixed(2)
             : ''
       }
-
-      // console.log(this.hprices, ' this.endVolume', typeof this.wprices)
-      // console.log(this.info, 'info')
     }
   }
 }
@@ -191,10 +171,7 @@ export default {
     left: 200px;
     top: 45px;
     margin-left: 0px;
-    /* border-radius: 6px;*/
-    /*display: none;*/
     background-color: #fff7d3;
-    /*box-shadow:0px 0px 20px rgba(0,0,0,0.3);*/
     padding-left: 15px;
     padding-top: 10px;
     border: 1px solid #979797;
@@ -209,10 +186,7 @@ export default {
     left: 200px;
     top: 80px;
     margin-left: 0px;
-    /*border-radius: 6px;*/
-    /*display: none;*/
     background-color: #fff;
-    /* box-shadow:0px 0px 20px rgba(0,0,0,0.3);*/
     padding-left: 15px;
     padding-top: 10px;
     background-color: #fff7d3;

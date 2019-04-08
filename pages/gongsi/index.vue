@@ -58,40 +58,46 @@
             <div 
               class="layui-carousel" 
               id="test1"
-              style="width: 100%; height: 250px;">
+              style="width: 100%;">
               <div carousel-item>
-                <div 
-                  v-for="(item,i) in 2"
-                  :key="i"><img 
-                    src="../../static/gongsi/images/02banner.jpg" 
-                    alt=""></div>
+                <img 
+                  src="../../static/gongsi/images/banner1.jpg" 
+                  width="260"
+                  alt="">
+                <img 
+                  src="../../static/gongsi/images/banner2.jpg" 
+                  width="260"
+                  alt="">
           
               </div>
             </div>
 
-            <!--             
-            <div
-              id="test1"
-              class="layui-carousel"
-              style="width: 100%; height: 250px;">
-              <div carousel-item>
-                <div
-                  v-for="(item, i) in 2"
-                  :key="i"><img src="../../static/gongsi/images/02banner.jpg"></div>
-              </div>
-            </div> -->
           </div>
           <div
             class="bot"
-            style="width: 100%; height: 140px;">
+            style="width: 100%; height: 140px;margin-top:20px">
             <a
-              v-for="(item, index) in 3"
-              :key="index"
             >
               <img
                 src="../../static/gongsi/images/03shuju.png"
                 alt=""
-                style="width: 260px;height: 135px;"
+                style="width: 260px;height: 140px;"
+              >
+            </a>
+            <a
+            >
+              <img
+                src="../../static/gongsi/images/2gz.png"
+                alt=""
+                style="width: 260px;height: 140px;"
+              >
+            </a>
+            <a
+            >
+              <img
+                src="../../static/gongsi/images/3mz.png"
+                alt=""
+                style="width: 260px;height: 140px;"
               >
             </a>
           </div>
@@ -171,8 +177,7 @@
       </div>
       <div
         class="header_links_r"
-        style="position: relative;margin-left: 20px;background: #fff;padding-left: 20px"
-      >
+        style="position: relative;margin-left: 20px;background: #fff;padding-left: 20px">
         <p
           style="font-size: 18px;color: #0d91e9;padding: 15px 0 40px 10px;font-weight: bold "
           class="header_links_r_search">运单查询</p>
@@ -226,25 +231,7 @@
                     :href="'/member/'+ item.id"
                     target="_blank"><span style="font-size: 14px;color: #333333;">{{ item.companyName?item.companyName:'' }}</span>
                   </a>
-                  <!-- </li> -->
-
-                  <!-- <li><a
-                  href="javascript:void(0)"
-                  target="_blank"
-                  v-for="(item, i) in 10"
-                  :key="i"><span>广州发合肥</span></a></li> -->
-
-
-
-                  <!--<li><a-->
-                  <!--href="javascript:void(0)"-->
-                  <!--target="_blank"><span>广州发重庆</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
-                  <!--<li><a-->
-                  <!--href="javascript:void(0)"-->
-                  <!--target="_blank"><span>广州发南昌</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
-                  <!--<li><a-->
-                  <!--href="javascript:void(0)"-->
-                  <!--target="_blank"><span>广州发郑州</span><i>重货：</i><font>0.45</font><i>元/公斤&nbsp;&nbsp;</i><font>+5%</font><span>轻货：</span><font>200</font><i>元/方&nbsp;&nbsp;</i><em>-2%</em></a></li>-->
+                
               </li></ul>
               <ul class="echart_scroll_nr2"/>
             </div>
@@ -329,7 +316,7 @@
             width="1080"
           >
           <DetailList :info="getgsListsFn"/>
-          <!--分页-->
+         
           <div
             v-if="gsList.length>10 ||gsList !=[]"
             class="box"
@@ -337,11 +324,8 @@
             <div
               id="pagination1"
               class="page fl"/>
-            <div class="info fl">
-            <!--<p>当前页数：<span id="current1">1</span></p>-->
-            </div>
+            <div class="info fl"/>
           </div>
-          <!--分页-->
           <div
 
 
@@ -386,7 +370,7 @@
                     :href="'/member/'+ item.id"
                     target="_blank">
                     <p style="font-size: 20px;color: rgb(253,240,3);text-align: center">{{ item.companyName.length>10?item.companyName.substring(0,10) +'..':item.companyName }}</p>
-                    <!--<p style="font-size: 25px;color: rgb(253,240,3); text-align: center">广州业务部</p>-->
+                 
                     <div
                     style="text-align: center;width: 200px;border: 1px solid #ccc;padding:10px;margin:20px 45px 0 32px;">
                       <i style="color: #ffffff;font-size: 12px;font-weight: bold">+</i>
@@ -543,8 +527,8 @@ export default {
   },
   data() {
     return {
-      pages: 0, //总页数
-      currentPage: 1, //当前页
+      pages: 0,
+      currentPage: 1,
       isAdd: false,
       types: 0,
       companyName: '',
@@ -558,7 +542,6 @@ export default {
     }
   },
   async fetch({ store, params, $axios, error, app }) {
-    // 今日要闻
     await store.dispatch('news/GETNEWSINFO', {
       params: {
         channelIds:
@@ -580,7 +563,6 @@ export default {
         })
       }
     })
-    // 物流资讯
     await store.dispatch('news/GETNEWSINFO', {
       params: {
         channelIds: '101',
@@ -881,7 +863,6 @@ export default {
       let getgsList = await getGSList(_this.$axios, 1, vo, _this.companyName)
       _this.gsList = getgsList.list
       _this.gsList.forEach(item => {
-        // item.num = Math.ceil(Math.random() * 30)
         let arr = (item.id || '').split('')
         let num = 0
         arr.forEach(el => {
@@ -889,7 +870,6 @@ export default {
         })
         item.num = (num % 30) + 1
       })
-      // console.log(getgsList.list, vo, this.gsList, 'quanxuan')
     })
     seajs.use(
       [
@@ -905,20 +885,17 @@ export default {
               seajs.use(['../js/gaodemap2.js'], function() {
                 layui.use('form', function() {
                   // console.log('layui', layui)
-                  //运单查询 S
                   $('.ydh').click(function() {
                     $('#yd_nr').val('1809260061')
                     $('.ydh').css('display', 'none')
                   })
                   $('#yd_nr').keyup(function() {
                     if ($('#yd_nr').val()) {
-                      console.log('nr')
                       $('#yd_cx1').css('background-color', '#eb434d')
                       $('#yd_cx1').css('color', '#f9f9f9')
                       $('.ydh').css('display', 'none')
                     }
                     if (!$('#yd_nr').val()) {
-                      console.log('nr')
                       $('#yd_cx1').css('background-color', '#fff')
                       $('#yd_cx1').css('color', '#f66618')
                       $('.ydh').css('display', 'block')
@@ -926,7 +903,6 @@ export default {
                   })
 
                   $('#yd_cx1').click(function() {
-                    console.log($('#yd_nr').val())
                     var num = $('#yd_nr').val()
                     if (num) {
                       window.open('/ydcx?num=' + num)
@@ -936,7 +912,6 @@ export default {
                     }
                   })
 
-                  //运单查询 E
                   //
                   var form = layui.form
                   form.render()
@@ -1007,7 +982,6 @@ export default {
   },
   methods: {
     searchCompanyName() {
-      // console.log(this.companyName, 'this.companyName')
       let vo = {}
       vo.locationCity =
         decodeURI(GetUrlParam('locationCity')) == 'null'
@@ -1022,7 +996,6 @@ export default {
         this.gsList.forEach(item => {
           item.num = (num % 30) + 1
         })
-        // console.log(res, 'res', this.gsList)
       })
     },
     initList() {
@@ -1031,19 +1004,16 @@ export default {
         this.pages = obj.pages
         this.gsList = obj.list
         this.currentPage = obj.currentPage
-        // console.log(res, this.vo, this.currentPage, this.pages)
         this.loadPagination()
       })
     },
     loadPagination() {
-      // console.log('objo566bjobj')
       $('#pagination1').pagination({
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
           $('#current1').text(current)
           let obj = await getGSList(this.$axios, current, this.vo)
-          // console.log(obj, 'objobjobj')
           this.gsList = obj.list
           this.pages = obj.pages
           this.currentPage = obj.currentPage
@@ -1061,7 +1031,6 @@ export default {
     callme() {
       this.addFn()
       this.types = 1
-      console.log(this.isAdd)
     },
     addFn() {
       this.isAdd = true
@@ -1092,6 +1061,9 @@ export default {
   }
   .clearfix:after {
     clear: both;
+  }
+  #test1 {
+    height: 260px !important;
   }
   .form_class {
     ul {
@@ -1158,24 +1130,8 @@ export default {
   .lll-line--othet {
     width: 1036px;
     display: inline-block;
-    /*.lll-recommend:first-of-type {*/
-    /*ul.footerLinks {*/
-    /*li {*/
-    /*width: 16.67%;*/
-    /*!* text-align: center; *!*/
-    /*overflow: hidden;*/
-    /*text-overflow: ellipsis;*/
-    /*white-space: nowrap;*/
-    /*}*/
-    /*}*/
-    /*}*/
   }
   .list-box-r-phone {
-    /*min-height: 246px;*/
-    /*height: auto !important;*/
-    /*width: 344px;*/
-    /*margin: 20px 0px 0 16px;*/
-    /*float: left;*/
     margin-top: 20px;
     background: url('/line/images/helpbg.png');
 
@@ -1231,7 +1187,6 @@ export default {
     padding-right: 5px;
     cursor: pointer;
   }
-  /*显示隐藏S */
   .toggle-btn {
     float: right;
     margin: 12px 15px 0 4px;
@@ -1285,8 +1240,6 @@ export default {
     height: 7px;
     cursor: pointer;
   }
-  /*显示隐藏E */
-  // 推荐企业
   .list_right {
     ul {
       .bg0,
@@ -1314,7 +1267,6 @@ export default {
       }
     }
   }
-  // 推荐企业
   .first_li {
     .company_address {
       ul#index_map1 {

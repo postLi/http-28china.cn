@@ -196,8 +196,51 @@ $('#order_02').click(function() {
   return
 })
 $('#order_03').click(function() {
-  layer.msg('功能正在开发中，敬请期待')
-  return
+  // layer.msg('功能正在开发中，敬请期待')
+  // return
+  var urlDev = 'http://127.0.0.1:8080/order1' //开发
+  var urlTest = 'http://192.168.1.157:8888/' //测试
+  var urlPro = 'http://biz.28china.cn/order1' //生产
+  var startjw = $('#zhidaFrom').attr('thepos') || ''
+  if (startjw) {
+    var startj = startjw.split(',', 2)[0]
+    var startw = startjw.split(',', 2)[1]
+  }
+  if (!startjw) {
+    var startj = ''
+    var startw = ''
+  }
+
+  var endjw = $('#zhidaTo').attr('thepos')
+  if (endjw) {
+    var endj = endjw.split(',', 2)[0]
+    var endw = endjw.split(',', 2)[1]
+  }
+  if (!endjw) {
+    var endj = ''
+    var endw = ''
+  }
+  var userdata = ''
+  if (
+    $.cookie('access_token') &&
+    JSON.parse(localStorage.getItem('28kuaiyunuserinfo')).registerOrigin ===
+      'AF0030106'
+  ) {
+    userdata = localStorage.getItem('28kuaiyunuserinfo')
+  }
+  window.open(
+    urlTest +
+      '?startj=' +
+      startj +
+      '&startw=' +
+      startw +
+      '&endj=' +
+      endj +
+      '&endw=' +
+      endw +
+      '&userdata=' +
+      userdata
+  )
 })
 //零担下单 E
 //运单查询 S

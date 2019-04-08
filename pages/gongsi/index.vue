@@ -177,8 +177,7 @@
       </div>
       <div
         class="header_links_r"
-        style="position: relative;margin-left: 20px;background: #fff;padding-left: 20px"
-      >
+        style="position: relative;margin-left: 20px;background: #fff;padding-left: 20px">
         <p
           style="font-size: 18px;color: #0d91e9;padding: 15px 0 40px 10px;font-weight: bold "
           class="header_links_r_search">运单查询</p>

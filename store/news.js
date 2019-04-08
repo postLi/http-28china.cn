@@ -23,7 +23,11 @@ export const state = () => ({
   gongsi_jryw: [],
   gongsi_wlzx: [],
   // 货源详情
-  huoyuan_wlzx: []
+  huoyuan_wlzx: [],
+  // 物流网点汇总页
+  wuliu_newest: [], // 最新动态
+  wuliu_hyzx: [], // 行业资讯
+  wuliu_ccyps: [] // 仓储与配送
 })
 
 export const mutations = {

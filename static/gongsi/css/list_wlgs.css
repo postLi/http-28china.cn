@@ -306,7 +306,7 @@ width: 342px;
   height: 420px
 }
 .header_list ul.first_ul .sec_li .bot a:nth-last-of-type(2){
-padding: 0 26px
+padding: 0 21px
 }
 .header_list ul.first_ul li.last_li{
   float: left;
@@ -315,7 +315,7 @@ padding: 0 26px
   height: 420px;
   background: #fff;
 
-}
+}s
 .header_list ul.first_ul .last_li .rem_bot_b_title{
   position: relative;
 }

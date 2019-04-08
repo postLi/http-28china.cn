@@ -14,32 +14,24 @@
       <div class="bot_pj">
         <ul class="pjul">
           <li>
-            <!-- <p>dfj</p> -->
-            <!-- <p>{{ linedataE.evaGoodRate }}%</p> -->
             <p><span
               :class="indexPl==3?'active':'unActive'"
               class="unActive"
               @click="showPingLunFn(3)"/>全部({{ pjNum.all || 0 }})</p>
           </li>
           <li>
-            <!-- <p>dfj</p> -->
-            <!-- <p>{{ linedataE.evaGoodRate }}%</p> -->
             <p><span
               :class="indexPl==0?'active':'unActive'"
               class="unActive"
               @click="showPingLunFn(0)"/>好评({{ pjNum.good || 0 }})</p>
           </li>
           <li>
-            <!-- <p>fkdf</p> -->
-            <!-- <p>{{ linedataE.evaMiddleRate }}%</p> -->
             <p><span
               :class="indexPl==1?'active':'unActive'"
               class="unActive"
               @click="showPingLunFn(1)"/>中评({{ pjNum.middle || 0 }})</p>
           </li>
           <li>
-            <!-- <p>df</p> -->
-            <!-- <p>{{ linedataE.evaBadCount }}%</p> -->
             <p><span
               :class="indexPl==2?'active':'unActive'"
               class="unActive"
@@ -82,7 +74,6 @@
             </li>
           </ul>
         </div>
-        <!--分页-->
         <div
           
           class="box"
@@ -92,12 +83,8 @@
             v-else
             id="pagination1"
             class="page fl"/>
-          <div class="info fl">
-            
-          <!-- <p>当前页数：<span id="current1">1</span></p> -->
-          </div>
+          <div class="info fl"/>
         </div>
-        <!--分页-->
       </div>
     </div>
     <div slot="footer"/>
@@ -125,7 +112,6 @@ async function getpjLists($axios, currentPage, vo = {}, query, assessLevel) {
   } else {
     return { list: [], pages: 0, currentPage: 1 }
   }
-  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
 }
 async function getpjNum($axios, query) {
   let res = await $axios.get(
@@ -136,13 +122,10 @@ async function getpjNum($axios, query) {
   if (res.data.status === 200) {
     return {
       data: res.data.data
-      // pages: res.data.data.pages,
-      // currentPage: res.data.data.pageNum
     }
   } else {
     return { list: [], pages: 0, currentPage: 1 }
   }
-  // console.log(typeof list, 'list', '/28-web/rangeEva/range/list')
 }
 export default {
   name: 'Add',
@@ -171,20 +154,15 @@ export default {
       default: () => {}
     }
   },
-  async asyncData({ $axios, app, query, error }) {},
+
   head: {
     link: [
       { rel: 'stylesheet', href: '/line/css/article_wlzx.css' },
       { rel: 'stylesheet', href: '/line/css/price.css' },
-      // { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' },
       { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
     ],
-    script: [
-      // { src: '../js/jquery.pagination.min.js' },
-
-      { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
-    ]
+    script: [{ src: 'https://echarts.baidu.com/dist/echarts.min.js' }]
   },
   data() {
     return {
@@ -192,10 +170,8 @@ export default {
       indexPl: 3,
       list: [],
       pjNum: {},
-      pages: 0, //总页数
-      currentPage: 1, //当前页
-      // isShow: this.show,
-      // popTitle: '提货派车单',
+      pages: 0,
+      currentPage: 1,
       falseMsg: '',
       form: {
         companyName: '',
@@ -218,8 +194,6 @@ export default {
   watch: {
     async showDiv(n) {
       if (n == true) {
-        // let vo
-        // this.indexPl = 3
         let obj = await getpjLists(
           this.$axios,
           1,
@@ -232,16 +206,12 @@ export default {
         this.currentPage = obj.currentPage
         this.loadPagination()
 
-        //总数
         let _data = await getpjNum(this.$axios, this.$route.query)
         this.pjNum = _data.data
-        //
       }
     },
     types(n, o) {},
-    info(n, o) {
-      console.log(n, 'nnn1')
-    }
+    info(n, o) {}
   },
   mounted() {},
   methods: {
@@ -267,8 +237,6 @@ export default {
     },
     showPingLunFn(index) {
       let assessLevel = ''
-
-      // console.log(index, 'index')
       if (index == 0) {
         assessLevel = 'AF0360101'
       } else if (index == 1) {
@@ -280,28 +248,18 @@ export default {
       }
       this.indexPl = index
       this.assessLevel = assessLevel
-      // let vo
-
-      // vo.assessLevel = assessLevel
       getpjLists(this.$axios, 1, this.vo, this.$route.query, assessLevel).then(
         res => {
           let obj = res
           this.pages = obj.pages
           this.list = obj.list
           this.currentPage = obj.currentPage
-          // console.log(res, 'this.res')
           this.loadPagination()
         }
       )
     },
     closeDialog() {
-      // this.vo = {}
       this.$emit('close')
-
-      // this.ismobile = false
-      // this.$emit('update:show', false)
-
-      //把绑定的弹窗数组 设为false即可关闭弹窗
     }
   }
 }
@@ -312,7 +270,6 @@ export default {
   .dialog-content {
     width: 900px !important;
     height: 900px !important;
-    // top: 30% !important;
     .bot_pj {
       margin-left: 80px;
       margin-bottom: 50px;

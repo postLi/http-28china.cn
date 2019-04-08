@@ -19,7 +19,8 @@
       provinceCode: '',
       registerOrigin: 'AF0030103',
       registerType: '1',
-      smsCode: ''
+      smsCode: '',
+      isOpenLgc: '0' // 是否开通物流公司,0:否；1：是
     },
     showStep: function(index) {
       $('.step-next>div')
@@ -366,6 +367,12 @@
       $('.registiter-page .step-next1 .next-btn').on('click', function() {
         //if(reg_page.reg_data.)
         if (reg_page.reg_data.memberType) {
+          // 显示是否开通物流公司
+          if (reg_page.reg_data.memberType === 'AF00101') {
+            $('.isOpenLgc').show()
+          } else {
+            $('.isOpenLgc').hide()
+          }
           reg_page.showStep(1)
         } else {
           layer.alert('请选择会员类型')
@@ -376,6 +383,7 @@
           .validate()
           .done(function(res) {
             console.log('check success:', res)
+            reg_page.reg_data.isOpenLgc = $('[name="isOpenLgc"]:checked').val()
             reg_page.doRegisiter()
           })
           .fail(function(err) {

@@ -966,10 +966,12 @@ input:-webkit-autofill {
 .radioinput{
   margin-left: 143px;
 }
-.registiter-page .step_2 .form .radioinput input {
+.registiter-page .step_2 .form .radioinput input , .registiter-page .step_2 .form .isOpenLgc input{
   width: auto;
   margin-right: 10px;
   margin-top: 2px;
+  float: none;
+  vertical-align: middle;
 }
 
 .registiter-page .step_3 .success-text {

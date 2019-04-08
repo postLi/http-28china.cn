@@ -421,7 +421,6 @@
     </div>
   </div>
 </template>
-
 <script>
 async function getListRangesAging($axios, currentPage, vo = {}) {
   let list, totalPage

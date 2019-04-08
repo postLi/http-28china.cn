@@ -62,6 +62,7 @@ const _5dcf82aa = () => interopDefault(import('..\\pages\\zhuanxian\\detail.vue'
 const _51f92896 = () => interopDefault(import('..\\pages\\zhuanxian\\detail1.vue' /* webpackChunkName: "pages_zhuanxian_detail1" */))
 const _1810a780 = () => interopDefault(import('..\\pages\\zhuanxian\\huizong.vue' /* webpackChunkName: "pages_zhuanxian_huizong" */))
 const _37ea10f8 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
+const _6e040ef8 = () => interopDefault(import('..\\pages\\zhuanxian\\lllshowEchart.vue' /* webpackChunkName: "pages_zhuanxian_lllshowEchart" */))
 const _7da25454 = () => interopDefault(import('..\\pages\\zhuanxian\\selectMap.vue' /* webpackChunkName: "pages_zhuanxian_selectMap" */))
 const _421afed0 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart.vue' /* webpackChunkName: "pages_zhuanxian_showEchart" */))
 const _817b353c = () => interopDefault(import('..\\pages\\zhuanxian\\showPrice.vue' /* webpackChunkName: "pages_zhuanxian_showPrice" */))
@@ -407,6 +408,10 @@ export function createRouter() {
       path: "/zhuanxian/list",
       component: _37ea10f8,
       name: "zhuanxian-list"
+    }, {
+      path: "/zhuanxian/lllshowEchart",
+      component: _6e040ef8,
+      name: "zhuanxian-lllshowEchart"
     }, {
       path: "/zhuanxian/selectMap",
       component: _7da25454,

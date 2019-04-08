@@ -203,9 +203,11 @@
           <div 
             v-if="showLinst && listRangesAging.length != 0"
             class="list_line">
-            <div class="zx_sx"><span class="biaozhi"/><span >为您精选20条优质专线</span><div class="more floatr"><a 
-              :href="'/zhuanxian/list?startp='+ vo.startProvince+'&startc='+vo.startCity" 
-              target="_blank">更多专线&gt;</a></div></div>
+            <div class="zx_sx"><span class="biaozhi"/><span >为您精选20条优质专线</span>
+              <div class="more floatr"><a 
+                :href="'/zhuanxian/list?startp='+ vo.startProvince+'&startc='+vo.startCity" 
+                target="_blank">更多专线&gt;</a></div>
+            </div>
             <div class="list_tiaoj">
               <span 
                 v-for="(item,index) in sortList" 

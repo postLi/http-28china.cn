@@ -10,7 +10,7 @@
         <div
           class="w1036"
           style=" background-color: #fff;margin-bottom: 20px;">
-          <div
+          <!-- <div
             class="zx_sx"
             style="border-bottom: 2px solid #2577e3"><span class="biaozhi"/><span>网点筛选</span>
             <a
@@ -23,7 +23,7 @@
                 <span>收起筛选</span><span class="arrow icon-btn-arrow-up-2"/>
               </span>
             </a>
-          </div>
+          </div> -->
           <div class="select_con">
             <dl>
               <dt>所在地&nbsp;：</dt>
@@ -68,7 +68,29 @@
                     type="text"
                     placeholder="请输入详细地址查附近网点" >
                 </div>
-                <input
+                <div 
+                  
+                style="float:left;position:relative;font-size:14px;" >
+                  关键字：
+                  <input
+                    id="companyName"
+                    v-model="companyName"
+                    name="cfd"
+                    type="text"
+                    class="list_input"
+                    placeholder="公司/网点名称/地址/电话" >
+                </div>
+                <!-- <dt>关键词&nbsp;:</dt>
+                <dd >
+                  <input
+                    id="companyName"
+                    v-model="companyName"
+                    name="cfd"
+                    type="text"
+                    class="list_input"
+                    placeholder="公司/网点名称/地址/电话" >
+                </dd> -->
+                <!-- <input
                   id="search_wangdian"
                   name="Submit2"
                   readonly=""
@@ -80,7 +102,7 @@
                   name="Submit2"
                   readonly=""
                   value="重置 "
-                  @click="reload()">
+                  @click="reload()"> -->
                 
               </form>
                 <br>
@@ -179,32 +201,50 @@
                   </div>
                 </div>
               </dd>
-              <dt>品牌&nbsp;:</dt>
-
-              <dd id="tjcx_02" >
-                <selectType
-                  name="AF029"
-                  :code="vo.belongBrandCode" />
-                <br>
+              <div class="showbox">
+                <dt>品牌&nbsp;:</dt>
+                <dd id="tjcx_02" >
+                  <a
+                    v-for="(item,index) in AF029"
+                    :class="[item.code === vo.belongBrandCode ? 'now':'all']"
+                    :key="index"
+                    href="javascript:"
+                    @click="AF029Click(item)">{{ item.name }}</a>
+                </dd>
+                <dt >其他&nbsp;:</dt>
+                <dd id="tjcx_03">
+                  <a
+                    v-for="(item,index) in AF025"
+                    :class="[item.code === vo.otherServiceCode ? 'now':'all']"
+                    :key="index"
+                    href="javascript:"
+                    @click="AF025Click(item)">{{ item.name }}</a>
+                </dd>
+              </div>
+              <dd id="tjcx_04">
+                <input
+                  id="search_wangdian"
+                  name="Submit2"
+                  readonly=""
+                  value=" 搜索 "
+                  class="list_button"
+                  @click="search()">
+                <input
+                  id="flush"
+                  name="Submit2"
+                  readonly=""
+                  value="重置 "
+                  @click="reload()">
                 <a
-                  v-for="(item,index) in AF029"
-                  :class="[item.code === vo.belongBrandCode ? 'now':'all']"
-                  :key="index"
-                  href="javascript:"
-                  @click="AF029Click(item)">{{ item.name }}</a>
-              </dd>
-              <dt >其他&nbsp;:</dt>
-              <dd id="tjcx_03">
-                <selectType
-                  name="AF025"
-                  :code="vo.otherServiceCode" />
-                <br>
-                <a
-                  v-for="(item,index) in AF025"
-                  :class="[item.code === vo.otherServiceCode ? 'now':'all']"
-                  :key="index"
-                  href="javascript:"
-                  @click="AF025Click(item)">{{ item.name }}</a>
+                  class="toggle-btn show-collapse"
+                  href="#">
+                  <span class="expand">
+                    <span>显示筛选</span><span class="arrow icon-btn-arrow-down-2"/>
+                  </span>
+                  <span class="collapse">
+                    <span>收起筛选</span><span class="arrow icon-btn-arrow-up-2"/>
+                  </span>
+                </a>
               </dd>
             </dl>
           </div>
@@ -212,13 +252,20 @@
         <div
           id="js002"
           class="w1036" >
-          <div class="zx_sx"><span class="biaozhi"/><span id="wangdian_list">网点列表</span></div>
-          <div class="list_tiaoj"><span
-            id="seq1"
-            class="active">综合排序</span>
+          <!-- <div class="zx_sx"><span class="biaozhi"/><span id="wangdian_list">网点列表</span></div> -->
+          <div class="list_tiaoj">
+            <span
+              id="seq1"
+              class="active">综合排序</span>
             <span
               id="seq2"
               title="距离从近到远">距离最近</span>
+            <!-- <div class="more floatr"><a 
+              :href="'/zhuanxian/list?startp='+ vo.startProvince+'&startc='+vo.startCity" 
+              target="_blank">更多专线&gt;</a></div> -->
+            <div class="wzlwad">
+              <span>在广东省广州市共找到34231个网点</span>
+            </div>
           </div>
 
           <div
@@ -532,12 +579,14 @@ export default {
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
-      $('.select_con').css('display', 'none')
+      // $('.select_con').css('display', 'none')
+      $('.showbox').hide()
     })
     $('.expand').click(function() {
       $('.collapse').css('display', 'inline-block')
       $('.expand').css('display', 'none')
-      $('.select_con').css('display', 'block')
+      // $('.select_con').css('display', 'block')
+      $('.showbox').show()
     })
     let _this = this
     $('#select_wlyq').mousedown(function() {
@@ -691,6 +740,15 @@ export default {
 #tjcx_03 span > a {
   margin-right: 10px;
 }
+#tjcx_04 {
+  text-align: center;
+}
+.showbox {
+  float: left;
+}
+#tjcx_04:hover a {
+  background: none !important;
+}
 .lll-wangdian {
   .list_button {
     width: 42px;
@@ -708,11 +766,13 @@ export default {
     border: none;
   }
   .toggle-btn {
-    float: right;
-    margin: 12px 15px 0 4px;
+    // float: right;
+    margin: 12px 150px 0 4px;
     height: 24px;
     line-height: 24px;
-    border: solid 1px #e8e8e8;
+    // border: solid 1px #e8e8e8;
+    font-size: 14px;
+
     padding: 0 9px;
     background: #fff;
     color: #6b6b6b;
@@ -720,7 +780,9 @@ export default {
     text-decoration: none;
     font: 12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
   }
-
+  .toggle-btn span {
+    font-weight: bold;
+  }
   .show-collapse .expand {
     display: none;
     margin-top: 2px;

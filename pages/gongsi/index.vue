@@ -326,10 +326,7 @@
               class="page fl"/>
             <div class="info fl"/>
           </div>
-          <div
-
-
-          class="lll-line--othet">
+          <div class="lll-line--othet">
             <div class="lll-recommend clearfix">
               <div
                 class="zx_sx1"
@@ -395,12 +392,76 @@
           <HotList
             :lines="lineHots"
             :gongsi="true"/>
-          <ComNews
-            :info="gongsi_jryw"
-            :infoyw="gongsi_jryw01"
-            :infos="gongsi_wlzx"
-            :infosyw="gongsi_wlzx01"/>
-           
+
+          <div class="list-box-r-news">
+            <div
+              v-if="gongsi_jryw01"
+              style="margin-top: 10px;"
+              class="today_news"><div
+                class="zx_sx"
+                style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a
+                  href="/zixun/"
+                  style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+                  target="_blank"
+              >更多>></a></div>
+              <div style="padding: 0 20px 10px 10px;background:#fff">
+                <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_jryw01.title }}
+                </p>
+                <div style="display: flex"><img
+                  style="width: 120px;height: 98px;display: inline-block;"
+                  width="120"
+                  height="98"
+                  :src="gongsi_jryw01.typeImg||'/gongsi/images/u1075.png'"
+                  alt=""><span style="padding-left: 5px">{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
+                    :href="gongsi_jryw01.url"
+                    style="color: #0d91e9">[详细]</a></span>
+                </div>
+
+                <ul>
+                  <li
+                    v-for="(item, i) in gongsi_jryw"
+                    :key="i"
+                    style="padding-top: 15px"><a
+                      :href="item.url"
+                      target="_blank">{{ item.title }}</a>
+
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div
+              v-if="gongsi_wlzx01"
+              class="wuliu_news"
+              style="margin-top: 10px;">
+              <div
+                class="zx_sx"
+                style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">物流资讯</span><a
+                  href="/zixun/"
+                  style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+                  target="_blank">更多>></a></div>
+              <div style="padding: 0 20px 10px 10px;background:#fff">
+                <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_wlzx01.title }}
+                </p>
+                <div style="display: flex"><img
+                  width="120"
+                  height="98"
+                  :src="gongsi_wlzx01.typeImg||'/gongsi/images/u1075.png'"
+                  alt=""><span style="padding-left: 5px">{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
+                    :href="gongsi_wlzx01.url"
+                    style="color: #0d91e9">[详细]</a></span></div>
+                <ul>
+                  <li
+                    v-for="(item, i) in gongsi_wlzx"
+                    :key="i"
+                    style="padding-top: 15px"><a
+                      :href="item.url"
+                      target="_blank">{{ item.title }}</a>
+
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -429,7 +490,6 @@
 <script>
 import DetailList from '../../components/detailList'
 import HotList from '../../components/hotList'
-import ComNews from '../../components/comNews'
 import selectMap from '../zhuanxian/selectMap'
 import FooterLinks from '../../components/footerLinks'
 import Add from './add'
@@ -459,7 +519,6 @@ export default {
     selectMap,
     FooterLinks,
     Add,
-    ComNews,
     // OrderSerch,
     HotList
   },

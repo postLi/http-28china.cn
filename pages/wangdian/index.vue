@@ -10,20 +10,6 @@
         <div
           class="w1036"
           style=" background-color: #fff;margin-bottom: 20px;">
-          <!-- <div
-            class="zx_sx"
-            style="border-bottom: 2px solid #2577e3"><span class="biaozhi"/><span>网点筛选</span>
-            <a
-              class="toggle-btn show-collapse"
-              href="#">
-              <span class="expand">
-                <span>显示筛选</span><span class="arrow icon-btn-arrow-down-2"/>
-              </span>
-              <span class="collapse">
-                <span>收起筛选</span><span class="arrow icon-btn-arrow-up-2"/>
-              </span>
-            </a>
-          </div> -->
           <div class="select_con">
             <dl>
               <dt>所在地：</dt>
@@ -73,68 +59,16 @@
                 style="float:left;position:relative;font-size:14px;" >
                   关键字：
                   <input
-                    id="companyName"
-                    v-model="companyName"
+                    v-model="keyword"
                     name="cfd"
                     type="text"
                     class="list_input"
                     placeholder="公司/网点名称/地址/电话" >
                 </div>
-                <!-- <dt>关键词&nbsp;:</dt>
-                <dd >
-                  <input
-                    id="companyName"
-                    v-model="companyName"
-                    name="cfd"
-                    type="text"
-                    class="list_input"
-                    placeholder="公司/网点名称/地址/电话" >
-                </dd> -->
-                <!-- <input
-                  id="search_wangdian"
-                  name="Submit2"
-                  readonly=""
-                  value=" 搜索 "
-                  class="list_button"
-                  @click="search()">
-                <input
-                  id="flush"
-                  name="Submit2"
-                  readonly=""
-                  value="重置 "
-                  @click="reload()"> -->
-                
               </form>
                 <br>
-                <!-- 出发地
-                <div class="order-line-from clearfix">
-                  <div class="order-form-item">
-                    <div class="order-form-label"><span class="required">*</span>出发地：</div>
-                    <div class="order-form-input" >
-                      <input 
-                        id="start_position" 
-                        wtmap="" 
-                        maxlength="40" 
-                        type="text" 
-                        placeholder="请选择 省-市-县">
-                    </div>
-                  </div>
-                  <div class="order-form-item form-detail">
-                    <div class="order-form-label">街道/门牌号：</div>
-                    <div class="order-form-input">
-                      <input 
-                        wtmapinit="" 
-                        wtmap="{township}{street}{building}" 
-                        maxlength="40" 
-                        type="text" 
-                        placeholder="请填写详细地址">
-                    </div>
-                  </div>
-                </div> -->
-
-
               </dd>
-              <dt>公司名称&nbsp;:</dt>
+              <!-- <dt>公司名称&nbsp;:</dt>
               <dd >
                 <input
                   id="companyName"
@@ -143,7 +77,7 @@
                   type="text"
                   class="list_input"
                   placeholder="请输入公司或网点名称" >
-              </dd>
+              </dd> -->
               <dt>所属园区:</dt>
 
               <dd
@@ -264,12 +198,12 @@
               <span class="icon active">
                 <img 
                   style="width:25px;float:left;margin:8px;" 
-                  src="wd/images/mue.png">
+                  src="/wd/images/mue.png">
               </span>
               <span class="icon">
                 <img 
                   style="width:25px;float:left;margin:8px;"
-                  src="wd/images/map.png">
+                  src="/wd/images/map.png">
               </span>
               <span class="city">在{{ vo.startProvince + '-' + vo.startCity }}共找到<strong>{{ total }}</strong>个网点</span>
             </div>
@@ -348,45 +282,47 @@
             class="page fl"/>
           <div class="info fl"/>
         </div>
+        <!-- gongsi -->
+        <div class="header_links_l">
+          <ul>
+            <li
+              v-for="(item, index) in lineAdviseRecommend.slice(0,8)"
+              :key="index"
+              style="float:left;width: 260px;height:97px;text-align: center;"><a
+                target="_blank"
+                :href="'/member/'+ item.id">
+                <p style="font-size: 16px;color: #2577e3;padding-top: 20px;">{{ item.companyName.length>12?item.companyName.substring(0,12)+'..':item.companyName }}</p>
+
+                <p
+                  v-if="item.advService.length"
+                  style="padding: 10px 0 10px;font-size: 13px;color:#666"
+                ><span
+                  v-for="(item, index) in (item.advService?item.advService.slice(0,2):'')"
+                  :key="index"
+                  style="padding-right:10px;color: #666;font-size: 13px;">{{ item }}</span></p>
+
+            </a></li>
+          </ul>
+        </div>
+        <!-- footer -->
+        <div class="lll-line--othet">
+          <div class="lll-recommend clearfix">
+            <div
+              class="zx_sx1"
+            ><span class="biaozhi"/><span class="zx_sxl_tit">{{ lineLinks.brandRecommend.label }}</span></div>
+            <FooterLinks :info="lineLinks.brandRecommend.links"/>
+          </div>
+        </div>
+        <div class="lll-recommend clearfix">
+          <div
+            class="zx_sx"
+            style="border-color: #e7e7e7"
+          ><span class="biaozhi"/><span>{{ lineLinks.interestedRecommend.label }}</span></div>
+          <FooterLinks
+            :info="lineLinks.interestedRecommend.links"
+            :types="types"/>
+        </div>
       </div>
-      <!-- <div
-        id="js007"
-        class="list_right">
-
-        <div class="zx_sx"><span class="biaozhi"/><span>物流公司推荐</span></div>
-        <div
-          v-if="recommendList.length === 0"
-          class="tj_none" >
-          <span>没有相关物流公司推荐</span>
-        </div>
-        <div
-          v-for="(item,index) in recommendList"
-          :key="index"
-          class="tj_list"
-        >
-          <p class="p1"><a
-            id="tj010"
-            :href="'/member/'+ item.id"
-            target="_blank"><span id="tj_01">{{ item.companyName }}</span></a></p>
-
-          <p class="p7">
-            <creditIcon :credit="item.credit" />
-          </p>
-
-          <p class="p3"><i>联系人：</i><font id="tj_02">{{ item.contactsName }}</font></p>
-          <p class="p4"><i>电话：</i><font id="tj_03">{{ item.contactsTel ? item.contactsTel + '-' : '' }}{{ item.mobile }}</font></p>
-          <p class="p5"><i>地址：</i><font
-            id="tj_04"
-            class="">{{ item.address }}</font></p>
-          <p class="p6">
-            <a
-              id="tj_05"
-              :href="'/member/'+ item.id"
-              target="_blank"><span>查看&nbsp;&gt;</span></a>
-          </p>
-        </div>
-
-      </div> -->
       <div class="list_right">
         <div class="last_li">
           <div class="btn_top">
@@ -525,7 +461,7 @@
         <div class="remqy">
           <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
             <i
-              style="color: rgb(255,116,23);float: right;font-size: 15px;cursor: pointer;padding-right:5px"
+              style="color: #EE8C18;float: right;font-size: 15px;cursor: pointer;padding-right:5px;text-decoration:underline;"
               @click="findMe">我也想出现在这里</i>
           </div>
           <div
@@ -564,76 +500,6 @@
             </li>
           </ul>
         </div>
-        <!-- 资讯 -->
-        <!-- <div class="list-box-r-news">
-          <div
-            v-if="gongsi_jryw01"
-            style="margin-top: 10px;"
-            class="today_news"><div
-              class="zx_sx"
-              style="width:100%;border-bottom: 1px solid #ccc;float:left"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a
-                href="/zixun/"
-                style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
-                target="_blank"
-            >更多>></a></div>
-            <div style="padding:10px;background:#fff">
-              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_jryw01.title }}
-              </p>
-              <div style="display: flex"><img
-                style="width: 120px;height: 98px;display: inline-block;"
-                width="120"
-                height="98"
-                :src="gongsi_jryw01.typeImg||'/gongsi/images/u1075.png'"
-                alt=""><span style="padding-left: 5px">{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
-                  :href="gongsi_jryw01.url"
-                  style="color: #0d91e9">[详细]</a></span>
-              </div>
-
-              <ul>
-                <li
-                  v-for="(item, i) in gongsi_jryw"
-                  :key="i"
-                  style="padding-top: 15px"><a
-                    :href="item.url"
-                    target="_blank">{{ item.title }}</a>
-
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div
-            v-if="gongsi_wlzx01"
-            class="wuliu_news"
-            style="margin-top: 10px;float:left;width:100%">
-            <div
-              class="zx_sx"
-              style="width:100%;float:left;border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">物流资讯</span><a
-                href="/zixun/"
-                style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
-                target="_blank">更多>></a></div>
-            <div style="padding: 0 20px 10px 10px;background:#fff">
-              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_wlzx01.title }}
-              </p>
-              <div style="display: flex;float:left"><img
-                width="120"
-                height="98"
-                :src="gongsi_wlzx01.typeImg||'/gongsi/images/u1075.png'"
-                alt=""><span style="padding-left: 5px">{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
-                  :href="gongsi_wlzx01.url"
-                  style="color: #0d91e9">[详细]</a></span></div>
-              <ul>
-                <li
-                  v-for="(item, i) in gongsi_wlzx"
-                  :key="i"
-                  style="padding-top: 15px"><a
-                    :href="item.url"
-                    target="_blank">{{ item.title }}</a>
-
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div> -->
         <ComNews
           :info="gongsi_jryw"
           :infoyw="gongsi_jryw01"
@@ -642,13 +508,18 @@
       </div>
     </div>
 
-
+    <Add
+      :show = "isAdd"
+      :types="types"
+      @close="noaddFn"/>
     <div class="h70"/>
   </div>
 </template>
 
 <script>
 import ComNews from '../../components/comNews'
+import Add from '../gongsi/add'
+import FooterLinks from '../../components/footerLinks'
 async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
   if (res.data.status === 200) {
@@ -712,12 +583,15 @@ export default {
     link: [
       { rel: 'stylesheet', href: '/css/wangdian.css' },
       { rel: 'stylesheet', href: '/css/jquery.pagination.css' },
-      { rel: 'stylesheet', href: '/css/WTMap.css' }
+      { rel: 'stylesheet', href: '/css/WTMap.css' },
+      { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
     ],
     script: [{ src: '/js/jquery.pagination.min.js' }, { src: 'layer/layer.js' }]
   },
   components: {
-    ComNews
+    ComNews,
+    Add,
+    FooterLinks
   },
   data() {
     return {
@@ -731,6 +605,8 @@ export default {
       wangdianInfoList: [],
       totalPage: 1,
       currentPage: 1,
+      isAdd: false,
+      types: 0,
       parkName: '',
       startProvince: '',
       startCity: '',
@@ -738,7 +614,8 @@ export default {
       endProvince: '',
       endCity: '',
       endArea: '',
-      companyName: ''
+      companyName: '',
+      keyword: ''
     }
   },
   async asyncData({ $axios, app, query, error }) {
@@ -760,6 +637,7 @@ export default {
       otherServiceCode: query.otherServiceCode ? query.otherServiceCode : '',
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
       companyName: query.companyName ? query.companyName : '',
+      keyword: query.keyword ? query.keyword : '',
       latitude: pos[1],
       longitude: pos[0],
       parkId: query.parkId || ''
@@ -769,6 +647,18 @@ export default {
     vo.area = vo.startArea
     let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
+    let listC = await $axios.post(
+      `/28-web/logisticsCompany/list/related/links`,
+      vo
+    )
+    let listD = await $axios.get(`/28-web/logisticsCompany/adviseRecommend`)
+    if (listD.data.status == 200) {
+      listD.data.data.forEach(item => {
+        item.advService = item.productServiceNameList
+          ? item.productServiceNameList
+          : item.otherServiceNameList
+      })
+    }
     let listE = await $axios.get(
       `/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
     )
@@ -777,7 +667,6 @@ export default {
         item.advService = item.productServiceNameList
           ? item.productServiceNameList
           : item.otherServiceNameList
-        // console.log(item.advService.slice(3), 'bbbb')
       })
     }
     let listG = await $axios.get(`/28-web/logisticsCompany/enterpriseRecommend`)
@@ -855,6 +744,8 @@ export default {
         AF025: AF025.data.status === 200 ? AF025.data.data : [],
         listE: listE.data.status == 200 ? listE.data.data : [],
         listG: listG.data.status == 200 ? listG.data.data : [],
+        lineLinks: listC.data.status == 200 ? listC.data.data : [],
+        lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : [],
         logisticsPark: logisticsPark,
         WangdiangInfoList: WangdiangInfoList.list,
         total: WangdiangInfoList.total,
@@ -878,7 +769,6 @@ export default {
       },
       name: 'gongsi_jryw',
       preFn: data => {
-        // console.log(data, 'datadfdf')
         return data.map((el, index) => {
           el.url = el.url.replace(
             /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
@@ -922,12 +812,6 @@ export default {
     gongsi_wlzx01() {
       return this.$store.state.news.gongsi_wlzx[0]
     }
-    // getgsListFn() {
-    //   return this.gsList.slice(0, 10)
-    // },
-    // getgsListsFn() {
-    //   return this.gsList.slice(10)
-    // }
   },
   mounted() {
     seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
@@ -1155,8 +1039,8 @@ export default {
       let address = $('#addressTo input').val() || ''
       window.location.href = `/wangdian/?&belongBrandCode=${
         this.vo.belongBrandCode
-      }&otherServiceCode=${this.vo.otherServiceCode}&companyName=${
-        this.companyName
+      }&otherServiceCode=${this.vo.otherServiceCode}&keyword=${
+        this.keyword
       }&parkName=${this.parkName}&endArea=${this.endArea}&endCity=${
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
@@ -1219,7 +1103,6 @@ export default {
           this.totalPage = hyList.pages
           this.current = hyList.current
           this.WangdiangInfoList = hyList.list
-          // window.location.href = '#top'
         }
       })
     },
@@ -1249,6 +1132,63 @@ export default {
   height: 95px;
 }
 .wzlwangdian {
+  .lll-line--othet {
+    display: inline-block;
+  }
+  .lll-recommend {
+    transition: all 0.4s;
+    background: #fff;
+    padding-bottom: 15px;
+    .zx_sx {
+      border-bottom: 1px solid #e7e7e7;
+      padding-top: 20px;
+    }
+  }
+  .zx_sx1 {
+    border-bottom: 1px solid #e7e7e7;
+    line-height: 50px;
+    font-size: 18px;
+    font-weight: bold;
+    .biaozhi {
+      width: 3px;
+      height: 18px;
+      background-color: #3f94ee;
+      border-radius: 1px;
+      margin: 16px 12px 0px 10px;
+      float: left;
+    }
+    .zx_sxl_tit {
+      color: #3f94ee;
+    }
+  }
+  .header_links_l ul {
+    float: left;
+    li {
+      margin-right: 13px;
+      background: url('../../static/gongsi/images/05bg.png');
+      margin-bottom: 15px;
+      box-sizing: border-box;
+    }
+  }
+  .header_links_l ul li:nth-child(4) {
+    margin-right: 0;
+  }
+  .header_links_l ul li:nth-child(8) {
+    margin-right: 0;
+  }
+  .list-box-r-top {
+    #form0 {
+      .city-picker-dropdown {
+        left: -45px !important;
+      }
+    }
+    #form1 {
+      .city-picker-dropdown {
+        left: -45px !important;
+      }
+    }
+  }
+
   .list_button {
     width: 42px;
     height: 28px;
@@ -1265,11 +1205,9 @@ export default {
     border: none;
   }
   .toggle-btn {
-    // float: right;
     margin: 12px 150px 0 4px;
     height: 24px;
     line-height: 24px;
-    // border: solid 1px #e8e8e8;
     font-size: 14px;
 
     padding: 0 9px;

@@ -116,6 +116,20 @@
                 <div class="getcode-btn">获取短信验证码</div>
                 <div class="tip"/>
               </li>
+              <li class="isOpenLgc">
+                <span class="label">是否开通物流公司</span>
+                <label><input 
+                  autocomplete="off" 
+                  name="isOpenLgc" 
+                  value="1"
+                  type="radio">开通</label>
+                <label><input 
+                  autocomplete="off" 
+                  name="isOpenLgc"
+                  value="0"
+                  checked 
+                  type="radio">不开通</label>
+              </li>
               <li class="radioinput">
                 <span class="label">&nbsp;</span><label><input 
                   autocomplete="off" 
@@ -179,43 +193,6 @@
       
       </div>
     </div>
-    <div 
-      class="hidediv" 
-      style="width:0;height:0;overflow: hidden;">
-      <form 
-        id="form1" 
-        name="form1" 
-        method="POST" 
-        action="index_do.php">
-        <input 
-          autocomplete="off" 
-          type="hidden" 
-          name="fmdo" 
-          value="login">
-        <input 
-          autocomplete="off" 
-          type="hidden" 
-          name="dopost" 
-          value="login">
-        <input 
-          autocomplete="off" 
-          type="hidden" 
-          name="gourl" 
-          value="">
-        <input 
-          id="usermobile" 
-          autocomplete="off" 
-          type="text" 
-          name="userid" 
-          placeholder="请输入您的手机号">
-        <input 
-          id="userpwd" 
-          autocomplete="off" 
-          type="password" 
-          name="pwd" 
-          placeholder="请输入您的密码">
-      </form>
-    </div>
 
   </div>
 
@@ -239,7 +216,7 @@ export default {
   mounted() {
     if (process.client) {
       window.seajs.use(['layer', 'api'], function() {
-        seajs.use(['./js/regisiter.js?v2'])
+        seajs.use(['./js/regisiter.js?v3'])
       })
     }
   }

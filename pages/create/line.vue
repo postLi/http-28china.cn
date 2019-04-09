@@ -147,10 +147,18 @@
                 </div>
               </li>
             </ul>
-            <div class="order3"/>
+            <!-- <div class="order3"/> -->
             <div class="order-company-list">
               <div class="order-form-label">重货价格：<span class="required">(阶梯价格最大值不填，代表无穷大，例如：500-，代表500公斤以上)</span></div>
               <div class="todoTable">
+                <span 
+                  class="addbox add1"
+                  @click="cargoAdd()"
+                >+</span>
+                <span 
+                  class="delete"
+                  @click="cargoDelete()"
+                  v-if="heavyList.length>1">-</span>             
                 <table class="table1">
                   <thead>
                     <tr>
@@ -166,19 +174,36 @@
                     </tr>
                   </thead>
                   <tbody class="nocompany box1">
-                    <tr class="box1_list">
+                    <tr 
+                      class="box1_list"
+                      v-for="(item, index) in heavyList" 
+                      :key="index">
                       <td colspan="2">
-                        <div class="inputbox">
+                        <div class="inputbox">              
                           <input 
                             maxlength="40" 
                             type="number" 
-                            class="volume"><label>------</label>
-                          <input 
-                            maxlength="40" 
-                            type="number" 
-                            class="volumeEnd" 
-                            value=""
-                            @change="tableChange('.table1 tbody  tr')">><label>元/公斤</label>
+                            class="volume"
+                            disabled
+                            v-model="item.startVolume">                                       
+                          <label>------</label>
+                          <label v-if="index===0">                      
+                            <input 
+                              maxlength="40" 
+                              type="number" 
+                              class="volumeEnd" 
+                              v-model="item.endVolume"
+                              @change="cargoChange()"
+                            >
+                          </label>
+                          <label v-else>                      
+                            <input 
+                              maxlength="40" 
+                              type="number" 
+                              class="volumeEnd" 
+                              v-model="item.endVolume">
+                          </label>
+                          <label>元/公斤</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -186,7 +211,9 @@
                           <input 
                             maxlength="40" 
                             type="number" 
-                            class="origina"><label>元/公斤</label>
+                            class="origina"
+                            v-model="item.primeryPrice">
+                          <label>元/公斤</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -194,19 +221,12 @@
                           <input 
                             maxlength="40" 
                             type="number" 
-                            class="discount"><label>元/公斤</label>
+                            class="discount"
+                            v-model="item.discountPrice">
+                          <label>元/公斤</label>
                         </div>
                       </td>
                     </tr>
-                    <tr 
-                      class="box1_list"
-                      v-for="(item,index) in heavyList" 
-                      :key="index" 
-                      v-html="item"/>
-                    <span 
-                      class="addbox add1"
-                      @click="cargoAdd(1)">+</span>
-                    <span class="delete">-</span>
                   </tbody>
                 </table>
               </div>
@@ -214,7 +234,13 @@
             <div class="order-company-list">
               <div class="order-form-label">轻货价格：<span class="required">(阶梯价格最大值不填，代表无穷大，例如：10-，代表10立方以上)</span></div>
               <div class="todoTable">
-                  
+                <span 
+                  class="addbox add1" 
+                  @click="cargoAdd(0)">+</span>
+                <span 
+                  class="delete"
+                  @click="cargoDelete(0)"
+                  v-if="lightList.length>1">-</span> 
                 <table class="table2">
                   <thead>
                     <tr>
@@ -231,18 +257,36 @@
                   </thead>
                       
                   <tbody class="nocompany box2">
-                    <tr class="box2_list">
+                    <tr 
+                      class="box2_list"
+                      v-for="(item, index) in lightList" 
+                      :key="index">
                       <td colspan="2">
-                        <div class="inputbox">
+                        <div class="inputbox">              
                           <input 
                             maxlength="40" 
                             type="number" 
-                            class="volume"><label>------</label>
-                          <input 
-                            maxlength="40" 
-                            class="volumeEnd" 
-                            type="number"
-                            @change="(tableChange('.table2 tbody  tr'))"><label>元/公斤</label>
+                            class="volume"
+                            disabled
+                            v-model="item.startVolume">                                       
+                          <label>------</label>
+                          <label v-if="index===0">                      
+                            <input 
+                              maxlength="40" 
+                              type="number" 
+                              class="volumeEnd" 
+                              v-model="item.endVolume"
+                              @change="cargoChange(0)"
+                            >
+                          </label>
+                          <label v-else>                      
+                            <input 
+                              maxlength="40" 
+                              type="number" 
+                              class="volumeEnd" 
+                              v-model="item.endVolume">
+                          </label>
+                          <label>元/公斤</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -250,7 +294,9 @@
                           <input 
                             maxlength="40" 
                             type="number" 
-                            class="origina"><label>元/公斤</label>
+                            class="origina"
+                            v-model="item.primeryPrice">
+                          <label>元/公斤</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -258,20 +304,12 @@
                           <input 
                             maxlength="40" 
                             type="number" 
-                            class="discount"><label>元/公斤</label>
-                              
+                            class="discount"
+                            v-model="item.discountPrice">
+                          <label>元/公斤</label>
                         </div>
                       </td>
                     </tr>
-                    <tr 
-                      class="box1_list"
-                      v-for="(item,index) in lightList" 
-                      :key="index" 
-                      v-html="item"/>
-                    <span 
-                      class="addbox add1"
-                      @click="cargoAdd(0)">+</span>
-                    <span class="delete">-</span>
                   </tbody>
                       
                 </table>
@@ -324,9 +362,12 @@
             class="order-line-from clearfix">
               <div class="order-form-label">专线照片：</div>
               <p style="padding-top: 10px">建议传</p>
-              <div>
+              <div class="upload_box">
                 <upload 
                   @imgData="imgListDataFn"
+                  :limit="3"
+                  :istoken="true"
+                  ref="mychild"
                 />
               </div>
                 
@@ -375,28 +416,26 @@ export default {
   },
   data() {
     return {
-      imgList: [],
-      tableHtml: `<tr class="box1_list">
-                          <td colspan="2">
-                            <div class="inputbox">
-                              <input maxlength="40" type="number" class="volume" disabled="disabled"><label>------</label>
-                              <input maxlength="40" type="number" class="volumeEnd"  /><label>元/公斤</label>
-                            </div>
-                            
-                          </td>
-                          <td colspan="2">
-                            <div class="inputbox">
-                              <input maxlength="40" type="number" class="origina"><label>元/公斤</label>
-                            </div>
-                          </td>
-                          <td colspan="2">
-                            <div class="inputbox">
-                              <input maxlength="40" type="number" class="discount"><label>元/公斤</label>
-                            </div>
-                          </td>
-                        </tr>`,
-      heavyList: [],
-      lightList: []
+      heavyList: [
+        {
+          startVolume: '0',
+          endVolume: '',
+          primeryPrice: '',
+          discountPrice: '',
+          type: '1'
+        }
+      ],
+      lightList: [
+        {
+          startVolume: '0',
+          endVolume: '',
+          primeryPrice: '',
+          discountPrice: '',
+          type: '0'
+        }
+      ],
+      //组件返回图片字符串
+      imgList: []
     }
   },
   mounted() {
@@ -407,9 +446,18 @@ export default {
         seajs.use(['/fancybox/jquery.fancybox.min.js'], function() {
           seajs.use(['layer'], function() {
             seajs.use(['/layer3/layui.js'], function() {
-              console.log(layer)
-
               $(function() {
+                //个人用的----------------------------------
+                $('#btn').click(function() {
+                  // let heavy = that.heavyList
+                  // let light = that.lightList
+                  // let arr = [...heavy, ...light]
+                  // console.log(arr)
+                  that.imgList = that.imgList.join(',')
+                  console.log(typeof that.imgList)
+                })
+                //---------------------------------
+
                 var theRequest = getRequest()
                 // var obj = {
                 //   startLocationCoordinate: '',
@@ -440,8 +488,8 @@ export default {
                 // }
 
                 var obj = {
-                  startLocationCoordinate: '',
-                  endLocationCoordinate: '',
+                  startLocationCoordinate: '', //出发的坐标
+                  endLocationCoordinate: '', //到达的坐标
                   // startLocation: '',
                   // endLocation: '',
                   startProvince: '',
@@ -467,304 +515,6 @@ export default {
                   rangePrices: []
                 }
 
-                var tpl = {
-                  cargo: `
-                          <td colspan="2">
-                            <div class="inputbox">
-                              <input maxlength="40" type="number" class="volume"><label>------</label>
-                              <input maxlength="40" type="number" class="volumeEnd"  /><label>元/公斤</label>
-                            </div>
-                            
-                          </td>
-                          <td colspan="2">
-                            <div class="inputbox">
-                              <input maxlength="40" type="number" class="origina"><label>元/公斤</label>
-                            </div>
-                          </td>
-                          <td colspan="2">
-                            <div class="inputbox">
-                              <input maxlength="40" type="number" class="discount"><label>元/公斤</label>
-                            </div>
-                          </td>
-                        `
-                }
-                //随机日期
-                function parseTime(time, cFormat) {
-                  if (arguments.length === 0) {
-                    return null
-                  }
-                  if (!time) {
-                    return ''
-                  }
-                  const format = cFormat || '{y}-{m}-{d} {h}:{i}:{s}'
-                  let date
-                  if (typeof time === 'object') {
-                    date = time
-                  } else {
-                    // 判断时毫秒还是字符串
-                    time = typeof time === 'number' ? time : ('' + time).trim()
-                    // 如果是秒级单位则转成毫秒
-                    if (/^\d{10}$/.test(time)) {
-                      time = parseInt(time) * 1000
-                    } else if (
-                      /(\d){4}-(\d){2}-(\d){2}\s+(\d){2}:(\d){2}:(\d){2}/.test(
-                        time
-                      )
-                    ) {
-                      // IE需要标准格式
-                      // time = time.replace(/(\d{4})-(\d{2})-(\d{2})\s+(\d{2}):(\d{2}):(\d{2})/, '$1-$2-$3T$4:$5:$6Z')
-                      time = time.replace(/-/g, '/')
-                    }
-
-                    date = new Date(time)
-                  }
-                  // 如果不能正确转换，则返回原有的数据
-                  if (date.toString().indexOf('Invalid') !== -1) {
-                    return time
-                  }
-                  const formatObj = {
-                    y: date.getFullYear(),
-                    m: date.getMonth() + 1,
-                    d: date.getDate(),
-                    h: date.getHours(),
-                    i: date.getMinutes(),
-                    s: date.getSeconds(),
-                    a: date.getDay()
-                  }
-                  const time_str = format.replace(
-                    /{(y|m|d|h|i|s|a)+}/g,
-                    (result, key) => {
-                      let value = formatObj[key]
-                      if (key === 'a')
-                        return ['一', '二', '三', '四', '五', '六', '日'][
-                          value - 1
-                        ]
-                      if (result.length > 0 && value < 10) {
-                        value = '0' + value
-                      }
-                      return value || 0
-                    }
-                  )
-                  return time_str
-                }
-                // 设置随机的文件名
-                function random_string(len) {
-                  len = len || 32
-                  var chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678'
-                  var maxPos = chars.length
-                  var pwd = ''
-                  for (var i = 0; i < len; i++) {
-                    pwd += chars.charAt(Math.floor(Math.random() * maxPos))
-                  }
-                  return pwd
-                }
-                function getImages() {
-                  var url =
-                    '/anfacommonservice/common/oss/v1/policy?access_token=' +
-                    $.cookie('access_token')
-                  // var options = $.extend(theRequest);
-                  api
-                    .getInfo1(url)
-                    .done(function(res) {
-                      var dir = res.data.dir
-                      var policy = res.data.policy
-                      var OSSAccessKeyId = res.data.accessid
-                      var signature = res.data.signature
-                      var success_action_status = 201
-                      layui.use('upload', function() {
-                        var upload = layui.upload
-                        var uploadInst = upload.render({
-                          elem: '#test1', //绑定元素
-                          method: 'post',
-                          data: {
-                            key: '',
-                            policy: policy,
-                            success_action_status: success_action_status,
-                            OSSAccessKeyId: OSSAccessKeyId,
-                            signature: signature
-                          },
-                          url: res.data.host,
-                          before: function(obj) {
-                            this.data.key =
-                              dir +
-                                parseTime(new Date(), '{y}{m}{d}') +
-                                '/' +
-                                random_string() +
-                                '.jpg' || '.png'
-                            // layer.load(); //上传loading
-                          },
-                          done: function(res, index, upload) {
-                            console.log(res)
-                            //这是返回来的图片
-                            $('.img_box .button_img').before(
-                              '<li><i class="layui-icon del_icon">&#xe640;</i><a style="float:left" class="fancybox-thumb" rel="fancybox-thumb" href="' +
-                                res.url +
-                                '" title="Golden Manarola (Sanjeev Deo)"><img src="' +
-                                res.url +
-                                '" alt="" /><i class="layui-icon add_icon">&#xe608</i></a></li>'
-                            )
-
-                            //点击放大图片
-                            $('.fancybox-thumb').fancybox({
-                              prevEffect: 'none',
-                              nextEffect: 'none',
-                              helpers: {
-                                title: {
-                                  type: 'outside'
-                                },
-                                thumbs: {
-                                  width: 50,
-                                  height: 50
-                                }
-                              }
-                            })
-                            $('.del_icon').click(function(e) {
-                              e.target.parentNode.remove()
-                              if ($('.img_box img').length < 3) {
-                                $('.button_img').show()
-                              }
-                            })
-                            if ($('.img_box img').length > 2) {
-                              $('.button_img').hide()
-                              layer.msg('最多上传三张')
-                              return
-                            }
-                          },
-                          error: function() {
-                            //请求异常回调
-                            layer.load() //上传loading
-                          }
-                        })
-                      })
-                    })
-                    .fail(function(err) {
-                      layer.msg('您还未登入')
-                    })
-                }
-                function getForm() {
-                  obj.rangePrices = []
-                  var isVad = true
-                  $('.order-company-list').each(function(index, ele) {
-                    if (!isVad) {
-                      return false
-                    }
-                    var type = '1'
-                    if (index == 1) {
-                      type = '0'
-                    }
-                    $(this)
-                      .find('table .nocompany tr')
-                      .each(function(index, ele) {
-                        var p = {
-                          discountPrice: '',
-                          endVolume: '',
-                          primeryPrice: '',
-                          startVolume: '',
-                          type: type
-                        }
-                        if (type === '1') {
-                          if (
-                            $(this)
-                              .find('.volumeEnd')
-                              .val()
-                          ) {
-                            p.endVolume = $(this)
-                              .find('.volumeEnd')
-                              .val()
-                          } else {
-                            isVad = false
-                            layer.msg('请补运量结束数值')
-                            return false
-                          }
-                          if (
-                            $(this)
-                              .find('.origina')
-                              .val()
-                          ) {
-                            p.primeryPrice = $(this)
-                              .find('.origina')
-                              .val()
-                          } else {
-                            isVad = false
-                            layer.msg('请补充重货原报价')
-                            return false
-                          }
-                          //折后价
-                          if (
-                            $(this)
-                              .find('.discount')
-                              .val()
-                          ) {
-                            p.discountPrice = $(this)
-                              .find('.discount')
-                              .val()
-                          } else {
-                            isVad = false
-                            layer.msg('请补充重货折后报价')
-                            return false
-                          }
-                          p.startVolume = $(this)
-                            .find('.volume')
-                            .val()
-                            ? $(this)
-                                .find('.volume')
-                                .val()
-                            : '0'
-                          console.log('运量1', p.startVolume)
-                        } else {
-                          if (
-                            $(this)
-                              .find('.volumeEnd')
-                              .val()
-                          ) {
-                            p.endVolume = $(this)
-                              .find('.volumeEnd')
-                              .val()
-                          } else {
-                            isVad = false
-
-                            return false
-                          }
-                          if (
-                            $(this)
-                              .find('.origina')
-                              .val()
-                          ) {
-                            p.primeryPrice = $(this)
-                              .find('.origina')
-                              .val()
-                          } else {
-                            isVad = false
-                            layer.msg('请补充轻货原报价')
-                            return false
-                          }
-
-                          //折后价
-                          if (
-                            $(this)
-                              .find('.discount')
-                              .val()
-                          ) {
-                            p.discountPrice = $(this)
-                              .find('.discount')
-                              .val()
-                          } else {
-                            isVad = false
-                            layer.msg('请补充轻货折后报价')
-                            return false
-                          }
-                          p.startVolume = $(this)
-                            .find('.volume')
-                            .val()
-                            ? $(this)
-                                .find('.volume')
-                                .val()
-                            : '0'
-                        }
-                        obj.rangePrices.push(p)
-                      })
-                  })
-                }
                 //获取运输时效和发车时间
                 function getValue() {
                   obj.departureTimeCode = $('#order_buttom .checked').attr(
@@ -776,60 +526,7 @@ export default {
                 function initEvent() {
                   var _this = this
                   getValue()
-                  getImages()
-                  var volume = $('.volume').val('0')
-                  $('.volume').attr('disabled', 'disabled')
-                  var listLen = $('.nocompany').find('.box1_list').length
-                  if (listLen <= 1) {
-                    $('.delete').hide()
-                  } else {
-                    $('.delete').show()
-                  }
-                  //删除整行
-                  $('.delete').click(function() {
-                    var $add = $(this).siblings('.add1')
-                    var $tr = $(this)
-                      .parent('.todoTable')
-                      .find('table tbody tr')
-                    $tr.last().remove()
-                    if ($tr.length > 2) {
-                      $(this).show()
-                    } else {
-                      $(this).hide()
-                    }
-                    if ($tr.length < 6) {
-                      $add.show()
-                    } else {
-                      $add.hide()
-                    }
-                  })
-                  $('#test1').click(function() {
-                    console.log('fdsafas', $.cookie('access_token'))
-                    if (!$.cookie('access_token')) {
-                      $('body').trigger('login.show')
-                    }
-                  })
-                  $(document).on('click', '.login-btn', function(event) {
-                    event.preventDefault()
-                    var timer = setInterval(() => {
-                      if ($.cookie('access_token')) {
-                        getImages()
-                        clearInterval(timer)
-                      }
-                      // else {
-                      //   clearInterval(timer)
-                      // }
-                    }, 5000)
-                    return false
-                  })
-                  //添加第一个
-                  // $('.add1').on('click', function(event) {
-                  //   event.stopPropagation()
-                  //   var table = $(this)
-                  //     .parent('.todoTable')
-                  //     .find('table')
-                  //   addCaroList(table)
-                  // })
+
                   //切换颜色
                   $('.order-submit-btn').click(function(event) {
                     event.stopPropagation()
@@ -862,136 +559,57 @@ export default {
                   })
                 }
 
-                //检查价格验证1
-                function checkCargoList($table) {
-                  var $inputcargo = $table.find('.nocompany')
-                  var volume = $inputcargo.find('.volume')
-                  var origina = $inputcargo.find('.origina')
-                  var discount = $inputcargo.find('.discount')
-                  var volumeEnd = $inputcargo.find('.volumeEnd')
-                  var flag = true
-                  $inputcargo.find('tr').each(function(index, ele) {
-                    var $volume = $(this).find('.volume')
-                    var $origina = $(this).find('.origina')
-                    var $discount = $(this).find('.discount')
-                    var $volumeEnd = $(this).find('.volumeEnd')
-                    if (!AFLC_VALID.ONLY_NUMBER_GT.test($volumeEnd.val())) {
-                      flag = false
-                      layer.msg('请补充重货运量')
-                      $volumeEnd.focus()
-                      return false
-                    }
-                    if (!AFLC_VALID.ONLY_NUMBER_GT.test($origina.val())) {
-                      flag = false
-                      layer.msg('请补充重货原报价')
-                      $origina.focus()
-                      return false
-                    }
-                    var volumeN = Number($volume.val())
-                    var volumeEndN = Number($volumeEnd.val())
-                    if (volumeEndN <= volumeN) {
-                      flag = false
-                      layer.msg('重货运量的最大值不能小于最小值')
-                      $volumeEnd.focus()
-                      return false
-                    }
-                  })
-                  return flag
-                }
-                //点击增加按钮
-                // function addCaroList($table) {
-                //   var _this = this
-                //   var flag = checkCargoList($table)
-                //   var $add1 = $table.parent('.todoTable').find('.add1')
-                //   var $delete = $table.parent('.todoTable').find('.delete')
-                //   if (flag) {
-                //     var $inputcargo = $table.find('.nocompany')
-                //     var volume = $inputcargo.find('.volume')
-                //     var volumeEnd = $inputcargo.find('.volumeEnd')
-                //     let orgvalue = ''
-                //     // let orgindex = ''
-                //     $.each(volumeEnd, function(index, ele) {
-                //       ele = $(ele)
-                //       var val = $.trim(ele.val())
-                //       orgvalue = val
-                //     })
-                //     console.log(tpl, 'tpl')
-                //     // $inputcargo.append(tpl.cargo)
-                //     var tmp = $(tpl.ca)
-                //     tmp.find('.volume').val(orgvalue)
-
-                //     $inputcargo.append(tmp)
-                //     $('.volume').attr('disabled', 'disabled')
-                //     var listLen = $inputcargo.find('tr').length
-                //     if (listLen >= 1) {
-                //       $delete.show()
-                //     } else {
-                //       console.log(listLen)
-                //       $delete.hide()
-                //     }
-                //     if (listLen > 4) {
-                //       $add1.hide()
-                //     } else {
-                //       $add1.show()
-                //     }
-                //   }
-                // }
                 //验证必填信息
                 function validate() {
-                  var checkinfo = {
-                    done: true,
-                    err: ''
-                  }
-                  console.log('地方-----------', $('.start').val())
+                  var check = true
+
                   if ($('.start').val()) {
-                    // obj.startLocationCoordinate = $('.start').attr('thepcd')
                     obj.startLocationCoordinate = $('.start').attr('thepos')
                     obj.startProvince = $('.start').attr('theprovince')
                     obj.startCity = $('.start').attr('thecity')
                     obj.startArea = $('.start').attr('thearea')
                   } else {
-                    checkinfo.done = false
                     layer.msg('出发地不能为空')
-                    return
+                    return false
                   }
+
                   if ($('.end').val()) {
-                    // obj.endLocationCoordinate = $('.end').attr('thepcd')
                     obj.endLocationCoordinate = $('.end').attr('thepos')
                     obj.endProvince = $('.end').attr('theprovince')
                     obj.endCity = $('.end').attr('thecity')
                     obj.endArea = $('.end').attr('thearea')
                   } else {
-                    checkinfo.done = false
                     layer.msg('到达地不能为空')
-                    return
+                    return false
                   }
+
                   if ($('.startName').val()) {
                     obj.startLocationContacts = $('.startName').val()
                   } else {
-                    checkinfo.done = false
                     layer.msg('出发地联系人不能为空')
-                    return
+                    return false
                   }
+
                   let startPhone = parseInt($('.startPhone').val())
                   if (AFLC_VALID.MOBILE.test(startPhone)) {
                     obj.startLocationContactsMobile = $('.startPhone').val()
                   } else {
                     if (!startPhone) {
-                      checkinfo.done = false
                       layer.msg('出发地联系人电话不能为空')
-                      return
+                      return false
                     }
-                    checkinfo.done = false
+
                     layer.msg('出发地联系人电话不正确')
-                    return
+                    return false
                   }
+
                   if ($('.endName').val()) {
                     obj.endLocationContacts = $('.endName').val()
                   } else {
-                    checkinfo.done = false
                     layer.msg('到达地联系人不能为空')
-                    return
+                    return false
                   }
+
                   let endPhone = parseInt($('.endPhone').val())
                   console.log(endPhone)
                   if (AFLC_VALID.MOBILE.test(endPhone)) {
@@ -999,35 +617,53 @@ export default {
                     console.log('电话号码', obj.endLocationContactsMobile)
                   } else {
                     if (!endPhone) {
-                      checkinfo.done = false
                       layer.msg('到达地联系人电话不能为空')
-                      return
+                      return false
                     }
-                    checkinfo.done = false
+
                     layer.msg('到达地联系人电话不正确')
-                    return
+                    return false
                   }
-                  if ($('#textarea').val().length < 3) {
-                    layer.msg('线路说明不能少于3个字符')
-                    return
-                  } else if ($('#textarea').val().length > 200) {
-                    layer.msg('线路说明不能超过200个字符')
-                    return
-                  } else {
-                    obj.transportRemark = $('#textarea').val()
+                  //轻货重货验证，轻货重货赋值
+                  let isHeavy = that.cargoValidate()
+                  if (!isHeavy) {
+                    return false
                   }
+                  let isLight = that.cargoValidate(0)
+                  if (!isLight) {
+                    return false
+                  }
+
+                  let heavy = that.heavyList
+                  let light = that.lightList
+                  obj.rangePrices = [...heavy, ...light]
+                  //最低价格
                   if (
                     $('#lowerPrice')
                       .val()
                       .charAt() == '-' ||
                     $('#lowerPrice').val() == '0'
                   ) {
-                    checkinfo.done = false
                     layer.msg('最低一票价格格式不正确')
                     return false
                   } else {
                     obj.lowerPrice = $('#lowerPrice').val()
                   }
+                  //线路说明可以为空
+                  let textarea = $('#textarea').val()
+                  if (
+                    (textarea !== '' && textarea.length < 3) ||
+                    textarea.length > 200
+                  ) {
+                    layer.msg('线路说明不能少于三个字符,不能超过200个字符')
+                    return false
+                  } else if (textarea === '') {
+                    obj.transportRemark = ''
+                  } else {
+                    obj.transportRemark = textarea
+                  }
+
+                  //默认单位
                   if ($('#transportAging').val()) {
                     obj.transportAging = $('#transportAging').val()
                   }
@@ -1037,14 +673,11 @@ export default {
                   if ($('#once').val()) {
                     obj.departureHzTime = $('#once').val()
                   }
-                  if (that.imgList) {
-                    console.log('图片数据提交', that.imgList)
-                    obj.rangeLogo = that.imgList.join(',')
-                  } else {
-                    layer.msg('上传图片不能为空')
-                  }
-                  getForm()
-                  return checkinfo
+                  //图片赋值
+                  obj.rangeLogo = that.imgList.join(',')
+
+                  // getForm()
+                  return check
                 }
                 //重置清空输入框
                 function resetForm() {
@@ -1059,26 +692,27 @@ export default {
                   $('#transportAging').val('')
                   $('#days').val('')
                   $('#once').val('')
+                  //清空重货，轻货数据
+                  that.clearCargoFn()
+                  //清空上传图片的数据
+                  that.$refs.mychild.clearimgFn()
                 }
                 //发布专线请求接口
                 function next() {
+                  if (!$.cookie('access_token')) {
+                    that.loginFn()
+                    return false
+                  }
                   var check = validate()
-                  console.log('到达电话', obj.startLocationContactsMobile)
-                  console.log('到达电话', obj.endLocationContactsMobile)
-                  console.log('到达区', obj.endArea)
-                  console.log('到达区', obj.Area)
-                  //缺少参数
-                  console.log(
-                    111111111111111111111111111111111111111111111111111111
-                  )
-                  return false
+                  // console.log('到达电话', obj.startLocationContactsMobile)
+                  // console.log('到达电话', obj.endLocationContactsMobile)
+                  // console.log('到达区', obj.endArea)
+                  // console.log('到达区', obj.Area)
                   var url =
                     '/28-web/range/create?access_token=' +
                     $.cookie('access_token') +
                     '&&user_token=' +
                     $.cookie('login_userToken')
-                  console.log('user', $.cookie('login_userToken'))
-                  console.log($.cookie('access_token'))
                   if (check) {
                     if ($.cookie('login_type') === 'aflc-2') {
                       // obj.publishId = $.cookie('loginId')
@@ -1103,6 +737,11 @@ export default {
                           //     '&publishId=' +
                           //     publishId
                           // }
+
+                          //  let huoyuanUrl = `/create/cySuccess?`
+                          //     window.open(huoyuanUrl)
+
+                          layer.msg('添加数据成功！')
                           console.log('请求返回的数据', res)
                         })
                         .fail(function(err) {
@@ -1128,57 +767,139 @@ export default {
     // })
   },
   methods: {
-    cargoAdd(type = 1) {
-      if (type === 1) {
-        this.tableAdd('.table1 tbody tr')
-      } else {
-        this.tableAdd('.table2 tbody tr')
-      }
-    },
-    tableAdd(el) {
-      let $el = $(el)
-      let tr = $el,
-        len = $el.length,
-        num = len - 1,
-        volumeEnd = tr
-          .eq(num)
-          .find('.volumeEnd')
-          .val(),
-        origina = tr
-          .eq(num)
-          .find('.origina')
-          .val(),
-        discount = tr
-          .eq(num)
-          .find('.discount')
-          .val()
-      if (!volumeEnd && !origina && !discount) {
-        layer.msg('数据没填满,不可以添加！')
-        return false
-      }
-      this.heavyList.push(this.tableHtml)
-      this.$nextTick(() => {
-        var _tr = $(el)
-        var _len = _tr.length
-        var _num = _len - 1
-        console.log(_tr)
-        _tr
-          .eq(_num)
-          .find('.volume')
-          .val(volumeEnd)
-      })
-    },
-    tableChange(el) {
-      this.$nextTick(() => {
-        let len = $(el).length
-        if (len > 1) {
-          $(el).remove()
-        }
-      })
-    },
     //获取子组件的值
     imgListDataFn(val) {
       this.imgList = val
+    },
+    //子组件获取父组件的事件
+    loginFn() {
+      $('body').trigger('login.show')
+    },
+    //添加轻货，重货
+    cargoAdd(type = 1) {
+      let isAdd = this.cargoValidate(type)
+      if (!isAdd) {
+        return false
+      }
+      let cargo = {
+        startVolume: '0',
+        endVolume: '',
+        primeryPrice: '',
+        discountPrice: '',
+        type: ''
+      }
+      if (type === 1) {
+        let endVolume = this.heavyList[this.heavyList.length - 1].endVolume
+        cargo.startVolume = endVolume
+        cargo.type = '1'
+        this.heavyList.push(cargo)
+      } else {
+        let endVolume = this.heavyList[this.heavyList.length - 1].endVolume
+        cargo.startVolume = endVolume
+        cargo.type = '0'
+        this.lightList.push(cargo)
+      }
+    },
+    //删除货物
+    cargoDelete(type = 1) {
+      let delNum
+      if (type === 1) {
+        delNum = this.heavyList.length - 1
+        this.heavyList = this.heavyList.splice(delNum, 1)
+        layer.msg('成功删除重货最后一条内容！')
+      } else {
+        delNum = this.lightList.length - 1
+        this.lightList = this.lightList.splice(delNum, 1)
+        layer.msg('成功删除轻货最后一条内容！')
+      }
+    },
+    //验证终货，轻货的数据
+    cargoValidate(type = 1) {
+      //还差token这里验证
+      if (type === 1) {
+        let heavy = this.heavyList[this.heavyList.length - 1]
+        let startVolume = parseFloat(heavy.startVolume)
+        let endVolume = parseFloat(heavy.endVolume)
+        let discountPrice = parseFloat(heavy.discountPrice)
+        let primeryPrice = parseFloat(heavy.primeryPrice)
+        if (!heavy.endVolume || !heavy.primeryPrice || !heavy.discountPrice) {
+          layer.msg('重货数据没有填满不能添加！')
+          return false
+        }
+        if (!(startVolume < endVolume)) {
+          layer.msg('重货运量开始不能大于结束！')
+          return false
+        }
+        if (!(discountPrice < primeryPrice)) {
+          layer.msg('重货折后价不能大于原价！')
+          return false
+        }
+        return true
+      } else {
+        let light = this.lightList[this.lightList.length - 1]
+        let startVolume = parseFloat(light.startVolume)
+        let endVolume = parseFloat(light.endVolume)
+        let discountPrice = parseFloat(light.discountPrice)
+        let primeryPrice = parseFloat(light.primeryPrice)
+        if (!light.endVolume || !light.primeryPrice || !light.discountPrice) {
+          layer.msg('轻货数据没有填满不能添加！')
+          return false
+        }
+        if (!(startVolume < endVolume)) {
+          layer.msg('轻货运量开始不能大于结束！')
+          return false
+        }
+        if (!(discountPrice < primeryPrice)) {
+          layer.msg('轻货折后价不能大于原价！')
+          return false
+        }
+        return true
+      }
+    },
+    //清空数据
+    cargoChange(type = 1) {
+      let heavyLen = this.heavyList.length
+      let lightLen = this.lightList.length
+      let cargo = [
+        {
+          startVolume: '0',
+          endVolume: '',
+          primeryPrice: '',
+          discountPrice: '',
+          type: ''
+        }
+      ]
+      console.log('轻货，重货的长度', heavyLen)
+      if (type === 1 && heavyLen > 1) {
+        console.log('清空数据')
+        cargo.type = '1'
+        this.heavyList = cargo
+        console.log('重货的列表', this.heavyList)
+      } else if (type === 0 && lightLen > 1) {
+        cargo.type = '0'
+        this.lightList = cargo
+      }
+    },
+    //表单重置清空数据
+    clearCargoFn() {
+      this.heavyList = [
+        {
+          startVolume: '0',
+          endVolume: '',
+          primeryPrice: '',
+          discountPrice: '',
+          type: '1'
+        }
+      ]
+      this.lightList = [
+        {
+          startVolume: '0',
+          endVolume: '',
+          primeryPrice: '',
+          discountPrice: '',
+          type: '0'
+        }
+      ]
     }
   }
 }
@@ -1200,5 +921,8 @@ export default {
   height: 40px;
   border-radius: 2px;
   border: solid 1px #d2d2d2;
+}
+.upload_box {
+  margin: 20px 0 0 70px;
 }
 </style>

@@ -522,7 +522,9 @@
       </div>
 
     </div>
-    <div class="banner"><img src="/images/index/23banner.png"></div>
+    <div class="banner"><a 
+      href="http://www.28fast.cn/Down" 
+      target="_blank"><img src="/images/indexb1.jpg"></a></div>
     <div
       id="rf01"
       class="main3 main_cy_hy center ">
@@ -900,7 +902,9 @@
 
     </div>
     <div class="banner">
-      <img src="/images/index/24banners2.png">
+      <a 
+        href="http://www.28tms.com/appointment/" 
+        target="_blank"><img src="/images/indexb2.jpg"></a>
     </div>
     <div
       id="rf04"
@@ -1134,7 +1138,9 @@
 
       <!--仓库出租/物流设备采购 E-->
       <div class="banner">
-        <img src="/images/index/26banners3.png">
+        <a 
+          href="/gongsi/" 
+          target="_blank"><img src="/images/indexb3.jpg"></a>
       </div>
 
       <!--物流资讯/物流前沿/网点加盟招商 S-->

@@ -324,6 +324,9 @@ body {
 .f_d8 {
   color: #d8d8d8;
 }
+.f-40 {
+  color: #ff4400;
+}
 .my-input {
   border: none;
   outline: none;

@@ -14,7 +14,7 @@ export default {
     LoginFooter
   },
   head: {
-    link: [{ rel: 'stylesheet', href: '/css/regisiter.css?v2' }]
+    link: [{ rel: 'stylesheet', href: '/css/regisiter.css?v3' }]
   }
 }
 </script>

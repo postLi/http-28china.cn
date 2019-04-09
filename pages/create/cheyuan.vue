@@ -377,15 +377,18 @@ export default {
               }
               function next() {
                 var check = validate()
+                let userToken =
+                  $.cookie('login_userToken') || $.cookie('user_token')
                 var url =
                   '/28-web/carInfo/home/createCar?access_token=' +
                   $.cookie('access_token') +
                   '&user_token=' +
-                  $.cookie('user_token')
+                  userToken
+                // console.log($.cookie('access_token'), userToken, 'fdfd')
                 if (check) {
                   var options = $.extend(obj, theRequest)
-
-                  if ($.cookie('access_token') && $.cookie('user_token')) {
+                  // login_userToken user_token
+                  if ($.cookie('access_token') && userToken) {
                     var options = $.extend(obj, theRequest)
                     api
                       .postAdd(url, options)

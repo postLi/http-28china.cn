@@ -2461,8 +2461,8 @@ export default {
       }
     },
     detailCollnum() {
-      let access_token = $.cookie('access_token') || ''
-      let user_token = $.cookie('user_token') || ''
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       let aurl = ''
       let isurl = ''
       let transportRangeId = this.$route.query.id
@@ -2487,8 +2487,8 @@ export default {
       }
     },
     cananyCollnum() {
-      let access_token = $.cookie('access_token') || ''
-      let user_token = $.cookie('user_token') || ''
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       let aurl = ''
       let isurl = ''
       let handle = 'check'
@@ -2515,7 +2515,7 @@ export default {
     },
     openColl(item) {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       let aurl = ''
       let isurl = ''
       let transportRangeId = this.$route.query.id

@@ -2,7 +2,7 @@
   <div class="list-box-r-news">
     <div
       v-if="gongsi_jryw01"
-      style="margin-top: 10px;"
+      style="margin-top: 10px;display: inline-block;"
       class="today_news"><div
         class="zx_sx"
         style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a

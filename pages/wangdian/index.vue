@@ -565,7 +565,7 @@
           </ul>
         </div>
         <!-- 资讯 -->
-        <div class="list-box-r-news">
+        <!-- <div class="list-box-r-news">
           <div
             v-if="gongsi_jryw01"
             style="margin-top: 10px;"
@@ -633,7 +633,12 @@
               </ul>
             </div>
           </div>
-        </div>
+        </div> -->
+        <ComNews
+          :info="gongsi_jryw"
+          :infoyw="gongsi_jryw01"
+          :infos="gongsi_wlzx"
+          :infosyw="gongsi_wlzx01"/>
       </div>
     </div>
 
@@ -643,6 +648,7 @@
 </template>
 
 <script>
+import ComNews from '../../components/comNews'
 async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
   if (res.data.status === 200) {
@@ -709,6 +715,9 @@ export default {
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
     script: [{ src: '/js/jquery.pagination.min.js' }, { src: 'layer/layer.js' }]
+  },
+  components: {
+    ComNews
   },
   data() {
     return {

@@ -409,6 +409,11 @@ export default {
       { rel: 'stylesheet', href: '/css/line_order.css' },
       { rel: 'stylesheet', href: '/layer3/css/layui.css' },
       { rel: 'stylesheet', href: '/fancybox/jquery.fancybox.min.css' }
+    ],
+    script: [
+      {
+        src: '/vendor/lrz.all.bundle.js'
+      }
     ]
   },
   components: {
@@ -655,7 +660,7 @@ export default {
                     (textarea !== '' && textarea.length < 3) ||
                     textarea.length > 200
                   ) {
-                    layer.msg('线路说明不能少于三个字符,不能超过200个字符')
+                    layer.msg('线路说明不能少于3个字符,不能超过200个字符')
                     return false
                   } else if (textarea === '') {
                     obj.transportRemark = ''
@@ -721,28 +726,12 @@ export default {
                       api
                         .postInfo1(url, options)
                         .done(function(res) {
-                          // console.log('请求返回数', 'res')
-                          // var id = res.data
-                          // var publishId = $.cookie('loginId')
-                          // if (res.status === '201') {
-                          //   window.location.href =
-                          //     '/plus/list.php?tid=86&status=201&text=专线&id=' +
-                          //     id +
-                          //     '&publishId=' +
-                          //     publishId
-                          // } else {
-                          //   window.location.href =
-                          //     '/plus/list.php?tid=86&status=200&text=专线&id=' +
-                          //     id +
-                          //     '&publishId=' +
-                          //     publishId
-                          // }
-
-                          //  let huoyuanUrl = `/create/cySuccess?`
-                          //     window.open(huoyuanUrl)
-
-                          layer.msg('添加数据成功！')
                           console.log('请求返回的数据', res)
+                          let url = `/create/cySuccess?id=${
+                            res.data.id
+                          }&publishId=${res.data.publishId}&text=专线`
+                          // window.location.href = huoyuanUrl
+                          window.open(url)
                         })
                         .fail(function(err) {
                           layer.msg(

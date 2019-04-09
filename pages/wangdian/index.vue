@@ -525,7 +525,7 @@
         <div class="remqy">
           <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
             <i
-              style="color: rgb(255,116,23);float: right;font-size: 15px;border-bottom: 1px solid rgb(255,116,23);cursor: pointer;padding-right:5px"
+              style="color: rgb(255,116,23);float: right;font-size: 15px;cursor: pointer;padding-right:5px"
               @click="findMe">我也想出现在这里</i>
           </div>
           <div
@@ -564,6 +564,81 @@
             </li>
           </ul>
         </div>
+        <!-- 资讯 -->
+        <!-- <div class="list-box-r-news">
+          <div
+            v-if="gongsi_jryw01"
+            style="margin-top: 10px;"
+            class="today_news"><div
+              class="zx_sx"
+              style="width:100%;border-bottom: 1px solid #ccc;float:left"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a
+                href="/zixun/"
+                style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+                target="_blank"
+            >更多>></a></div>
+            <div style="padding:10px;background:#fff">
+              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_jryw01.title }}
+              </p>
+              <div style="display: flex"><img
+                style="width: 120px;height: 98px;display: inline-block;"
+                width="120"
+                height="98"
+                :src="gongsi_jryw01.typeImg||'/gongsi/images/u1075.png'"
+                alt=""><span style="padding-left: 5px">{{ (gongsi_jryw01. description || '').substr(0,28) + '...' }}<a
+                  :href="gongsi_jryw01.url"
+                  style="color: #0d91e9">[详细]</a></span>
+              </div>
+
+              <ul>
+                <li
+                  v-for="(item, i) in gongsi_jryw"
+                  :key="i"
+                  style="padding-top: 15px"><a
+                    :href="item.url"
+                    target="_blank">{{ item.title }}</a>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            v-if="gongsi_wlzx01"
+            class="wuliu_news"
+            style="margin-top: 10px;float:left;width:100%">
+            <div
+              class="zx_sx"
+              style="width:100%;float:left;border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">物流资讯</span><a
+                href="/zixun/"
+                style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+                target="_blank">更多>></a></div>
+            <div style="padding: 0 20px 10px 10px;background:#fff">
+              <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_wlzx01.title }}
+              </p>
+              <div style="display: flex;float:left"><img
+                width="120"
+                height="98"
+                :src="gongsi_wlzx01.typeImg||'/gongsi/images/u1075.png'"
+                alt=""><span style="padding-left: 5px">{{ (gongsi_wlzx01. description || '').substr(0,28) + '...' }}<a
+                  :href="gongsi_wlzx01.url"
+                  style="color: #0d91e9">[详细]</a></span></div>
+              <ul>
+                <li
+                  v-for="(item, i) in gongsi_wlzx"
+                  :key="i"
+                  style="padding-top: 15px"><a
+                    :href="item.url"
+                    target="_blank">{{ item.title }}</a>
+
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+        <ComNews
+          :info="gongsi_jryw"
+          :infoyw="gongsi_jryw01"
+          :infos="gongsi_wlzx"
+          :infosyw="gongsi_wlzx01"/>
       </div>
     </div>
 
@@ -573,6 +648,7 @@
 </template>
 
 <script>
+import ComNews from '../../components/comNews'
 async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
   if (res.data.status === 200) {
@@ -639,6 +715,9 @@ export default {
       { rel: 'stylesheet', href: '/css/WTMap.css' }
     ],
     script: [{ src: '/js/jquery.pagination.min.js' }, { src: 'layer/layer.js' }]
+  },
+  components: {
+    ComNews
   },
   data() {
     return {
@@ -787,6 +866,68 @@ export default {
     } else {
       error({ statusCode: 500, message: '查找不到该物流网点' })
     }
+  },
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds:
+          '94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110',
+        count: 6,
+        orderBy: 2,
+        channelOption: 0
+      },
+      name: 'gongsi_jryw',
+      preFn: data => {
+        // console.log(data, 'datadfdf')
+        return data.map((el, index) => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
+
+          return el
+        })
+      }
+    })
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: '101',
+        count: 6,
+        orderBy: 9,
+        channelOption: 0
+      },
+      name: 'gongsi_wlzx',
+      preFn: data => {
+        return data.map((el, index) => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
+
+          return el
+        })
+      }
+    })
+  },
+  computed: {
+    gongsi_jryw() {
+      return this.$store.state.news.gongsi_jryw.slice(1)
+    },
+    gongsi_wlzx() {
+      return this.$store.state.news.gongsi_wlzx.slice(1)
+    },
+    gongsi_jryw01() {
+      return this.$store.state.news.gongsi_jryw[0]
+    },
+    gongsi_wlzx01() {
+      return this.$store.state.news.gongsi_wlzx[0]
+    }
+    // getgsListFn() {
+    //   return this.gsList.slice(0, 10)
+    // },
+    // getgsListsFn() {
+    //   return this.gsList.slice(10)
+    // }
   },
   mounted() {
     seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
@@ -1180,9 +1321,52 @@ export default {
     height: 7px;
     cursor: pointer;
   }
+  .list_right {
+    ul {
+      .bg0,
+      .bg2,
+      .bg4，,
+      .bg6,
+      .bg8,
+      .bg10,
+      .bg12 {
+        background: rgb(208, 104, 106) !important;
+      }
+      .bg0 {
+        background: rgb(208, 104, 106) !important;
+      }
+      .bg1,
+      .bg3,
+      .bg5,
+      .bg7,
+      .bg9,
+      .bg11 {
+        background: rgb(25, 138, 194) !important;
+      }
+      a:hover {
+        // color: #fff;
+      }
+    }
+  }
+  .first_li {
+    .company_address {
+      ul#index_map1 {
+        li.spanclass:hover {
+          background: rgb(78, 142, 212);
+          color: #fff !important;
+        }
+      }
+    }
+  }
   .select_con dl dd a.now {
     background: #3371ff;
     color: #fff;
   }
+}
+.list-box-r-news {
+  float: left;
+}
+.today_news {
+  float: left;
 }
 </style>

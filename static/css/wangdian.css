@@ -6,7 +6,7 @@ body {
 .zx_sx {
   OVERFLOW: hidden;
   LINE-HEIGHT: 50px;
-  HEIGHT: 50px;
+  HEIGHT: 100%;
   color: #585858;
   font-size: 18px;
   font-weight: bold;
@@ -1161,15 +1161,15 @@ height: 20px;
 width: 3px;
 background: #2577e3;
   }
-  .zx_sx {
+  /* .zx_sx {
     OVERFLOW: hidden;
     LINE-HEIGHT: 50px;
-    HEIGHT: 50px;
+    HEIGHT: 100%;
     color: #585858;
     font-size: 18px;
     font-weight: bold;
     background-color: #fff;
-  }
+  } */
   .zx_sx span{ float: left;display: block;color: #2577e3;}
   .zx_sx .biaozhi {
     width: 3px;

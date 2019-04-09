@@ -54,7 +54,7 @@ module.exports = {
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href: '//at.alicdn.com/t/font_1076232_r2rtchozkm.css'
+        href: '/css/font/iconfont.css'
       }
     ],
     script: [
@@ -63,9 +63,6 @@ module.exports = {
       },
       {
         src: '/vendor/polyfill.min.js'
-      },
-      {
-        src: '/vendor/lrz.all.bundle.js'
       }
     ]
   },

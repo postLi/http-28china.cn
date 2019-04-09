@@ -38,7 +38,7 @@
     <div
       v-if="gongsi_wlzx01"
       class="wuliu_news"
-      style="margin-top: 10px;">
+      style="margin-top: 10px;display: inline-block;">
       <div
         class="zx_sx"
         style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">物流资讯</span><a

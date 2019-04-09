@@ -452,15 +452,6 @@ export default {
           seajs.use(['layer'], function() {
             seajs.use(['/layer3/layui.js'], function() {
               $(function() {
-                //个人用的----------------------------------
-                $('#btn').click(function() {
-                  // let heavy = that.heavyList
-                  // let light = that.lightList
-                  // let arr = [...heavy, ...light]
-                  // console.log(arr)
-                  that.imgList = that.imgList.join(',')
-                  console.log(typeof that.imgList)
-                })
                 //---------------------------------
 
                 var theRequest = getRequest()
@@ -782,11 +773,13 @@ export default {
         cargo.startVolume = endVolume
         cargo.type = '1'
         this.heavyList.push(cargo)
+        console.log(this.heavyList)
       } else {
-        let endVolume = this.heavyList[this.heavyList.length - 1].endVolume
+        let endVolume = this.lightList[this.heavyList.length - 1].endVolume
         cargo.startVolume = endVolume
         cargo.type = '0'
         this.lightList.push(cargo)
+        console.log(this.lightList)
       }
     },
     //删除货物

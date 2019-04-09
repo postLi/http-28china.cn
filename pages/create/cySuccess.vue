@@ -114,7 +114,7 @@ export default {
           window.location.href = 'http://192.168.1.157:9526/carinfo/manage'
         } else if (buttonText === '货源') {
           window.location.href = 'http://192.168.1.157:9526/order/manage'
-        } else {
+        } else if (buttonText === '专线') {
           window.location.href = 'http://192.168.1.157:9526/logistics/manage'
         }
       }

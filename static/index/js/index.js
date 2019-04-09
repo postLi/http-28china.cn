@@ -199,7 +199,7 @@ $('#order_03').click(function() {
   // layer.msg('功能正在开发中，敬请期待')
   // return
   var urlDev = 'http://127.0.0.1:8080/order1' //开发
-  var urlTest = 'http://192.168.1.157:8888/' //测试
+  var urlTest = 'http://192.168.1.157:8888/order1' //测试
   var urlPro = 'http://biz.28china.cn/order1' //生产
   var startjw = $('#zhidaFrom').attr('thepos') || ''
   if (startjw) {

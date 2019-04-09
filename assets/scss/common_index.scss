@@ -1,13 +1,13 @@
 //公共颜色的变量
 $tit_color: #333; //标题颜色
-$border_color: #ddd; //边框的颜色
+$border_color: #dadada; //边框的颜色
 $line_color: #eee; //分割线的颜色
 $gray: #666;
 $light_gray: #999;
 $light_Violet: #c8b6e0; //淡紫色
-$blue: #3399ff; //蓝色
+$blue: #1d83fe; //蓝色
+$light_blue:#3f94ee; //浅蓝色
 $yellow:#eeb653;
-$light_blue:#e1edff;
 $orange: #f9552a;
 $light_orange: #f7722a;
 $white: #fff;
@@ -25,6 +25,7 @@ $icon_red_bj:#ed4e57; //降价升价背景颜色
 $bj_gray:#f5f5f7;
 /*公共的变量*/
 $w_1440: 1440px;
+$w_1400: 1400px;
 $f_20:20px;
 $f_18:18px;
 $f_16: 16px;
@@ -124,17 +125,21 @@ $f_12: 12px;
   position: absolute;
 }
 
-.ellipsis{
-  text-overflow:ellipsis;overflow:hidden;white-space:nowrap;
+.ellipsis {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
-.scale_img{
+
+.scale_img {
   // width: auto;
-	// height: auto;
-	// max-width: 100%;
+  // height: auto;
+  // max-width: 100%;
   // max-height: 100%;
   width: 100%;
   height: 100%;
 }
+
 /*公共宽度居中*/
 .grid_c1 {
   margin: 0 auto;
@@ -145,7 +150,6 @@ $f_12: 12px;
 /*背景颜色*/
 .bj_1 {
   box-sizing: border-box;
-  background: $light_Violet;
 }
 
 .bj_2 {
@@ -159,9 +163,10 @@ $f_12: 12px;
 }
 
 /*颜色*/
-.color_red{
+.color_red {
   color: $red;
 }
+
 .color_orange {
   color: $orange;
 }
@@ -192,6 +197,22 @@ $f_12: 12px;
 }
 
 /**********公共标题****************/
+.p_hz_title {
+  overflow: hidden;
+  margin-top: -60px;
+  width: 230px;
+  height: 106px;
+  text-align: center;
+  background: url('../../static/images/huizong/nav_bj.png') no-repeat;
+
+  >h2 {
+    margin-top: 25px;
+    font-size: 36px;
+    font-weight: normal;
+    color: #ffdb96;
+  }
+}
+
 .p_title {
   padding: 25px 0;
   font-size: 25px;
@@ -235,8 +256,9 @@ $f_12: 12px;
     font-size: $f_20;
   }
 }
-/*前往城市*/ 
-.p_go_city{
+
+/*前往城市*/
+.p_go_city {
   height: 54px;
   line-height: 54px;
   white-space: nowrap;
@@ -273,6 +295,7 @@ $f_12: 12px;
     padding: 0 4px;
   }
 }
+
 /*********分类导航***************/
 .p_type_nav {
   padding: 20px 0;
@@ -288,6 +311,7 @@ $f_12: 12px;
   padding: 10px 0;
 
   .category_menu_title {
+    margin-top: 15px;
     padding-left: 20px;
     color: $tit_color;
     font-size: $f_16;
@@ -296,9 +320,10 @@ $f_12: 12px;
   .category_menu_list {
     padding-left: 20px;
     display: table;
+
     .item {
       display: inline-block;
-      margin: 15px 0 0 0;
+      margin: 18px 0 0 0;
       width: 50px;
 
       a {
@@ -311,45 +336,47 @@ $f_12: 12px;
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
-  margin: 15px 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid $border_color;
+  height: 170px;
+  overflow: hidden;
+  background: url('../../static/images/huizong/user_bj.jpg') no-repeat;
 
   .user_pic {
     overflow: hidden;
-    margin: 0 auto;
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
+    margin: 15px auto 0 auto;
+    width: 58px;
+    height: 58px;
     border-radius: 50%;
     text-align: center;
-    background: #ddd;
   }
 
   .user_show {
-    .user_tip {
-      overflow: hidden;
-      line-height: 20px;
-      width: 100%;
+    .user_txt {
+      padding: 15px 0;
+      color: $tit_color;
       text-align: center;
-      white-space: nowrap;
-      text-overflow: ellipsis;
     }
 
     .user_profit {
-      padding: 10px 0 0 50px;
+      font-size: 0;
+      text-align: center;
 
-      a {
+      >a {
         display: inline-block;
         margin: 0 5px;
-        width: 70px;
-        height: 25px;
-        line-height: 25px;
+        width: 116px;
+        height: 28px;
+        line-height: 28px;
+        font-size: $f_14;
         text-align: center;
         color: $blue;
         border: 1px solid $blue;
-        border-radius: 5px;
+        border-radius: 20px;
         cursor: pointer;
+
+        &.login {
+          color: $white;
+          background: $light_blue;
+        }
       }
     }
   }
@@ -357,15 +384,20 @@ $f_12: 12px;
 
 /****************货主列表**********/
 .p_owner_list {
+  width:$w_1400;
+  overflow: hidden;
   li {
     &:nth-child(5n) {
       margin-right: 0px;
     }
 
-
     @extend .fl;
+    overflow: hidden;
     margin-right: 20px;
-    width: 272px;
+    width: 262px;
+    height: 384px;
+    background: $white;
+    border:1px solid $border_color;
 
     .owner_info {
       box-sizing: border-box;
@@ -384,6 +416,7 @@ $f_12: 12px;
     width: 272px;
     height: 195px;
     text-align: center;
+
     >img {
       @extend .scale_img
     }
@@ -391,19 +424,22 @@ $f_12: 12px;
 
   .owner_name {
     height: 20px;
-    line-height: 20px; 
+    line-height: 20px;
     color: $blue;
+
     span {
-      &.owner_name_companyName{
+      &.owner_name_companyName {
         width: 230px;
         @extend .ellipsis;
       }
-      &.owner_name_liveness{
-      .iconfont {
-        padding-right: 5px;
-      }
-      color: $orange;
-      font-size: $f_14;
+
+      &.owner_name_liveness {
+        .iconfont {
+          padding-right: 5px;
+        }
+
+        color: $orange;
+        font-size: $f_14;
       }
 
     }
@@ -438,26 +474,31 @@ $f_12: 12px;
     background: $light_blue;
     border: 1px solid $border_color;
 
-    a,a:hover{
+    a,
+    a:hover {
       color: $tit_color;
-      span{
-        color:$tit_color; 
+
+      span {
+        color: $tit_color;
+
         &.joint-label {
           color: $light_gray;
         }
       }
-      
-    
+
+
     }
 
     .hd_box {
       overflow: hidden;
-      font-size:$f_13;
-      >span{
+      font-size: $f_13;
+
+      >span {
         height: 20px;
         line-height: 20px;
-       @extend .fl;
+        @extend .fl;
       }
+
       .label_provider {
         color: $light_gray;
       }
@@ -465,7 +506,7 @@ $f_12: 12px;
       .provider {
         overflow: hidden;
         margin: 0 10px;
-        min-width:75px;
+        min-width: 75px;
         color: $tit_color;
       }
 
@@ -478,7 +519,7 @@ $f_12: 12px;
     }
 
     .md_box {
-       @extend .p_go_city;
+      @extend .p_go_city;
     }
 
     .type_box {
@@ -489,13 +530,15 @@ $f_12: 12px;
         @extend .fr;
         padding: 0 3px;
         color: $green;
-        background:#f2f2f2;
+        background: #f2f2f2;
         border: 1px solid $green;
       }
     }
-    .hy_list_goods{
+
+    .hy_list_goods {
       line-height: 20px;
-      >span{
+
+      >span {
         display: inline-block;
         max-width: 200px;
         @extend .ellipsis;
@@ -566,12 +609,15 @@ $f_12: 12px;
     .hy_info_user_text {
       line-height: 22px;
       overflow: hidden;
+
       >span {
         padding-right: 10px;
-        &.info_user_text_goods{
-          max-width: 380px; 
+
+        &.info_user_text_goods {
+          max-width: 380px;
           @extend .ellipsis;
         }
+
         b {
           font-weight: normal;
           color: $blue;
@@ -593,24 +639,32 @@ $f_12: 12px;
   .hy_info_num {
     height: 100px;
     border-left: 1px dashed #ddd;
-    .iconfont{font-weight: bold;}
+
+    .iconfont {
+      font-weight: bold;
+    }
   }
+
   .hy_info_list {
     overflow: hidden;
     height: 60px;
+
     >li {
       @extend .fl;
       margin-left: 45px;
       width: 90px;
       line-height: 30px;
+
       >span {
         display: block;
         line-height: 30px;
         text-align: center;
+
         .iconfont {
           color: $light_orange;
           padding-right: 10px;
         }
+
         &.hy_info_list_num {
           font-weight: bold;
           color: $light_orange;
@@ -777,22 +831,27 @@ $f_12: 12px;
     }
   }
 }
+
 .p_order_release {
   .release_total {
     margin-top: 0;
   }
+
   .btn_box {
     margin: 20px 0;
     text-align: center;
-    > a {
+
+    >a {
       margin: 0 auto;
       // @include btn_link(8px, 150px, 18px);
     }
   }
+
   .release_total_explain {
     text-align: center;
   }
 }
+
 /*入住*/
 .p_live {
   margin: 0 auto;
@@ -867,6 +926,7 @@ $f_12: 12px;
       height: 175px;
       margin-bottom: 10px;
       text-align: center;
+
       >img {
         @extend .scale_img
       }
@@ -878,11 +938,13 @@ $f_12: 12px;
       line-height: 20px;
       font-size: 16px;
       color: $blue;
-      .rank_tit_name{
+
+      .rank_tit_name {
         @extend .fl;
         width: 230px;
         @extend .ellipsis;
       }
+
       .rank_tit_icon_tuijian {
         @extend .fr;
         padding: 0 4px;
@@ -1182,8 +1244,9 @@ $f_12: 12px;
       width: 272px;
       height: 195px;
       text-align: center;
+
       img {
-       @extend .scale_img
+        @extend .scale_img
       }
     }
 

@@ -3,13 +3,12 @@ const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
 
 const app = new Koa()
-//  '0.0.0.0' 允许外网访问
-const host = process.env.HOST || '127.0.0.1'
-const port = process.env.PORT || 3000
-
 // Import and Set Nuxt.js options
 let config = require('../nuxt.config.js')
 config.dev = !(app.env === 'production')
+//  '0.0.0.0' 允许外网访问
+const host = config.dev ? '0.0.0.0' : process.env.HOST || '127.0.0.1'
+const port = process.env.PORT || 3000
 
 async function start() {
   // Instantiate nuxt.js

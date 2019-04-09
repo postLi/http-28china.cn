@@ -409,6 +409,11 @@ export default {
       { rel: 'stylesheet', href: '/css/line_order.css' },
       { rel: 'stylesheet', href: '/layer3/css/layui.css' },
       { rel: 'stylesheet', href: '/fancybox/jquery.fancybox.min.css' }
+    ],
+    script: [
+      {
+        src: '/vendor/lrz.all.bundle.js'
+      }
     ]
   },
   components: {
@@ -445,320 +450,291 @@ export default {
       seajs.use(['/js/gaodemap2.js'], function() {
         seajs.use(['/fancybox/jquery.fancybox.min.js'], function() {
           seajs.use(['layer'], function() {
-            seajs.use(['/layer3/layui.js'], function() {
-              $(function() {
-                //个人用的----------------------------------
-                $('#btn').click(function() {
-                  // let heavy = that.heavyList
-                  // let light = that.lightList
-                  // let arr = [...heavy, ...light]
-                  // console.log(arr)
-                  that.imgList = that.imgList.join(',')
-                  console.log(typeof that.imgList)
+            $(function() {
+              //---------------------------------
+
+              var theRequest = getRequest()
+              // var obj = {
+              //   startLocationCoordinate: '',
+              //   endLocationCoordinate: '',
+              //   startLocation: '',
+              //   endLocation: '',
+              //   startProvince: '',
+              //   startCity: '',
+              //   startArea: '',
+              //   endProvince: '',
+              //   endCity: '',
+              //   endArea: '',
+              //   startLocationContacts: '',
+              //   startLocationContactsMobile: '',
+              //   endLocationContacts: '',
+              //   endLocationContactsMobile: '',
+              //   transportAging: '',
+              //   transportAgingUnit: '', //运输时效单位
+              //   departureHzData: '', //天
+              //   departureHzTime: '', //次
+              //   lowerPrice: '', //最低一票价格
+              //   departureTime: '', //发车时间
+              //   transportRemark: '', //发车备注
+              //   rangeLogo: '', //专线照片
+              //   publishId: '', //公司id
+              //   publishName: '', //物流公司名称
+              //   rangePrices: []
+              // }
+
+              var obj = {
+                startLocationCoordinate: '', //出发的坐标
+                endLocationCoordinate: '', //到达的坐标
+                // startLocation: '',
+                // endLocation: '',
+                startProvince: '',
+                startCity: '',
+                startArea: '',
+                endProvince: '',
+                endCity: '',
+                endArea: '',
+                startLocationContacts: '',
+                startLocationContactsMobile: '',
+                endLocationContacts: '',
+                endLocationContactsMobile: '',
+                transportAging: '',
+                transportAgingUnit: '', //运输时效单位
+                departureHzData: '', //天
+                departureHzTime: '', //次
+                lowerPrice: '', //最低一票价格
+                departureTimeCode: '', //发车时间
+                transportRemark: '', //发车备注
+                rangeLogo: '', //专线照片
+                // publishId: '', //公司id
+                // publishName: '', //物流公司名称
+                rangePrices: []
+              }
+
+              //获取运输时效和发车时间
+              function getValue() {
+                obj.departureTimeCode = $('#order_buttom .checked').attr('type')
+                obj.transportAgingUnit = $('#order_top .checked').text()
+              }
+              //初始化页面，一进来就执行
+              function initEvent() {
+                var _this = this
+                getValue()
+
+                //切换颜色
+                $('.order-submit-btn').click(function(event) {
+                  event.stopPropagation()
+                  $('.order-submit-btn').removeClass('click')
+                  $(this).addClass('click')
                 })
-                //---------------------------------
 
-                var theRequest = getRequest()
-                // var obj = {
-                //   startLocationCoordinate: '',
-                //   endLocationCoordinate: '',
-                //   startLocation: '',
-                //   endLocation: '',
-                //   startProvince: '',
-                //   startCity: '',
-                //   startArea: '',
-                //   endProvince: '',
-                //   endCity: '',
-                //   endArea: '',
-                //   startLocationContacts: '',
-                //   startLocationContactsMobile: '',
-                //   endLocationContacts: '',
-                //   endLocationContactsMobile: '',
-                //   transportAging: '',
-                //   transportAgingUnit: '', //运输时效单位
-                //   departureHzData: '', //天
-                //   departureHzTime: '', //次
-                //   lowerPrice: '', //最低一票价格
-                //   departureTime: '', //发车时间
-                //   transportRemark: '', //发车备注
-                //   rangeLogo: '', //专线照片
-                //   publishId: '', //公司id
-                //   publishName: '', //物流公司名称
-                //   rangePrices: []
-                // }
-
-                var obj = {
-                  startLocationCoordinate: '', //出发的坐标
-                  endLocationCoordinate: '', //到达的坐标
-                  // startLocation: '',
-                  // endLocation: '',
-                  startProvince: '',
-                  startCity: '',
-                  startArea: '',
-                  endProvince: '',
-                  endCity: '',
-                  endArea: '',
-                  startLocationContacts: '',
-                  startLocationContactsMobile: '',
-                  endLocationContacts: '',
-                  endLocationContactsMobile: '',
-                  transportAging: '',
-                  transportAgingUnit: '', //运输时效单位
-                  departureHzData: '', //天
-                  departureHzTime: '', //次
-                  lowerPrice: '', //最低一票价格
-                  departureTimeCode: '', //发车时间
-                  transportRemark: '', //发车备注
-                  rangeLogo: '', //专线照片
-                  // publishId: '', //公司id
-                  // publishName: '', //物流公司名称
-                  rangePrices: []
-                }
-
-                //获取运输时效和发车时间
-                function getValue() {
-                  obj.departureTimeCode = $('#order_buttom .checked').attr(
-                    'type'
-                  )
-                  obj.transportAgingUnit = $('#order_top .checked').text()
-                }
-                //初始化页面，一进来就执行
-                function initEvent() {
-                  var _this = this
+                //运输时效
+                $('#order_top .minbox').click(function(event) {
+                  event.stopPropagation()
+                  $('#order_top .minbox').removeClass('checked')
+                  $(this).addClass('checked')
                   getValue()
+                })
+                //发车时间
+                $('#order_buttom .minbox').click(function(event) {
+                  event.stopPropagation()
+                  $('#order_buttom .minbox').removeClass('checked')
+                  $(this).addClass('checked')
+                  getValue()
+                })
 
-                  //切换颜色
-                  $('.order-submit-btn').click(function(event) {
-                    event.stopPropagation()
-                    $('.order-submit-btn').removeClass('click')
-                    $(this).addClass('click')
-                  })
+                //重置
+                $('#reset').click(function() {
+                  resetForm()
+                })
+                //发布
+                $('#next').click(function() {
+                  next()
+                })
+              }
 
-                  //运输时效
-                  $('#order_top .minbox').click(function(event) {
-                    event.stopPropagation()
-                    $('#order_top .minbox').removeClass('checked')
-                    $(this).addClass('checked')
-                    getValue()
-                  })
-                  //发车时间
-                  $('#order_buttom .minbox').click(function(event) {
-                    event.stopPropagation()
-                    $('#order_buttom .minbox').removeClass('checked')
-                    $(this).addClass('checked')
-                    getValue()
-                  })
+              //验证必填信息
+              function validate() {
+                var check = true
 
-                  //重置
-                  $('#reset').click(function() {
-                    resetForm()
-                  })
-                  //发布
-                  $('#next').click(function() {
-                    next()
-                  })
+                if ($('.start').val()) {
+                  obj.startLocationCoordinate = $('.start').attr('thepos')
+                  obj.startProvince = $('.start').attr('theprovince')
+                  obj.startCity = $('.start').attr('thecity')
+                  obj.startArea = $('.start').attr('thearea')
+                } else {
+                  layer.msg('出发地不能为空')
+                  return false
                 }
 
-                //验证必填信息
-                function validate() {
-                  var check = true
-
-                  if ($('.start').val()) {
-                    obj.startLocationCoordinate = $('.start').attr('thepos')
-                    obj.startProvince = $('.start').attr('theprovince')
-                    obj.startCity = $('.start').attr('thecity')
-                    obj.startArea = $('.start').attr('thearea')
-                  } else {
-                    layer.msg('出发地不能为空')
-                    return false
-                  }
-
-                  if ($('.end').val()) {
-                    obj.endLocationCoordinate = $('.end').attr('thepos')
-                    obj.endProvince = $('.end').attr('theprovince')
-                    obj.endCity = $('.end').attr('thecity')
-                    obj.endArea = $('.end').attr('thearea')
-                  } else {
-                    layer.msg('到达地不能为空')
-                    return false
-                  }
-
-                  if ($('.startName').val()) {
-                    obj.startLocationContacts = $('.startName').val()
-                  } else {
-                    layer.msg('出发地联系人不能为空')
-                    return false
-                  }
-
-                  let startPhone = parseInt($('.startPhone').val())
-                  if (AFLC_VALID.MOBILE.test(startPhone)) {
-                    obj.startLocationContactsMobile = $('.startPhone').val()
-                  } else {
-                    if (!startPhone) {
-                      layer.msg('出发地联系人电话不能为空')
-                      return false
-                    }
-
-                    layer.msg('出发地联系人电话不正确')
-                    return false
-                  }
-
-                  if ($('.endName').val()) {
-                    obj.endLocationContacts = $('.endName').val()
-                  } else {
-                    layer.msg('到达地联系人不能为空')
-                    return false
-                  }
-
-                  let endPhone = parseInt($('.endPhone').val())
-                  console.log(endPhone)
-                  if (AFLC_VALID.MOBILE.test(endPhone)) {
-                    obj.endLocationContactsMobile = $('.endPhone').val()
-                    console.log('电话号码', obj.endLocationContactsMobile)
-                  } else {
-                    if (!endPhone) {
-                      layer.msg('到达地联系人电话不能为空')
-                      return false
-                    }
-
-                    layer.msg('到达地联系人电话不正确')
-                    return false
-                  }
-                  //轻货重货验证，轻货重货赋值
-                  let isHeavy = that.cargoValidate()
-                  if (!isHeavy) {
-                    return false
-                  }
-                  let isLight = that.cargoValidate(0)
-                  if (!isLight) {
-                    return false
-                  }
-
-                  let heavy = that.heavyList
-                  let light = that.lightList
-                  obj.rangePrices = [...heavy, ...light]
-                  //最低价格
-                  if (
-                    $('#lowerPrice')
-                      .val()
-                      .charAt() == '-' ||
-                    $('#lowerPrice').val() == '0'
-                  ) {
-                    layer.msg('最低一票价格格式不正确')
-                    return false
-                  } else {
-                    obj.lowerPrice = $('#lowerPrice').val()
-                  }
-                  //线路说明可以为空
-                  let textarea = $('#textarea').val()
-                  if (
-                    (textarea !== '' && textarea.length < 3) ||
-                    textarea.length > 200
-                  ) {
-                    layer.msg('线路说明不能少于三个字符,不能超过200个字符')
-                    return false
-                  } else if (textarea === '') {
-                    obj.transportRemark = ''
-                  } else {
-                    obj.transportRemark = textarea
-                  }
-
-                  //默认单位
-                  if ($('#transportAging').val()) {
-                    obj.transportAging = $('#transportAging').val()
-                  }
-                  if ($('#days').val()) {
-                    obj.departureHzData = $('#days').val()
-                  }
-                  if ($('#once').val()) {
-                    obj.departureHzTime = $('#once').val()
-                  }
-                  //图片赋值
-                  obj.rangeLogo = that.imgList.join(',')
-
-                  // getForm()
-                  return check
+                if ($('.end').val()) {
+                  obj.endLocationCoordinate = $('.end').attr('thepos')
+                  obj.endProvince = $('.end').attr('theprovince')
+                  obj.endCity = $('.end').attr('thecity')
+                  obj.endArea = $('.end').attr('thearea')
+                } else {
+                  layer.msg('到达地不能为空')
+                  return false
                 }
-                //重置清空输入框
-                function resetForm() {
-                  $('.start').val('')
-                  $('.end').val('')
-                  $('.startName').val('')
-                  $('.startPhone').val('')
-                  $('.endName').val('')
-                  $('.endPhone').val('')
-                  $('#textarea').val('')
-                  $('#lowerPrice').val('')
-                  $('#transportAging').val('')
-                  $('#days').val('')
-                  $('#once').val('')
-                  //清空重货，轻货数据
-                  that.clearCargoFn()
-                  //清空上传图片的数据
-                  that.$refs.mychild.clearimgFn()
+
+                if ($('.startName').val()) {
+                  obj.startLocationContacts = $('.startName').val()
+                } else {
+                  layer.msg('出发地联系人不能为空')
+                  return false
                 }
-                //发布专线请求接口
-                function next() {
-                  if (!$.cookie('access_token')) {
-                    that.loginFn()
+
+                let startPhone = parseInt($('.startPhone').val())
+                if (AFLC_VALID.MOBILE.test(startPhone)) {
+                  obj.startLocationContactsMobile = $('.startPhone').val()
+                } else {
+                  if (!startPhone) {
+                    layer.msg('出发地联系人电话不能为空')
                     return false
                   }
-                  var check = validate()
-                  // console.log('到达电话', obj.startLocationContactsMobile)
-                  // console.log('到达电话', obj.endLocationContactsMobile)
-                  // console.log('到达区', obj.endArea)
-                  // console.log('到达区', obj.Area)
-                  var url =
-                    '/28-web/range/create?access_token=' +
-                    $.cookie('access_token') +
-                    '&&user_token=' +
-                    $.cookie('login_userToken')
-                  if (check) {
-                    if ($.cookie('login_type') === 'aflc-2') {
-                      // obj.publishId = $.cookie('loginId')
-                      // obj.publishName = $.cookie('loginCompanyName')
-                      var options = $.extend(obj, theRequest)
-                      api
-                        .postInfo1(url, options)
-                        .done(function(res) {
-                          // console.log('请求返回数', 'res')
-                          // var id = res.data
-                          // var publishId = $.cookie('loginId')
-                          // if (res.status === '201') {
-                          //   window.location.href =
-                          //     '/plus/list.php?tid=86&status=201&text=专线&id=' +
-                          //     id +
-                          //     '&publishId=' +
-                          //     publishId
-                          // } else {
-                          //   window.location.href =
-                          //     '/plus/list.php?tid=86&status=200&text=专线&id=' +
-                          //     id +
-                          //     '&publishId=' +
-                          //     publishId
-                          // }
 
-                          //  let huoyuanUrl = `/create/cySuccess?`
-                          //     window.open(huoyuanUrl)
+                  layer.msg('出发地联系人电话不正确')
+                  return false
+                }
 
-                          layer.msg('添加数据成功！')
-                          console.log('请求返回的数据', res)
-                        })
-                        .fail(function(err) {
-                          layer.msg(
-                            '发布失败：' +
-                              (err.errorInfo || err.text || '未知错误')
-                          )
-                        })
-                    } else {
-                      layer.msg('当前账号，不能发布专线')
-                    }
+                if ($('.endName').val()) {
+                  obj.endLocationContacts = $('.endName').val()
+                } else {
+                  layer.msg('到达地联系人不能为空')
+                  return false
+                }
+
+                let endPhone = parseInt($('.endPhone').val())
+                console.log(endPhone)
+                if (AFLC_VALID.MOBILE.test(endPhone)) {
+                  obj.endLocationContactsMobile = $('.endPhone').val()
+                  console.log('电话号码', obj.endLocationContactsMobile)
+                } else {
+                  if (!endPhone) {
+                    layer.msg('到达地联系人电话不能为空')
+                    return false
+                  }
+
+                  layer.msg('到达地联系人电话不正确')
+                  return false
+                }
+                //轻货重货验证，轻货重货赋值
+                let isHeavy = that.cargoValidate()
+                if (!isHeavy) {
+                  return false
+                }
+                let isLight = that.cargoValidate(0)
+                if (!isLight) {
+                  return false
+                }
+
+                let heavy = that.heavyList
+                let light = that.lightList
+                obj.rangePrices = [...heavy, ...light]
+                //最低价格
+                if (
+                  $('#lowerPrice')
+                    .val()
+                    .charAt() == '-' ||
+                  $('#lowerPrice').val() == '0'
+                ) {
+                  layer.msg('最低一票价格格式不正确')
+                  return false
+                } else {
+                  obj.lowerPrice = $('#lowerPrice').val()
+                }
+                //线路说明可以为空
+                let textarea = $('#textarea').val()
+                if (
+                  (textarea !== '' && textarea.length < 3) ||
+                  textarea.length > 200
+                ) {
+                  layer.msg('线路说明不能少于3个字符,不能超过200个字符')
+                  return false
+                } else if (textarea === '') {
+                  obj.transportRemark = ''
+                } else {
+                  obj.transportRemark = textarea
+                }
+
+                //默认单位
+                if ($('#transportAging').val()) {
+                  obj.transportAging = $('#transportAging').val()
+                }
+                if ($('#days').val()) {
+                  obj.departureHzData = $('#days').val()
+                }
+                if ($('#once').val()) {
+                  obj.departureHzTime = $('#once').val()
+                }
+                //图片赋值
+                obj.rangeLogo = that.imgList.join(',')
+
+                // getForm()
+                return check
+              }
+              //重置清空输入框
+              function resetForm() {
+                $('.start').val('')
+                $('.end').val('')
+                $('.startName').val('')
+                $('.startPhone').val('')
+                $('.endName').val('')
+                $('.endPhone').val('')
+                $('#textarea').val('')
+                $('#lowerPrice').val('')
+                $('#transportAging').val('')
+                $('#days').val('')
+                $('#once').val('')
+                //清空重货，轻货数据
+                that.clearCargoFn()
+                //清空上传图片的数据
+                that.$refs.mychild.clearimgFn()
+              }
+              //发布专线请求接口
+              function next() {
+                if (!$.cookie('access_token')) {
+                  that.loginFn()
+                  return false
+                }
+                var check = validate()
+                // console.log('到达电话', obj.startLocationContactsMobile)
+                // console.log('到达电话', obj.endLocationContactsMobile)
+                // console.log('到达区', obj.endArea)
+                // console.log('到达区', obj.Area)
+                var url =
+                  '/28-web/range/create?access_token=' +
+                  $.cookie('access_token') +
+                  '&&user_token=' +
+                  $.cookie('login_userToken')
+                if (check) {
+                  if ($.cookie('login_type') === 'aflc-2') {
+                    // obj.publishId = $.cookie('loginId')
+                    // obj.publishName = $.cookie('loginCompanyName')
+                    var options = $.extend(obj, theRequest)
+                    api
+                      .postInfo1(url, options)
+                      .done(function(res) {
+                        console.log('请求返回的数据', res)
+                        let url = `/create/cySuccess?id=${
+                          res.data.id
+                        }&publishId=${res.data.publishId}&text=专线`
+                        // window.location.href = huoyuanUrl
+                        window.open(url)
+                      })
+                      .fail(function(err) {
+                        layer.msg(
+                          '发布失败：' +
+                            (err.errorInfo || err.text || '未知错误')
+                        )
+                      })
                   } else {
-                    return false
+                    layer.msg('当前账号，不能发布专线')
                   }
+                } else {
+                  return false
                 }
-                initEvent()
-              })
+              }
+              initEvent()
             })
           })
         })
@@ -793,11 +769,13 @@ export default {
         cargo.startVolume = endVolume
         cargo.type = '1'
         this.heavyList.push(cargo)
+        console.log(this.heavyList)
       } else {
-        let endVolume = this.heavyList[this.heavyList.length - 1].endVolume
+        let endVolume = this.lightList[this.heavyList.length - 1].endVolume
         cargo.startVolume = endVolume
         cargo.type = '0'
         this.lightList.push(cargo)
+        console.log(this.lightList)
       }
     },
     //删除货物

@@ -68,7 +68,6 @@
 /*背景颜色*/
 .bj_1 {
   box-sizing: border-box;
-  background: #c8b6e0;
 }
 
 .bj_2 {
@@ -94,7 +93,7 @@
 }
 
 .color_blue {
-  color: #3399ff;
+  color: #1d83fe;
 }
 
 .color_violet {
@@ -122,6 +121,22 @@
 }
 
 /**********公共标题****************/
+.p_hz_title {
+  overflow: hidden;
+  margin-top: -60px;
+  width: 230px;
+  height: 106px;
+  text-align: center;
+  background: url("../../static/images/huizong/nav_bj.png") no-repeat;
+}
+
+.p_hz_title > h2 {
+  margin-top: 25px;
+  font-size: 36px;
+  font-weight: normal;
+  color: #ffdb96;
+}
+
 .p_title, .p_title_box > .title {
   padding: 25px 0;
   font-size: 25px;
@@ -216,6 +231,7 @@
 }
 
 .p_category_menu .category_menu_title {
+  margin-top: 15px;
   padding-left: 20px;
   color: #333;
   font-size: 16px;
@@ -228,7 +244,7 @@
 
 .p_category_menu .category_menu_list .item {
   display: inline-block;
-  margin: 15px 0 0 0;
+  margin: 18px 0 0 0;
   width: 50px;
 }
 
@@ -239,52 +255,63 @@
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
-  margin: 15px 0;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  height: 170px;
+  overflow: hidden;
+  background: url("../../static/images/huizong/user_bj.jpg") no-repeat;
 }
 
 .p_user_login .user_pic {
   overflow: hidden;
-  margin: 0 auto;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
+  margin: 15px auto 0 auto;
+  width: 58px;
+  height: 58px;
   border-radius: 50%;
   text-align: center;
-  background: #ddd;
 }
 
-.p_user_login .user_show .user_tip {
-  overflow: hidden;
-  line-height: 20px;
-  width: 100%;
+.p_user_login .user_show .user_txt {
+  padding: 15px 0;
+  color: #333;
   text-align: center;
-  white-space: nowrap;
-  text-overflow: ellipsis;
 }
 
 .p_user_login .user_show .user_profit {
-  padding: 10px 0 0 50px;
+  font-size: 0;
+  text-align: center;
 }
 
-.p_user_login .user_show .user_profit a {
+.p_user_login .user_show .user_profit > a {
   display: inline-block;
   margin: 0 5px;
-  width: 70px;
-  height: 25px;
-  line-height: 25px;
+  width: 116px;
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
   text-align: center;
-  color: #3399ff;
-  border: 1px solid #3399ff;
-  border-radius: 5px;
+  color: #1d83fe;
+  border: 1px solid #1d83fe;
+  border-radius: 20px;
   cursor: pointer;
 }
 
+.p_user_login .user_show .user_profit > a.login {
+  color: #fff;
+  background: #3f94ee;
+}
+
 /****************货主列表**********/
+.p_owner_list {
+  width: 1400px;
+  overflow: hidden;
+}
+
 .p_owner_list li {
+  overflow: hidden;
   margin-right: 20px;
-  width: 272px;
+  width: 262px;
+  height: 384px;
+  background: #fff;
+  border: 1px solid #dadada;
 }
 
 .p_owner_list li:nth-child(5n) {
@@ -312,7 +339,7 @@
 .p_owner_list .owner_name {
   height: 20px;
   line-height: 20px;
-  color: #3399ff;
+  color: #1d83fe;
 }
 
 .p_owner_list .owner_name span.owner_name_companyName {
@@ -349,19 +376,22 @@
   padding: 15px 10px;
   width: 246px;
   height: 109px;
-  background: #e1edff;
-  border: 1px solid #ddd;
+  background: #3f94ee;
+  border: 1px solid #dadada;
 }
 
-.p_hy_list > li a, .p_hy_list > li a:hover {
+.p_hy_list > li a,
+.p_hy_list > li a:hover {
   color: #333;
 }
 
-.p_hy_list > li a span, .p_hy_list > li a:hover span {
+.p_hy_list > li a span,
+.p_hy_list > li a:hover span {
   color: #333;
 }
 
-.p_hy_list > li a span.joint-label, .p_hy_list > li a:hover span.joint-label {
+.p_hy_list > li a span.joint-label,
+.p_hy_list > li a:hover span.joint-label {
   color: #999;
 }
 
@@ -509,12 +539,12 @@
 
 .p_hy_info .hy_info_user_box .hy_info_user_text > span b {
   font-weight: normal;
-  color: #3399ff;
+  color: #1d83fe;
 }
 
 .p_hy_info .hy_info_user_box .hy_info_user_text .hy_info_user_text_link {
   font-size: 16px;
-  color: #3399ff;
+  color: #1d83fe;
 }
 
 .p_hy_info .hy_info_col2 {
@@ -781,7 +811,7 @@
 }
 
 .p_co_owner_list > li .no2 {
-  background: #3399ff;
+  background: #1d83fe;
 }
 
 .p_co_owner_list > li .no3 {
@@ -801,7 +831,7 @@
   margin-bottom: 10px;
   line-height: 20px;
   font-size: 16px;
-  color: #3399ff;
+  color: #1d83fe;
 }
 
 .p_co_owner_list > li .rank_tit .rank_tit_name {
@@ -945,7 +975,7 @@
   height: 40px;
   line-height: 40px;
   font-size: 14px;
-  border: 1px solid #ddd;
+  border: 1px solid #dadada;
 }
 
 .p_groom_submit > button {
@@ -1123,7 +1153,7 @@
   overflow: hidden;
   margin-bottom: 2px;
   line-height: 22px;
-  color: #3399ff;
+  color: #1d83fe;
 }
 
 .p_hot_line > li .h_company .icon_box {

@@ -307,6 +307,7 @@ export default {
   text-align: center;
   background: #0e91e9;
   color: #fff;
+  border-radius: 5px;
   .iconfont {
     padding-right: 5px;
   }

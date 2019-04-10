@@ -24,7 +24,7 @@
           ><span style="color: #666;">您好，<em id="login_name3">{{ username }}</em>已登录</span>
             <a 
               target="_blank" 
-              href="/hyzx" 
+              href="/hyzx/" 
               style="color: #008be7" >会员中心</a>
             <a 
               class="exit_anfa"

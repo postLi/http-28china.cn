@@ -15,7 +15,7 @@
           <span class="chgoEm">您好，<span id="login_name1">{{ username }}</span>&nbsp;已登录</span>
           <a
             target="_blank"
-            href="/hyzx" >会员中心</a>
+            href="/hyzx/" >会员中心</a>
           <a
             class="exit_anfa"
             href="/exit">退出登录</a>

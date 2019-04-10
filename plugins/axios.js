@@ -1,5 +1,8 @@
 function logReqInfos(app, res, isError) {
   let cfg = res.config
+  if (isError) {
+    console.log('req error:', cfg.url, res.status)
+  }
   app.store.commit('setErrorReqList', {
     config: {
       baseURL: cfg.data,
@@ -50,8 +53,8 @@ $axios :
   } */
 
   // 基本配置
-  axios.defaults.timeout = 30000
-  // axios.defaults.timeout = 5000
+  // axios.defaults.timeout = 30000
+  axios.defaults.timeout = 5000
   axios.defaults.baseUrl = ''
   // axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
@@ -111,9 +114,9 @@ $axios :
   })
   axios.onResponseError(err => {
     // if (process.server) {
-    for (let i in err) {
+    /* for (let i in err) {
       console.log(i, ':')
-    }
+    } */
     logReqInfos(app, err, true)
     // }
   })

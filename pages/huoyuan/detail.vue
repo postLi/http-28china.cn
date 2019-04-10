@@ -1,25 +1,25 @@
-<template> 
+<template>
   <div class="arc_main">
     <div class="arc_top1">
-      <img 
-        width="135px" 
+      <img
+        width="135px"
         src="/img/logo.png" >
-      <div class="arc_top1_3"><a 
-        id="search_huo" 
-        target="_blank"><input 
-          class="arc_input3" 
+      <div class="arc_top1_3"><a
+        id="search_huo"
+        target="_blank"><input
+          class="arc_input3"
           readonly
           value="搜全网"> </a></div>
       <div class="arc_top1_2">
         <select id="search_type"><option name="zx">找专线</option><option name="che">找车源</option><option name="huo">找货源</option></select>
-        <input 
-          class="arc_input1" 
-          wtmap="" 
+        <input
+          class="arc_input1"
+          wtmap=""
           placeholder="出发地">
         <span>&rarr;</span>
-        <input 
-          class="arc_input2" 
-          wtmap="" 
+        <input
+          class="arc_input2"
+          wtmap=""
           placeholder="到达地">
       </div>
 
@@ -29,15 +29,15 @@
         v-if="archival.archivalType === '3'"
       >{{ archival.companyName }}</h1>
       <h1 v-else>货源详情</h1>
-      <ul 
-        class="two_tltle" 
+      <ul
+        class="two_tltle"
         v-if="archival.archivalType === '3'">
         <li/>
-        <li><a 
+        <li><a
           style="float:left"
           :href="/member/ + archival.companyId">公司官网</a><a :href="/member/ + archival.companyId + '-line'">专线信息</a></li>
-        <li><a  
-          style="float:left" 
+        <li><a
+          style="float:left"
           :href="/member/ + archival.companyId + '-wangdian'">网点信息</a>
         <a :href="/member/ + archival.companyId + '-huo'">货源信息</a></li>
         <li/>
@@ -60,9 +60,9 @@
         style="display: block"
         onmouseover="$('.city_box').css('display','block');"><a href="javascript:void(0)"><span>更多+</span></a></div>
       <!--更多城市-->
-      <div 
-        id="city_box" 
-        class="city_box" 
+      <div
+        id="city_box"
+        class="city_box"
         onmouseover="$('.city_box').css('display','block');"
         onmouseout="$('.city_box').css('display','none');">
         <a
@@ -80,15 +80,15 @@
         <div class="arc_left_1">
           <div class="top_left">
             <ul class="top_left_ul" >
-              <li 
-                v-for="(item,index) in newList" 
-                :key="index" 
+              <li
+                v-for="(item,index) in newList"
+                :key="index"
                 class="top_left_ul_li" >
                 <span>用户<em style="color: #2577e3;">{{ item.creater }}</em></span>
-                <span><em 
+                <span><em
                   :title="item.startCity"
                   style="color: #2577e3;">{{ item.startCity ? item.startCity.substring(0,3) : '' }}</em>到</span>
-                <span><em 
+                <span><em
                   :title="item.endCity"
                   style="color: #2577e3;">{{ item.endCity ? item.endCity.substring(0,3) :'' }}</em>货源</span>
                 <span>{{ item.time }}前</span>
@@ -96,7 +96,7 @@
             </ul>
           </div>
           <p class="arc_p1"><span>{{ hyDetail.startProvinceCityArea + '	&rarr;' + hyDetail.endProvinceCityArea }}</span>
-            <span class="arc_p2"><img 
+            <span class="arc_p2"><img
               class="imgarc_p2"
               src="/images/list_wlzx/ll_num.png"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i>
             </span>
@@ -125,17 +125,17 @@
             </table>
             </div>
           </div>
-          
+
           <div class="arc_left_2_2">
             <div class="collection_zx">
-              <div 
-                class="bt_close" 
+              <div
+                class="bt_close"
                 onclick="$('.collection_zx').hide()" ><img src="/images/article_wlzx/xxx.png"></div>
               <div class="collection_zx_nr">
                 <img src="/images/article_wlzx/yes.png">
-                <span>成功加入</span><a 
-                  id="collection_url" 
-                  target="_blank" 
+                <span>成功加入</span><a
+                  id="collection_url"
+                  target="_blank"
                   href="#">收藏夹</a>
               </div>
             </div>
@@ -144,10 +144,10 @@
               <tr><td class="arc_td1">出发地：</td><td class="arc_td2"><font>{{ hyDetail.startProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">到达地：</td><td class="arc_td2"><font>{{ hyDetail.endProvinceCityArea }}</font></td></tr>
               <tr><td class="arc_td1">联系人：</td><td class="arc_td2">{{ hyDetail.contacts }}</td></tr>
-              <tr><td class="arc_td1">联系电话：</td><td 
-                class="arc_td2" 
+              <tr><td class="arc_td1">联系电话：</td><td
+                class="arc_td2"
                 @click="checkobile()">
-                <a 
+                <a
                 :class="[isMobile ? '' : 'checkMobile']">
               {{ isMobile ? mobile : '查看电话' }}</a></td></tr>
               <tr><td class="arc_td1">装货时间：</td><td class="arc_td2">{{ hyDetail.createTime }}</td></tr>
@@ -165,12 +165,12 @@
                   height="72">
               </div>
               <div>
-                <a 
+                <a
                   target="_black"
                   href="http://h5.28tms.com/">
                 下载<span>【28快运APP】</span>，您可查看更多<span>{{ hyDetail.startCity }}</span>到<span>{{ hyDetail.endCity }}</span>的货源，并可实时接 收28快运为您推荐的精品货源提醒!</a>
               </div>
-              <p style="margin:20px;">便捷<span 
+              <p style="margin:20px;">便捷<span
                 @click="openOrder('check')"
                 style="color:#f8542b;cursor:pointer">查询我的运力</span>撮合情况</p>
             </div>
@@ -178,17 +178,17 @@
               <div class="arc_m5_1">
                 <span>小贴士：对此货源有意向可点击“抢单”，货主即可看到您的联系信息，提高成交率！</span>
                 <div style="margin-top: 15px">
-                  <a 
-                    href="javascript:;" 
+                  <a
+                    href="javascript:;"
                     class="button1"
-                    @click="openOrder('order')" 
+                    @click="openOrder('order')"
                   >立即抢单</a>
-                  <a 
-                    href="javascript:;" 
-                    class="button2" 
+                  <a
+                    href="javascript:;"
+                    class="button2"
                     @click="openAdd()"
-                  ><img 
-                    src="/images/cy/03u41008 2.gif" 
+                  ><img
+                    src="/images/cy/03u41008 2.gif"
                   >此线路上新货源提醒我</a>
                   <span style="margin-left: 47px">
                     <img src="/images/cy/14fresh.png">
@@ -200,12 +200,12 @@
               </div>
             </div>
           </div>
-          
+
         </div>
 
       </div>
-      <div 
-        v-if="archival.archivalType === '3'" 
+      <div
+        v-if="archival.archivalType === '3'"
         class="arc_right">
         <p class="arc_right01"><img src="/images/article_wlzx/04gongsi.png"><span :title="archival.companyName">{{ archival.companyName ? archival.companyName.substring(0,18) : '' }}</span></p>
         <p
@@ -247,7 +247,7 @@
                 value="QQ交谈">
             </a>
           </span>
-          <span><i style="float:left">地址：</i><a 
+          <span><i style="float:left">地址：</i><a
             style="overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -258,13 +258,13 @@
             v-if="archival.address">{{ archival.address }}</a></span>
         </p>
         <p class="arc_right05">
-          <a 
-            :href="/member/ + archival.companyId" 
+          <a
+            :href="/member/ + archival.companyId"
             class="website">进入官网</a>
-          <input 
-            class="collection_hz" 
-            style="cursor: pointer;" 
-            readonly 
+          <input
+            class="collection_hz"
+            style="cursor: pointer;"
+            readonly
             @click="collected()"
             :value="isShowCollect ? '收藏' : '取消收藏'">
         </p>
@@ -281,8 +281,8 @@
           <span v-if="archival.authStatus !== 'AF0010403' && (!archival.isVip || archival.isVip === 0)">暂无认证信息</span>
         </p>
       </div>
-      <div 
-        class="arc_right1" 
+      <div
+        class="arc_right1"
         v-if="archival.archivalType === '1'">
         <div class="arc_top_title">
           <h4>货主档案</h4>
@@ -293,7 +293,7 @@
         <div class="arc_middle">
           <img src="/images/cy/hztx.png">
           <p style="color:#f8542b">{{ archival.shipperTypeName }}</p>
-          <p><img 
+          <p><img
             v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
           <p>
@@ -303,7 +303,7 @@
         <ul class="bottom_ul">
           <li>联系人：{{ archival.contacts }}</li>
           <li>手机：
-            <a 
+            <a
               @click="showMoblieFn()"
               :class="[checkMoblie ? '' : 'checkMobile']">
             {{ checkMoblie ? check : '查看电话' }}</a>
@@ -312,8 +312,8 @@
           <li>好评数：{{ archival.evaGoodCount }}</li>
         </ul>
       </div>
-      <div 
-        class="arc_right1" 
+      <div
+        class="arc_right1"
         v-if="archival.archivalType === '2'">
         <div class="arc_top_title">
           <h4 :title="archival.companyName">{{ archival.companyName ? archival.companyName.substring(0,10) : '' }}</h4>
@@ -324,7 +324,7 @@
         <div class="arc_middle">
           <img src="/images/cy/hztx.png">
           <p style="color: #fa9925;">{{ archival.shipperTypeName }}</p>
-          <p><img 
+          <p><img
             v-if="archival.authStatus === 'AF0010403'"
             src="/images/cy/hzsmrz.png"></p>
           <p><img src="/images/cy/13hot.png">活跃度：<i style="color: #fa9925;">{{ archival.liveness }}</i></p>
@@ -332,7 +332,7 @@
         <ul class="bottom_ul">
           <li>联系人：{{ archival.contacts }}</li>
           <li>手机：
-            <a 
+            <a
               @click="showMoblieFn()"
               :class="[checkMoblie ? '' : 'checkMobile']">
           {{ checkMoblie ? check : '查看电话' }}</a></li>
@@ -356,8 +356,8 @@
             </div>
             <div class="name">{{ huoComprehensive.companyName }}</div>
             <div class="name">
-              <img 
-                v-if="huoComprehensive.accountStatus === 'AF0010403'" 
+              <img
+                v-if="huoComprehensive.accountStatus === 'AF0010403'"
                 src="/images/cy/hzsmrz.png">
             </div>
           </div>
@@ -371,9 +371,9 @@
             <div class="content-right-row">共成交 <i>{{ huoComprehensive.orderNumber }}</i> 笔订单，收到好评 <i>{{ huoComprehensive.evaGoodCount }}</i> 次</div>
             <div class="content-right-row">大家对他的印象:</div>
             <div class="content-right-row">
-              <span 
-                v-for="(item,index) in huoComprehensive.labels" 
-                :key="index" 
+              <span
+                v-for="(item,index) in huoComprehensive.labels"
+                :key="index"
               >{{ item.name }}（{{ item.count }}）</span>
             </div>
             <div
@@ -394,12 +394,12 @@
         </div>
         <div class="list_new_box">
           <ul class="zx_sx_new">
-            <li 
+            <li
               v-for="(item,index) in newestHuoyuanRe"
               :key="index"
               class="manage_box">
-              <a 
-              :href="'/huoyuan?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea +'&endProvince='+item.endProvince+'&endCity='+item.endCity + '&endArea='+item.endArea"> 
+              <a
+              :href="'/huoyuan?startProvince='+ item.startProvince+'&startCity='+item.startCity+'&startArea='+item.startArea +'&endProvince='+item.endProvince+'&endCity='+item.endCity + '&endArea='+item.endArea">
                 <span :title="item.startProvinceCityArea">{{ item.startProvinceCityArea ? item.startProvinceCityArea.substring(0,6) : '' }}</span>
                 <span :title="item.endProvinceCityArea">{{ item.endProvinceCityArea ? item.endProvinceCityArea.substring(0,6) : '' }}</span>
                 <span :title="item.goodsTypeName">{{ item.goodsTypeName ?item.goodsTypeName.substring(0,5) : '无' }}</span>
@@ -408,18 +408,18 @@
                 <span>{{ item.createTime }}</span>
               </a>
             </li>
-            <p 
+            <p
               class="massge"
               v-if="isShowMessge">
-              货主货源太少？为您推荐其他<a 
+              货主货源太少？为您推荐其他<a
                 :href="'/huoyuan?startProvince='+ hyDetail.startProvince+'&startCity='+hyDetail.startCity+'&endProvince='+hyDetail.endProvince+'&endCity='+hyDetail.endCity"
                 style="color:#3f94ee;">同线路货源</a>
             </p>
-            <li 
-              v-for="(i,dex) in dataset" 
+            <li
+              v-for="(i,dex) in dataset"
               :key="dex">
-              <a 
-              :href="'/huoyuan?startProvince='+ i.startProvince+'&startCity='+i.startCity+'&startArea='+i.startArea +'&endProvince='+i.endProvince+'&endCity='+i.endCity + '&endArea='+i.endArea"> 
+              <a
+              :href="'/huoyuan?startProvince='+ i.startProvince+'&startCity='+i.startCity+'&startArea='+i.startArea +'&endProvince='+i.endProvince+'&endCity='+i.endCity + '&endArea='+i.endArea">
                 <span :title="i.startProvinceCityArea">{{ i.startProvince + i.startCity }}</span>
                 <span :title="i.endProvinceCityArea">{{ i.endProvince + i.endCity }}</span>
                 <span :title="i.goodsTypeName">{{ i.goodsTypeName ?i.goodsTypeName.substring(0,5) : '' }}</span>
@@ -428,72 +428,72 @@
                 <span>{{ i.createTime }}</span>
               </a>
             </li>
-            
+
           </ul>
         </div>
       </div>
     </div>
     <div class="arc_main4">
       <!-- 货源列表start -->
-      <div 
+      <div
       class="w1036 list_hy">
         <div class="listInfo1">
           <div class="main3_1_1">
             <div class="floatl">
               <b class="b_title">更多从{{ hyDetail.startCity }}出发的货源</b>
               <div class="index_search floatl">
-                <div 
-                  id="wlLineFrom" 
-                  class="fl index_search_input" 
+                <div
+                  id="wlLineFrom"
+                  class="fl index_search_input"
                   style="position:relative;">
-                  <input 
-                    style="height: 100%;" 
-                    data-toggle="city-picker" 
-                    data-level="district" 
-                    type="text" 
-                    name="" 
-                    class="" 
-                    placeholder="请选择出发地" 
+                  <input
+                    style="height: 100%;"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text"
+                    name=""
+                    class=""
+                    placeholder="请选择出发地"
                     readonly="">
                 </div>
                 <em>→</em>
-                <div 
-                  id="wlLineTo" 
-                  class="fl index_search_input" 
-                  style="position:relative;">            
-                  <input 
-                    style="height: 100%;" 
-                    data-toggle="city-picker" 
-                    data-level="district" 
-                    type="text" 
-                    name="" 
-                    class="" 
-                    placeholder="请选择到达地" 
+                <div
+                  id="wlLineTo"
+                  class="fl index_search_input"
+                  style="position:relative;">
+                  <input
+                    style="height: 100%;"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text"
+                    name=""
+                    class=""
+                    placeholder="请选择到达地"
                     readonly="">
-                </div>                               
-              </div>               
-              <input 
-                id="search_wlLine" 
-                type="button" 
-                class="search_hy" 
-                value="" 
+                </div>
+              </div>
+              <input
+                id="search_wlLine"
+                type="button"
+                class="search_hy"
+                value=""
                 @click="search()">
-            </div>                        
-            <div class="more floatr"><a 
-              :href="'/huoyuan?startProvince='+hyDetail.startProvince+'&startCity='+hyDetail.startCity" 
-              target="_blank">更多&gt;</a></div>		 
+            </div>
+            <div class="more floatr"><a
+              :href="'/huoyuan?startProvince='+hyDetail.startProvince+'&startCity='+hyDetail.startCity"
+              target="_blank">更多&gt;</a></div>
           </div>
-          <div 
-            v-if="huoInfoList.length === 0" 
-            class="list_none" 
+          <div
+            v-if="huoInfoList.length === 0"
+            class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他货源哦</span>
             <img src="/images/none_pic.png">
           </div>
-          <ul 
+          <ul
             v-for="(item,index) in huoInfoList"
             :key="index"
-            class="wlzx_list"> 
+            class="wlzx_list">
             <li id="wlzx_list_0">
               <a
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId"
@@ -511,7 +511,7 @@
               <div class="sc_num"><img src="/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
               <div class="view_num"><img src="/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
             </li>
-          
+
             <li class="wlzx_list_1">
               <p class="p1"/>
               <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font :title="item.goodsTypeName">{{ item.goodsTypeName ? item.goodsTypeName.substring(0,6) : '' }} </font></p>
@@ -561,57 +561,57 @@
           <div class="main3_1_1">
             <div class="floatl">
               <b class="b_title">更多从{{ hyDetail.endCity }}出发的货源</b>
-        
+
               <div class="index_search floatl">
-                <div 
-                  id="wlLineFrom" 
-                  class="fl index_search_input" 
+                <div
+                  id="wlLineFrom"
+                  class="fl index_search_input"
                   style="position:relative;">
-                  <input 
-                    style="height: 100%;" 
-                    data-toggle="city-picker" 
-                    data-level="district" 
-                    type="text" 
-                    name="" 
-                    class="" 
-                    placeholder="请选择出发地" 
+                  <input
+                    style="height: 100%;"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text"
+                    name=""
+                    class=""
+                    placeholder="请选择出发地"
                     readonly="">
                 </div>
                 <em>→</em>
-                <div 
-                  id="wlLineTo" 
-                  class="fl index_search_input" 
-                  style="position:relative;">            
-                  <input 
-                    style="height: 100%;" 
-                    data-toggle="city-picker" 
-                    data-level="district" 
-                    type="text" 
-                    name="" 
-                    class="" 
-                    placeholder="请选择到达地" 
+                <div
+                  id="wlLineTo"
+                  class="fl index_search_input"
+                  style="position:relative;">
+                  <input
+                    style="height: 100%;"
+                    data-toggle="city-picker"
+                    data-level="district"
+                    type="text"
+                    name=""
+                    class=""
+                    placeholder="请选择到达地"
                     readonly="">
-                </div>                               
-                       
-              </div>               
-              <input 
-                id="search_wlLine" 
-                type="button" 
-                class="search_hy" 
-                value="" 
-                @click="search()"></div>                        
-            <div class="more floatr"><a 
-              :href="'/cheyuan?startProvince='+hyDetail.endProvince+'&startCity='+hyDetail.endCity"  
-              target="_blank">更多&gt;</a></div>		 
+                </div>
+
+              </div>
+              <input
+                id="search_wlLine"
+                type="button"
+                class="search_hy"
+                value=""
+                @click="search()"></div>
+            <div class="more floatr"><a
+              :href="'/cheyuan?startProvince='+hyDetail.endProvince+'&startCity='+hyDetail.endCity"
+              target="_blank">更多&gt;</a></div>
           </div>
-          <div 
-            v-if="huoInfoList1.length === 0" 
-            class="list_none" 
+          <div
+            v-if="huoInfoList1.length === 0"
+            class="list_none"
             style="display: block">
             <span>暂时没有找到您要查询的信息，可以看看其他货源哦</span>
             <img src="/images/none_pic.png">
           </div>
-          <ul 
+          <ul
             v-for="(item,index) in huoInfoList1"
             :key="index"
             class="wlzx_list">
@@ -632,7 +632,7 @@
               <div class="sc_num"><img src="/images/list_wlzx/ll_num.png"><span><i>浏览量:<em>{{ item.browseNumber?item.browseNumber:0 }}</em></i></span></div>
               <div class="view_num"><img src="/images/list_wlzx/sc_num.png"><span><i>收藏量:<em>{{ item.collectNum?item.collectNum:0 }}</em></i></span></div>
             </li>
-          
+
             <li class="wlzx_list_1">
               <p class="p1"/>
               <p class="p2"><img src="/images/list_wlzx/hy_item1.png"><i>货物：</i><font :title="item.goodsTypeName">{{ item.goodsTypeName ? item.goodsTypeName.substring(0,6) : '' }} </font></p>
@@ -671,15 +671,15 @@
             </li>
           </ul>
         </div>
-        <div 
+        <div
         class="arc_main4">
           <div class="zx_sx1">
             <span class="biaozhi1"/><span>更多从广州出发的{{ huoLabel }}</span>
           </div>
           <ul class="hot-cities">
-            <li 
-              v-for="(item,index) in huoLink" 
-              :key="index" 
+            <li
+              v-for="(item,index) in huoLink"
+              :key="index"
               class="hot-cities-li" >
               <a
                 target="_blank"
@@ -688,16 +688,16 @@
             </li>
           </ul>
         </div>
-        <div 
+        <div
           class="arc_main4"
           v-if="interestOrder.length != 0">
           <div class="zx_sx1">
             <span class="biaozhi1"/><span>{{ interesLabel }}</span>
           </div>
           <ul class="hot-cities">
-            <li 
-              v-for="(item,index) in interestOrder" 
-              :key="index" 
+            <li
+              v-for="(item,index) in interestOrder"
+              :key="index"
               class="hot-cities-li" >
               <a
                 :title="item.startCity + '到' + item.endCity"
@@ -754,16 +754,16 @@
           class="arc_main4-content"
           style="margin-top: 20px">
           <div class="zx_sx"><span class="biaozhi"/><span>企业月人气榜</span></div>
-          <div 
-            v-for="(item,index) in popularity" 
-            :key="index" 
+          <div
+            v-for="(item,index) in popularity"
+            :key="index"
             class="rc_list">
             <a :href="'/member/'+item.id">
               <div class="left">
                 <p :class="{'oneColor':index == 0,'twoColor':index== 1 , 'trihColor':index==2}">{{ index+1 }}</p>
               </div>
-              <div 
-                v-if="index < 3" 
+              <div
+                v-if="index < 3"
                 class="img">
                 <img :src="'/line/images/touxiang'+(index+1)+'.png'" >
               </div>
@@ -807,14 +807,14 @@
           <ul
             class="ps-list"
             style="padding-left: 30px;list-style: square">
-            <li 
+            <li
               v-for="(item, index) in $store.state.news.huoyuan_wlzx"
               :key="index">
               <div class="btn_span">
                 <span>代理</span>
                 <span>其他</span>
               </div>
-              <a 
+              <a
                 target="_blank"
                 :title="item.title"
                 :href="item.url">{{ item.title }}</a>
@@ -823,14 +823,14 @@
         </div>
 
       </div>
-    
+
     </div>
-    <Add 
-      :is-show-add.sync="isShowAdd" 
+    <Add
+      :is-show-add.sync="isShowAdd"
       :data-info="dataInfo"/>
     <Lelp :is-show-help.sync="isShowHelp" />
-    <Order 
-      :is-show-order.sync="isShowOrder" 
+    <Order
+      :is-show-order.sync="isShowOrder"
       :order-title="orderTitle"/>
   </div>
 </template>

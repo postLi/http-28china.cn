@@ -4,14 +4,14 @@
       <div class="flex_a f-26 b_b page_view_top b_c_w">
         <div
           class="flex_1 flex"
-          :class="[isShowMask[0]?'f_g':'c-3']"
+          :class="[isShowMask[0]?'f_b':'c-3']"
           @click="clickStart()">
           <span class="margin_r_10">{{ $store.state.m.zhuanxian.startName[0]===''?'全国': $store.state.m.zhuanxian.startName[2]===''?$store.state.m.zhuanxian.startName[1]:$store.state.m.zhuanxian.startName[2] }}</span>
           <div :class="[isShowMask[0]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
         <div
           class="flex_1 flex"
-          :class="[isShowMask[1] === true?'f_g':'c-3']"
+          :class="[isShowMask[1] === true?'f_b':'c-3']"
           @click="clickEnd()">
           <span class="margin_r_10">{{ $store.state.m.zhuanxian.endName[0]===''?'全国': $store.state.m.zhuanxian.endName[2]===''?$store.state.m.zhuanxian.endName[1]:$store.state.m.zhuanxian.endName[2] }}</span>
           <div :class="[isShowMask[1]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
@@ -19,7 +19,9 @@
         <div
           class="flex_1 flex"
           @click="clickReputation()">
-          <span class="margin_r_10">信誉最高</span>
+          <span
+            class="margin_r_10"
+            :class="[isShowMask[2] === true?'f_b':'c-3']">信誉最高</span>
           <div :class="[isShowMask[2]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
       </div>
@@ -32,6 +34,10 @@
           top="auto"
           ref="selectEndAddress"
           @setArea="getEndArea"/>
+        <Reputation
+          top="auto"
+          ref="selectReputation"
+          @setArea="getReputation"/>
       </div>
     </div>
 
@@ -55,31 +61,38 @@
         class="item"
         v-for="(item, index) in $store.state.m.zhuanxian.rangeList"
         :key="index"
-        @click="clickRange(item.id)"
+        @click="clickRange(item.id,item.publishId)"
       >
-        <div class="title c-3 f-26 b_b flex_a">
-          <span>{{ item.companyName }}</span>
-          <img
-            class="img-v margin_l_20"
-            src="/m/zhuanxian/details-icon-vip.png" >
-        </div>
-        <div class="flex_sb">
-          <div>
-            <div class="f-36 f_w_b">{{ item.startCity }} {{ item.startArea }} -- {{ item.endCity }} {{ item.endArea }}</div>
-            <div class="time f-20 c-9">
-              <span>时效{{ item.transportAging }}{{ item.transportAgingUnit }}</span>
-              <span class="margin_l_20">{{ item.browseNumber }}人浏览</span>
-            </div>
-          </div>
-          <div>
+        <div class="title c-3 f-30 b_b flex_sb">
+          <div class="flex_a">
+            <span>{{ item.companyName }}</span>
             <img
               class="img-v margin_l_20"
               src="/m/zhuanxian/details-icon-vip.png" >
           </div>
+          <div class="flex_a f-20 f_w">
+            <div class="shou flex">授</div>
+            <div class="jian margin_l_10 flex">荐</div>
+          </div>
         </div>
-        <div class="f-20">
-          轻货：{{ item.lightPrice }}元/m³ 重货：{{ item.weightPrice }}元/公斤
+        <div class="l_h">
+          <div class="width_100">
+            <div class="f-36 f_w_b flex_sb">
+              <span>{{ item.startCity }} {{ item.startArea }} -- {{ item.endCity }} {{ item.endArea }}</span>
+              <img
+                class="img-p margin_l_20"
+                src="/m/zhuanxian/phone.png" >
+            </div>
+            <div class="time f-20 c-9">
+              <span class="time_b">时效{{ item.transportAging }}{{ item.transportAgingUnit }}</span>
+              <span class="margin_l_20 time_b">{{ item.browseNumber }}人浏览</span>
+            </div>
+          </div>
+          <div class="f-24 f-40">
+            轻货：{{ item.lightPrice }}元/m³ 重货：{{ item.weightPrice }}元/公斤
+          </div>
         </div>
+
       </div>
     </cube-scroll>
   </div>
@@ -88,12 +101,13 @@
 
 <script>
 import SelectAddress from '../../../components/m/selectAddress'
+import Reputation from '../../../components/m/reputation'
 import Vue from 'vue'
 import { Scroll } from 'cube-ui'
 Vue.use(Scroll)
 export default {
   name: 'PageZhuanXian',
-  components: { SelectAddress },
+  components: { SelectAddress, Reputation },
   data() {
     return {
       isShowMask: [false, false, false],
@@ -110,8 +124,11 @@ export default {
     })
   },
   methods: {
-    clickRange(id) {
-      this.$router.push(`/m/zhuanxian/detail?id=${id}`)
+    clickRange(id, publishId) {
+      this.$router.push(`/m/zhuanxian/detail?id=${id}&publishId=${publishId}`)
+      // this.$router.push(
+      //   `/m/zhuanxian/detail?id=1110733427771965440&publishId=100000000000000001`
+      // )
     },
     onPullingDown() {
       this.$store.commit('m/zhuanxian/setData', {
@@ -161,20 +178,30 @@ export default {
     },
     clickStart() {
       this.$set(this.isShowMask, 1, false)
+      this.$set(this.isShowMask, 2, false)
       this.$refs.selectEndAddress.showMask = false
+      this.$refs.selectReputation.showMask = false
       this.$set(this.isShowMask, 0, !this.isShowMask[0])
       this.$refs.selectStartAddress.showMask = !this.$refs.selectStartAddress
         .showMask
     },
     clickEnd() {
       this.$set(this.isShowMask, 0, false)
+      this.$set(this.isShowMask, 2, false)
       this.$refs.selectStartAddress.showMask = false
+      this.$refs.selectReputation.showMask = false
       this.$set(this.isShowMask, 1, !this.isShowMask[1])
       this.$refs.selectEndAddress.showMask = !this.$refs.selectEndAddress
         .showMask
     },
     clickReputation() {
-      console.log(this.$store.state.m.zhuanxian.rangeList)
+      this.$set(this.isShowMask, 0, false)
+      this.$set(this.isShowMask, 1, false)
+      this.$refs.selectStartAddress.showMask = false
+      this.$refs.selectEndAddress.showMask = false
+      this.$set(this.isShowMask, 2, !this.isShowMask[2])
+      this.$refs.selectReputation.showMask = !this.$refs.selectReputation
+        .showMask
     },
     getStartArea(data) {
       this.$set(this.isShowMask, 0, false)
@@ -195,6 +222,17 @@ export default {
         })
         this.onPullingDown()
       }
+    },
+    getReputation(data) {
+      this.$set(this.isShowMask, 2, false)
+      console.log(data)
+      // if (data) {
+      //   this.$store.dispatch('m/zhuanxian/SETDATA', {
+      //     data: data,
+      //     name: 'endName'
+      //   })
+      //   this.onPullingDown()
+      // }
     }
   }
 }
@@ -213,8 +251,33 @@ export default {
       height: 0.24rem;
     }
   }
-  .time {
-    margin-top: 0.1rem;
+  .l_h {
+    line-height: 0.44rem;
+    padding: 0.3rem 0;
+    .img-p {
+      width: 0.44rem;
+    }
+    .time {
+      margin-top: 0.1rem;
+      .time_b {
+        height: 0.32rem;
+        background: rgba(238, 238, 238, 1);
+        border-radius: 0.16rem;
+        padding: 0.05rem 0.1rem;
+      }
+    }
   }
+}
+.shou {
+  width: 0.32rem;
+  height: 0.32rem;
+  background: rgba(101, 168, 255, 1);
+  border-radius: 0.04rem;
+}
+.jian {
+  width: 0.32rem;
+  height: 0.32rem;
+  background: rgba(255, 68, 0, 1);
+  border-radius: 0.04rem;
 }
 </style>

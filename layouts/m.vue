@@ -78,6 +78,7 @@ export default {
 }
 </script>
 <style>
+/*cube-scroll样式*/
 .mScroll .cube-pullup-wrapper .before-trigger {
   padding: 0;
   display: flex;

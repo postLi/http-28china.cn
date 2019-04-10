@@ -79,7 +79,7 @@
           >
             <li 
               :class="[{'active':groomIndex==1},'channel1']" 
-              @mouseover="groomTab(1)" > 
+              @mouseover="groomTab(0)" > 
               <h6 class="pt_groom_tit">担保交易</h6>
               <div class="pt_groom_txt">
                 平台担保，安全可靠
@@ -89,7 +89,7 @@
             </li>
             <li
               :class="[{'active':groomIndex===2},'channel2']" 
-              @mouseover="groomTab(2)">
+              @mouseover="groomTab(1)">
               <h6 class="pt_groom_tit">超值特惠</h6>
               <div class="pt_groom_txt">
                 价格直降，超值独享
@@ -99,7 +99,7 @@
             </li>
             <li 
               :class="[{'active':groomIndex===3},'channel3']" 
-              @mouseover="groomTab(3)">
+              @mouseover="groomTab(2)">
               <h6 class="pt_groom_tit">精准时效</h6>
               <div class="pt_groom_txt">
                 及时、高效、保质量
@@ -109,7 +109,7 @@
             </li>
             <li
               :class="[{'active':groomIndex===4},'channel4']" 
-              @mouseover="groomTab(4)">
+              @mouseover="groomTab(3)">
               <h6 class="pt_groom_tit">28信用</h6>
               <div class="pt_groom_txt">
                 平台认证，推荐专线
@@ -119,37 +119,47 @@
             </li>
           </ul>
           <div class="bd">
-            <div v-show="groomIndex===1">
-              <ul class="p_hy_list p_wl_list clearfix">
+            <div 
+              
+            >
+              <ul 
+                v-for="(item,index) in lineRecommend"
+                :key="index"
+                v-if="groomIndex==index"
+                :class="'act'+index"
+                class="p_hy_list p_wl_list clearfix"
+              >
                 <li>
                   <div class="p_10">
                     <div class="hd_box">
                       <span class="label_provider">物流商:</span>
                       <span class="provider">安能物流</span>
-                      <span class="icon"/>
-                      <span class="icon"/>
-                      <span class="icon"/>  
+                      <span 
+                        v-for="(item, index) in item.credit"
+                        :key="index"
+                        class="icon"/>
+                       
                     </div>
                     <div class="md_box">
-                      <div class="city">金华市</div>
+                      <div class="city">{{ item.startCity }}</div>
                       <span class="city-joint">
                         <span class="joint-line"/>
                         <span class="joint-label">发往</span>
                         <span class="joint-line"/>
                       </span>
-                      <div class="city">深圳市</div>
+                      <div class="city">{{ item.endCity }}</div>
                     </div>
                     <div class="type_box">
-                      <span class="name">货重:</span>
-                      <span class="item"><b>1.37</b></span>
-                      <span class="item color_gray"><span class="line-through">244</span>元／平方</span>
+                      <span class="name">重货:</span>
+                      <span class="item"><b>{{ item.weightPrice }}</b></span>
+                      <span class="item color_gray"><span class="line-through">{{ item.weightDiscountPrice }}</span>元／平方</span>
                     </div>
                     <div class="type_box">
                       <span class="name">轻货:</span>
-                      <span class="item"><b>107</b></span>
-                      <span class="item color_gray"><span class="line-through">212</span>元／立方</span>
+                      <span class="item"><b>{{ item.lightPrice }}</b></span>
+                      <span class="item color_gray"><span class="line-through">{{ item.lightDiscountPrice }}</span>元／立方</span>
                     </div>
-                    <div class="item_order_num">已有238人下单</div>
+                    <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
                   </div>
                   <div class="item_order clearfix">
                     <div class="name fl">担保交易</div>
@@ -157,132 +167,18 @@
                       <span class="dock_icon">延时赔付</span>
                       <span class="dock_num">88744人说好</span>
                     </div>
-                    <div class="link_oder fr"><a href="">立即下单</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="p_10">
-                    <div class="hd_box">
-                      <span class="label_provider">物流商:</span>
-                      <span class="provider">安能物流</span>
-                      <span class="icon"/>
-                      <span class="icon"/>
-                      <span class="icon"/>  
-                    </div>
-                    <div class="md_box">
-                      <div class="city">金华市</div>
-                      <span class="city-joint">
-                        <span class="joint-line"/>
-                        <span class="joint-label">发往</span>
-                        <span class="joint-line"/>
-                      </span>
-                      <div class="city">深圳市</div>
-                    </div>
-                    <div class="type_box">
-                      <span class="name">货重:</span>
-                      <span class="item"><b>1.37</b></span>
-                      <span class="item color_gray"><span class="line-through">244</span>元／平方</span>
-                    </div>
-                    <div class="type_box">
-                      <span class="name">轻货:</span>
-                      <span class="item"><b>107</b></span>
-                      <span class="item color_gray"><span class="line-through">212</span>元／立方</span>
-                    </div>
-                    <div class="item_order_num">已有238人下单</div>
-                  </div>
-                  <div class="item_order bj_red clearfix">
-                    <div class="name fl">担保交易</div>
-                    <div class="dock fl">
-                      <span class="dock_icon">延时赔付</span>
-                      <span class="dock_num">88744人说好</span>
-                    </div>
-                    <div class="link_oder fr"><a href="">立即下单</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="p_10">
-                    <div class="hd_box">
-                      <span class="label_provider">物流商:</span>
-                      <span class="provider">安能物流</span>
-                      <span class="icon"/>
-                      <span class="icon"/>
-                      <span class="icon"/>  
-                    </div>
-                    <div class="md_box">
-                      <div class="city">金华市</div>
-                      <span class="city-joint">
-                        <span class="joint-line"/>
-                        <span class="joint-label">发往</span>
-                        <span class="joint-line"/>
-                      </span>
-                      <div class="city">深圳市</div>
-                    </div>
-                    <div class="type_box">
-                      <span class="name">货重:</span>
-                      <span class="item"><b>1.37</b></span>
-                      <span class="item color_gray"><span class="line-through">244</span>元／平方</span>
-                    </div>
-                    <div class="type_box">
-                      <span class="name">轻货:</span>
-                      <span class="item"><b>107</b></span>
-                      <span class="item color_gray"><span class="line-through">212</span>元／立方</span>
-                    </div>
-                    <div class="item_order_num">已有238人下单</div>
-                  </div>
-                  <div class="item_order bj_blue clearfix">
-                    <div class="name fl">担保交易</div>
-                    <div class="dock fl">
-                      <span class="dock_icon">速达</span>
-                      <span class="dock_num">88744人说好</span>
-                    </div>
-                    <div class="link_oder fr"><a href="">立即下单</a></div>
-                  </div>
-                </li>
-                <li>
-                  <div class="p_10">
-                    <div class="hd_box">
-                      <span class="label_provider">物流商:</span>
-                      <span class="provider">安能物流</span>
-                      <span class="icon"/>
-                      <span class="icon"/>
-                      <span class="icon"/>  
-                    </div>
-                    <div class="md_box">
-                      <div class="city">金华市</div>
-                      <span class="city-joint">
-                        <span class="joint-line"/>
-                        <span class="joint-label">发往</span>
-                        <span class="joint-line"/>
-                      </span>
-                      <div class="city">深圳市</div>
-                    </div>
-                    <div class="type_box">
-                      <span class="name">货重:</span>
-                      <span class="item"><b>1.37</b></span>
-                      <span class="item color_gray"><span class="line-through">244</span>元／平方</span>
-                    </div>
-                    <div class="type_box">
-                      <span class="name">轻货:</span>
-                      <span class="item"><b>107</b></span>
-                      <span class="item color_gray"><span class="line-through">212</span>元／立方</span>
-                    </div>
-                    <div class="item_order_num">已有238人下单</div>
-                  </div>
-                  <div class="item_order clearfix">
-                    <div class="name fl">担保交易</div>
-                    <div class="dock fl">
-                      <span class="dock_icon">延时赔付</span>
-                      <span class="dock_num">88744人说好</span>
-                    </div>
-                    <div class="link_oder fr"><a href="">立即下单</a></div>
+                    <div class="link_oder fr"><a 
+                      :href="'/create/line?uid='+ item.account+'&publishId='+item.companyId+'&id='+item.id"
+                      target="blank">立即下单</a></div>
                   </div>
                 </li>
                
+               
               </ul>
             </div>
-            <div v-show="groomIndex===2">22</div>
+            <!-- <div v-show="groomIndex===2">22</div>
             <div v-show="groomIndex===3">33</div>
-            <div v-show="groomIndex===4">44</div>
+            <div v-show="groomIndex===4">44</div> -->
           </div>
         </div>
         <div class="pt_discount fr">
@@ -391,7 +287,8 @@
           <div class="gr_sch_btn"><a href="">搜索</a></div>
         </div>
         <a 
-          href="" 
+          :href="'/zhuanxian/list?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity" 
+          target="_blank"
           class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
       </div>
       <div class="p_type_nav">
@@ -951,61 +848,92 @@
           <h3 class="title">降价专线推荐</h3>
           <span class="title_txt">距结束<b>3</b>天15时<b>23</b>分<b>17</b>秒</span>
           <a 
-            href="" 
+            :href="'/zhuanxian/list?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity" 
+            target="_blank"
             class="title_link fr">全部专线<i class="iconfont iconjiantou2"/>
           </a>         
         </div>
         <ul class="p_hot_line clearfix">
-          <li>
+          <li 
+            v-for="(item,index) in lineRecomLowPrice.slice(0, 5)"
+            :key="index">
             <div class="hot_line_box">
               <div class="h_pic">        
-                <img src="../../static/images/huizong/_img01.png">
+                <a 
+                  target="_blank"
+                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">
+                  <img :src="item.rangeLogo || '/images/pic/bg1' + item.num + '.png'">
+                </a>
+              
               </div>
               <div class="wl_box">
-                <div class="h_place">
-                  <span class="icon icon_start">始</span>
-                  <span class="place">广州市天河区</span>
-                  <span class="icon icon_end">终</span>
-                  <span class="place">上海黄浦区</span>
+                <div 
+                  class="h_place"
+                  style="cursor:pointer"
+                  @click="toLineDetail(item)"
+                >
+                  
+                  <span 
+                    style="margin-right:5px"
+                    class="icon icon_start">始</span>
+                  <span class="place">{{ item.startLocation.length>5?item.startLocation.substring(0,5)+'..':item.startLocation }}</span>
+                  <span 
+                    style="margin-right:5px"
+                    class="icon icon_end">终</span>
+                  <span class="place">{{ item.endLocation.length>6?item.endLocation.substring(0,6)+'..':item.endLocation }}</span>
                 </div>
                 <div class="h_company">
-                  <div class="name fl">速递物流公司</div>
+                  <div class="name fl"><a 
+                    :href="'/member/'+item.companyId"
+                    target="_blank">{{ item.companyName }}</a></div>
                   <div class="icon_box fl">
-                    <span class="icon"/>
-                    <span class="icon"/>
-                    <span class="icon"/>
+                    <div v-if="item.isEq">
+                      <span 
+                        v-for="(item, index) in item.credit"
+                        :key="index"
+                        class="icon"/>
+                    </div>
+                    <!-- <span class="icon"/>
+                    <span class="icon"/> -->
                   </div>
-                  <span class="fr icon_qq"/>
+                  <a 
+                    :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
+                    target="_blank"><span 
+                      class="fr icon_qq"
+                  /></a>
                 </div>
                 <div class="h_type m_t10">
-                  <span class="icon_sale">7.8折</span>
+                  <span class="icon_sale">{{ item.weightDiscount?((item.weightDiscount)/10).toFixed(2):item.weightDiscount }}折</span>
                   <div class="type_box">
-                    <span class="name">货重:</span>
-                    <span class="item"><b>1.37</b></span>
-                    <span class="item color_gray"><span class="line-through">244</span>元／公斤</span>
+                    <span class="name">重货:</span>
+                    <span class="item"><b>{{ item.weightPrice }}</b></span>
+                    <span class="item color_gray"><span class="line-through">{{ item.weightDiscountPrice }}</span>元／公斤</span>
                   </div>
                   <div class="type_box">
                     <span class="name">轻货:</span>
-                    <span class="item"><b>107</b></span>
-                    <span class="item color_gray"><span class="line-through">212</span>元／m³</span>
+                    <span class="item"><b>{{ item.lightPrice }}</b></span>
+                    <span class="item color_gray"><span class="line-through">{{ item.lightDiscountPrice }}</span>元／m³</span>
                   </div>
                 </div>
                 <div class="h_market">
-                  <span class="h_market_price fl">比行情价格低<span class="h_market_num">13%</span></span>
-                  <span class="h_market_order fr">已有59人下单</span>
+                  <span class="h_market_price fl">比行情价格低<span 
+                    class="h_market_num"
+                    style="padding-left:3px">{{ item.belowMarketPrice }}%</span></span>
+                  <span class="h_market_order fr">已有{{ item.orderNumber }}人下单</span>
                 </div>
                 <div class="h_operate">
                   <a 
                     href="" 
                     class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
                   <a 
-                    href=""
+                    :href="'/create/line?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity"
+                    target="_blank"
                     class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
                 </div>
               </div>
             </div>
           </li>
-          <li>
+          <!-- <li>
             <div class="hot_line_box">
               <div class="h_pic">        
                 <img src="../../static/images/huizong/_img01.png">
@@ -1200,7 +1128,7 @@
                 </div>
               </div>
             </div>
-          </li>      
+          </li>       -->
         </ul>
       </div>
     </div>
@@ -1530,6 +1458,64 @@
   </div>
 </template>
 <script>
+function myCredit(credit, item) {
+  if (credit >= 0 && credit <= 3) {
+    item.credit = 1
+    item.isEq = true
+    // linedataB.data.data
+  }
+  if (credit >= 4 && credit <= 10) {
+    item.credit = 2
+    item.isEq = true
+  }
+  if (credit >= 11 && credit <= 40) {
+    item.credit = 3
+    item.isEq = true
+  }
+  if (credit >= 41 && credit <= 90) {
+    item.credit = 4
+    item.isEq = true
+  }
+  if (credit >= 91 && credit <= 150) {
+    item.credit = 5
+    item.isZuan = true
+  }
+  if (credit >= 151 && credit <= 250) {
+    item.hZhuan = 1
+    item.isHZhuan = true
+  }
+  if (credit >= 251 && credit <= 500) {
+    item.hZhuan = 2
+    item.isHZhuan = true
+  }
+  if (credit >= 500 && credit <= 1000) {
+    item.hZhuan = 3
+    item.isHZhuan = true
+  }
+  if (credit >= 1001 && credit <= 2000) {
+    item.hZhuan = 4
+    item.isHZhuan = true
+  }
+  if (credit >= 2001) {
+    item.hZhuan = 5
+    item.isHZhuan = true
+  }
+}
+async function getLineRecommend($axios, vo = {}, recommendType) {
+  let parm = vo
+  parm.currentPage = 4
+  parm.pageSize = 1
+  parm.recommendType = recommendType
+  let res = await $axios.post(`/28-web/range/platform/recommend/list`, parm)
+  if (res.data.status == 200) {
+    return {
+      list: res.data.data.slice(0, 4)
+    }
+  } else {
+    return { list: [] }
+  }
+  // console.log(res, 'res')
+}
 export default {
   name: 'HuiZong',
   head: {},
@@ -1575,11 +1561,66 @@ export default {
         '淄博',
         '绍兴'
       ],
-      groomIndex: 1,
+      groomIndex: 0,
       groomClass: 'active_green'
     }
   },
+  async asyncData({ $axios, app, query, error }) {
+    let vo = {
+      // currentPage: 1,
+      // pageSize: 5,
+      // companyName: query.companyName ? query.companyName : '',
+      city: query.locationCity ? query.locationCity : '',
+      province: query.locationProvince ? query.locationProvince : '',
+      endArea: query.endArea ? query.endArea : '',
+      endCity: query.endCity ? query.endCity : '',
+      endProvince: query.endProvince ? query.endProvince : '',
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
+    }
+    let vo1 = vo
+    vo1.currentPage = 1
+    vo1.pageSize = 4
+    let [lineA1, lineB, lineC] = await Promise.all([
+      $axios.post(`/28-web/range/platform/recommend/list`),
+      $axios.get('/28-web/logisticsCompany/popularity'),
+      $axios.post('/28-web/range/reduce/price/list', vo1)
+    ])
+    let collateral = 'collateral'
+    let lineA = await getLineRecommend($axios, vo, collateral)
+
+    if (lineC.data.status == 200) {
+      lineC.data.data.forEach(item => {
+        let arr = (item.id || '').split('')
+        let num = 0
+        let credit = item.credit
+        arr.forEach(el => {
+          num += el.charCodeAt(0) || 0
+        })
+        item.num = (num % 10) + 1
+        myCredit(credit, item)
+      })
+      lineA.list.forEach(item => {
+        let credit = item.credit
+
+        myCredit(credit, item)
+      })
+      console.log(lineA.list, ' lineC.data.data1', lineC.data.text)
+      return {
+        lineRecommend: lineA.list,
+        lineRecomLowPrice: lineC.data.data,
+        vo
+      }
+    }
+  },
+
   mounted() {
+    console.log(this.lineRecommend, 'lineRecommend')
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
       $('.p_hy_info .hy_info_user_box').Scroll({
@@ -1592,20 +1633,27 @@ export default {
       $('#groom_pageinp2').citypicker()
     })
   },
+
   methods: {
+    toLineDetail(item) {
+      // console.log(item, 'item')
+      window.open(
+        '/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId
+      )
+    },
     groomTab(index) {
       this.groomIndex = index
       switch (index) {
-        case 1:
+        case 0:
           this.groomClass = 'active_green'
           break
-        case 2:
+        case 1:
           this.groomClass = 'active_blue'
           break
-        case 3:
+        case 2:
           this.groomClass = 'active_orange'
           break
-        case 4:
+        case 3:
           this.groomClass = 'active_violet'
           break
       }

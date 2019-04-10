@@ -2,16 +2,16 @@
   <div class="list-box-r-news">
     <div
       v-if="gongsi_jryw01"
-      style="margin-top: 10px;display: inline-block;"
+      style="margin-top: 10px;display: inline-block;border: solid 1px #deedfd;float:left;width:100%;"
       class="today_news"><div
         class="zx_sx"
-        style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">今日要闻</span><a
+        style="border-bottom: 1px solid #2577e3;"><span class=""/><span style="color: #2577e3;padding-left: 10px">今日要闻</span><a
           href="/zixun/"
-          style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+          style="text-align: right;font-size: 14px;color: #666666;float: right;padding-right: 5px"
           target="_blank"
       >更多>></a></div>
-      <div style="padding: 0 20px 10px 10px;background:#fff">
-        <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_jryw01.title }}
+      <div style="padding:10px;background:#fff">
+        <p style="font-size: 15px;color: #333;padding-bottom:10px;font-weight: bold">{{ gongsi_jryw01.title }}
         </p>
         <div style="display: flex"><img
           style="width: 120px;height: 98px;display: inline-block;"
@@ -38,15 +38,15 @@
     <div
       v-if="gongsi_wlzx01"
       class="wuliu_news"
-      style="margin-top: 10px;display: inline-block;">
+      style="margin-top: 10px;display: inline-block;border: solid 1px #deedfd;float:left;width:100%;">
       <div
         class="zx_sx"
-        style="border-bottom: 1px solid #ccc;"><span class=""/><span style="color: rgb(54,54,54);padding-left: 10px">物流资讯</span><a
+        style="border-bottom: 1px solid #2577e3;"><span class=""/><span style="color: #2577e3;padding-left: 10px">物流资讯</span><a
           href="/zixun/"
-          style="text-align: right;font-size: 14px;color: #ccc;float: right;padding-right: 5px"
+          style="text-align: right;font-size: 14px;color: #666666;float: right;padding-right: 5px"
           target="_blank">更多>></a></div>
-      <div style="padding: 0 20px 10px 10px;background:#fff">
-        <p style="font-size: 15px;color: #333;padding:20px 0 10px;font-weight: bold">{{ gongsi_wlzx01.title }}
+      <div style="padding:10px;background:#fff">
+        <p style="font-size: 15px;color: #333;padding-bottom:10px;font-weight: bold">{{ gongsi_wlzx01.title }}
         </p>
         <div style="display: flex"><img
           width="120"

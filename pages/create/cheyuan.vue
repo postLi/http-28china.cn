@@ -384,10 +384,8 @@ export default {
                   $.cookie('access_token') +
                   '&user_token=' +
                   userToken
-                // console.log($.cookie('access_token'), userToken, 'fdfd')
                 if (check) {
                   var options = $.extend(obj, theRequest)
-                  // login_userToken user_token
                   if ($.cookie('access_token') && userToken) {
                     var options = $.extend(obj, theRequest)
                     api

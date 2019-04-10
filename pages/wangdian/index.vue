@@ -239,22 +239,27 @@
                 v-if="item.distance"><i>约</i><em id="nr04">{{ item.distance }}</em><i>公里</i></p>
             </li>
             <li class="wlzx_list_3">
-              <p class="p1"><i>联系人：</i><span id="nr05">{{ item.contactsName }}</span></P>
-              <p class="p2"><i>电话：</i><span id="nr06">{{ item.contactsTel? item.contactsTel + '-' : '' }}{{ item.mobile }}</span></p>
+              <p class="p1"><i>联系人：</i><span id="nr05">{{ item.contactsName }}</span><a
+                target="_black"
+                style="margin-left:10px;" 
+                :href="'http://wpa.qq.com/msgrd?v=3&uin='+ item.qq+'&site=qq&menu=yes'"
+                v-if="item.qq != ''"> <img src="/images/article_wlzx/15qq.gif"></a></P>
+              <p class="p2"><i>电话：</i><span id="nr06">{{ item.mobile }}</span></p>
+              <p class="p2"><i>固话：</i><span id="nr06">{{ item.contactsTel }}</span></p>
             </li>
             <li class="wlzx_list_4">
               <p
-                v-if="item.authStatus"
+                v-if="item.authStatus === 'AF0010403'"
                 class="p1"><img
                   id="list_shiming"
                   src="/wd/images/10shiming.png"></P>
               <p
-                v-if="item.isVip"
+                v-if="item.isVip && item.isVip === 1"
                 class="p2" ><img
                   id="list_xinyong"
                   src="/wd/images/11xinyong.png"></p>
               <p
-                v-if="item.collateral"
+                v-if="item.collateral && item.collateral !== 0"
                 class="p3" ><img
                   id="list_danbao"
                   src="/wd/images/12danbao.png"></p>
@@ -433,14 +438,15 @@
         <!-- 帮我找优质运动end -->
         <div
           class="header_links_r"
-          style="margin:20px 0;float:left;width:100%;position: relative;background: #fff;float:left;">
+          style="margin:20px 0;float:left;width:100%;position: relative;background-color: #fafcff;float:left;border: solid 1px #deedfd;box-sizing:border-box;">
           <p
-            style="font-size: 18px;color: #0d91e9;height:55px;line-height:55px;margin-left:20px;font-weight: bold "
+            style="font-size: 18px;color: #0d91e9;box-sizing:border-box;height:50px;line-height:50px;padding-left:20px;font-weight: bold;border-bottom:1px solid #2577e3;margin-bottom:20px;"
             class="header_links_r_search">运单查询</p>
           <input
             id="yd_nr"
             rows="3"
             cols="20"
+            maxlength="20"
             placeholder="请输入运单号，例如："
             style="width: 262px;margin-left: 10px;height:40px;">
           <input
@@ -448,7 +454,7 @@
             style="height: 42px;border-right:none;">
           <div
             class="ydh"
-            style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer; top: 70px;;color:#0d91e9;margin-left: 30px"
+            style="position: absolute; left: 145px;width: 100px;height: 28px;cursor: pointer; top: 82px;;color:#0d91e9;margin-left: 30px"
           >
             <span>1809260061</span>
           </div>
@@ -461,7 +467,7 @@
         <div class="remqy">
           <div class="zx_sx"><span class="biaozhi"/><span>推荐企业</span>
             <i
-              style="color: #EE8C18;float: right;font-size: 15px;cursor: pointer;padding-right:5px;text-decoration:underline;"
+              style="color: #EE8C18;float: right;font-size: 15px;cursor: pointer;padding-right:10px;text-decoration:underline;"
               @click="findMe">我也想出现在这里</i>
           </div>
           <div
@@ -471,7 +477,7 @@
           </div>
           <ul>
             <li
-              style="padding: 13px 6px 10px 6px;background: rgb(208,104,105);margin-top: 10px"
+              style="margin:10px;padding: 13px 6px 10px 6px;background: rgb(208,104,105);"
               v-for="(item, i) in listG"
               :key="i"
               :class="'bg'+i">
@@ -586,7 +592,7 @@ export default {
       { rel: 'stylesheet', href: '/css/WTMap.css' },
       { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
     ],
-    script: [{ src: '/js/jquery.pagination.min.js' }, { src: 'layer/layer.js' }]
+    script: [{ src: '/js/jquery.pagination.min.js' }]
   },
   components: {
     ComNews,
@@ -1127,6 +1133,10 @@ export default {
 #tjcx_04:hover a {
   background: none !important;
 }
+.rem_bot {
+  border: solid 1px #ffb65f;
+  box-sizing: border-box;
+}
 .rem_bot_t {
   background: url('/gongsi/images/tj.png') no-repeat;
   height: 95px;
@@ -1139,10 +1149,6 @@ export default {
     transition: all 0.4s;
     background: #fff;
     padding-bottom: 15px;
-    .zx_sx {
-      border-bottom: 1px solid #e7e7e7;
-      padding-top: 20px;
-    }
   }
   .zx_sx1 {
     border-bottom: 1px solid #e7e7e7;

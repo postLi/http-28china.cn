@@ -258,7 +258,7 @@ img{
 }
 
 .wlzx_list li {
-  height: 140px;
+  /* height: 140px; */
   float: left;
   overflow: hidden;
 }
@@ -292,7 +292,7 @@ img{
 .wlzx_list_4 {
   width: 90px;
   margin-left: 70px;
-  margin-top: 36px;
+  /* margin-top: 36px; */
 
 }
 
@@ -908,7 +908,7 @@ img{
 }
 
 .wlzx_list_3 .p1 {
-  margin-top: 33px;
+  /* margin-top: 33px; */
   margin-bottom: 5px;
 }
 
@@ -917,7 +917,7 @@ img{
 }
 
 .wlzx_list_6 .p1 {
-  margin-top: 25px;
+  /* margin-top: 25px; */
   margin-bottom: 22px;
 }
 
@@ -1079,10 +1079,9 @@ img{
   background: url('/images/list_wlzx/che_background.png');
 }
 .list_help_title {
-  text-align: center;
   line-height: 40px;
   height: 40px;
-  /* background: #3f94ee; */
+  font-weight: bold;
   color: #3f94ee;
 }
 .list_ewm {
@@ -1101,6 +1100,7 @@ img{
   float: left;
   box-sizing: border-box;
   padding: 12px 12px;
+  border: solid 1px #deedfd;
 }
 .ltl-input0 {
   position: relative;
@@ -1141,7 +1141,7 @@ img{
 }
 .ltl-button {
   display: block;
-  width: 110px;
+  width: 108px;
   height: 35px;
   line-height: 35px;
   text-align: center;
@@ -1182,5 +1182,11 @@ background: #2577e3;
   .remqy{
     float: left;
     width:100%;
+    border: solid 1px #deedfd;
+    background: #fff;
+    box-sizing: border-box;
+  }
+  .remqy .zx_sx {
+    border-bottom: 1px solid #3f94ee;
   }
 /*所属园区 E*/

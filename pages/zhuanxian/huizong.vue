@@ -123,17 +123,20 @@
               
             >
               <ul 
-                v-for="(item,index) in lineRecommend"
+                v-for="(item,index) in 4"
                 :key="index"
                 v-if="groomIndex==index"
-                :class="'act'+index"
+                :class="'lineRecommend'+index"
                 class="p_hy_list p_wl_list clearfix"
               >
-                <li>
+                <li 
+                  v-for="(item,index) in lineRecommend"
+                  :key="index"
+                  :class="'act'+index">
                   <div class="p_10">
                     <div class="hd_box">
                       <span class="label_provider">物流商:</span>
-                      <span class="provider">安能物流</span>
+                      <span class="provider">{{ item.companyName }}</span>
                       <span 
                         v-for="(item, index) in item.credit"
                         :key="index"
@@ -1646,6 +1649,7 @@ export default {
       switch (index) {
         case 0:
           this.groomClass = 'active_green'
+          // let lineA = await getLineRecommend($axios, vo, collateral)
           break
         case 1:
           this.groomClass = 'active_blue'
@@ -1657,6 +1661,9 @@ export default {
           this.groomClass = 'active_violet'
           break
       }
+    },
+    getLineRecom() {
+      getLineRecommend($axios, vo, collateral).then(res => {})
     }
   }
 }

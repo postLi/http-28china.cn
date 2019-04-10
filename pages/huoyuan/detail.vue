@@ -1322,7 +1322,7 @@ export default {
   methods: {
     showMoblieFn() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       if (access_token && user_token) {
         this.checkMoblie = true
         this.check = this.hyDetail.mobile
@@ -1334,7 +1334,7 @@ export default {
     checkobile() {
       // this.isMobile = !this.isMobile
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       if (access_token && user_token) {
         this.isMobile = true
         this.mobile = this.hyDetail.mobile
@@ -1353,7 +1353,7 @@ export default {
     },
     collected() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       this.isShowCollect = !this.isShowCollect
       if (!this.isShowCollect) {
         this.handle = 'collect'
@@ -1375,7 +1375,7 @@ export default {
     },
     openAdd() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       this.getAddress()
       if (access_token && user_token) {
         this.$axios
@@ -1409,7 +1409,7 @@ export default {
     },
     openHelp() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       this.getAddress()
       if (access_token && user_token) {
         this.$axios

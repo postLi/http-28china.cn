@@ -221,7 +221,6 @@
             :key="index"
             class="wlzx_list"
           >
-
             <li class="wlzx_list_2">
               <p class="p1"><a
                 id="nr01"
@@ -1240,8 +1239,23 @@ export default {
     margin-left: 8px;
     vertical-align: middle;
   }
-  .icon-btn-arrow-up-2,
   .icon-btn-arrow-down-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/dw.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .icon-btn-arrow-up-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/up.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
   }
 
   .icon-btn-arrow-down-2 {

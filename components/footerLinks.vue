@@ -115,6 +115,10 @@ ul.footerLinks {
   li {
     padding-top: 20px;
     float: left;
+    width: 148px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
     span {
       /*width: 126px;*/
       /*padding-right: 40px;*/

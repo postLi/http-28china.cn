@@ -826,6 +826,7 @@
     
     </div>
     <Add 
+      @close="closeMe"
       :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
     <Lelp :is-show-help.sync="isShowHelp" />
@@ -835,7 +836,7 @@
   </div>
 </template>
 <script>
-import Add from './add'
+import Add from './add1'
 import Lelp from './help'
 import Order from './order'
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
@@ -1400,6 +1401,11 @@ export default {
         this.isShowAdd = true
         this.getAddress()
       }
+    },
+    closeMe() {
+      this.isShowAdd = false
+      this.isShowHelp = false
+      this.isShowOrder = false
     },
     openHelp() {
       let access_token = $.cookie('access_token')

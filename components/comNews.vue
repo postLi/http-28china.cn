@@ -2,7 +2,7 @@
   <div class="list-box-r-news">
     <div
       v-if="gongsi_jryw01"
-      style="margin-top: 10px;display: inline-block;border: solid 1px #deedfd;float:left;width:100%;"
+      style="box-sizing:border-box;margin-top: 10px;display: inline-block;border: solid 1px #deedfd;float:left;width:100%;"
       class="today_news"><div
         class="zx_sx"
         style="border-bottom: 1px solid #2577e3;"><span class=""/><span style="color: #2577e3;padding-left: 10px">今日要闻</span><a
@@ -37,8 +37,8 @@
     </div>
     <div
       v-if="gongsi_wlzx01"
-      class="wuliu_news"
-      style="margin-top: 10px;display: inline-block;border: solid 1px #deedfd;float:left;width:100%;">
+      class="today_news"
+      style="box-sizing:border-box;margin-top: 10px;display: inline-block;border: solid 1px #deedfd;float:left;width:100%;">
       <div
         class="zx_sx"
         style="border-bottom: 1px solid #2577e3;"><span class=""/><span style="color: #2577e3;padding-left: 10px">物流资讯</span><a

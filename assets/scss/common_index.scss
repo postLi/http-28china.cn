@@ -1,4 +1,5 @@
 //公共颜色的变量
+$black:#000;
 $tit_color: #333; //标题颜色
 $border_color: #dadada; //边框的颜色
 $line_color: #eee; //分割线的颜色
@@ -6,15 +7,21 @@ $gray: #666;
 $light_gray: #999;
 $light_Violet: #c8b6e0; //淡紫色
 $blue: #1d83fe; //蓝色
-$light_blue:#3f94ee; //浅蓝色
+$btn_blue_color:#3f94ee;
+$tit_blue_color:#2577e3; //蓝的标题颜色
+$light_blue:#d1e8f0; //浅蓝色
+$bj_pale_blue:#eef8ff;   //货源推荐背景色
+$tit_color:#333; //标题颜色
 $yellow:#eeb653;
-$orange: #f9552a;
-$light_orange: #f7722a;
+$orange: #ff5b1a;
+$light_orange: #ff871e;
 $white: #fff;
 $light_green:#46cf74;
-$green: #3cb46d;
+$green: #13b31e;
+$grass_green:#13b31e;  //草绿色,推荐货源图标
 $deep_green:#3cb46d;
 $red: #ff0000;
+$txt_red_color:#ee1f1f;
 $light_red: #f65050; //浅红色
 $light_violet: #9966cc; //紫色
 /*小图标颜色*/
@@ -95,7 +102,8 @@ $f_12: 12px;
 .p_10 {
   padding: 10px;
 }
-
+.p_l5{ padding-right: 5px;}
+.p_r20{ padding-right: 20px;}
 .fl {
   float: left;
 }
@@ -214,9 +222,30 @@ $f_12: 12px;
 }
 
 .p_title {
-  padding: 25px 0;
-  font-size: 25px;
-  color: $tit_color;
+  margin: 90px auto 60px auto;
+  width: 360px;
+  .title_txt,
+  .title_line_box {
+    color: $tit_blue_color;
+    height: 30px;
+  }
+  .title_txt {
+    font-size: 30px;
+    line-height: 30px;
+    font-weight: normal;
+  }
+
+  .title_line_box {
+    width: 80px;
+    &:first-child{margin-right: 38px;}
+    &:last-child{margin-left: 38px;}
+    >span {
+      margin-top: 14px;
+      display: block;
+      height: 0;
+      border-top: 2px solid $tit_blue_color;
+    }
+  }
 }
 
 .p_title_box {
@@ -259,8 +288,8 @@ $f_12: 12px;
 
 /*前往城市*/
 .p_go_city {
-  height: 54px;
-  line-height: 54px;
+  height: 50px;
+  line-height: 50px;
   white-space: nowrap;
 
   >div,
@@ -274,6 +303,7 @@ $f_12: 12px;
     font-size: 16px;
     line-height: 18px;
     vertical-align: middle;
+    color: #222;
   }
 
   .city-joint {
@@ -298,11 +328,11 @@ $f_12: 12px;
 
 /*********分类导航***************/
 .p_type_nav {
-  padding: 20px 0;
+  padding: 35px 0;
 
   >a {
-    font-size: 16px;
-    color: $gray;
+    font-size:$f_13;
+    color: $tit_color;
     padding-right: 35px;
   }
 }
@@ -375,7 +405,7 @@ $f_12: 12px;
 
         &.login {
           color: $white;
-          background: $light_blue;
+          background: $btn_blue_color;
         }
       }
     }
@@ -384,13 +414,12 @@ $f_12: 12px;
 
 /****************货主列表**********/
 .p_owner_list {
-  width:$w_1400;
   overflow: hidden;
+  font-size: $f_14;
   li {
     &:nth-child(5n) {
       margin-right: 0px;
     }
-
     @extend .fl;
     overflow: hidden;
     margin-right: 20px;
@@ -398,23 +427,11 @@ $f_12: 12px;
     height: 384px;
     background: $white;
     border:1px solid $border_color;
-
-    .owner_info {
-      box-sizing: border-box;
-      margin-top: 15px;
-
-      >p {
-        padding: 3px 0;
-        display: block;
-        overflow: hidden;
-      }
-    }
   }
-
   .owner_pic {
     overflow: hidden;
-    width: 272px;
-    height: 195px;
+    width: 262px;
+    height: 262px;
     text-align: center;
 
     >img {
@@ -422,42 +439,34 @@ $f_12: 12px;
     }
   }
 
-  .owner_name {
-    height: 20px;
-    line-height: 20px;
-    color: $blue;
-
-    span {
-      &.owner_name_companyName {
-        width: 230px;
-        @extend .ellipsis;
-      }
-
-      &.owner_name_liveness {
-        .iconfont {
-          padding-right: 5px;
-        }
-
-        color: $orange;
-        font-size: $f_14;
-      }
-
-    }
-  }
-
-  .owner_total {
-    color: $tit_color;
-
-    span {
-      font-size: 17px;
-      font-weight: bold;
-      color: $orange;
-    }
-  }
-
   .owner_info {
+    box-sizing: border-box;
+    margin: 30px 10px 15px 10px;
+    >p {
+      display: block;
+      overflow: hidden;
+    }
+    .owner_name {
+      margin-bottom: 8px;
+      width: 242px;
+      font-size: $f_16;
+      color: $tit_color;
+      @extend .ellipsis;
+    }
+    .owner_total {
+      margin-bottom: 8px;
+      color: $tit_color;
+      .owner_total_num {
+        padding-left: 5px;
+        color: $txt_red_color;
+      }
+    }
     .owner_num {
-      color: $light_gray;
+      color: $gray;
+      .owner_num_liveness{
+        .iconfont{ padding-right: 5px;color: $orange;}
+        color: $txt_red_color;
+      }
     }
   }
 }
@@ -467,55 +476,39 @@ $f_12: 12px;
   >li {
     overflow: hidden;
     @extend .fl;
-    margin: 0 20px 20px 0;
-    padding: 15px 10px;
-    width: 246px;
-    height: 109px;
-    background: $light_blue;
-    border: 1px solid $border_color;
-
-    a,
-    a:hover {
-      color: $tit_color;
-
-      span {
-        color: $tit_color;
-
-        &.joint-label {
-          color: $light_gray;
+    margin: 0 15px 15px 0;
+    padding: 20px 10px 0 10px;
+    width: 238px;
+    height: 128px;
+    font-size: $f_13;
+    background: $bj_pale_blue;
+    border: 1px solid #daeefc;
+    .hd_box {
+      overflow: hidden;   
+      line-height: 20px;
+      >span {
+        .iconfont{
+          padding-left: 10px;
+          font-size: 20px;
+          color: $grass_green;
         }
       }
 
+      // .label_provider {
+      //   color: $light_gray;
+      // }
 
-    }
+      // .provider {
+      //   overflow: hidden;
+      //   margin: 0 10px;
+      // }
 
-    .hd_box {
-      overflow: hidden;
-      font-size: $f_13;
-
-      >span {
-        height: 20px;
-        line-height: 20px;
-        @extend .fl;
-      }
-
-      .label_provider {
-        color: $light_gray;
-      }
-
-      .provider {
-        overflow: hidden;
-        margin: 0 10px;
-        min-width: 75px;
-        color: $tit_color;
-      }
-
-      .sure {
-        padding: 0 5px;
-        color: $white;
-        background: $light_red;
-        border-radius: 3px;
-      }
+      // .sure {
+      //   // padding: 0 5px;
+      //   // color: $white;
+      //   // background: $light_red;
+      //   // border-radius: 3px;
+      // }
     }
 
     .md_box {
@@ -525,107 +518,90 @@ $f_12: 12px;
     .type_box {
       margin-bottom: 5px;
       @include type_box($f_13);
-
-      .time {
-        @extend .fr;
-        padding: 0 3px;
-        color: $green;
-        background: #f2f2f2;
-        border: 1px solid $green;
-      }
+      .type_box_item{
+         padding-right: 10px;
+     
+        }
+        .type_box_num{color: $txt_red_color;}
+      // .time {
+      //   @extend .fr;
+      //   padding: 0 3px;
+      //   color: $green;
+      //   background: #f2f2f2;
+      //   border: 1px solid $green;
+      // }
     }
 
-    .hy_list_goods {
-      line-height: 20px;
-
-      >span {
-        display: inline-block;
-        max-width: 200px;
-        @extend .ellipsis;
-      }
+    .list_goods {
+      .list_goods_time{color: $light_gray;}
     }
   }
 }
 
 /************最新货源************/
 .p_hy_info {
-  margin: 35px auto;
-  width: $w_1440;
-  height: 115px;
+  margin: 0 auto 85px auto;
+  width: 1398px;
+  height: 128px;
   font-size: $f_14;
   color: $tit_color;
   background: $white;
+  border: 1px solid $border_color;
 
   .hy_info_col1 {
-    margin: 25px 0 0 25px;
-    width: 830px;
-    height: 62px;
+    height: 128px;
   }
 
   .hy_info_tit {
-    width: 140px;
-    height: 58px;
-    border: 2px solid $orange;
-
+    width: 230px;
+    height: 128px;
+    background: #ff6f6f;
     >h3 {
-      margin-top: 15px;
-      margin-left: -2px;
-      width: 144px;
-      line-height: 25px;
-      font-size: 20px;
-      color: $orange;
+      line-height: 128px;
+      font-size: 24px;
+      font-weight: normal;
+      color:$white;
       text-align: center;
-      background: $white;
     }
   }
 
   .hy_info_user_box {
     overflow: hidden;
-    margin-left: 50px;
-    width: 600px;
-    height: 60px;
+    margin:20px 0 0 50px;
+    width: 660px;
+    height:90px;
 
     .hy_info_user_list {
       overflow: hidden;
-      height: 60px;
+      height: 90px;
+      >li{
+        height: 90px;
+        font-size: $f_16;
+      }
       // background-color: #bbb;
     }
-
+// 用户
     .hy_info_user_info {
       margin-bottom: 15px;
-      line-height: 22px;
-
       .hy_info_user_info_user {
         margin-right: 40px;
-        font-size: 16px;
-        font-weight: bold;
       }
 
       .hy_info_user_info_time {
         color: $light_gray;
       }
     }
-
+    // 货物
     .hy_info_user_text {
-      line-height: 22px;
       overflow: hidden;
-
-      >span {
+      margin-bottom:15px;
+      .p_l5{padding-right: 5px;}
+      .info_user_item{
         padding-right: 10px;
-
-        &.info_user_text_goods {
-          max-width: 380px;
-          @extend .ellipsis;
-        }
-
-        b {
-          font-weight: normal;
-          color: $blue;
-        }
-      }
-
-      .hy_info_user_text_link {
-        font-size: 16px;
+      }  
+    }
+    .hy_info_user_link{
+      a {
         color: $blue;
       }
     }
@@ -638,11 +614,8 @@ $f_12: 12px;
 
   .hy_info_num {
     height: 100px;
-    border-left: 1px dashed #ddd;
-
-    .iconfont {
-      font-weight: bold;
-    }
+    font-weight: bold;
+  
   }
 
   .hy_info_list {
@@ -651,44 +624,46 @@ $f_12: 12px;
 
     >li {
       @extend .fl;
-      margin-left: 45px;
+      margin-right: 60px;
       width: 90px;
       line-height: 30px;
-
       >span {
         display: block;
         line-height: 30px;
         text-align: center;
 
         .iconfont {
-          color: $light_orange;
-          padding-right: 10px;
+          font-size: 18px;
+          color: $orange;
+          padding-right: 5px;
         }
 
         &.hy_info_list_num {
           font-weight: bold;
-          color: $light_orange;
+          color: $orange;
         }
       }
     }
   }
 
   .hy_info_text_list {
-    margin-left: 45px;
     overflow: hidden;
     height: 40px;
     line-height: 40px;
 
     >li {
+      &:first-child{
+      margin-right: 15px;
+      }
       @extend .fl;
-      margin-right: 20px;
+      margin-right:40px;
 
       .iconfont {
         color: $light_orange;
       }
 
       .hy_info_text_num {
-        padding-left: 10px;
+        padding-left: 5px;
         color: $light_orange;
       }
     }
@@ -698,7 +673,7 @@ $f_12: 12px;
 /***********货源推荐************/
 .p_hy_groom {
   margin: 0 auto 30px auto;
-  width: $w_1440;
+  width: $w_1400;
   font-size: $f_14;
 
   .hd {
@@ -707,18 +682,19 @@ $f_12: 12px;
 
   .gr_title {
     @extend .fl;
-    color: $tit_color;
-    font-size: 25px;
+    color: $tit_blue_color;
+    font-size: 30px;
+    font-weight: normal;
   }
 
   .gr_txt {
     @extend .fl;
     margin-left: 25px;
-    font-size: 16px;
-    color: $light_gray;
+    font-size: $f_16;
+    color: $gray;
 
     >span {
-      color: $orange;
+      color: $txt_red_color;
     }
   }
 
@@ -729,7 +705,7 @@ $f_12: 12px;
     height: 38px;
     line-height: 38px;
     background: $white;
-    border: 1px solid $green;
+    border: 1px solid $btn_blue_color;
 
     .gr_sch_city,
     .gr_sch_icon,
@@ -764,7 +740,7 @@ $f_12: 12px;
         width: 65px;
         color: $white;
         text-align: center;
-        background: $green;
+        background: $btn_blue_color;
         cursor: pointer;
       }
     }
@@ -772,12 +748,12 @@ $f_12: 12px;
 
   .gr_link {
     @extend .fr;
+    font-size: $f_16;
     line-height: 40px;
 
     .iconfont {
       padding-left: 5px;
-      font-size: 14px;
-      color: $green;
+      color: $gray;
     }
   }
 }
@@ -993,6 +969,11 @@ $f_12: 12px;
 
   .p_title {
     text-align: center;
+
+    >div,
+    h3 {
+      display: inline-block;
+    }
   }
 
   .our_virtue_list {

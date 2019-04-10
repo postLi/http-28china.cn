@@ -1,9 +1,12 @@
 <template>
   <div>
-    <div class="bj_1">
+    <div class="bj_blue">
       <div class="hy_wrap clearfix">
         <div class="col1">
           <div class="p_category_menu">
+            <div class="p_hz_title">
+              <h2>货源</h2>
+            </div>
             <h4 class="category_menu_title">热门城市</h4>
             <div 
               class="category_menu_list"
@@ -52,74 +55,101 @@
               <a 
                 target="_blank"
                 :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'"
-              ><img src="../../static/images/huizong/type01.png"></a>
+              ><img src="../../static/images/huizong/hy_ad1.jpg"></a>
             </div>
             <div class="type_box">
               <a
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea"><img src="../../static/images/huizong/type02.png"></a>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea"><img src="../../static/images/huizong/hy_ad2.jpg"></a>
             </div>
             <div class="type_box">
               <a 
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&userAuth=AF0010403'"><img src="../../static/images/huizong/type03.png"></a></div>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&userAuth=AF0010403'"><img src="../../static/images/huizong/hy_ad3.jpg"></a></div>
           </div>
         </div>
         <div class="col3">
           <div class="p_user_login">
-            <div class="user_pic">头像</div>
+            <div class="user_pic"><img src="../../static/images/index/19stx.png"></div>
             <div class="user_show">
-              <p class="user_tip">Hi~欢迎来到28快运！</p>
+              <p class="user_txt">Hi~欢迎来到28快运！</p>
               <p class="user_profit">
-                <a href="/login">登录</a>
+                <a 
+                  class="login"
+                  href="/login">登录</a>
                 <a href="/regisiter">注册</a>
               </p>
             </div>
+          </div>
+          <!-- 用户登录 -->
+          <div class="hongbao_ad">
+            <a href="#"><img src="../../static/images/huizong/hy_hongbao_ad.jpg"></a>
           </div>
         </div>
       </div>
     </div>
     <!--货源-->
-    <div class="bj_2">
+    <div 
+      id="owner_swiper"
+      class="owner">
+      <h3 class="p_title">优质货主</h3>
       <div 
-        id="owner_swiper"
-        class="owner">
-        <h3 class="p_title">优质货主</h3>
-        <div 
-          class="swiper-container" 
-          v-if="shipperData.list!== undefined&&shipperData.list!== null&&shipperData.list.length > 0">
-          <ul class="swiper-wrapper p_owner_list clearfix">
-            <li 
-              class="swiper-slide"                
-              v-for="(item, index) in shipperData.list" 
-              :key="index">
-              <a 
-                target="_blank"
-                :href="'/member/' + item.companyId">
-                <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
-                <div class="owner_info">
-                  <p class="owner_name">
-                    <span 
-                      class="owner_name_companyName fl" 
-                      :title="item.companyName">{{ item.companyName }}</span>
-                    <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
-                  </p>
-                  <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
-                  <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
-                </div>
-              </a>
-            </li>
-          </ul>
-          <div class="swiper-pagination"/>
-          <!-- Add Arrows -->
-          <div class="swiper-button-next"/>
-          <div class="swiper-button-prev"/>
+        class="swiper-container" 
+        v-if="shipperData.list">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <ul class="p_owner_list clearfix">
+              <li                
+                v-for="(item, index) in shipperData.list" 
+                :key="index">
+                <a 
+                  target="_blank"
+                  :href="'/member/' + item.companyId">
+                  <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
+                  <div class="owner_info">
+                    <p class="owner_name">
+                      <span 
+                        class="owner_name_companyName fl" 
+                        :title="item.companyName">{{ item.companyName }}</span>
+                      <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    </p>
+                    <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
+                    <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div class="swiper-slide">
+            <ul class="p_owner_list clearfix">
+              <li                
+                v-for="(item, index) in shipperData.list" 
+                :key="index">
+                <a 
+                  target="_blank"
+                  :href="'/member/' + item.companyId">
+                  <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
+                  <div class="owner_info">
+                    <p class="owner_name">
+                      <span 
+                        class="owner_name_companyName fl" 
+                        :title="item.companyName">{{ item.companyName }}</span>
+                      <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    </p>
+                    <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
+                    <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div 
-          class="error" 
-          v-else>
-          没有数据
-        </div>
+        <div class="swiper-pagination"/>
+      </div>
+      <div 
+        class="error" 
+        v-else>
+        没有数据
       </div>
     </div>
     <!-- 优质货主 -->
@@ -344,7 +374,7 @@
         <div class="col1">
           <ul 
             class="p_hy_list clearfix"
-            v-if="recommendData.list!== undefined && recommendData.list!== null&&recommendData.list.length>0">
+            v-if="recommendData.list">
             <li               
               v-for="(item, index) in recommendData.list" 
               :key="index">
@@ -517,7 +547,7 @@
         </div>  
         <ul 
           class="p_co_owner_list clearfix"
-          v-if="monthShipperData.list.length > 0">
+          v-if="monthShipperData">
           <li 
             v-for="(item, index) in monthShipperData.list" 
             :key="index">
@@ -718,10 +748,11 @@ export default {
       return value * 1000
     }
   },
+  layout: 'huizong',
   data() {
     return {
       banners: [
-        require('../../static/images/huizong/banner01.jpg'),
+        require('../../static/images/huizong/hy_banner1.jpg'),
         require('../../static/images/huizong/banner02.jpg'),
         require('../../static/images/huizong/banner03.jpg')
       ],
@@ -737,39 +768,38 @@ export default {
     }
   },
   async asyncData({ $axios, query, app, error }) {
-    let [
-      hotCityData,
-      shipperData,
-      monthShipperData,
-      recommendData,
-      darenData,
-      newListData,
-      statisticsData
-    ] = await Promise.all([
-      //热门城市
-      $axios.get('/28-web/city/hot'),
-      // 优质货主
-      $axios.post('/28-web/shipper/excellent', {
-        currentPage: 1,
-        pageSize: 10
-      }),
-      //本月优质货主
-      $axios.post('/28-web/shipper/month/excellent', {
+    // let [, ] = await Promise.all([   ])
+    //热门城市
+    let hotCityData = await $axios.get('/28-web/city/hot')
+    // 优质货主
+    let shipperData = await $axios.post('/28-web/shipper/excellent', {
+      currentPage: 1,
+      pageSize: 5
+    })
+    //本月优质货主
+    let monthShipperData = await $axios.post(
+      '/28-web/shipper/month/excellent',
+      {
         currentPage: 1,
         pageSize: 5
-      }),
-      // 货源推荐
-      $axios.post('/28-web/lclOrder/orderSummary/recommendList', {
+      }
+    )
+    // 货源推荐
+    let recommendData = await $axios.post(
+      '/28-web/lclOrder/orderSummary/recommendList',
+      {
         currentPage: 1,
         pageSize: 12
-      }),
-      // 榜单达人
-      $axios.post('/28-web/lclOrder/orderSummary/findOrderDaren'),
-      //获取最新24小时内10条货源信息列表
-      $axios.get('/28-web/lclOrder/newList'),
-      //查询首页车源、货源、专线数量
-      $axios.get('/28-web//index/today/statistics')
-    ])
+      }
+    )
+    // 榜单达人
+    let darenData = await $axios.post(
+      '/28-web/lclOrder/orderSummary/findOrderDaren'
+    )
+    //获取最新24小时内10条货源信息列表
+    let newListData = await $axios.get('/28-web/lclOrder/newList')
+    //查询首页车源、货源、专线数量
+    let statisticsData = await $axios.get('/28-web//index/today/statistics')
 
     if (
       hotCityData.status === 200 ||
@@ -803,10 +833,13 @@ export default {
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
       console.log('cookies', decodeURIComponent(document.cookie))
-
+      //优质货主
+      this.shipperData.list = this.shipperData.list ? this.shipperData.list : []
+      //本月货主
       this.monthShipperData.list = this.monthShipperData.list
         ? this.monthShipperData.list
         : []
+      //货源推荐
       this.recommendData.list = this.recommendData.list
         ? this.recommendData.list
         : []
@@ -851,6 +884,7 @@ export default {
         let adSwiper = new Swiper('#ad .swiper-container', {
           effect: 'fade',
           spaceBetween: 30,
+          loop: true,
           centeredSlides: true,
           autoplay: {
             delay: 3000,
@@ -872,20 +906,31 @@ export default {
     intSwiper2() {
       this.$nextTick(() => {
         // 货主
-        let hahaswiper = new Swiper('#owner_swiper .swiper-container', {
-          slidesPerView: 5,
-          spaceBetween: 20,
-          freeMode: true,
+        let swiper = new Swiper('#owner_swiper .swiper-container', {
           pagination: {
             el: '#owner_swiper .swiper-pagination',
             clickable: true
-          },
-          navigation: {
-            nextEl: '#owner_swiper .swiper-button-next',
-            prevEl: '#owner_swiper .swiper-button-prev',
-            disabledClass: '#owner_swiper .my-button-disabled'
+            // renderBullet: function(index, className) {
+            //   return (
+            //     '<span class="' + className + '">' + (index + 1) + '</span>'
+            //   )
+            // }
           }
         })
+        // let hahaswiper = new Swiper('#owner_swiper .swiper-container', {
+        //   slidesPerView: 5,
+        //   spaceBetween: 20,
+        //   freeMode: true,
+        //   pagination: {
+        //     el: '#owner_swiper .swiper-pagination',
+        //     clickable: true
+        //   },
+        //   navigation: {
+        //     nextEl: '#owner_swiper .swiper-button-next',
+        //     prevEl: '#owner_swiper .swiper-button-prev',
+        //     disabledClass: '#owner_swiper .my-button-disabled'
+        //   }
+        // })
       })
     },
     //搜索货源
@@ -937,18 +982,21 @@ export default {
 <style lang="scss" scoped>
 @import '~/assets/scss/common_index.scss';
 /*1、货源导航*/
+.bj_blue {
+  box-sizing: border-box;
+  background: $blue;
+}
 .hy_wrap {
   // display: flex;
   // justify-content: space-between;
   margin: 0 auto 0 auto;
-  padding: 5px 0 15px 0;
-  width: $w_1440;
-  height: 425px;
+  padding: 5px 0 20px 0;
+  width: $w_1400;
   font-size: $f_14;
   .col1,
   .col2,
   .col3 {
-    height: 425px;
+    height: 516px;
     background: $white;
   }
   .col1 {
@@ -957,23 +1005,24 @@ export default {
   }
   .col2 {
     @extend .fl;
-    margin-left: 15px;
-    width: 890px;
+    margin-left: 20px;
+    width: 832px;
     background: none;
   }
   .col3 {
     @extend .fr;
-    padding: 0 20px;
-    width: 250px;
+    width: 298px;
+  }
+  .hongbao_ad {
   }
 }
 /*幻灯片*/
 .ad {
   overflow: hidden;
-  height: 290px;
+  height: 360px;
   background: $white;
   .swiper-container {
-    height: 290px;
+    height: 360px;
     > .swiper-slide {
       display: none;
     }
@@ -984,13 +1033,13 @@ export default {
   }
 }
 .type {
-  margin-top: 10px;
+  margin-top: 20px;
   height: 125px;
   .type_box {
     @extend .fl;
     box-sizing: border-box;
-    width: 296px;
-    height: 125px;
+    width: 277px;
+    height: 134px;
     background: $white;
     img {
       width: 100%;
@@ -1002,18 +1051,12 @@ export default {
 /*优质货主*/
 .owner {
   margin: 0 auto;
-  width: $w_1440;
+  width: $w_1400;
   font-size: 16px;
-  background: $white;
-  height: 440px;
-  > .swiper-container {
-    height: 350px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    top: 75px !important;
-    margin-top: 0 !important;
-  }
+  // > .swiper-container {
+  //   height: 350px;
+  // }
+
   > .error {
     font-size: $f_14;
   }
@@ -1021,7 +1064,7 @@ export default {
 /*选择我们*/
 .our {
   margin: 0 auto;
-  width: $w_1440;
+  width: $w_1400;
   font-size: $f_14;
   .col1,
   .col2 {
@@ -1237,7 +1280,7 @@ export default {
 /*货量达人榜*/
 .rank_people {
   margin: 0 auto 20px auto;
-  width: $w_1440;
+  width: $w_1400;
   font-size: $f_14;
   > .col1 {
     @extend .fl;
@@ -1347,7 +1390,7 @@ export default {
 .novice_steps {
   overflow: hidden;
   margin: 0 auto;
-  width: $w_1440;
+  width: $w_1400;
   height: 234px;
   .right-ward-container {
     position: relative;
@@ -1451,7 +1494,7 @@ export default {
 .hy_partner {
   margin: 0 auto;
   padding: 20px 0;
-  width: $w_1440;
+  width: $w_1400;
   .p_title {
     text-align: center;
   }

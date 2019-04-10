@@ -1,61 +1,28 @@
 <template>
   <div class="cy">
     <div class="main">
-      <div class="right main_nr">
-        <!-- <div class="nr_bt">
-          <div class="nr_bt1"><span>在线下单</span></div>
-        </div>	 -->
-        <!-- 下单部分 -->
-        <div class="nr order-create-main">
-          <div class="order-line-info order-input-tab">
-            <div class="order-success"><img
-              src="/images/wzlImg/dagou (1).png"
-              id="gou"><h3>恭喜发布成功！</h3></div>
-            <!-- <div class="order-metal">
-            <h4>您的会员信息完善度过低，发货客户很难找到您！</h4>
-            <h6>完善<a id="authentication">实名认证</a>信息，获得更多免费推广！<span id="more_che_line">获得更多推广</span></h6>
-          </div> -->
-            <div class="order-content">
-              <h4><img src="/images/wzlImg/dengpao.png">物流课堂小秘笈</h4>
-              <ul class="content-list">
-                <li>
-                  <img
-                    src="/images/wzlImg/xh1.png"
-                    class="li_imgbox">
-                  <h3>更多曝光机会</h3>
-                  <p>专线内容完善度越高，展示及推荐的次数越多！</p>
-                </li>
-                <li>
-                  <img
-                    src="/images/wzlImg/xh2.png"
-                    class="li_imgbox">
-                  <h3>获取更多商机</h3>
-                  <p>准确、完整的填写您的企业信息，有利于获得客户的信任，赢得更多商机！</p>
-                </li>
-                <li>
-                  <img
-                    src="/images/wzlImg/xh3.png"
-                    class="li_imgbox">
-                  <h3>更多曝光机会</h3>
-                  <p>及时反馈用户留言能够提升客户满意度！</p>
-                </li>
-                <li>
-                  <img
-                    src="/images/wzlImg/xh4.png"
-                    class="li_imgbox">
-                  <h3>更多曝光机会</h3>
-                  <p>定期发布及更新信息享受线上推广，获得更多的展示，让更多用户找到你！</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <!-- 提交按钮 -->
-          <div class="btn_bottom">
-          <!-- <div class="order-submit-btn" id="continue">继续发布车源</div>
-          <div class="order-submit-btn" id="check">查看车源详情</div>
-          <div class="order-submit-btn" id="management">管理我的车源</div> -->
+      <div class="nr order-create-main">
+        <div class="order-line-info order-input-tab">
+          <div class="order-success"><img
+            src="/images/wzlImg/dagou (1).png"
+            id="gou"><h3>恭喜发布成功！</h3></div>
+          <div class="order-content">
+            <h4><img src="/images/wzlImg/dengpao.png">物流课堂小秘笈</h4>
+            <ul class="content-list">
+              <li 
+                v-for="(item,index) in dataset" 
+                :key="index">
+                <img
+                  :src="'/images/wzlImg/xh'+item.num +'.png'"
+                  class="li_imgbox">
+                <h3>{{ item.title }}</h3>
+                <p>{{ item.contentText }}</p>
+              </li>
+            </ul>
           </div>
         </div>
+        <!-- 提交按钮 -->
+        <div class="btn_bottom"/>
       </div>
     </div>
 
@@ -69,7 +36,32 @@ export default {
     link: [{ rel: 'stylesheet', href: '/css/create/cySuccess.css' }]
   },
   data() {
-    return {}
+    return {
+      dataset: [
+        {
+          title: '更多曝光机会',
+          contentText: '专线内容完善度越高，展示及推荐的次数越多！',
+          num: 1
+        },
+        {
+          title: '获取更多商机',
+          contentText:
+            '准确、完整的填写您的企业信息，有利于获得客户的信任，赢得更多商机！',
+          num: 2
+        },
+        {
+          title: '更多曝光机会',
+          contentText: '及时反馈用户留言能够提升客户满意度！',
+          num: 3
+        },
+        {
+          title: '更多曝光机会',
+          contentText:
+            '定期发布及更新信息享受线上推广，获得更多的展示，让更多用户找到你！',
+          num: 4
+        }
+      ]
+    }
   },
   mounted() {
     var buttonText = this.$route.query.text
@@ -119,9 +111,6 @@ export default {
         }
       }
     })
-
-    // intEvent1()
-    // intEvent()
   }
 }
 </script>

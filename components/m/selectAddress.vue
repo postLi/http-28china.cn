@@ -277,9 +277,9 @@ export default {
   }
 }
 .code_item_selected {
-  border: 1px solid #2fb301;
-  color: #2fb301;
-  background-color: rgba(47, 179, 1, 0.5);
+  border: 1px solid #54a7ff;
+  color: #54a7ff;
+  background-color: rgba(84, 167, 255, 0.5);
 }
 .code_item_no_selected {
   border: 1px solid #999999;

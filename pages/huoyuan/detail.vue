@@ -825,8 +825,9 @@
       </div>
 
     </div>
-    <Add
-      :is-show-add.sync="isShowAdd"
+    <Add 
+      @close="closeMe"
+      :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
     <Lelp :is-show-help.sync="isShowHelp" />
     <Order
@@ -835,7 +836,7 @@
   </div>
 </template>
 <script>
-import Add from './add'
+import Add from './add1'
 import Lelp from './help'
 import Order from './order'
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
@@ -1321,7 +1322,7 @@ export default {
   methods: {
     showMoblieFn() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       if (access_token && user_token) {
         this.checkMoblie = true
         this.check = this.hyDetail.mobile
@@ -1333,7 +1334,7 @@ export default {
     checkobile() {
       // this.isMobile = !this.isMobile
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       if (access_token && user_token) {
         this.isMobile = true
         this.mobile = this.hyDetail.mobile
@@ -1352,7 +1353,7 @@ export default {
     },
     collected() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       this.isShowCollect = !this.isShowCollect
       if (!this.isShowCollect) {
         this.handle = 'collect'
@@ -1374,7 +1375,7 @@ export default {
     },
     openAdd() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       this.getAddress()
       if (access_token && user_token) {
         this.$axios
@@ -1401,9 +1402,14 @@ export default {
         this.getAddress()
       }
     },
+    closeMe() {
+      this.isShowAdd = false
+      this.isShowHelp = false
+      this.isShowOrder = false
+    },
     openHelp() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('user_token')
+      let user_token = $.cookie('login_userToken')
       this.getAddress()
       if (access_token && user_token) {
         this.$axios

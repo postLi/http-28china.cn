@@ -724,9 +724,9 @@ export default {
         this.$axios
           .post('/28-web/helpFind/range/create', obj)
           .then(res => {
-            this.reset()
             if (res.data.status === 200) {
               layer.msg('提交成功，客服稍后将会与您联系')
+              this.reset()
             } else {
               layer.msg(res.data.errorInfo)
             }

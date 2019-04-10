@@ -228,7 +228,7 @@
               <div class="operation">
                 <div class="loginBtn"><a
                   target="_blank"
-                  href="/hyzx">会员中心</a></div>
+                  href="/hyzx/">会员中心</a></div>
                 <div 
                   v-if="$cookies.get('login_type') === 'aflc-5'"
                   class="regBtn"> <a

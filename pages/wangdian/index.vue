@@ -221,7 +221,6 @@
             :key="index"
             class="wlzx_list"
           >
-
             <li class="wlzx_list_2">
               <p class="p1"><a
                 id="nr01"
@@ -310,7 +309,7 @@
           </ul>
         </div>
         <!-- footer -->
-        <div class="lll-line--othet">
+        <div class="lll-recommend clearfix">
           <div class="lll-recommend clearfix">
             <div
               class="zx_sx1"
@@ -320,7 +319,7 @@
         </div>
         <div class="lll-recommend clearfix">
           <div
-            class="zx_sx"
+            class="zx_sx1"
             style="border-color: #e7e7e7"
           ><span class="biaozhi"/><span>{{ lineLinks.interestedRecommend.label }}</span></div>
           <FooterLinks
@@ -975,22 +974,22 @@ export default {
         this.checkNotice.select != '' &&
         this.checkNotice.phone != ''
       ) {
-        this.$axios
-          .post('/28-web/helpFind/range/create', obj)
-          .then(res => {
+        this.$axios.post('/28-web/helpFind/range/create', obj).then(res => {
+          if (res.data.status === 200) {
+            layer.msg('提交成功，客服稍后将会与您联系')
             this.reset()
-            if (res.data.status === 200) {
-              layer.msg('提交成功，客服稍后将会与您联系')
-            } else {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-          .catch(err => {
+          } else {
             layer.msg(res.data.errorInfo)
-          })
+          }
+        })
       } else {
         return
       }
+    },
+    reset() {
+      setTimeout(function() {
+        window.location.reload()
+      }, 3000)
     },
     setMap() {
       this.searchDo()
@@ -1143,18 +1142,24 @@ export default {
 }
 .wzlwangdian {
   .lll-line--othet {
-    display: inline-block;
+    // display: inline-block;
+    float: left;
   }
   .lll-recommend {
     transition: all 0.4s;
     background: #fff;
     padding-bottom: 15px;
+    width: 100%;
+    float: left;
   }
   .zx_sx1 {
     border-bottom: 1px solid #e7e7e7;
     line-height: 50px;
     font-size: 18px;
     font-weight: bold;
+    float: left;
+    width: 100%;
+    color: #3f94ee;
     .biaozhi {
       width: 3px;
       height: 18px;
@@ -1234,8 +1239,23 @@ export default {
     margin-left: 8px;
     vertical-align: middle;
   }
-  .icon-btn-arrow-up-2,
   .icon-btn-arrow-down-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/dw.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .icon-btn-arrow-up-2 {
+    margin-top: 5px;
+    display: inline-block;
+    background: url(../../static/images/list_wlzx/up.png);
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
   }
 
   .icon-btn-arrow-down-2 {

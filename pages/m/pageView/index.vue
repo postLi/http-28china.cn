@@ -119,7 +119,7 @@ footer {
   height: 0;
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;
-  border-top: 5px solid #2fb301;
+  border-top: 5px solid #409eff;
 }
 .page_view_triangle-down-9 {
   width: 0;

@@ -14,7 +14,7 @@
             class="dialog_tit">
             <slot
               name="header"
-              style="float: left;">{{ title }}</slot>
+              style="float: left;margin-left:50px;">{{ title }}</slot>
           </div>
           <div
             class="layui-btn-group"
@@ -93,7 +93,9 @@ export default {
   position: relative;
   color: #2e2c2d;
   font-size: 16px;
-
+  .dialog_main {
+    margin: 0 30px;
+  }
   .dialog-cover {
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -115,12 +117,14 @@ export default {
     background: #fff;
   }
   .dialog_head {
+    height: 44px;
+    background: #3f94ee;
+    color: #fff;
     .dialog_tit {
       display: inline-block;
       width: 89%;
       padding: 10px;
       text-align: center;
-      color: #666;
       font-size: 18px;
     }
   }
@@ -128,6 +132,9 @@ export default {
     padding: 10px;
     display: inline-block;
     font-size: 14px;
+  }
+  .layui-btn-group {
+    padding: 5px;
   }
 }
 </style>

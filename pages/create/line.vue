@@ -385,8 +385,6 @@
               </ul> -->
             </div>
           </div>
-          <button id="a">重置</button>
-          <button id="b">提交</button>
           <!-- 提交按钮 -->
           <div class="btn_bottom">
             <div 
@@ -725,8 +723,6 @@ export default {
           //地点插件
           $('#startPlace .start').citypicker()
           $('#endPlace .end').citypicker()
-          // $('#a').click(function() {})
-          // $('#b').click(function() {})
         })
       })
       // })

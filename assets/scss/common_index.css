@@ -256,7 +256,7 @@
 
 /*********分类导航***************/
 .p_type_nav {
-  padding: 35px 0;
+  padding-bottom: 30px;
 }
 
 .p_type_nav > a {
@@ -696,30 +696,6 @@
   margin-bottom: 5px;
   font-size: 25px;
   color: #13b31e;
-}
-
-.p_release .release_total {
-  margin: 30px auto 0 auto;
-  display: table;
-  width: 430px;
-  font-size: 16px;
-  line-height: 20px;
-  color: #333;
-}
-
-.p_release .release_total > span {
-  display: inline-block;
-  font-size: 18px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.p_release .release_total > span.release_total_num {
-  padding: 2px 8px;
-  color: #fff;
-  background: #ff0000;
-  font-weight: normal;
-  font-size: 20px;
 }
 
 .p_order_release .release_total {

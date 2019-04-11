@@ -286,7 +286,7 @@
                               class="volumeEnd" 
                               v-model="item.endVolume">
                           </label>
-                          <label>元/公斤</label>
+                          <label>元/方</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -296,7 +296,7 @@
                             type="number" 
                             class="origina"
                             v-model="item.primeryPrice">
-                          <label>元/公斤</label>
+                          <label>元/方</label>
                         </div>
                       </td>
                       <td colspan="2">
@@ -771,7 +771,7 @@ export default {
         this.heavyList.push(cargo)
         console.log(this.heavyList)
       } else {
-        let endVolume = this.lightList[this.heavyList.length - 1].endVolume
+        let endVolume = this.lightList[this.lightList.length - 1].endVolume
         cargo.startVolume = endVolume
         cargo.type = '0'
         this.lightList.push(cargo)
@@ -783,11 +783,11 @@ export default {
       let delNum
       if (type === 1) {
         delNum = this.heavyList.length - 1
-        this.heavyList = this.heavyList.splice(delNum, 1)
+        this.heavyList = this.heavyList.slice(0, delNum)
         layer.msg('成功删除重货最后一条内容！')
       } else {
         delNum = this.lightList.length - 1
-        this.lightList = this.lightList.splice(delNum, 1)
+        this.lightList = this.lightList.splice(0, delNum)
         layer.msg('成功删除轻货最后一条内容！')
       }
     },

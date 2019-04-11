@@ -99,7 +99,7 @@
       </div>
       <div 
         class="swiper-container" 
-        v-if="shipperData.list">
+        v-if="shipperData.list.length>0">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
@@ -114,7 +114,7 @@
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
-                      :title="item.companyName">{{ item.companyName }}速递物流有限公司
+                      :title="item.companyName">{{ item.companyName }}暂无名字
                      
                     </p>
                     <p class="owner_total">
@@ -143,7 +143,7 @@
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
-                      :title="item.companyName">{{ item.companyName }}速递物流有限公司
+                      :title="item.companyName">{{ item.companyName }}暂无名字
                      
                     </p>
                     <p class="owner_total">
@@ -387,19 +387,19 @@
           :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">
         货源大厅<i class="iconfont iconjiantou_xiangyouliangci_o"/></a>
       </div>
-      <div class="p_type_nav">
-        <a 
-          target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
-        <a 
-          target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
-      </div>
       <div class="bd">
         <div class="col1">
+          <div class="p_type_nav">
+            <a 
+              target="_blank"
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
+            <a 
+              target="_blank"
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
+          </div>
           <ul 
             class="p_hy_list clearfix"
-            v-if="recommendData.list">
+            v-if="recommendData.list.length>0">
             <li               
               v-for="(item, index) in recommendData.list" 
               :key="index">
@@ -408,7 +408,7 @@
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
                   <span class="p_l5">物流商:</span>
-                  <span>{{ item.wlName }}壹米滴答</span>
+                  <span>{{ item.wlName }}暂无名字</span>
                   <span><i class="iconfont iconrenzheng"/></span>
                 </div>
                 <div class="md_box">
@@ -463,15 +463,31 @@
               订阅货源，第一时间获得系统消息通知
               已有<span class="subscribe_txt_num">18965</span>人订阅后达成交易
             </div>
-            <a class="btn_remind">上新提醒我</a>
+            <a class="subscribe_remind_btn">上新提醒我</a>
           </div>
-          <div class="weixin">
+          <!-- <div class="weixin">
             <div class="pic"><img src="../../static/images/huizong/weixin.png"></div>
             下载
             <a
               target="_blank" 
               href="http://h5.28tms.com/">【28快运APP】</a>，您可查看更多货源，并可实时接收28快运为您推荐的精品货源提醒
+          </div> -->
+          <div class="release_car">
+            <div class="release_car_num">
+              <span class="release_car_item">5</span>
+              <span class="release_car_item">3</span>
+              <span class="release_car_item">8</span>
+              <span class="release_car_item">8</span>
+              <span class="release_car_item">2</span>
+            </div>
+            <div class="release_car_tit">平台已撮合货源达成交易</div>
+            <a class="release_car_btn">发布求车信息</a>
+            <div class="release_car_txt">
+              快速发布货源，让承运商主动来找我<br>
+              自主挑选合适承运商
+            </div>
           </div>
+   
         </div>
       </div>
     </div>
@@ -573,7 +589,7 @@
         </div>  
         <ul 
           class="p_co_owner_list clearfix"
-          v-if="monthShipperData">
+          v-if="monthShipperData.length>0">
           <li 
             v-for="(item, index) in monthShipperData.list" 
             :key="index">
@@ -1220,6 +1236,7 @@ a {
 .p_hy_groom {
   margin-top: 65px;
   .bd {
+    margin-top: 50px;
     .col1 {
       overflow: hidden;
       @extend .fl;
@@ -1234,6 +1251,7 @@ a {
     padding: 0 20px;
     width: 256px;
     height: 268px;
+    background: url('../../static/images/huizong/bj_hy_dingyue.jpg') no-repeat;
     // padding: 20px;
     background-color: #edf6fc;
     border: 1px solid #e1eef7;
@@ -1267,46 +1285,90 @@ a {
     }
     .subscribe_txt {
       overflow: hidden;
-      margin: 10px 0;
+      margin: 20px 0;
       color: $light_gray;
       .subscribe_txt_num {
         padding: 0 5px;
         color: $txt_red_color;
       }
     }
-    .btn_remind {
+    .subscribe_remind_btn {
       display: block;
-      height: 45px;
-      line-height: 45px;
+      height: 40px;
+      line-height: 40px;
       text-align: center;
       color: $white;
       background: $orange;
-      box-shadow: 0 0 10px #46dcc6;
       cursor: pointer;
     }
   }
-  .weixin {
-    overflow: hidden;
+  // .weixin {
+  //   overflow: hidden;
+  //   margin-top: 20px;
+  //   padding: 20px 10px;
+  //   background: #fcfac1;
+  //   // height: 116px;
+  //   .pic {
+  //     overflow: hidden;
+  //     @extend .fl;
+  //     margin-right: 10px;
+  //     width: 85px;
+  //     height: 85px;
+  //     img {
+  //       width: 100%;
+  //       height: 100%;
+  //     }
+  //   }
+  //   > a {
+  //     color: #0066ff;
+  //   }
+  // }
+  .release_car {
     margin-top: 20px;
-    padding: 20px 10px;
-    background: #fcfac1;
-    // height: 116px;
-    .pic {
-      overflow: hidden;
-      @extend .fl;
-      margin-right: 10px;
-      width: 85px;
-      height: 85px;
-      img {
-        width: 100%;
-        height: 100%;
+    padding-top: 20px;
+    width: 297px;
+    height: 215px;
+    background: $white;
+    border: 1px solid $border_color;
+    font-size: $f_18;
+    text-align: center;
+    color: $tit_color;
+    .release_car_num {
+      font-size: 0;
+      .release_car_item {
+        display: inline-block;
+        margin: 0 3px;
+        width: 34px;
+        height: 34px;
+        line-height: 34px;
+        font-weight: bold;
+        text-align: center;
+        color: $white;
+        font-size: $f_18;
+        background: $orange;
+        font-weight: normal;
       }
     }
-    > a {
-      color: #0066ff;
+    .release_car_tit {
+      padding: 10px 0 30px 0;
+    }
+    .release_car_btn {
+      margin: 0 auto;
+      display: block;
+      width: 183px;
+      height: 40px;
+      line-height: 40px;
+      background: $btn_blue_color;
+      color: $white;
+    }
+    .release_car_txt {
+      margin-top: 10px;
+      font-size: $f_14;
+      line-height: 25px;
     }
   }
 }
+
 .p_release {
   .release_box {
     .release_box_txt {

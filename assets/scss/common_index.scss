@@ -328,7 +328,8 @@ $f_12: 12px;
 
 /*********分类导航***************/
 .p_type_nav {
-  padding: 35px 0;
+  // padding: 35px 0;
+  padding-bottom: 30px;
 
   >a {
     font-size:$f_13;
@@ -782,30 +783,30 @@ $f_12: 12px;
       }
     }
   }
+// 暂时不知道要不要
+  // .release_total {
+  //   margin: 30px auto 0 auto;
+  //   display: table;
+  //   width: 430px;
+  //   font-size: 16px;
+  //   line-height: 20px;
+  //   color: $tit_color;
 
-  .release_total {
-    margin: 30px auto 0 auto;
-    display: table;
-    width: 430px;
-    font-size: 16px;
-    line-height: 20px;
-    color: $tit_color;
+  //   >span {
+  //     display: inline-block;
+  //     font-size: 18px;
+  //     font-weight: bold;
+  //     margin-left: 10px;
 
-    >span {
-      display: inline-block;
-      font-size: 18px;
-      font-weight: bold;
-      margin-left: 10px;
-
-      &.release_total_num {
-        padding: 2px 8px;
-        color: $white;
-        background: $red;
-        font-weight: normal;
-        font-size: 20px;
-      }
-    }
-  }
+  //     &.release_total_num {
+  //       padding: 2px 8px;
+  //       color: $white;
+  //       background: $red;
+  //       font-weight: normal;
+  //       font-size: 20px;
+  //     }
+  //   }
+  // }
 }
 
 .p_order_release {

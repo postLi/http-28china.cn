@@ -48,9 +48,6 @@
                 
                 placeholder="请输入您的手机号"
                 class="fl">
-              <!-- maxlength="11"
-                v-model="inputData" -->
-              <!-- @click="helpMe" -->
               <button 
                 
               class="fl">帮我推荐</button>
@@ -266,6 +263,8 @@
           </ul>
         </div>
       </div>
+
+     
       <div class="hy_info_col2 fl clearfix">
         <div class="hy_info_num">
           <ul class="hy_info_list clearfix">
@@ -329,50 +328,7 @@
 
   
 
-      <form
-        class="form_help"
-        name="zxaddform"
-        method="post"
-        action=""
-        style="position: relative;">
-        <input
-          name="a7"
-          type="hidden"
-          value="0">
-        <input
-          type="hidden"
-          name="mid"
-          value="19">
-        <input
-          type="hidden"
-          name="dopost"
-          value="search">
-        <div
-          id="wlLineFrom1"
-          class="fl list_input"
-          style="position:relative;">
-          <input
-            name="cfd"
-            style="height: 100%;"
-            type="text"
-            data-toggle="city-picker"
-            data-level="district"
-            placeholder="请输入出发地">
-        </div>
-        <div
-          id="wlLineTo1"
-          class="fl list_input"
-          style="position:relative;">
-          <input
-            name="ddd"
-            style="height: 100%;"
-            data-toggle="city-picker"
-            data-level="district"
-            type="text"
-            placeholder="请输入到达地">
-        </div>
-   
-      </form>
+      
 
 
       <div class="p_type_nav">
@@ -895,16 +851,10 @@
       <div class="clear"/>
     </div>
     <!-- 热点新闻 -->
-    <Add
-      :show = "isAdd"
-      @close="noaddFn"
-      :info="inputData"
-      @fromAdd="fromAdd"
-    />
+  
   </div>
 </template>
 <script>
-import Add from './help'
 function myCredit(credit, item) {
   if (credit >= 0 && credit <= 3) {
     item.credit = 1
@@ -985,9 +935,6 @@ export default {
   head: {
     link: [{ rel: 'stylesheet', href: '/layer/dist/css/layui.css' }],
     script: [{ src: '/layer/layer.js' }]
-  },
-  components: {
-    Add
   },
   data() {
     return {
@@ -1162,7 +1109,7 @@ export default {
 
   mounted() {
     // console.log(this.typeNav, 'typeNav')
-    seajs.use(['layer', '/js/jq_scroll.js', '/js/LLL-AFLC_API.js'], function() {
+    seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
       $('.p_hy_info .hy_info_user_box').Scroll({
         line: 1,
@@ -1180,31 +1127,11 @@ export default {
   },
 
   methods: {
-    helpMe() {
-      if (this.inputData) {
-        var validReg = window.Lll_AFLC_VALID
-        let aurl = ''
-
-        if (validReg.MOBILE.test(this.inputData)) {
-          this.addFn()
-        } else {
-          this.isMobile = true
-          this.inputData = ''
-        }
-      } else {
-        this.isMobile = true
-      }
-    },
     fromAdd(data) {
       this.inputData = data
       this.isMobile = false
     },
-    addFn() {
-      this.isAdd = true
-    },
-    noaddFn() {
-      this.isAdd = false
-    },
+
     search() {
       let list1 = []
       $('#parkAddress .select-item').each(function(i, e) {
@@ -1918,58 +1845,4 @@ export default {
     display: none;
   }
 }
-.lll_huizong {
-  margin-left: 115px;
-  width: 510px;
-  height: 38px;
-  line-height: 38px;
-  background: #fff;
-  border: 1px solid #3cb46d;
-  .gr_sch_city {
-    position: relative;
-    padding-left: 10px;
-    width: 190px;
-  }
-  .gr_sch_city > input {
-    border: 0;
-  }
-  .gr_sch_icon {
-    width: 45px;
-  }
-  .gr_sch_btn {
-    width: 65px;
-    color: #fff;
-  }
-  .gr_sch_btn > a {
-    display: block;
-    width: 65px;
-    color: #fff;
-    text-align: center;
-    background: #3cb46d;
-    cursor: pointer;
-  }
-  .city-picker-input {
-    opacity: 0 !important;
-    top: -9999px;
-    left: -9999px;
-    position: absolute;
-    border: 0 !important;
-  }
-  .city-picker-span {
-    position: relative;
-    display: block;
-    outline: 0;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    color: #ccc;
-    cursor: pointer;
-    padding-left: 10px;
-    min-width: 190px;
-    width: auto !important;
-    /* height: 38px; */
-    /* line-height: 38px; */
-    overflow: hidden;
-    white-space: nowrap;
-  }
-}
-//
 </style>

@@ -4,22 +4,24 @@
       <div class="flex_a f-26 b_b page_view_top b_c_w">
         <div
           class="flex_1 flex"
-          :class="[isShowMask[0]?'f_g':'c-3']"
+          :class="[isShowMask[0]?'f_b':'c-3']"
           @click="clickStart()">
           <span class="margin_r_10">{{ $store.state.m.huoyuan.startName[0]===''?'全国': $store.state.m.huoyuan.startName[2]===''?$store.state.m.huoyuan.startName[1]:$store.state.m.huoyuan.startName[2] }}</span>
           <div :class="[isShowMask[0]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
         <div
           class="flex_1 flex"
-          :class="[isShowMask[1] === true?'f_g':'c-3']"
+          :class="[isShowMask[1] === true?'f_b':'c-3']"
           @click="clickEnd()">
           <span class="margin_r_10">{{ $store.state.m.huoyuan.endName[0]===''?'全国': $store.state.m.huoyuan.endName[2]===''?$store.state.m.huoyuan.endName[1]:$store.state.m.huoyuan.endName[2] }}</span>
           <div :class="[isShowMask[1]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
         <div
           class="flex_1 flex"
-          @click="clickReputation()">
-          <span class="margin_r_10">信誉最高</span>
+          @click="clickRelease()">
+          <span
+            class="margin_r_10"
+            :class="[isShowMask[2] === true?'f_b':'c-3']">{{ $store.state.m.huoyuan.orderBy.name }}</span>
           <div :class="[isShowMask[2]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
       </div>
@@ -32,12 +34,16 @@
           top="auto"
           ref="selectEndAddress"
           @setArea="getEndArea"/>
+        <Release
+          top="auto"
+          ref="selectRelease"
+          @setArea="getRelease"/>
       </div>
     </div>
 
     <div
       v-if="$store.state.m.huoyuan.pages === 0"
-      class="flex f-26">
+      class="flex f-26 margin_t_40">
       没有相关数据
     </div>
 
@@ -90,13 +96,14 @@
 import SelectAddress from '../../../components/m/selectAddress'
 import Vue from 'vue'
 import { Scroll } from 'cube-ui'
+import Release from '../../../components/m/release'
 Vue.use(Scroll)
 export default {
   name: 'PageHuoYuan',
-  components: { SelectAddress },
+  components: { Release, SelectAddress },
   data() {
     return {
-      isShowMask: [false, false, false],
+      isShowMask: [false, false, false, false],
       options: {
         pullDownRefresh: { txt: ' ' },
         pullUpLoad: { txt: { more: '', noMore: '没有更多数据了' } },
@@ -161,20 +168,29 @@ export default {
     },
     clickStart() {
       this.$set(this.isShowMask, 1, false)
+      this.$set(this.isShowMask, 2, false)
       this.$refs.selectEndAddress.showMask = false
+      this.$refs.selectRelease.showMask = false
       this.$set(this.isShowMask, 0, !this.isShowMask[0])
       this.$refs.selectStartAddress.showMask = !this.$refs.selectStartAddress
         .showMask
     },
     clickEnd() {
       this.$set(this.isShowMask, 0, false)
+      this.$set(this.isShowMask, 2, false)
       this.$refs.selectStartAddress.showMask = false
+      this.$refs.selectRelease.showMask = false
       this.$set(this.isShowMask, 1, !this.isShowMask[1])
       this.$refs.selectEndAddress.showMask = !this.$refs.selectEndAddress
         .showMask
     },
-    clickReputation() {
-      console.log(this.$store.state.m.huoyuan.rangeList)
+    clickRelease() {
+      this.$set(this.isShowMask, 0, false)
+      this.$set(this.isShowMask, 1, false)
+      this.$refs.selectStartAddress.showMask = false
+      this.$refs.selectEndAddress.showMask = false
+      this.$set(this.isShowMask, 2, !this.isShowMask[2])
+      this.$refs.selectRelease.showMask = !this.$refs.selectRelease.showMask
     },
     getStartArea(data) {
       this.$set(this.isShowMask, 0, false)
@@ -192,6 +208,16 @@ export default {
         this.$store.dispatch('m/huoyuan/SETDATA', {
           data: data,
           name: 'endName'
+        })
+        this.onPullingDown()
+      }
+    },
+    getRelease(data) {
+      this.$set(this.isShowMask, 2, false)
+      if (data) {
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'orderBy',
+          data: data
         })
         this.onPullingDown()
       }

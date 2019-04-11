@@ -375,7 +375,9 @@
             $this.feedText()
             $this.feedVal(true)
             if (last) {
-              $this.close()
+              setTimeout(function() {
+                $this.close()
+              }, 200)
             }
           }
         })
@@ -410,7 +412,9 @@
           EVENT_CHANGE,
           (this._changeCity = $.proxy(function() {
             if (this.output(DISTRICT)) {
-              $this.close()
+              setTimeout(function() {
+                $this.close()
+              }, 200)
               return
             }
             this.tab(DISTRICT)
@@ -441,6 +445,7 @@
     //关闭下拉
     close: function(blur) {
       if (this.$textspan.hasClass('open')) {
+        // debugger
         // 判断值，如果为省级则清空
         // 先判断是否只有第一层
         // 再判断这第一层是否为非直辖市、特别行政区

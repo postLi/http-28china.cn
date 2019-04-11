@@ -1,6 +1,7 @@
 export const state = () => ({
   startName: ['', '', ''],
   endName: ['', '', ''],
+  orderBy: { name: '最新发布', value: 'creditDesc' },
   currentPage: 1, // 当前页数
   pages: '', // 总页数
   rangeList: [], // 专线列表
@@ -24,7 +25,7 @@ export const actions = {
   GETRANGELIST({ commit }, obj) {
     return new Promise(resolve => {
       this.$axios
-        .post('/28-web/range/list', obj.data)
+        .post('/28-web/lclOrder/list', obj.data)
         .then(res => {
           let data = res.data
           if (data.status === 200) {

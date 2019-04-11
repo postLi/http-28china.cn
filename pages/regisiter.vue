@@ -116,7 +116,7 @@
                 <div class="getcode-btn">获取短信验证码</div>
                 <div class="tip"/>
               </li>
-              <li class="isOpenLgc">
+              <!-- <li class="isOpenLgc">
                 <span class="label">是否开通物流公司</span>
                 <label><input 
                   autocomplete="off" 
@@ -129,7 +129,7 @@
                   value="0"
                   checked 
                   type="radio">不开通</label>
-              </li>
+              </li> -->
               <li class="radioinput">
                 <span class="label">&nbsp;</span><label><input 
                   autocomplete="off" 

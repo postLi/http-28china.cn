@@ -4,9 +4,10 @@
       <div class="right main_nr">
 
         <div class="nr order-create-main">
-          <div class="order-step"><img 
-            src="/templets/default/images/wzlImg/dp.png" 
-            class="dp">发布车源信息，享受免费线上推广，越容易被发货客户找到您</div>
+          <div class="order-step">
+            <img 
+              src="../../static/images/wzlImg/dp.png" 
+              class="dp">发布车源信息，享受免费线上推广，越容易被发货客户找到您</div>
           <div class="order-line-info order-input-tab">
             <div class="order-title">基本信息 <span>（提示：带*为必填）</span></div>
           

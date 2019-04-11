@@ -165,7 +165,7 @@ export default {
   .price_box1 {
     display: block;
     width: 400px;
-    height: 180px;
+    // height: 180px;
     min-height: 110px;
     position: absolute;
     left: 200px;
@@ -180,7 +180,7 @@ export default {
 
   .price_box2 {
     width: 400px;
-    height: 180px;
+    // height: 180px;
     min-height: 110px;
     position: absolute;
     left: 200px;

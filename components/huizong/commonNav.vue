@@ -222,7 +222,7 @@ export default {
   head: {
     script: [
       {
-        src: '/js/city-picker.js'
+        src: '/js/city-picker.js?V2'
       }
     ]
   },

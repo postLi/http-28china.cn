@@ -27,7 +27,7 @@ export default {
         src: '/js/city-picker.data.js'
       },
       {
-        src: '/js/city-picker.js'
+        src: '/js/city-picker.js?v2'
       }
     ]
   },

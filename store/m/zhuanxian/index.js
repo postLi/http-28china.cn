@@ -1,6 +1,7 @@
 export const state = () => ({
   startName: ['', '', ''],
   endName: ['', '', ''],
+  orderBy: { name: '信誉最高', value: 'creditDesc' },
   currentPage: 1, // 当前页数
   pages: '', // 总页数
   rangeList: [], // 专线列表

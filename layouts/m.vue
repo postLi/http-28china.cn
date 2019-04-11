@@ -9,6 +9,7 @@ const rem =
 
 export default {
   head: {
+    meta: [{ name: 'format-detection', content: 'telephone=yes' }],
     script: [
       { innerHTML: rem, type: 'text/javascript', charset: 'utf-8' },
       {
@@ -32,6 +33,11 @@ export default {
       let citySearch = new AMap.CitySearch()
       citySearch.getLocalCity((status, result) => {
         if (status === 'complete' && result.info === 'OK') {
+          // 首页开始地 原始值
+          this.$store.dispatch('m/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName0'
+          })
           // 首页开始地
           this.$store.dispatch('m/SETDATA', {
             data: [result.province, result.city, ''],
@@ -39,6 +45,11 @@ export default {
           })
           // 专线页开始地
           this.$store.dispatch('m/zhuanxian/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName'
+          })
+          // 货源页开始地
+          this.$store.dispatch('m/huoyuan/SETDATA', {
             data: [result.province, result.city, ''],
             name: 'startName'
           })
@@ -52,7 +63,8 @@ export default {
               startArea: '',
               endProvince: '',
               endCity: '',
-              endArea: ''
+              endArea: '',
+              orderBy: this.$store.state.m.zhuanxian.orderBy.value
             },
             name: 'rangeList'
           })
@@ -436,5 +448,13 @@ input::-webkit-input-placeholder {
 }
 a {
   text-decoration: none;
+}
+.mask2 {
+  position: fixed;
+  left: 0;
+  z-index: 13;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

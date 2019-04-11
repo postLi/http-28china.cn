@@ -92,29 +92,39 @@
     <div 
       id="owner_swiper"
       class="owner">
-      <h3 class="p_title">优质货主</h3>
+      <div class="p_title clearfix">
+        <div class="title_line_box fl"><span/></div>
+        <h3 class="title_txt fl">优质货主</h3>
+        <div class="title_line_box fl"><span/></div>
+      </div>
       <div 
         class="swiper-container" 
-        v-if="shipperData.list">
+        v-if="shipperData.list.length>0">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
-                v-for="(item, index) in shipperData.list" 
-                :key="index">
+                v-for="(item, index) in shipperData.list"       
+                v-if="index<5"
+                :key="index" >
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
                   <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
                   <div class="owner_info">
-                    <p class="owner_name">
-                      <span 
-                        class="owner_name_companyName fl" 
-                        :title="item.companyName">{{ item.companyName }}</span>
-                      <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    <p 
+                      class="owner_name"               
+                      :title="item.companyName">{{ item.companyName }}暂无名字
+                     
                     </p>
-                    <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
-                    <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
+                    <p class="owner_total">
+                      <span class="p_r20">累计成交<span class="owner_total_num">{{ item.orderNumber }}</span></span>
+                      收到好评<span class="owner_total_num">{{ item.evaGoodCount }}</span>
+                    </p>
+                    <p class="owner_num">
+                      今日发货{{ item.todayOrderCount }}次
+                      <span class="owner_num_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    </p>
                   </div>
                 </a>
               </li>
@@ -123,21 +133,27 @@
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
-                v-for="(item, index) in shipperData.list" 
-                :key="index">
+                v-for="(item, index) in shipperData.list"       
+                v-if="index>4"
+                :key="index" >
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
                   <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
                   <div class="owner_info">
-                    <p class="owner_name">
-                      <span 
-                        class="owner_name_companyName fl" 
-                        :title="item.companyName">{{ item.companyName }}</span>
-                      <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    <p 
+                      class="owner_name"               
+                      :title="item.companyName">{{ item.companyName }}暂无名字
+                     
                     </p>
-                    <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
-                    <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
+                    <p class="owner_total">
+                      <span class="p_r20">累计成交<span class="owner_total_num">{{ item.orderNumber }}</span></span>
+                      收到好评<span class="owner_total_num">{{ item.evaGoodCount }}</span>
+                    </p>
+                    <p class="owner_num">
+                      今日发货{{ item.todayOrderCount }}次
+                      <span class="owner_num_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    </p>
                   </div>
                 </a>
               </li>
@@ -154,13 +170,17 @@
     </div>
     <!-- 优质货主 -->
     <div class="our clearfix">
-      <h3 class="p_title">选择我们，您可以</h3>
+      <div class="p_title clearfix">
+        <div class="title_line_box fl"><span/></div>
+        <h3 class="title_txt fl">选择我们，您可以</h3>
+        <div class="title_line_box fl"><span/></div>
+      </div>
       <div class="col1 clearfix">
-        <div class="our_tool">
+        <div class="our_tool our_tool_older">
           <div class="pic"><img src="../../static/images/huizong/our_01.jpg"></div>
           <ul class="link link2 clearfix">
             <li>
-              <span><i class="iconfont iconfuwu"/></span>
+              <span><i class="iconfont iconxiadan"/></span>
               <span>
                 <a 
                   class="btn_order" 
@@ -169,20 +189,20 @@
               </span>
             </li>
             <li>
-              <span><i class="iconfont iconicon"/></span>
+              <span><i class="iconfont iconfabu"/></span>
               <span><a 
                 class="btn_send"
                 target="_blank"
                 href="/create/huoyuan">发布货源</a></span>
-            </li>
-            <div class="num">今日已有<b>2368</b>人在线下单获得优惠</div>
+            </li>           
           </ul>
+          <div class="num">今日已有<b>2368</b>人在线下单获得优惠</div>
         </div>
         <div class="our_tool">
           <div class="pic"><img src="../../static/images/huizong/our_02.jpg"></div>
           <ul class="link clearfix">
             <li>
-              <span><i class="iconfont iconfuwu"/></span>
+              <span><i class="iconfont iconchaxunsousuo"/></span>
               <span>
                 <a 
                   target="_blank"
@@ -190,7 +210,7 @@
               </span>
             </li>
             <li>
-              <span><i class="iconfont iconicon"/></span>
+              <span><i class="iconfont iconlianxikefu"/></span>
               <span>
                 <a
                   target="_blank"
@@ -211,7 +231,7 @@
           <div class="pic"><img src="../../static/images/huizong/our_03.jpg"></div>
           <ul class="link clearfix">
             <li>
-              <span><i class="iconfont iconfuwu"/></span>
+              <span><i class="iconfont iconicon_siji"/></span>
               <span>
                 <a 
                   target="_blank"
@@ -219,7 +239,7 @@
               </span>
             </li>
             <li>
-              <span><i class="iconfont iconicon"/></span>
+              <span><i class="iconfont iconjiaru"/></span>
               <span>
                 <a
                   target="_blank"
@@ -231,10 +251,10 @@
       </div>
       <div class="col2">
         <div class="our_ad">
-          <img src="../../static/images/huizong/our_ad.png">
+          <a href="#"><img src="../../static/images/huizong/our_ad.jpg"></a>
         </div>
         <a 
-          class="link_hy" 
+          class="btn_hy_link" 
           target="_blank"
           :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">进入货源大厅</a>   
           <!-- 新增货源 -->
@@ -258,10 +278,15 @@
                 <span class="hy_info_user_info_time">{{ item.time }}</span>
               </div>
               <div class="hy_info_user_text ">
-                <span class="fl">发布<b>{{ item.startCity }}</b>到<b>{{ item.endCity }}</b></span>
-                <span class="info_user_text_goods fl">{{ item.goodsTypeName }}|{{ item.goodsNum }}件|{{ item.goodsWeight |kilogram }}公斤|体积{{ item.goodsVolume }}方  </span>                   
+                <span class="p_l5">发布</span>
+                <span class="info_user_item">{{ item.startCity }}→{{ item.endCity }}</span>
+                <span class="info_user_item">{{ item.goodsTypeName }}</span>
+                <span class="info_user_item">{{ item.goodsNum }}件</span>
+                <span class="info_user_item">{{ item.goodsWeight }}公斤</span>
+                <span class="info_user_item">体积{{ item.goodsVolume }}方 </span>                     
+              </div>
+              <div class="hy_info_user_link">                
                 <a 
-                  class="hy_info_user_text_link fr"
                   target="_blank"
                   :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">查看货源</a>
               </div>
@@ -277,7 +302,7 @@
           <ul class="hy_info_list clearfix">
             <li>
               <span>
-                <i class="iconfont iconhuowu"/>
+                <i class="iconfont iconhuowudui"/>
                 <a
                   target="_blank" 
                   href="/huoyuan">当前货物</a>
@@ -286,7 +311,7 @@
             </li>
             <li>
               <span>
-                <i class="iconfont iconwangfandijia"/>
+                <i class="iconfont iconjiantou_zuoyouqiehuan"/>
                 <a
                   target="_blank" 
                   href="/zhuanxian/list">物流专线</a>
@@ -295,7 +320,7 @@
             </li>
             <li>
               <span>
-                <i class="iconfont iconwuliu"/>
+                <i class="iconfont iconhuoche"/>
                 <a
                   target="_blank" 
                   href="/cheyuan">当前车源</a>
@@ -304,7 +329,7 @@
             </li>
           </ul>
           <ul class="hy_info_text_list">
-            <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
+            <li><i class="iconfont iconshang--jiantou"/>今日新增:</li>
             <li>
               <a
                 target="_blank" 
@@ -334,7 +359,7 @@
     <div class="p_hy_groom clearfix">
       <div class="hd clearfix">
         <h3 class="gr_title">货源推荐</h3>
-        <div class="gr_txt"><span>{{ statisticsData.goodsCount }}</span>条专线，为您优选12条热门优质专线</div>
+        <div class="gr_txt"><span>{{ statisticsData.goodsCount }}条</span>专线，为您优选<span>12条</span>热门优质专线</div>
         <div class="gr_sch">
           <div 
             id="huoyuan_from1"
@@ -360,21 +385,21 @@
           class="gr_link"
           target="_blank"
           :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">
-        货源大厅<i class="iconfont iconjiantou2"/></a>
-      </div>
-      <div class="p_type_nav">
-        <a 
-          target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
-        <a 
-          target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
+        货源大厅<i class="iconfont iconjiantou_xiangyouliangci_o"/></a>
       </div>
       <div class="bd">
         <div class="col1">
+          <div class="p_type_nav">
+            <a 
+              target="_blank"
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
+            <a 
+              target="_blank"
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
+          </div>
           <ul 
             class="p_hy_list clearfix"
-            v-if="recommendData.list">
+            v-if="recommendData.list.length>0">
             <li               
               v-for="(item, index) in recommendData.list" 
               :key="index">
@@ -382,9 +407,9 @@
                 target="_blank"
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">{{ item.createrName }}</span>
-                  <span class="sure">认证</span>
+                  <span class="p_l5">物流商:</span>
+                  <span>{{ item.wlName }}暂无名字</span>
+                  <span><i class="iconfont iconrenzheng"/></span>
                 </div>
                 <div class="md_box">
                   <div class="city">{{ item.startCity }}</div>
@@ -395,18 +420,19 @@
                   </span>
                   <div class="city">{{ item.endCity }}</div>
                 </div>
-                <div class="type_box hy_list_goods">
-                  <span class="type_box hy_list_name">货物:</span>
-                  <span class="type_box hy_list_goods">{{ item.goodsTypeName }}</span>
-                </div>
+     
                 <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>{{ item.goodsNum }}</b>件</span>
-                  <span class="item">{{ item.goodsWeight |kilogram }}公斤</span>
-                  <span class="item">{{ item.goodsVolume }}m³</span>
+                  <span class="p_l5">规格:</span>
+                  <span class="type_box_item type_box_num">{{ item.goodsNum }}件</span>
+                  <span class="type_box_item">{{ item.goodsWeight }}公斤</span>
+                  <span class="type_box_item">{{ item.goodsVolume }}m³</span>
                   <!-- <span class="time">{{ item.time }}</span> -->
                 </div>
-                <div class="hy_list_time">时间：{{ item.time }}</div>
+                <div class="list_goods">
+                  <span class="p_l5">货物:</span>
+                  <span>{{ item.goodsTypeName }}</span>
+                  <span class="list_goods_time fr">{{ item.time }}</span>
+                </div>
               </a>
             </li>
           </ul>
@@ -418,7 +444,7 @@
         </div>
         <div class="col2">
           <div class="subscribe">
-            <h4 class="tit"><i class="iconfont icondingyue"/>订阅优质支援</h4>
+            <h4 class="tit">订阅优质支援</h4>
             <div class="city_box clearfix">
               <input 
                 type="text" 
@@ -433,19 +459,35 @@
                 id="sb_pageinp2">
               <i class="iconfont iconjiantou32"/>
             </div>
-            <div class="text">
+            <div class="subscribe_txt">
               订阅货源，第一时间获得系统消息通知
-              已有<span>18965</span>人订阅后达成交易
+              已有<span class="subscribe_txt_num">18965</span>人订阅后达成交易
             </div>
-            <a class="btn_remind">上新提醒我</a>
+            <a class="subscribe_remind_btn">上新提醒我</a>
           </div>
-          <div class="weixin">
+          <!-- <div class="weixin">
             <div class="pic"><img src="../../static/images/huizong/weixin.png"></div>
             下载
             <a
               target="_blank" 
               href="http://h5.28tms.com/">【28快运APP】</a>，您可查看更多货源，并可实时接收28快运为您推荐的精品货源提醒
+          </div> -->
+          <div class="release_car">
+            <div class="release_car_num">
+              <span class="release_car_item">5</span>
+              <span class="release_car_item">3</span>
+              <span class="release_car_item">8</span>
+              <span class="release_car_item">8</span>
+              <span class="release_car_item">2</span>
+            </div>
+            <div class="release_car_tit">平台已撮合货源达成交易</div>
+            <a class="release_car_btn">发布求车信息</a>
+            <div class="release_car_txt">
+              快速发布货源，让承运商主动来找我<br>
+              自主挑选合适承运商
+            </div>
           </div>
+   
         </div>
       </div>
     </div>
@@ -547,7 +589,7 @@
         </div>  
         <ul 
           class="p_co_owner_list clearfix"
-          v-if="monthShipperData">
+          v-if="monthShipperData.length>0">
           <li 
             v-for="(item, index) in monthShipperData.list" 
             :key="index">
@@ -745,7 +787,7 @@ export default {
   head: {},
   filters: {
     kilogram(value) {
-      return value * 1000
+      return value
     }
   },
   layout: 'huizong',
@@ -774,7 +816,7 @@ export default {
     // 优质货主
     let shipperData = await $axios.post('/28-web/shipper/excellent', {
       currentPage: 1,
-      pageSize: 5
+      pageSize: 10
     })
     //本月优质货主
     let monthShipperData = await $axios.post(
@@ -981,6 +1023,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/scss/common_index.scss';
+/*全局影响样式处理*/
+a {
+  span,
+  p {
+    color: $tit_color;
+  }
+}
 /*1、货源导航*/
 .bj_blue {
   box-sizing: border-box;
@@ -1012,8 +1061,6 @@ export default {
   .col3 {
     @extend .fr;
     width: 298px;
-  }
-  .hongbao_ad {
   }
 }
 /*幻灯片*/
@@ -1052,10 +1099,20 @@ export default {
 .owner {
   margin: 0 auto;
   width: $w_1400;
-  font-size: 16px;
-  // > .swiper-container {
-  //   height: 350px;
-  // }
+  > .swiper-container {
+    height: 460px;
+    /deep/ .swiper-pagination-bullet {
+      margin: 0 10px;
+      width: 60px;
+      height: 10px;
+      border-radius: 5px;
+      background: #e1e1e1;
+      opacity: 1;
+    }
+    /deep/ .swiper-pagination-bullet-active {
+      background: #9bc0fe;
+    }
+  }
 
   > .error {
     font-size: $f_14;
@@ -1063,37 +1120,36 @@ export default {
 }
 /*选择我们*/
 .our {
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   width: $w_1400;
   font-size: $f_14;
+  .p_title {
+    width: 480px;
+  }
   .col1,
   .col2 {
     height: 352px;
   }
   .col1 {
     float: left;
-    width: 1105px;
+    width: 1065px;
   }
   .col2 {
     float: right;
     width: 335px;
   }
+
   .our_tool {
     @extend .fl;
-    width: 348px;
-    height: 340px;
-    border: $border_color 1px solid;
+    width: 335px;
+    height: 336px;
     background: $white;
     &:nth-child(2) {
       margin: 0 20px;
     }
     .pic {
       overflow: hidden;
-      height: 175px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
+      height: 168px;
     }
     .link {
       padding-top: 15px;
@@ -1105,18 +1161,19 @@ export default {
         }
         @extend .fl;
         display: block;
-        width: 174px;
+        width: 167px;
         > span {
           &:nth-child(1) {
             margin: 10px 0;
             .iconfont {
-              font-size: 40px;
-              color: #858585;
+              font-size: 50px;
+              color: #7498ff;
             }
           }
           > a {
-            font-weight: bold;
-            line-height: 48px;
+            font-size: $f_16;
+            line-height: 32px;
+            color: $gray;
           }
           display: block;
           text-align: center;
@@ -1125,82 +1182,84 @@ export default {
     }
     .link2 {
       li {
+        width: 166px;
         > span {
           > a {
             display: block;
             margin: 0 auto;
-            width: 160px;
-            height: 48px;
+            width: 110px;
+            height: 32px;
+            line-height: 32px;
             border-radius: 5px;
             font-weight: normal;
             cursor: pointer;
             &.btn_order {
               color: $white;
-              background: $orange;
+              background: #ff5858;
             }
             &.btn_send {
               color: $white;
-              background: $blue;
+              background: #5883ff;
             }
           }
         }
       }
     }
     .num {
-      padding: 0 10px;
-      line-height: 35px;
-      color: $tit_color;
+      margin: 10px 0 0 28px;
       b {
-        color: $orange;
-        font-size: 16px;
+        padding: 0 5px;
+        color: $txt_red_color;
       }
     }
   }
+  .our_tool_older {
+    border: 1px solid $border_color;
+  }
   .our_ad {
     overflow: hidden;
-    height: 254px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    height: 266px;
   }
-  .link_hy {
+  .btn_hy_link {
+    margin-top: 20px;
     display: block;
-    margin-top: 17px;
-    width: 100%;
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
     text-align: center;
     color: $white;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: bold;
-    background: $green;
+    background: $light_orange;
   }
 }
 /*货源推荐*/
 .p_hy_groom {
+  margin-top: 65px;
   .bd {
+    margin-top: 50px;
     .col1 {
       overflow: hidden;
       @extend .fl;
-      width: 1155px;
+      width: 1102px;
     }
     .col2 {
       @extend .fr;
-      padding: 20px 10px;
-      width: 265px;
-      height: 555px;
-      background: $green;
+      width: 298px;
     }
   }
   .subscribe {
-    padding: 20px;
-    background: #efeff0;
+    padding: 0 20px;
+    width: 256px;
+    height: 268px;
+    background: url('../../static/images/huizong/bj_hy_dingyue.jpg') no-repeat;
+    // padding: 20px;
+    background-color: #edf6fc;
+    border: 1px solid #e1eef7;
     .tit {
-      margin-bottom: 10px;
+      padding: 15px 0;
       font-weight: normal;
-      font-size: $f_14;
-      color: $tit_color;
+      font-size: $f_18;
+      color: $tit_blue_color;
       .iconfont {
         padding-right: 5px;
         color: $orange;
@@ -1210,8 +1269,8 @@ export default {
       position: relative;
       margin-bottom: 10px;
       padding: 0 10px;
-      height: 40px;
-      line-height: 40px;
+      height: 32px;
+      line-height: 32px;
       background: $white;
       border: 1px solid $border_color;
       > input {
@@ -1224,47 +1283,92 @@ export default {
         color: $light_gray;
       }
     }
-    .text {
+    .subscribe_txt {
       overflow: hidden;
-      height: 40px;
-      margin: 10px 0;
-      .num {
-        color: $orange;
+      margin: 20px 0;
+      color: $light_gray;
+      .subscribe_txt_num {
+        padding: 0 5px;
+        color: $txt_red_color;
       }
     }
-    .btn_remind {
+    .subscribe_remind_btn {
       display: block;
-      height: 45px;
-      line-height: 45px;
+      height: 40px;
+      line-height: 40px;
       text-align: center;
       color: $white;
       background: $orange;
-      box-shadow: 0 0 10px #46dcc6;
       cursor: pointer;
     }
   }
-  .weixin {
-    overflow: hidden;
+  // .weixin {
+  //   overflow: hidden;
+  //   margin-top: 20px;
+  //   padding: 20px 10px;
+  //   background: #fcfac1;
+  //   // height: 116px;
+  //   .pic {
+  //     overflow: hidden;
+  //     @extend .fl;
+  //     margin-right: 10px;
+  //     width: 85px;
+  //     height: 85px;
+  //     img {
+  //       width: 100%;
+  //       height: 100%;
+  //     }
+  //   }
+  //   > a {
+  //     color: #0066ff;
+  //   }
+  // }
+  .release_car {
     margin-top: 20px;
-    padding: 20px 10px;
-    background: #fcfac1;
-    // height: 116px;
-    .pic {
-      overflow: hidden;
-      @extend .fl;
-      margin-right: 10px;
-      width: 85px;
-      height: 85px;
-      img {
-        width: 100%;
-        height: 100%;
+    padding-top: 20px;
+    width: 297px;
+    height: 215px;
+    background: $white;
+    border: 1px solid $border_color;
+    font-size: $f_18;
+    text-align: center;
+    color: $tit_color;
+    .release_car_num {
+      font-size: 0;
+      .release_car_item {
+        display: inline-block;
+        margin: 0 3px;
+        width: 34px;
+        height: 34px;
+        line-height: 34px;
+        font-weight: bold;
+        text-align: center;
+        color: $white;
+        font-size: $f_18;
+        background: $orange;
+        font-weight: normal;
       }
     }
-    > a {
-      color: #0066ff;
+    .release_car_tit {
+      padding: 10px 0 30px 0;
+    }
+    .release_car_btn {
+      margin: 0 auto;
+      display: block;
+      width: 183px;
+      height: 40px;
+      line-height: 40px;
+      background: $btn_blue_color;
+      color: $white;
+    }
+    .release_car_txt {
+      margin-top: 10px;
+      font-size: $f_14;
+      line-height: 25px;
     }
   }
 }
+
 .p_release {
   .release_box {
     .release_box_txt {
@@ -1272,11 +1376,11 @@ export default {
     }
   }
 }
-.p_hy_list {
-  > li {
-    height: auto;
-  }
-}
+// .p_hy_list {
+//   > li {
+//     height: auto;
+//   }
+// }
 /*货量达人榜*/
 .rank_people {
   margin: 0 auto 20px auto;

@@ -1,4 +1,5 @@
 export const state = () => ({
+  startName0: ['', '', ''], // 原始值
   startName: ['', '', ''],
   endName: ['', '', ''],
   navId: 0, // 找专线导航id

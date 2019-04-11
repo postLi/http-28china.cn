@@ -16,7 +16,7 @@
         <img
           class="left margin_r_20"
           v-if="linedataA.rangeLogo"
-          :src="linedataA.rangeLogo.split(',')[0]">
+          :src="linedataA.rangeLogo[0]">
         <img
           v-else
           class="left margin_r_20"
@@ -333,7 +333,9 @@
         </div>
         <div @click="toEvaluate()">
           <span class="margin_r_20 c-9">查看全部</span>
-          <img src="/m/zhuanxian/list_right_grey.png">
+          <img
+            class="array"
+            src="/m/zhuanxian/list_right_grey.png">
         </div>
       </div>
       <div
@@ -358,12 +360,35 @@
       <div class="item3 f-28 c-9 f_w_b flex_a">
         专线相关图片
       </div>
-      <div class="item2">
-        <div class="img">
-          //
+      <div class="item2 p_r">
+        <div class="f-28 c-3 number">{{ currentImg }}/{{ linedataA.rangeLogo.length }}</div>
+        <cube-slide
+          v-if="linedataA.rangeLogo"
+          ref="slide"
+          :auto-play="false"
+          :loop="false"
+          :show-dots="false"
+          :allow-vertical="true"
+          :data="linedataA.rangeLogo"
+          @change="changePage"
+        >
+          <cube-slide-item
+            v-for="(item, index) in linedataA.rangeLogo"
+            :key="index">
+            <img
+              class="img"
+              :src="item">
+          </cube-slide-item>
+        </cube-slide>
+        <div
+          v-else
+          class="flex f-28">
+          还没有相关图片
         </div>
-        <div class="c-3 f-28 margin_t_40">
-          广州平泽润通物流有限公司，简称平泽润通物流，专业从事全省各地公路运输（整车、零担）业务主营线路的物流公司。公司有着严谨的运输组织，完善的经营管理，是一家干线专业型物流公司，业务范围涵盖了IT产品，汽配，化工 ，日用品，机械，电力设备，家具，家电，建材，食品等众多行业。
+        <div
+          class="c-3 f-28 margin_t_40"
+          v-if="linedataA.transportRemark">
+          {{ linedataA.transportRemark }}
         </div>
       </div>
 
@@ -371,7 +396,9 @@
     <div class="divide"/>
     <div class="content5">
       <div class="b_t cell flex_ce f-28">
-        <div class="flex button1 margin_r_20">联系专线</div>
+        <div
+          class="flex button1 margin_r_20"
+          @click="phone(linedataA.startLocationContactsMobile, linedataA.endLocationContactsMobile)">联系专线</div>
         <div class="flex button2">收 藏</div>
       </div>
     </div>
@@ -413,19 +440,27 @@
 </template>
 <script>
 import MyTop from '../../../components/m/myTop'
+import Vue from 'vue'
+import { ActionSheet, Slide } from 'cube-ui'
+Vue.use(ActionSheet)
+Vue.use(Slide)
 export default {
   components: { MyTop },
   layout: 'm',
   data() {
     return {
       showMask: false,
-      showMessage: [false, false, false]
+      showMessage: [false, false, false],
+      currentImg: 1
     }
   },
   async asyncData({ $axios, app, query, error }) {
     // 专线详情
     let linedataA = await $axios.get(`/28-web/range/${query.id}`)
     if (linedataA.data.status === 200 && linedataA.data.data) {
+      if (linedataA.data.data.rangeLogo) {
+        linedataA.data.data.rangeLogo = linedataA.data.data.rangeLogo.split(',')
+      }
       let v = [],
         w = []
       linedataA.data.data.rangePrices.forEach(item => {
@@ -472,6 +507,39 @@ export default {
     }
   },
   methods: {
+    changePage(current) {
+      this.currentImg = current + 1
+    },
+    phone(s, e) {
+      let obj_s = {},
+        obj_e = {}
+      if (s) {
+        obj_s = { content: '出发地手机号码' }
+      } else {
+        obj_s = { content: '出发地还没有手机号码' }
+      }
+      if (e) {
+        obj_e = { content: '到达地手机号码' }
+      } else {
+        obj_e = { content: '到达地还没有手机号码' }
+      }
+      let list = [obj_s, obj_e]
+      this.$createActionSheet({
+        title: '',
+        pickerStyle: true,
+        data: list,
+        onSelect: (item, index) => {
+          console.log(item)
+          if (item.content === '出发地手机号码') {
+            window.location.href = `tel:${s}`
+          }
+          if (item.content === '到达地手机号码') {
+            window.location.href = `tel:${e}`
+          }
+        },
+        onCancel: () => {}
+      }).show()
+    },
     clockMessage(i) {
       this.$set(this.showMessage, i, !this.showMessage[i])
     },
@@ -536,15 +604,22 @@ export default {
     background: white;
     padding: 0 0.3rem;
   }
-  img {
+  .array {
     height: 0.2rem;
   }
   .item2 {
     padding: 0.3rem;
+    .number {
+      position: absolute;
+      bottom: 0.62rem;
+      right: 0.46rem;
+      z-index: 100;
+    }
     .img {
-      height: 3.8rem;
-      background: rgba(247, 247, 247, 1);
+      /*height: 3.8rem;*/
+      width: 100%;
       border-radius: 0.16rem;
+      background: rgba(247, 247, 247, 1);
     }
   }
   .item3 {

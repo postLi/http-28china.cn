@@ -15,7 +15,7 @@
           <div
             class="item flex"
             :class="[index === list.length -1 ?'':'b_b']"
-            :style="{'color':$store.state.m.zhuanxian.orderBy.value === item.value?'#54A7FF':''}"
+            :style="{'color':$store.state.m.huoyuan.orderBy.value === item.value?'#54A7FF':''}"
             v-for="(item,index) in list"
             :key="index"
             @click="selectReputation(item)"
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'Reputation',
+  name: 'Release',
   props: {
     top: {
       type: String,
@@ -45,10 +45,8 @@ export default {
     return {
       showMask: false,
       list: [
-        { name: '信誉最高', value: 'creditDesc' },
-        { name: '运输时效', value: 'transportAgingAsc' },
-        { name: '重货价格最低', value: 'weightPriceAsc' },
-        { name: '轻货价格最低', value: 'lightPriceAsc' }
+        { name: '最新发布', value: 'creditDesc' },
+        { name: '价格最高', value: 'weightPriceAsc' }
       ]
     }
   },
@@ -98,7 +96,7 @@ export default {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 4.1rem;
+  height: 2.1rem;
   z-index: 100;
 }
 </style>

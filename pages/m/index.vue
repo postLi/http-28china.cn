@@ -248,6 +248,22 @@ export default {
           data: 1
         })
         this.$store.commit('m/zhuanxian/setData', {
+          name: 'orderBy',
+          data: { name: '信誉最高', value: 'creditDesc' }
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'startName',
+          data: [
+            this.$store.state.m.startName0[0],
+            this.$store.state.m.startName0[1],
+            ''
+          ]
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'endName',
+          data: ['', '', '']
+        })
+        this.$store.commit('m/zhuanxian/setData', {
           name: 'rangeList',
           data: []
         })
@@ -263,7 +279,8 @@ export default {
           startArea: this.$store.state.m.zhuanxian.startName[2],
           endProvince: this.$store.state.m.zhuanxian.endName[0],
           endCity: this.$store.state.m.zhuanxian.endName[1],
-          endArea: this.$store.state.m.zhuanxian.endName[2]
+          endArea: this.$store.state.m.zhuanxian.endName[2],
+          orderBy: this.$store.state.m.zhuanxian.orderBy.value
         }
         // 专线列表
         this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
@@ -272,30 +289,42 @@ export default {
         })
       }
       if (item.name === '货源大厅') {
-        this.$store.commit('m/zhuanxian/setData', {
+        this.$store.commit('m/huoyuan/setData', {
           name: 'currentPage',
           data: 1
         })
-        this.$store.commit('m/zhuanxian/setData', {
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'startName',
+          data: [
+            this.$store.state.m.startName0[0],
+            this.$store.state.m.startName0[1],
+            ''
+          ]
+        })
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'endName',
+          data: ['', '', '']
+        })
+        this.$store.commit('m/huoyuan/setData', {
           name: 'rangeList',
           data: []
         })
-        this.$store.commit('m/zhuanxian/setData', {
+        this.$store.commit('m/huoyuan/setData', {
           name: 'scrollTo',
           data: 0
         })
         let parm = {
-          currentPage: this.$store.state.m.zhuanxian.currentPage,
+          currentPage: this.$store.state.m.huoyuan.currentPage,
           pageSize: 20,
-          startProvince: this.$store.state.m.zhuanxian.startName[0],
-          startCity: this.$store.state.m.zhuanxian.startName[1],
-          startArea: this.$store.state.m.zhuanxian.startName[2],
-          endProvince: this.$store.state.m.zhuanxian.endName[0],
-          endCity: this.$store.state.m.zhuanxian.endName[1],
-          endArea: this.$store.state.m.zhuanxian.endName[2]
+          startProvince: this.$store.state.m.huoyuan.startName[0],
+          startCity: this.$store.state.m.huoyuan.startName[1],
+          startArea: this.$store.state.m.huoyuan.startName[2],
+          endProvince: this.$store.state.m.huoyuan.endName[0],
+          endCity: this.$store.state.m.huoyuan.endName[1],
+          endArea: this.$store.state.m.huoyuan.endName[2]
         }
-        // 专线列表
-        this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
+        // 货源列表
+        this.$store.dispatch('m/huoyuan/GETRANGELIST', {
           data: parm,
           name: 'rangeList'
         })
@@ -323,7 +352,7 @@ export default {
           endCity: this.$store.state.m.gongsi.endName[1],
           endArea: this.$store.state.m.gongsi.endName[2]
         }
-        // 专线列表
+        // 物流公司列表
         this.$store.dispatch('m/gongsi/GETRANGELIST', {
           data: parm,
           name: 'rangeList'

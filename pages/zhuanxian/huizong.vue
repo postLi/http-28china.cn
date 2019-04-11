@@ -325,6 +325,56 @@
           target="_blank"
           class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
       </div>
+      
+
+  
+
+      <form
+        class="form_help"
+        name="zxaddform"
+        method="post"
+        action=""
+        style="position: relative;">
+        <input
+          name="a7"
+          type="hidden"
+          value="0">
+        <input
+          type="hidden"
+          name="mid"
+          value="19">
+        <input
+          type="hidden"
+          name="dopost"
+          value="search">
+        <div
+          id="wlLineFrom1"
+          class="fl list_input"
+          style="position:relative;">
+          <input
+            name="cfd"
+            style="height: 100%;"
+            type="text"
+            data-toggle="city-picker"
+            data-level="district"
+            placeholder="请输入出发地">
+        </div>
+        <div
+          id="wlLineTo1"
+          class="fl list_input"
+          style="position:relative;">
+          <input
+            name="ddd"
+            style="height: 100%;"
+            data-toggle="city-picker"
+            data-level="district"
+            type="text"
+            placeholder="请输入到达地">
+        </div>
+   
+      </form>
+
+
       <div class="p_type_nav">
         <a 
           v-for="(item,index) in typeNav"
@@ -1122,8 +1172,10 @@ export default {
       // 地点插件
       $('#groom_pageinp1').citypicker()
       $('#groom_pageinp2').citypicker()
-      // $('#wlLineFrom').citypicker()
-      // $('#wlLineTo').citypicker()
+      $('#groom_pageinp11').citypicker()
+      $('#groom_pageinp21').citypicker()
+      $('#wlLineFrom1').citypicker()
+      $('#wlLineTo1').citypicker()
     })
   },
 
@@ -1249,7 +1301,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~/assets/scss/common_index.scss';
+@import '~/assets/scss/huizong.scss';
 /*本页面公共的函数*/
 @mixin active_color($color) {
   background: $color;
@@ -1864,6 +1916,59 @@ export default {
   }
   .noact {
     display: none;
+  }
+}
+.lll_huizong {
+  margin-left: 115px;
+  width: 510px;
+  height: 38px;
+  line-height: 38px;
+  background: #fff;
+  border: 1px solid #3cb46d;
+  .gr_sch_city {
+    position: relative;
+    padding-left: 10px;
+    width: 190px;
+  }
+  .gr_sch_city > input {
+    border: 0;
+  }
+  .gr_sch_icon {
+    width: 45px;
+  }
+  .gr_sch_btn {
+    width: 65px;
+    color: #fff;
+  }
+  .gr_sch_btn > a {
+    display: block;
+    width: 65px;
+    color: #fff;
+    text-align: center;
+    background: #3cb46d;
+    cursor: pointer;
+  }
+  .city-picker-input {
+    opacity: 0 !important;
+    top: -9999px;
+    left: -9999px;
+    position: absolute;
+    border: 0 !important;
+  }
+  .city-picker-span {
+    position: relative;
+    display: block;
+    outline: 0;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    color: #ccc;
+    cursor: pointer;
+    padding-left: 10px;
+    min-width: 190px;
+    width: auto !important;
+    /* height: 38px; */
+    /* line-height: 38px; */
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
 //

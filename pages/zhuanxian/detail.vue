@@ -315,7 +315,9 @@
               :browse="linedataA.assessNumber"/>
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
+            <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging }}{{ linedataA.transportAgingUnit.indexOf('多') != -1
+              ? linedataA.transportAgingUnit.replace('多', '')
+            : linedataA.transportAgingUnit }}</span></div>
             <div class="arc_m3"><i>发货频次：</i>
               <span>{{ (linedataA.departureHzData?linedataA.departureHzData:'')+'天'+(linedataA.departureHzTime?linedataA.departureHzTime:'') +'次' }}</span>
              
@@ -742,7 +744,7 @@
                         src="/line/images/danbao.png">
                     </p>
                     <p class="p3">
-                    <i>说明：</i><font>{{ item.transportRemark }}</font></p>
+                    <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,20)+'..':'暂无' }}</font></p>
                     <p class="p4"><i>地址：</i><font
                       id="nr06"
                       class="">{{ item.address.length>20?item.address.substring(0,20)+'..':item.address }}</font></p>
@@ -1123,6 +1125,10 @@ export default {
       arr.forEach(el => {
         num += el.charCodeAt(0) || 0
       })
+      linedataA.data.data.transportAgingUnit.indexOf('多') != -1
+        ? linedataA.data.data.transportAgingUnit.replace('多', '')
+        : linedataA.data.data.transportAgingUnit
+
       item.num = (num % 30) + 1
       linedataC.data.data.list.forEach(item => {
         let arr = (item.id || '').split('')

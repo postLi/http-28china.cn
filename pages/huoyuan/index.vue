@@ -1845,16 +1845,18 @@ body {
 
 /*V1.1版本S*/
 #HuoyuanFrom {
-  width: 222px;
-  background: url(/images/list_wlzx/start_addr.png) no-repeat 200px 8px #fff;
+  width: 200px;
+  background: url(/images/list_wlzx/start_addr.png) no-repeat 222px 8px #fff;
   background-size: 16px 17px;
-  padding-right: 20px;
+  padding-left: 12px;
+  padding-right: 35px;
 }
 #HuoyuanTo {
-  width: 222px;
-  background: url(/images/list_wlzx/end_addr.png) no-repeat 200px 8px #fff;
+  width: 200px;
+  background: url(/images/list_wlzx/end_addr.png) no-repeat 222px 8px #fff;
   background-size: 16px 17px;
-  padding-right: 20px;
+  padding-left: 12px;
+  padding-right: 35px;
 }
 #wlgs {
   width: 220px;

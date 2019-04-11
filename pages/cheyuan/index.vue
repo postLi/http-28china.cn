@@ -1678,14 +1678,18 @@ body {
 /*显示隐藏E */
 
 #carLineFrom {
-  width: 220px;
-  background: url(/images/list_wlzx/start_addr.png) no-repeat 200px 8px #fff;
+  width: 200px;
+  background: url(/images/list_wlzx/start_addr.png) no-repeat 222px 8px #fff;
   background-size: 16px 17px;
+  padding-left: 12px;
+  padding-right: 35px;
 }
 #carLineTo {
-  width: 220px;
-  background: url(/images/list_wlzx/end_addr.png) no-repeat 200px 8px #fff;
+  width: 200px;
+  background: url(/images/list_wlzx/end_addr.png) no-repeat 222px 8px #fff;
   background-size: 16px 17px;
+  padding-left: 12px;
+  padding-right: 35px;
 }
 #cy_list_0 {
   width: 100%;

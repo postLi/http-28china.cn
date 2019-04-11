@@ -3645,7 +3645,6 @@ height: 38px;
 .city-picker-span > .title > span:hover {
   background-color: #f1f8ff;
 }
-
 .city-picker-dropdown {
   position: absolute;
   width: 315px;

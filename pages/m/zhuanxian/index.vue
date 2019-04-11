@@ -90,7 +90,7 @@
               <span class="margin_l_20 time_b">{{ item.browseNumber }}人浏览</span>
             </div>
           </div>
-          <div class="f-24 f-40">
+          <div class="f-24 f_40">
             轻货：{{ item.lightPrice }}元/m³ 重货：{{ item.weightPrice }}元/公斤
           </div>
         </div>
@@ -208,8 +208,7 @@ export default {
       })
     },
     clickStart() {
-      this.$set(this.isShowMask, 1, false)
-      this.$set(this.isShowMask, 2, false)
+      this.isShowMask = [false, false, false]
       this.$refs.selectEndAddress.showMask = false
       this.$refs.selectReputation.showMask = false
       this.$set(this.isShowMask, 0, !this.isShowMask[0])
@@ -217,8 +216,7 @@ export default {
         .showMask
     },
     clickEnd() {
-      this.$set(this.isShowMask, 0, false)
-      this.$set(this.isShowMask, 2, false)
+      this.isShowMask = [false, false, false]
       this.$refs.selectStartAddress.showMask = false
       this.$refs.selectReputation.showMask = false
       this.$set(this.isShowMask, 1, !this.isShowMask[1])
@@ -226,8 +224,7 @@ export default {
         .showMask
     },
     clickReputation() {
-      this.$set(this.isShowMask, 0, false)
-      this.$set(this.isShowMask, 1, false)
+      this.isShowMask = [false, false, false]
       this.$refs.selectStartAddress.showMask = false
       this.$refs.selectEndAddress.showMask = false
       this.$set(this.isShowMask, 2, !this.isShowMask[2])

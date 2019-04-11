@@ -21,12 +21,38 @@ export default {
   },
   beforeCreate() {
     console.log(123132)
+    //省列表
     if (this.$store.state.m.provinceList.length === 0) {
       this.$store.dispatch('m/GETPROVINCELIST', {
         data: '',
         name: 'provinceList'
       })
     }
+    //货源类型
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF0491801',
+      name: 'AF0491801List'
+    })
+    //装货时间
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF0491802',
+      name: 'AF0491802List'
+    })
+    //用车类型
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF0491803',
+      name: 'AF0491803List'
+    })
+    //车辆规格
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF009',
+      name: 'AF009List'
+    })
+    //车辆类型
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF018',
+      name: 'AF018List'
+    })
   },
   beforeMount() {
     AMap.plugin('AMap.CitySearch', () => {
@@ -53,6 +79,11 @@ export default {
             data: [result.province, result.city, ''],
             name: 'startName'
           })
+          // 车源页开始地
+          this.$store.dispatch('m/cheyuan/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName'
+          })
           // 专线列表
           this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
             data: {
@@ -72,6 +103,20 @@ export default {
           this.$store.dispatch('m/huoyuan/GETRANGELIST', {
             data: {
               currentPage: this.$store.state.m.zhuanxian.currentPage,
+              pageSize: 20,
+              startProvince: result.province,
+              startCity: result.city,
+              startArea: '',
+              endProvince: '',
+              endCity: '',
+              endArea: ''
+            },
+            name: 'rangeList'
+          })
+          //车源列表
+          this.$store.dispatch('m/cheyuan/GETRANGELIST', {
+            data: {
+              currentPage: this.$store.state.m.cheyuan.currentPage,
               pageSize: 20,
               startProvince: result.province,
               startCity: result.city,
@@ -337,7 +382,7 @@ body {
 .f_d8 {
   color: #d8d8d8;
 }
-.f-40 {
+.f_40 {
   color: #ff4400;
 }
 .my-input {

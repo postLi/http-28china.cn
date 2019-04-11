@@ -18,7 +18,7 @@
             :style="{'color':$store.state.m.huoyuan.orderBy.value === item.value?'#54A7FF':''}"
             v-for="(item,index) in list"
             :key="index"
-            @click="selectReputation(item)"
+            @click="selectRelease(item)"
           >
             {{ item.name }}
           </div>
@@ -51,7 +51,7 @@ export default {
     }
   },
   methods: {
-    selectReputation(item) {
+    selectRelease(item) {
       this.showMask = false
       this.$emit('setArea', item)
     },

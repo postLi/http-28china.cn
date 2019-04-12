@@ -325,7 +325,8 @@ export default {
           startArea: this.$store.state.m.huoyuan.startName[2],
           endProvince: this.$store.state.m.huoyuan.endName[0],
           endCity: this.$store.state.m.huoyuan.endName[1],
-          endArea: this.$store.state.m.huoyuan.endName[2]
+          endArea: this.$store.state.m.huoyuan.endName[2],
+          orderBy: this.$store.state.m.huoyuan.orderBy.value
         }
         // 货源列表
         this.$store.dispatch('m/huoyuan/GETRANGELIST', {
@@ -337,6 +338,18 @@ export default {
         this.$store.commit('m/cheyuan/setData', {
           name: 'currentPage',
           data: 1
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'orderBy',
+          data: { name: '最新发布', value: 'createTimeDesc' }
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'carSpec',
+          data: ''
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'carType',
+          data: ''
         })
         this.$store.commit('m/cheyuan/setData', {
           name: 'startName',
@@ -366,7 +379,10 @@ export default {
           startArea: this.$store.state.m.cheyuan.startName[2],
           endProvince: this.$store.state.m.cheyuan.endName[0],
           endCity: this.$store.state.m.cheyuan.endName[1],
-          endArea: this.$store.state.m.cheyuan.endName[2]
+          endArea: this.$store.state.m.cheyuan.endName[2],
+          orderBy: this.$store.state.m.cheyuan.orderBy.value,
+          carSpec: this.$store.state.m.cheyuan.carSpec,
+          carType: this.$store.state.m.cheyuan.carType
         }
         // 车源列表
         this.$store.dispatch('m/cheyuan/GETRANGELIST', {

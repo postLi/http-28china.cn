@@ -44,6 +44,7 @@
           @setArea="getEndArea"/>
         <Release
           top="auto"
+          form="cheyuan"
           ref="selectRelease"
           @setArea="getRelease"/>
         <screen
@@ -76,10 +77,13 @@
         :key="index"
         @click="clickRange(item.id)"
       >
-        <div class="title c-3 f-26 b_b flex_a">
-          <span>{{ item.goodsTypeName? item.goodsTypeName + ' |': '' }}</span>
-          <span class="margin_l_10">{{ item.goodsVolume ? item.goodsVolume + '方 |': '' }}</span>
-          <span class="margin_l_10">{{ item.goodsWeight ? item.goodsWeight + '公斤': '' }}</span>
+        <div class="title c-3 f-26 b_b flex_sb">
+          <div class="flex_a">
+            <span>{{ item.carTypeName? item.carTypeName + ' |': '' }}</span>
+            <span class="margin_l_10">{{ item.carLength ? item.carLength + '米 |': '' }}</span>
+            <span class="margin_l_10">{{ item.carLoad ? '载重' + item.carLoad + '吨': '' }}</span>
+          </div>
+          <span class="c-9">{{ item.startTime ? item.startTime : '随时' }}发车</span>
         </div>
         <div class="flex_sb">
 
@@ -93,19 +97,28 @@
               <div class="red"/>
               <div class="f-32 f_w_b margin_l_20">{{ item.endCity }} {{ item.endArea }}</div>
             </div>
-
           </div>
 
-          <div class="f_40 f-32">
-            ￥1325.00
+          <div class="f_40 f-32 flex_a">
+            {{ item.expectPrice? '￥' + item.expectPrice + '元':'面议' }}
+            <a
+              :href="'tel:' + item.phone"
+              style="display: contents;">
+              <img
+                class="img-p margin_l_10"
+                src="/m/zhuanxian/phone.png"
+                @click.stop="">
+            </a>
           </div>
         </div>
         <div class="f-28 margin_t_20 flex_sb">
           <div class="flex_a">
-            <img src="/m/huoyuan/huoyuandt_dinwei.png">
-            <span class="margin_l_10">距离您最近网点<span class="f_40">6.5</span>公里</span>
+            <img
+              class="img_2"
+              src="/m/huoyuan/huoyuandt_dinwei.png">
+              <!--            <span class="margin_l_10 f_b">距离您<span class="f_40">6.5</span>公里</span>-->
           </div>
-          <span class="c-9">22分钟前发布</span>
+          <span class="c-9">{{ item.myTime }}前发布</span>
         </div>
       </div>
     </cube-scroll>
@@ -180,7 +193,10 @@ export default {
         startArea: this.$store.state.m.cheyuan.startName[2],
         endProvince: this.$store.state.m.cheyuan.endName[0],
         endCity: this.$store.state.m.cheyuan.endName[1],
-        endArea: this.$store.state.m.cheyuan.endName[2]
+        endArea: this.$store.state.m.cheyuan.endName[2],
+        orderBy: this.$store.state.m.cheyuan.orderBy.value,
+        carSpec: this.$store.state.m.cheyuan.carSpec,
+        carType: this.$store.state.m.cheyuan.carType
       }
       // 列表
       this.$store.dispatch('m/cheyuan/GETRANGELIST', {
@@ -254,11 +270,16 @@ export default {
     },
     getScreen(data) {
       this.$set(this.isShowMask, 3, false)
+      console.log(data)
       if (data) {
-        // this.$store.commit('m/cheyuan/setData', {
-        //   name: 'orderBy',
-        //   data: data
-        // })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'carSpec',
+          data: data.carSpec
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'carType',
+          data: data.carType
+        })
         this.onPullingDown()
       }
     }
@@ -275,7 +296,7 @@ export default {
   .title {
     height: 0.88rem;
   }
-  img {
+  .img_2 {
     width: 0.21rem;
     height: 0.26rem;
   }
@@ -302,5 +323,8 @@ export default {
   width: 1px;
   height: 0.34rem;
   background: #d8d8d8;
+}
+.img-p {
+  width: 0.44rem;
 }
 </style>

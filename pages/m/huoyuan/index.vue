@@ -44,6 +44,7 @@
           @setArea="getEndArea"/>
         <Release
           top="auto"
+          form="huoyuan"
           ref="selectRelease"
           @setArea="getRelease"/>
         <screen

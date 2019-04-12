@@ -102,14 +102,15 @@ export default {
           // 货源列表
           this.$store.dispatch('m/huoyuan/GETRANGELIST', {
             data: {
-              currentPage: this.$store.state.m.zhuanxian.currentPage,
+              currentPage: this.$store.state.m.huoyuan.currentPage,
               pageSize: 20,
               startProvince: result.province,
               startCity: result.city,
               startArea: '',
               endProvince: '',
               endCity: '',
-              endArea: ''
+              endArea: '',
+              orderBy: this.$store.state.m.huoyuan.orderBy.value
             },
             name: 'rangeList'
           })
@@ -123,7 +124,10 @@ export default {
               startArea: '',
               endProvince: '',
               endCity: '',
-              endArea: ''
+              endArea: '',
+              orderBy: this.$store.state.m.cheyuan.orderBy.value,
+              carSpec: this.$store.state.m.cheyuan.carSpec,
+              carType: this.$store.state.m.cheyuan.carType
             },
             name: 'rangeList'
           })

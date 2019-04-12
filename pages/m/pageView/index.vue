@@ -5,7 +5,8 @@
     </MyTop>
     <pageZhuanXian v-if="$store.state.m.pageView.footerId === 0"/>
     <pageHuoYuan v-if="$store.state.m.pageView.footerId === 1"/>
-    <pageGongSi v-if="$store.state.m.pageView.footerId === 3"/>
+    <pageCheYuan v-if="$store.state.m.pageView.footerId === 3"/>
+    <pageGongSi v-if="$store.state.m.pageView.footerId === 4"/>
     <footer class="f-20">
       <div
         class="flex_a"
@@ -17,7 +18,7 @@
           :key="index">
           <div
             class="circle flex"
-            v-if="item.id === 4">
+            v-if="item.id === 2">
             <img
               src="/m/home/home_fahuo.png"
               style="width: 0.76rem">
@@ -41,12 +42,16 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
+import { Scroll } from 'cube-ui'
+Vue.use(Scroll)
 import MyTop from '../../../components/m/myTop'
 import pageZhuanXian from '../zhuanxian'
 import pageHuoYuan from '../huoyuan'
+import pageCheYuan from '../cheyuan'
 import pageGongSi from '../gongsi'
 export default {
-  components: { MyTop, pageZhuanXian, pageHuoYuan, pageGongSi },
+  components: { MyTop, pageZhuanXian, pageHuoYuan, pageCheYuan, pageGongSi },
   layout: 'm',
   data() {
     return {
@@ -63,15 +68,15 @@ export default {
           img: '/m/home/lobby_icon_zhuanxian_h.png',
           img_selected: '/m/home/lobby_icon_zhuanxian_l.png'
         },
-        { id: 4, name: '发货', img: '' },
+        { id: 2, name: '发货', img: '' },
         {
-          id: 2,
+          id: 3,
           name: '车源大厅',
           img: '/m/home/lobby_icon_car_h.png',
           img_selected: '/m/home/lobby_icon_car_l.png'
         },
         {
-          id: 3,
+          id: 4,
           name: '物流公司',
           img: '/m/home/lobby_icon_activity_h.png',
           img_selected: '/m/home/lobby_icon_activity_l.png'
@@ -81,7 +86,7 @@ export default {
   },
   methods: {
     footerNav(item) {
-      if (item.id === 4) {
+      if (item.id === 2) {
         return
       }
       this.$store.commit('m/pageView/setData', {

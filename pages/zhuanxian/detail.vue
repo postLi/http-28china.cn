@@ -115,32 +115,33 @@
           </div> -->
           <div class="arc_left_1">
             <div 
-            
+              v-if="linedataA.rangeLogo"
               style="position:relative"
             >
               <img
-              :src="irangeLogo.split(',')[logoNum]">
+                style="height:336px"
+                :src="linedataA.rangeLogo.split(',').length > 2?linedataA.rangeLogo.split(',')[logoNum]:linedataA.rangeLogo">
               <ul>
                 <li 
                 
-                  v-for="(item , i) in 3"
+                  v-for="(item , i) in linedataA.rangeLogo.split(',').length > 2?linedataA.rangeLogo.split(',').length :linedataA.rangeLogo.split(',').length > 2"
                   :key="i"
-                  :class="['mright'+i,'act'+logoNum]"
+                  :class="{active:logoNum==i}"
                   class="mright"
                   style="padding-right:10px;float:left"
                   @mouseover="logofn(i)"
                 >
                   <span 
                     class="spans"
-                    style="position:absolute;right:20px;bottom:20px;width:10px;height:10px;background:#fff;border:1px solid #fff;border-radius:50%"/>
+                    style="position:absolute;right:20px;bottom:20px;width:10px;height:10px;background:#ccc;border:1px solid #ccc;border-radius:50%"/>
                 </li>
               </ul>
             </div>
-            <!-- <img
+            <img
               v-else
               :src="'/images/pic/bg' + linedataA.num + '.png'"
               alt="">
-             -->
+            
           </div>
           <div class="arc_left_down">
             <ul>
@@ -1057,8 +1058,8 @@ export default {
 
       lineBzAdd: {},
       showEchartData: {},
-      irangeLogo:
-        'http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/9.png,http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/19.png,http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/32.png',
+      // irangeLogo:
+      //   'http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/9.png,http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/19.png,http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/32.png',
       logoarr: [],
       logoNum: 0
     }
@@ -1099,6 +1100,7 @@ export default {
     }
 
     let linedataA = await $axios.get(aurl + `/28-web/range/${query.id}`)
+
     if (linedataA.data.status === 200 && linedataA.data.data) {
       enda = linedataA.data.data.endArea
       endc = linedataA.data.data.endCity
@@ -1106,7 +1108,8 @@ export default {
       starta = linedataA.data.data.startArea
       startc = linedataA.data.data.startCity
       startp = linedataA.data.data.startProvince
-      console.log(linedataA.data.data.rangeLogo, 'linedataA.rangeLogo')
+      console.log(linedataA.data.data.rangeLogo, 'linedataA.')
+      // if(linedataA.data.data.rangeLogo.split(','))
     }
     let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1244,7 +1247,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.irangeLogo.split(','))
+    // console.log(this.linedataA.rangeLogo.split(',').length)
     let _this = this
     if (process.client) {
       seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
@@ -1360,7 +1363,6 @@ export default {
   methods: {
     logofn(i) {
       this.logoNum = i
-      console.log(i, 'ijjjf')
     },
     showEchart() {
       this.bzAddFn()
@@ -2674,18 +2676,25 @@ export default {
 }
 .lll-zhuangXian-detail {
   .arc_left_1 {
-    .mright0 {
-      span {
-        margin-right: 40px;
+    li.mright {
+      &:nth-of-type(1) {
+        span {
+          margin-right: 40px;
+        }
       }
-    }
-    .mright1 {
-      span {
-        margin-right: 20px;
+      &:nth-of-type(2) {
+        span {
+          margin-right: 20px;
+        }
       }
-    }
-    li.mright:hover {
-      cursor: pointer;
+      &.active {
+        span {
+          background: #fff !important;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
   .arc_toptitle {

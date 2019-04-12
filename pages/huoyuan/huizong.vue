@@ -92,7 +92,7 @@
     <div 
       id="owner_swiper"
       class="owner">
-      <div class="p_title clearfix">
+      <div class="p_centre_title clearfix">
         <div class="title_line_box fl"><span/></div>
         <h3 class="title_txt fl">优质货主</h3>
         <div class="title_line_box fl"><span/></div>
@@ -170,7 +170,7 @@
     </div>
     <!-- 优质货主 -->
     <div class="our clearfix">
-      <div class="p_title clearfix">
+      <div class="p_centre_title clearfix">
         <div class="title_line_box fl"><span/></div>
         <h3 class="title_txt fl">选择我们，您可以</h3>
         <div class="title_line_box fl"><span/></div>
@@ -429,8 +429,8 @@
                   <!-- <span class="time">{{ item.time }}</span> -->
                 </div>
                 <div class="list_goods">
-                  <span class="p_l5">货物:</span>
-                  <span>{{ item.goodsTypeName }}</span>
+                  <span class="p_l5 fl">货物:</span>
+                  <span class="list_goods_name fl">{{ item.goodsTypeName }}</span>
                   <span class="list_goods_time fr">{{ item.time }}</span>
                 </div>
               </a>
@@ -481,7 +481,10 @@
               <span class="release_car_item">2</span>
             </div>
             <div class="release_car_tit">平台已撮合货源达成交易</div>
-            <a class="release_car_btn">发布求车信息</a>
+            <a 
+              class="release_car_btn"
+              target="_blank"
+              href="/create/huoyuan">发布求车信息</a>
             <div class="release_car_txt">
               快速发布货源，让承运商主动来找我<br>
               自主挑选合适承运商
@@ -492,144 +495,131 @@
       </div>
     </div>
     <!-- 货源推荐 -->
-    <div class="p_release">
-      <div class="release_box">
-        <div class="release_box_txt fl">
-          <h3 class="release_box_txt_tit">让承运商主动来找我</h3>
-          快速发布货源，让承运商主动联系我，自主挑选合适承运商
-        </div>
-        <a
-          class="btn_release fr" 
-          target="_blank"
-          href="/create/huoyuan"
-        >发布车源信息</a>
-      </div>
-      <div class="release_total">
-        <span class="release_total_txt">平台已撮合</span>
-        <span class="release_total_num">5</span>
-        <span class="release_total_num">3</span>
-        <span class="release_total_num">8</span>
-        <span class="release_total_num">8</span>
-        <span class="release_total_num">2</span>
-        <span class="release_total_txt">货源达成交易</span>
-      </div>
-    </div>
-    <!-- 发布信息 -->
-    <div class="bj_2">
-      <div class="rank_people clearfix">
-        <div class="p_title_box">
-          <h3 class="title">货量达人榜</h3>
-          <span class="title_txt">近3个月发布货源最多的货主</span>
-        </div>
-        <div class="col1">
-          <div 
-            class="clearfix" 
-            v-if="darenData!== undefined && darenData!== null &&darenData.length>0">
-            <div 
-              class="rank_box"
-              v-for="(item, index) in darenData" 
-              :key="index">
-              <ul class="ranking_info clearfix">
 
-                <li 
-                  class="rank_num no1"
-                  v-if="index === 0">NO.I</li>
-                <li 
-                  class="rank_num no2"
-                  v-else-if="index === 1">NO.2</li>
-                <li
-                  class="rank_num no3"
-                  v-else-if="index === 2">NO.3</li>                                   
+    <div class="rank_people clearfix">
+      <div class="p_title_box">
+        <h3 class="title">货量达人榜</h3>
+        <span class="title_txt">近3个月发布货源最多的货主</span>
+      </div>
+      <div class="col1">
+        <!-- <div 
+          class="clearfix" 
+          v-if="darenData!== undefined && darenData!== null &&darenData.length>0">
+          <div 
+            class="rank_box"
+            v-for="(item, index) in darenData" 
+            :key="index">
+            <ul class="ranking_info clearfix">
+
+              <li 
+                class="rank_num no1"
+                v-if="index === 0">NO.I</li>
+              <li 
+                class="rank_num no2"
+                v-else-if="index === 1">NO.2</li>
+              <li
+                class="rank_num no3"
+                v-else-if="index === 2">NO.3</li>                                   
                 
-                <li class="rank_name">{{ item.companyName }}</li>
-                <li class="rank_sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
-              </ul>
-              <div class="bd">
-                <div class="col1">
-                  <img 
-                    v-if="index === 0"
-                    src="../../static/images/huizong/daren_01.png" >
-                  <img 
-                    v-else-if="index === 1"
-                    src="../../static/images/huizong/daren_02.png" >
-                  <img 
-                    v-else-if="index === 2"
-                    src="../../static/images/huizong/daren_03.png" >
-                </div>
-                <div class="col2">
-                  <p>最近三个月发布货源<b>{{ item.lastThreeMonthSupplyNum }}</b>次</p>
-                  <p>累计成交<b>{{ item.orderNumber }}</b>笔订单，收到好评<b>{{ item.evaGoodCount }}</b>次</p>
-                  <p>使用现金券省<b class="money">{{ item.usedCoupon }}</b>元</p>
-                  <p class="rank_prize"><span class="rank_prize_tit">奖：</span>平台额外奖励{{ item.evaGoodCount }}元现金</p>
-                </div>
+              <li class="rank_name">{{ item.companyName }}</li>
+              <li class="rank_sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
+            </ul>
+            <div class="bd">
+              <div class="col1">
+                <img 
+                  v-if="index === 0"
+                  src="../../static/images/huizong/daren_01.png" >
+                <img 
+                  v-else-if="index === 1"
+                  src="../../static/images/huizong/daren_02.png" >
+                <img 
+                  v-else-if="index === 2"
+                  src="../../static/images/huizong/daren_03.png" >
+              </div>
+              <div class="col2">
+                <p>最近三个月发布货源<b>{{ item.lastThreeMonthSupplyNum }}</b>次</p>
+                <p>累计成交<b>{{ item.orderNumber }}</b>笔订单，收到好评<b>{{ item.evaGoodCount }}</b>次</p>
+                <p>使用现金券省<b class="money">{{ item.usedCoupon }}</b>元</p>
+                <p class="rank_prize"><span class="rank_prize_tit">奖：</span>平台额外奖励{{ item.evaGoodCount }}元现金</p>
               </div>
             </div>
           </div>
-          <div 
-            class="error"
-            v-else>
-            没有数据
-          </div>
         </div>
-        <div class="col2">
-          <a
-            target="_blank"
-            href="/create/huoyuan">
-            <img src="../../static/images/huizong/rank_ad.jpg">
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- 货量达人榜 -->
-    <div class="bj_2">
-      <div class="p_company_owner">
-        <div class="p_title_box">
-          <h3 class="title">本月优质企业货主</h3>
-          <span class="title_txt">稳定货源，好评率高</span>
-        </div>  
-        <ul 
-          class="p_co_owner_list clearfix"
-          v-if="monthShipperData.length>0">
-          <li 
-            v-for="(item, index) in monthShipperData.list" 
-            :key="index">
-            <a 
-              target="_blank"
-              :href="'/member/' + item.companyId"
-            >
-              <div 
-                class="rank_num no1" 
-                v-if="index === 0">
-                NO.1
-              </div>
-              <div 
-                class="rank_num no2" 
-                v-else-if="index === 1">
-                NO.2
-              </div>
-              <div 
-                class="rank_num no3" 
-                v-else-if="index === 2">
-                NO.3
-              </div>
-              <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
-              <div class="rank_tit">
-                <span 
-                  class="rank_tit_name" 
-                  :title="item.companyName ">{{ item.companyName }} </span>
-                <span class="rank_tit_icon_tuijian">推</span>
-              </div>
-              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_praise">好评率{{ item.recommendedNumber }}%</div>
-            </a>
-          </li>
-        </ul>  
-        <div
+        <div 
           class="error"
           v-else>
           没有数据
-        </div>  
+        </div> -->
+        <div class="rank_box">
+          <div class="rank_hd">
+            <span class="rank_hd_name">159****4589</span><span class="icon-real"/>
+          </div>
+          <div class="rank_bd">
+            <ul class="rank_bd_list">
+              <li> 最近三个月发布货源 496 次</li>
+              <li> 累计成交 296 笔订单，收到好评 1687 次</li>
+              <li>使用现金券 2383 元</li>
+            </ul>
+          </div>
+        </div>
       </div>
+      <div class="col2">
+        <a
+          target="_blank"
+          href="/create/huoyuan">
+          <img src="../../static/images/huizong/hy_hongbao.jpg">
+        </a>
+      </div>
+    </div>
+  
+    <!-- 货量达人榜 -->
+    <div class="p_company_owner">
+      <div class="p_title_box">
+        <h3 class="title">本月优质企业货主</h3>
+        <span class="title_txt">稳定货源，好评率高</span>
+      </div>  
+      <ul 
+        class="p_co_owner_list clearfix"
+        v-if="monthShipperData.length>0">
+        <li 
+          v-for="(item, index) in monthShipperData.list" 
+          :key="index">
+          <a 
+            target="_blank"
+            :href="'/member/' + item.companyId"
+          >
+            <div 
+              class="rank_num no1" 
+              v-if="index === 0">
+              NO.1
+            </div>
+            <div 
+              class="rank_num no2" 
+              v-else-if="index === 1">
+              NO.2
+            </div>
+            <div 
+              class="rank_num no3" 
+              v-else-if="index === 2">
+              NO.3
+            </div>
+            <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
+            <div class="rank_tit">
+              <span 
+                class="rank_tit_name" 
+                :title="item.companyName ">{{ item.companyName }} </span>
+              <span class="rank_tit_icon_tuijian">推</span>
+            </div>
+            <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+            <div class="rank_praise">好评率{{ item.recommendedNumber }}%</div>
+          </a>
+        </li>
+      </ul>  
+      <div
+        class="error"
+        v-else>
+        没有数据
+      </div>  
     </div>
     <!-- 本月优质企业货主 -->
     <div class="bj_2">
@@ -1002,8 +992,8 @@ export default {
         arr.push($(this).text())
       })
       this[province] = arr[0] ? arr[0] : ''
-      this[city] = arr[0] ? arr[0] : ''
-      this[area] = arr[0] ? arr[0] : ''
+      this[city] = arr[1] ? arr[1] : ''
+      this[area] = arr[2] ? arr[2] : ''
     },
     //获取cookies的值
     getCookie(cookieName) {
@@ -1123,7 +1113,7 @@ a {
   margin: 0 auto 20px auto;
   width: $w_1400;
   font-size: $f_14;
-  .p_title {
+  .p_centre_title {
     width: 480px;
   }
   .col1,
@@ -1390,99 +1380,131 @@ a {
     @extend .fl;
     display: table;
     word-spacing: -1em;
-    width: 1210px;
+    width: 1102px;
+    font-size: 0;
   }
   > .col2 {
     @extend .fr;
-    width: 230px;
-    height: 202px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    width: 298px;
+    height: 220px;
+    font-style: 0;
   }
   .rank_box {
-    overflow: hidden;
+    margin-right: 20px;
     display: inline-block;
-    margin-right: 25px;
-    padding: 15px;
-    width: 346px;
-    height: 160px;
-    background: $white;
-    border: 1px solid $border_color;
-    box-shadow: 2px 2px 5px #ddd;
+    width: 345px;
+    height: 218px;
     color: $tit_color;
-    .ranking_info {
+    font-size: 14px;
+    border: 1px solid #e1eef7;
+    background: url('../../static/images/huizong/bj_daren.jpg') no-repeat;
+    .rank_hd {
       overflow: hidden;
-      margin-bottom: 20px;
-      line-height: 22px;
-      > li {
+      margin: 30px auto;
+      width: 165px;
+      font-size: $f_16;
+      text-align: center;
+      > span {
         @extend .fl;
-        &.rank_num {
-          width: 75px;
-          font-size: 20px;
+        height: 22px;
+        line-height: 22px;
+        &.rank_hd_name {
+          min-width: 105px;
           font-weight: bold;
         }
-        &.no1 {
-          color: $orange;
-        }
-        &.no2 {
-          color: $blue;
-        }
-        &.no3 {
-          color: $green;
-        }
-        &.rank_name {
-          margin-right: 15px;
-          font-weight: bold;
-        }
-        &.rank_sure {
-          display: table;
-          word-spacing: -1em;
-          border: 1px solid $light_orange;
-          font-size: $f_12;
-          color: $orange;
-          height: 20px;
-          line-height: 20px;
-          > span {
-            display: inline-block;
-            &.span1 {
-              padding: 0 5px;
-              color: $white;
-              background: $light_orange;
-            }
-            &.span2 {
-              padding: 0 5px;
-              color: $light_orange;
-            }
-          }
+        &.icon-real {
+          margin-left: 15px;
+          width: 40px;
+          font-size: $f_16;
+          background: url('../../static/images/huizong/icon_real.png') no-repeat;
         }
       }
     }
-    .bd {
-      overflow: hidden;
-      .col1 {
-        @extend .fl;
-        width: 70px;
-      }
-      .col2 {
-        @extend .fr;
-        width: 275px;
-        > p {
-          margin-bottom: 8px;
-          b {
-            font-size: 16px;
-            color: $orange;
-            &.money {
-              font-weight: normal;
-            }
+    .rank_bd {
+      padding: 0 20px;
+      .rank_bd_list {
+        > li {
+          margin-bottom: 15px;
+          line-height: 20px;
+          .icon_square {
+            color: #ed1818;
+            font-size: 12px;
           }
-          &.rank_prize {
-            font-weight: bold;
-            .rank_prize_tit {
-              font-size: 18px;
-              color: $light_orange;
-            }
+          // list-style: square inside;
+          // list-style-type: square;
+        }
+      }
+    }
+    // .ranking_info {
+    //   overflow: hidden;
+    //   margin-bottom: 20px;
+    //   line-height: 22px;
+    //   > li {
+    //     @extend .fl;
+    //     &.rank_num {
+    //       width: 75px;
+    //       font-size: 20px;
+    //       font-weight: bold;
+    //     }
+    //     &.no1 {
+    //       color: $orange;
+    //     }
+    //     &.no2 {
+    //       color: $blue;
+    //     }
+    //     &.no3 {
+    //       color: $green;
+    //     }
+    //     &.rank_name {
+    //       margin-right: 15px;
+    //       font-weight: bold;
+    //     }
+    //     &.rank_sure {
+    //       display: table;
+    //       word-spacing: -1em;
+    //       border: 1px solid $light_orange;
+    //       font-size: $f_12;
+    //       color: $orange;
+    //       height: 20px;
+    //       line-height: 20px;
+    //       > span {
+    //         display: inline-block;
+    //         &.span1 {
+    //           padding: 0 5px;
+    //           color: $white;
+    //           background: $light_orange;
+    //         }
+    //         &.span2 {
+    //           padding: 0 5px;
+    //           color: $light_orange;
+    //         }
+    //       }
+    //     }
+    //   }
+  }
+  .bd {
+    overflow: hidden;
+    .col1 {
+      @extend .fl;
+      width: 70px;
+    }
+    .col2 {
+      @extend .fr;
+      width: 275px;
+      > p {
+        margin-bottom: 8px;
+        b {
+          font-size: 16px;
+          color: $orange;
+          &.money {
+            font-weight: normal;
+          }
+        }
+        &.rank_prize {
+          font-weight: bold;
+          .rank_prize_tit {
+            font-size: 18px;
+            color: $light_orange;
           }
         }
       }

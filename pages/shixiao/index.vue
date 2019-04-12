@@ -62,7 +62,7 @@
                     type="text" 
                     class="ltl-location" 
                     placeholder="请选择出发地">
-                  <i class="ltl-icons ss56-common-sprite1 ltl-ico-start"/>
+                  <i class="ss56-common-sprite1 ltl-ico-start"/>
                 </div>
                 <div 
                   id="form1" 
@@ -75,7 +75,7 @@
                     type="text" 
                     class="ltl-location" 
                     placeholder="请选择目到达地">
-                  <i class="ltl-icons ss56-common-sprite2 ltl-ico-end"/>
+                  <i class="ss56-common-sprite2 ltl-ico-end"/>
                 </div>
                 <textarea
                   id="form2"

@@ -15,7 +15,7 @@
           <div
             class="item flex"
             :class="[index === list.length -1 ?'':'b_b']"
-            :style="{'color':id === item.id?'#54A7FF':''}"
+            :style="{'color':$store.state.m.zhuanxian.orderBy.value === item.value?'#54A7FF':''}"
             v-for="(item,index) in list"
             :key="index"
             @click="selectReputation(item)"
@@ -44,20 +44,18 @@ export default {
   data() {
     return {
       showMask: false,
-      id: '',
       list: [
-        { id: 0, name: '信誉最高', value: 'creditDesc' },
-        { id: 1, name: '运输时效', value: 'transportAgingAsc' },
-        { id: 2, name: '重货价格最低', value: 'weightPriceAsc' },
-        { id: 3, name: '轻货价格最低', value: 'lightPriceAsc' }
+        { name: '信誉最高', value: 'creditDesc' },
+        { name: '运输时效', value: 'transportAgingAsc' },
+        { name: '重货价格最低', value: 'weightPriceAsc' },
+        { name: '轻货价格最低', value: 'lightPriceAsc' }
       ]
     }
   },
   methods: {
     selectReputation(item) {
-      this.id = item.id
       this.showMask = false
-      this.$emit('setArea', item.value)
+      this.$emit('setArea', item)
     },
     beforeEnter(el) {
       el.style.height = '0'
@@ -85,6 +83,7 @@ export default {
     },
     closeMask() {
       this.showMask = false
+      this.$emit('setArea', false)
     }
   }
 }
@@ -101,13 +100,5 @@ export default {
   width: 100%;
   height: 4.1rem;
   z-index: 100;
-}
-.mask2 {
-  position: fixed;
-  left: 0;
-  z-index: 13;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

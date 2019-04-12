@@ -61,6 +61,12 @@ module.exports = {
         type: 'text/css',
         href: '/css/font/iconfont.css'
       }
+      //暂时用的图标
+      // {
+      //   rel: 'stylesheet',
+      //   type: 'text/css',
+      //   href: '//at.alicdn.com/t/font_1076232_pygsk656jof.css'
+      // }
     ],
     script: [
       {

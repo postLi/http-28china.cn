@@ -92,29 +92,39 @@
     <div 
       id="owner_swiper"
       class="owner">
-      <h3 class="p_title">优质货主</h3>
+      <div class="p_centre_title clearfix">
+        <div class="title_line_box fl"><span/></div>
+        <h3 class="title_txt fl">优质货主</h3>
+        <div class="title_line_box fl"><span/></div>
+      </div>
       <div 
         class="swiper-container" 
-        v-if="shipperData.list">
+        v-if="shipperData.list.length>0">
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
-                v-for="(item, index) in shipperData.list" 
-                :key="index">
+                v-for="(item, index) in shipperData.list"       
+                v-if="index<5"
+                :key="index" >
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
                   <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
                   <div class="owner_info">
-                    <p class="owner_name">
-                      <span 
-                        class="owner_name_companyName fl" 
-                        :title="item.companyName">{{ item.companyName }}</span>
-                      <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    <p 
+                      class="owner_name"               
+                      :title="item.companyName">{{ item.companyName }}暂无名字
+                     
                     </p>
-                    <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
-                    <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
+                    <p class="owner_total">
+                      <span class="p_r20">累计成交<span class="owner_total_num">{{ item.orderNumber }}</span></span>
+                      收到好评<span class="owner_total_num">{{ item.evaGoodCount }}</span>
+                    </p>
+                    <p class="owner_num">
+                      今日发货{{ item.todayOrderCount }}次
+                      <span class="owner_num_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    </p>
                   </div>
                 </a>
               </li>
@@ -123,21 +133,27 @@
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
-                v-for="(item, index) in shipperData.list" 
-                :key="index">
+                v-for="(item, index) in shipperData.list"       
+                v-if="index>4"
+                :key="index" >
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
                   <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
                   <div class="owner_info">
-                    <p class="owner_name">
-                      <span 
-                        class="owner_name_companyName fl" 
-                        :title="item.companyName">{{ item.companyName }}</span>
-                      <span class="owner_name_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    <p 
+                      class="owner_name"               
+                      :title="item.companyName">{{ item.companyName }}暂无名字
+                     
                     </p>
-                    <p class="owner_total">累计成交<span>{{ item.orderNumber }}</span>，收到好评<span>{{ item.evaGoodCount }}</span></p>
-                    <p class="owner_num">今日发货{{ item.todayOrderCount }}次</p>
+                    <p class="owner_total">
+                      <span class="p_r20">累计成交<span class="owner_total_num">{{ item.orderNumber }}</span></span>
+                      收到好评<span class="owner_total_num">{{ item.evaGoodCount }}</span>
+                    </p>
+                    <p class="owner_num">
+                      今日发货{{ item.todayOrderCount }}次
+                      <span class="owner_num_liveness fr"><i class="iconfont iconhuo"/>{{ item.liveness }}</span>
+                    </p>
                   </div>
                 </a>
               </li>
@@ -154,13 +170,17 @@
     </div>
     <!-- 优质货主 -->
     <div class="our clearfix">
-      <h3 class="p_title">选择我们，您可以</h3>
+      <div class="p_centre_title clearfix">
+        <div class="title_line_box fl"><span/></div>
+        <h3 class="title_txt fl">选择我们，您可以</h3>
+        <div class="title_line_box fl"><span/></div>
+      </div>
       <div class="col1 clearfix">
-        <div class="our_tool">
+        <div class="our_tool our_tool_older">
           <div class="pic"><img src="../../static/images/huizong/our_01.jpg"></div>
           <ul class="link link2 clearfix">
             <li>
-              <span><i class="iconfont iconfuwu"/></span>
+              <span><i class="iconfont iconxiadan"/></span>
               <span>
                 <a 
                   class="btn_order" 
@@ -169,20 +189,20 @@
               </span>
             </li>
             <li>
-              <span><i class="iconfont iconicon"/></span>
+              <span><i class="iconfont iconfabu"/></span>
               <span><a 
                 class="btn_send"
                 target="_blank"
                 href="/create/huoyuan">发布货源</a></span>
-            </li>
-            <div class="num">今日已有<b>2368</b>人在线下单获得优惠</div>
+            </li>           
           </ul>
+          <div class="num">今日已有<b>2368</b>人在线下单获得优惠</div>
         </div>
         <div class="our_tool">
           <div class="pic"><img src="../../static/images/huizong/our_02.jpg"></div>
           <ul class="link clearfix">
             <li>
-              <span><i class="iconfont iconfuwu"/></span>
+              <span><i class="iconfont iconchaxunsousuo"/></span>
               <span>
                 <a 
                   target="_blank"
@@ -190,7 +210,7 @@
               </span>
             </li>
             <li>
-              <span><i class="iconfont iconicon"/></span>
+              <span><i class="iconfont iconlianxikefu"/></span>
               <span>
                 <a
                   target="_blank"
@@ -211,7 +231,7 @@
           <div class="pic"><img src="../../static/images/huizong/our_03.jpg"></div>
           <ul class="link clearfix">
             <li>
-              <span><i class="iconfont iconfuwu"/></span>
+              <span><i class="iconfont iconicon_siji"/></span>
               <span>
                 <a 
                   target="_blank"
@@ -219,7 +239,7 @@
               </span>
             </li>
             <li>
-              <span><i class="iconfont iconicon"/></span>
+              <span><i class="iconfont iconjiaru"/></span>
               <span>
                 <a
                   target="_blank"
@@ -231,10 +251,10 @@
       </div>
       <div class="col2">
         <div class="our_ad">
-          <img src="../../static/images/huizong/our_ad.png">
+          <a href="#"><img src="../../static/images/huizong/our_ad.jpg"></a>
         </div>
         <a 
-          class="link_hy" 
+          class="btn_hy_link" 
           target="_blank"
           :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">进入货源大厅</a>   
           <!-- 新增货源 -->
@@ -258,10 +278,15 @@
                 <span class="hy_info_user_info_time">{{ item.time }}</span>
               </div>
               <div class="hy_info_user_text ">
-                <span class="fl">发布<b>{{ item.startCity }}</b>到<b>{{ item.endCity }}</b></span>
-                <span class="info_user_text_goods fl">{{ item.goodsTypeName }}|{{ item.goodsNum }}件|{{ item.goodsWeight |kilogram }}公斤|体积{{ item.goodsVolume }}方  </span>                   
+                <span class="p_l5">发布</span>
+                <span class="info_user_item">{{ item.startCity }}→{{ item.endCity }}</span>
+                <span class="info_user_item">{{ item.goodsTypeName }}</span>
+                <span class="info_user_item">{{ item.goodsNum }}件</span>
+                <span class="info_user_item">{{ item.goodsWeight }}公斤</span>
+                <span class="info_user_item">体积{{ item.goodsVolume }}方 </span>                     
+              </div>
+              <div class="hy_info_user_link">                
                 <a 
-                  class="hy_info_user_text_link fr"
                   target="_blank"
                   :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">查看货源</a>
               </div>
@@ -277,7 +302,7 @@
           <ul class="hy_info_list clearfix">
             <li>
               <span>
-                <i class="iconfont iconhuowu"/>
+                <i class="iconfont iconhuowudui"/>
                 <a
                   target="_blank" 
                   href="/huoyuan">当前货物</a>
@@ -286,7 +311,7 @@
             </li>
             <li>
               <span>
-                <i class="iconfont iconwangfandijia"/>
+                <i class="iconfont iconjiantou_zuoyouqiehuan"/>
                 <a
                   target="_blank" 
                   href="/zhuanxian/list">物流专线</a>
@@ -295,7 +320,7 @@
             </li>
             <li>
               <span>
-                <i class="iconfont iconwuliu"/>
+                <i class="iconfont iconhuoche"/>
                 <a
                   target="_blank" 
                   href="/cheyuan">当前车源</a>
@@ -304,7 +329,7 @@
             </li>
           </ul>
           <ul class="hy_info_text_list">
-            <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
+            <li><i class="iconfont iconshang--jiantou"/>今日新增:</li>
             <li>
               <a
                 target="_blank" 
@@ -334,7 +359,7 @@
     <div class="p_hy_groom clearfix">
       <div class="hd clearfix">
         <h3 class="gr_title">货源推荐</h3>
-        <div class="gr_txt"><span>{{ statisticsData.goodsCount }}</span>条专线，为您优选12条热门优质专线</div>
+        <div class="gr_txt"><span>{{ statisticsData.goodsCount }}条</span>专线，为您优选<span>12条</span>热门优质专线</div>
         <div class="gr_sch">
           <div 
             id="huoyuan_from1"
@@ -360,21 +385,21 @@
           class="gr_link"
           target="_blank"
           :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">
-        货源大厅<i class="iconfont iconjiantou2"/></a>
-      </div>
-      <div class="p_type_nav">
-        <a 
-          target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
-        <a 
-          target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
+        货源大厅<i class="iconfont iconjiantou_xiangyouliangci_o"/></a>
       </div>
       <div class="bd">
         <div class="col1">
+          <div class="p_type_nav">
+            <a 
+              target="_blank"
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
+            <a 
+              target="_blank"
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
+          </div>
           <ul 
             class="p_hy_list clearfix"
-            v-if="recommendData.list">
+            v-if="recommendData.list.length>0">
             <li               
               v-for="(item, index) in recommendData.list" 
               :key="index">
@@ -382,9 +407,9 @@
                 target="_blank"
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
-                  <span class="label_provider">发布者:</span>
-                  <span class="provider">{{ item.createrName }}</span>
-                  <span class="sure">认证</span>
+                  <span class="p_l5">物流商:</span>
+                  <span>{{ item.wlName }}暂无名字</span>
+                  <span><i class="iconfont iconrenzheng"/></span>
                 </div>
                 <div class="md_box">
                   <div class="city">{{ item.startCity }}</div>
@@ -395,18 +420,19 @@
                   </span>
                   <div class="city">{{ item.endCity }}</div>
                 </div>
-                <div class="type_box hy_list_goods">
-                  <span class="type_box hy_list_name">货物:</span>
-                  <span class="type_box hy_list_goods">{{ item.goodsTypeName }}</span>
-                </div>
+     
                 <div class="type_box">
-                  <span class="">规格:</span>
-                  <span class="item"><b>{{ item.goodsNum }}</b>件</span>
-                  <span class="item">{{ item.goodsWeight |kilogram }}公斤</span>
-                  <span class="item">{{ item.goodsVolume }}m³</span>
+                  <span class="p_l5">规格:</span>
+                  <span class="type_box_item type_box_num">{{ item.goodsNum }}件</span>
+                  <span class="type_box_item">{{ item.goodsWeight }}公斤</span>
+                  <span class="type_box_item">{{ item.goodsVolume }}m³</span>
                   <!-- <span class="time">{{ item.time }}</span> -->
                 </div>
-                <div class="hy_list_time">时间：{{ item.time }}</div>
+                <div class="list_goods">
+                  <span class="p_l5 fl">货物:</span>
+                  <span class="list_goods_name fl">{{ item.goodsTypeName }}</span>
+                  <span class="list_goods_time fr">{{ item.time }}</span>
+                </div>
               </a>
             </li>
           </ul>
@@ -418,7 +444,7 @@
         </div>
         <div class="col2">
           <div class="subscribe">
-            <h4 class="tit"><i class="iconfont icondingyue"/>订阅优质支援</h4>
+            <h4 class="tit">订阅优质支援</h4>
             <div class="city_box clearfix">
               <input 
                 type="text" 
@@ -433,161 +459,167 @@
                 id="sb_pageinp2">
               <i class="iconfont iconjiantou32"/>
             </div>
-            <div class="text">
+            <div class="subscribe_txt">
               订阅货源，第一时间获得系统消息通知
-              已有<span>18965</span>人订阅后达成交易
+              已有<span class="subscribe_txt_num">18965</span>人订阅后达成交易
             </div>
-            <a class="btn_remind">上新提醒我</a>
+            <a class="subscribe_remind_btn">上新提醒我</a>
           </div>
-          <div class="weixin">
+          <!-- <div class="weixin">
             <div class="pic"><img src="../../static/images/huizong/weixin.png"></div>
             下载
             <a
               target="_blank" 
               href="http://h5.28tms.com/">【28快运APP】</a>，您可查看更多货源，并可实时接收28快运为您推荐的精品货源提醒
+          </div> -->
+          <div class="release_car">
+            <div class="release_car_num">
+              <span class="release_car_item">5</span>
+              <span class="release_car_item">3</span>
+              <span class="release_car_item">8</span>
+              <span class="release_car_item">8</span>
+              <span class="release_car_item">2</span>
+            </div>
+            <div class="release_car_tit">平台已撮合货源达成交易</div>
+            <a 
+              class="release_car_btn"
+              target="_blank"
+              href="/create/huoyuan">发布求车信息</a>
+            <div class="release_car_txt">
+              快速发布货源，让承运商主动来找我<br>
+              自主挑选合适承运商
+            </div>
           </div>
+   
         </div>
       </div>
     </div>
     <!-- 货源推荐 -->
-    <div class="p_release">
-      <div class="release_box">
-        <div class="release_box_txt fl">
-          <h3 class="release_box_txt_tit">让承运商主动来找我</h3>
-          快速发布货源，让承运商主动联系我，自主挑选合适承运商
-        </div>
-        <a
-          class="btn_release fr" 
-          target="_blank"
-          href="/create/huoyuan"
-        >发布车源信息</a>
-      </div>
-      <div class="release_total">
-        <span class="release_total_txt">平台已撮合</span>
-        <span class="release_total_num">5</span>
-        <span class="release_total_num">3</span>
-        <span class="release_total_num">8</span>
-        <span class="release_total_num">8</span>
-        <span class="release_total_num">2</span>
-        <span class="release_total_txt">货源达成交易</span>
-      </div>
-    </div>
-    <!-- 发布信息 -->
-    <div class="bj_2">
-      <div class="rank_people clearfix">
-        <div class="p_title_box">
-          <h3 class="title">货量达人榜</h3>
-          <span class="title_txt">近3个月发布货源最多的货主</span>
-        </div>
-        <div class="col1">
-          <div 
-            class="clearfix" 
-            v-if="darenData!== undefined && darenData!== null &&darenData.length>0">
-            <div 
-              class="rank_box"
-              v-for="(item, index) in darenData" 
-              :key="index">
-              <ul class="ranking_info clearfix">
 
-                <li 
-                  class="rank_num no1"
-                  v-if="index === 0">NO.I</li>
-                <li 
-                  class="rank_num no2"
-                  v-else-if="index === 1">NO.2</li>
-                <li
-                  class="rank_num no3"
-                  v-else-if="index === 2">NO.3</li>                                   
+    <div class="rank_people clearfix">
+      <div class="p_title_box">
+        <h3 class="title">货量达人榜</h3>
+        <span class="title_txt">近3个月发布货源最多的货主</span>
+      </div>
+      <div class="col1">
+        <!-- <div 
+          class="clearfix" 
+          v-if="darenData!== undefined && darenData!== null &&darenData.length>0">
+          <div 
+            class="rank_box"
+            v-for="(item, index) in darenData" 
+            :key="index">
+            <ul class="ranking_info clearfix">
+
+              <li 
+                class="rank_num no1"
+                v-if="index === 0">NO.I</li>
+              <li 
+                class="rank_num no2"
+                v-else-if="index === 1">NO.2</li>
+              <li
+                class="rank_num no3"
+                v-else-if="index === 2">NO.3</li>                                   
                 
-                <li class="rank_name">{{ item.companyName }}</li>
-                <li class="rank_sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
-              </ul>
-              <div class="bd">
-                <div class="col1">
-                  <img 
-                    v-if="index === 0"
-                    src="../../static/images/huizong/daren_01.png" >
-                  <img 
-                    v-else-if="index === 1"
-                    src="../../static/images/huizong/daren_02.png" >
-                  <img 
-                    v-else-if="index === 2"
-                    src="../../static/images/huizong/daren_03.png" >
-                </div>
-                <div class="col2">
-                  <p>最近三个月发布货源<b>{{ item.lastThreeMonthSupplyNum }}</b>次</p>
-                  <p>累计成交<b>{{ item.orderNumber }}</b>笔订单，收到好评<b>{{ item.evaGoodCount }}</b>次</p>
-                  <p>使用现金券省<b class="money">{{ item.usedCoupon }}</b>元</p>
-                  <p class="rank_prize"><span class="rank_prize_tit">奖：</span>平台额外奖励{{ item.evaGoodCount }}元现金</p>
-                </div>
+              <li class="rank_name">{{ item.companyName }}</li>
+              <li class="rank_sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
+            </ul>
+            <div class="bd">
+              <div class="col1">
+                <img 
+                  v-if="index === 0"
+                  src="../../static/images/huizong/daren_01.png" >
+                <img 
+                  v-else-if="index === 1"
+                  src="../../static/images/huizong/daren_02.png" >
+                <img 
+                  v-else-if="index === 2"
+                  src="../../static/images/huizong/daren_03.png" >
+              </div>
+              <div class="col2">
+                <p>最近三个月发布货源<b>{{ item.lastThreeMonthSupplyNum }}</b>次</p>
+                <p>累计成交<b>{{ item.orderNumber }}</b>笔订单，收到好评<b>{{ item.evaGoodCount }}</b>次</p>
+                <p>使用现金券省<b class="money">{{ item.usedCoupon }}</b>元</p>
+                <p class="rank_prize"><span class="rank_prize_tit">奖：</span>平台额外奖励{{ item.evaGoodCount }}元现金</p>
               </div>
             </div>
           </div>
-          <div 
-            class="error"
-            v-else>
-            没有数据
-          </div>
         </div>
-        <div class="col2">
-          <a
-            target="_blank"
-            href="/create/huoyuan">
-            <img src="../../static/images/huizong/rank_ad.jpg">
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- 货量达人榜 -->
-    <div class="bj_2">
-      <div class="p_company_owner">
-        <div class="p_title_box">
-          <h3 class="title">本月优质企业货主</h3>
-          <span class="title_txt">稳定货源，好评率高</span>
-        </div>  
-        <ul 
-          class="p_co_owner_list clearfix"
-          v-if="monthShipperData">
-          <li 
-            v-for="(item, index) in monthShipperData.list" 
-            :key="index">
-            <a 
-              target="_blank"
-              :href="'/member/' + item.companyId"
-            >
-              <div 
-                class="rank_num no1" 
-                v-if="index === 0">
-                NO.1
-              </div>
-              <div 
-                class="rank_num no2" 
-                v-else-if="index === 1">
-                NO.2
-              </div>
-              <div 
-                class="rank_num no3" 
-                v-else-if="index === 2">
-                NO.3
-              </div>
-              <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
-              <div class="rank_tit">
-                <span 
-                  class="rank_tit_name" 
-                  :title="item.companyName ">{{ item.companyName }} </span>
-                <span class="rank_tit_icon_tuijian">推</span>
-              </div>
-              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_praise">好评率{{ item.recommendedNumber }}%</div>
-            </a>
-          </li>
-        </ul>  
-        <div
+        <div 
           class="error"
           v-else>
           没有数据
-        </div>  
+        </div> -->
+        <div class="rank_box">
+          <div class="rank_hd">
+            <span class="rank_hd_name">159****4589</span><span class="icon-real"/>
+          </div>
+          <div class="rank_bd">
+            <ul class="rank_bd_list">
+              <li> 最近三个月发布货源 496 次</li>
+              <li> 累计成交 296 笔订单，收到好评 1687 次</li>
+              <li>使用现金券 2383 元</li>
+            </ul>
+          </div>
+        </div>
       </div>
+      <div class="col2">
+        <a
+          target="_blank"
+          href="/create/huoyuan">
+          <img src="../../static/images/huizong/hy_hongbao.jpg">
+        </a>
+      </div>
+    </div>
+  
+    <!-- 货量达人榜 -->
+    <div class="p_company_owner">
+      <div class="p_title_box">
+        <h3 class="title">本月优质企业货主</h3>
+        <span class="title_txt">稳定货源，好评率高</span>
+      </div>  
+      <ul 
+        class="p_co_owner_list clearfix"
+        v-if="monthShipperData.length>0">
+        <li 
+          v-for="(item, index) in monthShipperData.list" 
+          :key="index">
+          <a 
+            target="_blank"
+            :href="'/member/' + item.companyId"
+          >
+            <div 
+              class="rank_num no1" 
+              v-if="index === 0">
+              NO.1
+            </div>
+            <div 
+              class="rank_num no2" 
+              v-else-if="index === 1">
+              NO.2
+            </div>
+            <div 
+              class="rank_num no3" 
+              v-else-if="index === 2">
+              NO.3
+            </div>
+            <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
+            <div class="rank_tit">
+              <span 
+                class="rank_tit_name" 
+                :title="item.companyName ">{{ item.companyName }} </span>
+              <span class="rank_tit_icon_tuijian">推</span>
+            </div>
+            <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
+            <div class="rank_praise">好评率{{ item.recommendedNumber }}%</div>
+          </a>
+        </li>
+      </ul>  
+      <div
+        class="error"
+        v-else>
+        没有数据
+      </div>  
     </div>
     <!-- 本月优质企业货主 -->
     <div class="bj_2">
@@ -745,7 +777,7 @@ export default {
   head: {},
   filters: {
     kilogram(value) {
-      return value * 1000
+      return value
     }
   },
   layout: 'huizong',
@@ -774,7 +806,7 @@ export default {
     // 优质货主
     let shipperData = await $axios.post('/28-web/shipper/excellent', {
       currentPage: 1,
-      pageSize: 5
+      pageSize: 10
     })
     //本月优质货主
     let monthShipperData = await $axios.post(
@@ -960,8 +992,8 @@ export default {
         arr.push($(this).text())
       })
       this[province] = arr[0] ? arr[0] : ''
-      this[city] = arr[0] ? arr[0] : ''
-      this[area] = arr[0] ? arr[0] : ''
+      this[city] = arr[1] ? arr[1] : ''
+      this[area] = arr[2] ? arr[2] : ''
     },
     //获取cookies的值
     getCookie(cookieName) {
@@ -981,6 +1013,13 @@ export default {
 
 <style lang="scss" scoped>
 @import '~/assets/scss/common_index.scss';
+/*全局影响样式处理*/
+a {
+  span,
+  p {
+    color: $tit_color;
+  }
+}
 /*1、货源导航*/
 .bj_blue {
   box-sizing: border-box;
@@ -1012,8 +1051,6 @@ export default {
   .col3 {
     @extend .fr;
     width: 298px;
-  }
-  .hongbao_ad {
   }
 }
 /*幻灯片*/
@@ -1052,10 +1089,20 @@ export default {
 .owner {
   margin: 0 auto;
   width: $w_1400;
-  font-size: 16px;
-  // > .swiper-container {
-  //   height: 350px;
-  // }
+  > .swiper-container {
+    height: 460px;
+    /deep/ .swiper-pagination-bullet {
+      margin: 0 10px;
+      width: 60px;
+      height: 10px;
+      border-radius: 5px;
+      background: #e1e1e1;
+      opacity: 1;
+    }
+    /deep/ .swiper-pagination-bullet-active {
+      background: #9bc0fe;
+    }
+  }
 
   > .error {
     font-size: $f_14;
@@ -1063,37 +1110,36 @@ export default {
 }
 /*选择我们*/
 .our {
-  margin: 0 auto;
+  margin: 0 auto 20px auto;
   width: $w_1400;
   font-size: $f_14;
+  .p_centre_title {
+    width: 480px;
+  }
   .col1,
   .col2 {
     height: 352px;
   }
   .col1 {
     float: left;
-    width: 1105px;
+    width: 1065px;
   }
   .col2 {
     float: right;
     width: 335px;
   }
+
   .our_tool {
     @extend .fl;
-    width: 348px;
-    height: 340px;
-    border: $border_color 1px solid;
+    width: 335px;
+    height: 336px;
     background: $white;
     &:nth-child(2) {
       margin: 0 20px;
     }
     .pic {
       overflow: hidden;
-      height: 175px;
-      img {
-        width: 100%;
-        height: 100%;
-      }
+      height: 168px;
     }
     .link {
       padding-top: 15px;
@@ -1105,18 +1151,19 @@ export default {
         }
         @extend .fl;
         display: block;
-        width: 174px;
+        width: 167px;
         > span {
           &:nth-child(1) {
             margin: 10px 0;
             .iconfont {
-              font-size: 40px;
-              color: #858585;
+              font-size: 50px;
+              color: #7498ff;
             }
           }
           > a {
-            font-weight: bold;
-            line-height: 48px;
+            font-size: $f_16;
+            line-height: 32px;
+            color: $gray;
           }
           display: block;
           text-align: center;
@@ -1125,82 +1172,84 @@ export default {
     }
     .link2 {
       li {
+        width: 166px;
         > span {
           > a {
             display: block;
             margin: 0 auto;
-            width: 160px;
-            height: 48px;
+            width: 110px;
+            height: 32px;
+            line-height: 32px;
             border-radius: 5px;
             font-weight: normal;
             cursor: pointer;
             &.btn_order {
               color: $white;
-              background: $orange;
+              background: #ff5858;
             }
             &.btn_send {
               color: $white;
-              background: $blue;
+              background: #5883ff;
             }
           }
         }
       }
     }
     .num {
-      padding: 0 10px;
-      line-height: 35px;
-      color: $tit_color;
+      margin: 10px 0 0 28px;
       b {
-        color: $orange;
-        font-size: 16px;
+        padding: 0 5px;
+        color: $txt_red_color;
       }
     }
   }
+  .our_tool_older {
+    border: 1px solid $border_color;
+  }
   .our_ad {
     overflow: hidden;
-    height: 254px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    height: 266px;
   }
-  .link_hy {
+  .btn_hy_link {
+    margin-top: 20px;
     display: block;
-    margin-top: 17px;
-    width: 100%;
-    height: 70px;
-    line-height: 70px;
+    height: 50px;
+    line-height: 50px;
     text-align: center;
     color: $white;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: bold;
-    background: $green;
+    background: $light_orange;
   }
 }
 /*货源推荐*/
 .p_hy_groom {
+  margin-top: 65px;
   .bd {
+    margin-top: 50px;
     .col1 {
       overflow: hidden;
       @extend .fl;
-      width: 1155px;
+      width: 1102px;
     }
     .col2 {
       @extend .fr;
-      padding: 20px 10px;
-      width: 265px;
-      height: 555px;
-      background: $green;
+      width: 298px;
     }
   }
   .subscribe {
-    padding: 20px;
-    background: #efeff0;
+    padding: 0 20px;
+    width: 256px;
+    height: 268px;
+    background: url('../../static/images/huizong/bj_hy_dingyue.jpg') no-repeat;
+    // padding: 20px;
+    background-color: #edf6fc;
+    border: 1px solid #e1eef7;
     .tit {
-      margin-bottom: 10px;
+      padding: 15px 0;
       font-weight: normal;
-      font-size: $f_14;
-      color: $tit_color;
+      font-size: $f_18;
+      color: $tit_blue_color;
       .iconfont {
         padding-right: 5px;
         color: $orange;
@@ -1210,8 +1259,8 @@ export default {
       position: relative;
       margin-bottom: 10px;
       padding: 0 10px;
-      height: 40px;
-      line-height: 40px;
+      height: 32px;
+      line-height: 32px;
       background: $white;
       border: 1px solid $border_color;
       > input {
@@ -1224,47 +1273,92 @@ export default {
         color: $light_gray;
       }
     }
-    .text {
+    .subscribe_txt {
       overflow: hidden;
-      height: 40px;
-      margin: 10px 0;
-      .num {
-        color: $orange;
+      margin: 20px 0;
+      color: $light_gray;
+      .subscribe_txt_num {
+        padding: 0 5px;
+        color: $txt_red_color;
       }
     }
-    .btn_remind {
+    .subscribe_remind_btn {
       display: block;
-      height: 45px;
-      line-height: 45px;
+      height: 40px;
+      line-height: 40px;
       text-align: center;
       color: $white;
       background: $orange;
-      box-shadow: 0 0 10px #46dcc6;
       cursor: pointer;
     }
   }
-  .weixin {
-    overflow: hidden;
+  // .weixin {
+  //   overflow: hidden;
+  //   margin-top: 20px;
+  //   padding: 20px 10px;
+  //   background: #fcfac1;
+  //   // height: 116px;
+  //   .pic {
+  //     overflow: hidden;
+  //     @extend .fl;
+  //     margin-right: 10px;
+  //     width: 85px;
+  //     height: 85px;
+  //     img {
+  //       width: 100%;
+  //       height: 100%;
+  //     }
+  //   }
+  //   > a {
+  //     color: #0066ff;
+  //   }
+  // }
+  .release_car {
     margin-top: 20px;
-    padding: 20px 10px;
-    background: #fcfac1;
-    // height: 116px;
-    .pic {
-      overflow: hidden;
-      @extend .fl;
-      margin-right: 10px;
-      width: 85px;
-      height: 85px;
-      img {
-        width: 100%;
-        height: 100%;
+    padding-top: 20px;
+    width: 297px;
+    height: 215px;
+    background: $white;
+    border: 1px solid $border_color;
+    font-size: $f_18;
+    text-align: center;
+    color: $tit_color;
+    .release_car_num {
+      font-size: 0;
+      .release_car_item {
+        display: inline-block;
+        margin: 0 3px;
+        width: 34px;
+        height: 34px;
+        line-height: 34px;
+        font-weight: bold;
+        text-align: center;
+        color: $white;
+        font-size: $f_18;
+        background: $orange;
+        font-weight: normal;
       }
     }
-    > a {
-      color: #0066ff;
+    .release_car_tit {
+      padding: 10px 0 30px 0;
+    }
+    .release_car_btn {
+      margin: 0 auto;
+      display: block;
+      width: 183px;
+      height: 40px;
+      line-height: 40px;
+      background: $btn_blue_color;
+      color: $white;
+    }
+    .release_car_txt {
+      margin-top: 10px;
+      font-size: $f_14;
+      line-height: 25px;
     }
   }
 }
+
 .p_release {
   .release_box {
     .release_box_txt {
@@ -1272,11 +1366,11 @@ export default {
     }
   }
 }
-.p_hy_list {
-  > li {
-    height: auto;
-  }
-}
+// .p_hy_list {
+//   > li {
+//     height: auto;
+//   }
+// }
 /*货量达人榜*/
 .rank_people {
   margin: 0 auto 20px auto;
@@ -1286,99 +1380,131 @@ export default {
     @extend .fl;
     display: table;
     word-spacing: -1em;
-    width: 1210px;
+    width: 1102px;
+    font-size: 0;
   }
   > .col2 {
     @extend .fr;
-    width: 230px;
-    height: 202px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    width: 298px;
+    height: 220px;
+    font-style: 0;
   }
   .rank_box {
-    overflow: hidden;
+    margin-right: 20px;
     display: inline-block;
-    margin-right: 25px;
-    padding: 15px;
-    width: 346px;
-    height: 160px;
-    background: $white;
-    border: 1px solid $border_color;
-    box-shadow: 2px 2px 5px #ddd;
+    width: 345px;
+    height: 218px;
     color: $tit_color;
-    .ranking_info {
+    font-size: 14px;
+    border: 1px solid #e1eef7;
+    background: url('../../static/images/huizong/bj_daren.jpg') no-repeat;
+    .rank_hd {
       overflow: hidden;
-      margin-bottom: 20px;
-      line-height: 22px;
-      > li {
+      margin: 30px auto;
+      width: 165px;
+      font-size: $f_16;
+      text-align: center;
+      > span {
         @extend .fl;
-        &.rank_num {
-          width: 75px;
-          font-size: 20px;
+        height: 22px;
+        line-height: 22px;
+        &.rank_hd_name {
+          min-width: 105px;
           font-weight: bold;
         }
-        &.no1 {
-          color: $orange;
-        }
-        &.no2 {
-          color: $blue;
-        }
-        &.no3 {
-          color: $green;
-        }
-        &.rank_name {
-          margin-right: 15px;
-          font-weight: bold;
-        }
-        &.rank_sure {
-          display: table;
-          word-spacing: -1em;
-          border: 1px solid $light_orange;
-          font-size: $f_12;
-          color: $orange;
-          height: 20px;
-          line-height: 20px;
-          > span {
-            display: inline-block;
-            &.span1 {
-              padding: 0 5px;
-              color: $white;
-              background: $light_orange;
-            }
-            &.span2 {
-              padding: 0 5px;
-              color: $light_orange;
-            }
-          }
+        &.icon-real {
+          margin-left: 15px;
+          width: 40px;
+          font-size: $f_16;
+          background: url('../../static/images/huizong/icon_real.png') no-repeat;
         }
       }
     }
-    .bd {
-      overflow: hidden;
-      .col1 {
-        @extend .fl;
-        width: 70px;
-      }
-      .col2 {
-        @extend .fr;
-        width: 275px;
-        > p {
-          margin-bottom: 8px;
-          b {
-            font-size: 16px;
-            color: $orange;
-            &.money {
-              font-weight: normal;
-            }
+    .rank_bd {
+      padding: 0 20px;
+      .rank_bd_list {
+        > li {
+          margin-bottom: 15px;
+          line-height: 20px;
+          .icon_square {
+            color: #ed1818;
+            font-size: 12px;
           }
-          &.rank_prize {
-            font-weight: bold;
-            .rank_prize_tit {
-              font-size: 18px;
-              color: $light_orange;
-            }
+          // list-style: square inside;
+          // list-style-type: square;
+        }
+      }
+    }
+    // .ranking_info {
+    //   overflow: hidden;
+    //   margin-bottom: 20px;
+    //   line-height: 22px;
+    //   > li {
+    //     @extend .fl;
+    //     &.rank_num {
+    //       width: 75px;
+    //       font-size: 20px;
+    //       font-weight: bold;
+    //     }
+    //     &.no1 {
+    //       color: $orange;
+    //     }
+    //     &.no2 {
+    //       color: $blue;
+    //     }
+    //     &.no3 {
+    //       color: $green;
+    //     }
+    //     &.rank_name {
+    //       margin-right: 15px;
+    //       font-weight: bold;
+    //     }
+    //     &.rank_sure {
+    //       display: table;
+    //       word-spacing: -1em;
+    //       border: 1px solid $light_orange;
+    //       font-size: $f_12;
+    //       color: $orange;
+    //       height: 20px;
+    //       line-height: 20px;
+    //       > span {
+    //         display: inline-block;
+    //         &.span1 {
+    //           padding: 0 5px;
+    //           color: $white;
+    //           background: $light_orange;
+    //         }
+    //         &.span2 {
+    //           padding: 0 5px;
+    //           color: $light_orange;
+    //         }
+    //       }
+    //     }
+    //   }
+  }
+  .bd {
+    overflow: hidden;
+    .col1 {
+      @extend .fl;
+      width: 70px;
+    }
+    .col2 {
+      @extend .fr;
+      width: 275px;
+      > p {
+        margin-bottom: 8px;
+        b {
+          font-size: 16px;
+          color: $orange;
+          &.money {
+            font-weight: normal;
+          }
+        }
+        &.rank_prize {
+          font-weight: bold;
+          .rank_prize_tit {
+            font-size: 18px;
+            color: $light_orange;
           }
         }
       }

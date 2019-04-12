@@ -48,9 +48,6 @@
                 
                 placeholder="请输入您的手机号"
                 class="fl">
-              <!-- maxlength="11"
-                v-model="inputData" -->
-              <!-- @click="helpMe" -->
               <button 
                 
               class="fl">帮我推荐</button>
@@ -266,6 +263,8 @@
           </ul>
         </div>
       </div>
+
+     
       <div class="hy_info_col2 fl clearfix">
         <div class="hy_info_num">
           <ul class="hy_info_list clearfix">
@@ -325,6 +324,13 @@
           target="_blank"
           class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
       </div>
+      
+
+  
+
+      
+
+
       <div class="p_type_nav">
         <a 
           v-for="(item,index) in typeNav"
@@ -845,16 +851,10 @@
       <div class="clear"/>
     </div>
     <!-- 热点新闻 -->
-    <Add
-      :show = "isAdd"
-      @close="noaddFn"
-      :info="inputData"
-      @fromAdd="fromAdd"
-    />
+  
   </div>
 </template>
 <script>
-import Add from './help'
 function myCredit(credit, item) {
   if (credit >= 0 && credit <= 3) {
     item.credit = 1
@@ -935,9 +935,6 @@ export default {
   head: {
     link: [{ rel: 'stylesheet', href: '/layer/dist/css/layui.css' }],
     script: [{ src: '/layer/layer.js' }]
-  },
-  components: {
-    Add
   },
   data() {
     return {
@@ -1112,7 +1109,7 @@ export default {
 
   mounted() {
     // console.log(this.typeNav, 'typeNav')
-    seajs.use(['layer', '/js/jq_scroll.js', '/js/LLL-AFLC_API.js'], function() {
+    seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
       $('.p_hy_info .hy_info_user_box').Scroll({
         line: 1,
@@ -1122,37 +1119,19 @@ export default {
       // 地点插件
       $('#groom_pageinp1').citypicker()
       $('#groom_pageinp2').citypicker()
-      // $('#wlLineFrom').citypicker()
-      // $('#wlLineTo').citypicker()
+      $('#groom_pageinp11').citypicker()
+      $('#groom_pageinp21').citypicker()
+      $('#wlLineFrom1').citypicker()
+      $('#wlLineTo1').citypicker()
     })
   },
 
   methods: {
-    helpMe() {
-      if (this.inputData) {
-        var validReg = window.Lll_AFLC_VALID
-        let aurl = ''
-
-        if (validReg.MOBILE.test(this.inputData)) {
-          this.addFn()
-        } else {
-          this.isMobile = true
-          this.inputData = ''
-        }
-      } else {
-        this.isMobile = true
-      }
-    },
     fromAdd(data) {
       this.inputData = data
       this.isMobile = false
     },
-    addFn() {
-      this.isAdd = true
-    },
-    noaddFn() {
-      this.isAdd = false
-    },
+
     search() {
       let list1 = []
       $('#parkAddress .select-item').each(function(i, e) {
@@ -1249,7 +1228,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~/assets/scss/common_index.scss';
+@import '~/assets/scss/huizong.scss';
 /*本页面公共的函数*/
 @mixin active_color($color) {
   background: $color;
@@ -1866,5 +1845,4 @@ export default {
     display: none;
   }
 }
-//
 </style>

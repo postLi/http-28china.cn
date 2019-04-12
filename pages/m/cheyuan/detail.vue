@@ -39,7 +39,7 @@
         </div>
         <div class="f-28 flex_r">
           <span class="c-9 left">期望运价：</span>
-          <span class="f-40">￥1325.00</span>
+          <span class="f_40">￥1325.00</span>
         </div>
         <div class="f-28 flex_r">
           <span class="c-9 left">发车时间：</span>

@@ -258,91 +258,91 @@ export default {
 </script>
 
 <style lang="scss">
-.form_help {
-  padding-bottom: 20px;
-  margin-bottom: 10px;
-  .city-picker-span {
-    padding-top: 7px;
-  }
-  .city-picker-span .arrow {
-    background: url('../../static/images/index/01xx.png');
-    top: 80%;
-  }
-  .list_input {
-    width: 161px;
-    height: 32px;
-    border-radius: 2px;
-    border: solid 1px #e5e5e5;
-    background: none;
-    color: #333;
-    font-size: 13px;
-    padding-left: 9px;
-  }
-  #wlLineFrom {
-    width: 280px;
-    background: #fff;
-    padding-right: 20px;
-    margin-bottom: 10px;
-  }
-  #wlLineTo {
-    width: 280px;
-    background: #fff;
-    padding-right: 20px;
-    margin-bottom: 10px;
-    .list_input {
-      width: 161px;
-      height: 32px;
-      border-radius: 2px;
-      border: solid 1px #e5e5e5;
-      background: none;
-      color: #333;
-      font-size: 13px;
-      padding-left: 9px;
-    }
-  }
-  .textare {
-    width: 282px;
-    height: 64px;
-    padding: 10px 12px 10px 12px;
-    border: solid 1px #e5e5e5;
-    border-radius: 3px;
-    margin-bottom: 10px;
-  }
-  .textinput {
-    width: 180px;
-    height: 34px;
-    border: solid 1px #e5e5e5;
-    line-height: 34px;
-    padding-left: 13px;
-  }
-  .phone-btn {
-    width: 100px;
-    height: 34px;
-    background-color: #589def;
-    border: none;
-    margin-left: 3px;
-    color: #ffffff;
-    cursor: pointer;
-  }
-  .phone-btn:hover {
-    background-color: #2577ff;
-  }
-  /*.list-box-r-top {*/
-  /*background: rgba(255, 255, 255, 0.1);*/
-  /*padding-top: 0 !important;*/
-  /*margin-bottom: 0px !important;*/
-  /*}*/
+// .form_help {
+//   padding-bottom: 20px;
+//   margin-bottom: 10px;
+//   .city-picker-span {
+//     padding-top: 7px;
+//   }
+//   .city-picker-span .arrow {
+//     background: url('../../static/images/index/01xx.png');
+//     top: 80%;
+//   }
+//   .list_input {
+//     width: 161px;
+//     height: 32px;
+//     border-radius: 2px;
+//     border: solid 1px #e5e5e5;
+//     background: none;
+//     color: #333;
+//     font-size: 13px;
+//     padding-left: 9px;
+//   }
+//   #wlLineFrom {
+//     width: 280px;
+//     background: #fff;
+//     padding-right: 20px;
+//     margin-bottom: 10px;
+//   }
+//   #wlLineTo {
+//     width: 280px;
+//     background: #fff;
+//     padding-right: 20px;
+//     margin-bottom: 10px;
+//     .list_input {
+//       width: 161px;
+//       height: 32px;
+//       border-radius: 2px;
+//       border: solid 1px #e5e5e5;
+//       background: none;
+//       color: #333;
+//       font-size: 13px;
+//       padding-left: 9px;
+//     }
+//   }
+//   .textare {
+//     width: 282px;
+//     height: 64px;
+//     padding: 10px 12px 10px 12px;
+//     border: solid 1px #e5e5e5;
+//     border-radius: 3px;
+//     margin-bottom: 10px;
+//   }
+//   .textinput {
+//     width: 180px;
+//     height: 34px;
+//     border: solid 1px #e5e5e5;
+//     line-height: 34px;
+//     padding-left: 13px;
+//   }
+//   .phone-btn {
+//     width: 100px;
+//     height: 34px;
+//     background-color: #589def;
+//     border: none;
+//     margin-left: 3px;
+//     color: #ffffff;
+//     cursor: pointer;
+//   }
+//   .phone-btn:hover {
+//     background-color: #2577ff;
+//   }
+//   /*.list-box-r-top {*/
+//   /*background: rgba(255, 255, 255, 0.1);*/
+//   /*padding-top: 0 !important;*/
+//   /*margin-bottom: 0px !important;*/
+//   /*}*/
 
-  /*.phone-btn {*/
-  /*font-size: 14px;*/
-  /*padding: 7px 18px;*/
-  /*margin-left: 10px;*/
-  /*background-color: #589def;*/
-  /*color: #ffffff;*/
-  /*border-style: none;*/
-  /*}*/
-  /*.phone-btn:hover {*/
-  /*background-color: #2577ff;*/
-  /*}*/
-}
+//   /*.phone-btn {*/
+//   /*font-size: 14px;*/
+//   /*padding: 7px 18px;*/
+//   /*margin-left: 10px;*/
+//   /*background-color: #589def;*/
+//   /*color: #ffffff;*/
+//   /*border-style: none;*/
+//   /*}*/
+//   /*.phone-btn:hover {*/
+//   /*background-color: #2577ff;*/
+//   /*}*/
+// }
 </style>

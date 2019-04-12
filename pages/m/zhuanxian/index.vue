@@ -21,7 +21,7 @@
           @click="clickReputation()">
           <span
             class="margin_r_10"
-            :class="[isShowMask[2] === true?'f_b':'c-3']">信誉最高</span>
+            :class="[isShowMask[2] === true?'f_b':'c-3']">{{ $store.state.m.zhuanxian.orderBy.name }}</span>
           <div :class="[isShowMask[2]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
       </div>
@@ -43,7 +43,7 @@
 
     <div
       v-if="$store.state.m.zhuanxian.pages === 0"
-      class="flex f-26">
+      class="flex f-26 margin_t_40">
       没有相关数据
     </div>
 
@@ -81,14 +81,16 @@
               <span>{{ item.startCity }} {{ item.startArea }} -- {{ item.endCity }} {{ item.endArea }}</span>
               <img
                 class="img-p margin_l_20"
-                src="/m/zhuanxian/phone.png" >
+                src="/m/zhuanxian/phone.png"
+                @click.stop="phone(item.startLocationContactsMobile, item.endLocationContactsMobile)"
+              >
             </div>
             <div class="time f-20 c-9">
               <span class="time_b">时效{{ item.transportAging }}{{ item.transportAgingUnit }}</span>
               <span class="margin_l_20 time_b">{{ item.browseNumber }}人浏览</span>
             </div>
           </div>
-          <div class="f-24 f-40">
+          <div class="f-24 f_40">
             轻货：{{ item.lightPrice }}元/m³ 重货：{{ item.weightPrice }}元/公斤
           </div>
         </div>
@@ -103,8 +105,9 @@
 import SelectAddress from '../../../components/m/selectAddress'
 import Reputation from '../../../components/m/reputation'
 import Vue from 'vue'
-import { Scroll } from 'cube-ui'
+import { Scroll, ActionSheet } from 'cube-ui'
 Vue.use(Scroll)
+Vue.use(ActionSheet)
 export default {
   name: 'PageZhuanXian',
   components: { SelectAddress, Reputation },
@@ -124,11 +127,38 @@ export default {
     })
   },
   methods: {
+    phone(s, e) {
+      let obj_s = {},
+        obj_e = {}
+      if (s) {
+        obj_s = { content: '出发地手机号码' }
+      } else {
+        obj_s = { content: '出发地还没有手机号码' }
+      }
+      if (e) {
+        obj_e = { content: '到达地手机号码' }
+      } else {
+        obj_e = { content: '到达地还没有手机号码' }
+      }
+      let list = [obj_s, obj_e]
+      this.$createActionSheet({
+        title: '',
+        pickerStyle: true,
+        data: list,
+        onSelect: (item, index) => {
+          console.log(item)
+          if (item.content === '出发地手机号码') {
+            window.location.href = `tel:${s}`
+          }
+          if (item.content === '到达地手机号码') {
+            window.location.href = `tel:${e}`
+          }
+        },
+        onCancel: () => {}
+      }).show()
+    },
     clickRange(id, publishId) {
       this.$router.push(`/m/zhuanxian/detail?id=${id}&publishId=${publishId}`)
-      // this.$router.push(
-      //   `/m/zhuanxian/detail?id=1110733427771965440&publishId=100000000000000001`
-      // )
     },
     onPullingDown() {
       this.$store.commit('m/zhuanxian/setData', {
@@ -168,7 +198,8 @@ export default {
         startArea: this.$store.state.m.zhuanxian.startName[2],
         endProvince: this.$store.state.m.zhuanxian.endName[0],
         endCity: this.$store.state.m.zhuanxian.endName[1],
-        endArea: this.$store.state.m.zhuanxian.endName[2]
+        endArea: this.$store.state.m.zhuanxian.endName[2],
+        orderBy: this.$store.state.m.zhuanxian.orderBy.value
       }
       // 专线列表
       this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
@@ -177,8 +208,7 @@ export default {
       })
     },
     clickStart() {
-      this.$set(this.isShowMask, 1, false)
-      this.$set(this.isShowMask, 2, false)
+      this.isShowMask = [false, false, false]
       this.$refs.selectEndAddress.showMask = false
       this.$refs.selectReputation.showMask = false
       this.$set(this.isShowMask, 0, !this.isShowMask[0])
@@ -186,8 +216,7 @@ export default {
         .showMask
     },
     clickEnd() {
-      this.$set(this.isShowMask, 0, false)
-      this.$set(this.isShowMask, 2, false)
+      this.isShowMask = [false, false, false]
       this.$refs.selectStartAddress.showMask = false
       this.$refs.selectReputation.showMask = false
       this.$set(this.isShowMask, 1, !this.isShowMask[1])
@@ -195,8 +224,7 @@ export default {
         .showMask
     },
     clickReputation() {
-      this.$set(this.isShowMask, 0, false)
-      this.$set(this.isShowMask, 1, false)
+      this.isShowMask = [false, false, false]
       this.$refs.selectStartAddress.showMask = false
       this.$refs.selectEndAddress.showMask = false
       this.$set(this.isShowMask, 2, !this.isShowMask[2])
@@ -225,14 +253,13 @@ export default {
     },
     getReputation(data) {
       this.$set(this.isShowMask, 2, false)
-      console.log(data)
-      // if (data) {
-      //   this.$store.dispatch('m/zhuanxian/SETDATA', {
-      //     data: data,
-      //     name: 'endName'
-      //   })
-      //   this.onPullingDown()
-      // }
+      if (data) {
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'orderBy',
+          data: data
+        })
+        this.onPullingDown()
+      }
     }
   }
 }

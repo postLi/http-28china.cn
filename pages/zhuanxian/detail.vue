@@ -89,14 +89,59 @@
 
         </div>
         <div class="arc_left">
-          <div class="arc_left_1">
-            <img
+          <!-- <div class="arc_left_1">
+            <div 
               v-if="linedataA.rangeLogo"
+              style="position:relative"
+            >
+              <img
               :src="linedataA.rangeLogo.split(',')[showImg]">
+              <ul>
+                <li 
+                  v-for="(item , i) in 3"
+                  :key="i"
+                  :class="'mright'+i"
+                  style="padding-right:10px;float:left"
+                >
+                  <span style="position:absolute;right:20px;bottom:20px;width:10px;height:10px;background:red;"/>
+                </li>
+              </ul>
+            </div>
             <img
               v-else
               :src="'/images/pic/bg' + linedataA.num + '.png'"
               alt="">
+            
+          </div> -->
+          <div class="arc_left_1">
+            <div 
+              v-if="linedataA.rangeLogo"
+              style="position:relative"
+            >
+              <img
+                style="height:336px"
+                :src="linedataA.rangeLogo.split(',').length > 2?linedataA.rangeLogo.split(',')[logoNum]:linedataA.rangeLogo">
+              <ul>
+                <li 
+                
+                  v-for="(item , i) in linedataA.rangeLogo.split(',').length > 2?linedataA.rangeLogo.split(',').length :linedataA.rangeLogo.split(',').length > 2"
+                  :key="i"
+                  :class="{active:logoNum==i}"
+                  class="mright"
+                  style="padding-right:10px;float:left"
+                  @mouseover="logofn(i)"
+                >
+                  <span 
+                    class="spans"
+                    style="position:absolute;right:20px;bottom:20px;width:10px;height:10px;background:#ccc;border:1px solid #ccc;border-radius:50%"/>
+                </li>
+              </ul>
+            </div>
+            <img
+              v-else
+              :src="'/images/pic/bg' + linedataA.num + '.png'"
+              alt="">
+            
           </div>
           <div class="arc_left_down">
             <ul>
@@ -315,7 +360,9 @@
               :browse="linedataA.assessNumber"/>
           </div>
           <div class="arc_middle3">
-            <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging+linedataA.transportAgingUnit }}</span></div>
+            <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging }}{{ linedataA.transportAgingUnit.indexOf('多') != -1
+              ? linedataA.transportAgingUnit.replace('多', '')
+            : linedataA.transportAgingUnit }}</span></div>
             <div class="arc_m3"><i>发货频次：</i>
               <span>{{ (linedataA.departureHzData?linedataA.departureHzData:'')+'天'+(linedataA.departureHzTime?linedataA.departureHzTime:'') +'次' }}</span>
              
@@ -742,7 +789,7 @@
                         src="/line/images/danbao.png">
                     </p>
                     <p class="p3">
-                    <i>说明：</i><font>{{ item.transportRemark }}</font></p>
+                    <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,20)+'..':'暂无' }}</font></p>
                     <p class="p4"><i>地址：</i><font
                       id="nr06"
                       class="">{{ item.address.length>20?item.address.substring(0,20)+'..':item.address }}</font></p>
@@ -1010,7 +1057,11 @@ export default {
       indexPl: 0,
 
       lineBzAdd: {},
-      showEchartData: {}
+      showEchartData: {},
+      // irangeLogo:
+      //   'http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/9.png,http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/19.png,http://aflc.oss-cn-shenzhen.aliyuncs.com/plugin/range/32.png',
+      logoarr: [],
+      logoNum: 0
     }
   },
   async asyncData({ $axios, app, query, error }) {
@@ -1049,6 +1100,7 @@ export default {
     }
 
     let linedataA = await $axios.get(aurl + `/28-web/range/${query.id}`)
+
     if (linedataA.data.status === 200 && linedataA.data.data) {
       enda = linedataA.data.data.endArea
       endc = linedataA.data.data.endCity
@@ -1056,6 +1108,8 @@ export default {
       starta = linedataA.data.data.startArea
       startc = linedataA.data.data.startCity
       startp = linedataA.data.data.startProvince
+      console.log(linedataA.data.data.rangeLogo, 'linedataA.')
+      // if(linedataA.data.data.rangeLogo.split(','))
     }
     let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1123,6 +1177,10 @@ export default {
       arr.forEach(el => {
         num += el.charCodeAt(0) || 0
       })
+      linedataA.data.data.transportAgingUnit.indexOf('多') != -1
+        ? linedataA.data.data.transportAgingUnit.replace('多', '')
+        : linedataA.data.data.transportAgingUnit
+
       item.num = (num % 30) + 1
       linedataC.data.data.list.forEach(item => {
         let arr = (item.id || '').split('')
@@ -1189,6 +1247,7 @@ export default {
     }
   },
   mounted() {
+    // console.log(this.linedataA.rangeLogo.split(',').length)
     let _this = this
     if (process.client) {
       seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
@@ -1302,6 +1361,9 @@ export default {
     }
   },
   methods: {
+    logofn(i) {
+      this.logoNum = i
+    },
     showEchart() {
       this.bzAddFn()
     },
@@ -2613,6 +2675,28 @@ export default {
   margin-top: 0 !important;
 }
 .lll-zhuangXian-detail {
+  .arc_left_1 {
+    li.mright {
+      &:nth-of-type(1) {
+        span {
+          margin-right: 40px;
+        }
+      }
+      &:nth-of-type(2) {
+        span {
+          margin-right: 20px;
+        }
+      }
+      &.active {
+        span {
+          background: #fff !important;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
   .arc_toptitle {
     float: left;
     width: 100%;

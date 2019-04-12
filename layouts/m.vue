@@ -9,6 +9,7 @@ const rem =
 
 export default {
   head: {
+    meta: [{ name: 'format-detection', content: 'telephone=yes' }],
     script: [
       { innerHTML: rem, type: 'text/javascript', charset: 'utf-8' },
       {
@@ -20,18 +21,49 @@ export default {
   },
   beforeCreate() {
     console.log(123132)
+    //省列表
     if (this.$store.state.m.provinceList.length === 0) {
       this.$store.dispatch('m/GETPROVINCELIST', {
         data: '',
         name: 'provinceList'
       })
     }
+    //货源类型
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF0491801',
+      name: 'AF0491801List'
+    })
+    //装货时间
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF0491802',
+      name: 'AF0491802List'
+    })
+    //用车类型
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF0491803',
+      name: 'AF0491803List'
+    })
+    //车辆规格
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF009',
+      name: 'AF009List'
+    })
+    //车辆类型
+    this.$store.dispatch('m/GETDICT', {
+      data: 'AF018',
+      name: 'AF018List'
+    })
   },
   beforeMount() {
     AMap.plugin('AMap.CitySearch', () => {
       let citySearch = new AMap.CitySearch()
       citySearch.getLocalCity((status, result) => {
         if (status === 'complete' && result.info === 'OK') {
+          // 首页开始地 原始值
+          this.$store.dispatch('m/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName0'
+          })
           // 首页开始地
           this.$store.dispatch('m/SETDATA', {
             data: [result.province, result.city, ''],
@@ -39,6 +71,16 @@ export default {
           })
           // 专线页开始地
           this.$store.dispatch('m/zhuanxian/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName'
+          })
+          // 货源页开始地
+          this.$store.dispatch('m/huoyuan/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName'
+          })
+          // 车源页开始地
+          this.$store.dispatch('m/cheyuan/SETDATA', {
             data: [result.province, result.city, ''],
             name: 'startName'
           })
@@ -52,7 +94,8 @@ export default {
               startArea: '',
               endProvince: '',
               endCity: '',
-              endArea: ''
+              endArea: '',
+              orderBy: this.$store.state.m.zhuanxian.orderBy.value
             },
             name: 'rangeList'
           })
@@ -60,6 +103,20 @@ export default {
           this.$store.dispatch('m/huoyuan/GETRANGELIST', {
             data: {
               currentPage: this.$store.state.m.zhuanxian.currentPage,
+              pageSize: 20,
+              startProvince: result.province,
+              startCity: result.city,
+              startArea: '',
+              endProvince: '',
+              endCity: '',
+              endArea: ''
+            },
+            name: 'rangeList'
+          })
+          //车源列表
+          this.$store.dispatch('m/cheyuan/GETRANGELIST', {
+            data: {
+              currentPage: this.$store.state.m.cheyuan.currentPage,
               pageSize: 20,
               startProvince: result.province,
               startCity: result.city,
@@ -325,7 +382,7 @@ body {
 .f_d8 {
   color: #d8d8d8;
 }
-.f-40 {
+.f_40 {
   color: #ff4400;
 }
 .my-input {
@@ -436,5 +493,13 @@ input::-webkit-input-placeholder {
 }
 a {
   text-decoration: none;
+}
+.mask2 {
+  position: fixed;
+  left: 0;
+  z-index: 13;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

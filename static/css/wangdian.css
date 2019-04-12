@@ -22,7 +22,13 @@ body {
   display: block;
   color: #2577e3;
 }
-
+#addressFrom {
+  width: 200px;
+  background: url(/images/list_wlzx/start_addr.png) no-repeat 222px 8px #fff;
+  background-size: 16px 17px;
+  padding-left: 12px;
+  padding-right: 35px;
+}
 .zx_sx .biaozhi {
   width: 3px;
   height: 18px;

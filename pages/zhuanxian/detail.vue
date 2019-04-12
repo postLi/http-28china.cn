@@ -89,30 +89,7 @@
 
         </div>
         <div class="arc_left">
-          <!-- <div class="arc_left_1">
-            <div 
-              v-if="linedataA.rangeLogo"
-              style="position:relative"
-            >
-              <img
-              :src="linedataA.rangeLogo.split(',')[showImg]">
-              <ul>
-                <li 
-                  v-for="(item , i) in 3"
-                  :key="i"
-                  :class="'mright'+i"
-                  style="padding-right:10px;float:left"
-                >
-                  <span style="position:absolute;right:20px;bottom:20px;width:10px;height:10px;background:red;"/>
-                </li>
-              </ul>
-            </div>
-            <img
-              v-else
-              :src="'/images/pic/bg' + linedataA.num + '.png'"
-              alt="">
-            
-          </div> -->
+        
           <div class="arc_left_1">
             <div 
               v-if="linedataA.rangeLogo"
@@ -121,10 +98,10 @@
               <img
                 style="height:336px"
                 :src="linedataA.rangeLogo.split(',').length > 2?linedataA.rangeLogo.split(',')[logoNum]:linedataA.rangeLogo">
-              <ul>
+              <ul v-if="linedataA.rangeLogo.split(',').length > 2">
                 <li 
                 
-                  v-for="(item , i) in linedataA.rangeLogo.split(',').length > 2?linedataA.rangeLogo.split(',').length :linedataA.rangeLogo.split(',').length > 2"
+                  v-for="(item , i) in linedataA.rangeLogo.split(',').length "
                   :key="i"
                   :class="{active:logoNum==i}"
                   class="mright"
@@ -150,7 +127,7 @@
                 alt=""></li>
               <li
               @click="downFn">
-                下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更多<span style="color: #2577e3">{{ (linedataA.startCity || '').substring(0, linedataA.startCity.length-1) }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '').substring(0, linedataA.endCity.length-1) }}</span>的专线，并可实时接收28快运为您推荐的精品货源提醒!
+                下载<span style="color: #2577e3">【28快运APP】</span>，您可查看更多<span style="color: #2577e3">{{ (linedataA.startCity || '') }}</span>到<span style="color: #2577e3">{{ (linedataA.endCity || '') }}</span>的专线，并可实时接收28快运为您推荐的精品货源提醒!
 
               </li>
              
@@ -403,7 +380,11 @@
         
         </div>
         <div class="arc_right">
-          <p class="arc_right01"><img src="/line/images/04gongsi.png"><span id="nr1020" >{{ linedataB.companyName.length>13?linedataB.companyName.substring(0, 13) + '..' : linedataB.companyName }}</span></p>
+          <p class="arc_right01"><img src="/line/images/04gongsi.png"><span 
+            id="nr1020"
+            v-if="linedataB.companyName.length>20" >{{ linedataB.companyName.substring(0, 20) + '..' }}</span><span 
+              v-else 
+              id="nr1020" >{{ linedataB.companyName|| '' }}</span></p>
           <p class="arc_right02"><i>信誉：</i>
             <creditIcon :credit="linedataB.credit" />
           </p>
@@ -428,7 +409,14 @@
               target="_blank"><input
                 id="qq"
                 value="QQ交谈"></a></span>
-            <span><i>地址：</i><font id="nr10232">{{ linedataB.address.length > 20 ? linedataB.address.substring(0,20)+'..':linedataB.address }}</font></span>
+            <span><i>地址：</i>
+              <font 
+                id="nr10232"
+                v-if="linedataB.address==null">{{ linedataB.address }}</font>
+              <font 
+                id="nr10232"
+                v-else>{{ linedataB.address.substring(0,20)+'..' }}</font>
+            </span>
           </p>
           <p class="arc_right05">
             <a
@@ -479,7 +467,7 @@
       <div
         style="display: inline-block;width: 1360px; margin-top: 30px;"
         class="arc_main1-1">
-        想要更多<span>{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}</span>到<span>{{ linedataA.endCity.substring(0, linedataA.endCity.length-1) }}</span>的专线信息，您可以<a 
+        想要更多<span>{{ linedataA.startCity }}</span>到<span>{{ linedataA.endCity }}</span>的专线信息，您可以<a 
           :href="'/create/line?startProvince='+linedataA.startProvince+'&startCity='+linedataA.startCity+'&startArea='+linedataA.startArea+'&endProvince='+linedataA.endProvince+'&endCity='+linedataA.endCity+'&endArea='+linedataA.endArea"
         ><i style="border-bottom:1px solid #ccc; cursor: pointer;">发布专线</i></a>，让车主主动来联系您，达成交易
       </div>
@@ -522,7 +510,7 @@
                         target="_blank"
                         style="color: #fa9925">
                         <p style="padding-top: 10px">全部</p>
-                        <p style="padding-top: 0px;">（{{ linedataB.allServiceNameList.length }}）</p>
+                        <p style="padding-top: 0px;">（{{ linedataB.allServiceNameList.length ||0 }}）</p>
                       </a>
                     </div>
                   </li>
@@ -623,7 +611,7 @@
           <div class="bot_right">
             <p
               style="margin-top: 20px;color:red;font-size:16px"
-              v-if="!linedataF.length || linedataF == null">此用户没有评论</p>
+              v-if="linedataF == []">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
                 <button
@@ -670,7 +658,7 @@
             <div class="main3_1_1">
               <div class="xt_left"/>
               <div class="floatl">
-                <b>更多从{{ linedataA.startCity.substring(0, linedataA.startCity.length-1) }}出发的专线</b>
+                <b>更多从{{ linedataA.startCity }}出发的专线</b>
                 <div class="index_search floatl">
                   <div
                     id="HuoyuanFrom"
@@ -716,10 +704,9 @@
             >
               <div
                 class="list_none"
-                v-if="lineLists===null||
-              !lineLists.length"><span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px; font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span> <img
-                src="/images/none_pic.png"
-                style=" float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;"></div>
+                v-if="lineLists===[]"><span style="float: left; width: 100%;text-align: center;height: 40px;line-height: 40px; font-size: 16px;margin-top: 40px;">暂时没有找到您要查询的信息，可以看看其他线路哦</span> <img
+                  src="/images/none_pic.png"
+                  style=" float: left;width: 300px;height: 160px;margin: 20px 0 20px 400px;"></div>
               <div v-else>
                 <ul
                   v-for="(item , index) in lineLists"
@@ -752,12 +739,15 @@
                         class="list-title-a"
                         target="_blank">
                         <span class="list-icon lines-sprite-icons icon-start"/>
-                        <em>{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
+                        <em 
+                        v-if="(item.startCity+item.startArea).length>7">{{ (item.startCity+item.startArea).substring(0,7)+'..' }}</em>
+                        <em v-else>{{ item.startCity+item.startArea }}</em>
                       
                         <span class="list-icon lines-sprite-icons icon-through"/>
                         <span class="list-icon lines-sprite-icons icon-end"/>
-                        <em>{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
-                   
+                        <em 
+                        v-if="(item.endCity+item.endArea).length>7">{{ (item.endCity+item.endArea).substring(0,7)+'..' }}</em>
+                        <em v-else>{{ item.endCity+item.endArea }}</em>
                       </a>
                     </P>
                     <p class="p2">
@@ -789,10 +779,17 @@
                         src="/line/images/danbao.png">
                     </p>
                     <p class="p3">
-                    <i>说明：</i><font>{{ item.transportRemark?item.transportRemark.substring(0,20)+'..':'暂无' }}</font></p>
+                      <i>说明：</i>
+                      <font v-if="item.transportRemark==null">{{ item.transportRemark || '' }}</font>
+                    <font v-else>{{ item.transportRemark.substring(0,20)+'..' }}</font></p>
+                    
                     <p class="p4"><i>地址：</i><font
                       id="nr06"
-                      class="">{{ item.address.length>20?item.address.substring(0,20)+'..':item.address }}</font></p>
+                      class=""
+                      v-if="item.address==null">{{ item.address||'' }}</font><font
+                        id="nr06"
+                        class=""
+                        v-else>{{ item.address.substring(0,20)+'..' }}</font></p>
                   </li>
                   <li class="wlzx_list_3">
                     <p class="p0_0">
@@ -839,7 +836,7 @@
         <div class="arc_main6">
           <div class="zx_sx"><span class="biaozhi"/><span>更多从{{ queryCitys.endCity || queryCitys.endProvince }}出发的专线</span></div>
           <div
-            v-if="!lineRecoms.length ||lineRecoms==null"
+            v-if="lineRecoms==[]"
             class="tj_none">
             <span>没有相关线路推荐</span>
           </div>
@@ -869,10 +866,20 @@
                   class="list-title-a"
                   target="_blank">
                   <span class="list-icon lines-sprite-icons icon-start"/>
-                  <em id="tj011">{{ (item.startCity+item.startArea).length>7? (item.startCity+item.startArea).substring(0,7)+'..': item.startCity+item.startArea }}</em>
+                  <em 
+                    id="tj011"
+                    v-if="(item.startCity+item.startArea).length>7">{{ (item.startCity+item.startArea).substring(0,7)+'..' }}</em>
+                  <em 
+                    id="tj011"
+                    v-else>{{ item.startCity+item.startArea }}</em>
                   <span class="list-icon lines-sprite-icons icon-through"/>
                   <span class="list-icon lines-sprite-icons icon-end"/>
-                  <em id="tj012">{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
+                  <em 
+                    id="tj012"
+                    v-if="(item.endCity+item.endArea).length>7">{{ (item.endCity+item.endArea).length>7? (item.endCity+item.endArea).substring(0,7)+'..': item.endCity+item.endArea }}</em>
+                  <em 
+                    id="tj012"
+                    v-else>{{ item.endCity+item.endArea }}</em>
                 </a>
               </div>
 
@@ -1108,7 +1115,7 @@ export default {
       starta = linedataA.data.data.startArea
       startc = linedataA.data.data.startCity
       startp = linedataA.data.data.startProvince
-      console.log(linedataA.data.data.rangeLogo, 'linedataA.')
+      // console.log(linedataA.data.data.rangeLogo, 'linedataA.')
       // if(linedataA.data.data.rangeLogo.split(','))
     }
     let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
@@ -1132,6 +1139,7 @@ export default {
         endArea: enda
       })
     ])
+    console.log(linedataE, 'linedataE.')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&

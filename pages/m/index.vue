@@ -161,24 +161,28 @@ export default {
       ],
       content1List: [
         {
+          id: 0,
           name: '专线大厅',
           url: '/m/home/home_zhuanxian.png',
           bc: '#929DFB',
           to: '/m/pageView'
         },
         {
+          id: 1,
           name: '货源大厅',
           url: '/m/home/home_huoyuandt.png',
           bc: '#F77D5E',
           to: '/m/pageView'
         },
         {
+          id: 3,
           name: '车源大厅',
           url: '/m/home/home_cheyuandt.png',
           bc: '#F6CB43',
           to: '/m/pageView'
         },
         {
+          id: 4,
           name: '物流公司',
           url: '/m/home/home_wuliugs.png',
           bc: '#5592F7',
@@ -236,11 +240,11 @@ export default {
     search() {
       console.log(this.$store.state.m)
     },
-    toList(item, i) {
+    toList(item) {
       this.$router.push(item.to)
       this.$store.commit('m/pageView/setData', {
         name: 'footerId',
-        data: i
+        data: item.id
       })
       if (item.name === '专线大厅') {
         this.$store.commit('m/zhuanxian/setData', {
@@ -321,10 +325,67 @@ export default {
           startArea: this.$store.state.m.huoyuan.startName[2],
           endProvince: this.$store.state.m.huoyuan.endName[0],
           endCity: this.$store.state.m.huoyuan.endName[1],
-          endArea: this.$store.state.m.huoyuan.endName[2]
+          endArea: this.$store.state.m.huoyuan.endName[2],
+          orderBy: this.$store.state.m.huoyuan.orderBy.value
         }
         // 货源列表
         this.$store.dispatch('m/huoyuan/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
+      if (item.name === '车源大厅') {
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'currentPage',
+          data: 1
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'orderBy',
+          data: { name: '最新发布', value: 'createTimeDesc' }
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'carSpec',
+          data: ''
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'carType',
+          data: ''
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'startName',
+          data: [
+            this.$store.state.m.startName0[0],
+            this.$store.state.m.startName0[1],
+            ''
+          ]
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'endName',
+          data: ['', '', '']
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'rangeList',
+          data: []
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'scrollTo',
+          data: 0
+        })
+        let parm = {
+          currentPage: this.$store.state.m.cheyuan.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.cheyuan.startName[0],
+          startCity: this.$store.state.m.cheyuan.startName[1],
+          startArea: this.$store.state.m.cheyuan.startName[2],
+          endProvince: this.$store.state.m.cheyuan.endName[0],
+          endCity: this.$store.state.m.cheyuan.endName[1],
+          endArea: this.$store.state.m.cheyuan.endName[2],
+          orderBy: this.$store.state.m.cheyuan.orderBy.value,
+          carSpec: this.$store.state.m.cheyuan.carSpec,
+          carType: this.$store.state.m.cheyuan.carType
+        }
+        // 车源列表
+        this.$store.dispatch('m/cheyuan/GETRANGELIST', {
           data: parm,
           name: 'rangeList'
         })
@@ -339,18 +400,26 @@ export default {
           data: []
         })
         this.$store.commit('m/gongsi/setData', {
+          name: 'startName',
+          data: [
+            this.$store.state.m.startName0[0],
+            this.$store.state.m.startName0[1]
+          ]
+        })
+        this.$store.commit('m/gongsi/setData', {
+          name: 'orderBy',
+          data: { name: '最新发布', value: 'createDesc' }
+        })
+        this.$store.commit('m/gongsi/setData', {
           name: 'scrollTo',
           data: 0
         })
         let parm = {
           currentPage: this.$store.state.m.gongsi.currentPage,
           pageSize: 20,
-          startProvince: this.$store.state.m.gongsi.startName[0],
-          startCity: this.$store.state.m.gongsi.startName[1],
-          startArea: this.$store.state.m.gongsi.startName[2],
-          endProvince: this.$store.state.m.gongsi.endName[0],
-          endCity: this.$store.state.m.gongsi.endName[1],
-          endArea: this.$store.state.m.gongsi.endName[2]
+          province: this.$store.state.m.gongsi.startName[0],
+          city: this.$store.state.m.gongsi.startName[1],
+          orderBy: this.$store.state.m.gongsi.orderBy.value
         }
         // 物流公司列表
         this.$store.dispatch('m/gongsi/GETRANGELIST', {

@@ -205,6 +205,7 @@ $f_12: 12px;
 }
 
 /**********公共标题****************/
+//汇总标题 
 .p_hz_title {
   overflow: hidden;
   margin-top: -60px;
@@ -221,7 +222,37 @@ $f_12: 12px;
   }
 }
 
-.p_title {
+
+.p_title_box {
+  overflow: hidden;
+  margin-bottom: 60px;
+  height: 30px;
+  line-height: 30px;
+
+  >.title {
+    @extend .fl;
+    font-size: 30px;
+    color: $tit_blue_color;
+    font-weight: normal;
+  }
+
+  .title_txt {
+    @extend .fl;
+    margin: 10px;
+    padding-left: 30px;
+    line-height: 20px;
+    font-size: $f_16;
+    color: $light_gray;
+  }
+
+  // .title_link {
+  //   .iconfont {
+  //     padding-left: 5px;
+  //     color: $green;
+  //   }
+  // }
+}
+.p_centre_title {
   margin: 90px auto 60px auto;
   width: 360px;
   .title_txt,
@@ -244,32 +275,6 @@ $f_12: 12px;
       display: block;
       height: 0;
       border-top: 2px solid $tit_blue_color;
-    }
-  }
-}
-
-.p_title_box {
-  overflow: hidden;
-  padding: 25px 0;
-  line-height: 25px;
-
-  >.title {
-    @extend .p_title;
-    @extend .fl;
-    padding: 0;
-  }
-
-  .title_txt {
-    @extend .fl;
-    padding-left: 25px;
-    font-size: $f_16;
-    color: $light_gray;
-  }
-
-  .title_link {
-    .iconfont {
-      padding-left: 5px;
-      color: $green;
     }
   }
 }
@@ -517,7 +522,9 @@ $f_12: 12px;
     }
 
     .type_box {
+      overflow: hidden;
       margin-bottom: 5px;
+      height: 20px;
       @include type_box($f_13);
       .type_box_item{
          padding-right: 10px;
@@ -534,6 +541,18 @@ $f_12: 12px;
     }
 
     .list_goods {
+      overflow: hidden;
+      height: 20px;
+      font-size: 0;
+      >span{
+
+        font-size: $f_13;
+        display: inline-block;
+        &.list_goods_name{
+          width: 150px;
+          @extend .ellipsis;
+        }
+      }
       .list_goods_time{color: $light_gray;}
     }
   }
@@ -541,7 +560,7 @@ $f_12: 12px;
 
 /************最新货源************/
 .p_hy_info {
-  margin: 0 auto 85px auto;
+  margin: 0 auto 90px auto;
   width: 1398px;
   height: 128px;
   font-size: $f_14;
@@ -673,7 +692,7 @@ $f_12: 12px;
 
 /***********货源推荐************/
 .p_hy_groom {
-  margin: 0 auto 30px auto;
+  margin: 0 auto 90px auto;
   width: $w_1400;
   font-size: $f_14;
 
@@ -1021,7 +1040,6 @@ $f_12: 12px;
 
   .p_title_box {
     position: relative;
-
     .title {
       float: none;
       text-align: center;
@@ -1304,7 +1322,8 @@ $f_12: 12px;
 
     .type_box {
       overflow: hidden;
-      @include type_box($f_13);
+      @extend .ellipsis;
+      // @include type_box($f_13);
 
       .item {
         b {

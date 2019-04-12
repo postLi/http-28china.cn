@@ -1,6 +1,8 @@
 <template>
   <div class="yuanqu">
-    <div class="header">
+    <div
+      style="position:relative"
+      class="header">
       <a
         href="/wuliu/detail?id=1"
         target="_blank">
@@ -9,6 +11,26 @@
           alt=""
           width="1900">
       </a>
+      <div
+        style="display: inline-block;font-size: 12px;height: 16px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 1500px;position: absolute;bottom: 10px;color: #fff;left: 280px;"
+        class="top_left">
+        <ul
+          style="position:relative"
+          class="top_left_ul" >
+          <li
+            v-for="(item,index) in wuliu_newest"
+            :key="index"
+            class="top_left_ul_li" >
+            <a
+              :href="item.url"
+              :title="item.title"
+              target="_blank"><img
+                style="width:20px;height:20px"
+                src="../../static/yuanqu/images/lb.png"> <span style="padding:0 10px">最新公告 :</span><span style="padding-right:10px">{{ (item.releaseDate || '').split(' ')[0] }} </span><span >{{ item.title }} </span></a>
+
+          </li>
+        </ul>
+      </div>
     </div>
     <div class="list_box">
 
@@ -63,17 +85,17 @@
                   </div>
                   <!-- <span>&nbsp;园区名称&nbsp;：</span> -->
                   <input
-                    style="height:45px;width:270px;"
+                    style="height:45px;width:270px;    margin-left: 25px;"
                     v-model="vo.parkName"
                     type="text"
                     class="list_input"
                     placeholder="请选择园区名称" >
                   <input
                     id="search_wlyq"
-                    value=" 搜索园区 "
+                    value=" 搜索 "
                     readonly=""
                     class="list_button"
-                    style="width:100px"
+
                     @click="search()">
                     <!-- <input
                   id="flush"
@@ -157,11 +179,11 @@
         <div class="tuijian">
           <div
             class="tuijian_title"
-            style=" height: 50px; line-height: 50px;padding-top: 20px;">
-            <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">推荐园区</h5>
+            style=" height: 50px; line-height: 50px;padding-top: 20px;    margin-bottom: 40px;">
+            <h5 style="color:#2577E3;font-size:20px;float: left;">推荐园区</h5>
             <a
               href="/wuliu"
-              target="_blank"><span style="float:right"> 更多></span></a>
+              target="_blank"><span style="float:right"> 更多</span></a>
           </div>
           <div class="tuijian_content">
             <div
@@ -169,7 +191,7 @@
               class="list_none"
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
-              <img 
+              <img
                 style="margin: 20px 0 20px 545px;"
                 src="../../static/images/none_pic.png">
             </div>
@@ -177,22 +199,27 @@
               <li
                 v-for="(item,i) in getRecommendList"
                 :key="i"
-                style="float:left;padding-right:25px">
+                style="float:left;    margin-right: 20px;background: #fff;">
                 <a
                   :href="'/wuliu/detail?id=' + item.id"
                   target="_blank"
                   style="position:relative"><img
                     :src="item.parkSignPicture?item.parkSignPicture:'http://aflc.oss-cn-shenzhen.aliyuncs.com//tms/20181218/ryeGbJyAGatZj4DaSMFQeXDB4b5KPrdN.jpg'"
-                    width="260"
-                    height="165"
-                    alt=""><span style="position:absolute;bottom:-74px;left:1px;background:rgba(0,0,0,0.1);color:rgb(255,255,255);padding: 5px 0px;font-size:14px;width: 260px;text-align: center;">{{ item.parkName.length>15?item.parkName.substring(0,15):item.parkName }}</span>
+                    width="264"
+                    height="264"
+                    alt="">
                   <span
                     v-if="item.isInvestment==true"
-                    style="position:absolute;bottom:61px;left:0px;background:rgba(194,0,13,1);color:rgb(255,255,255);padding: 5px 20px;">招商中</span>
+                    style="position:absolute; top: -121px;;left:0px;background:linear-gradient(67deg,rgba(249,72,72,1),rgba(255,117,117,1));color:rgb(255,255,255);padding: 5px 20px;border:1px solid rgba(218,218,218,1);">招商中</span>
                 </a>
                 <!-- ourRatings -->
-                <p style="width: 260px;text-align: center;padding-top:10px"><span
-                style="padding-right:10px">推荐指数</span><img
+                <p style="width: 260px;text-align: left;padding-top:20px;color:#333333"><span
+                  style="padding-left:10px"
+                >{{ item.parkName.length>15?item.parkName.substring(0,15):item.parkName }}</span>
+
+                </p>
+                <p style="width: 260px;text-align: left;padding:10px 0;"><span
+                style="padding:0 10px">推荐指数</span><img
 
                   v-for="(item,i) in item.ourRatings"
                   :key="i"
@@ -204,144 +231,117 @@
             </ul>
           </div>
         </div>
-        <div
-          class="new"
-          style="clear: both;">
-          <div
-            class="new_title"
-            style="padding:30px 0 25px">
-            <h5
 
-            style="display: inline-block;color:rgb(255,255,255);font-size:18px;background:rgb(0,136,238);width:135px;padding:10px">最新动态</h5>
-            <div
-              style="display: inline-block;font-size: 12px;height: 16px;line-height: 16px;overflow: hidden;margin-top: 7px;width: 315px;"
-              class="top_left">
-              <ul
-                style="position:relative"
-                class="top_left_ul" >
-                <li
-                  v-for="(item,index) in wuliu_newest"
-                  :key="index"
-                  class="top_left_ul_li" >
-                  <a 
-                    :href="item.url"
-                    :title="item.title"
-                    target="_blank"><span>【{{ (item.releaseDate || '').split(' ')[0] }}】 {{ item.title }}</span></a>
-              
-                </li>
-              </ul>
-            </div>
-           
-          </div>
-
-
-
-        </div>
         <div>
           <div
             class="ruzhu"
-            style="width: 635px;float: left">
+            style="width: 688px;float: left; background: #fff;margin-top: 60px;    border: 1px solid rgba(227,238,252,1);">
             <div
               class="ruzhu_title"
-              style="padding:30px 0 25px">
-              <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">新入驻园区
+              style="padding:10px 0 5px;height: 30px; line-height: 30px;">
+              <h5 style="color:#2577E3;font-size:20px;float: left;padding-left:10px;">新入驻园区
               </h5>
-              <a href=""><span style="float:right"> 更多></span></a>
+              <a href=""><span style="float:right;margin-right:30px"> 更多</span></a>
             </div>
             <div
-              v-if="getNewestList.length==0 || getNewestList.list ==[] "
+              v-if=" getNewestList.list ==[] "
               class="list_none"
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
-              <img 
+              <img
                 style="margin: 20px 0 20px 150px;"
                 src="../../static/images/none_pic.png">
             </div>
-            <ul v-else>
+            <ul 
+              style="margin-bottom: 10px;"
+              v-else>
               <!-- :href="'/wuliu/detail?id=' + item.id"
                   target="_blank" -->
               <li
                 v-for="(item,i) in getNewestList"
                 :key="i"
-                style="padding-top: 20px"><a
+                style="padding-top:15px"><a
 
                   :href="'/wuliu/detail?id=' + item.id"
                   target="_blank">
-                  <img
-                    src="../../static/yuanqu/images/jiantou.png"
-                    alt=""><span style="padding: 0px 40px 0 30px;width: 100px;display: inline-block;">{{ item.parkName.length>6?item.parkName.substring(0,6)+'..':item.parkName }}
+                  <span
+                    class="ruzhu_parkName"
+                    style="padding: 0px 40px 0 30px;width: 110px;display: inline-block; margin-right:30px;color:#333333">{{ item.parkName.length>8?item.parkName.substring(0,8)+'..':item.parkName }}
                   </span><span
-              style="width: 320px;display: inline-block;"><i style="padding-right:10px">地址:</i>{{ item.parkAddress.length > 19?item.parkAddress.substring(0,19)+'..':item.parkAddress }}</span></a></li>
+              style="width: 400px;display: inline-block;"><img src="../../static/yuanqu/images/address.png"><i style="padding-left:10px;vertical-align:middle">{{ item.parkAddress.length > 25?item.parkAddress.substring(0,25)+'..':item.parkAddress }}</i></span></a></li>
             </ul>
           </div>
-          <div
-            class="zizhu"
-            style="width: 710px;float: left;margin-left:50px">
+          <div style="width: 688px;float: left;margin-left:20px;margin-top: 60px;">
             <div
-              class="zizhu_title"
-              style="padding:30px 0 25px">
-              <h5 style="color:rgb(196,0,13);font-size:18px;font-weight: bold;">自助服务
-              </h5>
-              <!--<a href=""><span style="float:right">更多></span></a> -->
-            </div>
-            <div
-              style="margin-left: 10px;"
-              class="zizhu_content">
-              <div>
-                <ul>
-                  <li
-                    style="float:left;padding-right:30px;padding-top:10px"
-                    v-for="(item,i) in ziZhuServerList"
-                    :key="i"><a
-                      :href="item.url"
-                      target="_blank"
-                      style="width: 185px;padding-left:15px;height: 60px;background: rgb(51,153,255);display: inline-block;color: white;text-align: left;line-height: 60px;font-size: 18px;"><img
-                        :src="item.img"
-                        alt=""
-                        width="40"
-                        style="padding-right:20px"
-                  >{{ item.title }}</a></li>
-        
-                </ul>
+              class="zizhu"
+              style="background: #fff;    border: 1px solid rgba(227,238,252,1);">
+              <div
+                class="zizhu_title"
+                style="padding:10px 0 25px;height: 30px; line-height: 30px;">
+                <h5 style="color:#2577E3;font-size:20px;padding-left:10px;;">自助服务
+                </h5>
+
               </div>
               <div
-                class="zizhu_bot"
-                style="border:1px solid #ccc;width:660px;height:150px;clear: both;">
-                <div>
-                  <!--<label class="layui-form-label">短输入框</label> -->
-                  <div
-                    class="layui-input-inline"
-                    style="margin: 30px 20px 10px 20px;float: left;">
-                    <input
-                      style="height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
-                      type="text"
-                      maxlength="11"
-                      placeholder="输入您的手机号"
-                      v-model="inputData">
-                    <span
-                      style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: rgb(51,153,255) ;display: inline-block;color:#fff"
-                      @click="openYuanqu">园区入驻</span>
-                    <p
-                      style="color:red;padding-top:5px"
-                      v-if="isMobile">请输入正确手机号</p>
-                    <p style="padding-top: 10px">入驻免费提供发布信息，园区宣传</p>
-                    <!--<label class="layui-form-label">园区入驻1</label>-->
-                  </div>
-                  <div
-                    style="display: inline-block;margin:20px;background:rgb(242,242,242);padding: 10px;"
-                    class="zizhu_bot_r">
-                    <img
-                      src="../../static/yuanqu/images/down.png"
-                      alt=""
-                      style="width: 90px;height: 80px;float:left">
-                    <p style="width: 150px;float:left;padding-left: 10px"><a
+                style="margin-left: 10px;"
+                class="zizhu_content">
+                <div style=" background: #fff; display: inline-block;margin-bottom: 25px">
+                  <ul style="margin-left:40px">
+                    <li
+                      style="float:left;margin-right:30px;padding-top:10px"
+                      v-for="(item,i) in ziZhuServerList"
+                      :key="i"><a
+                        :href="item.url"
+                        target="_blank"
+                        style="width: 165px;padding-left:15px;height: 60px;display: inline-block;color: white;text-align: left;line-height: 60px;font-size: 18px;border-radius:6px;"><img
+                          :src="item.img"
+                          alt=""
+                          width="24"
+                          style="padding-right:15px"
+                    >{{ item.title }}</a></li>
 
-                      href="http://h5.28tms.com/"
-                      target="_blank">下载<i style="color:rgb(0,102,255)">【28快运APP】</i>，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a></p>
-                  </div>
+                  </ul>
+                </div>
+
+
+              </div>
+            </div>
+            <div
+              class="zizhu_bot"
+              style="border:1px solid rgba(227,238,252,1);width:688px;height:165px;clear: both;margin-top:25px;    background: #fff;">
+              <div>
+                <!--<label class="layui-form-label">短输入框</label> -->
+                <div
+                  class="layui-input-inline"
+                  style="margin: 30px 20px 10px 50px;float: left;">
+                  <input
+                    style="height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
+                    type="text"
+                    maxlength="11"
+                    placeholder="输入您的手机号"
+                    v-model="inputData">
+                  <span
+                    style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: #2577E3;display: inline-block;color:#fff;font-size:16px"
+                    @click="openYuanqu">入驻</span>
+                  <p
+                    style="color:red;padding-top:5px"
+                    v-if="isMobile">请输入正确手机号</p>
+                  <p style="padding-top: 25px;color:#2577E3;padding-left: 20px;">入驻免费提供发布信息，园区宣传</p>
+                  <!--<label class="layui-form-label">园区入驻1</label>-->
+                </div>
+                <div
+                  style="display: inline-block;margin:20px;background:#FFFEE2;padding: 10px;"
+                  class="zizhu_bot_r">
+                  <img
+                    src="../../static/yuanqu/images/down.png"
+                    alt=""
+                    style="width: 90px;height: 80px;float:left">
+                  <p style="width: 150px;float:left;padding-left: 10px"><a
+
+                    href="http://h5.28tms.com/"
+                    target="_blank">下载<i style="color:rgb(0,102,255)">【28快运APP】</i>，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a></p>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
@@ -353,64 +353,63 @@
             style="padding:30px 0 25px 0">
             <h5 style="color:rgb(196,69,76);font-size:18px;float: left;font-weight: bold;">热门园区</h5>
             <span style="padding-left:30px;height: 24px;line-height: 24px;"><i style="color:rgb(249,155,42)">1365</i>个园区，为您优选10个热门园区</span>
-            <a
-              href="/wuliu"
-              target="_blank"><span style="float:right;height: 24px;line-height: 24px;"> 更多></span></a>
-          </div>
-          <div
-            style="border-top:none"
-            class="select_con"
-          >
-
-            <dl>
-              <!-- <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt> -->
-              <dd>
-                <form
-                  name="zxaddform"
-                  method="post"
-                  action="" >
-                  <input
-                    name="a7"
-                    type="hidden"
-                    value="0">
-                  <input
-                    type="hidden"
-                    name="mid"
-                    value="19" >
-                  <input
-                    type="hidden"
-                    name="dopost"
-                    value="search" >
-                  <div
-                    id="parkAddress1"
-                    class="fl list_input"
-                    style="position:relative;width:300px" >
+            <div
+              style="border-top:none;    display: inline-block;    height: 30px;    line-height: 30px;margin-left: 150px"
+              class=""
+            >
+              <dl>
+                <!-- <dt><span style="padding-left:0">园区所在地&nbsp;：</span></dt> -->
+                <dd>
+                  <form
+                    name="zxaddform"
+                    method="post"
+                    action="" >
                     <input
-                      style="height: 100%;border: none;outline: none;"
-                      data-toggle="city-picker"
-                      data-level="district"
-                      type="text"
-                      placeholder="请选择园区所在地" >
-                  </div>
-                  <!-- <span>&nbsp;园区名称&nbsp;：</span>
+                      name="a7"
+                      type="hidden"
+                      value="0">
+                    <input
+                      type="hidden"
+                      name="mid"
+                      value="19" >
+                    <input
+                      type="hidden"
+                      name="dopost"
+                      value="search" >
+                    <div
+                      id="parkAddress1"
+                      class="fl list_input"
+                      style="position:relative;width:300px" >
+                      <input
+                        style="height: 100%;border: none;outline: none;"
+                        data-toggle="city-picker"
+                        data-level="district"
+                        type="text"
+                        placeholder="请选择园区所在地" >
+                    </div>
+                    <!-- <span>&nbsp;园区名称&nbsp;：</span>
                   <input
                     v-model="vo.parkName"
                     type="text"
                     class="list_input"
-                    placeholder="请输入园区名称" > -->
-                  <input
-                    id="search_wlyq1"
-                    value=" 搜索园区 "
-                    readonly=""
-                    class="list_button"
-                    style="width:100px;background: #2577e3;color: #fff;text-align:center"
-                    @click="search1()">
-                </form>
-              </dd>
-
-            </dl>
-
+                    placeholder="请输入园区名称" > 
+                    background: no-repeat url(../images/search.png) 10px 14px #2577e3;-->
+                    <input
+                      id="search_wlyq1"
+                      value=" 搜索 "
+                      readonly=""
+                      class="list_button"
+                      style="width:100px;background: #2577e3;color: #fff;text-align:center"
+                      @click="search1()">
+                  </form>
+                </dd>
+              </dl>
+            </div>
+            <a
+              href="/wuliu"
+              target="_blank"><span style="float:right;height: 24px;line-height: 24px;"> 更多</span></a>
           </div>
+        
 
         </div>
         <div
@@ -486,7 +485,7 @@
               class="list_none"
               style="display: block">
               <span>暂时没有找到您要查询的信息，可以看看其他园区哦</span>
-              <img 
+              <img
                 style="margin: 20px 0 20px 545px;"
                 src="../../static/images/none_pic.png">
             </div>
@@ -561,7 +560,7 @@
                     :href="item.url"
                     :title="item.title"
                     target="_blank">
-                    <p><span 
+                    <p><span
                       class="news_title"
                       style="padding-left:20px">{{ item.title }}</span><span style="padding-left:30px">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
               </ul>
@@ -598,8 +597,8 @@
                     :href="item.url"
                     :title="item.title"
                     target="_blank">
-                    <p><span 
-                      class="news_title" 
+                    <p><span
+                      class="news_title"
                       style="padding-left:20px">{{ item.title }}</span><span style="padding-left:30px">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
               </ul>
             </div>
@@ -613,11 +612,11 @@
             href="/regisiter"
             target="_blank"><button style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</button></a>
         </div>
-    
+
 
       </div>
 
-  
+
     </div>
     <Add
       :show = "isAdd"
@@ -688,33 +687,33 @@ export default {
       ],
       ziZhuServerList: [
         {
-          img: require('../../static/yuanqu/images/xiadan.png'),
+          img: require('../../static/yuanqu/images/ksxd.png'),
           title: '快速下单',
           url: '/create/order'
         },
         {
-          img: require('../../static/yuanqu/images/line.png'),
+          img: require('../../static/yuanqu/images/ksxd.png'),
           title: '发布专线',
           url: '/create/line'
         },
         {
-          img: require('../../static/yuanqu/images/cheyuan.png'),
+          img: require('../../static/yuanqu/images/ksxd.png'),
           title: '发布车源',
           url: '/create/cheyuan'
         },
         {
-          img: require('../../static/yuanqu/images/check.png'),
+          img: require('../../static/yuanqu/images/ksxd.png'),
           title: '运单查询',
           url: '/ydcx'
         },
 
         {
-          img: require('../../static/yuanqu/images/shixiao.png'),
+          img: require('../../static/yuanqu/images/ksxd.png'),
           title: '时效查询',
           url: '/shixiao'
         },
         {
-          img: require('../../static/yuanqu/images/wangdian.png'),
+          img: require('../../static/yuanqu/images/ksxd.png'),
           title: '网点查询',
           url: '/wangdian'
         }
@@ -1002,12 +1001,24 @@ export default {
 }
 .top_left_ul {
   li {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    // white-space: nowrap;
+    // overflow: hidden;
+    // text-overflow: ellipsis;
+    a {
+      color: #fff;
+    }
+    a:hover {
+      span {
+        color: red;
+      }
+    }
   }
+  // &:hover {
+  //   color: red !important;
+  // }
 }
 .yuanqu {
+  background: rgb(249, 249, 249);
   .clearfix:after {
     content: ' ';
     display: table;
@@ -1039,9 +1050,17 @@ export default {
     }
   }
   .tuijian {
+    margin-top: 35px;
     .tuijian_content {
       li:last-of-type {
-        padding-right: 0 !important;
+        margin-right: 0 !important;
+      }
+      li {
+        transition: all 0.4s;
+      }
+      li:hover {
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+        transform: translate3d(0, -2px, 0);
       }
     }
   }
@@ -1070,7 +1089,25 @@ export default {
         margin-top: 15px;
       }
       li:last-of-type {
-        margin-bottom: 30px;
+        // margin-bottom: 80px;
+      }
+      li:first-of-type,
+      li:last-of-type {
+        a {
+          background: #49b1e7;
+        }
+      }
+      li:nth-of-type(2),
+      li:nth-of-type(4) {
+        a {
+          background: #ffaf47;
+        }
+      }
+      li:nth-of-type(3),
+      li:nth-of-type(5) {
+        a {
+          background: #15db27;
+        }
       }
     }
   }

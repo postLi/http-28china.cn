@@ -5,7 +5,7 @@ a:hover .wlzx_list_02 span{color:#FA5000}
 body{background-color: #F9F9F9;}
 /* img:hover{transform: scale(1.02);
 transition:0.7s}  */
-.tuijian img:hover,.wlzx_list img:hover,.youzhi_content img:hover{transform: scale(1.02);
+.wlzx_list img:hover,.youzhi_content img:hover{transform: scale(1.02);
 	transition:0.7s} 
 .zx_sx{
 OVERFLOW: hidden; LINE-HEIGHT: 50px;HEIGHT: 50px;  color:#585858; font-size:16px; font-weight:bold;
@@ -76,9 +76,7 @@ line-height: 47px;
 	background-color: #fff;
 	color: #2577e3;
 	font-size: 15px;
-	/*
-	background: no-repeat url(../images/01search.png) 45px 6px;
-	*/
+	/* background: no-repeat url(../images/search.png) 10px 14px #2577e3; */
 	text-align: left;
 	/*padding-left: 8px;*/
 	margin-left: 8px;	
@@ -395,15 +393,15 @@ border: 1px solid #eee;
 	margin-left: 10px;
 }
 #search_wlyq {
-    width: 56px;
+    width: 50px;
     height: 44px;
     border-radius: 2px;
     color: #f9f9f9;
     font-size: 16px;
-    background: no-repeat url(../images/white_search.png) 20px 14px #2577e3;
+    background: no-repeat url(../images/search.png) 10px 14px #2577e3;
     text-align: left;
-    padding-left: 40px;
-    margin-left: 8px;
+    padding-left: 30px;
+    /* margin-left: 8px; */
     cursor: pointer;
     border: 0;
 }
@@ -465,10 +463,10 @@ border: 1px solid #eee;
 	position: absolute;
 	content: '';
 	top: 25px;
-	left: 90px;
-	width: 1250px;
+	left: 120px;
+	width: 1220px;
 	height: 1px;
-	background: #ccc;
+	background: #999999;
 }
 .ruzhu_title h5{
 	position: relative
@@ -476,11 +474,23 @@ border: 1px solid #eee;
 .ruzhu_title h5::after{
 	position: absolute;
 	content: '';
-	top: 12px;
-	left: 118px;
-	width: 450px;
+	top: 15px;
+	left: 130px;
+	width: 480px;
 	height: 1px;
-	background: #ccc;
+	background: #999999;
+}
+.ruzhu ul li span.ruzhu_parkName{
+	position: relative
+}
+.ruzhu ul li span.ruzhu_parkName::after{
+	position: absolute;
+	content: '';
+	top: 7px;
+	left: 13px;
+	width: 6px;
+	height: 6px;
+	background: #EE2626;
 }
 .zizhu_title h5{
 	position: relative
@@ -488,13 +498,13 @@ border: 1px solid #eee;
 .zizhu_title h5::after{
 	position: absolute;
 	content: '';
-	top: 12px;
+	top: 15px;
 	left: 118px;
-	width: 611px;
+	width: 568px;
 	height: 1px;
-	background: #ccc;
+	background: #999999;
 }
-.hot_title span{
+/* .hot_title span{
 	position: relative
 }
 .hot_title span::after{
@@ -504,8 +514,8 @@ border: 1px solid #eee;
 	left: 300px;
 	width: 940px;
 	height: 1px;
-	background: #ccc;
-}
+	background: #999999;
+} */
 .youzhi_title span{
 	position: relative
 }
@@ -516,7 +526,7 @@ border: 1px solid #eee;
 	left: 220px;
 	width: 970px;
 	height: 1px;
-	background: #ccc;
+	background: #999999;
 }
 .zixuntitle h5{
 	position: relative
@@ -528,7 +538,7 @@ border: 1px solid #eee;
 	left: 100px;
 	width: 500px;
 	height: 1px;
-	background: #ccc;
+	background: #999999;
 }
 .zixun_title h5{
 	position: relative
@@ -540,6 +550,7 @@ border: 1px solid #eee;
 	left: 100px;
 	width: 500px;
 	height: 1px;
-	background: #ccc;
+	background: #999999;
 }
+
 /*  */

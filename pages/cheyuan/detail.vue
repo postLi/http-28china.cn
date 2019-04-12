@@ -695,7 +695,8 @@ export default {
     script: [
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
+      { src: 'https://echarts.baidu.com/dist/echarts.min.js' },
+      { src: './js/Links.js' }
     ]
   },
   layout: 'subLayout',
@@ -776,7 +777,6 @@ export default {
     let zxList, otherCarSourceList, carInfoRes, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     if (cy1.data.status === 200) {
-      // cy1.data.data.num = Math.ceil(Math.random() * 30)
       let item = cy1.data.data
       let arr = (item.id || '').split('')
       let num = 0
@@ -833,59 +833,11 @@ export default {
     let popularitys = await $axios
       .get('/28-web/driver/driverPopularityList')
       .catch(err => {})
-    let footLink = item => {
-      switch (item.startProvince) {
-        case null:
-          item.startProvince = ''
-      }
-      switch (item.startCity) {
-        case null:
-          item.startCity = ''
-      }
-      switch (item.startArea) {
-        case null:
-          item.startArea = ''
-      }
-      switch (item.endProvince) {
-        case null:
-          item.endProvince = ''
-      }
-      switch (item.endCity) {
-        case null:
-          item.endCity = ''
-      }
-      switch (item.endArea) {
-        case null:
-          item.endArea = ''
-      }
-      item.carSourceType = ''
-      item.targetLinks = ''
-      if (item.type == '1000') {
-        item.targetLinks = '/gongsi/'
-      }
-      if (item.type == '2000') {
-        item.targetLinks = '/zhuanxian/list'
-      }
-      if (item.type == '2001') {
-        item.targetLinks = '/member/' + item.companyId + '-line'
-      }
-      if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
-        item.targetLinks = '/cheyuan'
-      }
-      if (item.type == '3001') {
-        item.targetLinks = '/cheyuan'
-        item.carSourceType = 'AF01801'
-      }
-      if (item.type == '4000') {
-        item.targetLinks = '/huoyuan'
-      }
-      if (item.type == '4001') {
-        item.targetLinks = '/member/' + item.companyId + '-huo'
-      }
-    }
-    hotSearchs.data.data.links.forEach(footLink)
-    cheLinks.data.data.interestedRecommend.links.forEach(footLink)
-    cheLinks.data.data.recommend.links.forEach(footLink)
+    hotSearchs.data.data.links.forEach(window.COMMONLINK.HREFLINKS)
+    cheLinks.data.data.interestedRecommend.links.forEach(
+      window.COMMONLINK.HREFLINKS
+    )
+    cheLinks.data.data.recommend.links.forEach(window.COMMONLINK.HREFLINKS)
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
@@ -927,8 +879,6 @@ export default {
   },
   mounted() {
     seajs.use(['/js/gaodemap2.js'])
-    //找专线/货源/车源 S
-    // $('.arc_input1, .arc_input2').citypicker()
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')
       var start = $('.arc_input1')

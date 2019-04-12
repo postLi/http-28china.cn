@@ -105,8 +105,7 @@
 import SelectAddress from '../../../components/m/selectAddress'
 import Reputation from '../../../components/m/reputation'
 import Vue from 'vue'
-import { Scroll, ActionSheet } from 'cube-ui'
-Vue.use(Scroll)
+import { ActionSheet } from 'cube-ui'
 Vue.use(ActionSheet)
 export default {
   name: 'PageZhuanXian',

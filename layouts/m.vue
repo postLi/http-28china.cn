@@ -55,6 +55,7 @@ export default {
     })
   },
   beforeMount() {
+    // 因为要获取坐标，所以列表接口放在这里
     AMap.plugin('AMap.CitySearch', () => {
       let citySearch = new AMap.CitySearch()
       citySearch.getLocalCity((status, result) => {
@@ -81,6 +82,11 @@ export default {
           })
           // 车源页开始地
           this.$store.dispatch('m/cheyuan/SETDATA', {
+            data: [result.province, result.city, ''],
+            name: 'startName'
+          })
+          // 公司页开始地
+          this.$store.dispatch('m/gongsi/SETDATA', {
             data: [result.province, result.city, ''],
             name: 'startName'
           })
@@ -128,6 +134,17 @@ export default {
               orderBy: this.$store.state.m.cheyuan.orderBy.value,
               carSpec: this.$store.state.m.cheyuan.carSpec,
               carType: this.$store.state.m.cheyuan.carType
+            },
+            name: 'rangeList'
+          })
+          //公司列表
+          this.$store.dispatch('m/gongsi/GETRANGELIST', {
+            data: {
+              currentPage: this.$store.state.m.gongsi.currentPage,
+              pageSize: 20,
+              province: result.province,
+              city: result.city,
+              orderBy: this.$store.state.m.gongsi.orderBy.value
             },
             name: 'rangeList'
           })

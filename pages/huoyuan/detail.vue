@@ -872,7 +872,8 @@ export default {
     script: [
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
+      { src: 'https://echarts.baidu.com/dist/echarts.min.js' },
+      { src: './js/Links.js' }
     ]
   },
   layout: 'subLayout',

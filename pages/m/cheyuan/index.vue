@@ -128,11 +128,8 @@
 
 <script>
 import SelectAddress from '../../../components/m/selectAddress'
-import Vue from 'vue'
-import { Scroll } from 'cube-ui'
 import Release from '../../../components/m/release'
 import Screen from '../../../components/m/screen'
-Vue.use(Scroll)
 export default {
   name: 'PageCheYuan',
   components: { Screen, Release, SelectAddress },

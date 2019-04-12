@@ -400,18 +400,26 @@ export default {
           data: []
         })
         this.$store.commit('m/gongsi/setData', {
+          name: 'startName',
+          data: [
+            this.$store.state.m.startName0[0],
+            this.$store.state.m.startName0[1]
+          ]
+        })
+        this.$store.commit('m/gongsi/setData', {
+          name: 'orderBy',
+          data: { name: '最新发布', value: 'createDesc' }
+        })
+        this.$store.commit('m/gongsi/setData', {
           name: 'scrollTo',
           data: 0
         })
         let parm = {
           currentPage: this.$store.state.m.gongsi.currentPage,
           pageSize: 20,
-          startProvince: this.$store.state.m.gongsi.startName[0],
-          startCity: this.$store.state.m.gongsi.startName[1],
-          startArea: this.$store.state.m.gongsi.startName[2],
-          endProvince: this.$store.state.m.gongsi.endName[0],
-          endCity: this.$store.state.m.gongsi.endName[1],
-          endArea: this.$store.state.m.gongsi.endName[2]
+          province: this.$store.state.m.gongsi.startName[0],
+          city: this.$store.state.m.gongsi.startName[1],
+          orderBy: this.$store.state.m.gongsi.orderBy.value
         }
         // 物流公司列表
         this.$store.dispatch('m/gongsi/GETRANGELIST', {

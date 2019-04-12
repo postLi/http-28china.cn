@@ -42,6 +42,9 @@
   </div>
 </template>
 <script>
+import Vue from 'vue'
+import { Scroll } from 'cube-ui'
+Vue.use(Scroll)
 import MyTop from '../../../components/m/myTop'
 import pageZhuanXian from '../zhuanxian'
 import pageHuoYuan from '../huoyuan'

@@ -39,6 +39,20 @@
             {{ item.name }}
           </div>
         </div>
+        <div
+          class="b_c_w padding_l_20 padding_r_20 f-26 height_100 o_f"
+          v-if="form === 'gongsi'">
+          <div
+            class="item flex"
+            :class="[index === listGongSi.length -1 ?'':'b_b']"
+            :style="{'color':$store.state.m.gongsi.orderBy.value === item.value?'#54A7FF':''}"
+            v-for="(item,index) in listGongSi"
+            :key="index"
+            @click="selectRelease(item)"
+          >
+            {{ item.name }}
+          </div>
+        </div>
       </div>
     </transition>
     <div
@@ -71,6 +85,10 @@ export default {
       listCheYuan: [
         { name: '最新发布', value: 'createTimeDesc' },
         { name: '价格最低', value: 'expectPriceAsc' }
+      ],
+      listGongSi: [
+        { name: '最新发布', value: 'createDesc' },
+        { name: '信誉最高', value: 'creditDesc' }
       ]
     }
   },

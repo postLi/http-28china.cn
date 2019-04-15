@@ -264,7 +264,7 @@ img{
 }
 
 .wlzx_list li {
-  /* height: 140px; */
+  height: 96px;
   float: left;
   overflow: hidden;
 }

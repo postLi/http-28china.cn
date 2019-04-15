@@ -382,7 +382,7 @@
               <a
                 href="javascript:;"
                 class="button2"
-                @click="openHelp()"><img src="/images/cy/03u41008 2.gif">此货主货源上新提醒我</a>
+                @click="openHelp()"><img src="/images/cy/03u410082.gif">此货主货源上新提醒我</a>
             </div>
           </div>
         </div>
@@ -839,6 +839,7 @@
 import Add from './add1'
 import Lelp from './help'
 import Order from './order'
+import MUTUAL from '@/static/js/wzl-commonJs.js'
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 async function getCanyColl(
   $axios,
@@ -965,7 +966,7 @@ export default {
     let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {
-        // console.log('hyDetail:', err)
+        console.log('hyDetail:', err)
       })
     let parm = {
       currentPage: 1,
@@ -1006,154 +1007,66 @@ export default {
     let archivals = await $axios
       .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
       .catch(err => {
-        // console.log('archivals')
+        console.log('archivals', err)
       })
     if (archivals.data.status === 200) {
-      let credit = archivals.data.data.credit
-      if (credit >= 0 && credit <= 3) {
-        archivals.data.data.startA = 1
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 4 && credit <= 10) {
-        archivals.data.data.startA = 2
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 11 && credit <= 40) {
-        archivals.data.data.startA = 3
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 41 && credit <= 90) {
-        archivals.data.data.startA = 4
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 91 && credit <= 150) {
-        archivals.data.data.startA = 5
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 151 && credit <= 250) {
-        archivals.data.data.startB = 1
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 251 && credit <= 500) {
-        archivals.data.data.startB = 2
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 500 && credit <= 1000) {
-        archivals.data.data.startB = 3
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 1001 && credit <= 2000) {
-        archivals.data.data.startB = 4
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 2001) {
-        archivals.data.data.startB = 5
-        archivals.data.data.isShowB = true
-      }
+      MUTUAL.GETCREDIT(archivals)
     }
     //顶部轮播
-    let newLists = await $axios
-      .get('/28-web/lclOrder/newList')
-      .catch(err => {})
-      .catch(err => {
-        // console.log('newLists')
-      })
+    let newLists = await $axios.get('/28-web/lclOrder/newList').catch(err => {
+      console.log('newLists:', err)
+    })
     //货源列表
     let huoInfoLists = await $axios
       .post('/28-web/lclOrder/list', parm)
       .catch(err => {
-        // console.log('huoComprehensives4:', err)
+        console.log('huoInfoLists:', err)
       })
     //货源列表
     let huoInfoListst = await $axios
       .post('/28-web/lclOrder/list', parm1t)
       .catch(err => {
-        // console.log('huoComprehensives4:', err)
+        console.log('huoInfoListst:', err)
       })
     //最新货源信息
     let newestHuoyuanRes = await $axios
       .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
       .catch(err => {
-        // console.log('newestHuoyuanRes:', err)
+        console.log('newestHuoyuanRes:', err)
       })
     // 货主综合力评估
     let huoComprehensives = await $axios
       .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
       .catch(err => {
-        // console.log('huoComprehensives:', err)
+        console.log('huoComprehensives:', err)
       })
     //货源热门搜索
     let hotSearchs = await $axios
       .get('/28-web/hotSearch/supply/detail/links')
       .catch(err => {
-        // console.log('hotSearchs')
+        console.log('hotSearchs')
       })
     //企业人气榜
     let popularitys = await $axios
       .get('/28-web/logisticsCompany/popularity')
       .catch(err => {
-        // console.log('popularitys')
+        console.log('popularitys')
       })
     //底部推荐
     let huoLinks = await $axios
       .post('/28-web/lclOrder/detail/related/links', parm1)
       .catch(err => {
-        // console.log('huoLinks')
+        console.log('huoLinks', err)
       })
-    // console.log(huoLinks)
-    let footLink = item => {
-      switch (item.startProvince) {
-        case null:
-          item.startProvince = ''
-      }
-      switch (item.startCity) {
-        case null:
-          item.startCity = ''
-      }
-      switch (item.startArea) {
-        case null:
-          item.startArea = ''
-      }
-      switch (item.endProvince) {
-        case null:
-          item.endProvince = ''
-      }
-      switch (item.endCity) {
-        case null:
-          item.endCity = ''
-      }
-      switch (item.endArea) {
-        case null:
-          item.endArea = ''
-      }
-      item.carSourceType = ''
-      item.targetLinks = ''
-      if (item.type == '1000') {
-        item.targetLinks = '/gongsi/'
-      }
-      if (item.type == '2000') {
-        item.targetLinks = '/zhuanxian/list'
-      }
-      if (item.type == '2001') {
-        item.targetLinks = '/member/' + item.companyId + '-line'
-      }
-      if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
-        item.targetLinks = '/cheyuan'
-      }
-      if (item.type == '3001') {
-        item.targetLinks = '/cheyuan'
-        item.carSourceType = 'AF01801'
-      }
-      if (item.type == '4000') {
-        item.targetLinks = '/huoyuan'
-      }
-      if (item.type == '4001') {
-        item.targetLinks = '/member/' + item.companyId + '-huo'
-      }
-    }
-    huoLinks.data.data.brandOrder.links.forEach(footLink)
-    huoLinks.data.data.interestOrder.links.forEach(footLink)
-    hotSearchs.data.data.links.forEach(footLink)
+    huoLinks.data.data.brandOrder.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
+    huoLinks.data.data.interestOrder.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
+    hotSearchs.data.data.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
     return {
       archival: archivals.data.status === 200 ? archivals.data.data : [],
       hyDetail: hyDetails.data.status === 200 ? hyDetails.data.data : {},
@@ -1191,7 +1104,6 @@ export default {
   },
 
   mounted() {
-    // console.log(this.dataset, 'this.dataset')
     seajs.use(['/js/gaodemap2.js'])
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')

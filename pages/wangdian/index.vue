@@ -8,7 +8,7 @@
       </div>
       <div class="list_left">
         <div
-          class="w1036"
+          class="w1036 wzlgood"
           style=" background-color: #fff;margin-bottom: 20px;">
           <div class="select_con">
             <dl>
@@ -68,16 +68,6 @@
               </form>
                 <br>
               </dd>
-              <!-- <dt>公司名称&nbsp;:</dt>
-              <dd >
-                <input
-                  id="companyName"
-                  v-model="companyName"
-                  name="cfd"
-                  type="text"
-                  class="list_input"
-                  placeholder="请输入公司或网点名称" >
-              </dd> -->
               <dt>所属园区:</dt>
 
               <dd
@@ -186,14 +176,12 @@
         <div
           id="js002"
           class="w1036" >
-          <!-- <div class="zx_sx"><span class="biaozhi"/><span id="wangdian_list">网点列表</span></div> -->
           <div class="list_tiaoj">
-            <span
-              id="seq1"
-              class="active">综合排序</span>
-            <span
-              id="seq2"
-              title="距离从近到远">距离最近</span>
+            <span 
+              v-for="(item,index) in sortList" 
+              :key="index"
+              :class="[sortId === item.id ? 'active' : '']"
+              @click="selectSort(item)">{{ item.name }}</span>
             <div class="wzlwad">
               <span class="icon active">
                 <img 
@@ -520,11 +508,11 @@
     <div class="h70"/>
   </div>
 </template>
-
 <script>
-import ComNews from '../../components/comNews'
-import Add from '../gongsi/add'
-import FooterLinks from '../../components/footerLinks'
+import ComNews from '@/components/comNews'
+import Add from '@/pages/gongsi/add'
+import MUTUAL from '@/static/js/wzl-commonJs.js'
+import FooterLinks from '@/components/footerLinks'
 async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
   if (res.data.status === 200) {
@@ -533,13 +521,11 @@ async function getWdiangSearchList($axios, vo) {
     return { list: [] }
   }
 }
-
 async function getWangdiangInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
   parm.pageSize = 10
   let prefix = ''
-
   let res = await $axios.post('/28-web/pointNetwork/list', parm)
   if (res.data.status === 200) {
     res.data.data.list.forEach(item => {
@@ -553,7 +539,6 @@ async function getWangdiangInfoList($axios, currentPage, vo = {}) {
         item.pointAddress = item.pointAddress.substring(0, 15) + '..'
       }
     })
-    // console.log(res.data.data, 'res.data.data.total')
     return {
       list: res.data.data.list,
       pages: res.data.data.pages,
@@ -606,6 +591,8 @@ export default {
         select: '',
         phone: ''
       },
+      sortId: 1,
+      sortList: [{ id: 1, name: '综合排序' }, { id: 2, name: '运输时效' }],
       phoneHolder: '请输入正确手机号',
       wangdianInfoList: [],
       totalPage: 1,
@@ -620,6 +607,7 @@ export default {
       endCity: '',
       endArea: '',
       companyName: '',
+      filterSign: '',
       keyword: ''
     }
   },
@@ -637,7 +625,6 @@ export default {
       endCity: query.endCity ? query.endCity : '',
       endArea: query.endArea ? query.endArea : '',
       authStatus: query.authStatus ? query.authStatus : '',
-
       parkName: query.parkName ? query.parkName : '',
       otherServiceCode: query.otherServiceCode ? query.otherServiceCode : '',
       belongBrandCode: query.belongBrandCode ? query.belongBrandCode : '',
@@ -683,46 +670,7 @@ export default {
       })
     }
     recommendList.forEach(item => {
-      if (item.credit >= 0 && item.credit <= 3) {
-        item.showcreadimg = true
-        item.creditImg = 1
-      }
-      if (item.credit >= 4 && item.credit <= 10) {
-        item.showcreadimg = true
-        item.creditImg = 2
-      }
-      if (item.credit >= 11 && item.credit <= 40) {
-        item.showcreadimg = true
-        item.creditImg = 3
-      }
-      if (item.credit >= 41 && item.credit <= 90) {
-        item.showcreadimg = true
-        item.creditImg = 4
-      }
-      if (item.credit >= 91 && item.credit <= 150) {
-        item.showcreadimg = true
-        item.creditImg = 5
-      }
-      if (item.credit >= 151 && item.credit <= 250) {
-        item.showcreadeng = true
-        item.creditdeng = 1
-      }
-      if (item.credit >= 251 && item.credit <= 500) {
-        item.showcreadeng = true
-        item.creditdeng = 2
-      }
-      if (item.credit >= 500 && item.credit <= 1000) {
-        item.showcreadeng = true
-        item.creditdeng = 3
-      }
-      if (item.credit >= 1001 && item.credit <= 2000) {
-        item.showcreadeng = true
-        item.creditdeng = 4
-      }
-      if (item.credit >= 2001) {
-        item.showcreadeng = true
-        item.creditdeng = 5
-      }
+      MUTUAL.GETCREDITITEM(item)
     })
     let AF029 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF029'
@@ -730,7 +678,6 @@ export default {
     let AF025 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
     )
-
     let logisticsPark = await getWdiangSearchList($axios, {
       locationArea: vo.startArea,
       locationCity: vo.startCity,
@@ -779,7 +726,6 @@ export default {
             /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
             '/zixun'
           )
-
           return el
         })
       }
@@ -798,7 +744,6 @@ export default {
             /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
             '/zixun'
           )
-
           return el
         })
       }
@@ -819,51 +764,50 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
-      layui.use('form', function() {
-        $('.ydh').click(function() {
-          $('#yd_nr').val('1809260061')
-          $('.ydh').css('display', 'none')
-        })
-        $('#yd_nr').keyup(function() {
-          if ($('#yd_nr').val()) {
-            $('#yd_cx1').css('background-color', '#eb434d')
-            $('#yd_cx1').css('color', '#f9f9f9')
+    seajs.use(
+      ['/js/gaodemap2.js', '/layer/layer.js', '/layer/dist/layui.js'],
+      function() {
+        layui.use('form', function() {
+          $('.ydh').click(function() {
+            $('#yd_nr').val('1809260061')
             $('.ydh').css('display', 'none')
-          }
-          if (!$('#yd_nr').val()) {
-            $('#yd_cx1').css('background-color', '#3f94ee')
-            $('#yd_cx1').css('color', '#red')
-            $('.ydh').css('display', 'block')
-          }
+          })
+          $('#yd_nr').keyup(function() {
+            if ($('#yd_nr').val()) {
+              $('#yd_cx1').css('background-color', '#eb434d')
+              $('#yd_cx1').css('color', '#f9f9f9')
+              $('.ydh').css('display', 'none')
+            }
+            if (!$('#yd_nr').val()) {
+              $('#yd_cx1').css('background-color', '#3f94ee')
+              $('#yd_cx1').css('color', '#red')
+              $('.ydh').css('display', 'block')
+            }
+          })
+          $('#yd_cx1').click(function() {
+            var num = $('#yd_nr').val()
+            if (num) {
+              window.open('/ydcx?num=' + num)
+            }
+            if (!num) {
+              alert('请先输入运单号查询！')
+            }
+          })
+          var form = layui.form
+          form.render()
         })
-
-        $('#yd_cx1').click(function() {
-          var num = $('#yd_nr').val()
-          if (num) {
-            window.open('/ydcx?num=' + num)
-          }
-          if (!num) {
-            alert('请先输入运单号查询！')
-          }
-        })
-
-        var form = layui.form
-        form.render()
-      })
-    })
-
+      }
+    )
     this.companyName = this.$route.query.companyName || ''
-    seajs.use(['/js/gaodemap2.js'])
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
-      $('.showbox').hide()
+      $('.showbox').animate({ height: '0px' })
     })
     $('.expand').click(function() {
       $('.collapse').css('display', 'inline-block')
       $('.expand').css('display', 'none')
-      $('.showbox').show()
+      $('.showbox').animate({ height: '160px' })
     })
     let _this = this
     $('#select_wlyq').mousedown(function() {
@@ -873,46 +817,12 @@ export default {
       $('.icon').removeClass('active')
       $(this).addClass('active')
     })
-    $('#seq1').click(async function() {
-      $('#seq2').removeClass('active')
-      $(this).addClass('active')
-      let filterSign = 1
-      let WangdiangInfoList = await getWangdiangInfoList(
-        _this.$axios,
-        _this.current,
-        Object.assign(
-          {
-            filterSign: 1
-          },
-          _this.vo
-        )
-      )
-      _this.WangdiangInfoList = WangdiangInfoList.list
-    })
-
-    $('#seq2').click(async function() {
-      $('#seq1').removeClass('active')
-      $(this).addClass('active')
-      let filterSign = 2
-      let WangdiangInfoList = await getWangdiangInfoList(
-        _this.$axios,
-        _this.current,
-        Object.assign(
-          {
-            filterSign: 2
-          },
-          _this.vo
-        )
-      )
-      _this.WangdiangInfoList = WangdiangInfoList.list
-    })
     $('body').click(function(e) {
       var _con = $('.js_yq')
       if (!_con.is(e.target) && _con.has(e.target).length === 0) {
         $('#list_wlzx_yq').css('display', 'none')
       }
     })
-
     $('#select_wlyq').val(this.$route.query.parkName || '')
     $('#select_wlyq').attr('name', this.$route.query.parkId || '')
     $('#addressFrom input').citypicker({
@@ -924,7 +834,6 @@ export default {
       this.setMap()
     })
     $('#addressTo input').val(this.$route.query.address || '')
-
     this.pagination()
   },
   methods: {
@@ -985,6 +894,17 @@ export default {
       } else {
         return
       }
+    },
+    async selectSort(item) {
+      this.sortId = item.id
+      let vo = this.vo
+      vo.filterSign = this.sortId
+      let obj = await getWangdiangInfoList(
+        this.$axios,
+        this.currentPage,
+        this.vo
+      )
+      this.WangdiangInfoList = obj.list
     },
     reset() {
       setTimeout(function() {
@@ -1128,6 +1048,7 @@ export default {
 }
 .showbox {
   float: left;
+  overflow: hidden;
 }
 #tjcx_04:hover a {
   background: none !important;

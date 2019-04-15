@@ -9,7 +9,7 @@
       </div>
       <div class="list_left">
         <div
-          class="w1036"
+          class="w1036 wzlgood"
           style=" background-color: #fff;">
           <div class="zx_sx"><span class="biaozhi"/><span>货源筛选</span>
             <a
@@ -24,66 +24,67 @@
             </a>
           </div>
           <div class="select_con" >
-            <dl >
-              <dt>货源线路&nbsp;：</dt>
-              <dd><form
-                name="zxaddform"
-                method="post"
-                action="" >
-                <input
-                  name="a7"
-                  type="hidden"
-                  value="0">
-                <input
-                  type="hidden"
-                  name="mid"
-                  value="19" >
-                <input
-                  type="hidden"
-                  name="dopost"
-                  value="search" >
-                <div
-                  id="HuoyuanFrom"
-                  class="fl list_input"
-                  style="position:relative;" >
+            <dl>
+              <dt class="searchform1">货源线路&nbsp;：</dt>
+              <dd class="searchform">
+                <form
+                  name="zxaddform"
+                  method="post"
+                  action="" >
                   <input
-                    name="cfd"
-                    style="height: 100%;"
-                    data-toggle="city-picker"
-                    data-level="district"
-                    type="text"
-                    placeholder="请输入出发地" >
-                </div>
-                <img
-                  class="fl list_img"
-                  src="/images/list_wlzx/02jiantou.png">
-                <div
-                  id="HuoyuanTo"
-                  class="fl list_input"
-                  style="position:relative" >
+                    name="a7"
+                    type="hidden"
+                    value="0">
                   <input
-                    name="ddd"
-                    style="height: 100%;"
-                    data-toggle="city-picker"
-                    data-level="district"
-                    type="text"
-                    placeholder="请输入到达地" >
-                </div>
-                <input
-                  id="search_huoyuan"
-                  readonly
-                  name="Submit2"
-                  value=" 搜索 "
-                  class="list_button"
-                  @click="search()">
-                <input
-                  id="flush"
-                  name="Submit2"
-                  readonly
-                  value="重置 "
-                  class="list_button"
-                  @click="reload()">
-              </form>
+                    type="hidden"
+                    name="mid"
+                    value="19" >
+                  <input
+                    type="hidden"
+                    name="dopost"
+                    value="search" >
+                  <div
+                    id="HuoyuanFrom"
+                    class="fl list_input"
+                    style="position:relative;" >
+                    <input
+                      name="cfd"
+                      style="height: 100%;"
+                      data-toggle="city-picker"
+                      data-level="district"
+                      type="text"
+                      placeholder="请输入出发地" >
+                  </div>
+                  <img
+                    class="fl list_img"
+                    src="/images/list_wlzx/02jiantou.png">
+                  <div
+                    id="HuoyuanTo"
+                    class="fl list_input"
+                    style="position:relative" >
+                    <input
+                      name="ddd"
+                      style="height: 100%;"
+                      data-toggle="city-picker"
+                      data-level="district"
+                      type="text"
+                      placeholder="请输入到达地" >
+                  </div>
+                  <input
+                    id="search_huoyuan"
+                    readonly
+                    name="Submit2"
+                    value=" 搜索 "
+                    class="list_button"
+                    @click="search()">
+                  <input
+                    id="flush"
+                    name="Submit2"
+                    readonly
+                    value="重置 "
+                    class="list_button"
+                    @click="reload()">
+                </form>
               </dd>
 
               <dt>重量区间&nbsp;:</dt>
@@ -777,7 +778,7 @@ export default {
     }
   },
   mounted() {
-    console.log('hyList:', this.hyList)
+    // console.log('hyList:', this.hyList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())
@@ -812,12 +813,14 @@ export default {
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
-      $('.select_con').css('display', 'none')
+      $('.wzlgood').animate({ height: '130px' })
+      $('.list_hy').css('margin-top', '0')
     })
     $('.expand').click(function() {
+      $('.wzlgood').animate({ height: '350px' })
       $('.collapse').css('display', 'inline-block')
       $('.expand').css('display', 'none')
-      $('.select_con').css('display', 'block')
+      $('.list_hy').css('margin-top', '20px')
     })
 
     $('#list_nav_a').html(
@@ -1167,7 +1170,8 @@ body {
 }
 .select_con {
   width: 1128px;
-  border-color: #eee;
+  /* border-color: #eee; */
+  /* height: 300px; */
 }
 .select_con dl dt {
   font-size: 13px;
@@ -1879,7 +1883,7 @@ body {
   width: 1036px;
   float: left;
   /*OVERFLOW: hidden;*/
-  border: 1px solid #eee;
+  /* border: 1px solid #eee; */
   /* border-bottom: 0; */
 }
 .select_con {

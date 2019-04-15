@@ -8,8 +8,8 @@
       </div>
       <div class="list_left" >
         <div
-          class="w1036"
-          style=" background-color: #fff;border:1px solid #eeeeee;">
+          class="w1036 wzlgood"
+          style=" background-color: #fff">
           <div class="zx_sx"><span class="biaozhi"/><span>车源筛选</span>
             <a
               class="toggle-btn show-collapse"
@@ -444,6 +444,7 @@
 </template>
 
 <script>
+import MUTUAL from '@/static/js/wzl-commonJs.js'
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -695,12 +696,14 @@ export default {
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')
-      $('.select_con').css('display', 'none')
+      $('.wzlgood').animate({ height: '130px' })
+      $('.list_cy').css('margin-top', '0')
     })
     $('.expand').click(function() {
+      $('.wzlgood').animate({ height: '350px' })
       $('.collapse').css('display', 'inline-block')
       $('.expand').css('display', 'none')
-      $('.select_con').css('display', 'block')
+      $('.list_cy').css('margin-top', '20px')
     })
     $('#list_nav_a').html(
       this.vo.startCity +
@@ -766,12 +769,11 @@ export default {
         $('#form2').css('border-color', '#e5e5e5')
         obj.carType = this.checkNotice.selectValue
       }
-      let re = /^1[3|4|5|7|8|9]\d{9}$/
       if (this.checkNotice.phone === '') {
         $('.ltl-phone').css('border-color', 'red')
         this.phoneHolder = '请输入正确手机号'
       } else {
-        if (re.test(this.checkNotice.phone)) {
+        if (MUTUAL.AFLCVALUE.MOBILE.test(this.checkNotice.phone)) {
           $('.ltl-phone').css('border-color', '#e5e5e5')
           obj.msgMobile = this.checkNotice.phone
         } else {
@@ -1736,7 +1738,6 @@ body {
 }
 .list_cy {
   margin-top: 20px;
-  padding-bottom: 20px;
   background: #fff;
 }
 

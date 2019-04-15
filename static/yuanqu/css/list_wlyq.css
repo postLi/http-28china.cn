@@ -5,7 +5,7 @@ a:hover .wlzx_list_02 span{color:#FA5000}
 body{background-color: #F9F9F9;}
 /* img:hover{transform: scale(1.02);
 transition:0.7s}  */
-.wlzx_list img:hover,.youzhi_content img:hover{transform: scale(1.02);
+.wlzx_list img:hover{transform: scale(1.02);
 	transition:0.7s} 
 .zx_sx{
 OVERFLOW: hidden; LINE-HEIGHT: 50px;HEIGHT: 50px;  color:#585858; font-size:16px; font-weight:bold;
@@ -170,39 +170,45 @@ margin-left: 10px;
     }
 .wlzx_list_01{
 	width: 100%;
-	height: 268px;
-	margin-top: 32px;
+	/* height: 268px; */
+	/* margin-top: 32px; */
 	text-align: center;
 }
 .wlzx_list_02{
-margin-top: 16px;
-margin-bottom: 12px;
-text-align: center;
+margin-top: 10px;
+margin-bottom: 5px;
+text-align: left;
+color:#333
 }
 .wlzx_list_02 span{
-color: #2577e3;
+color: #333;
 font-size: 16px;
+padding-left: 10px;
 }
 .wlzx_list_03{
 	margin-bottom: 8px;
-	margin-left: 32px;
-	background:url(../images/list_wlzx/wlyq_zx.png) no-repeat -2px 0;
+	/* margin-left: 35px; */
+	text-align: left;
+	/* background:url(../images/list_wlzx/wlyq_zx.png) no-repeat -2px 0; */
 }
-.wlzx_list_03 font{color: #f85050;font-size: 14px;padding-left: 25px;}
+.wlzx_list_03 font{color: #F85050;font-size: 14px;padding-left: 10px;vertical-align: middle}
 .wlzx_list_03 i{color: #333;font-size: 14px;}
 .wlzx_list_03 span{color: #333;font-size: 14px;padding-left: 10px;}
 .wlzx_list_04{
 	margin-bottom: 15px;
-	margin-left: 32px;
-	background:url(../images/list_wlzx/wlyq_dw.png) no-repeat -2px 0;
+	margin-left: 10px;
+	vertical-align: middle
+	/* background:url(../images/list_wlzx/wlyq_dw.png) no-repeat -2px 0; */
 }
 .wlzx_list_04 span{
-font-size: 14px;color: #666;padding-left: 25px;
+font-size: 14px;color: #666;padding-left: 10px;
+vertical-align: middle
 }
 .wlzx_list_05{
 	margin-right: 19px;
 	text-align: right;
-	background:url(../images/list_wlzx/ll_num.png) no-repeat 260px -2px;
+	/* margin-top:5px */
+	/* background:url(../images/list_wlzx/ll_num.png) no-repeat 260px -2px; */
 }
 .wlzx_list_05 span{font-size: 13px;color: #999;}
 
@@ -523,8 +529,8 @@ border: 1px solid #eee;
 	position: absolute;
 	content: '';
 	top: 12px;
-	left: 220px;
-	width: 970px;
+	left: 170px;
+	width: 1050px;
 	height: 1px;
 	background: #999999;
 }
@@ -547,10 +553,14 @@ border: 1px solid #eee;
 	position: absolute;
 	content: '';
 	top: 12px;
-	left: 100px;
+	left: 120px;
 	width: 500px;
 	height: 1px;
 	background: #999999;
 }
-
+.youzhi li:hover{
+	box-shadow: 0 2px 20px rgba(0,0,0,.2);
+	transform: translate3d(0,-2px,0);
+	cursor: pointer
+}
 /*  */

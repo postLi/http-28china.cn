@@ -411,6 +411,10 @@ export default {
           data: { name: '最新发布', value: 'createDesc' }
         })
         this.$store.commit('m/gongsi/setData', {
+          name: 'companyName',
+          data: ''
+        })
+        this.$store.commit('m/gongsi/setData', {
           name: 'scrollTo',
           data: 0
         })
@@ -419,7 +423,8 @@ export default {
           pageSize: 20,
           province: this.$store.state.m.gongsi.startName[0],
           city: this.$store.state.m.gongsi.startName[1],
-          orderBy: this.$store.state.m.gongsi.orderBy.value
+          orderBy: this.$store.state.m.gongsi.orderBy.value,
+          companyName: this.$store.state.m.gongsi.companyName
         }
         // 物流公司列表
         this.$store.dispatch('m/gongsi/GETRANGELIST', {

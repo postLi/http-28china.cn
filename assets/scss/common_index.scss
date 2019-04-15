@@ -27,7 +27,11 @@ $light_violet: #9966cc; //紫色
 /*小图标颜色*/
 $icon_blue:#4494f6;
 $icon_red: #e46167;
-$icon_red_bj:#ed4e57; //降价升价背景颜色
+$icon_red_bj:#ff4141; //降价升价背景颜色
+
+/*********专线颜色*************/
+$cy_green: #00c17f; 
+
 /*公共的背景色*/
 $bj_gray:#f5f5f7;
 /*公共的变量*/
@@ -151,13 +155,30 @@ $f_12: 12px;
 /*公共宽度居中*/
 .grid_c1 {
   margin: 0 auto;
-  width: $w_1440;
+  width: $w_1400;
   font-size: $f_14;
 }
-
+/***********公共的icon图标*************/
+.icon_square_no {
+  position: absolute;
+  top: -14px;
+  left: 15px;
+  width: 70px;
+  height: 28px;
+}
+.icon_square_no1 {
+  background: url('../../static/images/huizong/icon_no1.png') no-repeat;
+}
+.icon_square_no2 {
+  background: url('../../static/images/huizong/icon_no2.png') no-repeat;
+}
+.icon_square_no3 {
+  background: url('../../static/images/huizong/icon_no3.png') no-repeat;
+} 
 /*背景颜色*/
-.bj_1 {
-  box-sizing: border-box;
+.bj_white{
+  overflow: hidden;
+  background: $white;
 }
 
 .bj_2 {
@@ -179,16 +200,16 @@ $f_12: 12px;
   color: $orange;
 }
 
-.color_green {
-  color: $green;
+.color_grass_green{
+  color: $grass_green;
 }
 
 .color_blue {
-  color: $blue;
+  color:$tit_blue_color;
 }
 
-.color_violet {
-  color: $light_violet;
+.color_light_orange {
+  color: $light_orange
 }
 
 /*按钮*/
@@ -239,18 +260,19 @@ $f_12: 12px;
   .title_txt {
     @extend .fl;
     margin: 10px;
-    padding-left: 30px;
+    padding-left: 20px;
     line-height: 20px;
     font-size: $f_16;
     color: $light_gray;
   }
 
-  // .title_link {
-  //   .iconfont {
-  //     padding-left: 5px;
-  //     color: $green;
-  //   }
-  // }
+  .title_link {
+    font-size: $f_16;
+    color: $light_gray;
+    .iconfont {
+      padding-left: 5px;
+    }
+  }
 }
 .p_centre_title {
   margin: 90px auto 60px auto;
@@ -293,20 +315,34 @@ $f_12: 12px;
 
 /*前往城市*/
 .p_go_city {
-  height: 50px;
-  line-height: 50px;
+  margin-top: 10px;
+  height: 48px;
+  line-height: 48px;
   white-space: nowrap;
-
   >div,
   span {
     display: inline-block;
   }
-
+.area{
+  >span{
+    display: block;
+    &.area_city{
+      max-width: 85px;
+      font-size: $f_16;
+      @extend .ellipsis;
+    }
+    &.area_qx{
+      font-size: $f_13;
+      text-align: center;
+      color: $gray;
+    }
+  }
+}
   .city {
-    max-width: 80px;
+    max-width: 85px;
+    font-size: $f_16;
+    @extend .ellipsis;
     color: $tit_color;
-    font-size: 16px;
-    line-height: 18px;
     vertical-align: middle;
     color: #222;
   }
@@ -314,8 +350,6 @@ $f_12: 12px;
   .city-joint {
     color: $light_gray;
     font-size: 12px;
-    line-height: 18px;
-    height: 18px;
   }
 
   .joint-line {
@@ -330,7 +364,13 @@ $f_12: 12px;
     padding: 0 4px;
   }
 }
-
+.p_go_area{
+  height: auto;
+  line-height:20px;
+  .city{
+    line-height: 48px;
+  }
+}
 /*********分类导航***************/
 .p_type_nav {
   // padding: 35px 0;
@@ -372,6 +412,7 @@ $f_12: 12px;
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
+  margin-bottom: 25px;
   height: 170px;
   overflow: hidden;
   background: url('../../static/images/huizong/user_bj.jpg') no-repeat;
@@ -399,9 +440,9 @@ $f_12: 12px;
       >a {
         display: inline-block;
         margin: 0 5px;
-        width: 116px;
-        height: 28px;
-        line-height: 28px;
+        width: 135px;
+        height: 40px;
+        line-height: 40px;
         font-size: $f_14;
         text-align: center;
         color: $blue;
@@ -483,9 +524,9 @@ $f_12: 12px;
     overflow: hidden;
     @extend .fl;
     margin: 0 15px 15px 0;
-    padding: 20px 10px 0 10px;
+    padding: 10px 10px 0 10px;
     width: 238px;
-    height: 128px;
+    height: 138px;
     font-size: $f_13;
     background: $bj_pale_blue;
     border: 1px solid #daeefc;
@@ -520,7 +561,13 @@ $f_12: 12px;
     .md_box {
       @extend .p_go_city;
     }
-
+    .md_area{
+       @extend .p_go_area;
+       overflow: hidden;
+       .city,.city-joint,.area{float: left;}
+       .city,.city-joint{height: 48px; line-height: 48px;}
+       .city-joint{ margin: 0 3px;}
+     }
     .type_box {
       overflow: hidden;
       margin-bottom: 5px;
@@ -589,13 +636,13 @@ $f_12: 12px;
     overflow: hidden;
     margin:20px 0 0 50px;
     width: 660px;
-    height:90px;
+    height:95px;
 
     .hy_info_user_list {
       overflow: hidden;
-      height: 90px;
+      height: 95px;
       >li{
-        height: 90px;
+        height: 95px;
         font-size: $f_16;
       }
       // background-color: #bbb;
@@ -709,7 +756,7 @@ $f_12: 12px;
 
   .gr_txt {
     @extend .fl;
-    margin-left: 25px;
+    margin-left: 20px;
     font-size: $f_16;
     color: $gray;
 
@@ -890,8 +937,10 @@ $f_12: 12px;
     @extend .fl;
     position: relative;
     margin-right: 30px;
-    width: 264px;
-
+    width: 262px;
+    height: 382px;
+    background: $white;
+    border: 1px solid $border_color;
     .rank_num {
       position: absolute;
       top: 10px;
@@ -904,22 +953,11 @@ $f_12: 12px;
       color: $white;
     }
 
-    .no1 {
-      background: $orange;
-    }
-
-    .no2 {
-      background: $blue;
-    }
-
-    .no3 {
-      background: $green;
-    }
-
+  
     .rank_pic {
       overflow: hidden;
       width: 264px;
-      height: 175px;
+      height: 264px;
       margin-bottom: 10px;
       text-align: center;
 
@@ -927,51 +965,54 @@ $f_12: 12px;
         @extend .scale_img
       }
     }
-
-    .rank_tit {
-      overflow: hidden;
-      margin-bottom: 10px;
-      line-height: 20px;
-      font-size: 16px;
-      color: $blue;
-
-      .rank_tit_name {
-        @extend .fl;
-        width: 230px;
-        @extend .ellipsis;
-      }
-
-      .rank_tit_icon_tuijian {
-        @extend .fr;
-        padding: 0 4px;
-        font-size: $f_12;
-        color: $white;
-        background: $green;
+    .rank_txt{
+      padding: 10px 10px 0 10px;
+      .rank_txt_tit {
+        overflow: hidden;
+        margin-bottom: 10px;
+        line-height: 20px;
+         
+        .txt_tit_name {
+          @extend .fl;
+          max-width: 200px;
+          font-size:$f_16; 
+          @extend .ellipsis;
+        }
+  
+        .txt_tit_icon_tuijian {
+          @extend .fl;
+          margin:1px 0 0 15px;
+          width: 18px;
+          height: 18px;
+          line-height: 18px;
+          text-align: center;
+          font:$f_14;
+          color: $white;
+          background: $icon_red_bj;
+          border-radius: 2px;
+        }
       }
     }
-
-    .rank_groom {
+    .rank_txt_groom {
       overflow: hidden;
       margin-bottom: 10px;
+      color: $tit_color;
       line-height: 20px;
-
       >span {
         @extend .fl;
-
         &.name {
           padding-right: 20px;
-          color: $gray;
+          color: $tit_color;
         }
-
         &.star {
-          width: 66px;
+          width: 96px;
           height: 20px;
-          background: url('../../static/images/huizong/u708.png') no-repeat center;
+          background: url('../../static/images/huizong/icon_star.png') no-repeat center;
         }
       }
     }
 
-    .rank_praise {
+    .rank_txt_praise {
       color: $light_gray;
     }
 
@@ -985,48 +1026,44 @@ $f_12: 12px;
 /*******我们的优势************/
 .p_our_virtue {
   margin: 0 auto 40px auto;
-  width: $w_1440;
+  width: $w_1400;
 
-  .p_title {
-    text-align: center;
-
-    >div,
-    h3 {
-      display: inline-block;
-    }
+  .p_centre_title{
+    width: 390px;
   }
 
   .our_virtue_list {
     >li {
       overflow: hidden;
       @extend .fl;
-      margin-right: 30px;
-      width: 337px;
-      height: 420px;
+      margin-right: 20px;
+      width: 333px;
+      height: 382px;
       font-size: 16px;
       background: $white;
-      border-radius: 10px;
-
+      border: 1px solid $border_color;
       &:last-child {
         margin-right: 0;
       }
 
-      box-shadow: 0 0 8px #bbb;
-
       .our_virtue_pic {
-        height: 190px;
+        overflow: hidden;
+        width: 333px;
+        height: 264px;
       }
 
       .our_virtue_tit {
-        padding: 20px 0;
-        font-size: 30px;
+        padding: 15px 0;
+        font-size: 24px;
+        font-weight: normal;
         text-align: center;
       }
 
-      .our_virtue_content {
-        margin: 0 auto;
-        width: 200px;
-        line-height: 25px;
+      .our_virtue_txt {
+        padding: 0 15px;
+        font-size: $f_14;
+        line-height: 20px;
+        color: $tit_color;
       }
     }
   }
@@ -1091,24 +1128,26 @@ $f_12: 12px;
 
 /*******帮我推荐提交******/
 .p_groom_submit {
+  margin-bottom: 20px;
   >input {
     outline: none;
     text-indent: 10px;
-    width: 170px;
+    width: 180px;
     height: 40px;
     line-height: 40px;
     font-size: $f_14;
-    border: 1px solid $border_color;
+    border: 0;
+    background-color:#f4f4f4;
   }
 
   >button {
     outline: none;
-    width: 78px;
-    height: 42px;
-    line-height: 42px;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
     border: none;
     color: $white;
-    background: $green;
+    background:$cy_green;
     cursor: pointer;
   }
 }
@@ -1118,50 +1157,47 @@ $f_12: 12px;
 
   // margin-bottom: 10px;
   .gr_text {
-    height: 160px;
+    padding: 0 20px;
+    // height: 160px;
 
     .gr_text_title {
       font-size: $f_16;
       color: $tit_color;
+      font-weight: bold;
     }
 
     .gr_text_txt {
       margin: 10px 0;
       line-height: 20px;
-      font-size: $f_12;
-    }
-
-    .error {
-      margin-top: 5px;
-      font-size: $f_12;
+      font-size: $f_14;
     }
   }
 
   .gr_operate {
     overflow: hidden;
-    margin-bottom: 15px;
-
+    border: 1px solid $border_color;
+    border-width: 1px 0 ;
     >a {
       @extend .fl;
-      width: 118px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 5px;
+      width:159px;
+      line-height: 50px;
+      font-size: $f_16;
       text-align: center;
-      color: $green;
-      border: 1px solid $green;
-
-      &:first-child {
-        margin-right: 10px;
+      color: $gray;
+      border-right: 1px solid $border_color;
+      &:last-child{
+        border-right: 0;
       }
     }
   }
 
   .gr_oder_num {
-    color: $tit_color;
+    margin-top: 25px;
+    padding-left: 20px;
+    color: $gray;
 
     >b {
-      font-size: 16px;
+      font-size: 20px;
       color: $orange;
     }
   }

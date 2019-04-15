@@ -153,6 +153,13 @@ export default {
       this.$router.push(`/m/cheyuan/detail?id=${id}`)
     },
     onPullingDown() {
+      this.$nextTick(() => {
+        this.$refs.scroll1.scrollTo(0, 0)
+      })
+      this.$store.commit('m/cheyuan/setData', {
+        name: 'scrollTo',
+        data: 0
+      })
       this.$store.commit('m/cheyuan/setData', {
         name: 'currentPage',
         data: 1

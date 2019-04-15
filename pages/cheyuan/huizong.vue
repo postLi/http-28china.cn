@@ -1254,7 +1254,7 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-@import '~/assets/scss/common_index.scss';
+@import '~/assets/scss/huizong.scss';
 .p_CY_car_list {
   > li {
     min-height: 366px;

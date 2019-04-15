@@ -402,7 +402,7 @@
               alt="广告">
           </div>
 
-          <div>
+          <div v-if="cy1.startCity != cy1.endCity">
             <div class="zx_sx">
               <span class="biaozhi"/><span>更多从{{ cy1.endCity }}出发的车源</span>
               <div class="morelink"><a 
@@ -648,23 +648,13 @@
 <script>
 import Add from './add'
 import MUTUAL from '@/static/js/wzl-commonJs.js'
-import { getCode, getCity, parseTime } from '~/components/commonJs.js'
-async function getOtherCarInfoList($axios, currentPage, vo) {
-  let res = await $axios.get(
-    `/28-web/carInfo/findOtherCarInfoList/${
-      vo.id
-    }?pageNum=${currentPage}&pageSize=5`
-  )
-  if (res.data.status === 200) {
-    return {
-      list: res.data.data.list,
-      pages: res.data.data.pages,
-      currentPage: res.data.data.pageNum
-    }
-  } else {
-    return { list: [], pages: 0, currentPage: 1 }
-  }
-}
+import {
+  isZXcity,
+  getSEListParams,
+  getCode,
+  getCity,
+  parseTime
+} from '~/components/commonJs.js'
 async function getCanyColl(
   $axios,
   carInfoId,
@@ -766,7 +756,6 @@ export default {
               /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
               '/zixun'
             )
-
             return el
           })
         }
@@ -797,14 +786,13 @@ export default {
         startCity: cy1.data.data.startCity
       }
       carInfoRes = await $axios.post('/28-web/carInfo/list', parm)
-      let parm1 = {
+      let queryCitys = getSEListParams(cy1.data.data)
+      carInfoRes1 = await $axios.post('/28-web/carInfo/list', {
         currentPage: 1,
         pageSize: 10,
-        startProvince: cy1.data.data.endProvince,
-        startCity: cy1.data.data.endCity
-      }
-
-      carInfoRes1 = await $axios.post('/28-web/carInfo/list', parm1)
+        startProvince: queryCitys.endProvince,
+        startCity: queryCitys.endCity
+      })
     }
     let parm2 = {
       endArea: cy1.data.data.endArea,
@@ -983,21 +971,6 @@ export default {
       .then(option => {
         myChart.setOption(option)
       })
-
-    $('#pagination1').pagination({
-      currentPage: this.currentPage,
-      totalPage: this.pages,
-      callback: async current => {
-        $('#current1').text(current)
-        let obj = await getOtherCarInfoList(this.$axios, current, {
-          id: this.$route.query.id
-        })
-        this.otherCarInfoList = obj.list
-        this.currentPage = obj.currentPage
-        this.pages = obj.pages
-        window.location.href = '#top'
-      }
-    })
   },
   methods: {
     //价格参考
@@ -1358,18 +1331,6 @@ export default {
       this.dataInfo.endProvince = this.cy1.endProvince
       this.dataInfo.endCity = this.cy1.endCity
       this.dataInfo.endArea = this.cy1.endArea
-    },
-    goToCy() {
-      window.open(
-        `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=
-        ${this.cy1.startCity}&startProvince=${this.cy1.startProvince}`
-      )
-    },
-    goToCy1() {
-      window.open(
-        `/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=
-        ${this.cy1.endCity}&startProvince=${this.cy1.endProvince}`
-      )
     },
     clickImg(int) {
       this.showImg = int

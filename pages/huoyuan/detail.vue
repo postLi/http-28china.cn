@@ -58,7 +58,8 @@
         v-if="zxList.length >14"
         class="arc_top2_3"
         style="display: block"
-        onmouseover="$('.city_box').css('display','block');"><a href="javascript:void(0)"><span>更多+</span></a></div>
+        onmouseover="$('.city_box').css('display','block');"><a href="javascript:void(0)"><span>更多+</span></a>
+      </div>
       <!--更多城市-->
       <div
         id="city_box"
@@ -188,7 +189,7 @@
                     class="button2"
                     @click="openAdd()"
                   ><img
-                    src="/images/cy/03u41008 2.gif"
+                    src="/images/cy/03u410082.gif"
                   >此线路上新货源提醒我</a>
                   <span style="margin-left: 47px">
                     <img src="/images/cy/14fresh.png">
@@ -403,8 +404,8 @@
                 <span :title="item.startProvinceCityArea">{{ item.startProvinceCityArea ? item.startProvinceCityArea.substring(0,6) : '' }}</span>
                 <span :title="item.endProvinceCityArea">{{ item.endProvinceCityArea ? item.endProvinceCityArea.substring(0,6) : '' }}</span>
                 <span :title="item.goodsTypeName">{{ item.goodsTypeName ?item.goodsTypeName.substring(0,5) : '无' }}</span>
-                <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
-                <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
+                <span :title="item.goodsWeight"><em style="color: #f14747;">{{ item.goodsWeight.length > 5 ? item.goodsWeight.substring(0,5) + '...': item.goodsWeight }}</em>公斤</span>
+                <span :title="item.goodsVolume"><em style="color: #f14747;">{{ item.goodsVolume.length > 5 ? item.goodsVolume.substring(0,5) : item.goodsVolume }}</em>方</span>
                 <span>{{ item.createTime }}</span>
               </a>
             </li>
@@ -423,8 +424,8 @@
                 <span :title="i.startProvinceCityArea">{{ i.startProvince + i.startCity }}</span>
                 <span :title="i.endProvinceCityArea">{{ i.endProvince + i.endCity }}</span>
                 <span :title="i.goodsTypeName">{{ i.goodsTypeName ?i.goodsTypeName.substring(0,5) : '' }}</span>
-                <span><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</span>
-                <span><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</span>
+                <span :title="i.goodsWeight"><em style="color: #f14747;">{{ i.goodsWeight.length > 5 ? i.goodsWeight.substring(0,5) : i.goodsWeight }}</em>公斤</span>
+                <span :title="i.goodsVolume"><em style="color: #f14747;">{{ i.goodsVolume.length > 5 ? i.goodsVolume.substring(0,5) : i.goodsVolume }}</em>方</span>
                 <span>{{ i.createTime }}</span>
               </a>
             </li>
@@ -840,7 +841,13 @@ import Add from './add1'
 import Lelp from './help'
 import Order from './order'
 import MUTUAL from '@/static/js/wzl-commonJs.js'
-import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+import {
+  isZXcity,
+  getSEListParams,
+  getCode,
+  getCity,
+  parseTime
+} from '~/components/commonJs.js'
 async function getCanyColl(
   $axios,
   companyId,
@@ -994,13 +1001,6 @@ export default {
         ? hyDetails.data.data.startProvince
         : ''
     }
-    let parm1t = {
-      startArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
-      startCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
-      startProvince: hyDetails.data.data.endProvince
-        ? hyDetails.data.data.endProvince
-        : ''
-    }
     let code = await getCode($axios, hyDetails.data.data.endProvince)
     let zxList = await getCity($axios, code, hyDetails.data.data.startCity)
     //货主档案
@@ -1022,9 +1022,15 @@ export default {
       .catch(err => {
         console.log('huoInfoLists:', err)
       })
+    let queryCitys = getSEListParams(huoInfoLists.data.data.list)
     //货源列表
     let huoInfoListst = await $axios
-      .post('/28-web/lclOrder/list', parm1t)
+      .post('/28-web/lclOrder/list', {
+        currentPage: 1,
+        pageSize: 10,
+        startProvince: queryCitys.endProvince,
+        startCity: queryCitys.endCity
+      })
       .catch(err => {
         console.log('huoInfoListst:', err)
       })
@@ -1145,7 +1151,6 @@ export default {
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
       let l = this.newestHuoyuanRe.length
-
       //  当不足一页的数据时，不需要滚动展示
       if (l > 8) {
         roll.append(roll.html())
@@ -1378,23 +1383,12 @@ export default {
       this.endArea = list2[2] ? list2[2] : ''
     },
     search() {
-      // console.log(999999)
       this.searchDo()
       window.location.href = `/huoyuan?endArea=${this.endArea}&endCity=${
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
         this.startCity
       }&startProvince=${this.startProvince}`
-    },
-    goToCy() {
-      window.location.href = `/huoyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.hyDetail.startCity
-      }&startProvince=${this.hyDetail.startProvince}`
-    },
-    goToCy1() {
-      window.location.href = `/huoyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.hyDetail.endCity
-      }&startProvince=${this.hyDetail.endProvince}`
     },
     clickImg(int) {
       this.showImg = int

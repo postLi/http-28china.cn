@@ -424,7 +424,7 @@
   </div>
 </template>
 <script>
-// import { Links } from '@/static/js/Links'
+import MUTUAL from '@/static/js/wzl-commonJs.js'
 async function getListRangesAging($axios, currentPage, vo = {}) {
   let list, totalPage
   let parm = vo
@@ -446,46 +446,7 @@ async function getHotLines($axios, currentPage, vo = {}) {
   await $axios.post('/28-web/range/hot/list', parm).then(res => {
     if (res.data.status === 200) {
       res.data.data.list.forEach(item => {
-        if (item.credit >= 0 && item.credit <= 3) {
-          item.showcreadimg = true
-          item.creditImg = 1
-        }
-        if (item.credit >= 4 && item.credit <= 10) {
-          item.showcreadimg = true
-          item.creditImg = 2
-        }
-        if (item.credit >= 11 && item.credit <= 40) {
-          item.showcreadimg = true
-          item.creditImg = 3
-        }
-        if (item.credit >= 41 && item.credit <= 90) {
-          item.showcreadimg = true
-          item.creditImg = 4
-        }
-        if (item.credit >= 91 && item.credit <= 150) {
-          item.showcreadimg = true
-          item.creditImg = 5
-        }
-        if (item.credit >= 151 && item.credit <= 250) {
-          item.showcreadeng = true
-          item.creditdeng = 1
-        }
-        if (item.credit >= 251 && item.credit <= 500) {
-          item.showcreadeng = true
-          item.creditdeng = 2
-        }
-        if (item.credit >= 500 && item.credit <= 1000) {
-          item.showcreadeng = true
-          item.creditdeng = 3
-        }
-        if (item.credit >= 1001 && item.credit <= 2000) {
-          item.showcreadeng = true
-          item.creditdeng = 4
-        }
-        if (item.credit >= 2001) {
-          item.showcreadeng = true
-          item.creditdeng = 5
-        }
+        MUTUAL.GETCREDITITEM(item)
       })
       list = res.data.data.list
     }
@@ -500,8 +461,7 @@ export default {
       { src: '/layer/layer.js' },
       { src: './js/city-picker.data.js' },
       { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' },
-      { src: './js/Links.js' }
+      { src: './js/jquery.pagination.min.js' }
     ]
   },
   data() {
@@ -818,13 +778,13 @@ export default {
         .post('/28-web/range/aging/list/related/links', serchForm)
         .then(res => {
           if (res.data.status === 200) {
-            res.data.data.recommendBy28.links.forEach(
-              window.COMMONLINK.HREFLINKS
-            )
+            res.data.data.recommendBy28.links.forEach(item => {
+              MUTUAL.HREFLINKS(item)
+            })
             Object.assign({}, this.recommendBy28)
-            res.data.data.otherRecommend.links.forEach(
-              window.COMMONLINK.HREFLINKS
-            )
+            res.data.data.otherRecommend.links.forEach(item => {
+              MUTUAL.HREFLINKS(item)
+            })
             Object.assign({}, this.otherRecommend)
             ;(this.recommendBy28 = res.data.data.recommendBy28.links),
               (this.recommendBy28Label = res.data.data.recommendBy28.label),
@@ -832,9 +792,7 @@ export default {
               (this.otherRecommendLabel = res.data.data.otherRecommend.label)
           }
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch(err => {})
     }
   }
 }

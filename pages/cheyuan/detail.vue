@@ -647,6 +647,7 @@
 
 <script>
 import Add from './add'
+import MUTUAL from '@/static/js/wzl-commonJs.js'
 import { getCode, getCity, parseTime } from '~/components/commonJs.js'
 async function getOtherCarInfoList($axios, currentPage, vo) {
   let res = await $axios.get(
@@ -695,8 +696,7 @@ export default {
     script: [
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: 'https://echarts.baidu.com/dist/echarts.min.js' },
-      { src: './js/Links.js' }
+      { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
   layout: 'subLayout',
@@ -833,11 +833,15 @@ export default {
     let popularitys = await $axios
       .get('/28-web/driver/driverPopularityList')
       .catch(err => {})
-    hotSearchs.data.data.links.forEach(window.COMMONLINK.HREFLINKS)
-    cheLinks.data.data.interestedRecommend.links.forEach(
-      window.COMMONLINK.HREFLINKS
-    )
-    cheLinks.data.data.recommend.links.forEach(window.COMMONLINK.HREFLINKS)
+    hotSearchs.data.data.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
+    cheLinks.data.data.interestedRecommend.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
+    cheLinks.data.data.recommend.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
       zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],

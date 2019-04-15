@@ -73,7 +73,7 @@
       </div>
     </div>
     <!-- 物流专线hd -->
-    <div class="grid_c1 clearfix">    
+    <div class="grid_c1 zx_terrace clearfix">    
       <div class="p_title_box">
         <h3 class="title">平台推荐</h3>
         <span class="title_txt">平台推荐，资质保障</span>
@@ -1371,9 +1371,12 @@ export default {
   }
 }
 /*2、平台推荐*/
+.zx_terrace {
+  margin-top: 50px;
+}
 .pt_groom {
   overflow: hidden;
-  width: 1155px;
+  width: 1090px;
   > .hd {
     margin-bottom: 20px;
     width: 1135px;
@@ -1381,9 +1384,9 @@ export default {
     > li {
       @extend .fl;
       position: relative;
-      padding: 20px 0 0 30px;
-      width: 253px;
-      height: 205px;
+      // padding: 20px 0 0 30px;
+      width: 270px;
+      height: 300px;
       cursor: default;
       &:after {
         content: '';
@@ -1485,10 +1488,16 @@ export default {
   /*列表*/
   .p_wl_list {
     > li {
+      margin: 0;
+      margin-right: 10px;
       padding: 0;
-      width: 266px;
-      height: auto;
+      width: 263px;
+      height: 240px;
       background: $light_blue;
+      border: 0;
+      &:nth-child(4n) {
+        margin-right: 0;
+      }
       .hd_box {
         overflow: hidden;
         > span {
@@ -1555,8 +1564,8 @@ export default {
 }
 .pt_discount {
   overflow: hidden;
-  width: 285px;
-  height: 460px;
+  width: 310px;
+  height: 549px;
   background: $icon_red_bj;
 }
 /*3、热门专线*/

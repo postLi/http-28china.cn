@@ -1192,7 +1192,6 @@ export default {
   },
 
   mounted() {
-    // console.log(this.dataset, 'this.dataset')
     seajs.use(['/js/gaodemap2.js'])
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')

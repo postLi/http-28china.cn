@@ -141,6 +141,13 @@ export default {
       this.$router.push(`/m/huoyuan/detail?id=${id}`)
     },
     onPullingDown() {
+      this.$nextTick(() => {
+        this.$refs.scroll1.scrollTo(0, 0)
+      })
+      this.$store.commit('m/huoyuan/setData', {
+        name: 'scrollTo',
+        data: 0
+      })
       this.$store.commit('m/huoyuan/setData', {
         name: 'currentPage',
         data: 1

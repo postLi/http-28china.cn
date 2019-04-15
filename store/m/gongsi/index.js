@@ -4,8 +4,8 @@ export const state = () => ({
   currentPage: 1, // 当前页数
   pages: '', // 总页数
   rangeList: [], // 专线列表
-  footerId: 0, // 底部导航
-  scrollTo: 0 // 滚动位置
+  scrollTo: 0, // 滚动位置
+  companyName: ''
 })
 
 export const mutations = {

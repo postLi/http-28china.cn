@@ -20,7 +20,7 @@
         <div class="flex_1 flex_ce margin_r_40">
           <img
             class="search"
-            @click="search()"
+            @click="showSearch = !showSearch"
             src="/m/gongsi/wuliugs_chaxun.png">
         </div>
       </div>
@@ -34,6 +34,17 @@
           form="gongsi"
           ref="selectRelease"
           @setArea="getRelease"/>
+        <div
+          v-if="showSearch"
+          class="search_name padding_10 flex_a b_c_w">
+          <input
+            type="text"
+            v-model="value"
+            class="search_content flex_1">
+          <div
+            class="c-3 f-30 margin_l_10"
+            @click="search()">搜索</div>
+        </div>
       </div>
     </div>
     <div
@@ -114,6 +125,8 @@ export default {
   data() {
     return {
       isShowMask: [false, false, false],
+      showSearch: false,
+      value: '',
       options: {
         pullDownRefresh: { txt: ' ' },
         pullUpLoad: { txt: { more: '', noMore: '没有更多数据了' } },
@@ -125,10 +138,15 @@ export default {
     this.$nextTick(() => {
       this.$refs.scroll1.scrollTo(0, this.$store.state.m.gongsi.scrollTo)
     })
+    this.value = this.$store.state.m.gongsi.companyName
   },
   methods: {
     search() {
-      //
+      this.$store.commit('m/gongsi/setData', {
+        name: 'companyName',
+        data: this.value
+      })
+      this.onPullingDown()
     },
     clickStart() {
       this.isShowMask = [false, false, false]
@@ -164,10 +182,17 @@ export default {
           name: 'orderBy',
           data: data
         })
-        //this.onPullingDown()
+        this.onPullingDown()
       }
     },
     onPullingDown() {
+      this.$nextTick(() => {
+        this.$refs.scroll1.scrollTo(0, 0)
+      })
+      this.$store.commit('m/gongsi/setData', {
+        name: 'scrollTo',
+        data: 0
+      })
       this.$store.commit('m/gongsi/setData', {
         name: 'currentPage',
         data: 1
@@ -202,7 +227,8 @@ export default {
         pageSize: 20,
         province: this.$store.state.m.gongsi.startName[0],
         city: this.$store.state.m.gongsi.startName[1],
-        orderBy: this.$store.state.m.gongsi.orderBy.value
+        orderBy: this.$store.state.m.gongsi.orderBy.value,
+        companyName: this.$store.state.m.gongsi.companyName
       }
       // 公司列表
       this.$store.dispatch('m/gongsi/GETRANGELIST', {
@@ -273,5 +299,17 @@ export default {
   -webkit-box-orient: vertical;
   /* autoprefixer: on */
   line-height: 0.33rem;
+}
+.search_name {
+  box-sizing: border-box;
+  .search_content {
+    background-color: #f4f4f4;
+    border-radius: 0.1rem;
+    height: 0.5rem;
+    font-size: 0.3rem !important;
+    border: none;
+    outline: none;
+    padding-left: 0.2rem;
+  }
 }
 </style>

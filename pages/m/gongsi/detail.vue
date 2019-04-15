@@ -19,7 +19,7 @@
             src="/m/gongsi/youzhi.png" >
           <div class="f-42 c_b47">{{ info.companyName }}</div>
           <div class="margin_t_20 flex_a">
-            <div class="circle f-20 flex">待认证</div>
+            <div class="circle f-20 flex">{{ info.authStatusName }}</div>
             <div class="f-24 c_e2a margin_l_20 margin_r_20">综合信誉值</div>
             <img
               style="width: 0.3rem"
@@ -71,7 +71,7 @@
 
     <div class="body_content">
       <div class="flex item1 f-26 margin_t_10">
-        此专线物流公司诚信值超过<span>77.9%</span>的同行
+        此专线物流公司诚信值超过<span>{{ linedataE.greaterCreditRate }}%</span>的同行
       </div>
     </div>
     <div class="body_content">
@@ -128,31 +128,35 @@
     <div class="body_content">
       <div class="flex_sb item_title">
         <div class="f-32 f_w_b">物流专线</div>
-        <div class="f-22 f_b flex_a">
+        <div
+          class="f-22 f_b flex_a"
+          v-if="line.length !== 0"
+          @click="toLine()"
+        >
           查看更多
           <img
             src="/m/gongsi/tiaozhuan.png"
             style="width: 0.12rem">
         </div>
       </div>
-      <div class="item_h1 flex_saf flex_f">
-        <div class="f-26 flex_a">郑州市 -> 徐州市 <span class="margin_l_20 f_w f-20 f_w_b flex qs">强 势</span></div>
+      <div
+        class="item_h1 flex_saf flex_f"
+        v-for="(item,index) in line"
+        :key="index">
+        <div class="f-26 flex_a">{{ item.startCity || '' }}{{ item.startArea || '' }} -> {{ item.endCity || '' }}{{ item.endArea || '' }}
+          <span
+            class="margin_l_20 f_w f-20 f_w_b flex rs"
+            v-if="item.rangeType === 'AF03302'">优 势</span>
+          <span
+            class="margin_l_20 f_w f-20 f_w_b flex qs"
+            v-if="item.rangeType === 'AF03303'">强 势</span>
+        </div>
         <div class="flex_a f-20">
-          <i class="flex">时效1天</i>
-          <i class="flex margin_l_20">2876人浏览</i>
+          <i class="flex">时效{{ item.transportAging }}{{ item.transportAgingUnit }}</i>
+          <i class="flex margin_l_20">{{ item.browseNumber }}人浏览</i>
         </div>
         <div class="footer f-24">
-          轻货：116元～128元/公斤 重货：80元～100元/公斤
-        </div>
-      </div>
-      <div class="item_h1 flex_saf flex_f">
-        <div class="f-26 flex_a">郑州市 -> 徐州市 <span class="margin_l_20 f_w f-20 f_w_b flex rs">优 势</span></div>
-        <div class="flex_a f-20">
-          <i class="flex">时效1天</i>
-          <i class="flex margin_l_20">2876人浏览</i>
-        </div>
-        <div class="footer f-24">
-          轻货：116元～128元/公斤 重货：80元～100元/公斤
+          轻货：{{ findPrice(item.rangePrices, '0') }}元/立方 重货：{{ findPrice(item.rangePrices, '1') }}元/公斤
         </div>
       </div>
     </div>
@@ -160,24 +164,25 @@
     <div class="body_content">
       <div class="flex_sb item_title">
         <div class="f-32 f_w_b">网点信息</div>
-        <div class="f-22 f_b flex_a">
+        <div
+          class="f-22 f_b flex_a"
+          v-if="companyPoint.length !== 0"
+          @click="$router.push('/m/gongsi/wangdian?id='+ $route.query.id)"
+        >
           查看更多
           <img
             src="/m/gongsi/tiaozhuan.png"
             style="width: 0.12rem">
         </div>
       </div>
-      <div class="item_h2 flex_js flex_f">
-        <div class="f-30 f_b">网点1 : 嘉兴网点</div>
-        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_dz.png">湖南省益阳市新华区嘉兴物流综合服务楼 </div>
-        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_xm.png">陈升 17665765433</div>
-        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_dh.png">020-29038810</div>
-      </div>
-      <div class="item_h2 flex_js flex_f">
-        <div class="f-30 f_b">网点1 : 嘉兴网点</div>
-        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_dz.png">湖南省益阳市新华区嘉兴物流综合服务楼 </div>
-        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_xm.png">陈升 17665765433</div>
-        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_dh.png">020-29038810</div>
+      <div
+        class="item_h2 flex_js flex_f"
+        v-for="(item,index) in companyPoint"
+        :key="index">
+        <div class="f-30 f_b">网点{{ index + 1 }}:{{ item.pointName }}</div>
+        <div class="f-26 flex_r c-3"><img src="/m/gongsi/wangdian_dz.png">{{ item.address }} </div>
+        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_xm.png">陈升 {{ item.mobile }}</div>
+        <div class="f-26 flex_a c-3"><img src="/m/gongsi/wangdian_dh.png">{{ item.telNum ? item.telNum : '无' }}</div>
       </div>
     </div>
     <div class="divide"/>
@@ -259,83 +264,178 @@ export default {
   async asyncData({ $axios, app, query }) {
     let AF027result = [],
       AF025result = []
-    let AF027 = await $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF027')
-    AF027.data.data.forEach(item => {
-      switch (item.name) {
-        case '整车运输': //需要使用名字，因生产环境与测试环境id不一样
-          item.img = '/m/gongsi/zhencheys.png'
-          break
-        case '零担运输':
-          item.img = '/m/gongsi/lingdanys.png'
-          break
-        case '专线运输':
-          item.img = '/m/gongsi/zhuanxianys.png'
-          break
-        case '特大货物运输':
-          item.img = '/m/gongsi/tedahwys.png'
-          break
-        case '大件运输':
-          item.img = '/m/gongsi/dajianys.png'
-          break
-        case '集装箱运输':
-          item.img = '/m/gongsi/jizhuangxys.png'
-          break
-        case '冷藏运输':
-          item.img = '/m/gongsi/lengcangys.png'
-          break
-        case '危险品运输':
-          item.img = '/m/gongsi/weixianpys.png'
-          break
-        case '仓储':
-          item.img = '/m/gongsi/weixianpys.png'
-          break
-      }
-    })
-    for (let i = 0, len = AF027.data.data.length; i < len; i += 4) {
-      AF027result.push(AF027.data.data.slice(i, i + 4))
-    }
-    let AF025 = await $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF025')
-    AF025.data.data.forEach(item => {
-      switch (item.name) {
-        case '送货上门':
-          item.img = '/m/gongsi/songhuosl.png'
-          break
-        case '保价运输':
-          item.img = '/m/gongsi/baojiays.png'
-          break
-        case '运费到付':
-          item.img = '/m/gongsi/yunfeidf.png'
-          break
-        case '代收货款':
-          item.img = '/m/gongsi/daishouhk.png'
-          break
-        case '上门提货':
-          item.img = '/m/gongsi/shangmenth.png'
-          break
-        case '开发票':
-          item.img = '/m/gongsi/kaifap.png'
-          break
-        case '签单回收':
-          item.img = '/m/gongsi/qiandanhs.png'
-          break
-        case '时效保障':
-          item.img = '/m/gongsi/shixiaobz.png'
-          break
-      }
-    })
-    for (let i = 0, len = AF025.data.data.length; i < len; i += 4) {
-      AF025result.push(AF025.data.data.slice(i, i + 4))
-    }
     const info = await $axios.get('/28-web/logisticsCompany/info/' + query.id)
+    if (info.data.status === 200) {
+      let myOtherServiceCodeList = [],
+        myProductServiceCodeList = []
+      info.data.data.productServiceCodeList.forEach(item => {
+        let obj = {}
+        switch (item) {
+          case 'AF02701':
+            obj.img = '/m/gongsi/zhencheys.png'
+            obj.name = '整车运输'
+            break
+          case 'AF02702':
+            obj.img = '/m/gongsi/lingdanys.png'
+            obj.name = '零担运输'
+            break
+          case 'AF02703':
+            obj.img = '/m/gongsi/zhuanxianys.png'
+            obj.name = '专线运输'
+            break
+          case 'AF02704':
+            obj.img = '/m/gongsi/tedahwys.png'
+            obj.name = '特大货物运输'
+            break
+          case 'AF02705':
+            obj.img = '/m/gongsi/dajianys.png'
+            obj.name = '大件运输'
+            break
+          case 'AF02706':
+            obj.img = '/m/gongsi/jizhuangxys.png'
+            obj.name = '集装箱运输'
+            break
+          case 'AF02707':
+            obj.img = '/m/gongsi/lengcangys.png'
+            obj.name = '冷藏运输'
+            break
+          case 'AF02708':
+            obj.img = '/m/gongsi/weixianpys.png'
+            obj.name = '危险品运输'
+            break
+          case 'AF02709':
+            obj.img = '/m/gongsi/weixianpys.png'
+            obj.name = '仓储'
+            break
+        }
+        myProductServiceCodeList.push(obj)
+      })
+      info.data.data.myProductServiceCodeList = myProductServiceCodeList
+      for (
+        let i = 0, len = info.data.data.myProductServiceCodeList.length;
+        i < len;
+        i += 4
+      ) {
+        AF027result.push(
+          info.data.data.myProductServiceCodeList.slice(i, i + 4)
+        )
+      }
+      info.data.data.otherServiceCodeList.forEach(item => {
+        let obj = {}
+        switch (item) {
+          case 'AF02504':
+            obj.img = '/m/gongsi/songhuosl.png'
+            obj.name = '送货上门'
+            break
+          case 'AF02502':
+            obj.img = '/m/gongsi/baojiays.png'
+            obj.name = '保价运输'
+            break
+          case 'AF02503':
+            obj.img = '/m/gongsi/yunfeidf.png'
+            obj.name = '运费到付'
+            break
+          case 'AF02501':
+            obj.img = '/m/gongsi/daishouhk.png'
+            obj.name = '代收货款'
+            break
+          case 'AF02505':
+            obj.img = '/m/gongsi/shangmenth.png'
+            obj.name = '上门提货'
+            break
+          case 'AF02506':
+            obj.img = '/m/gongsi/kaifap.png'
+            obj.name = '开发票'
+            break
+          case 'AF02507':
+            obj.img = '/m/gongsi/qiandanhs.png'
+            obj.name = '签单回收'
+            break
+          case 'AF02508':
+            obj.img = '/m/gongsi/shixiaobz.png'
+            obj.name = '时效保障'
+            break
+        }
+        myOtherServiceCodeList.push(obj)
+      })
+      info.data.data.myOtherServiceCodeList = myOtherServiceCodeList
+      for (
+        let i = 0, len = info.data.data.myOtherServiceCodeList.length;
+        i < len;
+        i += 4
+      ) {
+        AF025result.push(info.data.data.myOtherServiceCodeList.slice(i, i + 4))
+      }
+    }
+    // 物流公司综合信息
+    const linedataE = await $axios.post(
+      `/28-web/logisticsCompany/comprehensive?companyId=${query.id}`
+    )
+    // 网点信息
+    const companyPoint = await $axios.post(
+      '/28-web/pointNetwork/findCompanyNet',
+      { companyId: query.id, pageSize: 2, currentPage: 1 }
+    )
+    // 专线信息
+    const line = await $axios.post('/28-web/range/company/list', {
+      publishId: query.id,
+      pageSize: 2,
+      currentPage: 1
+    })
     return {
       AF027result: AF027result ? AF027result : [],
       AF025result: AF025result ? AF025result : [],
-      info: info.data.status === 200 ? info.data.data : {}
+      info: info.data.status === 200 ? info.data.data : {},
+      linedataE: linedataE.data.status === 200 ? linedataE.data.data : [],
+      companyPoint:
+        companyPoint.data.status === 200 ? companyPoint.data.data.list : [],
+      line: line.data.status === 200 ? line.data.data.list : []
     }
   },
   methods: {
-    showAll1() {
-      //
+    toLine() {
+      this.$store.commit('m/gongsi/line/setData', {
+        name: 'currentPage',
+        data: 1
+      })
+      this.$store.commit('m/gongsi/line/setData', {
+        name: 'orderBy',
+        data: { name: '信誉最高', value: 'creditDesc' }
+      })
+      this.$store.commit('m/gongsi/line/setData', {
+        name: 'startName',
+        data: ['', '', '']
+      })
+      this.$store.commit('m/gongsi/line/setData', {
+        name: 'endName',
+        data: ['', '', '']
+      })
+      this.$store.commit('m/gongsi/line/setData', {
+        name: 'rangeList',
+        data: []
+      })
+      this.$store.commit('m/gongsi/line/setData', {
+        name: 'pages',
+        data: ''
+      })
+      this.$store.commit('m/gongsi/line/setData', {
+        name: 'scrollTo',
+        data: 0
+      })
+      this.$router.push('/m/gongsi/line?id=' + this.$route.query.id)
+    },
+    findPrice(arr, type) {
+      let find = 0
+      if (arr.length) {
+        arr.forEach(item => {
+          if (item.type === type && item.startVolume === 0) {
+            find = item.discountPrice || item.primeryPrice
+          }
+        })
+        return find
+      } else {
+        return 0
+      }
     }
   }
 }

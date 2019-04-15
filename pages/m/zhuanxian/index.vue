@@ -36,6 +36,7 @@
           @setArea="getEndArea"/>
         <Reputation
           top="auto"
+          form="zhuanxian"
           ref="selectReputation"
           @setArea="getReputation"/>
       </div>
@@ -160,6 +161,13 @@ export default {
       this.$router.push(`/m/zhuanxian/detail?id=${id}&publishId=${publishId}`)
     },
     onPullingDown() {
+      this.$nextTick(() => {
+        this.$refs.scroll.scrollTo(0, 0)
+      })
+      this.$store.commit('m/zhuanxian/setData', {
+        name: 'scrollTo',
+        data: 0
+      })
       this.$store.commit('m/zhuanxian/setData', {
         name: 'currentPage',
         data: 1

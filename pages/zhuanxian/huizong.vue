@@ -1,214 +1,219 @@
 <template>
   <div>
-    <div class="grid_c1 category clearfix">
-      <div class="col1 fl">
-        <div class="p_category_menu">
-          <h4 class="category_menu_title">热门城市</h4>
-          <div class="category_menu_list">
-            <span 
-              class="item"
-              v-for="(item, index) in cityList" 
-              :key="index">
-            <a>{{ item }}</a></span>  
-          </div>          
-        </div>
+    <div class="bj_white">
+      <div class="grid_c1 category clearfix">
+        <div class="col1 fl">
+          <div class="category_app">
+            <img src="../../static/images/huizong/cheyuan/app.png">
+          </div>
+          <div class="p_category_menu">
+            <h4 class="category_menu_title">
+              <i class="iconfont iconzu-6"/>
+              热门城市
+            </h4>
+            <div class="category_menu_list">
+              <span 
+                class="item"
+                v-for="(item, index) in cityList" 
+                :key="index">
+              <a>{{ item }}</a></span>  
+            </div>          
+          </div>
         <!--导航 -->
-      </div>
-      <div class="col2 category_ad fl clearfix">
-        <div class="ad_big fl">
-          <img src="../../static/images/huizong/banner01.jpg">
         </div>
-        <div class="ad_right fr">        
-          <div class="ad_right_item"><img src="../../static/images/huizong/banner01.jpg"></div>
-          <div class="ad_right_item"><img src="../../static/images/huizong/banner01.jpg"></div>
-          <div class="ad_right_item"><img src="../../static/images/huizong/banner01.jpg"></div>
-        </div>
-      <!-- 幻灯片 -->
-      </div>
-      <div class="col3 fr">
-        <div class="p_user_login">
-          <div class="user_pic">头像</div>
-          <div class="user_show">
-            <p class="user_tip">Hi~欢迎来到28快运！</p>
-            <p class="user_profit">
-              <a href="/login">登录</a>
-              <a href="/regisiter">注册</a>
-            </p>
+        <div class="col2 category_ad fl clearfix">
+          <div class="ad_big fl">
+            <img src="../../static/images/huizong/cheyuan/banner.png">
           </div>
+          <div class="ad_right fr">        
+            <div class="ad_right_item"><img src="../../static/images/huizong/cheyuan/adlet1.png"></div>
+            <div class="ad_right_item"><img src="../../static/images/huizong/cheyuan/adlet2.png"></div>
+            <div class="ad_right_item"><img src="../../static/images/huizong/cheyuan/adlet3.png"></div>
+          </div>
+          <!-- 幻灯片 -->
         </div>
-        <!-- 用户登录 -->
-        <div 
-        class="p_me_groom">
-          <div class="gr_text">
-            <h4 class="gr_text_title">帮我推荐</h4>
-            <div class="gr_text_txt">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</div>
-            <div class="p_groom_submit clearfix">
-              <input 
-                type="text" 
-                
-                placeholder="请输入您的手机号"
-                class="fl">
-              <button 
-                
-              class="fl">帮我推荐</button>
+        <div class="col3 fr">
+          <div class="p_user_login">
+            <div class="user_pic"><img src="../../static/images/index/19stx.png"></div>
+            <div class="user_show">
+              <p class="user_txt">Hi~欢迎来到28快运！</p>
+              <p class="user_profit">
+                <a 
+                  class="login"
+                  href="/login">登录</a>
+                <a href="/regisiter">注册</a>
+              </p>
             </div>
-            <div class="error">请输入正确的手机号</div>
           </div>
-          <div class="gr_operate">
-            <a href="">快速下单</a>
-            <a href="">查询运单</a>
+          <!-- 用户登录 -->
+          <div 
+          class="p_me_groom">
+            <div class="gr_text">
+              <h4 class="gr_text_title">帮我推荐&#x3e;</h4>
+              <div class="gr_text_txt">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</div>
+              <div class="p_groom_submit clearfix">
+                <input 
+                  type="text" 
+                
+                  placeholder="请输入您的手机号"
+                  class="fl">
+                <button 
+                
+                class="fl">帮我推荐</button>
+              </div>
+            </div>
+            <div class="gr_operate">
+              <a href="">快速下单</a>
+              <a href="">查询运单</a>
+            </div>
+            <div class="gr_oder_num">今日已有<b>2368</b>人在线下单获得优惠</div>   
           </div>
-          <div class="gr_oder_num">今日已有<b>2368</b>人在线下单获得优惠</div>   
-        </div>
  
+        </div>
       </div>
     </div>
     <!-- 物流专线hd -->
-    <div 
-      class="bj_2"
-      style="height:550px">
-      <div class="grid_c1 clearfix">    
-        <div class="p_title_box">
-          <h3 class="title">平台推荐</h3>
-          <span class="title_txt">平台推荐，资质保障</span>
-          <a 
-            href="" 
-            class="title_link fr">更多优质专线<i class="iconfont iconjiantou2"/>
-          </a>         
-        </div>
-        <div class="pt_groom fl">
-          <ul 
-            :class="['hd','clearfix',groomClass]" 
-          >
-            <li 
-              :class="[{'active':groomIndex==1},'channel1']" 
-              @mouseover="groomTab(0)" > 
-              <h6 class="pt_groom_tit">担保交易</h6>
-              <div class="pt_groom_txt">
-                平台担保，安全可靠
-                <span class="pt_groom_line"/>
-              </div>
-              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
-            </li>
-            <li
-              :class="[{'active':groomIndex===2},'channel2']" 
-              @mouseover="groomTab(1)">
-              <h6 class="pt_groom_tit">超值特惠</h6>
-              <div class="pt_groom_txt">
-                价格直降，超值独享
-                <span class="pt_groom_line"/>
-              </div>
-              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
-            </li>
-            <li 
-              :class="[{'active':groomIndex===3},'channel3']" 
-              @mouseover="groomTab(2)">
-              <h6 class="pt_groom_tit">精准时效</h6>
-              <div class="pt_groom_txt">
-                及时、高效、保质量
-                <span class="pt_groom_line"/>
-              </div>
-              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
-            </li>
-            <li
-              :class="[{'active':groomIndex===4},'channel4']" 
-              @mouseover="groomTab(3)">
-              <h6 class="pt_groom_tit">28信用</h6>
-              <div class="pt_groom_txt">
-                平台认证，推荐专线
-                <span class="pt_groom_line"/>
-              </div>
-              <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
-            </li>
-          </ul>
-          <div class="bd">
-            <div 
+    <div class="grid_c1 clearfix">    
+      <div class="p_title_box">
+        <h3 class="title">平台推荐</h3>
+        <span class="title_txt">平台推荐，资质保障</span>
+        <a 
+          href="" 
+          class="title_link fr">更多优质专线<i class="iconfont iconzu6"/>
+        </a>         
+      </div>
+      <div class="pt_groom fl">
+        <ul 
+          :class="['hd','clearfix',groomClass]" 
+        >
+          <li 
+            :class="[{'active':groomIndex==1},'channel1']" 
+            @mouseover="groomTab(0)" > 
+            <h6 class="pt_groom_tit">担保交易</h6>
+            <div class="pt_groom_txt">
+              平台担保，安全可靠
+              <span class="pt_groom_line"/>
+            </div>
+            <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
+          </li>
+          <li
+            :class="[{'active':groomIndex===2},'channel2']" 
+            @mouseover="groomTab(1)">
+            <h6 class="pt_groom_tit">超值特惠</h6>
+            <div class="pt_groom_txt">
+              价格直降，超值独享
+              <span class="pt_groom_line"/>
+            </div>
+            <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
+          </li>
+          <li 
+            :class="[{'active':groomIndex===3},'channel3']" 
+            @mouseover="groomTab(2)">
+            <h6 class="pt_groom_tit">精准时效</h6>
+            <div class="pt_groom_txt">
+              及时、高效、保质量
+              <span class="pt_groom_line"/>
+            </div>
+            <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
+          </li>
+          <li
+            :class="[{'active':groomIndex===4},'channel4']" 
+            @mouseover="groomTab(3)">
+            <h6 class="pt_groom_tit">28信用</h6>
+            <div class="pt_groom_txt">
+              平台认证，推荐专线
+              <span class="pt_groom_line"/>
+            </div>
+            <div class="pt_groom_img"><img src="../../static/images/huizong/banner02.jpg"></div>
+          </li>
+        </ul>
+        <div class="bd">
+          <div 
               
+          >
+            <ul 
+              v-for="(item,index) in 4"
+              :key="index"
+              v-if="groomIndex==index"
+              :class="'lineRecommend'+index"
+              class="p_hy_list p_wl_list clearfix"
             >
-              <ul 
-                v-for="(item,index) in 4"
+              <li 
+                v-for="(item,index) in lineRecommend"
                 :key="index"
-                v-if="groomIndex==index"
-                :class="'lineRecommend'+index"
-                class="p_hy_list p_wl_list clearfix"
-              >
-                <li 
-                  v-for="(item,index) in lineRecommend"
-                  :key="index"
-                  :class="'act'+index">
-                  <div class="p_10">
-                    <div class="hd_box">
+                :class="'act'+index">
+                <div class="p_10">
+                  <div class="hd_box">
                      
                      
-                      <!-- <a 
+                    <!-- <a 
                         :href="'/member/'+item.companyId"
                         target="_blank"> -->
-                      <span class="label_provider">物流商:</span>
+                    <span class="label_provider">物流商:</span>
                      
-                      <span 
-                        class="provider"
-                        style="cursor:pointer"
-                        @click="toCompany(item)">{{ item.companyName }}</span>
-                      <!-- </a> -->
-                      <span 
-                        v-for="(item, index) in item.credit"
-                        :key="index"
-                        class="icon"/>
+                    <span 
+                      class="provider"
+                      style="cursor:pointer"
+                      @click="toCompany(item)">{{ item.companyName }}</span>
+                    <!-- </a> -->
+                    <span 
+                      v-for="(item, index) in item.credit"
+                      :key="index"
+                      class="icon"/>
                        
-                    </div>
-                    <div 
-                      @click="toLineDetail(item)"
-                      class="md_box"
-                      style="height:25px;line-height: 25px;padding-top:13px;cursor: pointer;">
-                      <div class="city">{{ item.startCity }}</div>
-                      <span class="city-joint">
-                        <span class="joint-line"/>
-                        <span class="joint-label">发往</span>
-                        <span class="joint-line"/>
-                      </span>
-                      <div class="city">{{ item.endCity }}</div>
+                  </div>
+                  <div 
+                    @click="toLineDetail(item)"
+                    class="md_box"
+                    style="height:25px;line-height: 25px;padding-top:13px;cursor: pointer;">
+                    <div class="city">{{ item.startCity }}</div>
+                    <span class="city-joint">
+                      <span class="joint-line"/>
+                      <span class="joint-label">发往</span>
+                      <span class="joint-line"/>
+                    </span>
+                    <div class="city">{{ item.endCity }}</div>
                      
-                    </div>
-                    <div 
+                  </div>
+                  <div 
                       
-                    > <span style="margin-right:70px">{{ item.startArea }}</span><span style="padding: 0 10px;">{{ item.endArea }}</span></div>
-                    <div class="type_box">
-                      <span class="name">重货:</span>
-                      <span class="item"><b>{{ item.weightPrice }}</b></span>
-                      <span class="item color_gray"><span class="line-through">{{ item.weightDiscountPrice }}</span>元／平方</span>
-                    </div>
-                    <div class="type_box">
-                      <span class="name">轻货:</span>
-                      <span class="item"><b>{{ item.lightPrice }}</b></span>
-                      <span class="item color_gray"><span class="line-through">{{ item.lightDiscountPrice }}</span>元／立方</span>
-                    </div>
-                    <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                  > <span style="margin-right:70px">{{ item.startArea }}</span><span style="padding: 0 10px;">{{ item.endArea }}</span></div>
+                  <div class="type_box">
+                    <span class="name">重货:</span>
+                    <span class="item"><b>{{ item.weightPrice }}</b></span>
+                    <span class="item color_gray"><span class="line-through">{{ item.weightDiscountPrice }}</span>元／平方</span>
                   </div>
-                  <div class="item_order clearfix">
-                    <div class="name fl">担保交易</div>
-                    <div class="dock fl">
-                      <span class="dock_icon">延时赔付</span>
-                      <span class="dock_num">{{ item.goodEvaCount }}人说好</span>
-                    </div>
-                    <div class="link_oder fr"><a 
-                      :href="'/create/line?uid='+ item.account+'&publishId='+item.companyId+'&id='+item.id"
-                      target="blank">立即下单</a></div>
+                  <div class="type_box">
+                    <span class="name">轻货:</span>
+                    <span class="item"><b>{{ item.lightPrice }}</b></span>
+                    <span class="item color_gray"><span class="line-through">{{ item.lightDiscountPrice }}</span>元／立方</span>
                   </div>
-                </li>
+                  <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                </div>
+                <div class="item_order clearfix">
+                  <div class="name fl">担保交易</div>
+                  <div class="dock fl">
+                    <span class="dock_icon">延时赔付</span>
+                    <span class="dock_num">{{ item.goodEvaCount }}人说好</span>
+                  </div>
+                  <div class="link_oder fr"><a 
+                    :href="'/create/line?uid='+ item.account+'&publishId='+item.companyId+'&id='+item.id"
+                    target="blank">立即下单</a></div>
+                </div>
+              </li>
                
                
-              </ul>
-            </div>
-            <!-- <div v-show="groomIndex===2">22</div>
+            </ul>
+          </div>
+          <!-- <div v-show="groomIndex===2">22</div>
             <div v-show="groomIndex===3">33</div>
             <div v-show="groomIndex===4">44</div> -->
-          </div>
         </div>
-        <div class="pt_discount fr">
-          <div class="p_subtitle clearfix ">
-            <i class="iconfont iconliwuhuodong fl"/>
-            <h4 class="title fl">优惠礼券</h4>
-          </div>
+      </div>
+      <div class="pt_discount fr">
+        <div class="p_subtitle clearfix ">
+          <i class="iconfont iconliwuhuodong fl"/>
+          <h4 class="title fl">优惠礼券</h4>
         </div>
       </div>
     </div>
@@ -324,13 +329,6 @@
           target="_blank"
           class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
       </div>
-      
-
-  
-
-      
-
-
       <div class="p_type_nav">
         <a 
           v-for="(item,index) in typeNav"
@@ -1227,8 +1225,55 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
-@import '~/assets/scss/huizong.scss';
+<style lang="scss">
+@import '~/assets/scss/common_index.scss';
+
+/********公共的导航修改**************/
+.header {
+  margin-bottom: 0 !important;
+  height: auto !important;
+}
+.header_bottom {
+  background: #fff !important;
+  border-bottom: 3px solid #00c17f !important;
+  ul {
+    > span {
+      display: none !important;
+    }
+    li {
+      margin-left: 0 !important;
+      padding: 0 33px !important;
+      &.nav-active {
+        position: relative;
+        &:after {
+          content: ' ';
+          position: absolute;
+          left: 20px;
+          top: 20px;
+          width: 5px;
+          height: 5px;
+          background: #00c17f;
+        }
+        > a {
+          color: #00c17f !important;
+        }
+        background: none !important;
+      }
+      &:hover {
+        > a {
+          color: #00c17f !important;
+        }
+        background: none !important;
+      }
+      > span {
+        display: none !important;
+      }
+      > a {
+        color: #333 !important;
+      }
+    }
+  }
+}
 /*本页面公共的函数*/
 @mixin active_color($color) {
   background: $color;
@@ -1247,43 +1292,81 @@ export default {
 
 /*1、物流专线*/
 .category {
-  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  margin: 40px auto;
+  -moz-box-shadow: 2px 2px 15px #ddd;
+  -webkit-box-shadow: 2px 2px 15px #ddd;
+  box-shadow: 2px 2px 15px #ddd;
   > .col1 {
-    width: 230px;
-    height: 425px;
-    background: $white;
+    width: 256px;
+    height: 476px;
+    background-color: $black;
+    background-image: url('../../static/images/huizong/cheyuan/nav_bj.png');
+    background-position: 0 bottom;
   }
   > .col2 {
-    margin-left: 15px;
-    width: 890px;
+    overflow: hidden;
+    width: 813px;
   }
   > .col3 {
-    padding: 0 20px;
-    width: 250px;
-    height: 425px;
+    overflow: hidden;
+    width: 320px;
+    height: 476px;
     background: $white;
+  }
+  /*导航*/
+  .category_app {
+    margin-top: -15px;
   }
   /*幻灯片*/
   .category_ad {
     overflow: hidden;
-    width: 890px;
-    height: 425px;
-    img {
-      width: 100%;
-      height: 100%;
-    }
+    width: 813px;
+    height: 476px;
     .ad_big {
-      width: 710px;
-      height: 425px;
+      overflow: hidden;
+      width: 612px;
+      height: 476px;
     }
     .ad_right {
-      width: 165px;
-      height: 425px;
+      overflow: hidden;
+      width: 192px;
+      height: 476px;
       .ad_right_item {
         margin-bottom: 15px;
-        width: 165px;
-        height: 132px;
+        width: 192px;
+        height: 152px;
       }
+    }
+  }
+}
+.p_category_menu {
+  margin-top: -15px;
+  padding: 0;
+  padding-left: 40px;
+  .category_menu_title {
+    margin: 0;
+    padding-left: 0;
+    color: $white;
+  }
+  .category_menu_list {
+    padding-left: 0;
+    .item {
+      margin-top: 10px;
+      > a {
+        color: #a5adb0;
+      }
+    }
+  }
+}
+.p_user_login {
+  .user_show .user_profit {
+    > a {
+      border: 1px solid $cy_green;
+      color: $cy_green;
+    }
+    > a.login {
+      background-color: $cy_green;
     }
   }
 }

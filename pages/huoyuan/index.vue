@@ -778,7 +778,7 @@ export default {
     }
   },
   mounted() {
-    console.log('hyList:', this.hyList)
+    // console.log('hyList:', this.hyList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())

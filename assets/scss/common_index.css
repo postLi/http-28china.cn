@@ -1,5 +1,6 @@
 @charset "UTF-8";
 /*小图标颜色*/
+/*********专线颜色*************/
 /*公共的背景色*/
 /*公共的变量*/
 /*公共函数*/
@@ -95,8 +96,9 @@
 }
 
 /*背景颜色*/
-.bj_1 {
-  box-sizing: border-box;
+.bj_white {
+  overflow: hidden;
+  background: #fff;
 }
 
 .bj_2 {
@@ -181,10 +183,19 @@
 
 .p_title_box .title_txt {
   margin: 10px;
-  padding-left: 30px;
+  padding-left: 20px;
   line-height: 20px;
   font-size: 16px;
   color: #999;
+}
+
+.p_title_box .title_link {
+  font-size: 16px;
+  color: #999;
+}
+
+.p_title_box .title_link .iconfont {
+  padding-left: 5px;
 }
 
 .p_centre_title {
@@ -337,6 +348,7 @@
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
+  margin-bottom: 25px;
   height: 170px;
   overflow: hidden;
   background: url("../../static/images/huizong/user_bj.jpg") no-repeat;
@@ -365,9 +377,9 @@
 .p_user_login .user_show .user_profit > a {
   display: inline-block;
   margin: 0 5px;
-  width: 116px;
-  height: 28px;
-  line-height: 28px;
+  width: 135px;
+  height: 40px;
+  line-height: 40px;
   font-size: 14px;
   text-align: center;
   color: #1d83fe;
@@ -695,7 +707,7 @@
 }
 
 .p_hy_groom .gr_txt {
-  margin-left: 25px;
+  margin-left: 20px;
   font-size: 16px;
   color: #666;
 }
@@ -1017,73 +1029,76 @@
 }
 
 /*******帮我推荐提交******/
+.p_groom_submit {
+  margin-bottom: 20px;
+}
+
 .p_groom_submit > input {
   outline: none;
   text-indent: 10px;
-  width: 170px;
+  width: 180px;
   height: 40px;
   line-height: 40px;
   font-size: 14px;
-  border: 1px solid #dadada;
+  border: 0;
+  background-color: #f4f4f4;
 }
 
 .p_groom_submit > button {
   outline: none;
-  width: 78px;
-  height: 42px;
-  line-height: 42px;
+  width: 100px;
+  height: 40px;
+  line-height: 40px;
   border: none;
   color: #fff;
-  background: #13b31e;
+  background: #00c17f;
   cursor: pointer;
 }
 
 /******帮我推荐***********/
 .p_me_groom .gr_text {
-  height: 160px;
+  padding: 0 20px;
 }
 
 .p_me_groom .gr_text .gr_text_title {
   font-size: 16px;
   color: #333;
+  font-weight: bold;
 }
 
 .p_me_groom .gr_text .gr_text_txt {
   margin: 10px 0;
   line-height: 20px;
-  font-size: 12px;
-}
-
-.p_me_groom .gr_text .error {
-  margin-top: 5px;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .p_me_groom .gr_operate {
   overflow: hidden;
-  margin-bottom: 15px;
+  border: 1px solid #dadada;
+  border-width: 1px 0;
 }
 
 .p_me_groom .gr_operate > a {
-  width: 118px;
-  height: 40px;
-  line-height: 40px;
-  border-radius: 5px;
+  width: 159px;
+  line-height: 50px;
+  font-size: 16px;
   text-align: center;
-  color: #13b31e;
-  border: 1px solid #13b31e;
+  color: #666;
+  border-right: 1px solid #dadada;
 }
 
-.p_me_groom .gr_operate > a:first-child {
-  margin-right: 10px;
+.p_me_groom .gr_operate > a:last-child {
+  border-right: 0;
 }
 
 .p_me_groom .gr_oder_num {
-  color: #333;
+  margin-top: 25px;
+  padding-left: 20px;
+  color: #666;
 }
 
 .p_me_groom .gr_oder_num > b {
-  font-size: 16px;
+  font-size: 20px;
   color: #ff5b1a;
 }
 

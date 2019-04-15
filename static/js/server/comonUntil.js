@@ -1,10 +1,11 @@
 const until = {
   getPlace(el) {
-    var obj = {
-      province: '',
-      city: '',
-      area: ''
-    }
+    let obj = {
+        province: '',
+        city: '',
+        area: ''
+      },
+      arr = []
     $(el + ' .select-item').each(function(i, e) {
       arr.push($(this).text())
     })

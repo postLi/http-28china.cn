@@ -28,6 +28,10 @@ $light_violet: #9966cc; //紫色
 $icon_blue:#4494f6;
 $icon_red: #e46167;
 $icon_red_bj:#ff4141; //降价升价背景颜色
+
+/*********专线颜色*************/
+$cy_green: #00c17f; 
+
 /*公共的背景色*/
 $bj_gray:#f5f5f7;
 /*公共的变量*/
@@ -172,8 +176,9 @@ $f_12: 12px;
   background: url('../../static/images/huizong/icon_no3.png') no-repeat;
 } 
 /*背景颜色*/
-.bj_1 {
-  box-sizing: border-box;
+.bj_white{
+  overflow: hidden;
+  background: $white;
 }
 
 .bj_2 {
@@ -255,18 +260,19 @@ $f_12: 12px;
   .title_txt {
     @extend .fl;
     margin: 10px;
-    padding-left: 30px;
+    padding-left: 20px;
     line-height: 20px;
     font-size: $f_16;
     color: $light_gray;
   }
 
-  // .title_link {
-  //   .iconfont {
-  //     padding-left: 5px;
-  //     color: $green;
-  //   }
-  // }
+  .title_link {
+    font-size: $f_16;
+    color: $light_gray;
+    .iconfont {
+      padding-left: 5px;
+    }
+  }
 }
 .p_centre_title {
   margin: 90px auto 60px auto;
@@ -406,6 +412,7 @@ $f_12: 12px;
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
+  margin-bottom: 25px;
   height: 170px;
   overflow: hidden;
   background: url('../../static/images/huizong/user_bj.jpg') no-repeat;
@@ -433,9 +440,9 @@ $f_12: 12px;
       >a {
         display: inline-block;
         margin: 0 5px;
-        width: 116px;
-        height: 28px;
-        line-height: 28px;
+        width: 135px;
+        height: 40px;
+        line-height: 40px;
         font-size: $f_14;
         text-align: center;
         color: $blue;
@@ -749,7 +756,7 @@ $f_12: 12px;
 
   .gr_txt {
     @extend .fl;
-    margin-left: 25px;
+    margin-left: 20px;
     font-size: $f_16;
     color: $gray;
 
@@ -1121,24 +1128,26 @@ $f_12: 12px;
 
 /*******帮我推荐提交******/
 .p_groom_submit {
+  margin-bottom: 20px;
   >input {
     outline: none;
     text-indent: 10px;
-    width: 170px;
+    width: 180px;
     height: 40px;
     line-height: 40px;
     font-size: $f_14;
-    border: 1px solid $border_color;
+    border: 0;
+    background-color:#f4f4f4;
   }
 
   >button {
     outline: none;
-    width: 78px;
-    height: 42px;
-    line-height: 42px;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
     border: none;
     color: $white;
-    background: $green;
+    background:$cy_green;
     cursor: pointer;
   }
 }
@@ -1148,50 +1157,47 @@ $f_12: 12px;
 
   // margin-bottom: 10px;
   .gr_text {
-    height: 160px;
+    padding: 0 20px;
+    // height: 160px;
 
     .gr_text_title {
       font-size: $f_16;
       color: $tit_color;
+      font-weight: bold;
     }
 
     .gr_text_txt {
       margin: 10px 0;
       line-height: 20px;
-      font-size: $f_12;
-    }
-
-    .error {
-      margin-top: 5px;
-      font-size: $f_12;
+      font-size: $f_14;
     }
   }
 
   .gr_operate {
     overflow: hidden;
-    margin-bottom: 15px;
-
+    border: 1px solid $border_color;
+    border-width: 1px 0 ;
     >a {
       @extend .fl;
-      width: 118px;
-      height: 40px;
-      line-height: 40px;
-      border-radius: 5px;
+      width:159px;
+      line-height: 50px;
+      font-size: $f_16;
       text-align: center;
-      color: $green;
-      border: 1px solid $green;
-
-      &:first-child {
-        margin-right: 10px;
+      color: $gray;
+      border-right: 1px solid $border_color;
+      &:last-child{
+        border-right: 0;
       }
     }
   }
 
   .gr_oder_num {
-    color: $tit_color;
+    margin-top: 25px;
+    padding-left: 20px;
+    color: $gray;
 
     >b {
-      font-size: 16px;
+      font-size: 20px;
       color: $orange;
     }
   }

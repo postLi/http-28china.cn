@@ -733,6 +733,8 @@
     <!-- 28问答 -->   
 </div></template>
 <script>
+//获取公共的函数
+import until from '../../static/js/server/comonUntil'
 import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
@@ -742,7 +744,7 @@ export default {
       return value
     }
   },
-  layout: 'huizong',
+  // layout: 'huizong',
   data() {
     return {
       banners: [
@@ -761,29 +763,19 @@ export default {
       hyEndArea: ''
     }
   },
-  // watch: {
-  //   currentProvince(newVal, oldVal) {
-  //     this.currentProvince = $.cookie('currentProvinceFullName')
-  //     console.log('watch数据变化省', this.currentProvince)
-  //   },
-  //   currentArea(newVal, oldVal) {
-  //     this.currentArea = $.cookie('currentAreaFullName')
-  //     console.log('watch数据变化市', this.currentArea)
-  //   }
-  // },
   async asyncData({ $axios, query, app, error }) {
     // let [, ] = await Promise.all([   ])
     // this.currentArea = $.cookie('currentAreaFullName')
     //服务端获取cookies
-    let cookies = app.$.cookies
-    let currentArea = cookies.get('currentAreaFullName')
+    let currentArea = app.$cookies.get('currentAreaFullName')
 
     //热门城市
     let hotCityData = await $axios.get('/28-web/city/hot')
     // 优质货主
     let shipperData = await $axios.post('/28-web/shipper/excellent', {
       currentPage: 1,
-      pageSize: 10
+      pageSize: 10,
+      endCity: currentArea
     })
     //本月优质货主
     let monthShipperData = await $axios.post(
@@ -798,7 +790,8 @@ export default {
       '/28-web/lclOrder/orderSummary/recommendList',
       {
         currentPage: 1,
-        pageSize: 12
+        pageSize: 12,
+        endCity: currentArea
       }
     )
     // 榜单达人
@@ -946,14 +939,31 @@ export default {
     },
     //搜索货源
     groomSearch() {
-      this.getPlace(
-        '#huoyuan_from1',
-        'hyStartProvince',
-        'hyStartCity',
-        'hyStartArea'
+      let startPlace = until.getPlace('#huoyuan_from1')
+      let endPlace = until.getPlace('#huoyuan_from2')
+
+      // 开始城市赋值
+      this.hyStartProvince = startPlace.province
+      this.hyStartCity = startPlace.city
+      this.hyStartArea = startPlace.area
+      //到达城市赋值
+      this.hyEndProvince = endPlace.province
+      this.hyEndCity = endPlace.city
+      this.hyEndArea = endPlace.area
+      console.log(
+        '开始城市赋值',
+        this.hyStartProvince,
+        this.hyStartCity,
+        this.hyStartArea
       )
-      this.getPlace('#huoyuan_from2', 'hyEndProvince', 'hyEndCity', 'hyEndArea')
-      // 跳转
+      console.log(
+        '到达城市赋值',
+        this.hyEndProvince,
+        this.hyEndCity,
+        this.hyEndArea
+      )
+
+      //跳转
       let huoyuanUrl = `/huoyuan?startProvince=${
         this.hyStartProvince
       }&startCity=${this.hyStartCity}&startArea=${
@@ -961,19 +971,18 @@ export default {
       }&endProvince=${this.hyEndProvince}&endCity${this.hyEndCity}&endArea${
         this.hyEndArea
       }`
-      // window.location.href = huoyuanUrl
       window.open(huoyuanUrl, '_blank')
-    },
-    //表单获取数据封装
-    getPlace(el, province, city, area) {
-      let arr = []
-      $(el + ' .select-item').each(function(i, e) {
-        arr.push($(this).text())
-      })
-      this[province] = arr[0] ? arr[0] : ''
-      this[city] = arr[1] ? arr[1] : ''
-      this[area] = arr[2] ? arr[2] : ''
     }
+    // //表单获取数据封装
+    // getPlace(el, province, city, area) {
+    //   let arr = []
+    //   $(el + ' .select-item').each(function(i, e) {
+    //     arr.push($(this).text())
+    //   })
+    //   this[province] = arr[0] ? arr[0] : ''
+    //   this[city] = arr[1] ? arr[1] : ''
+    //   this[area] = arr[2] ? arr[2] : ''
+    // }
     //获取cookies的值
     // getCookie(cookieName) {
     //   var strCookie = document.cookie
@@ -990,7 +999,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/scss/common_index.scss';
 /*全局影响样式处理*/
 a {
@@ -999,6 +1008,45 @@ a {
     color: $tit_color;
   }
 }
+/*******不同导航不同样式修改******/
+.header {
+  margin-bottom: 0 !important;
+}
+.header_bottom {
+  height: 45px !important;
+  background: #fff !important;
+
+  ul {
+    padding-left: 230px;
+    width: 1170px !important ;
+    > span {
+      display: none !important;
+    }
+    li {
+      margin-left: 0 !important;
+      line-height: 45px !important;
+      &.nav-active {
+        > a {
+          color: #1f81fe !important;
+        }
+        background: none !important;
+      }
+      &:hover {
+        > a {
+          color: #1f81fe !important;
+        }
+        background: none !important;
+      }
+      > span {
+        display: none !important;
+      }
+      > a {
+        color: #333 !important;
+      }
+    }
+  }
+}
+
 /*1、货源导航*/
 .bj_blue {
   box-sizing: border-box;

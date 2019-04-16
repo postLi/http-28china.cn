@@ -488,18 +488,7 @@ export default {
         orderBy: 2,
         channelOption: 0
       },
-      name: 'gongsi_jryw',
-      preFn: data => {
-        // console.log(data, 'datadfdf')
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-
-          return el
-        })
-      }
+      name: 'gongsi_jryw'
     })
     await store.dispatch('news/GETNEWSINFO', {
       params: {
@@ -508,17 +497,7 @@ export default {
         orderBy: 9,
         channelOption: 0
       },
-      name: 'gongsi_wlzx',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-
-          return el
-        })
-      }
+      name: 'gongsi_wlzx'
     })
   },
   async asyncData({ $axios, app, query, error }) {
@@ -695,6 +674,7 @@ export default {
       listH.data.status == 200
     ) {
       return {
+        createTime: new Date().getTime(),
         lineHots: listA.data.status == 200 ? listA.data.data : [],
         lineLinks: listC.data.status == 200 ? listC.data.data : [],
         lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : [],
@@ -734,7 +714,7 @@ export default {
   },
   head: {
     link: [
-      { rel: 'stylesheet', href: '/gongsi/css/list_wlgs.css' },
+      { rel: 'stylesheet', href: '/gongsi/css/list_wlgs.css?v2' },
       { rel: 'stylesheet', href: '/gongsi/css/jquery.pagination.css' },
       { rel: 'stylesheet', href: '/css/WTMap.css' },
       { rel: 'stylesheet', href: '/layer/dist/css/layui.css' }
@@ -742,6 +722,7 @@ export default {
     script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
+    this._updateCachePage()
     $('#buxian').prop('checked', true)
     var newArr = new Array()
     var _newArr = new Array()

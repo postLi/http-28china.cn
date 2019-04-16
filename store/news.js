@@ -36,6 +36,17 @@ export const mutations = {
   }
 }
 
+let THENEWSPREFN = data => {
+  return data.map((el, index) => {
+    el.url = el.url.replace(
+      /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+      '/zixun'
+    )
+
+    return el
+  })
+}
+
 export const actions = {
   // 获取资讯信息
   GETNEWSINFO({ commit }, payload) {
@@ -50,7 +61,8 @@ export const actions = {
           if (data.code === '200') {
             // console.log('payload-lineinfo', data.body)
             let ndata = data.body || []
-            ndata = payload.preFn ? payload.preFn(ndata) : ndata
+            let preFn = payload.preFn || THENEWSPREFN
+            ndata = preFn(ndata)
             commit('setInfo', {
               name: payload.name,
               data: ndata
@@ -79,7 +91,8 @@ export const actions = {
           if (data.code === '200') {
             // console.log('payload-GETMULTYNEWSINFO', data.body)
             let ndata = data.body || []
-            ndata = payload.preFn ? payload.preFn(ndata) : ndata
+            let preFn = payload.preFn || THENEWSPREFN
+            ndata = preFn(ndata)
             payload.names.forEach((name, index) => {
               commit('setInfo', {
                 name: name,

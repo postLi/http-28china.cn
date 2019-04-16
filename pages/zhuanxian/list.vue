@@ -644,7 +644,6 @@ export default {
       codeA.data.data.unshift(codeObj)
       codeB.data.data.unshift(codeObj)
       codeC.data.data.unshift(codeObj)
-
       return {
         lineListsTotalPage: listA.data.data.pages,
         lineLists: listA.data.data.list,

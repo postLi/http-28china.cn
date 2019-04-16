@@ -7,7 +7,7 @@
 
     <div
       slot="header"
-      style="font-size:20px;color:red;padding:20px 0"><span>{{ info.companyName }}-用户评价</span></div>
+      style="font-size:20px;"><span>{{ info.companyName }}-用户评价</span></div>
     <div
       class="dialog_publish_main"
       slot="main">

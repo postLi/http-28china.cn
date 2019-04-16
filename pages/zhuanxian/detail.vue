@@ -804,7 +804,7 @@
                     <p class="p2"><i
                       class="zhuo"
                       style="color: #666">轻货：</i><span style="color: #ff4747">{{ parseFloat(item.lightPrice).toFixed(1) }}</span><span style="color: #333">元/m³</span></p>
-                    <p class="p3"><i>时效：</i><span>{{ item.transportAging }}{{ item.transportAging }}</span></p>
+                    <p class="p3"><i>时效：</i><span>{{ item.transportAging }}{{ item.transportAgingUnit }}</span></p>
                     <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
                   </li>
                   <li class="wlzx_list_6">
@@ -1004,6 +1004,15 @@ async function getCanyColl(
     return { data: false }
   }
 }
+// $axios.get(aurl + `/28-web/range/${query.id}`)
+async function getDetailFn($axios, id) {
+  let res = await $axios.get(`/28-web/range/${id}`)
+  if (res.data.status == 200) {
+    return res.data.data
+  } else {
+    return {}
+  }
+}
 
 export default {
   name: 'Index',
@@ -1105,7 +1114,8 @@ export default {
     if (!endc || endc == 'null') {
       endc = ''
     }
-
+    // let datajid = await getDetailFn($axios, query.id)
+    // console.log(datajid, 'datajid')
     let linedataA = await $axios.get(aurl + `/28-web/range/${query.id}`)
 
     if (linedataA.data.status === 200 && linedataA.data.data) {
@@ -1139,7 +1149,6 @@ export default {
         endArea: enda
       })
     ])
-    console.log(linedataE, 'linedataE.')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
@@ -1234,7 +1243,6 @@ export default {
         // linedataB.data.data.isRenZhen = true
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
-
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
@@ -2590,9 +2598,10 @@ export default {
       let isurl = ''
       let transportRangeId = this.$route.query.id
       let handle = 'collect'
+      let comId = ''
       if (access_token && user_token) {
         if (item == 'detail') {
-          let transportRangeId = this.$route.query.id
+          comId = this.$route.query.id
           if (this.isXin == true) {
             handle = 'cancelCollect'
           }
@@ -2606,7 +2615,7 @@ export default {
             '&handle=' +
             handle
         } else {
-          let companyId = this.$route.query.publishId
+          comId = this.$route.query.publishId
           if (this.isComanyColl == true) {
             handle = 'cancelCollect'
           }
@@ -2616,7 +2625,7 @@ export default {
             '&user_token=' +
             user_token +
             '&companyId=' +
-            companyId +
+            comId +
             '&handle=' +
             handle
         }
@@ -2632,6 +2641,10 @@ export default {
                 } else {
                   this.isXin = false
                 }
+                getDetailFn(this.$axios, this.$route.query.id).then(res => {
+                  this.linedataA = res
+                  // console.log(res, 'resffdjidfsf')
+                })
               }
               if (item == 'comany') {
                 if (isMsg == '收藏成功！') {

@@ -444,6 +444,7 @@
 </template>
 
 <script>
+import MUTUAL from '@/static/js/wzl-commonJs.js'
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -768,12 +769,11 @@ export default {
         $('#form2').css('border-color', '#e5e5e5')
         obj.carType = this.checkNotice.selectValue
       }
-      let re = /^1[3|4|5|7|8|9]\d{9}$/
       if (this.checkNotice.phone === '') {
         $('.ltl-phone').css('border-color', 'red')
         this.phoneHolder = '请输入正确手机号'
       } else {
-        if (re.test(this.checkNotice.phone)) {
+        if (MUTUAL.AFLCVALUE.MOBILE.test(this.checkNotice.phone)) {
           $('.ltl-phone').css('border-color', '#e5e5e5')
           obj.msgMobile = this.checkNotice.phone
         } else {

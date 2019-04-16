@@ -1,5 +1,5 @@
 export const state = () => ({
-  footerId: 4 // 底部导航
+  footerId: 0 // 底部导航
 })
 
 export const mutations = {

@@ -97,15 +97,12 @@
         <h3 class="title_txt fl">优质货主</h3>
         <div class="title_line_box fl"><span/></div>
       </div>
-      <div 
-        class="swiper-container" 
-        v-if="shipperData.list.length>0">
+      <div class="swiper-container" >
         <div class="swiper-wrapper">
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
-                v-for="(item, index) in shipperData.list"       
-                v-if="index<5"
+                v-for="(item, index) in shipperData.list1"       
                 :key="index" >
                 <a 
                   target="_blank"
@@ -133,8 +130,7 @@
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
-                v-for="(item, index) in shipperData.list"       
-                v-if="index>4"
+                v-for="(item, index) in shipperData.list2"  
                 :key="index" >
                 <a 
                   target="_blank"
@@ -162,11 +158,7 @@
         </div>
         <div class="swiper-pagination"/>
       </div>
-      <div 
-        class="error" 
-        v-else>
-        没有数据
-      </div>
+ 
     </div>
     <!-- 优质货主 -->
     <div class="our clearfix">
@@ -399,9 +391,9 @@
           </div>
           <ul 
             class="p_hy_list clearfix"
-            v-if="recommendData.list.length>0">
+            v-if="recommendData.length>0">
             <li               
-              v-for="(item, index) in recommendData.list" 
+              v-for="(item, index) in recommendData" 
               :key="index">
               <a 
                 target="_blank"
@@ -411,14 +403,32 @@
                   <span>{{ item.wlName }}暂无名字</span>
                   <span><i class="iconfont iconrenzheng"/></span>
                 </div>
-                <div class="md_box">
-                  <div class="city">{{ item.startCity }}</div>
+                <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
+                  <div 
+                    class="city"
+                    v-if="!item.startArea">{{ item.startCity }}</div>
+                  <div
+                    class="area"
+                    v-else>
+                    <span class="area_city">{{ item.startCity }}</span>
+                    <span class="area_qx">{{ item.startArea }}</span>
+                  </div>
+              
                   <span class="city-joint">
                     <span class="joint-line"/>
                     <span class="joint-label">发往</span>
                     <span class="joint-line"/>
                   </span>
-                  <div class="city">{{ item.endCity }}</div>
+                  <div 
+                    class="city"
+                    v-if="!item.endArea">{{ item.endCity }}
+                  </div>
+                  <div 
+                    class="area"
+                    v-else>
+                    <span class="area_city">{{ item.endCity }}</span>
+                    <span class="area_qx">{{ item.endArea }}</span>
+                  </div>
                 </div>
      
                 <div class="type_box">
@@ -495,72 +505,45 @@
       </div>
     </div>
     <!-- 货源推荐 -->
-
     <div class="rank_people clearfix">
       <div class="p_title_box">
         <h3 class="title">货量达人榜</h3>
         <span class="title_txt">近3个月发布货源最多的货主</span>
       </div>
       <div class="col1">
-        <!-- <div 
+        <div 
           class="clearfix" 
-          v-if="darenData!== undefined && darenData!== null &&darenData.length>0">
+          v-if="darenData.length>0">
           <div 
             class="rank_box"
             v-for="(item, index) in darenData" 
             :key="index">
-            <ul class="ranking_info clearfix">
-
-              <li 
-                class="rank_num no1"
-                v-if="index === 0">NO.I</li>
-              <li 
-                class="rank_num no2"
-                v-else-if="index === 1">NO.2</li>
-              <li
-                class="rank_num no3"
-                v-else-if="index === 2">NO.3</li>                                   
-                
-              <li class="rank_name">{{ item.companyName }}</li>
-              <li class="rank_sure"><span class="span1">证</span><span class="span2">实名认证</span></li>
-            </ul>
-            <div class="bd">
-              <div class="col1">
-                <img 
-                  v-if="index === 0"
-                  src="../../static/images/huizong/daren_01.png" >
-                <img 
-                  v-else-if="index === 1"
-                  src="../../static/images/huizong/daren_02.png" >
-                <img 
-                  v-else-if="index === 2"
-                  src="../../static/images/huizong/daren_03.png" >
-              </div>
-              <div class="col2">
-                <p>最近三个月发布货源<b>{{ item.lastThreeMonthSupplyNum }}</b>次</p>
-                <p>累计成交<b>{{ item.orderNumber }}</b>笔订单，收到好评<b>{{ item.evaGoodCount }}</b>次</p>
-                <p>使用现金券省<b class="money">{{ item.usedCoupon }}</b>元</p>
-                <p class="rank_prize"><span class="rank_prize_tit">奖：</span>平台额外奖励{{ item.evaGoodCount }}元现金</p>
-              </div>
+            <span 
+              class="icon_square_no icon_square_no1"
+              v-if="index === 0"/>
+            <span 
+              class="icon_square_no icon_square_no2"
+              v-if="index === 1"/>
+            <span 
+              class="icon_square_no icon_square_no3"
+              v-if="index === 2"/>
+            <div class="rank_hd">
+              <span class="rank_hd_name">{{ item.companyName }}</span>
+            </div>
+            <div class="rank_bd">
+              <ul class="rank_bd_list">
+                <li> 最近三个月发布货源 <span class="rank_bd_num">{{ item.lastThreeMonthSupplyNum }}</span> 次</li>
+                <li> 累计成交 <span class="rank_bd_num">{{ item.orderNumber }}</span> 笔订单，收到好评 <span class="rank_bd_num">{{ item.evaGoodCount }}</span> 次</li>
+                <li>使用现金券 <span class="rank_bd_num">{{ item.usedCoupon }}</span> 元</li>
+              </ul>
+              <div class="rank_bd_prize">平台额外奖励 <span class="rank_bd_num">{{ item.rewardCoupon }}</span> 元现金券</div>
             </div>
           </div>
         </div>
-        <div 
+        <div
           class="error"
           v-else>
           没有数据
-        </div> -->
-        <div class="rank_box">
-          <div class="rank_hd">
-            <span class="rank_hd_name">159****4589</span><span class="icon-real"/>
-          </div>
-          <div class="rank_bd">
-            <ul class="rank_bd_list">
-              <li> 最近三个月发布货源 496 次</li>
-              <li> 累计成交 296 笔订单，收到好评 1687 次</li>
-              <li>使用现金券 2383 元</li>
-            </ul>
-          </div>
         </div>
       </div>
       <div class="col2">
@@ -582,36 +565,32 @@
         class="p_co_owner_list clearfix"
         v-if="monthShipperData.length>0">
         <li 
-          v-for="(item, index) in monthShipperData.list" 
+          v-for="(item, index) in monthShipperData" 
           :key="index">
           <a 
             target="_blank"
-            :href="'/member/' + item.companyId"
-          >
-            <div 
-              class="rank_num no1" 
-              v-if="index === 0">
-              NO.1
-            </div>
-            <div 
-              class="rank_num no2" 
-              v-else-if="index === 1">
-              NO.2
-            </div>
-            <div 
-              class="rank_num no3" 
-              v-else-if="index === 2">
-              NO.3
-            </div>
+            :href="'/member/' + item.companyId">
+            <span 
+              class="icon_square_no icon_square_no1"
+              v-if="index === 0"/>
+            <span 
+              class="icon_square_no icon_square_no2"
+              v-if="index === 1"/>
+            <span 
+              class="icon_square_no icon_square_no3"
+              v-if="index === 2"/>
             <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
-            <div class="rank_tit">
-              <span 
-                class="rank_tit_name" 
-                :title="item.companyName ">{{ item.companyName }} </span>
-              <span class="rank_tit_icon_tuijian">推</span>
+            <div class="rank_txt">
+              <div class="rank_txt_tit">
+                <span 
+                  class="txt_tit_name" 
+                  :title="item.companyName ">{{ item.companyName }}暂无名字 </span>
+                <span class="txt_tit_icon_tuijian">荐</span>
+              </div>
+              <div class="rank_txt_groom"><span class="name">推荐指数</span><span class="star"/></div>
+              <div class="rank_txt_praise">好评率{{ item.recommendedNumber }}%</div>
             </div>
-            <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-            <div class="rank_praise">好评率{{ item.recommendedNumber }}%</div>
+
           </a>
         </li>
       </ul>  
@@ -622,110 +601,106 @@
       </div>  
     </div>
     <!-- 本月优质企业货主 -->
-    <div class="bj_2">
-      <div class="p_our_virtue">
-        <h3 class="p_title">我们的优势</h3>
-        <ul class="our_virtue_list clearfix">
-          <li>
-            <div class="our_virtue_pic"><img src="../../static/images/huizong/u295.png"></div>
-            <h4 class="our_virtue_tit color_orange">海量货源</h4>
-            <div class="our_virtue_content">专业的项目客户团队，为成员引进更多的线上货源机会</div>
-          </li>
-          <li>
-            <div class="our_virtue_pic"><img src="../../static/images/huizong/u299.png"></div>
-            <h4 class="our_virtue_tit color_green">安全保障</h4>
-            <div class="our_virtue_content">流程标准化，降低货损率；完善的理赔保障体系，小额快赔的贴心设计，为成员的每一票货物保驾护航</div>
-          
-          </li>
-          <li>
-            <div class="our_virtue_pic"><img src="../../static/images/huizong/u301.png"></div>
-            <h4 class="our_virtue_tit color_blue">降本增效</h4>
-            <div class="our_virtue_content">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
-          </li>
-          <li>
-            <div class="our_virtue_pic"><img src="../../static/images/huizong/u295.png"></div>
-            <h4 class="our_virtue_tit color_violet">信息系统</h4>
-            <div class="our_virtue_content">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
-          </li>
-        </ul>
+    <div class="p_our_virtue">
+      <div class="p_centre_title clearfix">
+        <div class="title_line_box fl"><span/></div>
+        <h3 class="title_txt fl">我们的优势</h3>
+        <div class="title_line_box fl"><span/></div>
       </div>
+      <ul class="our_virtue_list clearfix">
+        <li>
+          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage1.jpg"></div>
+          <h4 class="our_virtue_tit color_orange">海量货源</h4>
+          <div class="our_virtue_txt">专业的项目客户团队，为成员引进更多的线上货源机会</div>
+        </li>
+        <li>
+          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage2.jpg"></div>
+          <h4 class="our_virtue_tit color_grass_green">安全保障</h4>
+          <div class="our_virtue_txt">流程标准化，降低货损率；完善的理赔保障体系，小额快赔，为成员的每一票货物保驾护航</div>
+          
+        </li>
+        <li>
+          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage3.jpg"></div>
+          <h4 class="our_virtue_tit color_blue">降本增效</h4>
+          <div class="our_virtue_txt">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
+        </li>
+        <li>
+          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage4.jpg"></div>
+          <h4 class="our_virtue_tit  color_light_orange">信息系统</h4>
+          <div class="our_virtue_txt">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
+        </li>
+      </ul>
     </div>
     <!-- 我们的优势 -->
     <div class="novice_steps clearfix">
-      <div class="right-ward-container fl">
-        <div class="right-ward-hd"><div class="title-zh">新手6步</div><div class="title-en">NOVICE GUIDANCE</div></div>
-        <p class="right-ward-desc">更多花样发货技能，点击“<a href="#">领取</a>“</p>
+      <div class="p_centre_title clearfix">
+        <div class="title_line_box fl"><span/></div>
+        <h3 class="title_txt fl">新手6步</h3>
+        <div class="title_line_box fl"><span/></div>
       </div>
+
       <div class="step-container fl">
         <div class="step-item-box fl">
-          <div class="step-item-hd"><span class="step-circle">1</span><span class="step-title">下单</span></div>
-          <div class="step-item-md img-wrapper"><img src="../../static/images/huizong/step01.svg" ></div>
+          <div class="step-item-hd">1、下单</div>
+          <div class="step-item-md "/>
           <div class="step-item-ft">线上发货，一键操作； 货发全国，价格真实</div>
         </div>
-        <div class="img-wrapper fl">
-          <img src="../../static/images/huizong/step_line.png">
-        </div>
+        <div class="img-wrapper fl"/>
         <div class="step-item-box fl">
-          <div class="step-item-hd"><span class="step-circle">2</span><span class="step-title">受理</span></div>
-          <div class="step-item-md img-wrapper"><img src="../../static/images/huizong/step02.svg" ></div>
+          <div class="step-item-hd">2、受理</div>
+          <div class="step-item-md icon-step2"/>
           <div class="step-item-ft">物流商承诺下单后一小内受理， 遇特殊情况及时告知</div>
         </div>
-        <div class="img-wrapper fl">
-          <img src="../../static/images/huizong/step_line.png">
-        </div>
+        <div class="img-wrapper fl"/>
         <div class="step-item-box fl">
-          <div class="step-item-hd"><span class="step-circle">3</span><span class="step-title">揽收</span></div>
-          <div class="step-item-md img-wrapper"><img src="../../static/images/huizong/step03.svg" ></div>
+          <div class="step-item-hd">3、揽收</div>
+          <div class="step-item-md icon-setp3"/>
           <div class="step-item-ft">受理后网点联系约定上门取货时间， 也可上网点投递</div>
         </div>
-        <div class="img-wrapper fl">
-          <img src="../../static/images/huizong/step_line.png">
-        </div>
+        <div class="img-wrapper fl"/>
         <div class="step-item-box fl">
-          <div class="step-item-hd"><span class="step-circle">4</span><span class="step-title">运输</span></div>
-          <div class="step-item-md img-wrapper"><img src="../../static/images/huizong/step04.svg" ></div>
+          <div class="step-item-hd">4、运输</div>
+          <div class="step-item-md icon-step4"/>
           <div class="step-item-ft">运输时效透明展示， 物流跟踪全程可视</div>
         </div>
-        <div class="img-wrapper fl">
-          <img src="../../static/images/huizong/step_line.png">
-        </div>
+        <div class="img-wrapper fl"/>
         <div class="step-item-box fl">
-          <div class="step-item-hd"><span class="step-circle">5</span><span class="step-title">签收</span></div>
-          <div class="step-item-md img-wrapper"><img src="../../static/images/huizong/step05.svg" ></div>
+          <div class="step-item-hd">5、签收</div>
+          <div class="step-item-md icon-step5"/>
           <div class="step-item-ft">签收异常: 货物破损、毁损、遗失赔付</div>
         </div>
-        <div class="img-wrapper fl">
-          <img src="../../static/images/huizong/step_line.png">
-        </div>
+        <div class="img-wrapper fl"/>
         <div class="step-item-box fl">
-          <div class="step-item-hd"><span class="step-circle">6</span><span class="step-title">保障</span></div>
-          <div class="step-item-md img-wrapper"><img src="../../static/images/huizong/step06.svg" ></div>
+          <div class="step-item-hd"><span class="step-circle">6、</span><span class="step-title">保障</span></div>
+          <div class="step-item-md icon-step6"/>
           <div class="step-item-ft">若线上申请投诉，菜鸟客服介入处理</div>
         </div>
       </div>
     </div>
     <!-- 新手步骤 -->
-    <div class="bj_2">
-      <div class="hy_partner">
-        <h3 class="p_title">我们的合作伙伴</h3>
-        <ul class="partner_list clearfix">
-          <li><img src="../../static/images/huizong/partner1.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner2.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner3.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner4.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner5.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner6.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner7.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner8.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner9.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner10.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner11.jpg" ></li>
-          <li><img src="../../static/images/huizong/partner12.jpg" ></li>
-        </ul>
+    <div class="hy_partner">
+      <div class="p_centre_title clearfix">
+        <div class="title_line_box fl"><span/></div>
+        <h3 class="title_txt fl">新手6步</h3>
+        <div class="title_line_box fl"><span/></div>
       </div>
+      <ul class="partner_list clearfix">
+        <li><img src="../../static/images/huizong/partner1.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner2.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner3.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner4.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner5.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner6.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner7.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner8.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner9.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner10.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner11.jpg" ></li>
+        <li><img src="../../static/images/huizong/partner12.jpg" ></li>
+      </ul>
     </div>
     <!-- 合作伙伴 -->
-    <div class="bj_2">
+    <!-- <div class="bj_2">
       <div class="p_answers">
         <div class="p_title_box">
           <h3 class="title">28问答</h3>
@@ -754,23 +729,12 @@
           </li>
         </ul>
       </div>
-    </div>
-    <!-- 28问答 -->
-    <div class="p_live clearfix">
-      <div class="live_txt">
-        <span class="live_txt_tit">快速成为承运商获取优质货源</span>
-        <span class="live_txt_phone">免费咨询电话：400-999-2828</span>
-      </div>
-      <a 
-        class="live_btn"
-        target="_blank"
-        href="/regisiter"
-      >我要入驻</a>
-    </div>
-    <!-- 入住 -->
-   
+    </div> -->
+    <!-- 28问答 -->   
 </div></template>
 <script>
+//获取公共的函数
+import until from '../../static/js/server/comonUntil'
 import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
@@ -780,7 +744,7 @@ export default {
       return value
     }
   },
-  layout: 'huizong',
+  // layout: 'huizong',
   data() {
     return {
       banners: [
@@ -788,7 +752,7 @@ export default {
         require('../../static/images/huizong/banner02.jpg'),
         require('../../static/images/huizong/banner03.jpg')
       ],
-      currentArea: '',
+      currentArea: '', //获取当前的城市
       currentProvince: '',
       // 地点插件
       hyStartProvince: '',
@@ -801,12 +765,17 @@ export default {
   },
   async asyncData({ $axios, query, app, error }) {
     // let [, ] = await Promise.all([   ])
+    // this.currentArea = $.cookie('currentAreaFullName')
+    //服务端获取cookies
+    let currentArea = app.$cookies.get('currentAreaFullName')
+
     //热门城市
     let hotCityData = await $axios.get('/28-web/city/hot')
     // 优质货主
     let shipperData = await $axios.post('/28-web/shipper/excellent', {
       currentPage: 1,
-      pageSize: 10
+      pageSize: 10,
+      endCity: currentArea
     })
     //本月优质货主
     let monthShipperData = await $axios.post(
@@ -821,7 +790,8 @@ export default {
       '/28-web/lclOrder/orderSummary/recommendList',
       {
         currentPage: 1,
-        pageSize: 12
+        pageSize: 12,
+        endCity: currentArea
       }
     )
     // 榜单达人
@@ -857,6 +827,10 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      this.handleData()
+      this.intSwiper1()
+      this.intSwiper2()
+
       console.log('优质货主', this.shipperData)
       console.log('本月货主', this.monthShipperData)
       console.log('货源推荐', this.recommendData)
@@ -864,23 +838,7 @@ export default {
       console.log('货量达人', this.darenData)
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
-      console.log('cookies', decodeURIComponent(document.cookie))
-      //优质货主
-      this.shipperData.list = this.shipperData.list ? this.shipperData.list : []
-      //本月货主
-      this.monthShipperData.list = this.monthShipperData.list
-        ? this.monthShipperData.list
-        : []
-      //货源推荐
-      this.recommendData.list = this.recommendData.list
-        ? this.recommendData.list
-        : []
-
-      this.currentArea = this.getCookie('currentAreaFullName')
-      this.currentProvince = this.getCookie('currentProvinceFullName')
-
-      this.intSwiper1()
-      this.intSwiper2()
+      console.log('获取本地cookies', this.currentProvince, this.currentArea)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -924,7 +882,6 @@ export default {
           },
           pagination: {
             el: '#ad .swiper-pagination',
-            dynamicBullets: true,
             clickable: true
           },
           navigation: {
@@ -942,39 +899,71 @@ export default {
           pagination: {
             el: '#owner_swiper .swiper-pagination',
             clickable: true
-            // renderBullet: function(index, className) {
-            //   return (
-            //     '<span class="' + className + '">' + (index + 1) + '</span>'
-            //   )
-            // }
           }
         })
-        // let hahaswiper = new Swiper('#owner_swiper .swiper-container', {
-        //   slidesPerView: 5,
-        //   spaceBetween: 20,
-        //   freeMode: true,
-        //   pagination: {
-        //     el: '#owner_swiper .swiper-pagination',
-        //     clickable: true
-        //   },
-        //   navigation: {
-        //     nextEl: '#owner_swiper .swiper-button-next',
-        //     prevEl: '#owner_swiper .swiper-button-prev',
-        //     disabledClass: '#owner_swiper .my-button-disabled'
-        //   }
-        // })
       })
+    },
+    //处理获取数据
+    handleData() {
+      //优质货主
+      this.shipperData = this.shipperData.list
+        ? this.shipperData.list
+        : { list1: [], list2: [] }
+      //本月货主
+      this.monthShipperData = this.monthShipperData.list
+        ? this.monthShipperData.list
+        : []
+      //货源推荐
+      this.recommendData = this.recommendData.list
+        ? this.recommendData.list
+        : []
+
+      //获取cookies
+      //$.cookie
+      this.currentProvince = $.cookie('currentProvinceFullName')
+      this.currentArea = $.cookie('currentAreaFullName')
+      console.log('获取本地cookies', this.currentProvince, this.currentArea)
+      //处理优质货主数据
+      if (this.shipperData.length > 5) {
+        let list1 = this.shipperData.filter((value, index, arr) => {
+          return index < 5
+        })
+        let list2 = this.shipperData.filter((value, index, arr) => {
+          return index > 4
+        })
+        this.shipperData = { list1: list1, list2: list2 }
+        console.log('优质货主数据处理', this.shipperData)
+      } else {
+        this.shipperData.list1 = this.shipperData
+      }
     },
     //搜索货源
     groomSearch() {
-      this.getPlace(
-        '#huoyuan_from1',
-        'hyStartProvince',
-        'hyStartCity',
-        'hyStartArea'
+      let startPlace = until.getPlace('#huoyuan_from1')
+      let endPlace = until.getPlace('#huoyuan_from2')
+
+      // 开始城市赋值
+      this.hyStartProvince = startPlace.province
+      this.hyStartCity = startPlace.city
+      this.hyStartArea = startPlace.area
+      //到达城市赋值
+      this.hyEndProvince = endPlace.province
+      this.hyEndCity = endPlace.city
+      this.hyEndArea = endPlace.area
+      console.log(
+        '开始城市赋值',
+        this.hyStartProvince,
+        this.hyStartCity,
+        this.hyStartArea
       )
-      this.getPlace('#huoyuan_from2', 'hyEndProvince', 'hyEndCity', 'hyEndArea')
-      // 跳转
+      console.log(
+        '到达城市赋值',
+        this.hyEndProvince,
+        this.hyEndCity,
+        this.hyEndArea
+      )
+
+      //跳转
       let huoyuanUrl = `/huoyuan?startProvince=${
         this.hyStartProvince
       }&startCity=${this.hyStartCity}&startArea=${
@@ -982,36 +971,35 @@ export default {
       }&endProvince=${this.hyEndProvince}&endCity${this.hyEndCity}&endArea${
         this.hyEndArea
       }`
-      // window.location.href = huoyuanUrl
       window.open(huoyuanUrl, '_blank')
-    },
-    //表单获取数据封装
-    getPlace(el, province, city, area) {
-      let arr = []
-      $(el + ' .select-item').each(function(i, e) {
-        arr.push($(this).text())
-      })
-      this[province] = arr[0] ? arr[0] : ''
-      this[city] = arr[1] ? arr[1] : ''
-      this[area] = arr[2] ? arr[2] : ''
-    },
-    //获取cookies的值
-    getCookie(cookieName) {
-      var strCookie = document.cookie
-      var arrCookie = strCookie.split('; ')
-      for (var i = 0; i < arrCookie.length; i++) {
-        var arr = arrCookie[i].split('=')
-        if (cookieName == arr[0]) {
-          return decodeURIComponent(arr[1])
-        }
-      }
-      return ''
     }
+    // //表单获取数据封装
+    // getPlace(el, province, city, area) {
+    //   let arr = []
+    //   $(el + ' .select-item').each(function(i, e) {
+    //     arr.push($(this).text())
+    //   })
+    //   this[province] = arr[0] ? arr[0] : ''
+    //   this[city] = arr[1] ? arr[1] : ''
+    //   this[area] = arr[2] ? arr[2] : ''
+    // }
+    //获取cookies的值
+    // getCookie(cookieName) {
+    //   var strCookie = document.cookie
+    //   var arrCookie = strCookie.split('; ')
+    //   for (var i = 0; i < arrCookie.length; i++) {
+    //     var arr = arrCookie[i].split('=')
+    //     if (cookieName == arr[0]) {
+    //       return decodeURIComponent(arr[1])
+    //     }
+    //   }
+    //   return ''
+    // }
   }
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '~/assets/scss/common_index.scss';
 /*全局影响样式处理*/
 a {
@@ -1020,6 +1008,45 @@ a {
     color: $tit_color;
   }
 }
+/*******不同导航不同样式修改******/
+.header {
+  margin-bottom: 0 !important;
+}
+.header_bottom {
+  height: 45px !important;
+  background: #fff !important;
+
+  ul {
+    padding-left: 230px;
+    width: 1170px !important ;
+    > span {
+      display: none !important;
+    }
+    li {
+      margin-left: 0 !important;
+      line-height: 45px !important;
+      &.nav-active {
+        > a {
+          color: #1f81fe !important;
+        }
+        background: none !important;
+      }
+      &:hover {
+        > a {
+          color: #1f81fe !important;
+        }
+        background: none !important;
+      }
+      > span {
+        display: none !important;
+      }
+      > a {
+        color: #333 !important;
+      }
+    }
+  }
+}
+
 /*1、货源导航*/
 .bj_blue {
   box-sizing: border-box;
@@ -1373,7 +1400,7 @@ a {
 // }
 /*货量达人榜*/
 .rank_people {
-  margin: 0 auto 20px auto;
+  margin: 0 auto 90px auto;
   width: $w_1400;
   font-size: $f_14;
   > .col1 {
@@ -1390,6 +1417,7 @@ a {
     font-style: 0;
   }
   .rank_box {
+    position: relative;
     margin-right: 20px;
     display: inline-block;
     width: 345px;
@@ -1400,32 +1428,34 @@ a {
     background: url('../../static/images/huizong/bj_daren.jpg') no-repeat;
     .rank_hd {
       overflow: hidden;
-      margin: 30px auto;
-      width: 165px;
+      margin: 30px 0 20px 0;
       font-size: $f_16;
       text-align: center;
       > span {
-        @extend .fl;
-        height: 22px;
+        display: inline-block;
         line-height: 22px;
         &.rank_hd_name {
-          min-width: 105px;
+          padding-right: 55px;
           font-weight: bold;
-        }
-        &.icon-real {
-          margin-left: 15px;
-          width: 40px;
-          font-size: $f_16;
-          background: url('../../static/images/huizong/icon_real.png') no-repeat;
+          background: url('../../static/images/huizong/icon_real.png') center
+            right no-repeat;
         }
       }
     }
     .rank_bd {
       padding: 0 20px;
+      .rank_bd_num {
+        font-size: $f_16;
+        color: $txt_red_color;
+      }
       .rank_bd_list {
         > li {
-          margin-bottom: 15px;
+          margin-bottom: 10px;
+          padding-left: 10px;
           line-height: 20px;
+          background: url('../../static/images/huizong/icon_square.jpg') left
+            9px no-repeat;
+
           .icon_square {
             color: #ed1818;
             font-size: 12px;
@@ -1433,6 +1463,12 @@ a {
           // list-style: square inside;
           // list-style-type: square;
         }
+      }
+      .rank_bd_prize {
+        padding-left: 33px;
+        height: 36px;
+        line-height: 36px;
+        background: url('../../static/images/huizong/icon_prize.png') no-repeat;
       }
     }
     // .ranking_info {
@@ -1514,105 +1550,57 @@ a {
 
 /*新手步骤*/
 .novice_steps {
-  overflow: hidden;
   margin: 0 auto;
   width: $w_1400;
-  height: 234px;
-  .right-ward-container {
-    position: relative;
-    width: 180px;
-    // height: 240px;
-    padding: 56px 22px;
-    background-image: linear-gradient(-135deg, #1251ff, #267dff);
-    &:after {
-      content: '';
-      position: absolute;
-      right: -11px;
-      top: 108px;
-      width: 0;
-      height: 0;
-      border-top: 12px solid transparent;
-      border-left: 12px solid #1251ff;
-      border-bottom: 12px solid transparent;
-    }
-    .right-ward-hd {
-      width: 128px;
-      margin: auto;
-      text-align: center;
-    }
-    .title-zh {
-      font-family: PingFangSC-Thin;
-      font-size: 32px;
-      color: #fff;
-      letter-spacing: 0;
-    }
-    .title-en {
-      font-family: PingFangSC-Thin;
-      font-size: 12px;
-      color: #fff;
-      letter-spacing: 0;
-    }
-    .right-ward-desc {
-      margin-top: 20px;
-    }
-    .right-ward-desc,
-    .right-ward-desc > a {
-      font-family: PingFangSC-Thin;
-      font-size: 16px;
-      color: hsla(0, 0%, 100%, 0.62);
-      letter-spacing: 0;
-      text-align: center;
-      vertical-align: middle;
-    }
-  }
-  .step-container {
-    // width: 1100px;
-    // height: 240px;
-    padding: 24px 24px 28px;
 
+  .step-container {
     .step-item-hd {
-      .step-circle {
-        display: inline-block;
-        border: 1px solid #bfd2f7;
-        width: 32px;
-        height: 32px;
-        border-radius: 100%;
-        line-height: 32px;
-        font-family: HelveticaNeue-BoldItalic;
-        font-size: 24px;
-        color: #185fff;
-        letter-spacing: 0;
-        text-align: center;
-      }
-      .step-title {
-        margin-left: 11px;
-        font-family: PingFangSC-Regular;
-        font-size: 18px;
-        color: #333;
-        letter-spacing: 0;
-        text-align: left;
-      }
+      padding: 20px 0;
+      font-size: $f_16;
+      color: $tit_blue_color;
+      text-align: center;
     }
     .step-item-box {
-      max-width: 154px;
+      width: 188px;
+      height: 206px;
+      background: $white;
       text-align: center;
+      border-radius: 5px;
+      box-shadow: 0px 0px 8px #bbb;
       .step-item-md {
-        margin-top: 38px;
+        margin: 0 auto;
+        width: 74px;
+        height: 74px;
+        background: url('../../static/images/huizong/icon_step.png') no-repeat;
+        background-position: 0px 0px;
+      }
+      .icon-step2 {
+        background-position: -75px 0px;
+      }
+      .icon-setp3 {
+        background-position: -150px 0px;
+      }
+      .icon-step4 {
+        background-position: -225px 0px;
+      }
+      .icon-step5 {
+        background-position: -300px 0px;
+      }
+      .icon-step6 {
+        background-position: 0px -75px;
       }
       .step-item-ft {
-        margin-top: 28px;
-        font-family: PingFangSC-Thin;
+        margin: 20px 20px 0 20px;
+        line-height: 20px;
         font-size: 12px;
-        color: #666;
-        letter-spacing: 0;
-        text-align: center;
+        color: $tit_color;
       }
     }
     > .img-wrapper {
-      margin-left: 20px;
-      margin-right: 15px;
+      width: 51px;
       height: 184px;
-      line-height: 184px;
+      background: url('../../static/images/huizong/step_line.png') left center
+        no-repeat;
     }
   }
 }
@@ -1626,19 +1614,19 @@ a {
   }
   .partner_list {
     margin: 0 auto;
-    width: 1140px;
+    width: 1216px;
+    height: 278px;
+    background: $white;
     > li {
       overflow: hidden;
       @extend .fl;
-      margin: 0 30px 30px 30px;
-      width: 130px;
-      height: 120px;
-      vertical-align: middle;
+      // margin: 0 30px 30px 30px;
+      width: 200px;
+      height: 139px;
+      // vertical-align: middle;
       text-align: center;
-      border-radius: 50%;
-      box-shadow: 0 0 8px #bbb;
       > img {
-        margin-top: 30px;
+        margin-top: 39px;
       }
     }
   }

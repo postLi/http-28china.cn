@@ -58,7 +58,8 @@
         v-if="zxList.length >14"
         class="arc_top2_3"
         style="display: block"
-        onmouseover="$('.city_box').css('display','block');"><a href="javascript:void(0)"><span>更多+</span></a></div>
+        onmouseover="$('.city_box').css('display','block');"><a href="javascript:void(0)"><span>更多+</span></a>
+      </div>
       <!--更多城市-->
       <div
         id="city_box"
@@ -188,7 +189,7 @@
                     class="button2"
                     @click="openAdd()"
                   ><img
-                    src="/images/cy/03u41008 2.gif"
+                    src="/images/cy/03u410082.gif"
                   >此线路上新货源提醒我</a>
                   <span style="margin-left: 47px">
                     <img src="/images/cy/14fresh.png">
@@ -382,7 +383,7 @@
               <a
                 href="javascript:;"
                 class="button2"
-                @click="openHelp()"><img src="/images/cy/03u41008 2.gif">此货主货源上新提醒我</a>
+                @click="openHelp()"><img src="/images/cy/03u410082.gif">此货主货源上新提醒我</a>
             </div>
           </div>
         </div>
@@ -403,8 +404,8 @@
                 <span :title="item.startProvinceCityArea">{{ item.startProvinceCityArea ? item.startProvinceCityArea.substring(0,6) : '' }}</span>
                 <span :title="item.endProvinceCityArea">{{ item.endProvinceCityArea ? item.endProvinceCityArea.substring(0,6) : '' }}</span>
                 <span :title="item.goodsTypeName">{{ item.goodsTypeName ?item.goodsTypeName.substring(0,5) : '无' }}</span>
-                <span><em style="color: #f14747;">{{ item.goodsWeight }}</em>公斤</span>
-                <span><em style="color: #f14747;">{{ item.goodsVolume }}</em>方</span>
+                <span :title="item.goodsWeight"><em style="color: #f14747;">{{ item.goodsWeight.length > 5 ? item.goodsWeight.substring(0,5) + '...': item.goodsWeight }}</em>公斤</span>
+                <span :title="item.goodsVolume"><em style="color: #f14747;">{{ item.goodsVolume.length > 5 ? item.goodsVolume.substring(0,5) : item.goodsVolume }}</em>方</span>
                 <span>{{ item.createTime }}</span>
               </a>
             </li>
@@ -423,8 +424,8 @@
                 <span :title="i.startProvinceCityArea">{{ i.startProvince + i.startCity }}</span>
                 <span :title="i.endProvinceCityArea">{{ i.endProvince + i.endCity }}</span>
                 <span :title="i.goodsTypeName">{{ i.goodsTypeName ?i.goodsTypeName.substring(0,5) : '' }}</span>
-                <span><em style="color: #f14747;">{{ i.goodsWeight }}</em>公斤</span>
-                <span><em style="color: #f14747;">{{ i.goodsVolume }}</em>方</span>
+                <span :title="i.goodsWeight"><em style="color: #f14747;">{{ i.goodsWeight.length > 5 ? i.goodsWeight.substring(0,5) : i.goodsWeight }}</em>公斤</span>
+                <span :title="i.goodsVolume"><em style="color: #f14747;">{{ i.goodsVolume.length > 5 ? i.goodsVolume.substring(0,5) : i.goodsVolume }}</em>方</span>
                 <span>{{ i.createTime }}</span>
               </a>
             </li>
@@ -839,7 +840,14 @@
 import Add from './add1'
 import Lelp from './help'
 import Order from './order'
-import { getCode, getCity, parseTime } from '~/components/commonJs.js'
+import MUTUAL from '@/static/js/wzl-commonJs.js'
+import {
+  isZXcity,
+  getSEListParams,
+  getCode,
+  getCity,
+  parseTime
+} from '~/components/commonJs.js'
 async function getCanyColl(
   $axios,
   companyId,
@@ -872,8 +880,7 @@ export default {
     script: [
       { src: '../vendor/layer/layer.js' },
       { src: '../js/jquery.pagination.min.js' },
-      { src: 'https://echarts.baidu.com/dist/echarts.min.js' },
-      { src: './js/Links.js' }
+      { src: 'https://echarts.baidu.com/dist/echarts.min.js' }
     ]
   },
   layout: 'subLayout',
@@ -950,23 +957,14 @@ export default {
         orderBy: '9',
         channelOption: '0'
       },
-      name: 'huoyuan_wlzx',
-      preFn: data => {
-        return data.map(el => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'huoyuan_wlzx'
     })
   },
   async asyncData({ $axios, app, query, error }) {
     let hyDetails = await $axios
       .get('/28-web/lclOrder/detail/' + query.id)
       .catch(err => {
-        // console.log('hyDetail:', err)
+        console.log('hyDetail:', err)
       })
     let parm = {
       currentPage: 1,
@@ -994,167 +992,78 @@ export default {
         ? hyDetails.data.data.startProvince
         : ''
     }
-    let parm1t = {
-      startArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
-      startCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
-      startProvince: hyDetails.data.data.endProvince
-        ? hyDetails.data.data.endProvince
-        : ''
-    }
     let code = await getCode($axios, hyDetails.data.data.endProvince)
     let zxList = await getCity($axios, code, hyDetails.data.data.startCity)
     //货主档案
     let archivals = await $axios
       .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
       .catch(err => {
-        // console.log('archivals')
+        console.log('archivals', err)
       })
     if (archivals.data.status === 200) {
-      let credit = archivals.data.data.credit
-      if (credit >= 0 && credit <= 3) {
-        archivals.data.data.startA = 1
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 4 && credit <= 10) {
-        archivals.data.data.startA = 2
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 11 && credit <= 40) {
-        archivals.data.data.startA = 3
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 41 && credit <= 90) {
-        archivals.data.data.startA = 4
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 91 && credit <= 150) {
-        archivals.data.data.startA = 5
-        archivals.data.data.isShowA = true
-      }
-      if (credit >= 151 && credit <= 250) {
-        archivals.data.data.startB = 1
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 251 && credit <= 500) {
-        archivals.data.data.startB = 2
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 500 && credit <= 1000) {
-        archivals.data.data.startB = 3
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 1001 && credit <= 2000) {
-        archivals.data.data.startB = 4
-        archivals.data.data.isShowB = true
-      }
-      if (credit >= 2001) {
-        archivals.data.data.startB = 5
-        archivals.data.data.isShowB = true
-      }
+      MUTUAL.GETCREDIT(archivals)
     }
     //顶部轮播
-    let newLists = await $axios
-      .get('/28-web/lclOrder/newList')
-      .catch(err => {})
-      .catch(err => {
-        // console.log('newLists')
-      })
+    let newLists = await $axios.get('/28-web/lclOrder/newList').catch(err => {
+      console.log('newLists:', err)
+    })
     //货源列表
     let huoInfoLists = await $axios
       .post('/28-web/lclOrder/list', parm)
       .catch(err => {
-        // console.log('huoComprehensives4:', err)
+        console.log('huoInfoLists:', err)
       })
+    let queryCitys = getSEListParams(huoInfoLists.data.data.list)
     //货源列表
     let huoInfoListst = await $axios
-      .post('/28-web/lclOrder/list', parm1t)
+      .post('/28-web/lclOrder/list', {
+        currentPage: 1,
+        pageSize: 10,
+        startProvince: queryCitys.endProvince,
+        startCity: queryCitys.endCity
+      })
       .catch(err => {
-        // console.log('huoComprehensives4:', err)
+        console.log('huoInfoListst:', err)
       })
     //最新货源信息
     let newestHuoyuanRes = await $axios
       .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
       .catch(err => {
-        // console.log('newestHuoyuanRes:', err)
+        console.log('newestHuoyuanRes:', err)
       })
     // 货主综合力评估
     let huoComprehensives = await $axios
       .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
       .catch(err => {
-        // console.log('huoComprehensives:', err)
+        console.log('huoComprehensives:', err)
       })
     //货源热门搜索
     let hotSearchs = await $axios
       .get('/28-web/hotSearch/supply/detail/links')
       .catch(err => {
-        // console.log('hotSearchs')
+        console.log('hotSearchs')
       })
     //企业人气榜
     let popularitys = await $axios
       .get('/28-web/logisticsCompany/popularity')
       .catch(err => {
-        // console.log('popularitys')
+        console.log('popularitys')
       })
     //底部推荐
     let huoLinks = await $axios
       .post('/28-web/lclOrder/detail/related/links', parm1)
       .catch(err => {
-        // console.log('huoLinks')
+        console.log('huoLinks', err)
       })
-    // console.log(huoLinks)
-    let footLink = item => {
-      switch (item.startProvince) {
-        case null:
-          item.startProvince = ''
-      }
-      switch (item.startCity) {
-        case null:
-          item.startCity = ''
-      }
-      switch (item.startArea) {
-        case null:
-          item.startArea = ''
-      }
-      switch (item.endProvince) {
-        case null:
-          item.endProvince = ''
-      }
-      switch (item.endCity) {
-        case null:
-          item.endCity = ''
-      }
-      switch (item.endArea) {
-        case null:
-          item.endArea = ''
-      }
-      item.carSourceType = ''
-      item.targetLinks = ''
-      if (item.type == '1000') {
-        item.targetLinks = '/gongsi/'
-      }
-      if (item.type == '2000') {
-        item.targetLinks = '/zhuanxian/list'
-      }
-      if (item.type == '2001') {
-        item.targetLinks = '/member/' + item.companyId + '-line'
-      }
-      if (item.type == '3000' || item.type == '3003' || item.type == '3002') {
-        item.targetLinks = '/cheyuan'
-      }
-      if (item.type == '3001') {
-        item.targetLinks = '/cheyuan'
-        item.carSourceType = 'AF01801'
-      }
-      if (item.type == '4000') {
-        item.targetLinks = '/huoyuan'
-      }
-      if (item.type == '4001') {
-        item.targetLinks = '/member/' + item.companyId + '-huo'
-      }
-    }
-    huoLinks.data.data.brandOrder.links.forEach(footLink)
-    huoLinks.data.data.interestOrder.links.forEach(footLink)
-    hotSearchs.data.data.links.forEach(footLink)
+    huoLinks.data.data.brandOrder.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
+    huoLinks.data.data.interestOrder.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
+    hotSearchs.data.data.links.forEach(item => {
+      MUTUAL.HREFLINKS(item)
+    })
     return {
       archival: archivals.data.status === 200 ? archivals.data.data : [],
       hyDetail: hyDetails.data.status === 200 ? hyDetails.data.data : {},
@@ -1192,7 +1101,6 @@ export default {
   },
 
   mounted() {
-    // console.log(this.dataset, 'this.dataset')
     seajs.use(['/js/gaodemap2.js'])
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')
@@ -1234,7 +1142,6 @@ export default {
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
       let l = this.newestHuoyuanRe.length
-
       //  当不足一页的数据时，不需要滚动展示
       if (l > 8) {
         roll.append(roll.html())
@@ -1467,23 +1374,12 @@ export default {
       this.endArea = list2[2] ? list2[2] : ''
     },
     search() {
-      // console.log(999999)
       this.searchDo()
       window.location.href = `/huoyuan?endArea=${this.endArea}&endCity=${
         this.endCity
       }&endProvince=${this.endProvince}&startArea=${this.startArea}&startCity=${
         this.startCity
       }&startProvince=${this.startProvince}`
-    },
-    goToCy() {
-      window.location.href = `/huoyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.hyDetail.startCity
-      }&startProvince=${this.hyDetail.startProvince}`
-    },
-    goToCy1() {
-      window.location.href = `/huoyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity=${
-        this.hyDetail.endCity
-      }&startProvince=${this.hyDetail.endProvince}`
     },
     clickImg(int) {
       this.showImg = int

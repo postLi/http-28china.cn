@@ -144,7 +144,8 @@ export default {
               pageSize: 20,
               province: result.province,
               city: result.city,
-              orderBy: this.$store.state.m.gongsi.orderBy.value
+              orderBy: this.$store.state.m.gongsi.orderBy.value,
+              companyName: this.$store.state.m.gongsi.companyName
             },
             name: 'rangeList'
           })
@@ -330,6 +331,9 @@ body {
 }
 .margin_r_40 {
   margin-right: 0.4rem;
+}
+.padding_10 {
+  padding: 0.1rem;
 }
 .padding_20 {
   padding: 0.2rem;
@@ -522,5 +526,22 @@ a {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+}
+.page_view_top {
+  height: 0.55rem;
+}
+.page_view_triangle-down-g {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 5px solid #409eff;
+}
+.page_view_triangle-down-9 {
+  width: 0;
+  height: 0;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  border-top: 5px solid #999999;
 }
 </style>

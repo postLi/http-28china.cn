@@ -511,6 +511,7 @@
 <script>
 import ComNews from '@/components/comNews'
 import Add from '@/pages/gongsi/add'
+import MUTUAL from '@/static/js/wzl-commonJs.js'
 import FooterLinks from '@/components/footerLinks'
 async function getWdiangSearchList($axios, vo) {
   let res = await $axios.post('/28-web/logisticsPark/search', vo)
@@ -669,46 +670,7 @@ export default {
       })
     }
     recommendList.forEach(item => {
-      if (item.credit >= 0 && item.credit <= 3) {
-        item.showcreadimg = true
-        item.creditImg = 1
-      }
-      if (item.credit >= 4 && item.credit <= 10) {
-        item.showcreadimg = true
-        item.creditImg = 2
-      }
-      if (item.credit >= 11 && item.credit <= 40) {
-        item.showcreadimg = true
-        item.creditImg = 3
-      }
-      if (item.credit >= 41 && item.credit <= 90) {
-        item.showcreadimg = true
-        item.creditImg = 4
-      }
-      if (item.credit >= 91 && item.credit <= 150) {
-        item.showcreadimg = true
-        item.creditImg = 5
-      }
-      if (item.credit >= 151 && item.credit <= 250) {
-        item.showcreadeng = true
-        item.creditdeng = 1
-      }
-      if (item.credit >= 251 && item.credit <= 500) {
-        item.showcreadeng = true
-        item.creditdeng = 2
-      }
-      if (item.credit >= 500 && item.credit <= 1000) {
-        item.showcreadeng = true
-        item.creditdeng = 3
-      }
-      if (item.credit >= 1001 && item.credit <= 2000) {
-        item.showcreadeng = true
-        item.creditdeng = 4
-      }
-      if (item.credit >= 2001) {
-        item.showcreadeng = true
-        item.creditdeng = 5
-      }
+      MUTUAL.GETCREDITITEM(item)
     })
     let AF029 = await $axios.get(
       '/aflc-common/sysDict/getSysDictByCodeGet/AF029'
@@ -757,16 +719,7 @@ export default {
         orderBy: 2,
         channelOption: 0
       },
-      name: 'gongsi_jryw',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'gongsi_jryw'
     })
     await store.dispatch('news/GETNEWSINFO', {
       params: {
@@ -775,16 +728,7 @@ export default {
         orderBy: 9,
         channelOption: 0
       },
-      name: 'gongsi_wlzx',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'gongsi_wlzx'
     })
   },
   computed: {
@@ -802,39 +746,41 @@ export default {
     }
   },
   mounted() {
-    seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
-      layui.use('form', function() {
-        $('.ydh').click(function() {
-          $('#yd_nr').val('1809260061')
-          $('.ydh').css('display', 'none')
-        })
-        $('#yd_nr').keyup(function() {
-          if ($('#yd_nr').val()) {
-            $('#yd_cx1').css('background-color', '#eb434d')
-            $('#yd_cx1').css('color', '#f9f9f9')
+    seajs.use(
+      ['/js/gaodemap2.js', '/layer/layer.js', '/layer/dist/layui.js'],
+      function() {
+        layui.use('form', function() {
+          $('.ydh').click(function() {
+            $('#yd_nr').val('1809260061')
             $('.ydh').css('display', 'none')
-          }
-          if (!$('#yd_nr').val()) {
-            $('#yd_cx1').css('background-color', '#3f94ee')
-            $('#yd_cx1').css('color', '#red')
-            $('.ydh').css('display', 'block')
-          }
+          })
+          $('#yd_nr').keyup(function() {
+            if ($('#yd_nr').val()) {
+              $('#yd_cx1').css('background-color', '#eb434d')
+              $('#yd_cx1').css('color', '#f9f9f9')
+              $('.ydh').css('display', 'none')
+            }
+            if (!$('#yd_nr').val()) {
+              $('#yd_cx1').css('background-color', '#3f94ee')
+              $('#yd_cx1').css('color', '#red')
+              $('.ydh').css('display', 'block')
+            }
+          })
+          $('#yd_cx1').click(function() {
+            var num = $('#yd_nr').val()
+            if (num) {
+              window.open('/ydcx?num=' + num)
+            }
+            if (!num) {
+              alert('请先输入运单号查询！')
+            }
+          })
+          var form = layui.form
+          form.render()
         })
-        $('#yd_cx1').click(function() {
-          var num = $('#yd_nr').val()
-          if (num) {
-            window.open('/ydcx?num=' + num)
-          }
-          if (!num) {
-            alert('请先输入运单号查询！')
-          }
-        })
-        var form = layui.form
-        form.render()
-      })
-    })
+      }
+    )
     this.companyName = this.$route.query.companyName || ''
-    seajs.use(['/js/gaodemap2.js'])
     $('.collapse').click(function() {
       $('.collapse').css('display', 'none')
       $('.expand').css('display', 'inline-block')

@@ -11,11 +11,27 @@
       <div
         class=" heightTran"
         v-if="showMask">
-        <div class="b_c_w padding_l_20 padding_r_20 f-26 height_100 o_f">
+        <div
+          class="b_c_w padding_l_20 padding_r_20 f-26 height_100 o_f"
+          v-if="form === 'zhuanxian'">
           <div
             class="item flex"
             :class="[index === list.length -1 ?'':'b_b']"
             :style="{'color':$store.state.m.zhuanxian.orderBy.value === item.value?'#54A7FF':''}"
+            v-for="(item,index) in list"
+            :key="index"
+            @click="selectReputation(item)"
+          >
+            {{ item.name }}
+          </div>
+        </div>
+        <div
+          class="b_c_w padding_l_20 padding_r_20 f-26 height_100 o_f"
+          v-if="form === 'gongsiLine'">
+          <div
+            class="item flex"
+            :class="[index === list.length -1 ?'':'b_b']"
+            :style="{'color':$store.state.m.gongsi.line.orderBy.value === item.value?'#54A7FF':''}"
             v-for="(item,index) in list"
             :key="index"
             @click="selectReputation(item)"
@@ -39,6 +55,10 @@ export default {
     top: {
       type: String,
       default: '0'
+    },
+    form: {
+      type: String,
+      default: ''
     }
   },
   data() {

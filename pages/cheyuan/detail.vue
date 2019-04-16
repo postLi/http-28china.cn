@@ -760,7 +760,8 @@ export default {
     })
   },
   async asyncData({ $axios, app, query }) {
-    let zxList, carInfoRes1
+    let zxLists
+    let carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     let [
       newLists,
@@ -795,7 +796,6 @@ export default {
         startProvince: cy1.data.data.startProvince || ''
       })
     ])
-
     if (cy1.data.status === 200) {
       let item = cy1.data.data
       let arr = (item.id || '').split('')
@@ -808,7 +808,7 @@ export default {
         cy1.data.data.startTime,
         '{y}-{m}-{d} {h}:{i}:{s}'
       )
-      zxList = await getCity($axios, code, cy1.data.data.startCity)
+      zxLists = await getCity($axios, code, cy1.data.data.startCity)
       carInfoRes1 = await $axios.post('/28-web/carInfo/list', {
         currentPage: 1,
         pageSize: 10,
@@ -827,7 +827,7 @@ export default {
     })
     return {
       cy1: cy1.data.status === 200 ? cy1.data.data : {},
-      zxList: zxList && zxList.data.status === 200 ? zxList.data.data : [],
+      zxList: zxLists && zxLists.data.status === 200 ? zxLists.data.data : [],
       newList: newLists.data.status === 200 ? newLists.data.data : [],
       interestOrder:
         cheLinks.data.status === 200

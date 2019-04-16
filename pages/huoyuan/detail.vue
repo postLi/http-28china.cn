@@ -962,63 +962,53 @@ export default {
   },
   async asyncData({ store, params, $axios, error, app, query }) {
     // console.log(app.$cookies.get(access_token), 'store')
+    let code, zxList, queryCitys, huoInfoListst
     let hyDetails = await $axios.get('/28-web/lclOrder/detail/' + query.id)
-    let parm = {
-      currentPage: 1,
-      pageSize: 10,
-      startProvince: hyDetails.data.data.startProvince
-        ? hyDetails.data.data.startProvince
-        : '',
-      startCity: hyDetails.data.data.startCity
-        ? hyDetails.data.data.startCity
-        : ''
-    }
-    let parm1 = {
-      endArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
-      endCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
-      endProvince: hyDetails.data.data.endProvince
-        ? hyDetails.data.data.endProvince
-        : '',
-      startArea: hyDetails.data.data.startArea
-        ? hyDetails.data.data.startArea
-        : '',
-      startCity: hyDetails.data.data.startCity
-        ? hyDetails.data.data.startCity
-        : '',
-      startProvince: hyDetails.data.data.startProvince
-        ? hyDetails.data.data.startProvince
-        : ''
-    }
-    let code = await getCode($axios, hyDetails.data.data.endProvince)
-    let zxList = await getCity($axios, code, hyDetails.data.data.startCity)
-    let archivals = await $axios.post(
-      '/28-web/shipper/archival?shipperId=' + query.shipperId
-    )
-    if (archivals.data.status === 200) {
-      MUTUAL.GETCREDIT(archivals)
-    }
-    let newLists = await $axios.get('/28-web/lclOrder/newList')
-    let huoInfoLists = await $axios.post('/28-web/lclOrder/list', parm)
-    let queryCitys = getSEListParams(huoInfoLists.data.data.list)
-    let huoInfoListst = await $axios.post('/28-web/lclOrder/list', {
+    let [
+      newLists,
+      huoComprehensives,
+      hotSearchs,
+      popularitys,
+      archivals,
+      huoInfoLists,
+      newestHuoyuanRes,
+      huoLinks
+    ] = await Promise.all([
+      $axios.get('/28-web/lclOrder/newList'),
+      $axios.get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId),
+      $axios.get('/28-web/hotSearch/supply/detail/links'),
+      $axios.get('/28-web/logisticsCompany/popularity'),
+      $axios.post('/28-web/shipper/archival?shipperId=' + query.shipperId),
+      $axios.post('/28-web/lclOrder/list', {
+        currentPage: 1,
+        pageSize: 10,
+        startProvince: hyDetails.data.data.startProvince || '',
+        startCity: hyDetails.data.data.startCity || ''
+      }),
+      $axios.post('/28-web/lclOrder/shipper/lastList', {
+        shipperId: query.shipperId
+      }),
+      $axios.post('/28-web/lclOrder/detail/related/links', {
+        endArea: hyDetails.data.data.endArea || '',
+        endCity: hyDetails.data.data.endCity || '',
+        endProvince: hyDetails.data.data.endProvince || '',
+        startArea: hyDetails.data.data.startArea || '',
+        startCity: hyDetails.data.data.startCity || '',
+        startProvince: hyDetails.data.data.startProvince || ''
+      })
+    ])
+    code = await getCode($axios, hyDetails.data.data.endProvince)
+    zxList = await getCity($axios, code, hyDetails.data.data.startCity)
+    queryCitys = getSEListParams(huoInfoLists.data.data.list)
+    huoInfoListst = await $axios.post('/28-web/lclOrder/list', {
       currentPage: 1,
       pageSize: 10,
       startProvince: queryCitys.endProvince,
       startCity: queryCitys.endCity
     })
-    let newestHuoyuanRes = await $axios.post(
-      '/28-web/lclOrder/shipper/lastList',
-      { shipperId: query.shipperId }
-    )
-    let huoComprehensives = await $axios.get(
-      '/28-web/shipper/comprehensive?shipperId=' + query.shipperId
-    )
-    let hotSearchs = await $axios.get('/28-web/hotSearch/supply/detail/links')
-    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
-    let huoLinks = await $axios.post(
-      '/28-web/lclOrder/detail/related/links',
-      parm1
-    )
+    if (archivals.data.status === 200) {
+      MUTUAL.GETCREDIT(archivals)
+    }
     huoLinks.data.data.brandOrder.links.forEach(item => {
       MUTUAL.HREFLINKS(item)
     })

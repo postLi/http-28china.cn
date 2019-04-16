@@ -860,7 +860,7 @@
       this.data.lclOrderAddressList[inx].city = obj.city
       this.data.lclOrderAddressList[inx].area = obj.district
       // 补上code值
-      this.data.lclOrderAddressList[inx].code = obj.adcode || ''
+      this.data.lclOrderAddressList[inx].areaCode = obj.adcode || ''
     },
     checkForm: function() {
       var flag = true

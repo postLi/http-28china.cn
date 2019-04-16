@@ -555,6 +555,7 @@
 
 /************最新货源************/
 .p_hy_info {
+  overflow: hidden;
   margin: 0 auto 90px auto;
   width: 1398px;
   height: 128px;

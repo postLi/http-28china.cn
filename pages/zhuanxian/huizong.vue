@@ -8,7 +8,7 @@
           </div>
           <div class="p_category_menu">
             <h4 class="category_menu_title">
-              <i class="iconfont iconzu-6"/>
+              <i class="iconfont iconchengshidingwei"/>
               热门城市
             </h4>
             <div class="category_menu_list">
@@ -80,7 +80,7 @@
         <span class="title_txt">平台推荐，资质保障</span>
         <a 
           href="" 
-          class="title_link fr">更多优质专线<i class="iconfont iconzu6"/>
+          class="title_link fr">更多优质专线<i class="iconfont iconxiaojiantouhuise"/>
         </a>         
       </div>
       <div class="pt_groom fl">
@@ -92,53 +92,58 @@
             @mouseover="groomTab(0)" > 
             <h6 class="pt_groom_tit">担保交易</h6>
             <div class="pt_groom_txt">
-              平台担保，安全可靠
-              
+              平台担保，安全可靠          
             </div>
-            <div class="pt_groom_explain pt_groom_bj1">1</div>
+            <div class="pt_groom_explain pt_groom_bj1">
+              <span class="groom_explain_tit">线上担保</span>
+              <span class="groom_explain_txt">服务安全保障</span>
+            </div>
           </li>
           <li
             :class="[{'active':groomIndex===1},'channel2']" 
             @mouseover="groomTab(1)">
             <h6 class="pt_groom_tit">超值特惠</h6>
             <div class="pt_groom_txt">
-              价格直降，超值独享
-              
+              价格直降，超值独享             
             </div>
-            <div class="pt_groom_explain pt_groom_bj2">2</div>
+            <div class="pt_groom_explain pt_groom_bj2">
+              <span class="groom_explain_tit">专享优惠</span>
+              <span class="groom_explain_txt">优惠推荐低价专线</span>             
+            </div>
           </li>
           <li 
             :class="[{'active':groomIndex===2},'channel3']" 
             @mouseover="groomTab(2)">
             <h6 class="pt_groom_tit">精准时效</h6>
             <div class="pt_groom_txt">
-              及时、高效、保质量
-              
+              及时、高效、保质量            
             </div>
-            <div class="pt_groom_explain pt_groom_bj3">3</div>
+            <div class="pt_groom_explain pt_groom_bj3">
+              <span class="groom_explain_tit">精准时效</span>
+              <span class="groom_explain_txt">物流时效服务有保证</span>             
+            </div>
           </li>
           <li
             :class="[{'active':groomIndex===3},'channel4']" 
             @mouseover="groomTab(3)">
             <h6 class="pt_groom_tit">28信用</h6>
             <div class="pt_groom_txt">
-              平台认证，推荐专线
-              
+              平台认证，推荐专线              
             </div>
-            <div class="pt_groom_explain pt_groom_bj4">4</div>
+            <div class="pt_groom_explain pt_groom_bj4">
+              <span class="groom_explain_tit">资质认证</span>
+              <span class="groom_explain_txt">实力承运</span>              
+            </div>
           </li>
         </ul>
         <div class="bd">
           <div v-show="groomIndex===0">
             <ul class="p_hy_list p_wl_list clearfix">
               <li>
-                <div class="p_10">
+                <div class="wl_box">
                   <div class="hd_box">
-                    <span class="label_provider">物流商:</span>
-                    <span class="provider">安能物流</span>
-                    <span class="icon"/>
-                    <span class="icon"/>
-                    <span class="icon"/>  
+                    <span class="p_l5">物流商:</span>
+                    <span>安能物流</span>
                   </div>
                   <div class="md_box">
                     <div class="city">金华市</div>
@@ -150,19 +155,19 @@
                     <div class="city">深圳市</div>
                   </div>
                   <div class="type_box">
-                    <span class="name">货重:</span>
-                    <span class="item"><b>1.37</b></span>
-                    <span class="item color_gray"><span class="line-through">244</span>元／平方</span>
+                    <span class="p_l5">货重:</span>
+                    <span class="type_item"><b>1.37</b></span>
+                    <span class="type_item color_gray"><span class="type_line_through">244</span>元／平方</span>
                   </div>
                   <div class="type_box">
-                    <span class="name">轻货:</span>
-                    <span class="item"><b>107</b></span>
-                    <span class="item color_gray"><span class="line-through">212</span>元／立方</span>
+                    <span class="p_l5">轻货:</span>
+                    <span class="type_item"><b>107</b></span>
+                    <span class="type_item color_gray"><span class="type_line_through">212</span>元／立方</span>
                   </div>
                   <div class="item_order_num">已有238人下单</div>
                 </div>
                 <div class="item_order clearfix">
-                  <div class="name fl">担保交易</div>
+                  <div class="order_name fl">担保交易</div>
                   <div class="dock fl">
                     <span class="dock_icon">延时赔付</span>
                     <span class="dock_num">88744人说好</span>
@@ -170,14 +175,11 @@
                   <div class="link_oder fr"><a href="">立即下单</a></div>
                 </div>
               </li>
-              <li>
-                <div class="p_10">
+              <!-- <li>
+                <div class="p_20">
                   <div class="hd_box">
                     <span class="label_provider">物流商:</span>
                     <span class="provider">安能物流</span>
-                    <span class="icon"/>
-                    <span class="icon"/>
-                    <span class="icon"/>  
                   </div>
                   <div class="md_box">
                     <div class="city">金华市</div>
@@ -210,13 +212,10 @@
                 </div>
               </li>
               <li>
-                <div class="p_10">
+                <div class="p_20">
                   <div class="hd_box">
                     <span class="label_provider">物流商:</span>
-                    <span class="provider">安能物流</span>
-                    <span class="icon"/>
-                    <span class="icon"/>
-                    <span class="icon"/>  
+                    <span class="provider">安能物流</span> 
                   </div>
                   <div class="md_box">
                     <div class="city">金华市</div>
@@ -249,13 +248,10 @@
                 </div>
               </li>
               <li>
-                <div class="p_10">
+                <div class="p_20">
                   <div class="hd_box">
                     <span class="label_provider">物流商:</span>
                     <span class="provider">安能物流</span>
-                    <span class="icon"/>
-                    <span class="icon"/>
-                    <span class="icon"/>  
                   </div>
                   <div class="md_box">
                     <div class="city">金华市</div>
@@ -287,7 +283,7 @@
                   <div class="link_oder fr"><a href="">立即下单</a></div>
                 </div>
               </li>
-               
+                -->
             </ul>
           </div>
           <div v-show="groomIndex===1">22</div>
@@ -296,88 +292,104 @@
         </div>
       </div>
       <div class="pt_discount fr">
-        <div class="p_subtitle clearfix ">
-          <i class="iconfont iconliwuhuodong fl"/>
-          <h4 class="title fl">优惠礼券</h4>
-        </div>
+        <h4 class="discount_tit">优惠礼券</h4>
+        <ul class="discount_ad_list">
+          <li>
+            <a href="#">
+              <img src="../../static/images/huizong/cheyuan/discount_ad1.png">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="../../static/images/huizong/cheyuan/discount_ad2.png">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="../../static/images/huizong/cheyuan/discount_ad3.png">
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <img src="../../static/images/huizong/cheyuan/discount_ad4.png">
+            </a>
+          </li>
+        </ul>
       </div>
     </div>
     <!-- 平台推荐 -->
-    <div class="p_hy_info clearfix">
-      <div class="hy_info_col1 fl clearfix">
-        <div class="hy_info_tit fl">
+    <div class="p_zx_info clearfix">
+      <div class="info_col1 fl clearfix">
+        <div class="info_tit fl">
+          <span class="info_line_left"/>
+          <span class="info_line_right"/>
           <h3>最新成交用户</h3>
         </div>
-        <div class="hy_info_user_box fl">
-          <ul class="hy_info_user_list">
+        <div class="info_user_box fl">
+          <ul class="info_user_list">
             <li>
-              <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">11用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
+              <div class="info_user_info">
+                <span class="info_user_info_user">11用户159****4895 </span>
+                <span class="info_user_info_time">3分钟前</span>
               </div>
-              <div class="hy_info_user_text ">
+              <div class="info_user_text ">
                 <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
                 <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
+                  class="info_user_text_link fr">查看货源</a>
               </div>
             </li>
             <li>
-              <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">22用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
+              <div class="info_user_info">
+                <span class="info_user_info_user">22用户159****4895 </span>
+                <span class="info_user_info_time">3分钟前</span>
               </div>
-              <div class="hy_info_user_text ">
+              <div class="info_user_text ">
                 <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
                 <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
+                  class="info_user_text_link fr">查看货源</a>
               </div>
             </li>
             <li>
-              <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">33用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
+              <div class="info_user_info">
+                <span class="info_user_info_user">33用户159****4895 </span>
+                <span class="info_user_info_time">3分钟前</span>
               </div>
-              <div class="hy_info_user_text ">
+              <div class="info_user_text ">
                 <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
                 <span>钢材| 31件|51公斤|体积21方  </span>                   
                 <a 
                   href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
+                  class="info_user_text_link fr">查看货源</a>
               </div>
-            </li>
-   
+            </li>   
           </ul>
         </div>
       </div>
-
-     
-      <div class="hy_info_col2 fl clearfix">
-        <div class="hy_info_num">
-          <ul class="hy_info_list clearfix">
+      <div class="info_col2 fl clearfix">
+        <div class="info_num">
+          <ul class="info_list clearfix">
             <li>
               <span><i class="iconfont iconhuowu"/>当前货物</span>
-              <span class="hy_info_list_num">{{ lineToday.goodsCount }}</span>
+              <span class="info_list_num">229089</span>
             </li>
             <li>
               <span><i class="iconfont iconwangfandijia"/>物流专线</span>
-              <span class="hy_info_list_num">{{ lineToday.transportRangeCount }}</span>
+              <span class="info_list_num">229089</span>
             </li>
             <li>
-              <span><i class="iconfont iconwuliu"/>车源信息</span>
-              <span class="hy_info_list_num">{{ lineToday.carInfoCount 
-              }}</span>
+              <span><i class="iconfont iconwuliu"/>当前货物</span>
+              <span class="info_list_num">45646</span>
             </li>
           </ul>
-          <ul class="hy_info_text_list">
+          <ul class="info_text_list">
             <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
-            <li>货源<span class="hy_info_text_num">{{ lineToday.toDayGoodsCount }}</span></li>
-            <li>专线<span class="hy_info_text_num">{{ lineToday.toDayTransportRangeCount 
-            }}</span></li>
-            <li>车源<span class="hy_info_text_num">{{ lineToday.toDayCarInfoCount }}</span></li>
+            <li>货源<span class="info_text_num">8951</span></li>
+            <li>专线<span class="info_text_num">854</span></li>
+            <li>车源<span class="info_text_num">8011</span></li>
           </ul>
         </div>
       </div>
@@ -1169,7 +1181,7 @@ export default {
   mounted() {
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
-      $('.p_hy_info .hy_info_user_box').Scroll({
+      $('.p_zx_info .info_user_box').Scroll({
         line: 1,
         speed: 600,
         timer: 3000
@@ -1320,10 +1332,19 @@ export default {
   }
 }
 /*本页面公共的函数*/
-@mixin active_color($color) {
-  background: $color;
+@mixin active_color($starColor, $endColor) {
+  background: -webkit-linear-gradient(
+    $starColor,
+    $endColor
+  ); /*for safari5.1-6.0*/
+  background: -o-linear-gradient($starColor, $endColor); /* Opera 11.1-12.0 */
+  background: -moz-linear-gradient($starColor, $endColor); /* firefox 3.6-15 */
+  background: linear-gradient(
+    $starColor,
+    $endColor
+  ); /* 标准语法，必须放在最后 */
   &:after {
-    border-top: 12px solid $color;
+    border-top: 12px solid $endColor;
     display: block !important;
   }
   .pt_groom_tit,
@@ -1334,8 +1355,7 @@ export default {
     }
   }
 }
-
-/*1、物流专线*/
+/* 1、物流专线 */
 .category {
   background-color: #f5f5f5;
   margin: 40px auto;
@@ -1359,11 +1379,11 @@ export default {
     height: 476px;
     background: $white;
   }
-  /*导航*/
+  /* 导航 */
   .category_app {
     margin-top: -15px;
   }
-  /*幻灯片*/
+  /* 幻灯片 */
   .category_ad {
     overflow: hidden;
     width: 813px;
@@ -1405,8 +1425,12 @@ export default {
   }
 }
 .p_user_login {
+  margin-bottom: 25px;
+  height: auto;
   .user_show .user_profit {
     > a {
+      height: 38px;
+      line-height: 38px;
       border: 1px solid $cy_green;
       color: $cy_green;
     }
@@ -1415,40 +1439,40 @@ export default {
     }
   }
 }
-/*2、平台推荐*/
+/* 2、平台推荐 */
 .zx_terrace {
-  margin-top: 50px;
+  margin: 50px auto 30px auto;
 }
 .pt_groom {
   overflow: hidden;
   width: 1090px;
   > .hd {
-    margin-bottom: 20px;
-    width: 1135px;
-    background: $bj_gray;
+    margin-bottom: 30px;
+    width: 1080px;
+    background: $white;
     > li {
       @extend .fl;
-      position: relative;
-      // padding: 20px 0 0 30px;
+      position: relative; // padding: 20px 0 0 30px;
       width: 270px;
-      height: 300px;
+      height: 280px;
       cursor: default;
       &:after {
         content: '';
         position: absolute;
         display: none;
-        left: 118px;
+        left: 113px;
         bottom: -12px;
         width: 0;
         height: 0;
-        border-left: 12px solid transparent;
-        border-right: 12px solid transparent;
-        border-top: 12px solid #f5f5f7;
+        border-left: 20px solid transparent;
+        border-right: 20px solid transparent;
+        border-top: 20px solid #f5f5f7;
       }
       .pt_groom_tit {
         margin-bottom: 5px;
         padding: 30px 0 0 35px;
-        font-size: 24px;
+        font-size: 25px;
+        font-weight: bold;
       }
       .pt_groom_txt {
         padding-left: 35px;
@@ -1457,8 +1481,20 @@ export default {
       .pt_groom_explain {
         overflow: hidden;
         margin: 70px auto 0 auto;
-        width: 250px;
-        height: 110px;
+        padding: 20px 0 0 30px;
+        width: 220px;
+        height: 90px;
+        > span {
+          display: block;
+          color: $white;
+          &.groom_explain_tit {
+            font-size: 25px;
+            font-weight: bold;
+          }
+          &.groom_explain_txt {
+            margin-top: 5px;
+          }
+        }
       }
       .pt_groom_bj1 {
         background: url('../../static/images/huizong/cheyuan/pt_bj1.png')
@@ -1478,12 +1514,12 @@ export default {
       }
       &.channel1 {
         .pt_groom_tit {
-          color: $green;
+          color: #0ed7a9;
         }
       }
       &.channel2 {
         .pt_groom_tit {
-          color: $blue;
+          color: #ffb91a;
         }
         .pt_groom_txt {
           &::after {
@@ -1493,56 +1529,61 @@ export default {
       }
       &.channel3 {
         .pt_groom_tit {
-          color: $orange;
-        }
-        .pt_groom_txt {
-          &::after {
-            background: $orange;
-          }
+          color: #1a95ff;
         }
       }
       &.channel4 {
         .pt_groom_tit {
-          color: $light_violet;
-        }
-        .pt_groom_txt {
-          &::after {
-            background: $light_violet;
-          }
+          color: #6e3ae3;
         }
       }
     }
   }
   .active_green {
     .channel1 {
-      @include active_color($green);
+      @include active_color(#26e9d8, #19daae);
     }
   }
   .active_blue {
     .channel2 {
-      @include active_color($blue);
+      @include active_color(#f6ce30, #f7a53f);
     }
   }
   .active_orange {
     .channel3 {
-      @include active_color($orange);
+      @include active_color(#4dc6fd, #2f97ec);
     }
   }
   .active_violet {
     .channel4 {
-      @include active_color($light_violet);
+      @include active_color(#b065fe, #432de8);
     }
   }
-  /*列表*/
+  /* 列表 */
   .p_wl_list {
     > li {
+      overflow: hidden;
       margin: 0;
-      margin-right: 10px;
+      margin-right: 9px;
       padding: 0;
-      width: 263px;
+      width: 264px;
       height: 240px;
-      background: $light_blue;
+      background: $white;
       border: 0;
+      .hd_box {
+        color: $light_gray;
+      }
+      .type_box {
+        margin-bottom: 0;
+        > span {
+          font-size: $f_14;
+          color: $light_gray;
+        }
+      }
+      .wl_box {
+        padding: 20px 20px 0 20px;
+        height: 165px;
+      }
       &:nth-child(4n) {
         margin-right: 0;
       }
@@ -1552,21 +1593,22 @@ export default {
           @extend .fl;
           height: $f_16;
           line-height: $f_16;
-          &.icon {
-            @include icon_huangGuan;
-          }
         }
       }
       .item_order_num {
-        margin-top: 10px;
+        margin-top: 20px;
+        font-size: $f_14;
       }
       .item_order {
         padding-left: 10px;
-        height: 50px;
-        line-height: 50px;
-        background-color: $green;
-        .name {
+        height: 55px;
+        line-height: 55px;
+        background-color: #00c17f;
+        .order_name {
+          padding-top: 7px;
+          width: 40px;
           font-size: 18px;
+          line-height: 20px;
           color: $white;
         }
         .dock {
@@ -1575,37 +1617,51 @@ export default {
           width: 75px;
           height: 50px;
           > span {
-            line-height: 25px;
             display: block;
             font-size: $f_12;
             color: $white;
             &.dock_icon {
               overflow: hidden;
               margin-top: 7px;
-              width: 55px;
-              height: 18px;
-              line-height: 18px;
+              width: 60px;
+              height: 20px;
+              line-height: 20px;
               text-align: center;
               background: #ff9933;
               border-radius: 3px;
             }
+            &.w_40 {
+              width: 40px;
+            }
+            &.dock_num {
+              line-height: 27px;
+            }
           }
         }
         .link_oder {
-          width: 80px;
+          width: 124px;
           text-align: center;
-          background: url('../../static/images/huizong/wl_bj_1.png') no-repeat;
+          background-image: url('../../static/images/huizong/cheyuan/pt_bj.png');
+          background-repeat: no-repeat;
+          background-position: 0 0;
           > a {
             display: block;
-            color: $light_red;
+            font-size: $f_16;
+            color: $white;
           }
         }
       }
-      .bj_red {
-        background: $light_red;
+      .bj_discount {
+        background-position: -375px 0px;
+        background-color: #ff8c1a;
       }
-      .bj_blue {
-        background: $blue;
+      .bj_time {
+        background-position: -125px 0px;
+        background-color: #1a95ff;
+      }
+      .bj_credit {
+        background-position: -125px 0px;
+        background-color: #6e3ae3;
       }
     }
   }
@@ -1613,10 +1669,25 @@ export default {
 .pt_discount {
   overflow: hidden;
   width: 310px;
-  height: 549px;
-  background: $icon_red_bj;
+  height: 550px;
+  background: $white;
+  .discount_tit {
+    padding: 15px;
+    font-size: 30px;
+    line-height: 30px;
+    color: $tit_color;
+  }
+  .discount_ad_list {
+    margin: 0 auto;
+    width: 290px;
+    > li {
+      margin-bottom: 20px;
+      width: 290px;
+      height: 100px;
+    }
+  }
 }
-/*3、热门专线*/
+/* 3、热门专线 */
 .p_type_nav {
   a {
     &:hover {
@@ -1629,9 +1700,8 @@ export default {
     cursor: pointer;
   }
 }
-/*4、快速下单*/
-
-/*5、降价专线*/
+/* 4、快速下单 */
+/* 5、降价专线 */
 .drop_groom {
   .p_title_box {
     .title_txt {
@@ -1642,7 +1712,7 @@ export default {
     }
   }
 }
-/*6、降价发布*/
+/* 6、降价发布 */
 .drop_release {
   padding: 50px 0;
   .release_box {
@@ -1652,7 +1722,7 @@ export default {
     }
   }
 }
-/*7、帮我推荐*/
+/* 7、帮我推荐 */
 .groom_login {
   padding: 50px 0;
   .groom_box {
@@ -1681,7 +1751,7 @@ export default {
     line-height: 15px;
   }
 }
-/*8、货主说*/
+/* 8、货主说 */
 .shipper_say {
   margin-bottom: 40px;
   .p_title {
@@ -1778,17 +1848,17 @@ export default {
     background-image: linear-gradient(rgba(255, 255, 255, 0.24), #fff);
   }
 }
-/*9、我们的优势*/
+/* 9、我们的优势 */
 .p_our_virtue {
   width: 1075px;
 }
-/*10、我要入驻*/
+/* 10、我要入驻 */
 .wl_enter {
   .release_box {
     width: 520px;
   }
 }
-/*11、28问答*/
+/* 11、28问答 */
 .p_answers {
   .answers_questions {
     padding: 40px 0;
@@ -1798,7 +1868,7 @@ export default {
     }
   }
 }
-/*12、热点新闻*/
+/* 12、热点新闻 */
 .MD-home-qa-qa-area {
   margin: 20px auto;
   width: 1210px;
@@ -1838,7 +1908,6 @@ export default {
       height: 320px;
       position: relative;
     }
-
     .MD-home-qa-qa-pic {
       display: block;
       width: 100%;
@@ -1915,7 +1984,7 @@ export default {
     }
   }
 }
-/*13、在线下单流程*/
+/* 13、在线下单流程 */
 .order_step {
   overflow: hidden;
   width: 100%;
@@ -1967,7 +2036,6 @@ export default {
     }
   }
 }
-//
 .bj_2 {
   .act0 {
     display: block !important;

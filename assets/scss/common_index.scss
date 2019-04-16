@@ -412,7 +412,7 @@ $f_12: 12px;
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
-  margin-bottom: 25px;
+  // margin-bottom: 25px;
   height: 170px;
   overflow: hidden;
   background: url('../../static/images/huizong/user_bj.jpg') no-repeat;
@@ -441,8 +441,8 @@ $f_12: 12px;
         display: inline-block;
         margin: 0 5px;
         width: 135px;
-        height: 40px;
-        line-height: 40px;
+        height: 28px;
+        line-height: 28px;
         font-size: $f_14;
         text-align: center;
         color: $blue;
@@ -530,6 +530,9 @@ $f_12: 12px;
     font-size: $f_13;
     background: $bj_pale_blue;
     border: 1px solid #daeefc;
+    >a{
+      span{color: $tit_color;}
+    }
     .hd_box {
       overflow: hidden;   
       line-height: 20px;

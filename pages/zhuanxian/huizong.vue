@@ -1251,8 +1251,7 @@ export default {
       }
     },
     getLineHot(orderBy) {
-      getLineHotList(this.$axios, this.vo, orderBy).then(res => {
-      })
+      getLineHotList(this.$axios, this.vo, orderBy).then(res => {})
     },
     toLineDetail(item) {
       window.open(

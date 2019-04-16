@@ -788,15 +788,15 @@ export default {
         let endVolume = parseFloat(heavy.endVolume)
         let discountPrice = parseFloat(heavy.discountPrice)
         let primeryPrice = parseFloat(heavy.primeryPrice)
-        if (!heavy.endVolume || !heavy.primeryPrice || !heavy.discountPrice) {
-          layer.msg('重货数据没有填满不能添加！')
+        if (!heavy.endVolume || !heavy.primeryPrice) {
+          layer.msg('重货运量,原报价没有填满不能添加！')
           return false
         }
         if (!(startVolume < endVolume)) {
           layer.msg('重货运量开始不能大于结束！')
           return false
         }
-        if (!(discountPrice < primeryPrice)) {
+        if (!primeryPrice && !(discountPrice < primeryPrice)) {
           layer.msg('重货折后价不能大于原价！')
           return false
         }
@@ -807,15 +807,15 @@ export default {
         let endVolume = parseFloat(light.endVolume)
         let discountPrice = parseFloat(light.discountPrice)
         let primeryPrice = parseFloat(light.primeryPrice)
-        if (!light.endVolume || !light.primeryPrice || !light.discountPrice) {
-          layer.msg('轻货数据没有填满不能添加！')
+        if (!light.endVolume || !light.primeryPrice) {
+          layer.msg('轻货运量,原报价没有填满不能添加！')
           return false
         }
         if (!(startVolume < endVolume)) {
           layer.msg('轻货运量开始不能大于结束！')
           return false
         }
-        if (!(discountPrice < primeryPrice)) {
+        if (!primeryPrice && !(discountPrice < primeryPrice)) {
           layer.msg('轻货折后价不能大于原价！')
           return false
         }

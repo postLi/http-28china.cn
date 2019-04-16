@@ -694,7 +694,6 @@ export default {
     return {
       cy1: {},
       zxList: [],
-      otherCarSourceList: [],
       otherCarInfoList: [],
       handle: '',
       collection: '',
@@ -741,30 +740,62 @@ export default {
   },
   async fetch({ store, params, $axios, error, app, query }) {
     await store.dispatch('cheyuan/addBrowserNum', query.id)
-    await store
-      .dispatch('news/GETNEWSINFO', {
-        params: {
-          channelIds: '101',
-          count: 10,
-          orderBy: 9,
-          channelOption: 0
-        },
-        name: 'cheyuan_ccyps',
-        preFn: data => {
-          return data.map((el, index) => {
-            el.url = el.url.replace(
-              /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-              '/zixun'
-            )
-            return el
-          })
-        }
-      })
-      .catch(err => {})
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: '101',
+        count: 10,
+        orderBy: 9,
+        channelOption: 0
+      },
+      name: 'cheyuan_ccyps',
+      preFn: data => {
+        return data.map((el, index) => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/zixun'
+          )
+          return el
+        })
+      }
+    })
   },
   async asyncData({ $axios, app, query }) {
-    let zxList, otherCarSourceList, carInfoRes, carInfoRes1
+    let zxList, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
+    let [
+      newLists,
+      hotSearchs,
+      popularitys,
+      code,
+      queryCitys,
+      cheComprehensives,
+      carInfoRes,
+      cheLinks
+    ] = await Promise.all([
+      $axios.post('/28-web/carInfo/newest/publish'),
+      $axios.get('/28-web/hotSearch/carInfo/detail/links'),
+      $axios.get('/28-web/driver/driverPopularityList'),
+      getCode($axios, cy1.data.data.endProvince),
+      getSEListParams(cy1.data.data),
+      $axios.get(
+        '/28-web/driver/comprehensive?driverId=' + cy1.data.data.driverId
+      ),
+      $axios.post('/28-web/carInfo/list', {
+        currentPage: 1,
+        pageSize: 10,
+        startProvince: cy1.data.data.startProvince || '',
+        startCity: cy1.data.data.startCity || ''
+      }),
+      $axios.post('/28-web/carInfo/detail/related/links', {
+        endArea: cy1.data.data.endArea || '',
+        endCity: cy1.data.data.endCity || '',
+        endProvince: cy1.data.data.endProvince || '',
+        startArea: cy1.data.data.startArea || '',
+        startCity: cy1.data.data.startCity || '',
+        startProvince: cy1.data.data.startProvince || ''
+      })
+    ])
+
     if (cy1.data.status === 200) {
       let item = cy1.data.data
       let arr = (item.id || '').split('')
@@ -777,16 +808,7 @@ export default {
         cy1.data.data.startTime,
         '{y}-{m}-{d} {h}:{i}:{s}'
       )
-      let code = await getCode($axios, cy1.data.data.endProvince)
       zxList = await getCity($axios, code, cy1.data.data.startCity)
-      let parm = {
-        currentPage: 1,
-        pageSize: 10,
-        startProvince: cy1.data.data.startProvince,
-        startCity: cy1.data.data.startCity
-      }
-      carInfoRes = await $axios.post('/28-web/carInfo/list', parm)
-      let queryCitys = getSEListParams(cy1.data.data)
       carInfoRes1 = await $axios.post('/28-web/carInfo/list', {
         currentPage: 1,
         pageSize: 10,
@@ -794,33 +816,6 @@ export default {
         startCity: queryCitys.endCity
       })
     }
-    let parm2 = {
-      endArea: cy1.data.data.endArea,
-      endCity: cy1.data.data.endCity,
-      endProvince: cy1.data.data.endProvince,
-      startArea: cy1.data.data.startArea,
-      startCity: cy1.data.data.startCity,
-      startProvince: cy1.data.data.startProvince
-    }
-    //最新货源信息
-    let newLists = await $axios
-      .post('/28-web/carInfo/newest/publish')
-      .catch(err => {})
-    let driverId = cy1.data.data.driverId
-    //综合力评估
-    let cheComprehensives = await $axios
-      .get('/28-web/driver/comprehensive?driverId=' + driverId)
-      .catch(err => {})
-    //货源热门搜索
-    let hotSearchs = await $axios.get('/28-web/hotSearch/carInfo/detail/links')
-    //底部推荐
-    let cheLinks = await $axios
-      .post('/28-web/carInfo/detail/related/links', parm2)
-      .catch(err => {})
-    //企业人气榜
-    let popularitys = await $axios
-      .get('/28-web/driver/driverPopularityList')
-      .catch(err => {})
     hotSearchs.data.data.links.forEach(item => {
       MUTUAL.HREFLINKS(item)
     })
@@ -850,10 +845,6 @@ export default {
         cheComprehensives.data.status === 200
           ? cheComprehensives.data.data
           : {},
-      otherCarSourceList:
-        otherCarSourceList && otherCarSourceList.data.status === 200
-          ? otherCarSourceList.data.data
-          : [],
       carInfoStartList: !carInfoRes
         ? []
         : carInfoRes.data.status === 200
@@ -892,9 +883,6 @@ export default {
         (end.attr('theprovince') || '') +
         '&endc=' +
         (end.attr('thecity') || '')
-      console.log(
-        '搜索类型：' + search_type + '出发地：' + start + '到达地：' + end
-      )
       if (search_type == 'zx') {
         window.open('/zhuanxian/list' + query)
       }
@@ -973,6 +961,12 @@ export default {
       })
   },
   methods: {
+    checkLogin() {
+      return (
+        $.cookie('access_token') &&
+        ($.cookie('login_userToken') || $.cookie('user_token'))
+      )
+    },
     //价格参考
     getChartData(id) {
       return this.$axios.get('/28-web/carInfo/priceReference/' + id)
@@ -1274,7 +1268,7 @@ export default {
     },
     collected() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       this.isShowCollect = !this.isShowCollect
       if (!this.isShowCollect) {
         this.handle = 'collect'
@@ -1299,7 +1293,7 @@ export default {
     },
     openAdd() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       this.getAddress()
       if (access_token && user_token) {
         this.$axios
@@ -1318,7 +1312,6 @@ export default {
               layer.msg(res.data.errorInfo)
             }
           })
-          .catch(err => {})
       } else {
         this.isShowAdd = true
         this.getAddress()

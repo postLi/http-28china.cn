@@ -55,27 +55,7 @@
                 :href="'/member/'+ item.id"
                 target="_blank"
               ><span style="padding-right:12px; vertical-align: middle;">{{ item.companyName.length>11?item.companyName.substring(0,11)+'..':item.companyName }}</span>
-                <span v-if="item.isEq">
-                  <img
-                    v-for="(item, index) in item.eq1"
-                    :key="index"
-                    class="xy_zuan"
-                    src="../static/gongsi/images/blue.gif">
-                </span>
-                <span v-if="item.isHZhuan">
-                  <img
-                    v-for="(item, index) in item.hZhuan"
-                    :key="index"
-                    class="xy_zuan"
-                    src="../static/gongsi/images/34huanguan.gif">
-                </span>
-                <span v-if="item.isHZhuan">
-                  <img
-                    v-for="(item, index) in item.hZhuan"
-                    :key="index"
-                    class="xy_zuan"
-                    src="../static/gongsi/images/34huanguan.gif">
-                </span>
+                <creditIcon :credit="item.credit" />
                 <span v-if="item.isRenZhen">
                   <img
                     src="../static/gongsi/images/wlgs_shiming.png"

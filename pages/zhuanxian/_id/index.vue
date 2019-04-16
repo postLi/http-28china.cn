@@ -118,16 +118,7 @@ export default {
         orderBy: '9',
         channelOption: '0'
       },
-      name: 'wlzx',
-      preFn: data => {
-        return data.map(el => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'wlzx'
     })
   }
 }

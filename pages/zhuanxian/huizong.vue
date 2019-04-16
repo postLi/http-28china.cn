@@ -942,7 +942,6 @@ function myCredit(credit, item) {
   if (credit >= 0 && credit <= 3) {
     item.credit = 1
     item.isEq = true
-    // linedataB.data.data
   }
   if (credit >= 4 && credit <= 10) {
     item.credit = 2
@@ -996,7 +995,6 @@ async function getLineHotList($axios, vo = {}, orderBy) {
   } else {
     return { list: [] }
   }
-  // console.log(res.data.data.list, 'res')
 }
 export default {
   name: 'HuiZong',
@@ -1169,7 +1167,6 @@ export default {
   },
 
   mounted() {
-    // console.log(this.typeNav, 'typeNav')
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
       $('.p_hy_info .hy_info_user_box').Scroll({
@@ -1234,7 +1231,6 @@ export default {
           this.getLineHot(orderBy)
           break
       }
-      console.log(index, 'index')
     },
 
     groomTab(index) {
@@ -1255,10 +1251,7 @@ export default {
       }
     },
     getLineHot(orderBy) {
-      //信誉高到低=creditDesc；交易量高到低=orderDesc；运输时效低到高=transportAgingAsc；轻货价低到高=lightPriceAsc；重货价低到高=weightPriceAsc
       getLineHotList(this.$axios, this.vo, orderBy).then(res => {
-        console.log(res, 'resresres')
-        // this.lineRecommend = res.list
       })
     },
     toLineDetail(item) {

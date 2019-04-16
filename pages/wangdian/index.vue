@@ -719,16 +719,7 @@ export default {
         orderBy: 2,
         channelOption: 0
       },
-      name: 'gongsi_jryw',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'gongsi_jryw'
     })
     await store.dispatch('news/GETNEWSINFO', {
       params: {
@@ -737,16 +728,7 @@ export default {
         orderBy: 9,
         channelOption: 0
       },
-      name: 'gongsi_wlzx',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'gongsi_wlzx'
     })
   },
   computed: {

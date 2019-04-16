@@ -614,7 +614,7 @@
                 <span style="padding-left:30px">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
               </ul>
             </div>
-          </div>hnlg030663
+          </div>
         </div>
         <div
           class="getyouzhi"
@@ -629,7 +629,7 @@
             href="/regisiter"
             target="_blank"><button style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</button></a> -->
 
-
+          <!--  -->
             
         </div>
 

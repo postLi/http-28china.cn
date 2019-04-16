@@ -305,8 +305,13 @@ width: 342px;
   /* border: 1px solid #ccc; */
   height: 420px
 }
-.header_list ul.first_ul .sec_li .bot a:nth-last-of-type(2){
-padding: 0 21px
+.header_list ul.first_ul .sec_li .bot a{
+  float: left;
+  width: 260px;
+  margin-left: 26px;
+}
+.header_list ul.first_ul .sec_li .bot a:nth-child(1){
+  margin-left: 0;
 }
 .header_list ul.first_ul li.last_li{
   float: left;

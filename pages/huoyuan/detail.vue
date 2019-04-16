@@ -957,16 +957,7 @@ export default {
         orderBy: '9',
         channelOption: '0'
       },
-      name: 'huoyuan_wlzx',
-      preFn: data => {
-        return data.map(el => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'huoyuan_wlzx'
     })
   },
   async asyncData({ store, params, $axios, error, app, query }) {

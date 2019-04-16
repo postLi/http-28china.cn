@@ -23,6 +23,15 @@ async function start() {
     await nuxt.ready()
   }
 
+  // 封装一个获取服务器时间的接口
+  app.use(async (ctx, next) => {
+    if (ctx.request.path === '/getServerTime') {
+      ctx.response.body = new Date().getTime()
+    } else {
+      await next()
+    }
+  })
+
   app.use(ctx => {
     ctx.status = 200 // koa defaults to 404 when it sees that status is unset
 

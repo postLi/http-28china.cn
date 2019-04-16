@@ -713,7 +713,6 @@ export default {
     }
     let hyList = await getHyList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
-    console.log('vo:', vo)
     //货源底部推荐
     let recommend = await $axios.post('/28-web/lclOrder/list/related/links', vo)
     //企业人气榜

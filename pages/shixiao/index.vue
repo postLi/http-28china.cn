@@ -500,12 +500,7 @@ export default {
         ? query.startProvince
         : app.$cookies.get('currentProvinceFullName')
     }
-    let listRangesAgingData = await getListRangesAging($axios, 1, vo).catch(
-      err => {
-        console.log(err)
-      }
-    )
-    //优质承运商推荐
+    let listRangesAgingData = await getListRangesAging($axios, 1, vo)
     let excellents = await $axios
       .get('/28-web/logisticsCompany/excellent?pageSize=8')
       .catch(err => {
@@ -513,7 +508,6 @@ export default {
       })
     let parhort = vo
     delete vo.filterSign
-    //推荐专线热门专线
     let hotLines = await getHotLines($axios, 1, parhort)
     return {
       listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
@@ -527,7 +521,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(window.HREFLINKS.hrefLink, 'Links')
     $('#list_nav_a').html(
       this.vo.startCity +
         this.vo.startArea +
@@ -629,7 +622,6 @@ export default {
       window.onscroll = function() {
         //滚动条滚动的高度
         let _height = $(document).scrollTop()
-        console.log(_height)
         if (_height >= 500) {
           _nav.css({ position: 'fixed', top: '0' })
         } else {
@@ -848,7 +840,7 @@ img {
   background: url(/images/wzlImg/15dw.png) no-repeat 20px;
 }
 .list_ul_one {
-  background: url(/images/wzlImg/06sjx.png) no-repeat 166px 24px;
+  background: url(/images/wzlImg/06sjx.png) no-repeat 166px 17px;
 }
 .list_ul_one a {
   color: #3f94ee;

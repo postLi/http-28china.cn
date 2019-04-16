@@ -1181,6 +1181,7 @@ export default {
       newsIndex: 1
     }
   },
+  async asyncData({ $axios, query, app, error }) {},
   mounted() {
     // this.intSwiper1()
     this.intSwiper2()

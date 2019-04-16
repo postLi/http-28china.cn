@@ -719,16 +719,7 @@ export default {
         orderBy: 2,
         channelOption: 0
       },
-      name: 'gongsi_jryw',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'gongsi_jryw'
     })
     await store.dispatch('news/GETNEWSINFO', {
       params: {
@@ -737,16 +728,7 @@ export default {
         orderBy: 9,
         channelOption: 0
       },
-      name: 'gongsi_wlzx',
-      preFn: data => {
-        return data.map((el, index) => {
-          el.url = el.url.replace(
-            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
-            '/zixun'
-          )
-          return el
-        })
-      }
+      name: 'gongsi_wlzx'
     })
   },
   computed: {
@@ -863,12 +845,11 @@ export default {
         $('#form2').css('border-color', '#e5e5e5')
         obj.memo = this.checkNotice.select
       }
-      let re = /^1[3|4|5|7|8|9]\d{9}$/
       if (this.checkNotice.phone === '') {
         $('.ltl-phone').css('border-color', 'red')
         this.phoneHolder = '请输入正确手机号'
       } else {
-        if (re.test(this.checkNotice.phone)) {
+        if (MUTUAL.AFLCVALUE.MOBILE.test(this.checkNotice.phone)) {
           $('.ltl-phone').css('border-color', '#e5e5e5')
           obj.msgMobile = this.checkNotice.phone
         } else {

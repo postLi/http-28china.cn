@@ -6,7 +6,7 @@
         <font
         class="font1">{{ wDiscountPrice }}</font>
         <span
-          :style="wPrimeryPrice?'':'text-decoration:none'"
+          :style="wDiscountPrice?'':'text-decoration:none'"
           class="span2">{{ wPrimeryPrice }}</span>
         <font
           class="font2"
@@ -15,7 +15,7 @@
       >[阶梯价]</font></p>
       <p class="p2"><i>轻货价：</i> <span>{{ pEndVolume }}</span><font
       class="font1">{{ hDiscountPrice }}</font><span
-        :style="hPrimeryPrice?'':'text-decoration:none'"
+        :style="hDiscountPrice?'':'text-decoration:none'"
         class="span2" >{{ hPrimeryPrice }}</span><font
           class="font2"
           @mouseover="showPrice_box2Fn"
@@ -41,7 +41,7 @@
         class="price_box_item1"
         
       >
-        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/公斤' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ?item.primeryPrice.toFixed(2) :item.primeryPrice }}</em><em style="">元/公斤</em></span>
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '公斤' : item.startVolume + '公斤以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/公斤' : item.discountPrice }}</span><span ><em :style="item.discountPrice?'text-decoration:line-through':''">{{ item.primeryPrice ?item.primeryPrice.toFixed(2) :item.primeryPrice }}</em><em style="">元/公斤</em></span>
       
       </div>
     </div>
@@ -58,9 +58,9 @@
         :key="index"
         class="price_box_item2"
       >
-        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/立方' : item.discountPrice }}</span><span ><em style="text-decoration:line-through">{{ item.primeryPrice ? item.primeryPrice.toFixed(2) : item.primeryPrice }}</em><em style="">元/立方</em></span>
+        <span>{{ item.endVolume ? item.startVolume+'-'+item.endVolume + '立方' : item.startVolume + '立方以上' }}</span><span style="color: #f00;" >{{ item.discountPrice ? item.discountPrice.toFixed(2)+ '元/立方' : item.discountPrice }}</span><span ><em :style="item.discountPrice?'text-decoration:line-through':''">{{ item.primeryPrice ? item.primeryPrice.toFixed(2) : item.primeryPrice }}</em><em style="">元/立方</em></span>
       
-      </div>
+      </div> 
     </div>
   </div>
 

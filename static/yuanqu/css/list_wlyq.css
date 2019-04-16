@@ -5,7 +5,7 @@ a:hover .wlzx_list_02 span{color:#FA5000}
 body{background-color: #F9F9F9;}
 /* img:hover{transform: scale(1.02);
 transition:0.7s}  */
-.wlzx_list img:hover{transform: scale(1.02);
+/* .wlzx_list img:hover{transform: scale(1.02); */
 	transition:0.7s} 
 .zx_sx{
 OVERFLOW: hidden; LINE-HEIGHT: 50px;HEIGHT: 50px;  color:#585858; font-size:16px; font-weight:bold;
@@ -58,9 +58,9 @@ line-height: 47px;
 
 }
 
-.list_input{
+.yuanqu .list_input{
 	width: 161px;
-	height: 32px;
+	height: 44px;
 	border-radius: 2px;
 	border: solid 1px #e5e5e5;
 	background: none;
@@ -69,18 +69,17 @@ line-height: 47px;
 	padding-left: 9px;
 }
 .list_button {
-	width: 72px;
-	height: 28px;
+	width: 50px;
+	height: 44px;
 	border-radius: 2px;
-	border: solid 1px #2577e3;
-	background-color: #fff;
-	color: #2577e3;
-	font-size: 15px;
-	/* background: no-repeat url(../images/search.png) 10px 14px #2577e3; */
+	color: #f9f9f9;
+	font-size: 16px;
+	background: no-repeat url(../images/search.png) 10px 14px #2577e3;
 	text-align: left;
-	/*padding-left: 8px;*/
-	margin-left: 8px;	
+	padding-left: 20px;
+	/* margin-left: 8px; */
 	cursor: pointer;
+	border: 0;
 }
 #flush
 {
@@ -106,7 +105,7 @@ margin-left: 10px;
 .select_con dl dd{border: 0;padding:0}
 .select_con dl dd a{min-width: 65px;text-align: center;}
 .select_con dl dd a:hover, .select_con dl dd a.now { background:#3371ff; color: #fff;}
-.select_con #parkAddress .city-picker-span{line-height: 46px !important;}
+.select_con #parkAddress .city-picker-span{line-height: 44px !important;}
 .select_con #parkAddress1 .city-picker-span{line-height: 32px !important;}
 .ck_input{
 	width: 14px;
@@ -191,7 +190,7 @@ padding-left: 10px;
 	text-align: left;
 	/* background:url(../images/list_wlzx/wlyq_zx.png) no-repeat -2px 0; */
 }
-.wlzx_list_03 font{color: #F85050;font-size: 14px;padding-left: 10px;vertical-align: middle}
+.wlzx_list_03 font{color: #F85050;font-size: 14px;padding-left: 10px;}
 .wlzx_list_03 i{color: #333;font-size: 14px;}
 .wlzx_list_03 span{color: #333;font-size: 14px;padding-left: 10px;}
 .wlzx_list_04{
@@ -386,8 +385,8 @@ border: 1px solid #eee;
 
 /*V1.1版本S*/
  #parkAddress {
-    width: 264px;
-    height: 44px;
+    /* width: 336px;
+    height: 44px; */
 }
 #parkName {
     width: 264px;
@@ -541,7 +540,7 @@ border: 1px solid #eee;
 	position: absolute;
 	content: '';
 	top: 12px;
-	left: 100px;
+	left: 110px;
 	width: 500px;
 	height: 1px;
 	background: #999999;
@@ -553,8 +552,8 @@ border: 1px solid #eee;
 	position: absolute;
 	content: '';
 	top: 12px;
-	left: 120px;
-	width: 500px;
+	left: 130px;
+	width: 480px;
 	height: 1px;
 	background: #999999;
 }

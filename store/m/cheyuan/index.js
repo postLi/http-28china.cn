@@ -1,4 +1,4 @@
-export const state = () => ({
+const cheYuanState = {
   startName: ['', '', ''],
   endName: ['', '', ''],
   orderBy: { name: '最新发布', value: 'createTimeDesc' },
@@ -8,11 +8,16 @@ export const state = () => ({
   pages: '', // 总页数
   rangeList: [], // 列表
   scrollTo: 0 // 滚动位置
-})
+}
+
+export const state = () => cheYuanState
 
 export const mutations = {
   setData(state, param) {
     state[param.name] = param.data
+  },
+  resetData(state) {
+    Object.assign(state, cheYuanState)
   }
 }
 

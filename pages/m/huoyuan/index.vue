@@ -21,7 +21,7 @@
           @click="clickRelease()">
           <span
             class="margin_r_10"
-            :class="[isShowMask[2] === true?'f_b':'c-3']">{{ $store.state.m.huoyuan.orderBy.name }}</span>
+            :class="[isShowMask[2] === true?'f_b':'c-3']">{{ $store.state.m.huoyuan.queryOrderType.name }}</span>
           <div :class="[isShowMask[2]?'page_view_triangle-down-g':'page_view_triangle-down-9']"/>
         </div>
         <div
@@ -77,7 +77,7 @@
         :key="index"
         @click="clickRange(item.id)"
       >
-        <div class="title c-3 f-26 b_b flex_a">
+        <div class="title c-3 f-26 b_b oneElisp">
           <span>{{ item.goodsTypeName? item.goodsTypeName + ' |': '' }}</span>
           <span class="margin_l_10">{{ item.goodsVolume ? item.goodsVolume + '方 |': '' }}</span>
           <span class="margin_l_10">{{ item.goodsWeight ? item.goodsWeight + '公斤': '' }}</span>
@@ -98,15 +98,15 @@
           </div>
 
           <div class="f_40 f-32">
-            ￥1325.00
+            {{ item.goodsPrice ? '￥'+ item.goodsPrice:'价格面议' }}
           </div>
         </div>
         <div class="f-28 margin_t_20 flex_sb">
           <div class="flex_a">
             <img src="/m/huoyuan/huoyuandt_dinwei.png">
-            <span class="margin_l_10">距离您最近网点<span class="f_40">6.5</span>公里</span>
+            <!--            <span class="margin_l_10">距离您最近网点<span class="f_40">6.5</span>公里</span>-->
           </div>
-          <span class="c-9">22分钟前发布</span>
+          <span class="c-9">{{ item.myTime }}前发布</span>
         </div>
       </div>
     </cube-scroll>
@@ -185,9 +185,14 @@ export default {
         startArea: this.$store.state.m.huoyuan.startName[2],
         endProvince: this.$store.state.m.huoyuan.endName[0],
         endCity: this.$store.state.m.huoyuan.endName[1],
-        endArea: this.$store.state.m.huoyuan.endName[2]
+        endArea: this.$store.state.m.huoyuan.endName[2],
+        queryOrderType: this.$store.state.m.huoyuan.queryOrderType.value,
+        orderType: this.$store.state.m.huoyuan.screen.orderType,
+        loadTimeType: this.$store.state.m.huoyuan.screen.loadTimeType,
+        useCarType: this.$store.state.m.huoyuan.screen.useCarType,
+        specName: this.$store.state.m.huoyuan.screen.specName
       }
-      // 专线列表
+      // 列表
       this.$store.dispatch('m/huoyuan/GETRANGELIST', {
         data: parm,
         name: 'rangeList'
@@ -251,19 +256,25 @@ export default {
       this.$set(this.isShowMask, 2, false)
       if (data) {
         this.$store.commit('m/huoyuan/setData', {
-          name: 'orderBy',
+          name: 'queryOrderType',
           data: data
         })
         this.onPullingDown()
       }
     },
     getScreen(data) {
+      console.log(data)
       this.$set(this.isShowMask, 3, false)
       if (data) {
-        // this.$store.commit('m/huoyuan/setData', {
-        //   name: 'orderBy',
-        //   data: data
-        // })
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'screen',
+          data: {
+            orderType: data.orderType,
+            loadTimeType: data.loadTimeType,
+            useCarType: data.useCarType,
+            specName: data.specName
+          }
+        })
         this.onPullingDown()
       }
     }
@@ -279,6 +290,7 @@ export default {
   padding: 0 0.3rem 0.3rem 0.3rem;
   .title {
     height: 0.88rem;
+    line-height: 0.88rem;
   }
   img {
     width: 0.21rem;

@@ -342,7 +342,6 @@ $("#flush").click(
 //   })
 $("#seq3").mouseenter(
   function () {
-    console.log("弹出价格排序")
     $("#tj_price").css("display", "block")
   })
 $("#seq3").mouseleave(

@@ -150,11 +150,10 @@ export default {
       this.showMask = false
       if (this.form === 'huoyuan') {
         this.$emit('setArea', {
-          AF0491801Code: this.AF0491801Code,
-          AF0491802Code: this.AF0491802Code,
-          AF0491803Code: this.AF0491803Code,
-          AF009Code: this.AF009Code,
-          AF018Code: this.AF018Code
+          orderType: this.AF0491801Code, // 货源类型
+          loadTimeType: this.AF0491802Code, // 装货时间
+          useCarType: this.AF0491803Code, // 用车类型
+          specName: this.AF009Code // 车辆规格
         })
       }
       if (this.form === 'cheyuan') {

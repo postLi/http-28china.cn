@@ -66,7 +66,7 @@
             :key="index">
             <div
               class="flex_a flex_f"
-              @click="toClick(item.name)">
+              @click="toClick(item)">
               <img
                 :src="item.url"
                 style="height: 0.56rem">
@@ -198,7 +198,7 @@ export default {
         {
           name: '运单查询',
           url: '/m/home/home_chaxun.png',
-          to: '/m/huoyuan'
+          to: '/m/ydcx'
         },
         {
           name: 'APP下载',
@@ -247,14 +247,7 @@ export default {
         data: item.id
       })
       if (item.name === '专线大厅') {
-        this.$store.commit('m/zhuanxian/setData', {
-          name: 'currentPage',
-          data: 1
-        })
-        this.$store.commit('m/zhuanxian/setData', {
-          name: 'orderBy',
-          data: { name: '信誉最高', value: 'creditDesc' }
-        })
+        this.$store.commit('m/zhuanxian/resetData')
         this.$store.commit('m/zhuanxian/setData', {
           name: 'startName',
           data: [
@@ -262,18 +255,6 @@ export default {
             this.$store.state.m.startName0[1],
             ''
           ]
-        })
-        this.$store.commit('m/zhuanxian/setData', {
-          name: 'endName',
-          data: ['', '', '']
-        })
-        this.$store.commit('m/zhuanxian/setData', {
-          name: 'rangeList',
-          data: []
-        })
-        this.$store.commit('m/zhuanxian/setData', {
-          name: 'scrollTo',
-          data: 0
         })
         let parm = {
           currentPage: this.$store.state.m.zhuanxian.currentPage,
@@ -293,10 +274,7 @@ export default {
         })
       }
       if (item.name === '货源大厅') {
-        this.$store.commit('m/huoyuan/setData', {
-          name: 'currentPage',
-          data: 1
-        })
+        this.$store.commit('m/huoyuan/resetData')
         this.$store.commit('m/huoyuan/setData', {
           name: 'startName',
           data: [
@@ -304,18 +282,6 @@ export default {
             this.$store.state.m.startName0[1],
             ''
           ]
-        })
-        this.$store.commit('m/huoyuan/setData', {
-          name: 'endName',
-          data: ['', '', '']
-        })
-        this.$store.commit('m/huoyuan/setData', {
-          name: 'rangeList',
-          data: []
-        })
-        this.$store.commit('m/huoyuan/setData', {
-          name: 'scrollTo',
-          data: 0
         })
         let parm = {
           currentPage: this.$store.state.m.huoyuan.currentPage,
@@ -326,7 +292,11 @@ export default {
           endProvince: this.$store.state.m.huoyuan.endName[0],
           endCity: this.$store.state.m.huoyuan.endName[1],
           endArea: this.$store.state.m.huoyuan.endName[2],
-          orderBy: this.$store.state.m.huoyuan.orderBy.value
+          queryOrderType: this.$store.state.m.huoyuan.queryOrderType.value,
+          orderType: this.$store.state.m.huoyuan.screen.orderType,
+          loadTimeType: this.$store.state.m.huoyuan.screen.loadTimeType,
+          useCarType: this.$store.state.m.huoyuan.screen.useCarType,
+          specName: this.$store.state.m.huoyuan.screen.specName
         }
         // 货源列表
         this.$store.dispatch('m/huoyuan/GETRANGELIST', {
@@ -335,22 +305,7 @@ export default {
         })
       }
       if (item.name === '车源大厅') {
-        this.$store.commit('m/cheyuan/setData', {
-          name: 'currentPage',
-          data: 1
-        })
-        this.$store.commit('m/cheyuan/setData', {
-          name: 'orderBy',
-          data: { name: '最新发布', value: 'createTimeDesc' }
-        })
-        this.$store.commit('m/cheyuan/setData', {
-          name: 'carSpec',
-          data: ''
-        })
-        this.$store.commit('m/cheyuan/setData', {
-          name: 'carType',
-          data: ''
-        })
+        this.$store.commit('m/cheyuan/resetData')
         this.$store.commit('m/cheyuan/setData', {
           name: 'startName',
           data: [
@@ -358,18 +313,6 @@ export default {
             this.$store.state.m.startName0[1],
             ''
           ]
-        })
-        this.$store.commit('m/cheyuan/setData', {
-          name: 'endName',
-          data: ['', '', '']
-        })
-        this.$store.commit('m/cheyuan/setData', {
-          name: 'rangeList',
-          data: []
-        })
-        this.$store.commit('m/cheyuan/setData', {
-          name: 'scrollTo',
-          data: 0
         })
         let parm = {
           currentPage: this.$store.state.m.cheyuan.currentPage,
@@ -391,32 +334,13 @@ export default {
         })
       }
       if (item.name === '物流公司') {
-        this.$store.commit('m/gongsi/setData', {
-          name: 'currentPage',
-          data: 1
-        })
-        this.$store.commit('m/gongsi/setData', {
-          name: 'rangeList',
-          data: []
-        })
+        this.$store.commit('m/gongsi/resetData')
         this.$store.commit('m/gongsi/setData', {
           name: 'startName',
           data: [
             this.$store.state.m.startName0[0],
             this.$store.state.m.startName0[1]
           ]
-        })
-        this.$store.commit('m/gongsi/setData', {
-          name: 'orderBy',
-          data: { name: '最新发布', value: 'createDesc' }
-        })
-        this.$store.commit('m/gongsi/setData', {
-          name: 'companyName',
-          data: ''
-        })
-        this.$store.commit('m/gongsi/setData', {
-          name: 'scrollTo',
-          data: 0
         })
         let parm = {
           currentPage: this.$store.state.m.gongsi.currentPage,
@@ -433,9 +357,12 @@ export default {
         })
       }
     },
-    toClick(name) {
-      if (name === '在线下单' || name === 'APP下载') {
+    toClick(item) {
+      if (item.name === '在线下单' || item.name === 'APP下载') {
         this.showMask = true
+      }
+      if (item.name === '运单查询' || item.name === '活动中心') {
+        this.$router.push(item.to)
       }
     },
     clickEnd() {

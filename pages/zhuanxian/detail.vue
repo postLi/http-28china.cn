@@ -611,7 +611,7 @@
           <div class="bot_right">
             <p
               style="margin-top: 20px;color:red;font-size:16px"
-              v-if="linedataF == []">此用户没有评论</p>
+              v-if="linedataF === []||linedataF.length==0">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
                 <button
@@ -1114,8 +1114,6 @@ export default {
     if (!endc || endc == 'null') {
       endc = ''
     }
-    // let datajid = await getDetailFn($axios, query.id)
-    // console.log(datajid, 'datajid')
     let linedataA = await $axios.get(aurl + `/28-web/range/${query.id}`)
 
     if (linedataA.data.status === 200 && linedataA.data.data) {
@@ -1125,8 +1123,6 @@ export default {
       starta = linedataA.data.data.startArea
       startc = linedataA.data.data.startCity
       startp = linedataA.data.data.startProvince
-      // console.log(linedataA.data.data.rangeLogo, 'linedataA.')
-      // if(linedataA.data.data.rangeLogo.split(','))
     }
     let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1263,7 +1259,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.linedataA.rangeLogo.split(',').length)
     let _this = this
     if (process.client) {
       seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
@@ -1543,9 +1538,6 @@ export default {
         skin: 'layui-layer-rim1',
         area: ['500px', '300px'],
         success: (layero, index) => {
-          // $('.layui-btn-danger').onclick(() => {
-          //   console.log($('.layui-input').value, 'vakhhhfd')
-          // })
           $('.layui-btn-danger').on('click', '')
         },
         content:
@@ -1605,7 +1597,6 @@ export default {
             this.$axios
               .post(aurl + '/28-web/helpFind/range/create', form)
               .then(res => {
-                // console.log(res, 'resresres')
                 if (res.data.status === 200) {
                   layer.msg(
                     '提交成功，客服稍后将会与您联系',
@@ -1733,7 +1724,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log('markPoint:', params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/公斤}`
@@ -1888,7 +1878,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/立方}`
@@ -2198,7 +2187,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/公斤}`
@@ -2351,7 +2339,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/公斤}`
@@ -2527,7 +2514,6 @@ export default {
       })
     },
     comInfo1(sendEchart, cargoType) {
-      // console.log(cargoType, 'cargoType')
       sendEchart[0] = cargoType.standardFamousBrandPrice
       sendEchart[1] = cargoType.standardHighQualityPrice
       sendEchart[2] = cargoType.standardHighAveragePrice
@@ -2643,7 +2629,6 @@ export default {
                 }
                 getDetailFn(this.$axios, this.$route.query.id).then(res => {
                   this.linedataA = res
-                  // console.log(res, 'resffdjidfsf')
                 })
               }
               if (item == 'comany') {

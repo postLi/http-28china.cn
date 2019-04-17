@@ -134,19 +134,15 @@ export default {
       if (n == true) {
         layui.use('element', function() {
           var $ = layui.jquery,
-            element = layui.element //Tab的切换功能，切换事件监听等，需要依赖element模块
-
-          //触发事件
+            element = layui.element
           var active = {
             setPercent: function() {
-              //设置50%进度
               element.progress('demo', '50%')
             },
             loading: function(othis) {
               var DISABLED = 'layui-btn-disabled'
               if (othis.hasClass(DISABLED)) return
 
-              //模拟loading
               var n = 0,
                 timer = setInterval(function() {
                   n = (n + Math.random() * 10) | 0
@@ -170,7 +166,6 @@ export default {
         })
         this.seconds = 5
 
-        // console.log(this.LineeEchartInfo, 'LineeEchartInfo')
         clearInterval(this.stopTimer)
         this.stopTimer = setInterval(() => {
           this.seconds--
@@ -180,10 +175,6 @@ export default {
             this.linedata = this.linedataA
             this.company = this.lineCompany
             this.LineeEchartInfo = this.info
-            // this.lowerPrice = this.lowerPriceRate
-            console.log(this.LineeEchartInfo, 'LineeEchartInfo')
-            // console.log(this.companyName, 'companyName')
-            // console.log(this.lowerPriceRate, 'lowerPriceRate')
           }
         }, 1000)
       }
@@ -191,20 +182,13 @@ export default {
     types(n, o) {},
     info(n, o) {
       this.LineeEchartInfo = n
-      console.log(n, 'nnn1')
     },
     linedataA(n, o) {
       this.linedata = n
-      console.log(n, 'linedataA2')
     },
     lineCompany(n, o) {
       this.company = n
-      console.log(n, 'companyName2')
     }
-    // lowerPriceRate(n, o) {
-    //   this.lowerPrice = n
-    //   console.log(n, 'lowerPriceRate2')
-    // }
   },
   mounted() {},
   methods: {
@@ -230,15 +214,11 @@ export default {
       } else {
         this.isLEchart = true
       }
-      // console.log(item, 'item')
     },
     closeDialog() {
       this.$emit('close')
       clearInterval(this.stopTimer)
       this.showEchartDiv = false
-      // this.$emit('update:show', false)
-
-      //把绑定的弹窗数组 设为false即可关闭弹窗
     }
   }
 }

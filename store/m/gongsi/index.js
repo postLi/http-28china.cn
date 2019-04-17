@@ -1,4 +1,4 @@
-export const state = () => ({
+const gongSiState = {
   startName: ['', ''],
   orderBy: { name: '最新发布', value: 'createDesc' },
   currentPage: 1, // 当前页数
@@ -6,11 +6,16 @@ export const state = () => ({
   rangeList: [], // 专线列表
   scrollTo: 0, // 滚动位置
   companyName: ''
-})
+}
+
+export const state = () => gongSiState
 
 export const mutations = {
   setData(state, param) {
     state[param.name] = param.data
+  },
+  resetData(state) {
+    Object.assign(state, gongSiState)
   }
 }
 

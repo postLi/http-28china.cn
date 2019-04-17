@@ -611,7 +611,7 @@
           <div class="bot_right">
             <p
               style="margin-top: 20px;color:red;font-size:16px"
-              v-if="linedataF == []">此用户没有评论</p>
+              v-if="linedataF === []||linedataF.length==0">此用户没有评论</p>
             <div v-else>
               <div class="bot_right_btn">
                 <button
@@ -804,7 +804,7 @@
                     <p class="p2"><i
                       class="zhuo"
                       style="color: #666">轻货：</i><span style="color: #ff4747">{{ parseFloat(item.lightPrice).toFixed(1) }}</span><span style="color: #333">元/m³</span></p>
-                    <p class="p3"><i>时效：</i><span>{{ item.transportAging }}{{ item.transportAging }}</span></p>
+                    <p class="p3"><i>时效：</i><span>{{ item.transportAging }}{{ item.transportAgingUnit }}</span></p>
                     <p class="p4"><i>频率：</i><span>{{ item.departureHzData?item.departureHzData+'天':'' }}</span><span>{{ item.departureHzData?item.departureHzTime+'次':'暂无' }}</span></p>
                   </li>
                   <li class="wlzx_list_6">
@@ -1004,6 +1004,15 @@ async function getCanyColl(
     return { data: false }
   }
 }
+// $axios.get(aurl + `/28-web/range/${query.id}`)
+async function getDetailFn($axios, id) {
+  let res = await $axios.get(`/28-web/range/${id}`)
+  if (res.data.status == 200) {
+    return res.data.data
+  } else {
+    return {}
+  }
+}
 
 export default {
   name: 'Index',
@@ -1105,7 +1114,6 @@ export default {
     if (!endc || endc == 'null') {
       endc = ''
     }
-
     let linedataA = await $axios.get(aurl + `/28-web/range/${query.id}`)
 
     if (linedataA.data.status === 200 && linedataA.data.data) {
@@ -1115,8 +1123,6 @@ export default {
       starta = linedataA.data.data.startArea
       startc = linedataA.data.data.startCity
       startp = linedataA.data.data.startProvince
-      // console.log(linedataA.data.data.rangeLogo, 'linedataA.')
-      // if(linedataA.data.data.rangeLogo.split(','))
     }
     let [linedataB, linedataE, linedataF, linedataG] = await Promise.all([
       $axios.get(aurl + `/28-web/logisticsCompany/${query.publishId}`),
@@ -1139,7 +1145,6 @@ export default {
         endArea: enda
       })
     ])
-    console.log(linedataE, 'linedataE.')
     if (
       linedataA.data.status == 200 &&
       linedataB.data.status == 200 &&
@@ -1234,7 +1239,6 @@ export default {
         // linedataB.data.data.isRenZhen = true
         // $('.arc_right07').html('<br/>暂无认证信息')
       }
-
       return {
         linedataA: linedataA.data.status == 200 ? linedataA.data.data : [],
         linedataB: linedataB.data.status == 200 ? linedataB.data.data : [],
@@ -1255,7 +1259,6 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.linedataA.rangeLogo.split(',').length)
     let _this = this
     if (process.client) {
       seajs.use(['/layer/layer.js', '/layer/dist/layui.js'], function() {
@@ -1535,9 +1538,6 @@ export default {
         skin: 'layui-layer-rim1',
         area: ['500px', '300px'],
         success: (layero, index) => {
-          // $('.layui-btn-danger').onclick(() => {
-          //   console.log($('.layui-input').value, 'vakhhhfd')
-          // })
           $('.layui-btn-danger').on('click', '')
         },
         content:
@@ -1597,7 +1597,6 @@ export default {
             this.$axios
               .post(aurl + '/28-web/helpFind/range/create', form)
               .then(res => {
-                // console.log(res, 'resresres')
                 if (res.data.status === 200) {
                   layer.msg(
                     '提交成功，客服稍后将会与您联系',
@@ -1725,7 +1724,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log('markPoint:', params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/公斤}`
@@ -1880,7 +1878,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/立方}`
@@ -2190,7 +2187,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/公斤}`
@@ -2343,7 +2339,6 @@ export default {
                       label: {
                         position: 'insideTop',
                         formatter: function(params) {
-                          // console.log(params)
                           return `{color1|${params.name}}\n{color0|${
                             params.value
                           }元/公斤}`
@@ -2519,7 +2514,6 @@ export default {
       })
     },
     comInfo1(sendEchart, cargoType) {
-      // console.log(cargoType, 'cargoType')
       sendEchart[0] = cargoType.standardFamousBrandPrice
       sendEchart[1] = cargoType.standardHighQualityPrice
       sendEchart[2] = cargoType.standardHighAveragePrice
@@ -2590,9 +2584,10 @@ export default {
       let isurl = ''
       let transportRangeId = this.$route.query.id
       let handle = 'collect'
+      let comId = ''
       if (access_token && user_token) {
         if (item == 'detail') {
-          let transportRangeId = this.$route.query.id
+          comId = this.$route.query.id
           if (this.isXin == true) {
             handle = 'cancelCollect'
           }
@@ -2606,7 +2601,7 @@ export default {
             '&handle=' +
             handle
         } else {
-          let companyId = this.$route.query.publishId
+          comId = this.$route.query.publishId
           if (this.isComanyColl == true) {
             handle = 'cancelCollect'
           }
@@ -2616,7 +2611,7 @@ export default {
             '&user_token=' +
             user_token +
             '&companyId=' +
-            companyId +
+            comId +
             '&handle=' +
             handle
         }
@@ -2632,6 +2627,9 @@ export default {
                 } else {
                   this.isXin = false
                 }
+                getDetailFn(this.$axios, this.$route.query.id).then(res => {
+                  this.linedataA = res
+                })
               }
               if (item == 'comany') {
                 if (isMsg == '收藏成功！') {

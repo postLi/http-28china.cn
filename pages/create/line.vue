@@ -705,7 +705,7 @@ export default {
                       res.data.publishId
                     }&text=专线`
                     // window.location.href = huoyuanUrl
-                    window.open(url)
+                    window.open(url, '_parent')
                   })
                   .fail(function(err) {
                     layer.msg(

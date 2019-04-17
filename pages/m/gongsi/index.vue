@@ -42,7 +42,7 @@
             v-model="value"
             class="search_content flex_1">
           <div
-            class="c-3 f-30 margin_l_10"
+            class="c-3 f-32 margin_l_10"
             @click="search()">搜索</div>
         </div>
       </div>
@@ -305,7 +305,7 @@ export default {
   .search_content {
     background-color: #f4f4f4;
     border-radius: 0.1rem;
-    height: 0.5rem;
+    height: 0.66rem;
     font-size: 0.3rem !important;
     border: none;
     outline: none;

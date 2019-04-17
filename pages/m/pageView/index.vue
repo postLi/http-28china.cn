@@ -39,6 +39,7 @@
           :key="index">{{ item.name }}</div>
       </div>
     </footer>
+    <down-app ref="downApp"/>
   </div>
 </template>
 <script>
@@ -50,8 +51,16 @@ import pageZhuanXian from '../zhuanxian'
 import pageHuoYuan from '../huoyuan'
 import pageCheYuan from '../cheyuan'
 import pageGongSi from '../gongsi'
+import DownApp from '../../../components/m/downApp'
 export default {
-  components: { MyTop, pageZhuanXian, pageHuoYuan, pageCheYuan, pageGongSi },
+  components: {
+    DownApp,
+    MyTop,
+    pageZhuanXian,
+    pageHuoYuan,
+    pageCheYuan,
+    pageGongSi
+  },
   layout: 'm',
   data() {
     return {
@@ -87,6 +96,7 @@ export default {
   methods: {
     footerNav(item) {
       if (item.id === 2) {
+        this.$refs.downApp.showMask = true
         return
       }
       this.$store.commit('m/pageView/setData', {

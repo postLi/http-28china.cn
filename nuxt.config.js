@@ -56,17 +56,17 @@ module.exports = {
         type: 'image/x-icon',
         href: '/favicon.ico'
       },
-      // {
-      //   rel: 'stylesheet',
-      //   type: 'text/css',
-      //   href: '/css/font/iconfont.css'
-      // }
-      //暂时用的图标
       {
         rel: 'stylesheet',
         type: 'text/css',
-        href: '//at.alicdn.com/t/font_1076232_t3kapnyz6rk.css'
+        href: '/css/font/iconfont.css'
       }
+      //暂时用的图标
+      // {
+      //   rel: 'stylesheet',
+      //   type: 'text/css',
+      //   href: '//at.alicdn.com/t/font_1076232_t3kapnyz6rk.css'
+      // }
     ],
     script: [
       {

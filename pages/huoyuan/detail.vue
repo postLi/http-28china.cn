@@ -960,101 +960,55 @@ export default {
       name: 'huoyuan_wlzx'
     })
   },
-  async asyncData({ $axios, app, query, error }) {
-    let hyDetails = await $axios
-      .get('/28-web/lclOrder/detail/' + query.id)
-      .catch(err => {
-        console.log('hyDetail:', err)
+  async asyncData({ store, params, $axios, error, app, query }) {
+    // console.log(app.$cookies.get(access_token), 'store')
+    let code, zxList, queryCitys, huoInfoListst
+    let hyDetails = await $axios.get('/28-web/lclOrder/detail/' + query.id)
+    let [
+      newLists,
+      huoComprehensives,
+      hotSearchs,
+      popularitys,
+      archivals,
+      huoInfoLists,
+      newestHuoyuanRes,
+      huoLinks
+    ] = await Promise.all([
+      $axios.get('/28-web/lclOrder/newList'),
+      $axios.get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId),
+      $axios.get('/28-web/hotSearch/supply/detail/links'),
+      $axios.get('/28-web/logisticsCompany/popularity'),
+      $axios.post('/28-web/shipper/archival?shipperId=' + query.shipperId),
+      $axios.post('/28-web/lclOrder/list', {
+        currentPage: 1,
+        pageSize: 10,
+        startProvince: hyDetails.data.data.startProvince || '',
+        startCity: hyDetails.data.data.startCity || ''
+      }),
+      $axios.post('/28-web/lclOrder/shipper/lastList', {
+        shipperId: query.shipperId
+      }),
+      $axios.post('/28-web/lclOrder/detail/related/links', {
+        endArea: hyDetails.data.data.endArea || '',
+        endCity: hyDetails.data.data.endCity || '',
+        endProvince: hyDetails.data.data.endProvince || '',
+        startArea: hyDetails.data.data.startArea || '',
+        startCity: hyDetails.data.data.startCity || '',
+        startProvince: hyDetails.data.data.startProvince || ''
       })
-    let parm = {
+    ])
+    code = await getCode($axios, hyDetails.data.data.endProvince)
+    zxList = await getCity($axios, code, hyDetails.data.data.startCity)
+    queryCitys = getSEListParams(huoInfoLists.data.data.list)
+    huoInfoListst = await $axios.post('/28-web/lclOrder/list', {
       currentPage: 1,
       pageSize: 10,
-      startProvince: hyDetails.data.data.startProvince
-        ? hyDetails.data.data.startProvince
-        : '',
-      startCity: hyDetails.data.data.startCity
-        ? hyDetails.data.data.startCity
-        : ''
-    }
-    let parm1 = {
-      endArea: hyDetails.data.data.endArea ? hyDetails.data.data.endArea : '',
-      endCity: hyDetails.data.data.endCity ? hyDetails.data.data.endCity : '',
-      endProvince: hyDetails.data.data.endProvince
-        ? hyDetails.data.data.endProvince
-        : '',
-      startArea: hyDetails.data.data.startArea
-        ? hyDetails.data.data.startArea
-        : '',
-      startCity: hyDetails.data.data.startCity
-        ? hyDetails.data.data.startCity
-        : '',
-      startProvince: hyDetails.data.data.startProvince
-        ? hyDetails.data.data.startProvince
-        : ''
-    }
-    let code = await getCode($axios, hyDetails.data.data.endProvince)
-    let zxList = await getCity($axios, code, hyDetails.data.data.startCity)
-    //货主档案
-    let archivals = await $axios
-      .post('/28-web/shipper/archival?shipperId=' + query.shipperId)
-      .catch(err => {
-        console.log('archivals', err)
-      })
+      startProvince: queryCitys.endProvince,
+      startCity: queryCitys.endCity
+    })
     if (archivals.data.status === 200) {
       MUTUAL.GETCREDIT(archivals)
     }
-    //顶部轮播
-    let newLists = await $axios.get('/28-web/lclOrder/newList').catch(err => {
-      console.log('newLists:', err)
-    })
-    //货源列表
-    let huoInfoLists = await $axios
-      .post('/28-web/lclOrder/list', parm)
-      .catch(err => {
-        console.log('huoInfoLists:', err)
-      })
-    let queryCitys = getSEListParams(huoInfoLists.data.data.list)
-    //货源列表
-    let huoInfoListst = await $axios
-      .post('/28-web/lclOrder/list', {
-        currentPage: 1,
-        pageSize: 10,
-        startProvince: queryCitys.endProvince,
-        startCity: queryCitys.endCity
-      })
-      .catch(err => {
-        console.log('huoInfoListst:', err)
-      })
-    //最新货源信息
-    let newestHuoyuanRes = await $axios
-      .post('/28-web/lclOrder/shipper/lastList', { shipperId: query.shipperId })
-      .catch(err => {
-        console.log('newestHuoyuanRes:', err)
-      })
-    // 货主综合力评估
-    let huoComprehensives = await $axios
-      .get('/28-web/shipper/comprehensive?shipperId=' + query.shipperId)
-      .catch(err => {
-        console.log('huoComprehensives:', err)
-      })
-    //货源热门搜索
-    let hotSearchs = await $axios
-      .get('/28-web/hotSearch/supply/detail/links')
-      .catch(err => {
-        console.log('hotSearchs')
-      })
-    //企业人气榜
-    let popularitys = await $axios
-      .get('/28-web/logisticsCompany/popularity')
-      .catch(err => {
-        console.log('popularitys')
-      })
-    //底部推荐
-    let huoLinks = await $axios
-      .post('/28-web/lclOrder/detail/related/links', parm1)
-      .catch(err => {
-        console.log('huoLinks', err)
-      })
     huoLinks.data.data.brandOrder.links.forEach(item => {
       MUTUAL.HREFLINKS(item)
     })
@@ -1142,7 +1096,6 @@ export default {
       let rollContainer_h = $('.list_new_box').height()
       let roll = $('.zx_sx_new')
       let l = this.newestHuoyuanRe.length
-      //  当不足一页的数据时，不需要滚动展示
       if (l > 8) {
         roll.append(roll.html())
         let number = 4
@@ -1187,14 +1140,9 @@ export default {
           currentPage: 1,
           pageSize: 7 - l
         }
-        this.$axios
-          .post('/28-web/lclOrder/list', obj)
-          .then(res => {
-            this.dataset = res.data.data.list
-          })
-          .catch(err => {
-            console.log('huoComprehensives4:', err)
-          })
+        this.$axios.post('/28-web/lclOrder/list', obj).then(res => {
+          this.dataset = res.data.data.list
+        })
       } else {
         this.isShowMessge = false
       }
@@ -1230,7 +1178,7 @@ export default {
   methods: {
     showMoblieFn() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       if (access_token && user_token) {
         this.checkMoblie = true
         this.check = this.hyDetail.mobile
@@ -1240,9 +1188,8 @@ export default {
       }
     },
     checkobile() {
-      // this.isMobile = !this.isMobile
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       if (access_token && user_token) {
         this.isMobile = true
         this.mobile = this.hyDetail.mobile
@@ -1261,7 +1208,7 @@ export default {
     },
     collected() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       this.isShowCollect = !this.isShowCollect
       if (!this.isShowCollect) {
         this.handle = 'collect'
@@ -1283,7 +1230,7 @@ export default {
     },
     openAdd() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       this.getAddress()
       if (access_token && user_token) {
         this.$axios
@@ -1301,9 +1248,6 @@ export default {
             if (res.data.errorInfo) {
               layer.msg(res.data.errorInfo)
             }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
           })
       } else {
         this.isShowAdd = true
@@ -1317,7 +1261,7 @@ export default {
     },
     openHelp() {
       let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken')
+      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       this.getAddress()
       if (access_token && user_token) {
         this.$axios
@@ -1335,9 +1279,6 @@ export default {
             if (res.data.errorInfo) {
               layer.msg(res.data.errorInfo)
             }
-          })
-          .catch(err => {
-            console.log('提交捕获异常')
           })
       } else {
         this.isShowHelp = true
@@ -1384,7 +1325,6 @@ export default {
     clickImg(int) {
       this.showImg = int
     },
-    //点击换一个
     findAnother() {
       let _this = this
       let obj = {
@@ -1395,18 +1335,13 @@ export default {
         startCity: this.hyDetail.startCity,
         startProvince: this.hyDetail.startProvince
       }
-      this.$axios
-        .post('/28-web/lclOrder/another', obj)
-        .then(res => {
-          if (res.data.status === 200) {
-            window.location.href = `/huoyuan/detail?id=${
-              res.data.data.id
-            }&shipperId=${res.data.data.shipperId}`
-          }
-        })
-        .catch(err => {
-          console.log('捕获异常')
-        })
+      this.$axios.post('/28-web/lclOrder/another', obj).then(res => {
+        if (res.data.status === 200) {
+          window.location.href = `/huoyuan/detail?id=${
+            res.data.data.id
+          }&shipperId=${res.data.data.shipperId}`
+        }
+      })
     }
   }
 }

@@ -17,7 +17,7 @@
           <div
             class="item flex"
             :class="[index === listHuoYuan.length -1 ?'':'b_b']"
-            :style="{'color':$store.state.m.huoyuan.orderBy.value === item.value?'#54A7FF':''}"
+            :style="{'color':$store.state.m.huoyuan.queryOrderType.value === item.value?'#54A7FF':''}"
             v-for="(item,index) in listHuoYuan"
             :key="index"
             @click="selectRelease(item)"
@@ -79,8 +79,8 @@ export default {
     return {
       showMask: false,
       listHuoYuan: [
-        { name: '最新发布', value: 'creditDesc' },
-        { name: '价格最高', value: 'weightPriceAsc' }
+        { name: '最新发布', value: 1 },
+        { name: '价格最高', value: 2 }
       ],
       listCheYuan: [
         { name: '最新发布', value: 'createTimeDesc' },

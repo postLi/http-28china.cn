@@ -17,6 +17,10 @@
   padding: 10px;
 }
 
+.p_20 {
+  padding: 20px;
+}
+
 .p_l5 {
   padding-right: 5px;
 }
@@ -27,7 +31,7 @@
 
 .fl, .p_title_box > .title, .p_title_box .title_txt, .p_owner_list li, .p_hy_list > li, .p_hy_info .hy_info_list > li, .p_hy_info .hy_info_text_list > li, .p_hy_groom .gr_title, .p_hy_groom .gr_txt, .p_hy_groom .gr_sch, .p_hy_groom .gr_sch .gr_sch_city,
 .p_hy_groom .gr_sch .gr_sch_icon,
-.p_hy_groom .gr_sch .gr_sch_btn, .p_live .live_txt, .p_co_owner_list > li, .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name, .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_icon_tuijian, .p_co_owner_list > li .rank_txt_groom > span, .p_our_virtue .our_virtue_list > li, .p_answers .answers_list > li, .p_me_groom .gr_operate > a, .p_hot_line > li, .p_hot_line > li .h_place > span, .p_hot_line > li .h_company .icon_box .icon, .p_hot_line > li .type_box .icon_list .item_icon {
+.p_hy_groom .gr_sch .gr_sch_btn, .p_live .live_txt, .p_co_owner_list > li, .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name, .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_icon_tuijian, .p_co_owner_list > li .rank_txt_groom > span, .p_our_virtue .our_virtue_list > li, .p_answers .answers_list > li, .p_me_groom .gr_operate > a, .p_hot_line > li, .p_hot_line > li .h_place > span, .p_hot_line > li .h_company .icon_box .icon, .p_hot_line > li .type_box .icon_list .item_icon, .p_zx_info .info_list > li, .p_zx_info .info_text_list > li {
   float: left;
 }
 
@@ -56,7 +60,7 @@
   position: absolute;
 }
 
-.ellipsis, .p_go_city .area > span.area_city, .p_hy_list > li .md_box .area > span.area_city, .p_go_city .city, .p_hy_list > li .md_box .city, .p_owner_list .owner_info .owner_name, .p_hy_list > li .list_goods > span.list_goods_name, .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name, .p_hot_line > li .type_box {
+.ellipsis, .p_go_city .area > span.area_city, .p_hy_list > li .md_box .area > span.area_city, .p_go_city .city, .p_hy_list > li .md_box .city, .p_owner_list .owner_info .owner_name, .p_hy_list > li .list_goods > span.list_goods_name, .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name, .p_hot_line > li .type_box, .p_zx_info .info_user_box .info_user_text > span.info_user_text_goods {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -234,23 +238,10 @@
   border-top: 2px solid #2577e3;
 }
 
-.p_subtitle {
-  margin: 20px;
-  line-height: 25px;
-  font-size: 18px;
-  color: #333;
-}
-
-.p_subtitle .iconfont {
-  padding-right: 5px;
-  font-size: 20px;
-}
-
 /*前往城市*/
 .p_go_city, .p_hy_list > li .md_box {
-  margin-top: 10px;
-  height: 48px;
-  line-height: 48px;
+  height: 50px;
+  line-height: 50px;
   white-space: nowrap;
 }
 
@@ -269,7 +260,7 @@
 }
 
 .p_go_city .area > span.area_qx, .p_hy_list > li .md_box .area > span.area_qx {
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
   color: #666;
 }
@@ -300,12 +291,28 @@
 }
 
 .p_go_area, .p_hy_list > li .md_area {
+  overflow: hidden;
+  margin: 10px 0;
+  height: 40px;
   height: auto;
   line-height: 20px;
 }
 
 .p_go_area .city, .p_hy_list > li .md_area .city {
-  line-height: 48px;
+  line-height: 40px;
+}
+
+.p_go_area .city .area, .p_hy_list > li .md_area .city .area {
+  float: left;
+}
+
+.p_go_area .city .city-joint, .p_hy_list > li .md_area .city .city-joint {
+  height: 40px;
+  line-height: 40px;
+}
+
+.p_go_area .city .city-joint, .p_hy_list > li .md_area .city .city-joint {
+  margin: 0 3px;
 }
 
 /*********分类导航***************/
@@ -348,7 +355,6 @@
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
-  margin-bottom: 25px;
   height: 170px;
   overflow: hidden;
   background: url("../../static/images/huizong/user_bj.jpg") no-repeat;
@@ -378,8 +384,8 @@
   display: inline-block;
   margin: 0 5px;
   width: 135px;
-  height: 40px;
-  line-height: 40px;
+  height: 28px;
+  line-height: 28px;
   font-size: 14px;
   text-align: center;
   color: #1d83fe;
@@ -471,6 +477,10 @@
   border: 1px solid #daeefc;
 }
 
+.p_hy_list > li > a span {
+  color: #333;
+}
+
 .p_hy_list > li .hd_box {
   overflow: hidden;
   line-height: 20px;
@@ -482,23 +492,6 @@
   color: #13b31e;
 }
 
-.p_hy_list > li .md_area {
-  overflow: hidden;
-}
-
-.p_hy_list > li .md_area .city, .p_hy_list > li .md_area .city-joint, .p_hy_list > li .md_area .area {
-  float: left;
-}
-
-.p_hy_list > li .md_area .city, .p_hy_list > li .md_area .city-joint {
-  height: 48px;
-  line-height: 48px;
-}
-
-.p_hy_list > li .md_area .city-joint {
-  margin: 0 3px;
-}
-
 .p_hy_list > li .type_box {
   overflow: hidden;
   margin-bottom: 5px;
@@ -508,17 +501,17 @@
   color: #333;
 }
 
-.p_hy_list > li .type_box .item {
-  padding-left: 5px;
+.p_hy_list > li .type_box .type_item {
+  padding-right: 5px;
   color: #333;
 }
 
-.p_hy_list > li .type_box .item b {
+.p_hy_list > li .type_box .type_item b {
   font-weight: normal;
   color: #ff5b1a;
 }
 
-.p_hy_list > li .type_box .line-through {
+.p_hy_list > li .type_box .type_line_through {
   text-decoration: line-through;
 }
 
@@ -555,6 +548,7 @@
 
 /************最新货源************/
 .p_hy_info {
+  overflow: hidden;
   margin: 0 auto 90px auto;
   width: 1398px;
   height: 128px;
@@ -1247,7 +1241,7 @@
 .p_hy_groom .gr_sch .gr_sch_icon,
 .p_hy_groom .gr_sch .p_hot_line > li .h_praise .gr_sch_icon, .p_hot_line > li .h_praise
 .p_hy_groom .gr_sch .gr_sch_btn,
-.p_hy_groom .gr_sch .p_hot_line > li .h_praise .gr_sch_btn, .p_hot_line > li .h_praise .p_live .live_txt, .p_live .p_hot_line > li .h_praise .live_txt, .p_hot_line > li .h_praise .p_co_owner_list > li, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_name, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_icon_tuijian, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_icon_tuijian, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt_groom > span, .p_co_owner_list > li .p_hot_line > li .h_praise .rank_txt_groom > span, .p_hot_line > li .h_praise .p_our_virtue .our_virtue_list > li, .p_our_virtue .p_hot_line > li .h_praise .our_virtue_list > li, .p_hot_line > li .h_praise .p_answers .answers_list > li, .p_answers .p_hot_line > li .h_praise .answers_list > li, .p_hot_line > li .h_praise .p_me_groom .gr_operate > a, .p_me_groom .p_hot_line > li .h_praise .gr_operate > a, .p_hot_line > li .h_praise .p_hot_line > li, .p_hot_line > li .h_praise .h_place > span, .p_hot_line > li .h_praise .h_company .icon_box .icon, .p_hot_line > li .h_company .icon_box .h_praise .icon, .p_hot_line > li .h_praise .type_box .icon_list .item_icon, .p_hot_line > li .type_box .icon_list .h_praise .item_icon {
+.p_hy_groom .gr_sch .p_hot_line > li .h_praise .gr_sch_btn, .p_hot_line > li .h_praise .p_live .live_txt, .p_live .p_hot_line > li .h_praise .live_txt, .p_hot_line > li .h_praise .p_co_owner_list > li, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_name, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_icon_tuijian, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_icon_tuijian, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt_groom > span, .p_co_owner_list > li .p_hot_line > li .h_praise .rank_txt_groom > span, .p_hot_line > li .h_praise .p_our_virtue .our_virtue_list > li, .p_our_virtue .p_hot_line > li .h_praise .our_virtue_list > li, .p_hot_line > li .h_praise .p_answers .answers_list > li, .p_answers .p_hot_line > li .h_praise .answers_list > li, .p_hot_line > li .h_praise .p_me_groom .gr_operate > a, .p_me_groom .p_hot_line > li .h_praise .gr_operate > a, .p_hot_line > li .h_praise .p_hot_line > li, .p_hot_line > li .h_praise .h_place > span, .p_hot_line > li .h_praise .h_company .icon_box .icon, .p_hot_line > li .h_company .icon_box .h_praise .icon, .p_hot_line > li .h_praise .type_box .icon_list .item_icon, .p_hot_line > li .type_box .icon_list .h_praise .item_icon, .p_hot_line > li .h_praise .p_zx_info .info_list > li, .p_zx_info .p_hot_line > li .h_praise .info_list > li, .p_hot_line > li .h_praise .p_zx_info .info_text_list > li, .p_zx_info .p_hot_line > li .h_praise .info_text_list > li {
   margin-right: 10px;
 }
 
@@ -1255,7 +1249,7 @@
 .p_hy_groom .gr_sch .gr_sch_icon > span,
 .p_hy_groom .gr_sch .p_hot_line > li .h_praise .gr_sch_icon > span, .p_hot_line > li .h_praise
 .p_hy_groom .gr_sch .gr_sch_btn > span,
-.p_hy_groom .gr_sch .p_hot_line > li .h_praise .gr_sch_btn > span, .p_hot_line > li .h_praise .p_live .live_txt > span, .p_live .p_hot_line > li .h_praise .live_txt > span, .p_hot_line > li .h_praise .p_co_owner_list > li > span, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name > span, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_name > span, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_icon_tuijian > span, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_icon_tuijian > span, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt_groom > span > span, .p_co_owner_list > li .p_hot_line > li .h_praise .rank_txt_groom > span > span, .p_hot_line > li .h_praise .p_our_virtue .our_virtue_list > li > span, .p_our_virtue .p_hot_line > li .h_praise .our_virtue_list > li > span, .p_hot_line > li .h_praise .p_answers .answers_list > li > span, .p_answers .p_hot_line > li .h_praise .answers_list > li > span, .p_hot_line > li .h_praise .p_me_groom .gr_operate > a > span, .p_me_groom .p_hot_line > li .h_praise .gr_operate > a > span, .p_hot_line > li .h_praise .p_hot_line > li > span, .p_hot_line > li .h_praise .h_place > span > span, .p_hot_line > li .h_praise .h_company .icon_box .icon > span, .p_hot_line > li .h_company .icon_box .h_praise .icon > span, .p_hot_line > li .h_praise .type_box .icon_list .item_icon > span, .p_hot_line > li .type_box .icon_list .h_praise .item_icon > span {
+.p_hy_groom .gr_sch .p_hot_line > li .h_praise .gr_sch_btn > span, .p_hot_line > li .h_praise .p_live .live_txt > span, .p_live .p_hot_line > li .h_praise .live_txt > span, .p_hot_line > li .h_praise .p_co_owner_list > li > span, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_name > span, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_name > span, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt .rank_txt_tit .txt_tit_icon_tuijian > span, .p_co_owner_list > li .rank_txt .rank_txt_tit .p_hot_line > li .h_praise .txt_tit_icon_tuijian > span, .p_hot_line > li .h_praise .p_co_owner_list > li .rank_txt_groom > span > span, .p_co_owner_list > li .p_hot_line > li .h_praise .rank_txt_groom > span > span, .p_hot_line > li .h_praise .p_our_virtue .our_virtue_list > li > span, .p_our_virtue .p_hot_line > li .h_praise .our_virtue_list > li > span, .p_hot_line > li .h_praise .p_answers .answers_list > li > span, .p_answers .p_hot_line > li .h_praise .answers_list > li > span, .p_hot_line > li .h_praise .p_me_groom .gr_operate > a > span, .p_me_groom .p_hot_line > li .h_praise .gr_operate > a > span, .p_hot_line > li .h_praise .p_hot_line > li > span, .p_hot_line > li .h_praise .h_place > span > span, .p_hot_line > li .h_praise .h_company .icon_box .icon > span, .p_hot_line > li .h_company .icon_box .h_praise .icon > span, .p_hot_line > li .h_praise .type_box .icon_list .item_icon > span, .p_hot_line > li .type_box .icon_list .h_praise .item_icon > span, .p_hot_line > li .h_praise .p_zx_info .info_list > li > span, .p_zx_info .p_hot_line > li .h_praise .info_list > li > span, .p_hot_line > li .h_praise .p_zx_info .info_text_list > li > span, .p_zx_info .p_hot_line > li .h_praise .info_text_list > li > span {
   padding-right: 5px;
 }
 
@@ -1319,4 +1313,150 @@
 
 .p_hot_line > li .h_market .h_market_order {
   color: #999;
+}
+
+/*******专线汇总********/
+.p_zx_info {
+  margin: 35px auto;
+  width: 1400px;
+  height: 200px;
+  font-size: 14px;
+  color: #fff;
+  background: url("../../static/images/huizong/cheyuan/news_bj.png") no-repeat;
+}
+
+.p_zx_info .info_col1 {
+  margin: 50px 0 0 80px;
+  width: 830px;
+  height: 100px;
+}
+
+.p_zx_info .info_tit {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border: 2px solid #00a36f;
+}
+
+.p_zx_info .info_tit > h3 {
+  position: absolute;
+  top: 50%;
+  left: -25px;
+  margin-top: -20px;
+  width: 140px;
+  line-height: 40px;
+  font-size: 20px;
+  color: #00c380;
+  text-align: center;
+}
+
+.p_zx_info .info_user_box {
+  overflow: hidden;
+  margin-left: 50px;
+  width: 600px;
+  height: 60px;
+}
+
+.p_zx_info .info_user_box .info_user_list {
+  overflow: hidden;
+  height: 60px;
+}
+
+.p_zx_info .info_user_box .info_user_info {
+  margin-bottom: 15px;
+  line-height: 22px;
+}
+
+.p_zx_info .info_user_box .info_user_info .info_user_info_user {
+  margin-right: 40px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.p_zx_info .info_user_box .info_user_info .info_user_info_time {
+  color: #999;
+}
+
+.p_zx_info .info_user_box .info_user_text {
+  line-height: 22px;
+  overflow: hidden;
+}
+
+.p_zx_info .info_user_box .info_user_text > span {
+  padding-right: 10px;
+}
+
+.p_zx_info .info_user_box .info_user_text > span.info_user_text_goods {
+  max-width: 380px;
+}
+
+.p_zx_info .info_user_box .info_user_text > span b {
+  font-weight: normal;
+  color: #1d83fe;
+}
+
+.p_zx_info .info_user_box .info_user_text .info_user_text_link {
+  font-size: 16px;
+  color: #1d83fe;
+}
+
+.p_zx_info .info_col2 {
+  margin-top: 10px;
+  height: 100px;
+}
+
+.p_zx_info .info_num {
+  height: 100px;
+  border-left: 1px dashed #ddd;
+}
+
+.p_zx_info .info_num .iconfont {
+  font-weight: bold;
+}
+
+.p_zx_info .info_list {
+  overflow: hidden;
+  height: 60px;
+}
+
+.p_zx_info .info_list > li {
+  margin-left: 45px;
+  width: 90px;
+  line-height: 30px;
+}
+
+.p_zx_info .info_list > li > span {
+  display: block;
+  line-height: 30px;
+  text-align: center;
+}
+
+.p_zx_info .info_list > li > span .iconfont {
+  color: #ff871e;
+  padding-right: 10px;
+}
+
+.p_zx_info .info_list > li > span.info_list_num {
+  font-weight: bold;
+  color: #ff871e;
+}
+
+.p_zx_info .info_text_list {
+  margin-left: 45px;
+  overflow: hidden;
+  height: 40px;
+  line-height: 40px;
+}
+
+.p_zx_info .info_text_list > li {
+  margin-right: 20px;
+}
+
+.p_zx_info .info_text_list > li .iconfont {
+  color: #ff871e;
+}
+
+.p_zx_info .info_text_list > li .hy_info_text_num {
+  padding-left: 10px;
+  color: #ff871e;
 }

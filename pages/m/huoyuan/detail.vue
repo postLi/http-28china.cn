@@ -7,36 +7,30 @@
       class="flex_1"
       style="background-color: #F4F4F4">
       <div class="padding_b_20 b_c_w">
-        <div class="address flex_a">
-          <div class="left flex">
+        <div
+          class="address flex_a"
+          v-for="(item,index) in infoData.aflcLclOrderAddresses"
+          :key="index">
+          <div
+            class="left flex p_r"
+            v-if="index === 0">
             <div class="green_circle"/>
           </div>
-          <div class="height_100 flex_f flex_saf padding_r_20 o_f">
-            <div class="f-32 c-3 oneElisp">
-              广州白云
-            </div>
-            <div class="f-28 c-9 oneElisp">
-              猎德村复建房五区广东省广州市天河区猎德fff
-            </div>
-            <div class="f-28 f_b oneElisp">
-              罗志超 13888888888
-            </div>
-          </div>
-        </div>
-        <div class="address flex_a">
-          <div class="left flex p_r">
+          <div
+            class="left flex p_r"
+            v-if="index === infoData.aflcLclOrderAddresses.length - 1">
             <div class="red_circle"/>
             <div class="line" />
           </div>
           <div class="height_100 flex_f flex_saf padding_r_20 o_f">
-            <div class="f-32 c-3">
-              广州白云
+            <div class="f-32 c-3 oneElisp">
+              {{ item.province }}{{ item.city }}{{ item.area }}
             </div>
-            <div class="f-28 c-9">
-              猎德村复建房五区广东省广州市天河区猎德fff
+            <div class="f-28 c-9 oneElisp">
+              {{ item.viaAddress }}
             </div>
-            <div class="f-28 f_b">
-              罗志超 13888888888
+            <div class="f-28 f_b oneElisp">
+              {{ item.contacts }} {{ item.contactsPhone }}
             </div>
           </div>
         </div>
@@ -46,13 +40,13 @@
         <div
           class="flex_a flex_sb"
           :class="[index !== 0 ?'margin_t_10':'']"
-          v-for="(item,index) in list"
+          v-for="(item,index) in infoData.aflcLclOrderGoodsList"
           :key="index">
           <div class="left">
-            <div class="f-32 c-3">{{ item.name1 }}</div>
-            <div class="f-24 c-9">{{ item.name2 }}</div>
+            <div class="f-32 c-3">{{ item.goodsName }}</div>
+            <div class="f-24 c-9">{{ item.goodsWeight?item.goodsWeight + '公斤/':'' }}{{ item.goodsVolume?item.goodsVolume + '方':'' }}</div>
           </div>
-          <div class="f-28 c-3">{{ item.name3 }}</div>
+          <div class="f-28 c-3">X {{ item.goodsNum }}</div>
         </div>
       </div>
       <div class="b_c_w">
@@ -64,27 +58,31 @@
         style="padding-bottom: 0.3rem">
         <div class="content1 flex_r f-28">
           <div class="c-9 left">货物合计：</div>
-          <div class="c-3">300公斤/50立方/210件</div>
+          <div class="c-3">
+            {{ infoData.aflcLclOrder.goodsWeight?infoData.aflcLclOrder.goodsWeight + '公斤/':'' }}
+            {{ infoData.aflcLclOrder.goodsVolume?infoData.aflcLclOrder.goodsVolume + '立方/':'' }}
+            {{ infoData.aflcLclOrder.goodsNum?infoData.aflcLclOrder.goodsNum + '件':'' }}
+          </div>
         </div>
         <div class="content1 flex_r f-28">
           <div class="c-9 left">出&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;价：</div>
-          <div style="color: #FF4400">￥1325.00</div>
+          <div style="color: #FF4400">{{ infoData.aflcLclOrder.goodsPrice ? '￥'+ infoData.aflcLclOrder.goodsPrice:'价格面议' }}</div>
         </div>
         <div class="content1 flex_r f-28">
           <div class="c-9 left">装货时间：</div>
-          <div class="c-3">2019/01/15 全天（00:00-24:00）</div>
+          <div class="c-3">{{ infoData.aflcLclOrder.loadingTime }} {{ infoData.aflcLclOrder.loadingTimeFragment }}</div>
         </div>
         <div class="content1 flex_r f-28">
           <div class="c-9 left">额外需求：</div>
-          <div class="c-3">回单(传真)/回款20000元/需要发票/送货上门</div>
+          <div class="c-3">{{ infoData.aflcLclOrder.extraName?infoData.aflcLclOrder.extraName:'无' }}</div>
         </div>
         <div class="content1 flex_r f-28">
           <div class="c-9 left">货源类型：</div>
-          <div class="c-3">9.6米、加长/单次急发货物</div>
+          <div class="c-3">{{ infoData.aflcLclOrder.goodsTypeName?infoData.aflcLclOrder.goodsTypeName:'无' }}</div>
         </div>
         <div class="content1 flex_r f-28">
-          <div class="c-9 left">其他服务：</div>
-          <div class="c-3">额外保障服务</div>
+          <div class="c-9 left">备注信息：</div>
+          <div class="c-3">{{ infoData.aflcLclOrder.remark?infoData.aflcLclOrder.remark:'无' }}</div>
         </div>
       </div>
 
@@ -93,11 +91,18 @@
         style="padding-bottom: 0.3rem">
         <div class="content1 flex_a f-28 margin_t_20">
           <div class="c-9 left">货源单号：</div>
-          <div class="c-3 flex_a">AFWL12099763217841345 <div class="copy flex f-20 margin_l_20">复制</div></div>
+          <div class="c-3 flex_a ">
+            <div> {{ infoData.aflcLclOrder.orderSerial }} </div>
+            <div
+              class="copy flex f-20 margin_l_20"
+              v-clipboard="copyData"
+              @success="handleSuccess"
+              @error="handleError">复制</div>
+          </div>
         </div>
         <div class="content1 flex_r f-28">
           <div class="c-9 left">发布时间：</div>
-          <div class="c-3">2018/05/15 16:35:08</div>
+          <div class="c-3">{{ infoData.aflcLclOrder.createTime }}</div>
         </div>
       </div>
 
@@ -107,15 +112,42 @@
 </template>
 <script>
 import MyTop from '../../../components/m/myTop'
+import Vue from 'vue'
+import { Toast } from 'cube-ui'
+import VueClipboards from 'vue-clipboards'
+Vue.use(VueClipboards)
+Vue.use(Toast)
 export default {
   components: { MyTop },
   layout: 'm',
   data() {
+    return {}
+  },
+  async asyncData({ $axios, app, query, error }) {
+    const infoData = await $axios.get('/28-web/lclOrder/app/detail/' + query.id)
+    if (infoData.data.status === 200) {
+      let item = infoData.data.data
+      let arr = (item.id || '').split('')
+      let num = 0
+      arr.forEach(el => {
+        num += el.charCodeAt(0) || 0
+      })
+      infoData.data.data.num = (num % 30) + 1
+    }
     return {
-      list: [
-        { name1: '外星人笔记本电脑', name2: '36公斤/0.2方', name3: 'X 385' },
-        { name1: '外星人笔记本电脑', name2: '36公斤/0.2方', name3: 'X 385' }
-      ]
+      copyData:
+        infoData.data.status === 200
+          ? infoData.data.data.aflcLclOrder.orderSerial
+          : '',
+      infoData: infoData.data.status === 200 ? infoData.data.data : {}
+    }
+  },
+  methods: {
+    handleSuccess(e) {
+      this.$createToast({ txt: '复制成功', type: 'txt' }).show()
+    },
+    handleError(e) {
+      this.$createToast({ txt: '复制失败', type: 'txt' }).show()
     }
   }
 }

@@ -5,7 +5,7 @@ $border_color: #dadada; //边框的颜色
 $line_color: #eee; //分割线的颜色
 $gray: #666;
 $light_gray: #999;
-$light_Violet: #c8b6e0; //淡紫色
+// $light_Violet: #c8b6e0; //淡紫色
 $blue: #1d83fe; //蓝色
 $btn_blue_color:#3f94ee;
 $tit_blue_color:#2577e3; //蓝的标题颜色
@@ -51,8 +51,8 @@ $f_12: 12px;
   font-size: $f;
   color: $tit_color;
 
-  .item {
-    padding-left: 5px;
+  .type_item {
+    padding-right: 5px;
     color: $tit_color;
 
     b {
@@ -61,7 +61,7 @@ $f_12: 12px;
     }
   }
 
-  .line-through {
+  .type_line_through {
     text-decoration: line-through;
   }
 
@@ -105,6 +105,9 @@ $f_12: 12px;
 
 .p_10 {
   padding: 10px;
+}
+.p_20{
+  padding: 20px;
 }
 .p_l5{ padding-right: 5px;}
 .p_r20{ padding-right: 20px;}
@@ -301,29 +304,29 @@ $f_12: 12px;
   }
 }
 
-.p_subtitle {
-  margin: 20px;
-  line-height: 25px;
-  font-size: $f_18;
-  color: $tit_color;
+// .p_subtitle {
+//   margin: 20px;
+//   line-height: 25px;
+//   font-size: $f_18;
+//   color: $tit_color;
 
-  .iconfont {
-    padding-right: 5px;
-    font-size: $f_20;
-  }
-}
+//   // .iconfont {
+//   //   padding-right: 5px;
+//   //   font-size: $f_20;
+//   // }
+// }
 
 /*前往城市*/
-.p_go_city {
-  margin-top: 10px;
-  height: 48px;
-  line-height: 48px;
+.p_go_city { 
+  height: 50px;
+  line-height: 50px;
   white-space: nowrap;
   >div,
   span {
     display: inline-block;
   }
 .area{
+  // margin: 10px 0;
   >span{
     display: block;
     &.area_city{
@@ -332,7 +335,7 @@ $f_12: 12px;
       @extend .ellipsis;
     }
     &.area_qx{
-      font-size: $f_13;
+      font-size: $f_12;
       text-align: center;
       color: $gray;
     }
@@ -365,11 +368,18 @@ $f_12: 12px;
   }
 }
 .p_go_area{
+  overflow: hidden;
+  margin: 10px 0;
+  height:40px;
   height: auto;
   line-height:20px;
   .city{
-    line-height: 48px;
+    line-height: 40px;
+    .area{float: left;}
+    .city-joint{height: 40px; line-height: 40px;}
+    .city-joint{ margin: 0 3px;}
   }
+  // .joint-label{line-height: 40px;}
 }
 /*********分类导航***************/
 .p_type_nav {
@@ -412,7 +422,7 @@ $f_12: 12px;
 /*************登录*****************/
 /*用户登录*/
 .p_user_login {
-  margin-bottom: 25px;
+  // margin-bottom: 25px;
   height: 170px;
   overflow: hidden;
   background: url('../../static/images/huizong/user_bj.jpg') no-repeat;
@@ -441,8 +451,8 @@ $f_12: 12px;
         display: inline-block;
         margin: 0 5px;
         width: 135px;
-        height: 40px;
-        line-height: 40px;
+        height: 28px;
+        line-height: 28px;
         font-size: $f_14;
         text-align: center;
         color: $blue;
@@ -530,6 +540,9 @@ $f_12: 12px;
     font-size: $f_13;
     background: $bj_pale_blue;
     border: 1px solid #daeefc;
+    >a{
+      span{color: $tit_color;}
+    }
     .hd_box {
       overflow: hidden;   
       line-height: 20px;
@@ -563,10 +576,6 @@ $f_12: 12px;
     }
     .md_area{
        @extend .p_go_area;
-       overflow: hidden;
-       .city,.city-joint,.area{float: left;}
-       .city,.city-joint{height: 48px; line-height: 48px;}
-       .city-joint{ margin: 0 3px;}
      }
     .type_box {
       overflow: hidden;
@@ -607,6 +616,7 @@ $f_12: 12px;
 
 /************最新货源************/
 .p_hy_info {
+  overflow: hidden;
   margin: 0 auto 90px auto;
   width: 1398px;
   height: 128px;
@@ -1427,3 +1437,144 @@ $f_12: 12px;
     }
   }
 }
+
+/*******专线汇总********/
+.p_zx_info {
+  margin: 35px auto;
+  width: $w_1400;
+  height: 200px;
+  font-size: $f_14;
+  color: $white;
+  background: url('../../static/images/huizong/cheyuan/news_bj.png') no-repeat;
+
+  .info_col1 {
+    margin: 50px 0 0 80px;
+    width: 830px;
+    height: 100px;
+  }
+
+  .info_tit {
+    position: relative;
+    width: 88px;
+    height: 88px;
+    border: 2px solid #00a36f;
+
+    >h3 {
+      position: absolute;
+      top: 50%;
+      left: -25px;
+      margin-top:-20px;
+      width: 140px;
+      line-height: 40px;
+      font-size: 20px;
+      color:#00c380;
+      text-align: center;
+      // background:#011226;
+    }
+  }
+
+  .info_user_box {
+    overflow: hidden;
+    margin-left: 50px;
+    width: 600px;
+    height: 60px;
+
+    .info_user_list {
+      overflow: hidden;
+      height: 60px;
+      // background-color: #bbb;
+    }
+
+    .info_user_info {
+      margin-bottom: 15px;
+      line-height: 22px;
+
+      .info_user_info_user {
+        margin-right: 40px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .info_user_info_time {
+        color: $light_gray;
+      }
+    }
+
+    .info_user_text {
+      line-height: 22px;
+      overflow: hidden;
+      >span {
+        padding-right: 10px;
+        &.info_user_text_goods{
+          max-width: 380px; 
+          @extend .ellipsis;
+        }
+        b {
+          font-weight: normal;
+          color: $blue;
+        }
+      }
+
+      .info_user_text_link {
+        font-size: 16px;
+        color: $blue;
+      }
+    }
+  }
+
+  .info_col2 {
+    margin-top: 10px;
+    height: 100px;
+  }
+
+  .info_num {
+    height: 100px;
+    border-left: 1px dashed #ddd;
+    .iconfont{font-weight: bold;}
+  }
+  .info_list {
+    overflow: hidden;
+    height: 60px;
+    >li {
+      @extend .fl;
+      margin-left: 45px;
+      width: 90px;
+      line-height: 30px;
+      >span {
+        display: block;
+        line-height: 30px;
+        text-align: center;
+        .iconfont {
+          color: $light_orange;
+          padding-right: 10px;
+        }
+        &.info_list_num {
+          font-weight: bold;
+          color: $light_orange;
+        }
+      }
+    }
+  }
+
+  .info_text_list {
+    margin-left: 45px;
+    overflow: hidden;
+    height: 40px;
+    line-height: 40px;
+
+    >li {
+      @extend .fl;
+      margin-right: 20px;
+
+      .iconfont {
+        color: $light_orange;
+      }
+
+      .hy_info_text_num {
+        padding-left: 10px;
+        color: $light_orange;
+      }
+    }
+  }
+}
+

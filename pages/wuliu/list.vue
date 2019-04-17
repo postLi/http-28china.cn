@@ -85,7 +85,7 @@
                   </div>
                   <!-- <span>&nbsp;园区名称&nbsp;：</span> -->
                   <input
-                    style="height:45px;width:270px;    margin-left: 25px;"
+                    style="height:45px;width:336px;    margin-left: 25px;"
                     v-model="vo.parkName"
                     type="text"
                     class="list_input"
@@ -103,7 +103,7 @@
                   value="重置 "
                   readonly=""
                   class="list_button"
-                  @click="reload()"> -->
+                  @click="reload()" -->
                 </form>
               </dd>
 
@@ -116,64 +116,64 @@
             target="_blank"><button
               id="yd_cx1"
               class="layui-btn"
-              style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#3f94ee;float:right;height:45px;line-height:45px"
+              style="width: 252px;margin-top: 10px;border-radius: 3px;margin-left: 10px;background:#2577ff;float:right;height:45px;line-height:45px"
           >物流公司入驻</button></a></div>
 
         </div>
         <div
           class="clearfix"
-          style="clear: both;"><i>热门：</i>
+          style="clear: both;font-weight:400;;"><i>热门：</i>
           <a
 
             href="/wuliu?locationProvince=上海市&locationCity=上海市"
             target="_blank">
             <span
-            style="padding-right:10px">上海</span>
+            style="padding-right:10px;font-weight:400;">上海</span>
           </a>
           <a
 
             href="/wuliu?locationProvince=北京市&locationCity=北京市"
             target="_blank">
             <span
-            style="padding-right:10px">北京</span>
+            style="padding-right:10px;font-weight:400;">北京</span>
           </a>
           <a
 
             href="/wuliu?locationProvince=广东省&locationCity=深圳市"
             target="_blank">
             <span
-            style="padding-right:10px">深圳</span>
+            style="padding-right:10px;font-weight:400;">深圳</span>
           </a>
           <a
 
             href="/wuliu?locationProvince=重庆市&locationCity=重庆市"
             target="_blank">
             <span
-            style="padding-right:10px">重庆</span>
+            style="padding-right:10px;font-weight:400;">重庆</span>
           </a>
           <a
             href="/wuliu?locationProvince=天津市&locationCity=天津市"
             target="_blank">
             <span
-            style="padding-right:10px">天津</span>
+            style="padding-right:10px;font-weight:400;">天津</span>
           </a>
           <a
             href="/wuliu?locationProvince=江苏省&locationCity=苏州市"
             target="_blank">
             <span
-            style="padding-right:10px">苏州</span>
+            style="padding-right:10px;font-weight:400;">苏州</span>
           </a>
           <a
             href="/wuliu?locationProvince=四川省&locationCity=成都市"
             target="_blank">
             <span
-            style="padding-right:10px">成都</span>
+            style="padding-right:10px;font-weight:400;">成都</span>
           </a>
           <a
             href="/wuliu?locationProvince=湖北省&locationCity=武汉市"
             target="_blank">
             <span
-            style="padding-right:10px">武汉</span>
+            style="padding-right:10px;font-weight:400;">武汉</span>
           </a>
         </div>
         <div class="tuijian">
@@ -199,7 +199,7 @@
               <li
                 v-for="(item,i) in getRecommendList"
                 :key="i"
-                style="float:left;    margin-right: 20px;background: #fff;">
+                style="float:left;margin-right: 20px;background: #fff;">
                 <a
                   :href="'/wuliu/detail?id=' + item.id"
                   target="_blank"
@@ -211,25 +211,24 @@
                   <span
                     v-if="item.isInvestment==true"
                     style="position:absolute; top: -121px;;left:0px;background:linear-gradient(67deg,rgba(249,72,72,1),rgba(255,117,117,1));color:rgb(255,255,255);padding: 5px 20px;border:1px solid #F04F4F;border-radius:0px 0px 6px 6px;;box-shadow:2px 5px 5px -2px #DADADA">招商中</span>
-                </a>
-                <!-- ourRatings -->
-                <p style="width: 260px;text-align: left;padding-top:20px;color:#333333"><a 
-                  :href="'/wuliu/detail?id=' + item.id"
-                  target="_blank"><span
+               
+                  <!-- ourRatings -->
+                  <p style="width: 260px;text-align: left;padding-top:20px;color:#333333"><span
                     style="padding-left:10px"
-                >{{ item.parkName.length>15?item.parkName.substring(0,15):item.parkName }}</span></a>
+                  >{{ item.parkName.length>15?item.parkName.substring(0,15):item.parkName }}</span>
 
-                </p>
-                <p style="width: 260px;text-align: left;padding:10px 0;"><span
-                style="padding:0 10px">推荐指数</span><img
+                  </p>
+                  <p style="width: 260px;text-align: left;padding:10px 0;"><span
+                  style="padding:0 10px">推荐指数</span><img
 
-                  v-for="(item,i) in item.ourRatings"
-                  :key="i"
-                  src="../../static/yuanqu/images/zhishu.png"
-                  alt=""
-                >
+                    v-for="(item,i) in item.ourRatings"
+                    :key="i"
+                    src="../../static/yuanqu/images/zhishu.png"
+                    alt=""
+                  >
 
-              </p></li>
+                  </p>
+              </a></li>
             </ul>
           </div>
         </div>
@@ -243,7 +242,9 @@
               style="padding:10px 0 5px;height: 30px; line-height: 30px;">
               <h5 style="color:#2577E3;font-size:20px;float: left;padding-left:10px;">新入驻园区
               </h5>
-              <a href=""><span style="float:right;margin-right:30px"> 更多</span></a>
+              <a 
+                href="/wuliu"
+                target="_blank"><span style="float:right;margin-right:30px"> 更多</span></a>
             </div>
             <div
               v-if=" getNewestList.list ==[] "
@@ -315,9 +316,9 @@
                 <!--<label class="layui-form-label">短输入框</label> -->
                 <div
                   class="layui-input-inline"
-                  style="margin: 30px 20px 10px 50px;float: left;">
+                  style="margin: 30px 0px 10px 50px;float: left;">
                   <input
-                    style="height: 38px;line-height: 1.3;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;"
+                    style="width:200px;height: 38px;line-height: 38px;border-width: 1px;border-style: solid;background-color: #fff;border-radius: 2px;padding-left: 10px;border-color: #D2D2D2;border-radius:5px"
                     type="text"
                     maxlength="11"
                     placeholder="输入您的手机号"
@@ -326,22 +327,22 @@
                     style="width: 90px;height: 38px;line-height: 38px;text-align: center;background: #2577E3;display: inline-block;color:#fff;font-size:16px;    cursor: pointer;"
                     @click="openYuanqu">入驻</span>
                   <p
-                    style="color:red;padding-top:5px"
+                    style="color:red;padding-top:10px;padding-left: 20px;"
                     v-if="isMobile">请输入正确手机号</p>
-                  <p style="padding-top: 25px;color:#2577E3;padding-left: 20px;">入驻免费提供发布信息，园区宣传</p>
+                  <p style="padding-top: 10px;color:#2577E3;padding-left: 20px;font-size: 16px;">入驻免费提供发布信息，园区宣传</p>
                   <!--<label class="layui-form-label">园区入驻1</label>-->
                 </div>
                 <div
-                  style="display: inline-block;margin:20px;background:#FFFEE2;padding: 10px;"
+                  style="display: inline-block;margin:24px;background:#FFFEE2;padding: 15px;"
                   class="zizhu_bot_r">
                   <img
                     src="../../static/yuanqu/images/down.png"
                     alt=""
-                    style="width: 90px;height: 80px;float:left">
+                    style="width: 90px;height: 88px;float:left">
                   <p style="width: 150px;float:left;padding-left: 10px"><a
 
                     href="http://h5.28tms.com/"
-                    target="_blank">下载<i style="color:rgb(0,102,255)">【28快运APP】</i>，随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a></p>
+                    target="_blank">下载<i style="color:rgb(0,102,255)">【28快运APP】</i>随时随地查看专线，在线下单推荐优质承运商，便捷查询运单</a></p>
                 </div>
               </div>
             </div>
@@ -356,7 +357,7 @@
             <h5 style="color:#2577E3;font-size:20px;float: left;font-weight: bold;">热门园区</h5>
             <span style="padding-left:30px;height: 24px;line-height: 24px;color:#666;font-size:16px;"><i style="">1365</i>个园区，为您优选10个热门园区</span>
             <div
-              style="border-top:none; display: inline-block; height: 30px;line-height: 30px;margin-left: 150px"
+              style="border-top:none; display: inline-block; height: 44px;line-height: 44px;margin-left: 150px"
               class=""
             >
               <dl>
@@ -381,7 +382,7 @@
                     <div
                       id="parkAddress1"
                       class="fl list_input"
-                      style="position:relative;width:340px" >
+                      style="position:relative;width: 314px;padding-right: 10px" >
                       <input
                         style="height: 100%;border: none;outline: none;"
                         data-toggle="city-picker"
@@ -401,7 +402,7 @@
                       value=" 搜索 "
                       readonly=""
                       class="list_button"
-                      style="width:100px;background: #2577e3;color: #fff;text-align:center;margin-left: 30px;"
+                      style="width:60px;color: #fff;text-align:center;margin-left: 30px;line-height:42x;height:42px"
                       @click="search1()">
                   </form>
                 </dd>
@@ -518,7 +519,7 @@
                     style="position:absolute; top: -133px;left: 20px;color:rgb(255,255,255);    padding: 5px 20px;border-radius:15px"/></a>
                 <!-- <div style="padding-top:5px;">
                   <a> <span style="padding-top:10px;color: rgb(51,153,255);font-size:16px">{{ item.companyName.length>12?item.companyName.substring(0,12)+'..':item.companyName }}</span></a>
-                </div> -->
+                </div>  -->
                 <p style="padding-top:20px;padding-left:10px;font-size:16px;color:#333">{{ item.companyName.length>12?item.companyName.substring(0,12)+'..':item.companyName }}
                   <span style="margin-left:10px;display:inline-block;width:18px;;height:18px;background:red;color:#fff;font-size:14px;text-align:center" >荐</span>
                 </p>
@@ -547,22 +548,23 @@
               <h5 style="color:#2577E3;font-size:20px;float: left;font-weight: bold;padding-left:10px">行业资讯
               </h5>
               <a
-                href="/zixun/xyzx/index.jhtml"
+                href="/zixun"
                 target="_blank"><span style="float:right;padding-right: 10px;"> 更多</span></a>
             </div>
             <div
               class="zixun_content"
               style="position:relative">
-              <img
-                src="../../static/gongsi/images/u1075.png"
-                style="width:270px;height:170px;float:left;padding-left: 10px;">
               <a
                 :href="wuliu_hyzx_show.url"
                 target="_blank"
               >
+                <img
+                  src="../../static/gongsi/images/u1075.png"
+                  style="width:270px;height:170px;float:left;padding-left: 10px;padding-bottom: 10px;">
+             
               <span style=" position: absolute;bottom: -170px;left: 10px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px; width: 240px;">{{ wuliu_hyzx_show.title.length>18?wuliu_hyzx_show.title.substring(0,18)+'..':wuliu_hyzx_show.title }}</span></a>
               <ul 
-              style="float:left;    padding-bottom: 20px;">
+              style="float:left; padding-bottom: 20px;">
                 <li
                   v-for="(item,i) in wuliu_hyzx"
                   :key="i"
@@ -573,7 +575,7 @@
                     target="_blank">
                     <p><span
                       class="news_title"
-                      style="padding-left:40px">{{ item.title.length>18? item.title.substring(0,18)+'..':item.title }}</span><span style="padding-left:20px">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
+                      style="padding-left:40px">{{ item.title.length>16? item.title.substring(0,16)+'..':item.title }}</span><span style="padding-left:20px;overflow: hidden;display: inline-block">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
               </ul>
             </div>
 
@@ -584,22 +586,23 @@
             <div
               class="zixun_title"
               style="padding:10px 0 25px;margin-bottom:30px">
-              <h5 style="color:#2577E3;font-size:20px;float: left;font-weight: bold;">仓储与配送
+              <h5 style="color:#2577E3;font-size:20px;float: left;font-weight: bold;padding-left:10px">仓储与配送
               </h5>
               <a
-                href="/zixun/ccyps/index.jhtml"
-                target="_blank"><span style="float:right"> 更多</span></a>
+                href="/zixun"
+                target="_blank"><span style="float:right;padding-right: 10px;"> 更多</span></a>
             </div>
             <div
               class="zixun_content"
               style="position:relative">
-              <img
-                src="../../static/yuanqu/images/zixun.png"
-                style="width:280px;height:170px;float:left"><a
-                  :href="wuliu_ccyps_show.url"
-                  target="_blank"
-                ><span style=" position: absolute;bottom: -170px;left: 1px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;width: 250px;">{{ wuliu_ccyps_show.title.length>16?wuliu_ccyps_show.title.substring(0,16)+'..':wuliu_ccyps_show.title }}</span></a>
-              <ul style="float:left">
+              <a
+                :href="wuliu_ccyps_show.url"
+                target="_blank"
+              >
+                <img
+                  src="../../static/yuanqu/images/zixun.png"
+                  style="width:270px;height:170px;float:left;padding-left: 10px;padding-bottom: 10px;"><span style=" position: absolute;bottom: -170px;left: 13px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px;width: 240px;">{{ wuliu_ccyps_show.title.length>16?wuliu_ccyps_show.title.substring(0,16)+'..':wuliu_ccyps_show.title }}</span></a>
+              <ul style="float:left ;padding-bottom: 20px;">
                 <li
                   v-for="(item,i) in wuliu_ccyps"
                   :key="i"
@@ -611,21 +614,21 @@
                     <p><span
                       class="news_title"
                       style="padding-left:40px">{{ item.title }}</span>
-                <span style="padding-left:30px">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
+                <span style="padding-left:20px;overflow: hidden;display: inline-block">{{ (item.releaseDate || '').split(' ')[0] }}</span></p></a></li>
               </ul>
             </div>
           </div>
         </div>
         <div
           class="getyouzhi"
-          style="clear: both;text-align: center;padding-top: 100px;font-size:24px;color:#FF892A;font-width:bloth;">
+          style="clear: both;text-align: center;padding: 100px 0;font-size:24px;color:#FF892A;font-width:bloth;">
           <span>快速成为承运商获取优质货源</span>
           <button 
             @click="toRegisiter"
             style="width: 280px;color: white;background: #FF892A;height:80px;;line-height: 80px;text-align: center;border-radius: 8px;    display: inline-block;margin-left:50px;cursor: pointer; border: none;color:rgba(255,255,255,1);font-size:24px;"><a 
               
           style="color:rgba(255,255,255,1);">我要入驻</a></button>
-          <!-- <a
+          <!-- <a 
             href="/regisiter"
             target="_blank"><button style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</button></a> -->
 
@@ -847,7 +850,7 @@ export default {
     )
 
     // /logisticsPark/hot/list
-    // console.log(getExcellentList.data.data, 'getExcellentList')
+    console.log(getExcellentList.data.data, 'getExcellentList')
     let vo1 = vo
     if (
       getExcellentList.data.status === 200 ||
@@ -1009,11 +1012,9 @@ export default {
     },
     toWulLius(item) {
       window.open('/member/' + item.id)
-      // wi
     },
     toRegisiter() {
       window.open('/regisiter')
-      // wi
     }
   }
 }
@@ -1073,6 +1074,19 @@ export default {
   .clearfix:after {
     clear: both;
   }
+  #parkAddress {
+    width: 320px;
+    // height: 44px;
+    background: url('../../static/images/index/01xx.png') no-repeat 335px 18px
+      #fff;
+    background-size: 10px 8px;
+    padding-right: 30px;
+  }
+  // #parkAddress .city-picker-span .arrow {
+  //   background: url('../../static/images/index/01xx.png');
+  //   top: 55%;
+  //   right: 10px;
+  // }
   .youzhi_content {
     ul {
       .noclass0 {

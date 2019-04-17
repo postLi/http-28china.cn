@@ -116,7 +116,11 @@ export default {
               endProvince: '',
               endCity: '',
               endArea: '',
-              orderBy: this.$store.state.m.huoyuan.orderBy.value
+              queryOrderType: this.$store.state.m.huoyuan.queryOrderType.value,
+              orderType: this.$store.state.m.huoyuan.screen.orderType,
+              loadTimeType: this.$store.state.m.huoyuan.screen.loadTimeType,
+              useCarType: this.$store.state.m.huoyuan.screen.useCarType,
+              specName: this.$store.state.m.huoyuan.screen.specName
             },
             name: 'rangeList'
           })

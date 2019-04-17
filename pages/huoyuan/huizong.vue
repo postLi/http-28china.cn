@@ -71,15 +71,27 @@
         <div class="col3">
           <div class="p_user_login">
             <div class="user_pic"><img src="../../static/images/index/19stx.png"></div>
-            <div class="user_show">
+
+            <div 
+              class="user_show"
+              v-if="!isToken">
               <p class="user_txt">Hi~欢迎来到28快运！</p>
               <p class="user_profit">
                 <a 
                   class="login"
-                  href="/login">登录</a>
+                  @click.prevent.stop="showLogin">登录</a>
                 <a href="/regisiter">注册</a>
               </p>
             </div>
+            <div 
+              class="user_show"
+              v-else>
+              <p class="user_txt">您好，{{ mobile }} <a href="/exit">【安全退出】</a></p>
+              <p class="user_profit">
+                <a href="/hyzx">会员中心</a>
+              </p>
+            </div>
+
           </div>
           <!-- 用户登录 -->
           <div class="hongbao_ad">
@@ -111,7 +123,7 @@
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
-                      :title="item.companyName">{{ item.companyName }}暂无名字
+                      :title="item.companyName">{{ item.companyName }}
                      
                     </p>
                     <p class="owner_total">
@@ -139,7 +151,7 @@
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
-                      :title="item.companyName">{{ item.companyName }}暂无名字
+                      :title="item.companyName">{{ item.companyName }}
                      
                     </p>
                     <p class="owner_total">
@@ -400,7 +412,7 @@
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
                   <span class="p_l5">物流商:</span>
-                  <span>{{ item.wlName }}暂无名字</span>
+                  <span>{{ item.wlName }}</span>
                   <span><i class="iconfont iconrenzheng"/></span>
                 </div>
                 <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
@@ -584,7 +596,7 @@
               <div class="rank_txt_tit">
                 <span 
                   class="txt_tit_name" 
-                  :title="item.companyName ">{{ item.companyName }}暂无名字 </span>
+                  :title="item.companyName ">{{ item.companyName }} </span>
                 <span class="txt_tit_icon_tuijian">荐</span>
               </div>
               <div class="rank_txt_groom"><span class="name">推荐指数</span><span class="star"/></div>
@@ -739,19 +751,18 @@ import Swiper from 'Swiper'
 export default {
   name: 'HuiZong',
   head: {},
-  filters: {
-    kilogram(value) {
-      return value
-    }
-  },
+  // filters: {
+  //   kilogram(value) {
+  //     return value
+  //   }
+  // },
   // layout: 'huizong',
   data() {
     return {
-      banners: [
-        require('../../static/images/huizong/hy_banner1.jpg'),
-        require('../../static/images/huizong/banner02.jpg'),
-        require('../../static/images/huizong/banner03.jpg')
-      ],
+      //登录权限
+      isToken: false,
+      mobile: '',
+      banners: [require('../../static/images/huizong/hy_banner1.jpg')],
       currentArea: '', //获取当前的城市
       currentProvince: '',
       // 地点插件
@@ -826,19 +837,20 @@ export default {
     }
   },
   mounted() {
+    let that = this
     this.$nextTick(() => {
       this.handleData()
       this.intSwiper1()
       this.intSwiper2()
-
-      console.log('优质货主', this.shipperData)
-      console.log('本月货主', this.monthShipperData)
-      console.log('货源推荐', this.recommendData)
-      console.log('热门城市', this.hotCityData)
-      console.log('货量达人', this.darenData)
-      console.log('24小时在线新闻', this.newListData)
-      console.log('统计数据', this.statisticsData)
-      console.log('获取本地cookies', this.currentProvince, this.currentArea)
+      this.getUser()
+      // console.log('优质货主', this.shipperData)
+      // console.log('本月货主', this.monthShipperData)
+      // console.log('货源推荐', this.recommendData)
+      // console.log('热门城市', this.hotCityData)
+      // console.log('货量达人', this.darenData)
+      // console.log('24小时在线新闻', this.newListData)
+      // console.log('统计数据', this.statisticsData)
+      // console.log('获取本地cookies', this.currentProvince, this.currentArea)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -853,9 +865,26 @@ export default {
         speed: 600,
         timer: 3000
       })
+      $('body').on('login.success', () => {
+        that.isToken = $.cookie('access_token') ? true : false
+        that.mobile = $.cookie('login_mobile')
+        // console.log('vue打印', that)
+        // alert($.cookie('access_token'))
+      })
     })
   },
   methods: {
+    //登录
+    showLogin() {
+      $('body').trigger('login.show')
+    },
+    //获取用户信息
+    getUser() {
+      this.isToken = $.cookie('access_token') ? true : false
+      this.mobile = $.cookie('login_mobile')
+      console.log('获取用户token', this.isToken, this.mobile)
+    },
+    //幻灯片
     intSwiper1() {
       this.$nextTick(() => {
         // 幻灯片
@@ -973,28 +1002,6 @@ export default {
       }`
       window.open(huoyuanUrl, '_blank')
     }
-    // //表单获取数据封装
-    // getPlace(el, province, city, area) {
-    //   let arr = []
-    //   $(el + ' .select-item').each(function(i, e) {
-    //     arr.push($(this).text())
-    //   })
-    //   this[province] = arr[0] ? arr[0] : ''
-    //   this[city] = arr[1] ? arr[1] : ''
-    //   this[area] = arr[2] ? arr[2] : ''
-    // }
-    //获取cookies的值
-    // getCookie(cookieName) {
-    //   var strCookie = document.cookie
-    //   var arrCookie = strCookie.split('; ')
-    //   for (var i = 0; i < arrCookie.length; i++) {
-    //     var arr = arrCookie[i].split('=')
-    //     if (cookieName == arr[0]) {
-    //       return decodeURIComponent(arr[1])
-    //     }
-    //   }
-    //   return ''
-    // }
   }
 }
 </script>
@@ -1319,27 +1326,7 @@ a {
       cursor: pointer;
     }
   }
-  // .weixin {
-  //   overflow: hidden;
-  //   margin-top: 20px;
-  //   padding: 20px 10px;
-  //   background: #fcfac1;
-  //   // height: 116px;
-  //   .pic {
-  //     overflow: hidden;
-  //     @extend .fl;
-  //     margin-right: 10px;
-  //     width: 85px;
-  //     height: 85px;
-  //     img {
-  //       width: 100%;
-  //       height: 100%;
-  //     }
-  //   }
-  //   > a {
-  //     color: #0066ff;
-  //   }
-  // }
+
   .release_car {
     margin-top: 20px;
     padding-top: 20px;
@@ -1460,8 +1447,6 @@ a {
             color: #ed1818;
             font-size: 12px;
           }
-          // list-style: square inside;
-          // list-style-type: square;
         }
       }
       .rank_bd_prize {
@@ -1471,52 +1456,6 @@ a {
         background: url('../../static/images/huizong/icon_prize.png') no-repeat;
       }
     }
-    // .ranking_info {
-    //   overflow: hidden;
-    //   margin-bottom: 20px;
-    //   line-height: 22px;
-    //   > li {
-    //     @extend .fl;
-    //     &.rank_num {
-    //       width: 75px;
-    //       font-size: 20px;
-    //       font-weight: bold;
-    //     }
-    //     &.no1 {
-    //       color: $orange;
-    //     }
-    //     &.no2 {
-    //       color: $blue;
-    //     }
-    //     &.no3 {
-    //       color: $green;
-    //     }
-    //     &.rank_name {
-    //       margin-right: 15px;
-    //       font-weight: bold;
-    //     }
-    //     &.rank_sure {
-    //       display: table;
-    //       word-spacing: -1em;
-    //       border: 1px solid $light_orange;
-    //       font-size: $f_12;
-    //       color: $orange;
-    //       height: 20px;
-    //       line-height: 20px;
-    //       > span {
-    //         display: inline-block;
-    //         &.span1 {
-    //           padding: 0 5px;
-    //           color: $white;
-    //           background: $light_orange;
-    //         }
-    //         &.span2 {
-    //           padding: 0 5px;
-    //           color: $light_orange;
-    //         }
-    //       }
-    //     }
-    //   }
   }
   .bd {
     overflow: hidden;

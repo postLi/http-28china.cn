@@ -95,7 +95,7 @@
           </div>
           <!-- 用户登录 -->
           <div class="hongbao_ad">
-            <a href="#"><img src="../../static/images/huizong/hy_hongbao_ad.jpg"></a>
+            <a @click="redPaperFn"><img src="../../static/images/huizong/hy_hongbao_ad.jpg"></a>
           </div>
         </div>
       </div>
@@ -467,14 +467,18 @@
         <div class="col2">
           <div class="subscribe">
             <h4 class="tit">订阅优质支援</h4>
-            <div class="city_box clearfix">
+            <div
+              id="sub_star"
+              class="city_box clearfix">
               <input 
                 type="text" 
                 placeholder="请输入出发地" 
                 id="sb_pageinp1">
               <i class="iconfont iconjiantou32"/>
             </div>
-            <div class="city_box clearfix">
+            <div 
+              id="sub_end"
+              class="city_box clearfix">
               <input 
                 type="text" 
                 placeholder="请输入到达地" 
@@ -485,7 +489,9 @@
               订阅货源，第一时间获得系统消息通知
               已有<span class="subscribe_txt_num">18965</span>人订阅后达成交易
             </div>
-            <a class="subscribe_remind_btn">上新提醒我</a>
+            <a 
+              class="subscribe_remind_btn"
+              @click="sendNotice">上新提醒我</a>
           </div>
           <!-- <div class="weixin">
             <div class="pic"><img src="../../static/images/huizong/weixin.png"></div>
@@ -562,7 +568,7 @@
         <a
           target="_blank"
           href="/create/huoyuan">
-          <img src="../../static/images/huizong/hy_hongbao.jpg">
+          <img src="~/static/images/huizong/hy_hongbao.jpg">
         </a>
       </div>
     </div>
@@ -621,23 +627,23 @@
       </div>
       <ul class="our_virtue_list clearfix">
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage1.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage1.jpg"></div>
           <h4 class="our_virtue_tit color_orange">海量货源</h4>
           <div class="our_virtue_txt">专业的项目客户团队，为成员引进更多的线上货源机会</div>
         </li>
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage2.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage2.jpg"></div>
           <h4 class="our_virtue_tit color_grass_green">安全保障</h4>
           <div class="our_virtue_txt">流程标准化，降低货损率；完善的理赔保障体系，小额快赔，为成员的每一票货物保驾护航</div>
           
         </li>
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage3.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage3.jpg"></div>
           <h4 class="our_virtue_tit color_blue">降本增效</h4>
           <div class="our_virtue_txt">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
         </li>
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage4.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage4.jpg"></div>
           <h4 class="our_virtue_tit  color_light_orange">信息系统</h4>
           <div class="our_virtue_txt">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
         </li>
@@ -697,19 +703,25 @@
         <div class="title_line_box fl"><span/></div>
       </div>
       <ul class="partner_list clearfix">
-        <li><img src="../../static/images/huizong/partner1.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner2.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner3.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner4.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner5.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner6.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner7.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner8.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner9.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner10.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner11.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner12.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner1.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner2.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner3.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner4.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner5.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner6.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner7.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner8.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner9.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner10.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner11.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner12.jpg" ></li>
       </ul>
+    </div>
+    <Add 
+      :is-show-add.sync="isShowAdd" 
+      :data-info="dataInfo"/>
+    <div id="hongbao">
+      <img src="../../static/images/huizong/hy_honhbao.jpg">
     </div>
     <!-- 合作伙伴 -->
     <!-- <div class="bj_2">
@@ -743,11 +755,14 @@
       </div>
     </div> -->
     <!-- 28问答 -->   
-</div></template>
+  </div>
+</template>
 <script>
 //获取公共的函数
-import until from '../../static/js/server/comonUntil'
+import until from '~/static/js/server/comonUntil'
+import Add from '~/components/subscribe/add'
 import Swiper from 'Swiper'
+
 export default {
   name: 'HuiZong',
   head: {},
@@ -757,6 +772,7 @@ export default {
   //   }
   // },
   // layout: 'huizong',
+  components: { Add },
   data() {
     return {
       //登录权限
@@ -771,7 +787,10 @@ export default {
       hyStartArea: '',
       hyEndProvince: '',
       hyEndCity: '',
-      hyEndArea: ''
+      hyEndArea: '',
+      //获取订阅的列表
+      isShowAdd: false,
+      dataInfo: {}
     }
   },
   async asyncData({ $axios, query, app, error }) {
@@ -1001,6 +1020,40 @@ export default {
         this.hyEndArea
       }`
       window.open(huoyuanUrl, '_blank')
+    },
+    //订阅货源
+    sendNotice() {
+      if (!this.isToken) {
+        let startPlace = until.getPlace('#sub_star')
+        let endPlace = until.getPlace('#sub_end')
+        //开始
+        this.dataInfo.startProvince = startPlace.province
+        this.dataInfo.startCity = startPlace.city
+        this.dataInfo.startArea = startPlace.area
+        //结束
+        this.dataInfo.endProvince = endPlace.province
+        this.dataInfo.endCity = endPlace.city
+        this.dataInfo.endArea = endPlace.area
+
+        if (!this.dataInfo.startProvince && !this.dataInfo.endCity) {
+          layer.msg('出发地省市不能为空！')
+          return false
+        }
+        if (!this.dataInfo.endProvince && !this.dataInfo.endCity) {
+          layer.msg('到达地省市不能为空！')
+          return false
+        }
+        this.isShowAdd = true
+      }
+    },
+    //点击领取红包
+    redPaperFn() {
+      layer.open({
+        type: 1,
+        title: '红包大派送',
+        area: ['800px', '560px'], //宽高
+        content: $('#hongbao')
+      })
     }
   }
 }

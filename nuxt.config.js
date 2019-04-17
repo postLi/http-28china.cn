@@ -1,6 +1,7 @@
 const pkg = require('./package')
 var TransformModulesPlugin = require('webpack-transform-modules-plugin')
-let apiurl = 'http://120.78.235.91:7010'
+// let apiurl = 'http://120.78.235.91:7010'
+let apiurl = 'http://172.18.226.183:7010'
 if (process.env.DEVBUILD) {
   apiurl = 'http://192.168.1.157:7010'
 }

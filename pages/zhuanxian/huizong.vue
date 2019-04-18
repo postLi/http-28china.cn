@@ -707,8 +707,11 @@
     <!-- 帮我推荐 -->
     <div class="bj_2">
       <div class="grid_c1 shipper_say">
-        <h3 class="p_title">3800万用户的共同选择！</h3>
-
+        <div class="p_centre_title clearfix">
+          <div class="title_line_box fl">
+          <span/></div> <h3 class="title_txt fl">3800万用户的共同选择！</h3> <div class="title_line_box fl"><span/>
+          </div>
+        </div>
         <div class="zx_sub_title clearfix">
           <img 
             src="../../static/images/huizong/zhuanxian/tit_icon.png" 
@@ -851,29 +854,32 @@
     <!-- 在线下单流程 -->
     <div class="bj_2">
       <div class="p_answers">
-        <div class="p_title_box">
-          <h3 class="title">28问答</h3>
-          <a 
-            href="/help/ggp/index.jhtml"
-            target="blank"
-            class="answers_link">全部<i class="iconfont iconjiantou2"/>
-          </a>         
+        <div class="zx_sub_title clearfix">
+          <img 
+            src="../../static/images/huizong/zhuanxian/tit_icon.png" 
+            class="sub_title_icon" 
+            alt="">
+          <span class="sub_title_word">28问答</span>
+          <img 
+            src="../../static/images/huizong/zhuanxian/tit_icon.png" 
+            class="sub_title_icon" 
+            alt="">
         </div>
         <ul class="answers_list">
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>什么是订阅货源？</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>什么是订阅货源？</p>
             <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么在平台接单？</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>怎么在平台接单？</p>
             <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么申请成为推荐承运商</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>怎么申请成为推荐承运商</p>
             <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>承运商入驻需要什么材料？</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>承运商入驻需要什么材料？</p>
             <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
         </ul>
@@ -1380,6 +1386,14 @@ export default {
     }
   }
 }
+.p_centre_title {
+  .title_line_box > span {
+    border-top: 2px solid $light_gray;
+  }
+  .title_txt {
+    color: $tit_color;
+  }
+}
 /* 1、物流专线 */
 .category {
   background-color: #f5f5f5;
@@ -1866,9 +1880,12 @@ export default {
   }
 }
 .shipper_say {
+  .p_centre_title {
+    margin: 60px auto;
+  }
   margin-bottom: 40px;
-  .p_title {
-    text-align: center;
+  .p_centre_title {
+    width: 580px;
   }
   .shipper_say_content {
     margin: 50px auto 0;
@@ -1970,6 +1987,12 @@ export default {
     .virtue_item_tit {
       background: url('../../static/images/huizong/zhuanxian/advantage3_bj.png')
         no-repeat;
+    }
+  }
+  .virtue_list {
+    margin-top: 30px;
+    > li {
+      margin-bottom: 10px;
     }
   }
 }

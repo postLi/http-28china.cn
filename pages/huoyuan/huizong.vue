@@ -10,7 +10,7 @@
             <h4 class="category_menu_title">热门城市</h4>
             <div 
               class="category_menu_list"
-              v-if="hotCityData!== undefined && hotCityData!== null &&hotCityData.length>0">
+              v-if="hotCityData.length>0">
               <span 
                 class="item"
                 v-for="(item, index) in hotCityData" 
@@ -720,7 +720,9 @@
     <Add 
       :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
-    <div id="hongbao">
+    <div 
+      id="hongbao" 
+      style="display: none">
       <img src="../../static/images/huizong/hy_honhbao.jpg">
     </div>
     <!-- 合作伙伴 -->

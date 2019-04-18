@@ -86,7 +86,7 @@
             <div 
               class="user_show"
               v-else>
-              <p class="user_txt">您好，{{ mobile }} <a href="/exit">【安全退出】</a></p>
+              <p class="user_txt">您好，{{ loginMobile }} <a href="/exit">【安全退出】</a></p>
               <p class="user_profit">
                 <a href="/hyzx">会员中心</a>
               </p>
@@ -782,7 +782,7 @@ export default {
     return {
       //登录权限
       isToken: false,
-      mobile: '',
+      loginMobile: '',
       noneImg: require('../../static/images/huizong/none.jpg'),
       banners: [require('../../static/images/huizong/hy_banner1.jpg')],
       currentCity: '', //获取当前的城市
@@ -854,6 +854,9 @@ export default {
       statisticsData.status === 200
     ) {
       return {
+        currentProvince: currentProvince ? currentProvince : '',
+        currentCity: currentCity ? currentCity : '', //获取当前的城市
+
         hotCityData: hotCityData.data ? hotCityData.data.data : [],
         shipperData: shipperData.data ? shipperData.data.data.list : [],
         monthShipperData: monthShipperData
@@ -908,7 +911,7 @@ export default {
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
       console.log('获取本地cookies', this.currentProvince, this.currentCity)
-      console.log('获取用户token', this.isToken, this.mobile)
+      console.log('获取用户token', this.isToken, this.loginMobile)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -925,7 +928,7 @@ export default {
       })
       $('body').on('login.success', () => {
         that.isToken = $.cookie('access_token') ? true : false
-        that.mobile = $.cookie('login_mobile')
+        that.loginMobile = $.cookie('login_mobile')
         // console.log('vue打印', that)
         // alert($.cookie('access_token'))
       })
@@ -986,14 +989,10 @@ export default {
     },
     //处理获取数据
     getCookies() {
-      //获取cookies
+      //获取省市cookies
       //$.cookie
-      //用户
       this.isToken = $.cookie('access_token') ? true : false
-      this.mobile = $.cookie('login_mobile')
-      //省市
-      this.currentProvince = $.cookie('currentProvinceFullName')
-      this.currentCity = $.cookie('currentAreaFullName')
+      this.loginMobile = $.cookie('login_mobile')
     },
     //搜索货源
     groomSearch() {

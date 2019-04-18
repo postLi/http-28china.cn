@@ -54,18 +54,18 @@
             <div class="type_box">
               <a 
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&orderClass=AF0490702'"
               ><img src="../../static/images/huizong/hy_ad1.jpg"></a>
             </div>
             <div class="type_box">
               <a
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea"><img src="../../static/images/huizong/hy_ad2.jpg"></a>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity"><img src="../../static/images/huizong/hy_ad2.jpg"></a>
             </div>
             <div class="type_box">
               <a 
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&userAuth=AF0010403'"><img src="../../static/images/huizong/hy_ad3.jpg"></a></div>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&userAuth=AF0010403'"><img src="../../static/images/huizong/hy_ad3.jpg"></a></div>
           </div>
         </div>
         <div class="col3">
@@ -260,7 +260,7 @@
         <a 
           class="btn_hy_link" 
           target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">进入货源大厅</a>   
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">进入货源大厅</a>   
           <!-- 新增货源 -->
       </div>
     </div>
@@ -388,7 +388,7 @@
         <a 
           class="gr_link"
           target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">
         货源大厅<i class="iconfont iconjiantou_xiangyouliangci_o"/></a>
       </div>
       <div class="bd">
@@ -396,10 +396,10 @@
           <div class="p_type_nav">
             <a 
               target="_blank"
-              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">最新货源</a>
             <a 
               target="_blank"
-              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&orderClass=AF0490702'">长期稳定货源</a>
           </div>
           <ul 
             class="p_hy_list clearfix"
@@ -763,10 +763,9 @@
   </div>
 </template>
 <script>
-//获取公共的函数
-import until from '~/static/js/server/comonUntil'
+import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Add from '~/components/subscribe/add' //订阅
-import Star from '~/components/star/star' //订阅
+import Star from '~/components/star/star' //星星
 import Swiper from 'Swiper'
 
 export default {
@@ -786,7 +785,7 @@ export default {
       mobile: '',
       noneImg: require('../../static/images/huizong/none.jpg'),
       banners: [require('../../static/images/huizong/hy_banner1.jpg')],
-      currentArea: '', //获取当前的城市
+      currentCity: '', //获取当前的城市
       currentProvince: '',
       // 地点插件
       hyStartProvince: '',
@@ -802,10 +801,10 @@ export default {
   },
   async asyncData({ $axios, query, app, error }) {
     // let [, ] = await Promise.all([   ])
-    // this.currentArea = $.cookie('currentAreaFullName')
+    // this.currentCity = $.cookie('currentAreaFullName')
     //服务端获取cookies
     let currentProvince = app.$cookies.get('currentProvinceFullName')
-    let currentArea = app.$cookies.get('currentAreaFullName')
+    let currentCity = app.$cookies.get('currentAreaFullName')
 
     //热门城市
     let hotCityData = await $axios.get('/28-web/city/hot')
@@ -814,7 +813,7 @@ export default {
       currentPage: 1,
       pageSize: 10,
       startProvince: currentProvince,
-      startCity: currentArea
+      startCity: currentCity
     })
     //本月优质货主
     let monthShipperData = await $axios.post(
@@ -823,7 +822,7 @@ export default {
         currentPage: 1,
         pageSize: 5,
         startProvince: currentProvince,
-        startCity: currentArea
+        startCity: currentCity
       }
     )
     // 货源推荐
@@ -833,7 +832,7 @@ export default {
         currentPage: 1,
         pageSize: 12,
         startProvince: currentProvince,
-        startCity: currentArea
+        startCity: currentCity
       }
     )
     // 榜单达人
@@ -901,7 +900,6 @@ export default {
       this.getCookies()
       this.intSwiper1()
       this.intSwiper2()
-      this.getUser()
       console.log('优质货主', this.shipperData)
       console.log('本月货主', this.monthShipperData)
       console.log('货源推荐', this.recommendData)
@@ -909,7 +907,7 @@ export default {
       console.log('货量达人', this.darenData)
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
-      console.log('获取本地cookies', this.currentProvince, this.currentArea)
+      console.log('获取本地cookies', this.currentProvince, this.currentCity)
       console.log('获取用户token', this.isToken, this.mobile)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
@@ -937,11 +935,6 @@ export default {
     //登录
     showLogin() {
       $('body').trigger('login.show')
-    },
-    //获取用户信息
-    getUser() {
-      this.isToken = $.cookie('access_token') ? true : false
-      this.mobile = $.cookie('login_mobile')
     },
     //幻灯片
     intSwiper1() {
@@ -995,8 +988,12 @@ export default {
     getCookies() {
       //获取cookies
       //$.cookie
+      //用户
+      this.isToken = $.cookie('access_token') ? true : false
+      this.mobile = $.cookie('login_mobile')
+      //省市
       this.currentProvince = $.cookie('currentProvinceFullName')
-      this.currentArea = $.cookie('currentAreaFullName')
+      this.currentCity = $.cookie('currentAreaFullName')
     },
     //搜索货源
     groomSearch() {
@@ -1029,7 +1026,7 @@ export default {
         this.hyStartProvince
       }&startCity=${this.hyStartCity}&startArea=${
         this.hyStartArea
-      }&endProvince=${this.hyEndProvince}&endCity${this.hyEndCity}&endArea${
+      }&endProvince=${this.hyEndProvince}&endCity=${this.hyEndCity}&endArea=${
         this.hyEndArea
       }`
       window.open(huoyuanUrl, '_blank')

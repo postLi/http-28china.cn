@@ -1,15 +1,16 @@
 <template>
   <div 
     v-show="isShow" 
-    class="wzlHelp">
+    class="wzlAdd">
     <div 
+      ref="ruleForm"
       :key="dialogKey" 
       class="add1_content">
       <div 
         class="closeMe" 
         @click="closeMe()"><a>关闭</a></div>
       <div class="huo_content">
-        <h4>订阅货主货源信息</h4>
+        <h4>您要订阅的货源：<a :title="dataInfo.startCity + '至' + dataInfo.endCity">{{ dataInfo.startCity + '至' + dataInfo.endCity + '货源' }}</a></h4>
         <ul class="cont_ul">
           <li class="cont_ul_li">
             <span 
@@ -37,7 +38,7 @@
           <li class="cont_ul_li">
             <input 
               class="text_num"
-              v-model="textnum"
+              v-model="validateCode"
               type="text" 
               maxlength="11"
               placeholder="请输入验证码">
@@ -51,7 +52,7 @@
               type="text" 
               value="提交" 
               readonly
-              @click="submitBtn">
+              @click="submitBtn()">
           </li>
         </ul>
         <p>提交成功后平台将会为您智能筛选，实时推荐即时货源</p>
@@ -61,9 +62,21 @@
 </template>
 <script>
 export default {
-  name: 'Help',
+  name: 'Add',
   props: {
-    isShowHelp: {
+    isShowAdd: {
+      type: Boolean,
+      default: false
+    },
+    dataInfo: {
+      type: [Array, Object],
+      default: () => {}
+    },
+    isActiveFirst: {
+      type: Boolean,
+      default: true
+    },
+    isStop: {
       type: Boolean,
       default: false
     }
@@ -74,15 +87,14 @@ export default {
   },
   data() {
     return {
-      dataInfo: {},
-      isActiveFirst: true,
+      // isActiveFirst: true,
       dialogKey: 0,
       getMoblie: '',
       ShowmobileErr: false,
       Showtextnum: false,
       showTitme: '',
       mobile: '',
-      textnum: '',
+      validateCode: '',
       userType: '',
       times: 60,
       mobileErr: '',
@@ -92,12 +104,12 @@ export default {
   async asyncData() {},
   computed: {
     isShow() {
-      return this.isShowHelp
+      return this.isShowAdd
     }
   },
   watch: {
     info() {},
-    isShowHelp: {
+    isShowAdd: {
       handler(cval, oval) {
         if (cval) {
         }
@@ -110,6 +122,10 @@ export default {
   },
   methods: {
     handleView(type) {
+      if (!this.isStop) {
+        this.userType = this.isActiveFirst ? 'aflc-5' : 'aflc-1'
+        return false
+      }
       this.isActiveFirst = !this.isActiveFirst
       if (type === 'aflc-5') {
         this.userType = 'aflc-5'
@@ -118,23 +134,22 @@ export default {
       }
     },
     closeMe() {
-      this.$emit('update:isShowHelp', false)
+      this.$emit('update:isShowAdd', false)
       this.reset()
       clearInterval(this.stop)
       this.getMoblie = false
+      // this.$emit('close')
     },
     reset() {
       this.mobile = ''
-      this.textnum = ''
-    },
-    done() {
-      console.log('done')
+      this.validateCode = ''
+      // window.location.reload()
     },
     submitBtn() {
       let _this = this
       var validReg = window.Lll_AFLC_VALID
       this.dataInfo.mobile = _this.mobile
-      this.dataInfo.textnum = _this.textnum
+      this.dataInfo.validateCode = _this.validateCode
       this.dataInfo.userType = _this.userType
       if (this.mobile) {
         if (validReg.MOBILE.test(this.mobile)) {
@@ -151,7 +166,7 @@ export default {
         this.mobileErr = '请填写手机号'
         return
       }
-      if (this.mobile && this.textnum) {
+      if (this.mobile && this.validateCode) {
         this.$axios
           .post('/28-web/companyLine/subscribe', this.dataInfo)
           .then(res => {
@@ -183,7 +198,7 @@ export default {
               if (res.status === 200) {
                 layer.msg('验证码发送成功')
                 this.getMoblie = true
-                _this.startCount()
+                this.stop = _this.startCount()
               }
             })
         } else {
@@ -210,7 +225,7 @@ export default {
 }
 </script>
 <style lang="scss">
-.wzlHelp {
+.wzlAdd {
   background-color: rgba(0, 0, 0, 0.5);
   width: 100%;
   height: 100%;
@@ -219,8 +234,10 @@ export default {
   left: 0;
   display: block;
   padding: 12% 30%;
+  z-index: 99;
 }
 .add1_content {
+  z-index: 999;
   width: 532px;
   float: left;
   background: #fff;

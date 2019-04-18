@@ -171,7 +171,7 @@ export default {
       navList: [
         { id: 0, name: '找专线' },
         { id: 1, name: '找货源' },
-        { id: 2, name: '找车源' }
+        { id: 3, name: '找车源' }
       ],
       content1List: [
         {
@@ -253,7 +253,108 @@ export default {
       }
     },
     search() {
-      console.log(this.$store.state.m)
+      this.$store.commit('m/pageView/setData', {
+        name: 'footerId',
+        data: this.$store.state.m.navId
+      })
+      this.$router.push('/m/pageView')
+      let startName = [
+        this.$store.state.m.startName[0],
+        this.$store.state.m.startName[1],
+        this.$store.state.m.startName[2]
+      ]
+      let endName = [
+        this.$store.state.m.endName[0],
+        this.$store.state.m.endName[1],
+        this.$store.state.m.endName[2]
+      ]
+      if (this.$store.state.m.navId === 0) {
+        this.$store.commit('m/zhuanxian/resetData')
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'startName',
+          data: startName
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'endName',
+          data: endName
+        })
+        let parm = {
+          currentPage: this.$store.state.m.zhuanxian.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.zhuanxian.startName[0],
+          startCity: this.$store.state.m.zhuanxian.startName[1],
+          startArea: this.$store.state.m.zhuanxian.startName[2],
+          endProvince: this.$store.state.m.zhuanxian.endName[0],
+          endCity: this.$store.state.m.zhuanxian.endName[1],
+          endArea: this.$store.state.m.zhuanxian.endName[2],
+          orderBy: this.$store.state.m.zhuanxian.orderBy.value
+        }
+        // 专线列表
+        this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
+      if (this.$store.state.m.navId === 1) {
+        this.$store.commit('m/huoyuan/resetData')
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'startName',
+          data: startName
+        })
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'endName',
+          data: endName
+        })
+        let parm = {
+          currentPage: this.$store.state.m.huoyuan.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.huoyuan.startName[0],
+          startCity: this.$store.state.m.huoyuan.startName[1],
+          startArea: this.$store.state.m.huoyuan.startName[2],
+          endProvince: this.$store.state.m.huoyuan.endName[0],
+          endCity: this.$store.state.m.huoyuan.endName[1],
+          endArea: this.$store.state.m.huoyuan.endName[2],
+          queryOrderType: this.$store.state.m.huoyuan.queryOrderType.value,
+          orderType: this.$store.state.m.huoyuan.screen.orderType,
+          loadTimeType: this.$store.state.m.huoyuan.screen.loadTimeType,
+          useCarType: this.$store.state.m.huoyuan.screen.useCarType,
+          specName: this.$store.state.m.huoyuan.screen.specName
+        }
+        // 货源列表
+        this.$store.dispatch('m/huoyuan/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
+      if (this.$store.state.m.navId === 3) {
+        this.$store.commit('m/cheyuan/resetData')
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'startName',
+          data: startName
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'endName',
+          data: endName
+        })
+        let parm = {
+          currentPage: this.$store.state.m.cheyuan.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.cheyuan.startName[0],
+          startCity: this.$store.state.m.cheyuan.startName[1],
+          startArea: this.$store.state.m.cheyuan.startName[2],
+          endProvince: this.$store.state.m.cheyuan.endName[0],
+          endCity: this.$store.state.m.cheyuan.endName[1],
+          endArea: this.$store.state.m.cheyuan.endName[2],
+          orderBy: this.$store.state.m.cheyuan.orderBy.value,
+          carSpec: this.$store.state.m.cheyuan.carSpec,
+          carType: this.$store.state.m.cheyuan.carType
+        }
+        // 车源列表
+        this.$store.dispatch('m/cheyuan/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
     },
     toList(item) {
       this.$router.push(item.to)

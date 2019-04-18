@@ -187,7 +187,7 @@
                   <a
                     href="javascript:;"
                     class="button2"
-                    @click="openAdd()"
+                    @click="openAdd('opend1')"
                   ><img
                     src="/images/cy/03u410082.gif"
                   >此线路上新货源提醒我</a>
@@ -383,7 +383,7 @@
               <a
                 href="javascript:;"
                 class="button2"
-                @click="openHelp()"><img src="/images/cy/03u410082.gif">此货主货源上新提醒我</a>
+                @click="openAdd('opend2')"><img src="/images/cy/03u410082.gif">此货主货源上新提醒我</a>
             </div>
           </div>
         </div>
@@ -828,9 +828,10 @@
     </div>
     <Add 
       @close="closeMe"
-      :is-show-add.sync="isShowAdd" 
-      :data-info="dataInfo"/>
-    <Lelp :is-show-help.sync="isShowHelp" />
+      :is-show-add="isShowAdd"  
+      :is-show-help.sync="isShowHelp"
+      :data-info="dataInfo" 
+      :help-title="helpTitle"/>
     <Order
       :is-show-order.sync="isShowOrder"
       :order-title="orderTitle"/>
@@ -838,7 +839,6 @@
 </template>
 <script>
 import Add from './add1'
-import Lelp from './help'
 import Order from './order'
 import MUTUAL from '@/static/js/wzl-commonJs.js'
 import {
@@ -869,7 +869,6 @@ export default {
   name: 'Detail',
   components: {
     Add,
-    Lelp,
     Order
   },
   head: {
@@ -894,6 +893,7 @@ export default {
       isShowCollect: true,
       isShowMessge: false,
       isMobile: false,
+      AddAbnormalVisible: false,
       orderTitle: '',
       mobile: '',
       check: '',
@@ -913,6 +913,7 @@ export default {
       endCity: '',
       endArea: '',
       dataInfo: {},
+      helpTitle: '',
       gldhList: [
         {
           title: '注册28快运会员',
@@ -1228,11 +1229,25 @@ export default {
         $('body').trigger('login.show')
       }
     },
-    openAdd() {
+    openAdd(type) {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('login_userToken') || $.cookie('user_token')
+      switch (type) {
+        case 'opend1':
+          this.getOrder(access_token, user_token, (this.isShowAdd = true))
+          break
+        case 'opend2':
+          this.isShowHelp = true
+          this.getOrder(access_token, user_token, (this.isShowAdd = true))
+          break
+        default:
+          break
+      }
+    },
+    getOrder(access_token, user_token) {
       this.getAddress()
       if (access_token && user_token) {
+        console.log(getAddress, 'getAddress')
         this.$axios
           .post(
             '/28-web/companyLine/subscribe?access_token=' +
@@ -1250,40 +1265,15 @@ export default {
             }
           })
       } else {
-        this.isShowAdd = true
         this.getAddress()
+        this.helpTitle = '订阅货主货源信息'
       }
     },
     closeMe() {
       this.isShowAdd = false
       this.isShowHelp = false
       this.isShowOrder = false
-    },
-    openHelp() {
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
-      this.getAddress()
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            '/28-web/companyLine/subscribe?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token,
-            this.dataInfo
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('订阅成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-      } else {
-        this.isShowHelp = true
-        this.getAddress()
-      }
+      this.AddAbnormalVisible = false
     },
     openOrder(type) {
       this.isShowOrder = true

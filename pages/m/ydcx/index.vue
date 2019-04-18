@@ -98,8 +98,9 @@
 </template>
 <script>
 import Vue from 'vue'
-import { Style } from 'cube-ui'
+import { Style, Toast } from 'cube-ui'
 Vue.use(Style)
+Vue.use(Toast)
 export default {
   layout: 'm',
   data() {
@@ -152,7 +153,17 @@ export default {
   },
   methods: {
     search() {
-      //
+      if (this.value === '') {
+        this.$createToast({ txt: '请输入你要搜索的值', type: 'txt' }).show()
+        return
+      }
+      this.$axios
+        .get(
+          '/aflc-portal/order/fclOrder/v1/queryCompanyBySerial/' + this.value
+        )
+        .then(res => {
+          //
+        })
     }
   }
 }

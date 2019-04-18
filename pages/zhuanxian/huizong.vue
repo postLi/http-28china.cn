@@ -4,7 +4,7 @@
       <div class="grid_c1 category clearfix">
         <div class="col1 fl">
           <div class="category_app">
-            <img src="../../static/images/huizong/cheyuan/app.png">
+            <img src="../../static/images/huizong/zhuanxian/app.png">
           </div>
           <div class="p_category_menu">
             <h4 class="category_menu_title">
@@ -23,12 +23,12 @@
         </div>
         <div class="col2 category_ad fl clearfix">
           <div class="ad_big fl">
-            <img src="../../static/images/huizong/cheyuan/banner.png">
+            <img src="../../static/images/huizong/zhuanxian/banner.png">
           </div>
           <div class="ad_right fr">        
-            <div class="ad_right_item"><img src="../../static/images/huizong/cheyuan/adlet1.png"></div>
-            <div class="ad_right_item"><img src="../../static/images/huizong/cheyuan/adlet2.png"></div>
-            <div class="ad_right_item"><img src="../../static/images/huizong/cheyuan/adlet3.png"></div>
+            <div class="ad_right_item"><img src="../../static/images/huizong/zhuanxian/adlet1.png"></div>
+            <div class="ad_right_item"><img src="../../static/images/huizong/zhuanxian/adlet2.png"></div>
+            <div class="ad_right_item"><img src="../../static/images/huizong/zhuanxian/adlet3.png"></div>
           </div>
           <!-- 幻灯片 -->
         </div>
@@ -296,22 +296,22 @@
         <ul class="discount_ad_list">
           <li>
             <a href="#">
-              <img src="../../static/images/huizong/cheyuan/discount_ad1.png">
+              <img src="../../static/images/huizong/zhuanxian/discount_ad1.png">
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="../../static/images/huizong/cheyuan/discount_ad2.png">
+              <img src="../../static/images/huizong/zhuanxian/discount_ad2.png">
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="../../static/images/huizong/cheyuan/discount_ad3.png">
+              <img src="../../static/images/huizong/zhuanxian/discount_ad3.png">
             </a>
           </li>
           <li>
             <a href="#">
-              <img src="../../static/images/huizong/cheyuan/discount_ad4.png">
+              <img src="../../static/images/huizong/zhuanxian/discount_ad4.png">
             </a>
           </li>
         </ul>
@@ -373,20 +373,20 @@
         <div class="info_num">
           <ul class="info_list clearfix">
             <li>
-              <span><i class="iconfont iconhuowu"/>当前货物</span>
+              <span><i class="iconfont icondangqianhuowu"/>当前货物</span>
               <span class="info_list_num">229089</span>
             </li>
             <li>
-              <span><i class="iconfont iconwangfandijia"/>物流专线</span>
+              <span><i class="iconfont iconwuliuzhuanxian"/>物流专线</span>
               <span class="info_list_num">229089</span>
             </li>
             <li>
-              <span><i class="iconfont iconwuliu"/>当前货物</span>
+              <span><i class="iconfont iconcheyuanxinxi"/>当前货物</span>
               <span class="info_list_num">45646</span>
             </li>
           </ul>
           <ul class="info_text_list">
-            <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
+            <li><i class="iconfont iconshang--jiantou"/>今日新增:</li>
             <li>货源<span class="info_text_num">8951</span></li>
             <li>专线<span class="info_text_num">854</span></li>
             <li>车源<span class="info_text_num">8011</span></li>
@@ -424,7 +424,7 @@
         <a 
           :href="'/zhuanxian/list?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity" 
           target="_blank"
-          class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
+          class="gr_link">全部专线<i class="iconfont iconxiaojiantouhuise"/></a>
       </div>
       <div class="p_type_nav">
         <a 
@@ -467,10 +467,7 @@
                   <div 
                     v-if="item.isEq"
                     class="icon_box fl">
-                    <span 
-                      v-for="(item, index) in item.credit"
-                      :key="index"
-                      class="icon"/>
+                    <creditIcon :credit="item.credit" />
                   </div>
                   <a 
                     :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
@@ -524,23 +521,23 @@
       </div>
     </div>
     <!-- 热门专线 -->
-    <div class="p_release p_order_release">
-      <div class="release_total">
-        <span class="release_total_txt">平台已撮合</span>
-        <span class="release_total_num">5</span>
-        <span class="release_total_num">3</span>
-        <span class="release_total_num">8</span>
-        <span class="release_total_num">8</span>
-        <span class="release_total_num">2</span>
-        <span class="release_total_txt">货源达成交易</span>
+    <div class="grid_c1 zx_business">
+      <div class="business_total">
+        <span class="business_total_txt1">平台已撮合</span>
+        <span class="business_total_num">5</span>
+        <span class="business_total_num">3</span>
+        <span class="business_total_num">8</span>
+        <span class="business_total_num">8</span>
+        <span class="business_total_num">2</span>
+        <span class="business_total_txt2">货源达成交易</span>
       </div>
-      <div class="btn_box">
+      <div class="p_zx_btn_box">
         <a 
           :href="'/create/line?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity"
           target="blank"
-          class="btn_release">快速下单</a>
+          class="btn_order">快速下单</a>
       </div>
-      <p class="release_total_explain">一键下单，运力30秒快速响应</p>
+      <p class="business_total_explain">一键下单，运力30秒快速响应</p>
     </div>
     <!-- 快速下单 -->
     <div class="bj_2">
@@ -588,12 +585,7 @@
                     :href="'/member/'+item.companyId"
                     target="_blank">{{ item.companyName }}</a></div>
                   <div class="icon_box fl">
-                    <div v-if="item.isEq">
-                      <span 
-                        v-for="(item, index) in item.credit"
-                        :key="index"
-                        class="icon"/>
-                    </div>
+                    <creditIcon :credit="item.credit" />
                   </div>
                   <a 
                     :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
@@ -637,20 +629,16 @@
       </div>
     </div>
     <!-- 降价专线推荐 -->
-    <div class="bj_2">
-      <div class="p_release drop_release">
-        <div class="release_box">
-          <div class="release_box_txt fl">
-            <h3 class="release_box_txt_tit">我也要降价发布</h3>
-            更多曝光机会，让更多货主联系您
-          </div>
-          <div class="btn_box fr">
-            <a 
-              :href="'/zhuanxian/list?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity" 
-              target="_blank"
-              class="btn_release">快速发布专线</a>
-          </div>
-        </div>
+    <div class="grid_c1 drop_publish"> 
+      <div class="drop_publish_txt fl">
+        <h3 class="publish_txt_tit">我也要降价发布</h3>
+        <div class="publish_txt_explain">更多曝光机会，让更多货主联系您</div>
+      </div>
+      <div class="p_zx_btn_box fr">
+        <a 
+          :href="'/zhuanxian/list?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity" 
+          target="_blank"
+        >快速发布专线</a>
       </div>
     </div>
     <!-- 降价发布 -->
@@ -681,7 +669,7 @@
                 :src="item.rangeLogo || '/images/pic/bg' + item.num + '.png'"></a></div>
             <div class="rank_tit"><a 
               :href="'/member/'+item.id"
-              target="_blank"><span class="rank_tit_name">{{ item.companyName }}</span> </a>
+              target="_blank"><span class="rank_tit_name">{{ item.companyName }}</span> <creditIcon :credit="item.credit" /></a>
               <!-- <span class="rank_tit_icon_tuijian">推</span> -->
             </div>
             <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
@@ -693,7 +681,7 @@
       </div> 
     </div>  
     <!-- 本月优质承运 -->
-    <div class="grid_c1 groom_login">
+    <!-- <div class="grid_c1 groom_login">
       <div class="groom_box">
         <div class="p_groom_submit clearfix">
           <input 
@@ -705,25 +693,37 @@
         </div>
         <p class="explain">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</p>
       </div>
+    </div> -->
+    <div class="grid_c1 groom_me">
+      <div class="groom_me_box clearfix">
+        <input 
+          type="text" 
+          placeholder="请输入您的手机号"
+          class="me_box_input fl">
+        <a class="me_box_btn fl">帮我推荐</a>
+      </div>
+      <div class="groom_me_txt">平台推荐，资质保障，为您快速匹配时效快、评价、安心、专业的专线</div>
     </div>
     <!-- 帮我推荐 -->
     <div class="bj_2">
       <div class="grid_c1 shipper_say">
-        <h3 class="p_title">3800万用户的共同选择！</h3>
-        <div class="shipper-say_title clearfix">
-          <img 
-            src="../../static/images/huizong/icon_index.png" 
-            class="shipper-say_title-icon" 
-            alt="">
-          <span class="shipper-say_title-word">货主说</span>
-          <img 
-            src="../../static/images/huizong/icon_index.png" 
-            class="shipper-say_title-icon" 
-            alt="">
-          <a 
-            href="" 
-            class="fr btn_small">我有话要说</a>
+        <div class="p_centre_title clearfix">
+          <div class="title_line_box fl">
+          <span/></div> <h3 class="title_txt fl">3800万用户的共同选择！</h3> <div class="title_line_box fl"><span/>
+          </div>
         </div>
+        <div class="zx_sub_title clearfix">
+          <img 
+            src="../../static/images/huizong/zhuanxian/tit_icon.png" 
+            class="sub_title_icon" 
+            alt="">
+          <span class="sub_title_word">货主说</span>
+          <img 
+            src="../../static/images/huizong/zhuanxian/tit_icon.png" 
+            class="sub_title_icon" 
+            alt="">
+        </div>
+
         <ul class="shipper_say_content clearfix">
           <li class="shipper_say_item ">
             <a href="">
@@ -771,77 +771,81 @@
       </div>
     </div>
     <!-- 货主要说 -->
-    <div class="bj_2">
-      <div class="p_our_virtue">
-        <h3 class="p_title">我们的优势</h3>
-        <ul class="our_virtue_list clearfix">
-          <li>
-            <div class="our_virtue_pic"><img src="../../static/images/huizong/u299.png"></div>
-            <h4 class="our_virtue_tit color_orange">安全保障</h4>
-            <div class="our_virtue_content">流程标准化，降低货损率；完善的理赔保障体系，小额快赔的贴心设计，为成员的每一票货物保驾护航</div>
-          
+    <div class="grid_c1 zx_our_virtue clearfix">
+      <div class="virtue_item virtue_left">
+        <h6 class="virtue_item_tit">快</h6>
+        <ul class="virtue_list">
+          <li>一键下单，运力30秒快速响应
           </li>
-          <li>
-            <div class="our_virtue_pic"><img src="../../static/images/huizong/u301.png"></div>
-            <h4 class="our_virtue_tit color_green">降本增效</h4>
-            <div class="our_virtue_content">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
+          <li>就近指派司机，20分钟内车辆闪电抵达提货</li>
+          <li> 同城4小时完成配送</li>
+          <li>城际当天到达</li>
+          <li>省际最快次日到货</li>
+        </ul>
+      </div>
+      <div class="virtue_item virtue_middle">
+        <h6 class="virtue_item_tit">好</h6>
+        <ul class="virtue_list">
+          <li>一键下单，运力30秒快速响应
           </li>
-          <li>
-            <div class="our_virtue_pic"><img src="../../static/images/huizong/u295.png"></div>
-            <h4 class="our_virtue_tit color_blue">信息系统</h4>
-            <div class="our_virtue_content">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
-          </li>
+          <li>全程可视化跟踪，随时随地一键查询在途信息</li>
+          <li> 到货预约和短信通知</li>
+          <li>智能签收与电子回单</li>
+        </ul>
+      </div>
+      <div class="virtue_item virtue_right">
+        <h6 class="virtue_item_tit">省</h6>
+        <ul class="virtue_list">
+          <li>全网比价竞价，优选低价</li>
+          <li> 大量回头车辆，价低质优，货主省钱，司机赚钱</li>
+          <li>一键发货和跟踪，全程省心</li>
         </ul>
       </div>
     </div>
     <!-- 我们的优势 -->
-    <div class="p_release drop_release wl_enter">
-      <div class="release_box">
-        <div class="release_box_txt fl">
-          <h3 class="release_box_txt_tit"> 快速成为承运商获取优质货源</h3>
-          能够以最快的时效最小的成本,了大量优质货源
-        </div>
-        <div class="btn_box fr">
-          <a 
-            href="/regisiter"
-            target="blank"
-            class="btn_release">我要入驻</a>
-        </div>
+    <div class="grid_c1 check_in">
+      <div class="check_in_tit fl">快速成为承运商获取优质货源</div>
+      <div class="p_zx_btn_box fr">
+        <a 
+          href="/regisiter"
+          target="blank">我要入驻</a>
       </div>
-    </div> 
+    </div>
     <!-- 入住 -->
     <div class="order_step">
       <div class="step_box">
         <h3 class="step-title">在线下单流程</h3>
         <div class="step_txt">
-          <p class="step_txt_title">三方约看</p>
-          <p class="step_txt_text">平均7日成交</p>
+          <p class="step_txt_title">一键下单</p>
+          <p class="step_txt_text">线上支付，平台担保</p>
         </div>
         <ul class="step_list">
           <li class="step_item">
-            <i class="iconfont icondingyue"/>
-            下单
+            <i class="iconfont iconxiadan1"/>           
+            <div class="step_item_txt">下单</div>
           </li>
-    
-          <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li>
+          <!-- <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li> -->
           <li class="step_item">
-            <i class="iconfont iconwuliu"/>
-            受理
+            <i class="iconfont iconshouli"/>
+            <div class="step_item_txt">受理</div>
+            
           </li>
-          <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li>
+          <!-- <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li> -->
           <li class="step_item">
-            <i class="iconfont iconhuowu"/>
-            揽收
+            <i class="iconfont iconlanshou"/>
+            <div class="step_item_txt">揽收</div>
+            
           </li>
-          <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li>
+          <!-- <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li> -->
           <li class="step_item">
-            <i class="iconfont iconwuliu"/>
-            运输
+            <i class="iconfont iconyunshu"/>
+            <div class="step_item_txt">运输</div>
+            
           </li>
-          <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li>
+          <!-- <li class="step_icon"><i class="iconfont iconjiantou_xiangyouliangci_o"/></li> -->
           <li class="step_item">
-            <i class="iconfont iconliwuhuodong"/>
-            签收
+            <i class="iconfont iconqianshou"/>
+            <div class="step_item_txt"> 签收</div>
           </li>
 
         </ul>
@@ -850,29 +854,32 @@
     <!-- 在线下单流程 -->
     <div class="bj_2">
       <div class="p_answers">
-        <div class="p_title_box">
-          <h3 class="title">28问答</h3>
-          <a 
-            href="/help/ggp/index.jhtml"
-            target="blank"
-            class="answers_link">全部<i class="iconfont iconjiantou2"/>
-          </a>         
+        <div class="zx_sub_title clearfix">
+          <img 
+            src="../../static/images/huizong/zhuanxian/tit_icon.png" 
+            class="sub_title_icon" 
+            alt="">
+          <span class="sub_title_word">28问答</span>
+          <img 
+            src="../../static/images/huizong/zhuanxian/tit_icon.png" 
+            class="sub_title_icon" 
+            alt="">
         </div>
         <ul class="answers_list">
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>什么是订阅货源？</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>什么是订阅货源？</p>
             <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么在平台接单？</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>怎么在平台接单？</p>
             <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么申请成为推荐承运商</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>怎么申请成为推荐承运商</p>
             <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
           <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>承运商入驻需要什么材料？</p>
+            <p class="answers_list_tit"><i class="iconfont iconwenda"/>承运商入驻需要什么材料？</p>
             <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
           </li>
         </ul>
@@ -946,7 +953,31 @@
       <div class="clear"/>
     </div>
     <!-- 热点新闻 -->
-
+    <div class="grid_c1 drop_publish quick_order"> 
+      <div class="drop_publish_txt fl">
+        <h3 class="publish_txt_tit">仅需3步 快速下单</h3>
+        <div class="publish_txt_explain">免费咨询电话：400-999-2828</div>
+      </div>
+      <div class="p_zx_btn_box fr">
+        <a 
+          :href="'/zhuanxian/list?startp='+vo.startProvince+'&startc='+vo.startCity+'&endp='+vo.endProvince+'&endc='+vo.endCity" 
+          target="_blank"
+        >快速发布专线</a>
+      </div>
+    </div>
+    
+    <!-- <div class="grid_c1 quick_order">
+      <div class="quick_order_txt fl">
+        <span class="order_txt_tit">仅需3步 快速下单</span>
+        <span class="order_txt">免费咨询电话：400-999-2828</span>
+      </div>
+      <div class="p_zx_btn_box fr">
+        <a 
+          href="/regisiter" 
+          target="blank">快速下单</a>
+      </div>
+    </div> -->
+    <!-- 快速下单 -->
   </div>
 </template>
 <script>
@@ -1355,6 +1386,14 @@ export default {
     }
   }
 }
+.p_centre_title {
+  .title_line_box > span {
+    border-top: 2px solid $light_gray;
+  }
+  .title_txt {
+    color: $tit_color;
+  }
+}
 /* 1、物流专线 */
 .category {
   background-color: #f5f5f5;
@@ -1366,7 +1405,7 @@ export default {
     width: 256px;
     height: 476px;
     background-color: $black;
-    background-image: url('../../static/images/huizong/cheyuan/nav_bj.png');
+    background-image: url('../../static/images/huizong/zhuanxian/nav_bj.png');
     background-position: 0 bottom;
   }
   > .col2 {
@@ -1431,11 +1470,11 @@ export default {
     > a {
       height: 38px;
       line-height: 38px;
-      border: 1px solid $cy_green;
-      color: $cy_green;
+      border: 1px solid $zx_green;
+      color: $zx_green;
     }
     > a.login {
-      background-color: $cy_green;
+      background-color: $zx_green;
     }
   }
 }
@@ -1497,19 +1536,19 @@ export default {
         }
       }
       .pt_groom_bj1 {
-        background: url('../../static/images/huizong/cheyuan/pt_bj1.png')
+        background: url('../../static/images/huizong/zhuanxian/pt_bj1.png')
           no-repeat;
       }
       .pt_groom_bj2 {
-        background: url('../../static/images/huizong/cheyuan/pt_bj2.png')
+        background: url('../../static/images/huizong/zhuanxian/pt_bj2.png')
           no-repeat;
       }
       .pt_groom_bj3 {
-        background: url('../../static/images/huizong/cheyuan/pt_bj3.png')
+        background: url('../../static/images/huizong/zhuanxian/pt_bj3.png')
           no-repeat;
       }
       .pt_groom_bj4 {
-        background: url('../../static/images/huizong/cheyuan/pt_bj4.png')
+        background: url('../../static/images/huizong/zhuanxian/pt_bj4.png')
           no-repeat;
       }
       &.channel1 {
@@ -1641,7 +1680,7 @@ export default {
         .link_oder {
           width: 124px;
           text-align: center;
-          background-image: url('../../static/images/huizong/cheyuan/pt_bj.png');
+          background-image: url('../../static/images/huizong/zhuanxian/pt_bj.png');
           background-repeat: no-repeat;
           background-position: 0 0;
           > a {
@@ -1688,98 +1727,165 @@ export default {
   }
 }
 /* 3、热门专线 */
-.p_type_nav {
-  a {
-    &:hover {
-      cursor: pointer;
-      color: #f9552a;
+.p_hy_groom {
+  .p_type_nav {
+    margin: 30px 0 20px 0;
+    padding-bottom: 0;
+  }
+  .gr_link {
+    color: $light_gray;
+    .iconfont {
+      padding-left: 5px;
+      color: #c5c5c5;
     }
   }
-  .active {
-    color: #f9552a;
-    cursor: pointer;
+}
+/* 平台交易 */
+.p_zx_btn_box {
+  margin: 30px auto 0 auto;
+  width: 200px;
+  height: 60px;
+  line-height: 60px;
+  > a {
+    display: block;
+    color: $white;
+    font-size: 20px;
+    text-align: center;
+    background: $zx_green;
+    border-radius: 5px;
   }
 }
-/* 4、快速下单 */
-/* 5、降价专线 */
-.drop_groom {
-  .p_title_box {
-    .title_txt {
-      color: $tit_color;
-      b {
-        color: $red;
+.zx_business {
+  overflow: hidden;
+  color: $white;
+  height: 310px;
+  background: url('../../static/images/huizong/zhuanxian/business_bj.png')
+    no-repeat;
+  .business_total {
+    margin-top: 60px;
+    font-size: 0;
+    text-align: center;
+    > span {
+      margin-left: 10px;
+      display: inline-block;
+      font-size: 25px;
+      line-height: 70px;
+      &.business_total_txt1 {
+        padding-right: 10px;
+      }
+      &.business_total_txt2 {
+        padding-left: 10px;
+      }
+      &.business_total_num {
+        width: 58px;
+        height: 68px;
+        line-height: 68px;
+        font-size: 30px;
+        color: $zx_green;
+        border: 1px solid $zx_green;
       }
     }
   }
+  .business_total_explain {
+    margin-top: 25px;
+    text-align: center;
+    color: #bfbfbf;
+  }
 }
 /* 6、降价发布 */
-.drop_release {
-  padding: 50px 0;
-  .release_box {
-    width: 400px;
-    .btn_box {
-      margin: 8px 0 0 0;
+.drop_publish {
+  padding: 30px 260px 0 260px;
+  width: 880px;
+  height: 120px;
+  background: url('../../static/images/huizong/zhuanxian/drop_bj.png') no-repeat;
+  .drop_publish_txt {
+    color: $white;
+    .publish_txt_tit {
+      font-size: 40px;
+      margin-bottom: 10px;
     }
+    .publish_txt_explain {
+      font-size: 18px;
+    }
+  }
+  .p_zx_btn_box {
+    margin-top: 10px;
   }
 }
-/* 7、帮我推荐 */
-.groom_login {
-  padding: 50px 0;
-  .groom_box {
-    margin: 0 auto;
-    width: 320px;
-  }
-  .p_groom_submit {
-    position: relative;
-    margin-bottom: 25px;
-    > input {
-      width: 200px;
-      font-size: $f_16;
+.groom_me {
+  overflow: hidden;
+  height: 200px;
+  background: url('../../static/images/huizong/zhuanxian/groom_me_bj.png')
+    no-repeat;
+  .groom_me_box {
+    margin: 50px auto 0 auto;
+    width: 500px;
+    height: 60px;
+    font-size: 18px;
+    background: $white;
+    .me_box_input {
+      border: 0;
+      width: 354px;
+      height: 60px;
+      line-height: 60px;
+      text-indent: 20px;
+      color: $gray;
     }
-    > button {
-      width: 100px;
-      font-size: $f_18;
+    .me_box_btn {
+      margin-top: 2px;
+      width: 144px;
+      height: 56px;
+      line-height: 56px;
+      text-align: center;
+      color: $white;
+      background: #ffb91a;
     }
   }
-  .error {
-    position: absolute;
-    left: 0;
-    bottom: -18px;
-    width: 100%;
-    font-size: $f_12;
-    color: $red;
-    line-height: 15px;
+  .groom_me_txt {
+    margin-top: 20px;
+    text-align: center;
+    color: $white;
+  }
+}
+/* 快速下单 */
+.quick_order {
+  background: url('../../static/images/huizong/zhuanxian/quick_order_bj.png')
+    no-repeat;
+  .drop_publish_txt {
+    .publish_txt_tit {
+      color: $tit_color;
+    }
+    .publish_txt_explain {
+      color: $gray;
+    }
   }
 }
 /* 8、货主说 */
-.shipper_say {
-  margin-bottom: 40px;
-  .p_title {
-    text-align: center;
+.zx_sub_title {
+  margin: 0 auto;
+  width: 1032px;
+  text-align: center;
+  .sub_title_icon {
+    display: inline-block;
+    width: 34px;
+    height: 33px;
+    vertical-align: top;
+    margin-top: 7px;
   }
-  .shipper-say_title {
-    margin: 0 auto;
-    width: 1032px;
-    text-align: center;
-    .shipper-say_title-icon {
-      display: inline-block;
-      width: 16px;
-      height: 22px;
-      vertical-align: top;
-      margin-top: 7px;
-    }
-    .shipper-say_title-word {
-      display: inline-block;
-      font-size: 22px;
-      color: rgba(0, 0, 0, 0.8);
-      margin: 0 10px 0 15px;
-    }
-    .btn_say {
-      padding: 5px 10px;
-      color: $green;
-      border: 1px solid $green;
-      border-radius: 5px;
-    }
+  .sub_title_word {
+    display: inline-block;
+    font-size: 30px;
+    color: $tit_color;
+    margin: 0 10px 0 15px;
+  }
+}
+.shipper_say {
+  .p_centre_title {
+    margin: 60px auto;
+  }
+  margin-bottom: 40px;
+  .p_centre_title {
+    width: 580px;
   }
   .shipper_say_content {
     margin: 50px auto 0;
@@ -1849,13 +1955,61 @@ export default {
   }
 }
 /* 9、我们的优势 */
-.p_our_virtue {
-  width: 1075px;
+.zx_our_virtue {
+  .virtue_item {
+    float: left;
+    width: 440px;
+    height: 350px;
+    .virtue_item_tit {
+      width: 440px;
+      height: 150px;
+      line-height: 150px;
+      color: $white;
+      font-size: 30px;
+      font-weight: bold;
+      text-indent: 30px;
+    }
+  }
+  .virtue_left {
+    .virtue_item_tit {
+      background: url('../../static/images/huizong/zhuanxian/advantage1_bj.png')
+        no-repeat;
+    }
+  }
+  .virtue_middle {
+    .virtue_item_tit {
+      background: url('../../static/images/huizong/zhuanxian/advantage2_bj.png')
+        no-repeat;
+    }
+    margin: 0 40px;
+  }
+  .virtue_right {
+    .virtue_item_tit {
+      background: url('../../static/images/huizong/zhuanxian/advantage3_bj.png')
+        no-repeat;
+    }
+  }
+  .virtue_list {
+    margin-top: 30px;
+    > li {
+      margin-bottom: 10px;
+    }
+  }
 }
 /* 10、我要入驻 */
-.wl_enter {
-  .release_box {
-    width: 520px;
+.check_in {
+  padding: 0 240px;
+  width: 920px;
+  height: 150px;
+  background: url('../../static/images/huizong/zhuanxian/check_in_bj.png')
+    no-repeat;
+  .check_in_tit {
+    font-size: 25px;
+    line-height: 150px;
+    color: $tit_color;
+  }
+  .p_zx_btn_box {
+    margin-top: 45px;
   }
 }
 /* 11、28问答 */
@@ -1988,30 +2142,29 @@ export default {
 .order_step {
   overflow: hidden;
   width: 100%;
-  height: 430px;
+  height: 660px;
   color: $tit_color;
-  background: url('../../static/images/huizong/_zhuanxin_oder_bj.jpg') right
-    center no-repeat;
+  background: url('../../static/images/huizong/zhuanxian/order_step_bj.png')
+    no-repeat;
   .step_box {
-    margin: 90px auto 0;
+    margin: 130px auto 0;
     width: 1075px;
   }
   .step-title {
     display: inline-block;
-    width: 100px;
-    font-size: 16px;
+    width: 200px;
+    font-size: 18px;
     font-weight: normal;
-    padding-bottom: 6px;
-    border-bottom: 3px solid #22ac38;
   }
   .step_txt {
     margin-top: 30px;
     .step_txt_title {
-      font-size: 40px;
+      font-size: 50px;
     }
     .step_txt_text {
-      margin-top: 20px;
-      font-size: 18px;
+      margin-top: 100px;
+      color: $tit_color;
+      font-size: 25px;
     }
   }
   .step_list {
@@ -2022,16 +2175,18 @@ export default {
       float: left;
       height: 65px;
       &.step_item {
-        width: 40px;
+        margin-right: 75px;
+        width: 50px;
         text-align: center;
         .iconfont {
-          display: block;
-          font-size: 30px;
+          // display: block;
+          font-size: 50px;
+          color: $zx_green;
         }
-      }
-      &.step_icon {
-        line-height: 65px;
-        padding: 0 25px;
+        .step_item_txt {
+          margin-top: 10px;
+          font-size: 18px;
+        }
       }
     }
   }

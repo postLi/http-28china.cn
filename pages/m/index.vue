@@ -253,7 +253,6 @@ export default {
       }
     },
     search() {
-      console.log(this.$store.state.m)
       this.$store.commit('m/pageView/setData', {
         name: 'footerId',
         data: this.$store.state.m.navId

@@ -102,13 +102,6 @@
 }
 
 /*按钮*/
-.btn_small {
-  padding: 5px 10px;
-  color: #3cb46d;
-  border: 1px solid #3cb46d;
-  border-radius: 5px;
-}
-
 /*发布按钮*/
 .btn_release {
   display: inline-block;

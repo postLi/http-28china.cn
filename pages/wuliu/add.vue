@@ -12,9 +12,7 @@
         class="layui-form"
         action=""
         style="width: 400px;">
-        <div
-         
-        class="layui-form-item">
+        <div class="layui-form-item">
           <label class="layui-form-label"><i style="color: red">*</i>园区名称:</label>
           <div class="layui-input-block">
             <input
@@ -24,17 +22,13 @@
               class="layui-input"
               v-model="form.name">
           </div>
-         
         </div>
-    
         <div 
-         
           style="margin-left: 40px;border-color: #fff;margin-bottom:30px"
           class="select_con"
           id="addMap"
         >
           <dl>
-            
             <dt style="height:32px;line-height:32px;font-size:14px;"><i style="color: red">*</i>园区地址：</dt>
             <dd>
               <form
@@ -43,7 +37,6 @@
                 action=""
                 style="float:left;"
               >
-
                 <div
                   id="addressTo"
                   class="fl list_input"
@@ -246,6 +239,7 @@ export default {
       }
     },
     closeDialog() {
+      console.log(this.showDiv, 'showDiv')
       this.$emit('close')
       this.form = {}
       this.ismobile = false

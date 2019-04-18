@@ -109,7 +109,7 @@
             style="width: 298px;background: #3f94ee;height:48px">实力承运商入驻</button></div>
           <div
             class="rem_bot"
-            style="margin-top: 10px"
+            style="margin-top: 10px;border:1px solid rgba(255,182,95,1);"
           >
             <div class="rem_bot_t">
               <div
@@ -124,7 +124,7 @@
 
             <ul
               class="rem_bot_b"
-              style="padding: 10px 15px 15px">
+              style="padding: 10px 15px 25px">
               <li
                 v-for="(item,i) in listE"
                 :key="i"
@@ -479,7 +479,24 @@ export default {
       // lineHots: []
     }
   },
-  async fetch({ store, params, $axios, error, app }) {
+  async fetch({ store, params, $axios, error, app, query }) {
+    let vo = {
+      currentPage: 1,
+      pageSize: 5,
+      city: query.locationCity ? query.locationCity : '',
+      province: query.locationProvince ? query.locationProvince : '',
+      endArea: query.endArea ? query.endArea : '',
+      endCity: query.endCity ? query.endCity : '',
+      endProvince: query.endProvince ? query.endProvince : '',
+      startArea: query.startArea ? query.startArea : '',
+      startCity: query.startCity
+        ? query.startCity
+        : app.$cookies.get('currentAreaFullName'),
+      startProvince: query.startProvince
+        ? query.startProvince
+        : app.$cookies.get('currentProvinceFullName')
+    }
+    // console.log(app, 'currentAreaFullName')
     await store.dispatch('news/GETNEWSINFO', {
       params: {
         channelIds:
@@ -499,8 +516,11 @@ export default {
       },
       name: 'gongsi_wlzx'
     })
+    await store.dispatch('lllapi/GETGSLINEHOTS').catch(err => {})
+    await store.dispatch('lllapi/GETGSLINKS', vo).catch(err => {})
   },
   async asyncData({ $axios, app, query, error }) {
+    // console.log(app.$cookies.get('currentAreaFullName'), 'currentAreaFullName')
     let aurl = ''
     let vo = {
       currentPage: 1,
@@ -667,7 +687,7 @@ export default {
     ) {
       return {
         createTime: new Date().getTime(),
-        lineHots: listA.data.status == 200 ? listA.data.data : [],
+        // lineHots: listA.data.status == 200 ? listA.data.data : [],
         lineLinks: listC.data.status == 200 ? listC.data.data : [],
         lineAdviseRecommend: listD.data.status == 200 ? listD.data.data : [],
         listE: listE.data.status == 200 ? listE.data.data : [],
@@ -682,6 +702,9 @@ export default {
     }
   },
   computed: {
+    lineHots() {
+      return this.$store.state.lllapi.gongsi_lineHots
+    },
     gongsi_jryw() {
       return this.$store.state.news.gongsi_jryw.slice(1)
     },
@@ -711,6 +734,10 @@ export default {
     script: [{ src: './js/jquery.pagination.min.js' }]
   },
   mounted() {
+    // console.log(
+    //   this.$store.state.lllapi.gongsi_lineHots,
+    //   'this.$store.state.lllapi.gongsi_lineHots1'
+    // )
     this._updateCachePage()
     $('#buxian').prop('checked', true)
     var newArr = new Array()

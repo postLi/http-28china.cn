@@ -299,7 +299,7 @@ $('#select_wlyq').mousedown(function () {
 //清空条件
 $("#flush").click(
   function () {
-    console.log("清空地址")
+    // console.log("清空地址")
     window.location.href='/zhuanxian/list';
     // window.location.reload();
   })
@@ -403,7 +403,7 @@ $("#check-fee").click(
     var enda = $("#right-bar-to").attr('thearea')
     var endjw = $("#right-bar-to").attr("thepos");
     var startj,startw, endj,endw;
-    console.log(startjw,'startjw');
+    // console.log(startjw,'startjw');
     if (startjw) {
       var startj = startjw.split(",", 2)[0];
       var startw = startjw.split(",", 2)[1];
@@ -457,7 +457,7 @@ $("#check-fee").click(
 
     s1 = '/create/order?&start=' + startpcd + '&end=' + endpcd + '&startstreet=' + startstreet + '&endstreet=' + endstreet;
     s2 = '&startj=' + startj + '&startw=' + startw + '&endj=' + endj + '&endw=' + endw + '&startp=' + startp + '&startc=' + startc + '&starta=' + starta + '&endp=' + endp + '&endc=' + endc + '&enda=' + enda;
-    console.log(s1 + s2);
+    // console.log(s1 + s2);
     window.open(s1 + s2);
 //+
 

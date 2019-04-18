@@ -211,7 +211,6 @@
             </ul>
           </div>
         </div>
-
         <div>
           <div
             class="ruzhu"
@@ -226,7 +225,7 @@
                 target="_blank"><span style="float:right;margin-right:30px"> 更多</span></a>
             </div>
             <div
-              v-if=" getNewestList.list ==[] "
+              v-if="getNewestList.length==0||getNewestList.list ==[] "
               class="list_none"
               style="display: block">
               <span>暂时没有找到您要的新入驻园区信息，可以看看其他园区哦</span>
@@ -588,12 +587,8 @@
             style="width: 280px;color: white;background: #FF892A;height:80px;;line-height: 80px;text-align: center;border-radius: 8px;    display: inline-block;margin-left:50px;cursor: pointer; border: none;color:rgba(255,255,255,1);font-size:24px;"><a 
               
           style="color:rgba(255,255,255,1);">我要入驻</a></button>
-          <!-- <a 
-            href="/regisiter"
-            target="_blank"><button style="width: 180px;color: white;background: rgb(60,180,69);height: 50px;line-height: 50px;text-align: center;border-radius: 5px;    display: inline-block;margin-left:50px;cursor: pointer">我要入驻</button></a> -->
-
-          <!--  -->
-            
+          <div @click="mapFn">mapFn</div>
+        
         </div>
 
 
@@ -607,11 +602,15 @@
       :info="inputData"
       @fromAdd="fromAdd"
     />
+    <Map 
+      :showMap="isMap"
+      @close="closeMap"/>
   </div>
 </template>
 
 <script>
 import Add from './add'
+import Map from './map'
 import { promised } from 'q'
 function comNum(item) {
   let arr = (item.id || '').split('')
@@ -636,7 +635,8 @@ async function gateWayList($axios, currentPage, vo = {}) {
 export default {
   name: 'WuLiu',
   components: {
-    Add
+    Add,
+    Map
   },
   head: {
     link: [
@@ -661,7 +661,7 @@ export default {
       isMobile: false,
       pages: 0,
       currentPage: 1,
-
+      isMap: false,
       ziZhuServerList: [
         {
           img: require('../../static/yuanqu/images/ksxd.png'),
@@ -927,6 +927,12 @@ export default {
   },
 
   methods: {
+    mapFn() {
+      this.isMap = true
+    },
+    closeMap() {
+      this.isMap = false
+    },
     fromAdd(data) {
       this.inputData = data
       this.isMobile = false

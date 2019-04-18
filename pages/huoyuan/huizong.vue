@@ -17,7 +17,7 @@
                 :key="index">
                 <a
                   target="_blank"
-                  :href="'/zhuanxian/list?startp=' + item.provinceName + '&startc=' + item.cityName">{{ item.cityShortName }}</a></span>  
+                  :href="'/huoyuan?startp=' + item.provinceName + '&startc=' + item.cityName">{{ item.cityShortName }}</a></span>  
             </div> 
             <div
               class="error" 
@@ -799,6 +799,7 @@ export default {
     // let [, ] = await Promise.all([   ])
     // this.currentArea = $.cookie('currentAreaFullName')
     //服务端获取cookies
+    let currentProvince = app.$cookies.get('currentProvinceFullName')
     let currentArea = app.$cookies.get('currentAreaFullName')
 
     //热门城市
@@ -807,14 +808,17 @@ export default {
     let shipperData = await $axios.post('/28-web/shipper/excellent', {
       currentPage: 1,
       pageSize: 10,
-      endCity: currentArea
+      startProvince: currentProvince,
+      startCity: currentArea
     })
     //本月优质货主
     let monthShipperData = await $axios.post(
       '/28-web/shipper/month/excellent',
       {
         currentPage: 1,
-        pageSize: 5
+        pageSize: 5,
+        startProvince: currentProvince,
+        startCity: currentArea
       }
     )
     // 货源推荐
@@ -823,7 +827,8 @@ export default {
       {
         currentPage: 1,
         pageSize: 12,
-        endCity: currentArea
+        startProvince: currentProvince,
+        startCity: currentArea
       }
     )
     // 榜单达人
@@ -855,6 +860,32 @@ export default {
       }
     } else {
       error({ statusCode: 500, message: '查找不到该专线列表' })
+    }
+  },
+  created() {
+    //优质货主
+    this.shipperData = this.shipperData.list
+      ? this.shipperData.list
+      : { list1: [], list2: [] }
+    //本月货主
+    this.monthShipperData = this.monthShipperData.list
+      ? this.monthShipperData.list
+      : []
+    //货源推荐
+    this.recommendData = this.recommendData.list ? this.recommendData.list : []
+
+    //处理优质货主数据
+    if (this.shipperData.length > 5) {
+      let list1 = this.shipperData.filter((value, index, arr) => {
+        return index < 5
+      })
+      let list2 = this.shipperData.filter((value, index, arr) => {
+        return index > 4
+      })
+      this.shipperData = { list1: list1, list2: list2 }
+      console.log('优质货主数据处理', this.shipperData)
+    } else {
+      this.shipperData.list1 = this.shipperData
     }
   },
   mounted() {
@@ -955,37 +986,10 @@ export default {
     },
     //处理获取数据
     handleData() {
-      //优质货主
-      this.shipperData = this.shipperData.list
-        ? this.shipperData.list
-        : { list1: [], list2: [] }
-      //本月货主
-      this.monthShipperData = this.monthShipperData.list
-        ? this.monthShipperData.list
-        : []
-      //货源推荐
-      this.recommendData = this.recommendData.list
-        ? this.recommendData.list
-        : []
-
       //获取cookies
       //$.cookie
       this.currentProvince = $.cookie('currentProvinceFullName')
       this.currentArea = $.cookie('currentAreaFullName')
-      console.log('获取本地cookies', this.currentProvince, this.currentArea)
-      //处理优质货主数据
-      if (this.shipperData.length > 5) {
-        let list1 = this.shipperData.filter((value, index, arr) => {
-          return index < 5
-        })
-        let list2 = this.shipperData.filter((value, index, arr) => {
-          return index > 4
-        })
-        this.shipperData = { list1: list1, list2: list2 }
-        console.log('优质货主数据处理', this.shipperData)
-      } else {
-        this.shipperData.list1 = this.shipperData
-      }
     },
     //搜索货源
     groomSearch() {

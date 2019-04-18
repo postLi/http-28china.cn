@@ -119,7 +119,7 @@
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
-                  <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
+                  <div class="owner_pic"><img :src="item.companyFacadeFile?item.companyFacadeFile:noneImg"></div>
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
@@ -147,7 +147,7 @@
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
-                  <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
+                  <div class="owner_pic"><img :src="item.companyFacadeFile?item.companyFacadeFile:noneImg"></div>
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
@@ -597,7 +597,7 @@
             <span 
               class="icon_square_no icon_square_no3"
               v-if="index === 2"/>
-            <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
+            <div class="rank_pic"><img :src="item.companyFacadeFile?item.companyFacadeFile:noneImg" ></div>
             <div class="rank_txt">
               <div class="rank_txt_tit">
                 <span 
@@ -605,8 +605,11 @@
                   :title="item.companyName ">{{ item.companyName }} </span>
                 <span class="txt_tit_icon_tuijian">荐</span>
               </div>
-              <div class="rank_txt_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_txt_praise">好评率{{ item.recommendedNumber }}%</div>
+              <div class="rank_txt_groom">
+                <span class="name">推荐指数</span>
+                <span><Star :start-num="item.recommendedNumber"/></span> 
+              </div>
+              <div class="rank_txt_praise">好评率{{ item.evaGoodCountRate }}%</div>
             </div>
 
           </a>
@@ -762,7 +765,8 @@
 <script>
 //获取公共的函数
 import until from '~/static/js/server/comonUntil'
-import Add from '~/components/subscribe/add'
+import Add from '~/components/subscribe/add' //订阅
+import Star from '~/components/star/star' //订阅
 import Swiper from 'Swiper'
 
 export default {
@@ -774,12 +778,13 @@ export default {
   //   }
   // },
   // layout: 'huizong',
-  components: { Add },
+  components: { Add, Star },
   data() {
     return {
       //登录权限
       isToken: false,
       mobile: '',
+      noneImg: require('../../static/images/huizong/none.jpg'),
       banners: [require('../../static/images/huizong/hy_banner1.jpg')],
       currentArea: '', //获取当前的城市
       currentProvince: '',
@@ -895,14 +900,15 @@ export default {
       this.intSwiper1()
       this.intSwiper2()
       this.getUser()
-      // console.log('优质货主', this.shipperData)
-      // console.log('本月货主', this.monthShipperData)
-      // console.log('货源推荐', this.recommendData)
-      // console.log('热门城市', this.hotCityData)
-      // console.log('货量达人', this.darenData)
-      // console.log('24小时在线新闻', this.newListData)
-      // console.log('统计数据', this.statisticsData)
-      // console.log('获取本地cookies', this.currentProvince, this.currentArea)
+      console.log('优质货主', this.shipperData)
+      console.log('本月货主', this.monthShipperData)
+      console.log('货源推荐', this.recommendData)
+      console.log('热门城市', this.hotCityData)
+      console.log('货量达人', this.darenData)
+      console.log('24小时在线新闻', this.newListData)
+      console.log('统计数据', this.statisticsData)
+      console.log('获取本地cookies', this.currentProvince, this.currentArea)
+      console.log('获取用户token', this.isToken, this.mobile)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -934,7 +940,6 @@ export default {
     getUser() {
       this.isToken = $.cookie('access_token') ? true : false
       this.mobile = $.cookie('login_mobile')
-      console.log('获取用户token', this.isToken, this.mobile)
     },
     //幻灯片
     intSwiper1() {

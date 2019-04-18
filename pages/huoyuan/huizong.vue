@@ -412,7 +412,7 @@
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
                   <span class="p_l5">物流商:</span>
-                  <span>{{ item.wlName }}</span>
+                  <span>{{ item.companyName }}</span>
                   <span><i class="iconfont iconrenzheng"/></span>
                 </div>
                 <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
@@ -856,9 +856,11 @@ export default {
     ) {
       return {
         hotCityData: hotCityData.data ? hotCityData.data.data : [],
-        shipperData: shipperData.data ? shipperData.data.data : [],
-        monthShipperData: monthShipperData ? monthShipperData.data.data : [],
-        recommendData: recommendData.data ? recommendData.data.data : [],
+        shipperData: shipperData.data ? shipperData.data.data.list : [],
+        monthShipperData: monthShipperData
+          ? monthShipperData.data.data.list
+          : [],
+        recommendData: recommendData.data ? recommendData.data.data.list : [],
         darenData: darenData.data ? darenData.data.data : [],
         newListData: newListData.data ? newListData.data.data : [],
         statisticsData: statisticsData.data ? statisticsData.data.data : []
@@ -869,15 +871,15 @@ export default {
   },
   created() {
     //优质货主
-    this.shipperData = this.shipperData.list
-      ? this.shipperData.list
-      : { list1: [], list2: [] }
-    //本月货主
-    this.monthShipperData = this.monthShipperData.list
-      ? this.monthShipperData.list
-      : []
-    //货源推荐
-    this.recommendData = this.recommendData.list ? this.recommendData.list : []
+    // this.shipperData = this.shipperData.list
+    //   ? this.shipperData.list
+    //   : { list1: [], list2: [] }
+    // //本月货主
+    // this.monthShipperData = this.monthShipperData.list
+    //   ? this.monthShipperData.list
+    //   : []
+    // //货源推荐
+    // this.recommendData = this.recommendData.list ? this.recommendData.list : []
 
     //处理优质货主数据
     if (this.shipperData.length > 5) {
@@ -896,7 +898,7 @@ export default {
   mounted() {
     let that = this
     this.$nextTick(() => {
-      this.handleData()
+      this.getCookies()
       this.intSwiper1()
       this.intSwiper2()
       this.getUser()
@@ -990,7 +992,7 @@ export default {
       })
     },
     //处理获取数据
-    handleData() {
+    getCookies() {
       //获取cookies
       //$.cookie
       this.currentProvince = $.cookie('currentProvinceFullName')

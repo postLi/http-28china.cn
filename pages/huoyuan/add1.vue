@@ -14,9 +14,10 @@
               :class="isActiveFirst?'actives' :''"
               @click="handleView('aflc-5')"
             >我是物流公司</span>
-            <span 
+            <span>我是车主</span>
+            <!-- <span 
               :class="isActiveFirst?'' :'actives'"
-              @click="handleView('aflc-1')" >我是车主</span>
+              @click="handleView('aflc-1')" >我是车主</span> -->
           </li>
           <li class="cont_ul_li" >
             <input 

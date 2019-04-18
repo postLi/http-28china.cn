@@ -960,12 +960,6 @@ export default {
       })
   },
   methods: {
-    checkLogin() {
-      return (
-        $.cookie('access_token') &&
-        ($.cookie('login_userToken') || $.cookie('user_token'))
-      )
-    },
     //价格参考
     getChartData(id) {
       return this.$axios.get('/28-web/carInfo/priceReference/' + id)

@@ -442,7 +442,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import MUTUAL from '@/static/js/wzl-commonJs.js'
 async function getCarInfoList($axios, currentPage, vo = {}) {
@@ -552,6 +551,10 @@ export default {
     await store.dispatch('cheyuan/GETPOPCARLIST', {
       name: 'list_pop_carowner'
     })
+    // await store.dispatch('cheyuan/GETLIST', {
+    //   data: vo,
+    //   name: 'index_list'
+    // })
   },
   async asyncData({ $axios, app, query }) {
     let cookie = app.$cookies
@@ -616,7 +619,6 @@ export default {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
     let carInfoLists = await getCarInfoList($axios, 1, vo)
-
     //车源底部推荐
     let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
     let newestCarRes = await $axios.post('/28-web/carInfo/newest/recommend', {
@@ -921,7 +923,7 @@ export default {
           this.carInfoList = carInfoList.list
           this.pages = carInfoList.pages
           this.current = carInfoList.current
-          // window.location.href = '#top'
+          window.location.href = '#top'
         }
       })
     },

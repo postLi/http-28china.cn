@@ -102,11 +102,27 @@
               src="/images/list_wlzx/ll_num.png"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i>
             </span>
           </p>
-          <div class="arc_middle1-2"><span><img
-            class="img1"
-            src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：{{ hyDetail.createTime }}</span><span><img
-              class="img2"
-              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：{{ hyDetail.collectNumber }}<i class="my_hz_num"/></span></div>
+          <ul class="arc_middle1-2">
+            <li>
+              <span><img
+                class="img1"
+                src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：{{ hyDetail.createTime }}</span>
+            </li>
+            <li>
+              <span @click="collected('one')">
+                <img
+                  v-if="collecImg === true"
+                  class="img2"
+                  src="/line/images/xin.png">
+                <img
+                  v-else
+                  class="img2"
+                  src="/line/images/03sc.png">
+              </span>
+              <span>收藏量：{{ hyDetail.collectNumber }}<i class="my_hz_num"/></span>
+            </li>
+            
+          </ul>
         </div>
         <div class="arc_left_2">
           <div class="arc_left_2_1">
@@ -266,7 +282,7 @@
             class="collection_hz"
             style="cursor: pointer;"
             readonly
-            @click="collected()"
+            @click="collected('two')"
             :value="isShowCollect ? '收藏' : '取消收藏'">
         </p>
         <p class="arc_right06">
@@ -893,8 +909,8 @@ export default {
       isShowCollect: true,
       isShowMessge: false,
       isMobile: false,
-      AddAbnormalVisible: false,
       orderTitle: '',
+      collecImg: false,
       mobile: '',
       check: '',
       handle: '',
@@ -1207,27 +1223,42 @@ export default {
       this.dataInfo.endCity = this.hyDetail.endCity
       this.dataInfo.endArea = this.hyDetail.endArea
     },
-    collected() {
+    collected(type) {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       this.isShowCollect = !this.isShowCollect
       if (!this.isShowCollect) {
         this.handle = 'collect'
+        this.collecImg = true
       } else {
+        this.collecImg = false
         this.handle = 'cancelCollect'
       }
       if (access_token && user_token) {
-        getCanyColl(
-          this.$axios,
-          this.archival.companyId,
-          access_token,
-          user_token,
-          this.handle
-        )
+        switch (type) {
+          case 'one':
+            this.getCollect(access_token, user_token)
+            break
+          case 'two':
+            this.getCollect(access_token, user_token)
+            break
+          default:
+            break
+        }
       } else {
+        this.collecImg = false
         this.isShowCollect = true
         $('body').trigger('login.show')
       }
+    },
+    getCollect(access_token, user_token) {
+      getCanyColl(
+        this.$axios,
+        this.archival.companyId,
+        access_token,
+        user_token,
+        this.handle
+      )
     },
     openAdd(type) {
       let access_token = $.cookie('access_token')
@@ -1247,7 +1278,6 @@ export default {
     getOrder(access_token, user_token) {
       this.getAddress()
       if (access_token && user_token) {
-        console.log(getAddress, 'getAddress')
         this.$axios
           .post(
             '/28-web/companyLine/subscribe?access_token=' +
@@ -1271,9 +1301,7 @@ export default {
     },
     closeMe() {
       this.isShowAdd = false
-      this.isShowHelp = false
       this.isShowOrder = false
-      this.AddAbnormalVisible = false
     },
     openOrder(type) {
       this.isShowOrder = true

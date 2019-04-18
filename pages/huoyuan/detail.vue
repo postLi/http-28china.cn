@@ -1056,7 +1056,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.AddAbnormalVisible)
     seajs.use(['/js/gaodemap2.js'])
     $('.arc_input3').click(function() {
       var search_type = $('#search_type option:selected').attr('name')

@@ -488,6 +488,7 @@
     
 
     <div class="h70"/>
+    <SidebarNav />
   </div>
 </template>
 
@@ -495,6 +496,7 @@
 import FooterLinks from '../../components/footerLinks'
 import selectMap from './selectMap'
 import HotList from '../../components/hotList'
+import SidebarNav from '~/components/public/sidebarNav'
 async function lineList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -513,7 +515,8 @@ export default {
   components: {
     FooterLinks,
     selectMap,
-    HotList
+    HotList,
+    SidebarNav
   },
   head: {
     link: [

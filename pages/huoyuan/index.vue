@@ -539,10 +539,12 @@
     <Add 
       :is-show-add.sync="isShowAdd" 
       :data-info="dataInfo"/>
+    <SidebarNav />
   </div>
 </template>
 <script>
 import Add from './add'
+import SidebarNav from '~/components/public/sidebarNav'
 async function getHyList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -572,7 +574,8 @@ async function getRecommendList($axios, vo) {
 export default {
   name: 'HuoYuan',
   components: {
-    Add
+    Add,
+    SidebarNav
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],

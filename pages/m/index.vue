@@ -2,8 +2,11 @@
   <div class="home">
     <img
       class="top"
+      v-if="showHome === 0"
       src="/m/home/home_banner.png" >
-    <div class="body flex_f">
+    <div
+      class="body flex_f"
+      v-if="showHome === 0">
       <div class="nav flex_f">
         <div class="nav_top flex_a f-34">
           <div
@@ -76,17 +79,52 @@
         </div>
       </div>
     </div>
+    <div v-if="showHome === 1">
+      <img
+        class="top"
+        src="/m/home/banner.png" >
+      <div class="flex_a b_c_w gg_item">
+        <img src="/m/home/gonggao_huozhu.png">
+        <div class="margin_l_20 right">
+          <div class="c-3 f-32">热点通知</div>
+          <div class="c-9 f-26">测试APP车主弹出公告</div>
+        </div>
+      </div>
+      <div class="flex_a b_c_w gg_item">
+        <img src="/m/home/gonggao_fuli.png">
+        <div class="margin_l_20 right">
+          <div class="c-3 f-32">车主福利</div>
+          <div class="c-9 f-26">测试APP两端公告</div>
+        </div>
+      </div>
+      <div class="flex_a b_c_w gg_item">
+        <img src="/m/home/gonggao_miji.png">
+        <div class="margin_l_20 right">
+          <div class="c-3 f-32">接单秘籍</div>
+          <div class="c-9 f-26">排除这些问题，比小心开车还省油！</div>
+        </div>
+      </div>
+      <div class="flex_a b_c_w gg_item">
+        <img src="/m/home/gonggao_huozhu.png">
+        <div class="margin_l_20 right">
+          <div class="c-3 f-32">货主公告</div>
+          <div class="c-9 f-26">货主大优惠</div>
+        </div>
+      </div>
+    </div>
     <footer class="flex_sb f-16 p_r">
       <div
         class="circle_out flex"
-        @click="showMask = true">
+        @click="$refs.downApp.showMask = true">
         <div class="circle_in flex">
           <img
             src="/m/home/home_fahuo.png"
             style="width: 50%">
         </div>
       </div>
-      <div class="h flex_sb flex_f">
+      <div
+        class="h flex_sb flex_f"
+        @click="showHome = 0">
         <img
           src="/m/home/home_home.png"
           style="width: 0.46rem">
@@ -101,7 +139,9 @@
         </div>
         <div class="f-16">发货</div>
       </div>
-      <div class="h flex_sb flex_f">
+      <div
+        class="h flex_sb flex_f"
+        @click="showHome = 1">
         <img
           src="/m/home/lobby_icon_activity.png"
           style="width: 0.46rem"
@@ -116,48 +156,22 @@
       ref="selectEndAddress"
       @setArea="getEndArea"/>
 
-    <div
-      class="flex"
-      :class="[showMask?'mask2':'']"
-      v-if="showMask"
-      @click="showMask = false">
-      <div
-        class="down_window flex_f"
-        @click.stop.prevent="">
-        <div class="flex_jfe">
-          <img
-            src="/images/login_close.png"
-            @click="showMask = false">
-        </div>
-        <div class="f-46 t_c f_w">APP下单发货</div>
-        <div class="f-32 t_c f_w">注册立送8200元，名满即止</div>
-        <div class="f-32 t_c f_w">发货贵了，差价双倍返还</div>
-        <img
-          src="/m/home/u23.png"
-          class="width_100">
-        <div
-          class="down f-32 f_w flex"
-          @click="downApp()">前往下载</div>
-        <div
-          class="f-32 t_c f_w margin_t_20"
-          @click="showMask = false">暂不</div>
-      </div>
-    </div>
+    <down-app ref="downApp"/>
   </div>
 
 </template>
 <script>
 import SelectAddress from '../../components/m/selectAddress'
+import DownApp from '../../components/m/downApp'
 export default {
-  components: { SelectAddress },
+  components: { DownApp, SelectAddress },
   layout: 'm',
   data() {
     return {
-      showMask: false,
       navList: [
         { id: 0, name: '找专线' },
         { id: 1, name: '找货源' },
-        { id: 2, name: '找车源' }
+        { id: 3, name: '找车源' }
       ],
       content1List: [
         {
@@ -208,9 +222,10 @@ export default {
         {
           name: '活动中心',
           url: '/m/home/home_huodong.png',
-          to: '/m/gongsi'
+          to: ''
         }
-      ]
+      ],
+      showHome: 0
     }
   },
   async fetch({ $axios, app, query, store }) {},
@@ -238,7 +253,108 @@ export default {
       }
     },
     search() {
-      console.log(this.$store.state.m)
+      this.$store.commit('m/pageView/setData', {
+        name: 'footerId',
+        data: this.$store.state.m.navId
+      })
+      this.$router.push('/m/pageView')
+      let startName = [
+        this.$store.state.m.startName[0],
+        this.$store.state.m.startName[1],
+        this.$store.state.m.startName[2]
+      ]
+      let endName = [
+        this.$store.state.m.endName[0],
+        this.$store.state.m.endName[1],
+        this.$store.state.m.endName[2]
+      ]
+      if (this.$store.state.m.navId === 0) {
+        this.$store.commit('m/zhuanxian/resetData')
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'startName',
+          data: startName
+        })
+        this.$store.commit('m/zhuanxian/setData', {
+          name: 'endName',
+          data: endName
+        })
+        let parm = {
+          currentPage: this.$store.state.m.zhuanxian.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.zhuanxian.startName[0],
+          startCity: this.$store.state.m.zhuanxian.startName[1],
+          startArea: this.$store.state.m.zhuanxian.startName[2],
+          endProvince: this.$store.state.m.zhuanxian.endName[0],
+          endCity: this.$store.state.m.zhuanxian.endName[1],
+          endArea: this.$store.state.m.zhuanxian.endName[2],
+          orderBy: this.$store.state.m.zhuanxian.orderBy.value
+        }
+        // 专线列表
+        this.$store.dispatch('m/zhuanxian/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
+      if (this.$store.state.m.navId === 1) {
+        this.$store.commit('m/huoyuan/resetData')
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'startName',
+          data: startName
+        })
+        this.$store.commit('m/huoyuan/setData', {
+          name: 'endName',
+          data: endName
+        })
+        let parm = {
+          currentPage: this.$store.state.m.huoyuan.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.huoyuan.startName[0],
+          startCity: this.$store.state.m.huoyuan.startName[1],
+          startArea: this.$store.state.m.huoyuan.startName[2],
+          endProvince: this.$store.state.m.huoyuan.endName[0],
+          endCity: this.$store.state.m.huoyuan.endName[1],
+          endArea: this.$store.state.m.huoyuan.endName[2],
+          queryOrderType: this.$store.state.m.huoyuan.queryOrderType.value,
+          orderType: this.$store.state.m.huoyuan.screen.orderType,
+          loadTimeType: this.$store.state.m.huoyuan.screen.loadTimeType,
+          useCarType: this.$store.state.m.huoyuan.screen.useCarType,
+          specName: this.$store.state.m.huoyuan.screen.specName
+        }
+        // 货源列表
+        this.$store.dispatch('m/huoyuan/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
+      if (this.$store.state.m.navId === 3) {
+        this.$store.commit('m/cheyuan/resetData')
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'startName',
+          data: startName
+        })
+        this.$store.commit('m/cheyuan/setData', {
+          name: 'endName',
+          data: endName
+        })
+        let parm = {
+          currentPage: this.$store.state.m.cheyuan.currentPage,
+          pageSize: 20,
+          startProvince: this.$store.state.m.cheyuan.startName[0],
+          startCity: this.$store.state.m.cheyuan.startName[1],
+          startArea: this.$store.state.m.cheyuan.startName[2],
+          endProvince: this.$store.state.m.cheyuan.endName[0],
+          endCity: this.$store.state.m.cheyuan.endName[1],
+          endArea: this.$store.state.m.cheyuan.endName[2],
+          orderBy: this.$store.state.m.cheyuan.orderBy.value,
+          carSpec: this.$store.state.m.cheyuan.carSpec,
+          carType: this.$store.state.m.cheyuan.carType
+        }
+        // 车源列表
+        this.$store.dispatch('m/cheyuan/GETRANGELIST', {
+          data: parm,
+          name: 'rangeList'
+        })
+      }
     },
     toList(item) {
       this.$router.push(item.to)
@@ -359,10 +475,13 @@ export default {
     },
     toClick(item) {
       if (item.name === '在线下单' || item.name === 'APP下载') {
-        this.showMask = true
+        this.$refs.downApp.showMask = true
       }
-      if (item.name === '运单查询' || item.name === '活动中心') {
+      if (item.name === '运单查询') {
         this.$router.push(item.to)
+      }
+      if (item.name === '活动中心') {
+        this.showHome = 1
       }
     },
     clickEnd() {
@@ -386,14 +505,22 @@ export default {
         data: id,
         name: 'navId'
       })
-    },
-    downApp() {
-      window.location.href = 'http://h5.28tms.com/'
     }
   }
 }
 </script>
 <style scoped lang="scss">
+.gg_item {
+  height: 1.2rem;
+  padding-left: 0.3rem;
+  img {
+    width: 0.78rem;
+    height: 0.78rem;
+  }
+  .right {
+    line-height: 0.37rem;
+  }
+}
 .home {
   height: inherit;
   background: #f4f4f4;
@@ -512,27 +639,5 @@ export default {
   border-top-left-radius: 0.16rem;
   border-top-right-radius: 0.16rem;
   color: #000000;
-}
-.mask2 {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 13;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.down_window {
-  width: 80%;
-  height: 8.2rem;
-  z-index: 100;
-  background: #ee595a;
-  padding: 0.2rem;
-  .down {
-    margin: 0 auto;
-    width: 4.8rem;
-    height: 0.9rem;
-    background: #ffaa00;
-  }
 }
 </style>

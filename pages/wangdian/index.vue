@@ -280,7 +280,7 @@
             <li
               v-for="(item, index) in lineAdviseRecommend.slice(0,8)"
               :key="index"
-              style="float:left;width: 260px;height:97px;text-align: center;"><a
+              style="float:left;width: 260px;height:97px;text-align: center;    cursor: pointer;"><a
                 target="_blank"
                 :href="'/member/'+ item.id">
                 <p style="font-size: 16px;color: #2577e3;padding-top: 20px;">{{ item.companyName.length>12?item.companyName.substring(0,12)+'..':item.companyName }}</p>
@@ -1076,11 +1076,15 @@ export default {
   }
   .header_links_l ul {
     float: left;
+
     li {
       margin-right: 13px;
       background: url('../../static/gongsi/images/05bg.png');
       margin-bottom: 15px;
       box-sizing: border-box;
+    }
+    li:hover {
+      border: 1px solid #3cbbec;
     }
   }
   .header_links_l ul li:nth-child(4) {

@@ -10,14 +10,14 @@
             <h4 class="category_menu_title">热门城市</h4>
             <div 
               class="category_menu_list"
-              v-if="hotCityData!== undefined && hotCityData!== null &&hotCityData.length>0">
+              v-if="hotCityData.length>0">
               <span 
                 class="item"
                 v-for="(item, index) in hotCityData" 
                 :key="index">
                 <a
                   target="_blank"
-                  :href="'/zhuanxian/list?startp=' + item.provinceName + '&startc=' + item.cityName">{{ item.cityShortName }}</a></span>  
+                  :href="'/huoyuan?startp=' + item.provinceName + '&startc=' + item.cityName">{{ item.cityShortName }}</a></span>  
             </div> 
             <div
               class="error" 
@@ -54,18 +54,18 @@
             <div class="type_box">
               <a 
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'"
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&orderClass=AF0490702'"
               ><img src="../../static/images/huizong/hy_ad1.jpg"></a>
             </div>
             <div class="type_box">
               <a
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea"><img src="../../static/images/huizong/hy_ad2.jpg"></a>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity"><img src="../../static/images/huizong/hy_ad2.jpg"></a>
             </div>
             <div class="type_box">
               <a 
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&userAuth=AF0010403'"><img src="../../static/images/huizong/hy_ad3.jpg"></a></div>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&userAuth=AF0010403'"><img src="../../static/images/huizong/hy_ad3.jpg"></a></div>
           </div>
         </div>
         <div class="col3">
@@ -86,7 +86,7 @@
             <div 
               class="user_show"
               v-else>
-              <p class="user_txt">您好，{{ mobile }} <a href="/exit">【安全退出】</a></p>
+              <p class="user_txt">您好，{{ loginMobile }} <a href="/exit">【安全退出】</a></p>
               <p class="user_profit">
                 <a href="/hyzx">会员中心</a>
               </p>
@@ -95,7 +95,7 @@
           </div>
           <!-- 用户登录 -->
           <div class="hongbao_ad">
-            <a href="#"><img src="../../static/images/huizong/hy_hongbao_ad.jpg"></a>
+            <a @click="redPaperFn"><img src="../../static/images/huizong/hy_hongbao_ad.jpg"></a>
           </div>
         </div>
       </div>
@@ -119,7 +119,7 @@
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
-                  <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
+                  <div class="owner_pic"><img :src="item.companyFacadeFile?item.companyFacadeFile:noneImg"></div>
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
@@ -147,7 +147,7 @@
                 <a 
                   target="_blank"
                   :href="'/member/' + item.companyId">
-                  <div class="owner_pic"><img :src="item.companyFacadeFile"></div>
+                  <div class="owner_pic"><img :src="item.companyFacadeFile?item.companyFacadeFile:noneImg"></div>
                   <div class="owner_info">
                     <p 
                       class="owner_name"               
@@ -260,7 +260,7 @@
         <a 
           class="btn_hy_link" 
           target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">进入货源大厅</a>   
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">进入货源大厅</a>   
           <!-- 新增货源 -->
       </div>
     </div>
@@ -388,7 +388,7 @@
         <a 
           class="gr_link"
           target="_blank"
-          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">
+          :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">
         货源大厅<i class="iconfont iconjiantou_xiangyouliangci_o"/></a>
       </div>
       <div class="bd">
@@ -396,10 +396,10 @@
           <div class="p_type_nav">
             <a 
               target="_blank"
-              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea">最新货源</a>
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">最新货源</a>
             <a 
               target="_blank"
-              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentArea+'&orderClass=AF0490702'">长期稳定货源</a>
+              :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&orderClass=AF0490702'">长期稳定货源</a>
           </div>
           <ul 
             class="p_hy_list clearfix"
@@ -412,7 +412,7 @@
                 :href="'/huoyuan/detail?id=' + item.id + '&shipperId=' + item.shipperId">
                 <div class="hd_box">
                   <span class="p_l5">物流商:</span>
-                  <span>{{ item.wlName }}</span>
+                  <span>{{ item.companyName }}</span>
                   <span><i class="iconfont iconrenzheng"/></span>
                 </div>
                 <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
@@ -467,14 +467,18 @@
         <div class="col2">
           <div class="subscribe">
             <h4 class="tit">订阅优质支援</h4>
-            <div class="city_box clearfix">
+            <div
+              id="sub_star"
+              class="city_box clearfix">
               <input 
                 type="text" 
                 placeholder="请输入出发地" 
                 id="sb_pageinp1">
               <i class="iconfont iconjiantou32"/>
             </div>
-            <div class="city_box clearfix">
+            <div 
+              id="sub_end"
+              class="city_box clearfix">
               <input 
                 type="text" 
                 placeholder="请输入到达地" 
@@ -485,7 +489,9 @@
               订阅货源，第一时间获得系统消息通知
               已有<span class="subscribe_txt_num">18965</span>人订阅后达成交易
             </div>
-            <a class="subscribe_remind_btn">上新提醒我</a>
+            <a 
+              class="subscribe_remind_btn"
+              @click="sendNotice">上新提醒我</a>
           </div>
           <!-- <div class="weixin">
             <div class="pic"><img src="../../static/images/huizong/weixin.png"></div>
@@ -562,7 +568,7 @@
         <a
           target="_blank"
           href="/create/huoyuan">
-          <img src="../../static/images/huizong/hy_hongbao.jpg">
+          <img src="~/static/images/huizong/hy_hongbao.jpg">
         </a>
       </div>
     </div>
@@ -591,7 +597,7 @@
             <span 
               class="icon_square_no icon_square_no3"
               v-if="index === 2"/>
-            <div class="rank_pic"><img :src="item.companyFacadeFile" ></div>
+            <div class="rank_pic"><img :src="item.companyFacadeFile?item.companyFacadeFile:noneImg" ></div>
             <div class="rank_txt">
               <div class="rank_txt_tit">
                 <span 
@@ -599,8 +605,11 @@
                   :title="item.companyName ">{{ item.companyName }} </span>
                 <span class="txt_tit_icon_tuijian">荐</span>
               </div>
-              <div class="rank_txt_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_txt_praise">好评率{{ item.recommendedNumber }}%</div>
+              <div class="rank_txt_groom">
+                <span class="name">推荐指数</span>
+                <span><Star :start-num="item.recommendedNumber"/></span> 
+              </div>
+              <div class="rank_txt_praise">好评率{{ item.evaGoodCountRate }}%</div>
             </div>
 
           </a>
@@ -621,23 +630,23 @@
       </div>
       <ul class="our_virtue_list clearfix">
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage1.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage1.jpg"></div>
           <h4 class="our_virtue_tit color_orange">海量货源</h4>
           <div class="our_virtue_txt">专业的项目客户团队，为成员引进更多的线上货源机会</div>
         </li>
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage2.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage2.jpg"></div>
           <h4 class="our_virtue_tit color_grass_green">安全保障</h4>
           <div class="our_virtue_txt">流程标准化，降低货损率；完善的理赔保障体系，小额快赔，为成员的每一票货物保驾护航</div>
           
         </li>
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage3.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage3.jpg"></div>
           <h4 class="our_virtue_tit color_blue">降本增效</h4>
           <div class="our_virtue_txt">金融、保险等丰富的产品选择，带来集采价产品服务，为成员增效，助力事业腾飞</div>   
         </li>
         <li>
-          <div class="our_virtue_pic"><img src="../../static/images/huizong/advantage4.jpg"></div>
+          <div class="our_virtue_pic"><img src="~/static/images/huizong/advantage4.jpg"></div>
           <h4 class="our_virtue_tit  color_light_orange">信息系统</h4>
           <div class="our_virtue_txt">强大的交易管理系统，让交易更便捷，管理更轻松，更少的人员投入，更多的业务承接</div>     
         </li>
@@ -697,19 +706,27 @@
         <div class="title_line_box fl"><span/></div>
       </div>
       <ul class="partner_list clearfix">
-        <li><img src="../../static/images/huizong/partner1.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner2.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner3.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner4.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner5.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner6.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner7.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner8.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner9.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner10.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner11.jpg" ></li>
-        <li><img src="../../static/images/huizong/partner12.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner1.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner2.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner3.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner4.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner5.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner6.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner7.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner8.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner9.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner10.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner11.jpg" ></li>
+        <li><img src="~/static/images/huizong/partner12.jpg" ></li>
       </ul>
+    </div>
+    <Add 
+      :is-show-add.sync="isShowAdd" 
+      :data-info="dataInfo"/>
+    <div 
+      id="hongbao" 
+      style="display: none">
+      <img src="../../static/images/huizong/hy_honhbao.jpg">
     </div>
     <!-- 合作伙伴 -->
     <!-- <div class="bj_2">
@@ -742,12 +759,17 @@
         </ul>
       </div>
     </div> -->
-    <!-- 28问答 -->   
-</div></template>
+    <!-- 28问答 -->
+    <SidebarNav />   
+  </div>
+</template>
 <script>
-//获取公共的函数
-import until from '../../static/js/server/comonUntil'
+import until from '~/static/js/server/comonUntil' //获取公共的函数
+import Add from '~/components/subscribe/add' //订阅
+import Star from '~/components/star/star' //星星
+import SidebarNav from '~/components/public/sidebarNav' //星星
 import Swiper from 'Swiper'
+
 export default {
   name: 'HuiZong',
   head: {},
@@ -757,13 +779,15 @@ export default {
   //   }
   // },
   // layout: 'huizong',
+  components: { Add, Star, SidebarNav },
   data() {
     return {
       //登录权限
       isToken: false,
-      mobile: '',
+      loginMobile: '',
+      noneImg: require('../../static/images/huizong/none.jpg'),
       banners: [require('../../static/images/huizong/hy_banner1.jpg')],
-      currentArea: '', //获取当前的城市
+      currentCity: '', //获取当前的城市
       currentProvince: '',
       // 地点插件
       hyStartProvince: '',
@@ -771,14 +795,18 @@ export default {
       hyStartArea: '',
       hyEndProvince: '',
       hyEndCity: '',
-      hyEndArea: ''
+      hyEndArea: '',
+      //获取订阅的列表
+      isShowAdd: false,
+      dataInfo: {}
     }
   },
   async asyncData({ $axios, query, app, error }) {
     // let [, ] = await Promise.all([   ])
-    // this.currentArea = $.cookie('currentAreaFullName')
+    // this.currentCity = $.cookie('currentAreaFullName')
     //服务端获取cookies
-    let currentArea = app.$cookies.get('currentAreaFullName')
+    let currentProvince = app.$cookies.get('currentProvinceFullName')
+    let currentCity = app.$cookies.get('currentAreaFullName')
 
     //热门城市
     let hotCityData = await $axios.get('/28-web/city/hot')
@@ -786,14 +814,17 @@ export default {
     let shipperData = await $axios.post('/28-web/shipper/excellent', {
       currentPage: 1,
       pageSize: 10,
-      endCity: currentArea
+      startProvince: currentProvince,
+      startCity: currentCity
     })
     //本月优质货主
     let monthShipperData = await $axios.post(
       '/28-web/shipper/month/excellent',
       {
         currentPage: 1,
-        pageSize: 5
+        pageSize: 5,
+        startProvince: currentProvince,
+        startCity: currentCity
       }
     )
     // 货源推荐
@@ -802,7 +833,8 @@ export default {
       {
         currentPage: 1,
         pageSize: 12,
-        endCity: currentArea
+        startProvince: currentProvince,
+        startCity: currentCity
       }
     )
     // 榜单达人
@@ -824,10 +856,15 @@ export default {
       statisticsData.status === 200
     ) {
       return {
+        currentProvince: currentProvince ? currentProvince : '',
+        currentCity: currentCity ? currentCity : '', //获取当前的城市
+
         hotCityData: hotCityData.data ? hotCityData.data.data : [],
-        shipperData: shipperData.data ? shipperData.data.data : [],
-        monthShipperData: monthShipperData ? monthShipperData.data.data : [],
-        recommendData: recommendData.data ? recommendData.data.data : [],
+        shipperData: shipperData.data ? shipperData.data.data.list : [],
+        monthShipperData: monthShipperData
+          ? monthShipperData.data.data.list
+          : [],
+        recommendData: recommendData.data ? recommendData.data.data.list : [],
         darenData: darenData.data ? darenData.data.data : [],
         newListData: newListData.data ? newListData.data.data : [],
         statisticsData: statisticsData.data ? statisticsData.data.data : []
@@ -836,21 +873,47 @@ export default {
       error({ statusCode: 500, message: '查找不到该专线列表' })
     }
   },
+  created() {
+    //优质货主
+    // this.shipperData = this.shipperData.list
+    //   ? this.shipperData.list
+    //   : { list1: [], list2: [] }
+    // //本月货主
+    // this.monthShipperData = this.monthShipperData.list
+    //   ? this.monthShipperData.list
+    //   : []
+    // //货源推荐
+    // this.recommendData = this.recommendData.list ? this.recommendData.list : []
+
+    //处理优质货主数据
+    if (this.shipperData.length > 5) {
+      let list1 = this.shipperData.filter((value, index, arr) => {
+        return index < 5
+      })
+      let list2 = this.shipperData.filter((value, index, arr) => {
+        return index > 4
+      })
+      this.shipperData = { list1: list1, list2: list2 }
+      console.log('优质货主数据处理', this.shipperData)
+    } else {
+      this.shipperData.list1 = this.shipperData
+    }
+  },
   mounted() {
     let that = this
     this.$nextTick(() => {
-      this.handleData()
+      this.getCookies()
       this.intSwiper1()
       this.intSwiper2()
-      this.getUser()
-      // console.log('优质货主', this.shipperData)
-      // console.log('本月货主', this.monthShipperData)
-      // console.log('货源推荐', this.recommendData)
-      // console.log('热门城市', this.hotCityData)
-      // console.log('货量达人', this.darenData)
-      // console.log('24小时在线新闻', this.newListData)
-      // console.log('统计数据', this.statisticsData)
-      // console.log('获取本地cookies', this.currentProvince, this.currentArea)
+      console.log('优质货主', this.shipperData)
+      console.log('本月货主', this.monthShipperData)
+      console.log('货源推荐', this.recommendData)
+      console.log('热门城市', this.hotCityData)
+      console.log('货量达人', this.darenData)
+      console.log('24小时在线新闻', this.newListData)
+      console.log('统计数据', this.statisticsData)
+      console.log('获取本地cookies', this.currentProvince, this.currentCity)
+      console.log('获取用户token', this.isToken, this.loginMobile)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -867,7 +930,7 @@ export default {
       })
       $('body').on('login.success', () => {
         that.isToken = $.cookie('access_token') ? true : false
-        that.mobile = $.cookie('login_mobile')
+        that.loginMobile = $.cookie('login_mobile')
         // console.log('vue打印', that)
         // alert($.cookie('access_token'))
       })
@@ -877,12 +940,6 @@ export default {
     //登录
     showLogin() {
       $('body').trigger('login.show')
-    },
-    //获取用户信息
-    getUser() {
-      this.isToken = $.cookie('access_token') ? true : false
-      this.mobile = $.cookie('login_mobile')
-      console.log('获取用户token', this.isToken, this.mobile)
     },
     //幻灯片
     intSwiper1() {
@@ -933,38 +990,11 @@ export default {
       })
     },
     //处理获取数据
-    handleData() {
-      //优质货主
-      this.shipperData = this.shipperData.list
-        ? this.shipperData.list
-        : { list1: [], list2: [] }
-      //本月货主
-      this.monthShipperData = this.monthShipperData.list
-        ? this.monthShipperData.list
-        : []
-      //货源推荐
-      this.recommendData = this.recommendData.list
-        ? this.recommendData.list
-        : []
-
-      //获取cookies
+    getCookies() {
+      //获取省市cookies
       //$.cookie
-      this.currentProvince = $.cookie('currentProvinceFullName')
-      this.currentArea = $.cookie('currentAreaFullName')
-      console.log('获取本地cookies', this.currentProvince, this.currentArea)
-      //处理优质货主数据
-      if (this.shipperData.length > 5) {
-        let list1 = this.shipperData.filter((value, index, arr) => {
-          return index < 5
-        })
-        let list2 = this.shipperData.filter((value, index, arr) => {
-          return index > 4
-        })
-        this.shipperData = { list1: list1, list2: list2 }
-        console.log('优质货主数据处理', this.shipperData)
-      } else {
-        this.shipperData.list1 = this.shipperData
-      }
+      this.isToken = $.cookie('access_token') ? true : false
+      this.loginMobile = $.cookie('login_mobile')
     },
     //搜索货源
     groomSearch() {
@@ -997,10 +1027,44 @@ export default {
         this.hyStartProvince
       }&startCity=${this.hyStartCity}&startArea=${
         this.hyStartArea
-      }&endProvince=${this.hyEndProvince}&endCity${this.hyEndCity}&endArea${
+      }&endProvince=${this.hyEndProvince}&endCity=${this.hyEndCity}&endArea=${
         this.hyEndArea
       }`
       window.open(huoyuanUrl, '_blank')
+    },
+    //订阅货源
+    sendNotice() {
+      if (!this.isToken) {
+        let startPlace = until.getPlace('#sub_star')
+        let endPlace = until.getPlace('#sub_end')
+        //开始
+        this.dataInfo.startProvince = startPlace.province
+        this.dataInfo.startCity = startPlace.city
+        this.dataInfo.startArea = startPlace.area
+        //结束
+        this.dataInfo.endProvince = endPlace.province
+        this.dataInfo.endCity = endPlace.city
+        this.dataInfo.endArea = endPlace.area
+
+        if (!this.dataInfo.startProvince && !this.dataInfo.endCity) {
+          layer.msg('出发地省市不能为空！')
+          return false
+        }
+        if (!this.dataInfo.endProvince && !this.dataInfo.endCity) {
+          layer.msg('到达地省市不能为空！')
+          return false
+        }
+        this.isShowAdd = true
+      }
+    },
+    //点击领取红包
+    redPaperFn() {
+      layer.open({
+        type: 1,
+        title: '红包大派送',
+        area: ['800px', '560px'], //宽高
+        content: $('#hongbao')
+      })
     }
   }
 }

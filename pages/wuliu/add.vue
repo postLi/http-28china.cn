@@ -12,9 +12,7 @@
         class="layui-form"
         action=""
         style="width: 400px;">
-        <div
-         
-        class="layui-form-item">
+        <div class="layui-form-item">
           <label class="layui-form-label"><i style="color: red">*</i>园区名称:</label>
           <div class="layui-input-block">
             <input
@@ -24,17 +22,13 @@
               class="layui-input"
               v-model="form.name">
           </div>
-         
         </div>
-    
         <div 
-         
           style="margin-left: 40px;border-color: #fff;margin-bottom:30px"
           class="select_con"
           id="addMap"
         >
           <dl>
-            
             <dt style="height:32px;line-height:32px;font-size:14px;"><i style="color: red">*</i>园区地址：</dt>
             <dd>
               <form
@@ -43,7 +37,6 @@
                 action=""
                 style="float:left;"
               >
-
                 <div
                   id="addressTo"
                   class="fl list_input"
@@ -129,13 +122,11 @@ export default {
   },
   data() {
     return {
-      // isShow: this.show,
-      popTitle: '提货派车单',
+      popTitle: '',
       falseMsg: '',
       form: {
         contact: '',
         address: '',
-        // msg: '',
         name: ''
       },
       isCompanyName: false,
@@ -169,7 +160,6 @@ export default {
   mounted() {
     seajs.use(['/js/gaodemap2.js'])
     $('#addressTo input').on('mouseenter', () => {
-      // alert('')
       this.setMap()
     })
     $('#addressTo input').val(this.$route.query.address || '')
@@ -181,22 +171,12 @@ export default {
         'wtmapinit',
         this.startProvince + this.startCity + this.startArea
       )
-      // console.log(this.startProvince, this.startCity, this.startArea)
     },
     searchDo() {
       let list1 = [],
         list2 = []
-      // $('#addressFrom .select-item').each(function(i, e) {
-      //   list1.push($(this).text())
-      //   console.log(list1, 'list1')
-      // })
-      // this.startProvince = list1[0] ? list1[0] : ''
-      // this.startCity = list1[1] ? list1[1] : ''
-      // this.startArea = list1[2] ? list1[2] : ''
-
       $('#addressTo .select-item').each(function(i, e) {
         list2.push($(this).text())
-        console.log(list2, 'list2list2')
       })
       this.endProvince = list2[0] ? list2[0] : ''
       this.endCity = list2[1] ? list2[1] : ''
@@ -209,7 +189,6 @@ export default {
         this.ismobile = true
         this.falseMsg = '请输入园区名称'
         isFalse = false
-        // alert('this.form.name', this.form.name)
         return false
       } else {
         isFalse = true
@@ -218,8 +197,6 @@ export default {
       if (this.form.address === '') {
         this.ismobile = true
         this.falseMsg = '请输入园区地址'
-
-        // alert('this.form.address', this.form.address)
         return false
       } else {
         isFalse = true
@@ -236,7 +213,6 @@ export default {
           this.form.area = $('.address').attr('thearea')
           if (this.form.province === '北京市') {
             this.form.city = '北京市'
-            // console.log(this.form.city, 'this.this.form.city')
           } else if (this.form.province === '天津市') {
             this.form.city = '天津市'
           } else if (this.form.province === '上海市') {
@@ -244,16 +220,12 @@ export default {
           }
         }
       }
-
-      // console.log(this.form, 'this.form')
       if ((isFalse = true)) {
-        // console.log(this.form, 'this.form2 ')
         this.form.mobile = this.info
 
         this.$axios
           .post(aurl + '/28-web/logisticsPark/entering/apply/', this.form)
           .then(res => {
-            // console.log(res, 'ressss')
             if (res.data.status == 200) {
               layer.msg('提交成功')
               this.$emit('close')
@@ -266,14 +238,11 @@ export default {
           })
       }
     },
-    // 留言类型（type  ） 1-入驻 2-推荐
     closeDialog() {
+      console.log(this.showDiv, 'showDiv')
       this.$emit('close')
       this.form = {}
       this.ismobile = false
-      // this.$emit('update:show', false)
-
-      //把绑定的弹窗数组 设为false即可关闭弹窗
     }
   }
 }

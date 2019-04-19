@@ -760,27 +760,26 @@ export default {
     })
   },
   async asyncData({ $axios, app, query }) {
-    let zxLists
-    let carInfoRes1
+    let zxLists, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     let [
-      newLists,
       hotSearchs,
       popularitys,
+      cheComprehensives,
       code,
       queryCitys,
-      cheComprehensives,
+      newLists,
       carInfoRes,
       cheLinks
     ] = await Promise.all([
-      $axios.post('/28-web/carInfo/newest/publish'),
       $axios.get('/28-web/hotSearch/carInfo/detail/links'),
       $axios.get('/28-web/driver/driverPopularityList'),
-      getCode($axios, cy1.data.data.endProvince),
-      getSEListParams(cy1.data.data),
       $axios.get(
         '/28-web/driver/comprehensive?driverId=' + cy1.data.data.driverId
       ),
+      getCode($axios, cy1.data.data.endProvince),
+      getSEListParams(cy1.data.data),
+      $axios.post('/28-web/carInfo/newest/publish'),
       $axios.post('/28-web/carInfo/list', {
         currentPage: 1,
         pageSize: 10,
@@ -961,12 +960,6 @@ export default {
       })
   },
   methods: {
-    checkLogin() {
-      return (
-        $.cookie('access_token') &&
-        ($.cookie('login_userToken') || $.cookie('user_token'))
-      )
-    },
     //价格参考
     getChartData(id) {
       return this.$axios.get('/28-web/carInfo/priceReference/' + id)

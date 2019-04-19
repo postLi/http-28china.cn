@@ -191,13 +191,13 @@
           <li
             id="wlzx"
             style="margin-left: 20px;"
-          ><a href="/zhuanxian/list" >物流专线</a></li>
+          ><a href="/zhuanxian/huizong" >物流专线</a></li>
           <li
             id="hy"
-            style="margin-left: 20px;"><a href="/huoyuan">货源信息</a></li>
+            style="margin-left: 20px;"><a href="/huoyuan/huizong">货源信息</a></li>
           <li
             id="cy"
-            style="margin-left: 20px;"><a href="/cheyuan">车源信息</a></li>
+            style="margin-left: 20px;"><a href="/cheyuan/huizong">车源信息</a></li>
           <li
             id="gs"
             style="margin-left: 20px;"><a href="/gongsi">物流公司</a></li>

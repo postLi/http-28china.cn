@@ -102,11 +102,27 @@
               src="/images/list_wlzx/ll_num.png"><i>浏览量：<em>{{ hyDetail.browseNumber }}</em></i>
             </span>
           </p>
-          <div class="arc_middle1-2"><span><img
-            class="img1"
-            src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：{{ hyDetail.createTime }}</span><span><img
-              class="img2"
-              src="/images/list_wlzx/sc_num.png"></span><span>收藏量：{{ hyDetail.collectNumber }}<i class="my_hz_num"/></span></div>
+          <ul class="arc_middle1-2">
+            <li>
+              <span><img
+                class="img1"
+                src="/images/list_wlzx/hy_item6.png"></span><span style="margin-right:50px;">发布日期：{{ hyDetail.createTime }}</span>
+            </li>
+            <li>
+              <span @click="collected('one')">
+                <img
+                  v-if="collecImg === true"
+                  class="img2"
+                  src="/line/images/xin.png">
+                <img
+                  v-else
+                  class="img2"
+                  src="/line/images/03sc.png">
+              </span>
+              <span>收藏量：{{ hyDetail.collectNumber }}<i class="my_hz_num"/></span>
+            </li>
+            
+          </ul>
         </div>
         <div class="arc_left_2">
           <div class="arc_left_2_1">
@@ -187,7 +203,7 @@
                   <a
                     href="javascript:;"
                     class="button2"
-                    @click="openAdd()"
+                    @click="openAdd('opend1')"
                   ><img
                     src="/images/cy/03u410082.gif"
                   >此线路上新货源提醒我</a>
@@ -266,7 +282,7 @@
             class="collection_hz"
             style="cursor: pointer;"
             readonly
-            @click="collected()"
+            @click="collected('two')"
             :value="isShowCollect ? '收藏' : '取消收藏'">
         </p>
         <p class="arc_right06">
@@ -383,7 +399,7 @@
               <a
                 href="javascript:;"
                 class="button2"
-                @click="openHelp()"><img src="/images/cy/03u410082.gif">此货主货源上新提醒我</a>
+                @click="openAdd('opend2')"><img src="/images/cy/03u410082.gif">此货主货源上新提醒我</a>
             </div>
           </div>
         </div>
@@ -828,9 +844,10 @@
     </div>
     <Add 
       @close="closeMe"
-      :is-show-add.sync="isShowAdd" 
-      :data-info="dataInfo"/>
-    <Lelp :is-show-help.sync="isShowHelp" />
+      :is-show-add="isShowAdd"  
+      :is-show-help.sync="isShowHelp"
+      :data-info="dataInfo" 
+      :help-title="helpTitle"/>
     <Order
       :is-show-order.sync="isShowOrder"
       :order-title="orderTitle"/>
@@ -838,7 +855,6 @@
 </template>
 <script>
 import Add from './add1'
-import Lelp from './help'
 import Order from './order'
 import MUTUAL from '@/static/js/wzl-commonJs.js'
 import {
@@ -869,7 +885,6 @@ export default {
   name: 'Detail',
   components: {
     Add,
-    Lelp,
     Order
   },
   head: {
@@ -895,6 +910,7 @@ export default {
       isShowMessge: false,
       isMobile: false,
       orderTitle: '',
+      collecImg: false,
       mobile: '',
       check: '',
       handle: '',
@@ -913,6 +929,7 @@ export default {
       endCity: '',
       endArea: '',
       dataInfo: {},
+      helpTitle: '',
       gldhList: [
         {
           title: '注册28快运会员',
@@ -1206,31 +1223,59 @@ export default {
       this.dataInfo.endCity = this.hyDetail.endCity
       this.dataInfo.endArea = this.hyDetail.endArea
     },
-    collected() {
+    collected(type) {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('login_userToken') || $.cookie('user_token')
       this.isShowCollect = !this.isShowCollect
       if (!this.isShowCollect) {
         this.handle = 'collect'
+        this.collecImg = true
       } else {
+        this.collecImg = false
         this.handle = 'cancelCollect'
       }
       if (access_token && user_token) {
-        getCanyColl(
-          this.$axios,
-          this.archival.companyId,
-          access_token,
-          user_token,
-          this.handle
-        )
+        switch (type) {
+          case 'one':
+            this.getCollect(access_token, user_token)
+            break
+          case 'two':
+            this.getCollect(access_token, user_token)
+            break
+          default:
+            break
+        }
       } else {
+        this.collecImg = false
         this.isShowCollect = true
         $('body').trigger('login.show')
       }
     },
-    openAdd() {
+    getCollect(access_token, user_token) {
+      getCanyColl(
+        this.$axios,
+        this.archival.companyId,
+        access_token,
+        user_token,
+        this.handle
+      )
+    },
+    openAdd(type) {
       let access_token = $.cookie('access_token')
       let user_token = $.cookie('login_userToken') || $.cookie('user_token')
+      switch (type) {
+        case 'opend1':
+          this.getOrder(access_token, user_token, (this.isShowAdd = true))
+          break
+        case 'opend2':
+          this.isShowHelp = true
+          this.getOrder(access_token, user_token, (this.isShowAdd = true))
+          break
+        default:
+          break
+      }
+    },
+    getOrder(access_token, user_token) {
       this.getAddress()
       if (access_token && user_token) {
         this.$axios
@@ -1250,40 +1295,13 @@ export default {
             }
           })
       } else {
-        this.isShowAdd = true
         this.getAddress()
+        this.helpTitle = '订阅货主货源信息'
       }
     },
     closeMe() {
       this.isShowAdd = false
-      this.isShowHelp = false
       this.isShowOrder = false
-    },
-    openHelp() {
-      let access_token = $.cookie('access_token')
-      let user_token = $.cookie('login_userToken') || $.cookie('user_token')
-      this.getAddress()
-      if (access_token && user_token) {
-        this.$axios
-          .post(
-            '/28-web/companyLine/subscribe?access_token=' +
-              access_token +
-              '&user_token=' +
-              user_token,
-            this.dataInfo
-          )
-          .then(res => {
-            if (res.data.status === 200) {
-              layer.msg('订阅成功')
-            }
-            if (res.data.errorInfo) {
-              layer.msg(res.data.errorInfo)
-            }
-          })
-      } else {
-        this.isShowHelp = true
-        this.getAddress()
-      }
     },
     openOrder(type) {
       this.isShowOrder = true

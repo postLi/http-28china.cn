@@ -6,16 +6,18 @@
     @close="closeMe()">
     <template slot="content">
       <div class="huo_content">
-        <h4>您要订阅的货源：<a :title="dataInfo.startCity + '至' + dataInfo.endCity">{{ dataInfo.startCity + '至' + dataInfo.endCity + '货源' }}</a></h4>
+        <h4 v-if="isShowHelp">{{ title }}</h4>
+        <h4 v-else>您要订阅的货源：<a :title="dataInfo.startCity + '至' + dataInfo.endCity">{{ dataInfo.startCity + '至' + dataInfo.endCity + '货源' }}</a></h4>
         <ul class="cont_ul">
           <li class="cont_ul_li">
             <span 
               :class="isActiveFirst?'actives' :''"
               @click="handleView('aflc-5')"
             >我是物流公司</span>
-            <span 
+            <span>我是车主</span>
+            <!-- <span 
               :class="isActiveFirst?'' :'actives'"
-              @click="handleView('aflc-1')" >我是车主</span>
+              @click="handleView('aflc-1')" >我是车主</span> -->
           </li>
           <li class="cont_ul_li" >
             <input 
@@ -71,6 +73,14 @@ export default {
       type: Boolean,
       default: false
     },
+    isShowHelp: {
+      type: Boolean,
+      default: false
+    },
+    helpTitle: {
+      type: String,
+      default: ''
+    },
     dataInfo: {
       type: [Array, Object],
       default: () => {}
@@ -99,10 +109,18 @@ export default {
   },
   computed: {
     isShow() {
+      // console.log(this.helpTitle, 'helpTitle')
       return this.isShowAdd
     }
   },
-  watch: {},
+  watch: {
+    isShowHelp: {
+      handler(newVal, oldVal) {
+        this.title = this.helpTitle
+      }
+    }
+  },
+  mounted() {},
   methods: {
     closeMe() {
       this.$emit('close')
@@ -295,5 +313,9 @@ export default {
   height: 22px;
   line-height: 22px;
   padding: 20px;
+}
+.actives {
+  border: solid 1px #ffb65f !important;
+  color: #ffb65f !important;
 }
 </style>

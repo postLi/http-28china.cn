@@ -105,7 +105,6 @@ export default {
             label: {
               position: 'insideTop',
               formatter: function(params) {
-                // console.log('markPoint:', params)
                 return `{color1|${params.name}}\n{color0|${
                   params.value
                 }元/公斤}`
@@ -245,12 +244,11 @@ export default {
             symbolOffset: [0, '-70%'],
             symbolSize: [82, 62],
             itemStyle: {
-              color: 'white' //需要把原本的样式变成白色，字体才能正常显示
+              color: 'white'
             },
             label: {
               position: 'insideTop',
               formatter: function(params) {
-                // console.log(params)
                 return `{color1|${params.name}}\n{color0|${
                   params.value
                 }元/立方}`
@@ -431,7 +429,6 @@ export default {
             label: {
               position: 'insideTop',
               formatter: function(params) {
-                console.log('markPoint:', params)
                 return `{color1|${params.name}}\n{color0|${
                   params.value
                 }元/公斤}`
@@ -576,7 +573,6 @@ export default {
             label: {
               position: 'insideTop',
               formatter: function(params) {
-                // console.log(params)
                 return `{color1|${params.name}}\n{color0|${
                   params.value
                 }元/立方}`
@@ -757,7 +753,6 @@ export default {
             label: {
               position: 'insideTop',
               formatter: function(params) {
-                // console.log(params)
                 return `{color1|${params.name}}\n{color0|${
                   params.value
                 }元/公斤}`
@@ -895,7 +890,6 @@ export default {
             label: {
               position: 'insideTop',
               formatter: function(params) {
-                // console.log(params)
                 return `{color1|${params.name}}\n{color0|${
                   params.value
                 }元/立方}`
@@ -1022,14 +1016,6 @@ export default {
   },
   methods: {
     comInfo(sendEchart, cargoType) {
-      //        轻重货（1重货，0轻货）：cargoType
-      // 最高价： highestPrice": 0.77,
-      //  最低价：lowestPrice": 0.3,
-      // 行业最高 ：highAveragePrice": 0.56,
-      // 行业最低： lowAveragePrice": 0.39,
-      // 本专线价： thisRangePrice": 0.43
-      // 最高价 行业最高 本专线价 行业最低 最低价
-      // console.log(cargoType, 'cargoType')
       sendEchart[0] =
         cargoType.highestPrice > 100
           ? Math.floor(cargoType.highestPrice)

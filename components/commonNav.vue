@@ -277,7 +277,7 @@ export default {
 
       var code = $.cookie('currentArea')
       var url = code ? '/zhuanxian/' + code + '.htm' : '/zhuanxian/list'
-      $('#wlzx a').attr('href', url)
+      // $('#wlzx a').attr('href', url)
     }
   },
   methods: {

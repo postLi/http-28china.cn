@@ -424,6 +424,7 @@
       :show = "isAdd"
       :types="types"
       @close="noaddFn"/>
+    <SidebarNav />
   </div>
 </template>
 <script>
@@ -433,6 +434,7 @@ import ComNews from '../../components/comNews'
 import selectMap from '../zhuanxian/selectMap'
 import FooterLinks from '../../components/footerLinks'
 import Add from './add'
+import SidebarNav from '~/components/public/sidebarNav'
 // import OrderSerch from './orderSearch'
 async function getGSList($axios, currentPage, vo = {}, companyName) {
   let parm = vo
@@ -460,6 +462,7 @@ export default {
     FooterLinks,
     Add,
     ComNews,
+    SidebarNav,
     // OrderSerch,
     HotList
   },

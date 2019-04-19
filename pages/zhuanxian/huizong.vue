@@ -1127,11 +1127,13 @@
       </div>
       <button @click="recommendSubmit">提交</button>
     </div>
+    <SidebarNav />
   </div>
 </template>
 <script>
 import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Star from '~/components/star/star' //星星
+import SidebarNav from '~/components/public/sidebarNav'
 // function myCredit(credit, item) {
 //   if (credit >= 0 && credit <= 3) {
 //     item.credit = 1
@@ -1196,7 +1198,7 @@ export default {
     link: [{ rel: 'stylesheet', href: '/layer/dist/css/layui.css' }],
     script: [{ src: '/layer/layer.js' }]
   },
-  components: { Star },
+  components: { Star, SidebarNav },
   data() {
     return {
       groomIndex: 1,

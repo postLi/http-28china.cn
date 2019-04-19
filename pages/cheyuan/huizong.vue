@@ -986,14 +986,19 @@
       </div>
     </div>
     <!-- 公司新闻 -->
+    <SidebarNav />
   </div>
 </template>
 <script>
 import 'swiper/dist/css/swiper.css'
 import Swiper from 'Swiper'
+import SidebarNav from '~/components/public/sidebarNav'
 export default {
   name: 'HuiZong',
   head: {},
+  components: {
+    SidebarNav
+  },
   data() {
     return {
       banners: [

@@ -713,9 +713,7 @@ export default {
     }
     let hyList = await getHyList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
-    //货源底部推荐
     let recommend = await $axios.post('/28-web/lclOrder/list/related/links', vo)
-    //企业人气榜
     let popularitys = await $axios
       .get('/28-web/logisticsCompany/popularity')
       .catch(err => {
@@ -724,8 +722,7 @@ export default {
     let newwesHuoRes = await $axios.post('/28-web/lclOrder/shipper/lastList', {
       currentPage: 1,
       pageSize: 20
-    }) //最新车源推荐列表
-    // console.log(newwesHuoRes.data.data.list, 'ffffffffffffffffffffff')
+    })
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],
       AF03802: AF03802.data.status === 200 ? AF03802.data.data : [],
@@ -777,7 +774,6 @@ export default {
     }
   },
   mounted() {
-    // console.log('hyList:', this.hyList)
     let rollContainer_h = $('.list_new_box').height()
     let roll = $('.list_new_ul')
     roll.append(roll.html())
@@ -984,7 +980,6 @@ export default {
         currentPage: this.currentPage,
         totalPage: this.pages,
         callback: async current => {
-          // $('#current1').text(current)
           let hyList = await getHyList(this.$axios, current, {
             startProvince: this.startProvince,
             startCity: this.startCity,
@@ -1002,11 +997,9 @@ export default {
             goodsWeightLower: this.goodsWeightLower,
             goodsWeightUpper: this.goodsWeightUpper
           })
-          console.log(hyList.list, 'hyList.list')
           this.hyList = hyList.list
           this.pages = hyList.pages
           this.current = hyList.current
-          // window.location.href = '#top'
         }
       })
     },

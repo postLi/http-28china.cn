@@ -58,7 +58,7 @@ margin-bottom: 12px; margin-top: 10px;
 height:48px;text-align: center;
 /* padding-top: 30px; */
 }
-.arc_p1 span{color: #2577e3;float:left;margin-left:52px;font-size: 20px;}
+.arc_p1 span{color: #2577e3;float:left;font-size: 20px;}
 .arc_left_1 .arc_p2{
 float:right;text-align: center;	
 }
@@ -569,6 +569,19 @@ text-align: center;
 
 .arc_middle1-2{
   text-align: center;
+  float: left;
+  width: 100%;
+  display: flex;
+}
+.arc_middle1-2 li{
+  float: left;
+  flex: 1;
+}
+.arc_middle1-2 li:nth-child(1){
+  text-align: right;
+}
+img{
+  cursor: pointer;
 }
 .arc_bottom{
   float: left;

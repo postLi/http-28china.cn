@@ -2,16 +2,19 @@ export const state = () => ({
   recommend: [], // 首页车源推荐表
   list_recommend: [], // 车源列表推荐榜
   list: [],
-  index_list: [], // 首页车源列表
+  index_list: {}, // 首页车源列表
   list_pop_carowner: [] // 车源列表人气榜
 })
-
+export const getter = {
+  aa(state) {
+    return state.index_list
+  }
+}
 export const mutations = {
   setInfo(state, param) {
     state[param.name] = param.data
   }
 }
-
 export const actions = {
   // 获取首页推荐列表
   GETRECOMMEND({ commit }, payload) {
@@ -57,11 +60,13 @@ export const actions = {
           if (data.status === 200) {
             // console.log('1payload-GETLIST', data.data.list[0])
             let ndata = data.data ? data.data.list || [] : []
+            let pages = data.data.pages
             ndata = payload.preFn ? payload.preFn(ndata) : ndata
             commit('setInfo', {
               name: payload.name,
-              data: ndata
+              data: { list: ndata, pages }
             })
+            console.log(data, 'data.data')
           }
           resolve()
         })

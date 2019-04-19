@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shixiao_page">
     <div class="shixiao_banner">
       <img src="/images/wzlImg/sxbanner.png">
       <a 
@@ -795,6 +795,9 @@ body {
 }
 img {
   vertical-align: middle;
+}
+.shixiao_page {
+  margin-top: -30px;
 }
 .shixiao_box {
   width: 1400px;

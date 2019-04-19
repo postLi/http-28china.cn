@@ -8,7 +8,9 @@ export const state = () => ({
   AF0491802List: [], //装货时间
   AF0491803List: [], //用车类型
   AF009List: [], //车辆规格
-  AF018List: [] //车辆类型
+  AF018List: [], //车辆类型
+  NoticeList: [], // 热点通知
+  showHome: 0
 })
 
 export const mutations = {
@@ -62,6 +64,29 @@ export const actions = {
               code: '',
               name: '不限类型'
             })
+            let ndata = data.data ? data.data || [] : []
+            commit('setData', {
+              name: obj.name,
+              data: ndata
+            })
+          }
+          resolve()
+        })
+        .catch(err => {
+          resolve()
+        })
+    })
+  },
+  GETNOTICELIST({ commit }, obj) {
+    return new Promise(resolve => {
+      this.$axios
+        .get(
+          '/aflc-common/aflcCommonNoticeApi/findDriverHomeNoticeList/' +
+            obj.data
+        )
+        .then(res => {
+          let data = res.data
+          if (data.status === 200) {
             let ndata = data.data ? data.data || [] : []
             commit('setData', {
               name: obj.name,

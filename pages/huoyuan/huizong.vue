@@ -859,31 +859,33 @@ export default {
         currentProvince: currentProvince ? currentProvince : '',
         currentCity: currentCity ? currentCity : '', //获取当前的城市
 
-        hotCityData: hotCityData.data ? hotCityData.data.data : [],
-        shipperData: shipperData.data ? shipperData.data.data.list : [],
-        monthShipperData: monthShipperData
-          ? monthShipperData.data.data.list
-          : [],
-        recommendData: recommendData.data ? recommendData.data.data.list : [],
-        darenData: darenData.data ? darenData.data.data : [],
-        newListData: newListData.data ? newListData.data.data : [],
-        statisticsData: statisticsData.data ? statisticsData.data.data : []
+        hotCityData: !hotCityData.data.data ? [] : hotCityData.data.data,
+        shipperData: !shipperData.data.data ? [] : shipperData.data.data,
+        monthShipperData: !monthShipperData.data.data
+          ? []
+          : monthShipperData.data.data,
+        recommendData: !recommendData.data.data ? [] : recommendData.data.data,
+        darenData: !darenData.data.data ? [] : darenData.data.data,
+        newListData: !newListData.data.data ? [] : newListData.data.data,
+        statisticsData: !statisticsData.data.data
+          ? {}
+          : statisticsData.data.data
       }
     } else {
       error({ statusCode: 500, message: '查找不到该专线列表' })
     }
   },
   created() {
-    //优质货主
-    // this.shipperData = this.shipperData.list
-    //   ? this.shipperData.list
-    //   : { list1: [], list2: [] }
-    // //本月货主
-    // this.monthShipperData = this.monthShipperData.list
-    //   ? this.monthShipperData.list
-    //   : []
-    // //货源推荐
-    // this.recommendData = this.recommendData.list ? this.recommendData.list : []
+    // 优质货主
+    this.shipperData = this.shipperData.list
+      ? this.shipperData.list
+      : { list1: [], list2: [] }
+    //本月货主
+    this.monthShipperData = this.monthShipperData.list
+      ? this.monthShipperData.list
+      : []
+    //货源推荐
+    this.recommendData = this.recommendData.list ? this.recommendData.list : []
 
     //处理优质货主数据
     if (this.shipperData.length > 5) {

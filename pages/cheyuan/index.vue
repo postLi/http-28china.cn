@@ -229,7 +229,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/cheyuan?&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
@@ -245,7 +245,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/cheyuan?&endCity='+item.endCity+'&endProvince='+item.endProvince+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
@@ -261,7 +261,7 @@
                 :key="index"
                 class="hot-cities-li" ><a
                   target="_blank"
-                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/cheyuan?&endCity='+item.endCity+'&endProvince='+item.endProvince+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
@@ -440,10 +440,12 @@
 
 
     </div>
+    <SidebarNav />
   </div>
 </template>
 <script>
 import MUTUAL from '@/static/js/wzl-commonJs.js'
+import SidebarNav from '~/components/public/sidebarNav'
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -470,6 +472,9 @@ export default {
       { src: '/js/jquery.pagination.min.js' }
       // { src: '/js/gaodemap2.js' }
     ]
+  },
+  components: {
+    SidebarNav
   },
   data() {
     return {

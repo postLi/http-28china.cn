@@ -2,11 +2,11 @@
   <div class="home">
     <img
       class="top"
-      v-if="showHome === 0"
+      v-if="$store.state.m.showHome === 0"
       src="/m/home/home_banner.png" >
     <div
       class="body flex_f"
-      v-if="showHome === 0">
+      v-if="$store.state.m.showHome === 0">
       <div class="nav flex_f">
         <div class="nav_top flex_a f-34">
           <div
@@ -79,22 +79,24 @@
         </div>
       </div>
     </div>
-    <div v-if="showHome === 1">
+    <div v-if="$store.state.m.showHome === 1">
       <img
         class="top"
         src="/m/home/banner.png" >
-      <div class="flex_a b_c_w gg_item">
-        <img src="/m/home/gonggao_huozhu.png">
+      <div
+        class="flex_a b_c_w gg_item"
+        v-for="(item, index) in $store.state.m.NoticeList"
+        @click="toNotice(item)"
+        :key="index">
+        <img
+          src="/m/home/gonggao_huozhu.png"
+          v-if="index % 2 === 0">
+        <img
+          src="/m/home/gonggao_fuli.png"
+          v-if="index % 2 !== 0">
         <div class="margin_l_20 right">
-          <div class="c-3 f-32">热点通知</div>
-          <div class="c-9 f-26">测试APP车主弹出公告</div>
-        </div>
-      </div>
-      <div class="flex_a b_c_w gg_item">
-        <img src="/m/home/gonggao_fuli.png">
-        <div class="margin_l_20 right">
-          <div class="c-3 f-32">车主福利</div>
-          <div class="c-9 f-26">测试APP两端公告</div>
+          <div class="c-3 f-32">{{ item.name }}</div>
+          <div class="c-9 f-26">{{ item.title }}</div>
         </div>
       </div>
       <div class="flex_a b_c_w gg_item">
@@ -124,7 +126,7 @@
       </div>
       <div
         class="h flex_sb flex_f"
-        @click="showHome = 0">
+        @click="toHome(0)">
         <img
           src="/m/home/home_home.png"
           style="width: 0.46rem">
@@ -141,7 +143,7 @@
       </div>
       <div
         class="h flex_sb flex_f"
-        @click="showHome = 1">
+        @click="toHome(1)">
         <img
           src="/m/home/lobby_icon_activity.png"
           style="width: 0.46rem"
@@ -224,8 +226,7 @@ export default {
           url: '/m/home/home_huodong.png',
           to: ''
         }
-      ],
-      showHome: 0
+      ]
     }
   },
   async fetch({ $axios, app, query, store }) {},
@@ -236,6 +237,19 @@ export default {
     //
   },
   methods: {
+    toHome(int) {
+      this.$store.commit('m/setData', {
+        name: 'showHome',
+        data: int
+      })
+    },
+    toNotice(item) {
+      this.$router.push(
+        `/m/gg/noticeList?name=${item.name ? item.name : ''}&noticeGroupCode=${
+          item.code
+        }`
+      )
+    },
     getEndArea(data) {
       if (data) {
         this.$store.dispatch('m/SETDATA', {
@@ -481,7 +495,10 @@ export default {
         this.$router.push(item.to)
       }
       if (item.name === '活动中心') {
-        this.showHome = 1
+        this.$store.commit('m/setData', {
+          name: 'showHome',
+          data: 1
+        })
       }
     },
     clickEnd() {

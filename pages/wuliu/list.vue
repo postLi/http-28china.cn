@@ -1,5 +1,5 @@
 <template>
-  <div class="yuanqu">
+  <div class="yuanqu yuanqu_page">
    
     <div class="list_box">
       <div
@@ -1008,6 +1008,9 @@ export default {
 </script>
 
 <style lang="scss">
+.yuanqu_page {
+  margin-top: -30px;
+}
 .news_title {
   width: 17em;
   overflow: hidden;

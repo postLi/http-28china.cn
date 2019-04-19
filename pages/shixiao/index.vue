@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shixiao_page">
     <div class="shixiao_banner">
       <img src="/images/wzlImg/sxbanner.png">
       <a 
@@ -301,7 +301,7 @@
             <div class="list_box">
               <ul class="ul_list">
                 <li 
-                  v-for="(item,index) in excellent" 
+                  v-for="(item,index) in $store.state.shixiao.excellent" 
                   :key="index"
                  
                 >
@@ -486,6 +486,11 @@ export default {
       sortId: 1
     }
   },
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('shixiao/GETEXCELLENT', {
+      name: 'excellent'
+    })
+  },
   async asyncData({ $axios, app, query }) {
     let vo = {
       filterSign: 1,
@@ -501,11 +506,6 @@ export default {
         : app.$cookies.get('currentProvinceFullName')
     }
     let listRangesAgingData = await getListRangesAging($axios, 1, vo)
-    let excellents = await $axios
-      .get('/28-web/logisticsCompany/excellent?pageSize=8')
-      .catch(err => {
-        console.log(err)
-      })
     let parhort = vo
     delete vo.filterSign
     let hotLines = await getHotLines($axios, 1, parhort)
@@ -516,8 +516,7 @@ export default {
         ? listRangesAgingData.totalPage
         : 0,
       currentPage: listRangesAgingData.currentPage,
-      vo: vo,
-      excellent: excellents.status === 200 ? excellents.data.data : []
+      vo: vo
     }
   },
   mounted() {
@@ -795,6 +794,9 @@ body {
 }
 img {
   vertical-align: middle;
+}
+.shixiao_page {
+  margin-top: -30px;
 }
 .shixiao_box {
   width: 1400px;

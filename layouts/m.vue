@@ -6,7 +6,29 @@
 <script>
 const rem =
   '!function(e){var t,n=document,i=window,o=n.documentElement;function u(){var t=o.getBoundingClientRect().width/e*100;o.style.fontSize=t+"px"}u(),i.addEventListener("resize",function(){clearTimeout(t),t=setTimeout(u,300)},!1),i.addEventListener("pageshow",function(e){e.persisted&&(clearTimeout(t),t=setTimeout(u,300))},!1)}(750);'
-
+Date.prototype.format = function(fmt) {
+  var o = {
+    'M+': this.getMonth() + 1, //月份
+    'd+': this.getDate(), //日
+    'h+': this.getHours(), //小时
+    'm+': this.getMinutes(), //分
+    's+': this.getSeconds(), //秒
+    'q+': Math.floor((this.getMonth() + 3) / 3), //季度
+    S: this.getMilliseconds() //毫秒
+  }
+  if (/(y+)/.test(fmt))
+    fmt = fmt.replace(
+      RegExp.$1,
+      (this.getFullYear() + '').substr(4 - RegExp.$1.length)
+    )
+  for (var k in o)
+    if (new RegExp('(' + k + ')').test(fmt))
+      fmt = fmt.replace(
+        RegExp.$1,
+        RegExp.$1.length === 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
+      )
+  return fmt
+}
 export default {
   head: {
     meta: [{ name: 'format-detection', content: 'telephone=yes' }],
@@ -60,6 +82,11 @@ export default {
       let citySearch = new AMap.CitySearch()
       citySearch.getLocalCity((status, result) => {
         if (status === 'complete' && result.info === 'OK') {
+          // 热点通知
+          this.$store.dispatch('m/GETNOTICELIST', {
+            data: result.adcode,
+            name: 'NoticeList'
+          })
           // 首页开始地 原始值
           this.$store.dispatch('m/SETDATA', {
             data: [result.province, result.city, ''],

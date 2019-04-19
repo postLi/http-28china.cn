@@ -307,43 +307,13 @@ export default {
                   }
                 }
                 obj.remark = $('#textarea').val() ? $('#textarea').val() : ''
-                // if ($('#textarea').val()) {
-                //   obj.remark = $('#textarea').val()
-                // } else {
-                //   checkinfo.done = false
-                //   layer.msg('请填写备注信息')
-                //   return
-                // }
 
-                // if ($('.remark span[class="check"]').length > 0) {
-                //   $('.remark span[class="check"]').each(function(index, ele) {
-                //     obj.carTag = obj.carTag + $(ele).attr('code') + '|'
-                //     obj.carTagName = obj.carTagName + $(ele).text() + '|'
-                //   })
-                //   obj.carTag = obj.carTag.substring(0, obj.carTag.length - 1)
-                //   obj.carTagName = obj.carTagName.substring(
-                //     0,
-                //     obj.carTagName.length - 1
-                //   )
-                // }
                 if ($('.start').val() && $('.end').val()) {
                   obj.title = $('.start').val() + '->' + $('.end').val()
                 }
                 return checkinfo
               }
-              function comCity(obj, startCity) {
-                if (obj === '北京市') {
-                  startCity = Object.assign({}, obj.startCity, '北京市')
-                } else if (obj === '上海市') {
-                  startCity = '上海市'
-                } else if (obj === '重庆市') {
-                  startCity = '重庆市'
-                } else if (obj === '天津市') {
-                  startCity = '天津市'
-                } else {
-                  startCity = $('.start').attr('thecity')
-                }
-              }
+
               function resetForm() {
                 $('.start').val('')
                 $('.end').val('')
@@ -396,6 +366,7 @@ export default {
                           layer.msg('发布成功', { time: 3000 }, function(
                             params
                           ) {
+                            debugger
                             window.location.href =
                               '/create/cySuccess?driverId=' +
                               res.data +

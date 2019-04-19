@@ -238,7 +238,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper +'&userAuth='+userAuth+'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/huoyuan?&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
             <!-- <ul class="hot-cities">
@@ -286,7 +286,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper+'&userAuth='+userAuth +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
+                  :href="'/huoyuan?&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           <!-- <ul class="hot-cities">
@@ -362,7 +362,7 @@
               :key="index"
               class="hot-cities-li" ><a
                 target="_blank"
-                :href="'/huoyuan?goodsVolumeLower=&' +goodsVolumeLower + '&goodsVolumeUpper=' + goodsVolumeUpper + '&goodsWeightLower='+goodsWeightLower +'&goodsWeightUpper='+goodsWeightUpper+'&userAuth='+userAuth +'&orderClass='+orderClass+'&isLongCar='+item.isLongCar+'&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
+                :href="'/huoyuan?&startCity='+item.startCity+'&startProvince='+item.startProvince+'&endCity='+item.endCity+'&endProvince='+item.endProvince"
                 class="hot-cities-a">{{ item.title }}</a></li>
               
           </ul>
@@ -579,11 +579,7 @@ export default {
   },
   head: {
     link: [{ rel: 'stylesheet', href: '/css/jquery.pagination.css' }],
-    script: [
-      { src: './js/city-picker.data.js' },
-      { src: './js/city-picker.js' },
-      { src: './js/jquery.pagination.min.js' }
-    ]
+    script: [{ src: '/js/jquery.pagination.min.js' }]
   },
   data() {
     return {
@@ -624,6 +620,11 @@ export default {
       endArea: ''
     }
   },
+  // async fetch({ store, $axios, param, app, error }) {
+  //   await store.dispatch('huoyuan/GETPOPULARITY', {
+  //     name: 'popularity'
+  //   })
+  // },
   async asyncData({ $axios, app, query }) {
     let goodsVolumeLower = '',
       goodsVolumeUpper = '',
@@ -717,11 +718,7 @@ export default {
     let hyList = await getHyList($axios, 1, vo)
     let recommendList = await getRecommendList($axios, vo)
     let recommend = await $axios.post('/28-web/lclOrder/list/related/links', vo)
-    let popularitys = await $axios
-      .get('/28-web/logisticsCompany/popularity')
-      .catch(err => {
-        console.log(err)
-      })
+    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
     let newwesHuoRes = await $axios.post('/28-web/lclOrder/shipper/lastList', {
       currentPage: 1,
       pageSize: 20

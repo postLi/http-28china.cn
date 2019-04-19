@@ -29,7 +29,8 @@
         <div
           class="placeHolder f_b"
           v-if="showPlaceHolder"
-        >18030405063</div>
+          @click="toInput()"
+        >001380</div>
       </div>
 
       <div
@@ -39,14 +40,16 @@
 
       <div
         class="flex"
-        v-if="showNoRes"
+        v-if="showRes === 'no'"
       >
         <img
           class="no_res"
           src="/m/ydcx/yundancx_kong.png" >
       </div>
-      <div class="margin_t_20">
-        <div class="f-34 c-3">物流跟踪：广东分拨中心</div>
+      <div
+        v-if="showRes === 'yes'"
+        class="margin_t_20">
+        <div class="f-34 c-3">物流跟踪：{{ list[0] ? list[0].trackNode : '' }}</div>
 
         <div
           class="flex_r margin_t_20 content"
@@ -66,7 +69,7 @@
               src="/m/ydcx/dindanxq_current.png">
             <div
               class="line"
-              :style="{height:lineHeight + 'px'}"/>
+              :style="{height:lineHeight + 'rem'}"/>
           </div>
           <div
             class="p_r flex_r"
@@ -83,8 +86,8 @@
               src="/m/ydcx/start.png">
           </div>
           <div class="f-24">
-            <div>{{ item.n1 }}</div>
-            <div>{{ item.n2 }}</div>
+            <div>{{ item.trackNode }}</div>
+            <div>{{ item.trackInfo }}</div>
           </div>
         </div>
 
@@ -107,28 +110,9 @@ export default {
     return {
       value: '',
       showPlaceHolder: true,
-      showNoRes: false,
+      showRes: '',
       lineHeight: 0,
-      list: [
-        {
-          t1: '2019-05-06',
-          t2: '03:15:23',
-          n1: '送货上门',
-          n2: '送货中，送货人：毛思111111吉，电话：1384858485'
-        },
-        {
-          t1: '2019-05-26',
-          t2: '03:15:23',
-          n1: '送货上门',
-          n2: '已到货，客户电话：1939495649，上一站：南昌网点'
-        },
-        {
-          t1: '2019-05-01',
-          t2: '03:15:23',
-          n1: '送货上门',
-          n2: '已到货，客户电话：1939495649，上一站：南昌网点'
-        }
-      ]
+      list: []
     }
   },
   watch: {
@@ -137,21 +121,21 @@ export default {
     }
   },
   mounted() {
-    let height = 0,
-      widthList = []
-    for (let i = 0; i < this.$refs.item.length - 1; i++) {
-      height += this.$refs.item[i].clientHeight + 10
-    }
-    this.lineHeight = height
-    let left = document.querySelectorAll('.content .left')
-    left.forEach(item => {
-      widthList.push(item.clientWidth)
-    })
-    left.forEach(item => {
-      item.style.minWidth = Math.max(...widthList) + 'px'
+    let resizeTask = null
+    window.addEventListener('resize', () => {
+      if (resizeTask !== null) {
+        clearTimeout(resizeTask)
+      }
+      resizeTask = setTimeout(() => {
+        resizeTask = null
+        this.setSize()
+      }, 500)
     })
   },
   methods: {
+    toInput() {
+      this.value = '001380'
+    },
     search() {
       if (this.value === '') {
         this.$createToast({ txt: '请输入你要搜索的值', type: 'txt' }).show()
@@ -162,8 +146,53 @@ export default {
           '/aflc-portal/order/fclOrder/v1/queryCompanyBySerial/' + this.value
         )
         .then(res => {
-          //
+          if (res.data.status === 200 && res.data.data.length !== 0) {
+            this.$axios
+              .get(
+                '/aflc-portal/order/fclOrder/v1/queryWaybillStateById/' +
+                  res.data.data[0].id
+              )
+              .then(res1 => {
+                if (res1.data.status === 200 && res1.data.data.length !== 0) {
+                  this.showRes = 'yes'
+                  res1.data.data.forEach(item => {
+                    item.t1 = item.createTime.split(' ')[0]
+                    item.t2 = item.createTime.split(' ')[1]
+                  })
+                  this.list = res1.data.data
+                  this.setSize()
+                } else {
+                  this.showRes = 'no'
+                }
+              })
+          } else {
+            this.showRes = 'no'
+          }
         })
+    },
+    setSize() {
+      this.$nextTick(() => {
+        if (this.list.length !== 0) {
+          let height = 0,
+            widthList = []
+          let fs = (
+            document.querySelector('html').style.fontSize.replace('px', '') * 1
+          ).toFixed(2)
+          for (let i = 0; i < this.$refs.item.length - 1; i++) {
+            height += this.$refs.item[i].clientHeight + (20 * fs) / 100
+          }
+          // (20 * fs) / 100 为 margin的px值
+          this.lineHeight = ((height * 100) / fs) * 0.01 // rem值
+          let left = document.querySelectorAll('.content .left')
+          left.forEach(item => {
+            item.style.minWidth = 'auto'
+            widthList.push(item.clientWidth)
+          })
+          left.forEach(item => {
+            item.style.minWidth = Math.max(...widthList) + 'px'
+          })
+        }
+      })
     }
   }
 }

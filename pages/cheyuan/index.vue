@@ -229,7 +229,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity=&endProvince=&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/cheyuan?&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
@@ -245,7 +245,7 @@
                 :key="index" 
                 class="hot-cities-li"><a
                   target="_blank"
-                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/cheyuan?&endCity='+item.endCity+'&endProvince='+item.endProvince+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>
@@ -261,7 +261,7 @@
                 :key="index"
                 class="hot-cities-li" ><a
                   target="_blank"
-                  :href="'/cheyuan?carLengthLower=&AF031Id=&carLengthUpper=&AF032Id=&carLoadLower=&carLoadUpper=&carSourceType=&carType=&endArea=&endCity='+item.endCity+'&endProvince='+item.endProvince+'&isLongCar=&startArea=&startCity='+item.startCity+'&startProvince='+item.startProvince"
+                  :href="'/cheyuan?&endCity='+item.endCity+'&endProvince='+item.endProvince+'&startCity='+item.startCity+'&startProvince='+item.startProvince"
                   class="hot-cities-a">{{ item.title }}</a></li>
             </ul>
           </div>

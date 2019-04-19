@@ -643,31 +643,24 @@ export default {
       `/28-web/logisticsCompany/list/related/links`,
       vo
     )
+    let getItem = item => {
+      item.advService = item.productServiceNameList
+        ? item.productServiceNameList
+        : item.otherServiceNameList
+    }
     let listD = await $axios.get(`/28-web/logisticsCompany/adviseRecommend`)
     if (listD.data.status == 200) {
-      listD.data.data.forEach(item => {
-        item.advService = item.productServiceNameList
-          ? item.productServiceNameList
-          : item.otherServiceNameList
-      })
+      listD.data.data.forEach(getItem)
     }
     let listE = await $axios.get(
       `/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
     )
     if (listE.data.status == 200) {
-      listE.data.data.forEach(item => {
-        item.advService = item.productServiceNameList
-          ? item.productServiceNameList
-          : item.otherServiceNameList
-      })
+      listE.data.data.forEach(getItem)
     }
     let listG = await $axios.get(`/28-web/logisticsCompany/enterpriseRecommend`)
     if (listG.data.status == 200) {
-      listG.data.data.forEach(item => {
-        item.advService = item.productServiceNameList
-          ? item.productServiceNameList
-          : item.otherServiceNameList
-      })
+      listG.data.data.forEach(getItem)
     }
     recommendList.forEach(item => {
       MUTUAL.GETCREDITITEM(item)

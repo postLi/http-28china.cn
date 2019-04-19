@@ -759,13 +759,15 @@
         </ul>
       </div>
     </div> -->
-    <!-- 28问答 -->   
+    <!-- 28问答 -->
+    <SidebarNav />   
   </div>
 </template>
 <script>
 import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Add from '~/components/subscribe/add' //订阅
 import Star from '~/components/star/star' //星星
+import SidebarNav from '~/components/public/sidebarNav' //星星
 import Swiper from 'Swiper'
 
 export default {
@@ -777,7 +779,7 @@ export default {
   //   }
   // },
   // layout: 'huizong',
-  components: { Add, Star },
+  components: { Add, Star, SidebarNav },
   data() {
     return {
       //登录权限

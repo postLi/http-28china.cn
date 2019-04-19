@@ -1,6 +1,7 @@
 export const state = () => ({
   gongsi_lineHots: [],
-  gongsi_links: {}
+  gongsi_links: {},
+  wuliu_recommentList: []
 })
 export const mutations = {
   setGSLineHots(state, param) {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   setGSLinks(state, param) {
     state.gongsi_links = param || []
+  },
+  setWLRECOMMENTLIST(state, param) {
+    state.wuliu_recommentList = paam || []
   }
 }
 export const actions = {
@@ -41,9 +45,16 @@ export const actions = {
         .post('/28-web/logisticsCompany/list/related/links', payload)
         .then(res => {
           if (res.data.status == 200) {
-            // commit('',res.data.)
           }
-          console.log(res.data.data, 'res22')
+          resolve()
+        })
+    })
+  },
+  GETWLREMCOMMENTLIST({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post('/28-web/logisticsPark/main/recommend/list', payload)
+        .then(res => {
           resolve()
         })
     })

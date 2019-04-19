@@ -86,6 +86,7 @@ $f_12: 12px;
   background: url('../../static/images/huizong/icon_huangguan.gif') no-repeat;
 }
 
+
 /*公共清楚浮动方法*/
 .m_t10 {
   margin-top: 10px;
@@ -235,10 +236,10 @@ $f_12: 12px;
     font-size: $f_20;
   }
 }
-/*前往城市*/ 
-.p_go_city{
-  height: 54px;
-  line-height: 54px;
+/*前往城市*/
+.p_go_city {
+  height: 50px;
+  line-height: 50px;
   white-space: nowrap;
 
   >div,
@@ -246,19 +247,38 @@ $f_12: 12px;
     display: inline-block;
   }
 
+  .area {
+
+    // margin: 10px 0;
+    >span {
+      display: block;
+
+      &.area_city {
+        max-width: 85px;
+        font-size: $f_16;
+        @extend .ellipsis;
+      }
+
+      &.area_qx {
+        font-size: $f_12;
+        text-align: center;
+        color: $gray;
+      }
+    }
+  }
+
   .city {
-    max-width: 80px;
+    max-width: 85px;
+    font-size: $f_16;
+    @extend .ellipsis;
     color: $tit_color;
-    font-size: 16px;
-    line-height: 18px;
     vertical-align: middle;
+    color: #222;
   }
 
   .city-joint {
     color: $light_gray;
     font-size: 12px;
-    line-height: 18px;
-    height: 18px;
   }
 
   .joint-line {
@@ -273,6 +293,36 @@ $f_12: 12px;
     padding: 0 4px;
   }
 }
+
+.p_go_area {
+  overflow: hidden;
+  margin: 10px 0;
+  height: 40px;
+  height: auto;
+  line-height: 20px;
+
+  .city {
+    float: left;
+    line-height: 40px;
+
+    .area {
+      float: left;
+    }
+
+    .city-joint {
+      float: left;
+      height: 40px;
+      line-height: 40px;
+    }
+
+    .city-joint {
+      margin: 0 3px;
+    }
+  }
+
+  // .joint-label{line-height: 40px;}
+}
+
 /*********分类导航***************/
 .p_type_nav {
   padding: 20px 0;
@@ -476,9 +526,12 @@ $f_12: 12px;
         border-radius: 3px;
       }
     }
-
     .md_box {
-       @extend .p_go_city;
+      @extend .p_go_city;
+    }
+
+    .md_area {
+      @extend .p_go_area;
     }
 
     .type_box {

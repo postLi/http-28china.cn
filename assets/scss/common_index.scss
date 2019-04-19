@@ -394,6 +394,7 @@ $f_12: 12px;
   line-height: 20px;
 
   .city {
+    float: left;
     line-height: 40px;
 
     .area {
@@ -401,6 +402,7 @@ $f_12: 12px;
     }
 
     .city-joint {
+      float: left;
       height: 40px;
       line-height: 40px;
     }

@@ -735,7 +735,7 @@
 import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Add from '~/components/subscribe/add' //订阅
 import Star from '~/components/star/star' //星星
-import SidebarNav from '~/components/public/sidebarNav' //星星
+import SidebarNav from '~/components/public/sidebarNav'
 import Swiper from 'Swiper'
 
 export default {

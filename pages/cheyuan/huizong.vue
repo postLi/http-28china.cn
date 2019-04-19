@@ -7,10 +7,13 @@
           <div class="category_menu_list">
             <span 
               class="item"
-              v-for="(item, index) in cityList" 
+              v-for="(item, index) in hotCityData" 
               :key="index">
-            <a>{{ item }}</a></span>  
-          </div>         
+              <a
+                target="_blank"
+                :href="'/cheyuan?startProvince='+item.provinceName+'&startCity='+item.cityName">{{ item.cityShortName }}</a></span>  
+          </div> 
+         
         </div>
       </div>
       <div class="cg_col2 fl">
@@ -38,13 +41,27 @@
       <div class="cg_col3 fr">
         <div class="p_user_login">
           <div class="user_pic">头像</div>
-          <div class="user_show">
-            <p class="user_tip">Hi~欢迎来到28快运！</p>
+
+          <div 
+            class="user_show"
+            v-if="!isToken">
+            <p class="user_txt">Hi~欢迎来到28快运！</p>
             <p class="user_profit">
-              <a>登录</a>
-              <a>注册</a>
+              <a 
+                class="login"
+                @click.prevent.stop="showLogin">登录</a>
+              <a href="/regisiter">注册</a>
             </p>
           </div>
+          <div 
+            class="user_show"
+            v-else>
+            <p class="user_txt">您好，{{ loginMobile }} <a href="/exit">【安全退出】</a></p>
+            <p class="user_profit">
+              <a href="/hyzx">会员中心</a>
+            </p>
+          </div>
+
         </div>
         <!-- 用户登录 -->
         <div class="p_me_groom">
@@ -89,21 +106,23 @@
         </div>
         <div class="bd">
           <ul class="p_hot_line p_CY_car_list clearfix">
-            <li>
+            <li
+              v-for="(item,index) in carSourceData"
+              :key="index">
               <div class="hot_line_box">
                 <div class="h_pic">
                   <span class="h_pic_icon_groom"> 平台推荐</span>          
-                  <img src="../../static/images/huizong/_img01.png">
+                  <img :src="item.carFile">
                 </div>
                 <div class="wl_box">
                   <div class="h_place">
                     <span class="icon icon_start">始</span>
-                    <span class="place">广州市天河区</span>
+                    <span class="place">{{ item.startCity }}{{ item.startArea }}</span>
                     <span class="icon icon_end">终</span>
                     <span class="place">上海黄浦区</span>
                   </div>
                   <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-                  <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
+                  <div class="CY_list_price"> 运价：<span class="CY_list_price_num"/> 元</div>
                   <div class="CY_list_praise">
                     <ul class="CY_list_praise_list fl">
                       <li><span class="CY_list_praise_name">好评</span>84</li>
@@ -111,131 +130,7 @@
                     </ul>
                     <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
                   </div>
-                  <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-                </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="hot_line_box">
-                <div class="h_pic">
-                  <span class="h_pic_icon_groom"> 平台推荐</span>         
-                  <img src="../../static/images/huizong/_img01.png">
-                </div>
-                <div class="wl_box">
-                  <div class="h_place">
-                    <span class="icon icon_start">始</span>
-                    <span class="place">广州市天河区</span>
-                    <span class="icon icon_end">终</span>
-                    <span class="place">上海黄浦区</span>
-                  </div>
-                  <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-                  <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-                  <div class="CY_list_praise">
-                    <ul class="CY_list_praise_list fl">
-                      <li><span class="CY_list_praise_name">好评</span>84</li>
-                      <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                    </ul>
-                    <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-                  </div>
-                  <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-                </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="hot_line_box">
-                <div class="h_pic">
-                  <span class="h_pic_icon_groom"> 平台推荐</span>         
-                  <img src="../../static/images/huizong/_img01.png">
-                </div>
-                <div class="wl_box">
-                  <div class="h_place">
-                    <span class="icon icon_start">始</span>
-                    <span class="place">广州市天河区</span>
-                    <span class="icon icon_end">终</span>
-                    <span class="place">上海黄浦区</span>
-                  </div>
-                  <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-                  <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-                  <div class="CY_list_praise">
-                    <ul class="CY_list_praise_list fl">
-                      <li><span class="CY_list_praise_name">好评</span>84</li>
-                      <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                    </ul>
-                    <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-                  </div>
-                  <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-                </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="hot_line_box">
-                <div class="h_pic"> 
-                  <span class="h_pic_icon_groom"> 平台推荐</span>        
-                  <img src="../../static/images/huizong/_img01.png">
-                </div>
-                <div class="wl_box">
-                  <div class="h_place">
-                    <span class="icon icon_start">始</span>
-                    <span class="place">广州市天河区</span>
-                    <span class="icon icon_end">终</span>
-                    <span class="place">上海黄浦区</span>
-                  </div>
-                  <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-                  <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-                  <div class="CY_list_praise">
-                    <ul class="CY_list_praise_list fl">
-                      <li><span class="CY_list_praise_name">好评</span>84</li>
-                      <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                    </ul>
-                    <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-                  </div>
-                  <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-                </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="hot_line_box">
-                <div class="h_pic"> 
-                  <span class="h_pic_icon_groom"> 平台推荐</span>        
-                  <img src="../../static/images/huizong/_img01.png">
-                </div>
-                <div class="wl_box">
-                  <div class="h_place">
-                    <span class="icon icon_start">始</span>
-                    <span class="place">广州市天河区</span>
-                    <span class="icon icon_end">终</span>
-                    <span class="place">上海黄浦区</span>
-                  </div>
-                  <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-                  <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-                  <div class="CY_list_praise">
-                    <ul class="CY_list_praise_list fl">
-                      <li><span class="CY_list_praise_name">好评</span>84</li>
-                      <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                    </ul>
-                    <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-                  </div>
-                  <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
+                  <div class="CY_list_time"><i class="iconfont iconshijian"/>{{ createTime }}</div>
                 </div>
                 <div class="h_operate">
                   <a 
@@ -1091,14 +986,19 @@
       </div>
     </div>
     <!-- 公司新闻 -->
+    <SidebarNav />
   </div>
 </template>
 <script>
 import 'swiper/dist/css/swiper.css'
 import Swiper from 'Swiper'
+import SidebarNav from '~/components/public/sidebarNav'
 export default {
   name: 'HuiZong',
   head: {},
+  components: {
+    SidebarNav
+  },
   data() {
     return {
       banners: [
@@ -1178,13 +1078,52 @@ export default {
         '淄博',
         '绍兴'
       ],
-      newsIndex: 1
+      newsIndex: 1,
+      //登录权限
+      isToken: false,
+      loginMobile: ''
     }
   },
-  async asyncData({ $axios, query, app, error }) {},
+  async asyncData({ $axios, query, app, error }) {
+    //服务端获取cookies
+    let currentProvince = app.$cookies.get('currentProvinceFullName')
+    let currentCity = app.$cookies.get('currentAreaFullName')
+
+    //热门城市
+    let hotCityData = await $axios.get('/28-web/city/hot')
+    //严选车源列表
+    let carSourceData = await $axios.post(
+      '/28-web/carInfo/sumPage/recommendList',
+      {
+        currentPage: 1,
+        pageSize: 5,
+        startProvince: currentProvince,
+        startCity: currentCity,
+        driverStatus: 'AF0010403'
+      }
+    )
+    //返回赋值
+    if (hotCityData.status === 200 || carSourceData.status === 200) {
+      return {
+        hotCityData: !hotCityData.data.data ? hotCityData.data.data : [],
+        // hotCityData: [],
+        carSourceData: !carSourceData.data.data ? carSourceData.data.data : []
+      }
+    } else {
+      error({ statusCode: 500, message: '查找不到该专线列表' })
+    }
+  },
   mounted() {
     // this.intSwiper1()
-    this.intSwiper2()
+    let that = this
+    this.$nextTick(() => {
+      this.getCookies()
+      //幻灯片
+      this.intSwiper2()
+      //打印返回的数据
+      console.log('严选车辆返回列表', this.carSourceData)
+    })
+
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
       $('.p_hy_info .hy_info_user_box').Scroll({
@@ -1195,6 +1134,13 @@ export default {
       // 地点插件
       $('#groom_pageinp1').citypicker()
       $('#groom_pageinp2').citypicker()
+      //登录成功赋值
+      $('body').on('login.success', () => {
+        that.isToken = $.cookie('access_token') ? true : false
+        that.loginMobile = $.cookie('login_mobile')
+        // console.log('vue打印', that)
+        // alert($.cookie('access_token'))
+      })
     })
   },
   methods: {
@@ -1250,6 +1196,17 @@ export default {
           }
         })
       })
+    },
+    //登录
+    //登录
+    showLogin() {
+      $('body').trigger('login.show')
+    },
+    getCookies() {
+      //获取省市cookies
+      //$.cookie
+      this.isToken = $.cookie('access_token') ? true : false
+      this.loginMobile = $.cookie('login_mobile')
     }
   }
 }

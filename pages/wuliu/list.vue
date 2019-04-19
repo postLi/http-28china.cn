@@ -587,7 +587,7 @@
             style="width: 280px;color: white;background: #FF892A;height:80px;;line-height: 80px;text-align: center;border-radius: 8px;    display: inline-block;margin-left:50px;cursor: pointer; border: none;color:rgba(255,255,255,1);font-size:24px;"><a 
               
           style="color:rgba(255,255,255,1);">我要入驻</a></button>
-          <div @click="mapFn">mapFn</div>
+          <!-- <div @click="mapFn">mapFn</div> -->
         
         </div>
 

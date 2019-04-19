@@ -440,10 +440,12 @@
 
 
     </div>
+    <SidebarNav />
   </div>
 </template>
 <script>
 import MUTUAL from '@/static/js/wzl-commonJs.js'
+import SidebarNav from '~/components/public/sidebarNav'
 async function getCarInfoList($axios, currentPage, vo = {}) {
   let parm = vo
   parm.currentPage = currentPage
@@ -470,6 +472,9 @@ export default {
       { src: '/js/jquery.pagination.min.js' }
       // { src: '/js/gaodemap2.js' }
     ]
+  },
+  components: {
+    SidebarNav
   },
   data() {
     return {

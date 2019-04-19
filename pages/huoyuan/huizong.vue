@@ -86,7 +86,7 @@
             <div 
               class="user_show"
               v-else>
-              <p class="user_txt">您好，{{ mobile }} <a href="/exit">【安全退出】</a></p>
+              <p class="user_txt">您好，{{ loginMobile }} <a href="/exit">【安全退出】</a></p>
               <p class="user_profit">
                 <a href="/hyzx">会员中心</a>
               </p>
@@ -759,13 +759,15 @@
         </ul>
       </div>
     </div> -->
-    <!-- 28问答 -->   
+    <!-- 28问答 -->
+    <SidebarNav />   
   </div>
 </template>
 <script>
 import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Add from '~/components/subscribe/add' //订阅
 import Star from '~/components/star/star' //星星
+import SidebarNav from '~/components/public/sidebarNav' //星星
 import Swiper from 'Swiper'
 
 export default {
@@ -777,12 +779,12 @@ export default {
   //   }
   // },
   // layout: 'huizong',
-  components: { Add, Star },
+  components: { Add, Star, SidebarNav },
   data() {
     return {
       //登录权限
       isToken: false,
-      mobile: '',
+      loginMobile: '',
       noneImg: require('../../static/images/huizong/none.jpg'),
       banners: [require('../../static/images/huizong/hy_banner1.jpg')],
       currentCity: '', //获取当前的城市
@@ -854,31 +856,36 @@ export default {
       statisticsData.status === 200
     ) {
       return {
-        hotCityData: hotCityData.data ? hotCityData.data.data : [],
-        shipperData: shipperData.data ? shipperData.data.data.list : [],
-        monthShipperData: monthShipperData
-          ? monthShipperData.data.data.list
-          : [],
-        recommendData: recommendData.data ? recommendData.data.data.list : [],
-        darenData: darenData.data ? darenData.data.data : [],
-        newListData: newListData.data ? newListData.data.data : [],
-        statisticsData: statisticsData.data ? statisticsData.data.data : []
+        currentProvince: currentProvince ? currentProvince : '',
+        currentCity: currentCity ? currentCity : '', //获取当前的城市
+
+        hotCityData: !hotCityData.data.data ? [] : hotCityData.data.data,
+        shipperData: !shipperData.data.data ? [] : shipperData.data.data,
+        monthShipperData: !monthShipperData.data.data
+          ? []
+          : monthShipperData.data.data,
+        recommendData: !recommendData.data.data ? [] : recommendData.data.data,
+        darenData: !darenData.data.data ? [] : darenData.data.data,
+        newListData: !newListData.data.data ? [] : newListData.data.data,
+        statisticsData: !statisticsData.data.data
+          ? {}
+          : statisticsData.data.data
       }
     } else {
       error({ statusCode: 500, message: '查找不到该专线列表' })
     }
   },
   created() {
-    //优质货主
-    // this.shipperData = this.shipperData.list
-    //   ? this.shipperData.list
-    //   : { list1: [], list2: [] }
-    // //本月货主
-    // this.monthShipperData = this.monthShipperData.list
-    //   ? this.monthShipperData.list
-    //   : []
-    // //货源推荐
-    // this.recommendData = this.recommendData.list ? this.recommendData.list : []
+    // 优质货主
+    this.shipperData = this.shipperData.list
+      ? this.shipperData.list
+      : { list1: [], list2: [] }
+    //本月货主
+    this.monthShipperData = this.monthShipperData.list
+      ? this.monthShipperData.list
+      : []
+    //货源推荐
+    this.recommendData = this.recommendData.list ? this.recommendData.list : []
 
     //处理优质货主数据
     if (this.shipperData.length > 5) {
@@ -908,7 +915,7 @@ export default {
       console.log('24小时在线新闻', this.newListData)
       console.log('统计数据', this.statisticsData)
       console.log('获取本地cookies', this.currentProvince, this.currentCity)
-      console.log('获取用户token', this.isToken, this.mobile)
+      console.log('获取用户token', this.isToken, this.loginMobile)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       /*地点插件 */
@@ -925,7 +932,7 @@ export default {
       })
       $('body').on('login.success', () => {
         that.isToken = $.cookie('access_token') ? true : false
-        that.mobile = $.cookie('login_mobile')
+        that.loginMobile = $.cookie('login_mobile')
         // console.log('vue打印', that)
         // alert($.cookie('access_token'))
       })
@@ -986,14 +993,10 @@ export default {
     },
     //处理获取数据
     getCookies() {
-      //获取cookies
+      //获取省市cookies
       //$.cookie
-      //用户
       this.isToken = $.cookie('access_token') ? true : false
-      this.mobile = $.cookie('login_mobile')
-      //省市
-      this.currentProvince = $.cookie('currentProvinceFullName')
-      this.currentCity = $.cookie('currentAreaFullName')
+      this.loginMobile = $.cookie('login_mobile')
     },
     //搜索货源
     groomSearch() {

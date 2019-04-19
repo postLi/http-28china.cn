@@ -1,2 +1,0 @@
-exports.ids=[50],exports.modules={552:function(t,e,r){"use strict";r.r(e);var n={layout:"m",async fetch({store:t,params:e,$axios:r,error:n}){}},o=r(0),component=Object(o.a)(n,function(){var t=this.$createElement;return(this._self._c||t)("div",[this._ssrNode("\n  a\n")])},[],!1,null,null,"51200619");e.default=component.exports}};
-//# sourceMappingURL=c1cd26c7a216f8509f0d.js.map

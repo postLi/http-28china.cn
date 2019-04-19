@@ -35,7 +35,6 @@ const _18469db7 = () => interopDefault(import('..\\pages\\help\\utils.js' /* web
 const _3856afde = () => interopDefault(import('..\\pages\\huoyuan\\add.vue' /* webpackChunkName: "pages_huoyuan_add" */))
 const _5aee447a = () => interopDefault(import('..\\pages\\huoyuan\\add1.vue' /* webpackChunkName: "pages_huoyuan_add1" */))
 const _dbafa1b8 = () => interopDefault(import('..\\pages\\huoyuan\\detail.vue' /* webpackChunkName: "pages_huoyuan_detail" */))
-const _20943e58 = () => interopDefault(import('..\\pages\\huoyuan\\help.vue' /* webpackChunkName: "pages_huoyuan_help" */))
 const _54e5cae7 = () => interopDefault(import('..\\pages\\huoyuan\\huizong.vue' /* webpackChunkName: "pages_huoyuan_huizong" */))
 const _b60a2a6a = () => interopDefault(import('..\\pages\\huoyuan\\order.vue' /* webpackChunkName: "pages_huoyuan_order" */))
 const _4aadb6d6 = () => interopDefault(import('..\\pages\\Insurance\\pay.vue' /* webpackChunkName: "pages_Insurance_pay" */))
@@ -56,6 +55,7 @@ const _0c098bce = () => interopDefault(import('..\\pages\\shixiao\\index - å‰¯æœ
 const _2b941be2 = () => interopDefault(import('..\\pages\\wuliu\\add.vue' /* webpackChunkName: "pages_wuliu_add" */))
 const _8400195a = () => interopDefault(import('..\\pages\\wuliu\\detail.vue' /* webpackChunkName: "pages_wuliu_detail" */))
 const _0df260c0 = () => interopDefault(import('..\\pages\\wuliu\\list.vue' /* webpackChunkName: "pages_wuliu_list" */))
+const _608b494a = () => interopDefault(import('..\\pages\\wuliu\\map.vue' /* webpackChunkName: "pages_wuliu_map" */))
 const _1fb8a726 = () => interopDefault(import('..\\pages\\yuanqu\\detail.vue' /* webpackChunkName: "pages_yuanqu_detail" */))
 const _488db492 = () => interopDefault(import('..\\pages\\zhuanxian\\add.vue' /* webpackChunkName: "pages_zhuanxian_add" */))
 const _7332d6bf = () => interopDefault(import('..\\pages\\zhuanxian\\bzAdd.vue' /* webpackChunkName: "pages_zhuanxian_bzAdd" */))
@@ -305,10 +305,6 @@ export function createRouter() {
       component: _dbafa1b8,
       name: "huoyuan-detail"
     }, {
-      path: "/huoyuan/help",
-      component: _20943e58,
-      name: "huoyuan-help"
-    }, {
       path: "/huoyuan/huizong",
       component: _54e5cae7,
       name: "huoyuan-huizong"
@@ -388,6 +384,10 @@ export function createRouter() {
       path: "/wuliu/list",
       component: _0df260c0,
       name: "wuliu-list"
+    }, {
+      path: "/wuliu/map",
+      component: _608b494a,
+      name: "wuliu-map"
     }, {
       path: "/yuanqu/detail",
       component: _1fb8a726,

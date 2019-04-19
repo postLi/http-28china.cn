@@ -74,7 +74,8 @@
                 <input 
                   type="text"                 
                   placeholder="请输入您的手机号"
-                  class="fl">
+                  class="fl"
+                  v-model="groomPhone1">
                 <button                
                   class="fl"
                   @click="groomMeFn">帮我推荐</button>
@@ -1117,14 +1118,14 @@
           id="recommend_pageinp1">
       </div>
       <div 
-        id="recommend_star"
+        id="recommend_end"
         class="recommend_box">        
         <input 
           type="text" 
           placeholder="请输入到达地" 
           id="recommend_pageinp2">
       </div>
-      <a @click="recommendSubmit">提交</a>
+      <button @click="recommendSubmit">提交</button>
     </div>
   </div>
 </template>
@@ -1204,6 +1205,9 @@ export default {
       //登录权限
       isToken: false,
       loginMobile: '',
+      //帮我推荐
+      groomPhone1: '',
+      groomPhone2: '',
       // 热门地点插件
       hotStartProvince: '',
       hotStartCity: '',
@@ -1598,14 +1602,19 @@ export default {
       }&enda=${this.hotEndArea}`
       window.open(zxUrl, '_blank')
     },
-    groomMeFn() {
-      console.log('000000000000000')
-      layer.open({
-        type: 1,
-        title: '推荐我',
-        area: ['800px', '560px'], //宽高
-        content: $('.recommend_pop')
-      })
+    groomMeFn(type = 0) {
+      let phone
+      if (type === 0) {
+        console.log('专线电话', this.groomPhone1)
+      } else {
+      }
+      // console.log('000000000000000')
+      // layer.open({
+      //   type: 1,
+      //   title: '推荐我',
+      //   area: ['800px', '560px'], //宽高
+      //   content: $('.recommend_pop')
+      // })
     },
     //推荐我提交
     recommendSubmit() {}

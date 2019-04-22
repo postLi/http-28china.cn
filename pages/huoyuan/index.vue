@@ -620,11 +620,6 @@ export default {
       endArea: ''
     }
   },
-  // async fetch({ store, $axios, param, app, error }) {
-  //   await store.dispatch('huoyuan/GETPOPULARITY', {
-  //     name: 'popularity'
-  //   })
-  // },
   async asyncData({ $axios, app, query }) {
     let goodsVolumeLower = '',
       goodsVolumeUpper = '',
@@ -686,18 +681,6 @@ export default {
     } else {
       startProvince = app.$cookies.get('currentProvinceFullName')
     }
-    let AF03801 = await $axios.get(
-      '/28-web/sysDict/getSysDictByCodeGet/AF03801'
-    )
-    if (AF03801.data.status === 200) {
-      AF03801.data.data.unshift({ id: '', name: '不限' })
-    }
-    let AF03802 = await $axios.get(
-      '/28-web/sysDict/getSysDictByCodeGet/AF03802'
-    )
-    if (AF03802.data.status === 200) {
-      AF03802.data.data.unshift({ id: '', name: '不限' })
-    }
     let vo = {
       startProvince: startProvince,
       startCity: startCity,
@@ -715,13 +698,31 @@ export default {
       goodsWeightLower: goodsWeightLower,
       goodsWeightUpper: goodsWeightUpper
     }
-    let hyList = await getHyList($axios, 1, vo)
-    let recommendList = await getRecommendList($axios, vo)
-    let recommend = await $axios.post('/28-web/lclOrder/list/related/links', vo)
-    let popularitys = await $axios.get('/28-web/logisticsCompany/popularity')
-    let newwesHuoRes = await $axios.post('/28-web/lclOrder/shipper/lastList', {
-      currentPage: 1,
-      pageSize: 20
+    let [AF03801, AF03802] = await Promise.all([
+      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF03801'),
+      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF03802')
+    ])
+    let [
+      hyList,
+      recommendList,
+      recommend,
+      popularitys,
+      newwesHuoRes
+    ] = await Promise.all([
+      getHyList($axios, 1, vo),
+      getRecommendList($axios, vo),
+      $axios.post('/28-web/lclOrder/list/related/links', vo),
+      $axios.get('/28-web/logisticsCompany/popularity'),
+      $axios.post('/28-web/lclOrder/shipper/lastList', {
+        currentPage: 1,
+        pageSize: 20
+      })
+    ])
+    var Code = Object.assign([], [AF03801, AF03802])
+    Code.forEach(item => {
+      if (item.data.status === 200) {
+        item.data.data.unshift({ code: '', name: '不限' })
+      }
     })
     return {
       AF03801: AF03801.data.status === 200 ? AF03801.data.data : [],

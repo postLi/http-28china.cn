@@ -556,10 +556,6 @@ export default {
     await store.dispatch('cheyuan/GETPOPCARLIST', {
       name: 'list_pop_carowner'
     })
-    // await store.dispatch('cheyuan/GETLIST', {
-    //   data: vo,
-    //   name: 'index_list'
-    // })
   },
   async asyncData({ $axios, app, query }) {
     let cookie = app.$cookies

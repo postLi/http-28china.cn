@@ -124,6 +124,9 @@ export default {
   methods: {
     closeMe() {
       this.$emit('close')
+      this.reset()
+      clearInterval(this.stop)
+      this.getMoblie = false
     },
     handleView(type) {
       this.isActiveFirst = !this.isActiveFirst

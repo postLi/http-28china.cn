@@ -871,15 +871,18 @@ async function getCanyColl(
   user_token,
   handle
 ) {
-  let res = await $axios.post(
-    `/28-web/collect/company?access_token=${access_token}&user_token=${user_token}&companyId=${companyId}&handle=${handle}
+  await $axios
+    .post(
+      `/28-web/collect/company?access_token=${access_token}&user_token=${user_token}&companyId=${companyId}&handle=${handle}
 `
-  )
-  if (res.data.status === 200) {
-    layer.msg(res.data.data)
-  } else {
-    layer.msg(res.data.errorInfo)
-  }
+    )
+    .then(res => {
+      if (res.data.status === 200) {
+        layer.msg(res.data.data)
+      } else {
+        layer.msg(res.data.errorInfo)
+      }
+    })
 }
 export default {
   name: 'Detail',
@@ -1344,22 +1347,22 @@ export default {
       this.showImg = int
     },
     findAnother() {
-      let _this = this
-      let obj = {
-        endArea: this.hyDetail.endArea,
-        endCity: this.hyDetail.endCity,
-        endProvince: this.hyDetail.endProvince,
-        startArea: this.hyDetail.startArea,
-        startCity: this.hyDetail.startCity,
-        startProvince: this.hyDetail.startProvince
-      }
-      this.$axios.post('/28-web/lclOrder/another', obj).then(res => {
-        if (res.data.status === 200) {
-          window.location.href = `/huoyuan/detail?id=${
-            res.data.data.id
-          }&shipperId=${res.data.data.shipperId}`
-        }
-      })
+      this.$axios
+        .post('/28-web/lclOrder/another', {
+          endArea: this.hyDetail.endArea,
+          endCity: this.hyDetail.endCity,
+          endProvince: this.hyDetail.endProvince,
+          startArea: this.hyDetail.startArea,
+          startCity: this.hyDetail.startCity,
+          startProvince: this.hyDetail.startProvince
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            window.location.href = `/huoyuan/detail?id=${
+              res.data.data.id
+            }&shipperId=${res.data.data.shipperId}`
+          }
+        })
     }
   }
 }

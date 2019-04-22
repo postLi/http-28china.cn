@@ -275,6 +275,7 @@
 }
 
 .p_go_area .city, .p_hy_list > li .md_area .city {
+  float: left;
   line-height: 40px;
 }
 
@@ -283,6 +284,7 @@
 }
 
 .p_go_area .city .city-joint, .p_hy_list > li .md_area .city .city-joint {
+  float: left;
   height: 40px;
   line-height: 40px;
 }

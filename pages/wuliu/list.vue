@@ -353,7 +353,7 @@
             v-for="(item,index) in getHottList"
             :key="index"
             class="wlzx_list"
-            style="margin-right: 20px;width:260px;height:380px;margin-top: 0px;padding-bottom: 0px;">
+            style="margin-right: 20px;width:260px;height:380px;margin-top: 0px;padding-bottom: 0px;margin-bottom: 20px;">
             <a
               :href="'/wuliu/detail?id=' + item.id"
               target="_blank">

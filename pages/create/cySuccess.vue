@@ -67,7 +67,6 @@ export default {
     var buttonText = this.$route.query.text
     var id = this.$route.query.id
     var publishId = this.$route.query.publishId
-    console.log(this.$route.query.publishId, 'this.$route.query.publishId')
     var shipperId = this.$route.query.shipperId
     var driverId = this.$route.query.driverId
     var lineOrder = '/zhuanxian/detail?id=' + id + '&publishId=' + publishId //查看详情

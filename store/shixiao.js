@@ -1,5 +1,7 @@
 export const state = () => ({
-  excellent: []
+  excellent: [],
+  hotLine: [],
+  listRangesAging: []
 })
 export const mutations = {
   setInfo(state, param) {
@@ -8,30 +10,59 @@ export const mutations = {
 }
 export const actions = {
   GETEXCELLENT({ commit }, payloay) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       this.$axios
         .get('/28-web/logisticsCompany/excellent?pageSize=8')
         .then(res => {
-          let data = res.data
-          if (data.status === 200) {
-            let ndata = data.data ? data.data || [] : []
-            ndata = ndata.map(el => {
-              for (let i in el) {
-                if (el[i] === null) {
-                  el[i] = ''
-                }
-              }
-              return el
-            })
-            ndata = payloay.preFn ? payloay.preFn(ndata) : ndata
+          if (res.data.status === 200) {
             commit('setInfo', {
               name: payloay.name,
-              data: ndata
+              data: res.data ? res.data.data || [] : []
             })
-            console.log(data.data, 'data')
+            resolve()
+          } else {
+            reject({
+              type: 'info',
+              msg: '找不到数据'
+            })
           }
-          resolve()
         })
+    })
+  },
+  GETHOTLINES({ commit }, payloay) {
+    return new Promise((resolve, reject) => {
+      this.$axios.post('/28-web/range/hot/list', payloay).then(res => {
+        if (res.data.status === 200) {
+          commit('setInfo', {
+            name: payloay.name,
+            data: res.data.data ? res.data.data.list || [] : []
+          })
+          resolve()
+        } else {
+          reject({
+            type: 'info',
+            msg: '找不到数据'
+          })
+        }
+      })
+    })
+  },
+  GETLISTRANGESAGING({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      this.$axios.post('/28-web/range/aging/list', payload).then(res => {
+        if (res.data.status === 200) {
+          commit('setInfo', {
+            name: payload.name,
+            data: res.data.data ? res.data.data.list || [] : []
+          })
+          resolve()
+        } else {
+          reject({
+            type: 'info',
+            msg: '找不到数据'
+          })
+        }
+      })
     })
   }
 }

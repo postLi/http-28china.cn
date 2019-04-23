@@ -55,16 +55,12 @@ const _0c098bce = () => interopDefault(import('..\\pages\\shixiao\\index - å‰¯æœ
 const _2b941be2 = () => interopDefault(import('..\\pages\\wuliu\\add.vue' /* webpackChunkName: "pages_wuliu_add" */))
 const _8400195a = () => interopDefault(import('..\\pages\\wuliu\\detail.vue' /* webpackChunkName: "pages_wuliu_detail" */))
 const _0df260c0 = () => interopDefault(import('..\\pages\\wuliu\\list.vue' /* webpackChunkName: "pages_wuliu_list" */))
-const _608b494a = () => interopDefault(import('..\\pages\\wuliu\\map.vue' /* webpackChunkName: "pages_wuliu_map" */))
 const _1fb8a726 = () => interopDefault(import('..\\pages\\yuanqu\\detail.vue' /* webpackChunkName: "pages_yuanqu_detail" */))
 const _488db492 = () => interopDefault(import('..\\pages\\zhuanxian\\add.vue' /* webpackChunkName: "pages_zhuanxian_add" */))
-const _7332d6bf = () => interopDefault(import('..\\pages\\zhuanxian\\bzAdd.vue' /* webpackChunkName: "pages_zhuanxian_bzAdd" */))
 const _5dcf82aa = () => interopDefault(import('..\\pages\\zhuanxian\\detail.vue' /* webpackChunkName: "pages_zhuanxian_detail" */))
-const _51f92896 = () => interopDefault(import('..\\pages\\zhuanxian\\detail1.vue' /* webpackChunkName: "pages_zhuanxian_detail1" */))
 const _8ebbb3ca = () => interopDefault(import('..\\pages\\zhuanxian\\help.vue' /* webpackChunkName: "pages_zhuanxian_help" */))
 const _1810a780 = () => interopDefault(import('..\\pages\\zhuanxian\\huizong.vue' /* webpackChunkName: "pages_zhuanxian_huizong" */))
 const _37ea10f8 = () => interopDefault(import('..\\pages\\zhuanxian\\list.vue' /* webpackChunkName: "pages_zhuanxian_list" */))
-const _6e040ef8 = () => interopDefault(import('..\\pages\\zhuanxian\\lllshowEchart.vue' /* webpackChunkName: "pages_zhuanxian_lllshowEchart" */))
 const _7da25454 = () => interopDefault(import('..\\pages\\zhuanxian\\selectMap.vue' /* webpackChunkName: "pages_zhuanxian_selectMap" */))
 const _421afed0 = () => interopDefault(import('..\\pages\\zhuanxian\\showEchart.vue' /* webpackChunkName: "pages_zhuanxian_showEchart" */))
 const _817b353c = () => interopDefault(import('..\\pages\\zhuanxian\\showPrice.vue' /* webpackChunkName: "pages_zhuanxian_showPrice" */))
@@ -386,10 +382,6 @@ export function createRouter() {
       component: _0df260c0,
       name: "wuliu-list"
     }, {
-      path: "/wuliu/map",
-      component: _608b494a,
-      name: "wuliu-map"
-    }, {
       path: "/yuanqu/detail",
       component: _1fb8a726,
       name: "yuanqu-detail"
@@ -398,17 +390,9 @@ export function createRouter() {
       component: _488db492,
       name: "zhuanxian-add"
     }, {
-      path: "/zhuanxian/bzAdd",
-      component: _7332d6bf,
-      name: "zhuanxian-bzAdd"
-    }, {
       path: "/zhuanxian/detail",
       component: _5dcf82aa,
       name: "zhuanxian-detail"
-    }, {
-      path: "/zhuanxian/detail1",
-      component: _51f92896,
-      name: "zhuanxian-detail1"
     }, {
       path: "/zhuanxian/help",
       component: _8ebbb3ca,
@@ -421,10 +405,6 @@ export function createRouter() {
       path: "/zhuanxian/list",
       component: _37ea10f8,
       name: "zhuanxian-list"
-    }, {
-      path: "/zhuanxian/lllshowEchart",
-      component: _6e040ef8,
-      name: "zhuanxian-lllshowEchart"
     }, {
       path: "/zhuanxian/selectMap",
       component: _7da25454,

@@ -23,15 +23,16 @@ void (function updateModules() {
   resolveStoreModules(require('@/store/login.js'), 'login.js')
   resolveStoreModules(require('@/store/wangdian.js'), 'wangdian.js')
   resolveStoreModules(require('@/store/topNav3.js'), 'topNav3.js')
+  resolveStoreModules(require('@/store/shixiao.js'), 'shixiao.js')
   resolveStoreModules(require('@/store/company.js'), 'company.js')
   resolveStoreModules(require('@/store/news.js'), 'news.js')
   resolveStoreModules(require('@/store/member.js'), 'member.js')
   resolveStoreModules(require('@/store/m/index.js'), 'm/index.js')
   resolveStoreModules(require('@/store/m/pageView.js'), 'm/pageView.js')
   resolveStoreModules(require('@/store/m/zhuanxian/index.js'), 'm/zhuanxian/index.js')
-  resolveStoreModules(require('@/store/m/huoyuan/index.js'), 'm/huoyuan/index.js')
   resolveStoreModules(require('@/store/m/gongsi/index.js'), 'm/gongsi/index.js')
   resolveStoreModules(require('@/store/m/cheyuan/index.js'), 'm/cheyuan/index.js')
+  resolveStoreModules(require('@/store/m/huoyuan/index.js'), 'm/huoyuan/index.js')
   resolveStoreModules(require('@/store/m/gongsi/line.js'), 'm/gongsi/line.js')
 
   // If the environment supports hot reloading...

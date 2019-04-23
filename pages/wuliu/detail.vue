@@ -491,7 +491,7 @@ export default {
     // 请求推荐公司
     let flag = ''
     let companysList = await $axios.get(
-      '/28-web/logisticsCompany/excellent?pageSize=8&parkId=' +
+      '/28-web/logisticsCompany/excellent?pageSize=5&parkId=' +
         query.id +
         '&flag=' +
         flag

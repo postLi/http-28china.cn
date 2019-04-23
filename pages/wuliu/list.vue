@@ -770,7 +770,6 @@ export default {
     let [
       getLogisticsPark,
       recommendParkList,
-      getGateWayListData,
       getRecommendList,
       getNewestList,
       getHottList,
@@ -791,14 +790,6 @@ export default {
         locationArea,
         currentPage,
         pageSize: 14
-      }),
-      gateWayList($axios, 1, {
-        parkName,
-        locationProvince,
-        locationCity,
-        locationArea,
-        currentPage,
-        pageSize: 5
       }),
       $axios.post('/28-web/logisticsPark/main/recommend/list', {
         parkName,
@@ -858,9 +849,7 @@ export default {
             : [],
         getNewestList:
           getNewestList.data.status === 200 ? getNewestList.data.data.list : [],
-        getGateWayList: getGateWayListData.list,
-        pages: getGateWayListData.pages,
-        currentPage: getGateWayListData.currentPage,
+
         getLogisticsPark:
           getLogisticsPark.data.status === 200
             ? getLogisticsPark.data.data.list

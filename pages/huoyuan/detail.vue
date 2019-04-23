@@ -982,8 +982,8 @@ export default {
   },
   async asyncData({ store, params, $axios, error, app, query }) {
     // console.log(app.$cookies.get(access_token), 'store')
-    let code, zxList, queryCitys, huoInfoListst
-    let hyDetails = await $axios.get('/28-web/lclOrder/detail/' + query.id)
+    let hyDetails, code, zxList, queryCitys, huoInfoListst
+    hyDetails = await $axios.get('/28-web/lclOrder/detail/' + query.id)
     let [
       newLists,
       huoComprehensives,

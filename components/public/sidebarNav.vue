@@ -1,6 +1,6 @@
 <template>
   <div 
-    v-if="show" 
+    v-show="show" 
     class="hyq-sidebar">
     <i class="hyq-sidebar-icon"/>
     快速入口
@@ -56,7 +56,7 @@ export default {
         }
       }, 50)
     }
-    $win.on('scroll', fn)
+    $win.on('scroll.sidebarnav', fn).trigger('scroll.sidebarnav')
   },
   methods: {
     goToTop() {

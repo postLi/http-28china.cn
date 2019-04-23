@@ -2719,33 +2719,7 @@ a{color:#333;text-decoration:none}
 .index_focus .slide_nav{position:absolute; z-index:1; left:30%; bottom:0px;height: 30px;}
 .index_focus .slide_nav a{cursor:pointer; float:left; font-size:26px; color:#fff; filter:alpha(opacity=50); opacity:0.4; padding:0 5px;}
 .index_focus .slide_nav .on{text-decoration:none; color:#fff; filter:alpha(opacity=100); opacity:1; }
-/*右侧悬浮 S*/
-.floatNavBar{ font-size:12px;width:70px;line-height:40px;text-align:center;position:fixed;_position:absolute;}
-.floatNavBar .nav-hd{position:relative;}
-.floatNavBar .nav-hd ul li{ height:32px; overflow:hidden;}
-.floatNavBar ul li a{background:#e8e8e8; color:#777; display:block; border-bottom:1px solid #f7f7f7; }
-.floatNavBar ul li a:hover{ background:#ff7300; color:#fff; display:block;}
-.floatNavBar ul li.active a {background:#ff720e; color:#fff; display:block;}
-.floatNavBar ul li .last{background:#b2b2b2!important; color:#fff; border-bottom:none; height:36px; font-size:12px; position:relative;}
-.floatNavBar ul li .last .whiteArw{position:absolute; bottom:4px; left:30px; display:inline-block; width:0; height:0; border-left:7px solid transparent; border-bottom:5px solid #fff; border-right:7px solid transparent;}
-.rightKfCon{width:70px; height:70px;}
-.rightKf{background:url(../images/rightKf.png) center no-repeat; width:70px; height:70px; display:block; cursor:pointer;}
 
-.rightBarHidden{display:none; position:absolute;top:0;right:60px;z-index:11;width:170px; padding:0 15px 0 0; background:none; border:none;}
-.rightBarHidden .item{background:#fff;-webkit-box-shadow:-3px 3px 10px rgba(5, 114, 169, .1);  -moz-box-shadow:-3px 3px 10px rgba(5, 114, 169, .1);   box-shadow:-3px 3px 10px rgba(5, 114, 169, .1); position:relative;}
-.rightBarHidden .itemhover{display:block;}
-.rightBarHidden .item{border:solid 1px #ff720e;}
-.rightBarHidden .kfTop{background:#ff720e; padding:10px 15px;text-align:left;line-height:25px;}
-.rightBarHidden .kfTop h3{font-size:16px;color:#fff;}
-.rightBarHidden .kfTop p{font-size:13px;color:#fff;}
-.rightBarHidden .kfCenter{padding:15px 20px 5px 20px; border-bottom:solid 1px #f3f3f3;}
-.rightBarHidden .kfCenter a{border:none;cursor:pointer;}
-.rightBarHidden .kfCenter .keFu1{display:block;}
-.rightBarHidden .kfRight{background:#fbfbfb url(../images/kfphone.png) no-repeat 6px center;padding:10px 5px 20px 40px;font-size:14px; text-align:left;border-top:solid 1px #fff;}
-.rightBarHidden .kfRight .phone{color:#ff720e; font-size:16px; font-family:Georgia; font-weight:bold; line-height:20px;}
-.rightBarHidden .kfImg{position:absolute; top:20px; right:-4px; display:inline-block; width:0; height:0; border-top:7px solid transparent; border-left:5px solid #ff720e; border-bottom:7px solid transparent;}
-/*.coinImg{background:url(../images/appcoin.png) no-repeat;position:absolute;right:-9px;top:25px;width:25px;height:30px;overflow: hidden;}*/
-/*右侧悬浮 E*/
 .bt_xiantiao{width: 1px;height: 14px;float: left;border-right: 1px solid #e2e2e2;margin-top: 16px;margin-left: 10px;}
 
 .main5 img{

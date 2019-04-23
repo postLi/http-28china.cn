@@ -238,35 +238,13 @@
               </div>
             </div>
 
-            <div class="main1_c">
-              <ul>
-                <li class="kefu_index">
-                  <a
-                    href="/zixun"
-                    onmouseout="kefu_none();">咨讯</a>
-                  <a
-                    href="/help/ggp/index.jhtml"
-                    onmouseout="kefu_none();">帮助</a>
-                  <a onmouseover="kefu_block();">客服</a>
-
-                  <a
-                    target="_blank"
-                    href="/help/tsjy/index.jhtml"
-                    onmouseout="kefu_none();">建议</a>
-                </li>
-                <li
-                  :key="index"
-                  v-for="(item, index) in $store.state.news.index_wlzx.slice(0,3)"
-                >
-                  <a 
-                    target="_blank" 
-                    :href="item.url" >{{ item.title }}</a>
-                </li>
-                <!-- <li><a
-                  target="_blank"
-                  href="/wlzx/xingyezixun/2018/0629/320.html">中国重汽不停车服务入驻凯立德物流地图生态</a></li> -->
-
-
+            <div class="main1_c why28">
+              <div class="why28-title">为什么选择28快运 ?</div>
+              <ul class="why28-li">
+                <li><span class="red">快</span>3秒下单，2分钟提货</li>
+                <li><span class="orange">好</span>车型丰富，7*24小时客户服务</li>
+                <li><span class="blue">省</span>更多优惠，更多福利运输安全、效率</li>
+                <li><span class="green">保</span>货运安全，全程保障，TMS实时物流跟踪</li>
               </ul>
             </div>
             <div
@@ -600,6 +578,7 @@
             <div
               v-else
               class="clear scroll_nr3">
+              
               <ul
                 id="js003"
                 class="hy_nr"
@@ -1463,11 +1442,17 @@
 
     </div>
     <!--右侧悬浮 S-->
-    <div class="floatNavBar">
+    <div 
+      v-show="show"
+      @mouseover="showmore = true"
+      @mouseout="showmore = false" 
+      class="floatNavBar">
 
       <div class="nav-bd">
         <div class="rightKfCon"><a class="rightKf"/></div>
-        <div class="rightBarHidden">
+        <div 
+          v-show="showmore"
+          class="rightBarHidden">
           <div class="item">
             <i class="kfImg"/>
             <div class="kfTop">
@@ -1492,19 +1477,24 @@
         <ul class="nav-flo">
           <li class=""><a
             href="#rf01"
+            @click.stop.prevent="goToTop('#rf01')"
             title="找专线">找专线</a></li>
           <li class=""><a
             href="#rf02"
+            @click.stop.prevent="goToTop('#rf02')"
             title="找车源">找车源</a></li>
           <li class=""><a
             href="#rf03"
+            @click.stop.prevent="goToTop('#rf03')"
             title="找货源">找货源</a></li>
           <li class=""><a
             href="#rf04"
+            @click.stop.prevent="goToTop('#rf04')"
             title="找园区">找园区</a></li>
           <li>
             <a
               href="#rf00"
+              @click.stop.prevent="goToTop()"
               title="回顶部"
               class="last">回顶部<br>
             <i class="whiteArw"/></a>
@@ -1530,7 +1520,9 @@ export default {
       lists: [],
       ip: '',
       islogin: false,
-      username: ''
+      username: '',
+      show: false, // 是否显示边栏导航
+      showmore: false // 是否显示客服
     }
   },
   computed: {
@@ -1676,7 +1668,7 @@ export default {
     if (process.client) {
       console.log(
         '$store.state.line.index_list',
-        this.$store.state.line.index_list
+        this.$store.state.cheyuan.index_list
       )
       // 获取统计数据
       this.$store.dispatch('getDailydata', {})
@@ -1691,7 +1683,6 @@ export default {
           '/index/js/pic_scroll.js',
           '/js/gaodemap2.js?V2',
           '/index/js/index.js?v3',
-          '/index/js/floatBar.min.js',
           '/index/js/map/echarts.min.js'
         ],
         function() {
@@ -2042,7 +2033,237 @@ export default {
           })
         }
       )
+
+      // 边栏导航效果
+      let $el = $('.floatNavBar')
+      let $rel = $('.rightBarHidden')
+      let $win = $(window)
+      let timer
+      let fn = () => {
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          if ($win.scrollTop() > 200) {
+            this.show = true
+          } else {
+            this.show = false
+          }
+        }, 50)
+      }
+      $win.on('scroll.indexsidebar', fn).trigger('scroll.indexsidebar')
+      /* $el
+        .mouseover(function() {
+          $rel.show()
+        })
+        .mouseout(function() {
+          $rel.hide()
+        }) */
+    }
+  },
+  methods: {
+    goToTop(el) {
+      let top = 0
+      if (el) {
+        top = $(el).offset().top
+        // window.location.hash = el
+      }
+      $('body,html').animate(
+        {
+          scrollTop: top
+        },
+        {
+          done() {
+            if (el) {
+              window.location.hash = el
+            }
+          }
+        }
+      )
     }
   }
 }
 </script>
+<style lang="scss" scoped>
+/* 为什么选择28 */
+.why28 {
+  font-size: 14px;
+  &-title {
+    padding-left: 22px;
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 13px;
+  }
+  .why28-li {
+    li {
+      color: #333;
+      line-height: 18px;
+      margin-bottom: 13px;
+      height: 18px;
+    }
+
+    span {
+      display: inline-block;
+      vertical-align: middle;
+      color: #fff;
+      width: 18px;
+      height: 18px;
+      text-align: center;
+      line-height: 18px;
+      border-radius: 2px;
+      margin-right: 8px;
+
+      &.red {
+        background: #ff4141;
+      }
+      &.orange {
+        background: #ff8b1a;
+      }
+      &.blue {
+        background: #1a8bff;
+      }
+      &.green {
+        background: #48c63b;
+      }
+    }
+  }
+}
+/*右侧悬浮 S*/
+.floatNavBar {
+  font-size: 12px;
+  width: 70px;
+  line-height: 40px;
+  text-align: center;
+  position: fixed;
+  left: 50%;
+  margin-left: 710px;
+  top: 200px;
+}
+.floatNavBar .nav-hd {
+  position: relative;
+}
+.floatNavBar .nav-hd ul li {
+  height: 32px;
+  overflow: hidden;
+}
+.floatNavBar ul li a {
+  background: #e8e8e8;
+  color: #777;
+  display: block;
+  border-bottom: 1px solid #f7f7f7;
+}
+.floatNavBar ul li a:hover {
+  background: #ff7300;
+  color: #fff;
+  display: block;
+}
+.floatNavBar ul li.active a {
+  background: #ff720e;
+  color: #fff;
+  display: block;
+}
+.floatNavBar ul li .last {
+  background: #b2b2b2 !important;
+  color: #fff;
+  border-bottom: none;
+  height: 36px;
+  font-size: 12px;
+  position: relative;
+}
+.floatNavBar ul li .last .whiteArw {
+  position: absolute;
+  bottom: 4px;
+  left: 30px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-bottom: 5px solid #fff;
+  border-right: 7px solid transparent;
+}
+.rightKfCon {
+  width: 70px;
+  height: 70px;
+}
+.rightKf {
+  background: url('../static/images/rightKf.png') center no-repeat;
+  width: 70px;
+  height: 70px;
+  display: block;
+  cursor: pointer;
+}
+
+.rightBarHidden {
+  position: absolute;
+  top: 0;
+  right: 60px;
+  z-index: 11;
+  width: 170px;
+  padding: 0 15px 0 0;
+  background: none;
+  border: none;
+}
+.rightBarHidden .item {
+  background: #fff;
+  -webkit-box-shadow: -3px 3px 10px rgba(5, 114, 169, 0.1);
+  -moz-box-shadow: -3px 3px 10px rgba(5, 114, 169, 0.1);
+  box-shadow: -3px 3px 10px rgba(5, 114, 169, 0.1);
+  position: relative;
+}
+.rightBarHidden .itemhover {
+  display: block;
+}
+.rightBarHidden .item {
+  border: solid 1px #ff720e;
+}
+.rightBarHidden .kfTop {
+  background: #ff720e;
+  padding: 10px 15px;
+  text-align: left;
+  line-height: 25px;
+}
+.rightBarHidden .kfTop h3 {
+  font-size: 16px;
+  color: #fff;
+}
+.rightBarHidden .kfTop p {
+  font-size: 13px;
+  color: #fff;
+}
+.rightBarHidden .kfCenter {
+  padding: 15px 20px 5px 20px;
+  border-bottom: solid 1px #f3f3f3;
+}
+.rightBarHidden .kfCenter a {
+  border: none;
+  cursor: pointer;
+}
+.rightBarHidden .kfCenter .keFu1 {
+  display: block;
+}
+.rightBarHidden .kfRight {
+  background: #fbfbfb url('../static/images/kfphone.png') no-repeat 6px center;
+  padding: 10px 5px 20px 40px;
+  font-size: 14px;
+  text-align: left;
+  border-top: solid 1px #fff;
+}
+.rightBarHidden .kfRight .phone {
+  color: #ff720e;
+  font-size: 16px;
+  font-family: Georgia;
+  font-weight: bold;
+  line-height: 20px;
+}
+.rightBarHidden .kfImg {
+  position: absolute;
+  top: 20px;
+  right: -4px;
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-left: 5px solid #ff720e;
+  border-bottom: 7px solid transparent;
+}
+/*.coinImg{background:url(../images/appcoin.png) no-repeat;position:absolute;right:-9px;top:25px;width:25px;height:30px;overflow: hidden;}*/
+/*右侧悬浮 E*/
+</style>

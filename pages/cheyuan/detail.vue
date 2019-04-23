@@ -662,15 +662,18 @@ async function getCanyColl(
   user_token,
   handle
 ) {
-  let res = await $axios.post(
-    `/28-web/collect/carInfo??access_token=${access_token}&user_token=${user_token}&carInfoId=${carInfoId}&handle=${handle}
+  await $axios
+    .post(
+      `/28-web/collect/carInfo??access_token=${access_token}&user_token=${user_token}&carInfoId=${carInfoId}&handle=${handle}
 `
-  )
-  if (res.data.status === 200) {
-    layer.msg(res.data.data)
-  } else {
-    layer.msg(res.data.errorInfo)
-  }
+    )
+    .then(res => {
+      if (res.data.status === 200) {
+        layer.msg(res.data.data)
+      } else {
+        layer.msg(res.data.errorInfo)
+      }
+    })
 }
 export default {
   name: 'Detail',
@@ -1249,15 +1252,16 @@ export default {
       })
     },
     findAnother() {
-      let parm = {
-        strartAddress: this.cy1.strartAddress,
-        endAddress: this.cy1.endAddress
-      }
-      this.$axios.post('/28-web/carInfo/findAnother', parm).then(res => {
-        if (res.data.status === 200) {
-          window.location.href = `/cheyuan/detail?id=${res.data.data.id}`
-        }
-      })
+      this.$axios
+        .post('/28-web/carInfo/findAnother', {
+          strartAddress: this.cy1.strartAddress,
+          endAddress: this.cy1.endAddress
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            window.location.href = `/cheyuan/detail?id=${res.data.data.id}`
+          }
+        })
     },
     collected() {
       let access_token = $.cookie('access_token')
@@ -1274,7 +1278,7 @@ export default {
       if (access_token && user_token) {
         getCanyColl(
           this.$axios,
-          this.cy1.carInfoId,
+          this.cy1.id,
           access_token,
           user_token,
           this.handle

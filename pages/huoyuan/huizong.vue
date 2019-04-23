@@ -114,7 +114,7 @@
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
-                v-for="(item, index) in shipperData.list1"       
+                v-for="(item, index) in shipperData.list1"  
                 :key="index" >
                 <a 
                   target="_blank"
@@ -138,7 +138,7 @@
                 </a>
               </li>
             </ul>
-          </div>
+          </div> 
           <div class="swiper-slide">
             <ul class="p_owner_list clearfix">
               <li                
@@ -572,7 +572,6 @@
         </a>
       </div>
     </div>
-  
     <!-- 货量达人榜 -->
     <div class="p_company_owner">
       <div class="p_title_box">
@@ -728,38 +727,7 @@
       style="display: none">
       <img src="../../static/images/huizong/hy_honhbao.jpg">
     </div>
-    <!-- 合作伙伴 -->
-    <!-- <div class="bj_2">
-      <div class="p_answers">
-        <div class="p_title_box">
-          <h3 class="title">28问答</h3>
-          <a 
-            target="_blank"
-            href="/help/ggp/index.jhtml" 
-            class="answers_link">全部<i class="iconfont iconjiantou2"/>
-          </a>         
-        </div>
-        <ul class="answers_list">
-          <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>什么是订阅货源？</p>
-            <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
-          </li>
-          <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么在平台接单？</p>
-            <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
-          </li>
-          <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>怎么申请成为推荐承运商</p>
-            <p>您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
-          </li>
-          <li>
-            <p class="answers_list_tit"><i class="iconfont iconinformatiom_"/>承运商入驻需要什么材料？</p>
-            <p> 您可以选择自己常跑的线路，订阅成功后，此线路有新发货源则会在APP即时提醒您</p>
-          </li>
-        </ul>
-      </div>
-    </div> -->
-    <!-- 28问答 -->
+
     <SidebarNav />   
   </div>
 </template>
@@ -767,7 +735,7 @@
 import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Add from '~/components/subscribe/add' //订阅
 import Star from '~/components/star/star' //星星
-import SidebarNav from '~/components/public/sidebarNav' //星星
+import SidebarNav from '~/components/public/sidebarNav'
 import Swiper from 'Swiper'
 
 export default {

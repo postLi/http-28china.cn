@@ -95,14 +95,21 @@
           <h3 class="title">严选车源</h3>
           <span class="title_txt">时效快,多重服务,资质保障</span>
           <a 
-            href="" 
+            target="_blank"
+            :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity"
             class="title_link fr">更多车源<i class="iconfont iconjiantou2"/>
           </a>         
         </div>
         <div class="p_type_nav">
-          <a href="">超值特惠</a>
-          <a href="">精选上新</a>
-          <a href="">回程车</a>       
+          <a 
+            target="_blank"
+            :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">超值特惠</a>
+          <a
+            target="_blank"
+            :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity">精选上新</a>
+          <a 
+            target="_blank"
+            :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carSourceType=AF0560102'">回程车</a>       
         </div>
         <div class="bd">
           <ul class="p_hot_line p_CY_car_list clearfix">
@@ -110,28 +117,34 @@
               v-for="(item,index) in carSourceData"
               :key="index">
               <div class="hot_line_box">
-                <div class="h_pic">
-                  <span class="h_pic_icon_groom"> 平台推荐</span>          
-                  <img :src="item.carFile">
-                </div>
-                <div class="wl_box">
-                  <div class="h_place">
-                    <span class="icon icon_start">始</span>
-                    <span class="place">{{ item.startCity }}{{ item.startArea }}</span>
-                    <span class="icon icon_end">终</span>
-                    <span class="place">上海黄浦区</span>
+                <a 
+                  target="_blank"
+                  :href="'/cheyuan/detail?id='+item.id">
+                  <div class="h_pic">
+                    <span class="h_pic_icon_groom"> 平台推荐</span>          
+                    <img :src="item.carFile">
                   </div>
-                  <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-                  <div class="CY_list_price"> 运价：<span class="CY_list_price_num"/> 元</div>
-                  <div class="CY_list_praise">
-                    <ul class="CY_list_praise_list fl">
-                      <li><span class="CY_list_praise_name">好评</span>84</li>
-                      <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                    </ul>
-                    <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
+                  <div class="wl_box">
+
+                    <div class="h_place">
+                      <span class="icon icon_start">始</span>
+                      <span class="place">{{ item.strartAddress }}</span>
+                      <span class="icon icon_end">终</span>
+                      <span class="place">{{ item.endAddress }}</span>
+                    </div>
+                    <div class="CY_list_txt">{{ item.carTypeName }}| 长{{ item.carLength }}米|载重{{ item.carLoad }}|吨|体积{{ item.carVolume }}方</div>
+                    <div class="CY_list_price"> 运价：<span class="CY_list_price_num">{{ item.expectPrice }}</span> 元</div>
+                    <div class="CY_list_praise">
+                      <div class="CY_list_praise_list fl">
+                        <span class="CY_list_praise_name">好评</span>{{ item.evaGoodCount }}
+                        <span class="CY_list_praise_name">收藏 </span>{{ item.collectNumber }}
+                      </div>
+                      <div class="CY_list_praise_num fr">好评率<span class="color_orange">{{ item.goodRate }}%</span></div>         
+                    </div>
+                    <div class="CY_list_time"><i class="iconfont iconshijian"/>{{ item.createTime }}</div>
+                
                   </div>
-                  <div class="CY_list_time"><i class="iconfont iconshijian"/>{{ createTime }}</div>
-                </div>
+                </a>
                 <div class="h_operate">
                   <a 
                     href="" 
@@ -165,174 +178,57 @@
     <div class="bj_2">
       <div class="grid_c1 discount clearfix">
         <div class="p_title_box">
-          <h3 class="title">严选车源</h3>
-          <span class="title_txt">时效快,多重服务,资质保障</span>
+          <h3 class="title">优惠专区</h3>
+          <span class="title_txt">直降</span>
           <a 
-            href="" 
+            target="_blank"
+            :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity"
             class="title_link fr">更多车源<i class="iconfont iconjiantou2"/>
           </a>         
         </div>
-        <div class="discount_left fl">严选车源</div>
+        <div class="discount_left fl">优惠券</div>
         <div class="discount_right fr">
           <ul class="d_car_list">
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
+            <li 
+              v-for="(item,index) in discountCarData" 
+              :key="index">
+              <a 
+                target="_blank"
+                :href="'/cheyuan/detail?id='+item.id">
+                <span class="d_car_icon_drop">低于市场行情{{ item.quotesPriceRate }}%</span>
+                <div class="d_car_name">{{ item.carTypeName }}| 长{{ item.carLength }}米|载重{{ item.carLoad }}|吨|体积{{ item.carVolume }}方</div>
+                <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
+                  <div 
+                    class="city"
+                    v-if="!item.startArea">{{ item.startCity }}</div>
+                  <div
+                    class="area"
+                    v-else>
+                    <span class="area_city">{{ item.startCity }}</span>
+                    <span class="area_qx">{{ item.startArea }}</span>
+                  </div>
+              
                   <span class="city-joint">
                     <span class="joint-line"/>
                     <span class="joint-label">发往</span>
                     <span class="joint-line"/>
                   </span>
-                  <div class="city">深圳市</div>
+                  <div 
+                    class="city"
+                    v-if="!item.endArea">{{ item.endCity }}
+                  </div>
+                  <div 
+                    class="area"
+                    v-else>
+                    <span class="area_city">{{ item.endCity }}</span>
+                    <span class="area_qx">{{ item.endArea }}</span>
+                  </div>
                 </div>
                 <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
+                  运价：<span class="d_car_price_num">{{ item.expectPrice }}</span>元
                 </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
-                </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
-                </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
-                </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
-                </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
-                </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
-                </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
-              </a>
-            </li>
-            <li>
-              <a href="">
-                <span class="d_car_icon_drop">低于市场行情13%</span>
-                <div class="d_car_name">中型货车| 长2米|载重15吨|体积13.6方</div>
-                <div class="d_car_city">
-                  <div class="city">金华市</div>
-                  <span class="city-joint">
-                    <span class="joint-line"/>
-                    <span class="joint-label">发往</span>
-                    <span class="joint-line"/>
-                  </span>
-                  <div class="city">深圳市</div>
-                </div>
-                <div class="d_car_price">
-                  运价：<span class="d_car_price_num">2560</span>元
-                </div>
-                <div class="d_car_time">2018-10-25 15:26</div>
-                <div class="d_car_deal">累计成交<span class="color_orange">260</span>单</div>
+                <div class="d_car_time">{{ item.createTime }}</div>
+                <div class="d_car_deal">累计成交<span class="color_orange">{{ item.orderNumber }}</span>单</div>
               </a>
             </li>
           </ul>
@@ -390,45 +286,22 @@
         </div>
         <div class="hy_info_user_box fl">
           <ul class="hy_info_user_list">
-            <li>
+            <li 
+              v-for="(item,index) in carNewsData"
+              :key="index">
               <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">11用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
+                <span class="hy_info_user_info_user">用户{{ item.creater }} </span>
+                <span class="hy_info_user_info_time">{{ item.time }}</span>
               </div>
               <div class="hy_info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
+                <span>发布<b>{{ item.startCity }}</b>到<b>{{ item.endCity }}</b></span>
+                <span>{{ item.goodsTypeName }}| {{ item.goodsNum }}件|{{ item.goodsWeight }}公斤|体积{{ item.goodsVolume }}方  </span>                   
                 <a 
-                  href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
+                  target="_blank"
+                  :href="'/cheyuan/detail?id='+item.id"
+                  class="hy_info_user_text_link fr">查看车源</a>
               </div>
-            </li>
-            <li>
-              <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">22用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
-              </div>
-              <div class="hy_info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
-                <a 
-                  href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
-              </div>
-            </li>
-            <li>
-              <div class="hy_info_user_info">
-                <span class="hy_info_user_info_user">33用户159****4895 </span>
-                <span class="hy_info_user_info_time">3分钟前</span>
-              </div>
-              <div class="hy_info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
-                <a 
-                  href=""
-                  class="hy_info_user_text_link fr">查看货源</a>
-              </div>
-            </li>   
+            </li> 
           </ul>
         </div>
       </div>
@@ -436,23 +309,55 @@
         <div class="hy_info_num">
           <ul class="hy_info_list clearfix">
             <li>
-              <span><i class="iconfont iconhuowu"/>当前货物</span>
-              <span class="hy_info_list_num">229089</span>
+              <span>
+                <i class="iconfont iconhuowu"/>
+                <a
+                  target="_blank" 
+                  href="/huoyuan">当前货物</a>
+              </span>
+              <span class="hy_info_list_num">{{ statisticsData.goodsCount }}</span>
             </li>
             <li>
-              <span><i class="iconfont iconwangfandijia"/>物流专线</span>
-              <span class="hy_info_list_num">229089</span>
+              <span>
+                <i class="iconfont iconwangfandijia"/>
+                <a
+                  target="_blank" 
+                  href="/zhuanxian/list">物流专线</a>
+              </span>
+              <span class="hy_info_list_num">{{ statisticsData.transportRangeCount }}</span>
             </li>
             <li>
-              <span><i class="iconfont iconwuliu"/>当前货物</span>
-              <span class="hy_info_list_num">45646</span>
+              <span
+              ><i class="iconfont iconwuliu"/>
+                <a
+                  target="_blank" 
+                  href="/cheyuan">当前车源</a>
+              </span>
+              <span class="hy_info_list_num">{{ statisticsData.carInfoCount }}</span>
             </li>
           </ul>
           <ul class="hy_info_text_list">
             <li><i class="iconfont iconjiantou_xiangshang_o"/>今日新增:</li>
-            <li>货源<span class="hy_info_text_num">8951</span></li>
-            <li>专线<span class="hy_info_text_num">854</span></li>
-            <li>车源<span class="hy_info_text_num">8011</span></li>
+            <li>
+              <a
+                target="_blank" 
+                href="/huoyuan">货源
+                <span class="hy_info_text_num">{{ statisticsData.toDayGoodsCount }}</span>
+            </a></li>
+            <li>
+              <a
+                target="_blank" 
+                href="/zhuanxian/list">
+                专线
+                <span class="hy_info_text_num">{{ statisticsData.toDayTransportRangeCount }}</span>
+            </a></li>
+            <li>
+              <a
+                target="_blank" 
+                href="/cheyuan">
+                车源
+                <span class="hy_info_text_num">{{ statisticsData.toDayCarInfoCount }}</span>
+            </a></li>
           </ul>
         </div>
       </div>
@@ -463,183 +368,99 @@
         <h3 class="gr_title">推荐车源</h3>
         <div class="gr_txt"><span>180789</span>条专线，为您优选12条热门优质专线</div>
         <div class="gr_sch">
-          <div class="gr_sch_city">
+          <div 
+            id="zx_groom_star"
+            class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入出发地" 
               id="groom_pageinp1">
           </div>
           <div class="gr_sch_icon"><i class="iconfont iconjiantou_xiangyou_o"/></div>
-          <div class="gr_sch_city">
+          <div 
+            id="zx_groom_end"
+            class="gr_sch_city">
             <input 
               type="text" 
               placeholder="请输入到达地" 
               id="groom_pageinp2">
           </div>
-          <div class="gr_sch_btn"><a href="">搜索</a></div>
+          <div class="gr_sch_btn"><a @click="groomSearch">搜索</a></div>
         </div>
         <a 
-          href="" 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity"
           class="gr_link">全部专线<i class="iconfont iconjiantou2"/></a>
       </div>
       <div class="p_type_nav">
-        <a href="">信誉最高</a>
-        <a href="">交易量</a>
-        <a href="">运输时效</a> 
-        <a href="">重货价格最低</a> 
-        <a href="">轻货价格最低</a>       
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01801'">小面包</a>
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01802'">金杯车</a>
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01803'">小型货车</a> 
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01804'">中型货车</a> 
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01805'">5.2米</a>
+        <a
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01806'">6.8米</a>
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01807'">7.6米</a>
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01808'">9.6米</a> 
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01809'">13米</a> 
+        <a 
+          target="_blank"
+          :href="'/cheyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&carType=AF01810'">17.5米</a>            
       </div>
       <ul class="p_hot_line p_CY_car_list clearfix">
-        <li>
+        <li 
+          v-for="(item,index) in recommendCarData"
+          :key="index">
           <div class="hot_line_box">
-            <div class="h_pic">       
-              <img src="../../static/images/huizong/_img01.png">
-            </div>
-            <div class="wl_box">
-              <div class="h_place">
-                <span class="icon icon_start">始</span>
-                <span class="place">广州市天河区</span>
-                <span class="icon icon_end">终</span>
-                <span class="place">上海黄浦区</span>
+            <a 
+              target="_blank"
+              :href="'/cheyuan/detail?id='+item.id">
+              <div class="h_pic">       
+                <img :src="item.carFile">
               </div>
-              <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-              <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-              <div class="CY_list_praise">
-                <ul class="CY_list_praise_list fl">
-                  <li><span class="CY_list_praise_name">好评</span>84</li>
-                  <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                </ul>
-                <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
+              <div class="wl_box">
+                <div class="h_place">
+                  <span class="icon icon_start">始</span>
+                  <span class="place">{{ item.strartAddress }}</span>
+                  <span class="icon icon_end">终</span>
+                  <span class="place">{{ item.endAddress }}</span>
+                </div>
+                <div class="CY_list_txt">{{ item.carTypeName }}| 长{{ item.carLength }}米|载重{{ item.carLoad }}|吨|体积{{ item.carVolume }}方</div>
+                <div class="CY_list_price"> 运价：<span class="CY_list_price_num">{{ item.expectPrice }}</span> 元</div>
+                <div class="CY_list_praise">
+                  <div class="CY_list_praise_list fl">
+                    <span class="CY_list_praise_name">好评</span>{{ item.evaGoodCount }}
+                    <span class="CY_list_praise_name">收藏 </span>{{ item.collectNumber }}
+                  </div>
+                  <div class="CY_list_praise_num fr">好评率<span class="color_orange">{{ item.goodRate }}%</span></div>         
+                </div>
+                <div class="CY_list_time"><i class="iconfont iconshijian"/>{{ item.createTime }}</div>
               </div>
-              <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-            </div>
+            </a>
             <div class="h_operate">
               <a 
                 href="" 
                 class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
             </div>
           </div>
-        </li>
-        <li>
-          <div class="hot_line_box">
-            <div class="h_pic">       
-              <img src="../../static/images/huizong/_img01.png">
-            </div>
-            <div class="wl_box">
-              <div class="h_place">
-                <span class="icon icon_start">始</span>
-                <span class="place">广州市天河区</span>
-                <span class="icon icon_end">终</span>
-                <span class="place">上海黄浦区</span>
-              </div>
-              <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-              <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-              <div class="CY_list_praise">
-                <ul class="CY_list_praise_list fl">
-                  <li><span class="CY_list_praise_name">好评</span>84</li>
-                  <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                </ul>
-                <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-              </div>
-              <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-            </div>
-            <div class="h_operate">
-              <a 
-                href="" 
-                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="hot_line_box">
-            <div class="h_pic">       
-              <img src="../../static/images/huizong/_img01.png">
-            </div>
-            <div class="wl_box">
-              <div class="h_place">
-                <span class="icon icon_start">始</span>
-                <span class="place">广州市天河区</span>
-                <span class="icon icon_end">终</span>
-                <span class="place">上海黄浦区</span>
-              </div>
-              <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-              <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-              <div class="CY_list_praise">
-                <ul class="CY_list_praise_list fl">
-                  <li><span class="CY_list_praise_name">好评</span>84</li>
-                  <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                </ul>
-                <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-              </div>
-              <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-            </div>
-            <div class="h_operate">
-              <a 
-                href="" 
-                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="hot_line_box">
-            <div class="h_pic">       
-              <img src="../../static/images/huizong/_img01.png">
-            </div>
-            <div class="wl_box">
-              <div class="h_place">
-                <span class="icon icon_start">始</span>
-                <span class="place">广州市天河区</span>
-                <span class="icon icon_end">终</span>
-                <span class="place">上海黄浦区</span>
-              </div>
-              <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-              <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-              <div class="CY_list_praise">
-                <ul class="CY_list_praise_list fl">
-                  <li><span class="CY_list_praise_name">好评</span>84</li>
-                  <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                </ul>
-                <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-              </div>
-              <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-            </div>
-            <div class="h_operate">
-              <a 
-                href="" 
-                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            </div>
-          </div>
-        </li>
-        <li>
-          <div class="hot_line_box">
-            <div class="h_pic">       
-              <img src="../../static/images/huizong/_img01.png">
-            </div>
-            <div class="wl_box">
-              <div class="h_place">
-                <span class="icon icon_start">始</span>
-                <span class="place">广州市天河区</span>
-                <span class="icon icon_end">终</span>
-                <span class="place">上海黄浦区</span>
-              </div>
-              <div class="CY_list_txt">中型货车| 长2米|载重15吨|体积13.6方</div>
-              <div class="CY_list_price"> 运价：<span class="CY_list_price_num">2590</span> 元</div>
-              <div class="CY_list_praise">
-                <ul class="CY_list_praise_list fl">
-                  <li><span class="CY_list_praise_name">好评</span>84</li>
-                  <li><span class="CY_list_praise_name">收藏 </span>840</li>
-                </ul>
-                <div class="CY_list_praise_num fr">好评率<span class="color_orange">98.3%</span></div>         
-              </div>
-              <div class="CY_list_time"><i class="iconfont iconshijian"/>2018-10-25 15:26</div>
-            </div>
-            <div class="h_operate">
-              <a 
-                href="" 
-                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-            </div>
-          </div>
-        </li>        
+        </li>      
       </ul>
     </div>
     <!-- 推荐车源 -->
@@ -991,6 +812,7 @@
 </template>
 <script>
 import 'swiper/dist/css/swiper.css'
+import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Swiper from 'Swiper'
 import SidebarNav from '~/components/public/sidebarNav'
 export default {
@@ -1001,6 +823,17 @@ export default {
   },
   data() {
     return {
+      newsIndex: 1,
+      //登录权限
+      isToken: false,
+      loginMobile: '',
+      // 地点插件
+      cyStartProvince: '',
+      cyStartCity: '',
+      cyStartArea: '',
+      cyEndProvince: '',
+      cyEndCity: '',
+      cyEndArea: '',
       banners: [
         require('../../static/images/huizong/banner01.jpg'),
         require('../../static/images/huizong/banner02.jpg'),
@@ -1037,51 +870,7 @@ export default {
           prevEl: '.swiper-button-prev',
           disabledClass: '.my-button-disabled'
         }
-      },
-      cityList: [
-        '上海',
-        '北京',
-        '深圳',
-        '广州',
-        '重庆',
-        '天津',
-        '苏州',
-        '成都',
-        '武汉',
-        '杭州',
-        '南京',
-        '青岛',
-        '无锡',
-        '长沙',
-        '农博',
-        '郑州',
-        '佛山',
-        '南通',
-        '东莞',
-        '西安',
-        '烟台',
-        '济南',
-        '泉州',
-        '大连',
-        '合肥',
-        '常州',
-        '福州',
-        '唐山',
-        '石家庄',
-        '潍坊',
-        '长春',
-        '沈阳',
-        '哈尔滨',
-        '温州',
-        '盐城',
-        '扬州',
-        '淄博',
-        '绍兴'
-      ],
-      newsIndex: 1,
-      //登录权限
-      isToken: false,
-      loginMobile: ''
+      }
     }
   },
   async asyncData({ $axios, query, app, error }) {
@@ -1102,12 +891,64 @@ export default {
         driverStatus: 'AF0010403'
       }
     )
+    //优惠专区
+    ///carInfo/sumPage/showCarList
+    let discountCarData = await $axios.post(
+      '/28-web/carInfo/sumPage/showCarList',
+      {
+        currentPage: 1,
+        pageSize: 8,
+        startProvince: currentProvince,
+        startCity: currentCity
+      }
+    )
+    //最新车源新闻
+    let carNewsData = await $axios.post('/28-web/carInfo/newest/publish', {
+      currentPage: 1,
+      pageSize: 10
+    })
+    //查询首页车源、货源、专线数量
+    let statisticsData = await $axios.get('/28-web//index/today/statistics')
+    //推荐车源
+    let recommendCarData = await $axios.post(
+      '/28-web/carInfo/sumPage/recommendList',
+      {
+        currentPage: 1,
+        pageSize: 15,
+        startProvince: currentProvince,
+        startCity: currentCity
+      }
+    )
     //返回赋值
-    if (hotCityData.status === 200 || carSourceData.status === 200) {
+    if (
+      hotCityData.status === 200 ||
+      carSourceData.status === 200 ||
+      discountCarData.status === 200 ||
+      carNewsData.status === 200 ||
+      statisticsData.status === 200 ||
+      recommendCarData.status === 200
+    ) {
       return {
-        hotCityData: !hotCityData.data.data ? hotCityData.data.data : [],
-        // hotCityData: [],
-        carSourceData: !carSourceData.data.data ? carSourceData.data.data : []
+        //获取当前的城市
+        currentProvince: currentProvince ? currentProvince : '',
+        currentCity: currentCity ? currentCity : '',
+        //热门城市
+        hotCityData: !hotCityData.data.data ? [] : hotCityData.data.data,
+        //车源列表
+        carSourceData: !carSourceData.data.data ? [] : carSourceData.data.data,
+        //优惠专区
+        discountCarData: !discountCarData.data.data
+          ? []
+          : discountCarData.data.data,
+        //车源新闻
+        carNewsData: !carNewsData.data.data ? [] : carNewsData.data.data,
+        statisticsData: !statisticsData.data.data
+          ? {}
+          : statisticsData.data.data,
+        //推荐车源
+        recommendCarData: !recommendCarData.data.data
+          ? []
+          : recommendCarData.data.data
       }
     } else {
       error({ statusCode: 500, message: '查找不到该专线列表' })
@@ -1122,6 +963,9 @@ export default {
       this.intSwiper2()
       //打印返回的数据
       console.log('严选车辆返回列表', this.carSourceData)
+      console.log('优惠专区', this.discountCarData)
+      console.log('最新新闻10', this.carNewsData)
+      console.log('车源推荐', this.recommendCarData)
     })
 
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
@@ -1207,6 +1051,28 @@ export default {
       //$.cookie
       this.isToken = $.cookie('access_token') ? true : false
       this.loginMobile = $.cookie('login_mobile')
+    },
+    //搜索货源
+    groomSearch() {
+      let startPlace = until.getPlace('#zx_groom_star')
+      let endPlace = until.getPlace('#zx_groom_end')
+
+      // 开始城市赋值
+      this.cyStartProvince = startPlace.province
+      this.cyStartCity = startPlace.city
+      this.cyStartArea = startPlace.area
+      //到达城市赋值
+      this.cyEndProvince = endPlace.province
+      this.cyEndCity = endPlace.city
+      this.cyEndArea = endPlace.area
+
+      //跳转
+      let url = `/cheyuan?startProvince=${this.cyStartProvince}&startCity=${
+        this.cyStartCity
+      }&startArea=${this.cyStartArea}&endProvince=${
+        this.cyEndProvince
+      }&endCity=${this.cyEndCity}&endArea=${this.cyEndArea}`
+      window.open(url, '_blank')
     }
   }
 }
@@ -1349,18 +1215,15 @@ export default {
         color: $tit_color;
         background: $light_blue;
         border: 1px solid $border_color;
-        a {
-          color: $tit_color;
-          .joint-label {
-            color: $light_gray;
-          }
-        }
-        .d_car_city {
+
+        .md_box {
           @extend .p_go_city;
-          > .city {
-            color: $gray;
-          }
         }
+
+        .md_area {
+          @extend .p_go_area;
+        }
+
         .d_car_price {
           margin-bottom: 5px;
           .d_car_price_num {

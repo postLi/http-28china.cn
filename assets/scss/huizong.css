@@ -47,7 +47,7 @@
   position: absolute;
 }
 
-.ellipsis, .p_owner_list .owner_name span.owner_name_companyName, .p_hy_list > li .hy_list_goods > span, .p_hy_info .hy_info_user_box .hy_info_user_text > span.info_user_text_goods, .p_co_owner_list > li .rank_tit .rank_tit_name {
+.ellipsis, .p_go_city .area > span.area_city, .p_hy_list > li .md_box .area > span.area_city, .p_go_city .city, .p_hy_list > li .md_box .city, .p_owner_list .owner_name span.owner_name_companyName, .p_hy_list > li .hy_list_goods > span, .p_hy_info .hy_info_user_box .hy_info_user_text > span.info_user_text_goods, .p_co_owner_list > li .rank_tit .rank_tit_name {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -156,8 +156,8 @@
 
 /*前往城市*/
 .p_go_city, .p_hy_list > li .md_box {
-  height: 54px;
-  line-height: 54px;
+  height: 50px;
+  line-height: 50px;
   white-space: nowrap;
 }
 
@@ -166,19 +166,32 @@
   display: inline-block;
 }
 
-.p_go_city .city, .p_hy_list > li .md_box .city {
-  max-width: 80px;
-  color: #333;
+.p_go_city .area > span, .p_hy_list > li .md_box .area > span {
+  display: block;
+}
+
+.p_go_city .area > span.area_city, .p_hy_list > li .md_box .area > span.area_city {
+  max-width: 85px;
   font-size: 16px;
-  line-height: 18px;
+}
+
+.p_go_city .area > span.area_qx, .p_hy_list > li .md_box .area > span.area_qx {
+  font-size: 12px;
+  text-align: center;
+  color: #666;
+}
+
+.p_go_city .city, .p_hy_list > li .md_box .city {
+  max-width: 85px;
+  font-size: 16px;
+  color: #333;
   vertical-align: middle;
+  color: #222;
 }
 
 .p_go_city .city-joint, .p_hy_list > li .md_box .city-joint {
   color: #999;
   font-size: 12px;
-  line-height: 18px;
-  height: 18px;
 }
 
 .p_go_city .joint-line, .p_hy_list > li .md_box .joint-line {
@@ -191,6 +204,33 @@
 
 .p_go_city .joint-label, .p_hy_list > li .md_box .joint-label {
   padding: 0 4px;
+}
+
+.p_go_area, .p_hy_list > li .md_area {
+  overflow: hidden;
+  margin: 10px 0;
+  height: 40px;
+  height: auto;
+  line-height: 20px;
+}
+
+.p_go_area .city, .p_hy_list > li .md_area .city {
+  float: left;
+  line-height: 40px;
+}
+
+.p_go_area .city .area, .p_hy_list > li .md_area .city .area {
+  float: left;
+}
+
+.p_go_area .city .city-joint, .p_hy_list > li .md_area .city .city-joint {
+  float: left;
+  height: 40px;
+  line-height: 40px;
+}
+
+.p_go_area .city .city-joint, .p_hy_list > li .md_area .city .city-joint {
+  margin: 0 3px;
 }
 
 /*********分类导航***************/

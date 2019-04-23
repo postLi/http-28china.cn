@@ -637,59 +637,46 @@ export default {
     vo.province = vo.startProvince
     vo.city = vo.startCity
     vo.area = vo.startArea
-    let WangdiangInfoList = await getWangdiangInfoList($axios, 1, vo)
-    let recommendList = await getRecommendList($axios, vo)
-    let listC = await $axios.post(
-      `/28-web/logisticsCompany/list/related/links`,
-      vo
-    )
-    let listD = await $axios.get(`/28-web/logisticsCompany/adviseRecommend`)
-    if (listD.data.status == 200) {
-      listD.data.data.forEach(item => {
-        item.advService = item.productServiceNameList
-          ? item.productServiceNameList
-          : item.otherServiceNameList
-      })
+    let getItem = item => {
+      item.advService = item.productServiceNameList
+        ? item.productServiceNameList
+        : item.otherServiceNameList
     }
-    let listE = await $axios.get(
-      `/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`
-    )
-    if (listE.data.status == 200) {
-      listE.data.data.forEach(item => {
-        item.advService = item.productServiceNameList
-          ? item.productServiceNameList
-          : item.otherServiceNameList
-      })
-    }
-    let listG = await $axios.get(`/28-web/logisticsCompany/enterpriseRecommend`)
-    if (listG.data.status == 200) {
-      listG.data.data.forEach(item => {
-        item.advService = item.productServiceNameList
-          ? item.productServiceNameList
-          : item.otherServiceNameList
-      })
-    }
+    let [AF029, AF025] = await Promise.all([
+      $axios.get('/aflc-common/sysDict/getSysDictByCodeGet/AF029'),
+      $axios.get('/aflc-common/sysDict/getSysDictByCodeGet/AF025')
+    ])
+    let [logisticsPark, WangdiangInfoList, recommendList] = await Promise.all([
+      getWdiangSearchList($axios, {
+        locationArea: vo.startArea,
+        locationCity: vo.startCity,
+        locationProvince: vo.startProvince,
+        ...vo
+      }),
+      getWangdiangInfoList($axios, 1, vo),
+      getRecommendList($axios, vo)
+    ])
+    let [listC, listD, listE, listG] = await Promise.all([
+      $axios.post(`/28-web/logisticsCompany/list/related/links`, vo),
+      $axios.get(`/28-web/logisticsCompany/adviseRecommend`),
+      $axios.get(`/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`),
+      $axios.get(`/28-web/logisticsCompany/enterpriseRecommend`)
+    ])
+    var arrs = Object.assign([], [listC, listD, listE, listG])
+    var Code = Object.assign([], [AF029, AF025])
+    arrs.forEach(item => {
+      if (item.data.status === 200 && item.data.data.length > 0) {
+        item.data.data.forEach(getItem)
+      }
+    })
+    Code.forEach(item => {
+      if (item.data.status === 200) {
+        item.data.data.unshift({ code: '', name: '不限' })
+      }
+    })
     recommendList.forEach(item => {
       MUTUAL.GETCREDITITEM(item)
     })
-    let AF029 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF029'
-    )
-    let AF025 = await $axios.get(
-      '/aflc-common/sysDict/getSysDictByCodeGet/AF025'
-    )
-    let logisticsPark = await getWdiangSearchList($axios, {
-      locationArea: vo.startArea,
-      locationCity: vo.startCity,
-      locationProvince: vo.startProvince,
-      ...vo
-    })
-    if (AF029.data.status === 200) {
-      AF029.data.data.unshift({ code: '', name: '不限' })
-    }
-    if (AF025.data.status === 200) {
-      AF025.data.data.unshift({ code: '', name: '不限' })
-    }
     if (AF029.data.status === 200 || AF025.data.status === 200) {
       return {
         AF029: AF029.data.status === 200 ? AF029.data.data : [],

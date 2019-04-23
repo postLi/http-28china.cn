@@ -941,13 +941,7 @@
       :show = "isAdd"
       :info="linedataE"
       @close="noaddFn"/>
-    <BzAdd
-      :show = "isBzAdd"
-      :info="LineeEchartInfo"
-      :linedata-a="linedataA"
-      :line-company="lineBzAdd"
-      @close="nobzAddFn"
-    />
+    
   </div>
 
 </template>
@@ -955,7 +949,6 @@
 <script>
 import creditIcon from '~/components/common/creditIcon'
 import Add from './add'
-import BzAdd from './bzAdd'
 
 import {
   isZXcity,
@@ -1021,7 +1014,7 @@ export default {
     FooterLinks,
     ShowEchart,
     Add,
-    BzAdd,
+    // BzAdd,
     creditIcon
   },
   head: {

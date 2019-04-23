@@ -104,57 +104,14 @@
           class="clearfix"
           style="clear: both;font-weight:400;;"><i>热门：</i>
           <a
-
-            href="/wuliu?locationProvince=上海市&locationCity=上海市"
+            v-for="(item,index) in hotlinks"
+            :key="index"
+            :href="'/wuliu?locationProvince='+item.locationProvince+'&locationCity='+item.locationCity"
             target="_blank">
             <span
-            style="padding-right:10px;font-weight:400;">上海</span>
+            style="padding-right:10px;font-weight:400;">{{ item.locationCity.slice(0,-1) }}</span>
           </a>
-          <a
-
-            href="/wuliu?locationProvince=北京市&locationCity=北京市"
-            target="_blank">
-            <span
-            style="padding-right:10px;font-weight:400;">北京</span>
-          </a>
-          <a
-
-            href="/wuliu?locationProvince=广东省&locationCity=深圳市"
-            target="_blank">
-            <span
-            style="padding-right:10px;font-weight:400;">深圳</span>
-          </a>
-          <a
-
-            href="/wuliu?locationProvince=重庆市&locationCity=重庆市"
-            target="_blank">
-            <span
-            style="padding-right:10px;font-weight:400;">重庆</span>
-          </a>
-          <a
-            href="/wuliu?locationProvince=天津市&locationCity=天津市"
-            target="_blank">
-            <span
-            style="padding-right:10px;font-weight:400;">天津</span>
-          </a>
-          <a
-            href="/wuliu?locationProvince=江苏省&locationCity=苏州市"
-            target="_blank">
-            <span
-            style="padding-right:10px;font-weight:400;">苏州</span>
-          </a>
-          <a
-            href="/wuliu?locationProvince=四川省&locationCity=成都市"
-            target="_blank">
-            <span
-            style="padding-right:10px;font-weight:400;">成都</span>
-          </a>
-          <a
-            href="/wuliu?locationProvince=湖北省&locationCity=武汉市"
-            target="_blank">
-            <span
-            style="padding-right:10px;font-weight:400;">武汉</span>
-          </a>
+          
         </div>
         <div class="tuijian">
           <div
@@ -396,7 +353,7 @@
             v-for="(item,index) in getHottList"
             :key="index"
             class="wlzx_list"
-            style="margin-right: 20px;width:260px;height:380px;margin-top: 0px;padding-bottom: 0px;">
+            style="margin-right: 20px;width:260px;height:380px;margin-top: 0px;padding-bottom: 0px;margin-bottom: 20px;">
             <a
               :href="'/wuliu/detail?id=' + item.id"
               target="_blank">
@@ -521,7 +478,7 @@
                   src="../../static/gongsi/images/u1075.png"
                   style="width:270px;height:170px;float:left;padding-left: 10px;padding-bottom: 10px;">
              
-              <span style=" position: absolute;bottom: -170px;left: 10px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px; width: 240px;">{{ wuliu_hyzx_show.title.length>18?wuliu_hyzx_show.title.substring(0,18)+'..':wuliu_hyzx_show.title }}</span></a>
+              <span style=" position: absolute;bottom: -170px;left: 10px; background: rgba(0, 0, 0, 0.3);color: rgb(255, 255, 255);padding: 10px 14px; width: 240px;">{{ wuliu_hyzx_show.title.length>16?wuliu_hyzx_show.title.substring(0,16)+'..':wuliu_hyzx_show.title }}</span></a>
               <ul 
               style="float:left; padding-bottom: 20px;">
                 <li
@@ -587,11 +544,8 @@
             style="width: 280px;color: white;background: #FF892A;height:80px;;line-height: 80px;text-align: center;border-radius: 8px;    display: inline-block;margin-left:50px;cursor: pointer; border: none;color:rgba(255,255,255,1);font-size:24px;"><a 
               
           style="color:rgba(255,255,255,1);">我要入驻</a></button>
-          <!-- <div @click="mapFn">mapFn</div> -->
         
         </div>
-
-
       </div>
 
 
@@ -602,15 +556,15 @@
       :info="inputData"
       @fromAdd="fromAdd"
     />
-    <Map 
+    <!-- <Map 
       :showMap="isMap"
-      @close="closeMap"/>
+      @close="closeMap"/> -->
   </div>
 </template>
 
 <script>
 import Add from './add'
-import Map from './map'
+// import Map from './map'
 import { promised } from 'q'
 function comNum(item) {
   let arr = (item.id || '').split('')
@@ -635,8 +589,8 @@ async function gateWayList($axios, currentPage, vo = {}) {
 export default {
   name: 'WuLiu',
   components: {
-    Add,
-    Map
+    Add
+    // Map
   },
   head: {
     link: [
@@ -693,6 +647,44 @@ export default {
           img: require('../../static/yuanqu/images/ksxd.png'),
           title: '网点查询',
           url: '/wangdian'
+        }
+      ],
+      hotlinks: [
+        {
+          locationProvince: '上海市',
+          locationCity: '上海市'
+        },
+        {
+          locationProvince: '北京市',
+          locationCity: '北京市'
+        },
+        {
+          locationProvince: '广东省',
+          locationCity: '深圳市'
+        },
+        {
+          locationProvince: '广东省',
+          locationCity: '广州市'
+        },
+        {
+          locationProvince: '重庆市',
+          locationCity: '重庆市'
+        },
+        {
+          locationProvince: '天津市',
+          locationCity: '天津市'
+        },
+        {
+          locationProvince: '江苏省',
+          locationCity: '苏州市'
+        },
+        {
+          locationProvince: '四川省',
+          locationCity: '成都市'
+        },
+        {
+          locationProvince: '湖北省',
+          locationCity: '武汉市'
         }
       ]
     }
@@ -778,7 +770,6 @@ export default {
     let [
       getLogisticsPark,
       recommendParkList,
-      getGateWayListData,
       getRecommendList,
       getNewestList,
       getHottList,
@@ -799,14 +790,6 @@ export default {
         locationArea,
         currentPage,
         pageSize: 14
-      }),
-      gateWayList($axios, 1, {
-        parkName,
-        locationProvince,
-        locationCity,
-        locationArea,
-        currentPage,
-        pageSize: 5
       }),
       $axios.post('/28-web/logisticsPark/main/recommend/list', {
         parkName,
@@ -866,9 +849,7 @@ export default {
             : [],
         getNewestList:
           getNewestList.data.status === 200 ? getNewestList.data.data.list : [],
-        getGateWayList: getGateWayListData.list,
-        pages: getGateWayListData.pages,
-        currentPage: getGateWayListData.currentPage,
+
         getLogisticsPark:
           getLogisticsPark.data.status === 200
             ? getLogisticsPark.data.data.list
@@ -927,12 +908,12 @@ export default {
   },
 
   methods: {
-    mapFn() {
-      this.isMap = true
-    },
-    closeMap() {
-      this.isMap = false
-    },
+    // mapFn() {
+    //   this.isMap = true
+    // },
+    // closeMap() {
+    //   this.isMap = false
+    // },
     fromAdd(data) {
       this.inputData = data
       this.isMobile = false

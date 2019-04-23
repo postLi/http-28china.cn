@@ -1,26 +1,28 @@
 <template>
   <div class="flex_f h">
     <MyTop>
-      <div class="flex_3 f-36 flex">{{ $route.query.name }}</div>
+      <div class="flex_3 f-36 flex">{{ $route.query.name ? $route.query.name : '公告' }}</div>
     </MyTop>
     <div
       class="body"
-      v-if="noticeList.length === 0">
+      v-if="list.length === 0">
       <div class="c-3 f-30 flex"> 此用户没有评论</div>
     </div>
     <cube-scroll
       ref="scroll"
       :scroll-events="['scroll-end']"
       class="mScroll flex_1 body"
-      :data="noticeList"
+      :data="list"
       :options="options"
       @pulling-up="onPullingUp"
       @scroll-end="getScroll"
     >
       <div
         class="content"
-        v-for="(item,index) in noticeList"
-        :key="index">
+        v-for="(item,index) in list"
+        :key="index"
+        @click="toDetail(item)"
+      >
         <div class="f-30 c-3 margin_t_20 f_w_b">
           {{ item.title }}
         </div>
@@ -38,24 +40,38 @@
 </template>
 
 <script>
-let getNoticeList = async ($axios, query, currentPage) => {
-  return await $axios.post(
-    `/aflc-common/aflcCommonNoticeApi/findDriverNoticeList`,
-    {
-      currentPage: currentPage,
-      pageSize: 20,
-      vo: {
-        noticeGroupCode: query.noticeGroupCode
+let getList = async ($axios, query, currentPage) => {
+  if (query.adcode) {
+    return await $axios.post(
+      `/aflc-common/aflcCommonNoticeApi/findShipperNoticeList`,
+      {
+        currentPage: currentPage,
+        pageSize: 20,
+        vo: {
+          belongCity: query.adcode
+        }
       }
-    }
-  )
+    )
+  }
+  if (query.noticeGroupCode) {
+    return await $axios.post(
+      `/aflc-common/aflcCommonNoticeApi/findDriverNoticeList`,
+      {
+        currentPage: currentPage,
+        pageSize: 20,
+        vo: {
+          noticeGroupCode: query.noticeGroupCode
+        }
+      }
+    )
+  }
 }
 import Vue from 'vue'
 import { Scroll } from 'cube-ui'
 Vue.use(Scroll)
 import MyTop from '../../../components/m/myTop'
 export default {
-  name: 'NoticeList',
+  name: 'GgList',
   components: { MyTop },
   layout: 'm',
   data() {
@@ -70,14 +86,23 @@ export default {
     }
   },
   async asyncData({ $axios, query }) {
-    let noticeList = await getNoticeList($axios, query, 1)
+    let list = await getList($axios, query, 1)
     return {
-      noticeList:
-        noticeList.data.status === 200 ? noticeList.data.data.list : [],
-      pages: noticeList.data.status === 200 ? noticeList.data.data.totalPage : 0
+      list: list.data.status === 200 ? list.data.data.list : [],
+      pages: list.data.status === 200 ? list.data.data.totalPage : 0
     }
   },
   methods: {
+    toDetail(item) {
+      if (item.noticeUrl) {
+        // this.$router.push(
+        //   `/m/gg/detail?url=${encodeURIComponent(item.noticeUrl)}`
+        // )
+        window.location.href = item.noticeUrl
+      } else {
+        this.$router.push(`/m/gg/detail?id=${item.id}`)
+      }
+    },
     getScroll(obj) {
       this.scrollTo = obj.y
     },
@@ -88,13 +113,9 @@ export default {
       } else {
         this.currentPage++
       }
-      let noticeList = await getNoticeList(
-        this.$axios,
-        this.$route.query,
-        this.currentPage
-      )
-      if (noticeList.data.status === 200) {
-        this.noticeList = this.noticeList.concat(noticeList)
+      let list = await getList(this.$axios, this.$route.query, this.currentPage)
+      if (list.data.status === 200) {
+        this.list = this.list.concat(list)
       }
     }
   }
@@ -112,7 +133,6 @@ export default {
   margin: 0.2rem 0.25rem 0 0.25rem;
   padding: 0.2rem 0.2rem 0 0.2rem;
   background-color: white;
-  min-height: 4rem;
   border-radius: 0.2rem;
 }
 </style>

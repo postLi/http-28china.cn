@@ -82,10 +82,20 @@ export default {
       let citySearch = new AMap.CitySearch()
       citySearch.getLocalCity((status, result) => {
         if (status === 'complete' && result.info === 'OK') {
+          // adcode
+          this.$store.dispatch('m/SETDATA', {
+            data: result.adcode,
+            name: 'adcode'
+          })
           // 热点通知
           this.$store.dispatch('m/GETNOTICELIST', {
             data: result.adcode,
             name: 'NoticeList'
+          })
+          // 货主公告
+          this.$store.dispatch('m/GETHZGG', {
+            data: result.adcode,
+            name: 'HZGGList'
           })
           // 首页开始地 原始值
           this.$store.dispatch('m/SETDATA', {

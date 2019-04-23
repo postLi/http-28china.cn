@@ -31,14 +31,24 @@
             class="ad">
             <div class="swiper-container">
               <div class="swiper-wrapper">
-                <div 
+                <!-- <div 
                   class="swiper-slide" 
                   :key="index"
-                  v-for="(banner, index) in banners">
+                  v-for="(item, index) in banners">
                   <a 
                     target="_blank"
                     href="/create/order">
-                    <img :src="banner">
+                    <img :src="item">
+                  </a>
+                </div> -->
+                <div 
+                  class="swiper-slide" 
+                  :key="index"
+                  v-for="(item, index) in bannerList">
+                  <a 
+                    target="_blank" 
+                    :href="item.link">
+                    <img :src="item.banner">
                   </a>
                 </div>
               </div>
@@ -306,7 +316,7 @@
           <ul class="hy_info_list clearfix">
             <li>
               <span>
-                <i class="iconfont iconhuowudui"/>
+                <i class="iconfont icondangqianhuowu"/>
                 <a
                   target="_blank" 
                   href="/huoyuan">当前货物</a>
@@ -315,7 +325,7 @@
             </li>
             <li>
               <span>
-                <i class="iconfont iconjiantou_zuoyouqiehuan"/>
+                <i class="iconfont iconwuliuzhuanxian"/>
                 <a
                   target="_blank" 
                   href="/zhuanxian/list">物流专线</a>
@@ -324,7 +334,7 @@
             </li>
             <li>
               <span>
-                <i class="iconfont iconhuoche"/>
+                <i class="iconfont iconcheyuanxinxi"/>
                 <a
                   target="_blank" 
                   href="/cheyuan">当前车源</a>
@@ -754,7 +764,13 @@ export default {
       isToken: false,
       loginMobile: '',
       noneImg: require('../../static/images/huizong/none.jpg'),
-      banners: [require('../../static/images/huizong/hy_banner1.jpg')],
+      // banners: [require('../../static/images/huizong/hy_banner1.jpg')],
+      bannerList: [
+        {
+          banner: require('../../static/images/huizong/hy_banner1.jpg'),
+          link: '/create/order'
+        }
+      ],
       currentCity: '', //获取当前的城市
       currentProvince: '',
       // 地点插件
@@ -814,34 +830,37 @@ export default {
     //查询首页车源、货源、专线数量
     let statisticsData = await $axios.get('/28-web//index/today/statistics')
 
-    if (
-      hotCityData.status === 200 ||
-      shipperData.status === 200 ||
-      monthShipperData.status === 200 ||
-      recommendData.status === 200 ||
-      darenData.status === 200 ||
-      newListData.status === 200 ||
-      statisticsData.status === 200
-    ) {
-      return {
-        currentProvince: currentProvince ? currentProvince : '',
-        currentCity: currentCity ? currentCity : '', //获取当前的城市
+    // if (
+    //   ||
+    //   shipperData.status === 200 ||
+    //   monthShipperData.status === 200 ||
+    //   recommendData.status === 200 ||
+    //   darenData.status === 200 ||
+    //   newListData.status === 200 ||
+    //   statisticsData.status === 200
+    // ) {
+    return {
+      //获取当前的城市
+      currentProvince: currentProvince ? currentProvince : '',
+      currentCity: currentCity ? currentCity : '',
 
-        hotCityData: !hotCityData.data.data ? [] : hotCityData.data.data,
-        shipperData: !shipperData.data.data ? [] : shipperData.data.data,
-        monthShipperData: !monthShipperData.data.data
-          ? []
-          : monthShipperData.data.data,
-        recommendData: !recommendData.data.data ? [] : recommendData.data.data,
-        darenData: !darenData.data.data ? [] : darenData.data.data,
-        newListData: !newListData.data.data ? [] : newListData.data.data,
-        statisticsData: !statisticsData.data.data
-          ? {}
-          : statisticsData.data.data
-      }
-    } else {
-      error({ statusCode: 500, message: '查找不到该专线列表' })
+      hotCityData:
+        hotCityData.status === 200 ? hotCityData.data.data || [] : [],
+      shipperData:
+        shipperData.status === 200 ? shipperData.data.data || [] : [],
+      monthShipperData:
+        monthShipperData.status === 200 ? monthShipperData.data.data || [] : [],
+      recommendData:
+        recommendData.status === 200 ? recommendData.data.data || [] : [],
+      darenData: darenData.status === 200 ? darenData.data.data || [] : [],
+      newListData:
+        newListData.status === 200 ? newListData.data.data || [] : [],
+      statisticsData:
+        statisticsData.status === 200 ? statisticsData.data.data || {} : {}
     }
+    // } else {
+    //   error({ statusCode: 500, message: '查找不到该专线列表' })
+    // }
   },
   created() {
     // 优质货主

@@ -654,7 +654,7 @@ $f_12: 12px;
     >li {
       @extend .fl;
       margin-left: 45px;
-      width: 90px;
+      width: 100px;
       line-height: 30px;
       >span {
         display: block;
@@ -1268,6 +1268,10 @@ $f_12: 12px;
         }
 
         &.place {
+          width: 90px;
+          height: 20px;
+          line-height: 20px;
+          @extend .ellipsis;
           font-size: $f_16;
           color: $tit_color;
         }

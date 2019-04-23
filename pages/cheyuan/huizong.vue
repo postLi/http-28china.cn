@@ -25,8 +25,12 @@
               <div 
                 class="swiper-slide" 
                 :key="index"
-                v-for="(banner, index) in banners">
-                <img :src="banner">
+                v-for="(item, index) in bannerList">
+                <a 
+                  target="_blank" 
+                  :href="item.link">
+                  <img :src="item.banner">
+                </a>
               </div>
             </div>
             <!-- Add Paginat ion -->
@@ -72,14 +76,21 @@
               <input 
                 type="text" 
                 placeholder="请输入您的手机号"
+                v-model="groomPhone"
                 class="fl">
-              <button class="fl">帮我推荐</button>
+              <button 
+                class="fl"
+                @click="groomMeFn">帮我推荐</button>
             </div>
-            <div class="error">请输入正确的手机号</div>
+            <!-- <div class="error">请输入正确的手机号</div> -->
           </div>
           <div class="gr_operate">
-            <a href="">快速下单</a>
-            <a href="">查询运单</a>
+            <a 
+              target="_blank" 
+              href="/create/order">快速下单</a>
+            <a 
+              target="_blank" 
+              href="/ydcx">查询运单</a>
           </div>
           <div class="gr_cy_info">
             <p>发布求车信息让车主主动联系您</p>
@@ -147,8 +158,17 @@
                 </a>
                 <div class="h_operate">
                   <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+                    v-show="item.iscollect" 
+                    @click="collectFn(item,index)"
+                    class="link_collect">
+                    <i class="iconfont iconshoucang1"/>收藏
+                  </a>
+                  <a 
+                    v-show="!item.iscollect" 
+                    @click="collectFn(item,index)"
+                    class="link_collect">
+                    <i class="iconfont iconshoucang1"/>取消收藏
+                  </a>
                 </div>
               </div>
             </li>
@@ -169,7 +189,8 @@
       </div>
       <div class="btn_box">
         <a 
-          href=""
+          target="_blank"
+          href="/create/order"
           class="btn_release">快速下单</a>
       </div>
       <p class="release_total_explain">一键下单，运力30秒快速响应</p>
@@ -244,8 +265,9 @@
         </div>
         <div class="btn_box fr">
           <a 
-            href=""
-            class="btn_release">我要入驻</a>
+            target="_blank"
+            href="/create/cheyuan"
+            class="btn_release">快速发布车源</a>
         </div>
       </div>
     </div> 
@@ -310,7 +332,7 @@
           <ul class="hy_info_list clearfix">
             <li>
               <span>
-                <i class="iconfont iconhuowu"/>
+                <i class="iconfont icondangqianhuowu"/>
                 <a
                   target="_blank" 
                   href="/huoyuan">当前货物</a>
@@ -319,7 +341,7 @@
             </li>
             <li>
               <span>
-                <i class="iconfont iconwangfandijia"/>
+                <i class="iconfont iconwuliuzhuanxian"/>
                 <a
                   target="_blank" 
                   href="/zhuanxian/list">物流专线</a>
@@ -328,7 +350,7 @@
             </li>
             <li>
               <span
-              ><i class="iconfont iconwuliu"/>
+              ><i class="iconfont iconcheyuanxinxi"/>
                 <a
                   target="_blank" 
                   href="/cheyuan">当前车源</a>
@@ -366,7 +388,7 @@
     <div class="p_hy_groom clearfix">
       <div class="hd clearfix">
         <h3 class="gr_title">推荐车源</h3>
-        <div class="gr_txt"><span>180789</span>条专线，为您优选12条热门优质专线</div>
+        <div class="gr_txt"><span>{{ statisticsData.carInfoCount }}</span>条专线，为您优选12条热门优质专线</div>
         <div class="gr_sch">
           <div 
             id="zx_groom_star"
@@ -454,10 +476,19 @@
                 <div class="CY_list_time"><i class="iconfont iconshijian"/>{{ item.createTime }}</div>
               </div>
             </a>
-            <div class="h_operate">
+            <div class="h_operate">        
               <a 
-                href="" 
-                class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+                v-show="item.iscollect" 
+                @click="collectFn(item,index,'recommend')"
+                class="link_collect">
+                <i class="iconfont iconshoucang1"/>收藏
+              </a>
+              <a 
+                v-show="!item.iscollect" 
+                @click="collectFn(item,index,'recommend')"
+                class="link_collect">
+                <i class="iconfont iconshoucang1"/>取消收藏
+              </a>
             </div>
           </div>
         </li>      
@@ -478,71 +509,89 @@
                   src="//imgcdn50.zuzuche.com/assets/book/desktop/book/images/reviews_banner_text-305b1b2dc9c12ac66aedb8620f257c02.png">
               </div>
               <ul class="usr_discuss_tab">
-                <li class="user_discuss_active">洛杉矶</li>
-                <li>墨尔本</li>
-                <li>伦敦</li>
-                <li>曼谷</li>
+                <li 
+                  :class="{'user_discuss_active':carTypeIndex===1}" 
+                  @mouseover="carTypeIndex=1">
+                面包车</li>
+                <li 
+                  :class="{'user_discuss_active':carTypeIndex===2}"
+                  @mouseover="carTypeIndex=2">金杯车</li>
+                <li 
+                  :class="{'user_discuss_active':carTypeIndex===3}"
+                  @mouseover="carTypeIndex=3">小型货车</li>
+                <li 
+                  :class="{'user_discuss_active':carTypeIndex===4}"
+                  @mouseover="carTypeIndex=4">中型货车</li>
               </ul>
               <div class="user_discuss_tab_content">
-                <div class="tab_item">
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v4/enterprise_100x50.png" 
-                      class="logo">
-                    <span>8.4</span>分
-                  </div>
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/sixt_id_32/100x50.png" 
-                      class="logo">
-                    <span>8.3</span>分
-                  </div>
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/world/dealer/logo/Hertz_dealer_pic_big_799c968e294.jpg"
-                      class="logo">
-                    <span>8.3</span>分
-                  </div>
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/europcar_id_44/100x50.png"
-                      class="logo">
-                    <span>8.2</span>分
-                  </div>
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/alamo_id_29/100x50.png" 
-                      class="logo">
-                    <span>8.2</span>分
-                  </div>
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/interrent_id_79/100x50.png" 
-                      class="logo">
-                    <span>8.2</span>分
-                  </div>
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/avis_id_30/100x50.png" 
-                      class="logo">
-                    <span>8.1</span>分
-                  </div>
-                  <div class="car-dealers">
-                    <img 
-                      src="//imgcdn5.zuzuche.com/cdn1/public/dealer_v5/national_id_34/100x50.png" 
-                      class="logo">
-                    <span>8.1</span>分
+                <div 
+                  class="tab_item"
+                  v-show="carTypeIndex===1">
+                  <div 
+                    class="car-dealers"
+                    v-for="(item,index) in carTypeData1"
+                    :key="index">
+                    <a 
+                      target="_blank"
+                      :href="'/cheyuan/detail?id='+item.id">
+                      <img 
+                        :src="item.carFile" 
+                        class="logo">
+                      <span>{{ item.goodRate }}</span>分
+                    </a>
+                  </div>          
+                </div>
+                <div 
+                  class="tab_item"
+                  v-show="carTypeIndex===2">
+                  <div 
+                    class="car-dealers"                    
+                    v-for="(item,index) in carTypeData2"
+                    :key="index">
+                    <a 
+                      target="_blank"
+                      :href="'/cheyuan/detail?id='+item.id">
+                      <img 
+                        :src="item.carFile" 
+                        class="logo">
+                      <span>{{ item.goodRate }}</span>分
+                    </a>
+                  </div> 
+                </div>
+                <div 
+                  class="tab_item"
+                  v-show="carTypeIndex===3">
+                  <div 
+                    class="car-dealers"
+                    v-for="(item,index) in carTypeData3"
+                    :key="index">
+                    <a 
+                      target="_blank"
+                      :href="'/cheyuan/detail?id='+item.id">
+                      <img 
+                        :src="item.carFile" 
+                        class="logo">
+                      <span>{{ item.goodRate }}</span>分
+                    </a>
                   </div>
                 </div>
                 <div 
                   class="tab_item"
-                  style="display: none;">2222</div>
-                <div 
-                  class="tab_item"
-                  style="display: none;">3333</div>
-                <div 
-                  class="tab_item"
-                  style="display: none;">44444</div>
+                  v-show="carTypeIndex===4">
+                  <div 
+                    class="car-dealers"
+                    v-for="(item,index) in carTypeData4"
+                    :key="index">
+                    <a 
+                      target="_blank"
+                      :href="'/cheyuan/detail?id='+item.id">
+                      <img 
+                        :src="item.carFile" 
+                        class="logo">
+                      <span>{{ item.goodRate }}</span>分
+                    </a>
+                  </div>
+                </div>
               </div>      
             </div>
           </div>
@@ -647,7 +696,8 @@
         </div>
         <div class="btn_box fr">
           <a 
-            href=""
+            target="_blank"
+            href="/create/huoyuan"
             class="btn_release">快速求车信息</a>
         </div>
       </div>
@@ -656,55 +706,29 @@
     <div class="bj_2">
       <div class="p_company_owner">
         <div class="p_title_box">
-          <h3 class="title">本月优质企业货主</h3>
-          <span class="title_txt">稳定货源，好评率高</span>
+          <h3 class="title">本月明星车主</h3>
+          <span class="title_txt">本月明星车主</span>
         </div>  
         <ul class="p_co_owner_list clearfix">
-          <li>
-            <a href="">
-              <div class="rank_num no1">NO.I</div>
-              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
-              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_praise">好评率98.2%</div>
-            </a>
+          <li
+            v-for="(item,index) in monthDriverData"
+            :key="index">
+            <div 
+              v-if="index==0"
+              class="rank_num no1">NO.I</div>
+            <div 
+              v-if="index==1"
+              class="rank_num no2">NO.I</div>
+            <div
+              v-if="index==2"
+              class="rank_num no3">NO.I</div>
+
+            <div class="rank_pic"><img :src="item.carFile||noneImg"></div>
+            <div class="rank_tit"><span class="rank_tit_name">{{ item.carNum }}</span> <span class="rank_tit_name">{{ item.driverName }}</span><span class="rank_tit_icon_tuijian">推</span></div>
+            <div class="rank_groom"><span class="name">推荐指数</span><span><Star :start-num="item.recommendedNumber"/></span></div>
+            <div class="rank_praise">好评率{{ item.goodRate }}%</div>
           </li>
-          <li>
-            <a href="">
-              <div class="rank_num no1">NO.I</div>
-              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
-              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_praise">好评率98.2%</div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="rank_num no1">NO.I</div>
-              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
-              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_praise">好评率98.2%</div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="rank_num no1">NO.I</div>
-              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
-              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_praise">好评率98.2%</div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="rank_num no1">NO.I</div>
-              <div class="rank_pic"><img src="../../static/images/huizong/_img01.png" ></div>
-              <div class="rank_tit"><span class="rank_tit_name">递速物流有限公司</span> <span class="rank_tit_icon_tuijian">推</span></div>
-              <div class="rank_groom"><span class="name">推荐指数</span><span class="star"/></div>
-              <div class="rank_praise">好评率98.2%</div>
-            </a>
-          </li>
+
         </ul>    
       </div> 
     </div>  
@@ -741,103 +765,113 @@
         <ul class="tab_head_lists">
           <li 
             :class="{'selected':newsIndex===1}" 
-            @mouseover="newsIndex=1">媒体报道</li>
+            @mouseover="newsIndex=1">网站公告</li>
           <li
             :class="{'selected':newsIndex===2}" 
-            @mouseover="newsIndex=2">新闻中心</li>
+            @mouseover="newsIndex=2">客户案例</li>
         </ul>
       </div>
       <div class="ournews_content">
         <div v-show="newsIndex===1"> 
           <ul class="ournews_content_lists ">
-            <li class="ournews_content_li">
+            <li 
+              class="ournews_content_li"
+              :key="index" 
+              v-for="(item, index) in $store.state.news.cheyuan_wzgg">
               <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+              <a 
+                :href="item.url" 
+                target="_blank">
+                <p class="ournews_content_li_item">{{ item.title }}</p>
+              </a>
             </li>
           </ul>
         </div>
         <div v-show="newsIndex===2">
           <ul class="ournews_content_lists ">
-            <li class="ournews_content_li">
+            <li 
+              class="ournews_content_li"
+              :key="index" 
+              v-for="(item, index) in $store.state.news.cheyuan_khal">
               <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
-            </li>
-            <li class="ournews_content_li">
-              <span class="ournews_content_pointe"/>
-              <p class="ournews_content_li_item">22人人车“新平台新零售”战略首战告捷 合伙人破千</p>
+              <a 
+                :href="item.url" 
+                target="_blank">
+                <p class="ournews_content_li_item">{{ item.title }}</p>
+              </a>
             </li>
           </ul>
         </div>
       </div>
     </div>
     <!-- 公司新闻 -->
+    <!-- 帮我推荐弹窗 -->
+    <div 
+      id="recommend"
+      class="recommend_pop"
+      style="display: none;">
+      <div 
+        id="recommend_start"
+        class="recommend_city">        
+        <input 
+          type="text" 
+          placeholder="请输入出发地" 
+          id="recommend_pageinp1">
+      </div>
+      <div 
+        id="recommend_end"
+        class="recommend_city">        
+        <input 
+          type="text" 
+          placeholder="请输入到达地" 
+          id="recommend_pageinp2">
+      </div>
+      <div class="select_box">
+        <select v-model="carTypeSelected" >
+          <!-- <option selected>请选择车辆类型</option>     -->
+          <option     
+            v-for="(item,index) in carTypeData"
+            :value="item.code"
+            :key="index">{{ item.name }}</option>
+        </select>
+      </div>
+    </div>
     <SidebarNav />
   </div>
 </template>
 <script>
 import 'swiper/dist/css/swiper.css'
 import until from '~/static/js/server/comonUntil' //获取公共的函数
+import Star from '~/components/star/star' //星星
 import Swiper from 'Swiper'
 import SidebarNav from '~/components/public/sidebarNav'
+
 export default {
   name: 'HuiZong',
   head: {},
   components: {
+    Star,
     SidebarNav
   },
   data() {
     return {
+      noneImg: require('../../static/images/huizong/none.jpg'),
       newsIndex: 1,
+      carTypeIndex: 1,
       //登录权限
       isToken: false,
       loginMobile: '',
-      // 地点插件
-      cyStartProvince: '',
-      cyStartCity: '',
-      cyStartArea: '',
-      cyEndProvince: '',
-      cyEndCity: '',
-      cyEndArea: '',
-      banners: [
-        require('../../static/images/huizong/banner01.jpg'),
-        require('../../static/images/huizong/banner02.jpg'),
-        require('../../static/images/huizong/banner03.jpg')
+      //推荐我手机
+      groomPhone: '',
+      ///推荐我车辆类型数据
+      carTypeData: '',
+      //推荐我默认选中的车辆
+      carTypeSelected: '',
+      bannerList: [
+        {
+          banner: require('../../static/images/huizong/cheyuan/banner.jpg'),
+          link: '/create/cheyuan'
+        }
       ],
       swiperOption1: {
         effect: 'fade',
@@ -873,6 +907,44 @@ export default {
       }
     }
   },
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 117,
+        count: 6,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'cheyuan_wzgg',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 118,
+        count: 6,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'cheyuan_khal',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+  },
   async asyncData({ $axios, query, app, error }) {
     //服务端获取cookies
     let currentProvince = app.$cookies.get('currentProvinceFullName')
@@ -891,6 +963,7 @@ export default {
         driverStatus: 'AF0010403'
       }
     )
+
     //优惠专区
     ///carInfo/sumPage/showCarList
     let discountCarData = await $axios.post(
@@ -908,7 +981,7 @@ export default {
       pageSize: 10
     })
     //查询首页车源、货源、专线数量
-    let statisticsData = await $axios.get('/28-web//index/today/statistics')
+    let statisticsData = await $axios.get('/28-web/index/today/statistics')
     //推荐车源
     let recommendCarData = await $axios.post(
       '/28-web/carInfo/sumPage/recommendList',
@@ -919,46 +992,122 @@ export default {
         startCity: currentCity
       }
     )
+    //用户点评车辆类型
+    let [
+      carTypeData1,
+      carTypeData2,
+      carTypeData3,
+      carTypeData4
+    ] = await Promise.all([
+      //面包车
+      $axios.post('/28-web/carInfo/sumPage/recommendList', {
+        currentPage: 1,
+        pageSize: 8,
+        startProvince: currentProvince,
+        startCity: currentCity,
+        carType: 'AF01801'
+      }),
+      //金杯车
+      $axios.post('/28-web/carInfo/sumPage/recommendList', {
+        currentPage: 1,
+        pageSize: 8,
+        startProvince: currentProvince,
+        startCity: currentCity,
+        carType: 'AF01802'
+      }),
+      //小型货车
+      $axios.post('/28-web/carInfo/sumPage/recommendList', {
+        currentPage: 1,
+        pageSize: 8,
+        startProvince: currentProvince,
+        startCity: currentCity,
+        carType: 'AF01803'
+      }),
+
+      //中型货车
+      $axios.post('/28-web/carInfo/sumPage/recommendList', {
+        currentPage: 1,
+        pageSize: 8,
+        startProvince: currentProvince,
+        startCity: currentCity,
+        carType: 'AF01804'
+      })
+    ])
+    //车主月人气榜列表
+    let monthDriverData = await $axios.get(
+      '/28-web/driver/driverPopularityList?currentPage=1&pageSize=5'
+    )
     //返回赋值
-    if (
-      hotCityData.status === 200 ||
-      carSourceData.status === 200 ||
-      discountCarData.status === 200 ||
-      carNewsData.status === 200 ||
-      statisticsData.status === 200 ||
-      recommendCarData.status === 200
-    ) {
-      return {
-        //获取当前的城市
-        currentProvince: currentProvince ? currentProvince : '',
-        currentCity: currentCity ? currentCity : '',
-        //热门城市
-        hotCityData: !hotCityData.data.data ? [] : hotCityData.data.data,
-        //车源列表
-        carSourceData: !carSourceData.data.data ? [] : carSourceData.data.data,
-        //优惠专区
-        discountCarData: !discountCarData.data.data
-          ? []
-          : discountCarData.data.data,
-        //车源新闻
-        carNewsData: !carNewsData.data.data ? [] : carNewsData.data.data,
-        statisticsData: !statisticsData.data.data
-          ? {}
-          : statisticsData.data.data,
-        //推荐车源
-        recommendCarData: !recommendCarData.data.data
-          ? []
-          : recommendCarData.data.data
-      }
-    } else {
-      error({ statusCode: 500, message: '查找不到该专线列表' })
+    // if (
+    //   hotCityData.status === 200 ||
+    //   carSourceData.status === 200 ||
+    //   discountCarData.status === 200 ||
+    //   carNewsData.status === 200 ||
+    //   statisticsData.status === 200 ||
+    //   recommendCarData.status === 200 ||
+    //   //用户点评车类型
+    //   carTypeData1.status === 200 ||
+    //   carTypeData2.status === 200 ||
+    //   carTypeData3.status === 200 ||
+    //   carTypeData4.status === 200 ||
+    //   monthDriverData.status === 200
+    // ) {
+    return {
+      //获取当前的城市
+      currentProvince: currentProvince ? currentProvince : '',
+      currentCity: currentCity ? currentCity : '',
+      //热门城市
+      hotCityData:
+        hotCityData.status === 200 ? hotCityData.data.data || [] : [],
+      //车源列表
+      carSourceData:
+        carSourceData.status === 200 ? carSourceData.data.data || [] : [],
+      //优惠专区
+      discountCarData:
+        discountCarData.status === 200 ? discountCarData.data.data || [] : [],
+      //车源新闻
+      carNewsData:
+        carNewsData.status === 200 ? carNewsData.data.data || [] : [],
+      statisticsData:
+        statisticsData.status === 200 ? statisticsData.data.data || {} : {},
+      //推荐车源
+      recommendCarData:
+        recommendCarData.status === 200 ? recommendCarData.data.data || [] : [],
+
+      //用户点评车类型
+      carTypeData1:
+        carTypeData1.status === 200 ? carTypeData1.data.data || [] : [],
+      carTypeData2:
+        carTypeData2.status === 200 ? carTypeData2.data.data || [] : [],
+      carTypeData3:
+        carTypeData3.status === 200 ? carTypeData3.data.data || [] : [],
+      carTypeData4:
+        carTypeData4.status === 200 ? carTypeData4.data.data || [] : [],
+      //本月人气车主
+      monthDriverData:
+        monthDriverData.status === 200 ? monthDriverData.data.data || [] : []
     }
+    // }
+    // else {
+    //   error({ statusCode: 500, message: '查找不到该专线列表' })
+    // }
+  },
+  created() {
+    //添加收藏字段
+    // this.carSourceData.forEach((item, index, array) => {
+    //   item.iscollect = true
+    // })
+    // this.recommendCarData.forEach((item, index, array) => {
+    //   item.iscollect = true
+    // })
   },
   mounted() {
     // this.intSwiper1()
     let that = this
     this.$nextTick(() => {
       this.getCookies()
+      //处理收藏的数据
+      this.handleData()
       //幻灯片
       this.intSwiper2()
       //打印返回的数据
@@ -966,6 +1115,14 @@ export default {
       console.log('优惠专区', this.discountCarData)
       console.log('最新新闻10', this.carNewsData)
       console.log('车源推荐', this.recommendCarData)
+      console.log('用户点评1', this.carTypeData1)
+      console.log('用户点评2', this.carTypeData2)
+      console.log('用户点评3', this.carTypeData3)
+      console.log('用户点评4', this.carTypeData4)
+      console.log('本月人气车主', this.monthDriverData)
+      console.log('用户成交量', this.statisticsData)
+      // console.log('行业新闻', this.hyNewData)
+      // console.log('客户案例', this.khNewData)
     })
 
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
@@ -978,6 +1135,9 @@ export default {
       // 地点插件
       $('#groom_pageinp1').citypicker()
       $('#groom_pageinp2').citypicker()
+      //推荐我
+      $('#recommend_pageinp1').citypicker()
+      $('#recommend_pageinp2').citypicker()
       //登录成功赋值
       $('body').on('login.success', () => {
         that.isToken = $.cookie('access_token') ? true : false
@@ -1041,10 +1201,18 @@ export default {
         })
       })
     },
-    //登录
-    //登录
-    showLogin() {
-      $('body').trigger('login.show')
+    //处理组装数据
+    handleData() {
+      if (this.carSourceData.length > 0) {
+        this.carSourceData.forEach((item, index, array) => {
+          item.iscollect = true
+        })
+      }
+      if (this.recommendCarData.length > 0) {
+        this.recommendCarData.forEach((item, index, array) => {
+          item.iscollect = true
+        })
+      }
     },
     getCookies() {
       //获取省市cookies
@@ -1052,27 +1220,222 @@ export default {
       this.isToken = $.cookie('access_token') ? true : false
       this.loginMobile = $.cookie('login_mobile')
     },
+    //登录
+    showLogin() {
+      $('body').trigger('login.show')
+    },
     //搜索货源
     groomSearch() {
       let startPlace = until.getPlace('#zx_groom_star')
       let endPlace = until.getPlace('#zx_groom_end')
-
-      // 开始城市赋值
-      this.cyStartProvince = startPlace.province
-      this.cyStartCity = startPlace.city
-      this.cyStartArea = startPlace.area
-      //到达城市赋值
-      this.cyEndProvince = endPlace.province
-      this.cyEndCity = endPlace.city
-      this.cyEndArea = endPlace.area
+      startPlace.province = !startPlace.province
+        ? this.currentProvince
+        : startPlace.province
+      startPlace.city = !startPlace.city ? this.currentCity : startPlace.city
 
       //跳转
-      let url = `/cheyuan?startProvince=${this.cyStartProvince}&startCity=${
-        this.cyStartCity
-      }&startArea=${this.cyStartArea}&endProvince=${
-        this.cyEndProvince
-      }&endCity=${this.cyEndCity}&endArea=${this.cyEndArea}`
+      let url = `/cheyuan?startProvince=${startPlace.province}&startCity=${
+        startPlace.city
+      }&startArea=${startPlace.area}&endProvince=${endPlace.province}&endCity=${
+        endPlace.city
+      }&endArea=${endPlace.area}`
       window.open(url, '_blank')
+    },
+    //收藏
+    collectFn(item, index, typeData = 'carSource') {
+      //type是1收藏，0不收藏
+      //dataTpe:carSource严选车辆，车源推荐carrecommend
+      if (!$.cookie('access_token')) {
+        layer.msg('请登录，在收藏！')
+        return false
+      }
+
+      let access_token = $.cookie('access_token')
+      let user_token = $.cookie('login_userToken')
+      let carInfoId = item.id
+      let handle = item.iscollect ? 'collect' : 'cancelCollect'
+      let url = `/28-web/collect/carInfo?access_token=${access_token}&user_token=${user_token}&carInfoId=${carInfoId}&handle=${handle}`
+
+      console.log('收藏token', $.cookie('access_token'))
+      console.log('收藏user_token', $.cookie('login_userToken'))
+      console.log('收藏id', carInfoId)
+      console.log('收藏handle', handle)
+
+      this.$axios.post(url).then(res => {
+        if (res.data.status === 200) {
+          if (typeData === 'carSource') {
+            this.carSourceData[index].iscollect = !this.carSourceData[index]
+              .iscollect
+            this.$forceUpdate()
+          } else {
+            this.recommendCarData[index].iscollect = !this.recommendCarData[
+              index
+            ].iscollect
+            this.$forceUpdate()
+          }
+          layer.msg(res.data.data)
+        } else {
+          layer.msg(res.data.errorInfo)
+        }
+      })
+
+      // const form = new FormData()
+      // form.append('token', $.cookie('access_token'))
+      // form.append('user_token', $.cookie('login_userToken'))
+      // form.append('carInfoId', id)
+      // form.append('handle', 'collect')
+
+      // let config = {
+      //   headers: {
+      //     'Content-Type': 'multipart/form-data'
+      //   }
+      // }
+      // this.$axios
+      //   .post('/28-web/collect/carInfo', form, config)
+      //   .then(res => {
+      //     console.log(res)
+      //   })
+      //   .catch(res => {
+      //     console.log(res)
+      //   })
+    },
+    //推荐我
+    groomMeFn() {
+      let that = this
+      //手机号码验证
+      if (this.groomPhone === '') {
+        layer.msg('手机号码不能为空！')
+        return false
+      }
+
+      if (!AFLC_VALID.MOBILE.test(this.groomPhone)) {
+        layer.msg('手机号码必须为11为数字！')
+        return false
+      }
+
+      //获取车辆的类型
+      //第一次非空才能请求
+      if (!this.carTypeData) {
+        console.log('只能请求一次')
+        this.$axios
+          .get('/28-web/sysDict/getSysDictByCodeGet/AF018')
+          .then(res => {
+            this.carTypeData =
+              res.data.status === 200 ? res.data.data || [] : []
+            if (this.carTypeData.length > 0) {
+              let selected = {
+                code: '',
+                name: '请选择车辆类型'
+              }
+              this.carTypeData.unshift(selected)
+              this.carTypeSelected = this.carTypeData[0].code
+            }
+          })
+      }
+
+      layer.open({
+        type: 1,
+        title: '推荐我',
+        area: ['600px', '450px'], //宽高
+        btn: ['确定', '取消'],
+        content: $('#recommend'),
+        cancel: function() {
+          that.clearGroomData()
+          console.log('取消按钮')
+          layer.closeAll()
+        },
+        yes: function() {
+          that.groomPlace()
+          //验证错误
+          let check = that.groomValidator()
+          if (!check) {
+            return false
+          }
+          //请求
+          that.groomAPi()
+          //清空数据
+          that.clearGroomData()
+          layer.closeAll()
+        },
+        btn2: function() {
+          //清空数据
+          that.clearGroomData()
+          console.log('取消按钮')
+          layer.closeAll()
+        }
+      })
+    },
+    //推荐我开始地点，结束地点赋值
+    groomPlace() {
+      let startPlace = until.getPlace('#recommend_start')
+      let endPlace = until.getPlace('#recommend_end')
+
+      // 开始城市赋值
+      this.grStartProvince = startPlace.province
+      this.grStartCity = startPlace.city
+      this.grStartArea = startPlace.area
+      //到达城市赋值
+      this.grEndProvince = endPlace.province
+      this.grEndCity = endPlace.city
+      this.grEndArea = endPlace.area
+    },
+    //验证数据
+    groomValidator() {
+      if (!this.grStartProvince && !this.grStartCity) {
+        layer.msg('开始的省市必填！')
+        return false
+      }
+      if (!this.grEndProvince && !this.grEndCity) {
+        layer.msg('到达的省市必填！')
+        return false
+      }
+      if (!this.carTypeSelected) {
+        layer.msg('您还没选择车辆的类型！')
+        return false
+      }
+      return true
+    },
+    //清空数据
+    clearGroomData() {
+      // 开始城市赋值
+      this.grStartProvince = ''
+      this.grStartCity = ''
+      this.grStartArea = ''
+      //到达城市赋值
+      this.grEndProvince = ''
+      this.grEndCity = ''
+      this.grEndArea = ''
+      //select
+      this.carTypeSelected = this.carTypeData[0].code
+      this.groomPhone = ''
+      //地址插件重置
+      $('#recommend_pageinp1').citypicker('reset')
+      $('#recommend_pageinp2').citypicker('reset')
+    },
+    //推荐我请求提交数据
+    groomAPi() {
+      //helpFind/carInfo/create
+      this.$axios
+        .post('/28-web/helpFind/carInfo/create', {
+          carType: this.carTypeSelected,
+          msgMobile: this.groomPhone,
+
+          startProvince: this.grStartProvince,
+          startCity: this.grStartCity,
+          startArea: this.grStartArea,
+
+          endProvince: this.grEndProvince,
+          endCity: this.grEndCity,
+          endArea: this.grEndArea
+        })
+        .then(res => {
+          if (res.data.status === 200) {
+            console.log('推荐我请求返回数据', res)
+            layer.msg('推荐成功！')
+          } else {
+            layer.msg(res.data.data.errorInfo)
+          }
+        })
     }
   }
 }
@@ -1130,6 +1493,7 @@ export default {
   .link_collect {
     display: inline-block;
     width: 100px;
+    cursor: pointer;
   }
 }
 /*1、导航*/
@@ -1558,6 +1922,27 @@ export default {
         white-space: nowrap;
         vertical-align: middle;
       }
+    }
+  }
+}
+.recommend_pop {
+  padding: 50px 0 0 100px;
+  .recommend_city {
+    position: relative;
+    margin-bottom: 30px;
+    width: 400px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #ddd;
+  }
+  .select_box {
+    > select {
+      text-indent: 10px;
+      width: 400px;
+      height: 40px;
+      line-height: 40px;
+      border: 1px solid #ddd;
+      outline: none;
     }
   }
 }

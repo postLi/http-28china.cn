@@ -27,7 +27,10 @@ export const state = () => ({
   // 物流网点汇总页
   wuliu_newest: [], // 最新动态
   wuliu_hyzx: [], // 行业资讯
-  wuliu_ccyps: [] // 仓储与配送
+  wuliu_ccyps: [], // 仓储与配送
+  // 车源汇总页
+  cheyuan_wzgg: [], // 网站公告
+  cheyuan_khal: [] // 客户案例
 })
 
 export const mutations = {

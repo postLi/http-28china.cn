@@ -558,23 +558,10 @@ export default {
         : query.startp || areaData.currentProvinceFullName
     let startc =
       query.startc === '' ? '' : query.startc || areaData.currentAreaFullName
-    let starta = query.starta
-    let endp = query.endp
-    let enda = query.enda
-    let endc = query.endc
-
-    if (!starta || starta == 'null') {
-      starta = ''
-    }
-    if (!endp || endp == 'null') {
-      endp = ''
-    }
-    if (!enda || enda == 'null') {
-      enda = ''
-    }
-    if (!endc || endc == 'null') {
-      endc = ''
-    }
+    let starta = query.starta || ''
+    let endp = query.endp || ''
+    let enda = query.enda || ''
+    let endc = query.endc || ''
     let vo = {
       currentPage: 1,
       pageSize: 15,
@@ -680,30 +667,6 @@ export default {
                     $('.list_tiaoj span').removeClass('active')
                     $(this).toggleClass('active')
                   })
-
-                  function onCheckPage() {
-                    var beginPage = parseInt(
-                      document.beginPagefrm.beginPage.value
-                    )
-                    if (isNaN(beginPage)) {
-                      return false
-                    }
-                    if (beginPage <= 0) {
-                      beginPage = 1
-                    }
-                    if (beginPage > 100) {
-                      beginPage = 100
-                    }
-                    if (beginPage > 1) {
-                      document.beginPagefrm.action =
-                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-                        beginPage
-                    } else {
-                      document.beginPagefrm.action =
-                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-                    }
-                    return true
-                  }
 
                   $('#pagination1').pagination({
                     currentPage: 1,

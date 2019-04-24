@@ -512,7 +512,7 @@
               <div class="discuss_ad_hd">
                 <img 
                   class="ad_hd_img"  
-                  src="//imgcdn50.zuzuche.com/assets/book/desktop/book/images/reviews_banner_text-305b1b2dc9c12ac66aedb8620f257c02.png">
+                  src="../../static/images/huizong/cheyuan/reviews_banner_text.png">
               </div>
               <ul class="usr_discuss_tab">
                 <li 

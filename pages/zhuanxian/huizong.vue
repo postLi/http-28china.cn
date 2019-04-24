@@ -650,8 +650,13 @@
                        
               <div class="h_operate">
                 <a 
-                  href="" 
+                  v-if="item.isCollect"
+                  @click="collectFn(item)"
                   class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+                <a 
+                  v-else
+                  @click="collectFn(item)"
+                  class="link_collect"><i class="iconfont iconshoucang1"/>取消收藏</a>                 
                 <a 
                   :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
                   target="_blank"
@@ -814,7 +819,6 @@
               </div>
               <div class="rank_txt_praise">好评率{{ item.evaGoodCountRate }}%</div>
             </div>
-
           </a>
         </li>
       </ul>  
@@ -1029,58 +1033,72 @@
     <!-- 28问答 -->
     <div class="MD-home-qa-qa-area MD-home-qa-js-qa-area">
       <div class="MD-home-qa-left">
-        <a 
-          href="" 
-          class="MD-home-qa-qa-hot qa-hot">
-          <span class="tag hot-tag">热点 &gt;</span>
-          <img 
-            class="MD-home-qa-qa-pic" 
-            src="../../static/images/huizong/_rd01.jpg">
-          <img 
-            src="" 
-            class="MD-home-qa-ad-little-icon">
-          <span class="MD-home-qa-tit">10万整辆复古车，玩的就是情调</span>
-        </a>
-        <div class="MD-home-qa-qa-list">
-          <p><a 
-            href=""
-            class="MD-home-qa-list-txt">新手开车五大省油技巧 老司机带带我！</a></p>
-          <p><a 
-            href="" 
-            class="MD-home-qa-list-txt">二手车过户那些事儿！满满的干货</a></p>
-          <p><a 
-            href="" 
-            class="MD-home-qa-list-txt">重磅！北京拟自7月1日起分步实施国六排放标准</a></p>
-          <p><a 
-            href="" 
-            class="MD-home-qa-list-txt">二手车如何出售才能卖高价？</a></p>
+        <!-- v-if="$store.state.news.zhuanxian_hot.lenght>0" -->
+        
+        <div
+          class="MD-home-qa-box "
+          v-if="$store.state.news.zhuanxian_hot.length>0">
+          <a 
+            :href="$store.state.news.zhuanxian_hot[0].url" 
+            target="_blank"
+            class="MD-home-qa-qa-hot qa-hot">
+            <span class="tag hot-tag">热点 &gt;</span>
+            <img 
+              class="MD-home-qa-qa-pic" 
+              :src="$store.state.news.zhuanxian_hot[0].titleImg||noneImg">
+            <span class="MD-home-qa-tit">{{ $store.state.news.zhuanxian_hot[0].title }}</span>
+          </a>
+        </div>
+      
+        <div 
+        class="MD-home-qa-qa-list">
+          <p
+            v-for="(item, index) in $store.state.news.zhuanxian_hot"
+            :key="index">
+            <a 
+              v-if="index>0"
+              :href="item.url" 
+              target="_blank"
+              class="MD-home-qa-list-txt">{{ item.title }}</a>
+          </p>         
         </div>
       </div>
       <div class="MD-home-qa-right">
-        <a 
-          href="" 
-          class="MD-home-qa-click MD-home-qa-book-click">
-          <span class="tag book-tag">宝典 &gt;</span>
-          <img 
-            class="MD-home-qa-imgs" 
-            src="../../static/images/huizong/_rd02.jpg">
-          <div class="MD-home-qa-right-tit">
-            <span class="MD-home-qa-right-title">十年开不坏 那些足以让修车师傅失业的车</span>
-            <span class="MD-home-qa-right-desc">十年开不坏 那些足以让修车师傅失业的车 “我最近要换车了” “你终于舍得换你那老捷达了” “也该换了，十几年了，买这车的时候，我还在上学，现在我孩子都上学了，这车还在开” “你这车还真够皮实的”</span>
-          </div>
-        </a>
-        <a 
-          href="" 
-          class="MD-home-qa-click MD-home-qa-article-click" >
-          <span class="tag tag art-tag">文章 &gt;</span>
-          <img 
-            class="MD-home-qa-imgs" 
-            src="../../static/images/huizong/_rd02.jpg">
-          <div class="MD-home-qa-right-tit">
-            <span class="MD-home-qa-right-title">找一辆适合胖子开的车就这么难吗？</span>
-            <span class="MD-home-qa-right-desc">找一辆适合胖子开的车就这么难吗？</span>
-          </div>
-        </a>
+        <div>      
+          <a 
+            v-for="(item, index) in $store.state.news.zhuanxian_baodian"
+            :key="index"
+            :href="item.url" 
+            target="_blank"
+            class="MD-home-qa-click MD-home-qa-book-click">
+            <span class="tag book-tag">宝典 &gt;</span>
+            <img 
+              class="MD-home-qa-imgs" 
+              :src="$store.state.news.zhuanxian_hot[0].titleImg||noneImg">
+            <div class="MD-home-qa-right-tit">
+              <span class="MD-home-qa-right-title">{{ item.title }}</span>
+              <span class="MD-home-qa-right-desc">十年开不坏 那些足以让修车师傅失业的车 “我最近要换车了” “你终于舍得换你那老捷达了” “也该换了，十几年了，买这车的时候，我还在上学，现在我孩子都上学了，这车还在开” “你这车还真够皮实的”</span>
+            </div>
+          </a>   
+        </div>
+        <div>
+          <a 
+            v-for="(item, index) in $store.state.news.zhuanxian_article"
+            :key="index"
+            :href="item.url" 
+            target="_blank"
+            class="MD-home-qa-click MD-home-qa-article-click" >
+            <span class="tag tag art-tag">文章 &gt;</span>
+            <img 
+              class="MD-home-qa-imgs" 
+              :src="$store.state.news.zhuanxian_hot[0].titleImg||noneImg">
+            <div class="MD-home-qa-right-tit">
+              <span class="MD-home-qa-right-title">{{ item.title }}</span>
+              <span class="MD-home-qa-right-desc">找一辆适合胖子开的车就这么难吗？</span>
+            </div>
+          </a>
+        </div>
+
       </div>
       <div class="clear"/>
     </div>
@@ -1154,7 +1172,62 @@ export default {
       // hotEndArea: ''
     }
   },
-
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 94,
+        count: 5,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'zhuanxian_hot',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 94,
+        count: 1,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'zhuanxian_baodian',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 94,
+        count: 1,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'zhuanxian_article',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+  },
   async asyncData({ $axios, app, query, error }) {
     //服务端获取省市cookies
     let currentProvince = app.$cookies.get('currentProvinceFullName')
@@ -1280,13 +1353,31 @@ export default {
         let isYun = item.otherServiceCodeList.indexOf('AF02503') !== -1
         let isDai = item.otherServiceCodeList.indexOf('AF02501') !== -1
         let isPiao = item.otherServiceCodeList.indexOf('AF02506') !== -1
-        item.isbao = isbao
-        item.isYun = isYun
-        item.isDai = isDai
-        item.isPiao = isPiao
+        // item.isbao = isbao
+        // item.isYun = isYun
+        // item.isDai = isDai
+        // item.isPiao = isPiao
+        this.$set(item, 'isbao', isbao)
+        this.$set(item, 'isYun', isYun)
+        this.$set(item, 'isDai', isDai)
+        this.$set(item, 'isPiao', isPiao)
+        this.$set(item, 'isCollect', true)
       })
-      console.log('打印专线数据', this.hotLineData)
     }
+
+    // if (this.hotLineData.length > 0) {
+    //   this.hotLineData.forEach((item, index, array) => {
+    //     let isbao = item.otherServiceCodeList.indexOf('AF02502') !== -1
+    //     let isYun = item.otherServiceCodeList.indexOf('AF02503') !== -1
+    //     let isDai = item.otherServiceCodeList.indexOf('AF02501') !== -1
+    //     let isPiao = item.otherServiceCodeList.indexOf('AF02506') !== -1
+    //     item.isbao = isbao
+    //     item.isYun = isYun
+    //     item.isDai = isDai
+    //     item.isPiao = isPiao
+    //   })
+    //   console.log('打印专线数据', this.hotLineData)
+    // }
   },
   mounted() {
     let that = this
@@ -1297,6 +1388,9 @@ export default {
       console.log('热门专线', this.hotLineData)
       console.log('降价专区', this.dropPriceData)
       console.log('最新用户成交量', this.userOrdeData)
+      console.log('新闻热点', this.$store.state.news.zhuanxian_hot)
+      console.log('新闻宝典', this.$store.state.news.zhuanxian_baodian)
+      console.log('新闻文章', this.$store.state.news.zhuanxian_article)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
@@ -1335,7 +1429,7 @@ export default {
       this.isToken = $.cookie('access_token') ? true : false
       this.loginMobile = $.cookie('login_mobile')
     },
-
+    handleData() {},
     //选项卡
     groomTab(index) {
       this.groomIndex = index
@@ -1367,12 +1461,9 @@ export default {
       }&enda=${endPlace.area}`
       window.open(zxUrl, '_blank')
     },
-    groomMeFn(type = 0) {
-      let phone
-      if (type === 0) {
-        console.log('专线电话', this.groomPhone1)
-      } else {
-      }
+    //点击收藏
+    collectFn() {},
+    groomMeFn() {
       // console.log('000000000000000')
       // layer.open({
       //   type: 1,
@@ -2140,14 +2231,15 @@ export default {
     }
     .MD-home-qa-qa-pic {
       display: block;
-      width: 100%;
+      width: 480px;
+      height: 320px;
     }
     .MD-home-qa-tit {
       display: block;
       width: 428px;
       padding: 0 30px;
       font-size: 18px;
-      color: #fff;
+      color: $gray;
       line-height: 60px;
       position: absolute;
       bottom: 0;

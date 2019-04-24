@@ -30,7 +30,11 @@ export const state = () => ({
   wuliu_ccyps: [], // 仓储与配送
   // 车源汇总页
   cheyuan_wzgg: [], // 网站公告
-  cheyuan_khal: [] // 客户案例
+  cheyuan_khal: [], // 客户案例
+  //专线汇总
+  zhuanxian_hot: [], //热点
+  zhuanxian_baodian: [], //宝典
+  zhuanxian_article: [] //文章
 })
 
 export const mutations = {

@@ -1077,11 +1077,10 @@ export default {
   mounted() {
     // this.intSwiper1()
     let that = this
-    //处理收藏的数据
-    this.handleData()
     this.$nextTick(() => {
       this.getCookies()
-
+      //处理收藏的数据
+      this.handleData()
       //幻灯片
       this.intSwiper2()
       //打印返回的数据

@@ -493,10 +493,13 @@
               </div>
               <div class="info_user_text ">
                 <span>{{ item.companyName }}</span>
-                <span><b>{{ item.line }}</b></span>                   
+                <span><b>{{ item.line }}</b></span>
+                <span>专线进行下单</span>                   
                 <a 
-                  href=""
-                  class="info_user_text_link fr">查看货源 
+                  class="info_user_text_link fr"
+                  target="_blank"
+                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId"
+                >查看货源 
               </a></div>
             </li>
           </ul>
@@ -582,14 +585,17 @@
           <li
             v-for="(item,index) in hotLineData"
             :key="index">
+
             <div class="hot_line_box">
+    
               <div class="h_pic">   
                 <a 
                   target="_blank"
-                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">     
-                  <img :src="item.rangeLogo">
+                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">   
+                  <img :src="item.rangeLogo"> 
+                </a>    
+              </div>
               
-              </a></div>
               <div class="wl_box">
                 <!-- @click="toLineDetail(item)" -->
                 <div class="h_place">
@@ -600,20 +606,17 @@
                   <span class="place">{{ item.endLocation }}</span>
                 </div>
                 <div class="h_company">
-                  <div class="name fl"><a 
-                    :href="'/member/'+item.companyId"
-                    target="_blank">{{ item.companyName }}</a></div>
+                  <div class="name fl">
+                  {{ item.companyName }}</div>
                   <div 
-                    v-if="item.isEq"
-                    class="icon_box fl">
+                  class="icon_box fl">
                     <creditIcon :credit="item.credit" />
                   </div>
                   <a 
                     :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                    target="_blank">  <span 
-                   
-                  class="fr icon_qq"/></a>
-                
+                    target="_blank">  
+                    <span class="fr icon_qq"/>
+                  </a>               
                 </div>
                 <div class="h_praise">
                   <div class="fl"><span>好评</span>{{ item.goodEvaCount }}</div>
@@ -642,16 +645,17 @@
                       v-if="item.isPiao"
                       class="item_icon icon_green">票</span>
                   </div>
-                </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                  <a 
-                    :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
-                    target="_blank"
-                    class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-                </div>
+                </div>        
+              </div>  
+                       
+              <div class="h_operate">
+                <a 
+                  href="" 
+                  class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+                <a 
+                  :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
+                  target="_blank"
+                  class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
               </div>
             </div>
           </li>
@@ -695,45 +699,36 @@
             v-for="(item,index) in dropPriceData"
             :key="index">
             <div class="hot_line_box">
-              <div class="h_pic">        
+          
+              <div class="h_pic">
                 <a 
                   target="_blank"
-                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">
+                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">        
                   <img :src="item.rangeLogo">
                 </a>
-              
               </div>
+         
               <div class="wl_box">
-                <div 
-                  class="h_place"
-                  style="cursor:pointer"
-                  @click="toLineDetail(item)"
-                >
-                  
+                <div class="h_place">                
                   <span 
-                    style="margin-right:5px"
-                    class="icon icon_start">始</span>
-                  <span class="place">{{ item.startLocation.length>5?item.startLocation.substring(0,5)+'..':item.startLocation }}</span>
+                  class="icon icon_start">始</span>
+                  <span class="place">{{ item.startLocation }}</span>
                   <span 
-                    style="margin-right:5px"
-                    class="icon icon_end">终</span>
-                  <span class="place">{{ item.endLocation.length>6?item.endLocation.substring(0,6)+'..':item.endLocation }}</span>
+                  class="icon icon_end">终</span>
+                  <span class="place">{{ item.endLocation }}</span>
                 </div>
                 <div class="h_company">
-                  <div class="name fl"><a 
-                    :href="'/member/'+item.companyId"
-                    target="_blank">{{ item.companyName }}</a></div>
+                  <div class="name fl">{{ item.companyName }}</div>
                   <div class="icon_box fl">
                     <creditIcon :credit="item.credit" />
                   </div>
                   <a 
                     :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                    target="_blank"><span 
-                      class="fr icon_qq"
-                  /></a>
+                    target="_blank">
+                  <span class="fr icon_qq" /></a>
                 </div>
                 <div class="h_type m_t10">
-                  <span class="icon_sale">{{ item.weightDiscount?((item.weightDiscount)/10).toFixed(2):item.weightDiscount }}折</span>
+                  <span class="icon_sale">{{ item.weightDiscount }}折</span>
                   <div class="type_box">
                     <span class="name">重货:</span>
                     <span class="item"><b>{{ item.weightPrice }}</b></span>
@@ -746,20 +741,21 @@
                   </div>
                 </div>
                 <div class="h_market">
-                  <span class="h_market_price fl">比行情价格低<span 
-                    class="h_market_num"
-                    style="padding-left:3px">{{ item.belowMarketPrice }}%</span></span>
+                  <span class="h_market_price fl">比行情价格低
+                  <span class="h_market_num">{{ item.belowMarketPrice }}%</span></span>
                   <span class="h_market_order fr">已有{{ item.orderNumber }}人下单</span>
                 </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                  <a 
-                    :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
-                    target="_blank"
-                    class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-                </div>
+   
+              </div>
+       
+              <div class="h_operate">
+                <a 
+                  href="" 
+                  class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+                <a 
+                  :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
+                  target="_blank"
+                  class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
               </div>
             </div>
           </li>
@@ -1148,14 +1144,14 @@ export default {
       loginMobile: '',
       //帮我推荐
       groomPhone1: '',
-      groomPhone2: '',
+      groomPhone2: ''
       // 热门地点插件
-      hotStartProvince: '',
-      hotStartCity: '',
-      hotStartArea: '',
-      hotEndProvince: '',
-      hotEndCity: '',
-      hotEndArea: ''
+      // hotStartProvince: '',
+      // hotStartCity: '',
+      // hotStartArea: '',
+      // hotEndProvince: '',
+      // hotEndCity: '',
+      // hotEndArea: ''
     }
   },
 
@@ -1363,21 +1359,12 @@ export default {
       let startPlace = until.getPlace('#hot_start')
       let endPlace = until.getPlace('#hot_end')
 
-      // 开始城市赋值
-      this.hotStartProvince = startPlace.province
-      this.hotStartCity = startPlace.city
-      this.hotStartArea = startPlace.area
-      //到达城市赋值
-      this.hotEndProvince = endPlace.province
-      this.hotEndCity = endPlace.city
-      this.hotEndArea = endPlace.area
-
       //跳转
-      let zxUrl = `/zhuanxian/list?startp=${this.hotStartProvince}&startc=${
-        this.hotStartCity
-      }&starta=${this.hotStartArea}&endp=${this.hotEndProvince}&endc=${
-        this.hotEndCity
-      }&enda=${this.hotEndArea}`
+      let zxUrl = `/zhuanxian/list?startp=${startPlace.province}&startc=${
+        startPlace.city
+      }&starta=${startPlace.area}&endp=${endPlace.province}&endc=${
+        endPlace.city
+      }&enda=${endPlace.area}`
       window.open(zxUrl, '_blank')
     },
     groomMeFn(type = 0) {

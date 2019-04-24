@@ -482,7 +482,8 @@
                 <div class="CY_list_time"><i class="iconfont iconshijian"/>{{ item.createTime }}</div>
               </div>
             </a>
-            <div class="h_operate">        
+            <div class="h_operate">
+              {{ item.iscollect +'=====' }}        
               <a 
                 v-show="item.iscollect" 
                 @click="collectFn(item,index,'recommend')"
@@ -1077,10 +1078,11 @@ export default {
   mounted() {
     // this.intSwiper1()
     let that = this
+    //处理收藏的数据
+    this.handleData()
     this.$nextTick(() => {
       this.getCookies()
-      //处理收藏的数据
-      this.handleData()
+
       //幻灯片
       this.intSwiper2()
       //打印返回的数据
@@ -1186,6 +1188,7 @@ export default {
           item.iscollect = true
         })
       }
+      this.$forceUpdate()
     },
     getCookies() {
       //获取省市cookies

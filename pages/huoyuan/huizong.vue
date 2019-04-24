@@ -283,7 +283,7 @@
         <div class="hy_info_user_box fl">
           <ul 
             class="hy_info_user_list"
-            v-if="newListData!== undefined && newListData!== null &&newListData.length>0">
+            v-if="newListData.length>0">
             <li
               v-for="(item, index) in newListData" 
               :key="index">

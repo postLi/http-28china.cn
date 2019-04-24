@@ -207,7 +207,7 @@
             class="title_link fr">更多车源<i class="iconfont iconjiantou2"/>
           </a>         
         </div>
-        <div class="discount_left fl">优惠券</div>
+        <div class="discount_left fl"><img src="../../static/images/huizong/cheyuan/cy_ad.png"></div>
         <div class="discount_right fr">
           <ul class="d_car_list">
             <li 
@@ -307,7 +307,10 @@
           <h3>最新成交用户</h3>
         </div>
         <div class="hy_info_user_box fl">
-          <ul class="hy_info_user_list">
+          <ul 
+            class="hy_info_user_list"
+            v-if="carNewsData.length>0"
+          >
             <li 
               v-for="(item,index) in carNewsData"
               :key="index">
@@ -325,6 +328,9 @@
               </div>
             </li> 
           </ul>
+          <div 
+            class="error"
+            v-else>没有数据</div>
         </div>
       </div>
       <div class="hy_info_col2 fl clearfix">
@@ -595,91 +601,29 @@
               </div>      
             </div>
           </div>
-          <div class="swiper-slide">
+          <div 
+            class="swiper-slide"
+            v-for="(item,index) in userList"
+            :key="index">
             <div class="discuss_item">
               <div 
                 class="discuss_item_pic" 
-                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/41/2302afa856b62e5f33be9e1a80656da2_1000x.jpg) ">
+                :style="{backgroundImage:'url(' + item.userBackground + ')'}"
+              >
+                <!-- :style="{background-image: item.userBackground}" -->
                 <div
                   class="item_pic_user"
-                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
+                  :style="{backgroundImage:'url(' + item.userImage + ')'}"/>
               </div>
               <div class="discuss_item_content">
-                <div class="content-tit">来自于彭**的评价</div>
-                <div class="content-score">非常满意 10 分</div>
-                <div class="content-text">很满意，过程中有问必答 回复也很及时</div>
-                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
+                <div class="content-tit">来自于{{ item.userName }}的评价</div>
+                <div class="content-score">非常满意 {{ item.estimate }} 分</div>
+                <div class="content-text">{{ item.txt }}</div>
+                <div class="content-address"><i class="iconfont iconweizhi"/>{{ item.address }}</div>
               </div>
             </div>
           </div>
-          <div class="swiper-slide">
-            <div class="discuss_item">
-              <div 
-                class="discuss_item_pic" 
-                style="background-image:url(//imgcdn50.zuzuche.com/world/survey/view/22/462cac03b2935ed4d3ab75f424f1deb0_1000x.jpg);">
-                <div
-                  class="item_pic_user"
-                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=14832701&amp;version=v2&quot;);"/>
-              </div>
-              <div class="discuss_item_content">
-                <div class="content-tit">来自于彭**的评价</div>
-                <div class="content-score">非常满意 10 分</div>
-                <div class="content-text">在租租车上预定非常方便，没有后顾之忧，同时给你行程规划的导航载入。很方便</div>
-                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="discuss_item">
-              <div 
-                class="discuss_item_pic" 
-                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
-                <div
-                  class="item_pic_user"
-                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
-              </div>
-              <div class="discuss_item_content">
-                <div class="content-tit">来自于彭**的评价</div>
-                <div class="content-score">非常满意 10 分</div>
-                <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
-                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="discuss_item">
-              <div 
-                class="discuss_item_pic" 
-                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
-                <div
-                  class="item_pic_user"
-                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
-              </div>
-              <div class="discuss_item_content">
-                <div class="content-tit">来自于彭**的评价</div>
-                <div class="content-score">非常满意 10 分</div>
-                <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
-                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
-              </div>
-            </div>
-          </div>
-          <div class="swiper-slide">
-            <div class="discuss_item">
-              <div 
-                class="discuss_item_pic" 
-                style="background-image: url(//imgcdn50.zuzuche.com/world/survey/view/36/1b144728d56b8e0caae178ed7252a89e_1000x.jpg); ">
-                <div
-                  class="item_pic_user"
-                  style="background-image: url(//account.zuzuche.com/avatar.php?userid=2127358&version=v2);"/>
-              </div>
-              <div class="discuss_item_content">
-                <div class="content-tit">来自于彭**的评价</div>
-                <div class="content-score">非常满意 10 分</div>
-                <div class="content-text">因为换车，车行最后没有照合同上扣钱而是多扣了，客服能够主动而且坚持不懈的追要合同最后把钱让车行退回来了，点一万个赞！让人下次在这里租车非常有信心！</div>
-                <div class="content-address"><i class="iconfont iconweizhi"/>美国 洛杉矶 6天</div>
-              </div>
-            </div>
-          </div>
+
         </div>
         <div class="swiper-pagination"/>
         <!-- Add Arrows -->
@@ -871,6 +815,35 @@ export default {
         {
           banner: require('../../static/images/huizong/cheyuan/banner.jpg'),
           link: '/create/cheyuan'
+        }
+      ],
+      userList: [
+        {
+          userBackground: require('../../static/images/huizong/cheyuan/user_bj1.png'),
+          userImage: require('../../static/images/huizong/cheyuan/user1.png'),
+          userName: '陈**',
+          estimate: 10,
+          txt:
+            '“没加入28快运城际回头车之前，我拉货到了一个城市，需要在当地信息部交钱找货，等找到活都需要几天，有时交完钱还不一定能拉到货。加入城际回头车之后简单多了，通过APP接单，一卸完货马上装车跑第二趟，一个月多赚5000块钱',
+          address: '广州'
+        },
+        {
+          userBackground: require('../../static/images/huizong/cheyuan/user_bj2.png'),
+          userImage: require('../../static/images/huizong/cheyuan/user2.png'),
+          userName: '陆**',
+          estimate: 10,
+          txt:
+            '“之前送货到目的地之后，对周围不熟悉，总是要放空跑回去，不仅浪费车还浪费时间，现在用城际回头车之后，在卸货的空档打开APP，周围就有一堆的订单，等卸完货我也联系好货主了，马上就拉下一趟，这样每个月多跑了三五趟。”',
+          address: '广州'
+        },
+        {
+          userBackground: require('../../static/images/huizong/cheyuan/user_bj1.png'),
+          userImage: require('../../static/images/huizong/cheyuan/user1.png'),
+          userName: '贾**',
+          estimate: 10,
+          txt:
+            '“我用过不同的APP接单，最后发现还是28快运回头车上订单最多，每个月根本就闲不下来。”',
+          address: '广州'
         }
       ],
       swiperOption1: {
@@ -1564,7 +1537,7 @@ export default {
   .discount_left {
     width: 285px;
     height: 354px;
-    background: #f5f5f5;
+    text-align: center;
   }
   .discount_right {
     width: 1155px;

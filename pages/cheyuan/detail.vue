@@ -549,7 +549,7 @@
             style="margin-top: 20px">
             <div class="zx_sx"><span class="biaozhi"/><span>车主月人气榜</span></div>
             <div 
-              v-for="(item,index) in popularity" 
+              v-for="(item,index) in $store.state.cheyuan.list_pop_carowner" 
               :key="index" 
               class="rc_list">
               <div class="left">
@@ -761,13 +761,15 @@ export default {
         })
       }
     })
+    await store.dispatch('cheyuan/GETPOPCARLIST', {
+      name: 'list_pop_carowner'
+    })
   },
   async asyncData({ $axios, app, query }) {
     let zxLists, carInfoRes1
     const cy1 = await $axios.post('/28-web/carInfo/' + query.id)
     let [
       hotSearchs,
-      popularitys,
       cheComprehensives,
       code,
       queryCitys,
@@ -776,7 +778,6 @@ export default {
       cheLinks
     ] = await Promise.all([
       $axios.get('/28-web/hotSearch/carInfo/detail/links'),
-      $axios.get('/28-web/driver/driverPopularityList'),
       $axios.get(
         '/28-web/driver/comprehensive?driverId=' + cy1.data.data.driverId
       ),
@@ -857,7 +858,6 @@ export default {
         : carInfoRes1.data.status === 200
           ? carInfoRes1.data.data.list
           : [],
-      popularity: popularitys.data.status === 200 ? popularitys.data.data : [],
       hotSearchList:
         hotSearchs.data.status === 200 ? hotSearchs.data.data.links : []
     }

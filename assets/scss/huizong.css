@@ -47,7 +47,7 @@
   position: absolute;
 }
 
-.ellipsis, .p_go_city .area > span.area_city, .p_hy_list > li .md_box .area > span.area_city, .p_go_city .city, .p_hy_list > li .md_box .city, .p_owner_list .owner_name span.owner_name_companyName, .p_hy_list > li .hy_list_goods > span, .p_hy_info .hy_info_user_box .hy_info_user_text > span.info_user_text_goods, .p_co_owner_list > li .rank_tit .rank_tit_name {
+.ellipsis, .p_go_city .area > span.area_city, .p_hy_list > li .md_box .area > span.area_city, .p_go_city .city, .p_hy_list > li .md_box .city, .p_owner_list .owner_name span.owner_name_companyName, .p_hy_list > li .hy_list_goods > span, .p_hy_info .hy_info_user_box .hy_info_user_text > span.info_user_text_goods, .p_co_owner_list > li .rank_tit .rank_tit_name, .p_hot_line > li .h_place > span.place {
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -571,7 +571,7 @@
 
 .p_hy_info .hy_info_list > li {
   margin-left: 45px;
-  width: 90px;
+  width: 100px;
   line-height: 30px;
 }
 
@@ -1148,6 +1148,9 @@
 }
 
 .p_hot_line > li .h_place > span.place {
+  width: 90px;
+  height: 20px;
+  line-height: 20px;
   font-size: 16px;
   color: #333;
 }

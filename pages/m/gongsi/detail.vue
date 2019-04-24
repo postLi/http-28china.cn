@@ -9,9 +9,6 @@
     <div class="top p_r">
       <div class="b_c"/>
       <div class="body_content p_r">
-        <img
-          src="/m/gongsi/mingpian_bg_normal.png"
-          class="width_100">
         <div class="width_100 height_100 top_content">
           <img
             class="img"
@@ -442,8 +439,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .top {
-  height: 4.74rem;
-  overflow: hidden;
   .b_c {
     background: #2f3241;
     width: 10rem;
@@ -456,8 +451,9 @@ export default {
     border-radius: 0 0 50% 50%;
   }
   .top_content {
-    position: absolute;
-    top: 0;
+    background-image: url('/m/gongsi/mingpian_bg_normal.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     padding: 0.36rem;
     box-sizing: border-box;
     .img {

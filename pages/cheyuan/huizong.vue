@@ -482,8 +482,7 @@
                 <div class="CY_list_time"><i class="iconfont iconshijian"/>{{ item.createTime }}</div>
               </div>
             </a>
-            <div class="h_operate">
-              {{ item.iscollect +'=====' }}        
+            <div class="h_operate">      
               <a 
                 v-show="item.iscollect" 
                 @click="collectFn(item,index,'recommend')"

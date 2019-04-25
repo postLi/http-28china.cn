@@ -669,43 +669,6 @@ export default {
                     $('.list_tiaoj span').removeClass('active')
                     $(this).toggleClass('active')
                   })
-                  fromRouteList(routeOrderBy)
-                  function fromRouteList(routeOrderBy) {
-                    if (routeOrderBy == 'orderDesc') {
-                      orderBy = routeOrderBy
-                      $('.list_tiaoj span').removeClass('active')
-                      $('.list_tiaoj span')
-                        .eq(1)
-                        .toggleClass('active')
-                      fetchLineList(currentPage, orderBy)
-                    }
-                    if (routeOrderBy == 'creditDesc') {
-                      orderBy = 'transportAgingAsc'
-                      $('.list_tiaoj span').removeClass('active')
-                      $('.list_tiaoj span')
-                        .eq(2)
-                        .toggleClass('active')
-
-                      fetchLineList(currentPage, orderBy)
-                    }
-                    // if (routeOrderBy == 'transportAgingAsc') {
-                    //   orderBy = 'lightPrice'
-                    //   $('.list_tiaoj span').removeClass('active')
-                    //   $('.list_tiaoj span')
-                    //     .eq(3)
-                    //     .toggleClass('active')
-                    //   fetchLineList(currentPage, orderBy)
-                    // }
-                    if (routeOrderBy == 'transportAgingAsc') {
-                      orderBy = 'weigthPrice'
-                      $('.list_tiaoj span').removeClass('active')
-                      $('.list_tiaoj span')
-                        .eq(3)
-                        .toggleClass('active')
-                      $('#tj_price #tj_price2').addClass('active')
-                      fetchLineList(currentPage, orderBy)
-                    }
-                  }
 
                   $('#pagination1').pagination({
                     currentPage: 1,

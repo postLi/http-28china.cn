@@ -69,7 +69,8 @@ const _0bfcb3a3 = () => interopDefault(import('..\\pages\\act\\2019\\springDay\\
 const _70acd084 = () => interopDefault(import('..\\pages\\m\\act\\detail.vue' /* webpackChunkName: "pages_m_act_detail" */))
 const _4f1492cb = () => interopDefault(import('..\\pages\\m\\act\\list.vue' /* webpackChunkName: "pages_m_act_list" */))
 const _76ec7015 = () => interopDefault(import('..\\pages\\m\\cheyuan\\detail.vue' /* webpackChunkName: "pages_m_cheyuan_detail" */))
-const _c1e59f2a = () => interopDefault(import('..\\pages\\m\\gg\\noticeList.vue' /* webpackChunkName: "pages_m_gg_noticeList" */))
+const _23820a26 = () => interopDefault(import('..\\pages\\m\\gg\\detail.vue' /* webpackChunkName: "pages_m_gg_detail" */))
+const _b329761a = () => interopDefault(import('..\\pages\\m\\gg\\ggList.vue' /* webpackChunkName: "pages_m_gg_ggList" */))
 const _44623206 = () => interopDefault(import('..\\pages\\m\\gongsi\\detail.vue' /* webpackChunkName: "pages_m_gongsi_detail" */))
 const _3b170a20 = () => interopDefault(import('..\\pages\\m\\gongsi\\line.vue' /* webpackChunkName: "pages_m_gongsi_line" */))
 const _548d6ba1 = () => interopDefault(import('..\\pages\\m\\gongsi\\wangdian.vue' /* webpackChunkName: "pages_m_gongsi_wangdian" */))
@@ -438,9 +439,13 @@ export function createRouter() {
       component: _76ec7015,
       name: "m-cheyuan-detail"
     }, {
-      path: "/m/gg/noticeList",
-      component: _c1e59f2a,
-      name: "m-gg-noticeList"
+      path: "/m/gg/detail",
+      component: _23820a26,
+      name: "m-gg-detail"
+    }, {
+      path: "/m/gg/ggList",
+      component: _b329761a,
+      name: "m-gg-ggList"
     }, {
       path: "/m/gongsi/detail",
       component: _44623206,

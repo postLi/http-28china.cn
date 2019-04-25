@@ -10,6 +10,8 @@ export const state = () => ({
   AF009List: [], //车辆规格
   AF018List: [], //车辆类型
   NoticeList: [], // 热点通知
+  HZGGList: [], // 货主公告
+  adcode: '', // adcode
   showHome: 0
 })
 
@@ -88,6 +90,32 @@ export const actions = {
           let data = res.data
           if (data.status === 200) {
             let ndata = data.data ? data.data || [] : []
+            commit('setData', {
+              name: obj.name,
+              data: ndata
+            })
+          }
+          resolve()
+        })
+        .catch(err => {
+          resolve()
+        })
+    })
+  },
+  GETHZGG({ commit }, obj) {
+    return new Promise(resolve => {
+      this.$axios
+        .post('/aflc-common/aflcCommonNoticeApi/findShipperNoticeList', {
+          currentPage: 1,
+          pageSize: 1,
+          vo: {
+            belongCity: obj.data
+          }
+        })
+        .then(res => {
+          let data = res.data
+          if (data.status === 200) {
+            let ndata = data.data.list ? data.data.list || [] : []
             commit('setData', {
               name: obj.name,
               data: ndata

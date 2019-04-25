@@ -204,6 +204,12 @@ export default {
       scrollToGood: 0,
       scrollToMiddle: 0,
       scrollToBad: 0,
+      linedataGood: [],
+      pagesGood: 0,
+      linedataMiddle: [],
+      pagesMiddle: 0,
+      linedataBad: [],
+      pagesBad: 0,
       options: {
         // pullDownRefresh: { txt: ' ' },
         pullUpLoad: { txt: { more: '', noMore: '没有更多数据了' } },
@@ -219,9 +225,6 @@ export default {
     )
     // 专线评价列表
     let linedataAll = await getLinedataF($axios, query, 1)
-    let linedataGood = await getLinedataF($axios, query, 1, 'AF0360101')
-    let linedataMiddle = await getLinedataF($axios, query, 1, 'AF0360102')
-    let linedataBad = await getLinedataF($axios, query, 1, 'AF0360103')
     if (linedataG.data.status === 200) {
       list = [
         { id: 0, name: `全部(${linedataG.data.data.all})` },
@@ -237,20 +240,28 @@ export default {
         linedataAll.data.status === 200 ? linedataAll.data.data.list : [],
       pagesAll:
         linedataAll.data.status === 200 ? linedataAll.data.data.pages : 0,
-      linedataGood:
-        linedataGood.data.status === 200 ? linedataGood.data.data.list : [],
-      pagesGood:
-        linedataGood.data.status === 200 ? linedataGood.data.data.pages : 0,
-      linedataMiddle:
-        linedataMiddle.data.status === 200 ? linedataMiddle.data.data.list : [],
-      pagesMiddle:
-        linedataMiddle.data.status === 200 ? linedataMiddle.data.data.pages : 0,
-      linedataBad:
-        linedataBad.data.status === 200 ? linedataBad.data.data.list : [],
-      pagesBad:
-        linedataBad.data.status === 200 ? linedataBad.data.data.pages : 0,
       linedataG: linedataG.data.status === 200 ? list : []
     }
+  },
+  beforeCreate() {
+    getLinedataF(this.$axios, this.$route.query, 1, 'AF0360101').then(res => {
+      if (res.data.status === 200) {
+        this.linedataGood = res.data.data.list
+        this.pagesGood = res.data.data.pages
+      }
+    })
+    getLinedataF(this.$axios, this.$route.query, 1, 'AF0360102').then(res => {
+      if (res.data.status === 200) {
+        this.linedataMiddle = res.data.data.list
+        this.pagesMiddle = res.data.data.pages
+      }
+    })
+    getLinedataF(this.$axios, this.$route.query, 1, 'AF0360103').then(res => {
+      if (res.data.status === 200) {
+        this.linedataBad = res.data.data.list
+        this.pagesBad = res.data.data.pages
+      }
+    })
   },
   methods: {
     getScrollAll(obj) {

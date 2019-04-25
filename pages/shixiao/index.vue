@@ -505,10 +505,12 @@ export default {
         ? query.startProvince
         : app.$cookies.get('currentProvinceFullName')
     }
-    let listRangesAgingData = await getListRangesAging($axios, 1, vo)
     let parhort = vo
     delete vo.filterSign
-    let hotLines = await getHotLines($axios, 1, parhort)
+    let [listRangesAgingData, hotLines] = await Promise.all([
+      getListRangesAging($axios, 1, vo),
+      getHotLines($axios, 1, parhort)
+    ])
     return {
       listRangesAging: listRangesAgingData.list ? listRangesAgingData.list : [],
       hotLine: hotLines.list ? hotLines.list : [],
@@ -735,12 +737,11 @@ export default {
       }
       let parhort = this.vo
       delete this.vo.filterSign
-      let hotLines = await getHotLines(this.$axios, 1, parhort)
-      if (hotLines.list) {
-        this.hotLine = hotLines.list
-      } else {
-        this.hotLines = []
-      }
+      await this.$store.dispatch('shixiao/GETHOTLINES', {
+        data: parhort,
+        name: 'hotLine'
+      })
+      this.hotLine = this.$store.state.shixiao.hotLine
     },
     getSearchForm() {
       let list1 = [],

@@ -559,7 +559,7 @@ export default {
               return false
             }
 
-            let startPhone = parseInt($('.startPhone').val())
+            let startPhone = $('.startPhone').val()
             if (AFLC_VALID.MOBILE.test(startPhone)) {
               obj.startLocationContactsMobile = $('.startPhone').val()
             } else {
@@ -579,7 +579,7 @@ export default {
               return false
             }
 
-            let endPhone = parseInt($('.endPhone').val())
+            let endPhone = $('.endPhone').val()
             console.log(endPhone)
             if (AFLC_VALID.MOBILE.test(endPhone)) {
               obj.endLocationContactsMobile = $('.endPhone').val()

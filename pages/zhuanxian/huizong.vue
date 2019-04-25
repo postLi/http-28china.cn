@@ -102,9 +102,7 @@
         </a>         
       </div>
       <div class="pt_groom fl">
-        <ul 
-          :class="['hd','clearfix',groomClass]" 
-        >
+        <ul :class="['hd','clearfix',groomClass]">
           <li 
             :class="[{'active':groomIndex==0},'channel1']" 
             @mouseover="groomTab(0)" > 
@@ -161,51 +159,56 @@
               v-if="pTbusinessData.length>0">
               <li 
                 v-for="(item,index) in pTbusinessData"
-                :key="index">
+                :key="index">             
                 <div class="wl_box">
-                  <div class="hd_box">
-                    <span class="p_l5">物流商:</span>
-                    <span>{{ item.companyName }}</span>
-                    <span><creditIcon :credit="item.credit" /></span>
-                  </div>
-                  <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
-                    <div 
-                      class="city"
-                      v-if="!item.startArea">{{ item.startCity }}</div>
-                    <div
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.startCity }}</span>
-                      <span class="area_qx">{{ item.startArea }}</span>
+                  <!-- publishId -->
+                  <a 
+                    target="_blank"
+                    :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.publishId">
+                    <div class="hd_box">
+                      <span class="p_l5">物流商:</span>
+                      <span>{{ item.companyName }}</span>
+                      <span><creditIcon :credit="item.credit" /></span>
                     </div>
+                    <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
+                      <div 
+                        class="city"
+                        v-if="!item.startArea">{{ item.startCity }}</div>
+                      <div
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.startCity }}</span>
+                        <span class="area_qx">{{ item.startArea }}</span>
+                      </div>
               
-                    <span class="city-joint">
-                      <span class="joint-line"/>
-                      <span class="joint-label">发往</span>
-                      <span class="joint-line"/>
-                    </span>
-                    <div 
-                      class="city"
-                      v-if="!item.endArea">{{ item.endCity }}
+                      <span class="city-joint">
+                        <span class="joint-line"/>
+                        <span class="joint-label">发往</span>
+                        <span class="joint-line"/>
+                      </span>
+                      <div 
+                        class="city"
+                        v-if="!item.endArea">{{ item.endCity }}
+                      </div>
+                      <div 
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.endCity }}</span>
+                        <span class="area_qx">{{ item.endArea }}</span>
+                      </div>
                     </div>
-                    <div 
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.endCity }}</span>
-                      <span class="area_qx">{{ item.endArea }}</span>
+                    <div class="type_box">
+                      <span class="p_l5">货重:</span>
+                      <span class="type_item"><b>{{ item.weightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
                     </div>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">货重:</span>
-                    <span class="type_item"><b>{{ item.weightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">轻货:</span>
-                    <span class="type_item"><b>{{ item.lightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
-                  </div>
-                  <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                    <div class="type_box">
+                      <span class="p_l5">轻货:</span>
+                      <span class="type_item"><b>{{ item.lightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
+                    </div>
+                    <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                  </a>
                 </div>
                 <div class="item_order clearfix">
                   <div class="order_name fl">担保交易</div>
@@ -213,7 +216,11 @@
                     <span class="dock_icon">延时赔付</span>
                     <span class="dock_num">{{ item.goodEvaCount }}人说好</span>
                   </div>
-                  <div class="link_oder fr"><a href="">立即下单</a></div>
+                  <div class="link_oder fr">
+                    <a 
+                      target="_blank"
+                      :href="'/create/line?id='+item.id+'&publishId='+item.publishId">立即下单</a>
+                  </div>
                 </div>
               </li>
  
@@ -227,49 +234,54 @@
                 v-for="(item,index) in pToddsData"
                 :key="index">
                 <div class="wl_box">
-                  <div class="hd_box">
-                    <span class="p_l5">物流商:</span>
-                    <span>{{ item.companyName }}</span>
-                    <span><creditIcon :credit="item.credit" /></span>
-                  </div>
-                  <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
-                    <div 
-                      class="city"
-                      v-if="!item.startArea">{{ item.startCity }}</div>
-                    <div
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.startCity }}</span>
-                      <span class="area_qx">{{ item.startArea }}</span>
+                  <a 
+                    target="_blank"
+                    :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.publishId">
+
+                    <div class="hd_box">
+                      <span class="p_l5">物流商:</span>
+                      <span>{{ item.companyName }}</span>
+                      <span><creditIcon :credit="item.credit" /></span>
                     </div>
+                    <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
+                      <div 
+                        class="city"
+                        v-if="!item.startArea">{{ item.startCity }}</div>
+                      <div
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.startCity }}</span>
+                        <span class="area_qx">{{ item.startArea }}</span>
+                      </div>
               
-                    <span class="city-joint">
-                      <span class="joint-line"/>
-                      <span class="joint-label">发往</span>
-                      <span class="joint-line"/>
-                    </span>
-                    <div 
-                      class="city"
-                      v-if="!item.endArea">{{ item.endCity }}
+                      <span class="city-joint">
+                        <span class="joint-line"/>
+                        <span class="joint-label">发往</span>
+                        <span class="joint-line"/>
+                      </span>
+                      <div 
+                        class="city"
+                        v-if="!item.endArea">{{ item.endCity }}
+                      </div>
+                      <div 
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.endCity }}</span>
+                        <span class="area_qx">{{ item.endArea }}</span>
+                      </div>
                     </div>
-                    <div 
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.endCity }}</span>
-                      <span class="area_qx">{{ item.endArea }}</span>
+                    <div class="type_box">
+                      <span class="p_l5">货重:</span>
+                      <span class="type_item"><b>{{ item.weightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
                     </div>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">货重:</span>
-                    <span class="type_item"><b>{{ item.weightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">轻货:</span>
-                    <span class="type_item"><b>{{ item.lightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
-                  </div>
-                  <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                    <div class="type_box">
+                      <span class="p_l5">轻货:</span>
+                      <span class="type_item"><b>{{ item.lightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
+                    </div>
+                    <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                  </a>
                 </div>
                 <div class="item_order clearfix">
                   <div class="order_name fl">担保交易</div>
@@ -277,7 +289,11 @@
                     <span class="dock_icon">延时赔付</span>
                     <span class="dock_num">{{ item.goodEvaCount }}人说好</span>
                   </div>
-                  <div class="link_oder fr"><a href="">立即下单</a></div>
+                  <div class="link_oder fr">
+                    <a 
+                      target="_blank"
+                      :href="'/create/line?id='+item.id+'&publishId='+item.publishId">立即下单</a>
+                  </div>
                 </div>
               </li>
  
@@ -291,49 +307,55 @@
                 v-for="(item,index) in pTagingData"
                 :key="index">
                 <div class="wl_box">
-                  <div class="hd_box">
-                    <span class="p_l5">物流商:</span>
-                    <span>{{ item.companyName }}</span>
-                    <span><creditIcon :credit="item.credit" /></span>
-                  </div>
-                  <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
-                    <div 
-                      class="city"
-                      v-if="!item.startArea">{{ item.startCity }}</div>
-                    <div
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.startCity }}</span>
-                      <span class="area_qx">{{ item.startArea }}</span>
+                  <a 
+                    target="_blank"
+                    :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.publishId">
+                    <div class="hd_box">
+                      <span class="p_l5">物流商:</span>
+                      <span>{{ item.companyName }}</span>
+                      <span><creditIcon :credit="item.credit" /></span>
                     </div>
+                    <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
+                      <div 
+                        class="city"
+                        v-if="!item.startArea">{{ item.startCity }}</div>
+                      <div
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.startCity }}</span>
+                        <span class="area_qx">{{ item.startArea }}</span>
+                      </div>
               
-                    <span class="city-joint">
-                      <span class="joint-line"/>
-                      <span class="joint-label">发往</span>
-                      <span class="joint-line"/>
-                    </span>
-                    <div 
-                      class="city"
-                      v-if="!item.endArea">{{ item.endCity }}
+                      <span class="city-joint">
+                        <span class="joint-line"/>
+                        <span class="joint-label">发往</span>
+                        <span class="joint-line"/>
+                      </span>
+                      <div 
+                        class="city"
+                        v-if="!item.endArea">{{ item.endCity }}
+                      </div>
+                      <div 
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.endCity }}</span>
+                        <span class="area_qx">{{ item.endArea }}</span>
+                      </div>
                     </div>
-                    <div 
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.endCity }}</span>
-                      <span class="area_qx">{{ item.endArea }}</span>
+                    <div class="type_box">
+                      <span class="p_l5">货重:</span>
+                      <span class="type_item"><b>{{ item.weightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
                     </div>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">货重:</span>
-                    <span class="type_item"><b>{{ item.weightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">轻货:</span>
-                    <span class="type_item"><b>{{ item.lightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
-                  </div>
-                  <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                    <div class="type_box">
+                      <span class="p_l5">轻货:</span>
+                      <span class="type_item"><b>{{ item.lightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
+                    </div>
+                    <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                  </a>
+
+
                 </div>
                 <div class="item_order clearfix">
                   <div class="order_name fl">担保交易</div>
@@ -341,7 +363,11 @@
                     <span class="dock_icon">延时赔付</span>
                     <span class="dock_num">{{ item.goodEvaCount }}人说好</span>
                   </div>
-                  <div class="link_oder fr"><a href="">立即下单</a></div>
+                  <div class="link_oder fr">
+                    <a 
+                      target="_blank"
+                      :href="'/create/line?id='+item.id+'&publishId='+item.publishId">立即下单</a>
+                  </div>
                 </div>
               </li>
  
@@ -355,49 +381,54 @@
                 v-for="(item,index) in pTcreditData"
                 :key="index">
                 <div class="wl_box">
-                  <div class="hd_box">
-                    <span class="p_l5">物流商:</span>
-                    <span>{{ item.companyName }}</span>
-                    <span><creditIcon :credit="item.credit" /></span>
-                  </div>
-                  <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
-                    <div 
-                      class="city"
-                      v-if="!item.startArea">{{ item.startCity }}</div>
-                    <div
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.startCity }}</span>
-                      <span class="area_qx">{{ item.startArea }}</span>
+                  <a 
+                    target="_blank"
+                    :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.publishId">
+                    <div class="hd_box">
+                      <span class="p_l5">物流商:</span>
+                      <span>{{ item.companyName }}</span>
+                      <span><creditIcon :credit="item.credit" /></span>
                     </div>
+                    <div :class="[ !item.startArea&&!item.endArea ?'':'md_area','md_box']">
+                      <div 
+                        class="city"
+                        v-if="!item.startArea">{{ item.startCity }}</div>
+                      <div
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.startCity }}</span>
+                        <span class="area_qx">{{ item.startArea }}</span>
+                      </div>
               
-                    <span class="city-joint">
-                      <span class="joint-line"/>
-                      <span class="joint-label">发往</span>
-                      <span class="joint-line"/>
-                    </span>
-                    <div 
-                      class="city"
-                      v-if="!item.endArea">{{ item.endCity }}
+                      <span class="city-joint">
+                        <span class="joint-line"/>
+                        <span class="joint-label">发往</span>
+                        <span class="joint-line"/>
+                      </span>
+                      <div 
+                        class="city"
+                        v-if="!item.endArea">{{ item.endCity }}
+                      </div>
+                      <div 
+                        class="area"
+                        v-else>
+                        <span class="area_city">{{ item.endCity }}</span>
+                        <span class="area_qx">{{ item.endArea }}</span>
+                      </div>
                     </div>
-                    <div 
-                      class="area"
-                      v-else>
-                      <span class="area_city">{{ item.endCity }}</span>
-                      <span class="area_qx">{{ item.endArea }}</span>
+                    <div class="type_box">
+                      <span class="p_l5">货重:</span>
+                      <span class="type_item"><b>{{ item.weightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
                     </div>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">货重:</span>
-                    <span class="type_item"><b>{{ item.weightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.weightDiscountPrice }}</span>元／平方</span>
-                  </div>
-                  <div class="type_box">
-                    <span class="p_l5">轻货:</span>
-                    <span class="type_item"><b>{{ item.lightPrice }}</b></span>
-                    <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
-                  </div>
-                  <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                    <div class="type_box">
+                      <span class="p_l5">轻货:</span>
+                      <span class="type_item"><b>{{ item.lightPrice }}</b></span>
+                      <span class="type_item color_gray"><span class="type_line_through">{{ item.lightDiscountPrice }}</span>元／立方</span>
+                    </div>
+                    <div class="item_order_num">已有{{ item.orderNumber }}人下单</div>
+                  </a>
+                
                 </div>
                 <div class="item_order clearfix">
                   <div class="order_name fl">担保交易</div>
@@ -405,7 +436,11 @@
                     <span class="dock_icon">延时赔付</span>
                     <span class="dock_num">{{ item.goodEvaCount }}人说好</span>
                   </div>
-                  <div class="link_oder fr"><a href="">立即下单</a></div>
+                  <div class="link_oder fr">
+                    <a 
+                      target="_blank"
+                      :href="'/create/line?id='+item.id+'&publishId='+item.publishId">立即下单</a>
+                  </div>
                 </div>
               </li>
  
@@ -449,45 +484,24 @@
         </div>
         <div class="info_user_box fl">
           <ul class="info_user_list">
-            <li>
+            <li 
+              v-for="(item, index) in userOrdeData" 
+              :key="index">
               <div class="info_user_info">
-                <span class="info_user_info_user">11用户159****4895 </span>
-                <span class="info_user_info_time">3分钟前</span>
+                <span class="info_user_info_user"> {{ item.mobile }}</span>
+                <span class="info_user_info_time">{{ item.orderTime }}</span>
               </div>
               <div class="info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
+                <span>{{ item.companyName }}</span>
+                <span><b>{{ item.line }}</b></span>
+                <span>专线进行下单</span>                   
                 <a 
-                  href=""
-                  class="info_user_text_link fr">查看货源</a>
-              </div>
+                  class="info_user_text_link fr"
+                  target="_blank"
+                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId"
+                >查看货源 
+              </a></div>
             </li>
-            <li>
-              <div class="info_user_info">
-                <span class="info_user_info_user">22用户159****4895 </span>
-                <span class="info_user_info_time">3分钟前</span>
-              </div>
-              <div class="info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
-                <a 
-                  href=""
-                  class="info_user_text_link fr">查看货源</a>
-              </div>
-            </li>
-            <li>
-              <div class="info_user_info">
-                <span class="info_user_info_user">33用户159****4895 </span>
-                <span class="info_user_info_time">3分钟前</span>
-              </div>
-              <div class="info_user_text ">
-                <span>发布<b>广州</b>到<b>长沙</b>货源  粤F***61 </span>
-                <span>钢材| 31件|51公斤|体积21方  </span>                   
-                <a 
-                  href=""
-                  class="info_user_text_link fr">查看货源</a>
-              </div>
-            </li>   
           </ul>
         </div>
       </div>
@@ -571,14 +585,17 @@
           <li
             v-for="(item,index) in hotLineData"
             :key="index">
+
             <div class="hot_line_box">
+    
               <div class="h_pic">   
                 <a 
                   target="_blank"
-                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">     
-                  <img :src="item.rangeLogo">
-                </a>
+                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">   
+                  <img :src="item.rangeLogo"> 
+                </a>    
               </div>
+              
               <div class="wl_box">
                 <!-- @click="toLineDetail(item)" -->
                 <div class="h_place">
@@ -589,20 +606,17 @@
                   <span class="place">{{ item.endLocation }}</span>
                 </div>
                 <div class="h_company">
-                  <div class="name fl"><a 
-                    :href="'/member/'+item.companyId"
-                    target="_blank">{{ item.companyName }}</a></div>
+                  <div class="name fl">
+                  {{ item.companyName }}</div>
                   <div 
-                    v-if="item.isEq"
-                    class="icon_box fl">
+                  class="icon_box fl">
                     <creditIcon :credit="item.credit" />
                   </div>
                   <a 
                     :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                    target="_blank">  <span 
-                   
-                  class="fr icon_qq"/></a>
-                
+                    target="_blank">  
+                    <span class="fr icon_qq"/>
+                  </a>               
                 </div>
                 <div class="h_praise">
                   <div class="fl"><span>好评</span>{{ item.goodEvaCount }}</div>
@@ -620,27 +634,32 @@
                   <div class="icon_list fr">
                     <span 
                       v-if="item.isbao"
-                      class="item_icon icon_blue">保</span>
+                      class="item_icon icon_blue">保0</span>
                     <span
                       v-if="item.isYun" 
-                      class="item_icon icon_red">运</span>
+                      class="item_icon icon_red">运0</span>
                     <span 
                       v-if="item.isDai"
                       class="item_icon">代</span>
                     <span 
                       v-if="item.isPiao"
-                      class="item_icon icon_green">票</span>
+                      class="item_icon icon_green">票0</span>
                   </div>
-                </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                  <a 
-                    :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
-                    target="_blank"
-                    class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-                </div>
+                </div>        
+              </div>     
+              <div class="h_operate">
+                <a 
+                  v-if="item.isCollect"
+                  @click="collectFn(item,index)"
+                  class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+                <a 
+                  v-else
+                  @click="collectFn(item,index)"
+                  class="link_collect"><i class="iconfont iconshoucang1"/>取消收藏</a>                 
+                <a 
+                  :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
+                  target="_blank"
+                  class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
               </div>
             </div>
           </li>
@@ -681,48 +700,39 @@
         </div>
         <ul class="p_hot_line clearfix">
           <li 
-            v-for="(item,index) in priceData"
+            v-for="(item,index) in dropPriceData"
             :key="index">
             <div class="hot_line_box">
-              <div class="h_pic">        
+          
+              <div class="h_pic">
                 <a 
                   target="_blank"
-                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">
-                  <img :src="item.rangeLogo || '/images/pic/bg' + item.num + '.png'">
+                  :href="'/zhuanxian/detail?id='+item.id+'&publishId='+item.companyId">        
+                  <img :src="item.rangeLogo">
                 </a>
-              
               </div>
+         
               <div class="wl_box">
-                <div 
-                  class="h_place"
-                  style="cursor:pointer"
-                  @click="toLineDetail(item)"
-                >
-                  
+                <div class="h_place">                
                   <span 
-                    style="margin-right:5px"
-                    class="icon icon_start">始</span>
-                  <span class="place">{{ item.startLocation.length>5?item.startLocation.substring(0,5)+'..':item.startLocation }}</span>
+                  class="icon icon_start">始</span>
+                  <span class="place">{{ item.startLocation }}</span>
                   <span 
-                    style="margin-right:5px"
-                    class="icon icon_end">终</span>
-                  <span class="place">{{ item.endLocation.length>6?item.endLocation.substring(0,6)+'..':item.endLocation }}</span>
+                  class="icon icon_end">终</span>
+                  <span class="place">{{ item.endLocation }}</span>
                 </div>
                 <div class="h_company">
-                  <div class="name fl"><a 
-                    :href="'/member/'+item.companyId"
-                    target="_blank">{{ item.companyName }}</a></div>
+                  <div class="name fl">{{ item.companyName }}</div>
                   <div class="icon_box fl">
                     <creditIcon :credit="item.credit" />
                   </div>
                   <a 
                     :href="'http://wpa.qq.com/msgrd?v=3&uin='+item.qq+'&site=qq&menu=yes'"
-                    target="_blank"><span 
-                      class="fr icon_qq"
-                  /></a>
+                    target="_blank">
+                  <span class="fr icon_qq" /></a>
                 </div>
                 <div class="h_type m_t10">
-                  <span class="icon_sale">{{ item.weightDiscount?((item.weightDiscount)/10).toFixed(2):item.weightDiscount }}折</span>
+                  <span class="icon_sale">{{ item.weightDiscount }}折</span>
                   <div class="type_box">
                     <span class="name">重货:</span>
                     <span class="item"><b>{{ item.weightPrice }}</b></span>
@@ -735,20 +745,21 @@
                   </div>
                 </div>
                 <div class="h_market">
-                  <span class="h_market_price fl">比行情价格低<span 
-                    class="h_market_num"
-                    style="padding-left:3px">{{ item.belowMarketPrice }}%</span></span>
+                  <span class="h_market_price fl">比行情价格低
+                  <span class="h_market_num">{{ item.belowMarketPrice }}%</span></span>
                   <span class="h_market_order fr">已有{{ item.orderNumber }}人下单</span>
                 </div>
-                <div class="h_operate">
-                  <a 
-                    href="" 
-                    class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
-                  <a 
-                    :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
-                    target="_blank"
-                    class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
-                </div>
+   
+              </div>
+       
+              <div class="h_operate">
+                <a 
+                  href="" 
+                  class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
+                <a 
+                  :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
+                  target="_blank"
+                  class="link_order"><i class="iconfont iconlightningbshandian"/>下单</a>
               </div>
             </div>
           </li>
@@ -807,7 +818,6 @@
               </div>
               <div class="rank_txt_praise">好评率{{ item.evaGoodCountRate }}%</div>
             </div>
-
           </a>
         </li>
       </ul>  
@@ -817,21 +827,6 @@
         没有数据
       </div>  
     </div>
-    <!-- 本月优质企业货主 --> 
-    <!-- 本月优质承运 -->
-    <!-- <div class="grid_c1 groom_login">
-      <div class="groom_box">
-        <div class="p_groom_submit clearfix">
-          <input 
-            type="text" 
-            placeholder="请输入您的手机号"
-            class="fl">
-          <button class="fl">帮我推荐</button>
-          <span class="error">请输入正确的手机号</span>
-        </div>
-        <p class="explain">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</p>
-      </div>
-    </div> -->
     <div class="grid_c1 groom_me">
       <div class="groom_me_box clearfix">
         <input 
@@ -1037,58 +1032,72 @@
     <!-- 28问答 -->
     <div class="MD-home-qa-qa-area MD-home-qa-js-qa-area">
       <div class="MD-home-qa-left">
-        <a 
-          href="" 
-          class="MD-home-qa-qa-hot qa-hot">
-          <span class="tag hot-tag">热点 &gt;</span>
-          <img 
-            class="MD-home-qa-qa-pic" 
-            src="../../static/images/huizong/_rd01.jpg">
-          <img 
-            src="" 
-            class="MD-home-qa-ad-little-icon">
-          <span class="MD-home-qa-tit">10万整辆复古车，玩的就是情调</span>
-        </a>
-        <div class="MD-home-qa-qa-list">
-          <p><a 
-            href=""
-            class="MD-home-qa-list-txt">新手开车五大省油技巧 老司机带带我！</a></p>
-          <p><a 
-            href="" 
-            class="MD-home-qa-list-txt">二手车过户那些事儿！满满的干货</a></p>
-          <p><a 
-            href="" 
-            class="MD-home-qa-list-txt">重磅！北京拟自7月1日起分步实施国六排放标准</a></p>
-          <p><a 
-            href="" 
-            class="MD-home-qa-list-txt">二手车如何出售才能卖高价？</a></p>
+        <!-- v-if="$store.state.news.zhuanxian_hot.lenght>0" -->
+        
+        <div
+          class="MD-home-qa-box "
+          v-if="$store.state.news.zhuanxian_hot.length>0">
+          <a 
+            :href="$store.state.news.zhuanxian_hot[0].url" 
+            target="_blank"
+            class="MD-home-qa-qa-hot qa-hot">
+            <span class="tag hot-tag">热点 &gt;</span>
+            <img 
+              class="MD-home-qa-qa-pic" 
+              :src="$store.state.news.zhuanxian_hot[0].titleImg||noneImg">
+            <span class="MD-home-qa-tit">{{ $store.state.news.zhuanxian_hot[0].title }}</span>
+          </a>
+        </div>
+      
+        <div 
+        class="MD-home-qa-qa-list">
+          <p
+            v-for="(item, index) in $store.state.news.zhuanxian_hot"
+            :key="index">
+            <a 
+              v-if="index>0"
+              :href="item.url" 
+              target="_blank"
+              class="MD-home-qa-list-txt">{{ item.title }}</a>
+          </p>         
         </div>
       </div>
       <div class="MD-home-qa-right">
-        <a 
-          href="" 
-          class="MD-home-qa-click MD-home-qa-book-click">
-          <span class="tag book-tag">宝典 &gt;</span>
-          <img 
-            class="MD-home-qa-imgs" 
-            src="../../static/images/huizong/_rd02.jpg">
-          <div class="MD-home-qa-right-tit">
-            <span class="MD-home-qa-right-title">十年开不坏 那些足以让修车师傅失业的车</span>
-            <span class="MD-home-qa-right-desc">十年开不坏 那些足以让修车师傅失业的车 “我最近要换车了” “你终于舍得换你那老捷达了” “也该换了，十几年了，买这车的时候，我还在上学，现在我孩子都上学了，这车还在开” “你这车还真够皮实的”</span>
-          </div>
-        </a>
-        <a 
-          href="" 
-          class="MD-home-qa-click MD-home-qa-article-click" >
-          <span class="tag tag art-tag">文章 &gt;</span>
-          <img 
-            class="MD-home-qa-imgs" 
-            src="../../static/images/huizong/_rd02.jpg">
-          <div class="MD-home-qa-right-tit">
-            <span class="MD-home-qa-right-title">找一辆适合胖子开的车就这么难吗？</span>
-            <span class="MD-home-qa-right-desc">找一辆适合胖子开的车就这么难吗？</span>
-          </div>
-        </a>
+        <div>      
+          <a 
+            v-for="(item, index) in $store.state.news.zhuanxian_baodian"
+            :key="index"
+            :href="item.url" 
+            target="_blank"
+            class="MD-home-qa-click MD-home-qa-book-click">
+            <span class="tag book-tag">宝典 &gt;</span>
+            <img 
+              class="MD-home-qa-imgs" 
+              :src="$store.state.news.zhuanxian_hot[0].titleImg||noneImg">
+            <div class="MD-home-qa-right-tit">
+              <span class="MD-home-qa-right-title">{{ item.title }}</span>
+              <span class="MD-home-qa-right-desc">十年开不坏 那些足以让修车师傅失业的车 “我最近要换车了” “你终于舍得换你那老捷达了” “也该换了，十几年了，买这车的时候，我还在上学，现在我孩子都上学了，这车还在开” “你这车还真够皮实的”</span>
+            </div>
+          </a>   
+        </div>
+        <div>
+          <a 
+            v-for="(item, index) in $store.state.news.zhuanxian_article"
+            :key="index"
+            :href="item.url" 
+            target="_blank"
+            class="MD-home-qa-click MD-home-qa-article-click" >
+            <span class="tag tag art-tag">文章 &gt;</span>
+            <img 
+              class="MD-home-qa-imgs" 
+              :src="$store.state.news.zhuanxian_hot[0].titleImg||noneImg">
+            <div class="MD-home-qa-right-tit">
+              <span class="MD-home-qa-right-title">{{ item.title }}</span>
+              <span class="MD-home-qa-right-desc">找一辆适合胖子开的车就这么难吗？</span>
+            </div>
+          </a>
+        </div>
+
       </div>
       <div class="clear"/>
     </div>
@@ -1134,64 +1143,7 @@
 import until from '~/static/js/server/comonUntil' //获取公共的函数
 import Star from '~/components/star/star' //星星
 import SidebarNav from '~/components/public/sidebarNav'
-// function myCredit(credit, item) {
-//   if (credit >= 0 && credit <= 3) {
-//     item.credit = 1
-//     item.isEq = true
-//   }
-//   if (credit >= 4 && credit <= 10) {
-//     item.credit = 2
-//     item.isEq = true
-//   }
-//   if (credit >= 11 && credit <= 40) {
-//     item.credit = 3
-//     item.isEq = true
-//   }
-//   if (credit >= 41 && credit <= 90) {
-//     item.credit = 4
-//     item.isEq = true
-//   }
-//   if (credit >= 91 && credit <= 150) {
-//     item.credit = 5
-//     item.isZuan = true
-//   }
-//   if (credit >= 151 && credit <= 250) {
-//     item.hZhuan = 1
-//     item.isHZhuan = true
-//   }
-//   if (credit >= 251 && credit <= 500) {
-//     item.hZhuan = 2
-//     item.isHZhuan = true
-//   }
-//   if (credit >= 500 && credit <= 1000) {
-//     item.hZhuan = 3
-//     item.isHZhuan = true
-//   }
-//   if (credit >= 1001 && credit <= 2000) {
-//     item.hZhuan = 4
-//     item.isHZhuan = true
-//   }
-//   if (credit >= 2001) {
-//     item.hZhuan = 5
-//     item.isHZhuan = true
-//   }
-// }
 
-// async function getLineHotList($axios, vo = {}, orderBy) {
-//   let parm = vo
-//   parm.currentPage = 1
-//   parm.pageSize = 15
-//   parm.orderBy = orderBy
-//   delete parm.recommendType
-//   let res = await $axios.post(`/28-web/range/hot/list`, parm)
-//   if (res.data.status == 200) {
-//     return {
-//       list: res.data.data.list
-//     }
-//   } else {
-//     return { list: [] }
-//   }
-// }
 export default {
   name: 'HuiZong',
   head: {
@@ -1209,175 +1161,125 @@ export default {
       loginMobile: '',
       //帮我推荐
       groomPhone1: '',
-      groomPhone2: '',
+      groomPhone2: ''
       // 热门地点插件
-      hotStartProvince: '',
-      hotStartCity: '',
-      hotStartArea: '',
-      hotEndProvince: '',
-      hotEndCity: '',
-      hotEndArea: ''
-      //-------------------------------------------------
-      // navIndex: 0,
-      // inputData: '',
-      // isMobile: false,
-      // isAdd: false,
-      // typeNav: [
-      //   {
-      //     title: '信誉最高'
-      //   },
-      //   {
-      //     title: '交易量'
-      //   },
-      //   {
-      //     title: '运输时效'
-      //   },
-      //   {
-      //     title: '重货价格最低'
-      //   },
-      //   {
-      //     title: '轻货价格最低'
-      //   }
-      // ]
+      // hotStartProvince: '',
+      // hotStartCity: '',
+      // hotStartArea: '',
+      // hotEndProvince: '',
+      // hotEndCity: '',
+      // hotEndArea: ''
     }
   },
-
+  async fetch({ store, params, $axios, error, app }) {
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 94,
+        count: 5,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'zhuanxian_hot',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 94,
+        count: 1,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'zhuanxian_baodian',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+    await store.dispatch('news/GETNEWSINFO', {
+      params: {
+        channelIds: 94,
+        count: 1,
+        orderBy: 0,
+        channelOption: 0
+      },
+      name: 'zhuanxian_article',
+      preFn: data => {
+        return data.map(el => {
+          el.url = el.url.replace(
+            /http:\/\/\d+\.\d+\.\d+\.\d+(:\d+)?\/anfacms/gim,
+            '/help'
+          )
+          return el
+        })
+      }
+    })
+  },
   async asyncData({ $axios, app, query, error }) {
-    // let vo = {
-    //   // currentPage: 1,
-    //   // pageSize: 5,
-    //   // companyName: query.companyName ? query.companyName : '',
-    //   city: query.locationCity ? query.locationCity : '',
-    //   province: query.locationProvince ? query.locationProvince : '',
-    //   endArea: query.endArea ? query.endArea : '',
-    //   endCity: query.endCity ? query.endCity : '',
-    //   endProvince: query.endProvince ? query.endProvince : '',
-    //   startArea: query.startArea ? query.startArea : '',
-    //   startCity: query.startCity
-    //     ? query.startCity
-    //     : app.$cookies.get('currentAreaFullName'),
-    //   startProvince: query.startProvince
-    //     ? query.startProvince
-    //     : app.$cookies.get('currentProvinceFullName')
-    // }
-    // let vo1 = vo
-    // vo1.currentPage = 1
-    // vo1.pageSize = 4
-    // let voExcel = {}
-    // voExcel.currentPage = 1
-    // voExcel.pageSize = 5
-    // voExcel.flag = 'excellentRate'
-    // let [lineC, lineD, lineE] = await Promise.all([
-    //   $axios.post('/28-web/range/reduce/price/list', vo1),
-    //   $axios.get(
-    //     '/28-web/logisticsCompany/excellent?currentPage=' +
-    //       voExcel.currentPage +
-    //       '&pageSize=' +
-    //       voExcel.pageSize +
-    //       '&flag=' +
-    //       voExcel.flag
-    //   ),
-    //   $axios.get('/28-web/index/today/statistics')
-    // ])
-    // let collateral = 'collateral'
-    // let orderBy = 'creditDesc'
-    // let lineB = await getLineHotList($axios, vo, orderBy)
-
-    // if (lineC.data.status == 200) {
-    //   lineC.data.data.forEach(item => {
-    //     let arr = (item.id || '').split('')
-    //     let num = 0
-    //     let credit = item.credit
-    //     arr.forEach(el => {
-    //       num += el.charCodeAt(0) || 0
-    //     })
-    //     item.num = (num % 20) + 1
-    //     myCredit(credit, item)
-    //   })
-
-    //   lineB.list.forEach(item => {
-    //     let arr = (item.id || '').split('')
-    //     let num = 0
-    //     arr.forEach(el => {
-    //       num += el.charCodeAt(0) || 0
-    //     })
-    //     item.num = (num % 30) + 1
-    //     let credit = item.credit
-    //     let newItem = item
-    //     myCredit(credit, item)
-    //     item.otherServiceCodeList.forEach(item => {
-    //       if (item === 'AF02502') {
-    //         newItem.isBao = true
-    //       } else if (item === 'AF02503') {
-    //         newItem.isYun = true
-    //       } else if (item === 'AF02501') {
-    //         newItem.isDai = true
-    //       } else if (item === 'AF02506') {
-    //         newItem.isPiao = true
-    //       }
-    //     })
-    //   })
-    //   lineD.data.data.forEach(item => {
-    //     let arr = (item.id || '').split('')
-    //     let num = 0
-    //     arr.forEach(el => {
-    //       num += el.charCodeAt(0) || 0
-    //     })
-    //     item.num = (num % 30) + 1
-    //     let credit = item.credit
-
-    //     myCredit(credit, item)
-    //   })
-    //-----------------------------------------------------------------------------------
     //服务端获取省市cookies
     let currentProvince = app.$cookies.get('currentProvinceFullName')
     let currentCity = app.$cookies.get('currentAreaFullName')
     //热门城市
     let hotCityData = await $axios.get('/28-web/city/hot')
-    //平台推荐担保交易1
-    let pTbusinessData = await $axios.post(
-      '/28-web/range/platform/recommend/list',
-      {
+
+    //平台推荐
+    let [
+      //平台推荐担保交易1
+      pTbusinessData,
+      //平台特惠2
+      pToddsData,
+      //平台时效3
+      pTagingData,
+      //平台信用4
+      pTcreditData
+    ] = await Promise.all([
+      $axios.post('/28-web/range/platform/recommend/list', {
         currentPage: 1,
         pageSize: 4,
         startProvince: currentProvince,
         startCity: currentCity,
         recommendType: 'collateral'
-      }
-    )
-    //平台特惠2
-    let pToddsData = await $axios.post(
-      '/28-web/range/platform/recommend/list',
-      {
+      }),
+
+      $axios.post('/28-web/range/platform/recommend/list', {
         currentPage: 1,
         pageSize: 4,
         startProvince: currentProvince,
         startCity: currentCity,
         recommendType: 'preferential'
-      }
-    )
-    //平台时效3
-    let pTagingData = await $axios.post(
-      '/28-web/range/platform/recommend/list',
-      {
+      }),
+
+      $axios.post('/28-web/range/platform/recommend/list', {
         currentPage: 1,
         pageSize: 4,
         startProvince: currentProvince,
         startCity: currentCity,
         recommendType: 'aging'
-      }
-    )
-    //平台信用
-    let pTcreditData = await $axios.post(
-      '/28-web/range/platform/recommend/list',
-      {
+      }),
+
+      $axios.post('/28-web/range/platform/recommend/list', {
         currentPage: 1,
         pageSize: 4,
         startProvince: currentProvince,
         startCity: currentCity,
         recommendType: 'credit'
-      }
-    )
+      })
+    ])
+    //最新成交用户
+    let userOrdeData = await $axios.get('/28-web//range/latestOrder')
+
     //热门专线
     let hotLineData = await $axios.post('/28-web/range/hot/list', {
       currentPage: 1,
@@ -1387,7 +1289,7 @@ export default {
     })
     //降价专区推荐
     ///28-web/range/reduce/price/list
-    let priceData = await $axios.post('/28-web/range/reduce/price/list', {
+    let dropPriceData = await $axios.post('/28-web/range/reduce/price/list', {
       currentPage: 1,
       pageSize: 15,
       startProvince: currentProvince,
@@ -1406,67 +1308,73 @@ export default {
     //查询首页车源、货源、专线数量
     let statisticsData = await $axios.get('/28-web//index/today/statistics')
     //赋值data
-    if (
-      hotCityData.status === 200 ||
-      pTbusinessData.status === 200 ||
-      pToddsData.status === 200 ||
-      pTagingData.status === 200 ||
-      pTcreditData.status === 200 ||
-      hotLineData.status === 200 ||
-      priceData.status === 200 ||
-      monthShipperData.status === 200 ||
-      statisticsData.status === 200
-    ) {
-      return {
-        currentProvince: currentProvince ? currentProvince : '',
-        currentCity: currentCity ? currentCity : '', //获取当前的城市
 
-        hotCityData: hotCityData.data ? hotCityData.data.data : [], //热门城市
-        pTbusinessData: pTbusinessData.data ? pTbusinessData.data.data : [],
-        pToddsData: pToddsData.data ? pToddsData.data.data : [], //平台优惠
-        pTagingData: pTagingData.data ? pTagingData.data.data : [], //平台时效
-        pTcreditData: pTcreditData.data ? pTcreditData.data.data : [], //平台信用
-        hotLineData: hotLineData.data ? hotLineData.data.data.list : [], //热门专线
-        priceData: priceData.data ? priceData.data.data : [], //热门专线
-        //本月优秀货主
-        monthShipperData: monthShipperData
-          ? monthShipperData.data.data.list
+    return {
+      //获取当前的城市
+      currentProvince: currentProvince ? currentProvince : '',
+      currentCity: currentCity ? currentCity : '',
+      //热门城市
+      hotCityData:
+        hotCityData.status === 200 ? hotCityData.data.data || [] : [],
+      pTbusinessData:
+        pTbusinessData.status === 200 ? pTbusinessData.data.data || [] : [],
+      //平台优惠
+      pToddsData: pToddsData.status === 200 ? pToddsData.data.data || [] : [],
+      //平台时效
+      pTagingData:
+        pTagingData.status === 200 ? pTagingData.data.data || [] : [],
+      //平台信用
+      pTcreditData:
+        pTcreditData.status === 200 ? pTcreditData.data.data || [] : [],
+      //用户成交量
+      userOrdeData:
+        userOrdeData.status === 200 ? userOrdeData.data.data || [] : [],
+      //热门专线
+      hotLineData:
+        hotLineData.status === 200 ? hotLineData.data.data.list || [] : [],
+      //优惠降价
+      dropPriceData: dropPriceData.data ? dropPriceData.data.data : [],
+      //本月优秀货主
+      monthShipperData:
+        monthShipperData.status === 200
+          ? monthShipperData.data.data.list || []
           : [],
-        statisticsData: statisticsData.data ? statisticsData.data.data : []
-        // LineHotList: lineB.list,
-        // lineRecomLowPrice: lineC.data.data,
-        // lineLogisticsCompany: lineD.data.data,
-        // lineToday: lineE.data.data,
-        // vo
-      }
-    } else {
-      error({ statusCode: 500, message: '查找不到该专线列表' })
+      //前货物,专线,车源
+      statisticsData:
+        statisticsData.status === 200 ? statisticsData.data.data || {} : {}
     }
-    //返回对象
-    // }
   },
   created() {
     //处理热门专线的数据
-    this.hotLineData.forEach((value, index, array) => {
-      let isbao = value.otherServiceCodeList.indexOf('AF02502') !== -1
-      let isYun = value.otherServiceCodeList.indexOf('AF02503') !== -1
-      let isDai = value.otherServiceCodeList.indexOf('AF02501') !== -1
-      let isPiao = value.otherServiceCodeList.indexOf('AF02506') !== -1
-      value.isbao = isbao
-      value.isYun = isYun
-      value.isDai = isDai
-      value.isPiao = isPiao
-    })
-    console.log('打印专线数据', this.hotLineData)
+    // this.handleData()
+    // if (this.hotLineData.length > 0) {
+    //   this.hotLineData.forEach((item, index, array) => {
+    //     let isbao = item.otherServiceCodeList.indexOf('AF02502') !== -1
+    //     let isYun = item.otherServiceCodeList.indexOf('AF02503') !== -1
+    //     let isDai = item.otherServiceCodeList.indexOf('AF02501') !== -1
+    //     let isPiao = item.otherServiceCodeList.indexOf('AF02506') !== -1
+    //     item.isbao = isbao
+    //     item.isYun = isYun
+    //     item.isDai = isDai
+    //     item.isPiao = isPiao
+    //     item.isCollect = true
+    //   })
+    //   console.log('打印专线数据', this.hotLineData)
+    // }
   },
   mounted() {
     let that = this
     this.$nextTick(() => {
+      this.getCookies()
+      this.handleData()
+      //打印数据
       console.log('请求平台数据', this.pTbusinessData)
       console.log('热门专线', this.hotLineData)
-      console.log('降价专区', this.priceData)
-
-      this.getCookies()
+      console.log('降价专区', this.dropPriceData)
+      console.log('最新用户成交量', this.userOrdeData)
+      console.log('新闻热点', this.$store.state.news.zhuanxian_hot)
+      console.log('新闻宝典', this.$store.state.news.zhuanxian_baodian)
+      console.log('新闻文章', this.$store.state.news.zhuanxian_article)
     })
     seajs.use(['layer', '/js/jq_scroll.js'], function() {
       // 向上滚动
@@ -1505,65 +1413,30 @@ export default {
       this.isToken = $.cookie('access_token') ? true : false
       this.loginMobile = $.cookie('login_mobile')
     },
-    // fromAdd(data) {
-    //   this.inputData = data
-    //   this.isMobile = false
-    // },
-
-    // search() {
-    //   let list1 = []
-    //   $('#parkAddress .select-item').each(function(i, e) {
-    //     list1.push($(this).text())
-    //   })
-    //   this.vo.locationProvince = list1[0] ? list1[0] : ''
-    //   this.vo.locationCity = list1[1] ? list1[1] : ''
-    //   this.vo.locationArea = list1[2] ? list1[2] : ''
-    //   window.open(
-    //     `/zhuanxian/list?locationProvince=${
-    //       this.vo.locationProvince
-    //     }&locationCity=${this.vo.locationCity}&locationArea=${
-    //       this.vo.locationArea
-    //     }`
-    //   )
-    // },
-    // getLineHot(orderBy) {
-    //   getLineHotList(this.$axios, this.vo, orderBy).then(res => {})
-    // },
-    // toLineDetail(item) {
-    //   window.open(
-    //     '/zhuanxian/detail?id=' + item.id + '&publishId=' + item.companyId
-    //   )
-    // },
-    // toCompany(item) {
-    //   window.open('/member/' + item.id)
-    // },
-    // navClass(index) {
-    //   this.navIndex = index
-    //   let orderBy = 'orderDesc'
-    //   switch (index) {
-    //     case 0:
-    //       orderBy = 'creditDesc'
-    //       this.getLineHot(orderBy)
-    //       break
-    //     case 1:
-    //       orderBy = 'orderDesc'
-    //       this.getLineHot(orderBy)
-    //       break
-    //     case 2:
-    //       orderBy = 'transportAgingAsc'
-    //       this.getLineHot(orderBy)
-    //       break
-    //     case 3:
-    //       orderBy = 'lightPriceAsc'
-    //       this.getLineHot(orderBy)
-    //       break
-    //     case 4:
-    //       orderBy = 'weightPriceAsc'
-    //       this.getLineHot(orderBy)
-    //       break
-    //   }
-    // },
-    //--------------------------------------
+    handleData() {
+      //热门专线处理
+      if (this.hotLineData.length > 0) {
+        this.hotLineData.forEach((item, index, array) => {
+          let isbao = item.otherServiceCodeList.indexOf('AF02502') !== -1
+          let isYun = item.otherServiceCodeList.indexOf('AF02503') !== -1
+          let isDai = item.otherServiceCodeList.indexOf('AF02501') !== -1
+          let isPiao = item.otherServiceCodeList.indexOf('AF02506') !== -1
+          item.isbao = isbao
+          item.isYun = isYun
+          item.isDai = isDai
+          item.isPiao = isPiao
+          item.isCollect = true
+        })
+        console.log('打印专线数据', this.hotLineData)
+      }
+      //降价专线推荐
+      if (this.dropPriceData.length > 0) {
+        this.dropPriceData.forEach((item, index, array) => {
+          item.isCollect = true
+        })
+      }
+      this.$forceUpdate
+    },
     //选项卡
     groomTab(index) {
       this.groomIndex = index
@@ -1587,29 +1460,22 @@ export default {
       let startPlace = until.getPlace('#hot_start')
       let endPlace = until.getPlace('#hot_end')
 
-      // 开始城市赋值
-      this.hotStartProvince = startPlace.province
-      this.hotStartCity = startPlace.city
-      this.hotStartArea = startPlace.area
-      //到达城市赋值
-      this.hotEndProvince = endPlace.province
-      this.hotEndCity = endPlace.city
-      this.hotEndArea = endPlace.area
-
       //跳转
-      let zxUrl = `/zhuanxian/list?startp=${this.hotStartProvince}&startc=${
-        this.hotStartCity
-      }&starta=${this.hotStartArea}&endp=${this.hotEndProvince}&endc=${
-        this.hotEndCity
-      }&enda=${this.hotEndArea}`
+      let zxUrl = `/zhuanxian/list?startp=${startPlace.province}&startc=${
+        startPlace.city
+      }&starta=${startPlace.area}&endp=${endPlace.province}&endc=${
+        endPlace.city
+      }&enda=${endPlace.area}`
       window.open(zxUrl, '_blank')
     },
-    groomMeFn(type = 0) {
-      let phone
-      if (type === 0) {
-        console.log('专线电话', this.groomPhone1)
-      } else {
-      }
+    //点击收藏
+    collectFn(item, index) {
+      this.hotLineData[index].isCollect = !item.isCollect
+      this.$forceUpdate()
+      console.log(this.hotLineData)
+      // this.$set(this.hotLineData, index, { isCollect: !item.isCollect })
+    },
+    groomMeFn() {
       // console.log('000000000000000')
       // layer.open({
       //   type: 1,
@@ -1624,8 +1490,6 @@ export default {
 }
 </script>
 <style lang="scss">
-@import '~/assets/scss/common_index.scss';
-
 /********公共的导航修改**************/
 .header {
   margin-bottom: 0 !important;
@@ -1640,7 +1504,7 @@ export default {
     }
     li {
       margin-left: 0 !important;
-      padding: 0 33px !important;
+      padding: 0 32px !important;
       &.nav-active {
         position: relative;
         &:after {
@@ -1672,6 +1536,11 @@ export default {
     }
   }
 }
+</style>
+
+<style lang="scss" scoped>
+@import '~/assets/scss/common_index.scss';
+
 /*本页面公共的函数*/
 @mixin active_color($starColor, $endColor) {
   background: -webkit-linear-gradient(
@@ -2374,14 +2243,15 @@ export default {
     }
     .MD-home-qa-qa-pic {
       display: block;
-      width: 100%;
+      width: 480px;
+      height: 320px;
     }
     .MD-home-qa-tit {
       display: block;
       width: 428px;
       padding: 0 30px;
       font-size: 18px;
-      color: #fff;
+      color: $gray;
       line-height: 60px;
       position: absolute;
       bottom: 0;

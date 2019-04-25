@@ -601,31 +601,33 @@ export default {
             ? ''
             : areaData.currentProvinceFullName
     }
-    let AF018 = await $axios.get(
-      '/28-web/sysDict/getSysDictByCodeGet/AF018' //车辆类型列表
-    )
+    let [
+      AF018,
+      AF031,
+      AF032,
+      carInfoLists,
+      recommend,
+      newestCarRes
+    ] = await Promise.all([
+      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF018'),
+      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF031'),
+      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF032'),
+      getCarInfoList($axios, 1, vo),
+      $axios.post('/28-web/carInfo/related/links', vo),
+      $axios.post('/28-web/carInfo/newest/recommend', {
+        currentPage: 1,
+        pageSize: 20
+      })
+    ])
     if (AF018.data.status === 200) {
       AF018.data.data.unshift({ code: '', name: '不限' })
     }
-    let AF031 = await $axios.get(
-      '/28-web/sysDict/getSysDictByCodeGet/AF031' //车厢长度列表
-    )
     if (AF031.data.status === 200) {
       AF031.data.data.unshift({ id: '', name: '不限' })
     }
-    let AF032 = await $axios.get(
-      '/28-web/sysDict/getSysDictByCodeGet/AF032' //载重列表
-    )
     if (AF032.data.status === 200) {
       AF032.data.data.unshift({ id: '', name: '不限' })
     }
-    let carInfoLists = await getCarInfoList($axios, 1, vo)
-    //车源底部推荐
-    let recommend = await $axios.post('/28-web/carInfo/related/links', vo)
-    let newestCarRes = await $axios.post('/28-web/carInfo/newest/recommend', {
-      currentPage: 1,
-      pageSize: 20
-    }) //最新车源推荐列表
     return {
       AF018: AF018.data.status === 200 ? AF018.data.data : [], //车辆类型列表
       AF018Select: AF018.data.status === 200 ? AF018.data.data : [], //优质运力 车辆类型列表

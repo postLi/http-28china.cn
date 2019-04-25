@@ -305,6 +305,8 @@
 }
 
 .p_category_menu {
+  position: relative;
+  z-index: 99;
   padding: 10px 0;
 }
 
@@ -557,7 +559,7 @@
 .p_hy_info .hy_info_user_box {
   overflow: hidden;
   margin: 20px 0 0 50px;
-  width: 660px;
+  width: 630px;
   height: 95px;
 }
 
@@ -617,7 +619,7 @@
 
 .p_hy_info .hy_info_list > li {
   margin-right: 60px;
-  width: 90px;
+  width: 100px;
   line-height: 30px;
 }
 

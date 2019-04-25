@@ -634,28 +634,27 @@
                   <div class="icon_list fr">
                     <span 
                       v-if="item.isbao"
-                      class="item_icon icon_blue">保</span>
+                      class="item_icon icon_blue">保0</span>
                     <span
                       v-if="item.isYun" 
-                      class="item_icon icon_red">运</span>
+                      class="item_icon icon_red">运0</span>
                     <span 
                       v-if="item.isDai"
                       class="item_icon">代</span>
                     <span 
                       v-if="item.isPiao"
-                      class="item_icon icon_green">票</span>
+                      class="item_icon icon_green">票0</span>
                   </div>
                 </div>        
-              </div>  
-                       
+              </div>     
               <div class="h_operate">
                 <a 
                   v-if="item.isCollect"
-                  @click="collectFn(item)"
+                  @click="collectFn(item,index)"
                   class="link_collect"><i class="iconfont iconshoucang1"/>收藏</a>
                 <a 
                   v-else
-                  @click="collectFn(item)"
+                  @click="collectFn(item,index)"
                   class="link_collect"><i class="iconfont iconshoucang1"/>取消收藏</a>                 
                 <a 
                   :href="'/create/line?startp='+currentProvince+'&startc='+currentCity"
@@ -1347,24 +1346,7 @@ export default {
   },
   created() {
     //处理热门专线的数据
-    if (this.hotLineData.length > 0) {
-      this.hotLineData.forEach((item, index, array) => {
-        let isbao = item.otherServiceCodeList.indexOf('AF02502') !== -1
-        let isYun = item.otherServiceCodeList.indexOf('AF02503') !== -1
-        let isDai = item.otherServiceCodeList.indexOf('AF02501') !== -1
-        let isPiao = item.otherServiceCodeList.indexOf('AF02506') !== -1
-        // item.isbao = isbao
-        // item.isYun = isYun
-        // item.isDai = isDai
-        // item.isPiao = isPiao
-        this.$set(item, 'isbao', isbao)
-        this.$set(item, 'isYun', isYun)
-        this.$set(item, 'isDai', isDai)
-        this.$set(item, 'isPiao', isPiao)
-        this.$set(item, 'isCollect', true)
-      })
-    }
-
+    // this.handleData()
     // if (this.hotLineData.length > 0) {
     //   this.hotLineData.forEach((item, index, array) => {
     //     let isbao = item.otherServiceCodeList.indexOf('AF02502') !== -1
@@ -1375,6 +1357,7 @@ export default {
     //     item.isYun = isYun
     //     item.isDai = isDai
     //     item.isPiao = isPiao
+    //     item.isCollect = true
     //   })
     //   console.log('打印专线数据', this.hotLineData)
     // }
@@ -1383,6 +1366,7 @@ export default {
     let that = this
     this.$nextTick(() => {
       this.getCookies()
+      this.handleData()
       //打印数据
       console.log('请求平台数据', this.pTbusinessData)
       console.log('热门专线', this.hotLineData)
@@ -1429,7 +1413,30 @@ export default {
       this.isToken = $.cookie('access_token') ? true : false
       this.loginMobile = $.cookie('login_mobile')
     },
-    handleData() {},
+    handleData() {
+      //热门专线处理
+      if (this.hotLineData.length > 0) {
+        this.hotLineData.forEach((item, index, array) => {
+          let isbao = item.otherServiceCodeList.indexOf('AF02502') !== -1
+          let isYun = item.otherServiceCodeList.indexOf('AF02503') !== -1
+          let isDai = item.otherServiceCodeList.indexOf('AF02501') !== -1
+          let isPiao = item.otherServiceCodeList.indexOf('AF02506') !== -1
+          item.isbao = isbao
+          item.isYun = isYun
+          item.isDai = isDai
+          item.isPiao = isPiao
+          item.isCollect = true
+        })
+        console.log('打印专线数据', this.hotLineData)
+      }
+      //降价专线推荐
+      if (this.dropPriceData.length > 0) {
+        this.dropPriceData.forEach((item, index, array) => {
+          item.isCollect = true
+        })
+      }
+      this.$forceUpdate
+    },
     //选项卡
     groomTab(index) {
       this.groomIndex = index
@@ -1462,7 +1469,12 @@ export default {
       window.open(zxUrl, '_blank')
     },
     //点击收藏
-    collectFn() {},
+    collectFn(item, index) {
+      this.hotLineData[index].isCollect = !item.isCollect
+      this.$forceUpdate()
+      console.log(this.hotLineData)
+      // this.$set(this.hotLineData, index, { isCollect: !item.isCollect })
+    },
     groomMeFn() {
       // console.log('000000000000000')
       // layer.open({

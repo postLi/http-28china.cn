@@ -568,7 +568,7 @@ async function getRecommendList($axios, vo) {
   }
 }
 export default {
-  name: 'Index',
+  name: 'Wangdian',
   head: {
     link: [
       { rel: 'stylesheet', href: '/css/wangdian.css' },
@@ -642,11 +642,23 @@ export default {
         ? item.productServiceNameList
         : item.otherServiceNameList
     }
-    let [AF029, AF025] = await Promise.all([
+    let [
+      AF029,
+      AF025,
+      listC,
+      listD,
+      listE,
+      listG,
+      logisticsPark,
+      WangdiangInfoList,
+      recommendList
+    ] = await Promise.all([
       $axios.get('/aflc-common/sysDict/getSysDictByCodeGet/AF029'),
-      $axios.get('/aflc-common/sysDict/getSysDictByCodeGet/AF025')
-    ])
-    let [logisticsPark, WangdiangInfoList, recommendList] = await Promise.all([
+      $axios.get('/aflc-common/sysDict/getSysDictByCodeGet/AF025'),
+      $axios.post(`/28-web/logisticsCompany/list/related/links`, vo),
+      $axios.get(`/28-web/logisticsCompany/adviseRecommend`),
+      $axios.get(`/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`),
+      $axios.get(`/28-web/logisticsCompany/enterpriseRecommend`),
       getWdiangSearchList($axios, {
         locationArea: vo.startArea,
         locationCity: vo.startCity,
@@ -655,12 +667,6 @@ export default {
       }),
       getWangdiangInfoList($axios, 1, vo),
       getRecommendList($axios, vo)
-    ])
-    let [listC, listD, listE, listG] = await Promise.all([
-      $axios.post(`/28-web/logisticsCompany/list/related/links`, vo),
-      $axios.get(`/28-web/logisticsCompany/adviseRecommend`),
-      $axios.get(`/28-web/logisticsCompany/excellent?currentPage=1&pageSize=3`),
-      $axios.get(`/28-web/logisticsCompany/enterpriseRecommend`)
     ])
     var arrs = Object.assign([], [listC, listD, listE, listG])
     var Code = Object.assign([], [AF029, AF025])

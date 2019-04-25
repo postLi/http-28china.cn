@@ -99,18 +99,20 @@
           <div class="c-9 f-26">{{ item.title }}</div>
         </div>
       </div>
-      <div class="flex_a b_c_w gg_item">
+      <!--      <div class="flex_a b_c_w gg_item">-->
+      <!--        <img src="/m/home/gonggao_miji.png">-->
+      <!--        <div class="margin_l_20 right">-->
+      <!--          <div class="c-3 f-32">接单秘籍</div>-->
+      <!--          <div class="c-9 f-26">排除这些问题，比小心开车还省油！</div>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <div
+        class="flex_a b_c_w gg_item"
+        @click="$router.push('/m/gg/ggList?adcode=' + $store.state.m.adcode)">
         <img src="/m/home/gonggao_miji.png">
         <div class="margin_l_20 right">
-          <div class="c-3 f-32">接单秘籍</div>
-          <div class="c-9 f-26">排除这些问题，比小心开车还省油！</div>
-        </div>
-      </div>
-      <div class="flex_a b_c_w gg_item">
-        <img src="/m/home/gonggao_huozhu.png">
-        <div class="margin_l_20 right">
           <div class="c-3 f-32">货主公告</div>
-          <div class="c-9 f-26">货主大优惠</div>
+          <div class="c-9 f-26">{{ $store.state.m.HZGGList[0].title }}</div>
         </div>
       </div>
     </div>
@@ -245,7 +247,7 @@ export default {
     },
     toNotice(item) {
       this.$router.push(
-        `/m/gg/noticeList?name=${item.name ? item.name : ''}&noticeGroupCode=${
+        `/m/gg/ggList?name=${item.name ? item.name : ''}&noticeGroupCode=${
           item.code
         }`
       )

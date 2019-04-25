@@ -154,10 +154,11 @@
                   :key="index"
                   style="margin-right: 10px;">
                   <a
-                    :href="'/zhuanxian/list?startp=' + vo.startProvince + '&startc=' + vo.startCity + '&starta=' + vo.startArea + '&endp=' + vo.endProvince + '&endc=' + vo.endCity + '&enda=' + vo.endArea + '&companyName=' + vo.companyName + '&parkId=' + vo.parkId + '&parkName=' + vo.parkName+ '&belongBrandCode=' + item.code+ '&otherServiceCode=' + vo.otherServiceCode"
+                    href="javascript:"
+                    @click="lineCodeBFn(item)"
                     :data-code="item.code"
-                    :class=" item.name=='不限'? 'now':''"
-                    class="all">{{ item.name }}</a>
+                    :class="[item.code == vo.belongBrandCode?'now':'all']"
+                  >{{ item.name }}</a>
                 </span>
                
               </dd>
@@ -168,9 +169,9 @@
                   :key="index"
                   style="margin-right: 10px;">
                   <a
-                    :href="'/zhuanxian/list?startp=' + vo.startProvince + '&startc=' + vo.startCity + '&starta=' + vo.startArea + '&endp=' + vo.endProvince + '&endc=' + vo.endCity + '&enda=' + vo.endArea + '&companyName=' + vo.companyName + '&parkId=' + vo.parkId + '&parkName=' + vo.parkName+ '&belongBrandCode=' + vo.belongBrandCode+ '&otherServiceCode=' + item.code"
                     :data-code="item.code"
-                    :class=" item.name=='不限'? 'now':''"
+                    :class="item.code==vo.otherServiceCode? 'now':'all'"
+                    @click="lineCodeCFn(item)"
                     class="all">{{ item.name }}</a>
                 </span>
               
@@ -344,7 +345,7 @@
           </div>
           <div
             class="lll-recommend"
-            style="padding-top: 40px;">
+            style="padding-top: 40px;float: left;">
             <div
               class="zx_sx"
             ><span class="biaozhi"/><span>{{ lineLinks.otherRecommend.label ||'' }}</span></div>
@@ -558,23 +559,10 @@ export default {
         : query.startp || areaData.currentProvinceFullName
     let startc =
       query.startc === '' ? '' : query.startc || areaData.currentAreaFullName
-    let starta = query.starta
-    let endp = query.endp
-    let enda = query.enda
-    let endc = query.endc
-
-    if (!starta || starta == 'null') {
-      starta = ''
-    }
-    if (!endp || endp == 'null') {
-      endp = ''
-    }
-    if (!enda || enda == 'null') {
-      enda = ''
-    }
-    if (!endc || endc == 'null') {
-      endc = ''
-    }
+    let starta = query.starta || ''
+    let endp = query.endp || ''
+    let enda = query.enda || ''
+    let endc = query.endc || ''
     let vo = {
       currentPage: 1,
       pageSize: 15,
@@ -676,33 +664,47 @@ export default {
                 seajs.use(['/js/gaodemap2.js'], function() {
                   let orderBy = 'default'
                   let currentPage = 1
+                  let routeOrderBy = _this.$route.query.orderBy
                   $('.list_tiaoj span').click(function() {
                     $('.list_tiaoj span').removeClass('active')
                     $(this).toggleClass('active')
                   })
+                  fromRouteList(routeOrderBy)
+                  function fromRouteList(routeOrderBy) {
+                    if (routeOrderBy == 'orderDesc') {
+                      orderBy = routeOrderBy
+                      $('.list_tiaoj span').removeClass('active')
+                      $('.list_tiaoj span')
+                        .eq(1)
+                        .toggleClass('active')
+                      fetchLineList(currentPage, orderBy)
+                    }
+                    if (routeOrderBy == 'creditDesc') {
+                      orderBy = 'transportAgingAsc'
+                      $('.list_tiaoj span').removeClass('active')
+                      $('.list_tiaoj span')
+                        .eq(2)
+                        .toggleClass('active')
 
-                  function onCheckPage() {
-                    var beginPage = parseInt(
-                      document.beginPagefrm.beginPage.value
-                    )
-                    if (isNaN(beginPage)) {
-                      return false
+                      fetchLineList(currentPage, orderBy)
                     }
-                    if (beginPage <= 0) {
-                      beginPage = 1
+                    // if (routeOrderBy == 'transportAgingAsc') {
+                    //   orderBy = 'lightPrice'
+                    //   $('.list_tiaoj span').removeClass('active')
+                    //   $('.list_tiaoj span')
+                    //     .eq(3)
+                    //     .toggleClass('active')
+                    //   fetchLineList(currentPage, orderBy)
+                    // }
+                    if (routeOrderBy == 'transportAgingAsc') {
+                      orderBy = 'weigthPrice'
+                      $('.list_tiaoj span').removeClass('active')
+                      $('.list_tiaoj span')
+                        .eq(3)
+                        .toggleClass('active')
+                      $('#tj_price #tj_price2').addClass('active')
+                      fetchLineList(currentPage, orderBy)
                     }
-                    if (beginPage > 100) {
-                      beginPage = 100
-                    }
-                    if (beginPage > 1) {
-                      document.beginPagefrm.action =
-                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}&PageNo=' +
-                        beginPage
-                    } else {
-                      document.beginPagefrm.action =
-                        '{dede:type typeid=’19′ row=1}[field:typelink /]{/dede:type}'
-                    }
-                    return true
                   }
 
                   $('#pagination1').pagination({
@@ -732,7 +734,7 @@ export default {
                       orderBy = 'weigthPrice'
                       fetchLineList(currentPage, orderBy)
                     })
-                    $('#tj_price1').click(function() {
+                    $('#tj_pricq  e1').click(function() {
                       $('#tj_price').css('display', 'none')
                       orderBy = 'lightPrice'
                       fetchLineList(currentPage, orderBy)
@@ -784,6 +786,36 @@ export default {
   methods: {
     resetSearch() {
       location.href = '/zhuanxian/list'
+    },
+    lineCodeBFn(item) {
+      this.vo.belongBrandCode = item.code
+
+      window.location.href = `/zhuanxian/list?&belongBrandCode=${
+        this.vo.belongBrandCode
+      }&otherServiceCode=${this.vo.otherServiceCode}&parkName=${
+        this.vo.parkName
+      }&endArea=${this.vo.endArea}&endCity=${this.endCity}&endProvince=${
+        this.vo.endProvince
+      }&startArea=${this.vo.startArea}&startCity=${
+        this.vo.startCity
+      }&startProvince=${this.vo.startProvince}&companyName=${
+        this.vo.companyName
+      }&parkId=${this.vo.parkId || ''}`
+    },
+    lineCodeCFn(item) {
+      this.vo.otherServiceCode = item.code
+
+      window.location.href = `/zhuanxian/list?&belongBrandCode=${
+        this.vo.belongBrandCode
+      }&otherServiceCode=${this.vo.otherServiceCode}&parkName=${
+        this.vo.parkName
+      }&endArea=${this.vo.endArea}&endCity=${this.endCity}&endProvince=${
+        this.vo.endProvince
+      }&startArea=${this.vo.startArea}&startCity=${
+        this.vo.startCity
+      }&startProvince=${this.vo.startProvince}&companyName=${
+        this.vo.companyName
+      }&parkId=${this.vo.parkId || ''}`
     }
   }
 }

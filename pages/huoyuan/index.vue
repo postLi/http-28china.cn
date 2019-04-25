@@ -698,21 +698,21 @@ export default {
       goodsWeightLower: goodsWeightLower,
       goodsWeightUpper: goodsWeightUpper
     }
-    let [AF03801, AF03802] = await Promise.all([
-      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF03801'),
-      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF03802')
-    ])
     let [
+      AF03801,
+      AF03802,
+      popularitys,
       hyList,
       recommendList,
       recommend,
-      popularitys,
       newwesHuoRes
     ] = await Promise.all([
+      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF03801'),
+      $axios.get('/28-web/sysDict/getSysDictByCodeGet/AF03802'),
+      $axios.get('/28-web/logisticsCompany/popularity'),
       getHyList($axios, 1, vo),
       getRecommendList($axios, vo),
       $axios.post('/28-web/lclOrder/list/related/links', vo),
-      $axios.get('/28-web/logisticsCompany/popularity'),
       $axios.post('/28-web/lclOrder/shipper/lastList', {
         currentPage: 1,
         pageSize: 20
@@ -721,7 +721,7 @@ export default {
     var Code = Object.assign([], [AF03801, AF03802])
     Code.forEach(item => {
       if (item.data.status === 200) {
-        item.data.data.unshift({ code: '', name: '不限' })
+        item.data.data.unshift({ id: '', name: '不限' })
       }
     })
     return {

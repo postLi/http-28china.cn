@@ -139,11 +139,11 @@
           </div>
           <div class="w1036" >
             <dl class="zx_bt" >
+              <dd class="bt05">物流公司</dd>
               <dd class="bt01">出发地&nbsp;&rarr;&nbsp;到达地</dd>
               <dd class="bt02">重货价格</dd>
               <dd class="bt03">轻货价格</dd>
               <dd class="bt04">时效</dd>
-              <dd class="bt05">物流公司</dd>
               <dd class="bt06">操作</dd>
             </dl>
             <ul
@@ -161,6 +161,9 @@
                 :key="index">
                 <a
                   :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
+                  target="_blank"><span class="nr05">{{ item.companyName }}</span></a>
+                <a
+                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr01">{{ item.startCity }}{{ item.startArea }}&nbsp;&rarr;&nbsp;{{ item.endCity }}{{ item.endArea }}</span></a>
                 <a
                   :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
@@ -171,9 +174,7 @@
                 <a
                   :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr04">{{ item.transportAging }}{{ item.transportAgingUnit }}</span></a>
-                <a
-                  :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
-                  target="_blank"><span class="nr05">{{ item.companyName }}</span></a>
+                
                 <a
                   :href="'/zhuanxian/detail?id=' + item.id +'&publishId=' + item.publishId"
                   target="_blank"><span class="nr06">详情</span></a>
@@ -261,8 +262,8 @@
                 <p class="p5"><i>电话：</i><font>{{ item.contactsTel }} {{ item.mobile }}</font></p>
               </li>
               <li class="wlzx_list_3">
-                <p class="p1"><i>经营范围：</i><span>{{ item.productService1 }}</span></P>
-                <p class="p2"><i>增值服务：</i><span>{{ item.otherService1 }}</span></p>
+                <p class="p1"><i>经营范围：</i><span>{{ (item.productServiceNameList || []).join(',') }}</span></P>
+                <p class="p2"><i>增值服务：</i><span>{{ (item.otherServiceNameList || []).join(',') }}</span></p>
               </li>
               <li class="wlzx_list_4">
                 <p
@@ -469,7 +470,7 @@ export default {
     }
 
     let vo1 = {
-      pageSize: 10,
+      pageSize: 25,
       currentPage: 1,
       otherServiceCode: '',
       orderBy: '',
@@ -664,6 +665,9 @@ export default {
 </script>
 
 <style scoped>
+.nr05 {
+  color: #fe0000;
+}
 .left_main {
   min-height: 420px;
 }

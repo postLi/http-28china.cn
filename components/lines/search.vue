@@ -31,6 +31,14 @@
             placeholder="请选择目的地" 
             value="" >
         </div>
+        <div 
+          id="carLineToCompany" 
+          style="position:relative;">
+          <input 
+            type="text" 
+            placeholder="请填写公司名称" 
+            value="" >
+        </div>
         <span 
           id="btn1" 
           class="btn_search active">搜索</span>
@@ -117,3 +125,24 @@
   </div>
 
 </template>
+<style lang="scss" scoped>
+.real-input {
+  width: 300px;
+}
+#carLineToCompany {
+  float: left;
+  width: 200px;
+  height: 40px;
+  margin-left: 20px;
+  input {
+    line-height: 38px;
+    height: 38px;
+    padding: 0 5px;
+    width: 188px;
+    border: 1px solid #ccc;
+  }
+}
+#btn1 {
+  margin-left: 40px;
+}
+</style>

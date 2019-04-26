@@ -104,7 +104,7 @@ export default {
     let content = con.data */
   },
   mounted() {
-    seajs.use(['/line/js/list_line.js', '/line/js/list_line_more.js'])
+    seajs.use(['/line/js/list_line.js?V2', '/line/js/list_line_more.js'])
   },
   methods: {
     //

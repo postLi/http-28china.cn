@@ -107,7 +107,7 @@
             <div class="order_content">
               <div class="imgbox">
                 <img 
-                  src="/images/28fast_download.png" 
+                  src="/images/twocode/huozhu.png" 
                   width="100" 
                   height="100">
               </div>

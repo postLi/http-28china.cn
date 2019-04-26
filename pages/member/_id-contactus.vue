@@ -91,6 +91,9 @@ export default {
     }
   },
   mounted() {
+    let jwd = [this.company.longitude, this.company.latitude]
+    let city = this.company.cityCode
+    let address = this.company.address
     seajs.use(
       [
         'http://api.map.baidu.com/getscript?v=2.0&ak=e0abRWFWOrgmN7emYjQGPj4Z0vyTVTfo&services=&t=20190102133327',
@@ -99,24 +102,51 @@ export default {
       ],
       function() {
         var map = new BMap.Map('allmap')
-        var obj3 = new Object()
-        obj3 = member_01()
-        var jwd = obj3.jwd
-        var newLoc = jwd.split(',')
-        var point = new BMap.Point(parseFloat(newLoc[0]), parseFloat(newLoc[1]))
-        map.centerAndZoom(point, 17)
-        var marker = new BMap.Marker(point) // 创建标注
-        map.addOverlay(marker) // 将标注添加到地图中
-        marker.setAnimation(BMAP_ANIMATION_BOUNCE) //跳动的动画
+        var fn = function(jwd, ispoint) {
+          var point = new BMap.Point(
+            jwd[0] ? parseFloat(jwd[0]) : 116.4039164169,
+            jwd[1] ? parseFloat(jwd[1]) : 39.9150048902
+          )
+          point = ispoint ? jwd : point
+          console.log('point:', point, jwd)
+          map.centerAndZoom(point, 17)
+          var marker = new BMap.Marker(point) // 创建标注
+          map.addOverlay(marker) // 将标注添加到地图中
+
+          marker.setAnimation(BMAP_ANIMATION_BOUNCE) //跳动的动画
+        }
+
+        if (jwd[0]) {
+          fn(jwd)
+        } else if (city && address) {
+          // 创建地址解析器实例
+          var myGeo = new BMap.Geocoder()
+          // 将地址解析结果显示在地图上，并调整地图视野
+          myGeo.getPoint(
+            address,
+            function(point) {
+              if (point) {
+                fn(point, true)
+              } else {
+                fn([])
+              }
+            },
+            city
+          )
+        } else {
+          fn([])
+        }
 
         //添加地图类型控件
+        // 如果有城市信息，可以通过反查地址去标记
+        //http://lbsyun.baidu.com/index.php?title=jspopular/guide/geocoding
 
         map.addControl(
           new BMap.MapTypeControl({
             mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
           })
         )
-        map.setCurrentCity('广州') // 设置地图显示的城市 此项是必须设置的
+        map.setCurrentCity(city || '广州') // 设置地图显示的城市 此项是必须设置的
         map.enableScrollWheelZoom(true) //开启鼠标滚轮缩放
         var opts = { type: BMAP_NAVIGATION_CONTROL_SMALL }
         map.addControl(new BMap.NavigationControl(opts))

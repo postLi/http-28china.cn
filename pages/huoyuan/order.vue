@@ -12,7 +12,7 @@
         <h3>{{ Title }}</h3>
         <div class="imgbox">
           <img 
-            src="/images/28fast_download.png" 
+            src="/images/twocode/huozhu.png" 
             width="200" 
             height="200">
         </div>

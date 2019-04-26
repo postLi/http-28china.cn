@@ -14,14 +14,14 @@
             </div>
             <div class="box-qr">
               <img 
-                src="/images/28fast_download.png" 
+                src="/images/twocode/huozhu.png" 
                 width="112" 
                 height="112">
               <div>28快运 货主端</div>
             </div>
             <div class="box-qr">
               <img
-                src="/images/28fast_download.png"
+                src="/images/twocode/chezhu.png"
                 width="112"
                 height="112">
               <div>28快运 车主端</div>

@@ -177,7 +177,7 @@
             <div class="arc_left_3">
               <div>
                 <img
-                  src="/images/28fast_download.png"
+                  src="/images/twocode/huozhu.png"
                   width="72"
                   height="72">
               </div>

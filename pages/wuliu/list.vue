@@ -76,7 +76,7 @@
                     v-model="vo.parkName"
                     type="text"
                     class="list_input"
-                    placeholder="请选择园区名称" >
+                    placeholder="请输入园区名称" >
                   <input
                     id="search_wlyq"
                     value=" 搜索 "

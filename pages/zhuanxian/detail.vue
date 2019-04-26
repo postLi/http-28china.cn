@@ -336,6 +336,9 @@
               :info="linedataA.rangePrices"
               :browse="linedataA.assessNumber"/>
           </div>
+          <div 
+            v-if="false" 
+            class="import-tip">友情提示：本专线价格为参考价格，具体价格请电询。</div>
           <div class="arc_middle3">
             <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging }}{{ linedataA.transportAgingUnit.indexOf('多') != -1
               ? linedataA.transportAgingUnit.replace('多', '')
@@ -2656,6 +2659,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.import-tip {
+  color: #f00;
+  clear: both;
+}
 .arc_top1 {
   width: 100%;
   height: 80px;

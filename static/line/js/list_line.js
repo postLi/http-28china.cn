@@ -170,6 +170,8 @@
     endp = encodeURI(endp)
     endc = encodeURI(endc)
     enda = encodeURI(enda)
+    var companyName = encodeURI($.trim($('#carLineToCompany input').val()))
+
     window.open(
       '/zhuanxian/list?tid=4&startp=' +
         startp +
@@ -182,7 +184,9 @@
         '&endc=' +
         endc +
         '&enda=' +
-        enda
+        enda +
+        '&companyName=' +
+        companyName
     )
   })
   //零担下单 E查询零担运费

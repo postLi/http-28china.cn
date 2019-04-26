@@ -70,28 +70,28 @@
             <div class="item_right item03">
               <span 
                 v-if="opdata.indexOf('AF02501')!==-1" 
-                id="fw001"><img src="/member/images/pic/item_zzfw1.png" >送货上门</span>
+                id="fw001"><img src="/images/pic/item_zzfw1.png" >送货上门</span>
               <span 
                 v-if="opdata.indexOf('AF02502')!==-1" 
-                id="fw002"><img src="/member/images/pic/item_zzfw2.png" >保价运输</span>
+                id="fw002"><img src="/images/pic/item_zzfw2.png" >保价运输</span>
               <span 
                 v-if="opdata.indexOf('AF02503')!==-1" 
-                id="fw003"><img src="/member/images/pic/item_zzfw3.png" >运费到付</span>
+                id="fw003"><img src="/images/pic/item_zzfw3.png" >运费到付</span>
               <span 
                 v-if="opdata.indexOf('AF02504')!==-1" 
-                id="fw004"><img src="/member/images/pic/item_zzfw4.png" >代收货款</span>
+                id="fw004"><img src="/images/pic/item_zzfw4.png" >代收货款</span>
               <span 
                 v-if="opdata.indexOf('AF02505')!==-1" 
-                id="fw005"><img src="/member/images/pic/item_zzfw5.png" >开发票</span>
+                id="fw005"><img src="/images/pic/item_zzfw5.png" >开发票</span>
               <span 
                 v-if="opdata.indexOf('AF02506')!==-1" 
-                id="fw006"><img src="/member/images/pic/item_zzfw6.png" >上门提货</span>
+                id="fw006"><img src="/images/pic/item_zzfw6.png" >上门提货</span>
               <span 
                 v-if="opdata.indexOf('AF02507')!==-1" 
-                id="fw007"><img src="/member/images/pic/item_zzfw7.png" >签单回收</span>
+                id="fw007"><img src="/images/pic/item_zzfw7.png" >签单回收</span>
               <span 
                 v-if="opdata.indexOf('AF02508')!==-1" 
-                id="fw008"><img src="/member/images/pic/item_zzfw8.png" >时效保障</span>
+                id="fw008"><img src="/images/pic/item_zzfw8.png" >时效保障</span>
             </div>
           </li>
           <li class="box_item">

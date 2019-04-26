@@ -33,9 +33,16 @@
             <img src="../../static/images/huizong/zhuanxian/banner.png">
           </div>
           <div class="ad_right fr">        
-            <div class="ad_right_item"><img src="../../static/images/huizong/zhuanxian/adlet1.png"></div>
-            <div class="ad_right_item"><img src="../../static/images/huizong/zhuanxian/adlet2.png"></div>
-            <div class="ad_right_item"><img src="../../static/images/huizong/zhuanxian/adlet3.png"></div>
+            <div class="ad_right_item"><a 
+              href="http://www.28tms.com"
+              target="_blank"><img src="../../static/images/huizong/zhuanxian/adlet1.png"></a></div>
+            <div class="ad_right_item"><a 
+              href="http://biz.28china.cn/"
+              target="_blank"><img src="../../static/images/huizong/zhuanxian/adlet2.png"></a></div>
+            <div class="ad_right_item"><a 
+              href="/zhuanxian/list"
+              id="zhuanxianrukou"
+              target="_blank"><img src="../../static/images/huizong/zhuanxian/adlet3.png"></a></div>
           </div>
           <!-- 幻灯片 -->
         </div>
@@ -1619,6 +1626,11 @@ export default {
         margin-bottom: 15px;
         width: 192px;
         height: 152px;
+        transition: all 0.5s ease;
+        &:hover {
+          transform: translate(0, -5px);
+          box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
+        }
       }
     }
   }

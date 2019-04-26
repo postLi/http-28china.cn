@@ -102,6 +102,7 @@ export default {
       ],
       function() {
         var map = new BMap.Map('allmap')
+        //116.4039164169 39.9150048902 为北京市天安门的坐标
         var fn = function(jwd, ispoint) {
           var point = new BMap.Point(
             jwd[0] ? parseFloat(jwd[0]) : 116.4039164169,

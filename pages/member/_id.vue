@@ -3,18 +3,24 @@
     <div 
       id="content" 
       class="index-banner">
-      <div class="banner_text">
+      <div 
+        class="banner_text"
+        :class="'banner_text'+lid"
+      >
         <span>
           <em id="nr_name">{{ company.contactsName }}</em>&nbsp;
           <em id="nr_tel">{{ company.mobile }}</em>
         </span>
       </div>
       <div class="banner-box">
-        <div class="banner-num">
+        <a 
+          href="#" 
+          class="banner-item"><img :src="'/member/images/banner/' + lid + '.jpg'"></a>
+          <!-- <div class="banner-num">
           <span class="dot cur">1</span>
           <span class="dot">2</span>
           <span class="dot">3</span>
-        </div>
+        </div> -->
       </div>
 
       <div class="content-main index-main">
@@ -750,6 +756,11 @@
 export default {
   components: {},
   layout: 'member',
+  data() {
+    return {
+      lid: 3
+    }
+  },
   computed: {
     plen() {
       return this.$store.state.member.company.productServiceCodeList.length
@@ -764,6 +775,10 @@ export default {
       return this.$store.state.member.company
     }
   },
+  created() {
+    let lid = this.$store.state.member.id.slice(-1)
+    this.lid = lid.charCodeAt(0) % 9 || 0
+  },
   mounted() {
     var _this = this
     seajs.use(['/js/city-picker.js'], function() {
@@ -771,7 +786,7 @@ export default {
         [
           '/js/gaodemap2.js',
           // '/member/js/index.js',
-          '/member/js/banner.js',
+          // '/member/js/banner.js',
           '/js/collection.js'
         ],
         function() {
@@ -948,3 +963,47 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.banner-item {
+  display: block;
+}
+.banner_text {
+  left: 50%;
+  top: 50%;
+}
+.banner_text0,
+.banner_text5 {
+  margin-left: 178px;
+  margin-top: 52px;
+  color: #000;
+  text-shadow: 0 0 1px #000;
+}
+.banner_text1,
+.banner_text6 {
+  color: #fff;
+  margin-left: -390px;
+  margin-top: 5px;
+  text-shadow: 0 0 1px #000;
+}
+.banner_text2,
+.banner_text7 {
+  color: #fff;
+  margin-left: -518px;
+  margin-top: 28px;
+  text-shadow: 0 0 1px #fff;
+}
+.banner_text3,
+.banner_text8 {
+  color: #f9e700;
+  margin-top: 20px;
+  margin-left: 20px;
+  text-shadow: 1px 1px 1px #000;
+}
+.banner_text4,
+.banner_text9 {
+  color: #fff;
+  margin-left: -136px;
+  margin-top: 85px;
+  text-shadow: 0 0 1px #000;
+}
+</style>

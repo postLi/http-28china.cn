@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MemberBanner />
+    <MemberBanner :url="'/member/images/banner_hy.jpg'" />
     <div class="main">
       <MemberSidebar />
       <div 

@@ -23,7 +23,7 @@ export default {
     CommonLogin
   },
   head: {
-    link: [{ rel: 'stylesheet', href: '/member/css/index.css?v2' }]
+    link: [{ rel: 'stylesheet', href: '/member/css/index.css?v4' }]
   },
   mounted() {
     console.groupCollapsed('服务端请求信息:')

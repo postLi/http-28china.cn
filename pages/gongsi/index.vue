@@ -60,14 +60,24 @@
               id="test1"
               style="width: 100%;">
               <div carousel-item>
-                <img 
-                  src="../../static/gongsi/images/banner1.jpg" 
-                  width="260"
-                  alt="">
-                <img 
-                  src="../../static/gongsi/images/banner2.jpg" 
-                  width="260"
-                  alt="">
+                <a 
+                  href="/member/ae6d5377691040079084fd3c34f579f0" 
+                  target="_blank">
+                  <img 
+                    src="../../static/images/gongsi/1.jpg" 
+                    height="260"
+                    width="832"
+                    alt="瑞千鑫">
+                </a>
+                <a 
+                  href="/member/1121247582304194560" 
+                  target="_blank">
+                  <img 
+                    src="../../static//images/gongsi/2.jpg" 
+                    height="260"
+                    width="832"
+                    alt="青春物流">
+                </a>
           
               </div>
             </div>
@@ -77,6 +87,8 @@
             class="bot"
             style="width: 100%; height: 140px;margin-top:20px">
             <a
+              href="/member/497479ce1e347418231258d8" 
+              target="_blank"
             >
               <img
                 src="../../static/gongsi/images/03shuju.png"
@@ -85,6 +97,7 @@
               >
             </a>
             <a
+              href="#" 
             >
               <img
                 src="../../static/gongsi/images/2gz.png"
@@ -93,6 +106,8 @@
               >
             </a>
             <a
+              href="/member/261479ce1e347418231258d8" 
+              target="_blank"
             >
               <img
                 src="../../static/gongsi/images/3mz.png"
@@ -929,6 +944,11 @@ export default {
       getGSList(this.$axios, 1, vo, this.companyName).then(res => {
         this.gsList = res.list
         this.gsList.forEach(item => {
+          let arr = (item.id || '').split('')
+          let num = 0
+          arr.forEach(el => {
+            num += el.charCodeAt(0) || 0
+          })
           item.num = (num % 30) + 1
         })
       })

@@ -44,6 +44,10 @@
           id="menu_6" 
           :href="mid + '-contactus'" 
           :class="tpath.indexOf('contactus') !== -1 ? 'nav-current' : ''">联系我们</a></li>
+        <li><a 
+          id="menu_6" 
+          :href="mid + '-recruit'" 
+          :class="tpath.indexOf('recruit') !== -1 ? 'nav-current' : ''">招聘信息</a></li>
       </ul>
     </div>
     <div class="clear"/>

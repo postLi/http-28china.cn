@@ -813,7 +813,11 @@ export default {
       carTypeSelected: '',
       bannerList: [
         {
-          banner: require('../../static/images/huizong/cheyuan/banner.jpg'),
+          banner: require('~/static/images/huizong/cheyuan/cheyuan_banner1.jpg'),
+          link: '/create/cheyuan'
+        },
+        {
+          banner: require('~/static/images/huizong/cheyuan/cheyuan_banner2.jpg'),
           link: '/create/cheyuan'
         }
       ],

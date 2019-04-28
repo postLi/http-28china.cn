@@ -87,6 +87,8 @@ const _2bc23a75 = () => interopDefault(import('..\\pages\\member\\_id-jianjie.vu
 const _07c97f2e = () => interopDefault(import('..\\pages\\member\\_id-line.vue' /* webpackChunkName: "pages_member__id-line" */))
 const _086593c8 = () => interopDefault(import('..\\pages\\member\\_id-news.vue' /* webpackChunkName: "pages_member__id-news" */))
 const _44b832ae = () => interopDefault(import('..\\pages\\member\\_id-order.vue' /* webpackChunkName: "pages_member__id-order" */))
+const _108789d9 = () => interopDefault(import('..\\pages\\member\\_id-recruit.vue' /* webpackChunkName: "pages_member__id-recruit" */))
+const _ee5a462c = () => interopDefault(import('..\\pages\\member\\_id-recruitdetail.vue' /* webpackChunkName: "pages_member__id-recruitdetail" */))
 const _1ee9552c = () => interopDefault(import('..\\pages\\member\\_id-wangdian.vue' /* webpackChunkName: "pages_member__id-wangdian" */))
 const _5fe03a07 = () => interopDefault(import('..\\pages\\member\\_id-webnotice.vue' /* webpackChunkName: "pages_member__id-webnotice" */))
 const _20410fe8 = () => interopDefault(import('..\\pages\\member\\_id.vue' /* webpackChunkName: "pages_member__id" */))
@@ -510,6 +512,14 @@ export function createRouter() {
       path: "/member/:id-order",
       component: _44b832ae,
       name: "member-id-order"
+    }, {
+      path: "/member/:id-recruit",
+      component: _108789d9,
+      name: "member-id-recruit"
+    }, {
+      path: "/member/:id-recruitdetail",
+      component: _ee5a462c,
+      name: "member-id-recruitdetail"
     }, {
       path: "/member/:id-wangdian",
       component: _1ee9552c,

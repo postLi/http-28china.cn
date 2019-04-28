@@ -711,7 +711,7 @@
     <div class="hy_partner">
       <div class="p_centre_title clearfix">
         <div class="title_line_box fl"><span/></div>
-        <h3 class="title_txt fl">新手6步</h3>
+        <h3 class="title_txt fl">明星货主</h3>
         <div class="title_line_box fl"><span/></div>
       </div>
       <ul class="partner_list clearfix">

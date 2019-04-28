@@ -1371,6 +1371,11 @@ export default {
   },
   mounted() {
     let that = this
+
+    var code = $.cookie('currentArea')
+    var url = code ? '/zhuanxian/' + code + '.htm' : '/zhuanxian/list'
+    $('#zhuanxianrukou').attr('href', url)
+
     this.$nextTick(() => {
       this.getCookies()
       this.handleData()

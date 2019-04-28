@@ -490,8 +490,11 @@ export default {
       }
     },
     toClick(item) {
-      if (item.name === '在线下单' || item.name === 'APP下载') {
+      if (item.name === '在线下单') {
         this.$refs.downApp.showMask = true
+      }
+      if (item.name === 'APP下载') {
+        window.location.href = 'http://h5.28tms.com/'
       }
       if (item.name === '运单查询') {
         this.$router.push(item.to)

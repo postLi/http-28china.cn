@@ -103,10 +103,15 @@ export const state = () => ({
   lineList: [],
   lineTotal: 0,
   pageType: '', // findpassword login
-  huoList: createDataModel()
+  huoList: createDataModel(),
+  recruitList: createDataModel(),
+  recruitDetail: {}
 })
 
 export const mutations = {
+  setInfo(state, param) {
+    state[param.name] = param.data
+  },
   setCompany(state, param) {
     state.company = param
   },
@@ -128,6 +133,11 @@ export const mutations = {
     state.huoList.list = param.list || []
     state.huoList.currentPage = param.currentPage
     state.huoList.total = param.pages || 0
+  },
+  setRecuritList(state, param) {
+    state.recruitList.list = param.list || []
+    state.recruitList.currentPage = param.currentPage
+    state.recruitList.total = param.pages || 0
   }
 }
 
@@ -194,7 +204,7 @@ export const actions = {
           }
         })
         .catch(err => {
-          console.log('payload2', payload, err.response)
+          // console.log('payload2', payload, err.response)
           resolve()
         })
     })
@@ -213,7 +223,7 @@ export const actions = {
           resolve()
         })
         .catch(err => {
-          console.log('payload2', payload, err.response)
+          // console.log('payload2', payload, err.response)
           resolve()
         })
     })
@@ -231,12 +241,53 @@ export const actions = {
 
             resolve()
           } else {
-            console.log('1122 error', data)
+            // console.log('1122 error', data)
             resolve()
           }
         })
         .catch(err => {
-          console.log('payload2', payload, err.response)
+          // console.log('payload2', payload, err.response)
+          resolve()
+        })
+    })
+  },
+  // 获取公司招聘信息
+  getRecruitList({ commit }, payload) {
+    return new Promise((resolve, reject) => {
+      this.$axios
+        .post('/28-web/recruit/list', payload)
+        .then(res => {
+          let data = res.data
+
+          if (data.status === 200) {
+            commit('setRecuritList', data.data)
+
+            resolve()
+          } else {
+            resolve()
+          }
+        })
+        .catch(err => {
+          resolve()
+        })
+    })
+  },
+  getRecruitDetail({ commit }, payload) {
+    // console.log('payload-lineinfopayload', payload)
+    return new Promise(resolve => {
+      this.$axios
+        .get('/28-web/recruit/detail/' + payload)
+        .then(res => {
+          let data = res.data
+          if (data.status === 200) {
+            commit('setInfo', {
+              name: 'recruitDetail',
+              data: data.data
+            })
+          }
+          resolve()
+        })
+        .catch(err => {
           resolve()
         })
     })

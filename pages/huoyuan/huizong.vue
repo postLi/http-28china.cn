@@ -65,17 +65,17 @@
               <a 
                 target="_blank"
                 :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&orderClass=AF0490702'"
-              ><img src="../../static/images/huizong/hy_ad1.jpg"></a>
+              ><img src="../../static/images/huizong/huoyuan/hyber3.jpg"></a>
             </div>
             <div class="type_box">
               <a
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity"><img src="../../static/images/huizong/hy_ad2.jpg"></a>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity"><img src="../../static/images/huizong/huoyuan/hyber4.jpg"></a>
             </div>
             <div class="type_box">
               <a 
                 target="_blank"
-                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&userAuth=AF0010403'"><img src="../../static/images/huizong/hy_ad3.jpg"></a></div>
+                :href="'/huoyuan?startProvince=' +currentProvince + '&startCity=' +currentCity+'&userAuth=AF0010403'"><img src="../../static/images/huizong/huoyuan/hyber5.jpg"></a></div>
           </div>
         </div>
         <div class="col3">
@@ -711,7 +711,7 @@
     <div class="hy_partner">
       <div class="p_centre_title clearfix">
         <div class="title_line_box fl"><span/></div>
-        <h3 class="title_txt fl">新手6步</h3>
+        <h3 class="title_txt fl">明星货主</h3>
         <div class="title_line_box fl"><span/></div>
       </div>
       <ul class="partner_list clearfix">
@@ -767,7 +767,11 @@ export default {
       // banners: [require('../../static/images/huizong/hy_banner1.jpg')],
       bannerList: [
         {
-          banner: require('../../static/images/huizong/hy_banner1.jpg'),
+          banner: require('../../static/images/huizong/huoyuan/hyber1.jpg'),
+          link: '/create/order'
+        },
+        {
+          banner: require('../../static/images/huizong/huoyuan/hyber2.jpg'),
           link: '/create/order'
         }
       ],

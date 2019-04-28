@@ -399,7 +399,7 @@
         <div
           class="flex button1 margin_r_20"
           @click="phone(linedataA.startLocationContactsMobile, linedataA.endLocationContactsMobile)">联系专线</div>
-        <div class="flex button2">收 藏</div>
+          <!--        <div class="flex button2">收 藏</div>-->
       </div>
     </div>
 
@@ -491,7 +491,7 @@ export default {
       // 专线评价列表
       $axios.post(`/28-web/rangeEva/range/list`, {
         currentPage: 1,
-        pageSize: 3,
+        pageSize: 1,
         transportRangeId: query.id,
         assessLevel: 'AF0360101' // 好评
       }),

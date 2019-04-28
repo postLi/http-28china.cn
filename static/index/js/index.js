@@ -202,7 +202,7 @@ $('#order_03').click(function() {
   var urlTest = 'http://192.168.1.157:8888/order1' //测试
   var urlPro = 'http://biz.28china.cn/order1' //生产
 
-  if(location.host.indexOf('192.168.')===-1){
+  if (location.host.indexOf('192.168.') === -1) {
     urlTest = urlPro
   }
   var startjw = $('#zhidaFrom').attr('thepos') || ''

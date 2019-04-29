@@ -4,7 +4,9 @@
       <div class="grid_c1 category clearfix">
         <div class="col1 fl">
           <div class="category_app">
-            <img src="../../static/images/huizong/zhuanxian/app.png">
+            <a 
+              href="http://h5.28tms.com/"
+              target="_blank"><img src="../../static/images/huizong/zhuanxian/app.png"></a>
           </div>
           <div class="p_category_menu">
             <h4 class="category_menu_title">
@@ -30,7 +32,9 @@
         </div>
         <div class="col2 category_ad fl clearfix">
           <div class="ad_big fl">
-            <img src="../../static/images/huizong/zhuanxian/banner.png">
+            <a 
+              href="http://h5.28tms.com/"
+              target="_blank"><img src="../../static/images/huizong/zhuanxian/banner.png"></a>
           </div>
           <div class="ad_right fr">        
             <div class="ad_right_item"><a 
@@ -75,7 +79,7 @@
           <div 
           class="p_me_groom">
             <div class="gr_text">
-              <h4 class="gr_text_title">帮我推荐&#x3e;</h4>
+              <h4 class="gr_text_title">帮我推荐 &#x3e;</h4>
               <div class="gr_text_txt">平台推荐，资质保障，为您快速匹配时效快、平价、安心、专业的专线</div>
               <div class="p_groom_submit clearfix">
                 <input 
@@ -89,10 +93,15 @@
               </div>
             </div>
             <div class="gr_operate">
-              <a href="">快速下单</a>
-              <a href="">查询运单</a>
+              <a 
+                href="/create/order"
+                target="_blank"
+              >快速下单</a>
+              <a 
+                href="/ydcx"
+                target="_blank">查询运单</a>
             </div>
-            <div class="gr_oder_num">今日已有<b>2368</b>人在线下单获得优惠</div>   
+            <div class="gr_oder_num">今日已有<b>{{ nowDataNum }}</b>人在线下单获得优惠</div>   
           </div>
  
         </div>
@@ -548,7 +557,8 @@
             class="gr_sch_city">
             <input 
               type="text" 
-              placeholder="请输入出发地" 
+              placeholder="请输入出发地"
+              data-level="district" 
               id="zx_pageinp1">
           </div>
           <div class="gr_sch_icon"><i class="iconfont iconjiantou_xiangyou_o"/></div>
@@ -557,7 +567,8 @@
             class="gr_sch_city">
             <input 
               type="text" 
-              placeholder="请输入到达地" 
+              placeholder="请输入到达地"
+              data-level="district" 
               id="zx_pageinp2">
           </div>
           <div class="gr_sch_btn"><a
@@ -870,13 +881,13 @@
           <li class="shipper_say_item ">
             <a href="">
               <img 
-                src="../../static/images/huizong/_shiper.png" 
+                src="../../static/images/huizong/zhuanxian/hzs1.jpg" 
                 class="shipper_say_img" 
                 alt="">
               <div class="shipper_say-word_box js-shipper_say-word_box">
-                <p class="shipper_say_name">货主：意先生</p>
-                <p class="shipper_say_name">马自达6：7.40万元</p> 
-                <p class="shipper_say_des">因为有了娃所以想换一辆B级车，当我看到这台马自达6时，当即感觉就是它！复检时发现这辆车可能调过表，人人车的工作人员帮我核实了4S店保养记录，最终安心入手，真的很给力！</p> 
+                <p class="shipper_say_name">王先生</p>
+                <p class="shipper_say_name">某三方物流公司总经理</p> 
+                <p class="shipper_say_des">在28快运上发货，帮我节省了一名调度员、两名客服专员、三名司机、两台车辆的成本，时效还更高了，运费也下降很多，值得推荐。</p> 
                 <div class="shipper_say_mask js-shipper_say_mask"/> 
               </div>
             </a>
@@ -884,13 +895,13 @@
           <li class="shipper_say_item shipper_say-item_middle">
             <a href="">
               <img 
-                src="../../static/images/huizong/_shiper.png" 
+                src="../../static/images/huizong/zhuanxian/hzs2.jpg" 
                 class="shipper_say_img" 
                 alt="">
               <div class="shipper_say-word_box js-shipper_say-word_box">
-                <p class="shipper_say_name">货主：意先生</p>
-                <p class="shipper_say_name">马自达6：7.40万元</p> 
-                <p class="shipper_say_des">因为有了娃所以想换一辆B级车，当我看到这台马自达6时，当即感觉就是它！复检时发现这辆车可能调过表，人人车的工作人员帮我核实了4S店保养记录，最终安心入手，真的很给力！</p> 
+                <p class="shipper_say_name">黄女士</p>
+                <p class="shipper_say_name">某物流公司客服</p> 
+                <p class="shipper_say_des">在28快运平台上发货，车辆都是上门提货，再也不用我们安排车辆跑去物流园区一家家专线发货，坐在公司办公室就能完成。</p> 
                 <div class="shipper_say_mask js-shipper_say_mask"/> 
               </div>
             </a>
@@ -898,13 +909,13 @@
           <li class="shipper_say_item ">
             <a href="">
               <img 
-                src="../../static/images/huizong/_shiper.png" 
+                src="../../static/images/huizong/zhuanxian/hzs3.jpg" 
                 class="shipper_say_img" 
                 alt="">
               <div class="shipper_say-word_box js-shipper_say-word_box">
-                <p class="shipper_say_name">买家：意先生</p>
-                <p class="shipper_say_name">马自达6：7.40万元</p> 
-                <p class="shipper_say_des">因为有了娃所以想换一辆B级车，当我看到这台马自达6时，当即感觉就是它！复检时发现这辆车可能调过表，人人车的工作人员帮我核实了4S店保养记录，最终安心入手，真的很给力！</p> 
+                <p class="shipper_say_name">叶先生</p>
+                <p class="shipper_say_name">某物流公司调度员</p> 
+                <p class="shipper_say_des">以前客户要查单的时候，我们需要一个个电话去打，到最后得到的信息还不一定准确，现在在28快运平台上，几秒钟就能得到货物的准确位置，客户自己也可以在平台上查单，大大减少了我们的工作量。</p> 
                 <div class="shipper_say_mask js-shipper_say_mask"/> 
               </div>
             </a>
@@ -1130,7 +1141,8 @@
         class="recommend_box">        
         <input 
           type="text" 
-          placeholder="请输入出发地" 
+          placeholder="请输入出发地"
+          data-level="district" 
           id="recommend_pageinp1">
       </div>
       <div 
@@ -1138,7 +1150,8 @@
         class="recommend_box">        
         <input 
           type="text" 
-          placeholder="请输入到达地" 
+          placeholder="请输入到达地"
+          data-level="district" 
           id="recommend_pageinp2">
       </div>
       <button @click="recommendSubmit">提交</button>
@@ -1316,7 +1329,43 @@ export default {
     let statisticsData = await $axios.get('/28-web//index/today/statistics')
     //赋值data
 
+    let createTime = new Date()
+    //从0点开始，每1小时增加800-1250之间的随机整数，进行累加
+    // 即每秒增加0.4~0.5人
+    let fn = function createNum(time) {
+      let diffTime =
+        time.getTime() -
+        new Date(time.getFullYear(), time.getMonth(), time.getDate()).getTime()
+      let num = 2368
+      if (diffTime > 0) {
+        let hours = Math.ceil(diffTime / (1000 * 60 * 60))
+        let seconds = Math.ceil(diffTime / 1000)
+        num = 0
+        let today = +(
+          '0.' +
+          time.getFullYear() +
+          '' +
+          time.getMonth() +
+          '' +
+          time.getDate()
+        )
+        let rnd = +time.getDate() % 2 ? 0.1 : -0.05
+        for (let i = 0; i < seconds; i++) {
+          if (i % 2) {
+            num += 0.4 + today * rnd
+          } else {
+            num += 0.3 + today * rnd
+          }
+        }
+        num = Math.ceil(num)
+      }
+
+      return num
+    }
+
     return {
+      createTime: createTime.getTime(),
+      nowDataNum: fn(createTime),
       //获取当前的城市
       currentProvince: currentProvince ? currentProvince : '',
       currentCity: currentCity ? currentCity : '',
@@ -1507,7 +1556,7 @@ export default {
   margin-bottom: 0 !important;
   height: auto !important;
 }
-.header_bottom {
+.header_bottom2 {
   background: #fff !important;
   border-bottom: 3px solid #00c17f !important;
   ul {

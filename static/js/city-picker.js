@@ -801,10 +801,12 @@
   }
 
   CityPicker.DEFAULTS = {
-    simple: false,
+    simple: false, //控制名称是否为简写
     responsive: false,
-    placeholder: '请选择省/市/区/县',
-    level: 'county',
+    // placeholder: '请选择省/市/区/县',
+    placeholder: '请选择省/市/区',
+    // level: 'county',
+    level: 'district',
     province: '',
     city: '',
     district: '',

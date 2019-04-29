@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="bj_blue">
+    <div class="">
       <div class="hy_wrap clearfix">
         <div class="col1">
           <div class="p_category_menu">
@@ -1074,9 +1074,9 @@ a {
 }
 /*******不同导航不同样式修改******/
 .header {
-  margin-bottom: 0 !important;
+  // margin-bottom: 30px !important;
 }
-.header_bottom {
+.header_bottom2 {
   height: 45px !important;
   background: #fff !important;
 
@@ -1120,7 +1120,7 @@ a {
   // display: flex;
   // justify-content: space-between;
   margin: 0 auto 0 auto;
-  padding: 5px 0 20px 0;
+  padding: 0 0 20px 0;
   width: $w_1400;
   font-size: $f_14;
   .col1,

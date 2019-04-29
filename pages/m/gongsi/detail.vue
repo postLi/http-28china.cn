@@ -14,9 +14,11 @@
             class="img"
             style="width: 1.18rem"
             src="/m/gongsi/youzhi.png" >
-          <div class="f-42 c_b47">{{ info.companyName }}</div>
+          <div
+            class="f-42 c_b47"
+            style="width: 80%">{{ info.companyName }}</div>
           <div class="margin_t_20 flex_a">
-            <div class="circle f-20 flex">{{ info.authStatusName }}</div>
+            <div class="circle f-20 flex">{{ info.authStatus === 'AF0010403' ? '认证会员': '待认证' }}</div>
             <div class="f-24 c_e2a margin_l_20 margin_r_20">综合信誉值</div>
             <img
               style="width: 0.3rem"
@@ -53,13 +55,13 @@
 
           <div class="flex_sb margin_t_20">
             <div class="f-24 c_b47">{{ info.browseNumber }}浏览</div>
-            <div class="fav f-28 f_w flex">
-              <img
-                src="/m/gongsi/weishoucang.png"
-                style="width: 0.25rem"
-              >
-              <span class="margin_l_10">收 藏</span>
-            </div>
+            <!--            <div class="fav f-28 f_w flex">-->
+            <!--              <img-->
+            <!--                src="/m/gongsi/weishoucang.png"-->
+            <!--                style="width: 0.25rem"-->
+            <!--              >-->
+            <!--              <span class="margin_l_10">收 藏</span>-->
+            <!--            </div>-->
           </div>
 
         </div>
@@ -137,6 +139,11 @@
         </div>
       </div>
       <div
+        class="padding_20 f-26 flex"
+        v-if="line.length === 0">
+        暂无专线信息
+      </div>
+      <div
         class="item_h1 flex_saf flex_f"
         v-for="(item,index) in line"
         :key="index">
@@ -173,6 +180,11 @@
         </div>
       </div>
       <div
+        class="padding_20 f-26 flex"
+        v-if="companyPoint.length === 0">
+        暂无网点信息
+      </div>
+      <div
         class="item_h2 flex_js flex_f"
         v-for="(item,index) in companyPoint"
         :key="index">
@@ -185,7 +197,7 @@
     <div class="divide"/>
     <div class="body_content">
       <div class="f-32 title_h flex_a f_w_b">企业简介</div>
-      <div v-if="info.companyDes">
+      <div>
         <div
           class="f-26 info c-3"
           v-if="!showAll">
@@ -204,27 +216,6 @@
             @click="showAll = false">收起</span>
         </div>
       </div>
-      <div
-        v-else
-        class="f-26 info c-3">
-        <div
-          class="f-26 info c-3"
-          v-if="!showAll">
-          {{ companyDes.length >200 ? companyDes.substring(0,200) + '...' : companyDes }}
-          <span
-            class="f_b margin_l_10"
-            @click="showAll = true"
-            v-if="companyDes.length > 200">详情</span>
-        </div>
-        <div
-          class="f-26 info c-3"
-          v-else>
-          {{ companyDes }}
-          <span
-            class="f_b margin_l_10"
-            @click="showAll = false">收起</span>
-        </div>
-      </div>
 
     </div>
 
@@ -233,22 +224,22 @@
 <script>
 import MyTop from '../../../components/m/myTop'
 import 'swiper/dist/css/swiper.css'
+let companyDes =
+  '是一家业内领先的现代物流运输企业，我们致力于为国内的制造业客户和商贸流通业务提供专业且有价格竞争力的运输、仓储、包装、配送、代收代付等相关物流服务。我们目前处在迅猛发展阶段，以快速的增长速度在大力扩张货物运输业务范围，公司的专线运输范围基本覆盖华中，华东和华北三个大区的各省市县，承揽广州到湖南，湖北，上海，江苏，河南，北京，山东，天津全境的整车及零担业务，公司通过引入先进的供应链物流管理系统，已经建立起帮助客户贯穿生产、物流、仓储、代理商、销售商之间信息流、物流、商流、资金流的金色桥梁。\n' +
+  '\n' +
+  '        经过多年的发展，本公司目前拥有一支30多人的专业化的物流管理和从业人员队伍。公司管理层成员有大学专科以上学历、物流管理及相关专业本科及以上学历的优秀人才，公司全资拥有18辆斯堪尼亚、沃尔沃高端重卡，长期协议合作的干线和城配运输车辆超过890辆，车源丰富。公司自成立以来就一直秉承服务为先的宗旨，不断致力于物流运输网络的建设和社会资源的整合，现拥有广州至上海，河南，北京，湖北，山东，天津全境的往返成熟物流线路46条，单一线路基本可以实现一天发车2车以上，部分强势路线（比如广州-长沙，广州-北京等）可以一天发车4车以上。在专线运输时效和货物无损签收方面一直居于同业领先地位。\n' +
+  '\n' +
+  '        本公司在大力发展KA物流业务的同时，公司于陆续引入先进的28TMS物流管理系统、OA系统和CRM系统，运用多种物流智能硬件和现代物联网技术手段不断提升管理效率和降低运输成本。\n' +
+  '\n' +
+  '        随着公司的不断发展和长期积累的经验，公司优秀的物流服务深得广大客户的好评。本公司将以“高效快捷、客户至上、信誉第一”为经营理念，以“适价经营、质量保证”求发展以及经验丰富的管理人员和专业高素质的员工队伍，竭诚为客户持续提供优质满意的运输服务。\n' +
+  '\n' +
+  '        我们的承诺 ：给我们一份信任，还您百分百满意！'
 export default {
   components: { MyTop },
   layout: 'm',
   data() {
     return {
       showAll: false,
-      companyDes:
-        '本公司是一家业内领先的现代物流运输企业，我们致力于为国内的制造业客户和商贸流通业务提供专业且有价格竞争力的运输、仓储、包装、配送、代收代付等相关物流服务。我们目前处在迅猛发展阶段，以快速的增长速度在大力扩张货物运输业务范围，公司的专线运输范围基本覆盖华中，华东和华北三个大区的各省市县，承揽广州到湖南，湖北，上海，江苏，河南，北京，山东，天津全境的整车及零担业务，公司通过引入先进的供应链物流管理系统，已经建立起帮助客户贯穿生产、物流、仓储、代理商、销售商之间信息流、物流、商流、资金流的金色桥梁。\n' +
-        '\n' +
-        '        经过多年的发展，本公司目前拥有一支30多人的专业化的物流管理和从业人员队伍。公司管理层成员有大学专科以上学历、物流管理及相关专业本科及以上学历的优秀人才，公司全资拥有18辆斯堪尼亚、沃尔沃高端重卡，长期协议合作的干线和城配运输车辆超过890辆，车源丰富。公司自成立以来就一直秉承服务为先的宗旨，不断致力于物流运输网络的建设和社会资源的整合，现拥有广州至上海，河南，北京，湖北，山东，天津全境的往返成熟物流线路46条，单一线路基本可以实现一天发车2车以上，部分强势路线（比如广州-长沙，广州-北京等）可以一天发车4车以上。在专线运输时效和货物无损签收方面一直居于同业领先地位。\n' +
-        '\n' +
-        '        本公司在大力发展KA物流业务的同时，公司于陆续引入先进的28TMS物流管理系统、OA系统和CRM系统，运用多种物流智能硬件和现代物联网技术手段不断提升管理效率和降低运输成本。\n' +
-        '\n' +
-        '        随着公司的不断发展和长期积累的经验，公司优秀的物流服务深得广大客户的好评。本公司将以“高效快捷、客户至上、信誉第一”为经营理念，以“适价经营、质量保证”求发展以及经验丰富的管理人员和专业高素质的员工队伍，竭诚为客户持续提供优质满意的运输服务。\n' +
-        '\n' +
-        '        我们的承诺 ：给我们一份信任，还您百分百满意！',
       swiperOption: {
         pagination: {
           el: '.swiper-pagination',
@@ -263,6 +254,11 @@ export default {
       AF025result = []
     const info = await $axios.get('/28-web/logisticsCompany/info/' + query.id)
     if (info.data.status === 200) {
+      if (!info.data.data.companyDes) {
+        info.data.data.companyDes = info.data.data.companyName
+          ? info.data.data.companyName + companyDes
+          : '本公司' + companyDes
+      }
       let myOtherServiceCodeList = [],
         myProductServiceCodeList = []
       info.data.data.productServiceCodeList.forEach(item => {

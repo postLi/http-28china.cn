@@ -74,12 +74,12 @@
       <a :href="'tel:' + cy1.phone">
         <div class="flex button1 margin_r_20">联系车主</div>
       </a>
-      <div class="flex button2">
-        <div class="flex_a">
-          <img src="/m/cheyuan/btn_collect_fill.png" >
-          收藏车主
-        </div>
-      </div>
+      <!--      <div class="flex button2">-->
+      <!--        <div class="flex_a">-->
+      <!--          <img src="/m/cheyuan/btn_collect_fill.png" >-->
+      <!--          收藏车主-->
+      <!--        </div>-->
+      <!--      </div>-->
     </footer>
   </div>
 </template>

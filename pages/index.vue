@@ -131,8 +131,29 @@
         </div>
         <div class="main1_2">
           <ul class="yd_box">
-            <li class="yd_1">
-              <img src="/images/index/12kd.png">
+            <li 
+              class="yd_1"
+              @mouseover="stopBanner"
+              @mouseout="startBanner"
+            >
+              <transition 
+              name="fade">
+
+                <a 
+                  href="http://www.28tms.com/"
+                  key="1234"
+                  v-if="showindex===0" 
+                  target="_blank"><img 
+                    src="/images/index/banner2.jpg" 
+                    alt="最好用的tms"></a>
+                <a 
+                  href="/Insurance"
+                  key="5678"
+                  v-if="showindex===1"  
+                  target="_blank"><img 
+                    src="/images/index/banner3.jpg" 
+                    alt="物流保险"></a>
+              </transition>
             </li>
             <li class="yd_2"><input
               id="yd_nr"
@@ -1517,6 +1538,7 @@ export default {
   data() {
     return {
       title: '首页',
+      showindex: 0,
       lists: [],
       ip: '',
       islogin: false,
@@ -2058,8 +2080,18 @@ export default {
           $rel.hide()
         }) */
     }
+    this.startBanner()
   },
   methods: {
+    stopBanner() {
+      clearInterval(this.timer)
+    },
+    startBanner() {
+      clearInterval(this.timer)
+      this.timer = setInterval(() => {
+        this.showindex = this.showindex === 0 ? 1 : 0
+      }, 5000)
+    },
     goToTop(el) {
       let top = 0
       if (el) {
@@ -2082,7 +2114,33 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+</style>
 <style lang="scss" scoped>
+.yd_1 {
+  width: 300px;
+  height: 120px;
+  padding-top: 12px;
+  padding-left: 45px;
+  position: relative;
+
+  a {
+    position: absolute;
+    top: 12px;
+    left: 45px;
+  }
+
+  img {
+    margin: 0;
+  }
+}
 /* 为什么选择28 */
 .why28 {
   font-size: 14px;

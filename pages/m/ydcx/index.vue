@@ -47,7 +47,24 @@
           src="/m/ydcx/yundancx_kong.png" >
       </div>
       <div
-        v-if="showRes === 'yes'"
+        class="gs"
+        v-if="showRes === 'showGsList'">
+        <div class="c-3 f-34 b_b gs_h flex_a">
+          请选择物流公司
+        </div>
+        <div
+          class="b_b gs_h flex_a"
+          v-for="(item,index) in gsList"
+          :key="index"
+          @click="showDetail(item.id)"
+        >
+          <span class="c-3 f-30">{{ item.companyName }}</span>
+          <span class="padding_l_20 c-9 f-26">{{ item.id }}</span>
+        </div>
+      </div>
+
+      <div
+        v-if="showRes === 'showDetail'"
         class="margin_t_20">
         <div class="f-34 c-3">物流跟踪：{{ list[0] ? list[0].trackNode : '' }}</div>
 
@@ -112,7 +129,8 @@ export default {
       showPlaceHolder: true,
       showRes: '',
       lineHeight: 0,
-      list: []
+      list: [], // 祥细
+      gsList: []
     }
   },
   watch: {
@@ -147,24 +165,25 @@ export default {
         )
         .then(res => {
           if (res.data.status === 200 && res.data.data.length !== 0) {
-            this.$axios
-              .get(
-                '/aflc-portal/order/fclOrder/v1/queryWaybillStateById/' +
-                  res.data.data[0].id
-              )
-              .then(res1 => {
-                if (res1.data.status === 200 && res1.data.data.length !== 0) {
-                  this.showRes = 'yes'
-                  res1.data.data.forEach(item => {
-                    item.t1 = item.createTime.split(' ')[0]
-                    item.t2 = item.createTime.split(' ')[1]
-                  })
-                  this.list = res1.data.data
-                  this.setSize()
-                } else {
-                  this.showRes = 'no'
-                }
-              })
+            this.showRes = 'showGsList'
+            this.gsList = res.data.data
+          } else {
+            this.showRes = 'no'
+          }
+        })
+    },
+    showDetail(id) {
+      this.$axios
+        .get('/aflc-portal/order/fclOrder/v1/queryWaybillStateById/' + id)
+        .then(res1 => {
+          if (res1.data.status === 200 && res1.data.data.length !== 0) {
+            this.showRes = 'showDetail'
+            res1.data.data.forEach(item => {
+              item.t1 = item.createTime.split(' ')[0]
+              item.t2 = item.createTime.split(' ')[1]
+            })
+            this.list = res1.data.data
+            this.setSize()
           } else {
             this.showRes = 'no'
           }
@@ -255,5 +274,14 @@ export default {
   transform: translateX(-50%);
   width: 1px;
   background-color: #cccccc;
+}
+.gs {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0.04rem 0.2rem 0 rgba(180, 225, 242, 0.5);
+  border-radius: 0.1rem;
+}
+.gs_h {
+  height: 0.88rem;
+  padding: 0 0.2rem;
 }
 </style>

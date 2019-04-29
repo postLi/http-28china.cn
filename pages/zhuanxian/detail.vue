@@ -338,7 +338,7 @@
           </div>
           <div 
             v-if="linedataA.flag === '1'" 
-            class="import-tip">友情提示：本专线价格为参考价格，具体价格请电询。</div>
+            class="import-tip">友情提示：以上价格仅供参考，欢迎来电咨询当天专线价格。</div>
           <div class="arc_middle3">
             <div class="arc_m3"><i>运输时效：</i><span>{{ linedataA.transportAging }}{{ linedataA.transportAgingUnit.indexOf('多') != -1
               ? linedataA.transportAgingUnit.replace('多', '')

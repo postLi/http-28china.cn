@@ -14,7 +14,11 @@
             <div
               id="m1_01_3"
               class="m1_01 m1_01_03">找小货车</div>
-
+            <iframe
+              frameborder="0"
+              height="0"
+              width="0"
+              :src="url"/>
 
           </div>
           <div class="title">
@@ -1544,7 +1548,8 @@ export default {
       islogin: false,
       username: '',
       show: false, // 是否显示边栏导航
-      showmore: false // 是否显示客服
+      showmore: false, // 是否显示客服
+      url: '' //用来接收快速下单页的用户数据
     }
   },
   computed: {
@@ -2079,6 +2084,15 @@ export default {
         .mouseout(function() {
           $rel.hide()
         }) */
+      let urlDev = 'http://127.0.0.1:8080/message' //开发
+      let urlTest = 'http://192.168.1.157:8888/message' //测试
+      let urlPro = 'http://biz.28china.cn/message' //生产
+
+      if (location.host.indexOf('192.168.') === -1) {
+        this.url = urlPro
+      } else {
+        this.url = urlTest
+      }
     }
     this.startBanner()
   },

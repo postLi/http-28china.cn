@@ -224,13 +224,26 @@ $('#order_03').click(function() {
     var endj = ''
     var endw = ''
   }
-  var userdata = ''
+  var mobile = ''
   if (
     $.cookie('access_token') &&
-    JSON.parse(localStorage.getItem('28kuaiyunuserinfo')).registerOrigin ===
-      'AF0030106'
+    (JSON.parse(localStorage.getItem('28kuaiyunuserinfo')).shipperType ===
+      'AF0010101' ||
+      JSON.parse(localStorage.getItem('28kuaiyunuserinfo')).shipperType ===
+        'AF0010102' ||
+      JSON.parse(localStorage.getItem('28kuaiyunuserinfo')).shipperType ===
+        'AF0010103')
   ) {
-    userdata = localStorage.getItem('28kuaiyunuserinfo')
+    mobile = JSON.parse(localStorage.getItem('28kuaiyunuserinfo')).mobile
+    window.frames[0].postMessage(
+      JSON.stringify({
+        type: 'set',
+        userData: JSON.parse(localStorage.getItem('28kuaiyunuserinfo'))
+      }),
+      '*'
+    )
+  } else {
+    mobile = 'noLogin'
   }
   window.open(
     urlTest +
@@ -242,8 +255,8 @@ $('#order_03').click(function() {
       endj +
       '&endw=' +
       endw +
-      '&userdata=' +
-      userdata
+      '&mobile=' +
+      mobile
   )
 })
 //零担下单 E
